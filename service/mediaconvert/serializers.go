@@ -3657,6 +3657,130 @@ func awsRestjson1_serializeDocumentAc3Settings(v *types.Ac3Settings, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAc4Settings(v *types.Ac4Settings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bitrate != nil {
+		ok := object.Key("bitrate")
+		ok.Integer(*v.Bitrate)
+	}
+
+	if len(v.BitstreamMode) > 0 {
+		ok := object.Key("bitstreamMode")
+		ok.String(string(v.BitstreamMode))
+	}
+
+	if len(v.CodingMode) > 0 {
+		ok := object.Key("codingMode")
+		ok.String(string(v.CodingMode))
+	}
+
+	if len(v.DynamicRangeCompressionFlatPanelTv) > 0 {
+		ok := object.Key("dynamicRangeCompressionFlatPanelTv")
+		ok.String(string(v.DynamicRangeCompressionFlatPanelTv))
+	}
+
+	if len(v.DynamicRangeCompressionHomeTheater) > 0 {
+		ok := object.Key("dynamicRangeCompressionHomeTheater")
+		ok.String(string(v.DynamicRangeCompressionHomeTheater))
+	}
+
+	if len(v.DynamicRangeCompressionPortableHeadphones) > 0 {
+		ok := object.Key("dynamicRangeCompressionPortableHeadphones")
+		ok.String(string(v.DynamicRangeCompressionPortableHeadphones))
+	}
+
+	if len(v.DynamicRangeCompressionPortableSpeakers) > 0 {
+		ok := object.Key("dynamicRangeCompressionPortableSpeakers")
+		ok.String(string(v.DynamicRangeCompressionPortableSpeakers))
+	}
+
+	if v.LoRoCenterMixLevel != nil {
+		ok := object.Key("loRoCenterMixLevel")
+		switch {
+		case math.IsNaN(*v.LoRoCenterMixLevel):
+			ok.String("NaN")
+
+		case math.IsInf(*v.LoRoCenterMixLevel, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.LoRoCenterMixLevel, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.LoRoCenterMixLevel)
+
+		}
+	}
+
+	if v.LoRoSurroundMixLevel != nil {
+		ok := object.Key("loRoSurroundMixLevel")
+		switch {
+		case math.IsNaN(*v.LoRoSurroundMixLevel):
+			ok.String("NaN")
+
+		case math.IsInf(*v.LoRoSurroundMixLevel, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.LoRoSurroundMixLevel, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.LoRoSurroundMixLevel)
+
+		}
+	}
+
+	if v.LtRtCenterMixLevel != nil {
+		ok := object.Key("ltRtCenterMixLevel")
+		switch {
+		case math.IsNaN(*v.LtRtCenterMixLevel):
+			ok.String("NaN")
+
+		case math.IsInf(*v.LtRtCenterMixLevel, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.LtRtCenterMixLevel, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.LtRtCenterMixLevel)
+
+		}
+	}
+
+	if v.LtRtSurroundMixLevel != nil {
+		ok := object.Key("ltRtSurroundMixLevel")
+		switch {
+		case math.IsNaN(*v.LtRtSurroundMixLevel):
+			ok.String("NaN")
+
+		case math.IsInf(*v.LtRtSurroundMixLevel, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.LtRtSurroundMixLevel, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.LtRtSurroundMixLevel)
+
+		}
+	}
+
+	if v.SampleRate != nil {
+		ok := object.Key("sampleRate")
+		ok.Integer(*v.SampleRate)
+	}
+
+	if len(v.StereoDownmix) > 0 {
+		ok := object.Key("stereoDownmix")
+		ok.String(string(v.StereoDownmix))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAccelerationSettings(v *types.AccelerationSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3785,6 +3909,13 @@ func awsRestjson1_serializeDocumentAudioCodecSettings(v *types.AudioCodecSetting
 	if v.Ac3Settings != nil {
 		ok := object.Key("ac3Settings")
 		if err := awsRestjson1_serializeDocumentAc3Settings(v.Ac3Settings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Ac4Settings != nil {
+		ok := object.Key("ac4Settings")
+		if err := awsRestjson1_serializeDocumentAc4Settings(v.Ac4Settings, ok); err != nil {
 			return err
 		}
 	}
@@ -4890,6 +5021,11 @@ func awsRestjson1_serializeDocumentCmafAdditionalManifest(v *types.CmafAdditiona
 func awsRestjson1_serializeDocumentCmafEncryptionSettings(v *types.CmafEncryptionSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.ClearLead) > 0 {
+		ok := object.Key("clearLead")
+		ok.String(string(v.ClearLead))
+	}
 
 	if v.ConstantInitializationVector != nil {
 		ok := object.Key("constantInitializationVector")

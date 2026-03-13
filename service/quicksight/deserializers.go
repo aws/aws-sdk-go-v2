@@ -58360,6 +58360,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 				sv.LinearAction = types.CapabilityState(jtv)
 			}
 
+		case "ManageSharedFolders":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ManageSharedFolders = types.CapabilityState(jtv)
+			}
+
 		case "MCPAction":
 			if value != nil {
 				jtv, ok := value.(string)

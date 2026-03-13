@@ -170,6 +170,26 @@ func (m *validateOpCreateLaunchConfigurationTemplate) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateNetworkMigrationDefinition struct {
+}
+
+func (*validateOpCreateNetworkMigrationDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateNetworkMigrationDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateNetworkMigrationDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateNetworkMigrationDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateReplicationConfigurationTemplate struct {
 }
 
@@ -285,6 +305,26 @@ func (m *validateOpDeleteLaunchConfigurationTemplate) HandleInitialize(ctx conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteLaunchConfigurationTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteNetworkMigrationDefinition struct {
+}
+
+func (*validateOpDeleteNetworkMigrationDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteNetworkMigrationDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteNetworkMigrationDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteNetworkMigrationDefinitionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -490,6 +530,46 @@ func (m *validateOpGetLaunchConfiguration) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetNetworkMigrationDefinition struct {
+}
+
+func (*validateOpGetNetworkMigrationDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetNetworkMigrationDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetNetworkMigrationDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetNetworkMigrationDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetNetworkMigrationMapperSegmentConstruct struct {
+}
+
+func (*validateOpGetNetworkMigrationMapperSegmentConstruct) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetNetworkMigrationMapperSegmentConstruct) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetNetworkMigrationMapperSegmentConstructInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetNetworkMigrationMapperSegmentConstructInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetReplicationConfiguration struct {
 }
 
@@ -545,6 +625,226 @@ func (m *validateOpListImportErrors) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListImportErrorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListNetworkMigrationAnalyses struct {
+}
+
+func (*validateOpListNetworkMigrationAnalyses) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListNetworkMigrationAnalyses) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListNetworkMigrationAnalysesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListNetworkMigrationAnalysesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListNetworkMigrationAnalysisResults struct {
+}
+
+func (*validateOpListNetworkMigrationAnalysisResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListNetworkMigrationAnalysisResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListNetworkMigrationAnalysisResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListNetworkMigrationAnalysisResultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListNetworkMigrationCodeGenerationSegments struct {
+}
+
+func (*validateOpListNetworkMigrationCodeGenerationSegments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListNetworkMigrationCodeGenerationSegments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListNetworkMigrationCodeGenerationSegmentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListNetworkMigrationCodeGenerationSegmentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListNetworkMigrationCodeGenerations struct {
+}
+
+func (*validateOpListNetworkMigrationCodeGenerations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListNetworkMigrationCodeGenerations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListNetworkMigrationCodeGenerationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListNetworkMigrationCodeGenerationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListNetworkMigrationDeployedStacks struct {
+}
+
+func (*validateOpListNetworkMigrationDeployedStacks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListNetworkMigrationDeployedStacks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListNetworkMigrationDeployedStacksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListNetworkMigrationDeployedStacksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListNetworkMigrationDeployments struct {
+}
+
+func (*validateOpListNetworkMigrationDeployments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListNetworkMigrationDeployments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListNetworkMigrationDeploymentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListNetworkMigrationDeploymentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListNetworkMigrationExecutions struct {
+}
+
+func (*validateOpListNetworkMigrationExecutions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListNetworkMigrationExecutions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListNetworkMigrationExecutionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListNetworkMigrationExecutionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListNetworkMigrationMapperSegmentConstructs struct {
+}
+
+func (*validateOpListNetworkMigrationMapperSegmentConstructs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListNetworkMigrationMapperSegmentConstructs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListNetworkMigrationMapperSegmentConstructsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListNetworkMigrationMapperSegmentConstructsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListNetworkMigrationMapperSegments struct {
+}
+
+func (*validateOpListNetworkMigrationMapperSegments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListNetworkMigrationMapperSegments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListNetworkMigrationMapperSegmentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListNetworkMigrationMapperSegmentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListNetworkMigrationMappings struct {
+}
+
+func (*validateOpListNetworkMigrationMappings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListNetworkMigrationMappings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListNetworkMigrationMappingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListNetworkMigrationMappingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListNetworkMigrationMappingUpdates struct {
+}
+
+func (*validateOpListNetworkMigrationMappingUpdates) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListNetworkMigrationMappingUpdates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListNetworkMigrationMappingUpdatesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListNetworkMigrationMappingUpdatesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -810,6 +1110,26 @@ func (m *validateOpStartExport) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartImportFileEnrichment struct {
+}
+
+func (*validateOpStartImportFileEnrichment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartImportFileEnrichment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartImportFileEnrichmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartImportFileEnrichmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartImport struct {
 }
 
@@ -825,6 +1145,106 @@ func (m *validateOpStartImport) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartImportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartNetworkMigrationAnalysis struct {
+}
+
+func (*validateOpStartNetworkMigrationAnalysis) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartNetworkMigrationAnalysis) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartNetworkMigrationAnalysisInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartNetworkMigrationAnalysisInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartNetworkMigrationCodeGeneration struct {
+}
+
+func (*validateOpStartNetworkMigrationCodeGeneration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartNetworkMigrationCodeGeneration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartNetworkMigrationCodeGenerationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartNetworkMigrationCodeGenerationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartNetworkMigrationDeployment struct {
+}
+
+func (*validateOpStartNetworkMigrationDeployment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartNetworkMigrationDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartNetworkMigrationDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartNetworkMigrationDeploymentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartNetworkMigrationMapping struct {
+}
+
+func (*validateOpStartNetworkMigrationMapping) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartNetworkMigrationMapping) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartNetworkMigrationMappingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartNetworkMigrationMappingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartNetworkMigrationMappingUpdate struct {
+}
+
+func (*validateOpStartNetworkMigrationMappingUpdate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartNetworkMigrationMappingUpdate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartNetworkMigrationMappingUpdateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartNetworkMigrationMappingUpdateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1070,6 +1490,46 @@ func (m *validateOpUpdateLaunchConfigurationTemplate) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateNetworkMigrationDefinition struct {
+}
+
+func (*validateOpUpdateNetworkMigrationDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateNetworkMigrationDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateNetworkMigrationDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateNetworkMigrationDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateNetworkMigrationMapperSegment struct {
+}
+
+func (*validateOpUpdateNetworkMigrationMapperSegment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateNetworkMigrationMapperSegment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateNetworkMigrationMapperSegmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateNetworkMigrationMapperSegmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateReplicationConfiguration struct {
 }
 
@@ -1202,6 +1662,10 @@ func addOpCreateLaunchConfigurationTemplateValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpCreateLaunchConfigurationTemplate{}, middleware.After)
 }
 
+func addOpCreateNetworkMigrationDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateNetworkMigrationDefinition{}, middleware.After)
+}
+
 func addOpCreateReplicationConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateReplicationConfigurationTemplate{}, middleware.After)
 }
@@ -1224,6 +1688,10 @@ func addOpDeleteJobValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteLaunchConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteLaunchConfigurationTemplate{}, middleware.After)
+}
+
+func addOpDeleteNetworkMigrationDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteNetworkMigrationDefinition{}, middleware.After)
 }
 
 func addOpDeleteReplicationConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
@@ -1266,6 +1734,14 @@ func addOpGetLaunchConfigurationValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpGetLaunchConfiguration{}, middleware.After)
 }
 
+func addOpGetNetworkMigrationDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetNetworkMigrationDefinition{}, middleware.After)
+}
+
+func addOpGetNetworkMigrationMapperSegmentConstructValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetNetworkMigrationMapperSegmentConstruct{}, middleware.After)
+}
+
 func addOpGetReplicationConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetReplicationConfiguration{}, middleware.After)
 }
@@ -1276,6 +1752,50 @@ func addOpListExportErrorsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListImportErrorsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListImportErrors{}, middleware.After)
+}
+
+func addOpListNetworkMigrationAnalysesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListNetworkMigrationAnalyses{}, middleware.After)
+}
+
+func addOpListNetworkMigrationAnalysisResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListNetworkMigrationAnalysisResults{}, middleware.After)
+}
+
+func addOpListNetworkMigrationCodeGenerationSegmentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListNetworkMigrationCodeGenerationSegments{}, middleware.After)
+}
+
+func addOpListNetworkMigrationCodeGenerationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListNetworkMigrationCodeGenerations{}, middleware.After)
+}
+
+func addOpListNetworkMigrationDeployedStacksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListNetworkMigrationDeployedStacks{}, middleware.After)
+}
+
+func addOpListNetworkMigrationDeploymentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListNetworkMigrationDeployments{}, middleware.After)
+}
+
+func addOpListNetworkMigrationExecutionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListNetworkMigrationExecutions{}, middleware.After)
+}
+
+func addOpListNetworkMigrationMapperSegmentConstructsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListNetworkMigrationMapperSegmentConstructs{}, middleware.After)
+}
+
+func addOpListNetworkMigrationMapperSegmentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListNetworkMigrationMapperSegments{}, middleware.After)
+}
+
+func addOpListNetworkMigrationMappingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListNetworkMigrationMappings{}, middleware.After)
+}
+
+func addOpListNetworkMigrationMappingUpdatesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListNetworkMigrationMappingUpdates{}, middleware.After)
 }
 
 func addOpListSourceServerActionsValidationMiddleware(stack *middleware.Stack) error {
@@ -1330,8 +1850,32 @@ func addOpStartExportValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartExport{}, middleware.After)
 }
 
+func addOpStartImportFileEnrichmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartImportFileEnrichment{}, middleware.After)
+}
+
 func addOpStartImportValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartImport{}, middleware.After)
+}
+
+func addOpStartNetworkMigrationAnalysisValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartNetworkMigrationAnalysis{}, middleware.After)
+}
+
+func addOpStartNetworkMigrationCodeGenerationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartNetworkMigrationCodeGeneration{}, middleware.After)
+}
+
+func addOpStartNetworkMigrationDeploymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartNetworkMigrationDeployment{}, middleware.After)
+}
+
+func addOpStartNetworkMigrationMappingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartNetworkMigrationMapping{}, middleware.After)
+}
+
+func addOpStartNetworkMigrationMappingUpdateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartNetworkMigrationMappingUpdate{}, middleware.After)
 }
 
 func addOpStartReplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -1380,6 +1924,14 @@ func addOpUpdateLaunchConfigurationValidationMiddleware(stack *middleware.Stack)
 
 func addOpUpdateLaunchConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLaunchConfigurationTemplate{}, middleware.After)
+}
+
+func addOpUpdateNetworkMigrationDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateNetworkMigrationDefinition{}, middleware.After)
+}
+
+func addOpUpdateNetworkMigrationMapperSegmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateNetworkMigrationMapperSegment{}, middleware.After)
 }
 
 func addOpUpdateReplicationConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -1435,6 +1987,48 @@ func validateConnectorSsmCommandConfig(v *types.ConnectorSsmCommandConfig) error
 	}
 }
 
+func validateEnrichmentSourceS3Configuration(v *types.EnrichmentSourceS3Configuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnrichmentSourceS3Configuration"}
+	if v.S3Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
+	}
+	if v.S3BucketOwner == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketOwner"))
+	}
+	if v.S3Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEnrichmentTargetS3Configuration(v *types.EnrichmentTargetS3Configuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnrichmentTargetS3Configuration"}
+	if v.S3Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
+	}
+	if v.S3BucketOwner == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketOwner"))
+	}
+	if v.S3Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePostLaunchActions(v *types.PostLaunchActions) error {
 	if v == nil {
 		return nil
@@ -1459,6 +2053,66 @@ func validateS3BucketSource(v *types.S3BucketSource) error {
 	invalidParams := smithy.InvalidParamsError{Context: "S3BucketSource"}
 	if v.S3Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
+	}
+	if v.S3Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceConfiguration(v *types.SourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceConfiguration"}
+	if len(v.SourceEnvironment) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceEnvironment"))
+	}
+	if v.SourceS3Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceS3Configuration"))
+	} else if v.SourceS3Configuration != nil {
+		if err := validateSourceS3Configuration(v.SourceS3Configuration); err != nil {
+			invalidParams.AddNested("SourceS3Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceConfigurationList(v []types.SourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceConfigurationList"}
+	for i := range v {
+		if err := validateSourceConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceS3Configuration(v *types.SourceS3Configuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceS3Configuration"}
+	if v.S3Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
+	}
+	if v.S3BucketOwner == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketOwner"))
 	}
 	if v.S3Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Key"))
@@ -1554,6 +2208,109 @@ func validateSsmParameterStoreParameters(v []types.SsmParameterStoreParameter) e
 		if err := validateSsmParameterStoreParameter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStartNetworkMigrationMappingUpdateConstruct(v *types.StartNetworkMigrationMappingUpdateConstruct) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartNetworkMigrationMappingUpdateConstruct"}
+	if v.SegmentID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentID"))
+	}
+	if v.ConstructID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConstructID"))
+	}
+	if v.ConstructType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConstructType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStartNetworkMigrationMappingUpdateConstructs(v []types.StartNetworkMigrationMappingUpdateConstruct) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartNetworkMigrationMappingUpdateConstructs"}
+	for i := range v {
+		if err := validateStartNetworkMigrationMappingUpdateConstruct(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStartNetworkMigrationMappingUpdateSegment(v *types.StartNetworkMigrationMappingUpdateSegment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartNetworkMigrationMappingUpdateSegment"}
+	if v.SegmentID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStartNetworkMigrationMappingUpdateSegments(v []types.StartNetworkMigrationMappingUpdateSegment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartNetworkMigrationMappingUpdateSegments"}
+	for i := range v {
+		if err := validateStartNetworkMigrationMappingUpdateSegment(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetNetwork(v *types.TargetNetwork) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetNetwork"}
+	if len(v.Topology) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Topology"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetS3Configuration(v *types.TargetS3Configuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetS3Configuration"}
+	if v.S3Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
+	}
+	if v.S3BucketOwner == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketOwner"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1705,6 +2462,40 @@ func validateOpCreateLaunchConfigurationTemplateInput(v *CreateLaunchConfigurati
 	}
 }
 
+func validateOpCreateNetworkMigrationDefinitionInput(v *CreateNetworkMigrationDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateNetworkMigrationDefinitionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SourceConfigurations != nil {
+		if err := validateSourceConfigurationList(v.SourceConfigurations); err != nil {
+			invalidParams.AddNested("SourceConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TargetS3Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetS3Configuration"))
+	} else if v.TargetS3Configuration != nil {
+		if err := validateTargetS3Configuration(v.TargetS3Configuration); err != nil {
+			invalidParams.AddNested("TargetS3Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TargetNetwork == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetNetwork"))
+	} else if v.TargetNetwork != nil {
+		if err := validateTargetNetwork(v.TargetNetwork); err != nil {
+			invalidParams.AddNested("TargetNetwork", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateReplicationConfigurationTemplateInput(v *CreateReplicationConfigurationTemplateInput) error {
 	if v == nil {
 		return nil
@@ -1814,6 +2605,21 @@ func validateOpDeleteLaunchConfigurationTemplateInput(v *DeleteLaunchConfigurati
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteLaunchConfigurationTemplateInput"}
 	if v.LaunchConfigurationTemplateID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LaunchConfigurationTemplateID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteNetworkMigrationDefinitionInput(v *DeleteNetworkMigrationDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteNetworkMigrationDefinitionInput"}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1978,6 +2784,45 @@ func validateOpGetLaunchConfigurationInput(v *GetLaunchConfigurationInput) error
 	}
 }
 
+func validateOpGetNetworkMigrationDefinitionInput(v *GetNetworkMigrationDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetNetworkMigrationDefinitionInput"}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetNetworkMigrationMapperSegmentConstructInput(v *GetNetworkMigrationMapperSegmentConstructInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetNetworkMigrationMapperSegmentConstructInput"}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if v.NetworkMigrationExecutionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationExecutionID"))
+	}
+	if v.SegmentID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentID"))
+	}
+	if v.ConstructID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConstructID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetReplicationConfigurationInput(v *GetReplicationConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -2015,6 +2860,204 @@ func validateOpListImportErrorsInput(v *ListImportErrorsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListImportErrorsInput"}
 	if v.ImportID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImportID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListNetworkMigrationAnalysesInput(v *ListNetworkMigrationAnalysesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListNetworkMigrationAnalysesInput"}
+	if v.NetworkMigrationExecutionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationExecutionID"))
+	}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListNetworkMigrationAnalysisResultsInput(v *ListNetworkMigrationAnalysisResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListNetworkMigrationAnalysisResultsInput"}
+	if v.NetworkMigrationExecutionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationExecutionID"))
+	}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListNetworkMigrationCodeGenerationSegmentsInput(v *ListNetworkMigrationCodeGenerationSegmentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListNetworkMigrationCodeGenerationSegmentsInput"}
+	if v.NetworkMigrationExecutionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationExecutionID"))
+	}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListNetworkMigrationCodeGenerationsInput(v *ListNetworkMigrationCodeGenerationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListNetworkMigrationCodeGenerationsInput"}
+	if v.NetworkMigrationExecutionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationExecutionID"))
+	}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListNetworkMigrationDeployedStacksInput(v *ListNetworkMigrationDeployedStacksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListNetworkMigrationDeployedStacksInput"}
+	if v.NetworkMigrationExecutionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationExecutionID"))
+	}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListNetworkMigrationDeploymentsInput(v *ListNetworkMigrationDeploymentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListNetworkMigrationDeploymentsInput"}
+	if v.NetworkMigrationExecutionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationExecutionID"))
+	}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListNetworkMigrationExecutionsInput(v *ListNetworkMigrationExecutionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListNetworkMigrationExecutionsInput"}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListNetworkMigrationMapperSegmentConstructsInput(v *ListNetworkMigrationMapperSegmentConstructsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListNetworkMigrationMapperSegmentConstructsInput"}
+	if v.NetworkMigrationExecutionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationExecutionID"))
+	}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if v.SegmentID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListNetworkMigrationMapperSegmentsInput(v *ListNetworkMigrationMapperSegmentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListNetworkMigrationMapperSegmentsInput"}
+	if v.NetworkMigrationExecutionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationExecutionID"))
+	}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListNetworkMigrationMappingsInput(v *ListNetworkMigrationMappingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListNetworkMigrationMappingsInput"}
+	if v.NetworkMigrationExecutionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationExecutionID"))
+	}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListNetworkMigrationMappingUpdatesInput(v *ListNetworkMigrationMappingUpdatesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListNetworkMigrationMappingUpdatesInput"}
+	if v.NetworkMigrationExecutionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationExecutionID"))
+	}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2261,6 +3304,32 @@ func validateOpStartExportInput(v *StartExportInput) error {
 	}
 }
 
+func validateOpStartImportFileEnrichmentInput(v *StartImportFileEnrichmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartImportFileEnrichmentInput"}
+	if v.S3BucketSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketSource"))
+	} else if v.S3BucketSource != nil {
+		if err := validateEnrichmentSourceS3Configuration(v.S3BucketSource); err != nil {
+			invalidParams.AddNested("S3BucketSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3BucketTarget == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketTarget"))
+	} else if v.S3BucketTarget != nil {
+		if err := validateEnrichmentTargetS3Configuration(v.S3BucketTarget); err != nil {
+			invalidParams.AddNested("S3BucketTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartImportInput(v *StartImportInput) error {
 	if v == nil {
 		return nil
@@ -2271,6 +3340,106 @@ func validateOpStartImportInput(v *StartImportInput) error {
 	} else if v.S3BucketSource != nil {
 		if err := validateS3BucketSource(v.S3BucketSource); err != nil {
 			invalidParams.AddNested("S3BucketSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartNetworkMigrationAnalysisInput(v *StartNetworkMigrationAnalysisInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartNetworkMigrationAnalysisInput"}
+	if v.NetworkMigrationExecutionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationExecutionID"))
+	}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartNetworkMigrationCodeGenerationInput(v *StartNetworkMigrationCodeGenerationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartNetworkMigrationCodeGenerationInput"}
+	if v.NetworkMigrationExecutionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationExecutionID"))
+	}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartNetworkMigrationDeploymentInput(v *StartNetworkMigrationDeploymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartNetworkMigrationDeploymentInput"}
+	if v.NetworkMigrationExecutionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationExecutionID"))
+	}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartNetworkMigrationMappingInput(v *StartNetworkMigrationMappingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartNetworkMigrationMappingInput"}
+	if v.NetworkMigrationExecutionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationExecutionID"))
+	}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartNetworkMigrationMappingUpdateInput(v *StartNetworkMigrationMappingUpdateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartNetworkMigrationMappingUpdateInput"}
+	if v.NetworkMigrationExecutionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationExecutionID"))
+	}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if v.Constructs != nil {
+		if err := validateStartNetworkMigrationMappingUpdateConstructs(v.Constructs); err != nil {
+			invalidParams.AddNested("Constructs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Segments != nil {
+		if err := validateStartNetworkMigrationMappingUpdateSegments(v.Segments); err != nil {
+			invalidParams.AddNested("Segments", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2473,6 +3642,47 @@ func validateOpUpdateLaunchConfigurationTemplateInput(v *UpdateLaunchConfigurati
 		if err := validatePostLaunchActions(v.PostLaunchActions); err != nil {
 			invalidParams.AddNested("PostLaunchActions", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateNetworkMigrationDefinitionInput(v *UpdateNetworkMigrationDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateNetworkMigrationDefinitionInput"}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if v.SourceConfigurations != nil {
+		if err := validateSourceConfigurationList(v.SourceConfigurations); err != nil {
+			invalidParams.AddNested("SourceConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateNetworkMigrationMapperSegmentInput(v *UpdateNetworkMigrationMapperSegmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateNetworkMigrationMapperSegmentInput"}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if v.NetworkMigrationExecutionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationExecutionID"))
+	}
+	if v.SegmentID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

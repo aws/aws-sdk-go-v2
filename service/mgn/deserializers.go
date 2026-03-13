@@ -13,6 +13,7 @@ import (
 	smithyio "github.com/aws/smithy-go/io"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
+	smithytime "github.com/aws/smithy-go/time"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -1680,6 +1681,258 @@ func awsRestjson1_deserializeOpDocumentCreateLaunchConfigurationTemplateOutput(v
 	return nil
 }
 
+type awsRestjson1_deserializeOpCreateNetworkMigrationDefinition struct {
+}
+
+func (*awsRestjson1_deserializeOpCreateNetworkMigrationDefinition) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpCreateNetworkMigrationDefinition) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorCreateNetworkMigrationDefinition(response, &metadata)
+	}
+	output := &CreateNetworkMigrationDefinitionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentCreateNetworkMigrationDefinitionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorCreateNetworkMigrationDefinition(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentCreateNetworkMigrationDefinitionOutput(v **CreateNetworkMigrationDefinitionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreateNetworkMigrationDefinitionOutput
+	if *v == nil {
+		sv = &CreateNetworkMigrationDefinitionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionDescription to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "networkMigrationDefinitionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationDefinitionID = ptr.String(jtv)
+			}
+
+		case "scopeTags":
+			if err := awsRestjson1_deserializeDocumentScopeTagsMap(&sv.ScopeTags, value); err != nil {
+				return err
+			}
+
+		case "sourceConfigurations":
+			if err := awsRestjson1_deserializeDocumentSourceConfigurationList(&sv.SourceConfigurations, value); err != nil {
+				return err
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "targetDeployment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetDeployment to be of type string, got %T instead", value)
+				}
+				sv.TargetDeployment = types.TargetDeployment(jtv)
+			}
+
+		case "targetNetwork":
+			if err := awsRestjson1_deserializeDocumentTargetNetwork(&sv.TargetNetwork, value); err != nil {
+				return err
+			}
+
+		case "targetS3Configuration":
+			if err := awsRestjson1_deserializeDocumentTargetS3Configuration(&sv.TargetS3Configuration, value); err != nil {
+				return err
+			}
+
+		case "updatedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UpdatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpCreateReplicationConfigurationTemplate struct {
 }
 
@@ -2584,6 +2837,100 @@ func awsRestjson1_deserializeOpErrorDeleteLaunchConfigurationTemplate(response *
 
 	case strings.EqualFold("UninitializedAccountException", errorCode):
 		return awsRestjson1_deserializeErrorUninitializedAccountException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestjson1_deserializeOpDeleteNetworkMigrationDefinition struct {
+}
+
+func (*awsRestjson1_deserializeOpDeleteNetworkMigrationDefinition) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpDeleteNetworkMigrationDefinition) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteNetworkMigrationDefinition(response, &metadata)
+	}
+	output := &DeleteNetworkMigrationDefinitionOutput{}
+	out.Result = output
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDeleteNetworkMigrationDefinition(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -4921,6 +5268,416 @@ func awsRestjson1_deserializeOpDocumentGetLaunchConfigurationOutput(v **GetLaunc
 	return nil
 }
 
+type awsRestjson1_deserializeOpGetNetworkMigrationDefinition struct {
+}
+
+func (*awsRestjson1_deserializeOpGetNetworkMigrationDefinition) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpGetNetworkMigrationDefinition) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorGetNetworkMigrationDefinition(response, &metadata)
+	}
+	output := &GetNetworkMigrationDefinitionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentGetNetworkMigrationDefinitionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorGetNetworkMigrationDefinition(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentGetNetworkMigrationDefinitionOutput(v **GetNetworkMigrationDefinitionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetNetworkMigrationDefinitionOutput
+	if *v == nil {
+		sv = &GetNetworkMigrationDefinitionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionDescription to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "networkMigrationDefinitionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationDefinitionID = ptr.String(jtv)
+			}
+
+		case "scopeTags":
+			if err := awsRestjson1_deserializeDocumentScopeTagsMap(&sv.ScopeTags, value); err != nil {
+				return err
+			}
+
+		case "sourceConfigurations":
+			if err := awsRestjson1_deserializeDocumentSourceConfigurationList(&sv.SourceConfigurations, value); err != nil {
+				return err
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "targetDeployment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetDeployment to be of type string, got %T instead", value)
+				}
+				sv.TargetDeployment = types.TargetDeployment(jtv)
+			}
+
+		case "targetNetwork":
+			if err := awsRestjson1_deserializeDocumentTargetNetwork(&sv.TargetNetwork, value); err != nil {
+				return err
+			}
+
+		case "targetS3Configuration":
+			if err := awsRestjson1_deserializeDocumentTargetS3Configuration(&sv.TargetS3Configuration, value); err != nil {
+				return err
+			}
+
+		case "updatedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UpdatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpGetNetworkMigrationMapperSegmentConstruct struct {
+}
+
+func (*awsRestjson1_deserializeOpGetNetworkMigrationMapperSegmentConstruct) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpGetNetworkMigrationMapperSegmentConstruct) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorGetNetworkMigrationMapperSegmentConstruct(response, &metadata)
+	}
+	output := &GetNetworkMigrationMapperSegmentConstructOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentGetNetworkMigrationMapperSegmentConstructOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorGetNetworkMigrationMapperSegmentConstruct(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentGetNetworkMigrationMapperSegmentConstructOutput(v **GetNetworkMigrationMapperSegmentConstructOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetNetworkMigrationMapperSegmentConstructOutput
+	if *v == nil {
+		sv = &GetNetworkMigrationMapperSegmentConstructOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "construct":
+			if err := awsRestjson1_deserializeDocumentNetworkMigrationMapperSegmentConstruct(&sv.Construct, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpGetReplicationConfiguration struct {
 }
 
@@ -6130,6 +6887,167 @@ func awsRestjson1_deserializeOpDocumentListImportErrorsOutput(v **ListImportErro
 	return nil
 }
 
+type awsRestjson1_deserializeOpListImportFileEnrichments struct {
+}
+
+func (*awsRestjson1_deserializeOpListImportFileEnrichments) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListImportFileEnrichments) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListImportFileEnrichments(response, &metadata)
+	}
+	output := &ListImportFileEnrichmentsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListImportFileEnrichmentsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListImportFileEnrichments(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListImportFileEnrichmentsOutput(v **ListImportFileEnrichmentsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListImportFileEnrichmentsOutput
+	if *v == nil {
+		sv = &ListImportFileEnrichmentsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "items":
+			if err := awsRestjson1_deserializeDocumentImportFileEnrichmentsList(&sv.Items, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpListImports struct {
 }
 
@@ -6437,6 +7355,2031 @@ func awsRestjson1_deserializeOpDocumentListManagedAccountsOutput(v **ListManaged
 		switch key {
 		case "items":
 			if err := awsRestjson1_deserializeDocumentManagedAccounts(&sv.Items, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListNetworkMigrationAnalyses struct {
+}
+
+func (*awsRestjson1_deserializeOpListNetworkMigrationAnalyses) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListNetworkMigrationAnalyses) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListNetworkMigrationAnalyses(response, &metadata)
+	}
+	output := &ListNetworkMigrationAnalysesOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListNetworkMigrationAnalysesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListNetworkMigrationAnalyses(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListNetworkMigrationAnalysesOutput(v **ListNetworkMigrationAnalysesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListNetworkMigrationAnalysesOutput
+	if *v == nil {
+		sv = &ListNetworkMigrationAnalysesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "items":
+			if err := awsRestjson1_deserializeDocumentNetworkMigrationAnalysesList(&sv.Items, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListNetworkMigrationAnalysisResults struct {
+}
+
+func (*awsRestjson1_deserializeOpListNetworkMigrationAnalysisResults) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListNetworkMigrationAnalysisResults) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListNetworkMigrationAnalysisResults(response, &metadata)
+	}
+	output := &ListNetworkMigrationAnalysisResultsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListNetworkMigrationAnalysisResultsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListNetworkMigrationAnalysisResults(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListNetworkMigrationAnalysisResultsOutput(v **ListNetworkMigrationAnalysisResultsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListNetworkMigrationAnalysisResultsOutput
+	if *v == nil {
+		sv = &ListNetworkMigrationAnalysisResultsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "items":
+			if err := awsRestjson1_deserializeDocumentNetworkMigrationAnalysisResultsList(&sv.Items, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListNetworkMigrationCodeGenerations struct {
+}
+
+func (*awsRestjson1_deserializeOpListNetworkMigrationCodeGenerations) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListNetworkMigrationCodeGenerations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListNetworkMigrationCodeGenerations(response, &metadata)
+	}
+	output := &ListNetworkMigrationCodeGenerationsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListNetworkMigrationCodeGenerationsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListNetworkMigrationCodeGenerations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListNetworkMigrationCodeGenerationsOutput(v **ListNetworkMigrationCodeGenerationsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListNetworkMigrationCodeGenerationsOutput
+	if *v == nil {
+		sv = &ListNetworkMigrationCodeGenerationsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "items":
+			if err := awsRestjson1_deserializeDocumentNetworkMigrationCodeGenerationsList(&sv.Items, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListNetworkMigrationCodeGenerationSegments struct {
+}
+
+func (*awsRestjson1_deserializeOpListNetworkMigrationCodeGenerationSegments) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListNetworkMigrationCodeGenerationSegments) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListNetworkMigrationCodeGenerationSegments(response, &metadata)
+	}
+	output := &ListNetworkMigrationCodeGenerationSegmentsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListNetworkMigrationCodeGenerationSegmentsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListNetworkMigrationCodeGenerationSegments(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListNetworkMigrationCodeGenerationSegmentsOutput(v **ListNetworkMigrationCodeGenerationSegmentsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListNetworkMigrationCodeGenerationSegmentsOutput
+	if *v == nil {
+		sv = &ListNetworkMigrationCodeGenerationSegmentsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "items":
+			if err := awsRestjson1_deserializeDocumentNetworkMigrationCodeGenerationSegmentsList(&sv.Items, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListNetworkMigrationDefinitions struct {
+}
+
+func (*awsRestjson1_deserializeOpListNetworkMigrationDefinitions) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListNetworkMigrationDefinitions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListNetworkMigrationDefinitions(response, &metadata)
+	}
+	output := &ListNetworkMigrationDefinitionsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListNetworkMigrationDefinitionsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListNetworkMigrationDefinitions(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListNetworkMigrationDefinitionsOutput(v **ListNetworkMigrationDefinitionsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListNetworkMigrationDefinitionsOutput
+	if *v == nil {
+		sv = &ListNetworkMigrationDefinitionsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "items":
+			if err := awsRestjson1_deserializeDocumentNetworkMigrationDefinitionSummariesList(&sv.Items, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListNetworkMigrationDeployedStacks struct {
+}
+
+func (*awsRestjson1_deserializeOpListNetworkMigrationDeployedStacks) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListNetworkMigrationDeployedStacks) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListNetworkMigrationDeployedStacks(response, &metadata)
+	}
+	output := &ListNetworkMigrationDeployedStacksOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListNetworkMigrationDeployedStacksOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListNetworkMigrationDeployedStacks(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListNetworkMigrationDeployedStacksOutput(v **ListNetworkMigrationDeployedStacksOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListNetworkMigrationDeployedStacksOutput
+	if *v == nil {
+		sv = &ListNetworkMigrationDeployedStacksOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "items":
+			if err := awsRestjson1_deserializeDocumentNetworkMigrationDeployedStacksList(&sv.Items, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListNetworkMigrationDeployments struct {
+}
+
+func (*awsRestjson1_deserializeOpListNetworkMigrationDeployments) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListNetworkMigrationDeployments) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListNetworkMigrationDeployments(response, &metadata)
+	}
+	output := &ListNetworkMigrationDeploymentsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListNetworkMigrationDeploymentsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListNetworkMigrationDeployments(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListNetworkMigrationDeploymentsOutput(v **ListNetworkMigrationDeploymentsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListNetworkMigrationDeploymentsOutput
+	if *v == nil {
+		sv = &ListNetworkMigrationDeploymentsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "items":
+			if err := awsRestjson1_deserializeDocumentNetworkMigrationDeployerJobList(&sv.Items, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListNetworkMigrationExecutions struct {
+}
+
+func (*awsRestjson1_deserializeOpListNetworkMigrationExecutions) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListNetworkMigrationExecutions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListNetworkMigrationExecutions(response, &metadata)
+	}
+	output := &ListNetworkMigrationExecutionsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListNetworkMigrationExecutionsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListNetworkMigrationExecutions(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListNetworkMigrationExecutionsOutput(v **ListNetworkMigrationExecutionsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListNetworkMigrationExecutionsOutput
+	if *v == nil {
+		sv = &ListNetworkMigrationExecutionsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "items":
+			if err := awsRestjson1_deserializeDocumentNetworkMigrationExecutionsList(&sv.Items, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListNetworkMigrationMapperSegmentConstructs struct {
+}
+
+func (*awsRestjson1_deserializeOpListNetworkMigrationMapperSegmentConstructs) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListNetworkMigrationMapperSegmentConstructs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListNetworkMigrationMapperSegmentConstructs(response, &metadata)
+	}
+	output := &ListNetworkMigrationMapperSegmentConstructsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListNetworkMigrationMapperSegmentConstructsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListNetworkMigrationMapperSegmentConstructs(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListNetworkMigrationMapperSegmentConstructsOutput(v **ListNetworkMigrationMapperSegmentConstructsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListNetworkMigrationMapperSegmentConstructsOutput
+	if *v == nil {
+		sv = &ListNetworkMigrationMapperSegmentConstructsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "items":
+			if err := awsRestjson1_deserializeDocumentNetworkMigrationMapperSegmentConstructs(&sv.Items, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListNetworkMigrationMapperSegments struct {
+}
+
+func (*awsRestjson1_deserializeOpListNetworkMigrationMapperSegments) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListNetworkMigrationMapperSegments) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListNetworkMigrationMapperSegments(response, &metadata)
+	}
+	output := &ListNetworkMigrationMapperSegmentsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListNetworkMigrationMapperSegmentsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListNetworkMigrationMapperSegments(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListNetworkMigrationMapperSegmentsOutput(v **ListNetworkMigrationMapperSegmentsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListNetworkMigrationMapperSegmentsOutput
+	if *v == nil {
+		sv = &ListNetworkMigrationMapperSegmentsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "items":
+			if err := awsRestjson1_deserializeDocumentNetworkMigrationMapperSegmentsList(&sv.Items, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListNetworkMigrationMappings struct {
+}
+
+func (*awsRestjson1_deserializeOpListNetworkMigrationMappings) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListNetworkMigrationMappings) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListNetworkMigrationMappings(response, &metadata)
+	}
+	output := &ListNetworkMigrationMappingsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListNetworkMigrationMappingsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListNetworkMigrationMappings(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListNetworkMigrationMappingsOutput(v **ListNetworkMigrationMappingsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListNetworkMigrationMappingsOutput
+	if *v == nil {
+		sv = &ListNetworkMigrationMappingsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "items":
+			if err := awsRestjson1_deserializeDocumentNetworkMigrationMappingsList(&sv.Items, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListNetworkMigrationMappingUpdates struct {
+}
+
+func (*awsRestjson1_deserializeOpListNetworkMigrationMappingUpdates) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListNetworkMigrationMappingUpdates) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListNetworkMigrationMappingUpdates(response, &metadata)
+	}
+	output := &ListNetworkMigrationMappingUpdatesOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListNetworkMigrationMappingUpdatesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListNetworkMigrationMappingUpdates(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListNetworkMigrationMappingUpdatesOutput(v **ListNetworkMigrationMappingUpdatesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListNetworkMigrationMappingUpdatesOutput
+	if *v == nil {
+		sv = &ListNetworkMigrationMappingUpdatesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "items":
+			if err := awsRestjson1_deserializeDocumentNetworkMigrationMappingUpdatesList(&sv.Items, value); err != nil {
 				return err
 			}
 
@@ -9348,6 +12291,1029 @@ func awsRestjson1_deserializeOpDocumentStartImportOutput(v **StartImportOutput, 
 	return nil
 }
 
+type awsRestjson1_deserializeOpStartImportFileEnrichment struct {
+}
+
+func (*awsRestjson1_deserializeOpStartImportFileEnrichment) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpStartImportFileEnrichment) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorStartImportFileEnrichment(response, &metadata)
+	}
+	output := &StartImportFileEnrichmentOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentStartImportFileEnrichmentOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorStartImportFileEnrichment(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentStartImportFileEnrichmentOutput(v **StartImportFileEnrichmentOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *StartImportFileEnrichmentOutput
+	if *v == nil {
+		sv = &StartImportFileEnrichmentOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "jobID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImportFileEnrichmentJobID to be of type string, got %T instead", value)
+				}
+				sv.JobID = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpStartNetworkMigrationAnalysis struct {
+}
+
+func (*awsRestjson1_deserializeOpStartNetworkMigrationAnalysis) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpStartNetworkMigrationAnalysis) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorStartNetworkMigrationAnalysis(response, &metadata)
+	}
+	output := &StartNetworkMigrationAnalysisOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentStartNetworkMigrationAnalysisOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorStartNetworkMigrationAnalysis(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentStartNetworkMigrationAnalysisOutput(v **StartNetworkMigrationAnalysisOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *StartNetworkMigrationAnalysisOutput
+	if *v == nil {
+		sv = &StartNetworkMigrationAnalysisOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "jobID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobID to be of type string, got %T instead", value)
+				}
+				sv.JobID = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpStartNetworkMigrationCodeGeneration struct {
+}
+
+func (*awsRestjson1_deserializeOpStartNetworkMigrationCodeGeneration) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpStartNetworkMigrationCodeGeneration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorStartNetworkMigrationCodeGeneration(response, &metadata)
+	}
+	output := &StartNetworkMigrationCodeGenerationOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentStartNetworkMigrationCodeGenerationOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorStartNetworkMigrationCodeGeneration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentStartNetworkMigrationCodeGenerationOutput(v **StartNetworkMigrationCodeGenerationOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *StartNetworkMigrationCodeGenerationOutput
+	if *v == nil {
+		sv = &StartNetworkMigrationCodeGenerationOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "jobID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobID to be of type string, got %T instead", value)
+				}
+				sv.JobID = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpStartNetworkMigrationDeployment struct {
+}
+
+func (*awsRestjson1_deserializeOpStartNetworkMigrationDeployment) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpStartNetworkMigrationDeployment) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorStartNetworkMigrationDeployment(response, &metadata)
+	}
+	output := &StartNetworkMigrationDeploymentOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentStartNetworkMigrationDeploymentOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorStartNetworkMigrationDeployment(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentStartNetworkMigrationDeploymentOutput(v **StartNetworkMigrationDeploymentOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *StartNetworkMigrationDeploymentOutput
+	if *v == nil {
+		sv = &StartNetworkMigrationDeploymentOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "jobID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobID to be of type string, got %T instead", value)
+				}
+				sv.JobID = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpStartNetworkMigrationMapping struct {
+}
+
+func (*awsRestjson1_deserializeOpStartNetworkMigrationMapping) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpStartNetworkMigrationMapping) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorStartNetworkMigrationMapping(response, &metadata)
+	}
+	output := &StartNetworkMigrationMappingOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentStartNetworkMigrationMappingOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorStartNetworkMigrationMapping(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentStartNetworkMigrationMappingOutput(v **StartNetworkMigrationMappingOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *StartNetworkMigrationMappingOutput
+	if *v == nil {
+		sv = &StartNetworkMigrationMappingOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "jobID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobID to be of type string, got %T instead", value)
+				}
+				sv.JobID = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpStartNetworkMigrationMappingUpdate struct {
+}
+
+func (*awsRestjson1_deserializeOpStartNetworkMigrationMappingUpdate) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpStartNetworkMigrationMappingUpdate) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorStartNetworkMigrationMappingUpdate(response, &metadata)
+	}
+	output := &StartNetworkMigrationMappingUpdateOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentStartNetworkMigrationMappingUpdateOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorStartNetworkMigrationMappingUpdate(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentStartNetworkMigrationMappingUpdateOutput(v **StartNetworkMigrationMappingUpdateOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *StartNetworkMigrationMappingUpdateOutput
+	if *v == nil {
+		sv = &StartNetworkMigrationMappingUpdateOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "jobID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobID to be of type string, got %T instead", value)
+				}
+				sv.JobID = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpStartReplication struct {
 }
 
@@ -11860,6 +15826,547 @@ func awsRestjson1_deserializeOpDocumentUpdateLaunchConfigurationTemplateOutput(v
 	return nil
 }
 
+type awsRestjson1_deserializeOpUpdateNetworkMigrationDefinition struct {
+}
+
+func (*awsRestjson1_deserializeOpUpdateNetworkMigrationDefinition) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpUpdateNetworkMigrationDefinition) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateNetworkMigrationDefinition(response, &metadata)
+	}
+	output := &UpdateNetworkMigrationDefinitionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentUpdateNetworkMigrationDefinitionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorUpdateNetworkMigrationDefinition(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentUpdateNetworkMigrationDefinitionOutput(v **UpdateNetworkMigrationDefinitionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateNetworkMigrationDefinitionOutput
+	if *v == nil {
+		sv = &UpdateNetworkMigrationDefinitionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionDescription to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "networkMigrationDefinitionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationDefinitionID = ptr.String(jtv)
+			}
+
+		case "scopeTags":
+			if err := awsRestjson1_deserializeDocumentScopeTagsMap(&sv.ScopeTags, value); err != nil {
+				return err
+			}
+
+		case "sourceConfigurations":
+			if err := awsRestjson1_deserializeDocumentSourceConfigurationList(&sv.SourceConfigurations, value); err != nil {
+				return err
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "targetDeployment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetDeployment to be of type string, got %T instead", value)
+				}
+				sv.TargetDeployment = types.TargetDeployment(jtv)
+			}
+
+		case "targetNetwork":
+			if err := awsRestjson1_deserializeDocumentTargetNetwork(&sv.TargetNetwork, value); err != nil {
+				return err
+			}
+
+		case "targetS3Configuration":
+			if err := awsRestjson1_deserializeDocumentTargetS3Configuration(&sv.TargetS3Configuration, value); err != nil {
+				return err
+			}
+
+		case "updatedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UpdatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpUpdateNetworkMigrationMapperSegment struct {
+}
+
+func (*awsRestjson1_deserializeOpUpdateNetworkMigrationMapperSegment) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpUpdateNetworkMigrationMapperSegment) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateNetworkMigrationMapperSegment(response, &metadata)
+	}
+	output := &UpdateNetworkMigrationMapperSegmentOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentUpdateNetworkMigrationMapperSegmentOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorUpdateNetworkMigrationMapperSegment(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentUpdateNetworkMigrationMapperSegmentOutput(v **UpdateNetworkMigrationMapperSegmentOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateNetworkMigrationMapperSegmentOutput
+	if *v == nil {
+		sv = &UpdateNetworkMigrationMapperSegmentOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "checksum":
+			if err := awsRestjson1_deserializeDocumentChecksum(&sv.Checksum, value); err != nil {
+				return err
+			}
+
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SegmentDescription to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "jobID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobID to be of type string, got %T instead", value)
+				}
+				sv.JobID = ptr.String(jtv)
+			}
+
+		case "logicalID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogicalID to be of type string, got %T instead", value)
+				}
+				sv.LogicalID = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SegmentName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "networkMigrationDefinitionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationDefinitionID = ptr.String(jtv)
+			}
+
+		case "networkMigrationExecutionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationExecutionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationExecutionID = ptr.String(jtv)
+			}
+
+		case "outputS3Configuration":
+			if err := awsRestjson1_deserializeDocumentS3Configuration(&sv.OutputS3Configuration, value); err != nil {
+				return err
+			}
+
+		case "referencedSegments":
+			if err := awsRestjson1_deserializeDocumentReferencedSegmentsList(&sv.ReferencedSegments, value); err != nil {
+				return err
+			}
+
+		case "scopeTags":
+			if err := awsRestjson1_deserializeDocumentScopeTagsMap(&sv.ScopeTags, value); err != nil {
+				return err
+			}
+
+		case "segmentID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SegmentID to be of type string, got %T instead", value)
+				}
+				sv.SegmentID = ptr.String(jtv)
+			}
+
+		case "segmentType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationMapperSegmentType to be of type string, got %T instead", value)
+				}
+				sv.SegmentType = types.NetworkMigrationMapperSegmentType(jtv)
+			}
+
+		case "targetAccount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountID to be of type string, got %T instead", value)
+				}
+				sv.TargetAccount = ptr.String(jtv)
+			}
+
+		case "updatedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UpdatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpUpdateReplicationConfiguration struct {
 }
 
@@ -13813,6 +18320,139 @@ func awsRestjson1_deserializeDocumentApplicationsList(v *[]types.Application, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentChecksum(v **types.Checksum, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Checksum
+	if *v == nil {
+		sv = &types.Checksum{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "encryptionAlgorithm":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionAlgorithm to be of type string, got %T instead", value)
+				}
+				sv.EncryptionAlgorithm = types.EncryptionAlgorithm(jtv)
+			}
+
+		case "hash":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Hash to be of type string, got %T instead", value)
+				}
+				sv.Hash = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCodeGenerationOutputFormatStatusDetails(v **types.CodeGenerationOutputFormatStatusDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CodeGenerationOutputFormatStatusDetails
+	if *v == nil {
+		sv = &types.CodeGenerationOutputFormatStatusDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CodeGenerationOutputFormatStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.CodeGenerationOutputFormatStatus(jtv)
+			}
+
+		case "statusDetailList":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LargeBoundedString to be of type string, got %T instead", value)
+				}
+				sv.StatusDetailList = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCodeGenerationOutputFormatStatusDetailsMap(v *map[string]types.CodeGenerationOutputFormatStatusDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.CodeGenerationOutputFormatStatusDetails
+	if *v == nil {
+		mv = map[string]types.CodeGenerationOutputFormatStatusDetails{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.CodeGenerationOutputFormatStatusDetails
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentCodeGenerationOutputFormatStatusDetails(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14094,6 +18734,42 @@ func awsRestjson1_deserializeDocumentConnectorSsmCommandConfig(v **types.Connect
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConstructProperties(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected MarshalledResourceDefinition to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -14671,6 +19347,64 @@ func awsRestjson1_deserializeDocumentDisks(v *[]types.Disk, value interface{}) e
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEnrichmentTargetS3Configuration(v **types.EnrichmentTargetS3Configuration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EnrichmentTargetS3Configuration
+	if *v == nil {
+		sv = &types.EnrichmentTargetS3Configuration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "s3Bucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3BucketName to be of type string, got %T instead", value)
+				}
+				sv.S3Bucket = ptr.String(jtv)
+			}
+
+		case "s3BucketOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountID to be of type string, got %T instead", value)
+				}
+				sv.S3BucketOwner = ptr.String(jtv)
+			}
+
+		case "s3Key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3KeyName to be of type string, got %T instead", value)
+				}
+				sv.S3Key = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -15309,6 +20043,140 @@ func awsRestjson1_deserializeDocumentImportErrors(v *[]types.ImportTaskError, va
 		var col types.ImportTaskError
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentImportTaskError(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImportFileEnrichment(v **types.ImportFileEnrichment, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImportFileEnrichment
+	if *v == nil {
+		sv = &types.ImportFileEnrichment{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "checksum":
+			if err := awsRestjson1_deserializeDocumentChecksum(&sv.Checksum, value); err != nil {
+				return err
+			}
+
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "endedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EndedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "jobID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImportFileEnrichmentJobID to be of type string, got %T instead", value)
+				}
+				sv.JobID = ptr.String(jtv)
+			}
+
+		case "s3BucketTarget":
+			if err := awsRestjson1_deserializeDocumentEnrichmentTargetS3Configuration(&sv.S3BucketTarget, value); err != nil {
+				return err
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImportFileEnrichmentStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ImportFileEnrichmentStatus(jtv)
+			}
+
+		case "statusDetails":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LargeBoundedString to be of type string, got %T instead", value)
+				}
+				sv.StatusDetails = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImportFileEnrichmentsList(v *[]types.ImportFileEnrichment, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ImportFileEnrichment
+	if *v == nil {
+		cv = []types.ImportFileEnrichment{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ImportFileEnrichment
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentImportFileEnrichment(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -17211,6 +22079,2034 @@ func awsRestjson1_deserializeDocumentNetworkInterfaces(v *[]types.NetworkInterfa
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentNetworkMigrationAnalysesList(v *[]types.NetworkMigrationAnalysisJobDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NetworkMigrationAnalysisJobDetails
+	if *v == nil {
+		cv = []types.NetworkMigrationAnalysisJobDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NetworkMigrationAnalysisJobDetails
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNetworkMigrationAnalysisJobDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationAnalysisJobDetails(v **types.NetworkMigrationAnalysisJobDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkMigrationAnalysisJobDetails
+	if *v == nil {
+		sv = &types.NetworkMigrationAnalysisJobDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "endedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EndedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "jobID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobID to be of type string, got %T instead", value)
+				}
+				sv.JobID = ptr.String(jtv)
+			}
+
+		case "networkMigrationDefinitionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationDefinitionID = ptr.String(jtv)
+			}
+
+		case "networkMigrationExecutionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationExecutionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationExecutionID = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.NetworkMigrationJobStatus(jtv)
+			}
+
+		case "statusDetails":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LargeBoundedString to be of type string, got %T instead", value)
+				}
+				sv.StatusDetails = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationAnalysisResult(v **types.NetworkMigrationAnalysisResult, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkMigrationAnalysisResult
+	if *v == nil {
+		sv = &types.NetworkMigrationAnalysisResult{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "analysisResult":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AnalysisResult = ptr.String(jtv)
+			}
+
+		case "analyzerType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AnalyzerType to be of type string, got %T instead", value)
+				}
+				sv.AnalyzerType = types.AnalyzerType(jtv)
+			}
+
+		case "jobID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobID to be of type string, got %T instead", value)
+				}
+				sv.JobID = ptr.String(jtv)
+			}
+
+		case "networkMigrationDefinitionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationDefinitionID = ptr.String(jtv)
+			}
+
+		case "networkMigrationExecutionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationExecutionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationExecutionID = ptr.String(jtv)
+			}
+
+		case "source":
+			if err := awsRestjson1_deserializeDocumentNetworkMigrationAnalysisResultSource(&sv.Source, value); err != nil {
+				return err
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationAnalysisResultStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.NetworkMigrationAnalysisResultStatus(jtv)
+			}
+
+		case "target":
+			if err := awsRestjson1_deserializeDocumentNetworkMigrationAnalysisResultTarget(&sv.Target, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationAnalysisResultsList(v *[]types.NetworkMigrationAnalysisResult, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NetworkMigrationAnalysisResult
+	if *v == nil {
+		cv = []types.NetworkMigrationAnalysisResult{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NetworkMigrationAnalysisResult
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNetworkMigrationAnalysisResult(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationAnalysisResultSource(v **types.NetworkMigrationAnalysisResultSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkMigrationAnalysisResultSource
+	if *v == nil {
+		sv = &types.NetworkMigrationAnalysisResultSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "subnetID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubnetID to be of type string, got %T instead", value)
+				}
+				sv.SubnetID = ptr.String(jtv)
+			}
+
+		case "vpcID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VpcID to be of type string, got %T instead", value)
+				}
+				sv.VpcID = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationAnalysisResultTarget(v **types.NetworkMigrationAnalysisResultTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkMigrationAnalysisResultTarget
+	if *v == nil {
+		sv = &types.NetworkMigrationAnalysisResultTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "subnetID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubnetID to be of type string, got %T instead", value)
+				}
+				sv.SubnetID = ptr.String(jtv)
+			}
+
+		case "vpcID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VpcID to be of type string, got %T instead", value)
+				}
+				sv.VpcID = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationCodeGenerationArtifact(v **types.NetworkMigrationCodeGenerationArtifact, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkMigrationCodeGenerationArtifact
+	if *v == nil {
+		sv = &types.NetworkMigrationCodeGenerationArtifact{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "artifactID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationCodeGenerationArtifactID to be of type string, got %T instead", value)
+				}
+				sv.ArtifactID = ptr.String(jtv)
+			}
+
+		case "artifactSubType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationCodeGenerationArtifactSubType to be of type string, got %T instead", value)
+				}
+				sv.ArtifactSubType = types.NetworkMigrationCodeGenerationArtifactSubType(jtv)
+			}
+
+		case "artifactType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationCodeGenerationArtifactType to be of type string, got %T instead", value)
+				}
+				sv.ArtifactType = types.NetworkMigrationCodeGenerationArtifactType(jtv)
+			}
+
+		case "checksum":
+			if err := awsRestjson1_deserializeDocumentChecksum(&sv.Checksum, value); err != nil {
+				return err
+			}
+
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "logicalID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogicalID to be of type string, got %T instead", value)
+				}
+				sv.LogicalID = ptr.String(jtv)
+			}
+
+		case "outputS3Configuration":
+			if err := awsRestjson1_deserializeDocumentS3Configuration(&sv.OutputS3Configuration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationCodeGenerationArtifacts(v *[]types.NetworkMigrationCodeGenerationArtifact, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NetworkMigrationCodeGenerationArtifact
+	if *v == nil {
+		cv = []types.NetworkMigrationCodeGenerationArtifact{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NetworkMigrationCodeGenerationArtifact
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNetworkMigrationCodeGenerationArtifact(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationCodeGenerationJobDetails(v **types.NetworkMigrationCodeGenerationJobDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkMigrationCodeGenerationJobDetails
+	if *v == nil {
+		sv = &types.NetworkMigrationCodeGenerationJobDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "codeGenerationOutputFormatStatusDetailsMap":
+			if err := awsRestjson1_deserializeDocumentCodeGenerationOutputFormatStatusDetailsMap(&sv.CodeGenerationOutputFormatStatusDetailsMap, value); err != nil {
+				return err
+			}
+
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "endedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EndedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "jobID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobID to be of type string, got %T instead", value)
+				}
+				sv.JobID = ptr.String(jtv)
+			}
+
+		case "networkMigrationDefinitionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationDefinitionID = ptr.String(jtv)
+			}
+
+		case "networkMigrationExecutionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationExecutionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationExecutionID = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.NetworkMigrationJobStatus(jtv)
+			}
+
+		case "statusDetails":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LargeBoundedString to be of type string, got %T instead", value)
+				}
+				sv.StatusDetails = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationCodeGenerationSegment(v **types.NetworkMigrationCodeGenerationSegment, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkMigrationCodeGenerationSegment
+	if *v == nil {
+		sv = &types.NetworkMigrationCodeGenerationSegment{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "artifacts":
+			if err := awsRestjson1_deserializeDocumentNetworkMigrationCodeGenerationArtifacts(&sv.Artifacts, value); err != nil {
+				return err
+			}
+
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "jobID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobID to be of type string, got %T instead", value)
+				}
+				sv.JobID = ptr.String(jtv)
+			}
+
+		case "logicalID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogicalID to be of type string, got %T instead", value)
+				}
+				sv.LogicalID = ptr.String(jtv)
+			}
+
+		case "mapperSegmentID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SegmentID to be of type string, got %T instead", value)
+				}
+				sv.MapperSegmentID = ptr.String(jtv)
+			}
+
+		case "networkMigrationDefinitionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationDefinitionID = ptr.String(jtv)
+			}
+
+		case "networkMigrationExecutionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationExecutionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationExecutionID = ptr.String(jtv)
+			}
+
+		case "segmentID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SegmentID to be of type string, got %T instead", value)
+				}
+				sv.SegmentID = ptr.String(jtv)
+			}
+
+		case "segmentType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationCodeGenerationSegmentType to be of type string, got %T instead", value)
+				}
+				sv.SegmentType = types.NetworkMigrationCodeGenerationSegmentType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationCodeGenerationSegmentsList(v *[]types.NetworkMigrationCodeGenerationSegment, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NetworkMigrationCodeGenerationSegment
+	if *v == nil {
+		cv = []types.NetworkMigrationCodeGenerationSegment{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NetworkMigrationCodeGenerationSegment
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNetworkMigrationCodeGenerationSegment(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationCodeGenerationsList(v *[]types.NetworkMigrationCodeGenerationJobDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NetworkMigrationCodeGenerationJobDetails
+	if *v == nil {
+		cv = []types.NetworkMigrationCodeGenerationJobDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NetworkMigrationCodeGenerationJobDetails
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNetworkMigrationCodeGenerationJobDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationDefinitionSummariesList(v *[]types.NetworkMigrationDefinitionSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NetworkMigrationDefinitionSummary
+	if *v == nil {
+		cv = []types.NetworkMigrationDefinitionSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NetworkMigrationDefinitionSummary
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNetworkMigrationDefinitionSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationDefinitionSummary(v **types.NetworkMigrationDefinitionSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkMigrationDefinitionSummary
+	if *v == nil {
+		sv = &types.NetworkMigrationDefinitionSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "networkMigrationDefinitionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationDefinitionID = ptr.String(jtv)
+			}
+
+		case "scopeTags":
+			if err := awsRestjson1_deserializeDocumentScopeTagsMap(&sv.ScopeTags, value); err != nil {
+				return err
+			}
+
+		case "sourceEnvironment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SourceEnvironment to be of type string, got %T instead", value)
+				}
+				sv.SourceEnvironment = types.SourceEnvironment(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationDeployedStackDetails(v **types.NetworkMigrationDeployedStackDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkMigrationDeployedStackDetails
+	if *v == nil {
+		sv = &types.NetworkMigrationDeployedStackDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "failedResources":
+			if err := awsRestjson1_deserializeDocumentNetworkMigrationFailedResourcesList(&sv.FailedResources, value); err != nil {
+				return err
+			}
+
+		case "segmentID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SegmentID to be of type string, got %T instead", value)
+				}
+				sv.SegmentID = ptr.String(jtv)
+			}
+
+		case "stackLogicalID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogicalID to be of type string, got %T instead", value)
+				}
+				sv.StackLogicalID = ptr.String(jtv)
+			}
+
+		case "stackPhysicalID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PhysicalID to be of type string, got %T instead", value)
+				}
+				sv.StackPhysicalID = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDeployedStackStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.NetworkMigrationDeployedStackStatus(jtv)
+			}
+
+		case "targetAccount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountID to be of type string, got %T instead", value)
+				}
+				sv.TargetAccount = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationDeployedStacksList(v *[]types.NetworkMigrationDeployedStackDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NetworkMigrationDeployedStackDetails
+	if *v == nil {
+		cv = []types.NetworkMigrationDeployedStackDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NetworkMigrationDeployedStackDetails
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNetworkMigrationDeployedStackDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationDeployerJobDetails(v **types.NetworkMigrationDeployerJobDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkMigrationDeployerJobDetails
+	if *v == nil {
+		sv = &types.NetworkMigrationDeployerJobDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "endedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EndedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "jobID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobID to be of type string, got %T instead", value)
+				}
+				sv.JobID = ptr.String(jtv)
+			}
+
+		case "networkMigrationDefinitionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationDefinitionID = ptr.String(jtv)
+			}
+
+		case "networkMigrationExecutionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationExecutionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationExecutionID = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.NetworkMigrationJobStatus(jtv)
+			}
+
+		case "statusDetails":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LargeBoundedString to be of type string, got %T instead", value)
+				}
+				sv.StatusDetails = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationDeployerJobList(v *[]types.NetworkMigrationDeployerJobDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NetworkMigrationDeployerJobDetails
+	if *v == nil {
+		cv = []types.NetworkMigrationDeployerJobDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NetworkMigrationDeployerJobDetails
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNetworkMigrationDeployerJobDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationExecution(v **types.NetworkMigrationExecution, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkMigrationExecution
+	if *v == nil {
+		sv = &types.NetworkMigrationExecution{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "activity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionStageActivity to be of type string, got %T instead", value)
+				}
+				sv.Activity = types.ExecutionStageActivity(jtv)
+			}
+
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "networkMigrationDefinitionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationDefinitionID = ptr.String(jtv)
+			}
+
+		case "networkMigrationExecutionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationExecutionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationExecutionID = ptr.String(jtv)
+			}
+
+		case "stage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionStage to be of type string, got %T instead", value)
+				}
+				sv.Stage = types.ExecutionStage(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ExecutionStatus(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "updatedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UpdatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationExecutionsList(v *[]types.NetworkMigrationExecution, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NetworkMigrationExecution
+	if *v == nil {
+		cv = []types.NetworkMigrationExecution{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NetworkMigrationExecution
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNetworkMigrationExecution(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationFailedResourceDetails(v **types.NetworkMigrationFailedResourceDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkMigrationFailedResourceDetails
+	if *v == nil {
+		sv = &types.NetworkMigrationFailedResourceDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "logicalID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogicalID to be of type string, got %T instead", value)
+				}
+				sv.LogicalID = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationFailedResourceStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.NetworkMigrationFailedResourceStatus(jtv)
+			}
+
+		case "statusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LargeBoundedString to be of type string, got %T instead", value)
+				}
+				sv.StatusReason = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationFailedResourcesList(v *[]types.NetworkMigrationFailedResourceDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NetworkMigrationFailedResourceDetails
+	if *v == nil {
+		cv = []types.NetworkMigrationFailedResourceDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NetworkMigrationFailedResourceDetails
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNetworkMigrationFailedResourceDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationMapperSegment(v **types.NetworkMigrationMapperSegment, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkMigrationMapperSegment
+	if *v == nil {
+		sv = &types.NetworkMigrationMapperSegment{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "checksum":
+			if err := awsRestjson1_deserializeDocumentChecksum(&sv.Checksum, value); err != nil {
+				return err
+			}
+
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SegmentDescription to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "jobID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobID to be of type string, got %T instead", value)
+				}
+				sv.JobID = ptr.String(jtv)
+			}
+
+		case "logicalID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogicalID to be of type string, got %T instead", value)
+				}
+				sv.LogicalID = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SegmentName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "networkMigrationDefinitionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationDefinitionID = ptr.String(jtv)
+			}
+
+		case "networkMigrationExecutionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationExecutionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationExecutionID = ptr.String(jtv)
+			}
+
+		case "outputS3Configuration":
+			if err := awsRestjson1_deserializeDocumentS3Configuration(&sv.OutputS3Configuration, value); err != nil {
+				return err
+			}
+
+		case "referencedSegments":
+			if err := awsRestjson1_deserializeDocumentReferencedSegmentsList(&sv.ReferencedSegments, value); err != nil {
+				return err
+			}
+
+		case "scopeTags":
+			if err := awsRestjson1_deserializeDocumentScopeTagsMap(&sv.ScopeTags, value); err != nil {
+				return err
+			}
+
+		case "segmentID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SegmentID to be of type string, got %T instead", value)
+				}
+				sv.SegmentID = ptr.String(jtv)
+			}
+
+		case "segmentType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationMapperSegmentType to be of type string, got %T instead", value)
+				}
+				sv.SegmentType = types.NetworkMigrationMapperSegmentType(jtv)
+			}
+
+		case "targetAccount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountID to be of type string, got %T instead", value)
+				}
+				sv.TargetAccount = ptr.String(jtv)
+			}
+
+		case "updatedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UpdatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationMapperSegmentConstruct(v **types.NetworkMigrationMapperSegmentConstruct, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkMigrationMapperSegmentConstruct
+	if *v == nil {
+		sv = &types.NetworkMigrationMapperSegmentConstruct{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "constructID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConstructID to be of type string, got %T instead", value)
+				}
+				sv.ConstructID = ptr.String(jtv)
+			}
+
+		case "constructType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationMapperSegmentConstructType to be of type string, got %T instead", value)
+				}
+				sv.ConstructType = ptr.String(jtv)
+			}
+
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SegmentConstructDescription to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "logicalID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogicalID to be of type string, got %T instead", value)
+				}
+				sv.LogicalID = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SegmentConstructName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "properties":
+			if err := awsRestjson1_deserializeDocumentConstructProperties(&sv.Properties, value); err != nil {
+				return err
+			}
+
+		case "updatedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UpdatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationMapperSegmentConstructs(v *[]types.NetworkMigrationMapperSegmentConstruct, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NetworkMigrationMapperSegmentConstruct
+	if *v == nil {
+		cv = []types.NetworkMigrationMapperSegmentConstruct{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NetworkMigrationMapperSegmentConstruct
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNetworkMigrationMapperSegmentConstruct(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationMapperSegmentsList(v *[]types.NetworkMigrationMapperSegment, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NetworkMigrationMapperSegment
+	if *v == nil {
+		cv = []types.NetworkMigrationMapperSegment{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NetworkMigrationMapperSegment
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNetworkMigrationMapperSegment(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationMappingJobDetails(v **types.NetworkMigrationMappingJobDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkMigrationMappingJobDetails
+	if *v == nil {
+		sv = &types.NetworkMigrationMappingJobDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "endedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EndedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "jobID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobID to be of type string, got %T instead", value)
+				}
+				sv.JobID = ptr.String(jtv)
+			}
+
+		case "networkMigrationDefinitionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationDefinitionID = ptr.String(jtv)
+			}
+
+		case "networkMigrationExecutionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationExecutionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationExecutionID = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.NetworkMigrationJobStatus(jtv)
+			}
+
+		case "statusDetails":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LargeBoundedString to be of type string, got %T instead", value)
+				}
+				sv.StatusDetails = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationMappingsList(v *[]types.NetworkMigrationMappingJobDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NetworkMigrationMappingJobDetails
+	if *v == nil {
+		cv = []types.NetworkMigrationMappingJobDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NetworkMigrationMappingJobDetails
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNetworkMigrationMappingJobDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationMappingUpdateJobDetails(v **types.NetworkMigrationMappingUpdateJobDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkMigrationMappingUpdateJobDetails
+	if *v == nil {
+		sv = &types.NetworkMigrationMappingUpdateJobDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "endedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EndedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "jobID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobID to be of type string, got %T instead", value)
+				}
+				sv.JobID = ptr.String(jtv)
+			}
+
+		case "networkMigrationDefinitionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationDefinitionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationDefinitionID = ptr.String(jtv)
+			}
+
+		case "networkMigrationExecutionID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationExecutionID to be of type string, got %T instead", value)
+				}
+				sv.NetworkMigrationExecutionID = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkMigrationJobStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.NetworkMigrationJobStatus(jtv)
+			}
+
+		case "statusDetails":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LargeBoundedString to be of type string, got %T instead", value)
+				}
+				sv.StatusDetails = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkMigrationMappingUpdatesList(v *[]types.NetworkMigrationMappingUpdateJobDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NetworkMigrationMappingUpdateJobDetails
+	if *v == nil {
+		cv = []types.NetworkMigrationMappingUpdateJobDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NetworkMigrationMappingUpdateJobDetails
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNetworkMigrationMappingUpdateJobDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOS(v **types.OS, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17496,6 +24392,42 @@ func awsRestjson1_deserializeDocumentPostLaunchActionsStatus(v **types.PostLaunc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReferencedSegmentsList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SegmentID to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -17997,6 +24929,100 @@ func awsRestjson1_deserializeDocumentS3BucketSource(v **types.S3BucketSource, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentS3Configuration(v **types.S3Configuration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3Configuration
+	if *v == nil {
+		sv = &types.S3Configuration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "s3Bucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3BucketName to be of type string, got %T instead", value)
+				}
+				sv.S3Bucket = ptr.String(jtv)
+			}
+
+		case "s3BucketOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountID to be of type string, got %T instead", value)
+				}
+				sv.S3BucketOwner = ptr.String(jtv)
+			}
+
+		case "s3Key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3KeyName to be of type string, got %T instead", value)
+				}
+				sv.S3Key = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScopeTagsMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ScopeTagValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.ServiceQuotaExceededException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18095,6 +25121,85 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSourceConfiguration(v **types.SourceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SourceConfiguration
+	if *v == nil {
+		sv = &types.SourceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "sourceEnvironment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SourceEnvironment to be of type string, got %T instead", value)
+				}
+				sv.SourceEnvironment = types.SourceEnvironment(jtv)
+			}
+
+		case "sourceS3Configuration":
+			if err := awsRestjson1_deserializeDocumentSourceS3Configuration(&sv.SourceS3Configuration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSourceConfigurationList(v *[]types.SourceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SourceConfiguration
+	if *v == nil {
+		cv = []types.SourceConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SourceConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSourceConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSourceProperties(v **types.SourceProperties, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18171,6 +25276,64 @@ func awsRestjson1_deserializeDocumentSourceProperties(v **types.SourceProperties
 					return fmt.Errorf("expected EC2InstanceType to be of type string, got %T instead", value)
 				}
 				sv.RecommendedInstanceType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSourceS3Configuration(v **types.SourceS3Configuration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SourceS3Configuration
+	if *v == nil {
+		sv = &types.SourceS3Configuration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "s3Bucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3BucketName to be of type string, got %T instead", value)
+				}
+				sv.S3Bucket = ptr.String(jtv)
+			}
+
+		case "s3BucketOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountID to be of type string, got %T instead", value)
+				}
+				sv.S3BucketOwner = ptr.String(jtv)
+			}
+
+		case "s3Key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3KeyName to be of type string, got %T instead", value)
+				}
+				sv.S3Key = ptr.String(jtv)
 			}
 
 		default:
@@ -18912,6 +26075,122 @@ func awsRestjson1_deserializeDocumentTagsMap(v *map[string]string, value interfa
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTargetNetwork(v **types.TargetNetwork, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TargetNetwork
+	if *v == nil {
+		sv = &types.TargetNetwork{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "inboundCidr":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Cidr to be of type string, got %T instead", value)
+				}
+				sv.InboundCidr = ptr.String(jtv)
+			}
+
+		case "inspectionCidr":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Cidr to be of type string, got %T instead", value)
+				}
+				sv.InspectionCidr = ptr.String(jtv)
+			}
+
+		case "outboundCidr":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Cidr to be of type string, got %T instead", value)
+				}
+				sv.OutboundCidr = ptr.String(jtv)
+			}
+
+		case "topology":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetNetworkTopology to be of type string, got %T instead", value)
+				}
+				sv.Topology = types.TargetNetworkTopology(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTargetS3Configuration(v **types.TargetS3Configuration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TargetS3Configuration
+	if *v == nil {
+		sv = &types.TargetS3Configuration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "s3Bucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3BucketName to be of type string, got %T instead", value)
+				}
+				sv.S3Bucket = ptr.String(jtv)
+			}
+
+		case "s3BucketOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountID to be of type string, got %T instead", value)
+				}
+				sv.S3BucketOwner = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

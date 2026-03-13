@@ -39,6 +39,23 @@ func (ActionCategory) Values() []ActionCategory {
 	}
 }
 
+type AnalyzerType string
+
+// Enum values for AnalyzerType
+const (
+	AnalyzerTypeReachabilityAnalyzer AnalyzerType = "REACHABILITY_ANALYZER"
+)
+
+// Values returns all known values for AnalyzerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyzerType) Values() []AnalyzerType {
+	return []AnalyzerType{
+		"REACHABILITY_ANALYZER",
+	}
+}
+
 type ApplicationHealthStatus string
 
 // Enum values for ApplicationHealthStatus
@@ -121,6 +138,50 @@ func (ChangeServerLifeCycleStateSourceServerLifecycleState) Values() []ChangeSer
 		"READY_FOR_TEST",
 		"READY_FOR_CUTOVER",
 		"CUTOVER",
+	}
+}
+
+type CodeGenerationOutputFormatStatus string
+
+// Enum values for CodeGenerationOutputFormatStatus
+const (
+	CodeGenerationOutputFormatStatusSucceeded CodeGenerationOutputFormatStatus = "SUCCEEDED"
+	CodeGenerationOutputFormatStatusFailed    CodeGenerationOutputFormatStatus = "FAILED"
+)
+
+// Values returns all known values for CodeGenerationOutputFormatStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CodeGenerationOutputFormatStatus) Values() []CodeGenerationOutputFormatStatus {
+	return []CodeGenerationOutputFormatStatus{
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
+type CodeGenerationOutputFormatType string
+
+// Enum values for CodeGenerationOutputFormatType
+const (
+	CodeGenerationOutputFormatTypeCdkL1     CodeGenerationOutputFormatType = "CDK_L1"
+	CodeGenerationOutputFormatTypeCdkL2     CodeGenerationOutputFormatType = "CDK_L2"
+	CodeGenerationOutputFormatTypeTerraform CodeGenerationOutputFormatType = "TERRAFORM"
+	CodeGenerationOutputFormatTypeLza       CodeGenerationOutputFormatType = "LZA"
+)
+
+// Values returns all known values for CodeGenerationOutputFormatType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CodeGenerationOutputFormatType) Values() []CodeGenerationOutputFormatType {
+	return []CodeGenerationOutputFormatType{
+		"CDK_L1",
+		"CDK_L2",
+		"TERRAFORM",
+		"LZA",
 	}
 }
 
@@ -274,6 +335,98 @@ func (DataReplicationState) Values() []DataReplicationState {
 	}
 }
 
+type EncryptionAlgorithm string
+
+// Enum values for EncryptionAlgorithm
+const (
+	EncryptionAlgorithmSha256 EncryptionAlgorithm = "SHA256"
+)
+
+// Values returns all known values for EncryptionAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionAlgorithm) Values() []EncryptionAlgorithm {
+	return []EncryptionAlgorithm{
+		"SHA256",
+	}
+}
+
+type ExecutionStage string
+
+// Enum values for ExecutionStage
+const (
+	ExecutionStageMapping                ExecutionStage = "MAPPING"
+	ExecutionStageCodeGeneration         ExecutionStage = "CODE_GENERATION"
+	ExecutionStageDeploy                 ExecutionStage = "DEPLOY"
+	ExecutionStageDeployedStacksDeletion ExecutionStage = "DEPLOYED_STACKS_DELETION"
+	ExecutionStageAnalyze                ExecutionStage = "ANALYZE"
+)
+
+// Values returns all known values for ExecutionStage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionStage) Values() []ExecutionStage {
+	return []ExecutionStage{
+		"MAPPING",
+		"CODE_GENERATION",
+		"DEPLOY",
+		"DEPLOYED_STACKS_DELETION",
+		"ANALYZE",
+	}
+}
+
+type ExecutionStageActivity string
+
+// Enum values for ExecutionStageActivity
+const (
+	ExecutionStageActivityMapping                ExecutionStageActivity = "MAPPING"
+	ExecutionStageActivityMappingUpdate          ExecutionStageActivity = "MAPPING_UPDATE"
+	ExecutionStageActivityCodeGeneration         ExecutionStageActivity = "CODE_GENERATION"
+	ExecutionStageActivityDeploy                 ExecutionStageActivity = "DEPLOY"
+	ExecutionStageActivityDeployedStacksDeletion ExecutionStageActivity = "DEPLOYED_STACKS_DELETION"
+	ExecutionStageActivityAnalyze                ExecutionStageActivity = "ANALYZE"
+)
+
+// Values returns all known values for ExecutionStageActivity. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionStageActivity) Values() []ExecutionStageActivity {
+	return []ExecutionStageActivity{
+		"MAPPING",
+		"MAPPING_UPDATE",
+		"CODE_GENERATION",
+		"DEPLOY",
+		"DEPLOYED_STACKS_DELETION",
+		"ANALYZE",
+	}
+}
+
+type ExecutionStatus string
+
+// Enum values for ExecutionStatus
+const (
+	ExecutionStatusPending   ExecutionStatus = "PENDING"
+	ExecutionStatusStarted   ExecutionStatus = "STARTED"
+	ExecutionStatusSucceeded ExecutionStatus = "SUCCEEDED"
+	ExecutionStatusFailed    ExecutionStatus = "FAILED"
+)
+
+// Values returns all known values for ExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionStatus) Values() []ExecutionStatus {
+	return []ExecutionStatus{
+		"PENDING",
+		"STARTED",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type ExportStatus string
 
 // Enum values for ExportStatus
@@ -339,6 +492,31 @@ func (ImportErrorType) Values() []ImportErrorType {
 	}
 }
 
+type ImportFileEnrichmentStatus string
+
+// Enum values for ImportFileEnrichmentStatus
+const (
+	ImportFileEnrichmentStatusPending               ImportFileEnrichmentStatus = "PENDING"
+	ImportFileEnrichmentStatusStarted               ImportFileEnrichmentStatus = "STARTED"
+	ImportFileEnrichmentStatusFailed                ImportFileEnrichmentStatus = "FAILED"
+	ImportFileEnrichmentStatusSucceeded             ImportFileEnrichmentStatus = "SUCCEEDED"
+	ImportFileEnrichmentStatusSucceededWithWarnings ImportFileEnrichmentStatus = "SUCCEEDED_WITH_WARNINGS"
+)
+
+// Values returns all known values for ImportFileEnrichmentStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImportFileEnrichmentStatus) Values() []ImportFileEnrichmentStatus {
+	return []ImportFileEnrichmentStatus{
+		"PENDING",
+		"STARTED",
+		"FAILED",
+		"SUCCEEDED",
+		"SUCCEEDED_WITH_WARNINGS",
+	}
+}
+
 type ImportStatus string
 
 // Enum values for ImportStatus
@@ -401,6 +579,25 @@ func (InternetProtocol) Values() []InternetProtocol {
 	return []InternetProtocol{
 		"IPV4",
 		"IPV6",
+	}
+}
+
+type IpAssignmentStrategy string
+
+// Enum values for IpAssignmentStrategy
+const (
+	IpAssignmentStrategyStatic  IpAssignmentStrategy = "STATIC"
+	IpAssignmentStrategyDynamic IpAssignmentStrategy = "DYNAMIC"
+)
+
+// Values returns all known values for IpAssignmentStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IpAssignmentStrategy) Values() []IpAssignmentStrategy {
+	return []IpAssignmentStrategy{
+		"STATIC",
+		"DYNAMIC",
 	}
 }
 
@@ -570,6 +767,191 @@ func (LifeCycleState) Values() []LifeCycleState {
 	}
 }
 
+type NetworkMigrationAnalysisResultStatus string
+
+// Enum values for NetworkMigrationAnalysisResultStatus
+const (
+	NetworkMigrationAnalysisResultStatusPending   NetworkMigrationAnalysisResultStatus = "PENDING"
+	NetworkMigrationAnalysisResultStatusStarted   NetworkMigrationAnalysisResultStatus = "STARTED"
+	NetworkMigrationAnalysisResultStatusSucceeded NetworkMigrationAnalysisResultStatus = "SUCCEEDED"
+	NetworkMigrationAnalysisResultStatusFailed    NetworkMigrationAnalysisResultStatus = "FAILED"
+)
+
+// Values returns all known values for NetworkMigrationAnalysisResultStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkMigrationAnalysisResultStatus) Values() []NetworkMigrationAnalysisResultStatus {
+	return []NetworkMigrationAnalysisResultStatus{
+		"PENDING",
+		"STARTED",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
+type NetworkMigrationCodeGenerationArtifactSubType string
+
+// Enum values for NetworkMigrationCodeGenerationArtifactSubType
+const (
+	NetworkMigrationCodeGenerationArtifactSubTypeApplication NetworkMigrationCodeGenerationArtifactSubType = "APPLICATION"
+	NetworkMigrationCodeGenerationArtifactSubTypeNestedStack NetworkMigrationCodeGenerationArtifactSubType = "NESTED_STACK"
+	NetworkMigrationCodeGenerationArtifactSubTypeStack       NetworkMigrationCodeGenerationArtifactSubType = "STACK"
+)
+
+// Values returns all known values for
+// NetworkMigrationCodeGenerationArtifactSubType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkMigrationCodeGenerationArtifactSubType) Values() []NetworkMigrationCodeGenerationArtifactSubType {
+	return []NetworkMigrationCodeGenerationArtifactSubType{
+		"APPLICATION",
+		"NESTED_STACK",
+		"STACK",
+	}
+}
+
+type NetworkMigrationCodeGenerationArtifactType string
+
+// Enum values for NetworkMigrationCodeGenerationArtifactType
+const (
+	NetworkMigrationCodeGenerationArtifactTypeCdkTypescript          NetworkMigrationCodeGenerationArtifactType = "CDK_TYPESCRIPT"
+	NetworkMigrationCodeGenerationArtifactTypeCloudformationTemplate NetworkMigrationCodeGenerationArtifactType = "CLOUDFORMATION_TEMPLATE"
+	NetworkMigrationCodeGenerationArtifactTypeCdktfTypescript        NetworkMigrationCodeGenerationArtifactType = "CDKTF_TYPESCRIPT"
+	NetworkMigrationCodeGenerationArtifactTypeTerraformConfiguration NetworkMigrationCodeGenerationArtifactType = "TERRAFORM_CONFIGURATION"
+	NetworkMigrationCodeGenerationArtifactTypeCdkL2Typescript        NetworkMigrationCodeGenerationArtifactType = "CDK_L2_TYPESCRIPT"
+)
+
+// Values returns all known values for NetworkMigrationCodeGenerationArtifactType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkMigrationCodeGenerationArtifactType) Values() []NetworkMigrationCodeGenerationArtifactType {
+	return []NetworkMigrationCodeGenerationArtifactType{
+		"CDK_TYPESCRIPT",
+		"CLOUDFORMATION_TEMPLATE",
+		"CDKTF_TYPESCRIPT",
+		"TERRAFORM_CONFIGURATION",
+		"CDK_L2_TYPESCRIPT",
+	}
+}
+
+type NetworkMigrationCodeGenerationSegmentType string
+
+// Enum values for NetworkMigrationCodeGenerationSegmentType
+const (
+	NetworkMigrationCodeGenerationSegmentTypeWorkload  NetworkMigrationCodeGenerationSegmentType = "WORKLOAD"
+	NetworkMigrationCodeGenerationSegmentTypeAppliance NetworkMigrationCodeGenerationSegmentType = "APPLIANCE"
+	NetworkMigrationCodeGenerationSegmentTypeNetwork   NetworkMigrationCodeGenerationSegmentType = "NETWORK"
+)
+
+// Values returns all known values for NetworkMigrationCodeGenerationSegmentType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkMigrationCodeGenerationSegmentType) Values() []NetworkMigrationCodeGenerationSegmentType {
+	return []NetworkMigrationCodeGenerationSegmentType{
+		"WORKLOAD",
+		"APPLIANCE",
+		"NETWORK",
+	}
+}
+
+type NetworkMigrationDeployedStackStatus string
+
+// Enum values for NetworkMigrationDeployedStackStatus
+const (
+	NetworkMigrationDeployedStackStatusCreateComplete NetworkMigrationDeployedStackStatus = "CREATE_COMPLETE"
+	NetworkMigrationDeployedStackStatusCreateFailed   NetworkMigrationDeployedStackStatus = "CREATE_FAILED"
+	NetworkMigrationDeployedStackStatusCreateStarted  NetworkMigrationDeployedStackStatus = "CREATE_STARTED"
+	NetworkMigrationDeployedStackStatusDeleteComplete NetworkMigrationDeployedStackStatus = "DELETE_COMPLETE"
+	NetworkMigrationDeployedStackStatusDeleteFailed   NetworkMigrationDeployedStackStatus = "DELETE_FAILED"
+	NetworkMigrationDeployedStackStatusDeleteStarted  NetworkMigrationDeployedStackStatus = "DELETE_STARTED"
+)
+
+// Values returns all known values for NetworkMigrationDeployedStackStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkMigrationDeployedStackStatus) Values() []NetworkMigrationDeployedStackStatus {
+	return []NetworkMigrationDeployedStackStatus{
+		"CREATE_COMPLETE",
+		"CREATE_FAILED",
+		"CREATE_STARTED",
+		"DELETE_COMPLETE",
+		"DELETE_FAILED",
+		"DELETE_STARTED",
+	}
+}
+
+type NetworkMigrationFailedResourceStatus string
+
+// Enum values for NetworkMigrationFailedResourceStatus
+const (
+	NetworkMigrationFailedResourceStatusCreateFailed NetworkMigrationFailedResourceStatus = "CREATE_FAILED"
+	NetworkMigrationFailedResourceStatusDeleteFailed NetworkMigrationFailedResourceStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for NetworkMigrationFailedResourceStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkMigrationFailedResourceStatus) Values() []NetworkMigrationFailedResourceStatus {
+	return []NetworkMigrationFailedResourceStatus{
+		"CREATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
+type NetworkMigrationJobStatus string
+
+// Enum values for NetworkMigrationJobStatus
+const (
+	NetworkMigrationJobStatusPending   NetworkMigrationJobStatus = "PENDING"
+	NetworkMigrationJobStatusStarted   NetworkMigrationJobStatus = "STARTED"
+	NetworkMigrationJobStatusSucceeded NetworkMigrationJobStatus = "SUCCEEDED"
+	NetworkMigrationJobStatusFailed    NetworkMigrationJobStatus = "FAILED"
+)
+
+// Values returns all known values for NetworkMigrationJobStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkMigrationJobStatus) Values() []NetworkMigrationJobStatus {
+	return []NetworkMigrationJobStatus{
+		"PENDING",
+		"STARTED",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
+type NetworkMigrationMapperSegmentType string
+
+// Enum values for NetworkMigrationMapperSegmentType
+const (
+	NetworkMigrationMapperSegmentTypeWorkload  NetworkMigrationMapperSegmentType = "WORKLOAD"
+	NetworkMigrationMapperSegmentTypeAppliance NetworkMigrationMapperSegmentType = "APPLIANCE"
+)
+
+// Values returns all known values for NetworkMigrationMapperSegmentType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkMigrationMapperSegmentType) Values() []NetworkMigrationMapperSegmentType {
+	return []NetworkMigrationMapperSegmentType{
+		"WORKLOAD",
+		"APPLIANCE",
+	}
+}
+
 type PostLaunchActionExecutionStatus string
 
 // Enum values for PostLaunchActionExecutionStatus
@@ -727,6 +1109,55 @@ func (ReplicationType) Values() []ReplicationType {
 	}
 }
 
+type SecurityGroupMappingStrategy string
+
+// Enum values for SecurityGroupMappingStrategy
+const (
+	SecurityGroupMappingStrategyMap  SecurityGroupMappingStrategy = "MAP"
+	SecurityGroupMappingStrategySkip SecurityGroupMappingStrategy = "SKIP"
+)
+
+// Values returns all known values for SecurityGroupMappingStrategy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityGroupMappingStrategy) Values() []SecurityGroupMappingStrategy {
+	return []SecurityGroupMappingStrategy{
+		"MAP",
+		"SKIP",
+	}
+}
+
+type SourceEnvironment string
+
+// Enum values for SourceEnvironment
+const (
+	SourceEnvironmentNsx               SourceEnvironment = "NSX"
+	SourceEnvironmentVsphere           SourceEnvironment = "VSPHERE"
+	SourceEnvironmentFortigateFirewall SourceEnvironment = "FORTIGATE_FIREWALL"
+	SourceEnvironmentPaloAltoFirewall  SourceEnvironment = "PALO_ALTO_FIREWALL"
+	SourceEnvironmentCiscoAci          SourceEnvironment = "CISCO_ACI"
+	SourceEnvironmentLogicalModel      SourceEnvironment = "LOGICAL_MODEL"
+	SourceEnvironmentModelizeIt        SourceEnvironment = "MODELIZE_IT"
+)
+
+// Values returns all known values for SourceEnvironment. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SourceEnvironment) Values() []SourceEnvironment {
+	return []SourceEnvironment{
+		"NSX",
+		"VSPHERE",
+		"FORTIGATE_FIREWALL",
+		"PALO_ALTO_FIREWALL",
+		"CISCO_ACI",
+		"LOGICAL_MODEL",
+		"MODELIZE_IT",
+	}
+}
+
 type SsmDocumentType string
 
 // Enum values for SsmDocumentType
@@ -766,6 +1197,25 @@ func (SsmParameterStoreParameterType) Values() []SsmParameterStoreParameterType 
 	}
 }
 
+type TargetDeployment string
+
+// Enum values for TargetDeployment
+const (
+	TargetDeploymentSingleAccount TargetDeployment = "SINGLE_ACCOUNT"
+	TargetDeploymentMultiAccount  TargetDeployment = "MULTI_ACCOUNT"
+)
+
+// Values returns all known values for TargetDeployment. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetDeployment) Values() []TargetDeployment {
+	return []TargetDeployment{
+		"SINGLE_ACCOUNT",
+		"MULTI_ACCOUNT",
+	}
+}
+
 type TargetInstanceTypeRightSizingMethod string
 
 // Enum values for TargetInstanceTypeRightSizingMethod
@@ -783,6 +1233,25 @@ func (TargetInstanceTypeRightSizingMethod) Values() []TargetInstanceTypeRightSiz
 	return []TargetInstanceTypeRightSizingMethod{
 		"NONE",
 		"BASIC",
+	}
+}
+
+type TargetNetworkTopology string
+
+// Enum values for TargetNetworkTopology
+const (
+	TargetNetworkTopologyIsolatedVpc TargetNetworkTopology = "ISOLATED_VPC"
+	TargetNetworkTopologyHubAndSpoke TargetNetworkTopology = "HUB_AND_SPOKE"
+)
+
+// Values returns all known values for TargetNetworkTopology. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetNetworkTopology) Values() []TargetNetworkTopology {
+	return []TargetNetworkTopology{
+		"ISOLATED_VPC",
+		"HUB_AND_SPOKE",
 	}
 }
 

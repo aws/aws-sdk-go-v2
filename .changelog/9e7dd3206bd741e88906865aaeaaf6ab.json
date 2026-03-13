@@ -1,0 +1,8 @@
+{
+    "id": "9e7dd320-6bd7-41e8-8906-865aaeaaf6ab",
+    "type": "feature",
+    "description": "Network Migration APIs are now publicly available for direct programmatic access. Customers can now call Network Migration APIs directly without going through AWS Transform (ATX), enabling automation, integration with existing tools, and self-service migration workflows.",
+    "modules": [
+        "service/mgn"
+    ]
+}

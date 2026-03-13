@@ -44,9 +44,17 @@ type BatchGetPartitionInput struct {
 	// This member is required.
 	TableName *string
 
+	// A structure containing the Lake Formation audit context.
+	AuditContext *types.AuditContext
+
 	// The ID of the Data Catalog where the partitions in question reside. If none is
 	// supplied, the Amazon Web Services account ID is used by default.
 	CatalogId *string
+
+	// A structure used as a protocol between query engines and Lake Formation or
+	// Glue. Contains both a Lake Formation generated authorization identifier and
+	// information from the request's authorization context.
+	QuerySessionContext *types.QuerySessionContext
 
 	noSmithyDocumentSerde
 }

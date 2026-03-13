@@ -21178,7 +21178,7 @@ func awsAwsjson11_deserializeDocumentOrganizationCustomPolicyRuleMetadataNoPolic
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StringWithCharLimit2048 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected StringWithCharLimit1024 to be of type string, got %T instead", value)
 				}
 				sv.InputParameters = ptr.String(jtv)
 			}
@@ -21282,7 +21282,7 @@ func awsAwsjson11_deserializeDocumentOrganizationCustomRuleMetadata(v **types.Or
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StringWithCharLimit2048 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected StringWithCharLimit1024 to be of type string, got %T instead", value)
 				}
 				sv.InputParameters = ptr.String(jtv)
 			}
@@ -21386,7 +21386,7 @@ func awsAwsjson11_deserializeDocumentOrganizationManagedRuleMetadata(v **types.O
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StringWithCharLimit2048 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected StringWithCharLimit1024 to be of type string, got %T instead", value)
 				}
 				sv.InputParameters = ptr.String(jtv)
 			}

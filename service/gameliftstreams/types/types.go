@@ -176,6 +176,16 @@ type LocationConfiguration struct {
 	// intentional idle state.
 	TargetIdleCapacity *int32
 
+	// Configuration for connecting the stream group to resources in your Amazon VPC
+	// using AWS Transit Gateway. This setting is optional. If specified, Amazon
+	// GameLift Streams creates a Transit Gateway to enable private network
+	// connectivity between the service VPC and your VPC. The VPC ID cannot be changed
+	// after the stream group is created, but you can update the CIDR blocks by calling
+	// [UpdateStreamGroup].
+	//
+	// [UpdateStreamGroup]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_UpdateStreamGroup.html
+	VpcTransitConfiguration *VpcTransitConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -203,6 +213,10 @@ type LocationState struct {
 	// It represents the stream group's ability to respond immediately to new stream
 	// requests with near-instant startup time.
 	IdleCapacity *int32
+
+	// The CIDR block of the service VPC for this location. Add this CIDR block to
+	// your VPC route table to enable traffic routing through the Transit Gateway.
+	InternalVpcIpv4CidrBlock *string
 
 	//  A location's name. For example, us-east-1 . For a complete list of locations
 	// that Amazon GameLift Streams supports, refer to [Regions, quotas, and limitations]in the Amazon GameLift Streams
@@ -257,6 +271,10 @@ type LocationState struct {
 	// capacity-allocation delays. You pay for capacity which is held in this
 	// intentional idle state.
 	TargetIdleCapacity *int32
+
+	// The VPC transit configuration for this location, including the Transit Gateway
+	// details needed to complete the VPC attachment setup.
+	VpcTransitConfiguration *VpcTransitConfigurationResponse
 
 	noSmithyDocumentSerde
 }
@@ -476,28 +494,6 @@ type StreamGroupSummary struct {
 	//
 	//   - Tenancy: Supports up to 12 concurrent stream sessions
 	//
-	//   - gen6n_medium_win2022 (NVIDIA, medium) Supports applications with low 3D
-	//   scene complexity. Uses NVIDIA L4 Tensor Core GPU.
-	//
-	//   - Reference resolution: 1080p
-	//
-	//   - Reference frame rate: 60 fps
-	//
-	//   - Workload specifications: 8 vCPUs, 32 GB RAM, 6 GB VRAM
-	//
-	//   - Tenancy: Supports 1 concurrent stream session
-	//
-	//   - gen6n_small_win2022 (NVIDIA, small) Supports applications with low 3D scene
-	//   complexity. Uses NVIDIA L4 Tensor Core GPU.
-	//
-	//   - Reference resolution: 1080p
-	//
-	//   - Reference frame rate: 60 fps
-	//
-	//   - Workload specifications: 2 vCPUs, 8 GB RAM, 3 GB VRAM
-	//
-	//   - Tenancy: Supports 1 concurrent stream session
-	//
 	//   - gen5n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
 	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.6, 32
@@ -677,6 +673,9 @@ type StreamSessionSummary struct {
 	//   failed to connect within the connection timeout period specified by
 	//   ConnectionTimeoutSeconds .
 	//
+	//   - idleTimeout : The stream session was terminated because it exceeded the idle
+	//   timeout period of 60 minutes with no user input activity.
+	//
 	//   - maxSessionLengthTimeout : The stream session was terminated because it
 	//   exceeded the maximum session length timeout period specified by
 	//   SessionLengthSeconds .
@@ -690,6 +689,54 @@ type StreamSessionSummary struct {
 
 	//  An opaque, unique identifier for an end-user, defined by the developer.
 	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for connecting a stream group location to resources in your
+// Amazon VPC using AWS Transit Gateway. When you specify a VPC transit
+// configuration, Amazon GameLift Streams creates a Transit Gateway and shares it
+// with your account using AWS Resource Access Manager. After the stream group is
+// active, you must complete the setup by accepting the resource share, creating a
+// VPC attachment, and configuring routing.
+type VpcTransitConfiguration struct {
+
+	// A list of IPv4 CIDR blocks in your VPC that you want the stream group to be
+	// able to access. You can specify up to 5 CIDR blocks. The CIDR blocks must be
+	// valid subsets of the VPC's CIDR blocks and cannot overlap with the service VPC
+	// CIDR block.
+	//
+	// This member is required.
+	Ipv4CidrBlocks []string
+
+	// The ID of the Amazon VPC that you want to connect to the stream group. The VPC
+	// must be in the same Amazon Web Services account as the stream group. This value
+	// cannot be changed after the stream group is created.
+	//
+	// This member is required.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// The VPC transit configuration details for a stream group location, including
+// the Transit Gateway information needed to complete the VPC attachment setup.
+type VpcTransitConfigurationResponse struct {
+
+	// The IPv4 CIDR blocks in your VPC that the stream group can access.
+	Ipv4CidrBlocks []string
+
+	// The ID of the Transit Gateway that Amazon GameLift Streams created for this VPC
+	// connection. Use this ID when creating your VPC attachment.
+	TransitGatewayId *string
+
+	// The ARN of the AWS Resource Access Manager resource share for the Transit
+	// Gateway. You must accept this resource share before you can create a VPC
+	// attachment.
+	TransitGatewayResourceShareArn *string
+
+	// The ID of the Amazon VPC that is connected to the stream group.
+	VpcId *string
 
 	noSmithyDocumentSerde
 }

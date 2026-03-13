@@ -5449,6 +5449,42 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentIpv4CidrBlockList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Ipv4CidrBlock to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentLocationState(v **types.LocationState, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5508,6 +5544,15 @@ func awsRestjson1_deserializeDocumentLocationState(v **types.LocationState, valu
 					return err
 				}
 				sv.IdleCapacity = ptr.Int32(int32(i64))
+			}
+
+		case "InternalVpcIpv4CidrBlock":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ipv4CidrBlock to be of type string, got %T instead", value)
+				}
+				sv.InternalVpcIpv4CidrBlock = ptr.String(jtv)
 			}
 
 		case "LocationName":
@@ -5578,6 +5623,11 @@ func awsRestjson1_deserializeDocumentLocationState(v **types.LocationState, valu
 					return err
 				}
 				sv.TargetIdleCapacity = ptr.Int32(int32(i64))
+			}
+
+		case "VpcTransitConfiguration":
+			if err := awsRestjson1_deserializeDocumentVpcTransitConfigurationResponse(&sv.VpcTransitConfiguration, value); err != nil {
+				return err
 			}
 
 		default:
@@ -6308,6 +6358,69 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVpcTransitConfigurationResponse(v **types.VpcTransitConfigurationResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VpcTransitConfigurationResponse
+	if *v == nil {
+		sv = &types.VpcTransitConfigurationResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Ipv4CidrBlocks":
+			if err := awsRestjson1_deserializeDocumentIpv4CidrBlockList(&sv.Ipv4CidrBlocks, value); err != nil {
+				return err
+			}
+
+		case "TransitGatewayId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TransitGatewayId = ptr.String(jtv)
+			}
+
+		case "TransitGatewayResourceShareArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TransitGatewayResourceShareArn = ptr.String(jtv)
+			}
+
+		case "VpcId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VpcId to be of type string, got %T instead", value)
+				}
+				sv.VpcId = ptr.String(jtv)
 			}
 
 		default:

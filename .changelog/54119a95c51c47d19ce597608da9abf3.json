@@ -1,0 +1,8 @@
+{
+    "id": "54119a95-c51c-47d1-9ce5-97608da9abf3",
+    "type": "feature",
+    "description": "Feature launch that enables customers to connect streaming sessions to their own VPCs running in AWS.",
+    "modules": [
+        "service/gameliftstreams"
+    ]
+}

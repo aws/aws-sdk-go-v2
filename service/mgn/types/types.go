@@ -4,6 +4,7 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 type Application struct {
@@ -66,6 +67,30 @@ type ChangeServerLifeCycleStateSourceServerLifecycle struct {
 	//
 	// This member is required.
 	State ChangeServerLifeCycleStateSourceServerLifecycleState
+
+	noSmithyDocumentSerde
+}
+
+// A checksum structure used to verify data integrity.
+type Checksum struct {
+
+	// The encryption algorithm used to generate the checksum.
+	EncryptionAlgorithm EncryptionAlgorithm
+
+	// The hash value of the checksum.
+	Hash *string
+
+	noSmithyDocumentSerde
+}
+
+// Status details for a specific code generation output format.
+type CodeGenerationOutputFormatStatusDetails struct {
+
+	// The status of the code generation for this output format.
+	Status CodeGenerationOutputFormatStatus
+
+	// A list of detailed status information for the code generation.
+	StatusDetailList *string
 
 	noSmithyDocumentSerde
 }
@@ -265,6 +290,48 @@ type Disk struct {
 	noSmithyDocumentSerde
 }
 
+// S3 configuration for the source import file to be enriched.
+type EnrichmentSourceS3Configuration struct {
+
+	// The name of the S3 bucket containing the source import file.
+	//
+	// This member is required.
+	S3Bucket *string
+
+	// The AWS account ID of the S3 bucket owner.
+	//
+	// This member is required.
+	S3BucketOwner *string
+
+	// The S3 key (path) for the source import file.
+	//
+	// This member is required.
+	S3Key *string
+
+	noSmithyDocumentSerde
+}
+
+// S3 configuration for storing the enriched import file.
+type EnrichmentTargetS3Configuration struct {
+
+	// The name of the S3 bucket where the enriched import file will be stored.
+	//
+	// This member is required.
+	S3Bucket *string
+
+	// The AWS account ID of the target S3 bucket owner.
+	//
+	// This member is required.
+	S3BucketOwner *string
+
+	// The S3 key (path) where the enriched import file will be stored.
+	//
+	// This member is required.
+	S3Key *string
+
+	noSmithyDocumentSerde
+}
+
 // Error details.
 type ErrorDetails struct {
 
@@ -402,6 +469,33 @@ type ImportErrorData struct {
 
 	// Import error data wave id.
 	WaveID *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an import file enrichment job.
+type ImportFileEnrichment struct {
+
+	// The checksum of the enriched file for integrity verification.
+	Checksum *Checksum
+
+	// The timestamp when the enrichment job was created.
+	CreatedAt *time.Time
+
+	// The timestamp when the enrichment job completed or failed.
+	EndedAt *time.Time
+
+	// The unique identifier of the import file enrichment job.
+	JobID *string
+
+	// The target S3 configuration for the enriched import file.
+	S3BucketTarget *EnrichmentTargetS3Configuration
+
+	// The current status of the import file enrichment job.
+	Status ImportFileEnrichmentStatus
+
+	// Detailed status information about the enrichment job.
+	StatusDetails *string
 
 	noSmithyDocumentSerde
 }
@@ -854,11 +948,125 @@ type ListExportsRequestFilters struct {
 	noSmithyDocumentSerde
 }
 
+// Filters for listing import file enrichment jobs.
+type ListImportFileEnrichmentsFilters struct {
+
+	// A list of job IDs to filter by.
+	JobIDs []string
+
+	noSmithyDocumentSerde
+}
+
 // List imports request filters.
 type ListImportsRequestFilters struct {
 
 	// List imports request filters import IDs.
 	ImportIDs []string
+
+	noSmithyDocumentSerde
+}
+
+// Filters for listing network migration analysis jobs.
+type ListNetworkMigrationAnalysesFilters struct {
+
+	// A list of job IDs to filter by.
+	JobIDs []string
+
+	noSmithyDocumentSerde
+}
+
+// Filters for listing network migration analysis results.
+type ListNetworkMigrationAnalysisResultsFilters struct {
+
+	// A list of VPC IDs to filter results by.
+	VpcIDs []string
+
+	noSmithyDocumentSerde
+}
+
+// Filters for listing code generation segments.
+type ListNetworkMigrationCodeGenerationSegmentsFilters struct {
+
+	// A list of segment IDs to filter by.
+	SegmentIDs []string
+
+	noSmithyDocumentSerde
+}
+
+// Filters for listing code generation jobs.
+type ListNetworkMigrationCodeGenerationsFilters struct {
+
+	// A list of job IDs to filter by.
+	JobIDs []string
+
+	noSmithyDocumentSerde
+}
+
+// Filters for listing network migration definitions.
+type ListNetworkMigrationDefinitionsRequestFilters struct {
+
+	// A list of definition IDs to filter by.
+	NetworkMigrationDefinitionIDs []string
+
+	noSmithyDocumentSerde
+}
+
+// Filters for listing deployer jobs.
+type ListNetworkMigrationDeployerJobFilters struct {
+
+	// A list of job IDs to filter by.
+	JobIDs []string
+
+	noSmithyDocumentSerde
+}
+
+// Filters for listing network migration executions.
+type ListNetworkMigrationExecutionRequestFilters struct {
+
+	// A list of execution IDs to filter by.
+	NetworkMigrationExecutionIDs []string
+
+	// A list of execution statuses to filter by.
+	NetworkMigrationExecutionStatuses []ExecutionStatus
+
+	noSmithyDocumentSerde
+}
+
+// Filters for listing mapper segment constructs.
+type ListNetworkMigrationMapperSegmentConstructsFilters struct {
+
+	// A list of construct IDs to filter by.
+	ConstructIDs []string
+
+	// A list of construct types to filter by.
+	ConstructTypes []string
+
+	noSmithyDocumentSerde
+}
+
+// Filters for listing mapper segments.
+type ListNetworkMigrationMapperSegmentsFilters struct {
+
+	// A list of segment IDs to filter by.
+	SegmentIDs []string
+
+	noSmithyDocumentSerde
+}
+
+// Filters for listing network migration mapping jobs.
+type ListNetworkMigrationMappingsFilters struct {
+
+	// A list of job IDs to filter by.
+	JobIDs []string
+
+	noSmithyDocumentSerde
+}
+
+// Filters for listing mapping update jobs.
+type ListNetworkMigrationMappingUpdatesFilters struct {
+
+	// A list of job IDs to filter by.
+	JobIDs []string
 
 	noSmithyDocumentSerde
 }
@@ -898,6 +1106,456 @@ type NetworkInterface struct {
 
 	noSmithyDocumentSerde
 }
+
+// Details about a network migration analysis job.
+type NetworkMigrationAnalysisJobDetails struct {
+
+	// The timestamp when the job was created.
+	CreatedAt *time.Time
+
+	// The timestamp when the job completed or failed.
+	EndedAt *time.Time
+
+	// The unique identifier of the analysis job.
+	JobID *string
+
+	// The unique identifier of the network migration definition.
+	NetworkMigrationDefinitionID *string
+
+	// The unique identifier of the network migration execution.
+	NetworkMigrationExecutionID *string
+
+	// The current status of the analysis job.
+	Status NetworkMigrationJobStatus
+
+	// Detailed status information about the job.
+	StatusDetails *string
+
+	noSmithyDocumentSerde
+}
+
+// The result of a network migration analysis operation.
+type NetworkMigrationAnalysisResult struct {
+
+	// The detailed analysis findings and recommendations.
+	AnalysisResult *string
+
+	// The type of analyzer that generated this result.
+	AnalyzerType AnalyzerType
+
+	// The unique identifier of the analysis job that generated this result.
+	JobID *string
+
+	// The unique identifier of the network migration definition.
+	NetworkMigrationDefinitionID *string
+
+	// The unique identifier of the network migration execution.
+	NetworkMigrationExecutionID *string
+
+	// The source resource that was analyzed.
+	Source *NetworkMigrationAnalysisResultSource
+
+	// The status of the analysis result.
+	Status NetworkMigrationAnalysisResultStatus
+
+	// The target resource in the analysis.
+	Target *NetworkMigrationAnalysisResultTarget
+
+	noSmithyDocumentSerde
+}
+
+// The source resource information for an analysis result.
+type NetworkMigrationAnalysisResultSource struct {
+
+	// The subnet ID of the source resource.
+	SubnetID *string
+
+	// The VPC ID of the source resource.
+	VpcID *string
+
+	noSmithyDocumentSerde
+}
+
+// The target resource information for an analysis result.
+type NetworkMigrationAnalysisResultTarget struct {
+
+	// The subnet ID of the target resource.
+	SubnetID *string
+
+	// The VPC ID of the target resource.
+	VpcID *string
+
+	noSmithyDocumentSerde
+}
+
+// An artifact generated during code generation, such as a CloudFormation template
+// or Terraform file.
+type NetworkMigrationCodeGenerationArtifact struct {
+
+	// The unique identifier of the artifact.
+	ArtifactID *string
+
+	// The sub-type of the artifact for further classification.
+	ArtifactSubType NetworkMigrationCodeGenerationArtifactSubType
+
+	// The type of the artifact, such as CLOUDFORMATION_TEMPLATE or TERRAFORM_MODULE.
+	ArtifactType NetworkMigrationCodeGenerationArtifactType
+
+	// The checksum of the artifact for integrity verification.
+	Checksum *Checksum
+
+	// The timestamp when the artifact was created.
+	CreatedAt *time.Time
+
+	// The logical identifier for the artifact.
+	LogicalID *string
+
+	// The S3 location where the artifact is stored.
+	OutputS3Configuration *S3Configuration
+
+	noSmithyDocumentSerde
+}
+
+// Details about a network migration code generation job.
+type NetworkMigrationCodeGenerationJobDetails struct {
+
+	// A map of output format types to their status details.
+	CodeGenerationOutputFormatStatusDetailsMap map[string]CodeGenerationOutputFormatStatusDetails
+
+	// The timestamp when the job was created.
+	CreatedAt *time.Time
+
+	// The timestamp when the job completed or failed.
+	EndedAt *time.Time
+
+	// The unique identifier of the code generation job.
+	JobID *string
+
+	// The unique identifier of the network migration definition.
+	NetworkMigrationDefinitionID *string
+
+	// The unique identifier of the network migration execution.
+	NetworkMigrationExecutionID *string
+
+	// The current status of the code generation job.
+	Status NetworkMigrationJobStatus
+
+	// Detailed status information about the job.
+	StatusDetails *string
+
+	noSmithyDocumentSerde
+}
+
+// A segment of generated code representing a logical grouping of infrastructure
+// resources.
+type NetworkMigrationCodeGenerationSegment struct {
+
+	// A list of artifacts generated for this segment.
+	Artifacts []NetworkMigrationCodeGenerationArtifact
+
+	// The timestamp when the segment was created.
+	CreatedAt *time.Time
+
+	// The unique identifier of the code generation job.
+	JobID *string
+
+	// The logical identifier for the segment.
+	LogicalID *string
+
+	// The ID of the mapper segment that this code generation segment was created from.
+	MapperSegmentID *string
+
+	// The unique identifier of the network migration definition.
+	NetworkMigrationDefinitionID *string
+
+	// The unique identifier of the network migration execution.
+	NetworkMigrationExecutionID *string
+
+	// The unique identifier of the segment.
+	SegmentID *string
+
+	// The type of the segment.
+	SegmentType NetworkMigrationCodeGenerationSegmentType
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a network migration definition.
+type NetworkMigrationDefinitionSummary struct {
+
+	// The Amazon Resource Name (ARN) of the network migration definition.
+	Arn *string
+
+	// The name of the network migration definition.
+	Name *string
+
+	// The unique identifier of the network migration definition.
+	NetworkMigrationDefinitionID *string
+
+	// Scope tags for the network migration definition.
+	ScopeTags map[string]string
+
+	// The source environment configuration.
+	SourceEnvironment SourceEnvironment
+
+	// Tags assigned to the network migration definition.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a CloudFormation stack that has been deployed as part of the
+// network migration.
+type NetworkMigrationDeployedStackDetails struct {
+
+	// A list of resources that failed to deploy.
+	FailedResources []NetworkMigrationFailedResourceDetails
+
+	// The ID of the segment that this stack was deployed for.
+	SegmentID *string
+
+	// The logical ID of the stack.
+	StackLogicalID *string
+
+	// The physical ID of the CloudFormation stack.
+	StackPhysicalID *string
+
+	// The current status of the deployed stack.
+	Status NetworkMigrationDeployedStackStatus
+
+	// The target AWS account where the stack was deployed.
+	TargetAccount *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a network migration deployer job.
+type NetworkMigrationDeployerJobDetails struct {
+
+	// The timestamp when the job was created.
+	CreatedAt *time.Time
+
+	// The timestamp when the job completed or failed.
+	EndedAt *time.Time
+
+	// The unique identifier of the deployer job.
+	JobID *string
+
+	// The unique identifier of the network migration definition.
+	NetworkMigrationDefinitionID *string
+
+	// The unique identifier of the network migration execution.
+	NetworkMigrationExecutionID *string
+
+	// The current status of the deployer job.
+	Status NetworkMigrationJobStatus
+
+	// Detailed status information about the job.
+	StatusDetails *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a network migration execution instance.
+type NetworkMigrationExecution struct {
+
+	// The current activity being performed in the execution.
+	Activity ExecutionStageActivity
+
+	// The timestamp when the execution was created.
+	CreatedAt *time.Time
+
+	// The unique identifier of the network migration definition used by this
+	// execution.
+	NetworkMigrationDefinitionID *string
+
+	// The unique identifier of the execution.
+	NetworkMigrationExecutionID *string
+
+	// The current stage of the execution in the migration workflow.
+	Stage ExecutionStage
+
+	// The current status of the execution.
+	Status ExecutionStatus
+
+	// Tags assigned to the execution.
+	Tags map[string]string
+
+	// The timestamp when the execution was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Details about a resource that failed to deploy.
+type NetworkMigrationFailedResourceDetails struct {
+
+	// The logical ID of the failed resource.
+	LogicalID *string
+
+	// The status of the failed resource.
+	Status NetworkMigrationFailedResourceStatus
+
+	// The reason why the resource failed.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+type NetworkMigrationMapperSegment struct {
+
+	// The checksum of the segment data for integrity verification.
+	Checksum *Checksum
+
+	// The timestamp when the segment was created.
+	CreatedAt *time.Time
+
+	// A description of the segment.
+	Description *string
+
+	// The unique identifier of the job that created this segment.
+	JobID *string
+
+	// The logical identifier for the segment in the infrastructure code.
+	LogicalID *string
+
+	// The name of the segment.
+	Name *string
+
+	// The unique identifier of the network migration definition.
+	NetworkMigrationDefinitionID *string
+
+	// The unique identifier of the network migration execution.
+	NetworkMigrationExecutionID *string
+
+	// The S3 location where segment artifacts are stored.
+	OutputS3Configuration *S3Configuration
+
+	// A list of other segments that this segment depends on or references.
+	ReferencedSegments []string
+
+	// Scope tags for the segment.
+	ScopeTags map[string]string
+
+	// The unique identifier of the segment.
+	SegmentID *string
+
+	// The type of the segment, such as VPC, subnet, or security group.
+	SegmentType NetworkMigrationMapperSegmentType
+
+	// The target AWS account where this segment will be deployed.
+	TargetAccount *string
+
+	// The timestamp when the segment was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents a construct within a mapper segment. A construct is an individual
+// infrastructure component such as a VPC, subnet, security group, route table, or
+// other network resource that is part of the network migration.
+type NetworkMigrationMapperSegmentConstruct struct {
+
+	// The unique identifier of the construct.
+	ConstructID *string
+
+	// The type of the construct, such as VPC, subnet, security group, or route table.
+	ConstructType *string
+
+	// The timestamp when the construct was created.
+	CreatedAt *time.Time
+
+	// A description of the construct.
+	Description *string
+
+	// The logical identifier for the construct in the infrastructure code.
+	LogicalID *string
+
+	// The name of the construct.
+	Name *string
+
+	// The properties and configuration of the construct.
+	Properties map[string]string
+
+	// The timestamp when the construct was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Details about a network migration mapping job.
+type NetworkMigrationMappingJobDetails struct {
+
+	// The timestamp when the job was created.
+	CreatedAt *time.Time
+
+	// The timestamp when the job completed or failed.
+	EndedAt *time.Time
+
+	// The unique identifier of the mapping job.
+	JobID *string
+
+	// The unique identifier of the network migration definition.
+	NetworkMigrationDefinitionID *string
+
+	// The unique identifier of the network migration execution.
+	NetworkMigrationExecutionID *string
+
+	// The current status of the mapping job.
+	Status NetworkMigrationJobStatus
+
+	// Detailed status information about the job.
+	StatusDetails *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a network migration mapping update job.
+type NetworkMigrationMappingUpdateJobDetails struct {
+
+	// The timestamp when the job was created.
+	CreatedAt *time.Time
+
+	// The timestamp when the job completed or failed.
+	EndedAt *time.Time
+
+	// The unique identifier of the mapping update job.
+	JobID *string
+
+	// The unique identifier of the network migration definition.
+	NetworkMigrationDefinitionID *string
+
+	// The unique identifier of the network migration execution.
+	NetworkMigrationExecutionID *string
+
+	// The current status of the mapping update job.
+	Status NetworkMigrationJobStatus
+
+	// Detailed status information about the job.
+	StatusDetails *string
+
+	noSmithyDocumentSerde
+}
+
+// A union type representing the operation to perform on a construct during a
+// mapping update.
+//
+// The following types satisfy this interface:
+//
+//	OperationUnionMemberUpdate
+type OperationUnion interface {
+	isOperationUnion()
+}
+
+// An update operation to modify construct properties.
+type OperationUnionMemberUpdate struct {
+	Value UpdateOperation
+
+	noSmithyDocumentSerde
+}
+
+func (*OperationUnionMemberUpdate) isOperationUnion() {}
 
 // Operating System.
 type OS struct {
@@ -1064,6 +1722,37 @@ type S3BucketSource struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for an S3 location.
+type S3Configuration struct {
+
+	// The name of the S3 bucket.
+	S3Bucket *string
+
+	// The AWS account ID of the S3 bucket owner.
+	S3BucketOwner *string
+
+	// The S3 key (path) for the object.
+	S3Key *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for a migration source environment.
+type SourceConfiguration struct {
+
+	// The source environment type.
+	//
+	// This member is required.
+	SourceEnvironment SourceEnvironment
+
+	// The S3 configuration for the source data.
+	//
+	// This member is required.
+	SourceS3Configuration *SourceS3Configuration
+
+	noSmithyDocumentSerde
+}
+
 // Source server properties.
 type SourceProperties struct {
 
@@ -1090,6 +1779,27 @@ type SourceProperties struct {
 
 	// Source server recommended instance type.
 	RecommendedInstanceType *string
+
+	noSmithyDocumentSerde
+}
+
+// S3 configuration for source network data.
+type SourceS3Configuration struct {
+
+	// The name of the S3 bucket containing source data.
+	//
+	// This member is required.
+	S3Bucket *string
+
+	// The AWS account ID of the S3 bucket owner.
+	//
+	// This member is required.
+	S3BucketOwner *string
+
+	// The S3 key (path) for the source data.
+	//
+	// This member is required.
+	S3Key *string
 
 	noSmithyDocumentSerde
 }
@@ -1265,6 +1975,113 @@ type SsmParameterStoreParameter struct {
 	noSmithyDocumentSerde
 }
 
+// A construct update to apply during a mapping update operation.
+type StartNetworkMigrationMappingUpdateConstruct struct {
+
+	// The ID of the construct to update.
+	//
+	// This member is required.
+	ConstructID *string
+
+	// The type of the construct.
+	//
+	// This member is required.
+	ConstructType *string
+
+	// The ID of the segment containing the construct.
+	//
+	// This member is required.
+	SegmentID *string
+
+	// The operation to perform on the construct.
+	Operation OperationUnion
+
+	noSmithyDocumentSerde
+}
+
+// A segment update to apply during a mapping update operation.
+type StartNetworkMigrationMappingUpdateSegment struct {
+
+	// The ID of the segment to update.
+	//
+	// This member is required.
+	SegmentID *string
+
+	// The updated scope tags for the segment.
+	ScopeTags map[string]string
+
+	// The updated target AWS account for the segment.
+	TargetAccount *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for the target network topology and addressing.
+type TargetNetwork struct {
+
+	// The network topology type for the target environment.
+	//
+	// This member is required.
+	Topology TargetNetworkTopology
+
+	// The CIDR block for inbound traffic in the target network.
+	InboundCidr *string
+
+	// The CIDR block for inspection traffic in the target network.
+	InspectionCidr *string
+
+	// The CIDR block for outbound traffic in the target network.
+	OutboundCidr *string
+
+	noSmithyDocumentSerde
+}
+
+// Updated configuration for the target network topology and addressing.
+type TargetNetworkUpdate struct {
+
+	// The updated CIDR block for inbound traffic.
+	InboundCidr *string
+
+	// The updated CIDR block for inspection traffic.
+	InspectionCidr *string
+
+	// The updated CIDR block for outbound traffic.
+	OutboundCidr *string
+
+	// The updated network topology type.
+	Topology TargetNetworkTopology
+
+	noSmithyDocumentSerde
+}
+
+// S3 configuration for storing target network artifacts.
+type TargetS3Configuration struct {
+
+	// The name of the S3 bucket for target artifacts.
+	//
+	// This member is required.
+	S3Bucket *string
+
+	// The AWS account ID of the S3 bucket owner.
+	//
+	// This member is required.
+	S3BucketOwner *string
+
+	noSmithyDocumentSerde
+}
+
+// Updated S3 configuration for storing target network artifacts.
+type TargetS3ConfigurationUpdate struct {
+
+	// The updated name of the S3 bucket.
+	S3Bucket *string
+
+	// The updated AWS account ID of the S3 bucket owner.
+	S3BucketOwner *string
+
+	noSmithyDocumentSerde
+}
+
 type TemplateActionDocument struct {
 
 	// Template post migration custom action ID.
@@ -1314,6 +2131,15 @@ type TemplateActionsRequestFilters struct {
 
 	// Action IDs to filter template post migration custom actions by.
 	ActionIDs []string
+
+	noSmithyDocumentSerde
+}
+
+// An operation that updates the properties of a construct.
+type UpdateOperation struct {
+
+	// The properties to update on the construct.
+	Properties map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -1424,4 +2250,5 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isOperationUnion()       {}
 func (*UnknownUnionMember) isSsmExternalParameter() {}

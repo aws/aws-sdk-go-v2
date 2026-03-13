@@ -67,6 +67,9 @@ type CreateNotificationInput struct {
 	ExpiresAt *time.Time
 
 	// The unique identifier for a notification.
+	//
+	// Deprecated: PredefinedNotificationId is deprecated. Use ClientToken for
+	// idempotency.
 	PredefinedNotificationId *string
 
 	// The priority level of the notification. Valid values are HIGH and LOW. High

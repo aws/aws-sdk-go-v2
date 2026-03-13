@@ -1,0 +1,8 @@
+{
+    "id": "2410aa46-38f3-4d15-be89-90887ac2849c",
+    "type": "feature",
+    "description": "Updates maximum reconnect window seconds from 60 to 300 for participant replication",
+    "modules": [
+        "service/ivsrealtime"
+    ]
+}

@@ -2229,6 +2229,17 @@ func awsRestjson1_serializeDocumentIdentifiers(v []string, value smithyjson.Valu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIpv4CidrBlockList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentLocationConfiguration(v *types.LocationConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2256,6 +2267,13 @@ func awsRestjson1_serializeDocumentLocationConfiguration(v *types.LocationConfig
 	if v.TargetIdleCapacity != nil {
 		ok := object.Key("TargetIdleCapacity")
 		ok.Integer(*v.TargetIdleCapacity)
+	}
+
+	if v.VpcTransitConfiguration != nil {
+		ok := object.Key("VpcTransitConfiguration")
+		if err := awsRestjson1_serializeDocumentVpcTransitConfiguration(v.VpcTransitConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -2322,5 +2340,24 @@ func awsRestjson1_serializeDocumentTags(v map[string]string, value smithyjson.Va
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVpcTransitConfiguration(v *types.VpcTransitConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Ipv4CidrBlocks != nil {
+		ok := object.Key("Ipv4CidrBlocks")
+		if err := awsRestjson1_serializeDocumentIpv4CidrBlockList(v.Ipv4CidrBlocks, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcId != nil {
+		ok := object.Key("VpcId")
+		ok.String(*v.VpcId)
+	}
+
 	return nil
 }

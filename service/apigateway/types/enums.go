@@ -549,17 +549,18 @@ type SecurityPolicy string
 
 // Enum values for SecurityPolicy
 const (
-	SecurityPolicyTls10                             SecurityPolicy = "TLS_1_0"
-	SecurityPolicyTls12                             SecurityPolicy = "TLS_1_2"
-	SecurityPolicySecurityPolicyTls1313202509       SecurityPolicy = "SecurityPolicy_TLS13_1_3_2025_09"
-	SecurityPolicySecurityPolicyTls1313Fips202509   SecurityPolicy = "SecurityPolicy_TLS13_1_3_FIPS_2025_09"
-	SecurityPolicySecurityPolicyTls1312PfsPq202509  SecurityPolicy = "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09"
-	SecurityPolicySecurityPolicyTls1312FipsPq202509 SecurityPolicy = "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09"
-	SecurityPolicySecurityPolicyTls1312Pq202509     SecurityPolicy = "SecurityPolicy_TLS13_1_2_PQ_2025_09"
-	SecurityPolicySecurityPolicyTls1312202106       SecurityPolicy = "SecurityPolicy_TLS13_1_2_2021_06"
-	SecurityPolicySecurityPolicyTls132025Edge       SecurityPolicy = "SecurityPolicy_TLS13_2025_EDGE"
-	SecurityPolicySecurityPolicyTls12Pfs2025Edge    SecurityPolicy = "SecurityPolicy_TLS12_PFS_2025_EDGE"
-	SecurityPolicySecurityPolicyTls122018Edge       SecurityPolicy = "SecurityPolicy_TLS12_2018_EDGE"
+	SecurityPolicyTls10                                SecurityPolicy = "TLS_1_0"
+	SecurityPolicyTls12                                SecurityPolicy = "TLS_1_2"
+	SecurityPolicySecurityPolicyTls1313202509          SecurityPolicy = "SecurityPolicy_TLS13_1_3_2025_09"
+	SecurityPolicySecurityPolicyTls1313Fips202509      SecurityPolicy = "SecurityPolicy_TLS13_1_3_FIPS_2025_09"
+	SecurityPolicySecurityPolicyTls1312PfsPq202509     SecurityPolicy = "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09"
+	SecurityPolicySecurityPolicyTls1312FipsPq202509    SecurityPolicy = "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09"
+	SecurityPolicySecurityPolicyTls1312FipsPfsPq202509 SecurityPolicy = "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09"
+	SecurityPolicySecurityPolicyTls1312Pq202509        SecurityPolicy = "SecurityPolicy_TLS13_1_2_PQ_2025_09"
+	SecurityPolicySecurityPolicyTls1312202106          SecurityPolicy = "SecurityPolicy_TLS13_1_2_2021_06"
+	SecurityPolicySecurityPolicyTls132025Edge          SecurityPolicy = "SecurityPolicy_TLS13_2025_EDGE"
+	SecurityPolicySecurityPolicyTls12Pfs2025Edge       SecurityPolicy = "SecurityPolicy_TLS12_PFS_2025_EDGE"
+	SecurityPolicySecurityPolicyTls122018Edge          SecurityPolicy = "SecurityPolicy_TLS12_2018_EDGE"
 )
 
 // Values returns all known values for SecurityPolicy. Note that this can be
@@ -574,6 +575,7 @@ func (SecurityPolicy) Values() []SecurityPolicy {
 		"SecurityPolicy_TLS13_1_3_FIPS_2025_09",
 		"SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09",
 		"SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09",
+		"SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09",
 		"SecurityPolicy_TLS13_1_2_PQ_2025_09",
 		"SecurityPolicy_TLS13_1_2_2021_06",
 		"SecurityPolicy_TLS13_2025_EDGE",

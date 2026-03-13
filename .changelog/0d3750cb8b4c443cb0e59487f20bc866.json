@@ -1,0 +1,8 @@
+{
+    "id": "0d3750cb-8b4c-443c-b0e5-9487f20bc866",
+    "type": "feature",
+    "description": "The change adds a new capability named ManageSharedFolders in Custom Permissions",
+    "modules": [
+        "service/quicksight"
+    ]
+}

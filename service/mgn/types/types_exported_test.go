@@ -7,6 +7,24 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
 )
 
+func ExampleOperationUnion_outputUsage() {
+	var union types.OperationUnion
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OperationUnionMemberUpdate:
+		_ = v.Value // Value is types.UpdateOperation
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.UpdateOperation
+
 func ExampleSsmExternalParameter_outputUsage() {
 	var union types.SsmExternalParameter
 	// type switches can be used to check the union value

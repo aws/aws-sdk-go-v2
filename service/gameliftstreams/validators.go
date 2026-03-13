@@ -522,6 +522,11 @@ func validateLocationConfiguration(v *types.LocationConfiguration) error {
 	if v.LocationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LocationName"))
 	}
+	if v.VpcTransitConfiguration != nil {
+		if err := validateVpcTransitConfiguration(v.VpcTransitConfiguration); err != nil {
+			invalidParams.AddNested("VpcTransitConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -556,6 +561,24 @@ func validateRuntimeEnvironment(v *types.RuntimeEnvironment) error {
 	}
 	if v.Version == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVpcTransitConfiguration(v *types.VpcTransitConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcTransitConfiguration"}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if v.Ipv4CidrBlocks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Ipv4CidrBlocks"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

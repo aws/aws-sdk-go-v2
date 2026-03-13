@@ -3368,6 +3368,14 @@ type Capabilities struct {
 	// The ability to perform actions using Microsoft Teams connectors.
 	MSTeamsAction CapabilityState
 
+	// The ability to create, update, delete and view shared folders (both restricted
+	// and unrestricted), ability to add any asset to shared folders, and ability to
+	// share the folders.
+	//
+	// Note: This does not prevent inheriting access to assets that others share with
+	// them through folder membership.
+	ManageSharedFolders CapabilityState
+
 	// The ability to perform actions using Monday connectors.
 	MondayAction CapabilityState
 

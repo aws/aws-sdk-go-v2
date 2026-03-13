@@ -7825,6 +7825,262 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAc4Settings(v **types.Ac4Settings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Ac4Settings
+	if *v == nil {
+		sv = &types.Ac4Settings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bitrate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin192000Max1024000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Bitrate = ptr.Int32(int32(i64))
+			}
+
+		case "bitstreamMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ac4BitstreamMode to be of type string, got %T instead", value)
+				}
+				sv.BitstreamMode = types.Ac4BitstreamMode(jtv)
+			}
+
+		case "codingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ac4CodingMode to be of type string, got %T instead", value)
+				}
+				sv.CodingMode = types.Ac4CodingMode(jtv)
+			}
+
+		case "dynamicRangeCompressionFlatPanelTv":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ac4DynamicRangeCompressionDrcProfile to be of type string, got %T instead", value)
+				}
+				sv.DynamicRangeCompressionFlatPanelTv = types.Ac4DynamicRangeCompressionDrcProfile(jtv)
+			}
+
+		case "dynamicRangeCompressionHomeTheater":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ac4DynamicRangeCompressionDrcProfile to be of type string, got %T instead", value)
+				}
+				sv.DynamicRangeCompressionHomeTheater = types.Ac4DynamicRangeCompressionDrcProfile(jtv)
+			}
+
+		case "dynamicRangeCompressionPortableHeadphones":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ac4DynamicRangeCompressionDrcProfile to be of type string, got %T instead", value)
+				}
+				sv.DynamicRangeCompressionPortableHeadphones = types.Ac4DynamicRangeCompressionDrcProfile(jtv)
+			}
+
+		case "dynamicRangeCompressionPortableSpeakers":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ac4DynamicRangeCompressionDrcProfile to be of type string, got %T instead", value)
+				}
+				sv.DynamicRangeCompressionPortableSpeakers = types.Ac4DynamicRangeCompressionDrcProfile(jtv)
+			}
+
+		case "loRoCenterMixLevel":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LoRoCenterMixLevel = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.LoRoCenterMixLevel = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected __doubleMinNegative1000Max3 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "loRoSurroundMixLevel":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LoRoSurroundMixLevel = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.LoRoSurroundMixLevel = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected __doubleMinNegative1000MaxNegative1 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "ltRtCenterMixLevel":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LtRtCenterMixLevel = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.LtRtCenterMixLevel = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected __doubleMinNegative1000Max3 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "ltRtSurroundMixLevel":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LtRtSurroundMixLevel = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.LtRtSurroundMixLevel = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected __doubleMinNegative1000MaxNegative1 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "sampleRate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin48000Max48000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SampleRate = ptr.Int32(int32(i64))
+			}
+
+		case "stereoDownmix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ac4StereoDownmix to be of type string, got %T instead", value)
+				}
+				sv.StereoDownmix = types.Ac4StereoDownmix(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAccelerationSettings(v **types.AccelerationSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8186,6 +8442,11 @@ func awsRestjson1_deserializeDocumentAudioCodecSettings(v **types.AudioCodecSett
 
 		case "ac3Settings":
 			if err := awsRestjson1_deserializeDocumentAc3Settings(&sv.Ac3Settings, value); err != nil {
+				return err
+			}
+
+		case "ac4Settings":
+			if err := awsRestjson1_deserializeDocumentAc4Settings(&sv.Ac4Settings, value); err != nil {
 				return err
 			}
 
@@ -10514,6 +10775,15 @@ func awsRestjson1_deserializeDocumentCmafEncryptionSettings(v **types.CmafEncryp
 
 	for key, value := range shape {
 		switch key {
+		case "clearLead":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HlsClearLead to be of type string, got %T instead", value)
+				}
+				sv.ClearLead = types.HlsClearLead(jtv)
+			}
+
 		case "constantInitializationVector":
 			if value != nil {
 				jtv, ok := value.(string)

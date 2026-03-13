@@ -27080,6 +27080,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 		ok.String(string(v.LinearAction))
 	}
 
+	if len(v.ManageSharedFolders) > 0 {
+		ok := object.Key("ManageSharedFolders")
+		ok.String(string(v.ManageSharedFolders))
+	}
+
 	if len(v.MCPAction) > 0 {
 		ok := object.Key("MCPAction")
 		ok.String(string(v.MCPAction))

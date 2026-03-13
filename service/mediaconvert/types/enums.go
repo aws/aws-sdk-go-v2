@@ -341,6 +341,97 @@ func (Ac3MetadataControl) Values() []Ac3MetadataControl {
 	}
 }
 
+type Ac4BitstreamMode string
+
+// Enum values for Ac4BitstreamMode
+const (
+	Ac4BitstreamModeCompleteMain Ac4BitstreamMode = "COMPLETE_MAIN"
+	Ac4BitstreamModeEmergency    Ac4BitstreamMode = "EMERGENCY"
+)
+
+// Values returns all known values for Ac4BitstreamMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Ac4BitstreamMode) Values() []Ac4BitstreamMode {
+	return []Ac4BitstreamMode{
+		"COMPLETE_MAIN",
+		"EMERGENCY",
+	}
+}
+
+type Ac4CodingMode string
+
+// Enum values for Ac4CodingMode
+const (
+	Ac4CodingModeCodingMode20    Ac4CodingMode = "CODING_MODE_2_0"
+	Ac4CodingModeCodingMode32Lfe Ac4CodingMode = "CODING_MODE_3_2_LFE"
+	Ac4CodingModeCodingMode514   Ac4CodingMode = "CODING_MODE_5_1_4"
+)
+
+// Values returns all known values for Ac4CodingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Ac4CodingMode) Values() []Ac4CodingMode {
+	return []Ac4CodingMode{
+		"CODING_MODE_2_0",
+		"CODING_MODE_3_2_LFE",
+		"CODING_MODE_5_1_4",
+	}
+}
+
+type Ac4DynamicRangeCompressionDrcProfile string
+
+// Enum values for Ac4DynamicRangeCompressionDrcProfile
+const (
+	Ac4DynamicRangeCompressionDrcProfileNone          Ac4DynamicRangeCompressionDrcProfile = "NONE"
+	Ac4DynamicRangeCompressionDrcProfileFilmStandard  Ac4DynamicRangeCompressionDrcProfile = "FILM_STANDARD"
+	Ac4DynamicRangeCompressionDrcProfileFilmLight     Ac4DynamicRangeCompressionDrcProfile = "FILM_LIGHT"
+	Ac4DynamicRangeCompressionDrcProfileMusicStandard Ac4DynamicRangeCompressionDrcProfile = "MUSIC_STANDARD"
+	Ac4DynamicRangeCompressionDrcProfileMusicLight    Ac4DynamicRangeCompressionDrcProfile = "MUSIC_LIGHT"
+	Ac4DynamicRangeCompressionDrcProfileSpeech        Ac4DynamicRangeCompressionDrcProfile = "SPEECH"
+)
+
+// Values returns all known values for Ac4DynamicRangeCompressionDrcProfile. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Ac4DynamicRangeCompressionDrcProfile) Values() []Ac4DynamicRangeCompressionDrcProfile {
+	return []Ac4DynamicRangeCompressionDrcProfile{
+		"NONE",
+		"FILM_STANDARD",
+		"FILM_LIGHT",
+		"MUSIC_STANDARD",
+		"MUSIC_LIGHT",
+		"SPEECH",
+	}
+}
+
+type Ac4StereoDownmix string
+
+// Enum values for Ac4StereoDownmix
+const (
+	Ac4StereoDownmixNotIndicated Ac4StereoDownmix = "NOT_INDICATED"
+	Ac4StereoDownmixLoRo         Ac4StereoDownmix = "LO_RO"
+	Ac4StereoDownmixLtRt         Ac4StereoDownmix = "LT_RT"
+	Ac4StereoDownmixDpl2         Ac4StereoDownmix = "DPL2"
+)
+
+// Values returns all known values for Ac4StereoDownmix. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Ac4StereoDownmix) Values() []Ac4StereoDownmix {
+	return []Ac4StereoDownmix{
+		"NOT_INDICATED",
+		"LO_RO",
+		"LT_RT",
+		"DPL2",
+	}
+}
+
 type AccelerationMode string
 
 // Enum values for AccelerationMode
@@ -623,6 +714,7 @@ const (
 	AudioCodecWav         AudioCodec = "WAV"
 	AudioCodecAiff        AudioCodec = "AIFF"
 	AudioCodecAc3         AudioCodec = "AC3"
+	AudioCodecAc4         AudioCodec = "AC4"
 	AudioCodecEac3        AudioCodec = "EAC3"
 	AudioCodecEac3Atmos   AudioCodec = "EAC3_ATMOS"
 	AudioCodecVorbis      AudioCodec = "VORBIS"
@@ -643,6 +735,7 @@ func (AudioCodec) Values() []AudioCodec {
 		"WAV",
 		"AIFF",
 		"AC3",
+		"AC4",
 		"EAC3",
 		"EAC3_ATMOS",
 		"VORBIS",
@@ -1714,8 +1807,9 @@ type CmafIntervalCadence string
 
 // Enum values for CmafIntervalCadence
 const (
-	CmafIntervalCadenceFollowIframe CmafIntervalCadence = "FOLLOW_IFRAME"
-	CmafIntervalCadenceFollowCustom CmafIntervalCadence = "FOLLOW_CUSTOM"
+	CmafIntervalCadenceFollowIframe       CmafIntervalCadence = "FOLLOW_IFRAME"
+	CmafIntervalCadenceFollowCustom       CmafIntervalCadence = "FOLLOW_CUSTOM"
+	CmafIntervalCadenceFollowSegmentation CmafIntervalCadence = "FOLLOW_SEGMENTATION"
 )
 
 // Values returns all known values for CmafIntervalCadence. Note that this can be
@@ -1726,6 +1820,7 @@ func (CmafIntervalCadence) Values() []CmafIntervalCadence {
 	return []CmafIntervalCadence{
 		"FOLLOW_IFRAME",
 		"FOLLOW_CUSTOM",
+		"FOLLOW_SEGMENTATION",
 	}
 }
 
@@ -2220,32 +2315,33 @@ type Codec string
 
 // Enum values for Codec
 const (
-	CodecUnknown  Codec = "UNKNOWN"
-	CodecAac      Codec = "AAC"
-	CodecAc3      Codec = "AC3"
-	CodecEac3     Codec = "EAC3"
-	CodecFlac     Codec = "FLAC"
-	CodecMp3      Codec = "MP3"
-	CodecOpus     Codec = "OPUS"
-	CodecPcm      Codec = "PCM"
-	CodecVorbis   Codec = "VORBIS"
-	CodecAv1      Codec = "AV1"
-	CodecAvc      Codec = "AVC"
-	CodecHevc     Codec = "HEVC"
-	CodecJpeg2000 Codec = "JPEG2000"
-	CodecMjpeg    Codec = "MJPEG"
-	CodecMpeg1    Codec = "MPEG1"
-	CodecMp4v     Codec = "MP4V"
-	CodecMpeg2    Codec = "MPEG2"
-	CodecProres   Codec = "PRORES"
-	CodecTheora   Codec = "THEORA"
-	CodecVfw      Codec = "VFW"
-	CodecVp8      Codec = "VP8"
-	CodecVp9      Codec = "VP9"
-	CodecQtrle    Codec = "QTRLE"
-	CodecC608     Codec = "C608"
-	CodecC708     Codec = "C708"
-	CodecWebvtt   Codec = "WEBVTT"
+	CodecUnknown      Codec = "UNKNOWN"
+	CodecAac          Codec = "AAC"
+	CodecAc3          Codec = "AC3"
+	CodecEac3         Codec = "EAC3"
+	CodecFlac         Codec = "FLAC"
+	CodecMp3          Codec = "MP3"
+	CodecOpus         Codec = "OPUS"
+	CodecPcm          Codec = "PCM"
+	CodecVorbis       Codec = "VORBIS"
+	CodecAv1          Codec = "AV1"
+	CodecAvc          Codec = "AVC"
+	CodecHevc         Codec = "HEVC"
+	CodecJpeg2000     Codec = "JPEG2000"
+	CodecMjpeg        Codec = "MJPEG"
+	CodecMpeg1        Codec = "MPEG1"
+	CodecMp4v         Codec = "MP4V"
+	CodecMpeg2        Codec = "MPEG2"
+	CodecProres       Codec = "PRORES"
+	CodecQtrle        Codec = "QTRLE"
+	CodecTheora       Codec = "THEORA"
+	CodecUncompressed Codec = "UNCOMPRESSED"
+	CodecVfw          Codec = "VFW"
+	CodecVp8          Codec = "VP8"
+	CodecVp9          Codec = "VP9"
+	CodecC608         Codec = "C608"
+	CodecC708         Codec = "C708"
+	CodecWebvtt       Codec = "WEBVTT"
 )
 
 // Values returns all known values for Codec. Note that this can be expanded in
@@ -2272,11 +2368,12 @@ func (Codec) Values() []Codec {
 		"MP4V",
 		"MPEG2",
 		"PRORES",
+		"QTRLE",
 		"THEORA",
+		"UNCOMPRESSED",
 		"VFW",
 		"VP8",
 		"VP9",
-		"QTRLE",
 		"C608",
 		"C708",
 		"WEBVTT",
@@ -2575,8 +2672,9 @@ type DashIsoIntervalCadence string
 
 // Enum values for DashIsoIntervalCadence
 const (
-	DashIsoIntervalCadenceFollowIframe DashIsoIntervalCadence = "FOLLOW_IFRAME"
-	DashIsoIntervalCadenceFollowCustom DashIsoIntervalCadence = "FOLLOW_CUSTOM"
+	DashIsoIntervalCadenceFollowIframe       DashIsoIntervalCadence = "FOLLOW_IFRAME"
+	DashIsoIntervalCadenceFollowCustom       DashIsoIntervalCadence = "FOLLOW_CUSTOM"
+	DashIsoIntervalCadenceFollowSegmentation DashIsoIntervalCadence = "FOLLOW_SEGMENTATION"
 )
 
 // Values returns all known values for DashIsoIntervalCadence. Note that this can
@@ -2587,6 +2685,7 @@ func (DashIsoIntervalCadence) Values() []DashIsoIntervalCadence {
 	return []DashIsoIntervalCadence{
 		"FOLLOW_IFRAME",
 		"FOLLOW_CUSTOM",
+		"FOLLOW_SEGMENTATION",
 	}
 }
 
@@ -3917,6 +4016,7 @@ const (
 	FormatWebm      Format = "webm"
 	FormatMxf       Format = "mxf"
 	FormatWave      Format = "wave"
+	FormatAvi       Format = "avi"
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
@@ -3931,6 +4031,7 @@ func (Format) Values() []Format {
 		"webm",
 		"mxf",
 		"wave",
+		"avi",
 	}
 }
 
@@ -5411,6 +5512,25 @@ func (HlsCaptionSegmentLengthControl) Values() []HlsCaptionSegmentLengthControl 
 	}
 }
 
+type HlsClearLead string
+
+// Enum values for HlsClearLead
+const (
+	HlsClearLeadEnabled  HlsClearLead = "ENABLED"
+	HlsClearLeadDisabled HlsClearLead = "DISABLED"
+)
+
+// Values returns all known values for HlsClearLead. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HlsClearLead) Values() []HlsClearLead {
+	return []HlsClearLead{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type HlsClientCache string
 
 // Enum values for HlsClientCache
@@ -5575,8 +5695,9 @@ type HlsIntervalCadence string
 
 // Enum values for HlsIntervalCadence
 const (
-	HlsIntervalCadenceFollowIframe HlsIntervalCadence = "FOLLOW_IFRAME"
-	HlsIntervalCadenceFollowCustom HlsIntervalCadence = "FOLLOW_CUSTOM"
+	HlsIntervalCadenceFollowIframe       HlsIntervalCadence = "FOLLOW_IFRAME"
+	HlsIntervalCadenceFollowCustom       HlsIntervalCadence = "FOLLOW_CUSTOM"
+	HlsIntervalCadenceFollowSegmentation HlsIntervalCadence = "FOLLOW_SEGMENTATION"
 )
 
 // Values returns all known values for HlsIntervalCadence. Note that this can be
@@ -5587,6 +5708,7 @@ func (HlsIntervalCadence) Values() []HlsIntervalCadence {
 	return []HlsIntervalCadence{
 		"FOLLOW_IFRAME",
 		"FOLLOW_CUSTOM",
+		"FOLLOW_SEGMENTATION",
 	}
 }
 

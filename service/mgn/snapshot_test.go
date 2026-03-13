@@ -158,6 +158,18 @@ func TestCheckSnapshot_CreateLaunchConfigurationTemplate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateNetworkMigrationDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateNetworkMigrationDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateReplicationConfigurationTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateReplicationConfigurationTemplate(context.Background(), nil, func(o *Options) {
@@ -223,6 +235,18 @@ func TestCheckSnapshot_DeleteLaunchConfigurationTemplate(t *testing.T) {
 	_, err := svc.DeleteLaunchConfigurationTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteLaunchConfigurationTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteNetworkMigrationDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNetworkMigrationDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteNetworkMigrationDefinition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -410,6 +434,30 @@ func TestCheckSnapshot_GetLaunchConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetNetworkMigrationDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetNetworkMigrationDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetNetworkMigrationDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetNetworkMigrationMapperSegmentConstruct(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetNetworkMigrationMapperSegmentConstruct(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetNetworkMigrationMapperSegmentConstruct")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetReplicationConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetReplicationConfiguration(context.Background(), nil, func(o *Options) {
@@ -494,6 +542,18 @@ func TestCheckSnapshot_ListImportErrors(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListImportFileEnrichments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListImportFileEnrichments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListImportFileEnrichments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListImports(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListImports(context.Background(), nil, func(o *Options) {
@@ -511,6 +571,150 @@ func TestCheckSnapshot_ListManagedAccounts(t *testing.T) {
 	_, err := svc.ListManagedAccounts(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListManagedAccounts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListNetworkMigrationAnalyses(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationAnalyses(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNetworkMigrationAnalyses")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListNetworkMigrationAnalysisResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationAnalysisResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNetworkMigrationAnalysisResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListNetworkMigrationCodeGenerations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationCodeGenerations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNetworkMigrationCodeGenerations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListNetworkMigrationCodeGenerationSegments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationCodeGenerationSegments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNetworkMigrationCodeGenerationSegments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListNetworkMigrationDefinitions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationDefinitions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNetworkMigrationDefinitions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListNetworkMigrationDeployedStacks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationDeployedStacks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNetworkMigrationDeployedStacks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListNetworkMigrationDeployments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationDeployments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNetworkMigrationDeployments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListNetworkMigrationExecutions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationExecutions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNetworkMigrationExecutions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListNetworkMigrationMapperSegmentConstructs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationMapperSegmentConstructs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNetworkMigrationMapperSegmentConstructs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListNetworkMigrationMapperSegments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationMapperSegments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNetworkMigrationMapperSegments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListNetworkMigrationMappings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationMappings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNetworkMigrationMappings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListNetworkMigrationMappingUpdates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationMappingUpdates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNetworkMigrationMappingUpdates")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -698,6 +902,78 @@ func TestCheckSnapshot_StartImport(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartImportFileEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartImportFileEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartImportFileEnrichment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartNetworkMigrationAnalysis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartNetworkMigrationAnalysis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartNetworkMigrationAnalysis")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartNetworkMigrationCodeGeneration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartNetworkMigrationCodeGeneration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartNetworkMigrationCodeGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartNetworkMigrationDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartNetworkMigrationDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartNetworkMigrationDeployment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartNetworkMigrationMapping(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartNetworkMigrationMapping(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartNetworkMigrationMapping")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartNetworkMigrationMappingUpdate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartNetworkMigrationMappingUpdate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartNetworkMigrationMappingUpdate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartReplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartReplication(context.Background(), nil, func(o *Options) {
@@ -835,6 +1111,30 @@ func TestCheckSnapshot_UpdateLaunchConfigurationTemplate(t *testing.T) {
 	_, err := svc.UpdateLaunchConfigurationTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateLaunchConfigurationTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateNetworkMigrationDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateNetworkMigrationDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateNetworkMigrationDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateNetworkMigrationMapperSegment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateNetworkMigrationMapperSegment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateNetworkMigrationMapperSegment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -997,6 +1297,18 @@ func TestUpdateSnapshot_CreateLaunchConfigurationTemplate(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateNetworkMigrationDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateNetworkMigrationDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateReplicationConfigurationTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateReplicationConfigurationTemplate(context.Background(), nil, func(o *Options) {
@@ -1062,6 +1374,18 @@ func TestUpdateSnapshot_DeleteLaunchConfigurationTemplate(t *testing.T) {
 	_, err := svc.DeleteLaunchConfigurationTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteLaunchConfigurationTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteNetworkMigrationDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNetworkMigrationDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteNetworkMigrationDefinition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1249,6 +1573,30 @@ func TestUpdateSnapshot_GetLaunchConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetNetworkMigrationDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetNetworkMigrationDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetNetworkMigrationDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetNetworkMigrationMapperSegmentConstruct(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetNetworkMigrationMapperSegmentConstruct(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetNetworkMigrationMapperSegmentConstruct")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetReplicationConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetReplicationConfiguration(context.Background(), nil, func(o *Options) {
@@ -1333,6 +1681,18 @@ func TestUpdateSnapshot_ListImportErrors(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListImportFileEnrichments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListImportFileEnrichments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListImportFileEnrichments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListImports(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListImports(context.Background(), nil, func(o *Options) {
@@ -1350,6 +1710,150 @@ func TestUpdateSnapshot_ListManagedAccounts(t *testing.T) {
 	_, err := svc.ListManagedAccounts(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListManagedAccounts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListNetworkMigrationAnalyses(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationAnalyses(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNetworkMigrationAnalyses")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListNetworkMigrationAnalysisResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationAnalysisResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNetworkMigrationAnalysisResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListNetworkMigrationCodeGenerations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationCodeGenerations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNetworkMigrationCodeGenerations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListNetworkMigrationCodeGenerationSegments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationCodeGenerationSegments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNetworkMigrationCodeGenerationSegments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListNetworkMigrationDefinitions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationDefinitions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNetworkMigrationDefinitions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListNetworkMigrationDeployedStacks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationDeployedStacks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNetworkMigrationDeployedStacks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListNetworkMigrationDeployments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationDeployments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNetworkMigrationDeployments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListNetworkMigrationExecutions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationExecutions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNetworkMigrationExecutions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListNetworkMigrationMapperSegmentConstructs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationMapperSegmentConstructs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNetworkMigrationMapperSegmentConstructs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListNetworkMigrationMapperSegments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationMapperSegments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNetworkMigrationMapperSegments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListNetworkMigrationMappings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationMappings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNetworkMigrationMappings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListNetworkMigrationMappingUpdates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationMappingUpdates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNetworkMigrationMappingUpdates")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1537,6 +2041,78 @@ func TestUpdateSnapshot_StartImport(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartImportFileEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartImportFileEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartImportFileEnrichment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartNetworkMigrationAnalysis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartNetworkMigrationAnalysis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartNetworkMigrationAnalysis")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartNetworkMigrationCodeGeneration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartNetworkMigrationCodeGeneration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartNetworkMigrationCodeGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartNetworkMigrationDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartNetworkMigrationDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartNetworkMigrationDeployment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartNetworkMigrationMapping(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartNetworkMigrationMapping(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartNetworkMigrationMapping")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartNetworkMigrationMappingUpdate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartNetworkMigrationMappingUpdate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartNetworkMigrationMappingUpdate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartReplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartReplication(context.Background(), nil, func(o *Options) {
@@ -1674,6 +2250,30 @@ func TestUpdateSnapshot_UpdateLaunchConfigurationTemplate(t *testing.T) {
 	_, err := svc.UpdateLaunchConfigurationTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateLaunchConfigurationTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateNetworkMigrationDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateNetworkMigrationDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateNetworkMigrationDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateNetworkMigrationMapperSegment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateNetworkMigrationMapperSegment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateNetworkMigrationMapperSegment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -299,6 +299,41 @@ func TestOpCreateLaunchConfigurationTemplateSRAOperationOrder(t *testing.T) {
 		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
 	}
 }
+func TestOpCreateNetworkMigrationDefinitionSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.CreateNetworkMigrationDefinition(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
 func TestOpCreateReplicationConfigurationTemplateSRAOperationOrder(t *testing.T) {
 	expect := []string{
 		"OperationSerializer",
@@ -492,6 +527,41 @@ func TestOpDeleteLaunchConfigurationTemplateSRAOperationOrder(t *testing.T) {
 		},
 	})
 	_, err := svc.DeleteLaunchConfigurationTemplate(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpDeleteNetworkMigrationDefinitionSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.DeleteNetworkMigrationDefinition(context.Background(), nil)
 	if err != nil && !errors.Is(err, errTestReturnEarly) {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -1034,6 +1104,76 @@ func TestOpGetLaunchConfigurationSRAOperationOrder(t *testing.T) {
 		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
 	}
 }
+func TestOpGetNetworkMigrationDefinitionSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.GetNetworkMigrationDefinition(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpGetNetworkMigrationMapperSegmentConstructSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.GetNetworkMigrationMapperSegmentConstruct(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
 func TestOpGetReplicationConfigurationSRAOperationOrder(t *testing.T) {
 	expect := []string{
 		"OperationSerializer",
@@ -1279,6 +1419,41 @@ func TestOpListImportErrorsSRAOperationOrder(t *testing.T) {
 		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
 	}
 }
+func TestOpListImportFileEnrichmentsSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.ListImportFileEnrichments(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
 func TestOpListImportsSRAOperationOrder(t *testing.T) {
 	expect := []string{
 		"OperationSerializer",
@@ -1332,6 +1507,426 @@ func TestOpListManagedAccountsSRAOperationOrder(t *testing.T) {
 		},
 	})
 	_, err := svc.ListManagedAccounts(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpListNetworkMigrationAnalysesSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.ListNetworkMigrationAnalyses(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpListNetworkMigrationAnalysisResultsSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.ListNetworkMigrationAnalysisResults(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpListNetworkMigrationCodeGenerationsSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.ListNetworkMigrationCodeGenerations(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpListNetworkMigrationCodeGenerationSegmentsSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.ListNetworkMigrationCodeGenerationSegments(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpListNetworkMigrationDefinitionsSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.ListNetworkMigrationDefinitions(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpListNetworkMigrationDeployedStacksSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.ListNetworkMigrationDeployedStacks(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpListNetworkMigrationDeploymentsSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.ListNetworkMigrationDeployments(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpListNetworkMigrationExecutionsSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.ListNetworkMigrationExecutions(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpListNetworkMigrationMapperSegmentConstructsSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.ListNetworkMigrationMapperSegmentConstructs(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpListNetworkMigrationMapperSegmentsSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.ListNetworkMigrationMapperSegments(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpListNetworkMigrationMappingsSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.ListNetworkMigrationMappings(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpListNetworkMigrationMappingUpdatesSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.ListNetworkMigrationMappingUpdates(context.Background(), nil)
 	if err != nil && !errors.Is(err, errTestReturnEarly) {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -1874,6 +2469,216 @@ func TestOpStartImportSRAOperationOrder(t *testing.T) {
 		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
 	}
 }
+func TestOpStartImportFileEnrichmentSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.StartImportFileEnrichment(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpStartNetworkMigrationAnalysisSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.StartNetworkMigrationAnalysis(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpStartNetworkMigrationCodeGenerationSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.StartNetworkMigrationCodeGeneration(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpStartNetworkMigrationDeploymentSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.StartNetworkMigrationDeployment(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpStartNetworkMigrationMappingSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.StartNetworkMigrationMapping(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpStartNetworkMigrationMappingUpdateSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.StartNetworkMigrationMappingUpdate(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
 func TestOpStartReplicationSRAOperationOrder(t *testing.T) {
 	expect := []string{
 		"OperationSerializer",
@@ -2277,6 +3082,76 @@ func TestOpUpdateLaunchConfigurationTemplateSRAOperationOrder(t *testing.T) {
 		},
 	})
 	_, err := svc.UpdateLaunchConfigurationTemplate(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpUpdateNetworkMigrationDefinitionSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.UpdateNetworkMigrationDefinition(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpUpdateNetworkMigrationMapperSegmentSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.UpdateNetworkMigrationMapperSegment(context.Background(), nil)
 	if err != nil && !errors.Is(err, errTestReturnEarly) {
 		t.Fatalf("unexpected error: %v", err)
 	}

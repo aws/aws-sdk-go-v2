@@ -28329,6 +28329,13 @@ func awsAwsjson11_serializeOpDocumentBatchGetPartitionInput(v *BatchGetPartition
 	object := value.Object()
 	defer object.Close()
 
+	if v.AuditContext != nil {
+		ok := object.Key("AuditContext")
+		if err := awsAwsjson11_serializeDocumentAuditContext(v.AuditContext, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CatalogId != nil {
 		ok := object.Key("CatalogId")
 		ok.String(*v.CatalogId)
@@ -28342,6 +28349,13 @@ func awsAwsjson11_serializeOpDocumentBatchGetPartitionInput(v *BatchGetPartition
 	if v.PartitionsToGet != nil {
 		ok := object.Key("PartitionsToGet")
 		if err := awsAwsjson11_serializeDocumentBatchGetPartitionValueList(v.PartitionsToGet, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QuerySessionContext != nil {
+		ok := object.Key("QuerySessionContext")
+		if err := awsAwsjson11_serializeDocumentQuerySessionContext(v.QuerySessionContext, ok); err != nil {
 			return err
 		}
 	}
