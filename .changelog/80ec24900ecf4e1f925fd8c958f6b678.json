@@ -1,8 +1,0 @@
-{
-    "id": "80ec2490-0ecf-4e1f-925f-d8c958f6b678",
-    "type": "feature",
-    "description": "Add QuerySessionContext to BatchGetPartitionRequest",
-    "modules": [
-        "service/glue"
-    ]
-}

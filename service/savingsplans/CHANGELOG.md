@@ -1,3 +1,7 @@
+# v1.32.1 (2026-03-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.0 (2026-03-05)
 
 * **Feature**: Added support for OpenSearch and Neptune Analytics to Database Savings Plans.

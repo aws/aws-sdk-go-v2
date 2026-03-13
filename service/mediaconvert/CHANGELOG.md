@@ -1,3 +1,8 @@
+# v1.88.0 (2026-03-13)
+
+* **Feature**: This update adds support for Dolby AC-4 audio output, frame rate conversion between non-Dolby Vision inputs to Dolby Vision outputs, and clear lead CMAF HLS output.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.87.3 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

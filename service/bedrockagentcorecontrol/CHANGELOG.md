@@ -1,3 +1,7 @@
+# v1.22.1 (2026-03-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2026-03-10)
 
 * **Feature**: Adding first class support for AG-UI protocol in AgentCore Runtime.

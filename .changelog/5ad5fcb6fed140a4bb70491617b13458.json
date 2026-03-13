@@ -1,8 +1,0 @@
-{
-    "id": "5ad5fcb6-fed1-40a4-bb70-491617b13458",
-    "type": "feature",
-    "description": "Deprecating PredefinedNotificationID field",
-    "modules": [
-        "service/connect"
-    ]
-}

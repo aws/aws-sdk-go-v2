@@ -1,3 +1,7 @@
+# v1.81.1 (2026-03-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.81.0 (2026-03-11)
 
 * **Feature**: Adds support for a new tier in controlPlaneScalingConfig on EKS Clusters.

@@ -1,3 +1,7 @@
+# v1.67.1 (2026-03-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.67.0 (2026-03-11)
 
 * **Feature**: Added WINDOWS SERVER 2025 OperatingSystemName.

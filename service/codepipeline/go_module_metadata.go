@@ -3,4 +3,4 @@
 package codepipeline
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.46.19"
+const goModuleVersion = "1.46.20"

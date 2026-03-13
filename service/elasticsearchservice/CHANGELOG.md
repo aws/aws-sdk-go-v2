@@ -1,3 +1,7 @@
+# v1.39.1 (2026-03-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.0 (2026-03-04)
 
 * **Feature**: Adds support for DeploymentStrategyOptions.

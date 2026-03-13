@@ -1,8 +1,0 @@
-{
-    "id": "6541bccb-bf93-4031-aa14-3d699f522aef",
-    "type": "feature",
-    "description": "This update adds support for Dolby AC-4 audio output, frame rate conversion between non-Dolby Vision inputs to Dolby Vision outputs, and clear lead CMAF HLS output.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

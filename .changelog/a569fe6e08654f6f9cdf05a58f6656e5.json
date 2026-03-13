@@ -1,8 +1,0 @@
-{
-    "id": "a569fe6e-0865-4f6f-9cdf-05a58f6656e5",
-    "type": "feature",
-    "description": "Fix pagination support for DescribeConformancePackCompliance, and update OrganizationConfigRule InputParameters max length to match ConfigRule.",
-    "modules": [
-        "service/configservice"
-    ]
-}

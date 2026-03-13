@@ -1,3 +1,8 @@
+# v1.105.0 (2026-03-13)
+
+* **Feature**: The change adds a new capability named ManageSharedFolders in Custom Permissions
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.104.1 (2026-03-11)
 
 * No change notes available for this release.

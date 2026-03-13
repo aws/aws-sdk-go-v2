@@ -1,3 +1,7 @@
+# v1.61.9 (2026-03-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.61.8 (2026-03-10)
 
 * **Documentation**: Not need to include to any release notes. The only change is to correct LoadTimeout unit from milliseconds to seconds in RedshiftSettings

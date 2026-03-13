@@ -1,3 +1,7 @@
+# v1.0.0-preview.2 (2026-03-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0-preview.1 (2026-03-03)
 
 * **Bug Fix**: Modernize non codegen files with go fix

@@ -1,3 +1,7 @@
+# v1.1.1 (2026-03-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.0 (2026-03-09)
 
 * **Feature**: Adds support for dual stack Global Resolvers and Dictionary-based Domain Generation Firewall Advanced Protection.

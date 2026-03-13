@@ -1,9 +1,0 @@
-{
-    "id": "67438bbe-91d8-4543-b399-f6adf7ddcb6f",
-    "type": "bugfix",
-    "description": "Fix documentation typo.",
-    "modules": [
-        "feature/dynamodb/attributevalue",
-        "feature/dynamodbstreams/attributevalue"
-    ]
-}

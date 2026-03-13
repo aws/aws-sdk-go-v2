@@ -1,3 +1,39 @@
+# Release (2026-03-13)
+
+## General Highlights
+* **Bug Fix**: Replace usages of the old ioutil/ package throughout the SDK.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.41.4
+  * **Bug Fix**: Remove X-Amz-Security-Token header on redirect.
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`: [v1.20.35](feature/dynamodb/attributevalue/CHANGELOG.md#v12035-2026-03-13)
+  * **Bug Fix**: Fix documentation typo.
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue`: [v1.19.35](feature/dynamodbstreams/attributevalue/CHANGELOG.md#v11935-2026-03-13)
+  * **Bug Fix**: Fix documentation typo.
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.39.0](service/apigateway/CHANGELOG.md#v1390-2026-03-13)
+  * **Feature**: API Gateway now supports an additional security policy "SecurityPolicy-TLS13-1-2-FIPS-PFS-PQ-2025-09" for REST APIs and custom domain names. The new policy is compliant with TLS 1.3, Federal Information Processing Standards (FIPS), Perfect Forward Secrecy (PFS), and post-quantum (PQ) cryptography
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.62.0](service/configservice/CHANGELOG.md#v1620-2026-03-13)
+  * **Feature**: Fix pagination support for DescribeConformancePackCompliance, and update OrganizationConfigRule InputParameters max length to match ConfigRule.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.166.0](service/connect/CHANGELOG.md#v11660-2026-03-13)
+  * **Feature**: Deprecating PredefinedNotificationID field
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.11.0](service/gameliftstreams/CHANGELOG.md#v1110-2026-03-13)
+  * **Feature**: Feature launch that enables customers to connect streaming sessions to their own VPCs running in AWS.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.138.0](service/glue/CHANGELOG.md#v11380-2026-03-13)
+  * **Feature**: Add QuerySessionContext to BatchGetPartitionRequest
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.33.0](service/ivsrealtime/CHANGELOG.md#v1330-2026-03-13)
+  * **Feature**: Updates maximum reconnect window seconds from 60 to 300 for participant replication
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.88.0](service/mediaconvert/CHANGELOG.md#v1880-2026-03-13)
+  * **Feature**: This update adds support for Dolby AC-4 audio output, frame rate conversion between non-Dolby Vision inputs to Dolby Vision outputs, and clear lead CMAF HLS output.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.93.2](service/medialive/CHANGELOG.md#v1932-2026-03-13)
+  * **Documentation**: Documents the VideoDescription.ScalingBehavior.SMART(underscore)CROP enum value.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.41.0](service/mgn/CHANGELOG.md#v1410-2026-03-13)
+  * **Feature**: Network Migration APIs are now publicly available for direct programmatic access. Customers can now call Network Migration APIs directly without going through AWS Transform (ATX), enabling automation, integration with existing tools, and self-service migration workflows.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.55.1](service/polly/CHANGELOG.md#v1551-2026-03-13)
+  * **Bug Fix**: Add missing fields serd of polly SynthesizeSpeech presign
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.105.0](service/quicksight/CHANGELOG.md#v11050-2026-03-13)
+  * **Feature**: The change adds a new capability named ManageSharedFolders in Custom Permissions
+
 # Release (2026-03-12)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.49.1 (2026-03-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.0 (2026-03-10)
 
 * **Feature**: Add dual stack endpoint to SDK

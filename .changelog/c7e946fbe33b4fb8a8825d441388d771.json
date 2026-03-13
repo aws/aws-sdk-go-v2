@@ -1,8 +1,0 @@
-{
-    "id": "c7e946fb-e33b-4fb8-a882-5d441388d771",
-    "type": "documentation",
-    "description": "Documents the VideoDescription.ScalingBehavior.SMART(underscore)CROP enum value.",
-    "modules": [
-        "service/medialive"
-    ]
-}

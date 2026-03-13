@@ -1,3 +1,8 @@
+# v1.11.0 (2026-03-13)
+
+* **Feature**: Feature launch that enables customers to connect streaming sessions to their own VPCs running in AWS.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.0 (2026-03-06)
 
 * **Feature**: Added new Gen6 stream classes based on the EC2 G6f instance family. These stream classes provide cost-optimized options for streaming well-optimized or lower-fidelity games on Windows environments.

@@ -1,3 +1,9 @@
+# v1.55.1 (2026-03-13)
+
+* **Bug Fix**: Add missing fields serd of polly SynthesizeSpeech presign
+* **Bug Fix**: Replace usages of the old ioutil/ package throughout the SDK.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.0 (2026-03-11)
 
 * **Feature**: Added support for the new voices - Ambre (fr-FR), Beatrice (it-IT), Florian (fr-FR), Lennart (de-DE), Lorenzo (it-IT) and Tiffany (en-US). They are available as a Generative voices only.

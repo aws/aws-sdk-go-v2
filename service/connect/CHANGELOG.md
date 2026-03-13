@@ -1,3 +1,8 @@
+# v1.166.0 (2026-03-13)
+
+* **Feature**: Deprecating PredefinedNotificationID field
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.165.0 (2026-03-06)
 
 * **Feature**: Amazon Connect now supports the ability to programmatically configure and run automated tests for contact center experiences for Chat. Integrate testing into CICD pipelines, run multiple tests at scale, and retrieve results via API to automate validation of chat interactions and workflows.

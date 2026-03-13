@@ -1,3 +1,7 @@
+# v1.56.1 (2026-03-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.0 (2026-03-12)
 
 * **Feature**: Add Chainguard to PTC upstreamRegistry enum

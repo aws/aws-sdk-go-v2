@@ -1,3 +1,8 @@
+# v1.33.0 (2026-03-13)
+
+* **Feature**: Updates maximum reconnect window seconds from 60 to 300 for participant replication
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.3 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

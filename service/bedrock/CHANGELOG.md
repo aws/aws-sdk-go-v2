@@ -1,3 +1,7 @@
+# v1.56.1 (2026-03-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.0 (2026-03-06)
 
 * **Feature**: Amazon Bedrock Guardrails account-level enforcement APIs now support lists for model inclusion and exclusion from guardrail enforcement.

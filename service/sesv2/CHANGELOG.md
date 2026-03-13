@@ -1,3 +1,7 @@
+# v1.60.1 (2026-03-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.60.0 (2026-03-06)
 
 * **Feature**: Adds support for longer email message header values, increasing the maximum length from 870 to 995 characters for RFC 5322 compliance.

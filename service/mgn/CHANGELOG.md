@@ -1,3 +1,8 @@
+# v1.41.0 (2026-03-13)
+
+* **Feature**: Network Migration APIs are now publicly available for direct programmatic access. Customers can now call Network Migration APIs directly without going through AWS Transform (ATX), enabling automation, integration with existing tools, and self-service migration workflows.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.0 (2026-03-09)
 
 * **Feature**: Adds support for new storeSnapshotOnLocalZone field in ReplicationConfiguration and updateReplicationConfiguration

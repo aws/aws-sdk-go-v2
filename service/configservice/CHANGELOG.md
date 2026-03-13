@@ -1,3 +1,8 @@
+# v1.62.0 (2026-03-13)
+
+* **Feature**: Fix pagination support for DescribeConformancePackCompliance, and update OrganizationConfigRule InputParameters max length to match ConfigRule.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.61.2 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

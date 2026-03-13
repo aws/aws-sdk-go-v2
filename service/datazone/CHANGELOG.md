@@ -1,3 +1,7 @@
+# v1.54.1 (2026-03-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.0 (2026-03-03)
 
 * **Feature**: Adding QueryGraph operation to DataZone SDK

@@ -1,3 +1,7 @@
+# v1.57.1 (2026-03-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.57.0 (2026-03-11)
 
 * **Feature**: Today, Amazon Connect is announcing the ability to filter (include or exclude) recommendations based on properties of items and interactions.

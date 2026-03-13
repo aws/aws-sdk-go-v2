@@ -1,3 +1,8 @@
+# v1.138.0 (2026-03-13)
+
+* **Feature**: Add QuerySessionContext to BatchGetPartitionRequest
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.137.2 (2026-03-03)
 
 * **Dependency Update**: Bump minimum Go version to 1.24

@@ -1,3 +1,7 @@
+# v1.38.1 (2026-03-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.0 (2026-03-10)
 
 * **Feature**: Added functionality for the Required and Hidden case rule types to be conditionally evaluated on up to 5 conditions.
