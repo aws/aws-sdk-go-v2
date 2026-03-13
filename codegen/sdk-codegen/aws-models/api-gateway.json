@@ -11102,6 +11102,12 @@
                         "smithy.api#enumValue": "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09"
                     }
                 },
+                "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09"
+                    }
+                },
                 "SecurityPolicy_TLS13_1_2_PQ_2025_09": {
                     "target": "smithy.api#Unit",
                     "traits": {

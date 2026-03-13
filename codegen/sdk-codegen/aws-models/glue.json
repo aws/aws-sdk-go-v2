@@ -3806,6 +3806,12 @@
                         "smithy.api#documentation": "<p>A list of partition values identifying the partitions to retrieve.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "AuditContext": {
+                    "target": "com.amazonaws.glue#AuditContext"
+                },
+                "QuerySessionContext": {
+                    "target": "com.amazonaws.glue#QuerySessionContext"
                 }
             },
             "traits": {

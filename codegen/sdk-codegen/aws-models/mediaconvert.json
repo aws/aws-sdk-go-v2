@@ -649,6 +649,227 @@
                 "smithy.api#documentation": "Required when you set Codec to the value AC3."
             }
         },
+        "com.amazonaws.mediaconvert#Ac4BitstreamMode": {
+            "type": "enum",
+            "members": {
+                "COMPLETE_MAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE_MAIN"
+                    }
+                },
+                "EMERGENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMERGENCY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Specify the bitstream mode for the AC-4 stream that the encoder emits. For more information about the AC-4 bitstream mode, see ETSI TS 103 190. Maps to dlb_paec_ac4_bed_classifier in the encoder implementation. - COMPLETE_MAIN: Complete Main (standard mix) - EMERGENCY: Stereo Emergency content"
+            }
+        },
+        "com.amazonaws.mediaconvert#Ac4CodingMode": {
+            "type": "enum",
+            "members": {
+                "CODING_MODE_2_0": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CODING_MODE_2_0"
+                    }
+                },
+                "CODING_MODE_3_2_LFE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CODING_MODE_3_2_LFE"
+                    }
+                },
+                "CODING_MODE_5_1_4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CODING_MODE_5_1_4"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Dolby AC-4 coding mode. Determines number of channels. Maps to dlb_paec_ac4_bed_channel_config in the encoder implementation. - CODING_MODE_2_0: 2.0 (stereo) - maps to DLB_PAEC_AC4_BED_CHANNEL_CONFIG_20   - CODING_MODE_3_2_LFE: 5.1 surround - maps to DLB_PAEC_AC4_BED_CHANNEL_CONFIG_51 - CODING_MODE_5_1_4: 5.1.4 immersive - maps to DLB_PAEC_AC4_BED_CHANNEL_CONFIG_514"
+            }
+        },
+        "com.amazonaws.mediaconvert#Ac4DynamicRangeCompressionDrcProfile": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "FILM_STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILM_STANDARD"
+                    }
+                },
+                "FILM_LIGHT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILM_LIGHT"
+                    }
+                },
+                "MUSIC_STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MUSIC_STANDARD"
+                    }
+                },
+                "MUSIC_LIGHT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MUSIC_LIGHT"
+                    }
+                },
+                "SPEECH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SPEECH"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Choose the Dolby AC-4 dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby AC-4 stream for the specified decoder mode. For information about the Dolby AC-4 DRC profiles, see the Dolby AC-4 specification."
+            }
+        },
+        "com.amazonaws.mediaconvert#Ac4Settings": {
+            "type": "structure",
+            "members": {
+                "Bitrate": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin192000Max1024000",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the average bitrate in bits per second. Leave blank to use the default bitrate for the coding mode you select according to ETSI TS 103 190. Valid bitrates for coding mode 2.0 (stereo): 192000, 256000, or 320000. Valid bitrates for coding mode 5.1 (3/2 with LFE): 512000. Valid bitrates for coding mode 5.1.4 (immersive): 512000, 768000, or 1024000.",
+                        "smithy.api#jsonName": "bitrate"
+                    }
+                },
+                "BitstreamMode": {
+                    "target": "com.amazonaws.mediaconvert#Ac4BitstreamMode",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the bitstream mode for the AC-4 stream that the encoder emits. For more information about the AC-4 bitstream mode, see ETSI TS 103 190. Maps to dlb_paec_ac4_bed_classifier in the encoder implementation. - COMPLETE_MAIN: Complete Main (standard mix) - EMERGENCY: Stereo Emergency content",
+                        "smithy.api#jsonName": "bitstreamMode"
+                    }
+                },
+                "CodingMode": {
+                    "target": "com.amazonaws.mediaconvert#Ac4CodingMode",
+                    "traits": {
+                        "smithy.api#documentation": "Dolby AC-4 coding mode. Determines number of channels. Maps to dlb_paec_ac4_bed_channel_config in the encoder implementation. - CODING_MODE_2_0: 2.0 (stereo) - maps to DLB_PAEC_AC4_BED_CHANNEL_CONFIG_20   - CODING_MODE_3_2_LFE: 5.1 surround - maps to DLB_PAEC_AC4_BED_CHANNEL_CONFIG_51 - CODING_MODE_5_1_4: 5.1.4 immersive - maps to DLB_PAEC_AC4_BED_CHANNEL_CONFIG_514",
+                        "smithy.api#jsonName": "codingMode"
+                    }
+                },
+                "DynamicRangeCompressionFlatPanelTv": {
+                    "target": "com.amazonaws.mediaconvert#Ac4DynamicRangeCompressionDrcProfile",
+                    "traits": {
+                        "smithy.api#documentation": "Choose the Dolby AC-4 dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby AC-4 stream for the specified decoder mode. For information about the Dolby AC-4 DRC profiles, see the Dolby AC-4 specification.",
+                        "smithy.api#jsonName": "dynamicRangeCompressionFlatPanelTv"
+                    }
+                },
+                "DynamicRangeCompressionHomeTheater": {
+                    "target": "com.amazonaws.mediaconvert#Ac4DynamicRangeCompressionDrcProfile",
+                    "traits": {
+                        "smithy.api#documentation": "Choose the Dolby AC-4 dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby AC-4 stream for the specified decoder mode. For information about the Dolby AC-4 DRC profiles, see the Dolby AC-4 specification.",
+                        "smithy.api#jsonName": "dynamicRangeCompressionHomeTheater"
+                    }
+                },
+                "DynamicRangeCompressionPortableHeadphones": {
+                    "target": "com.amazonaws.mediaconvert#Ac4DynamicRangeCompressionDrcProfile",
+                    "traits": {
+                        "smithy.api#documentation": "Choose the Dolby AC-4 dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby AC-4 stream for the specified decoder mode. For information about the Dolby AC-4 DRC profiles, see the Dolby AC-4 specification.",
+                        "smithy.api#jsonName": "dynamicRangeCompressionPortableHeadphones"
+                    }
+                },
+                "DynamicRangeCompressionPortableSpeakers": {
+                    "target": "com.amazonaws.mediaconvert#Ac4DynamicRangeCompressionDrcProfile",
+                    "traits": {
+                        "smithy.api#documentation": "Choose the Dolby AC-4 dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby AC-4 stream for the specified decoder mode. For information about the Dolby AC-4 DRC profiles, see the Dolby AC-4 specification.",
+                        "smithy.api#jsonName": "dynamicRangeCompressionPortableSpeakers"
+                    }
+                },
+                "LoRoCenterMixLevel": {
+                    "target": "com.amazonaws.mediaconvert#__doubleMinNegative1000Max3",
+                    "traits": {
+                        "smithy.api#documentation": "Specify a value for the following Dolby AC-4 setting: Left only/Right only center mix. MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix. Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, -6.0, and -infinity. The value -infinity mutes the channel. This setting applies only if you keep the default value of 3/2 - L, R, C, Ls, Rs for the setting Coding mode. If you choose a different value for Coding mode, the service ignores Left only/Right only center.",
+                        "smithy.api#jsonName": "loRoCenterMixLevel"
+                    }
+                },
+                "LoRoSurroundMixLevel": {
+                    "target": "com.amazonaws.mediaconvert#__doubleMinNegative1000MaxNegative1",
+                    "traits": {
+                        "smithy.api#documentation": "Specify a value for the following Dolby AC-4 setting: Left only/Right only surround mix. MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix. Valid values: -1.5, -3.0, -4.5, -6.0, and -infinity. The value -infinity mutes the channel. This setting applies only if you keep the default value of 3/2 - L, R, C, Ls, Rs for the setting Coding mode. If you choose a different value for Coding mode, the service ignores Left only/Right only surround.",
+                        "smithy.api#jsonName": "loRoSurroundMixLevel"
+                    }
+                },
+                "LtRtCenterMixLevel": {
+                    "target": "com.amazonaws.mediaconvert#__doubleMinNegative1000Max3",
+                    "traits": {
+                        "smithy.api#documentation": "Specify a value for the following Dolby AC-4 setting: Left total/Right total center mix. MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix. Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, -6.0, and -infinity. The value -infinity mutes the channel. This setting applies only if you keep the default value of 3/2 - L, R, C, Ls, Rs for the setting Coding mode. If you choose a different value for Coding mode, the service ignores Left total/Right total center.",
+                        "smithy.api#jsonName": "ltRtCenterMixLevel"
+                    }
+                },
+                "LtRtSurroundMixLevel": {
+                    "target": "com.amazonaws.mediaconvert#__doubleMinNegative1000MaxNegative1",
+                    "traits": {
+                        "smithy.api#documentation": "Specify a value for the following Dolby AC-4 setting: Left total/Right total surround mix. MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix. Valid values: -1.5, -3.0, -4.5, -6.0, and -infinity. The value -infinity mutes the channel. This setting applies only if you keep the default value of 3/2 - L, R, C, Ls, Rs for the setting Coding mode. If you choose a different value for Coding mode, the service ignores Left total/Right total surround.",
+                        "smithy.api#jsonName": "ltRtSurroundMixLevel"
+                    }
+                },
+                "SampleRate": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin48000Max48000",
+                    "traits": {
+                        "smithy.api#documentation": "This value is always 48000. It represents the sample rate in Hz.",
+                        "smithy.api#jsonName": "sampleRate"
+                    }
+                },
+                "StereoDownmix": {
+                    "target": "com.amazonaws.mediaconvert#Ac4StereoDownmix",
+                    "traits": {
+                        "smithy.api#documentation": "Choose the preferred stereo downmix method. This setting tells the decoder how to downmix multi-channel audio to stereo during playback.",
+                        "smithy.api#jsonName": "stereoDownmix"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Required when you set Codec to the value AC4."
+            }
+        },
+        "com.amazonaws.mediaconvert#Ac4StereoDownmix": {
+            "type": "enum",
+            "members": {
+                "NOT_INDICATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_INDICATED"
+                    }
+                },
+                "LO_RO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LO_RO"
+                    }
+                },
+                "LT_RT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LT_RT"
+                    }
+                },
+                "DPL2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DPL2"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Choose the preferred stereo downmix method. This setting tells the decoder how to downmix multi-channel audio to stereo during playback."
+            }
+        },
         "com.amazonaws.mediaconvert#AccelerationMode": {
             "type": "enum",
             "members": {
@@ -1306,6 +1527,12 @@
                         "smithy.api#enumValue": "AC3"
                     }
                 },
+                "AC4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AC4"
+                    }
+                },
                 "EAC3": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -1362,6 +1589,13 @@
                     "traits": {
                         "smithy.api#documentation": "Required when you set Codec to the value AC3.",
                         "smithy.api#jsonName": "ac3Settings"
+                    }
+                },
+                "Ac4Settings": {
+                    "target": "com.amazonaws.mediaconvert#Ac4Settings",
+                    "traits": {
+                        "smithy.api#documentation": "Required when you set Codec to the value AC4.",
+                        "smithy.api#jsonName": "ac4Settings"
                     }
                 },
                 "AiffSettings": {
@@ -4069,6 +4303,13 @@
         "com.amazonaws.mediaconvert#CmafEncryptionSettings": {
             "type": "structure",
             "members": {
+                "ClearLead": {
+                    "target": "com.amazonaws.mediaconvert#HlsClearLead",
+                    "traits": {
+                        "smithy.api#documentation": "Enable Clear Lead DRM to reduce video startup latency by leaving the first segment unencrypted while DRM license retrieval occurs in parallel. This optimization allows immediate playback startup while maintaining content protection for the remainder of the stream. When enabled, the first output segment remains fully unencrypted, and encryption begins at the start of the second segment. The HLS manifest will omit #EXT-X-KEY tags during the clear segment and insert the first #EXT-X-KEY immediately before the first encrypted fragment. This feature is supported exclusively for CMAF HLS (fMP4) outputs and is compatible with all existing key provider integrations (SPEKE v1, SPEKE v2, and Static Key encryption). Supported codecs: H.264 and H.265 video codecs, and AAC audio codec. Choose Enabled to activate Clear Lead DRM optimization. Choose Disabled to use standard encryption where all segments are encrypted from the beginning.",
+                        "smithy.api#jsonName": "clearLead"
+                    }
+                },
                 "ConstantInitializationVector": {
                     "target": "com.amazonaws.mediaconvert#__stringMin32Max32Pattern09aFAF32",
                     "traits": {
@@ -4378,7 +4619,7 @@
                 "IntervalCadence": {
                     "target": "com.amazonaws.mediaconvert#CmafIntervalCadence",
                     "traits": {
-                        "smithy.api#documentation": "The cadence MediaConvert follows for generating thumbnails. If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval.",
+                        "smithy.api#documentation": "The cadence MediaConvert follows for generating thumbnails. If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval. If set to FOLLOW_SEGMENTATION, MediaConvert generates thumbnail playlist entries that align exactly with video segment boundaries. FOLLOW_SEGMENTATION requires 1x1 tiling.",
                         "smithy.api#jsonName": "intervalCadence"
                     }
                 },
@@ -4456,10 +4697,16 @@
                     "traits": {
                         "smithy.api#enumValue": "FOLLOW_CUSTOM"
                     }
+                },
+                "FOLLOW_SEGMENTATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLLOW_SEGMENTATION"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The cadence MediaConvert follows for generating thumbnails. If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval."
+                "smithy.api#documentation": "The cadence MediaConvert follows for generating thumbnails. If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval. If set to FOLLOW_SEGMENTATION, MediaConvert generates thumbnail playlist entries that align exactly with video segment boundaries. FOLLOW_SEGMENTATION requires 1x1 tiling."
             }
         },
         "com.amazonaws.mediaconvert#CmafKeyProviderType": {
@@ -5218,10 +5465,22 @@
                         "smithy.api#enumValue": "PRORES"
                     }
                 },
+                "QTRLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QTRLE"
+                    }
+                },
                 "THEORA": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "THEORA"
+                    }
+                },
+                "UNCOMPRESSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNCOMPRESSED"
                     }
                 },
                 "VFW": {
@@ -5240,12 +5499,6 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "VP9"
-                    }
-                },
-                "QTRLE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "QTRLE"
                     }
                 },
                 "C608": {
@@ -5780,7 +6033,7 @@
                 "Format": {
                     "target": "com.amazonaws.mediaconvert#Format",
                     "traits": {
-                        "smithy.api#documentation": "The format of your media file. For example: MP4, QuickTime (MOV), Matroska (MKV), WebM, MXF or Wave. Note that this will be blank if your media file has a format that the MediaConvert Probe operation does not recognize.",
+                        "smithy.api#documentation": "The format of your media file. For example: MP4, QuickTime (MOV), Matroska (MKV), WebM, MXF, Wave, or AVI. Note that this will be blank if your media file has a format that the MediaConvert Probe operation does not recognize.",
                         "smithy.api#jsonName": "format"
                     }
                 },
@@ -6855,7 +7108,7 @@
                 "IntervalCadence": {
                     "target": "com.amazonaws.mediaconvert#DashIsoIntervalCadence",
                     "traits": {
-                        "smithy.api#documentation": "The cadence MediaConvert follows for generating thumbnails. If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval.",
+                        "smithy.api#documentation": "The cadence MediaConvert follows for generating thumbnails. If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval. If set to FOLLOW_SEGMENTATION, MediaConvert generates thumbnail playlist entries that align exactly with video segment boundaries. FOLLOW_SEGMENTATION requires 1x1 tiling.",
                         "smithy.api#jsonName": "intervalCadence"
                     }
                 },
@@ -6913,10 +7166,16 @@
                     "traits": {
                         "smithy.api#enumValue": "FOLLOW_CUSTOM"
                     }
+                },
+                "FOLLOW_SEGMENTATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLLOW_SEGMENTATION"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The cadence MediaConvert follows for generating thumbnails. If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval."
+                "smithy.api#documentation": "The cadence MediaConvert follows for generating thumbnails. If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval. If set to FOLLOW_SEGMENTATION, MediaConvert generates thumbnail playlist entries that align exactly with video segment boundaries. FOLLOW_SEGMENTATION requires 1x1 tiling."
             }
         },
         "com.amazonaws.mediaconvert#DashIsoMpdManifestBandwidthType": {
@@ -10108,6 +10367,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "wave"
+                    }
+                },
+                "avi": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "avi"
                     }
                 }
             }
@@ -13404,6 +13669,26 @@
                 "smithy.api#documentation": "Set Caption segment length control to Match video to create caption segments that align with the video segments from the first video output in this output group. For example, if the video segments are 2 seconds long, your WebVTT segments will also be 2 seconds long. Keep the default setting, Large segments to create caption segments that are 300 seconds long."
             }
         },
+        "com.amazonaws.mediaconvert#HlsClearLead": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Enable Clear Lead DRM to reduce video startup latency by leaving the first segment unencrypted while DRM license retrieval occurs in parallel. This optimization allows immediate playback startup while maintaining content protection for the remainder of the stream. When enabled, the first output segment remains fully unencrypted, and encryption begins at the start of the second segment. The HLS manifest will omit #EXT-X-KEY tags during the clear segment and insert the first #EXT-X-KEY immediately before the first encrypted fragment. This feature is supported exclusively for CMAF HLS (fMP4) outputs and is compatible with all existing key provider integrations (SPEKE v1, SPEKE v2, and Static Key encryption). Supported codecs: H.264 and H.265 video codecs, and AAC audio codec. Choose Enabled to activate Clear Lead DRM optimization. Choose Disabled to use standard encryption where all segments are encrypted from the beginning."
+            }
+        },
         "com.amazonaws.mediaconvert#HlsClientCache": {
             "type": "enum",
             "members": {
@@ -13857,7 +14142,7 @@
                 "IntervalCadence": {
                     "target": "com.amazonaws.mediaconvert#HlsIntervalCadence",
                     "traits": {
-                        "smithy.api#documentation": "The cadence MediaConvert follows for generating thumbnails. If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval.",
+                        "smithy.api#documentation": "The cadence MediaConvert follows for generating thumbnails. If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval. If set to FOLLOW_SEGMENTATION, MediaConvert generates thumbnail playlist entries that align exactly with video segment boundaries. FOLLOW_SEGMENTATION requires 1x1 tiling.",
                         "smithy.api#jsonName": "intervalCadence"
                     }
                 },
@@ -13935,10 +14220,16 @@
                     "traits": {
                         "smithy.api#enumValue": "FOLLOW_CUSTOM"
                     }
+                },
+                "FOLLOW_SEGMENTATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLLOW_SEGMENTATION"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The cadence MediaConvert follows for generating thumbnails. If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval."
+                "smithy.api#documentation": "The cadence MediaConvert follows for generating thumbnails. If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval. If set to FOLLOW_SEGMENTATION, MediaConvert generates thumbnail playlist entries that align exactly with video segment boundaries. FOLLOW_SEGMENTATION requires 1x1 tiling."
             }
         },
         "com.amazonaws.mediaconvert#HlsKeyProviderType": {
@@ -15588,7 +15879,7 @@
                 "FollowSource": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
                     "traits": {
-                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
                         "smithy.api#jsonName": "followSource"
                     }
                 },
@@ -15861,7 +16152,7 @@
                 "FollowSource": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
                     "traits": {
-                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
                         "smithy.api#jsonName": "followSource"
                     }
                 },
@@ -29072,6 +29363,12 @@
         "com.amazonaws.mediaconvert#__doubleMin1Max10": {
             "type": "double"
         },
+        "com.amazonaws.mediaconvert#__doubleMinNegative1000Max3": {
+            "type": "double"
+        },
+        "com.amazonaws.mediaconvert#__doubleMinNegative1000MaxNegative1": {
+            "type": "double"
+        },
         "com.amazonaws.mediaconvert#__doubleMinNegative59Max0": {
             "type": "double"
         },
@@ -29495,6 +29792,15 @@
                 "smithy.api#range": {
                     "min": 16,
                     "max": 24
+                }
+            }
+        },
+        "com.amazonaws.mediaconvert#__integerMin192000Max1024000": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 192000,
+                    "max": 1024000
                 }
             }
         },

@@ -4575,6 +4575,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ConformancePackRuleComplianceList",
                     "pageSize": "Limit"
                 }
             }
@@ -9523,7 +9524,7 @@
                     }
                 },
                 "InputParameters": {
-                    "target": "com.amazonaws.configservice#StringWithCharLimit2048",
+                    "target": "com.amazonaws.configservice#StringWithCharLimit1024",
                     "traits": {
                         "smithy.api#documentation": "<p>A string, in JSON format, that is passed to your organization Config Custom Policy rule.</p>"
                     }
@@ -9599,7 +9600,7 @@
                     }
                 },
                 "InputParameters": {
-                    "target": "com.amazonaws.configservice#StringWithCharLimit2048",
+                    "target": "com.amazonaws.configservice#StringWithCharLimit1024",
                     "traits": {
                         "smithy.api#documentation": "<p>A string, in JSON format, that is passed to your organization Config Custom Policy rule.</p>"
                     }
@@ -9675,7 +9676,7 @@
                     }
                 },
                 "InputParameters": {
-                    "target": "com.amazonaws.configservice#StringWithCharLimit2048",
+                    "target": "com.amazonaws.configservice#StringWithCharLimit1024",
                     "traits": {
                         "smithy.api#documentation": "<p>A string, in JSON format, that is passed to your organization Config rule Lambda function.</p>"
                     }
@@ -9732,7 +9733,7 @@
                     }
                 },
                 "InputParameters": {
-                    "target": "com.amazonaws.configservice#StringWithCharLimit2048",
+                    "target": "com.amazonaws.configservice#StringWithCharLimit1024",
                     "traits": {
                         "smithy.api#documentation": "<p>A string, in JSON format, that is passed to your organization Config rule Lambda function.</p>"
                     }
@@ -17774,15 +17775,6 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 128
-                }
-            }
-        },
-        "com.amazonaws.configservice#StringWithCharLimit2048": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 2048
                 }
             }
         },

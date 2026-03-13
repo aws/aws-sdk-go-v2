@@ -11691,7 +11691,13 @@
                     }
                 },
                 "PredefinedNotificationId": {
-                    "target": "com.amazonaws.connect#NotificationId"
+                    "target": "com.amazonaws.connect#NotificationId",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "since": "3/13/2026",
+                            "message": "PredefinedNotificationId is deprecated. Use ClientToken for idempotency."
+                        }
+                    }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.connect#ClientToken",
