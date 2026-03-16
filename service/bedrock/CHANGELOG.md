@@ -1,3 +1,7 @@
+# v1.57.0 (2026-03-16)
+
+* **Feature**: You can now generate policy scenarios on demand using the new GENERATE POLICY SCENARIOS build workflow type. Scenarios will no longer be automatically generated during INGEST CONTENT, REFINE POLICY, and IMPORT POLICY workflows, resulting in faster completion times for these operations.
+
 # v1.56.1 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "b6603cee-4c8d-4c90-9d4d-eb23d93fbb01",
-    "type": "feature",
-    "description": "Supporting hosting of public ECR Container Images in AgentCore Runtime",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

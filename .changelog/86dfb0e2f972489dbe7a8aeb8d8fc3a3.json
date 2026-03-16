@@ -1,8 +1,0 @@
-{
-    "id": "86dfb0e2-f972-489d-be7a-8aeb8d8fc3a3",
-    "type": "feature",
-    "description": "Provide support to perform deterministic operations on agent runtime through shell command executions via the new InvokeAgentRuntimeCommand API",
-    "modules": [
-        "service/bedrockagentcore"
-    ]
-}

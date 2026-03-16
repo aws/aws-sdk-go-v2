@@ -1,3 +1,13 @@
+# Release (2026-03-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.57.0](service/bedrock/CHANGELOG.md#v1570-2026-03-16)
+  * **Feature**: You can now generate policy scenarios on demand using the new GENERATE POLICY SCENARIOS build workflow type. Scenarios will no longer be automatically generated during INGEST CONTENT, REFINE POLICY, and IMPORT POLICY workflows, resulting in faster completion times for these operations.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.14.0](service/bedrockagentcore/CHANGELOG.md#v1140-2026-03-16)
+  * **Feature**: Provide support to perform deterministic operations on agent runtime through shell command executions via the new InvokeAgentRuntimeCommand API
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.74.0](service/ecs/CHANGELOG.md#v1740-2026-03-16)
+  * **Feature**: Amazon ECS now supports configuring whether tags are propagated to the EC2 Instance Metadata Service (IMDS) for instances launched by the Managed Instances capacity provider. This gives customers control over tag visibility in IMDS when using ECS Managed Instances.
+
 # Release (2026-03-13)
 
 ## General Highlights

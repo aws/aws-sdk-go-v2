@@ -1,3 +1,7 @@
+# v1.14.0 (2026-03-16)
+
+* **Feature**: Provide support to perform deterministic operations on agent runtime through shell command executions via the new InvokeAgentRuntimeCommand API
+
 # v1.13.3 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions
