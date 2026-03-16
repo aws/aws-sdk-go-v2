@@ -2635,6 +2635,12 @@
                     "traits": {
                         "smithy.api#enumValue": "GENERATE_FIDELITY_REPORT"
                     }
+                },
+                "GENERATE_POLICY_SCENARIOS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERATE_POLICY_SCENARIOS"
+                    }
                 }
             }
         },
