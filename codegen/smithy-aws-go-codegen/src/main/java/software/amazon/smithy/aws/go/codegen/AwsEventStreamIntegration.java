@@ -2,6 +2,7 @@ package software.amazon.smithy.aws.go.codegen;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -28,6 +29,9 @@ public class AwsEventStreamIntegration implements GoIntegration {
     private final Map<ShapeId, Collection<OperationShape>> serviceOperationMap = new HashMap<>();
     private final Map<ShapeId, Collection<OperationShape>> minHttp2 = new HashMap<>();
 
+    // getClientPlugins doesn't pass GoCodegenContext so just cheat this in, processedFinalizedModel is called first
+    private boolean useExperimentalSerde;
+
     @Override
     public byte getOrder() {
         return -127;
@@ -38,6 +42,11 @@ public class AwsEventStreamIntegration implements GoIntegration {
             GoSettings settings,
             Model model
     ) {
+        if (settings.useExperimentalSerde()) {
+            useExperimentalSerde = true;
+            return;
+        }
+
         var goEventStreamIndex = GoEventStreamIndex.of(model);
         var service = settings.getService();
 
@@ -71,6 +80,10 @@ public class AwsEventStreamIntegration implements GoIntegration {
 
     @Override
     public List<RuntimeClientPlugin> getClientPlugins() {
+        if (useExperimentalSerde) {
+            return Collections.emptyList();
+        }
+
         final List<RuntimeClientPlugin> plugins = new ArrayList<>();
 
         plugins.add(RuntimeClientPlugin.builder()
