@@ -5787,6 +5787,11 @@ func awsAwsjson11_serializeDocumentInstanceLaunchTemplate(v *types.InstanceLaunc
 		ok.Boolean(*v.FipsEnabled)
 	}
 
+	if v.InstanceMetadataTagsPropagation != nil {
+		ok := object.Key("instanceMetadataTagsPropagation")
+		ok.Boolean(*v.InstanceMetadataTagsPropagation)
+	}
+
 	if v.InstanceRequirements != nil {
 		ok := object.Key("instanceRequirements")
 		if err := awsAwsjson11_serializeDocumentInstanceRequirementsRequest(v.InstanceRequirements, ok); err != nil {
@@ -5830,6 +5835,11 @@ func awsAwsjson11_serializeDocumentInstanceLaunchTemplateUpdate(v *types.Instanc
 	if v.Ec2InstanceProfileArn != nil {
 		ok := object.Key("ec2InstanceProfileArn")
 		ok.String(*v.Ec2InstanceProfileArn)
+	}
+
+	if v.InstanceMetadataTagsPropagation != nil {
+		ok := object.Key("instanceMetadataTagsPropagation")
+		ok.Boolean(*v.InstanceMetadataTagsPropagation)
 	}
 
 	if v.InstanceRequirements != nil {

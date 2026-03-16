@@ -120,6 +120,24 @@ func ExampleExtractionJobMessages_outputUsage() {
 
 var _ []types.MessageMetadata
 
+func ExampleInvokeAgentRuntimeCommandStreamOutput_outputUsage() {
+	var union types.InvokeAgentRuntimeCommandStreamOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.InvokeAgentRuntimeCommandStreamOutputMemberChunk:
+		_ = v.Value // Value is types.ResponseChunk
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ResponseChunk
+
 func ExampleLeftExpression_outputUsage() {
 	var union types.LeftExpression
 	// type switches can be used to check the union value

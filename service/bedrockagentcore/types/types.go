@@ -337,6 +337,39 @@ type ContentBlock struct {
 	noSmithyDocumentSerde
 }
 
+// Content event containing stdout or stderr output
+type ContentDeltaEvent struct {
+
+	// Standard error content
+	Stderr *string
+
+	// Standard output content
+	Stdout *string
+
+	noSmithyDocumentSerde
+}
+
+// First event indicating command execution has started
+type ContentStartEvent struct {
+	noSmithyDocumentSerde
+}
+
+// Final event indicating command execution has completed
+type ContentStopEvent struct {
+
+	// Exit code: 0 = success, -1 = platform error, >0 = command error
+	//
+	// This member is required.
+	ExitCode *int32
+
+	// Execution status
+	//
+	// This member is required.
+	Status CommandExecutionStatus
+
+	noSmithyDocumentSerde
+}
+
 //	The contextual information associated with an evaluation, including span
 //
 // context details that identify the specific traces and sessions being evaluated
@@ -711,6 +744,39 @@ type InputContentBlock struct {
 
 	noSmithyDocumentSerde
 }
+
+// Request body for InvokeAgentRuntimeCommand
+type InvokeAgentRuntimeCommandRequestBody struct {
+
+	// The command to execute in the runtime container
+	//
+	// This member is required.
+	Command *string
+
+	// Command timeout in seconds (default: 300, min:1, max: 3600)
+	Timeout *int32
+
+	noSmithyDocumentSerde
+}
+
+// Streaming output for InvokeAgentRuntimeCommand operation Delivers typed events:
+// contentStart (first), contentDelta (middle), contentStop (last)
+//
+// The following types satisfy this interface:
+//
+//	InvokeAgentRuntimeCommandStreamOutputMemberChunk
+type InvokeAgentRuntimeCommandStreamOutput interface {
+	isInvokeAgentRuntimeCommandStreamOutput()
+}
+
+// Response chunk containing command execution events
+type InvokeAgentRuntimeCommandStreamOutputMemberChunk struct {
+	Value ResponseChunk
+
+	noSmithyDocumentSerde
+}
+
+func (*InvokeAgentRuntimeCommandStreamOutputMemberChunk) isInvokeAgentRuntimeCommandStreamOutput() {}
 
 // Left expression of the event metadata filter.
 //
@@ -1126,6 +1192,22 @@ type ResourceLocationMemberS3 struct {
 
 func (*ResourceLocationMemberS3) isResourceLocation() {}
 
+// Response chunk containing exactly one of: contentStart, contentDelta, or
+// contentStop
+type ResponseChunk struct {
+
+	// Middle chunks - stdout/stderr output
+	ContentDelta *ContentDeltaEvent
+
+	// First chunk - indicates command execution has started
+	ContentStart *ContentStartEvent
+
+	// Last chunk - indicates command execution has completed
+	ContentStop *ContentStopEvent
+
+	noSmithyDocumentSerde
+}
+
 // Right expression of the eventMetadata filter.
 //
 // The following types satisfy this interface:
@@ -1358,7 +1440,8 @@ type UserIdentifierMemberUserId struct {
 
 func (*UserIdentifierMemberUserId) isUserIdentifier() {}
 
-// The OAuth2.0 token issued by the user’s identity provider
+// The OAuth2.0 token issued by the user’s identity provider that was used to
+// generate the workload access token
 type UserIdentifierMemberUserToken struct {
 	Value string
 
@@ -1416,19 +1499,20 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isCodeInterpreterStreamOutput() {}
-func (*UnknownUnionMember) isContent()                     {}
-func (*UnknownUnionMember) isContext()                     {}
-func (*UnknownUnionMember) isEvaluationInput()             {}
-func (*UnknownUnionMember) isEvaluationTarget()            {}
-func (*UnknownUnionMember) isExtractionJobMessages()       {}
-func (*UnknownUnionMember) isLeftExpression()              {}
-func (*UnknownUnionMember) isMemoryContent()               {}
-func (*UnknownUnionMember) isMetadataValue()               {}
-func (*UnknownUnionMember) isPayloadType()                 {}
-func (*UnknownUnionMember) isProxy()                       {}
-func (*UnknownUnionMember) isProxyCredentials()            {}
-func (*UnknownUnionMember) isResourceLocation()            {}
-func (*UnknownUnionMember) isRightExpression()             {}
-func (*UnknownUnionMember) isStreamUpdate()                {}
-func (*UnknownUnionMember) isUserIdentifier()              {}
+func (*UnknownUnionMember) isCodeInterpreterStreamOutput()           {}
+func (*UnknownUnionMember) isContent()                               {}
+func (*UnknownUnionMember) isContext()                               {}
+func (*UnknownUnionMember) isEvaluationInput()                       {}
+func (*UnknownUnionMember) isEvaluationTarget()                      {}
+func (*UnknownUnionMember) isExtractionJobMessages()                 {}
+func (*UnknownUnionMember) isInvokeAgentRuntimeCommandStreamOutput() {}
+func (*UnknownUnionMember) isLeftExpression()                        {}
+func (*UnknownUnionMember) isMemoryContent()                         {}
+func (*UnknownUnionMember) isMetadataValue()                         {}
+func (*UnknownUnionMember) isPayloadType()                           {}
+func (*UnknownUnionMember) isProxy()                                 {}
+func (*UnknownUnionMember) isProxyCredentials()                      {}
+func (*UnknownUnionMember) isResourceLocation()                      {}
+func (*UnknownUnionMember) isRightExpression()                       {}
+func (*UnknownUnionMember) isStreamUpdate()                          {}
+func (*UnknownUnionMember) isUserIdentifier()                        {}

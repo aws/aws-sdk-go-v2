@@ -15197,6 +15197,15 @@ func awsAwsjson11_deserializeDocumentInstanceLaunchTemplate(v **types.InstanceLa
 				sv.FipsEnabled = ptr.Bool(jtv)
 			}
 
+		case "instanceMetadataTagsPropagation":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.InstanceMetadataTagsPropagation = ptr.Bool(jtv)
+			}
+
 		case "instanceRequirements":
 			if err := awsAwsjson11_deserializeDocumentInstanceRequirementsRequest(&sv.InstanceRequirements, value); err != nil {
 				return err

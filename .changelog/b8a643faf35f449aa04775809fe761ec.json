@@ -1,0 +1,8 @@
+{
+    "id": "b8a643fa-f35f-449a-a047-75809fe761ec",
+    "type": "feature",
+    "description": "You can now generate policy scenarios on demand using the new GENERATE POLICY SCENARIOS build workflow type. Scenarios will no longer be automatically generated during INGEST CONTENT, REFINE POLICY, and IMPORT POLICY workflows, resulting in faster completion times for these operations.",
+    "modules": [
+        "service/bedrock"
+    ]
+}

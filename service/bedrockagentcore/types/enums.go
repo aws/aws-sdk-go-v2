@@ -60,6 +60,25 @@ func (CodeInterpreterSessionStatus) Values() []CodeInterpreterSessionStatus {
 	}
 }
 
+type CommandExecutionStatus string
+
+// Enum values for CommandExecutionStatus
+const (
+	CommandExecutionStatusCompleted CommandExecutionStatus = "COMPLETED"
+	CommandExecutionStatusTimedOut  CommandExecutionStatus = "TIMED_OUT"
+)
+
+// Values returns all known values for CommandExecutionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CommandExecutionStatus) Values() []CommandExecutionStatus {
+	return []CommandExecutionStatus{
+		"COMPLETED",
+		"TIMED_OUT",
+	}
+}
+
 type ContentBlockType string
 
 // Enum values for ContentBlockType

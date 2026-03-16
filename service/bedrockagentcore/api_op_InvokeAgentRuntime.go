@@ -14,9 +14,11 @@ import (
 // Sends a request to an agent or tool hosted in an Amazon Bedrock AgentCore
 // Runtime and receives responses in real-time.
 //
-// To invoke an agent you must specify the AgentCore Runtime ARN and provide a
-// payload containing your request. You can optionally specify a qualifier to
-// target a specific version or endpoint of the agent.
+// To invoke an agent, you can specify either the AgentCore Runtime ARN or the
+// agent ID with an account ID, and provide a payload containing your request. When
+// you use the agent ID instead of the full ARN, you don't need to URL-encode the
+// identifier. You can optionally specify a qualifier to target a specific endpoint
+// of the agent.
 //
 // This operation supports streaming responses, allowing you to receive partial
 // responses as they become available. We recommend using pagination to ensure that
@@ -53,8 +55,9 @@ func (c *Client) InvokeAgentRuntime(ctx context.Context, params *InvokeAgentRunt
 
 type InvokeAgentRuntimeInput struct {
 
-	// The Amazon Web Services Resource Name (ARN) of the agent runtime to invoke. The
-	// ARN uniquely identifies the agent runtime resource in Amazon Bedrock AgentCore.
+	// The identifier of the agent runtime to invoke. You can specify either the full
+	// Amazon Web Services Resource Name (ARN) or the agent ID. If you use the agent
+	// ID, you must also provide the accountId query parameter.
 	//
 	// This member is required.
 	AgentRuntimeArn *string
@@ -72,7 +75,8 @@ type InvokeAgentRuntimeInput struct {
 	Accept *string
 
 	// The identifier of the Amazon Web Services account for the agent runtime
-	// resource.
+	// resource. This parameter is required when you specify an agent ID instead of the
+	// full ARN for agentRuntimeArn .
 	AccountId *string
 
 	// Additional context information for distributed tracing.
@@ -89,9 +93,9 @@ type InvokeAgentRuntimeInput struct {
 	// The identifier of the MCP session.
 	McpSessionId *string
 
-	// The qualifier to use for the agent runtime. This can be a version number or an
-	// endpoint name that points to a specific version. If not specified, Amazon
-	// Bedrock AgentCore uses the default version of the agent runtime.
+	// The qualifier to use for the agent runtime. This is an endpoint name that
+	// points to a specific version. If not specified, Amazon Bedrock AgentCore uses
+	// the default endpoint of the agent runtime.
 	Qualifier *string
 
 	// The identifier of the runtime session.

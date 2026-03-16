@@ -3439,6 +3439,22 @@ type InstanceLaunchTemplate struct {
 	// regions and FIPS disabled in other regions.
 	FipsEnabled *bool
 
+	// Determines whether tags are propagated to the instance metadata service (IMDS)
+	// for Amazon EC2 instances launched by the Managed Instances capacity provider.
+	// When enabled, all tags associated with the instance are available through the
+	// instance metadata service. When disabled, tags are not propagated to IMDS.
+	//
+	// Disable this setting if your tags contain characters that are not compatible
+	// with IMDS, such as / . IMDS requires tag keys to match the pattern
+	// [0-9a-zA-Z\-_+=,.@:]{1,255} .
+	//
+	// The default value is true .
+	//
+	// For more information, see [Work with instance tags in instance metadata] in the Amazon EC2 User Guide.
+	//
+	// [Work with instance tags in instance metadata]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
+	InstanceMetadataTagsPropagation *bool
+
 	// The instance requirements. You can specify:
 	//
 	//   - The instance types
@@ -3488,6 +3504,22 @@ type InstanceLaunchTemplateUpdate struct {
 	//
 	// [Amazon ECS instance profile for Managed Instances]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/managed-instances-instance-profile.html
 	Ec2InstanceProfileArn *string
+
+	// Determines whether tags are propagated to the instance metadata service (IMDS)
+	// for Amazon EC2 instances launched by the Managed Instances capacity provider.
+	// When enabled, all tags associated with the instance are available through the
+	// instance metadata service. When disabled, tags are not propagated to IMDS.
+	//
+	// Disable this setting if your tags contain characters that are not compatible
+	// with IMDS, such as / . IMDS requires tag keys to match the pattern
+	// [0-9a-zA-Z\-_+=,.@:]{1,255} .
+	//
+	// The default value is true .
+	//
+	// For more information, see [Work with instance tags in instance metadata] in the Amazon EC2 User Guide.
+	//
+	// [Work with instance tags in instance metadata]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
+	InstanceMetadataTagsPropagation *bool
 
 	// The updated instance requirements for attribute-based instance type selection.
 	// Changes to instance requirements affect which instance types Amazon ECS selects

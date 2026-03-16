@@ -266,10 +266,11 @@ type AutomatedReasoningPolicyBuildWorkflowType string
 
 // Enum values for AutomatedReasoningPolicyBuildWorkflowType
 const (
-	AutomatedReasoningPolicyBuildWorkflowTypeIngestContent          AutomatedReasoningPolicyBuildWorkflowType = "INGEST_CONTENT"
-	AutomatedReasoningPolicyBuildWorkflowTypeRefinePolicy           AutomatedReasoningPolicyBuildWorkflowType = "REFINE_POLICY"
-	AutomatedReasoningPolicyBuildWorkflowTypeImportPolicy           AutomatedReasoningPolicyBuildWorkflowType = "IMPORT_POLICY"
-	AutomatedReasoningPolicyBuildWorkflowTypeGenerateFidelityReport AutomatedReasoningPolicyBuildWorkflowType = "GENERATE_FIDELITY_REPORT"
+	AutomatedReasoningPolicyBuildWorkflowTypeIngestContent           AutomatedReasoningPolicyBuildWorkflowType = "INGEST_CONTENT"
+	AutomatedReasoningPolicyBuildWorkflowTypeRefinePolicy            AutomatedReasoningPolicyBuildWorkflowType = "REFINE_POLICY"
+	AutomatedReasoningPolicyBuildWorkflowTypeImportPolicy            AutomatedReasoningPolicyBuildWorkflowType = "IMPORT_POLICY"
+	AutomatedReasoningPolicyBuildWorkflowTypeGenerateFidelityReport  AutomatedReasoningPolicyBuildWorkflowType = "GENERATE_FIDELITY_REPORT"
+	AutomatedReasoningPolicyBuildWorkflowTypeGeneratePolicyScenarios AutomatedReasoningPolicyBuildWorkflowType = "GENERATE_POLICY_SCENARIOS"
 )
 
 // Values returns all known values for AutomatedReasoningPolicyBuildWorkflowType.
@@ -283,6 +284,7 @@ func (AutomatedReasoningPolicyBuildWorkflowType) Values() []AutomatedReasoningPo
 		"REFINE_POLICY",
 		"IMPORT_POLICY",
 		"GENERATE_FIDELITY_REPORT",
+		"GENERATE_POLICY_SCENARIOS",
 	}
 }
 

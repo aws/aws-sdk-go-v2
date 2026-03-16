@@ -1,0 +1,8 @@
+{
+    "id": "c782f923-59cc-4ed7-8ecd-cec3dea19f56",
+    "type": "feature",
+    "description": "Amazon ECS now supports configuring whether tags are propagated to the EC2 Instance Metadata Service (IMDS) for instances launched by the Managed Instances capacity provider. This gives customers control over tag visibility in IMDS when using ECS Managed Instances.",
+    "modules": [
+        "service/ecs"
+    ]
+}

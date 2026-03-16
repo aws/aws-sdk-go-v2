@@ -87,9 +87,9 @@ type StartBrowserSessionInput struct {
 	// secret ARNs.
 	ProxyConfiguration *types.ProxyConfiguration
 
-	// The time in seconds after which the session automatically terminates if there
-	// is no activity. The default value is 3600 seconds (1 hour). The minimum allowed
-	// value is 60 seconds, and the maximum allowed value is 28800 seconds (8 hours).
+	// The duration in seconds (time-to-live) after which the session automatically
+	// terminates, regardless of ongoing activity. Defaults to 3600 seconds (1 hour).
+	// Recommended minimum: 60 seconds. Maximum allowed: 28,800 seconds (8 hours).
 	SessionTimeoutSeconds *int32
 
 	// The trace identifier for request tracking.

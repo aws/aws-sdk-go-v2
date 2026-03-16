@@ -28,6 +28,7 @@
         "api_op_GetWorkloadAccessTokenForJWT.go",
         "api_op_GetWorkloadAccessTokenForUserId.go",
         "api_op_InvokeAgentRuntime.go",
+        "api_op_InvokeAgentRuntimeCommand.go",
         "api_op_InvokeCodeInterpreter.go",
         "api_op_ListActors.go",
         "api_op_ListBrowserSessions.go",

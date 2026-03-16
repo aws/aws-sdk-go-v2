@@ -370,6 +370,26 @@ func (m *validateOpGetWorkloadAccessToken) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpInvokeAgentRuntimeCommand struct {
+}
+
+func (*validateOpInvokeAgentRuntimeCommand) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInvokeAgentRuntimeCommand) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InvokeAgentRuntimeCommandInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInvokeAgentRuntimeCommandInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpInvokeAgentRuntime struct {
 }
 
@@ -802,6 +822,10 @@ func addOpGetWorkloadAccessTokenValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpGetWorkloadAccessToken{}, middleware.After)
 }
 
+func addOpInvokeAgentRuntimeCommandValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInvokeAgentRuntimeCommand{}, middleware.After)
+}
+
 func addOpInvokeAgentRuntimeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInvokeAgentRuntime{}, middleware.After)
 }
@@ -1107,6 +1131,21 @@ func validateInputContentBlockList(v []types.InputContentBlock) error {
 		if err := validateInputContentBlock(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInvokeAgentRuntimeCommandRequestBody(v *types.InvokeAgentRuntimeCommandRequestBody) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvokeAgentRuntimeCommandRequestBody"}
+	if v.Command == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Command"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1815,6 +1854,28 @@ func validateOpGetWorkloadAccessTokenInput(v *GetWorkloadAccessTokenInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "GetWorkloadAccessTokenInput"}
 	if v.WorkloadName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkloadName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpInvokeAgentRuntimeCommandInput(v *InvokeAgentRuntimeCommandInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvokeAgentRuntimeCommandInput"}
+	if v.AgentRuntimeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentRuntimeArn"))
+	}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	} else if v.Body != nil {
+		if err := validateInvokeAgentRuntimeCommandRequestBody(v.Body); err != nil {
+			invalidParams.AddNested("Body", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
