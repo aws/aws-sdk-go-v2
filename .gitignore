@@ -5,7 +5,7 @@
 /internal/awstesting/integration/smoke/_test/
 /vendor
 /private/model/cli/gen-api/gen-api
-build/
+build/ffsdf
 bin/
 
 # Mac
