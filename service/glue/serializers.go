@@ -17236,6 +17236,11 @@ func awsAwsjson11_serializeDocumentCatalogInput(v *types.CatalogInput, value smi
 		}
 	}
 
+	if len(v.OverwriteChildResourcePermissionsWithDefault) > 0 {
+		ok := object.Key("OverwriteChildResourcePermissionsWithDefault")
+		ok.String(string(v.OverwriteChildResourcePermissionsWithDefault))
+	}
+
 	if v.Parameters != nil {
 		ok := object.Key("Parameters")
 		if err := awsAwsjson11_serializeDocumentParametersMap(v.Parameters, ok); err != nil {

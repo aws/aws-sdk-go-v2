@@ -1,0 +1,8 @@
+{
+    "id": "7197b3f6-660b-41fd-b204-b06bc16ff368",
+    "type": "feature",
+    "description": "Provide approval to overwrite existing Lake Formation permissions on all child resources with the default permissions specified in 'CreateTableDefaultPermissions' and 'CreateDatabaseDefaultPermissions' when updating catalog. Allowed values are [\"Accept\",\"Deny\"] .",
+    "modules": [
+        "service/glue"
+    ]
+}

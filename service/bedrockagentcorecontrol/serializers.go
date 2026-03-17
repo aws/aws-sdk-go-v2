@@ -8608,6 +8608,13 @@ func awsRestjson1_serializeDocumentCustomMemoryStrategyInput(v *types.CustomMemo
 		}
 	}
 
+	if v.NamespaceTemplates != nil {
+		ok := object.Key("namespaceTemplates")
+		if err := awsRestjson1_serializeDocumentNamespacesList(v.NamespaceTemplates, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -8739,6 +8746,13 @@ func awsRestjson1_serializeDocumentEpisodicMemoryStrategyInput(v *types.Episodic
 		}
 	}
 
+	if v.NamespaceTemplates != nil {
+		ok := object.Key("namespaceTemplates")
+		if err := awsRestjson1_serializeDocumentNamespacesList(v.NamespaceTemplates, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ReflectionConfiguration != nil {
 		ok := object.Key("reflectionConfiguration")
 		if err := awsRestjson1_serializeDocumentEpisodicReflectionConfigurationInput(v.ReflectionConfiguration, ok); err != nil {
@@ -8832,6 +8846,13 @@ func awsRestjson1_serializeDocumentEpisodicOverrideReflectionConfigurationInput(
 		}
 	}
 
+	if v.NamespaceTemplates != nil {
+		ok := object.Key("namespaceTemplates")
+		if err := awsRestjson1_serializeDocumentNamespacesList(v.NamespaceTemplates, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -8842,6 +8863,13 @@ func awsRestjson1_serializeDocumentEpisodicReflectionConfigurationInput(v *types
 	if v.Namespaces != nil {
 		ok := object.Key("namespaces")
 		if err := awsRestjson1_serializeDocumentNamespacesList(v.Namespaces, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NamespaceTemplates != nil {
+		ok := object.Key("namespaceTemplates")
+		if err := awsRestjson1_serializeDocumentNamespacesList(v.NamespaceTemplates, ok); err != nil {
 			return err
 		}
 	}
@@ -9753,6 +9781,13 @@ func awsRestjson1_serializeDocumentModifyMemoryStrategyInput(v *types.ModifyMemo
 		}
 	}
 
+	if v.NamespaceTemplates != nil {
+		ok := object.Key("namespaceTemplates")
+		if err := awsRestjson1_serializeDocumentNamespacesList(v.NamespaceTemplates, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -10528,6 +10563,13 @@ func awsRestjson1_serializeDocumentSemanticMemoryStrategyInput(v *types.Semantic
 		}
 	}
 
+	if v.NamespaceTemplates != nil {
+		ok := object.Key("namespaceTemplates")
+		if err := awsRestjson1_serializeDocumentNamespacesList(v.NamespaceTemplates, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -10702,6 +10744,13 @@ func awsRestjson1_serializeDocumentSummaryMemoryStrategyInput(v *types.SummaryMe
 	if v.Namespaces != nil {
 		ok := object.Key("namespaces")
 		if err := awsRestjson1_serializeDocumentNamespacesList(v.Namespaces, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NamespaceTemplates != nil {
+		ok := object.Key("namespaceTemplates")
+		if err := awsRestjson1_serializeDocumentNamespacesList(v.NamespaceTemplates, ok); err != nil {
 			return err
 		}
 	}
@@ -10958,6 +11007,13 @@ func awsRestjson1_serializeDocumentUserPreferenceMemoryStrategyInput(v *types.Us
 	if v.Namespaces != nil {
 		ok := object.Key("namespaces")
 		if err := awsRestjson1_serializeDocumentNamespacesList(v.Namespaces, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NamespaceTemplates != nil {
+		ok := object.Key("namespaceTemplates")
+		if err := awsRestjson1_serializeDocumentNamespacesList(v.NamespaceTemplates, ok); err != nil {
 			return err
 		}
 	}

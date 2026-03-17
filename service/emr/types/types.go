@@ -2045,12 +2045,18 @@ type MetricDimension struct {
 	noSmithyDocumentSerde
 }
 
-// Contains CloudWatch log configuration metadata and settings.
+// Contains CloudWatch log configuration and S3 logging configuration metadata and
+// settings.
 type MonitoringConfiguration struct {
 
 	// CloudWatch log configuration settings and metadata that specify settings like
 	// log files to monitor and where to send them.
 	CloudWatchLogConfiguration *CloudWatchLogConfiguration
+
+	// S3 logging configuration that controls how different types of logs (system
+	// logs, application logs, and persistent UI logs) are uploaded to S3. Each log
+	// type can be configured with a specific upload policy.
+	S3LoggingConfiguration *S3LoggingConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2450,6 +2456,39 @@ type ReleaseLabelFilter struct {
 
 	// Optional release label version prefix filter. For example, emr-5 .
 	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for S3 logging behavior in EMR clusters. Defines how different
+// types of logs are uploaded to S3 based on the specified upload policies for each
+// log type.
+type S3LoggingConfiguration struct {
+
+	// A map that specifies the upload policy for each log type. The key is the log
+	// type, and the value is the upload policy.
+	//
+	// Valid log types:
+	//
+	//   - system-logs : System-level logs including daemon logs, bootstrap logs, and
+	//   other infrastructure logs.
+	//
+	//   - application-logs : Application-level logs from frameworks like Hadoop,
+	//   Spark, Hive, etc.
+	//
+	//   - persistent-ui-logs : Logs for persistent application UIs like Spark History
+	//   Server.
+	//
+	// Valid upload policies:
+	//
+	//   - emr-managed : Logs are uploaded to both the EMR-managed S3 bucket and the
+	//   customer-specified S3 bucket (if LogUri is provided).
+	//
+	//   - on-customer-s3only : Logs are uploaded only to the customer-specified S3
+	//   bucket. Requires LogUri to be specified in the cluster configuration.
+	//
+	//   - disabled : Log upload is disabled for this log type.
+	LogTypeUploadPolicy map[string]LogUploadPolicyValue
 
 	noSmithyDocumentSerde
 }

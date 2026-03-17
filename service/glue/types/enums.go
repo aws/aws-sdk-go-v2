@@ -2243,6 +2243,26 @@ func (OAuth2GrantType) Values() []OAuth2GrantType {
 	}
 }
 
+type OverwriteChildResourcePermissionsWithDefaultEnum string
+
+// Enum values for OverwriteChildResourcePermissionsWithDefaultEnum
+const (
+	OverwriteChildResourcePermissionsWithDefaultEnumAccept OverwriteChildResourcePermissionsWithDefaultEnum = "Accept"
+	OverwriteChildResourcePermissionsWithDefaultEnumDeny   OverwriteChildResourcePermissionsWithDefaultEnum = "Deny"
+)
+
+// Values returns all known values for
+// OverwriteChildResourcePermissionsWithDefaultEnum. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OverwriteChildResourcePermissionsWithDefaultEnum) Values() []OverwriteChildResourcePermissionsWithDefaultEnum {
+	return []OverwriteChildResourcePermissionsWithDefaultEnum{
+		"Accept",
+		"Deny",
+	}
+}
+
 type ParamType string
 
 // Enum values for ParamType

@@ -21396,6 +21396,11 @@ func awsRestjson1_deserializeDocumentEpisodicReflectionConfiguration(v **types.E
 				return err
 			}
 
+		case "namespaceTemplates":
+			if err := awsRestjson1_deserializeDocumentNamespacesList(&sv.NamespaceTemplates, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -21447,6 +21452,11 @@ func awsRestjson1_deserializeDocumentEpisodicReflectionOverride(v **types.Episod
 
 		case "namespaces":
 			if err := awsRestjson1_deserializeDocumentNamespacesList(&sv.Namespaces, value); err != nil {
+				return err
+			}
+
+		case "namespaceTemplates":
+			if err := awsRestjson1_deserializeDocumentNamespacesList(&sv.NamespaceTemplates, value); err != nil {
 				return err
 			}
 
@@ -23919,6 +23929,11 @@ func awsRestjson1_deserializeDocumentMemoryStrategy(v **types.MemoryStrategy, va
 
 		case "namespaces":
 			if err := awsRestjson1_deserializeDocumentNamespacesList(&sv.Namespaces, value); err != nil {
+				return err
+			}
+
+		case "namespaceTemplates":
+			if err := awsRestjson1_deserializeDocumentNamespacesList(&sv.NamespaceTemplates, value); err != nil {
 				return err
 			}
 

@@ -1130,7 +1130,12 @@ type CustomMemoryStrategyInput struct {
 	// The description of the custom memory strategy.
 	Description *string
 
+	// The namespaceTemplates associated with the custom memory strategy.
+	NamespaceTemplates []string
+
 	// The namespaces associated with the custom memory strategy.
+	//
+	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
 
 	noSmithyDocumentSerde
@@ -1287,7 +1292,12 @@ type EpisodicMemoryStrategyInput struct {
 	// The description of the episodic memory strategy.
 	Description *string
 
+	// The namespaceTemplates for which to create episodes.
+	NamespaceTemplates []string
+
 	// The namespaces for which to create episodes.
+	//
+	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
 
 	// The configuration for the reflections created with the episodic memory strategy.
@@ -1365,8 +1375,14 @@ type EpisodicOverrideReflectionConfigurationInput struct {
 	// This member is required.
 	ModelId *string
 
+	// The namespaceTemplates to use for episodic reflection. Can be less nested than
+	// the episodic namespaces.
+	NamespaceTemplates []string
+
 	// The namespaces to use for episodic reflection. Can be less nested than the
 	// episodic namespaces.
+	//
+	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
 
 	noSmithyDocumentSerde
@@ -1375,10 +1391,14 @@ type EpisodicOverrideReflectionConfigurationInput struct {
 // The configuration for the reflections created with the episodic memory strategy.
 type EpisodicReflectionConfiguration struct {
 
+	// The namespaceTemplates for which to create reflections. Can be less nested than
+	// the episodic namespaces.
+	NamespaceTemplates []string
+
 	// The namespaces for which to create reflections. Can be less nested than the
 	// episodic namespaces.
 	//
-	// This member is required.
+	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
 
 	noSmithyDocumentSerde
@@ -1387,10 +1407,14 @@ type EpisodicReflectionConfiguration struct {
 // An episodic reflection configuration input.
 type EpisodicReflectionConfigurationInput struct {
 
+	// The namespaceTemplates over which to create reflections. Can be less nested
+	// than episode namespaces.
+	NamespaceTemplates []string
+
 	// The namespaces over which to create reflections. Can be less nested than
 	// episode namespaces.
 	//
-	// This member is required.
+	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
 
 	noSmithyDocumentSerde
@@ -1411,8 +1435,14 @@ type EpisodicReflectionOverride struct {
 	// This member is required.
 	ModelId *string
 
+	// The namespaceTemplates over which reflections were created. Can be less nested
+	// than the episodic namespaces.
+	NamespaceTemplates []string
+
 	// The namespaces over which reflections were created. Can be less nested than the
 	// episodic namespaces.
+	//
+	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
 
 	noSmithyDocumentSerde
@@ -2343,9 +2373,16 @@ type MemoryStrategy struct {
 	// This member is required.
 	Name *string
 
+	// The namespaceTemplates associated with the memory strategy.
+	//
+	// This member is required.
+	NamespaceTemplates []string
+
 	// The namespaces associated with the memory strategy.
 	//
 	// This member is required.
+	//
+	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
 
 	// The unique identifier of the memory strategy.
@@ -2610,7 +2647,12 @@ type ModifyMemoryStrategyInput struct {
 	// The updated description of the memory strategy.
 	Description *string
 
+	// The updated namespaceTemplates for the memory strategy.
+	NamespaceTemplates []string
+
 	// The updated namespaces for the memory strategy.
+	//
+	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
 
 	noSmithyDocumentSerde
@@ -3786,7 +3828,12 @@ type SemanticMemoryStrategyInput struct {
 	// The description of the semantic memory strategy.
 	Description *string
 
+	// The namespaceTemplates associated with the semantic memory strategy.
+	NamespaceTemplates []string
+
 	// The namespaces associated with the semantic memory strategy.
+	//
+	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
 
 	noSmithyDocumentSerde
@@ -3957,7 +4004,12 @@ type SummaryMemoryStrategyInput struct {
 	// The description of the summary memory strategy.
 	Description *string
 
+	// The namespaceTemplates associated with the summary memory strategy.
+	NamespaceTemplates []string
+
 	// The namespaces associated with the summary memory strategy.
+	//
+	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
 
 	noSmithyDocumentSerde
@@ -4271,7 +4323,12 @@ type UserPreferenceMemoryStrategyInput struct {
 	// The description of the user preference memory strategy.
 	Description *string
 
+	// The namespaceTemplates associated with the user preference memory strategy.
+	NamespaceTemplates []string
+
 	// The namespaces associated with the user preference memory strategy.
+	//
+	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
 
 	noSmithyDocumentSerde

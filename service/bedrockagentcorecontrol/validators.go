@@ -2537,11 +2537,6 @@ func validateEpisodicMemoryStrategyInput(v *types.EpisodicMemoryStrategyInput) e
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.ReflectionConfiguration != nil {
-		if err := validateEpisodicReflectionConfigurationInput(v.ReflectionConfiguration); err != nil {
-			invalidParams.AddNested("ReflectionConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2622,21 +2617,6 @@ func validateEpisodicOverrideReflectionConfigurationInput(v *types.EpisodicOverr
 	}
 	if v.ModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateEpisodicReflectionConfigurationInput(v *types.EpisodicReflectionConfigurationInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "EpisodicReflectionConfigurationInput"}
-	if v.Namespaces == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Namespaces"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3254,11 +3234,6 @@ func validateModifyReflectionConfiguration(v types.ModifyReflectionConfiguration
 	case *types.ModifyReflectionConfigurationMemberCustomReflectionConfiguration:
 		if err := validateCustomReflectionConfigurationInput(uv.Value); err != nil {
 			invalidParams.AddNested("[customReflectionConfiguration]", err.(smithy.InvalidParamsError))
-		}
-
-	case *types.ModifyReflectionConfigurationMemberEpisodicReflectionConfiguration:
-		if err := validateEpisodicReflectionConfigurationInput(&uv.Value); err != nil {
-			invalidParams.AddNested("[episodicReflectionConfiguration]", err.(smithy.InvalidParamsError))
 		}
 
 	}

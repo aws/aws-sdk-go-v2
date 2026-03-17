@@ -4762,6 +4762,17 @@ func awsAwsjson11_serializeDocumentKeyValueList(v []types.KeyValue, value smithy
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentLogTypeMap(v map[string]types.LogUploadPolicyValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(string(v[key]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentLogTypesMap(v map[string][]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4839,6 +4850,13 @@ func awsAwsjson11_serializeDocumentMonitoringConfiguration(v *types.MonitoringCo
 	if v.CloudWatchLogConfiguration != nil {
 		ok := object.Key("CloudWatchLogConfiguration")
 		if err := awsAwsjson11_serializeDocumentCloudWatchLogConfiguration(v.CloudWatchLogConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3LoggingConfiguration != nil {
+		ok := object.Key("S3LoggingConfiguration")
+		if err := awsAwsjson11_serializeDocumentS3LoggingConfiguration(v.S3LoggingConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -5049,6 +5067,20 @@ func awsAwsjson11_serializeDocumentReleaseLabelFilter(v *types.ReleaseLabelFilte
 	if v.Prefix != nil {
 		ok := object.Key("Prefix")
 		ok.String(*v.Prefix)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentS3LoggingConfiguration(v *types.S3LoggingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LogTypeUploadPolicy != nil {
+		ok := object.Key("LogTypeUploadPolicy")
+		if err := awsAwsjson11_serializeDocumentLogTypeMap(v.LogTypeUploadPolicy, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

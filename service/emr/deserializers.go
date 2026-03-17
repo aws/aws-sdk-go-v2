@@ -11500,6 +11500,42 @@ func awsAwsjson11_deserializeDocumentKeyValueList(v *[]types.KeyValue, value int
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentLogTypeMap(v *map[string]types.LogUploadPolicyValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.LogUploadPolicyValue
+	if *v == nil {
+		mv = map[string]types.LogUploadPolicyValue{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.LogUploadPolicyValue
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected LogUploadPolicyValue to be of type string, got %T instead", value)
+			}
+			parsedVal = types.LogUploadPolicyValue(jtv)
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentLogTypesMap(v *map[string][]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11699,6 +11735,11 @@ func awsAwsjson11_deserializeDocumentMonitoringConfiguration(v **types.Monitorin
 		switch key {
 		case "CloudWatchLogConfiguration":
 			if err := awsAwsjson11_deserializeDocumentCloudWatchLogConfiguration(&sv.CloudWatchLogConfiguration, value); err != nil {
+				return err
+			}
+
+		case "S3LoggingConfiguration":
+			if err := awsAwsjson11_deserializeDocumentS3LoggingConfiguration(&sv.S3LoggingConfiguration, value); err != nil {
 				return err
 			}
 
@@ -12730,6 +12771,42 @@ func awsAwsjson11_deserializeDocumentPortRanges(v *[]types.PortRange, value inte
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentS3LoggingConfiguration(v **types.S3LoggingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3LoggingConfiguration
+	if *v == nil {
+		sv = &types.S3LoggingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LogTypeUploadPolicy":
+			if err := awsAwsjson11_deserializeDocumentLogTypeMap(&sv.LogTypeUploadPolicy, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

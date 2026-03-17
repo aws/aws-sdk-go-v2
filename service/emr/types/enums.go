@@ -573,6 +573,48 @@ func (JobFlowExecutionState) Values() []JobFlowExecutionState {
 	}
 }
 
+type LogType string
+
+// Enum values for LogType
+const (
+	LogTypeSystemLogs       LogType = "system-logs"
+	LogTypeApplicationLogs  LogType = "application-logs"
+	LogTypePersistentUiLogs LogType = "persistent-ui-logs"
+)
+
+// Values returns all known values for LogType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LogType) Values() []LogType {
+	return []LogType{
+		"system-logs",
+		"application-logs",
+		"persistent-ui-logs",
+	}
+}
+
+type LogUploadPolicyValue string
+
+// Enum values for LogUploadPolicyValue
+const (
+	LogUploadPolicyValueEmrManaged       LogUploadPolicyValue = "emr-managed"
+	LogUploadPolicyValueOnCustomerS3only LogUploadPolicyValue = "on-customer-s3only"
+	LogUploadPolicyValueDisabled         LogUploadPolicyValue = "disabled"
+)
+
+// Values returns all known values for LogUploadPolicyValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LogUploadPolicyValue) Values() []LogUploadPolicyValue {
+	return []LogUploadPolicyValue{
+		"emr-managed",
+		"on-customer-s3only",
+		"disabled",
+	}
+}
+
 type MarketType string
 
 // Enum values for MarketType

@@ -1039,6 +1039,11 @@ type CatalogInput struct {
 	// entity outside the Glue Data Catalog, for example a Redshift database.
 	FederatedCatalog *FederatedCatalog
 
+	//  Overwrites existing Amazon Web Services Lake Formation permissions with
+	// CatalogInput$CreateTableDefaultPermissions and
+	// CatalogInput$CreateDatabaseDefaultPermissions for all child resources.
+	OverwriteChildResourcePermissionsWithDefault OverwriteChildResourcePermissionsWithDefaultEnum
+
 	// A map array of key-value pairs that define the parameters and properties of the
 	// catalog.
 	Parameters map[string]string

@@ -1,0 +1,8 @@
+{
+    "id": "90945d37-1032-44cc-be4c-bd45d9b65cdc",
+    "type": "feature",
+    "description": "Add S3LoggingConfiguration to Control LogUploads",
+    "modules": [
+        "service/emr"
+    ]
+}
