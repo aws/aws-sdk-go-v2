@@ -5526,6 +5526,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      Allows third-party engines to access data in Amazon S3 locations that are registered with Lake Formation.\n    </p>"
                     }
+                },
+                "OverwriteChildResourcePermissionsWithDefault": {
+                    "target": "com.amazonaws.glue#OverwriteChildResourcePermissionsWithDefaultEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Overwrites existing Amazon Web Services Lake Formation permissions with <code>CatalogInput$CreateTableDefaultPermissions</code> and <code>CatalogInput$CreateDatabaseDefaultPermissions</code> for all child resources.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -35616,6 +35622,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A structure containing other metadata for a schema version belonging to the same metadata key.</p>"
+            }
+        },
+        "com.amazonaws.glue#OverwriteChildResourcePermissionsWithDefaultEnum": {
+            "type": "enum",
+            "members": {
+                "Accept": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Accept"
+                    }
+                },
+                "Deny": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deny"
+                    }
+                }
             }
         },
         "com.amazonaws.glue#PIIDetection": {

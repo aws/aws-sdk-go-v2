@@ -7618,6 +7618,38 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.emr#LogType": {
+            "type": "enum",
+            "members": {
+                "SYSTEM_LOGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "system-logs"
+                    }
+                },
+                "APPLICATION_LOGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "application-logs"
+                    }
+                },
+                "PERSISTENT_UI_LOGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "persistent-ui-logs"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emr#LogTypeMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.emr#LogType"
+            },
+            "value": {
+                "target": "com.amazonaws.emr#LogUploadPolicyValue"
+            }
+        },
         "com.amazonaws.emr#LogTypesMap": {
             "type": "map",
             "key": {
@@ -7625,6 +7657,29 @@
             },
             "value": {
                 "target": "com.amazonaws.emr#XmlStringList"
+            }
+        },
+        "com.amazonaws.emr#LogUploadPolicyValue": {
+            "type": "enum",
+            "members": {
+                "EMR_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "emr-managed"
+                    }
+                },
+                "ON_CUSTOMER_S3ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "on-customer-s3only"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
+                }
             }
         },
         "com.amazonaws.emr#Long": {
@@ -7869,10 +7924,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>CloudWatch log configuration settings and metadata that specify settings like log files to monitor and where to send them.</p>"
                     }
+                },
+                "S3LoggingConfiguration": {
+                    "target": "com.amazonaws.emr#S3LoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>S3 logging configuration that controls how different types of logs (system logs, application logs, and persistent UI logs) are uploaded to S3. Each log type can be configured with a specific upload policy.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains CloudWatch log configuration metadata and settings.</p>"
+                "smithy.api#documentation": "<p>Contains CloudWatch log configuration and S3 logging configuration metadata and settings.</p>"
             }
         },
         "com.amazonaws.emr#NewSupportedProductsList": {
@@ -9295,6 +9356,20 @@
             "traits": {
                 "smithy.api#documentation": "<p> The result of the <a>RunJobFlow</a> operation. </p>",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.emr#S3LoggingConfiguration": {
+            "type": "structure",
+            "members": {
+                "LogTypeUploadPolicy": {
+                    "target": "com.amazonaws.emr#LogTypeMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map that specifies the upload policy for each log type. The key is the log type, and the value is the upload policy.</p>\n         <p>Valid log types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>system-logs</code>: System-level logs including daemon logs, bootstrap logs, and other infrastructure logs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>application-logs</code>: Application-level logs from frameworks like Hadoop, Spark, Hive, etc.</p>\n            </li>\n            <li>\n               <p>\n                  <code>persistent-ui-logs</code>: Logs for persistent application UIs like Spark History Server.</p>\n            </li>\n         </ul>\n         <p>Valid upload policies:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>emr-managed</code>: Logs are uploaded to both the EMR-managed S3 bucket and the customer-specified S3 bucket (if LogUri is provided).</p>\n            </li>\n            <li>\n               <p>\n                  <code>on-customer-s3only</code>: Logs are uploaded only to the customer-specified S3 bucket. Requires LogUri to be specified in the cluster configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disabled</code>: Log upload is disabled for this log type.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for S3 logging behavior in EMR clusters. Defines how different types of logs are uploaded to S3 based on the specified upload policies for each log type.</p>"
             }
         },
         "com.amazonaws.emr#S3MonitoringConfiguration": {
