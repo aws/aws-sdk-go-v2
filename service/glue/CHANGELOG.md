@@ -1,3 +1,7 @@
+# v1.139.0 (2026-03-17)
+
+* **Feature**: Provide approval to overwrite existing Lake Formation permissions on all child resources with the default permissions specified in 'CreateTableDefaultPermissions' and 'CreateDatabaseDefaultPermissions' when updating catalog. Allowed values are ["Accept","Deny"] .
+
 # v1.138.0 (2026-03-13)
 
 * **Feature**: Add QuerySessionContext to BatchGetPartitionRequest

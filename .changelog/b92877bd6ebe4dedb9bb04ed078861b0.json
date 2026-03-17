@@ -1,8 +1,0 @@
-{
-    "id": "b92877bd-6ebe-4ded-b9bb-04ed078861b0",
-    "type": "feature",
-    "description": "Deprecating namespaces field and adding namespaceTemplates.",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

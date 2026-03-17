@@ -1,3 +1,13 @@
+# Release (2026-03-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.23.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1230-2026-03-17)
+  * **Feature**: Deprecating namespaces field and adding namespaceTemplates.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.58.0](service/emr/CHANGELOG.md#v1580-2026-03-17)
+  * **Feature**: Add S3LoggingConfiguration to Control LogUploads
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.139.0](service/glue/CHANGELOG.md#v11390-2026-03-17)
+  * **Feature**: Provide approval to overwrite existing Lake Formation permissions on all child resources with the default permissions specified in 'CreateTableDefaultPermissions' and 'CreateDatabaseDefaultPermissions' when updating catalog. Allowed values are ["Accept","Deny"] .
+
 # Release (2026-03-16)
 
 ## Module Highlights

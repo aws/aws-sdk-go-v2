@@ -1,3 +1,7 @@
+# v1.58.0 (2026-03-17)
+
+* **Feature**: Add S3LoggingConfiguration to Control LogUploads
+
 # v1.57.8 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

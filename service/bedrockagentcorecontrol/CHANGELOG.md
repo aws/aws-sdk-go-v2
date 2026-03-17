@@ -1,3 +1,7 @@
+# v1.23.0 (2026-03-17)
+
+* **Feature**: Deprecating namespaces field and adding namespaceTemplates.
+
 # v1.22.1 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions
