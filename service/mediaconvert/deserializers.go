@@ -7851,7 +7851,7 @@ func awsRestjson1_deserializeDocumentAc4Settings(v **types.Ac4Settings, value in
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integerMin192000Max1024000 to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __integerMin48000Max768000 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {

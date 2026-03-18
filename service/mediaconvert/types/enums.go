@@ -4017,6 +4017,7 @@ const (
 	FormatMxf       Format = "mxf"
 	FormatWave      Format = "wave"
 	FormatAvi       Format = "avi"
+	FormatMpegts    Format = "mpegts"
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
@@ -4032,6 +4033,7 @@ func (Format) Values() []Format {
 		"mxf",
 		"wave",
 		"avi",
+		"mpegts",
 	}
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "b4888a9c-9d7a-4964-8eb5-22ffde411f34",
+    "type": "feature",
+    "description": "The DescribeInstanceTypes API now returns default connection tracking timeout values for TCP, UDP, and UDP stream via the new connectionTrackingConfiguration field on NetworkInfo.",
+    "modules": [
+        "service/ec2"
+    ]
+}
