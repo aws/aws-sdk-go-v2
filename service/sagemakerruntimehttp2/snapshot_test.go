@@ -5,12 +5,14 @@
 package sagemakerruntimehttp2
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"github.com/aws/smithy-go/middleware"
 	"io"
 	"io/fs"
 	"os"
+	"testing"
 )
 
 const ssprefix = "snapshot"
@@ -59,4 +61,26 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 		return fmt.Errorf("%s != %s", expected, actual)
 	}
 	return snapshotOK{}
+}
+func TestCheckSnapshot_InvokeEndpointWithBidirectionalStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeEndpointWithBidirectionalStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "InvokeEndpointWithBidirectionalStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+func TestUpdateSnapshot_InvokeEndpointWithBidirectionalStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeEndpointWithBidirectionalStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "InvokeEndpointWithBidirectionalStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
 }
