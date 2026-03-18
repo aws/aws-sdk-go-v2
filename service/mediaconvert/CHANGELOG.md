@@ -1,3 +1,7 @@
+# v1.89.0 (2026-03-18)
+
+* **Feature**: This update adds additional bitrate options for Dolby AC-4 audio outputs.
+
 # v1.88.0 (2026-03-13)
 
 * **Feature**: This update adds support for Dolby AC-4 audio output, frame rate conversion between non-Dolby Vision inputs to Dolby Vision outputs, and clear lead CMAF HLS output.

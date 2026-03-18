@@ -1,3 +1,11 @@
+# Release (2026-03-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.295.0](service/ec2/CHANGELOG.md#v12950-2026-03-18)
+  * **Feature**: The DescribeInstanceTypes API now returns default connection tracking timeout values for TCP, UDP, and UDP stream via the new connectionTrackingConfiguration field on NetworkInfo.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.89.0](service/mediaconvert/CHANGELOG.md#v1890-2026-03-18)
+  * **Feature**: This update adds additional bitrate options for Dolby AC-4 audio outputs.
+
 # Release (2026-03-17)
 
 ## Module Highlights

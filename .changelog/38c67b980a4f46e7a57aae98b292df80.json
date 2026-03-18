@@ -1,8 +1,0 @@
-{
-    "id": "38c67b98-0a4f-46e7-a57a-ae98b292df80",
-    "type": "feature",
-    "description": "This update adds additional bitrate options for Dolby AC-4 audio outputs.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}
