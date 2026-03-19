@@ -159,6 +159,41 @@ func TestOpCreateJobQueueSRAOperationOrder(t *testing.T) {
 		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
 	}
 }
+func TestOpCreateQuotaShareSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.CreateQuotaShare(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
 func TestOpCreateSchedulingPolicySRAOperationOrder(t *testing.T) {
 	expect := []string{
 		"OperationSerializer",
@@ -317,6 +352,41 @@ func TestOpDeleteJobQueueSRAOperationOrder(t *testing.T) {
 		},
 	})
 	_, err := svc.DeleteJobQueue(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpDeleteQuotaShareSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.DeleteQuotaShare(context.Background(), nil)
 	if err != nil && !errors.Is(err, errTestReturnEarly) {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -614,6 +684,41 @@ func TestOpDescribeJobsSRAOperationOrder(t *testing.T) {
 		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
 	}
 }
+func TestOpDescribeQuotaShareSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.DescribeQuotaShare(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
 func TestOpDescribeSchedulingPoliciesSRAOperationOrder(t *testing.T) {
 	expect := []string{
 		"OperationSerializer",
@@ -842,6 +947,41 @@ func TestOpListJobsByConsumableResourceSRAOperationOrder(t *testing.T) {
 		},
 	})
 	_, err := svc.ListJobsByConsumableResource(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpListQuotaSharesSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.ListQuotaShares(context.Background(), nil)
 	if err != nil && !errors.Is(err, errTestReturnEarly) {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -1314,6 +1454,41 @@ func TestOpUpdateJobQueueSRAOperationOrder(t *testing.T) {
 		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
 	}
 }
+func TestOpUpdateQuotaShareSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.UpdateQuotaShare(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
 func TestOpUpdateSchedulingPolicySRAOperationOrder(t *testing.T) {
 	expect := []string{
 		"OperationSerializer",
@@ -1367,6 +1542,41 @@ func TestOpUpdateServiceEnvironmentSRAOperationOrder(t *testing.T) {
 		},
 	})
 	_, err := svc.UpdateServiceEnvironment(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpUpdateServiceJobSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.UpdateServiceJob(context.Background(), nil)
 	if err != nil && !errors.Is(err, errTestReturnEarly) {
 		t.Fatalf("unexpected error: %v", err)
 	}

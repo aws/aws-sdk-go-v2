@@ -456,6 +456,125 @@ func awsRestjson1_serializeOpDocumentCreateJobQueueInput(v *CreateJobQueueInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateQuotaShare struct {
+}
+
+func (*awsRestjson1_serializeOpCreateQuotaShare) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateQuotaShare) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateQuotaShareInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/createquotashare")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateQuotaShareInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateQuotaShareInput(v *CreateQuotaShareInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateQuotaShareInput(v *CreateQuotaShareInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CapacityLimits != nil {
+		ok := object.Key("capacityLimits")
+		if err := awsRestjson1_serializeDocumentQuotaShareCapacityLimits(v.CapacityLimits, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.JobQueue != nil {
+		ok := object.Key("jobQueue")
+		ok.String(*v.JobQueue)
+	}
+
+	if v.PreemptionConfiguration != nil {
+		ok := object.Key("preemptionConfiguration")
+		if err := awsRestjson1_serializeDocumentQuotaSharePreemptionConfiguration(v.PreemptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QuotaShareName != nil {
+		ok := object.Key("quotaShareName")
+		ok.String(*v.QuotaShareName)
+	}
+
+	if v.ResourceSharingConfiguration != nil {
+		ok := object.Key("resourceSharingConfiguration")
+		if err := awsRestjson1_serializeDocumentQuotaShareResourceSharingConfiguration(v.ResourceSharingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.State) > 0 {
+		ok := object.Key("state")
+		ok.String(string(v.State))
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagrisTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateSchedulingPolicy struct {
 }
 
@@ -539,6 +658,13 @@ func awsRestjson1_serializeOpDocumentCreateSchedulingPolicyInput(v *CreateSchedu
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.QuotaSharePolicy != nil {
+		ok := object.Key("quotaSharePolicy")
+		if err := awsRestjson1_serializeDocumentQuotaSharePolicy(v.QuotaSharePolicy, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Tags != nil {
@@ -894,6 +1020,87 @@ func awsRestjson1_serializeOpDocumentDeleteJobQueueInput(v *DeleteJobQueueInput,
 	if v.JobQueue != nil {
 		ok := object.Key("jobQueue")
 		ok.String(*v.JobQueue)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteQuotaShare struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteQuotaShare) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteQuotaShare) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteQuotaShareInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/deletequotashare")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDeleteQuotaShareInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteQuotaShareInput(v *DeleteQuotaShareInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDeleteQuotaShareInput(v *DeleteQuotaShareInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.QuotaShareArn != nil {
+		ok := object.Key("quotaShareArn")
+		ok.String(*v.QuotaShareArn)
 	}
 
 	return nil
@@ -1595,6 +1802,87 @@ func awsRestjson1_serializeOpDocumentDescribeJobsInput(v *DescribeJobsInput, val
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribeQuotaShare struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeQuotaShare) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeQuotaShare) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeQuotaShareInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/describequotashare")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDescribeQuotaShareInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeQuotaShareInput(v *DescribeQuotaShareInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDescribeQuotaShareInput(v *DescribeQuotaShareInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.QuotaShareArn != nil {
+		ok := object.Key("quotaShareArn")
+		ok.String(*v.QuotaShareArn)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribeSchedulingPolicies struct {
 }
 
@@ -2222,6 +2510,97 @@ func awsRestjson1_serializeOpDocumentListJobsByConsumableResourceInput(v *ListJo
 		if err := awsRestjson1_serializeDocumentListJobsByConsumableResourceFilterList(v.Filters, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListQuotaShares struct {
+}
+
+func (*awsRestjson1_serializeOpListQuotaShares) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListQuotaShares) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListQuotaSharesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/listquotashares")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListQuotaSharesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListQuotaSharesInput(v *ListQuotaSharesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListQuotaSharesInput(v *ListQuotaSharesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JobQueue != nil {
+		ok := object.Key("jobQueue")
+		ok.String(*v.JobQueue)
 	}
 
 	if v.MaxResults != nil {
@@ -2932,6 +3311,18 @@ func awsRestjson1_serializeOpDocumentSubmitServiceJobInput(v *SubmitServiceJobIn
 	if v.JobQueue != nil {
 		ok := object.Key("jobQueue")
 		ok.String(*v.JobQueue)
+	}
+
+	if v.PreemptionConfiguration != nil {
+		ok := object.Key("preemptionConfiguration")
+		if err := awsRestjson1_serializeDocumentServiceJobPreemptionConfiguration(v.PreemptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QuotaShareName != nil {
+		ok := object.Key("quotaShareName")
+		ok.String(*v.QuotaShareName)
 	}
 
 	if v.RetryStrategy != nil {
@@ -3651,6 +4042,113 @@ func awsRestjson1_serializeOpDocumentUpdateJobQueueInput(v *UpdateJobQueueInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateQuotaShare struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateQuotaShare) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateQuotaShare) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateQuotaShareInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/updatequotashare")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateQuotaShareInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateQuotaShareInput(v *UpdateQuotaShareInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateQuotaShareInput(v *UpdateQuotaShareInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CapacityLimits != nil {
+		ok := object.Key("capacityLimits")
+		if err := awsRestjson1_serializeDocumentQuotaShareCapacityLimits(v.CapacityLimits, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PreemptionConfiguration != nil {
+		ok := object.Key("preemptionConfiguration")
+		if err := awsRestjson1_serializeDocumentQuotaSharePreemptionConfiguration(v.PreemptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QuotaShareArn != nil {
+		ok := object.Key("quotaShareArn")
+		ok.String(*v.QuotaShareArn)
+	}
+
+	if v.ResourceSharingConfiguration != nil {
+		ok := object.Key("resourceSharingConfiguration")
+		if err := awsRestjson1_serializeDocumentQuotaShareResourceSharingConfiguration(v.ResourceSharingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.State) > 0 {
+		ok := object.Key("state")
+		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateSchedulingPolicy struct {
 }
 
@@ -3732,6 +4230,13 @@ func awsRestjson1_serializeOpDocumentUpdateSchedulingPolicyInput(v *UpdateSchedu
 	if v.FairsharePolicy != nil {
 		ok := object.Key("fairsharePolicy")
 		if err := awsRestjson1_serializeDocumentFairsharePolicy(v.FairsharePolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QuotaSharePolicy != nil {
+		ok := object.Key("quotaSharePolicy")
+		if err := awsRestjson1_serializeDocumentQuotaSharePolicy(v.QuotaSharePolicy, ok); err != nil {
 			return err
 		}
 	}
@@ -3827,6 +4332,92 @@ func awsRestjson1_serializeOpDocumentUpdateServiceEnvironmentInput(v *UpdateServ
 	if len(v.State) > 0 {
 		ok := object.Key("state")
 		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateServiceJob struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateServiceJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateServiceJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateServiceJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/updateservicejob")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateServiceJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateServiceJobInput(v *UpdateServiceJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateServiceJobInput(v *UpdateServiceJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JobId != nil {
+		ok := object.Key("jobId")
+		ok.String(*v.JobId)
+	}
+
+	if v.SchedulingPriority != nil {
+		ok := object.Key("schedulingPriority")
+		ok.Integer(*v.SchedulingPriority)
 	}
 
 	return nil
@@ -5966,6 +6557,77 @@ func awsRestjson1_serializeDocumentPlatformCapabilityList(v []types.PlatformCapa
 	return nil
 }
 
+func awsRestjson1_serializeDocumentQuotaShareCapacityLimit(v *types.QuotaShareCapacityLimit, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CapacityUnit != nil {
+		ok := object.Key("capacityUnit")
+		ok.String(*v.CapacityUnit)
+	}
+
+	if v.MaxCapacity != nil {
+		ok := object.Key("maxCapacity")
+		ok.Integer(*v.MaxCapacity)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQuotaShareCapacityLimits(v []types.QuotaShareCapacityLimit, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentQuotaShareCapacityLimit(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQuotaSharePolicy(v *types.QuotaSharePolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.IdleResourceAssignmentStrategy) > 0 {
+		ok := object.Key("idleResourceAssignmentStrategy")
+		ok.String(string(v.IdleResourceAssignmentStrategy))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQuotaSharePreemptionConfiguration(v *types.QuotaSharePreemptionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.InSharePreemption) > 0 {
+		ok := object.Key("inSharePreemption")
+		ok.String(string(v.InSharePreemption))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQuotaShareResourceSharingConfiguration(v *types.QuotaShareResourceSharingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BorrowLimit != nil {
+		ok := object.Key("borrowLimit")
+		ok.Integer(*v.BorrowLimit)
+	}
+
+	if len(v.Strategy) > 0 {
+		ok := object.Key("strategy")
+		ok.String(string(v.Strategy))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRepositoryCredentials(v *types.RepositoryCredentials, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6131,6 +6793,18 @@ func awsRestjson1_serializeDocumentServiceJobEvaluateOnExitList(v []types.Servic
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentServiceJobPreemptionConfiguration(v *types.ServiceJobPreemptionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PreemptionRetriesBeforeTermination != nil {
+		ok := object.Key("preemptionRetriesBeforeTermination")
+		ok.Integer(*v.PreemptionRetriesBeforeTermination)
+	}
+
 	return nil
 }
 

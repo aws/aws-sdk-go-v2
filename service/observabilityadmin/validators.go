@@ -831,9 +831,6 @@ func validateSourceLogsConfiguration(v *types.SourceLogsConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SourceLogsConfiguration"}
-	if v.LogGroupSelectionCriteria == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogGroupSelectionCriteria"))
-	}
 	if len(v.EncryptedLogGroupStrategy) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("EncryptedLogGroupStrategy"))
 	}

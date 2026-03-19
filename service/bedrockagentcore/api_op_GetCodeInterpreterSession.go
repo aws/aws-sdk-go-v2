@@ -78,6 +78,9 @@ type GetCodeInterpreterSessionOutput struct {
 	// This member is required.
 	SessionId *string
 
+	// The list of certificates installed in the code interpreter session.
+	Certificates []types.Certificate
+
 	// The name of the code interpreter session.
 	Name *string
 

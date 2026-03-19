@@ -41,6 +41,9 @@ type CreateCodeInterpreterInput struct {
 	// This member is required.
 	NetworkConfiguration *types.CodeInterpreterNetworkConfiguration
 
+	// A list of certificates to install in the code interpreter.
+	Certificates []types.Certificate
+
 	// A unique, case-sensitive identifier to ensure that the operation completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
 	// AgentCore ignores the request but does not return an error.

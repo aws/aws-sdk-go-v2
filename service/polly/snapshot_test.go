@@ -146,6 +146,18 @@ func TestCheckSnapshot_PutLexicon(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartSpeechSynthesisStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartSpeechSynthesisStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartSpeechSynthesisStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartSpeechSynthesisTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartSpeechSynthesisTask(context.Background(), nil, func(o *Options) {
@@ -246,6 +258,18 @@ func TestUpdateSnapshot_PutLexicon(t *testing.T) {
 	_, err := svc.PutLexicon(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutLexicon")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartSpeechSynthesisStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartSpeechSynthesisStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartSpeechSynthesisStream")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

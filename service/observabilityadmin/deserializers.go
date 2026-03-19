@@ -8832,6 +8832,15 @@ func awsRestjson1_deserializeDocumentSourceLogsConfiguration(v **types.SourceLog
 
 	for key, value := range shape {
 		switch key {
+		case "DataSourceSelectionCriteria":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSourceFilterString to be of type string, got %T instead", value)
+				}
+				sv.DataSourceSelectionCriteria = ptr.String(jtv)
+			}
+
 		case "EncryptedLogGroupStrategy":
 			if value != nil {
 				jtv, ok := value.(string)

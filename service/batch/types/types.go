@@ -155,24 +155,31 @@ type AttemptTaskContainerDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Defines the capacity limit for a service environment. This structure specifies
-// the maximum amount of resources that can be used by service jobs in the
-// environment.
+// Defines the type and maximum quantity of resources that can be allocated to
+// service jobs in a service environment.
 type CapacityLimit struct {
 
-	// The unit of measure for the capacity limit. This defines how the maxCapacity
-	// value should be interpreted. For SAGEMAKER_TRAINING jobs, use NUM_INSTANCES .
+	// The unit of measure for the capacity limit, which defines how maxCapacity is
+	// interpreted. For SAGEMAKER_TRAINING jobs in a quota management enabled service
+	// environment, specify the [instance type](for example, ml.m5.large ). Otherwise, use
+	// NUM_INSTANCES .
+	//
+	// [instance type]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ResourceConfig.html#sagemaker-Type-ResourceConfig-InstanceType
 	CapacityUnit *string
 
-	// The maximum capacity available for the service environment. This value
-	// represents the maximum amount of resources that can be allocated to service
-	// jobs.
+	// The maximum capacity available for the service environment. For a quota
+	// management enabled service environment, this value represents the maximum
+	// quantity of a particular resource type (specified by capacityUnit ) that can be
+	// allocated to service jobs. For other service environments, this value represents
+	// the maximum quantity of all resources that can be allocated to service jobs.
 	//
-	// For example, maxCapacity=50 , capacityUnit=NUM_INSTANCES . This indicates that
-	// the maximum number of instances that can be run on this service environment is
-	// 50. You could then run 5 SageMaker Training jobs that each use 10 instances.
-	// However, if you submit another job that requires 10 instances, it will wait in
-	// the queue.
+	// For example, if maxCapacity=50 and capacityUnit=NUM_INSTANCES , you can run up
+	// to 50 instances concurrently. If you run 5 SageMaker Training jobs that each use
+	// 10 instances, a subsequent job requiring 10 instances waits in the queue until
+	// capacity is available. In a quota management enabled service environment with
+	// capacityUnit=ml.m5.large , only ml.m5.large instances count against this limit,
+	// and jobs requiring other instance types wait until a matching capacity limit is
+	// configured.
 	MaxCapacity *int32
 
 	noSmithyDocumentSerde
@@ -2975,6 +2982,34 @@ type FrontOfQueueJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+// An object that represents summary details for the first RUNNABLE job in a quota
+// share.
+type FrontOfQuotaShareJobSummary struct {
+
+	// The Unix timestamp (in milliseconds) for when the job transitioned to its
+	// current position in the quota share.
+	EarliestTimeAtPosition *int64
+
+	// The ARN for a job in a named quota share.
+	JobArn *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents the details of the first RUNNABLE job in each named
+// quota share associated with a single job queue.
+type FrontOfQuotaSharesDetail struct {
+
+	// The Unix timestamp (in milliseconds) for when the first RUNNABLE job per quota
+	// share were all last updated.
+	LastUpdatedAt *int64
+
+	// Contains a list of the first RUNNABLE job in each named quota share.
+	QuotaShares map[string][]FrontOfQuotaShareJobSummary
+
+	noSmithyDocumentSerde
+}
+
 // Determine whether your data volume persists on the host container instance and
 // where it's stored. If this parameter is empty, then the Docker daemon assigns a
 // host path for your data volume. However, the data isn't guaranteed to persist
@@ -3381,8 +3416,11 @@ type JobQueueDetail struct {
 type JobStateTimeLimitAction struct {
 
 	// The action to take when a job is at the head of the job queue in the specified
-	// state for the specified period of time. The only supported value is CANCEL ,
-	// which will cancel the job.
+	// state for the specified period of time. For job queues connected to a ECS ,
+	// FARGATE or EKS compute environment, the only supported value is CANCEL , which
+	// will cancel the job. For job queues connected to a SAGEMAKER_TRAINING service
+	// environment, the only supported value is TERMINATE , which will terminate the
+	// job.
 	//
 	// This member is required.
 	Action JobStateTimeLimitActionsAction
@@ -4163,7 +4201,8 @@ type QueueSnapshotCapacityUsage struct {
 }
 
 // The job queue utilization at a specific point in time, including total capacity
-// usage and fairshare utilization breakdown.
+// usage, and quota share or fairshare utilization breakdown depending on the job
+// queue scheduling policy.
 type QueueSnapshotUtilizationDetail struct {
 
 	// The utilization information for a fairshare scheduling job queues, including
@@ -4174,9 +4213,156 @@ type QueueSnapshotUtilizationDetail struct {
 	// was last updated.
 	LastUpdatedAt *int64
 
-	// The total capacity usage for the entire job queue, for both first-in, first-out
-	// (FIFO) and fairshare scheduling job queue.
+	// The utilization information for a job queue with a quota share scheduling
+	// policy.
+	QuotaShareUtilization *QuotaShareUtilizationDetail
+
+	// The total capacity usage for the entire job queue.
 	TotalCapacityUsage []QueueSnapshotCapacityUsage
+
+	noSmithyDocumentSerde
+}
+
+// Defines the capacity limit for a quota share, or the type and maximum quantity
+// of a particular resource that can be allocated to jobs in the quota share
+// without borrowing.
+type QuotaShareCapacityLimit struct {
+
+	// The unit of compute capacity for the capacityLimit. For example, ml.m5.large .
+	//
+	// This member is required.
+	CapacityUnit *string
+
+	// The maximum capacity available for the quota share. This value represents the
+	// maximum quantity of a resource that can be allocated to jobs in the quota share
+	// without borrowing.
+	//
+	// This member is required.
+	MaxCapacity *int32
+
+	noSmithyDocumentSerde
+}
+
+// The capacity usage for a quota share, including units of compute capacity and
+// quantity of resources being used.
+type QuotaShareCapacityUsage struct {
+
+	// The unit of compute capacity for the capacity usage.
+	CapacityUnit *string
+
+	// The quantity of capacity being used.
+	Quantity *float64
+
+	noSmithyDocumentSerde
+}
+
+// The capacity utilization for a specific quota share, including the quota share
+// name and its current usage.
+type QuotaShareCapacityUtilization struct {
+
+	// The capacity usage information for this quota share, including the units of
+	// compute capacity and quantity being used.
+	CapacityUsage []QuotaShareCapacityUsage
+
+	// The name of the quota share.
+	QuotaShareName *string
+
+	noSmithyDocumentSerde
+}
+
+// Detailed information about a quota share, including its configuration, state,
+// and capacity limits.
+type QuotaShareDetail struct {
+
+	// A list that specifies the quantity and type of compute capacity allocated to
+	// the quota share.
+	CapacityLimits []QuotaShareCapacityLimit
+
+	// The Amazon Resource Name (ARN) of the job queue associated with the quota share.
+	JobQueueArn *string
+
+	// Specifies the preemption behavior for jobs in a quota share.
+	PreemptionConfiguration *QuotaSharePreemptionConfiguration
+
+	// The Amazon Resource Name (ARN) of the quota share.
+	QuotaShareArn *string
+
+	// The name of the quota share.
+	QuotaShareName *string
+
+	// Specifies whether a quota share reserves, lends, or both lends and borrows idle
+	// compute capacity.
+	ResourceSharingConfiguration *QuotaShareResourceSharingConfiguration
+
+	// The state of the quota share.
+	State QuotaShareState
+
+	// The current status of the quota share.
+	Status QuotaShareStatus
+
+	noSmithyDocumentSerde
+}
+
+// The quota share scheduling policy details for a job queue.
+type QuotaSharePolicy struct {
+
+	// The strategy that determines how idle resources are assigned to quota shares
+	// that are borrowing capacity. Currently, only FIFO is supported.
+	//
+	// This member is required.
+	IdleResourceAssignmentStrategy QuotaShareIdleResourceAssignmentStrategy
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the preemption behavior for jobs in a quota share.
+type QuotaSharePreemptionConfiguration struct {
+
+	// Specifies whether jobs within a quota share can be preempted by another, higher
+	// priority job in the same quota share.
+	//
+	// This member is required.
+	InSharePreemption QuotaShareInSharePreemptionState
+
+	noSmithyDocumentSerde
+}
+
+// Specifies whether a quota share reserves, lends, or both lends and borrows idle
+// compute capacity.
+type QuotaShareResourceSharingConfiguration struct {
+
+	// The resource sharing strategy for the quota share. The RESERVE strategy allows
+	// a quota share to reserve idle capacity for itself. LEND configures the share to
+	// lend its idle capacity to another share in need of capacity. The LEND_AND_BORROW
+	// strategy configures the share to borrow idle capacity from an underutilized
+	// share, as well as lend to another share.
+	//
+	// This member is required.
+	Strategy QuotaShareResourceSharingStrategy
+
+	// The maximum percentage of additional capacity that the quota share can borrow
+	// from other shares. borrowLimit can only be applied to quota shares with a
+	// strategy of LEND_AND_BORROW . This value is expressed as a percentage of the
+	// quota share's configured [CapacityLimits].
+	//
+	// The borrowLimit is applied uniformly across all capacity units. For example, if
+	// the borrowLimit is 200, the quota share can borrow up to 200% of its configured
+	// maxCapacity for each capacity unit. The default borrowLimit is -1, which
+	// indicates unlimited borrowing.
+	//
+	// [CapacityLimits]: https://docs.aws.amazon.com/batch/latest/APIReference/API_QuotaShareCapacityLimit.html
+	BorrowLimit *int32
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents the capacity utilization details of all quota shares
+// associated with a single job queue.
+type QuotaShareUtilizationDetail struct {
+
+	// A list of the top capacity utilizations across quota shares associated with a
+	// job queue.
+	TopCapacityUtilization []QuotaShareCapacityUtilization
 
 	noSmithyDocumentSerde
 }
@@ -4379,6 +4565,9 @@ type SchedulingPolicyDetail struct {
 	// The fair-share scheduling policy details.
 	FairsharePolicy *FairsharePolicy
 
+	// The quota share scheduling policy details.
+	QuotaSharePolicy *QuotaSharePolicy
+
 	// The tags that you apply to the fair-share scheduling policy to categorize and
 	// organize your resources. Each tag consists of a key and an optional value. For
 	// more information, see [Tagging Amazon Web Services resources]in Amazon Web Services General Reference.
@@ -4563,6 +4752,51 @@ type ServiceJobEvaluateOnExit struct {
 	noSmithyDocumentSerde
 }
 
+// Detailed information about a preempted attempt of a service job.
+type ServiceJobPreemptedAttempt struct {
+
+	// The service resource identifier associated with the service job attempt.
+	ServiceResourceId *ServiceResourceId
+
+	// The Unix timestamp (in milliseconds) for when the service job attempt was
+	// started.
+	StartedAt *int64
+
+	// A string that provides additional details for the current status of the service
+	// job attempt.
+	StatusReason *string
+
+	// The Unix timestamp (in milliseconds) for when the service job attempt stopped
+	// running.
+	StoppedAt *int64
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the service job behavior when preempted.
+type ServiceJobPreemptionConfiguration struct {
+
+	// The number of times a service job can be retried after it is preempted. A job
+	// will be terminated when preemption retries have been exhausted. If this field is
+	// unset, preempted jobs will be requeued an unlimited number of times.
+	PreemptionRetriesBeforeTermination *int32
+
+	noSmithyDocumentSerde
+}
+
+// Summarizes the preemptions of the service job. This field appears on a service
+// job when it has been preempted.
+type ServiceJobPreemptionSummary struct {
+
+	// The total number of times the service job has been preempted.
+	PreemptedAttemptCount *int32
+
+	// A list of the most recent preemption attempts for the service job.
+	RecentPreemptedAttempts []ServiceJobPreemptedAttempt
+
+	noSmithyDocumentSerde
+}
+
 // The retry strategy for service jobs. This defines how many times to retry a
 // failed service job and under what conditions. For more information, see [Service job retry strategies]in the
 // Batch User Guide.
@@ -4614,6 +4848,9 @@ type ServiceJobSummary struct {
 
 	// Information about the latest attempt for the service job.
 	LatestAttempt *LatestServiceJobAttempt
+
+	// The quota share for the service job.
+	QuotaShareName *string
 
 	// The Unix timestamp (in milliseconds) for when the service job was scheduled for
 	// execution.

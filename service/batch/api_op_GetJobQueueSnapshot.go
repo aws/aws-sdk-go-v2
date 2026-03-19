@@ -11,9 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides a list of the first 100 RUNNABLE jobs associated to a single job queue
-// and includes capacity utilization, including total usage and breakdown by share
-// for fairshare scheduling job queues.
+// Provides a snapshot of job queue state, including ordering of RUNNABLE jobs, as
+// well as capacity utilization for already dispatched jobs. The first 100 RUNNABLE
+// jobs in the job queue are listed in order of dispatch. For job queues with an
+// attached quota-share policy, the first RUNNABLE job in each quota share is also
+// listed. Capacity utilization for the job queue is provided, as well as break
+// downs by share for job queues with attached fair-share or quota-share scheduling
+// policies.
 func (c *Client) GetJobQueueSnapshot(ctx context.Context, params *GetJobQueueSnapshotInput, optFns ...func(*Options)) (*GetJobQueueSnapshotOutput, error) {
 	if params == nil {
 		params = &GetJobQueueSnapshotInput{}
@@ -43,12 +47,16 @@ type GetJobQueueSnapshotOutput struct {
 
 	// The list of the first 100 RUNNABLE jobs in each job queue. For
 	// first-in-first-out (FIFO) job queues, jobs are ordered based on their submission
-	// time. For fair-share scheduling (FSS) job queues, jobs are ordered based on
-	// their job priority and share usage.
+	// time. For job queues with an attached fair-share scheduling (FSS) or quota-share
+	// policy, jobs are ordered based on their job priority and share usage.
 	FrontOfQueue *types.FrontOfQueueDetail
 
-	// The job queue's capacity utilization, including total usage and breakdown by
-	// fairshare scheduling queue.
+	// The first RUNNABLE job in each quota share. Jobs are ordered based on their job
+	// priority and share usage.
+	FrontOfQuotaShares *types.FrontOfQuotaSharesDetail
+
+	// The job queue's capacity utilization, including total usage and breakdown per
+	// given share.
 	QueueUtilization *types.QueueSnapshotUtilizationDetail
 
 	// Metadata pertaining to the operation's result.

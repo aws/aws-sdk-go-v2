@@ -102,6 +102,20 @@ type BranchFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Browser enterprise policy configuration.
+type BrowserEnterprisePolicy struct {
+
+	// The location of the enterprise policy file.
+	//
+	// This member is required.
+	Location ResourceLocation
+
+	// The enterprise policy type. See BrowserEnterprisePolicyType.
+	Type BrowserEnterprisePolicyType
+
+	noSmithyDocumentSerde
+}
+
 // Browser extension configuration.
 type BrowserExtension struct {
 
@@ -192,6 +206,35 @@ type BrowserSessionSummary struct {
 
 	noSmithyDocumentSerde
 }
+
+// A certificate to install in the browser or code interpreter session.
+type Certificate struct {
+
+	// The location of the certificate.
+	//
+	// This member is required.
+	Location CertificateLocation
+
+	noSmithyDocumentSerde
+}
+
+// The location from which to retrieve a certificate.
+//
+// The following types satisfy this interface:
+//
+//	CertificateLocationMemberSecretsManager
+type CertificateLocation interface {
+	isCertificateLocation()
+}
+
+// The Amazon Web Services Secrets Manager location of the certificate.
+type CertificateLocationMemberSecretsManager struct {
+	Value SecretsManagerLocation
+
+	noSmithyDocumentSerde
+}
+
+func (*CertificateLocationMemberSecretsManager) isCertificateLocation() {}
 
 // The output produced by executing code in a code interpreter session in Amazon
 // Bedrock AgentCore. This structure contains the results of code execution,
@@ -1266,6 +1309,18 @@ type SearchCriteria struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon Web Services Secrets Manager location configuration.
+type SecretsManagerLocation struct {
+
+	// The ARN of the Amazon Web Services Secrets Manager secret containing the
+	// certificate.
+	//
+	// This member is required.
+	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary information about a session in an AgentCore Memory resource.
 type SessionSummary struct {
 
@@ -1499,6 +1554,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isCertificateLocation()                   {}
 func (*UnknownUnionMember) isCodeInterpreterStreamOutput()           {}
 func (*UnknownUnionMember) isContent()                               {}
 func (*UnknownUnionMember) isContext()                               {}

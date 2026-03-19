@@ -59,12 +59,18 @@ type StartBrowserSessionInput struct {
 	// This member is required.
 	BrowserIdentifier *string
 
+	// A list of certificates to install in the browser session.
+	Certificates []types.Certificate
+
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
 	// AgentCore ignores the request, but does not return an error. This parameter
 	// helps prevent the creation of duplicate sessions if there are temporary network
 	// issues.
 	ClientToken *string
+
+	// A list of files containing enterprise policies for the browser.
+	EnterprisePolicies []types.BrowserEnterprisePolicy
 
 	// A list of browser extensions to load into the browser session.
 	Extensions []types.BrowserExtension

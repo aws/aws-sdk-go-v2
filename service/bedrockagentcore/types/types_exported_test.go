@@ -8,6 +8,24 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
 )
 
+func ExampleCertificateLocation_outputUsage() {
+	var union types.CertificateLocation
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CertificateLocationMemberSecretsManager:
+		_ = v.Value // Value is types.SecretsManagerLocation
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SecretsManagerLocation
+
 func ExampleCodeInterpreterStreamOutput_outputUsage() {
 	var union types.CodeInterpreterStreamOutput
 	// type switches can be used to check the union value

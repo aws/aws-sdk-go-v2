@@ -35,8 +35,13 @@ type UpdateSchedulingPolicyInput struct {
 	// This member is required.
 	Arn *string
 
-	// The fair-share policy scheduling details.
+	// The fair-share policy scheduling details. Once set during creation, a
+	// fairsharePolicy cannot be removed or changed to a quotaSharePolicy.
 	FairsharePolicy *types.FairsharePolicy
+
+	// The quota share scheduling policy details. Once set during creation, a
+	// quotaSharePolicy cannot be removed or changed to a fairsharePolicy.
+	QuotaSharePolicy *types.QuotaSharePolicy
 
 	noSmithyDocumentSerde
 }

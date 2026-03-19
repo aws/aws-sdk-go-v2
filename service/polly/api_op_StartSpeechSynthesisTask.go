@@ -37,7 +37,8 @@ func (c *Client) StartSpeechSynthesisTask(ctx context.Context, params *StartSpee
 type StartSpeechSynthesisTaskInput struct {
 
 	// The format in which the returned output will be encoded. For audio stream, this
-	// will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json.
+	// will be mp3, ogg_vorbis, ogg_opus, mu-law, a-law, or pcm. For speech marks, this
+	// will be json.
 	//
 	// This member is required.
 	OutputFormat types.OutputFormat
@@ -92,6 +93,10 @@ type StartSpeechSynthesisTaskInput struct {
 	// default value for generative voices is "24000".
 	//
 	// Valid values for pcm are "8000" and "16000" The default value is "16000".
+	//
+	// Valid value for ogg_opus is "48000".
+	//
+	// Valid value for mu-law and a-law is "8000".
 	SampleRate *string
 
 	// ARN for the SNS topic optionally used for providing status notification for a

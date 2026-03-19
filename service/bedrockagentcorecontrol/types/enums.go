@@ -121,6 +121,25 @@ func (AuthorizerType) Values() []AuthorizerType {
 	}
 }
 
+type BrowserEnterprisePolicyType string
+
+// Enum values for BrowserEnterprisePolicyType
+const (
+	BrowserEnterprisePolicyTypeManaged     BrowserEnterprisePolicyType = "MANAGED"
+	BrowserEnterprisePolicyTypeRecommended BrowserEnterprisePolicyType = "RECOMMENDED"
+)
+
+// Values returns all known values for BrowserEnterprisePolicyType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BrowserEnterprisePolicyType) Values() []BrowserEnterprisePolicyType {
+	return []BrowserEnterprisePolicyType{
+		"MANAGED",
+		"RECOMMENDED",
+	}
+}
+
 type BrowserNetworkMode string
 
 // Enum values for BrowserNetworkMode

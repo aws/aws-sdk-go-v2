@@ -45,6 +45,9 @@ type CreateBrowserInput struct {
 	// identification using HTTP message signatures for web bot authentication.
 	BrowserSigning *types.BrowserSigningConfigInput
 
+	// A list of certificates to install in the browser.
+	Certificates []types.Certificate
+
 	// A unique, case-sensitive identifier to ensure that the operation completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
 	// AgentCore ignores the request but does not return an error.
@@ -52,6 +55,9 @@ type CreateBrowserInput struct {
 
 	// The description of the browser.
 	Description *string
+
+	// A list of enterprise policy files for the browser.
+	EnterprisePolicies []types.BrowserEnterprisePolicy
 
 	// The Amazon Resource Name (ARN) of the IAM role that provides permissions for
 	// the browser to access Amazon Web Services services.

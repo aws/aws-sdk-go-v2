@@ -37,8 +37,15 @@ type CreateSchedulingPolicyInput struct {
 	// This member is required.
 	Name *string
 
-	// The fair-share scheduling policy details.
+	// The fair-share scheduling policy details. Only one of fairsharePolicy or
+	// quotaSharePolicy can be set. Once set, this policy type cannot be removed or
+	// changed to a quotaSharePolicy.
 	FairsharePolicy *types.FairsharePolicy
+
+	// The quota share scheduling policy details. Only one of fairsharePolicy or
+	// quotaSharePolicy can be set. Once set, this policy type cannot be removed or
+	// changed to a fairSharePolicy.
+	QuotaSharePolicy *types.QuotaSharePolicy
 
 	// The tags that you apply to the scheduling policy to help you categorize and
 	// organize your resources. Each tag consists of a key and an optional value. For

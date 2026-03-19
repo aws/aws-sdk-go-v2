@@ -90,6 +90,26 @@ func (m *validateOpCreateJobQueue) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateQuotaShare struct {
+}
+
+func (*validateOpCreateQuotaShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateQuotaShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateQuotaShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateQuotaShareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateSchedulingPolicy struct {
 }
 
@@ -185,6 +205,26 @@ func (m *validateOpDeleteJobQueue) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteJobQueueInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteQuotaShare struct {
+}
+
+func (*validateOpDeleteQuotaShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteQuotaShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteQuotaShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteQuotaShareInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -290,6 +330,26 @@ func (m *validateOpDescribeJobs) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeQuotaShare struct {
+}
+
+func (*validateOpDescribeQuotaShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeQuotaShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeQuotaShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeQuotaShareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeSchedulingPolicies struct {
 }
 
@@ -365,6 +425,26 @@ func (m *validateOpListJobsByConsumableResource) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListJobsByConsumableResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListQuotaShares struct {
+}
+
+func (*validateOpListQuotaShares) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListQuotaShares) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListQuotaSharesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListQuotaSharesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -590,6 +670,26 @@ func (m *validateOpUpdateJobQueue) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateQuotaShare struct {
+}
+
+func (*validateOpUpdateQuotaShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQuotaShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQuotaShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQuotaShareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSchedulingPolicy struct {
 }
 
@@ -630,6 +730,26 @@ func (m *validateOpUpdateServiceEnvironment) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateServiceJob struct {
+}
+
+func (*validateOpUpdateServiceJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateServiceJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateServiceJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateServiceJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCancelJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelJob{}, middleware.After)
 }
@@ -644,6 +764,10 @@ func addOpCreateConsumableResourceValidationMiddleware(stack *middleware.Stack) 
 
 func addOpCreateJobQueueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateJobQueue{}, middleware.After)
+}
+
+func addOpCreateQuotaShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateQuotaShare{}, middleware.After)
 }
 
 func addOpCreateSchedulingPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -666,6 +790,10 @@ func addOpDeleteJobQueueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteJobQueue{}, middleware.After)
 }
 
+func addOpDeleteQuotaShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteQuotaShare{}, middleware.After)
+}
+
 func addOpDeleteSchedulingPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSchedulingPolicy{}, middleware.After)
 }
@@ -686,6 +814,10 @@ func addOpDescribeJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeJobs{}, middleware.After)
 }
 
+func addOpDescribeQuotaShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeQuotaShare{}, middleware.After)
+}
+
 func addOpDescribeSchedulingPoliciesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSchedulingPolicies{}, middleware.After)
 }
@@ -700,6 +832,10 @@ func addOpGetJobQueueSnapshotValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListJobsByConsumableResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListJobsByConsumableResource{}, middleware.After)
+}
+
+func addOpListQuotaSharesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListQuotaShares{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -746,12 +882,20 @@ func addOpUpdateJobQueueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateJobQueue{}, middleware.After)
 }
 
+func addOpUpdateQuotaShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQuotaShare{}, middleware.After)
+}
+
 func addOpUpdateSchedulingPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSchedulingPolicy{}, middleware.After)
 }
 
 func addOpUpdateServiceEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateServiceEnvironment{}, middleware.After)
+}
+
+func addOpUpdateServiceJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateServiceJob{}, middleware.After)
 }
 
 func validateComputeEnvironmentOrder(v *types.ComputeEnvironmentOrder) error {
@@ -1724,6 +1868,86 @@ func validateNodeRangeProperty(v *types.NodeRangeProperty) error {
 	}
 }
 
+func validateQuotaShareCapacityLimit(v *types.QuotaShareCapacityLimit) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QuotaShareCapacityLimit"}
+	if v.MaxCapacity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxCapacity"))
+	}
+	if v.CapacityUnit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityUnit"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQuotaShareCapacityLimits(v []types.QuotaShareCapacityLimit) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QuotaShareCapacityLimits"}
+	for i := range v {
+		if err := validateQuotaShareCapacityLimit(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQuotaSharePolicy(v *types.QuotaSharePolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QuotaSharePolicy"}
+	if len(v.IdleResourceAssignmentStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IdleResourceAssignmentStrategy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQuotaSharePreemptionConfiguration(v *types.QuotaSharePreemptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QuotaSharePreemptionConfiguration"}
+	if len(v.InSharePreemption) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InSharePreemption"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQuotaShareResourceSharingConfiguration(v *types.QuotaShareResourceSharingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QuotaShareResourceSharingConfiguration"}
+	if len(v.Strategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Strategy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRepositoryCredentials(v *types.RepositoryCredentials) error {
 	if v == nil {
 		return nil
@@ -2193,6 +2417,45 @@ func validateOpCreateJobQueueInput(v *CreateJobQueueInput) error {
 	}
 }
 
+func validateOpCreateQuotaShareInput(v *CreateQuotaShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateQuotaShareInput"}
+	if v.QuotaShareName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuotaShareName"))
+	}
+	if v.JobQueue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobQueue"))
+	}
+	if v.CapacityLimits == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityLimits"))
+	} else if v.CapacityLimits != nil {
+		if err := validateQuotaShareCapacityLimits(v.CapacityLimits); err != nil {
+			invalidParams.AddNested("CapacityLimits", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResourceSharingConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceSharingConfiguration"))
+	} else if v.ResourceSharingConfiguration != nil {
+		if err := validateQuotaShareResourceSharingConfiguration(v.ResourceSharingConfiguration); err != nil {
+			invalidParams.AddNested("ResourceSharingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PreemptionConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PreemptionConfiguration"))
+	} else if v.PreemptionConfiguration != nil {
+		if err := validateQuotaSharePreemptionConfiguration(v.PreemptionConfiguration); err != nil {
+			invalidParams.AddNested("PreemptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateSchedulingPolicyInput(v *CreateSchedulingPolicyInput) error {
 	if v == nil {
 		return nil
@@ -2200,6 +2463,11 @@ func validateOpCreateSchedulingPolicyInput(v *CreateSchedulingPolicyInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSchedulingPolicyInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.QuotaSharePolicy != nil {
+		if err := validateQuotaSharePolicy(v.QuotaSharePolicy); err != nil {
+			invalidParams.AddNested("QuotaSharePolicy", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.FairsharePolicy != nil {
 		if err := validateFairsharePolicy(v.FairsharePolicy); err != nil {
@@ -2271,6 +2539,21 @@ func validateOpDeleteJobQueueInput(v *DeleteJobQueueInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteJobQueueInput"}
 	if v.JobQueue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobQueue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteQuotaShareInput(v *DeleteQuotaShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteQuotaShareInput"}
+	if v.QuotaShareArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuotaShareArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2354,6 +2637,21 @@ func validateOpDescribeJobsInput(v *DescribeJobsInput) error {
 	}
 }
 
+func validateOpDescribeQuotaShareInput(v *DescribeQuotaShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeQuotaShareInput"}
+	if v.QuotaShareArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuotaShareArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeSchedulingPoliciesInput(v *DescribeSchedulingPoliciesInput) error {
 	if v == nil {
 		return nil
@@ -2406,6 +2704,21 @@ func validateOpListJobsByConsumableResourceInput(v *ListJobsByConsumableResource
 	invalidParams := smithy.InvalidParamsError{Context: "ListJobsByConsumableResourceInput"}
 	if v.ConsumableResource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConsumableResource"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListQuotaSharesInput(v *ListQuotaSharesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListQuotaSharesInput"}
+	if v.JobQueue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobQueue"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2684,6 +2997,36 @@ func validateOpUpdateJobQueueInput(v *UpdateJobQueueInput) error {
 	}
 }
 
+func validateOpUpdateQuotaShareInput(v *UpdateQuotaShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQuotaShareInput"}
+	if v.QuotaShareArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuotaShareArn"))
+	}
+	if v.CapacityLimits != nil {
+		if err := validateQuotaShareCapacityLimits(v.CapacityLimits); err != nil {
+			invalidParams.AddNested("CapacityLimits", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResourceSharingConfiguration != nil {
+		if err := validateQuotaShareResourceSharingConfiguration(v.ResourceSharingConfiguration); err != nil {
+			invalidParams.AddNested("ResourceSharingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PreemptionConfiguration != nil {
+		if err := validateQuotaSharePreemptionConfiguration(v.PreemptionConfiguration); err != nil {
+			invalidParams.AddNested("PreemptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateSchedulingPolicyInput(v *UpdateSchedulingPolicyInput) error {
 	if v == nil {
 		return nil
@@ -2691,6 +3034,11 @@ func validateOpUpdateSchedulingPolicyInput(v *UpdateSchedulingPolicyInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSchedulingPolicyInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.QuotaSharePolicy != nil {
+		if err := validateQuotaSharePolicy(v.QuotaSharePolicy); err != nil {
+			invalidParams.AddNested("QuotaSharePolicy", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.FairsharePolicy != nil {
 		if err := validateFairsharePolicy(v.FairsharePolicy); err != nil {
@@ -2711,6 +3059,24 @@ func validateOpUpdateServiceEnvironmentInput(v *UpdateServiceEnvironmentInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateServiceEnvironmentInput"}
 	if v.ServiceEnvironment == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceEnvironment"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateServiceJobInput(v *UpdateServiceJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateServiceJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if v.SchedulingPriority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchedulingPriority"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

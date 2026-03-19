@@ -7143,6 +7143,11 @@ func awsRestjson1_deserializeOpDocumentGetBrowserOutput(v **GetBrowserOutput, va
 				return err
 			}
 
+		case "certificates":
+			if err := awsRestjson1_deserializeDocumentCertificates(&sv.Certificates, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7163,6 +7168,11 @@ func awsRestjson1_deserializeOpDocumentGetBrowserOutput(v **GetBrowserOutput, va
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "enterprisePolicies":
+			if err := awsRestjson1_deserializeDocumentBrowserEnterprisePolicies(&sv.EnterprisePolicies, value); err != nil {
+				return err
 			}
 
 		case "executionRoleArn":
@@ -7644,6 +7654,11 @@ func awsRestjson1_deserializeOpDocumentGetCodeInterpreterOutput(v **GetCodeInter
 
 	for key, value := range shape {
 		switch key {
+		case "certificates":
+			if err := awsRestjson1_deserializeDocumentCertificates(&sv.Certificates, value); err != nil {
+				return err
+			}
+
 		case "codeInterpreterArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19433,6 +19448,85 @@ func awsRestjson1_deserializeDocumentBedrockEvaluatorModelConfig(v **types.Bedro
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBrowserEnterprisePolicies(v *[]types.BrowserEnterprisePolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BrowserEnterprisePolicy
+	if *v == nil {
+		cv = []types.BrowserEnterprisePolicy{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BrowserEnterprisePolicy
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBrowserEnterprisePolicy(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBrowserEnterprisePolicy(v **types.BrowserEnterprisePolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BrowserEnterprisePolicy
+	if *v == nil {
+		sv = &types.BrowserEnterprisePolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "location":
+			if err := awsRestjson1_deserializeDocumentResourceLocation(&sv.Location, value); err != nil {
+				return err
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BrowserEnterprisePolicyType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.BrowserEnterprisePolicyType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBrowserNetworkConfiguration(v **types.BrowserNetworkConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19941,6 +20035,116 @@ func awsRestjson1_deserializeDocumentCedarPolicy(v **types.CedarPolicy, value in
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCertificate(v **types.Certificate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Certificate
+	if *v == nil {
+		sv = &types.Certificate{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "location":
+			if err := awsRestjson1_deserializeDocumentCertificateLocation(&sv.Location, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCertificateLocation(v *types.CertificateLocation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.CertificateLocation
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "secretsManager":
+			var mv types.SecretsManagerLocation
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentSecretsManagerLocation(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.CertificateLocationMemberSecretsManager{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCertificates(v *[]types.Certificate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Certificate
+	if *v == nil {
+		cv = []types.Certificate{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Certificate
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCertificate(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -26275,6 +26479,46 @@ func awsRestjson1_deserializeDocumentResourceLimitExceededException(v **types.Re
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentResourceLocation(v *types.ResourceLocation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ResourceLocation
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "s3":
+			var mv types.S3Location
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentS3Location(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ResourceLocationMemberS3{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -26852,6 +27096,46 @@ func awsRestjson1_deserializeDocumentSecret(v **types.Secret, value interface{})
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSecretsManagerLocation(v **types.SecretsManagerLocation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SecretsManagerLocation
+	if *v == nil {
+		sv = &types.SecretsManagerLocation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "secretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ToolSecretArn to be of type string, got %T instead", value)
 				}
 				sv.SecretArn = ptr.String(jtv)
 			}

@@ -78,6 +78,12 @@ type GetBrowserSessionOutput struct {
 	// This member is required.
 	SessionId *string
 
+	// The list of certificates installed in the browser session.
+	Certificates []types.Certificate
+
+	// A list of files containing enterprise policies for the browser session.
+	EnterprisePolicies []types.BrowserEnterprisePolicy
+
 	// The list of browser extensions that are configured in the browser session.
 	Extensions []types.BrowserExtension
 

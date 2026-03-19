@@ -459,6 +459,13 @@ func awsRestjson1_serializeOpDocumentCreateBrowserInput(v *CreateBrowserInput, v
 		}
 	}
 
+	if v.Certificates != nil {
+		ok := object.Key("certificates")
+		if err := awsRestjson1_serializeDocumentCertificates(v.Certificates, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
@@ -467,6 +474,13 @@ func awsRestjson1_serializeOpDocumentCreateBrowserInput(v *CreateBrowserInput, v
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.EnterprisePolicies != nil {
+		ok := object.Key("enterprisePolicies")
+		if err := awsRestjson1_serializeDocumentBrowserEnterprisePolicies(v.EnterprisePolicies, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ExecutionRoleArn != nil {
@@ -673,6 +687,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateCodeInterpreterInput(v *CreateCod
 func awsRestjson1_serializeOpDocumentCreateCodeInterpreterInput(v *CreateCodeInterpreterInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Certificates != nil {
+		ok := object.Key("certificates")
+		if err := awsRestjson1_serializeDocumentCertificates(v.Certificates, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
@@ -8102,6 +8123,38 @@ func awsRestjson1_serializeDocumentBedrockEvaluatorModelConfig(v *types.BedrockE
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBrowserEnterprisePolicies(v []types.BrowserEnterprisePolicy, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentBrowserEnterprisePolicy(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBrowserEnterprisePolicy(v *types.BrowserEnterprisePolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Location != nil {
+		ok := object.Key("location")
+		if err := awsRestjson1_serializeDocumentResourceLocation(v.Location, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBrowserNetworkConfiguration(v *types.BrowserNetworkConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8172,6 +8225,51 @@ func awsRestjson1_serializeDocumentCedarPolicy(v *types.CedarPolicy, value smith
 		ok.String(*v.Statement)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCertificate(v *types.Certificate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Location != nil {
+		ok := object.Key("location")
+		if err := awsRestjson1_serializeDocumentCertificateLocation(v.Location, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCertificateLocation(v types.CertificateLocation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CertificateLocationMemberSecretsManager:
+		av := object.Key("secretsManager")
+		if err := awsRestjson1_serializeDocumentSecretsManagerLocation(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCertificates(v []types.Certificate, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCertificate(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -10299,6 +10397,24 @@ func awsRestjson1_serializeDocumentResource(v types.Resource, value smithyjson.V
 	return nil
 }
 
+func awsRestjson1_serializeDocumentResourceLocation(v types.ResourceLocation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ResourceLocationMemberS3:
+		av := object.Key("s3")
+		if err := awsRestjson1_serializeDocumentS3Location(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentResourceOauth2ReturnUrlListType(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -10502,6 +10618,18 @@ func awsRestjson1_serializeDocumentSchemaProperties(v map[string]types.SchemaDef
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSecretsManagerLocation(v *types.SecretsManagerLocation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecretArn != nil {
+		ok := object.Key("secretArn")
+		ok.String(*v.SecretArn)
+	}
+
 	return nil
 }
 

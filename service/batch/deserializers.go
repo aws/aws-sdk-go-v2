@@ -615,6 +615,174 @@ func awsRestjson1_deserializeOpDocumentCreateJobQueueOutput(v **CreateJobQueueOu
 	return nil
 }
 
+type awsRestjson1_deserializeOpCreateQuotaShare struct {
+}
+
+func (*awsRestjson1_deserializeOpCreateQuotaShare) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpCreateQuotaShare) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorCreateQuotaShare(response, &metadata)
+	}
+	output := &CreateQuotaShareOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentCreateQuotaShareOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorCreateQuotaShare(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("ClientException", errorCode):
+		return awsRestjson1_deserializeErrorClientException(response, errorBody)
+
+	case strings.EqualFold("ServerException", errorCode):
+		return awsRestjson1_deserializeErrorServerException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentCreateQuotaShareOutput(v **CreateQuotaShareOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreateQuotaShareOutput
+	if *v == nil {
+		sv = &CreateQuotaShareOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "quotaShareArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.QuotaShareArn = ptr.String(jtv)
+			}
+
+		case "quotaShareName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.QuotaShareName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpCreateSchedulingPolicy struct {
 }
 
@@ -1168,6 +1336,97 @@ func (m *awsRestjson1_deserializeOpDeleteJobQueue) HandleDeserialize(ctx context
 }
 
 func awsRestjson1_deserializeOpErrorDeleteJobQueue(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("ClientException", errorCode):
+		return awsRestjson1_deserializeErrorClientException(response, errorBody)
+
+	case strings.EqualFold("ServerException", errorCode):
+		return awsRestjson1_deserializeErrorServerException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestjson1_deserializeOpDeleteQuotaShare struct {
+}
+
+func (*awsRestjson1_deserializeOpDeleteQuotaShare) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpDeleteQuotaShare) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteQuotaShare(response, &metadata)
+	}
+	output := &DeleteQuotaShareOutput{}
+	out.Result = output
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDeleteQuotaShare(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2378,6 +2637,221 @@ func awsRestjson1_deserializeOpDocumentDescribeJobsOutput(v **DescribeJobsOutput
 	return nil
 }
 
+type awsRestjson1_deserializeOpDescribeQuotaShare struct {
+}
+
+func (*awsRestjson1_deserializeOpDescribeQuotaShare) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpDescribeQuotaShare) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorDescribeQuotaShare(response, &metadata)
+	}
+	output := &DescribeQuotaShareOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentDescribeQuotaShareOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDescribeQuotaShare(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("ClientException", errorCode):
+		return awsRestjson1_deserializeErrorClientException(response, errorBody)
+
+	case strings.EqualFold("ServerException", errorCode):
+		return awsRestjson1_deserializeErrorServerException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentDescribeQuotaShareOutput(v **DescribeQuotaShareOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DescribeQuotaShareOutput
+	if *v == nil {
+		sv = &DescribeQuotaShareOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "capacityLimits":
+			if err := awsRestjson1_deserializeDocumentQuotaShareCapacityLimits(&sv.CapacityLimits, value); err != nil {
+				return err
+			}
+
+		case "jobQueueArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.JobQueueArn = ptr.String(jtv)
+			}
+
+		case "preemptionConfiguration":
+			if err := awsRestjson1_deserializeDocumentQuotaSharePreemptionConfiguration(&sv.PreemptionConfiguration, value); err != nil {
+				return err
+			}
+
+		case "quotaShareArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.QuotaShareArn = ptr.String(jtv)
+			}
+
+		case "quotaShareName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.QuotaShareName = ptr.String(jtv)
+			}
+
+		case "resourceSharingConfiguration":
+			if err := awsRestjson1_deserializeDocumentQuotaShareResourceSharingConfiguration(&sv.ResourceSharingConfiguration, value); err != nil {
+				return err
+			}
+
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QuotaShareState to be of type string, got %T instead", value)
+				}
+				sv.State = types.QuotaShareState(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QuotaShareStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.QuotaShareStatus(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTagrisTagsMap(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpDescribeSchedulingPolicies struct {
 }
 
@@ -2911,6 +3385,25 @@ func awsRestjson1_deserializeOpDocumentDescribeServiceJobOutput(v **DescribeServ
 				return err
 			}
 
+		case "preemptionConfiguration":
+			if err := awsRestjson1_deserializeDocumentServiceJobPreemptionConfiguration(&sv.PreemptionConfiguration, value); err != nil {
+				return err
+			}
+
+		case "preemptionSummary":
+			if err := awsRestjson1_deserializeDocumentServiceJobPreemptionSummary(&sv.PreemptionSummary, value); err != nil {
+				return err
+			}
+
+		case "quotaShareName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.QuotaShareName = ptr.String(jtv)
+			}
+
 		case "retryStrategy":
 			if err := awsRestjson1_deserializeDocumentServiceJobRetryStrategy(&sv.RetryStrategy, value); err != nil {
 				return err
@@ -3175,6 +3668,11 @@ func awsRestjson1_deserializeOpDocumentGetJobQueueSnapshotOutput(v **GetJobQueue
 		switch key {
 		case "frontOfQueue":
 			if err := awsRestjson1_deserializeDocumentFrontOfQueueDetail(&sv.FrontOfQueue, value); err != nil {
+				return err
+			}
+
+		case "frontOfQuotaShares":
+			if err := awsRestjson1_deserializeDocumentFrontOfQuotaSharesDetail(&sv.FrontOfQuotaShares, value); err != nil {
 				return err
 			}
 
@@ -3673,6 +4171,170 @@ func awsRestjson1_deserializeOpDocumentListJobsByConsumableResourceOutput(v **Li
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListQuotaShares struct {
+}
+
+func (*awsRestjson1_deserializeOpListQuotaShares) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListQuotaShares) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListQuotaShares(response, &metadata)
+	}
+	output := &ListQuotaSharesOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListQuotaSharesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListQuotaShares(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("ClientException", errorCode):
+		return awsRestjson1_deserializeErrorClientException(response, errorBody)
+
+	case strings.EqualFold("ServerException", errorCode):
+		return awsRestjson1_deserializeErrorServerException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListQuotaSharesOutput(v **ListQuotaSharesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListQuotaSharesOutput
+	if *v == nil {
+		sv = &ListQuotaSharesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "quotaShares":
+			if err := awsRestjson1_deserializeDocumentQuotaShareList(&sv.QuotaShares, value); err != nil {
+				return err
 			}
 
 		default:
@@ -5583,6 +6245,174 @@ func awsRestjson1_deserializeOpDocumentUpdateJobQueueOutput(v **UpdateJobQueueOu
 	return nil
 }
 
+type awsRestjson1_deserializeOpUpdateQuotaShare struct {
+}
+
+func (*awsRestjson1_deserializeOpUpdateQuotaShare) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpUpdateQuotaShare) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateQuotaShare(response, &metadata)
+	}
+	output := &UpdateQuotaShareOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentUpdateQuotaShareOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorUpdateQuotaShare(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("ClientException", errorCode):
+		return awsRestjson1_deserializeErrorClientException(response, errorBody)
+
+	case strings.EqualFold("ServerException", errorCode):
+		return awsRestjson1_deserializeErrorServerException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentUpdateQuotaShareOutput(v **UpdateQuotaShareOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateQuotaShareOutput
+	if *v == nil {
+		sv = &UpdateQuotaShareOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "quotaShareArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.QuotaShareArn = ptr.String(jtv)
+			}
+
+		case "quotaShareName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.QuotaShareName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpUpdateSchedulingPolicy struct {
 }
 
@@ -5831,6 +6661,183 @@ func awsRestjson1_deserializeOpDocumentUpdateServiceEnvironmentOutput(v **Update
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ServiceEnvironmentName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpUpdateServiceJob struct {
+}
+
+func (*awsRestjson1_deserializeOpUpdateServiceJob) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpUpdateServiceJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateServiceJob(response, &metadata)
+	}
+	output := &UpdateServiceJobOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentUpdateServiceJobOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorUpdateServiceJob(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("ClientException", errorCode):
+		return awsRestjson1_deserializeErrorClientException(response, errorBody)
+
+	case strings.EqualFold("ServerException", errorCode):
+		return awsRestjson1_deserializeErrorServerException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentUpdateServiceJobOutput(v **UpdateServiceJobOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateServiceJobOutput
+	if *v == nil {
+		sv = &UpdateServiceJobOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "jobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
+			}
+
+		case "jobId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.JobId = ptr.String(jtv)
+			}
+
+		case "jobName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.JobName = ptr.String(jtv)
 			}
 
 		default:
@@ -10829,6 +11836,176 @@ func awsRestjson1_deserializeDocumentFrontOfQueueJobSummaryList(v *[]types.Front
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFrontOfQuotaShareJobSummary(v **types.FrontOfQuotaShareJobSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FrontOfQuotaShareJobSummary
+	if *v == nil {
+		sv = &types.FrontOfQuotaShareJobSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "earliestTimeAtPosition":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EarliestTimeAtPosition = ptr.Int64(i64)
+			}
+
+		case "jobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFrontOfQuotaShareJobSummaryList(v *[]types.FrontOfQuotaShareJobSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FrontOfQuotaShareJobSummary
+	if *v == nil {
+		cv = []types.FrontOfQuotaShareJobSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FrontOfQuotaShareJobSummary
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentFrontOfQuotaShareJobSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFrontOfQuotaSharesDetail(v **types.FrontOfQuotaSharesDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FrontOfQuotaSharesDetail
+	if *v == nil {
+		sv = &types.FrontOfQuotaSharesDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "lastUpdatedAt":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LastUpdatedAt = ptr.Int64(i64)
+			}
+
+		case "quotaShares":
+			if err := awsRestjson1_deserializeDocumentFrontOfQuotaSharesJobSummaryMap(&sv.QuotaShares, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFrontOfQuotaSharesJobSummaryMap(v *map[string][]types.FrontOfQuotaShareJobSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string][]types.FrontOfQuotaShareJobSummary
+	if *v == nil {
+		mv = map[string][]types.FrontOfQuotaShareJobSummary{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal []types.FrontOfQuotaShareJobSummary
+		mapVar := parsedVal
+		if err := awsRestjson1_deserializeDocumentFrontOfQuotaShareJobSummaryList(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentHost(v **types.Host, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13668,8 +14845,581 @@ func awsRestjson1_deserializeDocumentQueueSnapshotUtilizationDetail(v **types.Qu
 				sv.LastUpdatedAt = ptr.Int64(i64)
 			}
 
+		case "quotaShareUtilization":
+			if err := awsRestjson1_deserializeDocumentQuotaShareUtilizationDetail(&sv.QuotaShareUtilization, value); err != nil {
+				return err
+			}
+
 		case "totalCapacityUsage":
 			if err := awsRestjson1_deserializeDocumentQueueSnapshotCapacityUsageList(&sv.TotalCapacityUsage, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQuotaShareCapacityLimit(v **types.QuotaShareCapacityLimit, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QuotaShareCapacityLimit
+	if *v == nil {
+		sv = &types.QuotaShareCapacityLimit{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "capacityUnit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CapacityUnit = ptr.String(jtv)
+			}
+
+		case "maxCapacity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxCapacity = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQuotaShareCapacityLimits(v *[]types.QuotaShareCapacityLimit, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.QuotaShareCapacityLimit
+	if *v == nil {
+		cv = []types.QuotaShareCapacityLimit{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.QuotaShareCapacityLimit
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentQuotaShareCapacityLimit(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQuotaShareCapacityUsage(v **types.QuotaShareCapacityUsage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QuotaShareCapacityUsage
+	if *v == nil {
+		sv = &types.QuotaShareCapacityUsage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "capacityUnit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CapacityUnit = ptr.String(jtv)
+			}
+
+		case "quantity":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Quantity = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Quantity = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQuotaShareCapacityUsageList(v *[]types.QuotaShareCapacityUsage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.QuotaShareCapacityUsage
+	if *v == nil {
+		cv = []types.QuotaShareCapacityUsage{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.QuotaShareCapacityUsage
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentQuotaShareCapacityUsage(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQuotaShareCapacityUtilization(v **types.QuotaShareCapacityUtilization, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QuotaShareCapacityUtilization
+	if *v == nil {
+		sv = &types.QuotaShareCapacityUtilization{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "capacityUsage":
+			if err := awsRestjson1_deserializeDocumentQuotaShareCapacityUsageList(&sv.CapacityUsage, value); err != nil {
+				return err
+			}
+
+		case "quotaShareName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.QuotaShareName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQuotaShareCapacityUtilizationList(v *[]types.QuotaShareCapacityUtilization, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.QuotaShareCapacityUtilization
+	if *v == nil {
+		cv = []types.QuotaShareCapacityUtilization{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.QuotaShareCapacityUtilization
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentQuotaShareCapacityUtilization(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQuotaShareDetail(v **types.QuotaShareDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QuotaShareDetail
+	if *v == nil {
+		sv = &types.QuotaShareDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "capacityLimits":
+			if err := awsRestjson1_deserializeDocumentQuotaShareCapacityLimits(&sv.CapacityLimits, value); err != nil {
+				return err
+			}
+
+		case "jobQueueArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.JobQueueArn = ptr.String(jtv)
+			}
+
+		case "preemptionConfiguration":
+			if err := awsRestjson1_deserializeDocumentQuotaSharePreemptionConfiguration(&sv.PreemptionConfiguration, value); err != nil {
+				return err
+			}
+
+		case "quotaShareArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.QuotaShareArn = ptr.String(jtv)
+			}
+
+		case "quotaShareName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.QuotaShareName = ptr.String(jtv)
+			}
+
+		case "resourceSharingConfiguration":
+			if err := awsRestjson1_deserializeDocumentQuotaShareResourceSharingConfiguration(&sv.ResourceSharingConfiguration, value); err != nil {
+				return err
+			}
+
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QuotaShareState to be of type string, got %T instead", value)
+				}
+				sv.State = types.QuotaShareState(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QuotaShareStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.QuotaShareStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQuotaShareList(v *[]types.QuotaShareDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.QuotaShareDetail
+	if *v == nil {
+		cv = []types.QuotaShareDetail{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.QuotaShareDetail
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentQuotaShareDetail(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQuotaSharePolicy(v **types.QuotaSharePolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QuotaSharePolicy
+	if *v == nil {
+		sv = &types.QuotaSharePolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "idleResourceAssignmentStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QuotaShareIdleResourceAssignmentStrategy to be of type string, got %T instead", value)
+				}
+				sv.IdleResourceAssignmentStrategy = types.QuotaShareIdleResourceAssignmentStrategy(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQuotaSharePreemptionConfiguration(v **types.QuotaSharePreemptionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QuotaSharePreemptionConfiguration
+	if *v == nil {
+		sv = &types.QuotaSharePreemptionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "inSharePreemption":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QuotaShareInSharePreemptionState to be of type string, got %T instead", value)
+				}
+				sv.InSharePreemption = types.QuotaShareInSharePreemptionState(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQuotaShareResourceSharingConfiguration(v **types.QuotaShareResourceSharingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QuotaShareResourceSharingConfiguration
+	if *v == nil {
+		sv = &types.QuotaShareResourceSharingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "borrowLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BorrowLimit = ptr.Int32(int32(i64))
+			}
+
+		case "strategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QuotaShareResourceSharingStrategy to be of type string, got %T instead", value)
+				}
+				sv.Strategy = types.QuotaShareResourceSharingStrategy(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQuotaShareUtilizationDetail(v **types.QuotaShareUtilizationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QuotaShareUtilizationDetail
+	if *v == nil {
+		sv = &types.QuotaShareUtilizationDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "topCapacityUtilization":
+			if err := awsRestjson1_deserializeDocumentQuotaShareCapacityUtilizationList(&sv.TopCapacityUtilization, value); err != nil {
 				return err
 			}
 
@@ -13946,6 +15696,11 @@ func awsRestjson1_deserializeDocumentSchedulingPolicyDetail(v **types.Scheduling
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "quotaSharePolicy":
+			if err := awsRestjson1_deserializeDocumentQuotaSharePolicy(&sv.QuotaSharePolicy, value); err != nil {
+				return err
 			}
 
 		case "tags":
@@ -14804,6 +16559,204 @@ func awsRestjson1_deserializeDocumentServiceJobEvaluateOnExitList(v *[]types.Ser
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentServiceJobPreemptedAttempt(v **types.ServiceJobPreemptedAttempt, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceJobPreemptedAttempt
+	if *v == nil {
+		sv = &types.ServiceJobPreemptedAttempt{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "serviceResourceId":
+			if err := awsRestjson1_deserializeDocumentServiceResourceId(&sv.ServiceResourceId, value); err != nil {
+				return err
+			}
+
+		case "startedAt":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartedAt = ptr.Int64(i64)
+			}
+
+		case "statusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StatusReason = ptr.String(jtv)
+			}
+
+		case "stoppedAt":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StoppedAt = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceJobPreemptionConfiguration(v **types.ServiceJobPreemptionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceJobPreemptionConfiguration
+	if *v == nil {
+		sv = &types.ServiceJobPreemptionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "preemptionRetriesBeforeTermination":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PreemptionRetriesBeforeTermination = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceJobPreemptionSummary(v **types.ServiceJobPreemptionSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceJobPreemptionSummary
+	if *v == nil {
+		sv = &types.ServiceJobPreemptionSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "preemptedAttemptCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PreemptedAttemptCount = ptr.Int32(int32(i64))
+			}
+
+		case "recentPreemptedAttempts":
+			if err := awsRestjson1_deserializeDocumentServiceJobRecentPreemptedAttemptList(&sv.RecentPreemptedAttempts, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceJobRecentPreemptedAttemptList(v *[]types.ServiceJobPreemptedAttempt, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ServiceJobPreemptedAttempt
+	if *v == nil {
+		cv = []types.ServiceJobPreemptedAttempt{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ServiceJobPreemptedAttempt
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentServiceJobPreemptedAttempt(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentServiceJobRetryStrategy(v **types.ServiceJobRetryStrategy, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14923,6 +16876,15 @@ func awsRestjson1_deserializeDocumentServiceJobSummary(v **types.ServiceJobSumma
 		case "latestAttempt":
 			if err := awsRestjson1_deserializeDocumentLatestServiceJobAttempt(&sv.LatestAttempt, value); err != nil {
 				return err
+			}
+
+		case "quotaShareName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.QuotaShareName = ptr.String(jtv)
 			}
 
 		case "scheduledAt":

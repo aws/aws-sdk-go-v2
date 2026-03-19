@@ -3157,9 +3157,23 @@ func awsRestjson1_serializeOpDocumentStartBrowserSessionInput(v *StartBrowserSes
 	object := value.Object()
 	defer object.Close()
 
+	if v.Certificates != nil {
+		ok := object.Key("certificates")
+		if err := awsRestjson1_serializeDocumentCertificates(v.Certificates, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.EnterprisePolicies != nil {
+		ok := object.Key("enterprisePolicies")
+		if err := awsRestjson1_serializeDocumentBrowserEnterprisePolicies(v.EnterprisePolicies, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Extensions != nil {
@@ -3298,6 +3312,13 @@ func awsRestjson1_serializeOpHttpBindingsStartCodeInterpreterSessionInput(v *Sta
 func awsRestjson1_serializeOpDocumentStartCodeInterpreterSessionInput(v *StartCodeInterpreterSessionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Certificates != nil {
+		ok := object.Key("certificates")
+		if err := awsRestjson1_serializeDocumentCertificates(v.Certificates, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
@@ -3900,6 +3921,38 @@ func awsRestjson1_serializeDocumentBranchFilter(v *types.BranchFilter, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBrowserEnterprisePolicies(v []types.BrowserEnterprisePolicy, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentBrowserEnterprisePolicy(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBrowserEnterprisePolicy(v *types.BrowserEnterprisePolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Location != nil {
+		ok := object.Key("location")
+		if err := awsRestjson1_serializeDocumentResourceLocation(v.Location, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBrowserExtension(v *types.BrowserExtension, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3936,6 +3989,51 @@ func awsRestjson1_serializeDocumentBrowserProfileConfiguration(v *types.BrowserP
 		ok.String(*v.ProfileIdentifier)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCertificate(v *types.Certificate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Location != nil {
+		ok := object.Key("location")
+		if err := awsRestjson1_serializeDocumentCertificateLocation(v.Location, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCertificateLocation(v types.CertificateLocation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CertificateLocationMemberSecretsManager:
+		av := object.Key("secretsManager")
+		if err := awsRestjson1_serializeDocumentSecretsManagerLocation(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCertificates(v []types.Certificate, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCertificate(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -4692,6 +4790,18 @@ func awsRestjson1_serializeDocumentSearchCriteria(v *types.SearchCriteria, value
 	if v.TopK != nil {
 		ok := object.Key("topK")
 		ok.Integer(*v.TopK)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSecretsManagerLocation(v *types.SecretsManagerLocation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecretArn != nil {
+		ok := object.Key("secretArn")
+		ok.String(*v.SecretArn)
 	}
 
 	return nil

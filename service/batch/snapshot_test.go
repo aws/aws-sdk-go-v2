@@ -110,6 +110,18 @@ func TestCheckSnapshot_CreateJobQueue(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateQuotaShare(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateQuotaShare(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateQuotaShare")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateSchedulingPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateSchedulingPolicy(context.Background(), nil, func(o *Options) {
@@ -163,6 +175,18 @@ func TestCheckSnapshot_DeleteJobQueue(t *testing.T) {
 	_, err := svc.DeleteJobQueue(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteJobQueue")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteQuotaShare(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteQuotaShare(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteQuotaShare")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -266,6 +290,18 @@ func TestCheckSnapshot_DescribeJobs(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeQuotaShare(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeQuotaShare(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeQuotaShare")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeSchedulingPolicies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeSchedulingPolicies(context.Background(), nil, func(o *Options) {
@@ -343,6 +379,18 @@ func TestCheckSnapshot_ListJobsByConsumableResource(t *testing.T) {
 	_, err := svc.ListJobsByConsumableResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListJobsByConsumableResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListQuotaShares(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListQuotaShares(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListQuotaShares")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -506,6 +554,18 @@ func TestCheckSnapshot_UpdateJobQueue(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateQuotaShare(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQuotaShare(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateQuotaShare")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateSchedulingPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateSchedulingPolicy(context.Background(), nil, func(o *Options) {
@@ -523,6 +583,18 @@ func TestCheckSnapshot_UpdateServiceEnvironment(t *testing.T) {
 	_, err := svc.UpdateServiceEnvironment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateServiceEnvironment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateServiceJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateServiceJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateServiceJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -570,6 +642,18 @@ func TestUpdateSnapshot_CreateJobQueue(t *testing.T) {
 	_, err := svc.CreateJobQueue(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateJobQueue")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateQuotaShare(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateQuotaShare(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateQuotaShare")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -630,6 +714,18 @@ func TestUpdateSnapshot_DeleteJobQueue(t *testing.T) {
 	_, err := svc.DeleteJobQueue(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteJobQueue")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteQuotaShare(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteQuotaShare(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteQuotaShare")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -733,6 +829,18 @@ func TestUpdateSnapshot_DescribeJobs(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeQuotaShare(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeQuotaShare(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeQuotaShare")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeSchedulingPolicies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeSchedulingPolicies(context.Background(), nil, func(o *Options) {
@@ -810,6 +918,18 @@ func TestUpdateSnapshot_ListJobsByConsumableResource(t *testing.T) {
 	_, err := svc.ListJobsByConsumableResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListJobsByConsumableResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListQuotaShares(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListQuotaShares(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListQuotaShares")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -973,6 +1093,18 @@ func TestUpdateSnapshot_UpdateJobQueue(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateQuotaShare(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQuotaShare(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateQuotaShare")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateSchedulingPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateSchedulingPolicy(context.Background(), nil, func(o *Options) {
@@ -990,6 +1122,18 @@ func TestUpdateSnapshot_UpdateServiceEnvironment(t *testing.T) {
 	_, err := svc.UpdateServiceEnvironment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateServiceEnvironment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateServiceJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateServiceJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateServiceJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

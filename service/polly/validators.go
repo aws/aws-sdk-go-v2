@@ -5,6 +5,7 @@ package polly
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/polly/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -89,6 +90,26 @@ func (m *validateOpPutLexicon) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartSpeechSynthesisStream struct {
+}
+
+func (*validateOpStartSpeechSynthesisStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartSpeechSynthesisStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartSpeechSynthesisStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartSpeechSynthesisStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartSpeechSynthesisTask struct {
 }
 
@@ -145,12 +166,50 @@ func addOpPutLexiconValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutLexicon{}, middleware.After)
 }
 
+func addOpStartSpeechSynthesisStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartSpeechSynthesisStream{}, middleware.After)
+}
+
 func addOpStartSpeechSynthesisTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartSpeechSynthesisTask{}, middleware.After)
 }
 
 func addOpSynthesizeSpeechValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSynthesizeSpeech{}, middleware.After)
+}
+
+func validateStartSpeechSynthesisStreamActionStream(v types.StartSpeechSynthesisStreamActionStream) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartSpeechSynthesisStreamActionStream"}
+	switch uv := v.(type) {
+	case *types.StartSpeechSynthesisStreamActionStreamMemberTextEvent:
+		if err := validateTextEvent(&uv.Value); err != nil {
+			invalidParams.AddNested("[TextEvent]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTextEvent(v *types.TextEvent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TextEvent"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpDeleteLexiconInput(v *DeleteLexiconInput) error {
@@ -208,6 +267,27 @@ func validateOpPutLexiconInput(v *PutLexiconInput) error {
 	}
 	if v.Content == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartSpeechSynthesisStreamInput(v *StartSpeechSynthesisStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartSpeechSynthesisStreamInput"}
+	if len(v.Engine) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
+	}
+	if len(v.OutputFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputFormat"))
+	}
+	if len(v.VoiceId) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

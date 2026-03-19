@@ -474,6 +474,110 @@ func (PlatformCapability) Values() []PlatformCapability {
 	}
 }
 
+type QuotaShareIdleResourceAssignmentStrategy string
+
+// Enum values for QuotaShareIdleResourceAssignmentStrategy
+const (
+	QuotaShareIdleResourceAssignmentStrategyFifo QuotaShareIdleResourceAssignmentStrategy = "FIFO"
+)
+
+// Values returns all known values for QuotaShareIdleResourceAssignmentStrategy.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QuotaShareIdleResourceAssignmentStrategy) Values() []QuotaShareIdleResourceAssignmentStrategy {
+	return []QuotaShareIdleResourceAssignmentStrategy{
+		"FIFO",
+	}
+}
+
+type QuotaShareInSharePreemptionState string
+
+// Enum values for QuotaShareInSharePreemptionState
+const (
+	QuotaShareInSharePreemptionStateEnabled  QuotaShareInSharePreemptionState = "ENABLED"
+	QuotaShareInSharePreemptionStateDisabled QuotaShareInSharePreemptionState = "DISABLED"
+)
+
+// Values returns all known values for QuotaShareInSharePreemptionState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QuotaShareInSharePreemptionState) Values() []QuotaShareInSharePreemptionState {
+	return []QuotaShareInSharePreemptionState{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type QuotaShareResourceSharingStrategy string
+
+// Enum values for QuotaShareResourceSharingStrategy
+const (
+	QuotaShareResourceSharingStrategyReserve       QuotaShareResourceSharingStrategy = "RESERVE"
+	QuotaShareResourceSharingStrategyLend          QuotaShareResourceSharingStrategy = "LEND"
+	QuotaShareResourceSharingStrategyLendAndBorrow QuotaShareResourceSharingStrategy = "LEND_AND_BORROW"
+)
+
+// Values returns all known values for QuotaShareResourceSharingStrategy. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QuotaShareResourceSharingStrategy) Values() []QuotaShareResourceSharingStrategy {
+	return []QuotaShareResourceSharingStrategy{
+		"RESERVE",
+		"LEND",
+		"LEND_AND_BORROW",
+	}
+}
+
+type QuotaShareState string
+
+// Enum values for QuotaShareState
+const (
+	QuotaShareStateEnabled  QuotaShareState = "ENABLED"
+	QuotaShareStateDisabled QuotaShareState = "DISABLED"
+)
+
+// Values returns all known values for QuotaShareState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QuotaShareState) Values() []QuotaShareState {
+	return []QuotaShareState{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type QuotaShareStatus string
+
+// Enum values for QuotaShareStatus
+const (
+	QuotaShareStatusCreating QuotaShareStatus = "CREATING"
+	QuotaShareStatusValid    QuotaShareStatus = "VALID"
+	QuotaShareStatusInvalid  QuotaShareStatus = "INVALID"
+	QuotaShareStatusUpdating QuotaShareStatus = "UPDATING"
+	QuotaShareStatusDeleting QuotaShareStatus = "DELETING"
+)
+
+// Values returns all known values for QuotaShareStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QuotaShareStatus) Values() []QuotaShareStatus {
+	return []QuotaShareStatus{
+		"CREATING",
+		"VALID",
+		"INVALID",
+		"UPDATING",
+		"DELETING",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType

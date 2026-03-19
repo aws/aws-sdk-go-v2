@@ -3867,6 +3867,11 @@ func awsRestjson1_serializeDocumentSourceLogsConfiguration(v *types.SourceLogsCo
 	object := value.Object()
 	defer object.Close()
 
+	if v.DataSourceSelectionCriteria != nil {
+		ok := object.Key("DataSourceSelectionCriteria")
+		ok.String(*v.DataSourceSelectionCriteria)
+	}
+
 	if len(v.EncryptedLogGroupStrategy) > 0 {
 		ok := object.Key("EncryptedLogGroupStrategy")
 		ok.String(string(v.EncryptedLogGroupStrategy))

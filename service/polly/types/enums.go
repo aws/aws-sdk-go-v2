@@ -168,6 +168,42 @@ func (OutputFormat) Values() []OutputFormat {
 	}
 }
 
+type QuotaCode string
+
+// Enum values for QuotaCode
+const (
+	QuotaCodeInputStreamInboundEventTimeout QuotaCode = "input-stream-inbound-event-timeout"
+	QuotaCodeInputStreamTimeout             QuotaCode = "input-stream-timeout"
+)
+
+// Values returns all known values for QuotaCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QuotaCode) Values() []QuotaCode {
+	return []QuotaCode{
+		"input-stream-inbound-event-timeout",
+		"input-stream-timeout",
+	}
+}
+
+type ServiceCode string
+
+// Enum values for ServiceCode
+const (
+	ServiceCodePolly ServiceCode = "polly"
+)
+
+// Values returns all known values for ServiceCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceCode) Values() []ServiceCode {
+	return []ServiceCode{
+		"polly",
+	}
+}
+
 type SpeechMarkType string
 
 // Enum values for SpeechMarkType
@@ -230,6 +266,29 @@ func (TextType) Values() []TextType {
 	return []TextType{
 		"ssml",
 		"text",
+	}
+}
+
+type ValidationExceptionReason string
+
+// Enum values for ValidationExceptionReason
+const (
+	ValidationExceptionReasonUnsupportedOperation  ValidationExceptionReason = "unsupportedOperation"
+	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "fieldValidationFailed"
+	ValidationExceptionReasonOther                 ValidationExceptionReason = "other"
+	ValidationExceptionReasonInvalidInboundEvent   ValidationExceptionReason = "invalidInboundEvent"
+)
+
+// Values returns all known values for ValidationExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationExceptionReason) Values() []ValidationExceptionReason {
+	return []ValidationExceptionReason{
+		"unsupportedOperation",
+		"fieldValidationFailed",
+		"other",
+		"invalidInboundEvent",
 	}
 }
 

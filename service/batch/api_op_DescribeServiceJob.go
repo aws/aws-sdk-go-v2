@@ -90,6 +90,16 @@ type DescribeServiceJobOutput struct {
 	// The latest attempt associated with the service job.
 	LatestAttempt *types.LatestServiceJobAttempt
 
+	// Specifies the service job behavior when preempted.
+	PreemptionConfiguration *types.ServiceJobPreemptionConfiguration
+
+	// Summarizes the preemptions of the service job. This field appears on a service
+	// job when it has been preempted.
+	PreemptionSummary *types.ServiceJobPreemptionSummary
+
+	// The name of the quota share that the service job is associated with.
+	QuotaShareName *string
+
 	// The retry strategy to use for failed service jobs that are submitted with this
 	// service job.
 	RetryStrategy *types.ServiceJobRetryStrategy

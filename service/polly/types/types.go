@@ -7,6 +7,33 @@ import (
 	"time"
 )
 
+// Contains a chunk of synthesized audio data.
+type AudioEvent struct {
+
+	// A chunk of synthesized audio data encoded in the format specified by the
+	// OutputFormat parameter.
+	AudioChunk []byte
+
+	noSmithyDocumentSerde
+}
+
+// Indicates the end of the input stream. After sending this event, the input
+// stream will be closed and all audio will be returned.
+type CloseStreamEvent struct {
+	noSmithyDocumentSerde
+}
+
+// Configuration that controls when synthesized audio data is sent on the output
+// stream.
+type FlushStreamConfiguration struct {
+
+	// Specifies whether to force the synthesis engine to immediately write buffered
+	// audio data to the output stream.
+	Force bool
+
+	noSmithyDocumentSerde
+}
+
 // Provides lexicon name and lexicon content in string format. For more
 // information, see [Pronunciation Lexicon Specification (PLS) Version 1.0].
 //
@@ -64,6 +91,77 @@ type LexiconDescription struct {
 	noSmithyDocumentSerde
 }
 
+// Inbound event stream for sending input and control events to manage
+// bidirectional speech synthesis.
+//
+// The following types satisfy this interface:
+//
+//	StartSpeechSynthesisStreamActionStreamMemberCloseStreamEvent
+//	StartSpeechSynthesisStreamActionStreamMemberTextEvent
+type StartSpeechSynthesisStreamActionStream interface {
+	isStartSpeechSynthesisStreamActionStream()
+}
+
+// An event indicating the end of the input stream.
+type StartSpeechSynthesisStreamActionStreamMemberCloseStreamEvent struct {
+	Value CloseStreamEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*StartSpeechSynthesisStreamActionStreamMemberCloseStreamEvent) isStartSpeechSynthesisStreamActionStream() {
+}
+
+// A text event containing content to be synthesized.
+type StartSpeechSynthesisStreamActionStreamMemberTextEvent struct {
+	Value TextEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*StartSpeechSynthesisStreamActionStreamMemberTextEvent) isStartSpeechSynthesisStreamActionStream() {
+}
+
+// Outbound event stream that contains synthesized audio data and stream status
+// events.
+//
+// The following types satisfy this interface:
+//
+//	StartSpeechSynthesisStreamEventStreamMemberAudioEvent
+//	StartSpeechSynthesisStreamEventStreamMemberStreamClosedEvent
+type StartSpeechSynthesisStreamEventStream interface {
+	isStartSpeechSynthesisStreamEventStream()
+}
+
+// An audio event containing synthesized speech.
+type StartSpeechSynthesisStreamEventStreamMemberAudioEvent struct {
+	Value AudioEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*StartSpeechSynthesisStreamEventStreamMemberAudioEvent) isStartSpeechSynthesisStreamEventStream() {
+}
+
+// An event, with summary information, indicating the stream has closed.
+type StartSpeechSynthesisStreamEventStreamMemberStreamClosedEvent struct {
+	Value StreamClosedEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*StartSpeechSynthesisStreamEventStreamMemberStreamClosedEvent) isStartSpeechSynthesisStreamEventStream() {
+}
+
+// Indicates that the synthesis stream is closed and provides summary information.
+type StreamClosedEvent struct {
+
+	// The total number of characters synthesized during the streaming session.
+	RequestCharacters int32
+
+	noSmithyDocumentSerde
+}
+
 // SynthesisTask object that provides information about a speech synthesis task.
 type SynthesisTask struct {
 
@@ -94,7 +192,8 @@ type SynthesisTask struct {
 	LexiconNames []string
 
 	// The format in which the returned output will be encoded. For audio stream, this
-	// will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json.
+	// will be mp3, ogg_vorbis, ogg_opus, mu-law, a-law, or pcm. For speech marks, this
+	// will be json.
 	OutputFormat OutputFormat
 
 	// Pathway for the output speech file.
@@ -111,6 +210,10 @@ type SynthesisTask struct {
 	// default value for generative voices is "24000".
 	//
 	// Valid values for pcm are "8000" and "16000" The default value is "16000".
+	//
+	// Valid value for ogg_opus is "48000".
+	//
+	// Valid value for mu-law and a-law is "8000".
 	SampleRate *string
 
 	// ARN for the SNS topic optionally used for providing status notification for a
@@ -136,6 +239,53 @@ type SynthesisTask struct {
 
 	// Voice ID to use for the synthesis.
 	VoiceId VoiceId
+
+	noSmithyDocumentSerde
+}
+
+// Contains text content to be synthesized into speech.
+type TextEvent struct {
+
+	// The text content to synthesize. If you specify ssml as the TextType , follow the
+	// SSML format for the input text.
+	//
+	// This member is required.
+	Text *string
+
+	// Configuration for controlling when synthesized audio flushes to the output
+	// stream.
+	FlushStreamConfiguration *FlushStreamConfiguration
+
+	// Specifies whether the input text is plain text or SSML. Default: plain text.
+	TextType TextType
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about a specific throttling reason.
+type ThrottlingReason struct {
+
+	// The reason code explaining why the request was throttled.
+	Reason *string
+
+	// The resource that caused the throttling.
+	Resource *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a field that failed validation.
+type ValidationExceptionField struct {
+
+	// A message describing why the field failed validation.
+	//
+	// This member is required.
+	Message *string
+
+	// The name of the field that failed validation.
+	//
+	// This member is required.
+	Name *string
 
 	noSmithyDocumentSerde
 }
@@ -176,3 +326,15 @@ type Voice struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isStartSpeechSynthesisStreamActionStream() {}
+func (*UnknownUnionMember) isStartSpeechSynthesisStreamEventStream()  {}

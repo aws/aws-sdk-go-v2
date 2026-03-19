@@ -76,6 +76,9 @@ type GetCodeInterpreterOutput struct {
 	// This member is required.
 	Status types.CodeInterpreterStatus
 
+	// The list of certificates configured for the code interpreter.
+	Certificates []types.Certificate
+
 	// The description of the code interpreter.
 	Description *string
 

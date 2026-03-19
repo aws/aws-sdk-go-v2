@@ -7,6 +7,8 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/restjson"
 	"github.com/aws/aws-sdk-go-v2/service/polly/types"
 	smithy "github.com/aws/smithy-go"
@@ -1028,6 +1030,103 @@ func awsRestjson1_deserializeOpErrorPutLexicon(response *smithyhttp.Response, me
 	}
 }
 
+type awsRestjson1_deserializeOpStartSpeechSynthesisStream struct {
+}
+
+func (*awsRestjson1_deserializeOpStartSpeechSynthesisStream) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpStartSpeechSynthesisStream) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorStartSpeechSynthesisStream(response, &metadata)
+	}
+	output := &StartSpeechSynthesisStreamInitialReply{}
+	out.Result = output
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorStartSpeechSynthesisStream(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("ServiceFailureException", errorCode):
+		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsRestjson1_deserializeOpStartSpeechSynthesisTask struct {
 }
 
@@ -1362,6 +1461,693 @@ func awsRestjson1_deserializeOpDocumentSynthesizeSpeechOutput(v *SynthesizeSpeec
 	}
 
 	v.AudioStream = body
+	return nil
+}
+
+func awsRestjson1_deserializeEventStreamStartSpeechSynthesisStreamEventStream(v *types.StartSpeechSynthesisStreamEventStream, msg *eventstream.Message) error {
+	if v == nil {
+		return fmt.Errorf("unexpected serialization of nil %T", v)
+	}
+
+	eventType := msg.Headers.Get(eventstreamapi.EventTypeHeader)
+	if eventType == nil {
+		return fmt.Errorf("%s event header not present", eventstreamapi.EventTypeHeader)
+	}
+
+	switch {
+	case strings.EqualFold("AudioEvent", eventType.String()):
+		vv := &types.StartSpeechSynthesisStreamEventStreamMemberAudioEvent{}
+		if err := awsRestjson1_deserializeEventMessageAudioEvent(&vv.Value, msg); err != nil {
+			return err
+		}
+		*v = vv
+		return nil
+
+	case strings.EqualFold("StreamClosedEvent", eventType.String()):
+		vv := &types.StartSpeechSynthesisStreamEventStreamMemberStreamClosedEvent{}
+		if err := awsRestjson1_deserializeEventMessageStreamClosedEvent(&vv.Value, msg); err != nil {
+			return err
+		}
+		*v = vv
+		return nil
+
+	default:
+		buffer := bytes.NewBuffer(nil)
+		eventstream.NewEncoder().Encode(buffer, *msg)
+		*v = &types.UnknownUnionMember{
+			Tag:   eventType.String(),
+			Value: buffer.Bytes(),
+		}
+		return nil
+
+	}
+}
+
+func awsRestjson1_deserializeEventStreamExceptionStartSpeechSynthesisStreamEventStream(msg *eventstream.Message) error {
+	exceptionType := msg.Headers.Get(eventstreamapi.ExceptionTypeHeader)
+	if exceptionType == nil {
+		return fmt.Errorf("%s event header not present", eventstreamapi.ExceptionTypeHeader)
+	}
+
+	switch {
+	case strings.EqualFold("ServiceFailureException", exceptionType.String()):
+		return awsRestjson1_deserializeEventMessageExceptionServiceFailureException(msg)
+
+	case strings.EqualFold("ServiceQuotaExceededException", exceptionType.String()):
+		return awsRestjson1_deserializeEventMessageExceptionServiceQuotaExceededException(msg)
+
+	case strings.EqualFold("ThrottlingException", exceptionType.String()):
+		return awsRestjson1_deserializeEventMessageExceptionThrottlingException(msg)
+
+	case strings.EqualFold("ValidationException", exceptionType.String()):
+		return awsRestjson1_deserializeEventMessageExceptionValidationException(msg)
+
+	default:
+		br := bytes.NewReader(msg.Payload)
+		var buff [1024]byte
+		ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+		body := io.TeeReader(br, ringBuffer)
+		decoder := json.NewDecoder(body)
+		decoder.UseNumber()
+		code, message, err := restjson.GetErrorInfo(decoder)
+		if err != nil {
+			return err
+		}
+		errorCode := "UnknownError"
+		errorMessage := errorCode
+		if ev := exceptionType.String(); len(ev) > 0 {
+			errorCode = ev
+		} else if ev := code; len(ev) > 0 {
+			errorCode = ev
+		}
+		if ev := message; len(ev) > 0 {
+			errorMessage = ev
+		}
+		return &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+
+	}
+}
+
+func awsRestjson1_deserializeEventMessageAudioEvent(v *types.AudioEvent, msg *eventstream.Message) error {
+	if v == nil {
+		return fmt.Errorf("unexpected serialization of nil %T", v)
+	}
+
+	if msg.Payload != nil {
+		bsv := make([]byte, len(msg.Payload))
+		copy(bsv, msg.Payload)
+
+		v.AudioChunk = bsv
+	}
+	return nil
+}
+
+func awsRestjson1_deserializeEventMessageStreamClosedEvent(v *types.StreamClosedEvent, msg *eventstream.Message) error {
+	if v == nil {
+		return fmt.Errorf("unexpected serialization of nil %T", v)
+	}
+
+	br := bytes.NewReader(msg.Payload)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(br, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	if err := awsRestjson1_deserializeDocumentStreamClosedEvent(&v, shape); err != nil {
+		if err != nil {
+			var snapshot bytes.Buffer
+			io.Copy(&snapshot, ringBuffer)
+			err = &smithy.DeserializationError{
+				Err:      fmt.Errorf("failed to decode response body, %w", err),
+				Snapshot: snapshot.Bytes(),
+			}
+			return err
+		}
+
+	}
+	return nil
+}
+
+func awsRestjson1_deserializeEventMessageExceptionValidationException(msg *eventstream.Message) error {
+	br := bytes.NewReader(msg.Payload)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(br, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	v := &types.ValidationException{}
+	if err := awsRestjson1_deserializeDocumentValidationException(&v, shape); err != nil {
+		if err != nil {
+			var snapshot bytes.Buffer
+			io.Copy(&snapshot, ringBuffer)
+			err = &smithy.DeserializationError{
+				Err:      fmt.Errorf("failed to decode response body, %w", err),
+				Snapshot: snapshot.Bytes(),
+			}
+			return err
+		}
+
+	}
+	return v
+}
+
+func awsRestjson1_deserializeEventMessageExceptionServiceQuotaExceededException(msg *eventstream.Message) error {
+	br := bytes.NewReader(msg.Payload)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(br, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	v := &types.ServiceQuotaExceededException{}
+	if err := awsRestjson1_deserializeDocumentServiceQuotaExceededException(&v, shape); err != nil {
+		if err != nil {
+			var snapshot bytes.Buffer
+			io.Copy(&snapshot, ringBuffer)
+			err = &smithy.DeserializationError{
+				Err:      fmt.Errorf("failed to decode response body, %w", err),
+				Snapshot: snapshot.Bytes(),
+			}
+			return err
+		}
+
+	}
+	return v
+}
+
+func awsRestjson1_deserializeEventMessageExceptionServiceFailureException(msg *eventstream.Message) error {
+	br := bytes.NewReader(msg.Payload)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(br, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	v := &types.ServiceFailureException{}
+	if err := awsRestjson1_deserializeDocumentServiceFailureException(&v, shape); err != nil {
+		if err != nil {
+			var snapshot bytes.Buffer
+			io.Copy(&snapshot, ringBuffer)
+			err = &smithy.DeserializationError{
+				Err:      fmt.Errorf("failed to decode response body, %w", err),
+				Snapshot: snapshot.Bytes(),
+			}
+			return err
+		}
+
+	}
+	return v
+}
+
+func awsRestjson1_deserializeEventMessageExceptionThrottlingException(msg *eventstream.Message) error {
+	br := bytes.NewReader(msg.Payload)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(br, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	v := &types.ThrottlingException{}
+	if err := awsRestjson1_deserializeDocumentThrottlingException(&v, shape); err != nil {
+		if err != nil {
+			var snapshot bytes.Buffer
+			io.Copy(&snapshot, ringBuffer)
+			err = &smithy.DeserializationError{
+				Err:      fmt.Errorf("failed to decode response body, %w", err),
+				Snapshot: snapshot.Bytes(),
+			}
+			return err
+		}
+
+	}
+	return v
+}
+
+func awsRestjson1_deserializeDocumentServiceFailureException(v **types.ServiceFailureException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceFailureException
+	if *v == nil {
+		sv = &types.ServiceFailureException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.ServiceQuotaExceededException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceQuotaExceededException
+	if *v == nil {
+		sv = &types.ServiceQuotaExceededException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "quotaCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QuotaCode to be of type string, got %T instead", value)
+				}
+				sv.QuotaCode = types.QuotaCode(jtv)
+			}
+
+		case "serviceCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServiceCode to be of type string, got %T instead", value)
+				}
+				sv.ServiceCode = types.ServiceCode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStreamClosedEvent(v **types.StreamClosedEvent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StreamClosedEvent
+	if *v == nil {
+		sv = &types.StreamClosedEvent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RequestCharacters":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RequestCharacters to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RequestCharacters = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ThrottlingException
+	if *v == nil {
+		sv = &types.ThrottlingException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AvailabilityErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "throttlingReasons":
+			if err := awsRestjson1_deserializeDocumentThrottlingReasonList(&sv.ThrottlingReasons, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentThrottlingReason(v **types.ThrottlingReason, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ThrottlingReason
+	if *v == nil {
+		sv = &types.ThrottlingReason{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CoralAvailabilityThrottlingReason to be of type string, got %T instead", value)
+				}
+				sv.Reason = ptr.String(jtv)
+			}
+
+		case "resource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CoralAvailabilityThrottledResource to be of type string, got %T instead", value)
+				}
+				sv.Resource = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentThrottlingReasonList(v *[]types.ThrottlingReason, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ThrottlingReason
+	if *v == nil {
+		cv = []types.ThrottlingReason{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ThrottlingReason
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentThrottlingReason(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ValidationException
+	if *v == nil {
+		sv = &types.ValidationException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fields":
+			if err := awsRestjson1_deserializeDocumentValidationExceptionFieldList(&sv.Fields, value); err != nil {
+				return err
+			}
+
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ValidationExceptionReason to be of type string, got %T instead", value)
+				}
+				sv.Reason = types.ValidationExceptionReason(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.ValidationExceptionField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ValidationExceptionField
+	if *v == nil {
+		sv = &types.ValidationExceptionField{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ValidationExceptionFieldMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ValidationExceptionFieldName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentValidationExceptionFieldList(v *[]types.ValidationExceptionField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ValidationExceptionField
+	if *v == nil {
+		cv = []types.ValidationExceptionField{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ValidationExceptionField
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentValidationExceptionField(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -1941,6 +2727,42 @@ func awsRestjson1_deserializeErrorServiceFailureException(response *smithyhttp.R
 	return output
 }
 
+func awsRestjson1_deserializeErrorServiceQuotaExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ServiceQuotaExceededException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentServiceQuotaExceededException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorSsmlMarksNotSupportedForTextTypeException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.SsmlMarksNotSupportedForTextTypeException{}
 	var buff [1024]byte
@@ -2049,6 +2871,42 @@ func awsRestjson1_deserializeErrorTextLengthExceededException(response *smithyht
 	return output
 }
 
+func awsRestjson1_deserializeErrorThrottlingException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ThrottlingException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentThrottlingException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorUnsupportedPlsAlphabetException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.UnsupportedPlsAlphabetException{}
 	var buff [1024]byte
@@ -2105,6 +2963,42 @@ func awsRestjson1_deserializeErrorUnsupportedPlsLanguageException(response *smit
 	}
 
 	err := awsRestjson1_deserializeDocumentUnsupportedPlsLanguageException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
+func awsRestjson1_deserializeErrorValidationException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ValidationException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentValidationException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -3033,46 +3927,6 @@ func awsRestjson1_deserializeDocumentMaxLexiconsNumberExceededException(v **type
 	var sv *types.MaxLexiconsNumberExceededException
 	if *v == nil {
 		sv = &types.MaxLexiconsNumberExceededException{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "message", "Message":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
-				}
-				sv.Message = ptr.String(jtv)
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentServiceFailureException(v **types.ServiceFailureException, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.ServiceFailureException
-	if *v == nil {
-		sv = &types.ServiceFailureException{}
 	} else {
 		sv = *v
 	}

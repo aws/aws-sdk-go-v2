@@ -375,11 +375,13 @@ type LogGroupNameConfiguration struct {
 	//
 	//   - ${source.logGroup} — The original log group name from the source account.
 	//
-	//   - ${source.accountId} — The AWS account ID where the log originated.
+	//   - ${source.accountId} — The Amazon Web Services account ID where the log
+	//   originated.
 	//
-	//   - ${source.region} — The AWS Region where the log originated.
+	//   - ${source.region} — The Amazon Web Services Region where the log originated.
 	//
-	//   - ${source.org.id} — The AWS Organization ID of the source account.
+	//   - ${source.org.id} — The Amazon Web Services Organization ID of the source
+	//   account.
 	//
 	//   - ${source.org.ouId} — The organizational unit ID of the source account.
 	//
@@ -505,10 +507,15 @@ type SourceLogsConfiguration struct {
 	// This member is required.
 	EncryptedLogGroupStrategy EncryptedLogGroupStrategy
 
+	// The selection criteria that specifies which data sources to centralize. The
+	// selection criteria uses the same filter expression format as
+	// LogGroupSelectionCriteria , but operates on DataSourceName and DataSourceType
+	// operands. When both LogGroupSelectionCriteria and DataSourceSelectionCriteria
+	// are specified, a log event must match both criteria to be centralized.
+	DataSourceSelectionCriteria *string
+
 	// The selection criteria that specifies which source log groups to centralize.
 	// The selection criteria uses the same format as OAM link filters.
-	//
-	// This member is required.
 	LogGroupSelectionCriteria *string
 
 	noSmithyDocumentSerde

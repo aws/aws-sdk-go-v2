@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -54,6 +55,9 @@ type StartCodeInterpreterSessionInput struct {
 	//
 	// This member is required.
 	CodeInterpreterIdentifier *string
+
+	// A list of certificates to install in the code interpreter session.
+	Certificates []types.Certificate
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock

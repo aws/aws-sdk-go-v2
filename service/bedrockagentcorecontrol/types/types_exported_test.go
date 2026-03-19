@@ -69,6 +69,24 @@ func ExampleAuthorizerConfiguration_outputUsage() {
 
 var _ *types.CustomJWTAuthorizerConfiguration
 
+func ExampleCertificateLocation_outputUsage() {
+	var union types.CertificateLocation
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CertificateLocationMemberSecretsManager:
+		_ = v.Value // Value is types.SecretsManagerLocation
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SecretsManagerLocation
+
 func ExampleClaimMatchValueType_outputUsage() {
 	var union types.ClaimMatchValueType
 	// type switches can be used to check the union value
@@ -849,6 +867,24 @@ func ExampleResource_outputUsage() {
 }
 
 var _ *string
+
+func ExampleResourceLocation_outputUsage() {
+	var union types.ResourceLocation
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ResourceLocationMemberS3:
+		_ = v.Value // Value is types.S3Location
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.S3Location
 
 func ExampleStreamDeliveryResource_outputUsage() {
 	var union types.StreamDeliveryResource

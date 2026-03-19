@@ -63,6 +63,14 @@ type SubmitServiceJobInput struct {
 	// the same request and the second request is rejected.
 	ClientToken *string
 
+	// Specifies the service job behavior when preempted.
+	PreemptionConfiguration *types.ServiceJobPreemptionConfiguration
+
+	// The quota share for the service job. Don't specify this parameter if the job
+	// queue doesn't have a quota share scheduling policy. If the job queue has a quota
+	// share scheduling policy, then this parameter must be specified.
+	QuotaShareName *string
+
 	// The retry strategy to use for failed service jobs that are submitted with this
 	// service job request.
 	RetryStrategy *types.ServiceJobRetryStrategy

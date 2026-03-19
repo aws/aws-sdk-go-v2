@@ -1978,6 +1978,42 @@ func validateBedrockEvaluatorModelConfig(v *types.BedrockEvaluatorModelConfig) e
 	}
 }
 
+func validateBrowserEnterprisePolicies(v []types.BrowserEnterprisePolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BrowserEnterprisePolicies"}
+	for i := range v {
+		if err := validateBrowserEnterprisePolicy(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBrowserEnterprisePolicy(v *types.BrowserEnterprisePolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BrowserEnterprisePolicy"}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	} else if v.Location != nil {
+		if err := validateResourceLocation(v.Location); err != nil {
+			invalidParams.AddNested("Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBrowserNetworkConfiguration(v *types.BrowserNetworkConfiguration) error {
 	if v == nil {
 		return nil
@@ -2052,6 +2088,61 @@ func validateCedarPolicy(v *types.CedarPolicy) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CedarPolicy"}
 	if v.Statement == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Statement"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCertificate(v *types.Certificate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Certificate"}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	} else if v.Location != nil {
+		if err := validateCertificateLocation(v.Location); err != nil {
+			invalidParams.AddNested("Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCertificateLocation(v types.CertificateLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CertificateLocation"}
+	switch uv := v.(type) {
+	case *types.CertificateLocationMemberSecretsManager:
+		if err := validateSecretsManagerLocation(&uv.Value); err != nil {
+			invalidParams.AddNested("[secretsManager]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCertificates(v []types.Certificate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Certificates"}
+	for i := range v {
+		if err := validateCertificate(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3544,6 +3635,25 @@ func validateRecordingConfig(v *types.RecordingConfig) error {
 	}
 }
 
+func validateResourceLocation(v types.ResourceLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceLocation"}
+	switch uv := v.(type) {
+	case *types.ResourceLocationMemberS3:
+		if err := validateS3Location(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRule(v *types.Rule) error {
 	if v == nil {
 		return nil
@@ -3674,6 +3784,21 @@ func validateSchemaProperties(v map[string]types.SchemaDefinition) error {
 		if err := validateSchemaDefinition(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSecretsManagerLocation(v *types.SecretsManagerLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SecretsManagerLocation"}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4191,6 +4316,16 @@ func validateOpCreateBrowserInput(v *CreateBrowserInput) error {
 			invalidParams.AddNested("BrowserSigning", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.EnterprisePolicies != nil {
+		if err := validateBrowserEnterprisePolicies(v.EnterprisePolicies); err != nil {
+			invalidParams.AddNested("EnterprisePolicies", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Certificates != nil {
+		if err := validateCertificates(v.Certificates); err != nil {
+			invalidParams.AddNested("Certificates", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4226,6 +4361,11 @@ func validateOpCreateCodeInterpreterInput(v *CreateCodeInterpreterInput) error {
 	} else if v.NetworkConfiguration != nil {
 		if err := validateCodeInterpreterNetworkConfiguration(v.NetworkConfiguration); err != nil {
 			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Certificates != nil {
+		if err := validateCertificates(v.Certificates); err != nil {
+			invalidParams.AddNested("Certificates", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

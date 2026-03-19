@@ -1,6 +1,7 @@
 {
     "dependencies": {
         "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream": "v0.0.0-00010101000000-000000000000",
         "github.com/aws/aws-sdk-go-v2/internal/configsources": "v0.0.0-00010101000000-000000000000",
         "github.com/aws/aws-sdk-go-v2/internal/endpoints/v2": "v2.0.0-00010101000000-000000000000",
         "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding": "v1.0.5",
@@ -17,6 +18,7 @@
         "api_op_ListLexicons.go",
         "api_op_ListSpeechSynthesisTasks.go",
         "api_op_PutLexicon.go",
+        "api_op_StartSpeechSynthesisStream.go",
         "api_op_StartSpeechSynthesisTask.go",
         "api_op_SynthesizeSpeech.go",
         "auth.go",
@@ -25,6 +27,7 @@
         "endpoints.go",
         "endpoints_config_test.go",
         "endpoints_test.go",
+        "eventstream.go",
         "generated.json",
         "internal/endpoints/endpoints.go",
         "internal/endpoints/endpoints_test.go",
@@ -35,6 +38,7 @@
         "types/enums.go",
         "types/errors.go",
         "types/types.go",
+        "types/types_exported_test.go",
         "validators.go"
     ],
     "go": "1.24",

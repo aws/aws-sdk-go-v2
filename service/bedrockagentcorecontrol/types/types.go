@@ -367,6 +367,21 @@ type BedrockEvaluatorModelConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Browser enterprise policy configuration.
+type BrowserEnterprisePolicy struct {
+
+	// The location of the enterprise policy file.
+	//
+	// This member is required.
+	Location ResourceLocation
+
+	// The type of browser enterprise policy. Available values are MANAGED and
+	// RECOMMENDED .
+	Type BrowserEnterprisePolicyType
+
+	noSmithyDocumentSerde
+}
+
 // The network configuration for a browser. This structure defines how the browser
 // connects to the network.
 type BrowserNetworkConfiguration struct {
@@ -531,6 +546,35 @@ type CedarPolicy struct {
 
 	noSmithyDocumentSerde
 }
+
+// A certificate to install in the browser or code interpreter.
+type Certificate struct {
+
+	// The location of the certificate.
+	//
+	// This member is required.
+	Location CertificateLocation
+
+	noSmithyDocumentSerde
+}
+
+// The location from which to retrieve a certificate.
+//
+// The following types satisfy this interface:
+//
+//	CertificateLocationMemberSecretsManager
+type CertificateLocation interface {
+	isCertificateLocation()
+}
+
+// The Amazon Web Services Secrets Manager location of the certificate.
+type CertificateLocationMemberSecretsManager struct {
+	Value SecretsManagerLocation
+
+	noSmithyDocumentSerde
+}
+
+func (*CertificateLocationMemberSecretsManager) isCertificateLocation() {}
 
 // The value or values to match for.
 //
@@ -3592,6 +3636,25 @@ type ResourceMemberArn struct {
 
 func (*ResourceMemberArn) isResource() {}
 
+// The location of a resource.
+//
+// The following types satisfy this interface:
+//
+//	ResourceLocationMemberS3
+type ResourceLocation interface {
+	isResourceLocation()
+}
+
+// The Amazon S3 location for storing data. This structure defines where in Amazon
+// S3 data is stored.
+type ResourceLocationMemberS3 struct {
+	Value S3Location
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceLocationMemberS3) isResourceLocation() {}
+
 //	The evaluation rule that defines sampling configuration, filtering criteria,
 //
 // and session detection settings for online evaluation.
@@ -3740,6 +3803,18 @@ type SchemaDefinition struct {
 type Secret struct {
 
 	// The Amazon Resource Name (ARN) of the secret in AWS Secrets Manager.
+	//
+	// This member is required.
+	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon Web Services Secrets Manager location configuration.
+type SecretsManagerLocation struct {
+
+	// The ARN of the Amazon Web Services Secrets Manager secret containing the
+	// certificate.
 	//
 	// This member is required.
 	SecretArn *string
@@ -4454,6 +4529,7 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isAgentRuntimeArtifact()                  {}
 func (*UnknownUnionMember) isApiSchemaConfiguration()                {}
 func (*UnknownUnionMember) isAuthorizerConfiguration()               {}
+func (*UnknownUnionMember) isCertificateLocation()                   {}
 func (*UnknownUnionMember) isClaimMatchValueType()                   {}
 func (*UnknownUnionMember) isCode()                                  {}
 func (*UnknownUnionMember) isConsolidationConfiguration()            {}
@@ -4487,6 +4563,7 @@ func (*UnknownUnionMember) isRatingScale()                           {}
 func (*UnknownUnionMember) isReflectionConfiguration()               {}
 func (*UnknownUnionMember) isRequestHeaderConfiguration()            {}
 func (*UnknownUnionMember) isResource()                              {}
+func (*UnknownUnionMember) isResourceLocation()                      {}
 func (*UnknownUnionMember) isStreamDeliveryResource()                {}
 func (*UnknownUnionMember) isTargetConfiguration()                   {}
 func (*UnknownUnionMember) isToolSchema()                            {}

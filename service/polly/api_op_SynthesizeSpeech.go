@@ -37,7 +37,8 @@ func (c *Client) SynthesizeSpeech(ctx context.Context, params *SynthesizeSpeechI
 type SynthesizeSpeechInput struct {
 
 	//  The format in which the returned output will be encoded. For audio stream,
-	// this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json.
+	// this will be mp3, ogg_vorbis, ogg_opus, mu-law, a-law or pcm. For speech marks,
+	// this will be json.
 	//
 	// When pcm is used, the content returned is audio/pcm in a signed 16-bit, 1
 	// channel (mono), little-endian format.
@@ -98,6 +99,10 @@ type SynthesizeSpeechInput struct {
 	// voices is "24000". The default value for generative voices is "24000".
 	//
 	// Valid values for pcm are "8000" and "16000" The default value is "16000".
+	//
+	// Valid value for ogg_opus is "48000".
+	//
+	// Valid value for mu-law and a-law is "8000".
 	SampleRate *string
 
 	// The type of speech marks returned for the input text.
@@ -126,8 +131,17 @@ type SynthesizeSpeechOutput struct {
 	//   - If you request ogg_vorbis as the OutputFormat , the ContentType returned is
 	//   audio/ogg.
 	//
+	//   - If you request ogg_opus as the OutputFormat , the ContentType returned is
+	//   audio/ogg.
+	//
 	//   - If you request pcm as the OutputFormat , the ContentType returned is
 	//   audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format.
+	//
+	//   - If you request mu-law as the OutputFormat , the ContentType returned is
+	//   audio/mulaw.
+	//
+	//   - If you request a-law as the OutputFormat , the ContentType returned is
+	//   audio/alaw.
 	//
 	//   - If you request json as the OutputFormat , the ContentType returned is
 	//   application/x-json-stream.

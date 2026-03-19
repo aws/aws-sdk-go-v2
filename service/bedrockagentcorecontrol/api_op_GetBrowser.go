@@ -80,8 +80,14 @@ type GetBrowserOutput struct {
 	// identification is enabled for web bot authentication.
 	BrowserSigning *types.BrowserSigningConfigOutput
 
+	// The list of certificates configured for the browser.
+	Certificates []types.Certificate
+
 	// The description of the browser.
 	Description *string
+
+	// The list of enterprise policy files configured for the browser.
+	EnterprisePolicies []types.BrowserEnterprisePolicy
 
 	// The IAM role ARN that provides permissions for the browser.
 	ExecutionRoleArn *string
