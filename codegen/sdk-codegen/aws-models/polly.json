@@ -32,13 +32,47 @@
         "com.amazonaws.polly#Alphabet": {
             "type": "string"
         },
+        "com.amazonaws.polly#AudioChunk": {
+            "type": "blob"
+        },
+        "com.amazonaws.polly#AudioEvent": {
+            "type": "structure",
+            "members": {
+                "AudioChunk": {
+                    "target": "com.amazonaws.polly#AudioChunk",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A chunk of synthesized audio data encoded in the format specified by the \n      <code>OutputFormat</code> parameter.</p>",
+                        "smithy.api#eventPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a chunk of synthesized audio data.</p>"
+            }
+        },
         "com.amazonaws.polly#AudioStream": {
             "type": "blob",
             "traits": {
                 "smithy.api#streaming": {}
             }
         },
+        "com.amazonaws.polly#AvailabilityErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.polly#CloseStreamEvent": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates the end of the input stream. After sending this event, the input stream\n     will be closed and all audio will be returned.</p>"
+            }
+        },
         "com.amazonaws.polly#ContentType": {
+            "type": "string"
+        },
+        "com.amazonaws.polly#CoralAvailabilityThrottledResource": {
+            "type": "string"
+        },
+        "com.amazonaws.polly#CoralAvailabilityThrottlingReason": {
             "type": "string"
         },
         "com.amazonaws.polly#DateTime": {
@@ -281,6 +315,27 @@
         },
         "com.amazonaws.polly#ErrorMessage": {
             "type": "string"
+        },
+        "com.amazonaws.polly#FlushStreamConfiguration": {
+            "type": "structure",
+            "members": {
+                "Force": {
+                    "target": "com.amazonaws.polly#Force",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to force the synthesis engine to immediately \n      write buffered audio data to the output stream.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration that controls when synthesized audio data is sent on the output stream.</p>"
+            }
+        },
+        "com.amazonaws.polly#Force": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.polly#Gender": {
             "type": "enum",
@@ -1254,6 +1309,9 @@
                     "target": "com.amazonaws.polly#PutLexicon"
                 },
                 {
+                    "target": "com.amazonaws.polly#StartSpeechSynthesisStream"
+                },
+                {
                     "target": "com.amazonaws.polly#StartSpeechSynthesisTask"
                 },
                 {
@@ -1271,7 +1329,15 @@
                 "aws.auth#sigv4": {
                     "name": "polly"
                 },
-                "aws.protocols#restJson1": {},
+                "aws.protocols#restJson1": {
+                    "http": [
+                        "http/1.1",
+                        "h2"
+                    ],
+                    "eventStreamHttp": [
+                        "h2"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Amazon Polly is a web service that makes it easy to synthesize speech from\n      text.</p>\n         <p>The Amazon Polly service provides API operations for synthesizing\n      high-quality speech from plain text and Speech Synthesis Markup Language\n      (SSML), along with managing pronunciations lexicons that enable you to get\n      the best results for your application domain.</p>",
                 "smithy.api#title": "Amazon Polly",
                 "smithy.api#xmlNamespace": {
@@ -2256,6 +2322,23 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.polly#QuotaCode": {
+            "type": "enum",
+            "members": {
+                "INPUT_STREAM_INBOUND_EVENT_TIMEOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "input-stream-inbound-event-timeout"
+                    }
+                },
+                "INPUT_STREAM_TIMEOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "input-stream-timeout"
+                    }
+                }
+            }
+        },
         "com.amazonaws.polly#RequestCharacters": {
             "type": "integer",
             "traits": {
@@ -2264,6 +2347,17 @@
         },
         "com.amazonaws.polly#SampleRate": {
             "type": "string"
+        },
+        "com.amazonaws.polly#ServiceCode": {
+            "type": "enum",
+            "members": {
+                "POLLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "polly"
+                    }
+                }
+            }
         },
         "com.amazonaws.polly#ServiceFailureException": {
             "type": "structure",
@@ -2276,6 +2370,36 @@
                 "smithy.api#documentation": "<p>An unknown condition has caused a service failure.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.polly#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.polly#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "quotaCode": {
+                    "target": "com.amazonaws.polly#QuotaCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quota code identifying the specific quota.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceCode": {
+                    "target": "com.amazonaws.polly#ServiceCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service code identifying the originating service.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request would cause a service quota to be exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
             }
         },
         "com.amazonaws.polly#Size": {
@@ -2342,6 +2466,175 @@
                 "smithy.api#documentation": "<p>SSML speech marks are not supported for plain text-type\n      input.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.polly#StartSpeechSynthesisStream": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.polly#StartSpeechSynthesisStreamInput"
+            },
+            "output": {
+                "target": "com.amazonaws.polly#StartSpeechSynthesisStreamOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.polly#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.polly#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.polly#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.polly#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Synthesizes UTF-8 input, plain text, or SSML over a bidirectional streaming connection. \n      Specify synthesis parameters in HTTP/2 headers, send text incrementally as events on the input stream,\n       and receive synthesized audio as it becomes available.</p>\n         <p>This operation serves as a bidirectional counterpart to <code>SynthesizeSpeech</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/polly/latest/API/API_SynthesizeSpeech.html\">SynthesizeSpeech</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/synthesisStream",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.polly#StartSpeechSynthesisStreamActionStream": {
+            "type": "union",
+            "members": {
+                "TextEvent": {
+                    "target": "com.amazonaws.polly#TextEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A text event containing content to be synthesized.</p>"
+                    }
+                },
+                "CloseStreamEvent": {
+                    "target": "com.amazonaws.polly#CloseStreamEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An event indicating the end of the input stream.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Inbound event stream for sending input and control events to manage bidirectional speech synthesis.</p>",
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.polly#StartSpeechSynthesisStreamEventStream": {
+            "type": "union",
+            "members": {
+                "AudioEvent": {
+                    "target": "com.amazonaws.polly#AudioEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An audio event containing synthesized speech.</p>"
+                    }
+                },
+                "StreamClosedEvent": {
+                    "target": "com.amazonaws.polly#StreamClosedEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An event, with summary information, indicating the stream has closed.</p>"
+                    }
+                },
+                "ValidationException": {
+                    "target": "com.amazonaws.polly#ValidationException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An exception indicating the input failed validation.</p>"
+                    }
+                },
+                "ServiceQuotaExceededException": {
+                    "target": "com.amazonaws.polly#ServiceQuotaExceededException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An exception indicating a service quota would be exceeded.</p>"
+                    }
+                },
+                "ServiceFailureException": {
+                    "target": "com.amazonaws.polly#ServiceFailureException"
+                },
+                "ThrottlingException": {
+                    "target": "com.amazonaws.polly#ThrottlingException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An exception indicating the request was throttled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Outbound event stream that contains synthesized audio data and stream status events.</p>",
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.polly#StartSpeechSynthesisStreamInput": {
+            "type": "structure",
+            "members": {
+                "Engine": {
+                    "target": "com.amazonaws.polly#Engine",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the engine for Amazon Polly to use when processing input text for speech synthesis. \n      Currently, only the <code>generative</code> engine is supported.\n      If you specify a voice that the selected engine doesn't support, Amazon Polly returns an error.</p>",
+                        "smithy.api#httpHeader": "x-amzn-Engine",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.polly#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that sets the language code for the speech synthesis request. Specify this parameter only \n      when using a bilingual voice. If a bilingual voice is used and no language code is specified, Amazon Polly \n      uses the default language of the bilingual voice.</p>",
+                        "smithy.api#httpHeader": "x-amzn-LanguageCode"
+                    }
+                },
+                "LexiconNames": {
+                    "target": "com.amazonaws.polly#LexiconNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of one or more pronunciation lexicons for the service to apply \n      during synthesis. Amazon Polly applies lexicons only when the lexicon language matches the voice language.</p>",
+                        "smithy.api#httpHeader": "x-amzn-LexiconNames"
+                    }
+                },
+                "OutputFormat": {
+                    "target": "com.amazonaws.polly#OutputFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audio format for the synthesized speech. Currently, Amazon Polly does not support JSON speech marks.</p>",
+                        "smithy.api#httpHeader": "x-amzn-OutputFormat",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SampleRate": {
+                    "target": "com.amazonaws.polly#SampleRate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audio frequency, specified in Hz.</p>",
+                        "smithy.api#httpHeader": "x-amzn-SampleRate"
+                    }
+                },
+                "VoiceId": {
+                    "target": "com.amazonaws.polly#VoiceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The voice to use in synthesis. To get a list of available voice IDs, use the <a href=\"https://docs.aws.amazon.com/polly/latest/API/API_DescribeVoices.html\">DescribeVoices</a> operation.</p>",
+                        "smithy.api#httpHeader": "x-amzn-VoiceId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ActionStream": {
+                    "target": "com.amazonaws.polly#StartSpeechSynthesisStreamActionStream",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input event stream that contains text events and stream control events.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.polly#StartSpeechSynthesisStreamOutput": {
+            "type": "structure",
+            "members": {
+                "EventStream": {
+                    "target": "com.amazonaws.polly#StartSpeechSynthesisStreamEventStream",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output event stream that contains synthesized audio events and stream status events.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.polly#StartSpeechSynthesisTask": {
@@ -2423,7 +2716,7 @@
                 "OutputFormat": {
                     "target": "com.amazonaws.polly#OutputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format in which the returned output will be encoded. For audio\n      stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will\n      be json. </p>",
+                        "smithy.api#documentation": "<p>The format in which the returned output will be encoded. For audio\n      stream, this will be mp3, ogg_vorbis, ogg_opus, mu-law, a-law, or pcm. For speech marks, this will\n      be json. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2443,7 +2736,7 @@
                 "SampleRate": {
                     "target": "com.amazonaws.polly#SampleRate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The audio frequency specified in Hz.</p>\n         <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\",\n      and \"24000\". The default value for standard voices is \"22050\". The default\n      value for neural voices is \"24000\". The default value for long-form voices\n      is \"24000\". The default value for generative voices is \"24000\".</p>\n         <p>Valid values for pcm are \"8000\" and \"16000\" The default value is\n      \"16000\". </p>"
+                        "smithy.api#documentation": "<p>The audio frequency specified in Hz.</p>\n         <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\",\n      and \"24000\". The default value for standard voices is \"22050\". The default\n      value for neural voices is \"24000\". The default value for long-form voices\n      is \"24000\". The default value for generative voices is \"24000\".</p>\n         <p>Valid values for pcm are \"8000\" and \"16000\" The default value is\n      \"16000\". </p>\n         <p>Valid value for ogg_opus is \"48000\". </p>\n         <p>Valid value for mu-law and a-law is \"8000\". </p>"
                     }
                 },
                 "SnsTopicArn": {
@@ -2495,6 +2788,21 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.polly#StreamClosedEvent": {
+            "type": "structure",
+            "members": {
+                "RequestCharacters": {
+                    "target": "com.amazonaws.polly#RequestCharacters",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of characters synthesized during the streaming session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that the synthesis stream is closed and provides summary information.</p>"
             }
         },
         "com.amazonaws.polly#SynthesisTask": {
@@ -2558,13 +2866,13 @@
                 "OutputFormat": {
                     "target": "com.amazonaws.polly#OutputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format in which the returned output will be encoded. For audio\n      stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will\n      be json. </p>"
+                        "smithy.api#documentation": "<p>The format in which the returned output will be encoded. For audio\n      stream, this will be mp3, ogg_vorbis, ogg_opus, mu-law, a-law, or pcm. For speech marks, this will\n      be json. </p>"
                     }
                 },
                 "SampleRate": {
                     "target": "com.amazonaws.polly#SampleRate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The audio frequency specified in Hz.</p>\n         <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\",\n      and \"24000\". The default value for standard voices is \"22050\". The default\n      value for neural voices is \"24000\". The default value for long-form voices\n      is \"24000\". The default value for generative voices is \"24000\".</p>\n         <p>Valid values for pcm are \"8000\" and \"16000\" The default value is\n      \"16000\". </p>"
+                        "smithy.api#documentation": "<p>The audio frequency specified in Hz.</p>\n         <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\",\n      and \"24000\". The default value for standard voices is \"22050\". The default\n      value for neural voices is \"24000\". The default value for long-form voices\n      is \"24000\". The default value for generative voices is \"24000\".</p>\n         <p>Valid values for pcm are \"8000\" and \"16000\" The default value is\n      \"16000\". </p>\n         <p>Valid value for ogg_opus is \"48000\". </p>\n         <p>Valid value for mu-law and a-law is \"8000\". </p>"
                     }
                 },
                 "SpeechMarkTypes": {
@@ -2706,14 +3014,14 @@
                 "OutputFormat": {
                     "target": "com.amazonaws.polly#OutputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p> The format in which the returned output will be encoded. For audio\n      stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will\n      be json. </p>\n         <p>When pcm is used, the content returned is audio/pcm in a signed\n      16-bit, 1 channel (mono), little-endian format. </p>",
+                        "smithy.api#documentation": "<p> The format in which the returned output will be encoded. For audio\n      stream, this will be mp3, ogg_vorbis, ogg_opus, mu-law, a-law or pcm. For speech marks, this will\n      be json. </p>\n         <p>When pcm is used, the content returned is audio/pcm in a signed\n      16-bit, 1 channel (mono), little-endian format. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SampleRate": {
                     "target": "com.amazonaws.polly#SampleRate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The audio frequency specified in Hz.</p>\n         <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\", \"24000\", \"44100\" and \"48000\". The default value for standard voices is \"22050\". The default\n      value for neural voices is \"24000\". The default value for long-form voices\n      is \"24000\". The default value for generative voices is \"24000\".</p>\n         <p>Valid values for pcm are \"8000\" and \"16000\" The default value is\n      \"16000\". </p>"
+                        "smithy.api#documentation": "<p>The audio frequency specified in Hz.</p>\n         <p>The valid values for mp3 and ogg_vorbis are \"8000\", \"16000\", \"22050\", \"24000\", \"44100\" and \"48000\". The default value for standard voices is \"22050\". The default\n      value for neural voices is \"24000\". The default value for long-form voices\n      is \"24000\". The default value for generative voices is \"24000\".</p>\n         <p>Valid values for pcm are \"8000\" and \"16000\" The default value is\n      \"16000\". </p>\n         <p>Valid value for ogg_opus is \"48000\". </p>\n         <p>Valid value for mu-law and a-law is \"8000\". </p>"
                     }
                 },
                 "SpeechMarkTypes": {
@@ -2761,7 +3069,7 @@
                 "ContentType": {
                     "target": "com.amazonaws.polly#ContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies the type audio stream. This should reflect the\n        <code>OutputFormat</code> parameter in your request. </p>\n         <ul>\n            <li>\n               <p> If you request <code>mp3</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          audio/mpeg. </p>\n            </li>\n            <li>\n               <p> If you request <code>ogg_vorbis</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          audio/ogg. </p>\n            </li>\n            <li>\n               <p> If you request <code>pcm</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format.\n        </p>\n            </li>\n            <li>\n               <p>If you request <code>json</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          application/x-json-stream.</p>\n            </li>\n         </ul>\n         <p> </p>",
+                        "smithy.api#documentation": "<p> Specifies the type audio stream. This should reflect the\n        <code>OutputFormat</code> parameter in your request. </p>\n         <ul>\n            <li>\n               <p> If you request <code>mp3</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          audio/mpeg. </p>\n            </li>\n            <li>\n               <p> If you request <code>ogg_vorbis</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          audio/ogg. </p>\n            </li>\n            <li>\n               <p> If you request <code>ogg_opus</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          audio/ogg. </p>\n            </li>\n            <li>\n               <p> If you request <code>pcm</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format.\n        </p>\n            </li>\n            <li>\n               <p> If you request <code>mu-law</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          audio/mulaw.\n        </p>\n            </li>\n            <li>\n               <p> If you request <code>a-law</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          audio/alaw.\n        </p>\n            </li>\n            <li>\n               <p>If you request <code>json</code> as the\n            <code>OutputFormat</code>, the <code>ContentType</code> returned is\n          application/x-json-stream.</p>\n            </li>\n         </ul>\n         <p> </p>",
                         "smithy.api#httpHeader": "Content-Type"
                     }
                 },
@@ -2819,6 +3127,33 @@
         "com.amazonaws.polly#Text": {
             "type": "string"
         },
+        "com.amazonaws.polly#TextEvent": {
+            "type": "structure",
+            "members": {
+                "Text": {
+                    "target": "com.amazonaws.polly#Text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text content to synthesize. If you specify <code>ssml</code> as the \n      <code>TextType</code>, follow the SSML format for the input text.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TextType": {
+                    "target": "com.amazonaws.polly#TextType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the input text is plain text or SSML. Default: plain text.</p>"
+                    }
+                },
+                "FlushStreamConfiguration": {
+                    "target": "com.amazonaws.polly#FlushStreamConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for controlling when synthesized audio flushes to the output stream.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains text content to be synthesized into speech.</p>"
+            }
+        },
         "com.amazonaws.polly#TextLengthExceededException": {
             "type": "structure",
             "members": {
@@ -2849,6 +3184,55 @@
                 }
             }
         },
+        "com.amazonaws.polly#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.polly#AvailabilityErrorMessage"
+                },
+                "throttlingReasons": {
+                    "target": "com.amazonaws.polly#ThrottlingReasonList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of reasons explaining why the request was throttled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "Throttling",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The request was denied because of request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.polly#ThrottlingReason": {
+            "type": "structure",
+            "members": {
+                "reason": {
+                    "target": "com.amazonaws.polly#CoralAvailabilityThrottlingReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason code explaining why the request was throttled.</p>"
+                    }
+                },
+                "resource": {
+                    "target": "com.amazonaws.polly#CoralAvailabilityThrottledResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource that caused the throttling.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about a specific throttling reason.</p>"
+            }
+        },
+        "com.amazonaws.polly#ThrottlingReasonList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.polly#ThrottlingReason"
+            }
+        },
         "com.amazonaws.polly#UnsupportedPlsAlphabetException": {
             "type": "structure",
             "members": {
@@ -2873,6 +3257,98 @@
                 "smithy.api#documentation": "<p>The language specified in the lexicon is unsupported. For a list of\n      supported languages, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_LexiconAttributes.html\">Lexicon Attributes</a>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.polly#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.polly#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.polly#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the request failed validation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.polly#ValidationExceptionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fields that caused the validation error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by the service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.polly#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.polly#ValidationExceptionFieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field that failed validation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.polly#ValidationExceptionFieldMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing why the field failed validation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a field that failed validation.</p>"
+            }
+        },
+        "com.amazonaws.polly#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.polly#ValidationExceptionField"
+            }
+        },
+        "com.amazonaws.polly#ValidationExceptionFieldMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.polly#ValidationExceptionFieldName": {
+            "type": "string"
+        },
+        "com.amazonaws.polly#ValidationExceptionReason": {
+            "type": "enum",
+            "members": {
+                "UNSUPPORTED_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unsupportedOperation"
+                    }
+                },
+                "FIELD_VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fieldValidationFailed"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "other"
+                    }
+                },
+                "INVALID_INBOUND_EVENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "invalidInboundEvent"
+                    }
+                }
             }
         },
         "com.amazonaws.polly#Voice": {

@@ -892,6 +892,15 @@
                 "smithy.api#documentation": "<p>Information about a data source associated with the telemetry pipeline. For CloudWatch Logs sources, this includes both a name and type extracted from the log event metadata. For third-party sources (such as S3), this includes only a name, with the type field left empty.</p>"
             }
         },
+        "com.amazonaws.observabilityadmin#DataSourceFilterString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                }
+            }
+        },
         "com.amazonaws.observabilityadmin#DataSources": {
             "type": "list",
             "member": {
@@ -2934,7 +2943,7 @@
                 "LogGroupNamePattern": {
                     "target": "com.amazonaws.observabilityadmin#LogGroupNamePattern",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pattern used to generate destination log group names during centralization. The pattern can contain static text and dynamic variables that are replaced with source attributes. If a variable cannot be resolved, it inherits the value from its parent variable in the hierarchy. The pattern must be between 1 and 512 characters.</p> <p>Supported variables:</p> <ul> <li> <p> <b>${source.logGroup}</b> — The original log group name from the source account.</p> </li> <li> <p> <b>${source.accountId}</b> — The AWS account ID where the log originated.</p> </li> <li> <p> <b>${source.region}</b> — The AWS Region where the log originated.</p> </li> <li> <p> <b>${source.org.id}</b> — The AWS Organization ID of the source account.</p> </li> <li> <p> <b>${source.org.ouId}</b> — The organizational unit ID of the source account.</p> </li> <li> <p> <b>${source.org.rootId}</b> — The organization Root ID.</p> </li> <li> <p> <b>${source.org.path}</b> — The organizational path from account to root.</p> </li> </ul>",
+                        "smithy.api#documentation": "<p>The pattern used to generate destination log group names during centralization. The pattern can contain static text and dynamic variables that are replaced with source attributes. If a variable cannot be resolved, it inherits the value from its parent variable in the hierarchy. The pattern must be between 1 and 512 characters.</p> <p>Supported variables:</p> <ul> <li> <p> <b>${source.logGroup}</b> — The original log group name from the source account.</p> </li> <li> <p> <b>${source.accountId}</b> — The Amazon Web Services account ID where the log originated.</p> </li> <li> <p> <b>${source.region}</b> — The Amazon Web Services Region where the log originated.</p> </li> <li> <p> <b>${source.org.id}</b> — The Amazon Web Services Organization ID of the source account.</p> </li> <li> <p> <b>${source.org.ouId}</b> — The organizational unit ID of the source account.</p> </li> <li> <p> <b>${source.org.rootId}</b> — The organization Root ID.</p> </li> <li> <p> <b>${source.org.path}</b> — The organizational path from account to root.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2946,7 +2955,7 @@
         "com.amazonaws.observabilityadmin#LogGroupNamePattern": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The pattern used to generate destination log group names during centralization. The pattern can contain static text and dynamic variables that are replaced with source attributes. If a variable cannot be resolved, it inherits the value from its parent variable in the hierarchy. The pattern must be between 1 and 512 characters.</p> <p>Supported variables:</p> <ul> <li> <p> <b>${source.logGroup}</b> — The original log group name from the source account.</p> </li> <li> <p> <b>${source.accountId}</b> — The AWS account ID where the log originated.</p> </li> <li> <p> <b>${source.region}</b> — The AWS Region where the log originated.</p> </li> <li> <p> <b>${source.org.id}</b> — The AWS Organization ID of the source account.</p> </li> <li> <p> <b>${source.org.ouId}</b> — The organizational unit ID of the source account.</p> </li> <li> <p> <b>${source.org.rootId}</b> — The organization Root ID.</p> </li> <li> <p> <b>${source.org.path}</b> — The organizational path from account to root.</p> </li> </ul>",
+                "smithy.api#documentation": "<p>The pattern used to generate destination log group names during centralization. The pattern can contain static text and dynamic variables that are replaced with source attributes. If a variable cannot be resolved, it inherits the value from its parent variable in the hierarchy. The pattern must be between 1 and 512 characters.</p> <p>Supported variables:</p> <ul> <li> <p> <b>${source.logGroup}</b> — The original log group name from the source account.</p> </li> <li> <p> <b>${source.accountId}</b> — The Amazon Web Services account ID where the log originated.</p> </li> <li> <p> <b>${source.region}</b> — The Amazon Web Services Region where the log originated.</p> </li> <li> <p> <b>${source.org.id}</b> — The Amazon Web Services Organization ID of the source account.</p> </li> <li> <p> <b>${source.org.ouId}</b> — The organizational unit ID of the source account.</p> </li> <li> <p> <b>${source.org.rootId}</b> — The organization Root ID.</p> </li> <li> <p> <b>${source.org.path}</b> — The organizational path from account to root.</p> </li> </ul>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 512
@@ -4262,8 +4271,15 @@
                 "LogGroupSelectionCriteria": {
                     "target": "com.amazonaws.observabilityadmin#LogsFilterString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The selection criteria that specifies which source log groups to centralize. The selection criteria uses the same format as OAM link filters.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "*",
+                        "smithy.api#documentation": "<p>The selection criteria that specifies which source log groups to centralize. The selection criteria uses the same format as OAM link filters.</p>"
+                    }
+                },
+                "DataSourceSelectionCriteria": {
+                    "target": "com.amazonaws.observabilityadmin#DataSourceFilterString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selection criteria that specifies which data sources to centralize. The selection criteria uses the same filter expression format as <code>LogGroupSelectionCriteria</code>, but operates on <code>DataSourceName</code> and <code>DataSourceType</code> operands. When both <code>LogGroupSelectionCriteria</code> and <code>DataSourceSelectionCriteria</code> are specified, a log event must match both criteria to be centralized.</p>"
                     }
                 },
                 "EncryptedLogGroupStrategy": {

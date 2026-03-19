@@ -1163,6 +1163,59 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
             }
         },
+        "com.amazonaws.bedrockagentcore#BrowserEnterprisePolicies": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#BrowserEnterprisePolicy"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#BrowserEnterprisePolicy": {
+            "type": "structure",
+            "members": {
+                "location": {
+                    "target": "com.amazonaws.bedrockagentcore#ResourceLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the enterprise policy file.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.bedrockagentcore#BrowserEnterprisePolicyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enterprise policy type. See BrowserEnterprisePolicyType.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Browser enterprise policy configuration.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#BrowserEnterprisePolicyType": {
+            "type": "enum",
+            "members": {
+                "MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED"
+                    }
+                },
+                "RECOMMENDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECOMMENDED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of browser enterprise policy. Available values are <code>MANAGED</code> and <code>RECOMMENDED</code>.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcore#BrowserExtension": {
             "type": "structure",
             "members": {
@@ -1362,6 +1415,47 @@
                 "smithy.api#length": {
                     "min": 10,
                     "max": 512
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#Certificate": {
+            "type": "structure",
+            "members": {
+                "location": {
+                    "target": "com.amazonaws.bedrockagentcore#CertificateLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the certificate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A certificate to install in the browser or code interpreter session.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#CertificateLocation": {
+            "type": "union",
+            "members": {
+                "secretsManager": {
+                    "target": "com.amazonaws.bedrockagentcore#SecretsManagerLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Secrets Manager location of the certificate.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The location from which to retrieve a certificate.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#Certificates": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#Certificate"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
                 }
             }
         },
@@ -2976,6 +3070,12 @@
                         "smithy.api#documentation": "<p>The list of browser extensions that are configured in the browser session.</p>"
                     }
                 },
+                "enterprisePolicies": {
+                    "target": "com.amazonaws.bedrockagentcore#BrowserEnterprisePolicies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of files containing enterprise policies for the browser session.</p>"
+                    }
+                },
                 "profileConfiguration": {
                     "target": "com.amazonaws.bedrockagentcore#BrowserProfileConfiguration",
                     "traits": {
@@ -3004,6 +3104,12 @@
                     "target": "com.amazonaws.bedrockagentcore#ProxyConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The active proxy configuration for this browser session. This field is only present if proxy configuration was provided when the session was started using <code>StartBrowserSession</code>. The configuration includes proxy servers, domain bypass rules and the proxy authentication credentials.</p>"
+                    }
+                },
+                "certificates": {
+                    "target": "com.amazonaws.bedrockagentcore#Certificates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of certificates installed in the browser session.</p>"
                     }
                 },
                 "sessionReplayArtifact": {
@@ -3122,6 +3228,12 @@
                     "target": "com.amazonaws.bedrockagentcore#CodeInterpreterSessionStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the code interpreter session. Possible values include ACTIVE, STOPPING, and STOPPED.</p>"
+                    }
+                },
+                "certificates": {
+                    "target": "com.amazonaws.bedrockagentcore#Certificates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of certificates installed in the code interpreter session.</p>"
                     }
                 }
             },
@@ -6504,7 +6616,22 @@
         "com.amazonaws.bedrockagentcore#SecretArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$"
+                "smithy.api#pattern": "^arn:aws(-[a-z-]+)?:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#SecretsManagerLocation": {
+            "type": "structure",
+            "members": {
+                "secretArn": {
+                    "target": "com.amazonaws.bedrockagentcore#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services Secrets Manager secret containing the certificate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Web Services Secrets Manager location configuration.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#SensitiveString": {
@@ -6788,6 +6915,18 @@
                         "smithy.api#documentation": "<p>Optional proxy configuration for routing browser traffic through customer-specified proxy servers. When provided, enables HTTP Basic authentication via Amazon Web Services Secrets Manager and domain-based routing rules. Requires <code>secretsmanager:GetSecretValue</code> IAM permission for the specified secret ARNs.</p>"
                     }
                 },
+                "enterprisePolicies": {
+                    "target": "com.amazonaws.bedrockagentcore#BrowserEnterprisePolicies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of files containing enterprise policies for the browser.</p>"
+                    }
+                },
+                "certificates": {
+                    "target": "com.amazonaws.bedrockagentcore#Certificates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of certificates to install in the browser session.</p>"
+                    }
+                },
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagentcore#ClientToken",
                     "traits": {
@@ -6920,6 +7059,12 @@
                     "traits": {
                         "smithy.api#default": 900,
                         "smithy.api#documentation": "<p>The duration in seconds (time-to-live) after which the session automatically terminates, regardless of ongoing activity. Defaults to 900 seconds (15 minutes). Recommended minimum: 60 seconds. Maximum allowed: 28,800 seconds (8 hours).</p>"
+                    }
+                },
+                "certificates": {
+                    "target": "com.amazonaws.bedrockagentcore#Certificates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of certificates to install in the code interpreter session.</p>"
                     }
                 },
                 "clientToken": {

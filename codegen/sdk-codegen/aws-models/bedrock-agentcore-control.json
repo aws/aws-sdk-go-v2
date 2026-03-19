@@ -1666,6 +1666,56 @@
                 "smithy.api#pattern": "^arn:(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:(aws|[0-9]{12}):browser(-custom)?/(aws\\.browser\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#BrowserEnterprisePolicies": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#BrowserEnterprisePolicy"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#BrowserEnterprisePolicy": {
+            "type": "structure",
+            "members": {
+                "location": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the enterprise policy file.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#BrowserEnterprisePolicyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of browser enterprise policy. Available values are <code>MANAGED</code> and <code>RECOMMENDED</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Browser enterprise policy configuration.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#BrowserEnterprisePolicyType": {
+            "type": "enum",
+            "members": {
+                "MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED"
+                    }
+                },
+                "RECOMMENDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECOMMENDED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#BrowserId": {
             "type": "string",
             "traits": {
@@ -2065,6 +2115,47 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents a Cedar policy statement within the AgentCore Policy system. Cedar is a policy language designed for authorization that provides human-readable, analyzable, and high-performance policy evaluation for controlling agent behavior and access decisions. </p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#Certificate": {
+            "type": "structure",
+            "members": {
+                "location": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CertificateLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the certificate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A certificate to install in the browser or code interpreter.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CertificateLocation": {
+            "type": "union",
+            "members": {
+                "secretsManager": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#SecretsManagerLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Secrets Manager location of the certificate.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The location from which to retrieve a certificate.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#Certificates": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#Certificate"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#ClaimMatchOperatorType": {
@@ -3150,6 +3241,18 @@
                         "smithy.api#documentation": "<p>The browser signing configuration that enables cryptographic agent identification using HTTP message signatures for web bot authentication.</p>"
                     }
                 },
+                "enterprisePolicies": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#BrowserEnterprisePolicies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of enterprise policy files for the browser.</p>"
+                    }
+                },
+                "certificates": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Certificates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of certificates to install in the browser.</p>"
+                    }
+                },
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
                     "traits": {
@@ -3269,6 +3372,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The network configuration for the code interpreter. This configuration specifies the network mode for the code interpreter.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "certificates": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Certificates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of certificates to install in the code interpreter.</p>"
                     }
                 },
                 "clientToken": {
@@ -8839,6 +8948,18 @@
                         "smithy.api#documentation": "<p>The browser signing configuration that shows whether cryptographic agent identification is enabled for web bot authentication.</p>"
                     }
                 },
+                "enterprisePolicies": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#BrowserEnterprisePolicies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of enterprise policy files configured for the browser.</p>"
+                    }
+                },
+                "certificates": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Certificates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of certificates configured for the browser.</p>"
+                    }
+                },
                 "status": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#BrowserStatus",
                     "traits": {
@@ -8969,6 +9090,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the code interpreter.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "certificates": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Certificates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of certificates configured for the code interpreter.</p>"
                     }
                 },
                 "failureReason": {
@@ -15453,6 +15580,17 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ResourceLocation": {
+            "type": "union",
+            "members": {
+                "s3": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#S3Location"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The location of a resource.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -15891,6 +16029,21 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:(aws|aws-us-gov):secretsmanager:[A-Za-z0-9-]{1,64}:[0-9]{12}:secret:[a-zA-Z0-9-_/+=.@!]+$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#SecretsManagerLocation": {
+            "type": "structure",
+            "members": {
+                "secretArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ToolSecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services Secrets Manager secret containing the certificate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Web Services Secrets Manager location configuration.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#SecurityGroupId": {
@@ -17304,6 +17457,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A tool schema for a gateway target. This structure defines the schema for a tool that the target exposes through the Model Context Protocol.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ToolSecretArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws(-[a-z-]+)?:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#TriggerCondition": {

@@ -46,6 +46,9 @@
                     "target": "com.amazonaws.batch#CreateJobQueue"
                 },
                 {
+                    "target": "com.amazonaws.batch#CreateQuotaShare"
+                },
+                {
                     "target": "com.amazonaws.batch#CreateSchedulingPolicy"
                 },
                 {
@@ -59,6 +62,9 @@
                 },
                 {
                     "target": "com.amazonaws.batch#DeleteJobQueue"
+                },
+                {
+                    "target": "com.amazonaws.batch#DeleteQuotaShare"
                 },
                 {
                     "target": "com.amazonaws.batch#DeleteSchedulingPolicy"
@@ -85,6 +91,9 @@
                     "target": "com.amazonaws.batch#DescribeJobs"
                 },
                 {
+                    "target": "com.amazonaws.batch#DescribeQuotaShare"
+                },
+                {
                     "target": "com.amazonaws.batch#DescribeSchedulingPolicies"
                 },
                 {
@@ -104,6 +113,9 @@
                 },
                 {
                     "target": "com.amazonaws.batch#ListJobsByConsumableResource"
+                },
+                {
+                    "target": "com.amazonaws.batch#ListQuotaShares"
                 },
                 {
                     "target": "com.amazonaws.batch#ListSchedulingPolicies"
@@ -145,10 +157,16 @@
                     "target": "com.amazonaws.batch#UpdateJobQueue"
                 },
                 {
+                    "target": "com.amazonaws.batch#UpdateQuotaShare"
+                },
+                {
                     "target": "com.amazonaws.batch#UpdateSchedulingPolicy"
                 },
                 {
                     "target": "com.amazonaws.batch#UpdateServiceEnvironment"
+                },
+                {
+                    "target": "com.amazonaws.batch#UpdateServiceJob"
                 }
             ],
             "traits": {
@@ -1661,18 +1679,18 @@
                 "maxCapacity": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum capacity available for the service environment. This value represents the maximum amount of resources that can be allocated to service jobs.</p>\n         <p>For example, <code>maxCapacity=50</code>, <code>capacityUnit=NUM_INSTANCES</code>. This indicates that the\n            maximum number of instances that can be run on this service environment is 50. You could\n            then run 5 SageMaker Training jobs that each use 10 instances. However, if you submit another job that\n            requires 10 instances, it will wait in the queue.</p>"
+                        "smithy.api#documentation": "<p>The maximum capacity available for the service environment. For a quota management enabled service environment, this value represents\n      the maximum quantity of a particular resource type (specified by <code>capacityUnit</code>) that can be allocated to service jobs.\n      For other service environments, this value represents the maximum quantity of all resources that can be allocated to service jobs.</p>\n         <p>For example, if <code>maxCapacity=50</code> and <code>capacityUnit=NUM_INSTANCES</code>, you can run up to 50 instances concurrently.\n      If you run 5 SageMaker Training jobs that each use 10 instances, a subsequent job requiring 10 instances waits in the queue until\n      capacity is available. In a quota management enabled service environment with <code>capacityUnit=ml.m5.large</code>, only\n      <code>ml.m5.large</code> instances count against this limit, and jobs requiring other instance types wait until a matching capacity limit is configured.</p>"
                     }
                 },
                 "capacityUnit": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unit of measure for the capacity limit. This defines how the maxCapacity value should be interpreted. For <code>SAGEMAKER_TRAINING</code> jobs, use <code>NUM_INSTANCES</code>.</p>"
+                        "smithy.api#documentation": "<p>The unit of measure for the capacity limit, which defines how <code>maxCapacity</code> is interpreted. For <code>SAGEMAKER_TRAINING</code> jobs in a quota management\n      enabled service environment, specify the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ResourceConfig.html#sagemaker-Type-ResourceConfig-InstanceType\">instance type</a>\n      (for example, <code>ml.m5.large</code>). Otherwise, use <code>NUM_INSTANCES</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the capacity limit for a service environment. This structure specifies the maximum amount of resources that can be used by service jobs in the environment.</p>"
+                "smithy.api#documentation": "<p>Defines the type and maximum quantity of resources that can be allocated to service jobs in a service environment.</p>"
             }
         },
         "com.amazonaws.batch#CapacityLimits": {
@@ -3060,6 +3078,111 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.batch#CreateQuotaShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.batch#CreateQuotaShareRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.batch#CreateQuotaShareResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.batch#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.batch#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Batch quota share. Each quota share operates as a virtual queue with a configured compute capacity, resource sharing strategy, and borrow limits. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/createquotashare",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.batch#CreateQuotaShareRequest": {
+            "type": "structure",
+            "members": {
+                "quotaShareName": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the quota share. It can be up to 128 characters long. It can contain uppercase and\n      lowercase letters, numbers, hyphens (-), and underscores (_).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobQueue": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Batch job queue associated with the quota share. This can be the job queue name or ARN.\n    A job queue must be in the <code>VALID</code> state before you can associate it with a quota share.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "capacityLimits": {
+                    "target": "com.amazonaws.batch#QuotaShareCapacityLimits",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list that specifies the quantity and type of compute capacity allocated to the quota share. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceSharingConfiguration": {
+                    "target": "com.amazonaws.batch#QuotaShareResourceSharingConfiguration",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies whether a quota share reserves, lends, or both lends and borrows idle compute capacity.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "preemptionConfiguration": {
+                    "target": "com.amazonaws.batch#QuotaSharePreemptionConfiguration",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the preemption behavior for jobs in a quota share.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.batch#QuotaShareState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the quota share. If the quota share is <code>ENABLED</code>, it is able to accept jobs.\n    If the quota share is <code>DISABLED</code>, new jobs won't be accepted but jobs already submitted can finish.\n    The default state is <code>ENABLED</code>.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.batch#TagrisTagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that you apply to the quota share to help you categorize and organize your\n      resources. Each tag consists of a key and an optional value. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html\">Tagging your Batch resources</a>\n      in <i>Batch User Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.batch#CreateQuotaShareResponse": {
+            "type": "structure",
+            "members": {
+                "quotaShareName": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the quota share.</p>"
+                    }
+                },
+                "quotaShareArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the quota share.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.batch#CreateSchedulingPolicy": {
             "type": "operation",
             "input": {
@@ -3096,10 +3219,16 @@
                         "smithy.api#required": {}
                     }
                 },
+                "quotaSharePolicy": {
+                    "target": "com.amazonaws.batch#QuotaSharePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quota share scheduling policy details. Only one of fairsharePolicy or quotaSharePolicy can be set.\n        Once set, this policy type cannot be removed or changed to a fairSharePolicy.</p>"
+                    }
+                },
                 "fairsharePolicy": {
                     "target": "com.amazonaws.batch#FairsharePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fair-share scheduling policy details.</p>"
+                        "smithy.api#documentation": "<p>The fair-share scheduling policy details. Only one of fairsharePolicy or quotaSharePolicy can be set.\n    Once set, this policy type cannot be removed or changed to a quotaSharePolicy.</p>"
                     }
                 },
                 "tags": {
@@ -3365,7 +3494,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified job queue. You must first disable submissions for a queue with the\n        <a>UpdateJobQueue</a> operation. All jobs in the queue are eventually terminated\n      when you delete a job queue. The jobs are terminated at a rate of about 16 jobs each\n      second.</p>\n         <p>It's not necessary to disassociate compute environments from a queue before submitting a\n        <code>DeleteJobQueue</code> request.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified job queue. You must first disable submissions for a queue with the\n        <a>UpdateJobQueue</a> operation. All jobs in the queue are eventually terminated\n      when you delete a job queue.</p>\n         <p>It's not necessary to disassociate compute environments from a queue before submitting a\n        <code>DeleteJobQueue</code> request.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete a job queue",
@@ -3401,6 +3530,54 @@
             }
         },
         "com.amazonaws.batch#DeleteJobQueueResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.batch#DeleteQuotaShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.batch#DeleteQuotaShareRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.batch#DeleteQuotaShareResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.batch#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.batch#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified quota share. You must first disable submissions for the share by\n      updating the state to <code>DISABLED</code> using the <a>UpdateQuotaShare</a> operation.\n      All jobs in the share are eventually terminated when you delete a quota share.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/deletequotashare",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.batch#DeleteQuotaShareRequest": {
+            "type": "structure",
+            "members": {
+                "quotaShareArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the quota share.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.batch#DeleteQuotaShareResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -4159,6 +4336,109 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.batch#DescribeQuotaShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.batch#DescribeQuotaShareRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.batch#DescribeQuotaShareResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.batch#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.batch#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a description of the specified quota share.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/describequotashare",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.batch#DescribeQuotaShareRequest": {
+            "type": "structure",
+            "members": {
+                "quotaShareArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the quota share.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.batch#DescribeQuotaShareResponse": {
+            "type": "structure",
+            "members": {
+                "quotaShareName": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the quota share.</p>"
+                    }
+                },
+                "quotaShareArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the quota share.</p>"
+                    }
+                },
+                "jobQueueArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the job queue associated with the quota share.</p>"
+                    }
+                },
+                "capacityLimits": {
+                    "target": "com.amazonaws.batch#QuotaShareCapacityLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list that specifies the quantity and type of compute capacity allocated to the quota share.</p>"
+                    }
+                },
+                "resourceSharingConfiguration": {
+                    "target": "com.amazonaws.batch#QuotaShareResourceSharingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether a quota share reserves, lends, or both lends and borrows idle compute capacity.</p>"
+                    }
+                },
+                "preemptionConfiguration": {
+                    "target": "com.amazonaws.batch#QuotaSharePreemptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the preemption behavior for jobs in a quota share.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.batch#QuotaShareState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the quota share.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.batch#QuotaShareStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the quota share.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.batch#TagrisTagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags applied to the quota share.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.batch#DescribeSchedulingPolicies": {
             "type": "operation",
             "input": {
@@ -4432,6 +4712,24 @@
                     "target": "com.amazonaws.batch#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The share identifier for the service job. This is used for fair-share scheduling.</p>"
+                    }
+                },
+                "quotaShareName": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the quota share that the service job is associated with.</p>"
+                    }
+                },
+                "preemptionConfiguration": {
+                    "target": "com.amazonaws.batch#ServiceJobPreemptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the service job behavior when preempted.</p>"
+                    }
+                },
+                "preemptionSummary": {
+                    "target": "com.amazonaws.batch#ServiceJobPreemptionSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summarizes the preemptions of the service job. This field appears on a service job\n        when it has been preempted.</p>"
                     }
                 },
                 "startedAt": {
@@ -6000,6 +6298,61 @@
                 "target": "com.amazonaws.batch#FrontOfQueueJobSummary"
             }
         },
+        "com.amazonaws.batch#FrontOfQuotaShareJobSummary": {
+            "type": "structure",
+            "members": {
+                "jobArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for a job in a named quota share.</p>"
+                    }
+                },
+                "earliestTimeAtPosition": {
+                    "target": "com.amazonaws.batch#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp (in milliseconds) for when the job transitioned to its current position in the quota share.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents summary details for the first <code>RUNNABLE</code> job in a quota share.</p>"
+            }
+        },
+        "com.amazonaws.batch#FrontOfQuotaShareJobSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#FrontOfQuotaShareJobSummary"
+            }
+        },
+        "com.amazonaws.batch#FrontOfQuotaSharesDetail": {
+            "type": "structure",
+            "members": {
+                "quotaShares": {
+                    "target": "com.amazonaws.batch#FrontOfQuotaSharesJobSummaryMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains a list of the first <code>RUNNABLE</code> job in each named quota share.</p>"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.batch#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp (in milliseconds) for when the first <code>RUNNABLE</code> job per quota share were all last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the details of the first <code>RUNNABLE</code> job in each named quota share associated with a single job queue.</p>"
+            }
+        },
+        "com.amazonaws.batch#FrontOfQuotaSharesJobSummaryMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.batch#String"
+            },
+            "value": {
+                "target": "com.amazonaws.batch#FrontOfQuotaShareJobSummaryList"
+            }
+        },
         "com.amazonaws.batch#GetJobQueueSnapshot": {
             "type": "operation",
             "input": {
@@ -6017,7 +6370,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a list of the first 100 <code>RUNNABLE</code> jobs associated to a single job\n      queue and includes capacity utilization, including total usage and breakdown by share for fairshare scheduling job queues. </p>",
+                "smithy.api#documentation": "<p>Provides a snapshot of job queue state, including ordering of <code>RUNNABLE</code> jobs, as well as capacity utilization for already dispatched jobs.\n    The first 100 <code>RUNNABLE</code> jobs in the job queue are listed in order of dispatch. For job queues with an attached\n    quota-share policy, the first <code>RUNNABLE</code> job in each quota share is also listed. Capacity utilization for the job queue is provided, as well as\n    break downs by share for job queues with attached fair-share or quota-share scheduling policies.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/getjobqueuesnapshot",
@@ -6047,13 +6400,19 @@
                 "frontOfQueue": {
                     "target": "com.amazonaws.batch#FrontOfQueueDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of the first 100 <code>RUNNABLE</code> jobs in each job queue. For\n      first-in-first-out (FIFO) job queues, jobs are ordered based on their submission time. For\n      fair-share scheduling (FSS) job queues, jobs are ordered based on their job priority and share\n      usage.</p>"
+                        "smithy.api#documentation": "<p>The list of the first 100 <code>RUNNABLE</code> jobs in each job queue. For\n      first-in-first-out (FIFO) job queues, jobs are ordered based on their submission time. For job queues with an attached\n      fair-share scheduling (FSS) or quota-share policy, jobs are ordered based on their job priority and share\n      usage.</p>"
+                    }
+                },
+                "frontOfQuotaShares": {
+                    "target": "com.amazonaws.batch#FrontOfQuotaSharesDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first <code>RUNNABLE</code> job in each quota share. Jobs are ordered based on their job priority and share usage.</p>"
                     }
                 },
                 "queueUtilization": {
                     "target": "com.amazonaws.batch#QueueSnapshotUtilizationDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job queue's capacity utilization, including total usage and\n            breakdown by fairshare scheduling queue.</p>"
+                        "smithy.api#documentation": "<p>The job queue's capacity utilization, including total usage and\n            breakdown per given share.</p>"
                     }
                 }
             },
@@ -6746,7 +7105,7 @@
                     "target": "com.amazonaws.batch#JobStateTimeLimitActionsAction",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The action to take when a job is at the head of the job queue in the specified state for the specified period of\n   time. The only supported value is <code>CANCEL</code>, which will cancel the job.</p>",
+                        "smithy.api#documentation": "<p>The action to take when a job is at the head of the job queue in the specified state for the specified period of\n   time. For job queues connected to a <code>ECS</code>, <code>FARGATE</code> or <code>EKS</code> compute environment, the only supported value is <code>CANCEL</code>, which will cancel the job. \n   For job queues connected to a <code>SAGEMAKER_TRAINING</code> service environment, the only supported value is <code>TERMINATE</code>, which will terminate the job.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7653,6 +8012,85 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.batch#ListQuotaShares": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.batch#ListQuotaSharesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.batch#ListQuotaSharesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.batch#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.batch#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of Batch quota shares associated with a job queue.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/listquotashares",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "quotaShares",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.batch#ListQuotaSharesRequest": {
+            "type": "structure",
+            "members": {
+                "jobQueue": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name or full Amazon Resource Name (ARN) of the job queue used to list quota shares.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.batch#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results returned by <code>ListQuotaShares</code> in\n      paginated output. When this parameter is used, <code>ListQuotaShares</code> only\n      returns <code>maxResults</code> results in a single page and a <code>nextToken</code> response\n      element. You can see the remaining results of the initial request by sending another\n        <code>ListQuotaShares</code> request with the returned <code>nextToken</code> value.\n      This value can be between 1 and 100. If this parameter isn't\n      used, <code>ListQuotaShares</code> returns up to 100 results and a\n        <code>nextToken</code> value if applicable.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value that's returned from a previous paginated\n        <code>ListQuotaShares</code> request where <code>maxResults</code> was used and the\n      results exceeded the value of that parameter. Pagination continues from the end of the\n      previous results that returned the <code>nextToken</code> value. This value is\n        <code>null</code> when there are no more results to return.</p>\n         <note>\n            <p>Treat this token as an opaque identifier that's only used to\n retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.batch#ListQuotaSharesResponse": {
+            "type": "structure",
+            "members": {
+                "quotaShares": {
+                    "target": "com.amazonaws.batch#QuotaShareList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of quota shares that match the request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n        <code>ListQuotaShares</code> request. When the results of a\n        <code>ListQuotaShares</code> request exceed <code>maxResults</code>, this value can\n      be used to retrieve the next page of results. This value is <code>null</code> when there are\n      no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.batch#ListSchedulingPolicies": {
             "type": "operation",
             "input": {
@@ -8375,13 +8813,19 @@
                 "totalCapacityUsage": {
                     "target": "com.amazonaws.batch#QueueSnapshotCapacityUsageList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total capacity usage for the entire job queue, for both first-in,\n            first-out (FIFO) and fairshare scheduling job queue.</p>"
+                        "smithy.api#documentation": "<p>The total capacity usage for the entire job queue.</p>"
                     }
                 },
                 "fairshareUtilization": {
                     "target": "com.amazonaws.batch#FairshareUtilizationDetail",
                     "traits": {
                         "smithy.api#documentation": "<p>The utilization information for a fairshare scheduling job queues, including\n            active share count and top capacity utilization by share.</p>"
+                    }
+                },
+                "quotaShareUtilization": {
+                    "target": "com.amazonaws.batch#QuotaShareUtilizationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The utilization information for a job queue with a quota share scheduling policy.</p>"
                     }
                 },
                 "lastUpdatedAt": {
@@ -8392,7 +8836,322 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The job queue utilization at a specific point in time,\n            including total capacity usage and fairshare utilization breakdown.</p>"
+                "smithy.api#documentation": "<p>The job queue utilization at a specific point in time,\n            including total capacity usage, and quota share or fairshare utilization breakdown\n            depending on the job queue scheduling policy.</p>"
+            }
+        },
+        "com.amazonaws.batch#QuotaShareCapacityLimit": {
+            "type": "structure",
+            "members": {
+                "maxCapacity": {
+                    "target": "com.amazonaws.batch#Integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The maximum capacity available for the quota share. This value represents the maximum quantity of a resource that can be allocated to jobs in the quota share\n       without borrowing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "capacityUnit": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unit of compute capacity for the capacityLimit. For example, <code>ml.m5.large</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the capacity limit for a quota share, or the type and maximum quantity of a particular resource that can be allocated to jobs in the quota share\n       without borrowing. </p>"
+            }
+        },
+        "com.amazonaws.batch#QuotaShareCapacityLimits": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#QuotaShareCapacityLimit"
+            }
+        },
+        "com.amazonaws.batch#QuotaShareCapacityUsage": {
+            "type": "structure",
+            "members": {
+                "capacityUnit": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of compute capacity for the capacity usage.</p>"
+                    }
+                },
+                "quantity": {
+                    "target": "com.amazonaws.batch#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quantity of capacity being used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The capacity usage for a quota share, including units of compute capacity and quantity of resources being used.</p>"
+            }
+        },
+        "com.amazonaws.batch#QuotaShareCapacityUsageList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#QuotaShareCapacityUsage"
+            }
+        },
+        "com.amazonaws.batch#QuotaShareCapacityUtilization": {
+            "type": "structure",
+            "members": {
+                "quotaShareName": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the quota share.</p>"
+                    }
+                },
+                "capacityUsage": {
+                    "target": "com.amazonaws.batch#QuotaShareCapacityUsageList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity usage information for this quota share, including the units of compute capacity and quantity being used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The capacity utilization for a specific quota share, including the quota share name and its current usage.</p>"
+            }
+        },
+        "com.amazonaws.batch#QuotaShareCapacityUtilizationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#QuotaShareCapacityUtilization"
+            }
+        },
+        "com.amazonaws.batch#QuotaShareDetail": {
+            "type": "structure",
+            "members": {
+                "quotaShareName": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the quota share.</p>"
+                    }
+                },
+                "quotaShareArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the quota share.</p>"
+                    }
+                },
+                "jobQueueArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the job queue associated with the quota share.</p>"
+                    }
+                },
+                "capacityLimits": {
+                    "target": "com.amazonaws.batch#QuotaShareCapacityLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list that specifies the quantity and type of compute capacity allocated to the quota share.</p>"
+                    }
+                },
+                "resourceSharingConfiguration": {
+                    "target": "com.amazonaws.batch#QuotaShareResourceSharingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether a quota share reserves, lends, or both lends and borrows idle compute capacity.</p>"
+                    }
+                },
+                "preemptionConfiguration": {
+                    "target": "com.amazonaws.batch#QuotaSharePreemptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the preemption behavior for jobs in a quota share.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.batch#QuotaShareState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the quota share.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.batch#QuotaShareStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the quota share.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detailed information about a quota share, including its configuration, state, and capacity limits.</p>"
+            }
+        },
+        "com.amazonaws.batch#QuotaShareIdleResourceAssignmentStrategy": {
+            "type": "enum",
+            "members": {
+                "FIFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIFO"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.batch#QuotaShareInSharePreemptionState": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.batch#QuotaShareList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#QuotaShareDetail"
+            }
+        },
+        "com.amazonaws.batch#QuotaSharePolicy": {
+            "type": "structure",
+            "members": {
+                "idleResourceAssignmentStrategy": {
+                    "target": "com.amazonaws.batch#QuotaShareIdleResourceAssignmentStrategy",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The strategy that determines how idle resources are assigned to quota shares\n       that are borrowing capacity. Currently, only <code>FIFO</code> is supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The quota share scheduling policy details for a job queue.</p>"
+            }
+        },
+        "com.amazonaws.batch#QuotaSharePreemptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "inSharePreemption": {
+                    "target": "com.amazonaws.batch#QuotaShareInSharePreemptionState",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies whether jobs within a quota share can be preempted by another, higher priority job in the same quota share.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the preemption behavior for jobs in a quota share.</p>"
+            }
+        },
+        "com.amazonaws.batch#QuotaShareResourceSharingConfiguration": {
+            "type": "structure",
+            "members": {
+                "strategy": {
+                    "target": "com.amazonaws.batch#QuotaShareResourceSharingStrategy",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The resource sharing strategy for the quota share. The <code>RESERVE</code> strategy allows a quota share to reserve idle capacity for itself.\n      <code>LEND</code> configures the share to lend its idle capacity to another share in need of capacity.\n      The <code>LEND_AND_BORROW</code> strategy configures the share to borrow idle capacity from an underutilized share, as well as lend to another share.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "borrowLimit": {
+                    "target": "com.amazonaws.batch#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum percentage of additional capacity that the quota share can borrow from other shares. <code>borrowLimit</code> can only be applied to quota shares with a strategy of <code>LEND_AND_BORROW</code>.\n        This value is expressed as a percentage of the quota share's configured <a href=\"https://docs.aws.amazon.com/batch/latest/APIReference/API_QuotaShareCapacityLimit.html\">CapacityLimits</a>.</p>\n         <p>The <code>borrowLimit</code> is applied uniformly across all capacity units. \n        For example, if the <code>borrowLimit</code> is 200, the quota \n        share can borrow up to 200% of its configured <code>maxCapacity</code> for each capacity unit. The default <code>borrowLimit</code> is -1, which indicates unlimited borrowing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether a quota share reserves, lends, or both lends and borrows idle compute capacity.</p>"
+            }
+        },
+        "com.amazonaws.batch#QuotaShareResourceSharingStrategy": {
+            "type": "enum",
+            "members": {
+                "RESERVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESERVE"
+                    }
+                },
+                "LEND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LEND"
+                    }
+                },
+                "LEND_AND_BORROW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LEND_AND_BORROW"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.batch#QuotaShareState": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.batch#QuotaShareStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "VALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALID"
+                    }
+                },
+                "INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.batch#QuotaShareUtilizationDetail": {
+            "type": "structure",
+            "members": {
+                "topCapacityUtilization": {
+                    "target": "com.amazonaws.batch#QuotaShareCapacityUtilizationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the top capacity utilizations across quota shares associated with a job queue.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the capacity utilization details of all quota shares associated with a single job queue.</p>"
             }
         },
         "com.amazonaws.batch#RegisterJobDefinition": {
@@ -8758,6 +9517,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the scheduling policy. An example is\n     <code>arn:<i>aws</i>:batch:<i>us-east-1</i>:<i>123456789012</i>:scheduling-policy/<i>HighPriority</i>\n            </code>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "quotaSharePolicy": {
+                    "target": "com.amazonaws.batch#QuotaSharePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quota share scheduling policy details.</p>"
                     }
                 },
                 "fairsharePolicy": {
@@ -9127,6 +9892,78 @@
                 "target": "com.amazonaws.batch#ServiceJobEvaluateOnExit"
             }
         },
+        "com.amazonaws.batch#ServiceJobPreemptedAttempt": {
+            "type": "structure",
+            "members": {
+                "serviceResourceId": {
+                    "target": "com.amazonaws.batch#ServiceResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service resource identifier associated with the service job attempt.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.batch#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp (in milliseconds) for when the service job attempt was started.</p>"
+                    }
+                },
+                "stoppedAt": {
+                    "target": "com.amazonaws.batch#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp (in milliseconds) for when the service job attempt stopped running.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that provides additional details for the current status of the service job attempt.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detailed information about a preempted attempt of a service job.</p>"
+            }
+        },
+        "com.amazonaws.batch#ServiceJobPreemptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "preemptionRetriesBeforeTermination": {
+                    "target": "com.amazonaws.batch#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of times a service job can be retried after it is preempted.  A job will be terminated when preemption retries have been exhausted.\n      If this field is unset, preempted jobs will be requeued an unlimited number of times. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the service job behavior when preempted.</p>"
+            }
+        },
+        "com.amazonaws.batch#ServiceJobPreemptionSummary": {
+            "type": "structure",
+            "members": {
+                "preemptedAttemptCount": {
+                    "target": "com.amazonaws.batch#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of times the service job has been preempted.</p>"
+                    }
+                },
+                "recentPreemptedAttempts": {
+                    "target": "com.amazonaws.batch#ServiceJobRecentPreemptedAttemptList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the most recent preemption attempts for the service job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summarizes the preemptions of the service job. This field appears on a service job\n        when it has been preempted.</p>"
+            }
+        },
+        "com.amazonaws.batch#ServiceJobRecentPreemptedAttemptList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#ServiceJobPreemptedAttempt"
+            }
+        },
         "com.amazonaws.batch#ServiceJobRetryAction": {
             "type": "enum",
             "members": {
@@ -9280,6 +10117,12 @@
                     "target": "com.amazonaws.batch#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The share identifier for the job.</p>"
+                    }
+                },
+                "quotaShareName": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quota share for the service job.</p>"
                     }
                 },
                 "status": {
@@ -9677,6 +10520,18 @@
                     "target": "com.amazonaws.batch#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The share identifier for the service job. Don't specify this parameter if the job\n            queue doesn't have a fair-share scheduling policy. If the job queue has a fair-share\n            scheduling policy, then this parameter must be specified.</p>"
+                    }
+                },
+                "quotaShareName": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quota share for the service job. Don't specify this parameter if the job queue\n        doesn't have a quota share scheduling policy. If the job queue has a quota share scheduling policy,\n        then this parameter must be specified.</p>"
+                    }
+                },
+                "preemptionConfiguration": {
+                    "target": "com.amazonaws.batch#ServiceJobPreemptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the service job behavior when preempted.</p>"
                     }
                 },
                 "timeoutConfig": {
@@ -10794,6 +11649,91 @@
                 "smithy.api#documentation": "<p>Specifies the infrastructure update policy for the Amazon EC2 compute environment. For more information\n   about infrastructure updates, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html\">Updating compute environments</a> in the\n    <i>Batch User Guide</i>.</p>"
             }
         },
+        "com.amazonaws.batch#UpdateQuotaShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.batch#UpdateQuotaShareRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.batch#UpdateQuotaShareResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.batch#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.batch#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a quota share.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/updatequotashare",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.batch#UpdateQuotaShareRequest": {
+            "type": "structure",
+            "members": {
+                "quotaShareArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the quota share to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "capacityLimits": {
+                    "target": "com.amazonaws.batch#QuotaShareCapacityLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list that specifies the quantity and type of compute capacity allocated to the quota share.</p>"
+                    }
+                },
+                "resourceSharingConfiguration": {
+                    "target": "com.amazonaws.batch#QuotaShareResourceSharingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether a quota share reserves, lends, or both lends and borrows idle compute capacity.</p>"
+                    }
+                },
+                "preemptionConfiguration": {
+                    "target": "com.amazonaws.batch#QuotaSharePreemptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the preemption behavior for jobs in a quota share.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.batch#QuotaShareState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the quota share. If the quota share is <code>ENABLED</code>, it is able to accept jobs.\n    If the quota share is <code>DISABLED</code>, new jobs won't be accepted but jobs already submitted can finish.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.batch#UpdateQuotaShareResponse": {
+            "type": "structure",
+            "members": {
+                "quotaShareName": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the quota share.</p>"
+                    }
+                },
+                "quotaShareArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the quota share.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.batch#UpdateSchedulingPolicy": {
             "type": "operation",
             "input": {
@@ -10830,15 +11770,21 @@
                         "smithy.api#required": {}
                     }
                 },
+                "quotaSharePolicy": {
+                    "target": "com.amazonaws.batch#QuotaSharePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quota share scheduling policy details. Once set during creation, a quotaSharePolicy cannot be removed or changed to a fairsharePolicy.</p>"
+                    }
+                },
                 "fairsharePolicy": {
                     "target": "com.amazonaws.batch#FairsharePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fair-share policy scheduling details.</p>"
+                        "smithy.api#documentation": "<p>The fair-share policy scheduling details. Once set during creation, a fairsharePolicy cannot be removed or changed to a quotaSharePolicy.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the parameters for <code>UpdateSchedulingPolicy</code>.</p>",
+                "smithy.api#documentation": "<p>Contains the parameters for <code>UpdateSchedulingPolicy</code>. </p>",
                 "smithy.api#input": {}
             }
         },
@@ -10919,6 +11865,81 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service environment that was updated.</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.batch#UpdateServiceJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.batch#UpdateServiceJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.batch#UpdateServiceJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.batch#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.batch#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the priority of a specified service job in an Batch job queue.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/updateservicejob",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.batch#UpdateServiceJobRequest": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Batch job ID of the job to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "schedulingPriority": {
+                    "target": "com.amazonaws.batch#Integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The scheduling priority for the job. This only affects jobs in job queues with a\n      quota-share or fair-share scheduling policy. Jobs with a higher scheduling priority are scheduled before jobs with a lower\n      scheduling priority within a share.</p>\n         <p>The minimum supported value is 0 and the maximum supported value is 9999.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.batch#UpdateServiceJobResponse": {
+            "type": "structure",
+            "members": {
+                "jobArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the job.</p>"
+                    }
+                },
+                "jobName": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the job.</p>"
+                    }
+                },
+                "jobId": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the job.</p>"
                     }
                 }
             },
