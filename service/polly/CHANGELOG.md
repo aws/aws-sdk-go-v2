@@ -1,3 +1,7 @@
+# v1.56.0 (2026-03-19)
+
+* **Feature**: Added bi-directional streaming functionality through a new API, StartSpeechSynthesisStream. This API allows streaming input text through inbound events and receiving audio as part of an output stream simultaneously.
+
 # v1.55.1 (2026-03-13)
 
 * **Bug Fix**: Add missing fields serd of polly SynthesizeSpeech presign

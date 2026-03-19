@@ -1,3 +1,7 @@
+# v1.15.0 (2026-03-19)
+
+* **Feature**: This release includes SDK support for the following new features on AgentCore Built In Tools.  1. Enterprise Policies for AgentCore Browser Tool. 2. Root CA Configuration Support for AgentCore Browser Tool and Code Interpreter. 3. API changes to AgentCore Browser Profile APIs
+
 # v1.14.0 (2026-03-16)
 
 * **Feature**: Provide support to perform deterministic operations on agent runtime through shell command executions via the new InvokeAgentRuntimeCommand API

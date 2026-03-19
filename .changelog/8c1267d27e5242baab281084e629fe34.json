@@ -1,8 +1,0 @@
-{
-    "id": "8c1267d2-7e52-42ba-ab28-1084e629fe34",
-    "type": "feature",
-    "description": "Added bi-directional streaming functionality through a new API, StartSpeechSynthesisStream. This API allows streaming input text through inbound events and receiving audio as part of an output stream simultaneously.",
-    "modules": [
-        "service/polly"
-    ]
-}

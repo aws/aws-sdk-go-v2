@@ -1,3 +1,7 @@
+# v1.11.0 (2026-03-19)
+
+* **Feature**: Adding a new field in the CreateCentralizationRuleForOrganization, UpdateCentralizationRuleForOrganization API and updating the GetCentralizationRuleForOrganization API response to include the new field
+
 # v1.10.2 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

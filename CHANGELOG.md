@@ -1,3 +1,19 @@
+# Release (2026-03-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.62.0](service/batch/CHANGELOG.md#v1620-2026-03-19)
+  * **Feature**: AWS Batch now supports quota management, enabling administrators to allocate shared compute resources across teams and projects through quota shares with capacity limits, resource-sharing strategies, and priority-based preemption - currently available for SageMaker Training job queues.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.15.0](service/bedrockagentcore/CHANGELOG.md#v1150-2026-03-19)
+  * **Feature**: This release includes SDK support for the following new features on AgentCore Built In Tools.  1. Enterprise Policies for AgentCore Browser Tool. 2. Root CA Configuration Support for AgentCore Browser Tool and Code Interpreter. 3. API changes to AgentCore Browser Profile APIs
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.24.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1240-2026-03-19)
+  * **Feature**: Adds support for the following new features. 1. Enterprise Policies support for AgentCore Browser Tool. 2. Root CA Configuration support for AgentCore Browser Tool and Code Interpreter.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.296.0](service/ec2/CHANGELOG.md#v12960-2026-03-19)
+  * **Feature**: Amazon EC2 Fleet instant mode now supports launching instances into Interruptible Capacity Reservations, enabling customers to use spare capacity shared by Capacity Reservation owners within their AWS Organization.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.11.0](service/observabilityadmin/CHANGELOG.md#v1110-2026-03-19)
+  * **Feature**: Adding a new field in the CreateCentralizationRuleForOrganization, UpdateCentralizationRuleForOrganization API and updating the GetCentralizationRuleForOrganization API response to include the new field
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.56.0](service/polly/CHANGELOG.md#v1560-2026-03-19)
+  * **Feature**: Added bi-directional streaming functionality through a new API, StartSpeechSynthesisStream. This API allows streaming input text through inbound events and receiving audio as part of an output stream simultaneously.
+
 # Release (2026-03-18)
 
 ## Module Highlights

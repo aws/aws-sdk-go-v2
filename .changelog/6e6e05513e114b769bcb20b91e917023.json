@@ -1,8 +1,0 @@
-{
-    "id": "6e6e0551-3e11-4b76-9bcb-20b91e917023",
-    "type": "feature",
-    "description": "Adds support for the following new features. 1. Enterprise Policies support for AgentCore Browser Tool. 2. Root CA Configuration support for AgentCore Browser Tool and Code Interpreter.",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

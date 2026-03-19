@@ -1,8 +1,0 @@
-{
-    "id": "36e514ad-e15f-4884-97fa-9b3928f48851",
-    "type": "feature",
-    "description": "AWS Batch now supports quota management, enabling administrators to allocate shared compute resources across teams and projects through quota shares with capacity limits, resource-sharing strategies, and priority-based preemption - currently available for SageMaker Training job queues.",
-    "modules": [
-        "service/batch"
-    ]
-}
