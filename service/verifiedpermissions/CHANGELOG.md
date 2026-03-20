@@ -1,3 +1,7 @@
+# v1.32.0 (2026-03-20)
+
+* **Feature**: Adds support for Policy Store Aliases, Policy Names, and Policy Template Names. These are customizable identifiers that can be used in place of Policy Store ids, Policy ids, and Policy Template ids respectively in Amazon Verified Permissions APIs.
+
 # v1.31.4 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

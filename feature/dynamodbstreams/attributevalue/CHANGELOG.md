@@ -1,3 +1,7 @@
+# v1.19.36 (2026-03-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.35 (2026-03-13)
 
 * **Bug Fix**: Fix documentation typo.

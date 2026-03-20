@@ -1,3 +1,18 @@
+# Release (2026-03-20)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.54.10](service/backup/CHANGELOG.md#v15410-2026-03-20)
+  * **Documentation**: Fix Typo for S3Backup Options ( S3BackupACLs to BackupACLs)
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.57.0](service/dynamodb/CHANGELOG.md#v1570-2026-03-20)
+  * **Feature**: Adding ReplicaArn to ReplicaDescription of a global table replica
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.61.0](service/opensearch/CHANGELOG.md#v1610-2026-03-20)
+  * **Feature**: Added support for Amazon Managed Service for Prometheus (AMP) as a connected data source in OpenSearch UI. Now users can analyze Prometheus metrics in OpenSearch UI without data copy.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.32.0](service/verifiedpermissions/CHANGELOG.md#v1320-2026-03-20)
+  * **Feature**: Adds support for Policy Store Aliases, Policy Names, and Policy Template Names. These are customizable identifiers that can be used in place of Policy Store ids, Policy ids, and Policy Template ids respectively in Amazon Verified Permissions APIs.
+
 # Release (2026-03-19)
 
 ## Module Highlights

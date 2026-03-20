@@ -1,3 +1,7 @@
+# v1.57.0 (2026-03-20)
+
+* **Feature**: Adding ReplicaArn to ReplicaDescription of a global table replica
+
 # v1.56.2 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

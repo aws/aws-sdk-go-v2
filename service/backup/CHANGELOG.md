@@ -1,3 +1,7 @@
+# v1.54.10 (2026-03-20)
+
+* **Documentation**: Fix Typo for S3Backup Options ( S3BackupACLs to BackupACLs)
+
 # v1.54.9 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

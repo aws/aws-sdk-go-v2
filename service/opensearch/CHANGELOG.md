@@ -1,3 +1,7 @@
+# v1.61.0 (2026-03-20)
+
+* **Feature**: Added support for Amazon Managed Service for Prometheus (AMP) as a connected data source in OpenSearch UI. Now users can analyze Prometheus metrics in OpenSearch UI without data copy.
+
 # v1.60.1 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions
