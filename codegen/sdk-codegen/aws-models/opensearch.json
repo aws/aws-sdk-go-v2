@@ -98,6 +98,12 @@
                 "smithy.api#documentation": "<p>The status of machine learning options on the specified domain.</p>"
             }
         },
+        "com.amazonaws.opensearch#AMPWorkspaceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:aps:[a-z0-9-]+:[0-9]{12}:workspace\\/ws-[a-z0-9-]*$"
+            }
+        },
         "com.amazonaws.opensearch#ARN": {
             "type": "string",
             "traits": {
@@ -493,8 +499,7 @@
                 "OpenSearchArns": {
                     "target": "com.amazonaws.opensearch#DirectQueryOpenSearchARNList",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of Amazon Resource Names (ARNs) for the OpenSearch collections that are\n            associated with the direct query data source. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p> An optional list of Amazon Resource Names (ARNs) for the OpenSearch collections that are\n            associated with the direct query data source. This field is required for CloudWatchLogs\n            and SecurityLake datasource types. </p>"
                     }
                 },
                 "DataSourceAccessPolicy": {
@@ -6609,6 +6614,12 @@
                     "target": "com.amazonaws.opensearch#SecurityLakeDirectQueryDataSource",
                     "traits": {
                         "smithy.api#documentation": "<p> Specifies Security Lake as a type of data source for direct queries. </p>"
+                    }
+                },
+                "Prometheus": {
+                    "target": "com.amazonaws.opensearch#PrometheusDirectQueryDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies Prometheus as a type of data source for direct queries. </p>"
                     }
                 }
             },
@@ -12932,6 +12943,28 @@
                 }
             }
         },
+        "com.amazonaws.opensearch#PrometheusDirectQueryDataSource": {
+            "type": "structure",
+            "members": {
+                "RoleArn": {
+                    "target": "com.amazonaws.opensearch#DirectQueryDataSourceRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the IAM role that grants OpenSearch Service permission to access\n            the specified data source. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkspaceArn": {
+                    "target": "com.amazonaws.opensearch#AMPWorkspaceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the Amazon Managed Prometheus Workspace that is associated with the specified\n            data source. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Configuration details for a Prometheus data source that can be used for direct queries.\n        </p>"
+            }
+        },
         "com.amazonaws.opensearch#PropertyValueType": {
             "type": "enum",
             "members": {
@@ -14915,8 +14948,7 @@
                 "OpenSearchArns": {
                     "target": "com.amazonaws.opensearch#DirectQueryOpenSearchARNList",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of Amazon Resource Names (ARNs) for the OpenSearch collections that are\n            associated with the direct query data source. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p> An optional list of Amazon Resource Names (ARNs) for the OpenSearch collections that are\n            associated with the direct query data source. This field is required for CloudWatchLogs\n            and SecurityLake datasource types. </p>"
                     }
                 },
                 "DataSourceAccessPolicy": {

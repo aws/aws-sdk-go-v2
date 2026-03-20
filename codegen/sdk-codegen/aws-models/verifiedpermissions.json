@@ -67,6 +67,33 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.verifiedpermissions#Alias": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 150
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-/_]*$"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#AliasState": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
+                    }
+                },
+                "PENDING_DELETION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PendingDeletion"
+                    }
+                }
+            }
+        },
         "com.amazonaws.verifiedpermissions#AmazonResourceName": {
             "type": "string",
             "traits": {
@@ -212,6 +239,7 @@
                                     "policyStoreId": "ERZeDpRc34dkYZeb6FZRVC",
                                     "policyId": "PWv5M6d5HePx3gVVLKY1nK",
                                     "policyType": "STATIC",
+                                    "name": "name/example-policy",
                                     "definition": {
                                         "static": {
                                             "description": "Users can manage account resources in any account they own",
@@ -225,6 +253,7 @@
                                     "policyStoreId": "ERZeDpRc34dkYZeb6FZRVC",
                                     "policyId": "LzFn6KgLWvv4Mbegus35jn",
                                     "policyType": "STATIC",
+                                    "name": "name/example-policy-2",
                                     "definition": {
                                         "static": {
                                             "description": "User alice can't delete any photos.",
@@ -250,6 +279,55 @@
                             ],
                             "errors": []
                         }
+                    },
+                    {
+                        "title": "To retrieve policies by name",
+                        "documentation": "The following example retrieves information about policies using their names instead of their IDs.",
+                        "input": {
+                            "requests": [
+                                {
+                                    "policyId": "name/example-policy",
+                                    "policyStoreId": "ERZeDpRc34dkYZeb6FZRVC"
+                                },
+                                {
+                                    "policyId": "name/example-policy-2",
+                                    "policyStoreId": "ERZeDpRc34dkYZeb6FZRVC"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "results": [
+                                {
+                                    "policyStoreId": "ERZeDpRc34dkYZeb6FZRVC",
+                                    "policyId": "PWv5M6d5HePx3gVVLKY1nK",
+                                    "policyType": "STATIC",
+                                    "name": "name/example-policy",
+                                    "definition": {
+                                        "static": {
+                                            "description": "Users can manage account resources in any account they own",
+                                            "statement": "permit (principal, action in PhotoFlash::Action::\"ManageAccount\",resource) when { resource in principal.Account };"
+                                        }
+                                    },
+                                    "createdDate": "2024-10-18T18:53:39.258153Z",
+                                    "lastUpdatedDate": "2024-10-18T18:53:39.258153Z"
+                                },
+                                {
+                                    "policyStoreId": "ERZeDpRc34dkYZeb6FZRVC",
+                                    "policyId": "LzFn6KgLWvv4Mbegus35jn",
+                                    "policyType": "STATIC",
+                                    "name": "name/example-policy-2",
+                                    "definition": {
+                                        "static": {
+                                            "description": "User alice can't delete any photos.",
+                                            "statement": "forbid (principal == PhotoFlash::User::\"alice\", action in [PhotoFlash::Action::\"DeletePhoto\"], resource);"
+                                        }
+                                    },
+                                    "createdDate": "2024-10-18T18:57:03.305027Z",
+                                    "lastUpdatedDate": "2024-10-18T18:57:03.305027Z"
+                                }
+                            ],
+                            "errors": []
+                        }
                     }
                 ],
                 "smithy.api#readonly": {}
@@ -268,6 +346,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "POLICY_NOT_FOUND"
+                    }
+                },
+                "POLICY_STORE_ALIAS_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POLICY_STORE_ALIAS_NOT_FOUND"
                     }
                 }
             }
@@ -342,7 +426,7 @@
                 "policyId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the policy you want information about.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the policy you want information about.</p> <p>You can use the policy name in place of the policy ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>SPEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy</code> </p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -436,6 +520,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time the policy was most recently updated.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the policy, if one was assigned when the policy was created or last updated.</p>",
+                        "smithy.api#tags": [
+                            "exposeToTSClient"
+                        ]
                     }
                 }
             },
@@ -640,7 +733,7 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store. Policies in this policy store will be used to make the authorization decisions for the input.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store. Policies in this policy store will be used to make the authorization decisions for the input.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -927,7 +1020,7 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1423,7 +1516,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request failed because another request to modify a resource occurred at the same.</p>",
+                "smithy.api#documentation": "<p>The request failed because another request to modify a resource occurred at the same time.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -1525,7 +1618,7 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store in which you want to store this identity source. Only policies and requests made using this policy store can reference identities from the identity provider configured in the new identity source.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store in which you want to store this identity source. Only policies and requests made using this policy store can reference identities from the identity provider configured in the new identity source.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1625,36 +1718,8 @@
                                 }
                             },
                             "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
-                            "clientToken": "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111"
-                        },
-                        "output": {
-                            "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
-                            "policyId": "9wYxMpljbbZQb5fcZHyJhY",
-                            "createdDate": "2024-08-12T18:20:50.99Z",
-                            "lastUpdatedDate": "2024-08-12T18:20:50.99Z",
-                            "policyType": "STATIC",
-                            "principal": {
-                                "entityId": "janeFriends",
-                                "entityType": "UserGroup"
-                            },
-                            "resource": {
-                                "entityId": "vacationFolder",
-                                "entityType": "Album"
-                            }
-                        }
-                    },
-                    {
-                        "title": "To create a static policy",
-                        "documentation": "The following example request creates a static policy with a policy scope that specifies both a principal and a resource. The response includes both the Principal and Resource elements because both were specified in the request policy scope.",
-                        "input": {
-                            "definition": {
-                                "static": {
-                                    "description": "Grant members of janeFriends UserGroup access to the vacationFolder Album",
-                                    "statement": "permit( principal in UserGroup::\"janeFriends\", action, resource in Album::\"vacationFolder\" );"
-                                }
-                            },
-                            "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
-                            "clientToken": "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111"
+                            "clientToken": "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111",
+                            "name": "name/example-policy"
                         },
                         "output": {
                             "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
@@ -1686,7 +1751,8 @@
                                 }
                             },
                             "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
-                            "clientToken": "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111"
+                            "clientToken": "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111",
+                            "name": "name/example-template-linked-policy"
                         },
                         "output": {
                             "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
@@ -1721,7 +1787,7 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the <code>PolicyStoreId</code> of the policy store you want to store the policy in.</p>",
+                        "smithy.api#documentation": "<p>Specifies the <code>PolicyStoreId</code> of the policy store you want to store the policy in.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1730,6 +1796,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A structure that specifies the policy type and content to use for the new policy. You must include either a static or a templateLinked element. The policy content must be written in the Cedar policy language.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a name for the policy that is unique among all policies within the policy store. You can use the name in place of the policy ID in API operations that reference the policy. The name must be prefixed with <code>name/</code>.</p> <p>If you specify a name that is already associated with another policy in the policy store, you receive a <code>ConflictException</code> error.</p>",
+                        "smithy.api#tags": [
+                            "exposeToTSClient"
+                        ]
                     }
                 }
             },
@@ -1870,6 +1945,115 @@
                 "smithy.api#idempotent": {}
             }
         },
+        "com.amazonaws.verifiedpermissions#CreatePolicyStoreAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.verifiedpermissions#CreatePolicyStoreAliasInput"
+            },
+            "output": {
+                "target": "com.amazonaws.verifiedpermissions#CreatePolicyStoreAliasOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.verifiedpermissions#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.verifiedpermissions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.verifiedpermissions#ServiceQuotaExceededException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create an alias against a policy store"
+                },
+                "smithy.api#documentation": "<p>Creates a policy store alias for the specified policy store. A policy store alias is an alternative identifier that you can use to reference a policy store in API operations.</p> <p>This operation is idempotent. If multiple CreatePolicyStoreAlias requests are made where the <code>aliasName</code> and <code>policyStoreId</code> fields are the same between the requests, subsequent requests will be ignored. For each duplicate CreatePolicyStoreAlias request, a Success response will be returned and a new policy store alias will not be created.</p> <note> <p>Verified Permissions is <i> <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a> </i>. It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations.</p> </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "CreatePolicyStoreAlias",
+                        "documentation": "The following example creates a new policy store alias.",
+                        "input": {
+                            "aliasName": "policy-store-alias/example-policy-store",
+                            "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a"
+                        },
+                        "output": {
+                            "aliasName": "policy-store-alias/example-policy-store",
+                            "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
+                            "aliasArn": "arn:aws:verifiedpermissions:us-east-1:123456789012:policy-store-alias/example-policy-store",
+                            "createdAt": "2024-01-15T12:30:00.52Z"
+                        }
+                    }
+                ],
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "exposeToTSClient"
+                ]
+            }
+        },
+        "com.amazonaws.verifiedpermissions#CreatePolicyStoreAliasInput": {
+            "type": "structure",
+            "members": {
+                "aliasName": {
+                    "target": "com.amazonaws.verifiedpermissions#Alias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name of the policy store alias to create. The name must be unique within your Amazon Web Services account and Amazon Web Services Region.</p> <note> <p>The alias name must always be prefixed with <code>policy-store-alias/</code>.</p> </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyStoreId": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store to associate with the alias.</p> <note> <p>The associated policy store must be specified using its ID. The alias name cannot be used.</p> </note>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.verifiedpermissions#PolicyStore"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.verifiedpermissions#CreatePolicyStoreAliasOutput": {
+            "type": "structure",
+            "members": {
+                "aliasName": {
+                    "target": "com.amazonaws.verifiedpermissions#Alias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the policy store alias.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyStoreId": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the policy store associated with the alias.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aliasArn": {
+                    "target": "com.amazonaws.verifiedpermissions#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the policy store alias.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.verifiedpermissions#TimestampFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the policy store alias was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.verifiedpermissions#CreatePolicyStoreInput": {
             "type": "structure",
             "members": {
@@ -1984,7 +2168,8 @@
                             "description": "Template for research dept",
                             "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
                             "statement": "\"AccessVacation\"\npermit(\n    principal in ?principal,\n    action == Action::\"view\",\n    resource == Photo::\"VacationPhoto94.jpg\"\n)\nwhen {\n    principal has department && principal.department == \"research\"\n};",
-                            "clientToken": "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111"
+                            "clientToken": "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111",
+                            "name": "name/example-policy-template"
                         },
                         "output": {
                             "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
@@ -2010,7 +2195,7 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the policy store in which to create the policy template.</p>",
+                        "smithy.api#documentation": "<p>The ID of the policy store in which to create the policy template.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2025,6 +2210,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the content that you want to use for the new policy template, written in the Cedar policy language.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a name for the policy template that is unique among all policy templates within the policy store. You can use the name in place of the policy template ID in API operations that reference the policy template. The name must be prefixed with <code>name/</code>.</p> <p>If you specify a name that is already associated with another policy template in the policy store, you receive a <code>ConflictException</code> error.</p>",
+                        "smithy.api#tags": [
+                            "exposeToTSClient"
+                        ]
                     }
                 }
             },
@@ -2148,7 +2342,7 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the identity source that you want to delete.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the identity source that you want to delete.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2212,14 +2406,14 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the policy that you want to delete.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the policy that you want to delete.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "policyId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy that you want to delete.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy that you want to delete.</p> <p>You can use the policy name in place of the policy ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>SPEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy</code> </p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2266,13 +2460,69 @@
                 "smithy.api#idempotent": {}
             }
         },
+        "com.amazonaws.verifiedpermissions#DeletePolicyStoreAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.verifiedpermissions#DeletePolicyStoreAliasInput"
+            },
+            "output": {
+                "target": "com.amazonaws.verifiedpermissions#DeletePolicyStoreAliasOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.verifiedpermissions#InvalidStateException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete an alias for a policy store"
+                },
+                "smithy.api#documentation": "<p>Deletes the specified policy store alias.</p> <p>This operation is idempotent. If you specify a policy store alias that does not exist, the request response will still return a successful HTTP 200 status code.</p> <p>When a policy store alias is deleted, it enters the <code>PendingDeletion</code> state. When a policy store alias is in the <code>PendingDeletion</code> state, new policy store aliases cannot be created with the same name. If the policy store alias is used in an API that has a <code>policyStoreId</code> field, the operation will fail with a <code>ResourceNotFound</code> exception.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DeletePolicyStoreAlias",
+                        "documentation": "The following example deletes the policy store alias with name example-policy-store.",
+                        "input": {
+                            "aliasName": "policy-store-alias/example-policy-store"
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "exposeToTSClient"
+                ]
+            }
+        },
+        "com.amazonaws.verifiedpermissions#DeletePolicyStoreAliasInput": {
+            "type": "structure",
+            "members": {
+                "aliasName": {
+                    "target": "com.amazonaws.verifiedpermissions#Alias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name of the policy store alias that you want to delete.</p> <note> <p>The alias name must always be prefixed with <code>policy-store-alias/</code>.</p> </note>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.verifiedpermissions#DeletePolicyStoreAliasOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.verifiedpermissions#DeletePolicyStoreInput": {
             "type": "structure",
             "members": {
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that you want to delete.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that you want to delete.</p> <note> <p>To specify a policy store, the alias name cannot be used. Only the ID can be used.</p> </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2329,14 +2579,14 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the policy template that you want to delete.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the policy template that you want to delete.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "policyTemplateId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyTemplateId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy template that you want to delete.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy template that you want to delete.</p> <p>You can use the policy template name in place of the policy template ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>PTEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy-template</code> </p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2713,7 +2963,7 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the identity source you want information about.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the identity source you want information about.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2840,6 +3090,32 @@
                             "createdDate": "2024-08-12T18:20:50.99Z",
                             "lastUpdatedDate": "2024-08-12T18:20:50.99Z"
                         }
+                    },
+                    {
+                        "title": "To retrieve a policy by name",
+                        "documentation": "The following example retrieves information about a policy using its name instead of its ID.",
+                        "input": {
+                            "policyId": "name/example-policy",
+                            "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a"
+                        },
+                        "output": {
+                            "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
+                            "policyId": "9wYxMpljbbZQb5fcZHyJhY",
+                            "policyType": "STATIC",
+                            "name": "name/example-policy",
+                            "resource": {
+                                "entityId": "publicFolder",
+                                "entityType": "Album"
+                            },
+                            "definition": {
+                                "static": {
+                                    "description": "Grant everyone of janeFriends UserGroup access to the vacationFolder Album",
+                                    "statement": "permit(principal, action, resource in Album::\"publicFolder\");"
+                                }
+                            },
+                            "createdDate": "2024-08-12T18:20:50.99Z",
+                            "lastUpdatedDate": "2024-08-12T18:20:50.99Z"
+                        }
                     }
                 ],
                 "smithy.api#readonly": {}
@@ -2851,14 +3127,14 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the policy that you want information about.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the policy that you want information about.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "policyId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy you want information about.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy you want information about.</p> <p>You can use the policy name in place of the policy ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>SPEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy</code> </p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2942,6 +3218,15 @@
                         "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The effect of the decision that a policy returns to an authorization request. For example, <code>\"effect\": \"Permit\"</code>.</p>"
                     }
+                },
+                "name": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the policy, if one was assigned when the policy was created or last updated.</p>",
+                        "smithy.api#tags": [
+                            "exposeToTSClient"
+                        ]
+                    }
                 }
             },
             "traits": {
@@ -3014,13 +3299,111 @@
                 "smithy.api#readonly": {}
             }
         },
+        "com.amazonaws.verifiedpermissions#GetPolicyStoreAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.verifiedpermissions#GetPolicyStoreAliasInput"
+            },
+            "output": {
+                "target": "com.amazonaws.verifiedpermissions#GetPolicyStoreAliasOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.verifiedpermissions#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve details about an alias for a policy store"
+                },
+                "smithy.api#documentation": "<p>Retrieves details about the specified policy store alias.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetPolicyStoreAlias",
+                        "documentation": "The following example retrieves details about the policy store alias with name example-policy-store.",
+                        "input": {
+                            "aliasName": "policy-store-alias/example-policy-store"
+                        },
+                        "output": {
+                            "aliasName": "policy-store-alias/example-policy-store",
+                            "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
+                            "aliasArn": "arn:aws:verifiedpermissions:us-east-1:123456789012:policy-store-alias/example-policy-store",
+                            "createdAt": "2024-01-15T12:30:00.52Z",
+                            "state": "Active"
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "exposeToTSClient"
+                ]
+            }
+        },
+        "com.amazonaws.verifiedpermissions#GetPolicyStoreAliasInput": {
+            "type": "structure",
+            "members": {
+                "aliasName": {
+                    "target": "com.amazonaws.verifiedpermissions#Alias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name of the policy store alias that you want information about.</p> <note> <p>The alias name must always be prefixed with <code>policy-store-alias/</code>.</p> </note>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.verifiedpermissions#GetPolicyStoreAliasOutput": {
+            "type": "structure",
+            "members": {
+                "aliasName": {
+                    "target": "com.amazonaws.verifiedpermissions#Alias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the policy store alias.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyStoreId": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the policy store associated with the alias.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aliasArn": {
+                    "target": "com.amazonaws.verifiedpermissions#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the policy store alias.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.verifiedpermissions#TimestampFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the policy store alias was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.verifiedpermissions#AliasState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the policy store alias. Policy Store Aliases in the Active state can be used normally. When a policy store alias is deleted, it enters the PendingDeletion state. Policy Store Aliases in the PendingDeletion cannot be used, and creating a policy store alias with the same alias name will fail.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.verifiedpermissions#GetPolicyStoreInput": {
             "type": "structure",
             "members": {
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that you want information about.</p>",
+                        "smithy.api#documentation": "<p>Specifies the policy store that you want information about.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3145,6 +3528,23 @@
                             "createdDate": "2024-08-12T18:20:50.99Z",
                             "lastUpdatedDate": "2024-08-12T18:20:50.99Z"
                         }
+                    },
+                    {
+                        "title": "To retrieve a policy template by name",
+                        "documentation": "The following example retrieves the details of a policy template using its name instead of its ID.",
+                        "input": {
+                            "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
+                            "policyTemplateId": "name/example-policy-template"
+                        },
+                        "output": {
+                            "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
+                            "policyTemplateId": "PTEXAMPLEabcdefg111111",
+                            "name": "name/example-policy-template",
+                            "description": "Template for research dept",
+                            "statement": "permit(\n  principal ?principal,\n  action == Action::\"view\",\n  resource in ?resource\n) when {\n  principal has department && principal.department == \"research\" \n};",
+                            "createdDate": "2024-08-12T18:20:50.99Z",
+                            "lastUpdatedDate": "2024-08-12T18:20:50.99Z"
+                        }
                     }
                 ],
                 "smithy.api#readonly": {}
@@ -3156,14 +3556,14 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the policy template that you want information about.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the policy template that you want information about.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "policyTemplateId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyTemplateId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy template that you want information about.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy template that you want information about.</p> <p>You can use the policy template name in place of the policy template ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>PTEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy-template</code> </p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3217,6 +3617,15 @@
                         "smithy.api#documentation": "<p>The date and time that the policy template was most recently updated.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "name": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the policy template, if one was assigned when the policy template was created or last updated.</p>",
+                        "smithy.api#tags": [
+                            "exposeToTSClient"
+                        ]
+                    }
                 }
             },
             "traits": {
@@ -3265,7 +3674,7 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the schema.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the schema.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3687,7 +4096,7 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3809,7 +4218,7 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4009,7 +4418,7 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the identity sources that you want to list.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the identity sources that you want to list.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4103,6 +4512,7 @@
                                     "policyId": "9wYxMpljbbZQb5fcZHyJhY",
                                     "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
                                     "policyType": "STATIC",
+                                    "name": "name/example-policy",
                                     "principal": {
                                         "entityId": "janeFriends",
                                         "entityType": "UserGroup"
@@ -4123,6 +4533,7 @@
                                     "policyId": "Et9KxMplyaDdyurDw8TeFa",
                                     "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
                                     "policyType": "STATIC",
+                                    "name": "name/example-policy-2",
                                     "resource": {
                                         "entityId": "publicFolder",
                                         "entityType": "Album"
@@ -4246,7 +4657,7 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store you want to list policies from.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store you want to list policies from.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4286,6 +4697,137 @@
                     "target": "com.amazonaws.verifiedpermissions#PolicyList",
                     "traits": {
                         "smithy.api#documentation": "<p>Lists all policies that are available in the specified policy store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.verifiedpermissions#ListPolicyStoreAliases": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.verifiedpermissions#ListPolicyStoreAliasesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.verifiedpermissions#ListPolicyStoreAliasesOutput"
+            },
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to return a paginated list of all policy store aliases"
+                },
+                "smithy.api#documentation": "<p>Returns a paginated list of all policy store aliases in the calling Amazon Web Services account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListPolicyStoreAliases - Example 1",
+                        "documentation": "The following example lists all policy store aliases in the AWS account in the AWS Region in which you call the operation.",
+                        "output": {
+                            "policyStoreAliases": [
+                                {
+                                    "aliasName": "policy-store-alias/example-policy-store",
+                                    "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
+                                    "aliasArn": "arn:aws:verifiedpermissions:us-east-1:123456789012:policy-store-alias/example-policy-store",
+                                    "createdAt": "2024-01-15T12:30:00.52Z",
+                                    "state": "Active"
+                                },
+                                {
+                                    "aliasName": "policy-store-alias/example-policy-store-2",
+                                    "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
+                                    "aliasArn": "arn:aws:verifiedpermissions:us-east-1:123456789012:policy-store-alias/example-policy-store-2",
+                                    "createdAt": "2024-01-16T09:15:00.52Z",
+                                    "state": "Active"
+                                },
+                                {
+                                    "aliasName": "policy-store-alias/example-policy-store-3",
+                                    "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
+                                    "aliasArn": "arn:aws:verifiedpermissions:us-east-1:123456789012:policy-store-alias/example-policy-store-3",
+                                    "createdAt": "2024-01-17T14:45:00.52Z",
+                                    "state": "Active"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "ListPolicyStoreAliases - Example 2",
+                        "documentation": "The following example lists all policy store aliases associated with the policy store with ID C7v5xMplfFH3i3e4Jrzb1a",
+                        "input": {
+                            "filter": {
+                                "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a"
+                            }
+                        },
+                        "output": {
+                            "policyStoreAliases": [
+                                {
+                                    "aliasName": "policy-store-alias/example-policy-store",
+                                    "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
+                                    "aliasArn": "arn:aws:verifiedpermissions:us-east-1:123456789012:policy-store-alias/example-policy-store",
+                                    "createdAt": "2024-01-15T12:30:00.52Z",
+                                    "state": "Active"
+                                },
+                                {
+                                    "aliasName": "policy-store-alias/example-policy-store-2",
+                                    "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
+                                    "aliasArn": "arn:aws:verifiedpermissions:us-east-1:123456789012:policy-store-alias/example-policy-store-2",
+                                    "createdAt": "2024-01-16T09:15:00.52Z",
+                                    "state": "Active"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "policyStoreAliases"
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "exposeToTSClient"
+                ]
+            }
+        },
+        "com.amazonaws.verifiedpermissions#ListPolicyStoreAliasesInput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.verifiedpermissions#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>NextToken</code> response to request the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.verifiedpermissions#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 5,
+                        "smithy.api#documentation": "<p>Specifies the total number of results that you want included in each response. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next set of results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> <p>If you do not specify this parameter, the operation defaults to 5 policy store aliases per response. You can specify a maximum of 50 policy store aliases per response.</p>"
+                    }
+                },
+                "filter": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyStoreAliasFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a filter to narrow the results. You can filter by <code>policyStoreId</code> to list only the policy store aliases associated with a specific policy store.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.verifiedpermissions#ListPolicyStoreAliasesOutput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.verifiedpermissions#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.</p>"
+                    }
+                },
+                "policyStoreAliases": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyStoreAliasList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of policy store aliases in the account.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4408,6 +4950,7 @@
                                     "createdDate": "2024-08-12T18:20:50.99Z",
                                     "description": "Generic template",
                                     "lastUpdatedDate": "2024-08-12T18:20:50.99Z",
+                                    "name": "name/example-policy-template",
                                     "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
                                     "policyTemplateId": "PTEXAMPLEabcdefg111111"
                                 },
@@ -4415,6 +4958,7 @@
                                     "createdDate": "2024-08-12T18:20:50.99Z",
                                     "description": "Template for research dept",
                                     "lastUpdatedDate": "2024-08-12T18:20:50.99Z",
+                                    "name": "name/example-policy-template-2",
                                     "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
                                     "policyTemplateId": "PTEXAMPLEabcdefg222222"
                                 }
@@ -4437,7 +4981,7 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the policy templates you want to list.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the policy templates you want to list.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5192,6 +5736,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The effect of the decision that a policy returns to an authorization request. For example, <code>\"effect\": \"Permit\"</code>.</p>"
                     }
+                },
+                "name": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the policy, if one was assigned when the policy was created or last updated.</p>",
+                        "smithy.api#tags": [
+                            "exposeToTSClient"
+                        ]
+                    }
                 }
             },
             "traits": {
@@ -5204,12 +5757,21 @@
                 "target": "com.amazonaws.verifiedpermissions#PolicyItem"
             }
         },
+        "com.amazonaws.verifiedpermissions#PolicyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 150
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-/_]*$"
+            }
+        },
         "com.amazonaws.verifiedpermissions#PolicyStatement": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 10000
+                    "min": 1
                 },
                 "smithy.api#sensitive": {}
             }
@@ -5286,6 +5848,100 @@
                     "name": "policy-store"
                 },
                 "smithy.api#documentation": "Represents a policy store that you can place schema, policies, and policy templates in to validate authorization requests"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#PolicyStoreAlias": {
+            "type": "resource",
+            "identifiers": {
+                "aliasName": {
+                    "target": "com.amazonaws.verifiedpermissions#Alias"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.verifiedpermissions#CreatePolicyStoreAlias"
+            },
+            "read": {
+                "target": "com.amazonaws.verifiedpermissions#GetPolicyStoreAlias"
+            },
+            "delete": {
+                "target": "com.amazonaws.verifiedpermissions#DeletePolicyStoreAlias"
+            },
+            "list": {
+                "target": "com.amazonaws.verifiedpermissions#ListPolicyStoreAliases"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "policy-store-alias/{aliasName}",
+                    "noRegion": false
+                },
+                "aws.iam#disableConditionKeyInference": {},
+                "aws.iam#iamResource": {
+                    "name": "policy-store-alias"
+                },
+                "smithy.api#documentation": "Represents an alias for a policy store that provides a user-defined identifier"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#PolicyStoreAliasFilter": {
+            "type": "structure",
+            "members": {
+                "policyStoreId": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the policy store to filter by. Only policy store aliases associated with this policy store are returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains filters for the <code>ListPolicyStoreAliases</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#PolicyStoreAliasItem": {
+            "type": "structure",
+            "members": {
+                "aliasName": {
+                    "target": "com.amazonaws.verifiedpermissions#Alias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the policy store alias.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyStoreId": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the policy store associated with the alias.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aliasArn": {
+                    "target": "com.amazonaws.verifiedpermissions#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the policy store alias.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.verifiedpermissions#TimestampFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the policy store alias was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.verifiedpermissions#AliasState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the policy store alias. Policy Store Aliases in the Active state can be used normally. When a policy store alias is deleted, it enters the PendingDeletion state. Policy Store Aliases in the PendingDeletion state cannot be used, and creating a policy store alias with the same alias name will fail.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a policy store alias.</p> <p>This data type is used as a response parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a> operation.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#PolicyStoreAliasList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.verifiedpermissions#PolicyStoreAliasItem"
             }
         },
         "com.amazonaws.verifiedpermissions#PolicyStoreDescription": {
@@ -5441,10 +6097,29 @@
                         "smithy.api#documentation": "<p>The date and time that the policy template was most recently updated.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "name": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the policy template, if one was assigned when the policy template was created or last updated.</p>",
+                        "smithy.api#tags": [
+                            "exposeToTSClient"
+                        ]
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains details about a policy template</p> <p>This data type is used as a response parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyTemplates.html\">ListPolicyTemplates</a> operation.</p>"
+            }
+        },
+        "com.amazonaws.verifiedpermissions#PolicyTemplateName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 150
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-/_]*$"
             }
         },
         "com.amazonaws.verifiedpermissions#PolicyTemplatesList": {
@@ -5534,7 +6209,7 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store in which to place the schema.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store in which to place the schema.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5694,6 +6369,15 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SCHEMA"
+                    }
+                },
+                "POLICY_STORE_ALIAS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POLICY_STORE_ALIAS",
+                        "smithy.api#tags": [
+                            "exposeToTSClient"
+                        ]
                     }
                 }
             }
@@ -6312,7 +6996,7 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the identity source that you want to update.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the identity source that you want to update.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6531,7 +7215,8 @@
                                 "static": {
                                     "statement": "permit(principal, action, resource in Album::\"public_folder\");"
                                 }
-                            }
+                            },
+                            "name": "name/example-policy-2"
                         },
                         "output": {
                             "createdDate": "2024-08-12T18:20:50.99Z",
@@ -6569,14 +7254,14 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the policy that you want to update.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the policy that you want to update.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "policyId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy that you want to update. To find this value, you can use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html\">ListPolicies</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy that you want to update. To find this value, you can use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html\">ListPolicies</a>.</p> <p>You can use the policy name in place of the policy ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>SPEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy</code> </p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6584,7 +7269,16 @@
                     "target": "com.amazonaws.verifiedpermissions#UpdatePolicyDefinition",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>Specifies the updated policy content that you want to replace on the specified policy. The content must be valid Cedar policy language text.</p> <p>You can change only the following elements from the policy definition:</p> <ul> <li> <p>The <code>action</code> referenced by the policy.</p> </li> <li> <p>Any conditional clauses, such as <code>when</code> or <code>unless</code> clauses.</p> </li> </ul> <p>You <b>can't</b> change the following elements:</p> <ul> <li> <p>Changing from <code>static</code> to <code>templateLinked</code>.</p> </li> <li> <p>Changing the effect of the policy from <code>permit</code> or <code>forbid</code>.</p> </li> <li> <p>The <code>principal</code> referenced by the policy.</p> </li> <li> <p>The <code>resource</code> referenced by the policy.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>Specifies the updated policy content that you want to replace on the specified policy. The content must be valid Cedar policy language text.</p> <p>If you don't specify this parameter, the existing policy definition remains unchanged.</p> <p>You can change only the following elements from the policy definition:</p> <ul> <li> <p>The <code>action</code> referenced by the policy.</p> </li> <li> <p>Any conditional clauses, such as <code>when</code> or <code>unless</code> clauses.</p> </li> </ul> <p>You <b>can't</b> change the following elements:</p> <ul> <li> <p>Changing from <code>static</code> to <code>templateLinked</code>.</p> </li> <li> <p>Changing the effect of the policy from <code>permit</code> or <code>forbid</code>.</p> </li> <li> <p>The <code>principal</code> referenced by the policy.</p> </li> <li> <p>The <code>resource</code> referenced by the policy.</p> </li> </ul>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a name for the policy that is unique among all policies within the policy store. You can use the name in place of the policy ID in API operations that reference the policy. The name must be prefixed with <code>name/</code>.</p> <note> <p>If you don't include the name in an update request, the existing name is unchanged. To remove a name, set it to an empty string (<code>\"\"</code>).</p> </note> <p>If you specify a name that is already associated with another policy in the policy store, you receive a <code>ConflictException</code> error.</p>",
+                        "smithy.api#tags": [
+                            "exposeToTSClient"
+                        ]
                     }
                 }
             },
@@ -6707,7 +7401,7 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that you want to update</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that you want to update</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6800,7 +7494,8 @@
                             "description": "My updated template description",
                             "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
                             "policyTemplateId": "PTEXAMPLEabcdefg111111",
-                            "statement": "\"ResearchAccess\"\npermit(\nprincipal in ?principal,\naction == Action::\"view\",\nresource in ?resource\"\n)\nwhen {\nprincipal has department && principal.department == \"research\"\n};"
+                            "statement": "\"ResearchAccess\"\npermit(\nprincipal in ?principal,\naction == Action::\"view\",\nresource in ?resource\"\n)\nwhen {\nprincipal has department && principal.department == \"research\"\n};",
+                            "name": "name/example-policy-template-2"
                         },
                         "output": {
                             "policyStoreId": "C7v5xMplfFH3i3e4Jrzb1a",
@@ -6819,14 +7514,14 @@
                 "policyStoreId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the policy template that you want to update.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy store that contains the policy template that you want to update.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html\">ListPolicyStoreAliases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "policyTemplateId": {
                     "target": "com.amazonaws.verifiedpermissions#PolicyTemplateId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the policy template that you want to update.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the policy template that you want to update.</p> <p>You can use the policy template name in place of the policy template ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>PTEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy-template</code> </p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6841,6 +7536,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies new statement content written in Cedar policy language to replace the current body of the policy template.</p> <p>You can change only the following elements of the policy body:</p> <ul> <li> <p>The <code>action</code> referenced by the policy template.</p> </li> <li> <p>Any conditional clauses, such as <code>when</code> or <code>unless</code> clauses.</p> </li> </ul> <p>You <b>can't</b> change the following elements:</p> <ul> <li> <p>The effect (<code>permit</code> or <code>forbid</code>) of the policy template.</p> </li> <li> <p>The <code>principal</code> referenced by the policy template.</p> </li> <li> <p>The <code>resource</code> referenced by the policy template.</p> </li> </ul>",
                         "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a name for the policy template that is unique among all policy templates within the policy store. You can use the name in place of the policy template ID in API operations that reference the policy template. The name must be prefixed with <code>name/</code>.</p> <note> <p>If you don't include the name in an update request, the existing name is unchanged. To remove a name, set it to an empty string (<code>\"\"</code>).</p> </note> <p>If you specify a name that is already associated with another policy template in the policy store, you receive a <code>ConflictException</code> error.</p>",
+                        "smithy.api#tags": [
+                            "exposeToTSClient"
+                        ]
                     }
                 }
             },
@@ -7013,6 +7717,9 @@
             "resources": [
                 {
                     "target": "com.amazonaws.verifiedpermissions#PolicyStore"
+                },
+                {
+                    "target": "com.amazonaws.verifiedpermissions#PolicyStoreAlias"
                 }
             ],
             "errors": [
