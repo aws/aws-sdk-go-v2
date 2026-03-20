@@ -11,40 +11,28 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a paginated list of all policy templates in the specified policy store.
-func (c *Client) ListPolicyTemplates(ctx context.Context, params *ListPolicyTemplatesInput, optFns ...func(*Options)) (*ListPolicyTemplatesOutput, error) {
+// Returns a paginated list of all policy store aliases in the calling Amazon Web
+// Services account.
+func (c *Client) ListPolicyStoreAliases(ctx context.Context, params *ListPolicyStoreAliasesInput, optFns ...func(*Options)) (*ListPolicyStoreAliasesOutput, error) {
 	if params == nil {
-		params = &ListPolicyTemplatesInput{}
+		params = &ListPolicyStoreAliasesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPolicyTemplates", params, optFns, c.addOperationListPolicyTemplatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPolicyStoreAliases", params, optFns, c.addOperationListPolicyStoreAliasesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListPolicyTemplatesOutput)
+	out := result.(*ListPolicyStoreAliasesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListPolicyTemplatesInput struct {
+type ListPolicyStoreAliasesInput struct {
 
-	// Specifies the ID of the policy store that contains the policy templates you
-	// want to list.
-	//
-	// To specify a policy store, use its ID or alias name. When using an alias name,
-	// prefix it with policy-store-alias/ . For example:
-	//
-	//   - ID: PSEXAMPLEabcdefg111111
-	//
-	//   - Alias name: policy-store-alias/example-policy-store
-	//
-	// To view aliases, use [ListPolicyStoreAliases].
-	//
-	// [ListPolicyStoreAliases]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
-	//
-	// This member is required.
-	PolicyStoreId *string
+	// Specifies a filter to narrow the results. You can filter by policyStoreId to
+	// list only the policy store aliases associated with a specific policy store.
+	Filter *types.PolicyStoreAliasFilter
 
 	// Specifies the total number of results that you want included in each response.
 	// If additional items exist beyond the number you specify, the NextToken response
@@ -54,8 +42,8 @@ type ListPolicyTemplatesInput struct {
 	// maximum even when there are more results available. You should check NextToken
 	// after every operation to ensure that you receive all of the results.
 	//
-	// If you do not specify this parameter, the operation defaults to 10 policy
-	// templates per response. You can specify a maximum of 50 policy templates per
+	// If you do not specify this parameter, the operation defaults to 5 policy store
+	// aliases per response. You can specify a maximum of 50 policy store aliases per
 	// response.
 	MaxResults *int32
 
@@ -68,12 +56,12 @@ type ListPolicyTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
-type ListPolicyTemplatesOutput struct {
+type ListPolicyStoreAliasesOutput struct {
 
-	// The list of the policy templates in the specified policy store.
+	// The list of policy store aliases in the account.
 	//
 	// This member is required.
-	PolicyTemplates []types.PolicyTemplateItem
+	PolicyStoreAliases []types.PolicyStoreAliasItem
 
 	// If present, this value indicates that more output is available than is included
 	// in the current response. Use this value in the NextToken request parameter in a
@@ -88,19 +76,19 @@ type ListPolicyTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListPolicyTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPolicyStoreAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListPolicyTemplates{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListPolicyStoreAliases{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListPolicyTemplates{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListPolicyStoreAliases{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPolicyTemplates"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPolicyStoreAliases"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -155,10 +143,7 @@ func (c *Client) addOperationListPolicyTemplatesMiddlewares(stack *middleware.St
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpListPolicyTemplatesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPolicyTemplates(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPolicyStoreAliases(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -188,9 +173,9 @@ func (c *Client) addOperationListPolicyTemplatesMiddlewares(stack *middleware.St
 	return nil
 }
 
-// ListPolicyTemplatesPaginatorOptions is the paginator options for
-// ListPolicyTemplates
-type ListPolicyTemplatesPaginatorOptions struct {
+// ListPolicyStoreAliasesPaginatorOptions is the paginator options for
+// ListPolicyStoreAliases
+type ListPolicyStoreAliasesPaginatorOptions struct {
 	// Specifies the total number of results that you want included in each response.
 	// If additional items exist beyond the number you specify, the NextToken response
 	// element is returned with a value (not null). Include the specified value as the
@@ -199,8 +184,8 @@ type ListPolicyTemplatesPaginatorOptions struct {
 	// maximum even when there are more results available. You should check NextToken
 	// after every operation to ensure that you receive all of the results.
 	//
-	// If you do not specify this parameter, the operation defaults to 10 policy
-	// templates per response. You can specify a maximum of 50 policy templates per
+	// If you do not specify this parameter, the operation defaults to 5 policy store
+	// aliases per response. You can specify a maximum of 50 policy store aliases per
 	// response.
 	Limit int32
 
@@ -209,22 +194,22 @@ type ListPolicyTemplatesPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// ListPolicyTemplatesPaginator is a paginator for ListPolicyTemplates
-type ListPolicyTemplatesPaginator struct {
-	options   ListPolicyTemplatesPaginatorOptions
-	client    ListPolicyTemplatesAPIClient
-	params    *ListPolicyTemplatesInput
+// ListPolicyStoreAliasesPaginator is a paginator for ListPolicyStoreAliases
+type ListPolicyStoreAliasesPaginator struct {
+	options   ListPolicyStoreAliasesPaginatorOptions
+	client    ListPolicyStoreAliasesAPIClient
+	params    *ListPolicyStoreAliasesInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewListPolicyTemplatesPaginator returns a new ListPolicyTemplatesPaginator
-func NewListPolicyTemplatesPaginator(client ListPolicyTemplatesAPIClient, params *ListPolicyTemplatesInput, optFns ...func(*ListPolicyTemplatesPaginatorOptions)) *ListPolicyTemplatesPaginator {
+// NewListPolicyStoreAliasesPaginator returns a new ListPolicyStoreAliasesPaginator
+func NewListPolicyStoreAliasesPaginator(client ListPolicyStoreAliasesAPIClient, params *ListPolicyStoreAliasesInput, optFns ...func(*ListPolicyStoreAliasesPaginatorOptions)) *ListPolicyStoreAliasesPaginator {
 	if params == nil {
-		params = &ListPolicyTemplatesInput{}
+		params = &ListPolicyStoreAliasesInput{}
 	}
 
-	options := ListPolicyTemplatesPaginatorOptions{}
+	options := ListPolicyStoreAliasesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -233,7 +218,7 @@ func NewListPolicyTemplatesPaginator(client ListPolicyTemplatesAPIClient, params
 		fn(&options)
 	}
 
-	return &ListPolicyTemplatesPaginator{
+	return &ListPolicyStoreAliasesPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -243,12 +228,12 @@ func NewListPolicyTemplatesPaginator(client ListPolicyTemplatesAPIClient, params
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListPolicyTemplatesPaginator) HasMorePages() bool {
+func (p *ListPolicyStoreAliasesPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next ListPolicyTemplates page.
-func (p *ListPolicyTemplatesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPolicyTemplatesOutput, error) {
+// NextPage retrieves the next ListPolicyStoreAliases page.
+func (p *ListPolicyStoreAliasesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPolicyStoreAliasesOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -265,7 +250,7 @@ func (p *ListPolicyTemplatesPaginator) NextPage(ctx context.Context, optFns ...f
 	optFns = append([]func(*Options){
 		addIsPaginatorUserAgent,
 	}, optFns...)
-	result, err := p.client.ListPolicyTemplates(ctx, &params, optFns...)
+	result, err := p.client.ListPolicyStoreAliases(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -284,18 +269,18 @@ func (p *ListPolicyTemplatesPaginator) NextPage(ctx context.Context, optFns ...f
 	return result, nil
 }
 
-// ListPolicyTemplatesAPIClient is a client that implements the
-// ListPolicyTemplates operation.
-type ListPolicyTemplatesAPIClient interface {
-	ListPolicyTemplates(context.Context, *ListPolicyTemplatesInput, ...func(*Options)) (*ListPolicyTemplatesOutput, error)
+// ListPolicyStoreAliasesAPIClient is a client that implements the
+// ListPolicyStoreAliases operation.
+type ListPolicyStoreAliasesAPIClient interface {
+	ListPolicyStoreAliases(context.Context, *ListPolicyStoreAliasesInput, ...func(*Options)) (*ListPolicyStoreAliasesOutput, error)
 }
 
-var _ ListPolicyTemplatesAPIClient = (*Client)(nil)
+var _ ListPolicyStoreAliasesAPIClient = (*Client)(nil)
 
-func newServiceMetadataMiddleware_opListPolicyTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListPolicyStoreAliases(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "ListPolicyTemplates",
+		OperationName: "ListPolicyStoreAliases",
 	}
 }

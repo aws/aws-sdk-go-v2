@@ -908,6 +908,7 @@ type DirectQueryDataSource struct {
 // The following types satisfy this interface:
 //
 //	DirectQueryDataSourceTypeMemberCloudWatchLog
+//	DirectQueryDataSourceTypeMemberPrometheus
 //	DirectQueryDataSourceTypeMemberSecurityLake
 type DirectQueryDataSourceType interface {
 	isDirectQueryDataSourceType()
@@ -921,6 +922,15 @@ type DirectQueryDataSourceTypeMemberCloudWatchLog struct {
 }
 
 func (*DirectQueryDataSourceTypeMemberCloudWatchLog) isDirectQueryDataSourceType() {}
+
+// Specifies Prometheus as a type of data source for direct queries.
+type DirectQueryDataSourceTypeMemberPrometheus struct {
+	Value PrometheusDirectQueryDataSource
+
+	noSmithyDocumentSerde
+}
+
+func (*DirectQueryDataSourceTypeMemberPrometheus) isDirectQueryDataSourceType() {}
 
 // Specifies Security Lake as a type of data source for direct queries.
 type DirectQueryDataSourceTypeMemberSecurityLake struct {
@@ -2333,6 +2343,26 @@ type PluginProperties struct {
 
 	// The version of the plugin.
 	Version *string
+
+	noSmithyDocumentSerde
+}
+
+//	Configuration details for a Prometheus data source that can be used for direct
+//
+// queries.
+type PrometheusDirectQueryDataSource struct {
+
+	//  The unique identifier of the IAM role that grants OpenSearch Service
+	// permission to access the specified data source.
+	//
+	// This member is required.
+	RoleArn *string
+
+	//  The unique identifier of the Amazon Managed Prometheus Workspace that is
+	// associated with the specified data source.
+	//
+	// This member is required.
+	WorkspaceArn *string
 
 	noSmithyDocumentSerde
 }

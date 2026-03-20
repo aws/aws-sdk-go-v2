@@ -43,6 +43,17 @@ type CreatePolicyTemplateInput struct {
 
 	// The ID of the policy store in which to create the policy template.
 	//
+	// To specify a policy store, use its ID or alias name. When using an alias name,
+	// prefix it with policy-store-alias/ . For example:
+	//
+	//   - ID: PSEXAMPLEabcdefg111111
+	//
+	//   - Alias name: policy-store-alias/example-policy-store
+	//
+	// To view aliases, use [ListPolicyStoreAliases].
+	//
+	// [ListPolicyStoreAliases]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
+	//
 	// This member is required.
 	PolicyStoreId *string
 
@@ -73,6 +84,15 @@ type CreatePolicyTemplateInput struct {
 
 	// Specifies a description for the policy template.
 	Description *string
+
+	// Specifies a name for the policy template that is unique among all policy
+	// templates within the policy store. You can use the name in place of the policy
+	// template ID in API operations that reference the policy template. The name must
+	// be prefixed with name/ .
+	//
+	// If you specify a name that is already associated with another policy template
+	// in the policy store, you receive a ConflictException error.
+	Name *string
 
 	noSmithyDocumentSerde
 }

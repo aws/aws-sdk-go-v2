@@ -21,9 +21,9 @@ type AdvancedBackupSetting struct {
 	// Set to "WindowsVSS":"disabled" to create a regular backup. The WindowsVSS
 	// option is not enabled by default.
 	//
-	// For S3 backups, set to "S3BackupACLs":"disabled" to exclude ACLs from the
-	// backup, or "S3BackupObjectTags":"disabled" to exclude object tags from the
-	// backup. By default, both ACLs and object tags are included in S3 backups.
+	// For S3 backups, set to "BackupACLs":"disabled" to exclude ACLs from the backup,
+	// or "BackupObjectTags":"disabled" to exclude object tags from the backup. By
+	// default, both ACLs and object tags are included in S3 backups.
 	//
 	// If you specify an invalid option, you get an InvalidParameterValueException
 	// exception.
@@ -102,6 +102,9 @@ type BackupJob struct {
 	//
 	//   - For Amazon EFS, this value refers to the delta bytes transferred during a
 	//   backup.
+	//
+	//   - For Amazon EKS, this value refers to the size of your nested EKS recovery
+	//   point.
 	//
 	//   - Amazon FSx does not populate this value from the operation
 	//   GetBackupJobStatus for FSx file systems.
@@ -700,6 +703,10 @@ type BackupSelection struct {
 	//
 	// If you specify multiple ARNs, the resources much match any of the ARNs (OR
 	// logic).
+	//
+	// When using wildcards in ARN patterns for backup selections, the asterisk (*)
+	// must appear at the end of the ARN string (prefix pattern). For example,
+	// arn:aws:s3:::my-bucket-* is valid, but arn:aws:s3:::*-logs is not supported.
 	Resources []string
 
 	noSmithyDocumentSerde

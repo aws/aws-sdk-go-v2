@@ -2,12 +2,32 @@
 
 package types
 
+type AliasState string
+
+// Enum values for AliasState
+const (
+	AliasStateActive          AliasState = "Active"
+	AliasStatePendingDeletion AliasState = "PendingDeletion"
+)
+
+// Values returns all known values for AliasState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AliasState) Values() []AliasState {
+	return []AliasState{
+		"Active",
+		"PendingDeletion",
+	}
+}
+
 type BatchGetPolicyErrorCode string
 
 // Enum values for BatchGetPolicyErrorCode
 const (
-	BatchGetPolicyErrorCodePolicyStoreNotFound BatchGetPolicyErrorCode = "POLICY_STORE_NOT_FOUND"
-	BatchGetPolicyErrorCodePolicyNotFound      BatchGetPolicyErrorCode = "POLICY_NOT_FOUND"
+	BatchGetPolicyErrorCodePolicyStoreNotFound      BatchGetPolicyErrorCode = "POLICY_STORE_NOT_FOUND"
+	BatchGetPolicyErrorCodePolicyNotFound           BatchGetPolicyErrorCode = "POLICY_NOT_FOUND"
+	BatchGetPolicyErrorCodePolicyStoreAliasNotFound BatchGetPolicyErrorCode = "POLICY_STORE_ALIAS_NOT_FOUND"
 )
 
 // Values returns all known values for BatchGetPolicyErrorCode. Note that this can
@@ -18,6 +38,7 @@ func (BatchGetPolicyErrorCode) Values() []BatchGetPolicyErrorCode {
 	return []BatchGetPolicyErrorCode{
 		"POLICY_STORE_NOT_FOUND",
 		"POLICY_NOT_FOUND",
+		"POLICY_STORE_ALIAS_NOT_FOUND",
 	}
 }
 
@@ -137,11 +158,12 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeIdentitySource ResourceType = "IDENTITY_SOURCE"
-	ResourceTypePolicyStore    ResourceType = "POLICY_STORE"
-	ResourceTypePolicy         ResourceType = "POLICY"
-	ResourceTypePolicyTemplate ResourceType = "POLICY_TEMPLATE"
-	ResourceTypeSchema         ResourceType = "SCHEMA"
+	ResourceTypeIdentitySource   ResourceType = "IDENTITY_SOURCE"
+	ResourceTypePolicyStore      ResourceType = "POLICY_STORE"
+	ResourceTypePolicy           ResourceType = "POLICY"
+	ResourceTypePolicyTemplate   ResourceType = "POLICY_TEMPLATE"
+	ResourceTypeSchema           ResourceType = "SCHEMA"
+	ResourceTypePolicyStoreAlias ResourceType = "POLICY_STORE_ALIAS"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -155,6 +177,7 @@ func (ResourceType) Values() []ResourceType {
 		"POLICY",
 		"POLICY_TEMPLATE",
 		"SCHEMA",
+		"POLICY_STORE_ALIAS",
 	}
 }
 

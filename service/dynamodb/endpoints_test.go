@@ -14207,11 +14207,12 @@ func TestEndpointCase362(t *testing.T) {
 	}
 }
 
-// {Endpoint=https://dynamodb.eu-west-1.api.aws, Region=eu-west-1}
+// {Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn,
+// Region=cn-north-1}
 func TestEndpointCase363(t *testing.T) {
 	var params = EndpointParameters{
-		Endpoint: ptr.String("https://dynamodb.eu-west-1.api.aws"),
-		Region:   ptr.String("eu-west-1"),
+		Endpoint: ptr.String("https://dynamodb.cn-north-1.api.amazonwebservices.com.cn"),
+		Region:   ptr.String("cn-north-1"),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -14226,11 +14227,29 @@ func TestEndpointCase363(t *testing.T) {
 	}
 }
 
-// {Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws,
-// Region=us-east-1}
+// {Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1}
 func TestEndpointCase364(t *testing.T) {
 	var params = EndpointParameters{
-		Endpoint: ptr.String("https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws"),
+		Endpoint: ptr.String("https://dynamodb.us-gov-east-1.api.aws"),
+		Region:   ptr.String("us-gov-east-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1}
+func TestEndpointCase365(t *testing.T) {
+	var params = EndpointParameters{
+		Endpoint: ptr.String("https://dynamodb.us-east-1.api.aws"),
 		Region:   ptr.String("us-east-1"),
 	}
 
@@ -14238,33 +14257,16 @@ func TestEndpointCase364(t *testing.T) {
 	result, err := resolver.ResolveEndpoint(context.Background(), params)
 	_, _ = result, err
 
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
+	if err == nil {
+		t.Fatalf("expect error, got none")
 	}
-
-	uri, _ := url.Parse("https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws")
-
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:        *uri,
-		Headers:    http.Header{},
-		Properties: smithy.Properties{},
-	}
-
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
-		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
-		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
 	}
 }
 
 // {Endpoint=https://111111111111.ddb.us-east-1.api.aws, Region=us-east-1}
-func TestEndpointCase365(t *testing.T) {
+func TestEndpointCase366(t *testing.T) {
 	var params = EndpointParameters{
 		Endpoint: ptr.String("https://111111111111.ddb.us-east-1.api.aws"),
 		Region:   ptr.String("us-east-1"),
@@ -14299,10 +14301,11 @@ func TestEndpointCase365(t *testing.T) {
 	}
 }
 
-// {Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1}
-func TestEndpointCase366(t *testing.T) {
+// {Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws,
+// Region=us-east-1}
+func TestEndpointCase367(t *testing.T) {
 	var params = EndpointParameters{
-		Endpoint: ptr.String("https://dynamodb.us-east-1.api.aws"),
+		Endpoint: ptr.String("https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws"),
 		Region:   ptr.String("us-east-1"),
 	}
 
@@ -14310,39 +14313,36 @@ func TestEndpointCase366(t *testing.T) {
 	result, err := resolver.ResolveEndpoint(context.Background(), params)
 	_, _ = result, err
 
-	if err == nil {
-		t.Fatalf("expect error, got none")
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
 	}
-	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
+
+	uri, _ := url.Parse("https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
-// {Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1}
-func TestEndpointCase367(t *testing.T) {
-	var params = EndpointParameters{
-		Endpoint: ptr.String("https://dynamodb.us-gov-east-1.api.aws"),
-		Region:   ptr.String("us-gov-east-1"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
-// {Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn,
-// Region=cn-north-1}
+// {Endpoint=https://dynamodb.eu-west-1.api.aws, Region=eu-west-1}
 func TestEndpointCase368(t *testing.T) {
 	var params = EndpointParameters{
-		Endpoint: ptr.String("https://dynamodb.cn-north-1.api.amazonwebservices.com.cn"),
-		Region:   ptr.String("cn-north-1"),
+		Endpoint: ptr.String("https://dynamodb.eu-west-1.api.aws"),
+		Region:   ptr.String("eu-west-1"),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()

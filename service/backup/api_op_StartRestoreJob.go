@@ -52,6 +52,8 @@ type StartRestoreJobInput struct {
 	//
 	// [Metadata for Amazon EFS]
 	//
+	// [Metadata for Amazon EKS]
+	//
 	// [Metadata for Amazon FSx]
 	//
 	// [Metadata for Amazon Neptune]
@@ -75,6 +77,7 @@ type StartRestoreJobInput struct {
 	// [Metadata for Amazon Timestream]: https://docs.aws.amazon.com/aws-backup/latest/devguide/timestream-restore.html#timestream-restore-api
 	// [Metadata for Amazon EBS]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-ebs.html#ebs-restore-cli
 	// [Metadata for Amazon Redshift]: https://docs.aws.amazon.com/aws-backup/latest/devguide/redshift-restores.html#redshift-restore-api
+	// [Metadata for Amazon EKS]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-eks.html#eks-restore-backup-section
 	// [Metadata for Amazon DynamoDB]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-dynamodb.html#ddb-restore-cli
 	// [Metadata for Amazon Neptune]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-nep.html#nep-restore-cli
 	// [Metadata for Amazon S3]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-s3.html#s3-restore-cli
@@ -124,6 +127,8 @@ type StartRestoreJobInput struct {
 	//   - EC2 - Amazon Elastic Compute Cloud
 	//
 	//   - EFS - Amazon Elastic File System
+	//
+	//   - EKS - Amazon Elastic Kubernetes Service
 	//
 	//   - FSx - Amazon FSx
 	//

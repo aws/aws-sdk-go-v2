@@ -223,6 +223,13 @@ type BatchGetPolicyInputItem struct {
 
 	// The identifier of the policy you want information about.
 	//
+	// You can use the policy name in place of the policy ID. When using a name,
+	// prefix it with name/ . For example:
+	//
+	//   - ID: SPEXAMPLEabcdefg111111
+	//
+	//   - Name: name/example-policy
+	//
 	// This member is required.
 	PolicyId *string
 
@@ -272,6 +279,10 @@ type BatchGetPolicyOutputItem struct {
 	//
 	// This member is required.
 	PolicyType PolicyType
+
+	// The name of the policy, if one was assigned when the policy was created or last
+	// updated.
+	Name *string
 
 	noSmithyDocumentSerde
 }
@@ -2009,11 +2020,63 @@ type PolicyItem struct {
 	// For example, "effect": "Permit" .
 	Effect PolicyEffect
 
+	// The name of the policy, if one was assigned when the policy was created or last
+	// updated.
+	Name *string
+
 	// The principal associated with the policy.
 	Principal *EntityIdentifier
 
 	// The resource associated with the policy.
 	Resource *EntityIdentifier
+
+	noSmithyDocumentSerde
+}
+
+// Contains filters for the ListPolicyStoreAliases operation.
+type PolicyStoreAliasFilter struct {
+
+	// The ID of the policy store to filter by. Only policy store aliases associated
+	// with this policy store are returned.
+	PolicyStoreId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a policy store alias.
+//
+// This data type is used as a response parameter for the [ListPolicyStoreAliases] operation.
+//
+// [ListPolicyStoreAliases]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
+type PolicyStoreAliasItem struct {
+
+	// The Amazon Resource Name (ARN) of the policy store alias.
+	//
+	// This member is required.
+	AliasArn *string
+
+	// The name of the policy store alias.
+	//
+	// This member is required.
+	AliasName *string
+
+	// The date and time the policy store alias was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The ID of the policy store associated with the alias.
+	//
+	// This member is required.
+	PolicyStoreId *string
+
+	// The state of the policy store alias. Policy Store Aliases in the Active state
+	// can be used normally. When a policy store alias is deleted, it enters the
+	// PendingDeletion state. Policy Store Aliases in the PendingDeletion state cannot
+	// be used, and creating a policy store alias with the same alias name will fail.
+	//
+	// This member is required.
+	State AliasState
 
 	noSmithyDocumentSerde
 }
@@ -2079,6 +2142,10 @@ type PolicyTemplateItem struct {
 
 	// The description attached to the policy template.
 	Description *string
+
+	// The name of the policy template, if one was assigned when the policy template
+	// was created or last updated.
+	Name *string
 
 	noSmithyDocumentSerde
 }

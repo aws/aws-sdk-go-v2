@@ -110,6 +110,26 @@ func (m *validateOpCreatePolicy) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePolicyStoreAlias struct {
+}
+
+func (*validateOpCreatePolicyStoreAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePolicyStoreAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePolicyStoreAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePolicyStoreAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreatePolicyStore struct {
 }
 
@@ -190,6 +210,26 @@ func (m *validateOpDeletePolicy) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeletePolicyStoreAlias struct {
+}
+
+func (*validateOpDeletePolicyStoreAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePolicyStoreAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePolicyStoreAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePolicyStoreAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeletePolicyStore struct {
 }
 
@@ -265,6 +305,26 @@ func (m *validateOpGetPolicy) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPolicyStoreAlias struct {
+}
+
+func (*validateOpGetPolicyStoreAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPolicyStoreAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPolicyStoreAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPolicyStoreAliasInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -610,6 +670,10 @@ func addOpCreatePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePolicy{}, middleware.After)
 }
 
+func addOpCreatePolicyStoreAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePolicyStoreAlias{}, middleware.After)
+}
+
 func addOpCreatePolicyStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePolicyStore{}, middleware.After)
 }
@@ -626,6 +690,10 @@ func addOpDeletePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePolicy{}, middleware.After)
 }
 
+func addOpDeletePolicyStoreAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePolicyStoreAlias{}, middleware.After)
+}
+
 func addOpDeletePolicyStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePolicyStore{}, middleware.After)
 }
@@ -640,6 +708,10 @@ func addOpGetIdentitySourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPolicy{}, middleware.After)
+}
+
+func addOpGetPolicyStoreAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPolicyStoreAlias{}, middleware.After)
 }
 
 func addOpGetPolicyStoreValidationMiddleware(stack *middleware.Stack) error {
@@ -1658,6 +1730,24 @@ func validateOpCreatePolicyInput(v *CreatePolicyInput) error {
 	}
 }
 
+func validateOpCreatePolicyStoreAliasInput(v *CreatePolicyStoreAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePolicyStoreAliasInput"}
+	if v.AliasName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasName"))
+	}
+	if v.PolicyStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyStoreId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreatePolicyStoreInput(v *CreatePolicyStoreInput) error {
 	if v == nil {
 		return nil
@@ -1736,6 +1826,21 @@ func validateOpDeletePolicyInput(v *DeletePolicyInput) error {
 	}
 }
 
+func validateOpDeletePolicyStoreAliasInput(v *DeletePolicyStoreAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePolicyStoreAliasInput"}
+	if v.AliasName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeletePolicyStoreInput(v *DeletePolicyStoreInput) error {
 	if v == nil {
 		return nil
@@ -1797,6 +1902,21 @@ func validateOpGetPolicyInput(v *GetPolicyInput) error {
 	}
 	if v.PolicyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPolicyStoreAliasInput(v *GetPolicyStoreAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPolicyStoreAliasInput"}
+	if v.AliasName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -44,10 +44,28 @@ type UpdatePolicyTemplateInput struct {
 	// Specifies the ID of the policy store that contains the policy template that you
 	// want to update.
 	//
+	// To specify a policy store, use its ID or alias name. When using an alias name,
+	// prefix it with policy-store-alias/ . For example:
+	//
+	//   - ID: PSEXAMPLEabcdefg111111
+	//
+	//   - Alias name: policy-store-alias/example-policy-store
+	//
+	// To view aliases, use [ListPolicyStoreAliases].
+	//
+	// [ListPolicyStoreAliases]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
+	//
 	// This member is required.
 	PolicyStoreId *string
 
 	// Specifies the ID of the policy template that you want to update.
+	//
+	// You can use the policy template name in place of the policy template ID. When
+	// using a name, prefix it with name/ . For example:
+	//
+	//   - ID: PTEXAMPLEabcdefg111111
+	//
+	//   - Name: name/example-policy-template
 	//
 	// This member is required.
 	PolicyTemplateId *string
@@ -74,6 +92,18 @@ type UpdatePolicyTemplateInput struct {
 
 	// Specifies a new description to apply to the policy template.
 	Description *string
+
+	// Specifies a name for the policy template that is unique among all policy
+	// templates within the policy store. You can use the name in place of the policy
+	// template ID in API operations that reference the policy template. The name must
+	// be prefixed with name/ .
+	//
+	// If you don't include the name in an update request, the existing name is
+	// unchanged. To remove a name, set it to an empty string ( "" ).
+	//
+	// If you specify a name that is already associated with another policy template
+	// in the policy store, you receive a ConflictException error.
+	Name *string
 
 	noSmithyDocumentSerde
 }

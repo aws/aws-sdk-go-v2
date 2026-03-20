@@ -32,6 +32,9 @@ func ExampleDirectQueryDataSourceType_outputUsage() {
 	case *types.DirectQueryDataSourceTypeMemberCloudWatchLog:
 		_ = v.Value // Value is types.CloudWatchDirectQueryDataSource
 
+	case *types.DirectQueryDataSourceTypeMemberPrometheus:
+		_ = v.Value // Value is types.PrometheusDirectQueryDataSource
+
 	case *types.DirectQueryDataSourceTypeMemberSecurityLake:
 		_ = v.Value // Value is types.SecurityLakeDirectQueryDataSource
 
@@ -45,4 +48,5 @@ func ExampleDirectQueryDataSourceType_outputUsage() {
 }
 
 var _ *types.CloudWatchDirectQueryDataSource
+var _ *types.PrometheusDirectQueryDataSource
 var _ *types.SecurityLakeDirectQueryDataSource

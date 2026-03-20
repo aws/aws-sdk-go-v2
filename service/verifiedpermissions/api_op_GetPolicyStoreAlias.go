@@ -6,84 +6,89 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
-// Deletes the specified policy template from the policy store.
-//
-// This operation also deletes any policies that were created from the specified
-// policy template. Those policies are immediately removed from all future API
-// responses, and are asynchronously deleted from the policy store.
-func (c *Client) DeletePolicyTemplate(ctx context.Context, params *DeletePolicyTemplateInput, optFns ...func(*Options)) (*DeletePolicyTemplateOutput, error) {
+// Retrieves details about the specified policy store alias.
+func (c *Client) GetPolicyStoreAlias(ctx context.Context, params *GetPolicyStoreAliasInput, optFns ...func(*Options)) (*GetPolicyStoreAliasOutput, error) {
 	if params == nil {
-		params = &DeletePolicyTemplateInput{}
+		params = &GetPolicyStoreAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePolicyTemplate", params, optFns, c.addOperationDeletePolicyTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPolicyStoreAlias", params, optFns, c.addOperationGetPolicyStoreAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeletePolicyTemplateOutput)
+	out := result.(*GetPolicyStoreAliasOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeletePolicyTemplateInput struct {
+type GetPolicyStoreAliasInput struct {
 
-	// Specifies the ID of the policy store that contains the policy template that you
-	// want to delete.
+	// Specifies the name of the policy store alias that you want information about.
 	//
-	// To specify a policy store, use its ID or alias name. When using an alias name,
-	// prefix it with policy-store-alias/ . For example:
-	//
-	//   - ID: PSEXAMPLEabcdefg111111
-	//
-	//   - Alias name: policy-store-alias/example-policy-store
-	//
-	// To view aliases, use [ListPolicyStoreAliases].
-	//
-	// [ListPolicyStoreAliases]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
+	// The alias name must always be prefixed with policy-store-alias/ .
 	//
 	// This member is required.
-	PolicyStoreId *string
-
-	// Specifies the ID of the policy template that you want to delete.
-	//
-	// You can use the policy template name in place of the policy template ID. When
-	// using a name, prefix it with name/ . For example:
-	//
-	//   - ID: PTEXAMPLEabcdefg111111
-	//
-	//   - Name: name/example-policy-template
-	//
-	// This member is required.
-	PolicyTemplateId *string
+	AliasName *string
 
 	noSmithyDocumentSerde
 }
 
-type DeletePolicyTemplateOutput struct {
+type GetPolicyStoreAliasOutput struct {
+
+	// The Amazon Resource Name (ARN) of the policy store alias.
+	//
+	// This member is required.
+	AliasArn *string
+
+	// The name of the policy store alias.
+	//
+	// This member is required.
+	AliasName *string
+
+	// The date and time the policy store alias was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The ID of the policy store associated with the alias.
+	//
+	// This member is required.
+	PolicyStoreId *string
+
+	// The state of the policy store alias. Policy Store Aliases in the Active state
+	// can be used normally. When a policy store alias is deleted, it enters the
+	// PendingDeletion state. Policy Store Aliases in the PendingDeletion cannot be
+	// used, and creating a policy store alias with the same alias name will fail.
+	//
+	// This member is required.
+	State types.AliasState
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeletePolicyTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPolicyStoreAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeletePolicyTemplate{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetPolicyStoreAlias{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeletePolicyTemplate{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetPolicyStoreAlias{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePolicyTemplate"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPolicyStoreAlias"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -138,10 +143,10 @@ func (c *Client) addOperationDeletePolicyTemplateMiddlewares(stack *middleware.S
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpDeletePolicyTemplateValidationMiddleware(stack); err != nil {
+	if err = addOpGetPolicyStoreAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePolicyTemplate(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPolicyStoreAlias(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -171,10 +176,10 @@ func (c *Client) addOperationDeletePolicyTemplateMiddlewares(stack *middleware.S
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeletePolicyTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetPolicyStoreAlias(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DeletePolicyTemplate",
+		OperationName: "GetPolicyStoreAlias",
 	}
 }

@@ -10,80 +10,63 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified policy template from the policy store.
+// Deletes the specified policy store alias.
 //
-// This operation also deletes any policies that were created from the specified
-// policy template. Those policies are immediately removed from all future API
-// responses, and are asynchronously deleted from the policy store.
-func (c *Client) DeletePolicyTemplate(ctx context.Context, params *DeletePolicyTemplateInput, optFns ...func(*Options)) (*DeletePolicyTemplateOutput, error) {
+// This operation is idempotent. If you specify a policy store alias that does not
+// exist, the request response will still return a successful HTTP 200 status code.
+//
+// When a policy store alias is deleted, it enters the PendingDeletion state. When
+// a policy store alias is in the PendingDeletion state, new policy store aliases
+// cannot be created with the same name. If the policy store alias is used in an
+// API that has a policyStoreId field, the operation will fail with a
+// ResourceNotFound exception.
+func (c *Client) DeletePolicyStoreAlias(ctx context.Context, params *DeletePolicyStoreAliasInput, optFns ...func(*Options)) (*DeletePolicyStoreAliasOutput, error) {
 	if params == nil {
-		params = &DeletePolicyTemplateInput{}
+		params = &DeletePolicyStoreAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePolicyTemplate", params, optFns, c.addOperationDeletePolicyTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePolicyStoreAlias", params, optFns, c.addOperationDeletePolicyStoreAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeletePolicyTemplateOutput)
+	out := result.(*DeletePolicyStoreAliasOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeletePolicyTemplateInput struct {
+type DeletePolicyStoreAliasInput struct {
 
-	// Specifies the ID of the policy store that contains the policy template that you
-	// want to delete.
+	// Specifies the name of the policy store alias that you want to delete.
 	//
-	// To specify a policy store, use its ID or alias name. When using an alias name,
-	// prefix it with policy-store-alias/ . For example:
-	//
-	//   - ID: PSEXAMPLEabcdefg111111
-	//
-	//   - Alias name: policy-store-alias/example-policy-store
-	//
-	// To view aliases, use [ListPolicyStoreAliases].
-	//
-	// [ListPolicyStoreAliases]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
+	// The alias name must always be prefixed with policy-store-alias/ .
 	//
 	// This member is required.
-	PolicyStoreId *string
-
-	// Specifies the ID of the policy template that you want to delete.
-	//
-	// You can use the policy template name in place of the policy template ID. When
-	// using a name, prefix it with name/ . For example:
-	//
-	//   - ID: PTEXAMPLEabcdefg111111
-	//
-	//   - Name: name/example-policy-template
-	//
-	// This member is required.
-	PolicyTemplateId *string
+	AliasName *string
 
 	noSmithyDocumentSerde
 }
 
-type DeletePolicyTemplateOutput struct {
+type DeletePolicyStoreAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeletePolicyTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePolicyStoreAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeletePolicyTemplate{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeletePolicyStoreAlias{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeletePolicyTemplate{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeletePolicyStoreAlias{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePolicyTemplate"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePolicyStoreAlias"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -138,10 +121,10 @@ func (c *Client) addOperationDeletePolicyTemplateMiddlewares(stack *middleware.S
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpDeletePolicyTemplateValidationMiddleware(stack); err != nil {
+	if err = addOpDeletePolicyStoreAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePolicyTemplate(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePolicyStoreAlias(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -171,10 +154,10 @@ func (c *Client) addOperationDeletePolicyTemplateMiddlewares(stack *middleware.S
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeletePolicyTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeletePolicyStoreAlias(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DeletePolicyTemplate",
+		OperationName: "DeletePolicyStoreAlias",
 	}
 }

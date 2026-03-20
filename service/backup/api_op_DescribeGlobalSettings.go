@@ -11,9 +11,11 @@ import (
 	"time"
 )
 
-// Describes whether the Amazon Web Services account is opted in to cross-account
-// backup. Returns an error if the account is not a member of an Organizations
-// organization. Example: describe-global-settings --region us-west-2
+// Describes whether the Amazon Web Services account has enabled different
+// cross-account management options, including cross-account backup, multi-party
+// approval, and delegated administrator. Returns an error if the account is not a
+// member of an Organizations organization. Example: describe-global-settings
+// --region us-west-2
 func (c *Client) DescribeGlobalSettings(ctx context.Context, params *DescribeGlobalSettingsInput, optFns ...func(*Options)) (*DescribeGlobalSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeGlobalSettingsInput{}
@@ -37,12 +39,21 @@ type DescribeGlobalSettingsOutput struct {
 
 	// The status of the flags isCrossAccountBackupEnabled , isMpaEnabled ('Mpa'
 	// refers to multi-party approval), and isDelegatedAdministratorEnabled .
+	//
+	//   - isCrossAccountBackupEnabled : Allow accounts in your organization to copy
+	//   backups to other accounts.
+	//
+	//   - isMpaEnabled : Add cross-account access to your organization with the option
+	//   to assign a Multi-party approval team to a logically air-gapped vault.
+	//
+	//   - isDelegatedAdministratorEnabled : Allow Backup to automatically synchronize
+	//   delegated administrator permissions with Organizations.
 	GlobalSettings map[string]string
 
-	// The date and time that the flag isCrossAccountBackupEnabled was last updated.
-	// This update is in Unix format and Coordinated Universal Time (UTC). The value of
-	// LastUpdateTime is accurate to milliseconds. For example, the value
-	// 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+	// The date and time that the supported flags were last updated. This update is in
+	// Unix format and Coordinated Universal Time (UTC). The value of LastUpdateTime
+	// is accurate to milliseconds. For example, the value 1516925490.087 represents
+	// Friday, January 26, 2018 12:11:30.087 AM.
 	LastUpdateTime *time.Time
 
 	// Metadata pertaining to the operation's result.

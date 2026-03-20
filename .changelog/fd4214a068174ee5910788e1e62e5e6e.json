@@ -1,0 +1,8 @@
+{
+    "id": "fd4214a0-6817-4ee5-9107-88e1e62e5e6e",
+    "type": "feature",
+    "description": "Added support for Amazon Managed Service for Prometheus (AMP) as a connected data source in OpenSearch UI. Now users can analyze Prometheus metrics in OpenSearch UI without data copy.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

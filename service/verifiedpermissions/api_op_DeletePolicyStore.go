@@ -33,6 +33,9 @@ type DeletePolicyStoreInput struct {
 
 	// Specifies the ID of the policy store that you want to delete.
 	//
+	// To specify a policy store, the alias name cannot be used. Only the ID can be
+	// used.
+	//
 	// This member is required.
 	PolicyStoreId *string
 

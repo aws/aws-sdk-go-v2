@@ -6,59 +6,55 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Creates or updates the policy schema in the specified policy store. The schema
-// is used to validate any Cedar policies and policy templates submitted to the
-// policy store. Any changes to the schema validate only policies and templates
-// submitted after the schema change. Existing policies and templates are not
-// re-evaluated against the changed schema. If you later update a policy, then it
-// is evaluated against the new schema at that time.
+// Creates a policy store alias for the specified policy store. A policy store
+// alias is an alternative identifier that you can use to reference a policy store
+// in API operations.
+//
+// This operation is idempotent. If multiple CreatePolicyStoreAlias requests are
+// made where the aliasName and policyStoreId fields are the same between the
+// requests, subsequent requests will be ignored. For each duplicate
+// CreatePolicyStoreAlias request, a Success response will be returned and a new
+// policy store alias will not be created.
 //
 // Verified Permissions is [eventually consistent] . It can take a few seconds for a new or changed
 // element to propagate through the service and be visible in the results of other
 // Verified Permissions operations.
 //
 // [eventually consistent]: https://wikipedia.org/wiki/Eventual_consistency
-func (c *Client) PutSchema(ctx context.Context, params *PutSchemaInput, optFns ...func(*Options)) (*PutSchemaOutput, error) {
+func (c *Client) CreatePolicyStoreAlias(ctx context.Context, params *CreatePolicyStoreAliasInput, optFns ...func(*Options)) (*CreatePolicyStoreAliasOutput, error) {
 	if params == nil {
-		params = &PutSchemaInput{}
+		params = &CreatePolicyStoreAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutSchema", params, optFns, c.addOperationPutSchemaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePolicyStoreAlias", params, optFns, c.addOperationCreatePolicyStoreAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*PutSchemaOutput)
+	out := result.(*CreatePolicyStoreAliasOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type PutSchemaInput struct {
+type CreatePolicyStoreAliasInput struct {
 
-	// Specifies the definition of the schema to be stored. The schema definition must
-	// be written in Cedar schema JSON.
+	// Specifies the name of the policy store alias to create. The name must be unique
+	// within your Amazon Web Services account and Amazon Web Services Region.
+	//
+	// The alias name must always be prefixed with policy-store-alias/ .
 	//
 	// This member is required.
-	Definition types.SchemaDefinition
+	AliasName *string
 
-	// Specifies the ID of the policy store in which to place the schema.
+	// Specifies the ID of the policy store to associate with the alias.
 	//
-	// To specify a policy store, use its ID or alias name. When using an alias name,
-	// prefix it with policy-store-alias/ . For example:
-	//
-	//   - ID: PSEXAMPLEabcdefg111111
-	//
-	//   - Alias name: policy-store-alias/example-policy-store
-	//
-	// To view aliases, use [ListPolicyStoreAliases].
-	//
-	// [ListPolicyStoreAliases]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
+	// The associated policy store must be specified using its ID. The alias name
+	// cannot be used.
 	//
 	// This member is required.
 	PolicyStoreId *string
@@ -66,24 +62,24 @@ type PutSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
-type PutSchemaOutput struct {
+type CreatePolicyStoreAliasOutput struct {
 
-	// The date and time that the schema was originally created.
+	// The Amazon Resource Name (ARN) of the policy store alias.
 	//
 	// This member is required.
-	CreatedDate *time.Time
+	AliasArn *string
 
-	// The date and time that the schema was last updated.
+	// The name of the policy store alias.
 	//
 	// This member is required.
-	LastUpdatedDate *time.Time
+	AliasName *string
 
-	// Identifies the namespaces of the entities referenced by this schema.
+	// The date and time the policy store alias was created.
 	//
 	// This member is required.
-	Namespaces []string
+	CreatedAt *time.Time
 
-	// The unique ID of the policy store that contains the schema.
+	// The ID of the policy store associated with the alias.
 	//
 	// This member is required.
 	PolicyStoreId *string
@@ -94,19 +90,19 @@ type PutSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationPutSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePolicyStoreAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPutSchema{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreatePolicyStoreAlias{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPutSchema{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreatePolicyStoreAlias{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutSchema"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePolicyStoreAlias"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -161,10 +157,10 @@ func (c *Client) addOperationPutSchemaMiddlewares(stack *middleware.Stack, optio
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpPutSchemaValidationMiddleware(stack); err != nil {
+	if err = addOpCreatePolicyStoreAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutSchema(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePolicyStoreAlias(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -194,10 +190,10 @@ func (c *Client) addOperationPutSchemaMiddlewares(stack *middleware.Stack, optio
 	return nil
 }
 
-func newServiceMetadataMiddleware_opPutSchema(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCreatePolicyStoreAlias(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "PutSchema",
+		OperationName: "CreatePolicyStoreAlias",
 	}
 }

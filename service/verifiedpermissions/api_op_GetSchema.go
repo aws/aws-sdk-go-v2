@@ -31,6 +31,17 @@ type GetSchemaInput struct {
 
 	// Specifies the ID of the policy store that contains the schema.
 	//
+	// To specify a policy store, use its ID or alias name. When using an alias name,
+	// prefix it with policy-store-alias/ . For example:
+	//
+	//   - ID: PSEXAMPLEabcdefg111111
+	//
+	//   - Alias name: policy-store-alias/example-policy-store
+	//
+	// To view aliases, use [ListPolicyStoreAliases].
+	//
+	// [ListPolicyStoreAliases]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
+	//
 	// This member is required.
 	PolicyStoreId *string
 

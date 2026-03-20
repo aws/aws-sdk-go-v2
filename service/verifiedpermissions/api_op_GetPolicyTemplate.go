@@ -33,10 +33,28 @@ type GetPolicyTemplateInput struct {
 	// Specifies the ID of the policy store that contains the policy template that you
 	// want information about.
 	//
+	// To specify a policy store, use its ID or alias name. When using an alias name,
+	// prefix it with policy-store-alias/ . For example:
+	//
+	//   - ID: PSEXAMPLEabcdefg111111
+	//
+	//   - Alias name: policy-store-alias/example-policy-store
+	//
+	// To view aliases, use [ListPolicyStoreAliases].
+	//
+	// [ListPolicyStoreAliases]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
+	//
 	// This member is required.
 	PolicyStoreId *string
 
 	// Specifies the ID of the policy template that you want information about.
+	//
+	// You can use the policy template name in place of the policy template ID. When
+	// using a name, prefix it with name/ . For example:
+	//
+	//   - ID: PTEXAMPLEabcdefg111111
+	//
+	//   - Name: name/example-policy-template
 	//
 	// This member is required.
 	PolicyTemplateId *string
@@ -74,6 +92,10 @@ type GetPolicyTemplateOutput struct {
 
 	// The description of the policy template.
 	Description *string
+
+	// The name of the policy template, if one was assigned when the policy template
+	// was created or last updated.
+	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

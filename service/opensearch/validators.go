@@ -1795,6 +1795,11 @@ func validateDirectQueryDataSourceType(v types.DirectQueryDataSourceType) error 
 			invalidParams.AddNested("[CloudWatchLog]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.DirectQueryDataSourceTypeMemberPrometheus:
+		if err := validatePrometheusDirectQueryDataSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[Prometheus]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.DirectQueryDataSourceTypeMemberSecurityLake:
 		if err := validateSecurityLakeDirectQueryDataSource(&uv.Value); err != nil {
 			invalidParams.AddNested("[SecurityLake]", err.(smithy.InvalidParamsError))
@@ -1976,6 +1981,24 @@ func validatePackageVendingOptions(v *types.PackageVendingOptions) error {
 	}
 }
 
+func validatePrometheusDirectQueryDataSource(v *types.PrometheusDirectQueryDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrometheusDirectQueryDataSource"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.WorkspaceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSAMLIdp(v *types.SAMLIdp) error {
 	if v == nil {
 		return nil
@@ -2123,9 +2146,6 @@ func validateOpAddDirectQueryDataSourceInput(v *AddDirectQueryDataSourceInput) e
 		if err := validateDirectQueryDataSourceType(v.DataSourceType); err != nil {
 			invalidParams.AddNested("DataSourceType", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.OpenSearchArns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OpenSearchArns"))
 	}
 	if v.TagList != nil {
 		if err := validateTagList(v.TagList); err != nil {
@@ -3176,9 +3196,6 @@ func validateOpUpdateDirectQueryDataSourceInput(v *UpdateDirectQueryDataSourceIn
 		if err := validateDirectQueryDataSourceType(v.DataSourceType); err != nil {
 			invalidParams.AddNested("DataSourceType", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.OpenSearchArns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OpenSearchArns"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

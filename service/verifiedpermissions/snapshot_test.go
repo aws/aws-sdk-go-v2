@@ -134,6 +134,18 @@ func TestCheckSnapshot_CreatePolicyStore(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreatePolicyStoreAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePolicyStoreAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePolicyStoreAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreatePolicyTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreatePolicyTemplate(context.Background(), nil, func(o *Options) {
@@ -182,6 +194,18 @@ func TestCheckSnapshot_DeletePolicyStore(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeletePolicyStoreAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePolicyStoreAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePolicyStoreAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeletePolicyTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeletePolicyTemplate(context.Background(), nil, func(o *Options) {
@@ -223,6 +247,18 @@ func TestCheckSnapshot_GetPolicyStore(t *testing.T) {
 	_, err := svc.GetPolicyStore(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetPolicyStore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPolicyStoreAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicyStoreAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPolicyStoreAlias")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -295,6 +331,18 @@ func TestCheckSnapshot_ListPolicies(t *testing.T) {
 	_, err := svc.ListPolicies(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPolicyStoreAliases(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyStoreAliases(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPolicyStoreAliases")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -493,6 +541,18 @@ func TestUpdateSnapshot_CreatePolicyStore(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreatePolicyStoreAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePolicyStoreAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePolicyStoreAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreatePolicyTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreatePolicyTemplate(context.Background(), nil, func(o *Options) {
@@ -541,6 +601,18 @@ func TestUpdateSnapshot_DeletePolicyStore(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeletePolicyStoreAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePolicyStoreAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePolicyStoreAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeletePolicyTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeletePolicyTemplate(context.Background(), nil, func(o *Options) {
@@ -582,6 +654,18 @@ func TestUpdateSnapshot_GetPolicyStore(t *testing.T) {
 	_, err := svc.GetPolicyStore(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetPolicyStore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPolicyStoreAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicyStoreAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPolicyStoreAlias")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -654,6 +738,18 @@ func TestUpdateSnapshot_ListPolicies(t *testing.T) {
 	_, err := svc.ListPolicies(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPolicyStoreAliases(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyStoreAliases(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPolicyStoreAliases")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

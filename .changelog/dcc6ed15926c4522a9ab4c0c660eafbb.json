@@ -1,0 +1,8 @@
+{
+    "id": "dcc6ed15-926c-4522-a9ab-4c0c660eafbb",
+    "type": "feature",
+    "description": "Adding ReplicaArn to ReplicaDescription of a global table replica",
+    "modules": [
+        "service/dynamodb"
+    ]
+}

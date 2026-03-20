@@ -34,7 +34,7 @@ func (e *AccessDeniedException) ErrorCode() string {
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request failed because another request to modify a resource occurred at the
-// same.
+// same time.
 type ConflictException struct {
 	Message *string
 

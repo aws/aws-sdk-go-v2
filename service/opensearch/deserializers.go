@@ -17526,6 +17526,16 @@ loop:
 			uv = &types.DirectQueryDataSourceTypeMemberCloudWatchLog{Value: mv}
 			break loop
 
+		case "Prometheus":
+			var mv types.PrometheusDirectQueryDataSource
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentPrometheusDirectQueryDataSource(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DirectQueryDataSourceTypeMemberPrometheus{Value: mv}
+			break loop
+
 		case "SecurityLake":
 			var mv types.SecurityLakeDirectQueryDataSource
 			destAddr := &mv
@@ -21979,6 +21989,55 @@ func awsRestjson1_deserializeDocumentPluginProperties(v **types.PluginProperties
 					return fmt.Errorf("expected PluginVersion to be of type string, got %T instead", value)
 				}
 				sv.Version = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPrometheusDirectQueryDataSource(v **types.PrometheusDirectQueryDataSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PrometheusDirectQueryDataSource
+	if *v == nil {
+		sv = &types.PrometheusDirectQueryDataSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DirectQueryDataSourceRoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "WorkspaceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AMPWorkspaceArn to be of type string, got %T instead", value)
+				}
+				sv.WorkspaceArn = ptr.String(jtv)
 			}
 
 		default:

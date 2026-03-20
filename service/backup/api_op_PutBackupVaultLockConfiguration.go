@@ -56,6 +56,8 @@ type PutBackupVaultLockConfigurationInput struct {
 	// Backup enforces a 72-hour cooling-off period before Vault Lock takes effect and
 	// becomes immutable. Therefore, you must set ChangeableForDays to 3 or greater.
 	//
+	// The maximum value you can specify is 36,500 days (approximately 100 years).
+	//
 	// Before the lock date, you can delete Vault Lock from the vault using
 	// DeleteBackupVaultLockConfiguration or change the Vault Lock configuration using
 	// PutBackupVaultLockConfiguration . On and after the lock date, the Vault Lock

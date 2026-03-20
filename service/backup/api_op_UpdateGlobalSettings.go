@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates whether the Amazon Web Services account is opted in to cross-account
-// backup. Returns an error if the account is not an Organizations management
-// account. Use the DescribeGlobalSettings API to determine the current settings.
+// Updates whether the Amazon Web Services account has enabled different
+// cross-account management options, including cross-account backup, multi-party
+// approval, and delegated administrator. Returns an error if the account is not an
+// Organizations management account. Use the DescribeGlobalSettings API to
+// determine the current settings.
 func (c *Client) UpdateGlobalSettings(ctx context.Context, params *UpdateGlobalSettingsInput, optFns ...func(*Options)) (*UpdateGlobalSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateGlobalSettingsInput{}
@@ -32,18 +34,15 @@ type UpdateGlobalSettingsInput struct {
 
 	// Inputs can include:
 	//
-	// A value for isCrossAccountBackupEnabled and a Region. Example:
-	// update-global-settings --global-settings isCrossAccountBackupEnabled=false
-	// --region us-west-2 .
+	// A value for isCrossAccountBackupEnabled . Values can be true or false. Example:
+	// update-global-settings --global-settings isCrossAccountBackupEnabled=false .
 	//
-	// A value for Multi-party approval, styled as "Mpa": isMpaEnabled . Values can be
-	// true or false. Example: update-global-settings --global-settings
-	// isMpaEnabled=false --region us-west-2 .
+	// A value for Multi-party approval, styled as isMpaEnabled . Values can be true or
+	// false. Example: update-global-settings --global-settings isMpaEnabled=false .
 	//
 	// A value for Backup Service-Linked Role creation, styled as
 	// isDelegatedAdministratorEnabled . Values can be true or false. Example:
-	// update-global-settings --global-settings isDelegatedAdministratorEnabled=false
-	// --region us-west-2 .
+	// update-global-settings --global-settings isDelegatedAdministratorEnabled=false .
 	GlobalSettings map[string]string
 
 	noSmithyDocumentSerde

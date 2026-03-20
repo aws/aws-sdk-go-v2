@@ -32,11 +32,29 @@ type GetPolicyInput struct {
 
 	// Specifies the ID of the policy you want information about.
 	//
+	// You can use the policy name in place of the policy ID. When using a name,
+	// prefix it with name/ . For example:
+	//
+	//   - ID: SPEXAMPLEabcdefg111111
+	//
+	//   - Name: name/example-policy
+	//
 	// This member is required.
 	PolicyId *string
 
 	// Specifies the ID of the policy store that contains the policy that you want
 	// information about.
+	//
+	// To specify a policy store, use its ID or alias name. When using an alias name,
+	// prefix it with policy-store-alias/ . For example:
+	//
+	//   - ID: PSEXAMPLEabcdefg111111
+	//
+	//   - Alias name: policy-store-alias/example-policy-store
+	//
+	// To view aliases, use [ListPolicyStoreAliases].
+	//
+	// [ListPolicyStoreAliases]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
 	//
 	// This member is required.
 	PolicyStoreId *string
@@ -85,6 +103,10 @@ type GetPolicyOutput struct {
 	// The effect of the decision that a policy returns to an authorization request.
 	// For example, "effect": "Permit" .
 	Effect types.PolicyEffect
+
+	// The name of the policy, if one was assigned when the policy was created or last
+	// updated.
+	Name *string
 
 	// The principal specified in the policy's scope. This element isn't included in
 	// the response when Principal isn't present in the policy content.

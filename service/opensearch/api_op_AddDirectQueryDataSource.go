@@ -43,12 +43,6 @@ type AddDirectQueryDataSourceInput struct {
 	// This member is required.
 	DataSourceType types.DirectQueryDataSourceType
 
-	//  A list of Amazon Resource Names (ARNs) for the OpenSearch collections that are
-	// associated with the direct query data source.
-	//
-	// This member is required.
-	OpenSearchArns []string
-
 	//  An optional IAM access policy document that defines the permissions for
 	// accessing the data source. The policy document must be in valid JSON format and
 	// follow IAM policy syntax.
@@ -57,6 +51,11 @@ type AddDirectQueryDataSourceInput struct {
 	//  An optional text field for providing additional context and details about the
 	// data source.
 	Description *string
+
+	//  An optional list of Amazon Resource Names (ARNs) for the OpenSearch
+	// collections that are associated with the direct query data source. This field is
+	// required for CloudWatchLogs and SecurityLake datasource types.
+	OpenSearchArns []string
 
 	// A list of tags attached to a domain.
 	TagList []types.Tag

@@ -1,0 +1,8 @@
+{
+    "id": "7fbb8881-5382-4992-a8fa-75a8f68e4900",
+    "type": "documentation",
+    "description": "Fix Typo for S3Backup Options ( S3BackupACLs to BackupACLs)",
+    "modules": [
+        "service/backup"
+    ]
+}

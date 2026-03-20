@@ -7729,6 +7729,12 @@ func awsRestjson1_serializeDocumentDirectQueryDataSourceType(v types.DirectQuery
 			return err
 		}
 
+	case *types.DirectQueryDataSourceTypeMemberPrometheus:
+		av := object.Key("Prometheus")
+		if err := awsRestjson1_serializeDocumentPrometheusDirectQueryDataSource(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.DirectQueryDataSourceTypeMemberSecurityLake:
 		av := object.Key("SecurityLake")
 		if err := awsRestjson1_serializeDocumentSecurityLakeDirectQueryDataSource(&uv.Value, av); err != nil {
@@ -8345,6 +8351,23 @@ func awsRestjson1_serializeDocumentPackageVendingOptions(v *types.PackageVending
 	if v.VendingEnabled != nil {
 		ok := object.Key("VendingEnabled")
 		ok.Boolean(*v.VendingEnabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPrometheusDirectQueryDataSource(v *types.PrometheusDirectQueryDataSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RoleArn != nil {
+		ok := object.Key("RoleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.WorkspaceArn != nil {
+		ok := object.Key("WorkspaceArn")
+		ok.String(*v.WorkspaceArn)
 	}
 
 	return nil
