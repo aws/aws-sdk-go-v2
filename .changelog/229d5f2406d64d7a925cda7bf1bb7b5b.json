@@ -1,0 +1,8 @@
+{
+    "id": "229d5f24-06d6-4d7a-925c-da7bf1bb7b5b",
+    "type": "feature",
+    "description": "Add InvokeEndpointWithBidirectionalStream.",
+    "modules": [
+        "service/sagemakerruntimehttp2"
+    ]
+}
