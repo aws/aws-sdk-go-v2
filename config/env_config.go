@@ -11,6 +11,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
+	"github.com/aws/aws-sdk-go-v2/internal/shareddefaults"
 	smithyrequestcompression "github.com/aws/smithy-go/private/requestcompression"
 )
 
@@ -340,8 +341,8 @@ func NewEnvConfig() (EnvConfig, error) {
 	setStringFromEnvVal(&cfg.Region, regionEnvKeys)
 	setStringFromEnvVal(&cfg.SharedConfigProfile, profileEnvKeys)
 
-	cfg.SharedCredentialsFile = os.Getenv(awsSharedCredentialsFileEnv)
-	cfg.SharedConfigFile = os.Getenv(awsConfigFileEnv)
+	cfg.SharedCredentialsFile = shareddefaults.ExpandHomePath(os.Getenv(awsSharedCredentialsFileEnv))
+	cfg.SharedConfigFile = shareddefaults.ExpandHomePath(os.Getenv(awsConfigFileEnv))
 
 	cfg.CustomCABundle = os.Getenv(awsCABundleEnv)
 
