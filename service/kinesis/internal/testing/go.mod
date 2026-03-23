@@ -4,9 +4,9 @@ go 1.24
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.41.4
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.7
-	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.6.38
-	github.com/aws/aws-sdk-go-v2/service/kinesis v1.43.3
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.8
+	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.6.39
+	github.com/aws/aws-sdk-go-v2/service/kinesis v1.43.4
 	github.com/aws/smithy-go v1.24.2
 )
 

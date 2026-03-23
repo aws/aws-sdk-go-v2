@@ -1,3 +1,18 @@
+# Release (2026-03-23)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.63.0](service/batch/CHANGELOG.md#v1630-2026-03-23)
+  * **Feature**: AWS Batch AMI Visibility feature support. Adds read-only batchImageStatus to Ec2Configuration to provide visibility on the status of Batch-vended AMIs used by Compute Environments.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.39.0](service/connectcases/CHANGELOG.md#v1390-2026-03-23)
+  * **Feature**: You can now use the UpdateRelatedItem API to update the content of comments and custom related items associated with a case.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.51.0](service/lightsail/CHANGELOG.md#v1510-2026-03-23)
+  * **Feature**: Add support for tagging of ContactMethod resource type
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.39.0](service/omics/CHANGELOG.md#v1390-2026-03-23)
+  * **Feature**: Adds support for batch workflow runs in Amazon Omics, enabling users to submit, manage, and monitor multiple runs as a single batch. Includes APIs to create, cancel, and delete batches, track submission statuses and counts, list runs within a batch, and configure default settings.
+
 # Release (2026-03-20)
 
 ## General Highlights

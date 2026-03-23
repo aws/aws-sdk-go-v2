@@ -1,3 +1,7 @@
+# v1.51.0 (2026-03-23)
+
+* **Feature**: Add support for tagging of ContactMethod resource type
+
 # v1.50.14 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "5414e02e-0250-499b-b4b5-92003d9e445e",
-    "type": "feature",
-    "description": "You can now use the UpdateRelatedItem API to update the content of comments and custom related items associated with a case.",
-    "modules": [
-        "service/connectcases"
-    ]
-}

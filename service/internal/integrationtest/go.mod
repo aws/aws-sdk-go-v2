@@ -3,21 +3,21 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.41.4
 	github.com/aws/aws-sdk-go-v2/config v1.32.12
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.22.8
-	github.com/aws/aws-sdk-go-v2/service/bedrockruntime v1.50.2
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.22.9
+	github.com/aws/aws-sdk-go-v2/service/bedrockruntime v1.50.3
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.57.0
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.296.0
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.88.3
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.97.1
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.88.4
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.97.2
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.68.3
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.42.24
 	github.com/aws/aws-sdk-go-v2/service/sts v1.41.9
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.34.3
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.34.4
 	github.com/aws/smithy-go v1.24.2
 )
 
 require (
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.7 // indirect
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.8 // indirect
 	github.com/aws/aws-sdk-go-v2/credentials v1.19.12 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.20 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.20 // indirect

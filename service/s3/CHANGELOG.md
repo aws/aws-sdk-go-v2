@@ -1,3 +1,7 @@
+# v1.97.2 (2026-03-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.97.1 (2026-03-13)
 
 * **Bug Fix**: Replace usages of the old ioutil/ package throughout the SDK.
