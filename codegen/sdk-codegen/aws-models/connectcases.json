@@ -729,7 +729,7 @@
                 "type": {
                     "target": "com.amazonaws.connectcases#AuditEventType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Type of an audit history event.</p>",
+                        "smithy.api#documentation": "<p>The type of audit history event.</p> <p>Valid Values: <code>Case.Created</code> | <code>Case.Updated</code> | <code>RelatedItem.Created</code> | <code>RelatedItem.Updated</code> | <code>RelatedItem.Deleted</code> </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -896,6 +896,14 @@
                     {
                         "value": "RelatedItem.Created",
                         "name": "RELATED_ITEM_CREATED"
+                    },
+                    {
+                        "value": "RelatedItem.Deleted",
+                        "name": "RELATED_ITEM_DELETED"
+                    },
+                    {
+                        "value": "RelatedItem.Updated",
+                        "name": "RELATED_ITEM_UPDATED"
                     }
                 ]
             }
@@ -1715,6 +1723,28 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>A filter for related items of type <code>Comment</code>.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#CommentUpdateContent": {
+            "type": "structure",
+            "members": {
+                "body": {
+                    "target": "com.amazonaws.connectcases#CommentBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated text in the body of a <code>Comment</code> on a case.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentType": {
+                    "target": "com.amazonaws.connectcases#CommentBodyTextType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the text in the box of a <code>Comment</code> on a case.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the updated content of a <code>Comment</code> related item.</p>"
             }
         },
         "com.amazonaws.connectcases#CompoundCondition": {
@@ -2651,6 +2681,25 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents the content of a <code>Custom</code> related item.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#CustomUpdateContent": {
+            "type": "structure",
+            "members": {
+                "fields": {
+                    "target": "com.amazonaws.connectcases#FieldValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of updated field values for the <code>Custom</code> related item. All existing and new fields, and their associated values should be included. Fields not included as part of this request will be removed.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 50
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the updated content of a <code>Custom</code> related item.</p>"
             }
         },
         "com.amazonaws.connectcases#DeleteCase": {
@@ -5747,6 +5796,9 @@
             "create": {
                 "target": "com.amazonaws.connectcases#CreateRelatedItem"
             },
+            "update": {
+                "target": "com.amazonaws.connectcases#UpdateRelatedItem"
+            },
             "delete": {
                 "target": "com.amazonaws.connectcases#DeleteRelatedItem"
             },
@@ -5959,6 +6011,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The list of types of related items and their parameters to use for filtering.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#RelatedItemUpdateContent": {
+            "type": "union",
+            "members": {
+                "comment": {
+                    "target": "com.amazonaws.connectcases#CommentUpdateContent"
+                },
+                "custom": {
+                    "target": "com.amazonaws.connectcases#CustomUpdateContent"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the content of a related item to be updated. This is a union type that can contain either comment content or custom content.</p>"
             }
         },
         "com.amazonaws.connectcases#RequiredCaseRule": {
@@ -7701,6 +7767,146 @@
         "com.amazonaws.connectcases#UpdateLayoutResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.connectcases#UpdateRelatedItem": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#UpdateRelatedItemRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#UpdateRelatedItemResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the content of a related item associated with a case. The following related item types are supported:</p> <ul> <li> <p> <b>Comment</b> - Update the text content of an existing comment</p> </li> <li> <p> <b>Custom</b> - Update the fields of a custom related item. You can add, modify, and remove fields from a custom related item. There's a quota for the number of fields allowed in a Custom type related item. See <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas\">Amazon Connect Cases quotas</a>.</p> </li> </ul> <p> <b>Important things to know</b> </p> <ul> <li> <p>When updating a Custom related item, all existing and new fields, and their associated values should be included in the request. Fields not included as part of this request will be removed.</p> </li> <li> <p>If you provide a value for <code>performedBy.userArn</code> you must also have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">DescribeUser</a> permission on the ARN of the user that you provide.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-fields.html#system-case-fields\">System case fields</a> cannot be used in a custom related item.</p> </li> </ul> <p> <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and quotas</a>.</p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/cases/{caseId}/related-items/{relatedItemId}",
+                    "method": "PUT"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#UpdateRelatedItemRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "caseId": {
+                    "target": "com.amazonaws.connectcases#CaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the case.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "relatedItemId": {
+                    "target": "com.amazonaws.connectcases#RelatedItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of a related item.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.connectcases#RelatedItemUpdateContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of a related item to be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "performedBy": {
+                    "target": "com.amazonaws.connectcases#UserUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the user who performed the update of the related item.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connectcases#UpdateRelatedItemResponse": {
+            "type": "structure",
+            "members": {
+                "relatedItemId": {
+                    "target": "com.amazonaws.connectcases#RelatedItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the updated related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "relatedItemArn": {
+                    "target": "com.amazonaws.connectcases#RelatedItemArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the updated related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.connectcases#RelatedItemType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the updated related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.connectcases#RelatedItemContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the content of the updated related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "associationTime": {
+                    "target": "com.amazonaws.connectcases#AssociationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time at which the related item was associated with the case.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.connectcases#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "lastUpdatedUser": {
+                    "target": "com.amazonaws.connectcases#UserUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the last user that updated the related item.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.connectcases#UserUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the creator of the related item.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.connectcases#UpdateTemplate": {
             "type": "operation",

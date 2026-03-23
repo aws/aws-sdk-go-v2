@@ -2434,6 +2434,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The support code. Include this code in your email to support when you have questions about\n      your Lightsail contact method. This code enables our support team to look up your\n      Lightsail information more easily.</p>"
                     }
+                },
+                "tags": {
+                    "target": "com.amazonaws.lightsail#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys and optional values for the resource. For more information about tags in\n      Lightsail, see the <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3832,6 +3838,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The destination of the contact method, such as an email address or a mobile phone\n      number.</p>\n         <p>Use the E.164 format when specifying a mobile phone number. E.164 is a standard for the\n      phone number structure used for international telecommunication. Phone numbers that follow\n      this format can have a maximum of 15 digits, and they are prefixed with the plus character (+)\n      and the country code. For example, a U.S. phone number in E.164 format would be specified as\n      +1XXX5550100. For more information, see <a href=\"https://en.wikipedia.org/wiki/E.164\">E.164</a> on <i>Wikipedia</i>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.lightsail#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys and optional values to add to the contact method during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
                     }
                 }
             },
