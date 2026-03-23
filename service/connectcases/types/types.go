@@ -25,7 +25,10 @@ type AuditEvent struct {
 	// This member is required.
 	PerformedTime *time.Time
 
-	// The Type of an audit history event.
+	// The type of audit history event.
+	//
+	// Valid Values: Case.Created | Case.Updated | RelatedItem.Created |
+	// RelatedItem.Updated | RelatedItem.Deleted
 	//
 	// This member is required.
 	Type AuditEventType
@@ -444,6 +447,22 @@ type CommentFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Represents the updated content of a Comment related item.
+type CommentUpdateContent struct {
+
+	// Updated text in the body of a Comment on a case.
+	//
+	// This member is required.
+	Body *string
+
+	// Type of the text in the box of a Comment on a case.
+	//
+	// This member is required.
+	ContentType CommentBodyTextType
+
+	noSmithyDocumentSerde
+}
+
 // A compound condition that combines multiple boolean conditions using logical
 // operators. In the Amazon Connect admin website, case rules are known as case
 // field conditions. For more information about case field conditions, see [Add case field conditions to a case template].
@@ -608,6 +627,19 @@ type CustomFilter struct {
 type CustomInputContent struct {
 
 	// List of field values for the Custom related item.
+	//
+	// This member is required.
+	Fields []FieldValue
+
+	noSmithyDocumentSerde
+}
+
+// Represents the updated content of a Custom related item.
+type CustomUpdateContent struct {
+
+	// List of updated field values for the Custom related item. All existing and new
+	// fields, and their associated values should be included. Fields not included as
+	// part of this request will be removed.
 	//
 	// This member is required.
 	Fields []FieldValue
@@ -1496,6 +1528,35 @@ type RelatedItemTypeFilterMemberSla struct {
 
 func (*RelatedItemTypeFilterMemberSla) isRelatedItemTypeFilter() {}
 
+// Represents the content of a related item to be updated. This is a union type
+// that can contain either comment content or custom content.
+//
+// The following types satisfy this interface:
+//
+//	RelatedItemUpdateContentMemberComment
+//	RelatedItemUpdateContentMemberCustom
+type RelatedItemUpdateContent interface {
+	isRelatedItemUpdateContent()
+}
+
+// Represents the updated content of a Comment related item.
+type RelatedItemUpdateContentMemberComment struct {
+	Value CommentUpdateContent
+
+	noSmithyDocumentSerde
+}
+
+func (*RelatedItemUpdateContentMemberComment) isRelatedItemUpdateContent() {}
+
+// Represents the updated content of a Custom related item.
+type RelatedItemUpdateContentMemberCustom struct {
+	Value CustomUpdateContent
+
+	noSmithyDocumentSerde
+}
+
+func (*RelatedItemUpdateContentMemberCustom) isRelatedItemUpdateContent() {}
+
 // Required rule type, used to indicate whether a field is required. In the Amazon
 // Connect admin website, case rules are known as case field conditions. For more
 // information about case field conditions, see [Add case field conditions to a case template].
@@ -1946,6 +2007,7 @@ func (*UnknownUnionMember) isOperandTwo()                {}
 func (*UnknownUnionMember) isRelatedItemContent()        {}
 func (*UnknownUnionMember) isRelatedItemInputContent()   {}
 func (*UnknownUnionMember) isRelatedItemTypeFilter()     {}
+func (*UnknownUnionMember) isRelatedItemUpdateContent()  {}
 func (*UnknownUnionMember) isSection()                   {}
 func (*UnknownUnionMember) isSlaInputContent()           {}
 func (*UnknownUnionMember) isTagFilter()                 {}

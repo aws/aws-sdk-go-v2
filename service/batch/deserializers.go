@@ -8964,6 +8964,15 @@ func awsRestjson1_deserializeDocumentEc2Configuration(v **types.Ec2Configuration
 
 	for key, value := range shape {
 		switch key {
+		case "batchImageStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.BatchImageStatus = ptr.String(jtv)
+			}
+
 		case "imageIdOverride":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -3896,6 +3896,127 @@ func awsRestjson1_serializeOpDocumentUpdateLayoutInput(v *UpdateLayoutInput, val
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateRelatedItem struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateRelatedItem) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateRelatedItem) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateRelatedItemInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/domains/{domainId}/cases/{caseId}/related-items/{relatedItemId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateRelatedItemInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateRelatedItemInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateRelatedItemInput(v *UpdateRelatedItemInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CaseId == nil || len(*v.CaseId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member caseId must not be empty")}
+	}
+	if v.CaseId != nil {
+		if err := encoder.SetURI("caseId").String(*v.CaseId); err != nil {
+			return err
+		}
+	}
+
+	if v.DomainId == nil || len(*v.DomainId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member domainId must not be empty")}
+	}
+	if v.DomainId != nil {
+		if err := encoder.SetURI("domainId").String(*v.DomainId); err != nil {
+			return err
+		}
+	}
+
+	if v.RelatedItemId == nil || len(*v.RelatedItemId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member relatedItemId must not be empty")}
+	}
+	if v.RelatedItemId != nil {
+		if err := encoder.SetURI("relatedItemId").String(*v.RelatedItemId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateRelatedItemInput(v *UpdateRelatedItemInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Content != nil {
+		ok := object.Key("content")
+		if err := awsRestjson1_serializeDocumentRelatedItemUpdateContent(v.Content, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PerformedBy != nil {
+		ok := object.Key("performedBy")
+		if err := awsRestjson1_serializeDocumentUserUnion(v.PerformedBy, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateTemplate struct {
 }
 
@@ -4311,6 +4432,23 @@ func awsRestjson1_serializeDocumentCommentFilter(v *types.CommentFilter, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCommentUpdateContent(v *types.CommentUpdateContent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Body != nil {
+		ok := object.Key("body")
+		ok.String(*v.Body)
+	}
+
+	if len(v.ContentType) > 0 {
+		ok := object.Key("contentType")
+		ok.String(string(v.ContentType))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCompoundCondition(v *types.CompoundCondition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4447,6 +4585,20 @@ func awsRestjson1_serializeDocumentCustomFilter(v *types.CustomFilter, value smi
 }
 
 func awsRestjson1_serializeDocumentCustomInputContent(v *types.CustomInputContent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Fields != nil {
+		ok := object.Key("fields")
+		if err := awsRestjson1_serializeDocumentFieldValueList(v.Fields, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomUpdateContent(v *types.CustomUpdateContent, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5101,6 +5253,30 @@ func awsRestjson1_serializeDocumentRelatedItemTypeFilter(v types.RelatedItemType
 	case *types.RelatedItemTypeFilterMemberSla:
 		av := object.Key("sla")
 		if err := awsRestjson1_serializeDocumentSlaFilter(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRelatedItemUpdateContent(v types.RelatedItemUpdateContent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.RelatedItemUpdateContentMemberComment:
+		av := object.Key("comment")
+		if err := awsRestjson1_serializeDocumentCommentUpdateContent(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RelatedItemUpdateContentMemberCustom:
+		av := object.Key("custom")
+		if err := awsRestjson1_serializeDocumentCustomUpdateContent(&uv.Value, av); err != nil {
 			return err
 		}
 

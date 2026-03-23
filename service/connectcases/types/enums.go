@@ -9,6 +9,8 @@ const (
 	AuditEventTypeCaseCreated        AuditEventType = "Case.Created"
 	AuditEventTypeCaseUpdated        AuditEventType = "Case.Updated"
 	AuditEventTypeRelatedItemCreated AuditEventType = "RelatedItem.Created"
+	AuditEventTypeRelatedItemDeleted AuditEventType = "RelatedItem.Deleted"
+	AuditEventTypeRelatedItemUpdated AuditEventType = "RelatedItem.Updated"
 )
 
 // Values returns all known values for AuditEventType. Note that this can be
@@ -20,6 +22,8 @@ func (AuditEventType) Values() []AuditEventType {
 		"Case.Created",
 		"Case.Updated",
 		"RelatedItem.Created",
+		"RelatedItem.Deleted",
+		"RelatedItem.Updated",
 	}
 }
 

@@ -37,6 +37,9 @@ func (c *Client) ListRuns(ctx context.Context, params *ListRunsInput, optFns ...
 
 type ListRunsInput struct {
 
+	// Filter by batch ID.
+	BatchId *string
+
 	// The maximum number of runs to return in one page of results.
 	MaxResults *int32
 

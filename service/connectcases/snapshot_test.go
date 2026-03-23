@@ -554,6 +554,18 @@ func TestCheckSnapshot_UpdateLayout(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateRelatedItem(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRelatedItem(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRelatedItem")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateTemplate(context.Background(), nil, func(o *Options) {
@@ -1050,6 +1062,18 @@ func TestUpdateSnapshot_UpdateLayout(t *testing.T) {
 	_, err := svc.UpdateLayout(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateLayout")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRelatedItem(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRelatedItem(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRelatedItem")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

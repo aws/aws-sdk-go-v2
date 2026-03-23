@@ -1,0 +1,8 @@
+{
+    "id": "37971d52-14dc-4cb2-a3be-b4afee7aa889",
+    "type": "feature",
+    "description": "Add support for tagging of ContactMethod resource type",
+    "modules": [
+        "service/lightsail"
+    ]
+}

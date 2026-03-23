@@ -420,6 +420,28 @@ var _ *types.SlaFilter
 var _ *types.ConnectCaseFilter
 var _ *types.CommentFilter
 
+func ExampleRelatedItemUpdateContent_outputUsage() {
+	var union types.RelatedItemUpdateContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RelatedItemUpdateContentMemberComment:
+		_ = v.Value // Value is types.CommentUpdateContent
+
+	case *types.RelatedItemUpdateContentMemberCustom:
+		_ = v.Value // Value is types.CustomUpdateContent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CustomUpdateContent
+var _ *types.CommentUpdateContent
+
 func ExampleSection_outputUsage() {
 	var union types.Section
 	// type switches can be used to check the union value

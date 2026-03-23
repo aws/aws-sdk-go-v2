@@ -49,6 +49,7 @@
         "api_op_UpdateCaseRule.go",
         "api_op_UpdateField.go",
         "api_op_UpdateLayout.go",
+        "api_op_UpdateRelatedItem.go",
         "api_op_UpdateTemplate.go",
         "auth.go",
         "deserializers.go",

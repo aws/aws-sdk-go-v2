@@ -5023,6 +5023,11 @@ func awsRestjson1_serializeDocumentEc2Configuration(v *types.Ec2Configuration, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.BatchImageStatus != nil {
+		ok := object.Key("batchImageStatus")
+		ok.String(*v.BatchImageStatus)
+	}
+
 	if v.ImageIdOverride != nil {
 		ok := object.Key("imageIdOverride")
 		ok.String(*v.ImageIdOverride)

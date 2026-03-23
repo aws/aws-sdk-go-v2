@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/omics/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -274,6 +275,68 @@ type AnnotationStoreVersionItem struct {
 	noSmithyDocumentSerde
 }
 
+// A summary of a batch returned by ListBatch .
+type BatchListItem struct {
+
+	// The timestamp when the batch was created.
+	CreatedAt *time.Time
+
+	// The batch identifier.
+	Id *string
+
+	// The batch name.
+	Name *string
+
+	// The current batch status.
+	Status BatchStatus
+
+	// The total number of runs in the batch.
+	TotalRuns *int32
+
+	// The identifier of the workflow used for the batch.
+	WorkflowId *string
+
+	noSmithyDocumentSerde
+}
+
+// A union type representing per-run configurations for the batch. Specify exactly
+// one of the following members.
+//
+// The following types satisfy this interface:
+//
+//	BatchRunSettingsMemberInlineSettings
+//	BatchRunSettingsMemberS3UriSettings
+type BatchRunSettings interface {
+	isBatchRunSettings()
+}
+
+// A list of per-run configurations provided inline in the request. Each entry
+// must include a unique runSettingId . Supports up to 100 entries. For batches
+// with more than 100 runs, use s3UriSettings .
+type BatchRunSettingsMemberInlineSettings struct {
+	Value []InlineSetting
+
+	noSmithyDocumentSerde
+}
+
+func (*BatchRunSettingsMemberInlineSettings) isBatchRunSettings() {}
+
+// An Amazon S3 URI pointing to a JSON file containing per-run configurations. The
+// file must be a JSON array in the same format as inlineSettings . Supports up to
+// 100,000 run configurations. The maximum file size is 6 GB.
+//
+// The IAM service role in roleArn must have read access to this S3 object.
+// HealthOmics validates access to the file during the synchronous API call and
+// records the file's ETag. If the file is modified after submission, the batch
+// fails.
+type BatchRunSettingsMemberS3UriSettings struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*BatchRunSettingsMemberS3UriSettings) isBatchRunSettings() {}
+
 // Part of the response to the CompleteReadSetUpload API, including metadata.
 type CompleteReadSetUploadPartListItem struct {
 
@@ -310,6 +373,86 @@ type ContainerRegistryMap struct {
 	// Mapping that provides the ECR repository path where upstream container images
 	// are pulled and synchronized.
 	RegistryMappings []RegistryMapping
+
+	noSmithyDocumentSerde
+}
+
+// Shared configuration applied to all runs in a batch. Fields specified in a
+// per-run InlineSetting entry override the corresponding fields in this object
+// for that run. The parameters and runTags fields are merged rather than replaced
+// — run-specific values take precedence when keys overlap.
+type DefaultRunSetting struct {
+
+	// The IAM role ARN that grants HealthOmics permissions to access required AWS
+	// resources such as Amazon S3 and CloudWatch. The role must have the same
+	// permissions required for individual StartRun calls.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The identifier of the workflow to run.
+	//
+	// This member is required.
+	WorkflowId *string
+
+	// The cache behavior for the runs. Requires cacheId to be set.
+	CacheBehavior CacheBehavior
+
+	// The identifier of the run cache to associate with the runs.
+	CacheId *string
+
+	// The verbosity level for CloudWatch Logs emitted during each run.
+	LogLevel RunLogLevel
+
+	// An optional user-friendly name applied to each workflow run. Can be overridden
+	// per run.
+	Name *string
+
+	// The expected AWS account ID of the owner of the output S3 bucket. Can be
+	// overridden per run.
+	OutputBucketOwnerId *string
+
+	// The destination S3 URI for workflow outputs. Must begin with s3:// . The roleArn
+	// must grant write permissions to this bucket. Can be overridden per run.
+	OutputUri *string
+
+	// Workflow parameter names and values shared across all runs. Merged with per-run
+	// parameters; run-specific values take precedence when keys overlap. Can be
+	// overridden per run.
+	Parameters document.Interface
+
+	// An integer priority for the workflow runs. Higher values correspond to higher
+	// priority. A value of 0 corresponds to the lowest priority. Can be overridden per
+	// run.
+	Priority *int32
+
+	// The retention behavior for runs after completion.
+	RetentionMode RunRetentionMode
+
+	// The ID of the run group to contain all workflow runs in the batch.
+	RunGroupId *string
+
+	// AWS tags to associate with each workflow run. Merged with per-run runTags ;
+	// run-specific values take precedence when keys overlap.
+	RunTags map[string]string
+
+	// The filesystem size in gibibytes (GiB) provisioned for each workflow run and
+	// shared by all tasks in that run. Defaults to 1200 GiB if not specified.
+	StorageCapacity *int32
+
+	// The storage type for the workflow runs.
+	StorageType StorageType
+
+	// The AWS account ID of the workflow owner, used for cross-account workflow
+	// sharing.
+	WorkflowOwnerId *string
+
+	// The type of the originating workflow. Batch runs are not supported with
+	// READY2RUN workflows.
+	WorkflowType WorkflowType
+
+	// The version name of the specified workflow.
+	WorkflowVersionName *string
 
 	noSmithyDocumentSerde
 }
@@ -732,6 +875,40 @@ type ImportReferenceSourceItem struct {
 
 	// The source's tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A per-run configuration that overrides or merges with fields from
+// DefaultRunSetting for a specific run.
+type InlineSetting struct {
+
+	// A customer-provided unique identifier for this run configuration within the
+	// batch. After submission, use ListRunsInBatch to map each runSettingId to the
+	// HealthOmics-generated runId .
+	//
+	// This member is required.
+	RunSettingId *string
+
+	// An optional user-friendly name for this run.
+	Name *string
+
+	// The expected AWS account ID of the owner of the output S3 bucket for this run.
+	OutputBucketOwnerId *string
+
+	// Override the destination S3 URI for this run's outputs.
+	OutputUri *string
+
+	// Per-run workflow parameters. Merged with defaultRunSetting.parameters ; values
+	// in this object take precedence when keys overlap.
+	Parameters document.Interface
+
+	// Override the priority for this run.
+	Priority *int32
+
+	// Per-run AWS tags. Merged with defaultRunSetting.runTags ; values in this object
+	// take precedence when keys overlap.
+	RunTags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -1226,6 +1403,37 @@ type RegistryMapping struct {
 	noSmithyDocumentSerde
 }
 
+// A single run entry returned by ListRunsInBatch .
+type RunBatchListItem struct {
+
+	// The unique ARN of the workflow run.
+	RunArn *string
+
+	// The HealthOmics-generated identifier for the workflow run. Empty if submission
+	// failed.
+	RunId *string
+
+	// The universally unique identifier (UUID) for the run.
+	RunInternalUuid *string
+
+	// The customer-provided identifier for the run configuration. Use this to
+	// correlate results back to the input configuration provided in inlineSettings or
+	// s3UriSettings .
+	RunSettingId *string
+
+	// A detailed message describing the submission failure.
+	SubmissionFailureMessage *string
+
+	// The error category for a failed submission. See the run-level failure table in
+	// the HealthOmics User Guide for details on each value.
+	SubmissionFailureReason *string
+
+	// The submission outcome for this run.
+	SubmissionStatus SubmissionStatus
+
+	noSmithyDocumentSerde
+}
+
 // List entry for one run cache.
 type RunCacheListItem struct {
 
@@ -1289,6 +1497,9 @@ type RunListItem struct {
 	// The run's ARN.
 	Arn *string
 
+	// The run's batch ID.
+	BatchId *string
+
 	// When the run was created.
 	CreationTime *time.Time
 
@@ -1334,6 +1545,36 @@ type RunLogLocation struct {
 
 	// The log stream ARN for the run log.
 	RunLogStream *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the runs in a batch.
+type RunSummary struct {
+
+	// The number of cancelled runs.
+	CancelledRunCount *int32
+
+	// The number of completed runs.
+	CompletedRunCount *int32
+
+	// The number of deleted runs.
+	DeletedRunCount *int32
+
+	// The number of failed runs.
+	FailedRunCount *int32
+
+	// The number of pending runs.
+	PendingRunCount *int32
+
+	// The number of running runs.
+	RunningRunCount *int32
+
+	// The number of starting runs.
+	StartingRunCount *int32
+
+	// The number of stopping runs.
+	StoppingRunCount *int32
 
 	noSmithyDocumentSerde
 }
@@ -1623,6 +1864,33 @@ type StoreOptionsMemberTsvStoreOptions struct {
 }
 
 func (*StoreOptionsMemberTsvStoreOptions) isStoreOptions() {}
+
+// A summary of the submissions in a batch.
+type SubmissionSummary struct {
+
+	// The number of failed cancel submissions.
+	FailedCancelSubmissionCount *int32
+
+	// The number of failed delete submissions.
+	FailedDeleteSubmissionCount *int32
+
+	// The number of failed start submissions.
+	FailedStartSubmissionCount *int32
+
+	// The number of pending start submissions.
+	PendingStartSubmissionCount *int32
+
+	// The number of successful cancel submissions.
+	SuccessfulCancelSubmissionCount *int32
+
+	// The number of successful delete submissions.
+	SuccessfulDeleteSubmissionCount *int32
+
+	// The number of successful start submissions.
+	SuccessfulStartSubmissionCount *int32
+
+	noSmithyDocumentSerde
+}
 
 // A workflow run task.
 type TaskListItem struct {
@@ -1975,7 +2243,8 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isFormatOptions()  {}
-func (*UnknownUnionMember) isReferenceItem()  {}
-func (*UnknownUnionMember) isStoreOptions()   {}
-func (*UnknownUnionMember) isVersionOptions() {}
+func (*UnknownUnionMember) isBatchRunSettings() {}
+func (*UnknownUnionMember) isFormatOptions()    {}
+func (*UnknownUnionMember) isReferenceItem()    {}
+func (*UnknownUnionMember) isStoreOptions()     {}
+func (*UnknownUnionMember) isVersionOptions()   {}

@@ -60,6 +60,9 @@ type GetRunOutput struct {
 	// The run's ARN.
 	Arn *string
 
+	// The run's batch ID.
+	BatchId *string
+
 	// The run cache behavior for the run.
 	CacheBehavior types.CacheBehavior
 

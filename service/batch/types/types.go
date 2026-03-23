@@ -431,7 +431,8 @@ type ComputeResource struct {
 
 	// Provides information that's used to select Amazon Machine Images (AMIs) for
 	// Amazon EC2 instances in the compute environment. If Ec2Configuration isn't
-	// specified, the default is ECS_AL2 .
+	// specified, the default is ECS_AL2 for EC2 (ECS) compute environments and
+	// EKS_AL2023 for EKS compute environments.
 	//
 	// One or two values can be provided.
 	//
@@ -699,7 +700,8 @@ type ComputeResourceUpdate struct {
 
 	// Provides information used to select Amazon Machine Images (AMIs) for Amazon EC2
 	// instances in the compute environment. If Ec2Configuration isn't specified, the
-	// default is ECS_AL2 .
+	// default is ECS_AL2 for EC2 (ECS) compute environments and EKS_AL2023 for EKS
+	// compute environments.
 	//
 	// When updating a compute environment, changing this setting requires an
 	// infrastructure update of the compute environment. For more information, see [Updating compute environments]in
@@ -1579,11 +1581,13 @@ type Device struct {
 
 // Provides information used to select Amazon Machine Images (AMIs) for instances
 // in the compute environment. If Ec2Configuration isn't specified, the default is
-// ECS_AL2 ([Amazon Linux 2] ).
+// ECS_AL2 ([Amazon ECS-optimized Amazon Linux 2] ) for EC2 (ECS) compute environments and EKS_AL2023 ([Amazon EKS-optimized Amazon Linux 2023 AMI] ) for EKS
+// compute environments.
 //
 // This object isn't applicable to jobs that are running on Fargate resources.
 //
-// [Amazon Linux 2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami
+// [Amazon ECS-optimized Amazon Linux 2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami
+// [Amazon EKS-optimized Amazon Linux 2023 AMI]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
 type Ec2Configuration struct {
 
 	// The image type to match with the instance type to select an AMI. The supported
@@ -1655,6 +1659,37 @@ type Ec2Configuration struct {
 	//
 	// This member is required.
 	ImageType *string
+
+	// The status of the Batch-provided default AMIs associated with the imageType .
+	//
+	// The field only appears after the compute environment has begun scaling
+	// instances using the imageType . The field is not present when an image is
+	// specified in ComputeResources.imageId (deprecated), the default launch
+	// template, or Ec2Configuration.imageIdOverride . The field is also not present
+	// when the compute environment has a launch template override.
+	//
+	// For more information on image selection, see [AMI selection order].
+	//
+	// This field is read-only and only appears in the [DescribeComputeEnvironments] response.
+	//
+	//   - LATEST − Using the most recent AMI supported
+	//
+	//   - UPDATE_AVAILABLE − An updated AMI is available
+	//
+	//   - If a compute environment has multiple AMIs for the imageType and any one AMI
+	//   has UPDATE_AVAILABLE , the status shows UPDATE_AVAILABLE .
+	//
+	//   - For compute environments that use BEST_FIT as their allocation strategy, you
+	//   can perform a [blue/green update]to update the AMI.
+	//
+	//   - For all other compute environments, you can perform an [AMI version update]to update the AMI to
+	//   the latest version.
+	//
+	// [blue/green update]: https://docs.aws.amazon.com/batch/latest/userguide/blue-green-updates.html
+	// [AMI selection order]: https://docs.aws.amazon.com/batch/latest/userguide/ami-selection-order.html
+	// [AMI version update]: https://docs.aws.amazon.com/batch/latest/userguide/managing-ami-versions.html#updating-ami-versions
+	// [DescribeComputeEnvironments]: https://docs.aws.amazon.com/batch/latest/APIReference/API_DescribeComputeEnvironments.html
+	BatchImageStatus *string
 
 	// The AMI ID used for instances launched in the compute environment that match
 	// the image type. This setting overrides the imageId set in the computeResource

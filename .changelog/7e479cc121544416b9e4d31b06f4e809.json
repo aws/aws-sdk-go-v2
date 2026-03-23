@@ -1,0 +1,8 @@
+{
+    "id": "7e479cc1-2154-4416-b9e4-d31b06f4e809",
+    "type": "feature",
+    "description": "AWS Batch AMI Visibility feature support. Adds read-only batchImageStatus to Ec2Configuration to provide visibility on the status of Batch-vended AMIs used by Compute Environments.",
+    "modules": [
+        "service/batch"
+    ]
+}

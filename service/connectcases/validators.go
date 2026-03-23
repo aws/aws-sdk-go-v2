@@ -810,6 +810,26 @@ func (m *validateOpUpdateLayout) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRelatedItem struct {
+}
+
+func (*validateOpUpdateRelatedItem) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRelatedItem) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRelatedItemInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRelatedItemInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTemplate struct {
 }
 
@@ -988,6 +1008,10 @@ func addOpUpdateFieldValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateLayoutValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLayout{}, middleware.After)
+}
+
+func addOpUpdateRelatedItemValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRelatedItem{}, middleware.After)
 }
 
 func addOpUpdateTemplateValidationMiddleware(stack *middleware.Stack) error {
@@ -1254,6 +1278,24 @@ func validateCommentContent(v *types.CommentContent) error {
 	}
 }
 
+func validateCommentUpdateContent(v *types.CommentUpdateContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CommentUpdateContent"}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	}
+	if len(v.ContentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCompoundCondition(v *types.CompoundCondition) error {
 	if v == nil {
 		return nil
@@ -1376,6 +1418,25 @@ func validateCustomInputContent(v *types.CustomInputContent) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CustomInputContent"}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateFieldValueList(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomUpdateContent(v *types.CustomUpdateContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomUpdateContent"}
 	if v.Fields == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
 	} else if v.Fields != nil {
@@ -1862,6 +1923,30 @@ func validateRelatedItemTypeFilter(v types.RelatedItemTypeFilter) error {
 	switch uv := v.(type) {
 	case *types.RelatedItemTypeFilterMemberCustom:
 		if err := validateCustomFilter(&uv.Value); err != nil {
+			invalidParams.AddNested("[custom]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRelatedItemUpdateContent(v types.RelatedItemUpdateContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RelatedItemUpdateContent"}
+	switch uv := v.(type) {
+	case *types.RelatedItemUpdateContentMemberComment:
+		if err := validateCommentUpdateContent(&uv.Value); err != nil {
+			invalidParams.AddNested("[comment]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RelatedItemUpdateContentMemberCustom:
+		if err := validateCustomUpdateContent(&uv.Value); err != nil {
 			invalidParams.AddNested("[custom]", err.(smithy.InvalidParamsError))
 		}
 
@@ -2967,6 +3052,34 @@ func validateOpUpdateLayoutInput(v *UpdateLayoutInput) error {
 	}
 	if v.Content != nil {
 		if err := validateLayoutContent(v.Content); err != nil {
+			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRelatedItemInput(v *UpdateRelatedItemInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRelatedItemInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.CaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaseId"))
+	}
+	if v.RelatedItemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RelatedItemId"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	} else if v.Content != nil {
+		if err := validateRelatedItemUpdateContent(v.Content); err != nil {
 			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
 		}
 	}
