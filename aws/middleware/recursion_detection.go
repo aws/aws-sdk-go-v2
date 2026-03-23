@@ -10,6 +10,7 @@ import (
 
 const envAwsLambdaFunctionName = "AWS_LAMBDA_FUNCTION_NAME"
 const envAmznTraceID = "_X_AMZN_TRACE_ID"
+const ctxKeyAmznTraceID = "x-amzn-trace-id"
 const amznTraceIDHeader = "X-Amzn-Trace-Id"
 
 // AddRecursionDetection adds recursionDetection to the middleware stack
@@ -38,10 +39,13 @@ func (m *RecursionDetection) HandleBuild(
 	}
 
 	_, hasLambdaEnv := os.LookupEnv(envAwsLambdaFunctionName)
-	xAmznTraceID, hasTraceID := os.LookupEnv(envAmznTraceID)
+	xAmznTraceID, hasTraceID := ctx.Value(ctxKeyAmznTraceID).(string)
+	if !hasTraceID {
+		xAmznTraceID, hasTraceID = os.LookupEnv(envAmznTraceID)
+	}
 	value := req.Header.Get(amznTraceIDHeader)
 	// only set the X-Amzn-Trace-Id header when it is not set initially, the
-	// current environment is Lambda and the _X_AMZN_TRACE_ID env variable exists
+	// current environment is Lambda and the x-amzn-trace-id value is present in the context
 	if value != "" || !hasLambdaEnv || !hasTraceID {
 		return next.HandleBuild(ctx, in)
 	}

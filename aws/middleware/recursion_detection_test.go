@@ -12,32 +12,57 @@ func TestRecursionDetection(t *testing.T) {
 	cases := map[string]struct {
 		LambdaFuncName string
 		TraceID        string
+		EnvTraceID     string
 		HeaderBefore   string
 		HeaderAfter    string
 	}{
 		"non lambda env and no trace ID header before": {},
-		"with lambda env but no trace ID env variable, no trace ID header before": {
+		"with lambda env but no trace ID ctx value, no trace ID header before": {
 			LambdaFuncName: "some-function1",
 		},
-		"with lambda env and trace ID env variable, no trace ID header before": {
+		"with lambda env and trace ID ctx value, no trace ID header before": {
 			LambdaFuncName: "some-function2",
 			TraceID:        "traceID1",
 			HeaderAfter:    "traceID1",
 		},
-		"with lambda env and trace ID env variable, has trace ID header before": {
+		"with lambda env and trace ID ctx value, has trace ID header before": {
 			LambdaFuncName: "some-function3",
 			TraceID:        "traceID2",
 			HeaderBefore:   "traceID1",
 			HeaderAfter:    "traceID1",
 		},
-		"with lambda env and trace ID (needs encoding) env variable, no trace ID header before": {
+		"with lambda env and trace ID (needs encoding) ctx value, no trace ID header before": {
 			LambdaFuncName: "some-function4",
 			TraceID:        "traceID3\n",
 			HeaderAfter:    "traceID3%0A",
 		},
-		"with lambda env and trace ID (contains chars must not be encoded) env variable, no trace ID header before": {
+		"with lambda env and trace ID (contains chars must not be encoded) ctx value, no trace ID header before": {
 			LambdaFuncName: "some-function5",
 			TraceID:        "traceID4-=;:+&[]{}\"'",
+			HeaderAfter:    "traceID4-=;:+&[]{}\"'",
+		},
+		"with lambda env but no trace ID ctx value, no trace ID header before, with fallback trace ID env": {
+			LambdaFuncName: "some-function1",
+			EnvTraceID:     "traceIDEnv",
+			HeaderAfter:    "traceIDEnv",
+		},
+		"with lambda env and trace ID ctx value, has trace ID header before, with fallback trace ID env": {
+			LambdaFuncName: "some-function3",
+			TraceID:        "traceID2",
+			EnvTraceID:     "traceIDEnv",
+			HeaderBefore:   "traceID1",
+			HeaderAfter:    "traceID1",
+		},
+		"with lambda env and trace ID (needs encoding) ctx value, no trace ID header before, with fallback trace ID env": {
+			LambdaFuncName: "some-function4",
+			TraceID:        "traceID3\n",
+			EnvTraceID:     "traceIDEnv",
+			HeaderAfter:    "traceID3%0A",
+		},
+		"with lambda env and trace ID (contains chars must not be encoded) ctx value, no trace ID header before, with fallback trace ID env": {
+			LambdaFuncName: "some-function5",
+			TraceID:        "traceID4-=;:+&[]{}\"'",
+			EnvTraceID:     "traceIDEnv",
 			HeaderAfter:    "traceID4-=;:+&[]{}\"'",
 		},
 	}
@@ -49,7 +74,11 @@ func TestRecursionDetection(t *testing.T) {
 			defer restoreEnv()
 
 			setEnvVar(t, envAwsLambdaFunctionName, c.LambdaFuncName)
-			setEnvVar(t, envAmznTraceID, c.TraceID)
+			setEnvVar(t, envAmznTraceID, c.EnvTraceID)
+			ctx := context.Background()
+			if (c.TraceID != "") {
+				ctx = context.WithValue(context.Background(), ctxKeyAmznTraceID, c.TraceID)
+			}
 
 			req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 			if c.HeaderBefore != "" {
@@ -57,7 +86,7 @@ func TestRecursionDetection(t *testing.T) {
 			}
 			var updatedRequest *smithyhttp.Request
 			m := RecursionDetection{}
-			_, _, err := m.HandleBuild(context.Background(),
+			_, _, err := m.HandleBuild(ctx,
 				smithymiddleware.BuildInput{Request: req},
 				smithymiddleware.BuildHandlerFunc(func(ctx context.Context, input smithymiddleware.BuildInput) (
 					out smithymiddleware.BuildOutput, metadata smithymiddleware.Metadata, err error) {
