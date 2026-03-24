@@ -26,12 +26,16 @@ type CollectionStatus string
 const (
 	// Creating collection resource
 	CollectionStatusCreating CollectionStatus = "CREATING"
+	// Updating collection resource
+	CollectionStatusUpdating CollectionStatus = "UPDATING"
 	// Deleting collection resource
 	CollectionStatusDeleting CollectionStatus = "DELETING"
 	// Collection resource is ready to use
 	CollectionStatusActive CollectionStatus = "ACTIVE"
 	// Collection resource create or delete failed
 	CollectionStatusFailed CollectionStatus = "FAILED"
+	// Collection resource update failed
+	CollectionStatusUpdateFailed CollectionStatus = "UPDATE_FAILED"
 )
 
 // Values returns all known values for CollectionStatus. Note that this can be
@@ -41,9 +45,11 @@ const (
 func (CollectionStatus) Values() []CollectionStatus {
 	return []CollectionStatus{
 		"CREATING",
+		"UPDATING",
 		"DELETING",
 		"ACTIVE",
 		"FAILED",
+		"UPDATE_FAILED",
 	}
 }
 

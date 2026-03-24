@@ -4224,6 +4224,13 @@ func awsAwsjson10_serializeOpDocumentUpdateCollectionInput(v *UpdateCollectionIn
 		ok.String(*v.Id)
 	}
 
+	if v.VectorOptions != nil {
+		ok := object.Key("vectorOptions")
+		if err := awsAwsjson10_serializeDocumentVectorOptions(v.VectorOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

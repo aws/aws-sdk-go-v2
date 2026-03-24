@@ -1191,6 +1191,36 @@ func awsAwsjson10_serializeDocumentAccountingRequest(v *types.AccountingRequest,
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentCgroupCustomSetting(v *types.CgroupCustomSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ParameterName != nil {
+		ok := object.Key("parameterName")
+		ok.String(*v.ParameterName)
+	}
+
+	if v.ParameterValue != nil {
+		ok := object.Key("parameterValue")
+		ok.String(*v.ParameterValue)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentCgroupCustomSettings(v []types.CgroupCustomSetting, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentCgroupCustomSetting(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentClusterSlurmConfigurationRequest(v *types.ClusterSlurmConfigurationRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1198,6 +1228,13 @@ func awsAwsjson10_serializeDocumentClusterSlurmConfigurationRequest(v *types.Clu
 	if v.Accounting != nil {
 		ok := object.Key("accounting")
 		if err := awsAwsjson10_serializeDocumentAccountingRequest(v.Accounting, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CgroupCustomSettings != nil {
+		ok := object.Key("cgroupCustomSettings")
+		if err := awsAwsjson10_serializeDocumentCgroupCustomSettings(v.CgroupCustomSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -1210,6 +1247,13 @@ func awsAwsjson10_serializeDocumentClusterSlurmConfigurationRequest(v *types.Clu
 	if v.SlurmCustomSettings != nil {
 		ok := object.Key("slurmCustomSettings")
 		if err := awsAwsjson10_serializeDocumentSlurmCustomSettings(v.SlurmCustomSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SlurmdbdCustomSettings != nil {
+		ok := object.Key("slurmdbdCustomSettings")
+		if err := awsAwsjson10_serializeDocumentSlurmdbdCustomSettings(v.SlurmdbdCustomSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -1431,6 +1475,36 @@ func awsAwsjson10_serializeDocumentSlurmCustomSettings(v []types.SlurmCustomSett
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentSlurmdbdCustomSetting(v *types.SlurmdbdCustomSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ParameterName != nil {
+		ok := object.Key("parameterName")
+		ok.String(*v.ParameterName)
+	}
+
+	if v.ParameterValue != nil {
+		ok := object.Key("parameterValue")
+		ok.String(*v.ParameterValue)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentSlurmdbdCustomSettings(v []types.SlurmdbdCustomSetting, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentSlurmdbdCustomSetting(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentSlurmRestRequest(v *types.SlurmRestRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1516,6 +1590,13 @@ func awsAwsjson10_serializeDocumentUpdateClusterSlurmConfigurationRequest(v *typ
 		}
 	}
 
+	if v.CgroupCustomSettings != nil {
+		ok := object.Key("cgroupCustomSettings")
+		if err := awsAwsjson10_serializeDocumentCgroupCustomSettings(v.CgroupCustomSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ScaleDownIdleTimeInSeconds != nil {
 		ok := object.Key("scaleDownIdleTimeInSeconds")
 		ok.Integer(*v.ScaleDownIdleTimeInSeconds)
@@ -1524,6 +1605,13 @@ func awsAwsjson10_serializeDocumentUpdateClusterSlurmConfigurationRequest(v *typ
 	if v.SlurmCustomSettings != nil {
 		ok := object.Key("slurmCustomSettings")
 		if err := awsAwsjson10_serializeDocumentSlurmCustomSettings(v.SlurmCustomSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SlurmdbdCustomSettings != nil {
+		ok := object.Key("slurmdbdCustomSettings")
+		if err := awsAwsjson10_serializeDocumentSlurmdbdCustomSettings(v.SlurmdbdCustomSettings, ok); err != nil {
 			return err
 		}
 	}

@@ -457,6 +457,24 @@ func ExampleExtractionConfiguration_outputUsage() {
 
 var _ types.CustomExtractionConfiguration
 
+func ExampleFilesystemConfiguration_outputUsage() {
+	var union types.FilesystemConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FilesystemConfigurationMemberSessionStorage:
+		_ = v.Value // Value is types.SessionStorageConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SessionStorageConfiguration
+
 func ExampleFilterValue_outputUsage() {
 	var union types.FilterValue
 	// type switches can be used to check the union value

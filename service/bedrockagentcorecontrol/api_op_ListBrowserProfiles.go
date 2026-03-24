@@ -32,6 +32,9 @@ type ListBrowserProfilesInput struct {
 	// The maximum number of results to return in the response.
 	MaxResults *int32
 
+	// The name of the browser profile to filter results by.
+	Name *string
+
 	// A token to retrieve the next page of results.
 	NextToken *string
 

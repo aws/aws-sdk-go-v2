@@ -2754,6 +2754,42 @@ func validateEvaluatorModelConfig(v types.EvaluatorModelConfig) error {
 	}
 }
 
+func validateFilesystemConfiguration(v types.FilesystemConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilesystemConfiguration"}
+	switch uv := v.(type) {
+	case *types.FilesystemConfigurationMemberSessionStorage:
+		if err := validateSessionStorageConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[sessionStorage]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilesystemConfigurations(v []types.FilesystemConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilesystemConfigurations"}
+	for i := range v {
+		if err := validateFilesystemConfiguration(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFilter(v *types.Filter) error {
 	if v == nil {
 		return nil
@@ -3914,6 +3950,21 @@ func validateSessionConfig(v *types.SessionConfig) error {
 	}
 }
 
+func validateSessionStorageConfiguration(v *types.SessionStorageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SessionStorageConfiguration"}
+	if v.MountPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MountPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSlackOauth2ProviderConfigInput(v *types.SlackOauth2ProviderConfigInput) error {
 	if v == nil {
 		return nil
@@ -4264,6 +4315,11 @@ func validateOpCreateAgentRuntimeInput(v *CreateAgentRuntimeInput) error {
 	if v.ProtocolConfiguration != nil {
 		if err := validateProtocolConfiguration(v.ProtocolConfiguration); err != nil {
 			invalidParams.AddNested("ProtocolConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FilesystemConfigurations != nil {
+		if err := validateFilesystemConfigurations(v.FilesystemConfigurations); err != nil {
+			invalidParams.AddNested("FilesystemConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5410,6 +5466,11 @@ func validateOpUpdateAgentRuntimeInput(v *UpdateAgentRuntimeInput) error {
 	if v.MetadataConfiguration != nil {
 		if err := validateRuntimeMetadataConfiguration(v.MetadataConfiguration); err != nil {
 			invalidParams.AddNested("MetadataConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FilesystemConfigurations != nil {
+		if err := validateFilesystemConfigurations(v.FilesystemConfigurations); err != nil {
+			invalidParams.AddNested("FilesystemConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

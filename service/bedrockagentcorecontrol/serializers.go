@@ -127,6 +127,13 @@ func awsRestjson1_serializeOpDocumentCreateAgentRuntimeInput(v *CreateAgentRunti
 		}
 	}
 
+	if v.FilesystemConfigurations != nil {
+		ok := object.Key("filesystemConfigurations")
+		if err := awsRestjson1_serializeDocumentFilesystemConfigurations(v.FilesystemConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LifecycleConfiguration != nil {
 		ok := object.Key("lifecycleConfiguration")
 		if err := awsRestjson1_serializeDocumentLifecycleConfiguration(v.LifecycleConfiguration, ok); err != nil {
@@ -4726,6 +4733,17 @@ func (m *awsRestjson1_serializeOpListBrowserProfiles) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListBrowserProfilesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4746,6 +4764,18 @@ func awsRestjson1_serializeOpHttpBindingsListBrowserProfilesInput(v *ListBrowser
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListBrowserProfilesInput(v *ListBrowserProfilesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
 	}
 
 	return nil
@@ -6514,6 +6544,13 @@ func awsRestjson1_serializeOpDocumentUpdateAgentRuntimeInput(v *UpdateAgentRunti
 	if v.EnvironmentVariables != nil {
 		ok := object.Key("environmentVariables")
 		if err := awsRestjson1_serializeDocumentEnvironmentVariablesMap(v.EnvironmentVariables, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FilesystemConfigurations != nil {
+		ok := object.Key("filesystemConfigurations")
+		if err := awsRestjson1_serializeDocumentFilesystemConfigurations(v.FilesystemConfigurations, ok); err != nil {
 			return err
 		}
 	}
@@ -9043,6 +9080,40 @@ func awsRestjson1_serializeDocumentEvaluatorReference(v types.EvaluatorReference
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFilesystemConfiguration(v types.FilesystemConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.FilesystemConfigurationMemberSessionStorage:
+		av := object.Key("sessionStorage")
+		if err := awsRestjson1_serializeDocumentSessionStorageConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFilesystemConfigurations(v []types.FilesystemConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentFilesystemConfiguration(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFilter(v *types.Filter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10774,6 +10845,18 @@ func awsRestjson1_serializeDocumentSessionConfig(v *types.SessionConfig, value s
 	if v.SessionTimeoutMinutes != nil {
 		ok := object.Key("sessionTimeoutMinutes")
 		ok.Integer(*v.SessionTimeoutMinutes)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSessionStorageConfiguration(v *types.SessionStorageConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MountPath != nil {
+		ok := object.Key("mountPath")
+		ok.String(*v.MountPath)
 	}
 
 	return nil

@@ -108,6 +108,9 @@ type GetAgentRuntimeOutput struct {
 	// The reason for failure if the AgentCore Runtime is in a failed state.
 	FailureReason *string
 
+	// The filesystem configurations mounted into the AgentCore Runtime.
+	FilesystemConfigurations []types.FilesystemConfiguration
+
 	// Configuration for microVM Metadata Service (MMDS) settings for the AgentCore
 	// Runtime.
 	MetadataConfiguration *types.RuntimeMetadataConfiguration

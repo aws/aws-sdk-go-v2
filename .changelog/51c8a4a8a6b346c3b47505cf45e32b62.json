@@ -1,0 +1,8 @@
+{
+    "id": "51c8a4a8-a6b3-46c3-b475-05cf45e32b62",
+    "type": "feature",
+    "description": "Adds support in Aurora PostgreSQL serverless databases for express configuration based creation through WithExpressConfiguration in CreateDbCluster API, and for restoring clusters using RestoreDBClusterToPointInTime and RestoreDBClusterFromSnapshot APIs.",
+    "modules": [
+        "service/rds"
+    ]
+}

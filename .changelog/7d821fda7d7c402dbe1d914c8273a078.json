@@ -1,0 +1,8 @@
+{
+    "id": "7d821fda-7d7c-402d-be1d-914c8273a078",
+    "type": "feature",
+    "description": "Reduces the minimum allowed value for startOverWindowSeconds from 60 to 0, allowing customers to effectively disable the start-over window.",
+    "modules": [
+        "service/mediapackagev2"
+    ]
+}

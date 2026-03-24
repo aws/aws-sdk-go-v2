@@ -1629,6 +1629,25 @@ type ExtractionConfigurationMemberCustomExtractionConfiguration struct {
 
 func (*ExtractionConfigurationMemberCustomExtractionConfiguration) isExtractionConfiguration() {}
 
+// Configuration for a filesystem that can be mounted into the AgentCore Runtime.
+//
+// The following types satisfy this interface:
+//
+//	FilesystemConfigurationMemberSessionStorage
+type FilesystemConfiguration interface {
+	isFilesystemConfiguration()
+}
+
+// Configuration for session storage. Session storage provides persistent storage
+// that is preserved across AgentCore Runtime session invocations.
+type FilesystemConfigurationMemberSessionStorage struct {
+	Value SessionStorageConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FilesystemConfigurationMemberSessionStorage) isFilesystemConfiguration() {}
+
 //	The filter that applies conditions to agent traces during online evaluation to
 //
 // determine which traces should be evaluated.
@@ -3972,6 +3991,21 @@ type SessionConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for a session storage filesystem mounted into the AgentCore
+// Runtime. Session storage provides persistent storage that is preserved across
+// AgentCore Runtime session invocations.
+type SessionStorageConfiguration struct {
+
+	// The mount path for the session storage filesystem inside the AgentCore Runtime.
+	// The path must be under /mnt with exactly one subdirectory level (for example,
+	// /mnt/data ).
+	//
+	// This member is required.
+	MountPath *string
+
+	noSmithyDocumentSerde
+}
+
 // Input configuration for a Slack OAuth2 provider.
 type SlackOauth2ProviderConfigInput struct {
 
@@ -4342,9 +4376,10 @@ type TriggerConditionInputMemberTokenBasedTrigger struct {
 
 func (*TriggerConditionInputMemberTokenBasedTrigger) isTriggerConditionInput() {}
 
-// Respresents an optional value that can be provided to update the human-readable
-// description of the resource. If the field is omitted from the request, it will
-// leave the current decription value unchanged.
+// Wrapper for updating an optional Description field with PATCH semantics. When
+// present in an update request, the description is replaced with optionalValue.
+// When absent, the description is left unchanged. To unset the description,
+// include the wrapper with optionalValue set to null.
 type UpdatedDescription struct {
 
 	// Represents an optional value that is used to update the human-readable
@@ -4547,6 +4582,7 @@ func (*UnknownUnionMember) isEvaluatorConfig()                       {}
 func (*UnknownUnionMember) isEvaluatorModelConfig()                  {}
 func (*UnknownUnionMember) isEvaluatorReference()                    {}
 func (*UnknownUnionMember) isExtractionConfiguration()               {}
+func (*UnknownUnionMember) isFilesystemConfiguration()               {}
 func (*UnknownUnionMember) isFilterValue()                           {}
 func (*UnknownUnionMember) isGatewayProtocolConfiguration()          {}
 func (*UnknownUnionMember) isInterceptorConfiguration()              {}

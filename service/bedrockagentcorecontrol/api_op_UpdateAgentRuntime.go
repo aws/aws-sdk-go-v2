@@ -62,6 +62,9 @@ type UpdateAgentRuntimeInput struct {
 	// Updated environment variables to set in the AgentCore Runtime environment.
 	EnvironmentVariables map[string]string
 
+	// The updated filesystem configurations to mount into the AgentCore Runtime.
+	FilesystemConfigurations []types.FilesystemConfiguration
+
 	// The updated life cycle configuration for the AgentCore Runtime.
 	LifecycleConfiguration *types.LifecycleConfiguration
 

@@ -1,0 +1,8 @@
+{
+    "id": "73fe21fc-db4e-4398-89f3-51807cfad107",
+    "type": "feature",
+    "description": "Adds support for updating the vector options field for existing collections.",
+    "modules": [
+        "service/opensearchserverless"
+    ]
+}

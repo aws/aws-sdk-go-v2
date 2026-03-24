@@ -2710,6 +2710,89 @@ func awsAwsjson10_deserializeDocumentAccounting(v **types.Accounting, value inte
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentCgroupCustomSetting(v **types.CgroupCustomSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CgroupCustomSetting
+	if *v == nil {
+		sv = &types.CgroupCustomSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "parameterName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ParameterName = ptr.String(jtv)
+			}
+
+		case "parameterValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ParameterValue = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentCgroupCustomSettings(v *[]types.CgroupCustomSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CgroupCustomSetting
+	if *v == nil {
+		cv = []types.CgroupCustomSetting{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CgroupCustomSetting
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentCgroupCustomSetting(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentCluster(v **types.Cluster, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2903,6 +2986,11 @@ func awsAwsjson10_deserializeDocumentClusterSlurmConfiguration(v **types.Cluster
 				return err
 			}
 
+		case "cgroupCustomSettings":
+			if err := awsAwsjson10_deserializeDocumentCgroupCustomSettings(&sv.CgroupCustomSettings, value); err != nil {
+				return err
+			}
+
 		case "jwtAuth":
 			if err := awsAwsjson10_deserializeDocumentJwtAuth(&sv.JwtAuth, value); err != nil {
 				return err
@@ -2923,6 +3011,11 @@ func awsAwsjson10_deserializeDocumentClusterSlurmConfiguration(v **types.Cluster
 
 		case "slurmCustomSettings":
 			if err := awsAwsjson10_deserializeDocumentSlurmCustomSettings(&sv.SlurmCustomSettings, value); err != nil {
+				return err
+			}
+
+		case "slurmdbdCustomSettings":
+			if err := awsAwsjson10_deserializeDocumentSlurmdbdCustomSettings(&sv.SlurmdbdCustomSettings, value); err != nil {
 				return err
 			}
 
@@ -4715,6 +4808,89 @@ func awsAwsjson10_deserializeDocumentSlurmCustomSettings(v *[]types.SlurmCustomS
 		var col types.SlurmCustomSetting
 		destAddr := &col
 		if err := awsAwsjson10_deserializeDocumentSlurmCustomSetting(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentSlurmdbdCustomSetting(v **types.SlurmdbdCustomSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SlurmdbdCustomSetting
+	if *v == nil {
+		sv = &types.SlurmdbdCustomSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "parameterName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ParameterName = ptr.String(jtv)
+			}
+
+		case "parameterValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ParameterValue = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentSlurmdbdCustomSettings(v *[]types.SlurmdbdCustomSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SlurmdbdCustomSetting
+	if *v == nil {
+		cv = []types.SlurmdbdCustomSetting{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SlurmdbdCustomSetting
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentSlurmdbdCustomSetting(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr

@@ -897,6 +897,9 @@ type UpdateCollectionDetail struct {
 	// The collection type.
 	Type CollectionType
 
+	// Configuration options for vector search capabilities in the collection.
+	VectorOptions *VectorOptions
+
 	noSmithyDocumentSerde
 }
 

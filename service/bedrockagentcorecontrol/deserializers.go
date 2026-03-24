@@ -6414,6 +6414,11 @@ func awsRestjson1_deserializeOpDocumentGetAgentRuntimeOutput(v **GetAgentRuntime
 				sv.FailureReason = ptr.String(jtv)
 			}
 
+		case "filesystemConfigurations":
+			if err := awsRestjson1_deserializeDocumentFilesystemConfigurations(&sv.FilesystemConfigurations, value); err != nil {
+				return err
+			}
+
 		case "lastUpdatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22034,6 +22039,78 @@ loop:
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFilesystemConfiguration(v *types.FilesystemConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.FilesystemConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "sessionStorage":
+			var mv types.SessionStorageConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentSessionStorageConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.FilesystemConfigurationMemberSessionStorage{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFilesystemConfigurations(v *[]types.FilesystemConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FilesystemConfiguration
+	if *v == nil {
+		cv = []types.FilesystemConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FilesystemConfiguration
+		if err := awsRestjson1_deserializeDocumentFilesystemConfiguration(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFilter(v **types.Filter, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -27486,6 +27563,46 @@ func awsRestjson1_deserializeDocumentSessionConfig(v **types.SessionConfig, valu
 					return err
 				}
 				sv.SessionTimeoutMinutes = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSessionStorageConfiguration(v **types.SessionStorageConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SessionStorageConfiguration
+	if *v == nil {
+		sv = &types.SessionStorageConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "mountPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MountPath to be of type string, got %T instead", value)
+				}
+				sv.MountPath = ptr.String(jtv)
 			}
 
 		default:

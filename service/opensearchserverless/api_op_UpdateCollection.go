@@ -40,6 +40,9 @@ type UpdateCollectionInput struct {
 	// A description of the collection.
 	Description *string
 
+	// Configuration options for vector search capabilities in the collection.
+	VectorOptions *types.VectorOptions
+
 	noSmithyDocumentSerde
 }
 

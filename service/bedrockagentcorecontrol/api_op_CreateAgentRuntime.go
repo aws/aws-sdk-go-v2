@@ -62,6 +62,11 @@ type CreateAgentRuntimeInput struct {
 	// Environment variables to set in the AgentCore Runtime environment.
 	EnvironmentVariables map[string]string
 
+	// The filesystem configurations to mount into the AgentCore Runtime. Use
+	// filesystem configurations to provide persistent storage to your AgentCore
+	// Runtime sessions.
+	FilesystemConfigurations []types.FilesystemConfiguration
+
 	// The life cycle configuration for the AgentCore Runtime.
 	LifecycleConfiguration *types.LifecycleConfiguration
 

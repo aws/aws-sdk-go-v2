@@ -9349,6 +9349,11 @@ func awsAwsjson10_deserializeDocumentUpdateCollectionDetail(v **types.UpdateColl
 				sv.Type = types.CollectionType(jtv)
 			}
 
+		case "vectorOptions":
+			if err := awsAwsjson10_deserializeDocumentVectorOptions(&sv.VectorOptions, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
