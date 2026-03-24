@@ -1,3 +1,7 @@
+# v1.30.0 (2026-03-24)
+
+* **Feature**: Adds support for updating the vector options field for existing collections.
+
 # v1.29.3 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

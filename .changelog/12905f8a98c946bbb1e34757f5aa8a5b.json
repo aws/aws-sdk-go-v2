@@ -1,8 +1,0 @@
-{
-    "id": "12905f8a-98c9-46bb-b1e3-4757f5aa8a5b",
-    "type": "feature",
-    "description": "This release adds support for custom slurmdbd and cgroup configuration in AWS PCS. Customers can now specify slurmdbd and cgroup settings to configure database accounting and reporting for their HPC workloads, and control resource allocation and limits for compute jobs.",
-    "modules": [
-        "service/pcs"
-    ]
-}

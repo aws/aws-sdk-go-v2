@@ -1,3 +1,7 @@
+# v1.51.2 (2026-03-24)
+
+* **Documentation**: Amazon GameLift Servers launches UDP ping beacons in the Beijing and Ningxia (China) Regions to help measure real-time network latency for multiplayer games. The ListLocations API is now available in these regions to provide endpoint domain and port information as part of the locations list.
+
 # v1.51.1 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

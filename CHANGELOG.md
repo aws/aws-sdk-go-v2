@@ -1,3 +1,19 @@
+# Release (2026-03-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.25.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1250-2026-03-24)
+  * **Feature**: Adds SDK support for 1) Persist session state in AgentCore Runtime via filesystemConfigurations in CreateAgentRuntime, UpdateAgentRuntime, and GetAgentRuntime APIs, 2) Optional name-based filtering on AgentCore ListBrowserProfiles API.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.51.2](service/gamelift/CHANGELOG.md#v1512-2026-03-24)
+  * **Documentation**: Amazon GameLift Servers launches UDP ping beacons in the Beijing and Ningxia (China) Regions to help measure real-time network latency for multiplayer games. The ListLocations API is now available in these regions to provide endpoint domain and port information as part of the locations list.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.36.0](service/mediapackagev2/CHANGELOG.md#v1360-2026-03-24)
+  * **Feature**: Reduces the minimum allowed value for startOverWindowSeconds from 60 to 0, allowing customers to effectively disable the start-over window.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.30.0](service/opensearchserverless/CHANGELOG.md#v1300-2026-03-24)
+  * **Feature**: Adds support for updating the vector options field for existing collections.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.17.0](service/pcs/CHANGELOG.md#v1170-2026-03-24)
+  * **Feature**: This release adds support for custom slurmdbd and cgroup configuration in AWS PCS. Customers can now specify slurmdbd and cgroup settings to configure database accounting and reporting for their HPC workloads, and control resource allocation and limits for compute jobs.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.117.0](service/rds/CHANGELOG.md#v11170-2026-03-24)
+  * **Feature**: Adds support in Aurora PostgreSQL serverless databases for express configuration based creation through WithExpressConfiguration in CreateDbCluster API, and for restoring clusters using RestoreDBClusterToPointInTime and RestoreDBClusterFromSnapshot APIs.
+
 # Release (2026-03-23)
 
 ## General Highlights
