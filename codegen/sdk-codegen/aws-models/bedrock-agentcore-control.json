@@ -2881,6 +2881,12 @@
                         "smithy.api#documentation": "<p>Environment variables to set in the AgentCore Runtime environment.</p>"
                     }
                 },
+                "filesystemConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#FilesystemConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filesystem configurations to mount into the AgentCore Runtime. Use filesystem configurations to provide persistent storage to your AgentCore Runtime sessions.</p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#TagsMap",
                     "traits": {
@@ -7605,6 +7611,32 @@
                 "smithy.api#documentation": "<p>Contains extraction configuration information for a memory strategy.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#FilesystemConfiguration": {
+            "type": "union",
+            "members": {
+                "sessionStorage": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#SessionStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for session storage. Session storage provides persistent storage that is preserved across AgentCore Runtime session invocations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a filesystem that can be mounted into the AgentCore Runtime.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#FilesystemConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#FilesystemConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#Filter": {
             "type": "structure",
             "members": {
@@ -8614,6 +8646,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#RuntimeMetadataConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for microVM Metadata Service (MMDS) settings for the AgentCore Runtime.</p>"
+                    }
+                },
+                "filesystemConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#FilesystemConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filesystem configurations mounted into the AgentCore Runtime.</p>"
                     }
                 }
             },
@@ -11734,6 +11772,12 @@
                         "smithy.api#documentation": "<p>A token to retrieve the next page of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#BrowserProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the browser profile to filter results by.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13936,6 +13980,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information for modifying a strategy configuration.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#MountPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 6,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^/mnt/[a-zA-Z0-9._-]+/?$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#Name": {
@@ -16361,6 +16415,21 @@
                 "smithy.api#documentation": "<p> The configuration that defines how agent sessions are detected and when they are considered complete for evaluation. </p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#SessionStorageConfiguration": {
+            "type": "structure",
+            "members": {
+                "mountPath": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MountPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mount path for the session storage filesystem inside the AgentCore Runtime. The path must be under <code>/mnt</code> with exactly one subdirectory level (for example, <code>/mnt/data</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a session storage filesystem mounted into the AgentCore Runtime. Session storage provides persistent storage that is preserved across AgentCore Runtime session invocations.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#SetTokenVaultCMK": {
             "type": "operation",
             "input": {
@@ -17867,6 +17936,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#EnvironmentVariablesMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Updated environment variables to set in the AgentCore Runtime environment.</p>"
+                    }
+                },
+                "filesystemConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#FilesystemConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated filesystem configurations to mount into the AgentCore Runtime.</p>"
                     }
                 },
                 "clientToken": {
@@ -19421,7 +19496,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Respresents an optional value that can be provided to update the human-readable description of the resource. If the field is omitted from the request, it will leave the current decription value unchanged.</p>"
+                "smithy.api#documentation": "Wrapper for updating an optional Description field with PATCH semantics.\nWhen present in an update request, the description is replaced with optionalValue.\nWhen absent, the description is left unchanged.\nTo unset the description, include the wrapper with optionalValue set to null."
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#UserPreferenceConsolidationOverride": {

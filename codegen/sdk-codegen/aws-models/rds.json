@@ -2616,7 +2616,7 @@
                 "smithy.api#deprecated": {
                     "message": "Please avoid using this fault"
                 },
-                "smithy.api#documentation": "",
+                "smithy.api#documentation": "<p/>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -4292,7 +4292,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Amazon Aurora DB cluster or Multi-AZ DB cluster.</p> <p>If you create an Aurora DB cluster, the request creates an empty cluster. You must explicitly create the writer instance for your DB cluster using the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html\">CreateDBInstance</a> operation. If you create a Multi-AZ DB cluster, the request creates a writer and two reader DB instances for you, each in a different Availability Zone.</p> <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create an Amazon Aurora DB cluster as a read replica of another DB cluster or Amazon RDS for MySQL or PostgreSQL DB instance. For more information about Amazon Aurora, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\">What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide</i>.</p> <p>You can also use the <code>ReplicationSourceIdentifier</code> parameter to create a Multi-AZ DB cluster read replica with an RDS for MySQL or PostgreSQL DB instance as the source. For more information about Multi-AZ DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\">Multi-AZ DB cluster deployments</a> in the <i>Amazon RDS User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a new Amazon Aurora DB cluster or Multi-AZ DB cluster.</p> <p>If you create an Aurora DB cluster, the request creates an empty cluster. You must explicitly create the writer instance for your DB cluster using the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html\">CreateDBInstance</a> operation. If you create a Multi-AZ DB cluster, the request creates a writer and two reader DB instances for you, each in a different Availability Zone.</p> <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create an Amazon Aurora DB cluster as a read replica of another DB cluster or Amazon RDS for MySQL or PostgreSQL DB instance. For more information about Amazon Aurora, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\">What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide</i>.</p> <p>You can also use the <code>ReplicationSourceIdentifier</code> parameter to create a Multi-AZ DB cluster read replica with an RDS for MySQL or PostgreSQL DB instance as the source. For more information about Multi-AZ DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\">Multi-AZ DB cluster deployments</a> in the <i>Amazon RDS User Guide</i>.</p> <p>You can use the <code>WithExpressConfiguration</code> parameter to create an Aurora DB Cluster with express configuration and create cluster in seconds. Express configuration provides a cluster with a writer instance and feature specific values set to all other input parameters of this API. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To create a MySQL 5.7-compatible DB cluster",
@@ -4406,6 +4406,70 @@
                                 ],
                                 "ReadReplicaIdentifiers": [],
                                 "DBSubnetGroup": "default"
+                            }
+                        }
+                    },
+                    {
+                        "title": "To create a Aurora DB cluster with express configuration",
+                        "documentation": "The following example creates a Aurora DB cluster with express configuration.",
+                        "input": {
+                            "DBClusterIdentifier": "sample-cluster",
+                            "Engine": "aurora-postgresql",
+                            "WithExpressConfiguration": true
+                        },
+                        "output": {
+                            "DBCluster": {
+                                "AllocatedStorage": 1,
+                                "AvailabilityZones": [
+                                    "us-east-1c",
+                                    "us-east-1a",
+                                    "us-east-1b"
+                                ],
+                                "BackupRetentionPeriod": 7,
+                                "DBClusterIdentifier": "sample-cluster",
+                                "DBClusterParameterGroup": "default.aurora-postgresql17",
+                                "Status": "creating",
+                                "MultiAZ": false,
+                                "Engine": "aurora-postgresql",
+                                "EngineVersion": "17.7",
+                                "Port": 5432,
+                                "MasterUsername": "postgres",
+                                "PreferredBackupWindow": "06:15-06:45",
+                                "PreferredMaintenanceWindow": "sat:03:44-sat:04:14",
+                                "ReadReplicaIdentifiers": [],
+                                "DBClusterMembers": [
+                                    {
+                                        "DBInstanceIdentifier": "sample-cluster-instance-1",
+                                        "IsClusterWriter": false,
+                                        "DBClusterParameterGroupStatus": "in-sync",
+                                        "PromotionTier": 1
+                                    }
+                                ],
+                                "VpcSecurityGroups": [],
+                                "StorageEncrypted": false,
+                                "DbClusterResourceId": "cluster-OWV7DRHS2W7R4LXZRYNXCHZST4",
+                                "DBClusterArn": "arn:aws:rds:us-east-1:654654253058:cluster:sample-cluster",
+                                "AssociatedRoles": [],
+                                "IAMDatabaseAuthenticationEnabled": true,
+                                "ClusterCreateTime": "2026-01-10T22:14:02Z",
+                                "EngineMode": "provisioned",
+                                "AutoMinorVersionUpgrade": true,
+                                "DeletionProtection": false,
+                                "HttpEndpointEnabled": false,
+                                "CopyTagsToSnapshot": false,
+                                "CrossAccountClone": false,
+                                "DomainMemberships": [],
+                                "TagList": [],
+                                "ServerlessV2ScalingConfiguration": {
+                                    "MinCapacity": 0.0,
+                                    "MaxCapacity": 16.0,
+                                    "SecondsUntilAutoPause": 300
+                                },
+                                "ServerlessV2PlatformVersion": "3",
+                                "DatabaseInsightsMode": "standard",
+                                "PerformanceInsightsEnabled": false,
+                                "LocalWriteForwardingStatus": "disabled",
+                                "EngineLifecycleSupport": "open-source-rds-extended-support"
                             }
                         }
                     }
@@ -4874,6 +4938,12 @@
                     "target": "com.amazonaws.rds#MasterUserAuthenticationType",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the authentication type for the master user. With IAM master user authentication, you can configure the master DB user with IAM database authentication when you create a DB cluster.</p> <p>You can specify one of the following values:</p> <ul> <li> <p> <code>password</code> - Use standard database authentication with a password.</p> </li> <li> <p> <code>iam-db-auth</code> - Use IAM database authentication for the master user.</p> </li> </ul> <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p> <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>"
+                    }
+                },
+                "WithExpressConfiguration": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies to create an Aurora DB Cluster with express configuration in seconds. Express configuration provides a cluster with a writer instance and feature specific values set to all other input parameters of this API. </p> <p>Valid for Cluster Type: Aurora DB clusters</p>"
                     }
                 }
             },
@@ -8059,6 +8129,18 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The lifecycle type for the DB cluster.</p> <p>For more information, see CreateDBCluster.</p>"
+                    }
+                },
+                "VPCNetworkingEnabled": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the DB cluster uses VPC-based networking.</p> <p>This setting is applicable only for Aurora PostgreSQL clusters created through express configuration.</p>"
+                    }
+                },
+                "InternetAccessGatewayEnabled": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the DB cluster has internet-based connectivity enabled through an internet access gateway.</p> <p>This setting is applicable only for Aurora PostgreSQL clusters created through express configuration.</p>"
                     }
                 }
             },
@@ -15570,6 +15652,68 @@
                                     "EngineMode": "provisioned",
                                     "DeletionProtection": false,
                                     "HttpEndpointEnabled": false
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "To describe an Aurora DB cluster without VPC networking",
+                        "documentation": "The following example retrieves the details of the specified Aurora PostgreSQL DB cluster configured without VPC networking and with internet access gateway enabled. IAM database authentication is required when VPC networking is disabled and internet access gateway is enabled.",
+                        "input": {
+                            "DBClusterIdentifier": "my-vpcless-cluster"
+                        },
+                        "output": {
+                            "DBClusters": [
+                                {
+                                    "AllocatedStorage": 1,
+                                    "AvailabilityZones": [
+                                        "us-east-1d",
+                                        "us-east-1a",
+                                        "us-east-1c"
+                                    ],
+                                    "BackupRetentionPeriod": 1,
+                                    "DBClusterIdentifier": "my-vpcless-cluster",
+                                    "DBClusterParameterGroup": "default.aurora-postgresql17",
+                                    "Status": "available",
+                                    "EarliestRestorableTime": "2026-03-09T20:53:39.652Z",
+                                    "MultiAZ": false,
+                                    "Engine": "aurora-postgresql",
+                                    "EngineVersion": "17.4",
+                                    "LatestRestorableTime": "2026-03-09T20:53:39.652Z",
+                                    "Port": 5432,
+                                    "MasterUsername": "postgres",
+                                    "PreferredBackupWindow": "07:13-07:43",
+                                    "PreferredMaintenanceWindow": "mon:07:55-mon:08:25",
+                                    "UpgradeRolloutOrder": "second",
+                                    "ReadReplicaIdentifiers": [],
+                                    "DBClusterMembers": [],
+                                    "VpcSecurityGroups": [],
+                                    "StorageEncrypted": false,
+                                    "StorageEncryptionType": "sse-rds",
+                                    "DbClusterResourceId": "cluster-AHX35HFI2YV26F3XVXVVO3MEHU",
+                                    "DBClusterArn": "arn:aws:rds:us-east-1:123456789012:cluster:my-vpcless-cluster",
+                                    "AssociatedRoles": [],
+                                    "IAMDatabaseAuthenticationEnabled": true,
+                                    "VPCNetworkingEnabled": false,
+                                    "InternetAccessGatewayEnabled": true,
+                                    "ClusterCreateTime": "2026-03-09T20:53:24.054Z",
+                                    "EngineMode": "provisioned",
+                                    "AutoMinorVersionUpgrade": true,
+                                    "DeletionProtection": false,
+                                    "HttpEndpointEnabled": false,
+                                    "ActivityStreamStatus": "stopped",
+                                    "CopyTagsToSnapshot": false,
+                                    "CrossAccountClone": false,
+                                    "DomainMemberships": [],
+                                    "TagList": [],
+                                    "ServerlessV2ScalingConfiguration": {
+                                        "MinCapacity": 1.0,
+                                        "MaxCapacity": 128.0
+                                    },
+                                    "ServerlessV2PlatformVersion": "3",
+                                    "DatabaseInsightsMode": "standard",
+                                    "LocalWriteForwardingStatus": "disabled",
+                                    "EngineLifecycleSupport": "open-source-rds-extended-support"
                                 }
                             ]
                         }
@@ -28711,7 +28855,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new DB cluster from a DB snapshot or DB cluster snapshot.</p> <p>The target DB cluster is created from the source snapshot with a default configuration. If you don't specify a security group, the new DB cluster is associated with the default security group.</p> <note> <p>This operation only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the <code>CreateDBInstance</code> operation to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in <code>DBClusterIdentifier</code>. You can create DB instances only after the <code>RestoreDBClusterFromSnapshot</code> operation has completed and the DB cluster is available.</p> </note> <p>For more information on Amazon Aurora DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\"> What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide</i>.</p> <p>For more information on Multi-AZ DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\"> Multi-AZ DB cluster deployments</a> in the <i>Amazon RDS User Guide.</i> </p>",
+                "smithy.api#documentation": "<p>Creates a new DB cluster from a DB snapshot or DB cluster snapshot.</p> <p>The target DB cluster is created from the source snapshot with a default configuration. If you don't specify a security group, the new DB cluster is associated with the default security group.</p> <p>You can use the <code>EnableVPCNetworking</code> and <code>EnableInternetAccessGateway</code> parameters together to restore an Aurora PostgreSQL cluster without VPC networking and with internet-based connectivity. These two parameters must always be specified together. Set <code>EnableVPCNetworking</code> to <code>false</code> to disable the VPC network interface (ENI) for the cluster. <code>EnableInternetAccessGateway</code> enables internet-based connectivity through an internet access gateway. IAM database authentication is required and must be enabled using <code>EnableIAMDatabaseAuthentication</code>. Once the cluster is restored, you need to modify the DB cluster to update <code>MasterUserAuthenticationType</code> to <code>iam-db-auth</code>. </p> <note> <p>This operation only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the <code>CreateDBInstance</code> operation to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in <code>DBClusterIdentifier</code>. You can create DB instances only after the <code>RestoreDBClusterFromSnapshot</code> operation has completed and the DB cluster is available.</p> </note> <p>For more information on Amazon Aurora DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\"> What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide</i>.</p> <p>For more information on Multi-AZ DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\"> Multi-AZ DB cluster deployments</a> in the <i>Amazon RDS User Guide.</i> </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To restore a DB cluster from a snapshot",
@@ -28760,6 +28904,55 @@
                                 "DBClusterArn": "arn:aws:rds:us-west-2:123456789012:cluster:newdbcluster",
                                 "AssociatedRoles": [],
                                 "IAMDatabaseAuthenticationEnabled": false,
+                                "ClusterCreateTime": "2020-06-05T15:06:58.634Z",
+                                "EngineMode": "provisioned",
+                                "DeletionProtection": false,
+                                "HttpEndpointEnabled": false,
+                                "CopyTagsToSnapshot": false,
+                                "CrossAccountClone": false,
+                                "DomainMemberships": []
+                            }
+                        }
+                    },
+                    {
+                        "title": "To restore a DB cluster from a snapshot without VPC networking",
+                        "documentation": "The following example restores an Aurora DB cluster from a DB cluster snapshot named sample-cluster-snapshot without VPC networking and with internet-based connectivity enabled through an internet access gateway. The EnableVPCNetworking and EnableInternetAccessGateway parameters must always be specified together. IAM database authentication is required when both parameters are specified.",
+                        "input": {
+                            "DBClusterIdentifier": "restored-cluster",
+                            "SnapshotIdentifier": "sample-cluster-snapshot",
+                            "Engine": "aurora-postgresql",
+                            "EnableVPCNetworking": false,
+                            "EnableInternetAccessGateway": true,
+                            "EnableIAMDatabaseAuthentication": true
+                        },
+                        "output": {
+                            "DBCluster": {
+                                "AllocatedStorage": 1,
+                                "AvailabilityZones": [
+                                    "us-west-2c",
+                                    "us-west-2a",
+                                    "us-west-2b"
+                                ],
+                                "BackupRetentionPeriod": 7,
+                                "DatabaseName": "",
+                                "DBClusterIdentifier": "restored-cluster",
+                                "DBClusterParameterGroup": "default.aurora-postgresql17",
+                                "Status": "creating",
+                                "MultiAZ": false,
+                                "Engine": "aurora-postgresql",
+                                "EngineVersion": "17.7",
+                                "Port": 5432,
+                                "MasterUsername": "postgres",
+                                "PreferredBackupWindow": "09:33-10:03",
+                                "PreferredMaintenanceWindow": "sun:12:22-sun:12:52",
+                                "ReadReplicaIdentifiers": [],
+                                "DBClusterMembers": [],
+                                "VpcSecurityGroups": [],
+                                "StorageEncrypted": false,
+                                "DbClusterResourceId": "cluster-5DSB5IFQDDUVAWOUWM1EXAMPLE",
+                                "DBClusterArn": "arn:aws:rds:us-west-2:123456789012:cluster:restored-cluster",
+                                "AssociatedRoles": [],
+                                "IAMDatabaseAuthenticationEnabled": true,
                                 "ClusterCreateTime": "2020-06-05T15:06:58.634Z",
                                 "EngineMode": "provisioned",
                                 "DeletionProtection": false,
@@ -29006,6 +29199,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Tags to assign to resources associated with the DB cluster.</p> <p>Valid Values: </p> <ul> <li> <p> <code>cluster-auto-backup</code> - The DB cluster's automated backup.</p> </li> </ul>"
                     }
+                },
+                "EnableVPCNetworking": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable VPC networking for the restored DB cluster. Set this parameter to <code>false</code> to create a cluster without the VPC network interface (ENI).</p> <p>This parameter must be used together with <code>EnableInternetAccessGateway</code>. When both parameters are specified, IAM database authentication is required. You must also specify <code>EnableIAMDatabaseAuthentication</code>.</p> <p>Valid for Cluster Type: Aurora PostgreSQL clusters</p>"
+                    }
+                },
+                "EnableInternetAccessGateway": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that the restored DB cluster should use internet-based connectivity through an internet access gateway. This allows clients to connect to the cluster over the internet without requiring a VPC.</p> <p>This parameter must be used together with <code>EnableVPCNetworking</code> set to <code>false</code>. When both parameters are specified, IAM database authentication is required. You must also specify <code>EnableIAMDatabaseAuthentication</code>.</p> <p>Valid for Cluster Type: Aurora PostgreSQL clusters</p>"
+                    }
                 }
             },
             "traits": {
@@ -29104,7 +29309,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before <code>LatestRestorableTime</code> for up to <code>BackupRetentionPeriod</code> days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group. Unless the <code>RestoreType</code> is set to <code>copy-on-write</code>, the restore may occur in a different Availability Zone (AZ) from the original DB cluster. The AZ where RDS restores the DB cluster depends on the AZs in the specified subnet group.</p> <note> <p>For Aurora, this operation only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the <code>CreateDBInstance</code> operation to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in <code>DBClusterIdentifier</code>. You can create DB instances only after the <code>RestoreDBClusterToPointInTime</code> operation has completed and the DB cluster is available.</p> </note> <p>For more information on Amazon Aurora DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\"> What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide</i>.</p> <p>For more information on Multi-AZ DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\"> Multi-AZ DB cluster deployments</a> in the <i>Amazon RDS User Guide.</i> </p>",
+                "smithy.api#documentation": "<p>Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before <code>LatestRestorableTime</code> for up to <code>BackupRetentionPeriod</code> days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group. Unless the <code>RestoreType</code> is set to <code>copy-on-write</code>, the restore may occur in a different Availability Zone (AZ) from the original DB cluster. The AZ where RDS restores the DB cluster depends on the AZs in the specified subnet group.</p> <p>You can use the <code>EnableVPCNetworking</code> and <code>EnableInternetAccessGateway</code> parameters together to restore an Aurora PostgreSQL cluster without VPC networking and with internet-based connectivity. These two parameters must always be specified together. Set <code>EnableVPCNetworking</code> to <code>false</code> to disable the VPC network interface (ENI) for the cluster. <code>EnableInternetAccessGateway</code> enables internet-based connectivity through an internet access gateway. IAM database authentication is required and must be enabled using <code>EnableIAMDatabaseAuthentication</code>. Once the cluster is restored, you need to modify the DB cluster to update <code>MasterUserAuthenticationType</code> to <code>iam-db-auth</code>. </p> <note> <p>For Aurora, this operation only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the <code>CreateDBInstance</code> operation to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in <code>DBClusterIdentifier</code>. You can create DB instances only after the <code>RestoreDBClusterToPointInTime</code> operation has completed and the DB cluster is available.</p> </note> <p>For more information on Amazon Aurora DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\"> What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide</i>.</p> <p>For more information on Multi-AZ DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\"> Multi-AZ DB cluster deployments</a> in the <i>Amazon RDS User Guide.</i> </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To restore a DB cluster to a specified time",
@@ -29155,6 +29360,55 @@
                                 "IAMDatabaseAuthenticationEnabled": false,
                                 "CloneGroupId": "8d19331a-099a-45a4-b4aa-11aa22bb33cc44dd",
                                 "ClusterCreateTime": "2020-03-10T19:57:38.967Z",
+                                "EngineMode": "provisioned",
+                                "DeletionProtection": false,
+                                "HttpEndpointEnabled": false,
+                                "CopyTagsToSnapshot": false,
+                                "CrossAccountClone": false
+                            }
+                        }
+                    },
+                    {
+                        "title": "To restore an Aurora DB cluster to a point in time without VPC networking",
+                        "documentation": "The following example restores an Aurora DB cluster to the latest possible time without VPC networking and with internet-based connectivity enabled through an internet access gateway. The EnableVPCNetworking and EnableInternetAccessGateway parameters must always be specified together. IAM database authentication is required when both parameters are specified.",
+                        "input": {
+                            "DBClusterIdentifier": "sample-cluster-restored",
+                            "RestoreType": "copy-on-write",
+                            "SourceDBClusterIdentifier": "sample-cluster",
+                            "UseLatestRestorableTime": true,
+                            "EnableVPCNetworking": false,
+                            "EnableInternetAccessGateway": true,
+                            "EnableIAMDatabaseAuthentication": true
+                        },
+                        "output": {
+                            "DBCluster": {
+                                "AllocatedStorage": 1,
+                                "AvailabilityZones": [
+                                    "us-east-1c",
+                                    "us-east-1a",
+                                    "us-east-1b"
+                                ],
+                                "BackupRetentionPeriod": 7,
+                                "DatabaseName": "",
+                                "DBClusterIdentifier": "sample-cluster-restored",
+                                "DBClusterParameterGroup": "default.aurora-postgresql17",
+                                "Status": "creating",
+                                "MultiAZ": false,
+                                "Engine": "aurora-postgresql",
+                                "EngineVersion": "17.7",
+                                "Port": 5432,
+                                "MasterUsername": "postgres",
+                                "PreferredBackupWindow": "06:15-06:45",
+                                "PreferredMaintenanceWindow": "sat:03:44-sat:04:14",
+                                "ReadReplicaIdentifiers": [],
+                                "DBClusterMembers": [],
+                                "VpcSecurityGroups": [],
+                                "StorageEncrypted": false,
+                                "DbClusterResourceId": "cluster-ABCDEFGHIJKLMNOPQRSTUVWXYZ1234",
+                                "DBClusterArn": "arn:aws:rds:us-east-1:654654253058:cluster:sample-cluster-restored",
+                                "AssociatedRoles": [],
+                                "IAMDatabaseAuthenticationEnabled": true,
+                                "ClusterCreateTime": "2026-01-15T22:14:02.000Z",
                                 "EngineMode": "provisioned",
                                 "DeletionProtection": false,
                                 "HttpEndpointEnabled": false,
@@ -29391,6 +29645,18 @@
                     "target": "com.amazonaws.rds#TagSpecificationList",
                     "traits": {
                         "smithy.api#documentation": "<p>Tags to assign to resources associated with the DB cluster.</p> <p>Valid Values: </p> <ul> <li> <p> <code>cluster-auto-backup</code> - The DB cluster's automated backup.</p> </li> </ul>"
+                    }
+                },
+                "EnableVPCNetworking": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable VPC networking for the restored DB cluster. Set this parameter to <code>false</code> to create a cluster without the VPC network interface (ENI).</p> <p>This parameter must be used together with <code>EnableInternetAccessGateway</code>. When both parameters are specified, IAM database authentication is required. You must also specify <code>EnableIAMDatabaseAuthentication</code>.</p> <p>Valid for Cluster Type: Aurora PostgreSQL clusters</p>"
+                    }
+                },
+                "EnableInternetAccessGateway": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that the restored DB cluster should use internet-based connectivity through an internet access gateway. This allows clients to connect to the cluster over the internet without requiring a VPC.</p> <p>This parameter must be used together with <code>EnableVPCNetworking</code> set to <code>false</code>. When both parameters are specified, IAM database authentication is required. You must also specify <code>EnableIAMDatabaseAuthentication</code>.</p> <p>Valid for Cluster Type: Aurora PostgreSQL clusters</p>"
                     }
                 }
             },

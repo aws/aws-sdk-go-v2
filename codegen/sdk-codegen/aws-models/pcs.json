@@ -789,6 +789,34 @@
                 "smithy.api#pattern": "^[\\S]+$"
             }
         },
+        "com.amazonaws.pcs#CgroupCustomSetting": {
+            "type": "structure",
+            "members": {
+                "parameterName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>PCS supports custom Cgroup settings for clusters. For more information, see <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/cgroup-custom-settings.html\">Configuring custom Cgroup settings in PCS</a> in the <i>PCS User Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parameterValue": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values for the configured Cgroup settings.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Additional settings that directly map to Cgroup settings.</p> <important> <p>PCS supports a subset of Cgroup settings. For more information, see <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/cgroup-custom-settings.html\">Configuring custom Cgroup settings in PCS</a> in the <i>PCS User Guide</i>.</p> </important>"
+            }
+        },
+        "com.amazonaws.pcs#CgroupCustomSettings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pcs#CgroupCustomSetting"
+            }
+        },
         "com.amazonaws.pcs#Cluster": {
             "type": "structure",
             "members": {
@@ -968,6 +996,18 @@
                         "smithy.api#documentation": "<p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>"
                     }
                 },
+                "slurmdbdCustomSettings": {
+                    "target": "com.amazonaws.pcs#SlurmdbdCustomSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional SlurmDBD-specific configuration that directly maps to SlurmDBD settings.</p>"
+                    }
+                },
+                "cgroupCustomSettings": {
+                    "target": "com.amazonaws.pcs#CgroupCustomSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional Cgroup-specific configuration that directly maps to Cgroup settings.</p>"
+                    }
+                },
                 "authKey": {
                     "target": "com.amazonaws.pcs#SlurmAuthKey",
                     "traits": {
@@ -1014,6 +1054,18 @@
                     "target": "com.amazonaws.pcs#SlurmCustomSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>"
+                    }
+                },
+                "slurmdbdCustomSettings": {
+                    "target": "com.amazonaws.pcs#SlurmdbdCustomSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional SlurmDBD-specific configuration that directly maps to SlurmDBD settings.</p>"
+                    }
+                },
+                "cgroupCustomSettings": {
+                    "target": "com.amazonaws.pcs#CgroupCustomSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional Cgroup-specific configuration that directly maps to Cgroup settings.</p>"
                     }
                 },
                 "accounting": {
@@ -3580,7 +3632,7 @@
                 "version": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the specified scheduling software that PCS uses to manage cluster scaling and job scheduling. For more information, see <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html\">Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> <p>Valid Values: <code>23.11 | 24.05 | 24.11</code> </p>",
+                        "smithy.api#documentation": "<p>The version of the specified scheduling software that PCS uses to manage cluster scaling and job scheduling. For more information, see <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html\">Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> <p>Valid Values: <code>23.11 | 24.05 | 24.11 | 25.05</code> </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3602,7 +3654,7 @@
                 "version": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the specified scheduling software that PCS uses to manage cluster scaling and job scheduling. For more information, see <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html\">Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> <p>Valid Values: <code>23.11 | 24.05 | 24.11</code> </p>",
+                        "smithy.api#documentation": "<p>The version of the specified scheduling software that PCS uses to manage cluster scaling and job scheduling. For more information, see <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html\">Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> <p>Valid Values: <code>24.11 | 25.05</code> </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3799,6 +3851,34 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The Slurm REST API configuration includes settings for enabling and configuring the Slurm REST API. It's a property of the <b>ClusterSlurmConfiguration</b> object.</p>"
+            }
+        },
+        "com.amazonaws.pcs#SlurmdbdCustomSetting": {
+            "type": "structure",
+            "members": {
+                "parameterName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>PCS supports custom SlurmDBD settings for clusters. For more information, see <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/slurmdbd-custom-settings.html\">Configuring custom SlurmDBD settings in PCS</a> in the <i>PCS User Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parameterValue": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values for the configured SlurmDBD settings.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Additional settings that directly map to SlurmDBD settings.</p> <important> <p>PCS supports a subset of SlurmDBD settings. For more information, see <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/slurmdbd-custom-settings.html\">Configuring custom SlurmDBD settings in PCS</a> in the <i>PCS User Guide</i>.</p> </important>"
+            }
+        },
+        "com.amazonaws.pcs#SlurmdbdCustomSettings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pcs#SlurmdbdCustomSetting"
             }
         },
         "com.amazonaws.pcs#SpotAllocationStrategy": {
@@ -4200,6 +4280,18 @@
                     "target": "com.amazonaws.pcs#SlurmCustomSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>"
+                    }
+                },
+                "slurmdbdCustomSettings": {
+                    "target": "com.amazonaws.pcs#SlurmdbdCustomSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional SlurmDBD-specific configuration that directly maps to SlurmDBD settings.</p>"
+                    }
+                },
+                "cgroupCustomSettings": {
+                    "target": "com.amazonaws.pcs#CgroupCustomSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional Cgroup-specific configuration that directly maps to Cgroup settings.</p>"
                     }
                 },
                 "accounting": {

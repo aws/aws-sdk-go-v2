@@ -2351,7 +2351,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The size of the window (in seconds) to create a window of the live stream that's available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window. The maximum startover window is 1,209,600 seconds (14 days).</p>",
                         "smithy.api#range": {
-                            "min": 60,
+                            "min": 0,
                             "max": 1209600
                         }
                     }
@@ -7729,7 +7729,7 @@
                 "CertificateArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for the certificate that you imported to AWS Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.</p>",
+                        "smithy.api#documentation": "<p>The ARN for the certificate that you imported to Amazon Web Services Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.</p>",
                         "smithy.api#length": {
                             "min": 20,
                             "max": 2048
@@ -8705,7 +8705,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The size of the window (in seconds) to create a window of the live stream that's available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window. The maximum startover window is 1,209,600 seconds (14 days).</p>",
                         "smithy.api#range": {
-                            "min": 60,
+                            "min": 0,
                             "max": 1209600
                         }
                     }
