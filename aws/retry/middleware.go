@@ -52,12 +52,8 @@ type Attempt struct {
 	requestCloner RequestCloner
 }
 
-// skewThreshold is used for several things:
-//   - It defines the threshold at which we will consider certain kind of errors
-//     to be probably caused by clock skew
-//   - It is the threshold at which we actually treat client and server clock
-//     difference as a significant skew such that we store it back to the client to
-//     be reused in subsequent requests.
+// define the threshold at which we will consider certain kind of errors to be probably
+// caused by clock skew
 const skewThreshold = 4 * time.Minute
 
 // NewAttemptMiddleware returns a new Attempt retry middleware.
