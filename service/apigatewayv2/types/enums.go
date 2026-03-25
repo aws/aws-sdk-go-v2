@@ -278,6 +278,8 @@ const (
 	PublishStatusPublished         PublishStatus = "PUBLISHED"
 	PublishStatusPublishInProgress PublishStatus = "PUBLISH_IN_PROGRESS"
 	PublishStatusPublishFailed     PublishStatus = "PUBLISH_FAILED"
+	PublishStatusDisableInProgress PublishStatus = "DISABLE_IN_PROGRESS"
+	PublishStatusDisableFailed     PublishStatus = "DISABLE_FAILED"
 	PublishStatusDisabled          PublishStatus = "DISABLED"
 )
 
@@ -290,6 +292,8 @@ func (PublishStatus) Values() []PublishStatus {
 		"PUBLISHED",
 		"PUBLISH_IN_PROGRESS",
 		"PUBLISH_FAILED",
+		"DISABLE_IN_PROGRESS",
+		"DISABLE_FAILED",
 		"DISABLED",
 	}
 }

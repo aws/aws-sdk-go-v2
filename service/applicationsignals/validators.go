@@ -872,6 +872,21 @@ func validateMetricDataQuery(v *types.MetricDataQuery) error {
 	}
 }
 
+func validateMetricSource(v *types.MetricSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricSource"}
+	if v.MetricSourceKeyAttributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricSourceKeyAttributes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMetricStat(v *types.MetricStat) error {
 	if v == nil {
 		return nil
@@ -975,6 +990,11 @@ func validateRequestBasedServiceLevelIndicatorMetricConfig(v *types.RequestBased
 			invalidParams.AddNested("DependencyConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MetricSource != nil {
+		if err := validateMetricSource(v.MetricSource); err != nil {
+			invalidParams.AddNested("MetricSource", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1030,6 +1050,11 @@ func validateServiceLevelIndicatorMetricConfig(v *types.ServiceLevelIndicatorMet
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ServiceLevelIndicatorMetricConfig"}
+	if v.MetricSource != nil {
+		if err := validateMetricSource(v.MetricSource); err != nil {
+			invalidParams.AddNested("MetricSource", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.MetricDataQueries != nil {
 		if err := validateMetricDataQueries(v.MetricDataQueries); err != nil {
 			invalidParams.AddNested("MetricDataQueries", err.(smithy.InvalidParamsError))
@@ -1345,6 +1370,11 @@ func validateOpListServiceLevelObjectivesInput(v *ListServiceLevelObjectivesInpu
 	if v.DependencyConfig != nil {
 		if err := validateDependencyConfig(v.DependencyConfig); err != nil {
 			invalidParams.AddNested("DependencyConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MetricSource != nil {
+		if err := validateMetricSource(v.MetricSource); err != nil {
+			invalidParams.AddNested("MetricSource", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

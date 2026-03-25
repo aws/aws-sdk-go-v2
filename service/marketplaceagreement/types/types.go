@@ -458,6 +458,41 @@ type LegalTerm struct {
 	noSmithyDocumentSerde
 }
 
+// Summary view of a payment request.
+type PaymentRequestSummary struct {
+
+	// The unique identifier of the agreement associated with this payment request.
+	AgreementId *string
+
+	// The amount charged or to be charged to the buyer.
+	ChargeAmount *string
+
+	// The unique identifier of the charge created after the payment request is
+	// approved. This field is only present for approved payment requests.
+	ChargeId *string
+
+	// The date and time when the payment request was created, in ISO 8601 format.
+	CreatedAt *time.Time
+
+	// The currency code for the charge amount.
+	CurrencyCode *string
+
+	// The descriptive name of the payment request.
+	Name *string
+
+	// The unique identifier of the payment request.
+	PaymentRequestId *string
+
+	// The current status of the payment request. Possible values include VALIDATING ,
+	// VALIDATION_FAILED , PENDING_APPROVAL , APPROVED , REJECTED , and CANCELLED .
+	Status PaymentRequestStatus
+
+	// The date and time when the payment request was last updated, in ISO 8601 format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Defines an installment-based pricing model where customers are charged a fixed
 // price on different dates during the agreement validity period. This is used most
 // commonly for flexible payment schedule pricing.

@@ -1310,6 +1310,13 @@ func awsRestjson1_serializeOpDocumentListServiceLevelObjectivesInput(v *ListServ
 		}
 	}
 
+	if v.MetricSource != nil {
+		ok := object.Key("MetricSource")
+		if err := awsRestjson1_serializeDocumentMetricSource(v.MetricSource, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MetricSourceTypes != nil {
 		ok := object.Key("MetricSourceTypes")
 		if err := awsRestjson1_serializeDocumentMetricSourceTypes(v.MetricSourceTypes, ok); err != nil {
@@ -2615,6 +2622,27 @@ func awsRestjson1_serializeDocumentMetricDataQuery(v *types.MetricDataQuery, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMetricSource(v *types.MetricSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetricSourceAttributes != nil {
+		ok := object.Key("MetricSourceAttributes")
+		if err := awsRestjson1_serializeDocumentAttributes(v.MetricSourceAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MetricSourceKeyAttributes != nil {
+		ok := object.Key("MetricSourceKeyAttributes")
+		if err := awsRestjson1_serializeDocumentAttributes(v.MetricSourceKeyAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMetricSourceTypes(v []types.MetricSourceType, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2742,6 +2770,18 @@ func awsRestjson1_serializeDocumentRequestBasedServiceLevelIndicatorMetricConfig
 	if v.KeyAttributes != nil {
 		ok := object.Key("KeyAttributes")
 		if err := awsRestjson1_serializeDocumentAttributes(v.KeyAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MetricName != nil {
+		ok := object.Key("MetricName")
+		ok.String(*v.MetricName)
+	}
+
+	if v.MetricSource != nil {
+		ok := object.Key("MetricSource")
+		if err := awsRestjson1_serializeDocumentMetricSource(v.MetricSource, ok); err != nil {
 			return err
 		}
 	}
@@ -2882,6 +2922,13 @@ func awsRestjson1_serializeDocumentServiceLevelIndicatorMetricConfig(v *types.Se
 	if v.MetricName != nil {
 		ok := object.Key("MetricName")
 		ok.String(*v.MetricName)
+	}
+
+	if v.MetricSource != nil {
+		ok := object.Key("MetricSource")
+		if err := awsRestjson1_serializeDocumentMetricSource(v.MetricSource, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.MetricType) > 0 {

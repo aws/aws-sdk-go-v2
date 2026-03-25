@@ -5975,6 +5975,47 @@ func awsRestjson1_deserializeDocumentMetricReferences(v *[]types.MetricReference
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMetricSource(v **types.MetricSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MetricSource
+	if *v == nil {
+		sv = &types.MetricSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MetricSourceAttributes":
+			if err := awsRestjson1_deserializeDocumentAttributes(&sv.MetricSourceAttributes, value); err != nil {
+				return err
+			}
+
+		case "MetricSourceKeyAttributes":
+			if err := awsRestjson1_deserializeDocumentAttributes(&sv.MetricSourceKeyAttributes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMetricStat(v **types.MetricStat, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6385,6 +6426,11 @@ func awsRestjson1_deserializeDocumentRequestBasedServiceLevelIndicatorMetric(v *
 
 		case "KeyAttributes":
 			if err := awsRestjson1_deserializeDocumentAttributes(&sv.KeyAttributes, value); err != nil {
+				return err
+			}
+
+		case "MetricSource":
+			if err := awsRestjson1_deserializeDocumentMetricSource(&sv.MetricSource, value); err != nil {
 				return err
 			}
 
@@ -6995,6 +7041,11 @@ func awsRestjson1_deserializeDocumentServiceLevelIndicatorMetric(v **types.Servi
 				return err
 			}
 
+		case "MetricSource":
+			if err := awsRestjson1_deserializeDocumentMetricSource(&sv.MetricSource, value); err != nil {
+				return err
+			}
+
 		case "MetricType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7586,6 +7637,11 @@ func awsRestjson1_deserializeDocumentServiceLevelObjectiveSummary(v **types.Serv
 
 		case "KeyAttributes":
 			if err := awsRestjson1_deserializeDocumentAttributes(&sv.KeyAttributes, value); err != nil {
+				return err
+			}
+
+		case "MetricSource":
+			if err := awsRestjson1_deserializeDocumentMetricSource(&sv.MetricSource, value); err != nil {
 				return err
 			}
 

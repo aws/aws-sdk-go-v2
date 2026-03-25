@@ -152,6 +152,8 @@ const (
 	OutputFormatOggOpus   OutputFormat = "ogg_opus"
 	OutputFormatOggVorbis OutputFormat = "ogg_vorbis"
 	OutputFormatPcm       OutputFormat = "pcm"
+	OutputFormatMulaw     OutputFormat = "mulaw"
+	OutputFormatAlaw      OutputFormat = "alaw"
 )
 
 // Values returns all known values for OutputFormat. Note that this can be
@@ -165,6 +167,8 @@ func (OutputFormat) Values() []OutputFormat {
 		"ogg_opus",
 		"ogg_vorbis",
 		"pcm",
+		"mulaw",
+		"alaw",
 	}
 }
 

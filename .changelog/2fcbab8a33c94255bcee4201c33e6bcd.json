@@ -1,0 +1,8 @@
+{
+    "id": "2fcbab8a-33c9-4255-bcee-4201c33e6bcd",
+    "type": "feature",
+    "description": "Added DISABLE IN PROGRESS and DISABLE FAILED Portal statuses.",
+    "modules": [
+        "service/apigatewayv2"
+    ]
+}

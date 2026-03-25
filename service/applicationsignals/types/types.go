@@ -715,6 +715,21 @@ type MetricReference struct {
 	noSmithyDocumentSerde
 }
 
+// Identifies the metric source for SLOs on resources other than Application
+// Signals services.
+type MetricSource struct {
+
+	// Key attributes that identify the metric source.
+	//
+	// This member is required.
+	MetricSourceKeyAttributes map[string]string
+
+	// Additional attributes for the metric source.
+	MetricSourceAttributes map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // This structure defines the metric to be used as the service level indicator,
 // along with the statistics, period, and unit.
 type MetricStat struct {
@@ -922,6 +937,10 @@ type RequestBasedServiceLevelIndicatorMetric struct {
 	//   belongs to.
 	KeyAttributes map[string]string
 
+	// Identifies the metric source for SLOs on resources other than Application
+	// Signals services.
+	MetricSource *MetricSource
+
 	// If the SLO monitors either the LATENCY or AVAILABILITY metric that Application
 	// Signals collects, this field displays which of those metrics is used.
 	MetricType ServiceLevelIndicatorMetricType
@@ -961,6 +980,14 @@ type RequestBasedServiceLevelIndicatorMetricConfig struct {
 	//   - Environment specifies the location where this object is hosted, or what it
 	//   belongs to.
 	KeyAttributes map[string]string
+
+	// The name of the metric for SLOs on resources other than Application Signals
+	// services.
+	MetricName *string
+
+	// Identifies the metric source for SLOs on resources other than Application
+	// Signals services.
+	MetricSource *MetricSource
 
 	// If the SLO is to monitor either the LATENCY or AVAILABILITY metric that
 	// Application Signals collects, use this field to specify which of those metrics
@@ -1316,6 +1343,10 @@ type ServiceLevelIndicatorMetric struct {
 	//   belongs to.
 	KeyAttributes map[string]string
 
+	// Identifies the metric source for SLOs on resources other than Application
+	// Signals services.
+	MetricSource *MetricSource
+
 	// If the SLO monitors either the LATENCY or AVAILABILITY metric that Application
 	// Signals collects, this field displays which of those metrics is used.
 	MetricType ServiceLevelIndicatorMetricType
@@ -1363,6 +1394,10 @@ type ServiceLevelIndicatorMetricConfig struct {
 	// The name of the CloudWatch metric to use for the SLO, when using a custom
 	// metric rather than Application Signals standard metrics.
 	MetricName *string
+
+	// Identifies the metric source for SLOs on resources other than Application
+	// Signals services.
+	MetricSource *MetricSource
 
 	// If the SLO is to monitor either the LATENCY or AVAILABILITY metric that
 	// Application Signals collects, use this field to specify which of those metrics
@@ -1444,7 +1479,13 @@ type ServiceLevelObjective struct {
 	//
 	//   - Service dependency
 	//
+	//   - Service
+	//
 	//   - CloudWatch metric
+	//
+	//   - AppMonitor
+	//
+	//   - Canary
 	MetricSourceType MetricSourceType
 
 	// A structure containing information about the performance metric that this SLO
@@ -1635,13 +1676,23 @@ type ServiceLevelObjectiveSummary struct {
 	//   belongs to.
 	KeyAttributes map[string]string
 
+	// Identifies the metric source for SLOs on resources other than Application
+	// Signals services.
+	MetricSource *MetricSource
+
 	// Displays the SLI metric source type for this SLO. Supported types are:
 	//
 	//   - Service operation
 	//
 	//   - Service dependency
 	//
+	//   - Service
+	//
 	//   - CloudWatch metric
+	//
+	//   - AppMonitor
+	//
+	//   - Canary
 	MetricSourceType MetricSourceType
 
 	// If this service level objective is specific to a single operation, this field

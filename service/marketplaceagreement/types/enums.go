@@ -55,11 +55,40 @@ func (PaymentRequestApprovalStrategy) Values() []PaymentRequestApprovalStrategy 
 	}
 }
 
+type PaymentRequestStatus string
+
+// Enum values for PaymentRequestStatus
+const (
+	PaymentRequestStatusValidating       PaymentRequestStatus = "VALIDATING"
+	PaymentRequestStatusValidationFailed PaymentRequestStatus = "VALIDATION_FAILED"
+	PaymentRequestStatusPendingApproval  PaymentRequestStatus = "PENDING_APPROVAL"
+	PaymentRequestStatusApproved         PaymentRequestStatus = "APPROVED"
+	PaymentRequestStatusRejected         PaymentRequestStatus = "REJECTED"
+	PaymentRequestStatusCancelled        PaymentRequestStatus = "CANCELLED"
+)
+
+// Values returns all known values for PaymentRequestStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentRequestStatus) Values() []PaymentRequestStatus {
+	return []PaymentRequestStatus{
+		"VALIDATING",
+		"VALIDATION_FAILED",
+		"PENDING_APPROVAL",
+		"APPROVED",
+		"REJECTED",
+		"CANCELLED",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeAgreement ResourceType = "Agreement"
+	ResourceTypeAgreement      ResourceType = "Agreement"
+	ResourceTypeCharge         ResourceType = "Charge"
+	ResourceTypePaymentRequest ResourceType = "PaymentRequest"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -69,6 +98,8 @@ const (
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"Agreement",
+		"Charge",
+		"PaymentRequest",
 	}
 }
 
@@ -95,17 +126,30 @@ type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason
 const (
-	ValidationExceptionReasonInvalidAgreementId  ValidationExceptionReason = "INVALID_AGREEMENT_ID"
-	ValidationExceptionReasonMissingAgreementId  ValidationExceptionReason = "MISSING_AGREEMENT_ID"
-	ValidationExceptionReasonInvalidCatalog      ValidationExceptionReason = "INVALID_CATALOG"
-	ValidationExceptionReasonInvalidFilterName   ValidationExceptionReason = "INVALID_FILTER_NAME"
-	ValidationExceptionReasonInvalidFilterValues ValidationExceptionReason = "INVALID_FILTER_VALUES"
-	ValidationExceptionReasonInvalidSortBy       ValidationExceptionReason = "INVALID_SORT_BY"
-	ValidationExceptionReasonInvalidSortOrder    ValidationExceptionReason = "INVALID_SORT_ORDER"
-	ValidationExceptionReasonInvalidNextToken    ValidationExceptionReason = "INVALID_NEXT_TOKEN"
-	ValidationExceptionReasonInvalidMaxResults   ValidationExceptionReason = "INVALID_MAX_RESULTS"
-	ValidationExceptionReasonUnsupportedFilters  ValidationExceptionReason = "UNSUPPORTED_FILTERS"
-	ValidationExceptionReasonOther               ValidationExceptionReason = "OTHER"
+	ValidationExceptionReasonInvalidAgreementId          ValidationExceptionReason = "INVALID_AGREEMENT_ID"
+	ValidationExceptionReasonMissingAgreementId          ValidationExceptionReason = "MISSING_AGREEMENT_ID"
+	ValidationExceptionReasonInvalidCatalog              ValidationExceptionReason = "INVALID_CATALOG"
+	ValidationExceptionReasonInvalidFilterName           ValidationExceptionReason = "INVALID_FILTER_NAME"
+	ValidationExceptionReasonInvalidFilterValues         ValidationExceptionReason = "INVALID_FILTER_VALUES"
+	ValidationExceptionReasonInvalidSortBy               ValidationExceptionReason = "INVALID_SORT_BY"
+	ValidationExceptionReasonInvalidSortOrder            ValidationExceptionReason = "INVALID_SORT_ORDER"
+	ValidationExceptionReasonInvalidNextToken            ValidationExceptionReason = "INVALID_NEXT_TOKEN"
+	ValidationExceptionReasonInvalidMaxResults           ValidationExceptionReason = "INVALID_MAX_RESULTS"
+	ValidationExceptionReasonInvalidTermId               ValidationExceptionReason = "INVALID_TERM_ID"
+	ValidationExceptionReasonMissingTermId               ValidationExceptionReason = "MISSING_TERM_ID"
+	ValidationExceptionReasonMissingName                 ValidationExceptionReason = "MISSING_NAME"
+	ValidationExceptionReasonInvalidName                 ValidationExceptionReason = "INVALID_NAME"
+	ValidationExceptionReasonInvalidDescription          ValidationExceptionReason = "INVALID_DESCRIPTION"
+	ValidationExceptionReasonMissingChargeAmount         ValidationExceptionReason = "MISSING_CHARGE_AMOUNT"
+	ValidationExceptionReasonInvalidChargeAmount         ValidationExceptionReason = "INVALID_CHARGE_AMOUNT"
+	ValidationExceptionReasonMissingPaymentRequestId     ValidationExceptionReason = "MISSING_PAYMENT_REQUEST_ID"
+	ValidationExceptionReasonInvalidPaymentRequestId     ValidationExceptionReason = "INVALID_PAYMENT_REQUEST_ID"
+	ValidationExceptionReasonMissingPartyType            ValidationExceptionReason = "MISSING_PARTY_TYPE"
+	ValidationExceptionReasonInvalidPartyType            ValidationExceptionReason = "INVALID_PARTY_TYPE"
+	ValidationExceptionReasonUnsupportedFilters          ValidationExceptionReason = "UNSUPPORTED_FILTERS"
+	ValidationExceptionReasonInvalidRejectionReason      ValidationExceptionReason = "INVALID_REJECTION_REASON"
+	ValidationExceptionReasonInvalidPaymentRequestStatus ValidationExceptionReason = "INVALID_PAYMENT_REQUEST_STATUS"
+	ValidationExceptionReasonOther                       ValidationExceptionReason = "OTHER"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -123,7 +167,20 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"INVALID_SORT_ORDER",
 		"INVALID_NEXT_TOKEN",
 		"INVALID_MAX_RESULTS",
+		"INVALID_TERM_ID",
+		"MISSING_TERM_ID",
+		"MISSING_NAME",
+		"INVALID_NAME",
+		"INVALID_DESCRIPTION",
+		"MISSING_CHARGE_AMOUNT",
+		"INVALID_CHARGE_AMOUNT",
+		"MISSING_PAYMENT_REQUEST_ID",
+		"INVALID_PAYMENT_REQUEST_ID",
+		"MISSING_PARTY_TYPE",
+		"INVALID_PARTY_TYPE",
 		"UNSUPPORTED_FILTERS",
+		"INVALID_REJECTION_REASON",
+		"INVALID_PAYMENT_REQUEST_STATUS",
 		"OTHER",
 	}
 }

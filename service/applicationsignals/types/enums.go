@@ -108,6 +108,9 @@ const (
 	MetricSourceTypeServiceOperation  MetricSourceType = "ServiceOperation"
 	MetricSourceTypeCloudwatchMetric  MetricSourceType = "CloudWatchMetric"
 	MetricSourceTypeServiceDependency MetricSourceType = "ServiceDependency"
+	MetricSourceTypeAppmonitor        MetricSourceType = "AppMonitor"
+	MetricSourceTypeCanary            MetricSourceType = "Canary"
+	MetricSourceTypeService           MetricSourceType = "Service"
 )
 
 // Values returns all known values for MetricSourceType. Note that this can be
@@ -119,6 +122,9 @@ func (MetricSourceType) Values() []MetricSourceType {
 		"ServiceOperation",
 		"CloudWatchMetric",
 		"ServiceDependency",
+		"AppMonitor",
+		"Canary",
+		"Service",
 	}
 }
 

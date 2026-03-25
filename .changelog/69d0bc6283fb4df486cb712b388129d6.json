@@ -1,0 +1,8 @@
+{
+    "id": "69d0bc62-83fb-4df4-86cb-712b388129d6",
+    "type": "feature",
+    "description": "Add support for Mu-law and A-law codecs for output format",
+    "modules": [
+        "service/polly"
+    ]
+}
