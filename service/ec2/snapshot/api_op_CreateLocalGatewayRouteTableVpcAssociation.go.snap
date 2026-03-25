@@ -13,7 +13,6 @@ CreateLocalGatewayRouteTableVpcAssociation
 		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		spanRetryLoop
@@ -35,6 +34,5 @@ CreateLocalGatewayRouteTableVpcAssociation
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

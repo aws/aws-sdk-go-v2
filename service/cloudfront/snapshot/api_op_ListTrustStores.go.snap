@@ -12,7 +12,6 @@ ListTrustStores
 		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		spanRetryLoop
@@ -34,6 +33,5 @@ ListTrustStores
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

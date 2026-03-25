@@ -13,7 +13,6 @@ CreateGeofenceCollection
 		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		spanRetryLoop
@@ -36,6 +35,5 @@ CreateGeofenceCollection
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

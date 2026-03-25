@@ -12,7 +12,6 @@ ListAuditFindings
 		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		spanRetryLoop
@@ -34,6 +33,5 @@ ListAuditFindings
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

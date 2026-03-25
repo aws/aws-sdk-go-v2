@@ -13,7 +13,6 @@ ListEntities
 		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		spanRetryLoop
@@ -36,6 +35,5 @@ ListEntities
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

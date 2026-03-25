@@ -13,7 +13,6 @@ GetMethod
 		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 		APIGATEWAY:AcceptHeader
 	Finalize stack step
@@ -36,6 +35,5 @@ GetMethod
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

@@ -21,7 +21,6 @@ UploadPartCopy
 		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		DisableAcceptEncodingGzip
@@ -46,6 +45,5 @@ UploadPartCopy
 		S3MetadataRetriever
 		OperationDeserializer
 		S3:ProcessResponseFor200Error
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

@@ -12,7 +12,6 @@ StartStreamTranscription
 		ClientRequestID
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		ComputePayloadHash
@@ -36,6 +35,5 @@ StartStreamTranscription
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

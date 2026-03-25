@@ -12,7 +12,6 @@ ListSourceRepositoryBranches
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		spanRetryLoop
@@ -33,6 +32,5 @@ ListSourceRepositoryBranches
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

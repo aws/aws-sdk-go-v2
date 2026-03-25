@@ -12,7 +12,6 @@ UpdateSpace
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		spanRetryLoop
@@ -33,6 +32,5 @@ UpdateSpace
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

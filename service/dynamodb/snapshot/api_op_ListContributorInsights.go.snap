@@ -12,7 +12,6 @@ ListContributorInsights
 		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		DisableAcceptEncodingGzip
@@ -35,7 +34,6 @@ ListContributorInsights
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		DynamoDB:ResponseChecksumValidation
 		RequestResponseLogger

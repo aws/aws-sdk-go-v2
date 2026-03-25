@@ -13,7 +13,6 @@ CreateResource
 		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 		APIGATEWAY:AcceptHeader
 	Finalize stack step
@@ -36,6 +35,5 @@ CreateResource
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

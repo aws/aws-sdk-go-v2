@@ -19,7 +19,6 @@ GetBucketVersioning
 		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		spanRetryLoop
@@ -44,6 +43,5 @@ GetBucketVersioning
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

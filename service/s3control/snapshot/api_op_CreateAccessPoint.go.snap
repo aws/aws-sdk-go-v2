@@ -19,7 +19,6 @@ CreateAccessPoint
 		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		spanRetryLoop
@@ -44,6 +43,5 @@ CreateAccessPoint
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

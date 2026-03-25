@@ -13,7 +13,6 @@ GetDeployment
 		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 		APIGATEWAY:AcceptHeader
 	Finalize stack step
@@ -36,6 +35,5 @@ GetDeployment
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

@@ -23,7 +23,6 @@ PutBucketVersioning
 		AWSChecksum:RequestMetricsTracking
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		DisableAcceptEncodingGzip
@@ -49,6 +48,5 @@ PutBucketVersioning
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

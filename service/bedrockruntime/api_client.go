@@ -16,7 +16,6 @@ import (
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
-	internalmiddleware "github.com/aws/aws-sdk-go-v2/internal/middleware"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/auth/bearer"
 	smithydocument "github.com/aws/smithy-go/document"
@@ -873,10 +872,11 @@ func resolveIdempotencyTokenProvider(o *Options) {
 	o.IdempotencyTokenProvider = smithyrand.NewUUIDIdempotencyToken(cryptorand.Reader)
 }
 
-func addRetry(stack *middleware.Stack, o Options) error {
+func addRetry(stack *middleware.Stack, o Options, c *Client) error {
 	attempt := retry.NewAttemptMiddleware(o.Retryer, smithyhttp.RequestCloner, func(m *retry.Attempt) {
 		m.LogAttempts = o.ClientLogMode.IsRetries()
 		m.OperationMeter = o.MeterProvider.Meter("github.com/aws/aws-sdk-go-v2/service/bedrockruntime")
+		m.ClientSkew = c.timeOffset
 	})
 	if err := stack.Finalize.Insert(attempt, "ResolveAuthScheme", middleware.Before); err != nil {
 		return err
@@ -927,13 +927,6 @@ func newDefaultBearerAuthSigner(o Options) bearer.Signer {
 	return bearer.NewSignHTTPSMessage()
 }
 
-func addTimeOffsetBuild(stack *middleware.Stack, c *Client) error {
-	mw := internalmiddleware.AddTimeOffsetMiddleware{Offset: c.timeOffset}
-	if err := stack.Build.Add(&mw, middleware.After); err != nil {
-		return err
-	}
-	return stack.Deserialize.Insert(&mw, "RecordResponseTiming", middleware.Before)
-}
 func initializeTimeOffsetResolver(c *Client) {
 	c.timeOffset = new(atomic.Int64)
 }

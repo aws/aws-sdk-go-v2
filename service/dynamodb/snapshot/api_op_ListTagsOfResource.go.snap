@@ -13,7 +13,6 @@ ListTagsOfResource
 		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		DisableAcceptEncodingGzip
@@ -37,7 +36,6 @@ ListTagsOfResource
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		DynamoDB:ResponseChecksumValidation
 		RequestResponseLogger

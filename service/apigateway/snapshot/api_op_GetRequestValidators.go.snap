@@ -13,7 +13,6 @@ GetRequestValidators
 		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 		APIGATEWAY:AcceptHeader
 	Finalize stack step
@@ -36,6 +35,5 @@ GetRequestValidators
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

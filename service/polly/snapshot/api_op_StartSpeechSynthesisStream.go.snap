@@ -13,7 +13,6 @@ StartSpeechSynthesisStream
 		ClientRequestID
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		ComputePayloadHash
@@ -37,6 +36,5 @@ StartSpeechSynthesisStream
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

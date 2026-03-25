@@ -12,7 +12,6 @@ ListDevEnvironmentSessions
 		ClientRequestID
 		ComputeContentLength
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		spanRetryLoop
@@ -33,6 +32,5 @@ ListDevEnvironmentSessions
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

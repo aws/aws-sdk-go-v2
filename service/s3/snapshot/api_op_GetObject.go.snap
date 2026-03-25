@@ -23,7 +23,6 @@ GetObject
 		AWSChecksum:ResponseMetricsTracking
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		DisableAcceptEncodingGzip
@@ -46,7 +45,6 @@ GetObject
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		AWSChecksum:ValidateOutputPayloadChecksum
 		RequestResponseLogger

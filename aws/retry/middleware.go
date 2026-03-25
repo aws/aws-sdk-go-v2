@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"sync/atomic"
 	"time"
 
 	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
@@ -43,12 +44,20 @@ type Attempt struct {
 	// A Meter instance for recording retry-related metrics.
 	OperationMeter metrics.Meter
 
+	// Initial clock skew that would have been saved from a previous operation
+	// call.
+	ClientSkew *atomic.Int64
+
 	retryer       aws.RetryerV2
 	requestCloner RequestCloner
 }
 
-// define the threshold at which we will consider certain kind of errors to be probably
-// caused by clock skew
+// skewThreshold is used for several things:
+//   - It defines the threshold at which we will consider certain kind of errors
+//     to be probably caused by clock skew
+//   - It is the threshold at which we actually treat client and server clock
+//     difference as a significant skew such that we store it back to the client to
+//     be reused in subsequent requests.
 const skewThreshold = 4 * time.Minute
 
 // NewAttemptMiddleware returns a new Attempt retry middleware.
@@ -82,8 +91,12 @@ func (r Attempt) logf(logger logging.Logger, classification logging.Classificati
 func (r *Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInput, next smithymiddle.FinalizeHandler) (
 	out smithymiddle.FinalizeOutput, metadata smithymiddle.Metadata, err error,
 ) {
-	var attemptNum int
 	var attemptClockSkew time.Duration
+	if r.ClientSkew != nil {
+		attemptClockSkew = time.Duration(r.ClientSkew.Load())
+	}
+
+	var attemptNum int
 	var attemptResults AttemptResults
 
 	maxAttempts := r.retryer.MaxAttempts()
@@ -99,6 +112,8 @@ func (r *Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeIn
 		attemptInput := in
 		attemptInput.Request = r.requestCloner(attemptInput.Request)
 
+		ctx = internalcontext.SetAttemptSkewContext(ctx, attemptClockSkew)
+
 		// Record the metadata for the for attempt being started.
 		attemptCtx := setRetryMetadata(ctx, retryMetadata{
 			AttemptNum:       attemptNum,
@@ -106,9 +121,6 @@ func (r *Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeIn
 			MaxAttempts:      maxAttempts,
 			AttemptClockSkew: attemptClockSkew,
 		})
-
-		// Setting clock skew to be used on other context (like signing)
-		ctx = internalcontext.SetAttemptSkewContext(ctx, attemptClockSkew)
 
 		var attemptResult AttemptResult
 
@@ -146,6 +158,14 @@ func (r *Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeIn
 			metadata = attemptResult.ResponseMetadata.Clone()
 
 			break
+		}
+	}
+
+	// this guarantees we are staying on top of the persistent skew value
+	// (either to apply it or to heal it back if the clocks realign)
+	if r.ClientSkew != nil {
+		if resultSkew, ok := awsmiddle.GetAttemptSkew(metadata); ok {
+			r.ClientSkew.Store(resultSkew.Nanoseconds())
 		}
 	}
 

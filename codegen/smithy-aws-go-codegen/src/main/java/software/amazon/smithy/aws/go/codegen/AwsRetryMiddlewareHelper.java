@@ -45,10 +45,11 @@ public class AwsRetryMiddlewareHelper implements GoIntegration {
                 .addUseImports(SmithyGoDependency.SMITHY_HTTP_TRANSPORT)
                 .addUseImports(AwsGoDependency.AWS_RETRY)
                 .write(goTemplate("""
-                        func addRetry(stack *middleware.Stack, o Options) error {
+                        func addRetry(stack *middleware.Stack, o Options, c *Client) error {
                         attempt := retry.NewAttemptMiddleware(o.Retryer, smithyhttp.RequestCloner, func(m *retry.Attempt) {
                             m.LogAttempts = o.ClientLogMode.IsRetries()
                             m.OperationMeter = o.MeterProvider.Meter($S)
+                            m.ClientSkew = c.timeOffset
                         })
                         if err := stack.Finalize.Insert(attempt, "ResolveAuthScheme", middleware.Before); err != nil {
                             return err
