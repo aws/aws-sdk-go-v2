@@ -1,3 +1,20 @@
+# Release (2026-03-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigatewayv2`: [v1.34.0](service/apigatewayv2/CHANGELOG.md#v1340-2026-03-25)
+  * **Feature**: Added DISABLE IN PROGRESS and DISABLE FAILED Portal statuses.
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.19.0](service/applicationsignals/CHANGELOG.md#v1190-2026-03-25)
+  * **Feature**: This release adds support for creating SLOs on RUM appMonitors, Synthetics canaries and services.
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.63.1](service/batch/CHANGELOG.md#v1631-2026-03-25)
+  * **Documentation**: Documentation-only update for AWS Batch.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.13.0](service/marketplaceagreement/CHANGELOG.md#v1130-2026-03-25)
+  * **Feature**: The Variable Payments APIs enable AWS Marketplace Sellers to perform manage their payment requests (send, get, list, cancel).
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.57.0](service/polly/CHANGELOG.md#v1570-2026-03-25)
+  * **Feature**: Add support for Mu-law and A-law codecs for output format
+* `github.com/aws/aws-sdk-go-v2/service/uxc`: [v1.0.0](service/uxc/CHANGELOG.md#v100-2026-03-25)
+  * **Release**: New AWS service client module
+  * **Feature**: GA release of AccountCustomizations, used to manage account color, visible services, and visible regions settings in the AWS Management Console.
+
 # Release (2026-03-24)
 
 ## Module Highlights

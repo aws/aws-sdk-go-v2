@@ -1,8 +1,0 @@
-{
-    "id": "6b6e7ecd-21c6-468a-86e3-25a548224382",
-    "type": "feature",
-    "description": "This release adds support for creating SLOs on RUM appMonitors, Synthetics canaries and services.",
-    "modules": [
-        "service/applicationsignals"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "5ed27d44-fcd4-46a5-bac7-69bd32b6f6a9",
-    "type": "feature",
-    "description": "GA release of AccountCustomizations, used to manage account color, visible services, and visible regions settings in the AWS Management Console.",
-    "modules": [
-        "service/uxc"
-    ]
-}

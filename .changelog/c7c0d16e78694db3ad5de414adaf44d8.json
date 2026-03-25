@@ -1,8 +1,0 @@
-{
-    "id": "c7c0d16e-7869-4db3-ad5d-e414adaf44d8",
-    "type": "documentation",
-    "description": "Documentation-only update for AWS Batch.",
-    "modules": [
-        "service/batch"
-    ]
-}

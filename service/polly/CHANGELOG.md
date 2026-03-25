@@ -1,3 +1,7 @@
+# v1.57.0 (2026-03-25)
+
+* **Feature**: Add support for Mu-law and A-law codecs for output format
+
 # v1.56.1 (2026-03-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

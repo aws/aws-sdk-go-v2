@@ -1,3 +1,7 @@
+# v1.34.0 (2026-03-25)
+
+* **Feature**: Added DISABLE IN PROGRESS and DISABLE FAILED Portal statuses.
+
 # v1.33.8 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

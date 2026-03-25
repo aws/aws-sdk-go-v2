@@ -1,3 +1,7 @@
+# v1.19.0 (2026-03-25)
+
+* **Feature**: This release adds support for creating SLOs on RUM appMonitors, Synthetics canaries and services.
+
 # v1.18.7 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

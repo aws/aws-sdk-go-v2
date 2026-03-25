@@ -1,3 +1,7 @@
+# v1.63.1 (2026-03-25)
+
+* **Documentation**: Documentation-only update for AWS Batch.
+
 # v1.63.0 (2026-03-23)
 
 * **Feature**: AWS Batch AMI Visibility feature support. Adds read-only batchImageStatus to Ec2Configuration to provide visibility on the status of Batch-vended AMIs used by Compute Environments.
