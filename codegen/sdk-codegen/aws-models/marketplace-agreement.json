@@ -5,8 +5,8 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 32
+                    "min": 12,
+                    "max": 12
                 },
                 "smithy.api#pattern": "^[0-9]+$"
             }
@@ -16,13 +16,25 @@
             "version": "2020-03-01",
             "operations": [
                 {
+                    "target": "com.amazonaws.marketplaceagreement#CancelAgreementPaymentRequest"
+                },
+                {
                     "target": "com.amazonaws.marketplaceagreement#DescribeAgreement"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#GetAgreementPaymentRequest"
                 },
                 {
                     "target": "com.amazonaws.marketplaceagreement#GetAgreementTerms"
                 },
                 {
+                    "target": "com.amazonaws.marketplaceagreement#ListAgreementPaymentRequests"
+                },
+                {
                     "target": "com.amazonaws.marketplaceagreement#SearchAgreements"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#SendAgreementPaymentRequest"
                 }
             ],
             "traits": {
@@ -782,6 +794,16 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.marketplaceagreement#AgreementId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_/-]+$"
+            }
+        },
         "com.amazonaws.marketplaceagreement#AgreementResourceType": {
             "type": "string",
             "traits": {
@@ -956,6 +978,122 @@
                 "smithy.api#documentation": "<p>Enables you and your customers to move your existing agreements to AWS Marketplace. The customer won't be charged for product usage in AWS Marketplace because they already paid for the product outside of AWS Marketplace.</p>"
             }
         },
+        "com.amazonaws.marketplaceagreement#CancelAgreementPaymentRequest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceagreement#CancelAgreementPaymentRequestInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceagreement#CancelAgreementPaymentRequestOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Allows sellers (proposers) to cancel a payment request that is in <code>PENDING_APPROVAL</code> status. Once cancelled, the payment request transitions to <code>CANCELLED</code> status and can no longer be accepted or rejected by the buyer.</p> <note> <p>Only payment requests in <code>PENDING_APPROVAL</code> status can be cancelled. A <code>ConflictException</code> is thrown if the payment request is in any other status.</p> </note>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#CancelAgreementPaymentRequestInput": {
+            "type": "structure",
+            "members": {
+                "paymentRequestId": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the payment request to cancel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agreementId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement associated with the payment request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#CancelAgreementPaymentRequestOutput": {
+            "type": "structure",
+            "members": {
+                "paymentRequestId": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the cancelled payment request.</p>"
+                    }
+                },
+                "agreementId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement associated with this payment request.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated status of the payment request, which is <code>CANCELLED</code>.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the payment request.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed description of the payment request, if provided.</p>"
+                    }
+                },
+                "chargeAmount": {
+                    "target": "com.amazonaws.marketplaceagreement#PositiveAmountUpto8Decimals",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount that was requested to be charged.</p>"
+                    }
+                },
+                "currencyCode": {
+                    "target": "com.amazonaws.marketplaceagreement#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The currency code for the charge amount.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the payment request was originally created, in ISO 8601 format.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the payment request was cancelled, in ISO 8601 format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.marketplaceagreement#Catalog": {
             "type": "string",
             "traits": {
@@ -963,7 +1101,27 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[a-zA-Z]+$"
+                "smithy.api#pattern": "^[a-zA-Z0-9.-]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ChargeId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^ch-[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
             }
         },
         "com.amazonaws.marketplaceagreement#ConfigurableUpfrontPricingTerm": {
@@ -1050,6 +1208,37 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.marketplaceagreement#ConfigurableUpfrontRateCardItem"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ConflictException": {
+            "type": "structure",
+            "members": {
+                "requestId": {
+                    "target": "com.amazonaws.marketplaceagreement#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the error.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.marketplaceagreement#ExceptionMessage"
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the resource.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request could not be completed due to a conflict with the current state of the resource.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
             }
         },
         "com.amazonaws.marketplaceagreement#Constraints": {
@@ -1417,6 +1606,131 @@
                 "smithy.api#documentation": "<p>Defines a short-term free pricing model where the buyers aren’t charged anything within a specified limit.</p>"
             }
         },
+        "com.amazonaws.marketplaceagreement#GetAgreementPaymentRequest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceagreement#GetAgreementPaymentRequestInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceagreement#GetAgreementPaymentRequestOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves detailed information about a specific payment request. Both sellers (proposers) and buyers (acceptors) can use this operation to view payment requests associated with their agreements. The response includes the current status, charge details, timestamps, and the charge ID if the request has been approved.</p> <note> <p>The calling identity must be either the acceptor or proposer of the payment request. A <code>ResourceNotFoundException</code> is returned if the payment request does not exist.</p> </note>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementPaymentRequestInput": {
+            "type": "structure",
+            "members": {
+                "paymentRequestId": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the payment request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agreementId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement associated with the payment request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementPaymentRequestOutput": {
+            "type": "structure",
+            "members": {
+                "paymentRequestId": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the payment request.</p>"
+                    }
+                },
+                "agreementId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement associated with this payment request. Use <code>DescribeAgreement</code> to retrieve full agreement details.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the payment request. Possible values include:</p> <ul> <li> <p> <code>VALIDATING</code> – The payment request is being validated against agreement terms.</p> </li> <li> <p> <code>VALIDATION_FAILED</code> – The payment request failed validation.</p> </li> <li> <p> <code>PENDING_APPROVAL</code> – The payment request is awaiting buyer action.</p> </li> <li> <p> <code>APPROVED</code> – The buyer has approved the payment request.</p> </li> <li> <p> <code>REJECTED</code> – The buyer has rejected the payment request.</p> </li> <li> <p> <code>CANCELLED</code> – The seller has cancelled the payment request.</p> </li> </ul>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional message providing additional context about the payment request status, such as a rejection reason or validation failure details.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the payment request.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed description of the payment request, if provided.</p>"
+                    }
+                },
+                "chargeId": {
+                    "target": "com.amazonaws.marketplaceagreement#ChargeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the charge created after the payment request is approved. This field is only present for approved payment requests and follows the pattern <code>ch-[a-zA-Z0-9]+</code>.</p>"
+                    }
+                },
+                "chargeAmount": {
+                    "target": "com.amazonaws.marketplaceagreement#PositiveAmountUpto8Decimals",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount charged or to be charged to the buyer.</p>"
+                    }
+                },
+                "currencyCode": {
+                    "target": "com.amazonaws.marketplaceagreement#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The currency code for the charge amount.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the payment request was created, in ISO 8601 format.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the payment request was last updated, in ISO 8601 format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.marketplaceagreement#GetAgreementTerms": {
             "type": "operation",
             "input": {
@@ -1566,6 +1880,110 @@
                 "smithy.api#documentation": "<p>Defines the list of text agreements proposed to the acceptors. An example is the end user license agreement (EULA).</p>"
             }
         },
+        "com.amazonaws.marketplaceagreement#ListAgreementPaymentRequests": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceagreement#ListAgreementPaymentRequestsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceagreement#ListAgreementPaymentRequestsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists payment requests available to you as a seller or buyer. Both sellers (proposers) and buyers (acceptors) can use this operation to find payment requests by specifying their party type and applying optional parameters.</p> <note> <p> <code>PartyType</code> is a required parameter. A <code>ValidationException</code> is returned if <code>PartyType</code> is not provided. Pagination is supported through <code>maxResults</code> (1-50, default 50) and <code>nextToken</code> parameters.</p> </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ListAgreementPaymentRequestsInput": {
+            "type": "structure",
+            "members": {
+                "partyType": {
+                    "target": "com.amazonaws.marketplaceagreement#PartyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The party type for the payment requests. Required parameter. Use <code>Proposer</code> to list payment requests where you are the seller, or <code>Acceptor</code> to list payment requests where you are the buyer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agreementType": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter to list payment requests by agreement type (e.g., <code>PurchaseAgreement</code>).</p>"
+                    }
+                },
+                "catalog": {
+                    "target": "com.amazonaws.marketplaceagreement#Catalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter to list payment requests by catalog (e.g., <code>AWSMarketplace</code>).</p>"
+                    }
+                },
+                "agreementId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter to list payment requests for a specific agreement.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter to list payment requests by status. Valid values include <code>VALIDATING</code>, <code>VALIDATION_FAILED</code>, <code>PENDING_APPROVAL</code>, <code>APPROVED</code>, <code>REJECTED</code>, and <code>CANCELLED</code>.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.marketplaceagreement#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of payment requests to return in a single response (1-50). Default is 50.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.marketplaceagreement#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start pagination. Use the <code>nextToken</code> value from a previous response to retrieve the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ListAgreementPaymentRequestsOutput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.marketplaceagreement#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to retrieve the next page of results. If <code>null</code>, there are no more results to retrieve.</p>"
+                    }
+                },
+                "items": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>PaymentRequestSummary</code> objects containing summary information about each payment request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.marketplaceagreement#MaxResults": {
             "type": "integer",
             "traits": {
@@ -1579,10 +1997,9 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 0,
                     "max": 8192
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9+/=]+$"
+                "smithy.api#pattern": "^[a-zA-Z0-9+/=_-]+$"
             }
         },
         "com.amazonaws.marketplaceagreement#OfferId": {
@@ -1601,6 +2018,16 @@
                 "smithy.api#pattern": "^\\S{1,50}$"
             }
         },
+        "com.amazonaws.marketplaceagreement#PartyType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[A-Za-z]+$"
+            }
+        },
         "com.amazonaws.marketplaceagreement#PaymentRequestApprovalStrategy": {
             "type": "enum",
             "members": {
@@ -1616,6 +2043,149 @@
                         "smithy.api#enumValue": "WAIT_FOR_APPROVAL"
                     }
                 }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#PaymentRequestDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                },
+                "smithy.api#pattern": "^.+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#PaymentRequestId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^pr-[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#PaymentRequestName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^.+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#PaymentRequestStatus": {
+            "type": "enum",
+            "members": {
+                "VALIDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATING"
+                    }
+                },
+                "VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATION_FAILED"
+                    }
+                },
+                "PENDING_APPROVAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_APPROVAL"
+                    }
+                },
+                "APPROVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPROVED"
+                    }
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#PaymentRequestStatusMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.marketplaceagreement#PaymentRequestSummary": {
+            "type": "structure",
+            "members": {
+                "paymentRequestId": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the payment request.</p>"
+                    }
+                },
+                "agreementId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement associated with this payment request.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the payment request. Possible values include <code>VALIDATING</code>, <code>VALIDATION_FAILED</code>, <code>PENDING_APPROVAL</code>, <code>APPROVED</code>, <code>REJECTED</code>, and <code>CANCELLED</code>.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the payment request.</p>"
+                    }
+                },
+                "chargeId": {
+                    "target": "com.amazonaws.marketplaceagreement#ChargeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the charge created after the payment request is approved. This field is only present for approved payment requests.</p>"
+                    }
+                },
+                "chargeAmount": {
+                    "target": "com.amazonaws.marketplaceagreement#PositiveAmountUpto8Decimals",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount charged or to be charged to the buyer.</p>"
+                    }
+                },
+                "currencyCode": {
+                    "target": "com.amazonaws.marketplaceagreement#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The currency code for the charge amount.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the payment request was created, in ISO 8601 format.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the payment request was last updated, in ISO 8601 format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary view of a payment request.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#PaymentRequestSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#PaymentRequestSummary"
             }
         },
         "com.amazonaws.marketplaceagreement#PaymentScheduleTerm": {
@@ -1642,6 +2212,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Defines an installment-based pricing model where customers are charged a fixed price on different dates during the agreement validity period. This is used most commonly for flexible payment schedule pricing.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#PositiveAmountUpto8Decimals": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]*(\\.[0-9]{0,8})?$"
             }
         },
         "com.amazonaws.marketplaceagreement#PositiveIntegerWithDefaultValueOne": {
@@ -1865,6 +2441,18 @@
                     "traits": {
                         "smithy.api#enumValue": "Agreement"
                     }
+                },
+                "CHARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Charge"
+                    }
+                },
+                "PAYMENT_REQUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PaymentRequest"
+                    }
                 }
             }
         },
@@ -2005,6 +2593,143 @@
                 "smithy.api#documentation": "<p>Differentiates between the mutually exclusive rate cards in the same pricing term to be selected by the buyer.</p>"
             }
         },
+        "com.amazonaws.marketplaceagreement#SendAgreementPaymentRequest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceagreement#SendAgreementPaymentRequestInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceagreement#SendAgreementPaymentRequestOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Allows sellers (proposers) to submit a payment request to buyers (acceptors) for a specific charge amount for an agreement that includes a <code>VariablePaymentTerm</code>. The payment request is created in <code>PENDING_APPROVAL</code> status, at which point the buyer can accept or reject it.</p> <note> <p>The agreement must be active and have a <code>VariablePaymentTerm</code> to support payment requests. The <code>chargeAmount</code> must not exceed the remaining available balance under the <code>VariablePaymentTerm</code> <code>maxTotalChargeAmount</code>.</p> </note>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#SendAgreementPaymentRequestInput": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.marketplaceagreement#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "agreementId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement for which the payment request is being submitted. Use <code>GetAgreementTerms</code> to retrieve agreement term details.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "termId": {
+                    "target": "com.amazonaws.marketplaceagreement#TermId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the <code>VariablePaymentTerm</code> for the agreement that the payment request is being sent for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A descriptive name for the payment request (5-64 characters).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "chargeAmount": {
+                    "target": "com.amazonaws.marketplaceagreement#PositiveAmountUpto8Decimals",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount requested to be charged to the buyer, positive decimal value in the currency of the accepted term.</p> <note> <p>A <code>ValidationException</code> is returned if the <code>chargeAmount</code> exceeds the available balance, if the agreement doesn't have an active <code>VariablePaymentTerm</code>, or if the <code>termId</code> is invalid.</p> </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional detailed description of the payment request (1-2000 characters).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#SendAgreementPaymentRequestOutput": {
+            "type": "structure",
+            "members": {
+                "paymentRequestId": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the sent payment request.</p>"
+                    }
+                },
+                "agreementId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agreement identifier for this payment request.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the payment request. The initial status is <code>PENDING_APPROVAL</code>.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the payment request.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentRequestDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed description of the payment request, if provided.</p>"
+                    }
+                },
+                "chargeAmount": {
+                    "target": "com.amazonaws.marketplaceagreement#PositiveAmountUpto8Decimals",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount being charged to the buyer.</p>"
+                    }
+                },
+                "currencyCode": {
+                    "target": "com.amazonaws.marketplaceagreement#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The currency code for the charge amount (e.g., <code>USD</code>).</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the payment request was created, in ISO 8601 format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.marketplaceagreement#Sort": {
             "type": "structure",
             "members": {
@@ -2070,6 +2795,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Defines the customer support available for the acceptors when they purchase the software.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#TermId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9+=;,.@\\-_]+$"
             }
         },
         "com.amazonaws.marketplaceagreement#ThrottlingException": {
@@ -2266,10 +3001,88 @@
                         "smithy.api#enumValue": "INVALID_MAX_RESULTS"
                     }
                 },
+                "INVALID_TERM_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_TERM_ID"
+                    }
+                },
+                "MISSING_TERM_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_TERM_ID"
+                    }
+                },
+                "MISSING_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_NAME"
+                    }
+                },
+                "INVALID_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NAME"
+                    }
+                },
+                "INVALID_DESCRIPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_DESCRIPTION"
+                    }
+                },
+                "MISSING_CHARGE_AMOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_CHARGE_AMOUNT"
+                    }
+                },
+                "INVALID_CHARGE_AMOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_CHARGE_AMOUNT"
+                    }
+                },
+                "MISSING_PAYMENT_REQUEST_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_PAYMENT_REQUEST_ID"
+                    }
+                },
+                "INVALID_PAYMENT_REQUEST_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_PAYMENT_REQUEST_ID"
+                    }
+                },
+                "MISSING_PARTY_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_PARTY_TYPE"
+                    }
+                },
+                "INVALID_PARTY_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_PARTY_TYPE"
+                    }
+                },
                 "UNSUPPORTED_FILTERS": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "UNSUPPORTED_FILTERS"
+                    }
+                },
+                "INVALID_REJECTION_REASON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_REJECTION_REASON"
+                    }
+                },
+                "INVALID_PAYMENT_REQUEST_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_PAYMENT_REQUEST_STATUS"
                     }
                 },
                 "OTHER": {

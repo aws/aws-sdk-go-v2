@@ -2585,6 +2585,12 @@
                         "smithy.api#httpQuery": "NextToken"
                     }
                 },
+                "MetricSourceTypes": {
+                    "target": "com.amazonaws.applicationsignals#MetricSourceTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this optional field to only include SLOs with the specified metric source types in the output. Supported types are:</p> <ul> <li> <p>Service operation</p> </li> <li> <p>Service dependency</p> </li> <li> <p>Service</p> </li> <li> <p>CloudWatch metric</p> </li> <li> <p>AppMonitor</p> </li> <li> <p>Canary</p> </li> </ul>"
+                    }
+                },
                 "IncludeLinkedAccounts": {
                     "target": "smithy.api#Boolean",
                     "traits": {
@@ -2600,10 +2606,10 @@
                         "smithy.api#httpQuery": "SloOwnerAwsAccountId"
                     }
                 },
-                "MetricSourceTypes": {
-                    "target": "com.amazonaws.applicationsignals#MetricSourceTypes",
+                "MetricSource": {
+                    "target": "com.amazonaws.applicationsignals#MetricSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this optional field to only include SLOs with the specified metric source types in the output. Supported types are:</p> <ul> <li> <p>Service operation</p> </li> <li> <p>Service dependency</p> </li> <li> <p>CloudWatch metric</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>Identifies the metric source to filter SLOs by.</p>"
                     }
                 }
             },
@@ -3270,6 +3276,27 @@
                 "target": "com.amazonaws.applicationsignals#MetricReference"
             }
         },
+        "com.amazonaws.applicationsignals#MetricSource": {
+            "type": "structure",
+            "members": {
+                "MetricSourceKeyAttributes": {
+                    "target": "com.amazonaws.applicationsignals#Attributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key attributes that identify the metric source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetricSourceAttributes": {
+                    "target": "com.amazonaws.applicationsignals#Attributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional attributes for the metric source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the metric source for SLOs on resources other than Application Signals services.</p>"
+            }
+        },
         "com.amazonaws.applicationsignals#MetricSourceType": {
             "type": "enum",
             "members": {
@@ -3289,6 +3316,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ServiceDependency"
+                    }
+                },
+                "APPMONITOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AppMonitor"
+                    }
+                },
+                "CANARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Canary"
+                    }
+                },
+                "SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Service"
                     }
                 }
             }
@@ -3628,6 +3673,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>. </p>"
                     }
+                },
+                "MetricSource": {
+                    "target": "com.amazonaws.applicationsignals#MetricSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the metric source for SLOs on resources other than Application Signals services.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3671,6 +3722,18 @@
                     "target": "com.amazonaws.applicationsignals#DependencyConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>. </p>"
+                    }
+                },
+                "MetricSource": {
+                    "target": "com.amazonaws.applicationsignals#MetricSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the metric source for SLOs on resources other than Application Signals services.</p>"
+                    }
+                },
+                "MetricName": {
+                    "target": "com.amazonaws.applicationsignals#MetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the metric for SLOs on resources other than Application Signals services.</p>"
                     }
                 }
             },
@@ -4087,6 +4150,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>. </p>"
                     }
+                },
+                "MetricSource": {
+                    "target": "com.amazonaws.applicationsignals#MetricSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the metric source for SLOs on resources other than Application Signals services.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4130,6 +4199,12 @@
                     "target": "com.amazonaws.applicationsignals#SLIPeriodSeconds",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of seconds to use as the period for SLO evaluation. Your application's performance is compared to the SLI during each period. For each period, the application is determined to have either achieved or not achieved the necessary performance.</p>"
+                    }
+                },
+                "MetricSource": {
+                    "target": "com.amazonaws.applicationsignals#MetricSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the metric source for SLOs on resources other than Application Signals services.</p>"
                     }
                 },
                 "MetricDataQueries": {
@@ -4249,7 +4324,7 @@
                 "MetricSourceType": {
                     "target": "com.amazonaws.applicationsignals#MetricSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Displays the SLI metric source type for this SLO. Supported types are:</p> <ul> <li> <p>Service operation</p> </li> <li> <p>Service dependency</p> </li> <li> <p>CloudWatch metric</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>Displays the SLI metric source type for this SLO. Supported types are:</p> <ul> <li> <p>Service operation</p> </li> <li> <p>Service dependency</p> </li> <li> <p>Service</p> </li> <li> <p>CloudWatch metric</p> </li> <li> <p>AppMonitor</p> </li> <li> <p>Canary</p> </li> </ul>"
                     }
                 }
             },
@@ -4575,7 +4650,13 @@
                 "MetricSourceType": {
                     "target": "com.amazonaws.applicationsignals#MetricSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Displays the SLI metric source type for this SLO. Supported types are:</p> <ul> <li> <p>Service operation</p> </li> <li> <p>Service dependency</p> </li> <li> <p>CloudWatch metric</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>Displays the SLI metric source type for this SLO. Supported types are:</p> <ul> <li> <p>Service operation</p> </li> <li> <p>Service dependency</p> </li> <li> <p>Service</p> </li> <li> <p>CloudWatch metric</p> </li> <li> <p>AppMonitor</p> </li> <li> <p>Canary</p> </li> </ul>"
+                    }
+                },
+                "MetricSource": {
+                    "target": "com.amazonaws.applicationsignals#MetricSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the metric source for SLOs on resources other than Application Signals services.</p>"
                     }
                 }
             },
