@@ -14,7 +14,6 @@ ChangeResourceRecordSets
 		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		spanRetryLoop
@@ -37,6 +36,5 @@ ChangeResourceRecordSets
 		RequestIDRetriever
 		OperationDeserializer
 		Route53:ProcessResponseForCustomErrorResponse
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

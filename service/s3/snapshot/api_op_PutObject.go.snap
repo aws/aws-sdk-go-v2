@@ -23,7 +23,6 @@ PutObject
 		AWSChecksum:RequestMetricsTracking
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		S3100Continue
 		RecursionDetection
 	Finalize stack step
@@ -50,6 +49,5 @@ PutObject
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger
