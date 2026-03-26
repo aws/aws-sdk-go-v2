@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Retrieves information about a Timestream for InfluxDB cluster.
@@ -57,6 +58,9 @@ type GetDbClusterOutput struct {
 	// The amount of storage allocated for your DB storage type (in gibibytes).
 	AllocatedStorage *int32
 
+	// Configuration for node modes in the DbCluster.
+	ClusterConfiguration *types.ClusterConfiguration
+
 	// The Timestream for InfluxDB instance type that InfluxDB runs on.
 	DbInstanceType types.DbInstanceType
 
@@ -85,13 +89,22 @@ type GetDbClusterOutput struct {
 	// username, and password.
 	InfluxAuthParametersSecretArn *string
 
+	// The timestamp of the last completed maintenance operation on the DB cluster.
+	LastMaintenanceTime *time.Time
+
 	// Configuration for sending InfluxDB engine logs to send to specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
+
+	// The maintenance schedule for the DB cluster.
+	MaintenanceSchedule *types.MaintenanceSchedule
 
 	// Specifies whether the network type of the Timestream for InfluxDB cluster is
 	// IPv4, which can communicate over IPv4 protocol only, or DUAL, which can
 	// communicate over both IPv4 and IPv6 protocols.
 	NetworkType types.NetworkType
+
+	// The timestamp of the next scheduled maintenance operation on the DB cluster.
+	NextMaintenanceTime *time.Time
 
 	// The port number on which InfluxDB accepts connections.
 	Port *int32

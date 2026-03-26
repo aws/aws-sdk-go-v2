@@ -46,6 +46,10 @@ type UpdateDbClusterInput struct {
 	// The log delivery configuration to apply to the DB cluster.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
 
+	// Specifies the maintenance schedule for the DB cluster, including the preferred
+	// maintenance window and timezone.
+	MaintenanceSchedule *types.MaintenanceSchedule
+
 	// Update the DB cluster to use the specified port.
 	Port *int32
 

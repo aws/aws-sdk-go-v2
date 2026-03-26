@@ -1995,6 +1995,7 @@ const (
 	ClusterInstanceTypeMlR7i16xlarge      ClusterInstanceType = "ml.r7i.16xlarge"
 	ClusterInstanceTypeMlR7i24xlarge      ClusterInstanceType = "ml.r7i.24xlarge"
 	ClusterInstanceTypeMlR7i48xlarge      ClusterInstanceType = "ml.r7i.48xlarge"
+	ClusterInstanceTypeMlR5d16xlarge      ClusterInstanceType = "ml.r5d.16xlarge"
 	ClusterInstanceTypeMlP6B30048xlarge   ClusterInstanceType = "ml.p6-b300.48xlarge"
 )
 
@@ -2119,6 +2120,7 @@ func (ClusterInstanceType) Values() []ClusterInstanceType {
 		"ml.r7i.16xlarge",
 		"ml.r7i.24xlarge",
 		"ml.r7i.48xlarge",
+		"ml.r5d.16xlarge",
 		"ml.p6-b300.48xlarge",
 	}
 }

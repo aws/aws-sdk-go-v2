@@ -7715,6 +7715,41 @@ func awsAwsjson11_serializeDocumentProcessors(v []types.Processor, value smithyj
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentQueryParameter(v *types.QueryParameter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultValue != nil {
+		ok := object.Key("defaultValue")
+		ok.String(*v.DefaultValue)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentQueryParameterList(v []types.QueryParameter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentQueryParameter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRecordFields(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -7811,6 +7846,16 @@ func awsAwsjson11_serializeDocumentS3Configuration(v *types.S3Configuration, val
 	if v.DestinationIdentifier != nil {
 		ok := object.Key("destinationIdentifier")
 		ok.String(*v.DestinationIdentifier)
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("kmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	if v.OwnerAccountId != nil {
+		ok := object.Key("ownerAccountId")
+		ok.String(*v.OwnerAccountId)
 	}
 
 	if v.RoleArn != nil {
@@ -10239,6 +10284,13 @@ func awsAwsjson11_serializeOpDocumentPutQueryDefinitionInput(v *PutQueryDefiniti
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.Parameters != nil {
+		ok := object.Key("parameters")
+		if err := awsAwsjson11_serializeDocumentQueryParameterList(v.Parameters, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.QueryDefinitionId != nil {

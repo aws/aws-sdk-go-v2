@@ -47,14 +47,12 @@ type CreateInferenceComponentInput struct {
 	// This member is required.
 	InferenceComponentName *string
 
-	// Details about the resources to deploy with this inference component, including
-	// the model, container, and compute resources.
-	//
-	// This member is required.
-	Specification *types.InferenceComponentSpecification
-
 	// Runtime settings for a model that is deployed with an inference component.
 	RuntimeConfig *types.InferenceComponentRuntimeConfig
+
+	// Details about the resources to deploy with this inference component, including
+	// the model, container, and compute resources.
+	Specification *types.InferenceComponentSpecification
 
 	// A list of key-value pairs associated with the model. For more information, see [Tagging Amazon Web Services resources]
 	// in the Amazon Web Services General Reference.

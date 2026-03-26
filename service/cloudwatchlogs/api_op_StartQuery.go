@@ -53,7 +53,7 @@ import (
 // For more information, see [CloudWatch cross-account observability]. For a cross-account StartQuery operation, the query
 // definition must be defined in the monitoring account.
 //
-// You can have up to 30 concurrent CloudWatch Logs insights queries, including
+// You can have up to 100 concurrent CloudWatch Logs insights queries, including
 // queries that have been added to dashboards.
 //
 // [CloudWatch Logs Insights Query Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html

@@ -16367,9 +16367,7 @@ func validateOpCreateInferenceComponentInput(v *CreateInferenceComponentInput) e
 	if v.EndpointName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
 	}
-	if v.Specification == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Specification"))
-	} else if v.Specification != nil {
+	if v.Specification != nil {
 		if err := validateInferenceComponentSpecification(v.Specification); err != nil {
 			invalidParams.AddNested("Specification", err.(smithy.InvalidParamsError))
 		}

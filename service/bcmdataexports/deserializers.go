@@ -2590,6 +2590,15 @@ func awsAwsjson11_deserializeDocumentS3Destination(v **types.S3Destination, valu
 				sv.S3Bucket = ptr.String(jtv)
 			}
 
+		case "S3BucketOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.S3BucketOwner = ptr.String(jtv)
+			}
+
 		case "S3OutputConfigurations":
 			if err := awsAwsjson11_deserializeDocumentS3OutputConfigurations(&sv.S3OutputConfigurations, value); err != nil {
 				return err

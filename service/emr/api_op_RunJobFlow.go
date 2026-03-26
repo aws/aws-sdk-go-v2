@@ -241,6 +241,18 @@ type RunJobFlowInput struct {
 	// value is 1 . The maximum value is 256 .
 	StepConcurrencyLevel *int32
 
+	// The Amazon Resource Name (ARN) of the runtime role for steps specified in the
+	// RunJobFlow request. The runtime role can be a cross-account IAM role. The
+	// runtime role ARN is a combination of account ID, role name, and role type using
+	// the following format: arn:partition:iam::account-id:role/role-name .
+	//
+	// For example, arn:aws:iam::1234567890:role/ReadOnly is a correctly formatted
+	// runtime role ARN.
+	//
+	// This parameter applies only to steps included in the Steps parameter of this
+	// RunJobFlow request. It does not apply to steps added later to the cluster.
+	StepExecutionRoleArn *string
+
 	// A list of steps to run.
 	Steps []types.StepConfig
 

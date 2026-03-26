@@ -20877,6 +20877,11 @@ func awsAwsjson11_deserializeDocumentQueryDefinition(v **types.QueryDefinition, 
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "parameters":
+			if err := awsAwsjson11_deserializeDocumentQueryParameterList(&sv.Parameters, value); err != nil {
+				return err
+			}
+
 		case "queryDefinitionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21060,6 +21065,98 @@ func awsAwsjson11_deserializeDocumentQueryInfoList(v *[]types.QueryInfo, value i
 		var col types.QueryInfo
 		destAddr := &col
 		if err := awsAwsjson11_deserializeDocumentQueryInfo(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentQueryParameter(v **types.QueryParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QueryParameter
+	if *v == nil {
+		sv = &types.QueryParameter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "defaultValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QueryParameterDefaultValue to be of type string, got %T instead", value)
+				}
+				sv.DefaultValue = ptr.String(jtv)
+			}
+
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QueryParameterDescription to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QueryParameterName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentQueryParameterList(v *[]types.QueryParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.QueryParameter
+	if *v == nil {
+		cv = []types.QueryParameter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.QueryParameter
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentQueryParameter(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -22011,6 +22108,24 @@ func awsAwsjson11_deserializeDocumentS3Configuration(v **types.S3Configuration, 
 					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
 				}
 				sv.DestinationIdentifier = ptr.String(jtv)
+			}
+
+		case "kmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
+			}
+
+		case "ownerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.OwnerAccountId = ptr.String(jtv)
 			}
 
 		case "roleArn":

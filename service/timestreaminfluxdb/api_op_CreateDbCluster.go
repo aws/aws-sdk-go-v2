@@ -91,6 +91,10 @@ type CreateDbClusterInput struct {
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
 
+	// Specifies the maintenance schedule for the DB cluster, including the preferred
+	// maintenance window and timezone.
+	MaintenanceSchedule *types.MaintenanceSchedule
+
 	// Specifies whether the network type of the Timestream for InfluxDB cluster is
 	// IPv4, which can communicate over IPv4 protocol only, or DUAL, which can
 	// communicate over both IPv4 and IPv6 protocols.

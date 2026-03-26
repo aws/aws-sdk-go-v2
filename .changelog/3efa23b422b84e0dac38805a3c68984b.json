@@ -1,0 +1,8 @@
+{
+    "id": "3efa23b4-22b8-4e0d-ac38-805a3c68984b",
+    "type": "feature",
+    "description": "Release support for ml.r5d.16xlarge instance types for SageMaker HyperPod",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

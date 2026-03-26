@@ -1,0 +1,8 @@
+{
+    "id": "99720f02-7919-4784-90ef-6eb4a236dcd7",
+    "type": "feature",
+    "description": "This release adds parameter support to saved queries in CloudWatch Logs Insights. Define reusable query templates with named placeholders, invoke them using start query. Available in Console, CLI and SDK",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

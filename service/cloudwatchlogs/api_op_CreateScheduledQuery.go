@@ -46,8 +46,8 @@ type CreateScheduledQueryInput struct {
 	// This member is required.
 	Name *string
 
-	// The query language to use for the scheduled query. Valid values are LogsQL , PPL
-	// , and SQL .
+	// The query language to use for the scheduled query. Valid values are CWLI , PPL ,
+	// and SQL .
 	//
 	// This member is required.
 	QueryLanguage types.QueryLanguage

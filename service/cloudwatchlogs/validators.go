@@ -2617,6 +2617,38 @@ func validateProcessors(v []types.Processor) error {
 	}
 }
 
+func validateQueryParameter(v *types.QueryParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryParameter"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueryParameterList(v []types.QueryParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryParameterList"}
+	for i := range v {
+		if err := validateQueryParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRenameKeyEntries(v []types.RenameKeyEntry) error {
 	if v == nil {
 		return nil
@@ -4092,6 +4124,11 @@ func validateOpPutQueryDefinitionInput(v *PutQueryDefinitionInput) error {
 	}
 	if v.QueryString == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
+	}
+	if v.Parameters != nil {
+		if err := validateQueryParameterList(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

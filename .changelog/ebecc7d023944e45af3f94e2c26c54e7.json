@@ -1,0 +1,8 @@
+{
+    "id": "ebecc7d0-2394-4e45-af3f-94e2c26c54e7",
+    "type": "feature",
+    "description": "Add StepExecutionRoleArn to RunJobFlow API",
+    "modules": [
+        "service/emr"
+    ]
+}

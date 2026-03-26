@@ -651,6 +651,24 @@ func validateLogDeliveryConfiguration(v *types.LogDeliveryConfiguration) error {
 	}
 }
 
+func validateMaintenanceSchedule(v *types.MaintenanceSchedule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MaintenanceSchedule"}
+	if v.Timezone == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Timezone"))
+	}
+	if v.PreferredMaintenanceWindow == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PreferredMaintenanceWindow"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateParameters(v types.Parameters) error {
 	if v == nil {
 		return nil
@@ -720,6 +738,11 @@ func validateOpCreateDbClusterInput(v *CreateDbClusterInput) error {
 			invalidParams.AddNested("LogDeliveryConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MaintenanceSchedule != nil {
+		if err := validateMaintenanceSchedule(v.MaintenanceSchedule); err != nil {
+			invalidParams.AddNested("MaintenanceSchedule", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -753,6 +776,11 @@ func validateOpCreateDbInstanceInput(v *CreateDbInstanceInput) error {
 	if v.LogDeliveryConfiguration != nil {
 		if err := validateLogDeliveryConfiguration(v.LogDeliveryConfiguration); err != nil {
 			invalidParams.AddNested("LogDeliveryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MaintenanceSchedule != nil {
+		if err := validateMaintenanceSchedule(v.MaintenanceSchedule); err != nil {
+			invalidParams.AddNested("MaintenanceSchedule", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -966,6 +994,11 @@ func validateOpUpdateDbClusterInput(v *UpdateDbClusterInput) error {
 			invalidParams.AddNested("LogDeliveryConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MaintenanceSchedule != nil {
+		if err := validateMaintenanceSchedule(v.MaintenanceSchedule); err != nil {
+			invalidParams.AddNested("MaintenanceSchedule", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -984,6 +1017,11 @@ func validateOpUpdateDbInstanceInput(v *UpdateDbInstanceInput) error {
 	if v.LogDeliveryConfiguration != nil {
 		if err := validateLogDeliveryConfiguration(v.LogDeliveryConfiguration); err != nil {
 			invalidParams.AddNested("LogDeliveryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MaintenanceSchedule != nil {
+		if err := validateMaintenanceSchedule(v.MaintenanceSchedule); err != nil {
+			invalidParams.AddNested("MaintenanceSchedule", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

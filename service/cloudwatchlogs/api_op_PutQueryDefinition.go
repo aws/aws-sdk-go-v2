@@ -73,6 +73,13 @@ type PutQueryDefinitionInput struct {
 	// will contain no log groups.
 	LogGroupNames []string
 
+	// Use this parameter to include specific query parameters as part of your query
+	// definition. Query parameters are supported only for Logs Insights QL queries.
+	// Query parameters allow you to use placeholder variables in your query string
+	// that are substituted with values at execution time. Use the {{parameterName}}
+	// syntax in your query string to reference a parameter.
+	Parameters []types.QueryParameter
+
 	// If you are updating a query definition, use this parameter to specify the ID of
 	// the query definition that you want to update. You can use [DescribeQueryDefinitions]to retrieve the IDs
 	// of your saved query definitions.
