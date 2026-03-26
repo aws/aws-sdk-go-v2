@@ -733,6 +733,32 @@
                 "smithy.api#pattern": "^[^_\"][^\"]*$"
             }
         },
+        "com.amazonaws.timestreaminfluxdb#ClusterConfiguration": {
+            "type": "structure",
+            "members": {
+                "ingestQueryInstances": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances in the DbCluster which can both ingest and query.</p>"
+                    }
+                },
+                "queryOnlyInstances": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances in the DbCluster which can only query.</p>"
+                    }
+                },
+                "dedicatedCompactor": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if the compactor instance is a standalone instance or not.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for node modes in the DbCluster.</p>"
+            }
+        },
         "com.amazonaws.timestreaminfluxdb#ClusterDeploymentType": {
             "type": "enum",
             "members": {
@@ -997,6 +1023,12 @@
                         "smithy.api#documentation": "<p>Configuration for sending InfluxDB engine logs to a specified S3 bucket.</p>"
                     }
                 },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maintenance schedule for the DB cluster, including the preferred maintenance window and timezone.</p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.timestreaminfluxdb#RequestTagMap",
                     "traits": {
@@ -1172,6 +1204,12 @@
                         "smithy.api#documentation": "<p>Configuration for sending InfluxDB engine logs to a specified S3 bucket.</p>"
                     }
                 },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maintenance schedule for the DB instance, including the preferred maintenance window and timezone.</p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.timestreaminfluxdb#RequestTagMap",
                     "traits": {
@@ -1338,6 +1376,26 @@
                     "target": "com.amazonaws.timestreaminfluxdb#InstanceModeList",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the DbInstance's roles in the cluster.</p>"
+                    }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintenance schedule for the DB instance.</p>"
+                    }
+                },
+                "lastMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the last completed maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "nextMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the next scheduled maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
                     }
                 }
             },
@@ -2341,6 +2399,26 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the DbInstance's roles in the cluster.</p>"
                     }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintenance schedule for the DB instance.</p>"
+                    }
+                },
+                "lastMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the last completed maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "nextMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the next scheduled maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
                 }
             },
             "traits": {
@@ -2617,6 +2695,26 @@
                         "smithy.api#documentation": "<p>Configuration for sending InfluxDB engine logs to send to specified S3 bucket.</p>"
                     }
                 },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintenance schedule for the DB cluster.</p>"
+                    }
+                },
+                "lastMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the last completed maintenance operation on the DB cluster.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "nextMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the next scheduled maintenance operation on the DB cluster.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
                 "influxAuthParametersSecretArn": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -2639,6 +2737,12 @@
                     "target": "com.amazonaws.timestreaminfluxdb#FailoverMode",
                     "traits": {
                         "smithy.api#documentation": "<p>The configured failover mode for the DB cluster.</p>"
+                    }
+                },
+                "clusterConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#ClusterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for node modes in the DbCluster.</p>"
                     }
                 }
             },
@@ -2836,6 +2940,26 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the DbInstance's roles in the cluster.</p>"
                     }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintenance schedule for the DB instance.</p>"
+                    }
+                },
+                "lastMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the last completed maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "nextMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the next scheduled maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
                 }
             },
             "traits": {
@@ -2933,6 +3057,17 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#IanaTimezone": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "IANA timezone identifier.\n\nFormat: Region/City or UTC\nSee: https://www.iana.org/time-zones",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^(UTC|[A-Za-z_]+/[A-Za-z0-9_]+(/[A-Za-z0-9_]+)?)$"
             }
         },
         "com.amazonaws.timestreaminfluxdb#InfluxDBv2Parameters": {
@@ -3352,7 +3487,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides custom configuration to DataFusion as a comma-separated list of key:value pairs.</p>",
-                        "smithy.api#pattern": "^[a-zA-Z0-9_]+=[^,\\s]+(?:,[a-zA-Z0-9_]+=[^,\\s]+)*$"
+                        "smithy.api#pattern": "^[a-zA-Z0-9_.]+:[^,\\s]+(?:,[a-zA-Z0-9_.]+:[^,\\s]+)*$"
                     }
                 },
                 "maxHttpRequestSize": {
@@ -3667,7 +3802,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides custom configuration to DataFusion as a comma-separated list of key:value pairs.</p>",
-                        "smithy.api#pattern": "^[a-zA-Z0-9_]+=[^,\\s]+(?:,[a-zA-Z0-9_]+=[^,\\s]+)*$"
+                        "smithy.api#pattern": "^[a-zA-Z0-9_.]+:[^,\\s]+(?:,[a-zA-Z0-9_.]+:[^,\\s]+)*$"
                     }
                 },
                 "maxHttpRequestSize": {
@@ -4475,6 +4610,39 @@
                 }
             }
         },
+        "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule": {
+            "type": "structure",
+            "members": {
+                "timezone": {
+                    "target": "com.amazonaws.timestreaminfluxdb#IanaTimezone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IANA timezone identifier for the maintenance window. Format: Region/City or UTC. For example, America/New_York or UTC.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "preferredMaintenanceWindow": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM (UTC). Day must be one of: Mon, Tue, Wed, Thu, Fri, Sat, Sun. For example, Sun:02:00-Sun:06:00. Provide an empty string to let the system choose a window.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the maintenance schedule for a DB instance or cluster, defining when maintenance operations such as patching can be performed.</p>"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#MaintenanceWindow": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Preferred maintenance window in format \"ddd:HH:MM-ddd:HH:MM\"\n\nFormat requirements:\n  - Day: Mon, Tue, Wed, Thu, Fri, Sat, Sun\n  - Hour: 00-23 (24-hour format, 2 digits)\n  - Minute: 00-59 (2 digits)\n\nProvide empty string to let the system choose a window.\n\nExamples:\n  - \"Sun:02:00-Sun:06:00\" (4-hour window Sunday morning)\n  - \"Sat:23:00-Sun:03:00\" (cross-midnight window)\n  - \"\" or (system chooses)",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 19
+                },
+                "smithy.api#pattern": "^$|^(Mon|Tue|Wed|Thu|Fri|Sat|Sun):([01]\\d|2[0-3]):[0-5]\\d-(Mon|Tue|Wed|Thu|Fri|Sat|Sun):([01]\\d|2[0-3]):[0-5]\\d$"
+            }
+        },
         "com.amazonaws.timestreaminfluxdb#MaxResults": {
             "type": "integer",
             "traits": {
@@ -4860,6 +5028,26 @@
                     "target": "com.amazonaws.timestreaminfluxdb#InstanceModeList",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the DbInstance's roles in the cluster.</p>"
+                    }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintenance schedule for the DB instance.</p>"
+                    }
+                },
+                "lastMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the last completed maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "nextMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the next scheduled maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
                     }
                 }
             },
@@ -5340,6 +5528,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Update the DB cluster's failover behavior.</p>"
                     }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maintenance schedule for the DB cluster, including the preferred maintenance window and timezone.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5455,6 +5649,12 @@
                     "target": "com.amazonaws.timestreaminfluxdb#AllocatedStorage",
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of storage to allocate for your DB storage type (in gibibytes).</p>"
+                    }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maintenance schedule for the DB instance, including the preferred maintenance window and timezone.</p>"
                     }
                 }
             },
@@ -5604,6 +5804,26 @@
                     "target": "com.amazonaws.timestreaminfluxdb#InstanceModeList",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the DbInstance's roles in the cluster.</p>"
+                    }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintenance schedule for the DB instance.</p>"
+                    }
+                },
+                "lastMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the last completed maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "nextMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the next scheduled maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
                     }
                 }
             },

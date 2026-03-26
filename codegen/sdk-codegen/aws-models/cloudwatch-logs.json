@@ -1623,7 +1623,7 @@
                 "queryLanguage": {
                     "target": "com.amazonaws.cloudwatchlogs#QueryLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The query language to use for the scheduled query. Valid values are <code>LogsQL</code>,\n        <code>PPL</code>, and <code>SQL</code>.</p>",
+                        "smithy.api#documentation": "<p>The query language to use for the scheduled query. Valid values are <code>CWLI</code>,\n        <code>PPL</code>, and <code>SQL</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12175,7 +12175,7 @@
                 "logType": {
                     "target": "com.amazonaws.cloudwatchlogs#LogType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the type of log that the source is sending.</p>\n         <ul>\n            <li>\n               <p>For Amazon Bedrock Agents, the valid values are <code>APPLICATION_LOGS</code> and\n            <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock Knowledge Bases, the valid value is\n            <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Runtime, the valid values are\n            <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Tools, the valid values are\n            <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Identity, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Gateway, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For CloudFront, the valid value is <code>ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon CodeWhisperer, the valid value is <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaPackage, the valid values are <code>EGRESS_ACCESS_LOGS</code> and\n            <code>INGRESS_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaTailor, the valid values are <code>AD_DECISION_SERVER_LOGS</code>,\n            <code>MANIFEST_SERVICE_LOGS</code>, and <code>TRANSCODE_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Entity Resolution, the valid value is <code>WORKFLOW_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For IAM Identity Center, the valid value is\n          <code>ERROR_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Network Firewall Proxy, the valid values are <code>ALERT_LOGS</code>,\n            <code>ALLOW_LOGS</code>, and <code>DENY_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Network Load Balancer, the valid value is <code>NLB_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For PCS, the valid values are <code>PCS_SCHEDULER_LOGS</code> and\n            <code>PCS_JOBCOMP_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Quick Suite, the valid values are <code>CHAT_LOGS</code> and\n            <code>FEEDBACK_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services RTB Fabric, the valid values is\n          <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Q, the valid values are <code>EVENT_LOGS</code> and\n            <code>SYNC_JOB_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon SES mail manager, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRAFFIC_POLICY_DEBUG_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon WorkMail, the valid values are <code>ACCESS_CONTROL_LOGS</code>,\n            <code>AUTHENTICATION_LOGS</code>, <code>WORKMAIL_AVAILABILITY_PROVIDER_LOGS</code>,\n            <code>WORKMAIL_MAILBOX_ACCESS_LOGS</code>, and\n            <code>WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon VPC Route Server, the valid value is\n          <code>EVENT_LOGS</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Defines the type of log that the source is sending.</p>\n         <ul>\n            <li>\n               <p>For Amazon Bedrock Agents, the valid values are <code>APPLICATION_LOGS</code> and\n            <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock Knowledge Bases, the valid value is\n            <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Runtime, the valid values are\n            <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Tools, the valid values are\n            <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Identity, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Memory, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Gateway, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For CloudFront, the valid value is <code>ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon CodeWhisperer, the valid value is <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaPackage, the valid values are <code>EGRESS_ACCESS_LOGS</code> and\n            <code>INGRESS_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaTailor, the valid values are <code>AD_DECISION_SERVER_LOGS</code>,\n            <code>MANIFEST_SERVICE_LOGS</code>, and <code>TRANSCODE_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon EKS Auto Mode, the valid values are <code>AUTO_MODE_BLOCK_STORAGE_LOGS</code>,\n            <code>AUTO_MODE_COMPUTE_LOGS</code>, <code>AUTO_MODE_IPAM_LOGS</code>, and\n            <code>AUTO_MODE_LOAD_BALANCING_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Entity Resolution, the valid value is <code>WORKFLOW_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For IAM Identity Center, the valid value is\n          <code>ERROR_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Network Firewall Proxy, the valid values are <code>ALERT_LOGS</code>,\n            <code>ALLOW_LOGS</code>, and <code>DENY_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Network Load Balancer, the valid value is <code>NLB_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For PCS, the valid values are <code>PCS_SCHEDULER_LOGS</code> and\n            <code>PCS_JOBCOMP_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Quick, the valid values are <code>CHAT_LOGS</code> and\n            <code>FEEDBACK_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services RTB Fabric, the valid values is\n          <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Q, the valid values are <code>EVENT_LOGS</code> and\n            <code>SYNC_JOB_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon SES mail manager, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRAFFIC_POLICY_DEBUG_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon WorkMail, the valid values are <code>ACCESS_CONTROL_LOGS</code>,\n            <code>AUTHENTICATION_LOGS</code>, <code>WORKMAIL_AVAILABILITY_PROVIDER_LOGS</code>,\n            <code>WORKMAIL_MAILBOX_ACCESS_LOGS</code>, and\n            <code>WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon VPC Route Server, the valid value is\n          <code>EVENT_LOGS</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12774,6 +12774,12 @@
                         "smithy.api#documentation": "<p>Used as an idempotency token, to avoid returning an exception if the service receives the\n      same request twice because of a network error.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.cloudwatchlogs#QueryParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to include specific query parameters as part of your query definition.\n      Query parameters are supported only for Logs Insights QL queries. Query parameters allow you\n      to use placeholder variables in your query string that are substituted with values at execution\n      time. Use the <code>{{parameterName}}</code> syntax in your query string to reference a\n      parameter.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13156,6 +13162,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If this query definition contains a list of log groups that it is limited to, that list\n      appears here.</p>"
                     }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.cloudwatchlogs#QueryParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If this query definition contains a list of query parameters that define placeholder\n      variables for the query string, that list appears here.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13275,6 +13287,73 @@
                     "min": 1,
                     "max": 1000
                 }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#QueryParameter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.cloudwatchlogs#QueryParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the query parameter. A query parameter name must start with a letter or\n      underscore, and contain only letters, digits, and underscores.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "defaultValue": {
+                    "target": "com.amazonaws.cloudwatchlogs#QueryParameterDefaultValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value to use for this query parameter if no value is supplied at execution\n      time.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.cloudwatchlogs#QueryParameterDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the query parameter that explains its purpose or expected values.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure defines a query parameter for a saved CloudWatch Logs Insights query\n      definition. Query parameters are supported only for Logs Insights QL queries. They are\n      placeholder variables that you can reference in a query string using the\n      <code>{{parameterName}}</code> syntax. Each parameter can include a default value and a\n      description.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#QueryParameterDefaultValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#QueryParameterDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#QueryParameterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#QueryParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#QueryParameterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
             }
         },
         "com.amazonaws.cloudwatchlogs#QueryResults": {
@@ -13720,6 +13799,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the IAM role that grants permissions to write query results to the specified\n      Amazon S3 destination.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "ownerAccountId": {
+                    "target": "com.amazonaws.cloudwatchlogs#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS accountId for the bucket owning account.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.cloudwatchlogs#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS encryption key. Must belong to the same AWS Region\n      as the destination Amazon S3 bucket.</p>"
                     }
                 }
             },
@@ -14557,7 +14648,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a query of one or more log groups or data sources using CloudWatch Logs\n      Insights. You specify the log groups or data sources and time range to query and the query\n      string to use. You can query up to 10 data sources in a single query.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html\">CloudWatch Logs Insights Query\n        Syntax</a>.</p>\n         <p>After you run a query using <code>StartQuery</code>, the query results are stored by\n        CloudWatch Logs. You can use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetQueryResults.html\">GetQueryResults</a> to retrieve the results of a query, using the <code>queryId</code>\n      that <code>StartQuery</code> returns. </p>\n         <p>Interactive queries started with <code>StartQuery</code> share concurrency limits with\n      automated scheduled query executions. Both types of queries count toward the same regional\n      concurrent query quota, so high scheduled query activity may affect the availability of\n      concurrent slots for interactive queries.</p>\n         <note>\n            <p>To specify the log groups to query, a <code>StartQuery</code> operation must include one\n        of the following:</p>\n            <ul>\n               <li>\n                  <p>Either exactly one of the following parameters: <code>logGroupName</code>,\n              <code>logGroupNames</code>, or <code>logGroupIdentifiers</code>\n                  </p>\n               </li>\n               <li>\n                  <p>Or the <code>queryString</code> must include a <code>SOURCE</code> command to select\n            log groups for the query. The <code>SOURCE</code> command can select log groups based on\n            log group name prefix, account ID, and log class, or select data sources using\n            dataSource syntax in LogsQL, PPL, and SQL.\n            </p>\n                  <p>For more information about the <code>SOURCE</code> command, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax-Source.html\">SOURCE</a>.</p>\n               </li>\n            </ul>\n         </note>\n         <p>If you have associated a KMS key with the query results in this\n      account, then <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html\">StartQuery</a> uses\n      that key to encrypt the results when it stores them. If no key is associated with query\n      results, the query results are encrypted with the default CloudWatch Logs encryption\n      method.</p>\n         <p>Queries time out after 60 minutes of runtime. If your queries are timing out, reduce the\n      time range being searched or partition your query into a number of queries.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation\n      in a monitoring account to start a query in a linked source account. For more information, see\n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>. For a cross-account <code>StartQuery</code>\n      operation, the query definition must be defined in the monitoring account.</p>\n         <p>You can have up to 30 concurrent CloudWatch Logs insights queries, including queries\n      that have been added to dashboards. </p>"
+                "smithy.api#documentation": "<p>Starts a query of one or more log groups or data sources using CloudWatch Logs\n      Insights. You specify the log groups or data sources and time range to query and the query\n      string to use. You can query up to 10 data sources in a single query.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html\">CloudWatch Logs Insights Query\n        Syntax</a>.</p>\n         <p>After you run a query using <code>StartQuery</code>, the query results are stored by\n        CloudWatch Logs. You can use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetQueryResults.html\">GetQueryResults</a> to retrieve the results of a query, using the <code>queryId</code>\n      that <code>StartQuery</code> returns. </p>\n         <p>Interactive queries started with <code>StartQuery</code> share concurrency limits with\n      automated scheduled query executions. Both types of queries count toward the same regional\n      concurrent query quota, so high scheduled query activity may affect the availability of\n      concurrent slots for interactive queries.</p>\n         <note>\n            <p>To specify the log groups to query, a <code>StartQuery</code> operation must include one\n        of the following:</p>\n            <ul>\n               <li>\n                  <p>Either exactly one of the following parameters: <code>logGroupName</code>,\n              <code>logGroupNames</code>, or <code>logGroupIdentifiers</code>\n                  </p>\n               </li>\n               <li>\n                  <p>Or the <code>queryString</code> must include a <code>SOURCE</code> command to select\n            log groups for the query. The <code>SOURCE</code> command can select log groups based on\n            log group name prefix, account ID, and log class, or select data sources using\n            dataSource syntax in LogsQL, PPL, and SQL.\n            </p>\n                  <p>For more information about the <code>SOURCE</code> command, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax-Source.html\">SOURCE</a>.</p>\n               </li>\n            </ul>\n         </note>\n         <p>If you have associated a KMS key with the query results in this\n      account, then <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html\">StartQuery</a> uses\n      that key to encrypt the results when it stores them. If no key is associated with query\n      results, the query results are encrypted with the default CloudWatch Logs encryption\n      method.</p>\n         <p>Queries time out after 60 minutes of runtime. If your queries are timing out, reduce the\n      time range being searched or partition your query into a number of queries.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation\n      in a monitoring account to start a query in a linked source account. For more information, see\n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>. For a cross-account <code>StartQuery</code>\n      operation, the query definition must be defined in the monitoring account.</p>\n         <p>You can have up to 100 concurrent CloudWatch Logs insights queries, including queries\n      that have been added to dashboards. </p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#StartQueryRequest": {

@@ -566,6 +566,16 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.bcmdataexports#AccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
         "com.amazonaws.bcmdataexports#Arn": {
             "type": "string",
             "traits": {
@@ -1840,6 +1850,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the Amazon S3 bucket used as the destination of a data export file.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "S3BucketOwner": {
+                    "target": "com.amazonaws.bcmdataexports#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Account ID that owns the S3 bucket used as the destination for the data export.</p>"
                     }
                 },
                 "S3Prefix": {
