@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"net/http"
 	"sort"
 	"sync"
 	"time"
@@ -874,8 +875,11 @@ func (u *uploader) singleUpload(ctx context.Context, r io.Reader, sz int, cleanU
 	params := u.in.mapSingleUploadInput(r, u.options.ChecksumAlgorithm)
 	objectSize := int64(sz)
 
+	var loc recordLocationClient
+	opts := append(clientOptions, loc.WrapClient())
+
 	u.progressEmitter.Start(ctx, u.in, objectSize)
-	out, err := u.options.S3.PutObject(ctx, params, clientOptions...)
+	out, err := u.options.S3.PutObject(ctx, params, opts...)
 	if err != nil {
 		u.progressEmitter.Failed(ctx, err)
 		return nil, err
@@ -883,6 +887,7 @@ func (u *uploader) singleUpload(ctx context.Context, r io.Reader, sz int, cleanU
 
 	var output UploadObjectOutput
 	output.mapFromPutObjectOutput(out, u.in.Bucket, u.in.Key, objectSize)
+	output.Location = nzstring(loc.location)
 
 	u.progressEmitter.BytesTransferred(ctx, objectSize)
 	u.progressEmitter.Complete(ctx, &output)
@@ -962,9 +967,15 @@ func (cp completedParts) Swap(i, j int) {
 func (u *multiUploader) upload(ctx context.Context, firstBuf io.Reader, firstBuflen int, cleanup func(), clientOptions ...func(*s3.Options)) (*UploadObjectOutput, error) {
 	params := u.uploader.in.mapCreateMultipartUploadInput(u.options.ChecksumAlgorithm)
 
-	// Create a multipart
+	// We are **ignoring** the output.Location here for backwards compat.
+	//
+	// In output.Location S3 URL-encodes the key (e.g. "a/b" -> "a%2Fb"). v1
+	// (feature/s3/manager) used recordLocationClient which did not do that. We
+	// are electing to preserve that behavior here.
+	var loc recordLocationClient
 	u.progressEmitter.Start(ctx, u.in, u.objectSize)
-	resp, err := u.uploader.options.S3.CreateMultipartUpload(ctx, params, clientOptions...)
+	resp, err := u.uploader.options.S3.CreateMultipartUpload(ctx, params,
+		append(clientOptions, loc.WrapClient())...)
 	if err != nil {
 		cleanup()
 		u.progressEmitter.Failed(ctx, err)
@@ -1026,6 +1037,7 @@ func (u *multiUploader) upload(ctx context.Context, firstBuf io.Reader, firstBuf
 
 	var out UploadObjectOutput
 	out.mapFromCompleteMultipartUploadOutput(completeOut, params.Bucket, u.uploadID, u.progressEmitter.bytesTransferred.Load(), u.parts)
+	out.Location = nzstring(loc.location)
 
 	u.progressEmitter.Complete(ctx, &out)
 	return &out, nil
@@ -1165,4 +1177,35 @@ func getOrAddRequestUserAgent(stack *smithymiddleware.Stack) (*middleware.Reques
 	}
 
 	return ua, nil
+}
+
+type httpClient interface {
+	Do(r *http.Request) (*http.Response, error)
+}
+
+type recordLocationClient struct {
+	httpClient
+	location string
+}
+
+func (c *recordLocationClient) WrapClient() func(o *s3.Options) {
+	return func(o *s3.Options) {
+		c.httpClient = o.HTTPClient
+		o.HTTPClient = c
+	}
+}
+
+func (c *recordLocationClient) Do(r *http.Request) (resp *http.Response, err error) {
+	resp, err = c.httpClient.Do(r)
+	if err != nil {
+		return resp, err
+	}
+
+	if resp.Request != nil && resp.Request.URL != nil {
+		url := *resp.Request.URL
+		url.RawQuery = ""
+		c.location = url.String()
+	}
+
+	return resp, err
 }
