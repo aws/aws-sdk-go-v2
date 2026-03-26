@@ -1,3 +1,8 @@
+# v1.51.21 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.51.20 (2026-03-20)
 
 * No change notes available for this release.

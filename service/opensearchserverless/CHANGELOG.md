@@ -1,3 +1,8 @@
+# v1.30.1 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.0 (2026-03-24)
 
 * **Feature**: Adds support for updating the vector options field for existing collections.

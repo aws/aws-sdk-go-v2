@@ -1,8 +1,0 @@
-{
-    "id": "04b0fc32-be49-4bed-ad14-bd377c854e89",
-    "type": "feature",
-    "description": "With this release we are providing an option to accounts to have their export delivered to an S3 bucket that is not owned by the account.",
-    "modules": [
-        "service/bcmdataexports"
-    ]
-}

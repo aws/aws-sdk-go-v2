@@ -1,3 +1,853 @@
+# Release (2026-03-26)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.41.5
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.45.12](service/accessanalyzer/CHANGELOG.md#v14512-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.30.5](service/account/CHANGELOG.md#v1305-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.37.23](service/acm/CHANGELOG.md#v13723-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.46.12](service/acmpca/CHANGELOG.md#v14612-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/aiops`: [v1.6.21](service/aiops/CHANGELOG.md#v1621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.42.9](service/amp/CHANGELOG.md#v1429-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.38.14](service/amplify/CHANGELOG.md#v13814-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/amplifybackend`: [v1.32.20](service/amplifybackend/CHANGELOG.md#v13220-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder`: [v1.28.20](service/amplifyuibuilder/CHANGELOG.md#v12820-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.39.1](service/apigateway/CHANGELOG.md#v1391-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi`: [v1.29.14](service/apigatewaymanagementapi/CHANGELOG.md#v12914-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/apigatewayv2`: [v1.34.1](service/apigatewayv2/CHANGELOG.md#v1341-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.43.13](service/appconfig/CHANGELOG.md#v14313-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/appconfigdata`: [v1.23.22](service/appconfigdata/CHANGELOG.md#v12322-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/appfabric`: [v1.16.21](service/appfabric/CHANGELOG.md#v11621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.51.12](service/appflow/CHANGELOG.md#v15112-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.37.7](service/appintegrations/CHANGELOG.md#v1377-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.41.14](service/applicationautoscaling/CHANGELOG.md#v14114-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler`: [v1.27.12](service/applicationcostprofiler/CHANGELOG.md#v12712-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice`: [v1.35.13](service/applicationdiscoveryservice/CHANGELOG.md#v13513-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/applicationinsights`: [v1.34.20](service/applicationinsights/CHANGELOG.md#v13420-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.19.1](service/applicationsignals/CHANGELOG.md#v1191-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/appmesh`: [v1.35.12](service/appmesh/CHANGELOG.md#v13512-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.39.14](service/apprunner/CHANGELOG.md#v13914-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.54.4](service/appstream/CHANGELOG.md#v1544-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.53.5](service/appsync/CHANGELOG.md#v1535-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.6.3](service/arcregionswitch/CHANGELOG.md#v163-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/arczonalshift`: [v1.22.23](service/arczonalshift/CHANGELOG.md#v12223-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.15.5](service/artifact/CHANGELOG.md#v1155-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.57.4](service/athena/CHANGELOG.md#v1574-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.46.12](service/auditmanager/CHANGELOG.md#v14612-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.64.4](service/autoscaling/CHANGELOG.md#v1644-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/autoscalingplans`: [v1.30.14](service/autoscalingplans/CHANGELOG.md#v13014-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.100](service/b2bi/CHANGELOG.md#v100-preview100-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.54.11](service/backup/CHANGELOG.md#v15411-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/backupgateway`: [v1.26.3](service/backupgateway/CHANGELOG.md#v1263-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/backupsearch`: [v1.6.23](service/backupsearch/CHANGELOG.md#v1623-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.63.2](service/batch/CHANGELOG.md#v1632-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bcmdashboards`: [v1.1.4](service/bcmdashboards/CHANGELOG.md#v114-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bcmdataexports`: [v1.14.0](service/bcmdataexports/CHANGELOG.md#v1140-2026-03-26)
+  * **Feature**: With this release we are providing an option to accounts to have their export delivered to an S3 bucket that is not owned by the account.
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator`: [v1.10.9](service/bcmpricingcalculator/CHANGELOG.md#v1109-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bcmrecommendedactions`: [v1.1.5](service/bcmrecommendedactions/CHANGELOG.md#v115-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.57.1](service/bedrock/CHANGELOG.md#v1571-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.52.7](service/bedrockagent/CHANGELOG.md#v1527-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.15.2](service/bedrockagentcore/CHANGELOG.md#v1152-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.25.1](service/bedrockagentcorecontrol/CHANGELOG.md#v1251-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.51.8](service/bedrockagentruntime/CHANGELOG.md#v1518-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation`: [v1.13.5](service/bedrockdataautomation/CHANGELOG.md#v1135-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomationruntime`: [v1.10.4](service/bedrockdataautomationruntime/CHANGELOG.md#v1104-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.50.4](service/bedrockruntime/CHANGELOG.md#v1504-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.10.4](service/billing/CHANGELOG.md#v1104-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.28.5](service/billingconductor/CHANGELOG.md#v1285-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.39.8](service/braket/CHANGELOG.md#v1398-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.43.4](service/budgets/CHANGELOG.md#v1434-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/chatbot`: [v1.14.21](service/chatbot/CHANGELOG.md#v11421-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/chime`: [v1.41.12](service/chime/CHANGELOG.md#v14112-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkidentity`: [v1.27.20](service/chimesdkidentity/CHANGELOG.md#v12720-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.26.21](service/chimesdkmediapipelines/CHANGELOG.md#v12621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.33.15](service/chimesdkmeetings/CHANGELOG.md#v13315-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging`: [v1.32.17](service/chimesdkmessaging/CHANGELOG.md#v13217-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.28.13](service/chimesdkvoice/CHANGELOG.md#v12813-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.42.4](service/cleanrooms/CHANGELOG.md#v1424-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cleanroomsml`: [v1.22.5](service/cleanroomsml/CHANGELOG.md#v1225-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.33.20](service/cloud9/CHANGELOG.md#v13320-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudcontrol`: [v1.29.13](service/cloudcontrol/CHANGELOG.md#v12913-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/clouddirectory`: [v1.30.12](service/clouddirectory/CHANGELOG.md#v13012-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.71.9](service/cloudformation/CHANGELOG.md#v1719-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.60.4](service/cloudfront/CHANGELOG.md#v1604-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore`: [v1.12.24](service/cloudfrontkeyvaluestore/CHANGELOG.md#v11224-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsm`: [v1.29.21](service/cloudhsm/CHANGELOG.md#v12921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsmv2`: [v1.34.21](service/cloudhsmv2/CHANGELOG.md#v13421-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearch`: [v1.32.12](service/cloudsearch/CHANGELOG.md#v13212-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain`: [v1.28.20](service/cloudsearchdomain/CHANGELOG.md#v12820-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.55.9](service/cloudtrail/CHANGELOG.md#v1559-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtraildata`: [v1.17.13](service/cloudtraildata/CHANGELOG.md#v11713-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.55.3](service/cloudwatch/CHANGELOG.md#v1553-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchevents`: [v1.32.23](service/cloudwatchevents/CHANGELOG.md#v13223-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.65.0](service/cloudwatchlogs/CHANGELOG.md#v1650-2026-03-26)
+  * **Feature**: This release adds parameter support to saved queries in CloudWatch Logs Insights. Define reusable query templates with named placeholders, invoke them using start query. Available in Console, CLI and SDK
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.38.21](service/codeartifact/CHANGELOG.md#v13821-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.68.13](service/codebuild/CHANGELOG.md#v16813-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codecatalyst`: [v1.21.12](service/codecatalyst/CHANGELOG.md#v12112-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codecommit`: [v1.33.12](service/codecommit/CHANGELOG.md#v13312-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codeconnections`: [v1.10.20](service/codeconnections/CHANGELOG.md#v11020-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codedeploy`: [v1.35.13](service/codedeploy/CHANGELOG.md#v13513-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codeguruprofiler`: [v1.29.20](service/codeguruprofiler/CHANGELOG.md#v12920-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codegurureviewer`: [v1.34.20](service/codegurureviewer/CHANGELOG.md#v13420-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codegurusecurity`: [v1.16.24](service/codegurusecurity/CHANGELOG.md#v11624-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.46.21](service/codepipeline/CHANGELOG.md#v14621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codestarconnections`: [v1.35.13](service/codestarconnections/CHANGELOG.md#v13513-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codestarnotifications`: [v1.31.21](service/codestarnotifications/CHANGELOG.md#v13121-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentity`: [v1.33.22](service/cognitoidentity/CHANGELOG.md#v13322-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.59.3](service/cognitoidentityprovider/CHANGELOG.md#v1593-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cognitosync`: [v1.29.12](service/cognitosync/CHANGELOG.md#v12912-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.40.21](service/comprehend/CHANGELOG.md#v14021-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/comprehendmedical`: [v1.31.21](service/comprehendmedical/CHANGELOG.md#v13121-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.49.8](service/computeoptimizer/CHANGELOG.md#v1498-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation`: [v1.0.8](service/computeoptimizerautomation/CHANGELOG.md#v108-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.62.1](service/configservice/CHANGELOG.md#v1621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.166.1](service/connect/CHANGELOG.md#v11661-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaigns`: [v1.20.20](service/connectcampaigns/CHANGELOG.md#v12020-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.11.4](service/connectcampaignsv2/CHANGELOG.md#v1114-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.39.1](service/connectcases/CHANGELOG.md#v1391-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/connectcontactlens`: [v1.33.13](service/connectcontactlens/CHANGELOG.md#v13313-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/connecthealth`: [v1.0.3](service/connecthealth/CHANGELOG.md#v103-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.36.7](service/connectparticipant/CHANGELOG.md#v1367-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/controlcatalog`: [v1.14.9](service/controlcatalog/CHANGELOG.md#v1149-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.28.9](service/controltower/CHANGELOG.md#v1289-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/costandusagereportservice`: [v1.34.13](service/costandusagereportservice/CHANGELOG.md#v13413-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.63.6](service/costexplorer/CHANGELOG.md#v1636-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.22.8](service/costoptimizationhub/CHANGELOG.md#v1228-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.57.2](service/customerprofiles/CHANGELOG.md#v1572-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.61.10](service/databasemigrationservice/CHANGELOG.md#v16110-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/databrew`: [v1.39.14](service/databrew/CHANGELOG.md#v13914-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.40.14](service/dataexchange/CHANGELOG.md#v14014-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/datapipeline`: [v1.30.20](service/datapipeline/CHANGELOG.md#v13020-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.58.2](service/datasync/CHANGELOG.md#v1582-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.54.2](service/datazone/CHANGELOG.md#v1542-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/dax`: [v1.29.16](service/dax/CHANGELOG.md#v12916-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.26.2](service/deadline/CHANGELOG.md#v1262-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.38.13](service/detective/CHANGELOG.md#v13813-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.38.8](service/devicefarm/CHANGELOG.md#v1388-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/devopsguru`: [v1.40.12](service/devopsguru/CHANGELOG.md#v14012-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.38.15](service/directconnect/CHANGELOG.md#v13815-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/directoryservice`: [v1.38.16](service/directoryservice/CHANGELOG.md#v13816-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/directoryservicedata`: [v1.7.21](service/directoryservicedata/CHANGELOG.md#v1721-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/dlm`: [v1.35.16](service/dlm/CHANGELOG.md#v13516-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.48.13](service/docdb/CHANGELOG.md#v14813-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/docdbelastic`: [v1.20.13](service/docdbelastic/CHANGELOG.md#v12013-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.36.13](service/drs/CHANGELOG.md#v13613-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/dsql`: [v1.12.8](service/dsql/CHANGELOG.md#v1128-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.57.1](service/dynamodb/CHANGELOG.md#v1571-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.32.14](service/dynamodbstreams/CHANGELOG.md#v13214-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ebs`: [v1.33.14](service/ebs/CHANGELOG.md#v13314-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.296.1](service/ec2/CHANGELOG.md#v12961-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect`: [v1.32.20](service/ec2instanceconnect/CHANGELOG.md#v13220-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.56.2](service/ecr/CHANGELOG.md#v1562-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.38.13](service/ecrpublic/CHANGELOG.md#v13813-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.74.1](service/ecs/CHANGELOG.md#v1741-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.41.14](service/efs/CHANGELOG.md#v14114-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.81.2](service/eks/CHANGELOG.md#v1812-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/eksauth`: [v1.12.13](service/eksauth/CHANGELOG.md#v11213-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.51.13](service/elasticache/CHANGELOG.md#v15113-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk`: [v1.34.2](service/elasticbeanstalk/CHANGELOG.md#v1342-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing`: [v1.33.23](service/elasticloadbalancing/CHANGELOG.md#v13323-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.54.10](service/elasticloadbalancingv2/CHANGELOG.md#v15410-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.39.2](service/elasticsearchservice/CHANGELOG.md#v1392-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/elementalinference`: [v1.0.3](service/elementalinference/CHANGELOG.md#v103-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.59.0](service/emr/CHANGELOG.md#v1590-2026-03-26)
+  * **Feature**: Add StepExecutionRoleArn to RunJobFlow API
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.40.17](service/emrcontainers/CHANGELOG.md#v14017-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.39.6](service/emrserverless/CHANGELOG.md#v1396-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.26.5](service/entityresolution/CHANGELOG.md#v1265-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.45.23](service/eventbridge/CHANGELOG.md#v14523-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.6.4](service/evs/CHANGELOG.md#v164-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/finspace`: [v1.33.21](service/finspace/CHANGELOG.md#v13321-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/finspacedata`: [v1.33.21](service/finspacedata/CHANGELOG.md#v13321-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.42.13](service/firehose/CHANGELOG.md#v14213-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/fis`: [v1.37.20](service/fis/CHANGELOG.md#v13720-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.44.22](service/fms/CHANGELOG.md#v14422-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/forecast`: [v1.41.21](service/forecast/CHANGELOG.md#v14121-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/forecastquery`: [v1.29.21](service/forecastquery/CHANGELOG.md#v12921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/frauddetector`: [v1.41.12](service/frauddetector/CHANGELOG.md#v14112-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/freetier`: [v1.13.14](service/freetier/CHANGELOG.md#v11314-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.65.7](service/fsx/CHANGELOG.md#v1657-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.51.3](service/gamelift/CHANGELOG.md#v1513-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.11.1](service/gameliftstreams/CHANGELOG.md#v1111-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/geomaps`: [v1.9.4](service/geomaps/CHANGELOG.md#v194-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/geoplaces`: [v1.8.5](service/geoplaces/CHANGELOG.md#v185-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/georoutes`: [v1.7.14](service/georoutes/CHANGELOG.md#v1714-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/glacier`: [v1.32.6](service/glacier/CHANGELOG.md#v1326-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/globalaccelerator`: [v1.35.15](service/globalaccelerator/CHANGELOG.md#v13515-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.139.1](service/glue/CHANGELOG.md#v11391-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.33.4](service/grafana/CHANGELOG.md#v1334-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/greengrass`: [v1.32.21](service/greengrass/CHANGELOG.md#v13221-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.42.12](service/greengrassv2/CHANGELOG.md#v14212-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.40.4](service/groundstation/CHANGELOG.md#v1404-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.74.2](service/guardduty/CHANGELOG.md#v1742-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.37.4](service/health/CHANGELOG.md#v1374-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.36.13](service/healthlake/CHANGELOG.md#v13613-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.53.7](service/iam/CHANGELOG.md#v1537-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.36.5](service/identitystore/CHANGELOG.md#v1365-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.51.4](service/imagebuilder/CHANGELOG.md#v1514-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/inspector`: [v1.30.20](service/inspector/CHANGELOG.md#v13020-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.47.4](service/inspector2/CHANGELOG.md#v1474-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/inspectorscan`: [v1.13.5](service/inspectorscan/CHANGELOG.md#v1135-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.26.14](service/internetmonitor/CHANGELOG.md#v12614-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/invoicing`: [v1.9.8](service/invoicing/CHANGELOG.md#v198-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.72.5](service/iot/CHANGELOG.md#v1725-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotdataplane`: [v1.32.21](service/iotdataplane/CHANGELOG.md#v13221-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor`: [v1.36.21](service/iotdeviceadvisor/CHANGELOG.md#v13621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotevents`: [v1.33.13](service/iotevents/CHANGELOG.md#v13313-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ioteventsdata`: [v1.30.12](service/ioteventsdata/CHANGELOG.md#v13012-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.31.20](service/iotfleetwise/CHANGELOG.md#v13120-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane`: [v1.30.13](service/iotjobsdataplane/CHANGELOG.md#v13013-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations`: [v1.8.4](service/iotmanagedintegrations/CHANGELOG.md#v184-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling`: [v1.33.21](service/iotsecuretunneling/CHANGELOG.md#v13321-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.52.19](service/iotsitewise/CHANGELOG.md#v15219-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotthingsgraph`: [v1.30.21](service/iotthingsgraph/CHANGELOG.md#v13021-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iottwinmaker`: [v1.29.21](service/iottwinmaker/CHANGELOG.md#v12921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.54.9](service/iotwireless/CHANGELOG.md#v1549-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.48.14](service/ivs/CHANGELOG.md#v14814-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.21.20](service/ivschat/CHANGELOG.md#v12120-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.33.1](service/ivsrealtime/CHANGELOG.md#v1331-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.49.2](service/kafka/CHANGELOG.md#v1492-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kafkaconnect`: [v1.30.4](service/kafkaconnect/CHANGELOG.md#v1304-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.60.21](service/kendra/CHANGELOG.md#v16021-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kendraranking`: [v1.15.25](service/kendraranking/CHANGELOG.md#v11525-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.25.4](service/keyspaces/CHANGELOG.md#v1254-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/keyspacesstreams`: [v1.6.3](service/keyspacesstreams/CHANGELOG.md#v163-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.43.5](service/kinesis/CHANGELOG.md#v1435-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalytics`: [v1.30.23](service/kinesisanalytics/CHANGELOG.md#v13023-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.36.24](service/kinesisanalyticsv2/CHANGELOG.md#v13624-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideo`: [v1.33.8](service/kinesisvideo/CHANGELOG.md#v1338-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia`: [v1.33.13](service/kinesisvideoarchivedmedia/CHANGELOG.md#v13313-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia`: [v1.27.20](service/kinesisvideomedia/CHANGELOG.md#v12720-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling`: [v1.28.21](service/kinesisvideosignaling/CHANGELOG.md#v12821-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideowebrtcstorage`: [v1.20.13](service/kinesisvideowebrtcstorage/CHANGELOG.md#v12013-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.50.4](service/kms/CHANGELOG.md#v1504-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.47.5](service/lakeformation/CHANGELOG.md#v1475-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.88.5](service/lambda/CHANGELOG.md#v1885-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/launchwizard`: [v1.14.4](service/launchwizard/CHANGELOG.md#v1144-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice`: [v1.34.14](service/lexmodelbuildingservice/CHANGELOG.md#v13414-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.60.2](service/lexmodelsv2/CHANGELOG.md#v1602-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimeservice`: [v1.29.21](service/lexruntimeservice/CHANGELOG.md#v12921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimev2`: [v1.35.15](service/lexruntimev2/CHANGELOG.md#v13515-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanager`: [v1.37.10](service/licensemanager/CHANGELOG.md#v13710-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions`: [v1.20.13](service/licensemanagerlinuxsubscriptions/CHANGELOG.md#v12013-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions`: [v1.21.15](service/licensemanagerusersubscriptions/CHANGELOG.md#v12115-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.51.1](service/lightsail/CHANGELOG.md#v1511-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.50.13](service/location/CHANGELOG.md#v15013-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutequipment`: [v1.36.14](service/lookoutequipment/CHANGELOG.md#v13614-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.26.14](service/m2/CHANGELOG.md#v12614-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/machinelearning`: [v1.34.14](service/machinelearning/CHANGELOG.md#v13414-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.50.13](service/macie2/CHANGELOG.md#v15013-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.17.21](service/mailmanager/CHANGELOG.md#v11721-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchain`: [v1.31.21](service/managedblockchain/CHANGELOG.md#v13121-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchainquery`: [v1.22.13](service/managedblockchainquery/CHANGELOG.md#v12213-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.13.1](service/marketplaceagreement/CHANGELOG.md#v1131-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.39.4](service/marketplacecatalog/CHANGELOG.md#v1394-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics`: [v1.30.13](service/marketplacecommerceanalytics/CHANGELOG.md#v13013-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacedeployment`: [v1.11.20](service/marketplacedeployment/CHANGELOG.md#v11120-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.36.3](service/marketplaceentitlementservice/CHANGELOG.md#v1363-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.36.3](service/marketplacemetering/CHANGELOG.md#v1363-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacereporting`: [v1.7.12](service/marketplacereporting/CHANGELOG.md#v1712-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.47.5](service/mediaconnect/CHANGELOG.md#v1475-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.89.1](service/mediaconvert/CHANGELOG.md#v1891-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.93.3](service/medialive/CHANGELOG.md#v1933-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackage`: [v1.39.21](service/mediapackage/CHANGELOG.md#v13921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.36.1](service/mediapackagev2/CHANGELOG.md#v1361-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagevod`: [v1.39.21](service/mediapackagevod/CHANGELOG.md#v13921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mediastore`: [v1.29.21](service/mediastore/CHANGELOG.md#v12921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mediastoredata`: [v1.29.20](service/mediastoredata/CHANGELOG.md#v12920-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.56.3](service/mediatailor/CHANGELOG.md#v1563-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/medicalimaging`: [v1.23.10](service/medicalimaging/CHANGELOG.md#v12310-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.33.14](service/memorydb/CHANGELOG.md#v13314-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.41.1](service/mgn/CHANGELOG.md#v1411-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhub`: [v1.31.13](service/migrationhub/CHANGELOG.md#v13113-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubconfig`: [v1.31.14](service/migrationhubconfig/CHANGELOG.md#v13114-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator`: [v1.18.21](service/migrationhuborchestrator/CHANGELOG.md#v11821-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces`: [v1.25.21](service/migrationhubrefactorspaces/CHANGELOG.md#v12521-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy`: [v1.26.21](service/migrationhubstrategy/CHANGELOG.md#v12621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mpa`: [v1.7.2](service/mpa/CHANGELOG.md#v172-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mq`: [v1.34.19](service/mq/CHANGELOG.md#v13419-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mturk`: [v1.30.20](service/mturk/CHANGELOG.md#v13020-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.39.22](service/mwaa/CHANGELOG.md#v13922-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mwaaserverless`: [v1.0.9](service/mwaaserverless/CHANGELOG.md#v109-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.44.3](service/neptune/CHANGELOG.md#v1443-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/neptunedata`: [v1.17.4](service/neptunedata/CHANGELOG.md#v1174-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.21.21](service/neptunegraph/CHANGELOG.md#v12121-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.59.7](service/networkfirewall/CHANGELOG.md#v1597-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/networkflowmonitor`: [v1.11.9](service/networkflowmonitor/CHANGELOG.md#v1119-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.41.8](service/networkmanager/CHANGELOG.md#v1418-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/networkmonitor`: [v1.13.13](service/networkmonitor/CHANGELOG.md#v11313-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/notifications`: [v1.7.20](service/notifications/CHANGELOG.md#v1720-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/notificationscontacts`: [v1.5.23](service/notificationscontacts/CHANGELOG.md#v1523-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/novaact`: [v1.0.6](service/novaact/CHANGELOG.md#v106-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/oam`: [v1.23.15](service/oam/CHANGELOG.md#v12315-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.11.1](service/observabilityadmin/CHANGELOG.md#v1111-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.9.3](service/odb/CHANGELOG.md#v193-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.39.1](service/omics/CHANGELOG.md#v1391-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.61.1](service/opensearch/CHANGELOG.md#v1611-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.30.1](service/opensearchserverless/CHANGELOG.md#v1301-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.50.6](service/organizations/CHANGELOG.md#v1506-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/osis`: [v1.21.14](service/osis/CHANGELOG.md#v12114-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.57.15](service/outposts/CHANGELOG.md#v15715-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/panorama`: [v1.27.21](service/panorama/CHANGELOG.md#v12721-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralaccount`: [v1.1.6](service/partnercentralaccount/CHANGELOG.md#v116-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits`: [v1.0.7](service/partnercentralbenefits/CHANGELOG.md#v107-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralchannel`: [v1.1.3](service/partnercentralchannel/CHANGELOG.md#v113-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.15.3](service/partnercentralselling/CHANGELOG.md#v1153-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.27.5](service/paymentcryptography/CHANGELOG.md#v1275-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.25.5](service/paymentcryptographydata/CHANGELOG.md#v1255-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pcaconnectorad`: [v1.15.21](service/pcaconnectorad/CHANGELOG.md#v11521-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep`: [v1.11.4](service/pcaconnectorscep/CHANGELOG.md#v1114-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.17.1](service/pcs/CHANGELOG.md#v1171-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.47.7](service/personalize/CHANGELOG.md#v1477-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/personalizeevents`: [v1.31.13](service/personalizeevents/CHANGELOG.md#v13113-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/personalizeruntime`: [v1.33.14](service/personalizeruntime/CHANGELOG.md#v13314-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.35.22](service/pi/CHANGELOG.md#v13522-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.39.21](service/pinpoint/CHANGELOG.md#v13921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointemail`: [v1.29.15](service/pinpointemail/CHANGELOG.md#v12915-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice`: [v1.29.14](service/pinpointsmsvoice/CHANGELOG.md#v12914-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.27.6](service/pinpointsmsvoicev2/CHANGELOG.md#v1276-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pipes`: [v1.23.20](service/pipes/CHANGELOG.md#v12320-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.57.1](service/polly/CHANGELOG.md#v1571-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.40.15](service/pricing/CHANGELOG.md#v14015-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.39.15](service/proton/CHANGELOG.md#v13915-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/qapps`: [v1.11.20](service/qapps/CHANGELOG.md#v11120-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.34.6](service/qbusiness/CHANGELOG.md#v1346-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.28.4](service/qconnect/CHANGELOG.md#v1284-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.105.1](service/quicksight/CHANGELOG.md#v11051-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ram`: [v1.36.3](service/ram/CHANGELOG.md#v1363-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/rbin`: [v1.27.9](service/rbin/CHANGELOG.md#v1279-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.117.1](service/rds/CHANGELOG.md#v11171-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.32.21](service/rdsdata/CHANGELOG.md#v13221-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.62.5](service/redshift/CHANGELOG.md#v1625-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.38.8](service/redshiftdata/CHANGELOG.md#v1388-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.34.4](service/redshiftserverless/CHANGELOG.md#v1344-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.51.21](service/rekognition/CHANGELOG.md#v15121-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/repostspace`: [v1.14.21](service/repostspace/CHANGELOG.md#v11421-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.35.13](service/resiliencehub/CHANGELOG.md#v13513-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.23.4](service/resourceexplorer2/CHANGELOG.md#v1234-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroups`: [v1.33.24](service/resourcegroups/CHANGELOG.md#v13324-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi`: [v1.31.10](service/resourcegroupstaggingapi/CHANGELOG.md#v13110-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/rolesanywhere`: [v1.22.7](service/rolesanywhere/CHANGELOG.md#v1227-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.62.5](service/route53/CHANGELOG.md#v1625-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.34.19](service/route53domains/CHANGELOG.md#v13419-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/route53globalresolver`: [v1.1.2](service/route53globalresolver/CHANGELOG.md#v112-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/route53profiles`: [v1.9.23](service/route53profiles/CHANGELOG.md#v1923-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycluster`: [v1.28.21](service/route53recoverycluster/CHANGELOG.md#v12821-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig`: [v1.32.14](service/route53recoverycontrolconfig/CHANGELOG.md#v13214-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness`: [v1.26.21](service/route53recoveryreadiness/CHANGELOG.md#v12621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.42.5](service/route53resolver/CHANGELOG.md#v1425-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.2.10](service/rtbfabric/CHANGELOG.md#v1210-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.30.10](service/rum/CHANGELOG.md#v13010-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.97.3](service/s3/CHANGELOG.md#v1973-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.68.4](service/s3control/CHANGELOG.md#v1684-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/s3outposts`: [v1.34.12](service/s3outposts/CHANGELOG.md#v13412-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.14.4](service/s3tables/CHANGELOG.md#v1144-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/s3vectors`: [v1.6.6](service/s3vectors/CHANGELOG.md#v166-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.237.0](service/sagemaker/CHANGELOG.md#v12370-2026-03-26)
+  * **Feature**: Release support for ml.r5d.16xlarge instance types for SageMaker HyperPod
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime`: [v1.32.21](service/sagemakera2iruntime/CHANGELOG.md#v13221-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakeredge`: [v1.31.13](service/sagemakeredge/CHANGELOG.md#v13113-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.34.21](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v13421-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial`: [v1.19.21](service/sagemakergeospatial/CHANGELOG.md#v11921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakermetrics`: [v1.18.24](service/sagemakermetrics/CHANGELOG.md#v11824-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.39.6](service/sagemakerruntime/CHANGELOG.md#v1396-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntimehttp2`: [v1.0.9](service/sagemakerruntimehttp2/CHANGELOG.md#v109-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/savingsplans`: [v1.32.2](service/savingsplans/CHANGELOG.md#v1322-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/scheduler`: [v1.17.22](service/scheduler/CHANGELOG.md#v11722-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/schemas`: [v1.34.12](service/schemas/CHANGELOG.md#v13412-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.41.5](service/secretsmanager/CHANGELOG.md#v1415-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.68.3](service/securityhub/CHANGELOG.md#v1683-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/securityir`: [v1.10.8](service/securityir/CHANGELOG.md#v1108-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.25.13](service/securitylake/CHANGELOG.md#v12513-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository`: [v1.30.12](service/serverlessapplicationrepository/CHANGELOG.md#v13012-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.39.12](service/servicecatalog/CHANGELOG.md#v13912-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry`: [v1.35.21](service/servicecatalogappregistry/CHANGELOG.md#v13521-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.39.26](service/servicediscovery/CHANGELOG.md#v13926-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/servicequotas`: [v1.34.5](service/servicequotas/CHANGELOG.md#v1345-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ses`: [v1.34.22](service/ses/CHANGELOG.md#v13422-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.60.2](service/sesv2/CHANGELOG.md#v1602-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.40.10](service/sfn/CHANGELOG.md#v14010-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/shield`: [v1.34.21](service/shield/CHANGELOG.md#v13421-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/signer`: [v1.32.5](service/signer/CHANGELOG.md#v1325-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/signerdata`: [v1.0.4](service/signerdata/CHANGELOG.md#v104-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/signin`: [v1.0.9](service/signin/CHANGELOG.md#v109-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/simpledbv2`: [v1.0.2](service/simpledbv2/CHANGELOG.md#v102-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/simspaceweaver`: [v1.19.21](service/simspaceweaver/CHANGELOG.md#v11921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.35.21](service/snowball/CHANGELOG.md#v13521-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement`: [v1.25.20](service/snowdevicemanagement/CHANGELOG.md#v12520-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.39.15](service/sns/CHANGELOG.md#v13915-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.8.4](service/socialmessaging/CHANGELOG.md#v184-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.42.25](service/sqs/CHANGELOG.md#v14225-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.68.4](service/ssm/CHANGELOG.md#v1684-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ssmcontacts`: [v1.31.14](service/ssmcontacts/CHANGELOG.md#v13114-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ssmguiconnect`: [v1.5.14](service/ssmguiconnect/CHANGELOG.md#v1514-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.39.20](service/ssmincidents/CHANGELOG.md#v13920-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ssmquicksetup`: [v1.8.21](service/ssmquicksetup/CHANGELOG.md#v1821-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ssmsap`: [v1.26.5](service/ssmsap/CHANGELOG.md#v1265-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sso`: [v1.30.14](service/sso/CHANGELOG.md#v13014-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.37.5](service/ssoadmin/CHANGELOG.md#v1375-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ssooidc`: [v1.35.18](service/ssooidc/CHANGELOG.md#v13518-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.43.14](service/storagegateway/CHANGELOG.md#v14314-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.41.10](service/sts/CHANGELOG.md#v14110-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/supplychain`: [v1.17.20](service/supplychain/CHANGELOG.md#v11720-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/support`: [v1.31.21](service/support/CHANGELOG.md#v13121-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/supportapp`: [v1.18.21](service/supportapp/CHANGELOG.md#v11821-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/swf`: [v1.33.16](service/swf/CHANGELOG.md#v13316-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.42.14](service/synthetics/CHANGELOG.md#v14214-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.16.21](service/taxsettings/CHANGELOG.md#v11621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.40.20](service/textract/CHANGELOG.md#v14020-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.19.0](service/timestreaminfluxdb/CHANGELOG.md#v1190-2026-03-26)
+  * **Feature**: Timestream for InfluxDB adds support for customer defined maintenance windows. This allows customers to define maintenance schedule during resource creation and updates
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.36.14](service/timestreamquery/CHANGELOG.md#v13614-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamwrite`: [v1.35.20](service/timestreamwrite/CHANGELOG.md#v13520-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/tnb`: [v1.18.21](service/tnb/CHANGELOG.md#v11821-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.54.4](service/transcribe/CHANGELOG.md#v1544-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.34.5](service/transcribestreaming/CHANGELOG.md#v1345-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.69.5](service/transfer/CHANGELOG.md#v1695-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/translate`: [v1.33.21](service/translate/CHANGELOG.md#v13321-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/trustedadvisor`: [v1.14.4](service/trustedadvisor/CHANGELOG.md#v1144-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/uxc`: [v1.0.1](service/uxc/CHANGELOG.md#v101-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.32.1](service/verifiedpermissions/CHANGELOG.md#v1321-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/voiceid`: [v1.30.14](service/voiceid/CHANGELOG.md#v13014-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.20.11](service/vpclattice/CHANGELOG.md#v12011-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/waf`: [v1.30.20](service/waf/CHANGELOG.md#v13020-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/wafregional`: [v1.30.21](service/wafregional/CHANGELOG.md#v13021-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.71.3](service/wafv2/CHANGELOG.md#v1713-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.39.21](service/wellarchitected/CHANGELOG.md#v13921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/wickr`: [v1.1.3](service/wickr/CHANGELOG.md#v113-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.32.21](service/wisdom/CHANGELOG.md#v13221-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/workdocs`: [v1.30.20](service/workdocs/CHANGELOG.md#v13020-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/workmail`: [v1.36.19](service/workmail/CHANGELOG.md#v13619-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/workmailmessageflow`: [v1.28.20](service/workmailmessageflow/CHANGELOG.md#v12820-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.67.2](service/workspaces/CHANGELOG.md#v1672-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesinstances`: [v1.5.4](service/workspacesinstances/CHANGELOG.md#v154-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesthinclient`: [v1.20.21](service/workspacesthinclient/CHANGELOG.md#v12021-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.38.4](service/workspacesweb/CHANGELOG.md#v1384-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/xray`: [v1.36.21](service/xray/CHANGELOG.md#v13621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+
 # Release (2026-03-25)
 
 ## Module Highlights

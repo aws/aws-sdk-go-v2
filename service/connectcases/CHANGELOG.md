@@ -1,3 +1,8 @@
+# v1.39.1 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.0 (2026-03-23)
 
 * **Feature**: You can now use the UpdateRelatedItem API to update the content of comments and custom related items associated with a case.

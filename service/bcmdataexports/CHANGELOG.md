@@ -1,3 +1,9 @@
+# v1.14.0 (2026-03-26)
+
+* **Feature**: With this release we are providing an option to accounts to have their export delivered to an S3 bucket that is not owned by the account.
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.1 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

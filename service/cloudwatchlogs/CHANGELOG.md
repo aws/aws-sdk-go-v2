@@ -1,3 +1,9 @@
+# v1.65.0 (2026-03-26)
+
+* **Feature**: This release adds parameter support to saved queries in CloudWatch Logs Insights. Define reusable query templates with named placeholders, invoke them using start query. Available in Console, CLI and SDK
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.64.2 (2026-03-23)
 
 * **Dependency Update**: Updated to the latest SDK module versions

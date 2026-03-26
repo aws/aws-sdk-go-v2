@@ -1,3 +1,8 @@
+# v1.0.1 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0 (2026-03-25)
 
 * **Release**: New AWS service client module

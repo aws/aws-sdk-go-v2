@@ -1,3 +1,9 @@
+# v1.237.0 (2026-03-26)
+
+* **Feature**: Release support for ml.r5d.16xlarge instance types for SageMaker HyperPod
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.236.1 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

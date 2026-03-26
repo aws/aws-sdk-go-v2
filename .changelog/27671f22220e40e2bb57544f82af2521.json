@@ -1,8 +1,0 @@
-{
-    "id": "27671f22-220e-40e2-bb57-544f82af2521",
-    "type": "feature",
-    "description": "Timestream for InfluxDB adds support for customer defined maintenance windows. This allows customers to define maintenance schedule during resource creation and updates",
-    "modules": [
-        "service/timestreaminfluxdb"
-    ]
-}
