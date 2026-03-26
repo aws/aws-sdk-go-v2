@@ -61,7 +61,7 @@ func mkerr(typ string) string {
 	return `{"__type":"` + typ + `","message":"error message"}`
 }
 
-func newSkewClient(hc HTTPClient) *Client {
+func newSkewClient(hc HTTPClient, optfn ...func(*Options)) *Client {
 	opts := Options{
 		Region: "us-east-1",
 		Credentials: aws.CredentialsProviderFunc(func(ctx context.Context) (aws.Credentials, error) {
@@ -70,7 +70,7 @@ func newSkewClient(hc HTTPClient) *Client {
 		HTTPClient:         hc,
 		EndpointResolverV2: &endpointResolver{},
 	}
-	return New(opts)
+	return New(opts, optfn...)
 }
 
 func TestClockSkew_OK(t *testing.T) {
@@ -123,6 +123,55 @@ func TestClockSkew_DefiniteCode(t *testing.T) {
 	}
 	if mock.attempts != 2 {
 		t.Errorf("op 3: expected 2 attempts, got %d", mock.attempts)
+	}
+
+	// Op 4: healed offset sticks
+	mock.reset()
+	if _, err := svc.GetItem(context.Background(), nil); err != nil {
+		t.Fatalf("op 4: %v", err)
+	}
+	if mock.attempts != 1 {
+		t.Errorf("op 4: expected 1 attempt, got %d", mock.attempts)
+	}
+}
+
+func TestClockSkew_HealWithMaxAttempts1(t *testing.T) {
+	clientTime := time.Unix(1000, 0).UTC()
+	restore := sdk.TestingUseReferenceTime(clientTime)
+	defer restore()
+
+	mock := &skewHTTP{ServerTime: clientTime.Add(-5 * time.Minute)}
+	svc := newSkewClient(mock, func(o *Options) {
+		o.RetryMaxAttempts = 1
+	})
+
+	// Op 1: skew detected, no retry (max attempts 1), but offset is saved
+	_, err := svc.GetItem(context.Background(), nil)
+	if err == nil {
+		t.Fatal("op 1: expected error")
+	}
+	if mock.attempts != 1 {
+		t.Errorf("op 1: expected 1 attempt, got %d", mock.attempts)
+	}
+
+	// Op 2: saved offset applied, succeeds
+	mock.reset()
+	if _, err := svc.GetItem(context.Background(), nil); err != nil {
+		t.Fatalf("op 2: %v", err)
+	}
+	if mock.attempts != 1 {
+		t.Errorf("op 2: expected 1 attempt, got %d", mock.attempts)
+	}
+
+	// Op 3: server clock fixed, stale offset causes skew, fails but heals
+	mock.ServerTime = clientTime
+	mock.reset()
+	_, err = svc.GetItem(context.Background(), nil)
+	if err == nil {
+		t.Fatal("op 3: expected error")
+	}
+	if mock.attempts != 1 {
+		t.Errorf("op 3: expected 1 attempt, got %d", mock.attempts)
 	}
 
 	// Op 4: healed offset sticks
