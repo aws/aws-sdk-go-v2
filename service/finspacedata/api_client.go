@@ -17,7 +17,6 @@ import (
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
 	smithy "github.com/aws/smithy-go"
-	smithyauth "github.com/aws/smithy-go/auth"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/metrics"
@@ -795,18 +794,6 @@ func (m *customizeRestJsonContentType) HandleSerialize(ctx context.Context, in m
 
 func addRestJsonContentTypeCustomization(stack *middleware.Stack) error {
 	return stack.Serialize.Insert(&customizeRestJsonContentType{}, "OperationSerializer", middleware.After)
-}
-
-func resolveAccountID(identity smithyauth.Identity, mode aws.AccountIDEndpointMode) *string {
-	if mode == aws.AccountIDEndpointModeDisabled {
-		return nil
-	}
-
-	if ca, ok := identity.(*internalauthsmithy.CredentialsAdapter); ok && ca.Credentials.AccountID != "" {
-		return aws.String(ca.Credentials.AccountID)
-	}
-
-	return nil
 }
 
 func initializeTimeOffsetResolver(c *Client) {
