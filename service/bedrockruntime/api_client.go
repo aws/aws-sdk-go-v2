@@ -18,7 +18,6 @@ import (
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
 	internalmiddleware "github.com/aws/aws-sdk-go-v2/internal/middleware"
 	smithy "github.com/aws/smithy-go"
-	smithyauth "github.com/aws/smithy-go/auth"
 	"github.com/aws/smithy-go/auth/bearer"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
@@ -915,18 +914,6 @@ func resolveUseFIPSEndpoint(cfg aws.Config, o *Options) error {
 	if found {
 		o.EndpointOptions.UseFIPSEndpoint = value
 	}
-	return nil
-}
-
-func resolveAccountID(identity smithyauth.Identity, mode aws.AccountIDEndpointMode) *string {
-	if mode == aws.AccountIDEndpointModeDisabled {
-		return nil
-	}
-
-	if ca, ok := identity.(*internalauthsmithy.CredentialsAdapter); ok && ca.Credentials.AccountID != "" {
-		return aws.String(ca.Credentials.AccountID)
-	}
-
 	return nil
 }
 

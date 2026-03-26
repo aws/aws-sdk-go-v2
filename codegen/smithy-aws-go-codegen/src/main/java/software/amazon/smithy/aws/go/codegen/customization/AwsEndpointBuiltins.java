@@ -13,6 +13,7 @@ import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.rulesengine.traits.EndpointBddTrait;
 import software.amazon.smithy.rulesengine.traits.EndpointRuleSetTrait;
 import software.amazon.smithy.utils.ListUtils;
 import software.amazon.smithy.utils.MapUtils;
@@ -68,7 +69,7 @@ public class AwsEndpointBuiltins implements GoIntegration {
     @Override
     public void writeAdditionalFiles(GoSettings settings, Model model, SymbolProvider symbolProvider, GoDelegator goDelegator) {
         goDelegator.useFileWriter("endpoints.go", settings.getModuleName(), builtinBindingSource());
-        if (!settings.getService(model).hasTrait(EndpointRuleSetTrait.class)) {
+        if (!AccountIDEndpointRouting.hasAccountIdEndpoints(model, settings.getService(model))) {
             return;
         }
         goDelegator.useShapeWriter(settings.getService(model), goTemplate("""
