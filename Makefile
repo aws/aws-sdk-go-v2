@@ -1,6 +1,7 @@
 # Lint rules to ignore
 LINTIGNORESINGLEFIGHT='internal/sync/singleflight/singleflight.go:.+error should be the last type'
 LINT_IGNORE_S3MANAGER_INPUT='feature/s3/manager/upload.go:.+struct field SSEKMSKeyId should be SSEKMSKeyID'
+LINT_IGNORE_RECURSIONDETECTIONTEST='aws/middleware/recursion_detection_test.go:.+should not use basic type untyped string as key in context.WithValue'
 # Names of these are tied to endpoint rules and they're internal so ignore them
 LINT_IGNORE_AWSRULESFN_ARN='internal/endpoints/awsrulesfn/arn.go'
 LINT_IGNORE_AWSRULESFN_PARTITION='internal/endpoints/awsrulesfn/partition.go'
@@ -430,6 +431,7 @@ lint:
 	dolint=`echo "$$lint" | grep -E -v \
 	-e ${LINT_IGNORE_S3MANAGER_INPUT} \
 	-e ${LINTIGNORESINGLEFIGHT} \
+	-e ${LINT_IGNORE_RECURSIONDETECTIONTEST} \
 	-e ${LINT_IGNORE_AWSRULESFN_ARN} \
 	-e ${LINT_IGNORE_AWSRULESFN_PARTITION} \
 	-e ${LINT_IGNORE_PRIVATE_METRICS}`; \
