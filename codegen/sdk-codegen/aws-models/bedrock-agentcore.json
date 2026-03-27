@@ -2364,7 +2364,7 @@
                 "evaluatorId": {
                     "target": "com.amazonaws.bedrockagentcore#EvaluatorId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique identifier of the evaluator to use for scoring. Can be a built-in evaluator (e.g., <code>Builtin.Helpfulness</code>, <code>Builtin.Correctness</code>) or a custom evaluator ARN created through the control plane API. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier of the evaluator to use for scoring. Can be a built-in evaluator (e.g., <code>Builtin.Helpfulness</code>, <code>Builtin.Correctness</code>) or a custom evaluator Id created through the control plane API. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4558,6 +4558,29 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#LanguageRuntime": {
+            "type": "enum",
+            "members": {
+                "NODEJS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nodejs"
+                    }
+                },
+                "DENO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deno"
+                    }
+                },
+                "PYTHON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "python"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockagentcore#LeftExpression": {
@@ -7684,7 +7707,7 @@
                 "language": {
                     "target": "com.amazonaws.bedrockagentcore#ProgrammingLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The programming language of the code to execute. This tells the code interpreter which language runtime to use for execution. Common values include 'python', 'javascript', and 'r'.</p>"
+                        "smithy.api#documentation": "<p>The programming language of the code to execute. This tells the code interpreter which language runtime to use for execution.</p>"
                     }
                 },
                 "clearContext": {
@@ -7727,6 +7750,12 @@
                     "target": "com.amazonaws.bedrockagentcore#MaxLenString",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the task for the tool operation.</p>"
+                    }
+                },
+                "runtime": {
+                    "target": "com.amazonaws.bedrockagentcore#LanguageRuntime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime environment to use for code execution. If not specified, defaults to <code>deno</code> for JavaScript and TypeScript.</p>"
                     }
                 }
             },

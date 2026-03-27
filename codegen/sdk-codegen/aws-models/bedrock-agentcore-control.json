@@ -2289,6 +2289,20 @@
                 "smithy.api#documentation": "<p>The source code configuration that specifies the location and details of the code to be executed.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#CodeBasedEvaluatorConfig": {
+            "type": "union",
+            "members": {
+                "lambdaConfig": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LambdaEvaluatorConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Lambda function configuration for code-based evaluation. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Configuration for a code-based evaluator. Specify the Lambda function to use for evaluation. </p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#CodeConfiguration": {
             "type": "structure",
             "members": {
@@ -3469,7 +3483,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Creates a custom evaluator for agent quality assessment. Custom evaluators use LLM-as-a-Judge configurations with user-defined prompts, rating scales, and model settings to evaluate agent performance at tool call, trace, or session levels. </p>",
+                "smithy.api#documentation": "<p> Creates a custom evaluator for agent quality assessment. Custom evaluators can use either LLM-as-a-Judge configurations with user-defined prompts, rating scales, and model settings, or code-based configurations with customer-managed Lambda functions to evaluate agent performance at tool call, trace, or session levels. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/evaluators/create",
@@ -3503,7 +3517,7 @@
                 "evaluatorConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#EvaluatorConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> The configuration for the evaluator, including LLM-as-a-Judge settings with instructions, rating scale, and model configuration. </p>",
+                        "smithy.api#documentation": "<p> The configuration for the evaluator. Specify either LLM-as-a-Judge settings with instructions, rating scale, and model configuration, or code-based settings with a customer-managed Lambda function. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7347,6 +7361,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The LLM-as-a-Judge configuration that uses a language model to evaluate agent performance based on custom instructions and rating scales. </p>"
                     }
+                },
+                "codeBased": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CodeBasedEvaluatorConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Configuration for a code-based evaluator that uses a customer-managed Lambda function to programmatically assess agent performance. </p>"
+                    }
                 }
             },
             "traits": {
@@ -7582,6 +7602,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Custom"
+                    }
+                },
+                "CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CustomCode"
                     }
                 }
             }
@@ -9244,7 +9270,7 @@
                 "evaluatorConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#EvaluatorConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> The configuration of the evaluator, including LLM-as-a-Judge settings for custom evaluators. </p>",
+                        "smithy.api#documentation": "<p> The configuration of the evaluator, including LLM-as-a-Judge or code-based settings. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11273,6 +11299,37 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#LambdaArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:([a-z]{2}(-gov)?-[a-z]+-\\d{1}):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#LambdaEvaluatorConfig": {
+            "type": "structure",
+            "members": {
+                "lambdaArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LambdaArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the Lambda function that implements the evaluation logic. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lambdaTimeoutInSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The timeout in seconds for the Lambda function invocation. Defaults to 60. Must be between 1 and 300. </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 300
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Configuration for a Lambda function used as a code-based evaluator. </p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#LambdaFunctionArn": {
@@ -18196,7 +18253,7 @@
                 "evaluatorConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#EvaluatorConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> The updated configuration for the evaluator, including LLM-as-a-Judge settings with instructions, rating scale, and model configuration. </p>"
+                        "smithy.api#documentation": "<p> The updated configuration for the evaluator. Specify either LLM-as-a-Judge settings with instructions, rating scale, and model configuration, or code-based settings with a customer-managed Lambda function. </p>"
                     }
                 },
                 "level": {
@@ -19491,12 +19548,12 @@
                 "optionalValue": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents an optional value that is used to update the human-readable description of the resource. If set to null, it will clear the current description of the resource.</p>"
+                        "smithy.api#documentation": "<p>Represents an optional value that is used to update the human-readable description of the resource. If not specified, it will clear the current description of the resource.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Wrapper for updating an optional Description field with PATCH semantics.\nWhen present in an update request, the description is replaced with optionalValue.\nWhen absent, the description is left unchanged.\nTo unset the description, include the wrapper with optionalValue set to null."
+                "smithy.api#documentation": "Wrapper for updating an optional Description field with PATCH semantics.\nWhen present in an update request, the description is replaced with optionalValue.\nWhen absent, the description is left unchanged.\nTo unset the description, include the wrapper with optionalValue not specified."
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#UserPreferenceConsolidationOverride": {
