@@ -1,3 +1,7 @@
+# v1.26.0 (2026-03-27)
+
+* **Feature**: Adds support for custom code-based evaluators using customer-managed Lambda functions.
+
 # v1.25.1 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

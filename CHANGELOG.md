@@ -1,3 +1,15 @@
+# Release (2026-03-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.16.0](service/bedrockagentcore/CHANGELOG.md#v1160-2026-03-27)
+  * **Feature**: Adding AgentCore Code Interpreter Node.js Runtime Support with an optional runtime field
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.26.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1260-2026-03-27)
+  * **Feature**: Adds support for custom code-based evaluators using customer-managed Lambda functions.
+* `github.com/aws/aws-sdk-go-v2/service/neptunedata`: [v1.17.5](service/neptunedata/CHANGELOG.md#v1175-2026-03-27)
+  * **Documentation**: Minor formatting changes to remove unnecessary symbols.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.40.0](service/omics/CHANGELOG.md#v1400-2026-03-27)
+  * **Feature**: AWS HealthOmics now supports VPC networking, allowing users to connect runs to external resources with NAT gateway, AWS VPC resources, and more. New Configuration APIs support configuring VPC settings. StartRun API now accepts networkingMode and configurationName parameters to enable VPC networking.
+
 # Release (2026-03-26)
 
 ## General Highlights

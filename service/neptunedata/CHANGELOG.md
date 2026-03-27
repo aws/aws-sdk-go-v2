@@ -1,3 +1,7 @@
+# v1.17.5 (2026-03-27)
+
+* **Documentation**: Minor formatting changes to remove unnecessary symbols.
+
 # v1.17.4 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

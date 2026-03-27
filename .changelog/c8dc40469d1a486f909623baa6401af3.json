@@ -1,8 +1,0 @@
-{
-    "id": "c8dc4046-9d1a-486f-9096-23baa6401af3",
-    "type": "feature",
-    "description": "Adds support for custom code-based evaluators using customer-managed Lambda functions.",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}
