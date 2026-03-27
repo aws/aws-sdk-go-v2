@@ -73,17 +73,17 @@ type GetPropertygraphStreamInput struct {
 
 	// Can be one of:
 	//
-	//   - AT_SEQUENCE_NUMBER – Indicates that reading should start from the event
+	//   - AT_SEQUENCE_NUMBER - Indicates that reading should start from the event
 	//   sequence number specified jointly by the commitNum and opNum parameters.
 	//
-	//   - AFTER_SEQUENCE_NUMBER – Indicates that reading should start right after the
+	//   - AFTER_SEQUENCE_NUMBER - Indicates that reading should start right after the
 	//   event sequence number specified jointly by the commitNum and opNum parameters.
 	//
-	//   - TRIM_HORIZON – Indicates that reading should start at the last untrimmed
+	//   - TRIM_HORIZON - Indicates that reading should start at the last untrimmed
 	//   record in the system, which is the oldest unexpired (not yet deleted) record in
 	//   the change-log stream.
 	//
-	//   - LATEST – Indicates that reading should start at the most recent record in
+	//   - LATEST - Indicates that reading should start at the most recent record in
 	//   the system, which is the latest unexpired (not yet deleted) record in the
 	//   change-log stream.
 	IteratorType types.IteratorType

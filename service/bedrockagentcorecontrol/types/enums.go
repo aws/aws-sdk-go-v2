@@ -455,6 +455,7 @@ type EvaluatorType string
 const (
 	EvaluatorTypeBuiltin EvaluatorType = "Builtin"
 	EvaluatorTypeCustom  EvaluatorType = "Custom"
+	EvaluatorTypeCode    EvaluatorType = "CustomCode"
 )
 
 // Values returns all known values for EvaluatorType. Note that this can be
@@ -465,6 +466,7 @@ func (EvaluatorType) Values() []EvaluatorType {
 	return []EvaluatorType{
 		"Builtin",
 		"Custom",
+		"CustomCode",
 	}
 }
 

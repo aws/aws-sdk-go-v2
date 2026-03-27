@@ -359,6 +359,42 @@ type CompleteReadSetUploadPartListItem struct {
 	noSmithyDocumentSerde
 }
 
+// Minimal details for a configuration resource.
+type ConfigurationDetails struct {
+
+	// Unique resource identifier for the configuration.
+	Arn *string
+
+	// User-friendly name for the configuration.
+	Name *string
+
+	// Unique identifier for the configuration.
+	Uuid *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration list item with summary information.
+type ConfigurationListItem struct {
+
+	// Unique resource identifier for the configuration.
+	Arn *string
+
+	// Configuration creation timestamp.
+	CreationTime *time.Time
+
+	// Description for the configuration.
+	Description *string
+
+	// User-friendly name for the configuration.
+	Name *string
+
+	// Current configuration status.
+	Status ConfigurationStatus
+
+	noSmithyDocumentSerde
+}
+
 // Use a container registry map to specify mappings between the ECR private
 // repository and one or more upstream registries. For more information, see [Container images]in
 // the Amazon Web Services HealthOmics User Guide.
@@ -1461,6 +1497,24 @@ type RunCacheListItem struct {
 	noSmithyDocumentSerde
 }
 
+// Run-specific configuration settings.
+type RunConfigurations struct {
+
+	// VPC configuration for workflow runs.
+	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
+}
+
+// Run-specific configuration settings with computed values.
+type RunConfigurationsResponse struct {
+
+	// VPC configuration for workflow runs with computed VPC ID.
+	VpcConfig *VpcConfigResponse
+
+	noSmithyDocumentSerde
+}
+
 // A run group.
 type RunGroupListItem struct {
 
@@ -2155,6 +2209,33 @@ type VersionOptionsMemberTsvVersionOptions struct {
 }
 
 func (*VersionOptionsMemberTsvVersionOptions) isVersionOptions() {}
+
+// VPC configuration for workflow runs.
+type VpcConfig struct {
+
+	// List of security group IDs. Maximum of 5 security groups allowed.
+	SecurityGroupIds []string
+
+	// List of subnet IDs. Maximum of 16 subnets allowed.
+	SubnetIds []string
+
+	noSmithyDocumentSerde
+}
+
+// VPC configuration for workflow runs with computed VPC ID.
+type VpcConfigResponse struct {
+
+	// List of security group IDs.
+	SecurityGroupIds []string
+
+	// List of subnet IDs.
+	SubnetIds []string
+
+	// VPC ID computed from the provided subnet IDs.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
 
 // A workflow.
 type WorkflowListItem struct {

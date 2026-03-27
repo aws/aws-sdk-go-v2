@@ -1,0 +1,8 @@
+{
+    "id": "f2c2c88d-1ca4-4ad7-a810-ed455fac0e89",
+    "type": "feature",
+    "description": "AWS HealthOmics now supports VPC networking, allowing users to connect runs to external resources with NAT gateway, AWS VPC resources, and more. New Configuration APIs support configuring VPC settings. StartRun API now accepts networkingMode and configurationName parameters to enable VPC networking.",
+    "modules": [
+        "service/omics"
+    ]
+}

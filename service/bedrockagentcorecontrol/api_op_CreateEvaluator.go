@@ -12,10 +12,11 @@ import (
 	"time"
 )
 
-//	Creates a custom evaluator for agent quality assessment. Custom evaluators use
+//	Creates a custom evaluator for agent quality assessment. Custom evaluators can
 //
-// LLM-as-a-Judge configurations with user-defined prompts, rating scales, and
-// model settings to evaluate agent performance at tool call, trace, or session
+// use either LLM-as-a-Judge configurations with user-defined prompts, rating
+// scales, and model settings, or code-based configurations with customer-managed
+// Lambda functions to evaluate agent performance at tool call, trace, or session
 // levels.
 func (c *Client) CreateEvaluator(ctx context.Context, params *CreateEvaluatorInput, optFns ...func(*Options)) (*CreateEvaluatorOutput, error) {
 	if params == nil {
@@ -34,8 +35,9 @@ func (c *Client) CreateEvaluator(ctx context.Context, params *CreateEvaluatorInp
 
 type CreateEvaluatorInput struct {
 
-	//  The configuration for the evaluator, including LLM-as-a-Judge settings with
-	// instructions, rating scale, and model configuration.
+	//  The configuration for the evaluator. Specify either LLM-as-a-Judge settings
+	// with instructions, rating scale, and model configuration, or code-based settings
+	// with a customer-managed Lambda function.
 	//
 	// This member is required.
 	EvaluatorConfig types.EvaluatorConfig

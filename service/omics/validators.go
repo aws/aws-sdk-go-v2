@@ -210,6 +210,26 @@ func (m *validateOpCreateAnnotationStoreVersion) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateConfiguration struct {
+}
+
+func (*validateOpCreateConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateMultipartReadSetUpload struct {
 }
 
@@ -445,6 +465,26 @@ func (m *validateOpDeleteBatch) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteBatchInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteConfiguration struct {
+}
+
+func (*validateOpDeleteConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -765,6 +805,26 @@ func (m *validateOpGetBatch) HandleInitialize(ctx context.Context, in middleware
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetBatchInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetConfiguration struct {
+}
+
+func (*validateOpGetConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1890,6 +1950,10 @@ func addOpCreateAnnotationStoreVersionValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpCreateAnnotationStoreVersion{}, middleware.After)
 }
 
+func addOpCreateConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConfiguration{}, middleware.After)
+}
+
 func addOpCreateMultipartReadSetUploadValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMultipartReadSetUpload{}, middleware.After)
 }
@@ -1936,6 +2000,10 @@ func addOpDeleteAnnotationStoreVersionsValidationMiddleware(stack *middleware.St
 
 func addOpDeleteBatchValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBatch{}, middleware.After)
+}
+
+func addOpDeleteConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConfiguration{}, middleware.After)
 }
 
 func addOpDeleteReferenceValidationMiddleware(stack *middleware.Stack) error {
@@ -2000,6 +2068,10 @@ func addOpGetAnnotationStoreVersionValidationMiddleware(stack *middleware.Stack)
 
 func addOpGetBatchValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetBatch{}, middleware.After)
+}
+
+func addOpGetConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConfiguration{}, middleware.After)
 }
 
 func addOpGetReadSetActivationJobValidationMiddleware(stack *middleware.Stack) error {
@@ -2778,6 +2850,27 @@ func validateOpCreateAnnotationStoreVersionInput(v *CreateAnnotationStoreVersion
 	}
 }
 
+func validateOpCreateConfigurationInput(v *CreateConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConfigurationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RunConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunConfigurations"))
+	}
+	if v.RequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateMultipartReadSetUploadInput(v *CreateMultipartReadSetUploadInput) error {
 	if v == nil {
 		return nil
@@ -3002,6 +3095,21 @@ func validateOpDeleteBatchInput(v *DeleteBatchInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBatchInput"}
 	if v.BatchId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BatchId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteConfigurationInput(v *DeleteConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConfigurationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3251,6 +3359,21 @@ func validateOpGetBatchInput(v *GetBatchInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetBatchInput"}
 	if v.BatchId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BatchId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetConfigurationInput(v *GetConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConfigurationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

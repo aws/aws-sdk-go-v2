@@ -1434,8 +1434,7 @@ type ToolArguments struct {
 	DirectoryPath *string
 
 	// The programming language of the code to execute. This tells the code
-	// interpreter which language runtime to use for execution. Common values include
-	// 'python', 'javascript', and 'r'.
+	// interpreter which language runtime to use for execution.
 	Language ProgrammingLanguage
 
 	// The path for the tool operation.
@@ -1443,6 +1442,10 @@ type ToolArguments struct {
 
 	// The paths for the tool operation.
 	Paths []string
+
+	// The runtime environment to use for code execution. If not specified, defaults
+	// to deno for JavaScript and TypeScript.
+	Runtime LanguageRuntime
 
 	// The identifier of the task for the tool operation.
 	TaskId *string

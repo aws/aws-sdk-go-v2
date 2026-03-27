@@ -4926,6 +4926,11 @@ func awsRestjson1_serializeDocumentToolArguments(v *types.ToolArguments, value s
 		}
 	}
 
+	if len(v.Runtime) > 0 {
+		ok := object.Key("runtime")
+		ok.String(string(v.Runtime))
+	}
+
 	if v.TaskId != nil {
 		ok := object.Key("taskId")
 		ok.String(*v.TaskId)

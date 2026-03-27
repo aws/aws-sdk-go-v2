@@ -127,6 +127,24 @@ func ExampleCode_outputUsage() {
 
 var _ *types.S3Location
 
+func ExampleCodeBasedEvaluatorConfig_outputUsage() {
+	var union types.CodeBasedEvaluatorConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CodeBasedEvaluatorConfigMemberLambdaConfig:
+		_ = v.Value // Value is types.LambdaEvaluatorConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.LambdaEvaluatorConfig
+
 func ExampleConsolidationConfiguration_outputUsage() {
 	var union types.ConsolidationConfiguration
 	// type switches can be used to check the union value
@@ -389,6 +407,9 @@ func ExampleEvaluatorConfig_outputUsage() {
 	var union types.EvaluatorConfig
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.EvaluatorConfigMemberCodeBased:
+		_ = v.Value // Value is types.CodeBasedEvaluatorConfig
+
 	case *types.EvaluatorConfigMemberLlmAsAJudge:
 		_ = v.Value // Value is types.LlmAsAJudgeEvaluatorConfig
 
@@ -402,6 +423,7 @@ func ExampleEvaluatorConfig_outputUsage() {
 }
 
 var _ *types.LlmAsAJudgeEvaluatorConfig
+var _ types.CodeBasedEvaluatorConfig
 
 func ExampleEvaluatorModelConfig_outputUsage() {
 	var union types.EvaluatorModelConfig

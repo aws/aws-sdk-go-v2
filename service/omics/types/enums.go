@@ -109,6 +109,33 @@ func (CacheBehavior) Values() []CacheBehavior {
 	}
 }
 
+type ConfigurationStatus string
+
+// Enum values for ConfigurationStatus
+const (
+	ConfigurationStatusCreating ConfigurationStatus = "CREATING"
+	ConfigurationStatusActive   ConfigurationStatus = "ACTIVE"
+	ConfigurationStatusUpdating ConfigurationStatus = "UPDATING"
+	ConfigurationStatusDeleting ConfigurationStatus = "DELETING"
+	ConfigurationStatusDeleted  ConfigurationStatus = "DELETED"
+	ConfigurationStatusFailed   ConfigurationStatus = "FAILED"
+)
+
+// Values returns all known values for ConfigurationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationStatus) Values() []ConfigurationStatus {
+	return []ConfigurationStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"DELETED",
+		"FAILED",
+	}
+}
+
 type CreationType string
 
 // Enum values for CreationType
@@ -280,6 +307,25 @@ func (JobStatus) Values() []JobStatus {
 		"COMPLETED",
 		"FAILED",
 		"COMPLETED_WITH_FAILURES",
+	}
+}
+
+type NetworkingMode string
+
+// Enum values for NetworkingMode
+const (
+	NetworkingModeRestricted NetworkingMode = "RESTRICTED"
+	NetworkingModeVpc        NetworkingMode = "VPC"
+)
+
+// Values returns all known values for NetworkingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkingMode) Values() []NetworkingMode {
+	return []NetworkingMode{
+		"RESTRICTED",
+		"VPC",
 	}
 }
 

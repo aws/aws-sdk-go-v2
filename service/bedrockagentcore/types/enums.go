@@ -138,6 +138,27 @@ func (ExtractionJobStatus) Values() []ExtractionJobStatus {
 	}
 }
 
+type LanguageRuntime string
+
+// Enum values for LanguageRuntime
+const (
+	LanguageRuntimeNodejs LanguageRuntime = "nodejs"
+	LanguageRuntimeDeno   LanguageRuntime = "deno"
+	LanguageRuntimePython LanguageRuntime = "python"
+)
+
+// Values returns all known values for LanguageRuntime. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LanguageRuntime) Values() []LanguageRuntime {
+	return []LanguageRuntime{
+		"nodejs",
+		"deno",
+		"python",
+	}
+}
+
 type MemoryRecordStatus string
 
 // Enum values for MemoryRecordStatus

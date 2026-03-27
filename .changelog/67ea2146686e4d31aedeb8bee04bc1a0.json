@@ -1,0 +1,8 @@
+{
+    "id": "67ea2146-686e-4d31-aede-b8bee04bc1a0",
+    "type": "feature",
+    "description": "Adding AgentCore Code Interpreter Node.js Runtime Support with an optional runtime field",
+    "modules": [
+        "service/bedrockagentcore"
+    ]
+}

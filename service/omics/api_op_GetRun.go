@@ -69,6 +69,9 @@ type GetRunOutput struct {
 	// The run cache associated with the run.
 	CacheId *string
 
+	// Configuration details for the workflow run.
+	Configuration *types.ConfigurationDetails
+
 	// When the run was created.
 	CreationTime *time.Time
 
@@ -97,6 +100,10 @@ type GetRunOutput struct {
 
 	// The run's name.
 	Name *string
+
+	// Configuration for run networking behavior. If absent, this will default to
+	// RESTRICTED.
+	NetworkingMode types.NetworkingMode
 
 	// The run's output URI.
 	OutputUri *string
@@ -152,6 +159,9 @@ type GetRunOutput struct {
 
 	// The universally unique identifier for a run.
 	Uuid *string
+
+	// VPC configuration for the workflow run.
+	VpcConfig *types.VpcConfigResponse
 
 	// The run's workflow ID.
 	WorkflowId *string

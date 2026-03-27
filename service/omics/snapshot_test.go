@@ -182,6 +182,18 @@ func TestCheckSnapshot_CreateAnnotationStoreVersion(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateMultipartReadSetUpload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateMultipartReadSetUpload(context.Background(), nil, func(o *Options) {
@@ -319,6 +331,18 @@ func TestCheckSnapshot_DeleteBatch(t *testing.T) {
 	_, err := svc.DeleteBatch(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteBatch")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -511,6 +535,18 @@ func TestCheckSnapshot_GetBatch(t *testing.T) {
 	_, err := svc.GetBatch(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetBatch")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -799,6 +835,18 @@ func TestCheckSnapshot_ListBatch(t *testing.T) {
 	_, err := svc.ListBatch(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListBatch")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConfigurations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1417,6 +1465,18 @@ func TestUpdateSnapshot_CreateAnnotationStoreVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateMultipartReadSetUpload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateMultipartReadSetUpload(context.Background(), nil, func(o *Options) {
@@ -1554,6 +1614,18 @@ func TestUpdateSnapshot_DeleteBatch(t *testing.T) {
 	_, err := svc.DeleteBatch(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteBatch")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1746,6 +1818,18 @@ func TestUpdateSnapshot_GetBatch(t *testing.T) {
 	_, err := svc.GetBatch(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetBatch")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2034,6 +2118,18 @@ func TestUpdateSnapshot_ListBatch(t *testing.T) {
 	_, err := svc.ListBatch(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListBatch")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConfigurations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -133,7 +133,7 @@ type StartLoaderJobInput struct {
 	// it to be cancelled.
 	Dependencies []string
 
-	// edgeOnlyLoad – A flag that controls file processing order during bulk loading.
+	// edgeOnlyLoad - A flag that controls file processing order during bulk loading.
 	//
 	// Allowed values: "TRUE" , "FALSE" .
 	//
@@ -146,7 +146,7 @@ type StartLoaderJobInput struct {
 	// all files in the order they appear.
 	EdgeOnlyLoad *bool
 
-	// failOnError – A flag to toggle a complete stop on an error.
+	// failOnError - A flag to toggle a complete stop on an error.
 	//
 	// Allowed values: "TRUE" , "FALSE" .
 	//
@@ -165,7 +165,7 @@ type StartLoaderJobInput struct {
 	//
 	// Default value: AUTO .
 	//
-	//   - RESUME – In RESUME mode, the loader looks for a previous load from this
+	//   - RESUME - In RESUME mode, the loader looks for a previous load from this
 	//   source, and if it finds one, resumes that load job. If no previous load job is
 	//   found, the loader stops.
 	//
@@ -175,12 +175,12 @@ type StartLoaderJobInput struct {
 	//   previous load job loaded all files from the same source successfully, nothing is
 	//   reloaded, and the loader returns success.
 	//
-	//   - NEW – In NEW mode, the creates a new load request regardless of any previous
+	//   - NEW - In NEW mode, the creates a new load request regardless of any previous
 	//   loads. You can use this mode to reload all the data from a source after dropping
 	//   previously loaded data from your Neptune cluster, or to load new data available
 	//   at the same source.
 	//
-	//   - AUTO – In AUTO mode, the loader looks for a previous load job from the same
+	//   - AUTO - In AUTO mode, the loader looks for a previous load job from the same
 	//   source, and if it finds one, resumes that job, just as in RESUME mode.
 	//
 	// If the loader doesn't find a previous load job from the same source, it loads
@@ -220,16 +220,16 @@ type StartLoaderJobInput struct {
 	// parserConfiguration – An optional object with additional parser configuration
 	// values. Each of the child parameters is also optional:
 	//
-	//   - namedGraphUri – The default graph for all RDF formats when no graph is
+	//   - namedGraphUri - The default graph for all RDF formats when no graph is
 	//   specified (for non-quads formats and NQUAD entries with no graph).
 	//
 	// The default is https://aws.amazon.com/neptune/vocab/v01/DefaultNamedGraph .
 	//
-	//   - baseUri – The base URI for RDF/XML and Turtle formats.
+	//   - baseUri - The base URI for RDF/XML and Turtle formats.
 	//
 	// The default is https://aws.amazon.com/neptune/default .
 	//
-	//   - allowEmptyStrings – Gremlin users need to be able to pass empty string
+	//   - allowEmptyStrings - Gremlin users need to be able to pass empty string
 	//   values("") as node and edge properties when loading CSV data. If
 	//   allowEmptyStrings is set to false (the default), such empty strings are
 	//   treated as nulls and are not loaded.

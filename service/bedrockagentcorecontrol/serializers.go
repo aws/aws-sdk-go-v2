@@ -8371,6 +8371,24 @@ func awsRestjson1_serializeDocumentCode(v types.Code, value smithyjson.Value) er
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCodeBasedEvaluatorConfig(v types.CodeBasedEvaluatorConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CodeBasedEvaluatorConfigMemberLambdaConfig:
+		av := object.Key("lambdaConfig")
+		if err := awsRestjson1_serializeDocumentLambdaEvaluatorConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCodeConfiguration(v *types.CodeConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9017,6 +9035,12 @@ func awsRestjson1_serializeDocumentEvaluatorConfig(v types.EvaluatorConfig, valu
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.EvaluatorConfigMemberCodeBased:
+		av := object.Key("codeBased")
+		if err := awsRestjson1_serializeDocumentCodeBasedEvaluatorConfig(uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.EvaluatorConfigMemberLlmAsAJudge:
 		av := object.Key("llmAsAJudge")
 		if err := awsRestjson1_serializeDocumentLlmAsAJudgeEvaluatorConfig(&uv.Value, av); err != nil {
@@ -9501,6 +9525,23 @@ func awsRestjson1_serializeDocumentKmsConfiguration(v *types.KmsConfiguration, v
 	if v.KmsKeyArn != nil {
 		ok := object.Key("kmsKeyArn")
 		ok.String(*v.KmsKeyArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLambdaEvaluatorConfig(v *types.LambdaEvaluatorConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LambdaArn != nil {
+		ok := object.Key("lambdaArn")
+		ok.String(*v.LambdaArn)
+	}
+
+	if v.LambdaTimeoutInSeconds != nil {
+		ok := object.Key("lambdaTimeoutInSeconds")
+		ok.Integer(*v.LambdaTimeoutInSeconds)
 	}
 
 	return nil

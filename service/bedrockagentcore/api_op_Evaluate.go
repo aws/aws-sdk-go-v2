@@ -41,7 +41,7 @@ type EvaluateInput struct {
 
 	//  The unique identifier of the evaluator to use for scoring. Can be a built-in
 	// evaluator (e.g., Builtin.Helpfulness , Builtin.Correctness ) or a custom
-	// evaluator ARN created through the control plane API.
+	// evaluator Id created through the control plane API.
 	//
 	// This member is required.
 	EvaluatorId *string

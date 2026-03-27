@@ -20324,6 +20324,46 @@ loop:
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCodeBasedEvaluatorConfig(v *types.CodeBasedEvaluatorConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.CodeBasedEvaluatorConfig
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "lambdaConfig":
+			var mv types.LambdaEvaluatorConfig
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentLambdaEvaluatorConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.CodeBasedEvaluatorConfigMemberLambdaConfig{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCodeConfiguration(v **types.CodeConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21698,6 +21738,14 @@ loop:
 			continue
 		}
 		switch key {
+		case "codeBased":
+			var mv types.CodeBasedEvaluatorConfig
+			if err := awsRestjson1_deserializeDocumentCodeBasedEvaluatorConfig(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.EvaluatorConfigMemberCodeBased{Value: mv}
+			break loop
+
 		case "llmAsAJudge":
 			var mv types.LlmAsAJudgeEvaluatorConfig
 			destAddr := &mv
@@ -23463,6 +23511,59 @@ func awsRestjson1_deserializeDocumentKmsConfiguration(v **types.KmsConfiguration
 					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLambdaEvaluatorConfig(v **types.LambdaEvaluatorConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LambdaEvaluatorConfig
+	if *v == nil {
+		sv = &types.LambdaEvaluatorConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "lambdaArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LambdaArn to be of type string, got %T instead", value)
+				}
+				sv.LambdaArn = ptr.String(jtv)
+			}
+
+		case "lambdaTimeoutInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LambdaTimeoutInSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:

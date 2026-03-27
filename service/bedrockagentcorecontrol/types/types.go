@@ -667,6 +667,26 @@ type CodeMemberS3 struct {
 
 func (*CodeMemberS3) isCode() {}
 
+//	Configuration for a code-based evaluator. Specify the Lambda function to use
+//
+// for evaluation.
+//
+// The following types satisfy this interface:
+//
+//	CodeBasedEvaluatorConfigMemberLambdaConfig
+type CodeBasedEvaluatorConfig interface {
+	isCodeBasedEvaluatorConfig()
+}
+
+// The Lambda function configuration for code-based evaluation.
+type CodeBasedEvaluatorConfigMemberLambdaConfig struct {
+	Value LambdaEvaluatorConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*CodeBasedEvaluatorConfigMemberLambdaConfig) isCodeBasedEvaluatorConfig() {}
+
 // The configuration for the source code that defines how the agent runtime code
 // should be executed, including the code location, runtime environment, and entry
 // point.
@@ -1498,10 +1518,22 @@ type EpisodicReflectionOverride struct {
 //
 // The following types satisfy this interface:
 //
+//	EvaluatorConfigMemberCodeBased
 //	EvaluatorConfigMemberLlmAsAJudge
 type EvaluatorConfig interface {
 	isEvaluatorConfig()
 }
+
+//	Configuration for a code-based evaluator that uses a customer-managed Lambda
+//
+// function to programmatically assess agent performance.
+type EvaluatorConfigMemberCodeBased struct {
+	Value CodeBasedEvaluatorConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluatorConfigMemberCodeBased) isEvaluatorConfig() {}
 
 //	The LLM-as-a-Judge configuration that uses a language model to evaluate agent
 //
@@ -2163,6 +2195,22 @@ type KmsConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the KMS key.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for a Lambda function used as a code-based evaluator.
+type LambdaEvaluatorConfig struct {
+
+	//  The Amazon Resource Name (ARN) of the Lambda function that implements the
+	// evaluation logic.
+	//
+	// This member is required.
+	LambdaArn *string
+
+	//  The timeout in seconds for the Lambda function invocation. Defaults to 60.
+	// Must be between 1 and 300.
+	LambdaTimeoutInSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -4379,11 +4427,11 @@ func (*TriggerConditionInputMemberTokenBasedTrigger) isTriggerConditionInput() {
 // Wrapper for updating an optional Description field with PATCH semantics. When
 // present in an update request, the description is replaced with optionalValue.
 // When absent, the description is left unchanged. To unset the description,
-// include the wrapper with optionalValue set to null.
+// include the wrapper with optionalValue not specified.
 type UpdatedDescription struct {
 
 	// Represents an optional value that is used to update the human-readable
-	// description of the resource. If set to null, it will clear the current
+	// description of the resource. If not specified, it will clear the current
 	// description of the resource.
 	OptionalValue *string
 
@@ -4567,6 +4615,7 @@ func (*UnknownUnionMember) isAuthorizerConfiguration()               {}
 func (*UnknownUnionMember) isCertificateLocation()                   {}
 func (*UnknownUnionMember) isClaimMatchValueType()                   {}
 func (*UnknownUnionMember) isCode()                                  {}
+func (*UnknownUnionMember) isCodeBasedEvaluatorConfig()              {}
 func (*UnknownUnionMember) isConsolidationConfiguration()            {}
 func (*UnknownUnionMember) isContent()                               {}
 func (*UnknownUnionMember) isCredentialProvider()                    {}

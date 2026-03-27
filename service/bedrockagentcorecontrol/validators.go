@@ -2188,6 +2188,25 @@ func validateCode(v types.Code) error {
 	}
 }
 
+func validateCodeBasedEvaluatorConfig(v types.CodeBasedEvaluatorConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodeBasedEvaluatorConfig"}
+	switch uv := v.(type) {
+	case *types.CodeBasedEvaluatorConfigMemberLambdaConfig:
+		if err := validateLambdaEvaluatorConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[lambdaConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCodeConfiguration(v *types.CodeConfiguration) error {
 	if v == nil {
 		return nil
@@ -2722,6 +2741,11 @@ func validateEvaluatorConfig(v types.EvaluatorConfig) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EvaluatorConfig"}
 	switch uv := v.(type) {
+	case *types.EvaluatorConfigMemberCodeBased:
+		if err := validateCodeBasedEvaluatorConfig(uv.Value); err != nil {
+			invalidParams.AddNested("[codeBased]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.EvaluatorConfigMemberLlmAsAJudge:
 		if err := validateLlmAsAJudgeEvaluatorConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[llmAsAJudge]", err.(smithy.InvalidParamsError))
@@ -3040,6 +3064,21 @@ func validateKmsConfiguration(v *types.KmsConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "KmsConfiguration"}
 	if len(v.KeyType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLambdaEvaluatorConfig(v *types.LambdaEvaluatorConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LambdaEvaluatorConfig"}
+	if v.LambdaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LambdaArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

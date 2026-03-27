@@ -49,8 +49,9 @@ type UpdateEvaluatorInput struct {
 	//  The updated description of the evaluator.
 	Description *string
 
-	//  The updated configuration for the evaluator, including LLM-as-a-Judge settings
-	// with instructions, rating scale, and model configuration.
+	//  The updated configuration for the evaluator. Specify either LLM-as-a-Judge
+	// settings with instructions, rating scale, and model configuration, or code-based
+	// settings with a customer-managed Lambda function.
 	EvaluatorConfig types.EvaluatorConfig
 
 	//  The updated evaluation level ( TOOL_CALL , TRACE , or SESSION ) that determines
