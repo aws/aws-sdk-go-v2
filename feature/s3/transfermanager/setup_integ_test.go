@@ -48,7 +48,7 @@ var s3TransferManagerClient *Client
 var stsClient *sts.Client
 
 // http client setting to use for integ testing
-var httpClient *http.Client
+var testHTTPClient *http.Client
 
 var region = "us-west-2"
 
@@ -86,7 +86,7 @@ func TestMain(m *testing.M) {
 	flag.BoolVar(&verifyTLS, "verify-tls", true, "verify server TLS certificate")
 	flag.Parse()
 
-	httpClient = &http.Client{
+	testHTTPClient = &http.Client{
 		Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{InsecureSkipVerify: verifyTLS},
 		},
@@ -101,7 +101,7 @@ func TestMain(m *testing.M) {
 	}
 
 	// assign the http client
-	cfg.HTTPClient = httpClient
+	cfg.HTTPClient = testHTTPClient
 
 	// create a s3 client
 	s3cfg := cfg.Copy()
