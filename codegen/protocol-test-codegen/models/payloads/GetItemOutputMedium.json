@@ -1,0 +1,99 @@
+{
+  "Item": {
+    "id": {
+      "S": "recipe-002"
+    },
+    "name": {
+      "S": "Fettuccine Alfredo"
+    },
+    "description": {
+      "S": "Creamy, rich pasta dish with butter, parmesan cheese, and fresh fettuccine noodles"
+    },
+    "cook_time": {
+      "N": "25"
+    },
+    "prep_time": {
+      "N": "15"
+    },
+    "difficulty": {
+      "S": "Easy"
+    },
+    "cuisine": {
+      "S": "Italian"
+    },
+    "servings": {
+      "N": "4"
+    },
+    "rating": {
+      "N": "4.6"
+    },
+    "tags": {
+      "SS": ["creamy", "comfort-food", "vegetarian"]
+    },
+    "ingredients": {
+      "L": [
+        {
+          "M": {
+            "item": {
+              "S": "fettuccine pasta"
+            },
+            "amount": {
+              "S": "1 lb"
+            }
+          }
+        },
+        {
+          "M": {
+            "item": {
+              "S": "butter"
+            },
+            "amount": {
+              "S": "1/2 cup"
+            }
+          }
+        },
+        {
+          "M": {
+            "item": {
+              "S": "parmesan cheese"
+            },
+            "amount": {
+              "S": "1 cup grated"
+            }
+          }
+        },
+        {
+          "M": {
+            "item": {
+              "S": "heavy cream"
+            },
+            "amount": {
+              "S": "1/2 cup"
+            }
+          }
+        }
+      ]
+    },
+    "nutrition": {
+      "M": {
+        "calories": {
+          "N": "520"
+        },
+        "protein": {
+          "N": "18"
+        },
+        "carbs": {
+          "N": "45"
+        },
+        "fat": {
+          "N": "28"
+        }
+      }
+    }
+  },
+  "ConsumedCapacity": {
+    "TableName": "pasta-recipes",
+    "CapacityUnits": 2.5,
+    "ReadCapacityUnits": 2.5
+  }
+}
