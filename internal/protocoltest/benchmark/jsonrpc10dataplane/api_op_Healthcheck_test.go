@@ -5,7 +5,6 @@ package jsonrpc10dataplane
 import (
 	"bytes"
 	"context"
-	"errors"
 	"github.com/aws/smithy-go/middleware"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -19,7 +18,7 @@ import (
 	"time"
 )
 
-func TestClient_Healthcheck_Serialize(t *testing.T) {
+func TestSerdClient_Healthcheck_(t *testing.T) {
 	cases := map[string]struct {
 		Params        *HealthcheckInput
 		ExpectMethod  string
@@ -43,144 +42,6 @@ func TestClient_Healthcheck_Serialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			actualReq := &http.Request{}
-			serverURL := "http://localhost:8888/"
-			if c.Host != nil {
-				u, err := url.Parse(serverURL)
-				if err != nil {
-					t.Fatalf("expect no error, got %v", err)
-				}
-				u.Path = c.Host.Path
-				u.RawPath = c.Host.RawPath
-				u.RawQuery = c.Host.RawQuery
-				serverURL = u.String()
-			}
-			client := New(Options{
-				APIOptions: []func(*middleware.Stack) error{
-					func(s *middleware.Stack) error {
-						s.Finalize.Clear()
-						s.Initialize.Remove(`OperationInputValidation`)
-						return nil
-					},
-				},
-				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
-				HTTPClient:         &protocolTestHTTPClient{},
-			})
-			result, err := client.Healthcheck(context.Background(), c.Params, func(options *Options) {
-				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-					return errors.Join(
-						stack.Finalize.Add(&resolveAuthSchemeMiddleware{"", *options}, middleware.After),
-						stack.Finalize.Add(&resolveEndpointV2Middleware{*options}, middleware.After),
-						stack.Finalize.Add(&captureRequestMiddleware{actualReq}, middleware.After),
-					)
-
-				})
-			})
-			if err != nil {
-				t.Fatalf("expect nil err, got %v", err)
-			}
-			if result == nil {
-				t.Fatalf("expect not nil result")
-			}
-			if e, a := c.ExpectMethod, actualReq.Method; e != a {
-				t.Errorf("expect %v method, got %v", e, a)
-			}
-			if e, a := c.ExpectURIPath, actualReq.URL.RawPath; e != a {
-				t.Errorf("expect %v path, got %v", e, a)
-			}
-			queryItems := smithytesting.ParseRawQuery(actualReq.URL.RawQuery)
-			smithytesting.AssertHasQuery(t, c.ExpectQuery, queryItems)
-			smithytesting.AssertHasQueryKeys(t, c.RequireQuery, queryItems)
-			smithytesting.AssertNotHaveQueryKeys(t, c.ForbidQuery, queryItems)
-			smithytesting.AssertHasHeader(t, c.ExpectHeader, actualReq.Header)
-			smithytesting.AssertHasHeaderKeys(t, c.RequireHeader, actualReq.Header)
-			smithytesting.AssertNotHaveHeaderKeys(t, c.ForbidHeader, actualReq.Header)
-			if c.BodyAssert != nil {
-				if err := c.BodyAssert(actualReq.Body); err != nil {
-					t.Errorf("expect body equal, got %v", err)
-				}
-			}
-		})
-	}
-}
-
-func BenchmarkClient_Healthcheck_Serialize(b *testing.B) {
-	cases := map[string]struct {
-		Params        *HealthcheckInput
-		ExpectMethod  string
-		ExpectURIPath string
-		ExpectQuery   []smithytesting.QueryItem
-		RequireQuery  []string
-		ForbidQuery   []string
-		ExpectHeader  http.Header
-		RequireHeader []string
-		ForbidHeader  []string
-		Host          *url.URL
-		BodyMediaType string
-		BodyAssert    func(io.Reader) error
-	}{
-		"awsJson1_0_HealthcheckRequest_Example": {
-			Params:        &HealthcheckInput{},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/",
-			ExpectQuery:   []smithytesting.QueryItem{},
-		},
-	}
-	for name, c := range cases {
-		b.Run(name, func(b *testing.B) {
-			serverURL := "http://localhost:8888/"
-			if c.Host != nil {
-				u, err := url.Parse(serverURL)
-				if err != nil {
-					panic(err)
-				}
-				u.Path = c.Host.Path
-				u.RawPath = c.Host.RawPath
-				u.RawQuery = c.Host.RawQuery
-				serverURL = u.String()
-			}
-			client := New(Options{
-				APIOptions: []func(*middleware.Stack) error{
-					func(s *middleware.Stack) error {
-						s.Finalize.Clear()
-						s.Initialize.Remove(`OperationInputValidation`)
-						return nil
-					},
-				},
-				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
-				HTTPClient:         &protocolTestHTTPClient{},
-			})
-			for i := 0; i < b.N; i++ {
-				client.Healthcheck(context.Background(), c.Params)
-			}
-		})
-	}
-}
-
-func SerdBenchmarkClient_Healthcheck_(b *testing.B) {
-	cases := map[string]struct {
-		Params        *HealthcheckInput
-		ExpectMethod  string
-		ExpectURIPath string
-		ExpectQuery   []smithytesting.QueryItem
-		RequireQuery  []string
-		ForbidQuery   []string
-		ExpectHeader  http.Header
-		RequireHeader []string
-		ForbidHeader  []string
-		Host          *url.URL
-		BodyMediaType string
-		BodyAssert    func(io.Reader) error
-	}{
-		"awsJson1_0_HealthcheckRequest_Example": {
-			Params:        &HealthcheckInput{},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/",
-			ExpectQuery:   []smithytesting.QueryItem{},
-		},
-	}
-	for name, c := range cases {
-		b.Run(name, func(b *testing.B) {
 			serverURL := "http://localhost:8888/"
 			if c.Host != nil {
 				u, err := url.Parse(serverURL)
@@ -208,24 +69,27 @@ func SerdBenchmarkClient_Healthcheck_(b *testing.B) {
 
 			for i := 0; i < 10000; i++ {
 				serializeStart := time.Now()
-				client.Healthcheck(context.Background(), c.Params)
+				_, err := client.Healthcheck(context.Background(), c.Params)
+				if err != nil {
+					t.Fatalf("error when running serd test for %s", name)
+				}
+
 				serializeEnd := time.Now()
 				if i >= 1000 {
-					timings := append(timings, serializeEnd.Sub(serializeStart))
+					timings = append(timings, serializeEnd.Sub(serializeStart))
 				}
 				if benchmarkStart.Add(30000000000).Before(serializeEnd) {
 					break
 				}
 
 			}
-			sum := int64(0)
+			mean := float64(0)
 			n := len(timings)
 			slices.Sort(timings)
-			stddev := int64(0)
+			stddev := float64(0)
 			for _, t := range timings {
-				sum += int64(t)
+				mean += float64(t) / float64(n)
 			}
-			mean := float64(sum) / float64(n)
 			p50 := timings[int64(float64(n-1)*0.5)]
 			p90 := timings[int64(float64(n-1)*0.9)]
 			p95 := timings[int64(float64(n-1)*0.95)]
@@ -235,18 +99,18 @@ func SerdBenchmarkClient_Healthcheck_(b *testing.B) {
 			}
 			stddev = math.Sqrt(stddev)
 
-			b.Logf("p50: %v\n", p50)
-			b.Logf("p90: %v\n", p90)
-			b.Logf("p95: %v\n", p95)
-			b.Logf("p99: %v\n", p99)
-			b.Logf("mean: %v\n", mean)
-			b.Logf("stddev: %v\n", stddev)
+			t.Logf("p50: %v ns\n", p50)
+			t.Logf("p90: %v ns\n", p90)
+			t.Logf("p95: %v ns\n", p95)
+			t.Logf("p99: %v ns\n", p99)
+			t.Logf("mean: %v ns\n", mean)
+			t.Logf("stddev: %v\n", stddev)
 
 		})
 	}
 }
 
-func TestClient_Healthcheck_Deserialize(t *testing.T) {
+func TestDeserdClient_Healthcheck_(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
@@ -261,129 +125,6 @@ func TestClient_Healthcheck_Deserialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			serverURL := "http://localhost:8888/"
-			client := New(Options{
-				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
-					headers := http.Header{}
-					for k, vs := range c.Header {
-						for _, v := range vs {
-							headers.Add(k, v)
-						}
-					}
-					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
-						headers.Set("Content-Type", c.BodyMediaType)
-					}
-					response := &http.Response{
-						StatusCode: c.StatusCode,
-						Header:     headers,
-						Request:    r,
-					}
-					if len(c.Body) != 0 {
-						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
-					} else {
-
-						response.Body = http.NoBody
-					}
-					return response, nil
-				}),
-				APIOptions: []func(*middleware.Stack) error{
-					func(s *middleware.Stack) error {
-						s.Finalize.Clear()
-						s.Initialize.Remove(`OperationInputValidation`)
-						return nil
-					},
-				},
-				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
-			})
-			var params HealthcheckInput
-			result, err := client.Healthcheck(context.Background(), &params)
-			if err != nil {
-				t.Fatalf("expect nil err, got %v", err)
-			}
-			if result == nil {
-				t.Fatalf("expect not nil result")
-			}
-			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
-				t.Errorf("expect c.ExpectResult value match:\n%v", err)
-			}
-		})
-	}
-}
-
-func BenchmarkClient_Healthcheck_Deserialize(b *testing.B) {
-	cases := map[string]struct {
-		StatusCode    int
-		Header        http.Header
-		BodyMediaType string
-		Body          []byte
-		ExpectResult  *HealthcheckOutput
-	}{
-		"awsJson1_0_HealthcheckResponse_Example": {
-			StatusCode:   200,
-			ExpectResult: &HealthcheckOutput{},
-		},
-	}
-	for name, c := range cases {
-		b.Run(name, func(b *testing.B) {
-			var params HealthcheckInput
-			serverURL := "http://localhost:8888/"
-			client := New(Options{
-				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
-					headers := http.Header{}
-					for k, vs := range c.Header {
-						for _, v := range vs {
-							headers.Add(k, v)
-						}
-					}
-					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
-						headers.Set("Content-Type", c.BodyMediaType)
-					}
-					response := &http.Response{
-						StatusCode: c.StatusCode,
-						Header:     headers,
-						Request:    r,
-					}
-					if len(c.Body) != 0 {
-						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
-					} else {
-
-						response.Body = http.NoBody
-					}
-					return response, nil
-				}),
-				APIOptions: []func(*middleware.Stack) error{
-					func(s *middleware.Stack) error {
-						s.Finalize.Clear()
-						s.Initialize.Remove(`OperationInputValidation`)
-						return nil
-					},
-				},
-				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
-			})
-			for i := 0; i < b.N; i++ {
-				client.Healthcheck(context.Background(), &params)
-			}
-		})
-	}
-}
-
-func DeserdBenchmarkClient_Healthcheck_(b *testing.B) {
-	cases := map[string]struct {
-		StatusCode    int
-		Header        http.Header
-		BodyMediaType string
-		Body          []byte
-		ExpectResult  *HealthcheckOutput
-	}{
-		"awsJson1_0_HealthcheckResponse_Example": {
-			StatusCode:   200,
-			ExpectResult: &HealthcheckOutput{},
-		},
-	}
-	for name, c := range cases {
-		b.Run(name, func(b *testing.B) {
 			var params HealthcheckInput
 			serverURL := "http://localhost:8888/"
 			client := New(Options{
@@ -424,8 +165,7 @@ func DeserdBenchmarkClient_Healthcheck_(b *testing.B) {
 			benchmarkStart := time.Now()
 
 			for i := 0; i < 10000; i++ {
-				var params HealthcheckInput
-				result, err := client.Healthcheck(context.Background(), &params, func(o *Options) {
+				_, err := client.Healthcheck(context.Background(), &params, func(o *Options) {
 					o.APIOptions = append(o.APIOptions, []func(*middleware.Stack) error{
 						func(s *middleware.Stack) error {
 							return s.Deserialize.Insert(middleware.DeserializeMiddlewareFunc("deserilaizerbenchmark", func(ctx context.Context, input middleware.DeserializeInput, next middleware.DeserializeHandler) (out middleware.DeserializeOutput, metadata middleware.Metadata, err error) {
@@ -440,19 +180,21 @@ func DeserdBenchmarkClient_Healthcheck_(b *testing.B) {
 						},
 					}...)
 				})
+				if err != nil {
+					t.Fatalf("error when running deserd test for %s", name)
+				}
 				if benchmarkStart.Add(30000000000).Before(time.Now()) {
 					break
 				}
 
 			}
-			sum := int64(0)
+			mean := float64(0)
 			n := len(timings)
 			slices.Sort(timings)
-			stddev := int64(0)
+			stddev := float64(0)
 			for _, t := range timings {
-				sum += int64(t)
+				mean += float64(t) / float64(n)
 			}
-			mean := float64(sum) / float64(n)
 			p50 := timings[int64(float64(n-1)*0.5)]
 			p90 := timings[int64(float64(n-1)*0.9)]
 			p95 := timings[int64(float64(n-1)*0.95)]
@@ -462,12 +204,12 @@ func DeserdBenchmarkClient_Healthcheck_(b *testing.B) {
 			}
 			stddev = math.Sqrt(stddev)
 
-			b.Logf("p50: %v\n", p50)
-			b.Logf("p90: %v\n", p90)
-			b.Logf("p95: %v\n", p95)
-			b.Logf("p99: %v\n", p99)
-			b.Logf("mean: %v\n", mean)
-			b.Logf("stddev: %v\n", stddev)
+			t.Logf("p50: %v ns\n", p50)
+			t.Logf("p90: %v ns\n", p90)
+			t.Logf("p95: %v ns\n", p95)
+			t.Logf("p99: %v ns\n", p99)
+			t.Logf("mean: %v ns\n", mean)
+			t.Logf("stddev: %v\n", stddev)
 
 		})
 	}
