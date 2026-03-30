@@ -1546,6 +1546,20 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.appstream#ContentRedirection": {
+            "type": "structure",
+            "members": {
+                "HostToClient": {
+                    "target": "com.amazonaws.appstream#UrlRedirectionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for redirecting URLs from the remote desktop to the local client browser.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for bidirectional URL redirection between the streaming session and the local client. Use HostToClient to redirect URLs from the remote desktop to the local browser.</p>"
+            }
+        },
         "com.amazonaws.appstream#CopyImage": {
             "type": "operation",
             "input": {
@@ -3007,6 +3021,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.</p>"
                     }
+                },
+                "ContentRedirection": {
+                    "target": "com.amazonaws.appstream#ContentRedirection"
                 }
             },
             "traits": {
@@ -9959,6 +9976,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.</p>"
                     }
+                },
+                "ContentRedirection": {
+                    "target": "com.amazonaws.appstream#ContentRedirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for bidirectional URL redirection between the streaming session and the local client. Use HostToClient to redirect URLs from the remote desktop to the local browser.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10038,6 +10061,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "STREAMING_EXPERIENCE_SETTINGS"
+                    }
+                },
+                "CONTENT_REDIRECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTENT_REDIRECTION"
                     }
                 }
             }
@@ -11867,6 +11896,57 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.appstream#UrlPattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A glob pattern using wildcards (* for zero or more characters, ? for exactly one character) to match URLs for redirection rules. Patterns do not include a protocol prefix; HTTPS is enforced automatically. Valid examples: *, *.example.com, github.com/myorg/*, api?.example.com Invalid examples: https://example.com (no protocol), empty string</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(\\*|https?://[^\\s,;]+)$"
+            }
+        },
+        "com.amazonaws.appstream#UrlPatternList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#UrlPattern"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.appstream#UrlRedirectionConfig": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.appstream#BooleanObject",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Whether URL redirection is enabled for this direction.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AllowedUrls": {
+                    "target": "com.amazonaws.appstream#UrlPatternList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of URL patterns that are allowed to be redirected. URLs matching these patterns will be redirected unless they also match a pattern in the denied list.</p>"
+                    }
+                },
+                "DeniedUrls": {
+                    "target": "com.amazonaws.appstream#UrlPatternList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of URL patterns that are denied from redirection. This list takes precedence over the allowed list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for URL redirection in a specific direction (host-to-client or client-to-host). When enabled, URLs matching the allowed or denied patterns are redirected accordingly. The denied list takes precedence over the allowed list.</p>"
             }
         },
         "com.amazonaws.appstream#UsageReportExecutionErrorCode": {

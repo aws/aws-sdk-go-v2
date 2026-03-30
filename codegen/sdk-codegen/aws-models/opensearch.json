@@ -870,6 +870,9 @@
                     "target": "com.amazonaws.opensearch#DescribeInboundConnections"
                 },
                 {
+                    "target": "com.amazonaws.opensearch#DescribeInsightDetails"
+                },
+                {
                     "target": "com.amazonaws.opensearch#DescribeInstanceTypeLimits"
                 },
                 {
@@ -940,6 +943,9 @@
                 },
                 {
                     "target": "com.amazonaws.opensearch#ListDomainsForPackage"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ListInsights"
                 },
                 {
                     "target": "com.amazonaws.opensearch#ListInstanceTypeDetails"
@@ -5936,6 +5942,88 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.opensearch#DescribeInsightDetails": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#DescribeInsightDetailsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#DescribeInsightDetailsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the details of an existing insight for an Amazon OpenSearch Service domain.\n            Returns detailed fields associated with the specified insight, such as text descriptions\n            and metric data.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2021-01-01/opensearch/insight-details",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#DescribeInsightDetailsRequest": {
+            "type": "structure",
+            "members": {
+                "Entity": {
+                    "target": "com.amazonaws.opensearch#InsightEntity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity for which to retrieve insight details. Specifies the type and value of the\n            entity, such as a domain name or Amazon Web Services account ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InsightId": {
+                    "target": "com.amazonaws.opensearch#GUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the insight to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ShowHtmlContent": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to show response with HTML content in response or not.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>DescribeInsightDetails</code>\n            operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#DescribeInsightDetailsResponse": {
+            "type": "structure",
+            "members": {
+                "Fields": {
+                    "target": "com.amazonaws.opensearch#InsightFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of fields that contain detailed information about the insight.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a <code>DescribeInsightDetails</code> request. Contains the detailed\n            fields associated with the specified insight.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.opensearch#DescribeInstanceTypeLimits": {
             "type": "operation",
             "input": {
@@ -9363,6 +9451,311 @@
                 }
             }
         },
+        "com.amazonaws.opensearch#Insight": {
+            "type": "structure",
+            "members": {
+                "InsightId": {
+                    "target": "com.amazonaws.opensearch#GUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the insight.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the insight.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.opensearch#InsightType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the insight. Possible values are <code>EVENT</code> and\n            <code>RECOMMENDATION</code>.</p>"
+                    }
+                },
+                "Priority": {
+                    "target": "com.amazonaws.opensearch#InsightPriorityLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The priority level of the insight. Possible values are <code>CRITICAL</code>,\n            <code>HIGH</code>, <code>MEDIUM</code>, and <code>LOW</code>.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.opensearch#InsightStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the insight. Possible values are <code>ACTIVE</code>,\n            <code>RESOLVED</code>, and <code>DISMISSED</code>.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.opensearch#UpdateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the insight was created, in epoch milliseconds.</p>"
+                    }
+                },
+                "UpdateTime": {
+                    "target": "com.amazonaws.opensearch#UpdateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the insight was last updated, in epoch milliseconds.</p>"
+                    }
+                },
+                "IsExperimental": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the insight is experimental.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an insight returned by the <code>ListInsights</code> operation. An insight\n            is a notification about a domain event or recommendation that helps you optimize your\n            Amazon OpenSearch Service domain.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#InsightEntity": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.opensearch#InsightEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the entity. Possible values are <code>Account</code> and\n            <code>DomainName</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.opensearch#InsightEntityValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the entity. For <code>DomainName</code>, this is the domain name. For\n            <code>Account</code>, this is the Amazon Web Services account ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the entity for which to retrieve insights. An entity can be an Amazon\n            OpenSearch Service domain or an Amazon Web Services account.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#InsightEntityType": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Account"
+                    }
+                },
+                "DOMAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DomainName"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of entity for which to retrieve insights. Possible values are\n            <code>Account</code> and <code>DomainName</code>.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#InsightEntityValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The value of the entity, such as a domain name or Amazon Web Services account\n            ID.</p>",
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 28
+                },
+                "smithy.api#pattern": "^([a-z][a-z0-9\\-]+|\\d{12})$"
+            }
+        },
+        "com.amazonaws.opensearch#InsightField": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the insight field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.opensearch#InsightFieldType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the insight field. Possible values are <code>text</code> and\n            <code>metric</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the insight field.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a field in the detailed view of an insight, returned by the\n            <code>DescribeInsightDetails</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#InsightFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearch#InsightField"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of insight fields.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#InsightFieldType": {
+            "type": "enum",
+            "members": {
+                "TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "text"
+                    }
+                },
+                "METRIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "metric"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of an insight field. Possible values are <code>text</code> and\n            <code>metric</code>.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#InsightList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearch#Insight"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of insights.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#InsightPageSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "<p>The maximum number of insights to return per page. Valid values are 1 to 500.</p>",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.opensearch#InsightPriorityLevel": {
+            "type": "enum",
+            "members": {
+                "CRITICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CRITICAL"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIUM"
+                    }
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The priority level of an insight. Possible values are <code>CRITICAL</code>,\n            <code>HIGH</code>, <code>MEDIUM</code>, and <code>LOW</code>.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#InsightSortOrder": {
+            "type": "enum",
+            "members": {
+                "ASC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASC"
+                    }
+                },
+                "DESC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESC"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sort order for listing insights. Possible values are <code>ASC</code> (ascending)\n            and <code>DESC</code> (descending).</p>"
+            }
+        },
+        "com.amazonaws.opensearch#InsightStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "RESOLVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOLVED"
+                    }
+                },
+                "DISMISSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISMISSED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of an insight. Possible values are <code>ACTIVE</code>,\n            <code>RESOLVED</code>, and <code>DISMISSED</code>.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#InsightTimeRange": {
+            "type": "structure",
+            "members": {
+                "From": {
+                    "target": "com.amazonaws.opensearch#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start of the time range, in epoch milliseconds.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "To": {
+                    "target": "com.amazonaws.opensearch#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of the time range, in epoch milliseconds.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the time range for filtering insights.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#InsightType": {
+            "type": "enum",
+            "members": {
+                "EVENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVENT"
+                    }
+                },
+                "RECOMMENDATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECOMMENDATION"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of an insight. Possible values are <code>EVENT</code> and\n            <code>RECOMMENDATION</code>.</p>"
+            }
+        },
         "com.amazonaws.opensearch#InstanceCount": {
             "type": "integer",
             "traits": {
@@ -10212,6 +10605,104 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Container for the response parameters to the <code>ListDomainsForPackage</code>\n            operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.opensearch#ListInsights": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#ListInsightsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#ListInsightsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists insights for an Amazon OpenSearch Service domain or Amazon Web Services account.\n            Returns a paginated list of insights based on the specified entity, filters, time range,\n            and sort order.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2021-01-01/opensearch/insights",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#ListInsightsRequest": {
+            "type": "structure",
+            "members": {
+                "Entity": {
+                    "target": "com.amazonaws.opensearch#InsightEntity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity for which to list insights. Specifies the type and value of the entity,\n            such as a domain name or Amazon Web Services account ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TimeRange": {
+                    "target": "com.amazonaws.opensearch#InsightTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time range for filtering insights, specified as epoch millisecond timestamps.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.opensearch#InsightSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order for the results. Possible values are <code>ASC</code> (ascending) and\n            <code>DESC</code> (descending).</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.opensearch#InsightPageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return. You can\n            use <code>NextToken</code> to get the next page of results. Valid values are 1 to\n            500.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your initial <code>ListInsights</code> operation returns a\n            <code>NextToken</code>, include the returned <code>NextToken</code> in subsequent\n            <code>ListInsights</code> operations to retrieve the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>ListInsights</code> operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#ListInsightsResponse": {
+            "type": "structure",
+            "members": {
+                "Insights": {
+                    "target": "com.amazonaws.opensearch#InsightList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of insights returned for the specified entity.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.opensearch#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>NextToken</code> is returned, there are more results available. The value\n            of <code>NextToken</code> is a unique pagination token for each page. Send the request\n            again using the returned token to retrieve the next page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a <code>ListInsights</code> request. Contains the list of insights and\n            a pagination token for retrieving the next page of results.</p>",
                 "smithy.api#output": {}
             }
         },

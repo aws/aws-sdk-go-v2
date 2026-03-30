@@ -23,6 +23,9 @@
                     "target": "com.amazonaws.partnercentralaccount#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.partnercentralaccount#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.partnercentralaccount#ThrottlingException"
                 },
                 {
@@ -394,6 +397,18 @@
                         "smithy.api#documentation": "<p>The business verification details that were processed and verified, potentially including additional information discovered during the verification process.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "CompletionUrl": {
+                    "target": "com.amazonaws.partnercentralaccount#CompletionUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A secure URL where the registrant can complete additional verification steps, such as document upload or identity confirmation through a third-party verification service.</p>"
+                    }
+                },
+                "CompletionUrlExpiresAt": {
+                    "target": "com.amazonaws.partnercentralaccount#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the completion URL expires and is no longer valid for accessing the verification workflow.</p>"
+                    }
                 }
             },
             "traits": {
@@ -573,7 +588,7 @@
                     }
                 },
                 "InvitationMessage": {
-                    "target": "com.amazonaws.partnercentralaccount#UnicodeString",
+                    "target": "com.amazonaws.partnercentralaccount#UnicodeStringIncludingNewLine",
                     "traits": {
                         "smithy.api#documentation": "<p>The message that was included with the original connection invitation.</p>",
                         "smithy.api#length": {
@@ -1436,6 +1451,9 @@
                     "target": "com.amazonaws.partnercentralaccount#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.partnercentralaccount#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.partnercentralaccount#ThrottlingException"
                 },
                 {
@@ -1479,7 +1497,7 @@
                     }
                 },
                 "Message": {
-                    "target": "com.amazonaws.partnercentralaccount#UnicodeString",
+                    "target": "com.amazonaws.partnercentralaccount#UnicodeStringIncludingNewLine",
                     "traits": {
                         "smithy.api#documentation": "<p>A custom message to include with the connection invitation.</p>",
                         "smithy.api#length": {
@@ -1587,7 +1605,7 @@
                     }
                 },
                 "InvitationMessage": {
-                    "target": "com.amazonaws.partnercentralaccount#UnicodeString",
+                    "target": "com.amazonaws.partnercentralaccount#UnicodeStringIncludingNewLine",
                     "traits": {
                         "smithy.api#documentation": "<p>The custom message included with the connection invitation.</p>",
                         "smithy.api#length": {
@@ -2241,7 +2259,7 @@
                     }
                 },
                 "InvitationMessage": {
-                    "target": "com.amazonaws.partnercentralaccount#UnicodeString",
+                    "target": "com.amazonaws.partnercentralaccount#UnicodeStringIncludingNewLine",
                     "traits": {
                         "smithy.api#documentation": "<p>The custom message included with the connection invitation.</p>",
                         "smithy.api#length": {
@@ -3243,7 +3261,10 @@
                 "OtherParticipantIdentifiers": {
                     "target": "com.amazonaws.partnercentralaccount#ParticipantIdentifierList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filter results by specific participant identifiers.</p>"
+                        "smithy.api#documentation": "<p>Filter results by specific participant identifiers.</p>",
+                        "smithy.api#length": {
+                            "max": 100
+                        }
                     }
                 },
                 "ParticipantType": {
@@ -3349,7 +3370,10 @@
                 "OtherParticipantIdentifiers": {
                     "target": "com.amazonaws.partnercentralaccount#ParticipantIdentifierList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filter results by specific participant identifiers.</p>"
+                        "smithy.api#documentation": "<p>Filter results by specific participant identifiers.</p>",
+                        "smithy.api#length": {
+                            "max": 100
+                        }
                     }
                 }
             },
@@ -4788,7 +4812,7 @@
                     }
                 },
                 "InvitationMessage": {
-                    "target": "com.amazonaws.partnercentralaccount#UnicodeString",
+                    "target": "com.amazonaws.partnercentralaccount#UnicodeStringIncludingNewLine",
                     "traits": {
                         "smithy.api#documentation": "<p>The message that was included with the original connection invitation.</p>",
                         "smithy.api#length": {
@@ -5039,6 +5063,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "LIMIT_EXCEEDED_NUMBER_OF_DOMAIN"
+                    }
+                },
+                "LIMIT_EXCEEDED_NUMBER_OF_CONNECTION_INVITATION_PER_DAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIMIT_EXCEEDED_NUMBER_OF_CONNECTION_INVITATION_PER_DAY"
+                    }
+                },
+                "LIMIT_EXCEEDED_NUMBER_OF_ACTIVE_CONNECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIMIT_EXCEEDED_NUMBER_OF_ACTIVE_CONNECTION"
+                    }
+                },
+                "LIMIT_EXCEEDED_NUMBER_OF_OPEN_CONNECTION_INVITATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIMIT_EXCEEDED_NUMBER_OF_OPEN_CONNECTION_INVITATION"
                     }
                 }
             }
@@ -5541,6 +5583,16 @@
                     "max": 80
                 },
                 "smithy.api#pattern": "^[\\u0020-\\u007E\\u00A0-\\uD7FF\\uE000-\\uFFFD]+$"
+            }
+        },
+        "com.amazonaws.partnercentralaccount#UnicodeStringIncludingNewLine": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 80
+                },
+                "smithy.api#pattern": "^[\\u0020-\\u007E\\u00A0-\\uD7FF\\uE000-\\uFFFD\\n]+$"
             }
         },
         "com.amazonaws.partnercentralaccount#UntagResource": {

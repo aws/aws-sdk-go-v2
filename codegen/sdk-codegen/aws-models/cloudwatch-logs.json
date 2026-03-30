@@ -1569,6 +1569,98 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.cloudwatchlogs#CreateLookupTable": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#CreateLookupTableRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#CreateLookupTableResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a lookup table by uploading CSV data. You can use lookup tables to enrich log\n      data in CloudWatch Logs Insights queries with reference data such as user details, application\n      names, or error descriptions.</p>\n         <p>The table name must be unique within your account and Region. The CSV content must include\n      a header row with column names, use UTF-8 encoding, and not exceed 10 MB.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#CreateLookupTableRequest": {
+            "type": "structure",
+            "members": {
+                "lookupTableName": {
+                    "target": "com.amazonaws.cloudwatchlogs#LookupTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the lookup table. The name must be unique within your account and Region.\n      The name can contain only alphanumeric characters and underscores, and can be up to\n      256 characters long.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.cloudwatchlogs#LookupTableDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the lookup table. The description can be up to 1024 characters\n      long.</p>"
+                    }
+                },
+                "tableBody": {
+                    "target": "com.amazonaws.cloudwatchlogs#TableBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CSV content of the lookup table. The first row must be a header row with column\n      names. The content must use UTF-8 encoding and not exceed 10 MB.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.cloudwatchlogs#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the KMS key to use to encrypt the lookup table data. If you\n      don't specify a key, the data is encrypted with an Amazon Web Services-owned key.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.cloudwatchlogs#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key-value pairs to associate with the lookup table. You can associate as many\n      as 50 tags with a lookup table. Tags can help you organize and categorize your\n      resources.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#CreateLookupTableResponse": {
+            "type": "structure",
+            "members": {
+                "lookupTableArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the lookup table that was created.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.cloudwatchlogs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the lookup table was created, expressed as the number of milliseconds\n      after <code>Jan 1, 1970 00:00:00 UTC</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudwatchlogs#CreateScheduledQuery": {
             "type": "operation",
             "input": {
@@ -2463,6 +2555,47 @@
                     "target": "com.amazonaws.cloudwatchlogs#LogStreamName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the log stream.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeleteLookupTable": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#DeleteLookupTableRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a lookup table permanently. This operation cannot be undone.</p>\n         <p>Queries that reference a deleted table will return an error. Before deleting a lookup\n      table, review any saved queries or dashboards that may reference it.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeleteLookupTableRequest": {
+            "type": "structure",
+            "members": {
+                "lookupTableArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the lookup table to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4168,6 +4301,88 @@
                 },
                 "nextToken": {
                     "target": "com.amazonaws.cloudwatchlogs#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeLookupTables": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#DescribeLookupTablesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#DescribeLookupTablesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves metadata about lookup tables in your account. You can optionally filter the\n      results by table name prefix. Results are sorted by table name in ascending order.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeLookupTablesMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeLookupTablesRequest": {
+            "type": "structure",
+            "members": {
+                "lookupTableNamePrefix": {
+                    "target": "com.amazonaws.cloudwatchlogs#LookupTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A prefix to filter lookup tables by name. Only tables whose names start with this\n      prefix are returned. If you don't specify a prefix, all tables in the account and Region are\n      returned.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.cloudwatchlogs#DescribeLookupTablesMaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of lookup tables to return in the response. The default value is 50\n      and the maximum value is 100.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.cloudwatchlogs#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n      call.)</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeLookupTablesResponse": {
+            "type": "structure",
+            "members": {
+                "lookupTables": {
+                    "target": "com.amazonaws.cloudwatchlogs#LookupTables",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures, where each structure contains metadata about one lookup\n      table.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.cloudwatchlogs#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of items.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6572,6 +6787,97 @@
                     "target": "com.amazonaws.cloudwatchlogs#LogRecord",
                     "traits": {
                         "smithy.api#documentation": "<p>The requested log event, as a JSON string.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#GetLookupTable": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#GetLookupTableRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#GetLookupTableResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the full content of a lookup table, including the CSV data.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#GetLookupTableRequest": {
+            "type": "structure",
+            "members": {
+                "lookupTableArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the lookup table to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#GetLookupTableResponse": {
+            "type": "structure",
+            "members": {
+                "lookupTableArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the lookup table.</p>"
+                    }
+                },
+                "lookupTableName": {
+                    "target": "com.amazonaws.cloudwatchlogs#LookupTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the lookup table.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.cloudwatchlogs#LookupTableDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the lookup table.</p>"
+                    }
+                },
+                "tableBody": {
+                    "target": "com.amazonaws.cloudwatchlogs#TableBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full CSV content of the lookup table.</p>"
+                    }
+                },
+                "sizeBytes": {
+                    "target": "com.amazonaws.cloudwatchlogs#StoredBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the lookup table in bytes.</p>"
+                    }
+                },
+                "lastUpdatedTime": {
+                    "target": "com.amazonaws.cloudwatchlogs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the lookup table was last updated, expressed as the number of\n      milliseconds after <code>Jan 1, 1970 00:00:00 UTC</code>.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.cloudwatchlogs#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the KMS key used to encrypt the lookup table data, if\n      applicable.</p>"
                     }
                 }
             },
@@ -9121,6 +9427,9 @@
                     "target": "com.amazonaws.cloudwatchlogs#CreateLogStream"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatchlogs#CreateLookupTable"
+                },
+                {
                     "target": "com.amazonaws.cloudwatchlogs#CreateScheduledQuery"
                 },
                 {
@@ -9158,6 +9467,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#DeleteLogStream"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#DeleteLookupTable"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#DeleteMetricFilter"
@@ -9220,6 +9532,9 @@
                     "target": "com.amazonaws.cloudwatchlogs#DescribeLogStreams"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatchlogs#DescribeLookupTables"
+                },
+                {
                     "target": "com.amazonaws.cloudwatchlogs#DescribeMetricFilters"
                 },
                 {
@@ -9278,6 +9593,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#GetLogRecord"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#GetLookupTable"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#GetQueryResults"
@@ -9410,6 +9728,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#UpdateLogAnomalyDetector"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#UpdateLookupTable"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#UpdateScheduledQuery"
@@ -10419,6 +10740,87 @@
                     ],
                     "version": "1.0"
                 }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#LookupTable": {
+            "type": "structure",
+            "members": {
+                "lookupTableArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the lookup table.</p>"
+                    }
+                },
+                "lookupTableName": {
+                    "target": "com.amazonaws.cloudwatchlogs#LookupTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the lookup table.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.cloudwatchlogs#LookupTableDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the lookup table.</p>"
+                    }
+                },
+                "tableFields": {
+                    "target": "com.amazonaws.cloudwatchlogs#TableFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column headers from the first row of the CSV file.</p>"
+                    }
+                },
+                "recordsCount": {
+                    "target": "com.amazonaws.cloudwatchlogs#RecordsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of data rows in the lookup table, excluding the header row.</p>"
+                    }
+                },
+                "sizeBytes": {
+                    "target": "com.amazonaws.cloudwatchlogs#StoredBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the lookup table in bytes.</p>"
+                    }
+                },
+                "lastUpdatedTime": {
+                    "target": "com.amazonaws.cloudwatchlogs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the lookup table was last updated, expressed as the number of\n      milliseconds after <code>Jan 1, 1970 00:00:00 UTC</code>.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.cloudwatchlogs#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the KMS key used to encrypt the lookup table data, if\n      applicable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata about a lookup table returned by <code>DescribeLookupTables</code>.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#LookupTableDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#LookupTableName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_]+$"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#LookupTables": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#LookupTable"
             }
         },
         "com.amazonaws.cloudwatchlogs#LowerCaseString": {
@@ -13509,6 +13911,14 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatchlogs#RecordsCount": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.cloudwatchlogs#RejectedEntityInfo": {
             "type": "structure",
             "members": {
@@ -15032,6 +15442,21 @@
         "com.amazonaws.cloudwatchlogs#SystemField": {
             "type": "string"
         },
+        "com.amazonaws.cloudwatchlogs#TableBody": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10485760
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#TableFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#String"
+            }
+        },
         "com.amazonaws.cloudwatchlogs#TagKey": {
             "type": "string",
             "traits": {
@@ -15921,6 +16346,89 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#UpdateLookupTable": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#UpdateLookupTableRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#UpdateLookupTableResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing lookup table by replacing all of its CSV content. After the update\n      completes, queries that use this table will use the new data.</p>\n         <p>This is a full replacement operation. All existing content is replaced with the new CSV\n      data.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#UpdateLookupTableRequest": {
+            "type": "structure",
+            "members": {
+                "lookupTableArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the lookup table to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.cloudwatchlogs#LookupTableDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An updated description of the lookup table.</p>"
+                    }
+                },
+                "tableBody": {
+                    "target": "com.amazonaws.cloudwatchlogs#TableBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new CSV content to replace the existing data. The first row must be a header row\n      with column names. The content must use UTF-8 encoding and not exceed 10 MB.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.cloudwatchlogs#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the KMS key to use to encrypt the lookup table data. You can\n      use this parameter to add, update, or remove the KMS key. To remove the KMS key and use an\n      Amazon Web Services-owned key instead, specify an empty string.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#UpdateLookupTableResponse": {
+            "type": "structure",
+            "members": {
+                "lookupTableArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the lookup table that was updated.</p>"
+                    }
+                },
+                "lastUpdatedTime": {
+                    "target": "com.amazonaws.cloudwatchlogs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the lookup table was last updated, expressed as the number of\n      milliseconds after <code>Jan 1, 1970 00:00:00 UTC</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#UpdateScheduledQuery": {

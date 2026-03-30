@@ -501,14 +501,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "principalId": {
-                    "target": "com.amazonaws.deadline#IdentityCenterPrincipalId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The member's principal ID to associate with the farm.</p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "principalType": {
                     "target": "com.amazonaws.deadline#DeadlinePrincipalType",
                     "traits": {
@@ -529,10 +521,19 @@
                         "smithy.api#documentation": "<p>The principal's membership level for the associated farm.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "principalId": {
+                    "target": "com.amazonaws.deadline#IdentityCenterPrincipalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The member's principal ID to associate with the farm.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
                 "aws.api#data": "permissions",
+                "smithy.api#documentation": "Shared member fields for Associate inputs and {Resource}Member response structures.\nprincipalId is excluded because it has @httpLabel on inputs but not on responses.",
                 "smithy.api#input": {}
             }
         },
@@ -621,14 +622,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "principalId": {
-                    "target": "com.amazonaws.deadline#IdentityCenterPrincipalId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The member's principal ID to associate with a fleet.</p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "principalType": {
                     "target": "com.amazonaws.deadline#DeadlinePrincipalType",
                     "traits": {
@@ -649,10 +642,19 @@
                         "smithy.api#documentation": "<p>The principal's membership level for the associated fleet.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "principalId": {
+                    "target": "com.amazonaws.deadline#IdentityCenterPrincipalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The member's principal ID to associate with a fleet.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
                 "aws.api#data": "permissions",
+                "smithy.api#documentation": "Shared member fields for Associate inputs and {Resource}Member response structures.\nprincipalId is excluded because it has @httpLabel on inputs but not on responses.",
                 "smithy.api#input": {}
             }
         },
@@ -749,14 +751,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "principalId": {
-                    "target": "com.amazonaws.deadline#IdentityCenterPrincipalId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The member's principal ID to associate with the job.</p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "principalType": {
                     "target": "com.amazonaws.deadline#DeadlinePrincipalType",
                     "traits": {
@@ -777,10 +771,19 @@
                         "smithy.api#documentation": "<p>The principal's membership level for the associated job.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "principalId": {
+                    "target": "com.amazonaws.deadline#IdentityCenterPrincipalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The member's principal ID to associate with the job.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
                 "aws.api#data": "permissions",
+                "smithy.api#documentation": "Shared member fields for Associate inputs and {Resource}Member response structures.\nprincipalId is excluded because it has @httpLabel on inputs but not on responses.",
                 "smithy.api#input": {}
             }
         },
@@ -869,14 +872,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "principalId": {
-                    "target": "com.amazonaws.deadline#IdentityCenterPrincipalId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The member's principal ID to associate with the queue.</p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "principalType": {
                     "target": "com.amazonaws.deadline#DeadlinePrincipalType",
                     "traits": {
@@ -897,10 +892,19 @@
                         "smithy.api#documentation": "<p>The principal's membership level for the associated queue.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "principalId": {
+                    "target": "com.amazonaws.deadline#IdentityCenterPrincipalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The member's principal ID to associate with the queue.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
                 "aws.api#data": "permissions",
+                "smithy.api#documentation": "Shared member fields for Associate inputs and {Resource}Member response structures.\nprincipalId is excluded because it has @httpLabel on inputs but not on responses.",
                 "smithy.api#input": {}
             }
         },
@@ -996,6 +1000,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared response body for AssumeRole operations where credentials are required.\nAssumeQueueRoleForWorkerResponse is excluded because credentials is optional there\nbecause Queue.roleArn is optional, so the mixin's @required trait would be incorrect.",
                 "smithy.api#output": {},
                 "smithy.api#sensitive": {}
             }
@@ -1093,6 +1098,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared response body for AssumeRole operations where credentials are required.\nAssumeQueueRoleForWorkerResponse is excluded because credentials is optional there\nbecause Queue.roleArn is optional, so the mixin's @required trait would be incorrect.",
                 "smithy.api#output": {},
                 "smithy.api#sensitive": {}
             }
@@ -1182,6 +1188,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared response body for AssumeRole operations where credentials are required.\nAssumeQueueRoleForWorkerResponse is excluded because credentials is optional there\nbecause Queue.roleArn is optional, so the mixin's @required trait would be incorrect.",
                 "smithy.api#output": {},
                 "smithy.api#sensitive": {}
             }
@@ -1271,6 +1278,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared response body for AssumeRole operations where credentials are required.\nAssumeQueueRoleForWorkerResponse is excluded because credentials is optional there\nbecause Queue.roleArn is optional, so the mixin's @required trait would be incorrect.",
                 "smithy.api#output": {},
                 "smithy.api#sensitive": {}
             }
@@ -1857,15 +1865,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "description": {
-                    "target": "com.amazonaws.deadline#Description",
-                    "traits": {
-                        "smithy.api#deprecated": {
-                            "message": "ListBudgets no longer supports description. Use GetBudget if description is needed."
-                        },
-                        "smithy.api#documentation": "<p>The description of the budget summary.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
-                    }
-                },
                 "approximateDollarLimit": {
                     "target": "com.amazonaws.deadline#ConsumedUsageLimit",
                     "traits": {
@@ -1904,6 +1903,15 @@
                     "target": "com.amazonaws.deadline#UpdatedAt",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time the resource was updated.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.deadline#Description",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "ListBudgets no longer supports description. Use GetBudget if description is needed."
+                        },
+                        "smithy.api#documentation": "<p>The description of the budget summary.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 }
             },
@@ -2188,18 +2196,18 @@
                         "smithy.api#required": {}
                     }
                 },
-                "jobId": {
-                    "target": "com.amazonaws.deadline#JobId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The job ID to copy.</p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "queueId": {
                     "target": "com.amazonaws.deadline#QueueId",
                     "traits": {
                         "smithy.api#documentation": "<p>The queue ID to copy.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobId": {
+                    "target": "com.amazonaws.deadline#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job ID to copy.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2319,26 +2327,11 @@
         "com.amazonaws.deadline#CreateBudgetRequest": {
             "type": "structure",
             "members": {
-                "clientToken": {
-                    "target": "com.amazonaws.deadline#ClientToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
-                        "smithy.api#httpHeader": "X-Amz-Client-Token",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                },
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
                         "smithy.api#documentation": "<p>The farm ID to include in this budget.</p>",
                         "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                },
-                "usageTrackingResource": {
-                    "target": "com.amazonaws.deadline#UsageTrackingResource",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The queue ID provided to this budget to track usage.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2354,6 +2347,21 @@
                     "traits": {
                         "smithy.api#default": "",
                         "smithy.api#documentation": "<p>The description of the budget.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.deadline#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Client-Token",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "usageTrackingResource": {
+                    "target": "com.amazonaws.deadline#UsageTrackingResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The queue ID provided to this budget to track usage.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "approximateDollarLimit": {
@@ -2385,6 +2393,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared displayName + description for Create operations where both are present.\ndisplayName is @required here - this mixin is Create-only by design (Update has optional displayName).",
                 "smithy.api#input": {}
             }
         },
@@ -2400,6 +2409,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Mixin that adds an optional ARN field to response structures.\nApply to SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.",
                 "smithy.api#output": {}
             }
         },
@@ -2490,7 +2500,7 @@
                     "target": "com.amazonaws.deadline#CostScaleFactor",
                     "traits": {
                         "smithy.api#default": 1,
-                        "smithy.api#documentation": "<p>The cost scale factor to apply on the farm.</p>"
+                        "smithy.api#documentation": "<p>A multiplier applied to the farm's calculated costs for usage data and budget tracking. A value less than 1 represents a discount, a value greater than 1 represents a premium, and a value of 1 represents no adjustment. The default value is 1.</p>"
                     }
                 },
                 "tags": {
@@ -2501,6 +2511,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared displayName + description for Create operations where both are present.\ndisplayName is @required here - this mixin is Create-only by design (Update has optional displayName).",
                 "smithy.api#input": {}
             }
         },
@@ -2516,6 +2527,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Mixin that adds an optional ARN field to response structures.\nApply to SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.",
                 "smithy.api#output": {}
             }
         },
@@ -2585,20 +2597,20 @@
         "com.amazonaws.deadline#CreateFleetRequest": {
             "type": "structure",
             "members": {
-                "clientToken": {
-                    "target": "com.amazonaws.deadline#ClientToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
-                        "smithy.api#httpHeader": "X-Amz-Client-Token",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                },
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
                         "smithy.api#documentation": "<p>The farm ID of the farm to connect to the fleet.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.deadline#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Client-Token",
+                        "smithy.api#idempotencyToken": {}
                     }
                 },
                 "displayName": {
@@ -2657,6 +2669,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared displayName + description for Create operations where both are present.\ndisplayName is @required here - this mixin is Create-only by design (Update has optional displayName).",
                 "smithy.api#input": {}
             }
         },
@@ -2672,6 +2685,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Mixin that adds an optional ARN field to response structures.\nApply to SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.",
                 "smithy.api#output": {}
             }
         },
@@ -2865,6 +2879,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Mixin that adds an optional ARN field to response structures.\nApply to SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.",
                 "smithy.api#output": {}
             }
         },
@@ -3003,6 +3018,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Mixin that adds an optional ARN field to response structures.\nApply to SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.",
                 "smithy.api#output": {}
             }
         },
@@ -3057,6 +3073,14 @@
         "com.amazonaws.deadline#CreateLimitRequest": {
             "type": "structure",
             "members": {
+                "farmId": {
+                    "target": "com.amazonaws.deadline#FarmId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The farm ID of the farm that contains the limit.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
                 "clientToken": {
                     "target": "com.amazonaws.deadline#ClientToken",
                     "traits": {
@@ -3083,14 +3107,6 @@
                     "target": "com.amazonaws.deadline#MaxCount",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of resources constrained by this limit. When all of the resources are in use, steps that require the limit won't be scheduled until the resource is available.</p> <p>The <code>maxCount</code> must not be 0. If the value is -1, there is no restriction on the number of resources that can be acquired for this limit.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "farmId": {
-                    "target": "com.amazonaws.deadline#FarmId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The farm ID of the farm that contains the limit.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -3245,6 +3261,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Mixin that adds an optional ARN field to response structures.\nApply to SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.",
                 "smithy.api#output": {}
             }
         },
@@ -3365,14 +3382,6 @@
         "com.amazonaws.deadline#CreateQueueEnvironmentRequest": {
             "type": "structure",
             "members": {
-                "clientToken": {
-                    "target": "com.amazonaws.deadline#ClientToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
-                        "smithy.api#httpHeader": "X-Amz-Client-Token",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                },
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
@@ -3387,6 +3396,14 @@
                         "smithy.api#documentation": "<p>The queue ID to connect the queue and environment.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.deadline#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Client-Token",
+                        "smithy.api#idempotencyToken": {}
                     }
                 },
                 "priority": {
@@ -3609,20 +3626,20 @@
         "com.amazonaws.deadline#CreateQueueRequest": {
             "type": "structure",
             "members": {
-                "clientToken": {
-                    "target": "com.amazonaws.deadline#ClientToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
-                        "smithy.api#httpHeader": "X-Amz-Client-Token",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                },
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
                         "smithy.api#documentation": "<p>The farm ID of the farm to connect to the queue.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.deadline#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Client-Token",
+                        "smithy.api#idempotencyToken": {}
                     }
                 },
                 "displayName": {
@@ -3684,6 +3701,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared displayName + description for Create operations where both are present.\ndisplayName is @required here - this mixin is Create-only by design (Update has optional displayName).",
                 "smithy.api#input": {}
             }
         },
@@ -3699,6 +3717,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Mixin that adds an optional ARN field to response structures.\nApply to SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.",
                 "smithy.api#output": {}
             }
         },
@@ -3753,20 +3772,20 @@
         "com.amazonaws.deadline#CreateStorageProfileRequest": {
             "type": "structure",
             "members": {
-                "clientToken": {
-                    "target": "com.amazonaws.deadline#ClientToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
-                        "smithy.api#httpHeader": "X-Amz-Client-Token",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                },
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
                         "smithy.api#documentation": "<p>The farm ID of the farm to connect to the storage profile.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.deadline#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Client-Token",
+                        "smithy.api#idempotencyToken": {}
                     }
                 },
                 "displayName": {
@@ -3923,6 +3942,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Mixin that adds an optional ARN field to response structures.\nApply to SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.",
                 "smithy.api#output": {}
             }
         },
@@ -3959,6 +3979,33 @@
                 }
             }
         },
+        "com.amazonaws.deadline#CustomerManagedAutoScalingConfiguration": {
+            "type": "structure",
+            "members": {
+                "standbyWorkerCount": {
+                    "target": "com.amazonaws.deadline#MinZeroMaxInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of standby workers to maintain for the fleet.</p>"
+                    }
+                },
+                "workerIdleDurationSeconds": {
+                    "target": "com.amazonaws.deadline#MinZeroMaxInteger",
+                    "traits": {
+                        "smithy.api#default": 300,
+                        "smithy.api#documentation": "<p>The duration in seconds that a worker can be idle before it is scaled down.</p>"
+                    }
+                },
+                "scaleOutWorkersPerMinute": {
+                    "target": "com.amazonaws.deadline#MinOneMaxInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of workers that can be scaled out per minute.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The auto scaling configuration options for a customer managed fleet.</p>"
+            }
+        },
         "com.amazonaws.deadline#CustomerManagedFleetConfiguration": {
             "type": "structure",
             "members": {
@@ -3967,6 +4014,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Auto Scaling mode for the customer managed fleet.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "autoScalingConfiguration": {
+                    "target": "com.amazonaws.deadline#CustomerManagedAutoScalingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The auto scaling configuration options for the customer managed fleet.</p>"
                     }
                 },
                 "workerCapabilities": {
@@ -5157,14 +5210,6 @@
         "com.amazonaws.deadline#DeleteFleetRequest": {
             "type": "structure",
             "members": {
-                "clientToken": {
-                    "target": "com.amazonaws.deadline#ClientToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
-                        "smithy.api#httpHeader": "X-Amz-Client-Token",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                },
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
@@ -5179,6 +5224,14 @@
                         "smithy.api#documentation": "<p>The fleet ID of the fleet to delete.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.deadline#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Client-Token",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },
@@ -5704,6 +5757,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Identifier mixin for queue-fleet association operations.\nComposes QueueIdentifierMixin (farmId + queueId) and adds fleetId.",
                 "smithy.api#input": {}
             }
         },
@@ -7587,12 +7641,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "description": {
-                    "target": "com.amazonaws.deadline#Description",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The description of the budget.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
-                    }
-                },
                 "approximateDollarLimit": {
                     "target": "com.amazonaws.deadline#ConsumedUsageLimit",
                     "traits": {
@@ -7604,20 +7652,6 @@
                     "target": "com.amazonaws.deadline#ConsumedUsages",
                     "traits": {
                         "smithy.api#documentation": "<p>The usages of the budget.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "actions": {
-                    "target": "com.amazonaws.deadline#ResponseBudgetActionList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The budget actions for the budget.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "schedule": {
-                    "target": "com.amazonaws.deadline#BudgetSchedule",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The budget schedule.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7647,6 +7681,26 @@
                         "smithy.api#documentation": "<p>The date and time the resource was updated.</p>"
                     }
                 },
+                "description": {
+                    "target": "com.amazonaws.deadline#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the budget.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
+                    }
+                },
+                "actions": {
+                    "target": "com.amazonaws.deadline#ResponseBudgetActionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The budget actions for the budget.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "schedule": {
+                    "target": "com.amazonaws.deadline#BudgetSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The budget schedule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
                 "queueStoppedAt": {
                     "target": "com.amazonaws.deadline#UpdatedAt",
                     "traits": {
@@ -7655,6 +7709,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Mixin that adds an optional ARN field to response structures.\nApply to SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.",
                 "smithy.api#output": {}
             }
         },
@@ -7736,24 +7791,10 @@
                         "smithy.api#required": {}
                     }
                 },
-                "description": {
-                    "target": "com.amazonaws.deadline#Description",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The description of the farm.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
-                    }
-                },
                 "kmsKeyArn": {
                     "target": "com.amazonaws.deadline#KmsKeyArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the KMS key used on the farm.</p>"
-                    }
-                },
-                "costScaleFactor": {
-                    "target": "com.amazonaws.deadline#CostScaleFactor",
-                    "traits": {
-                        "smithy.api#default": 1,
-                        "smithy.api#documentation": "<p>The cost scale factor applied on the farm.</p>",
-                        "smithy.api#required": {}
                     }
                 },
                 "createdAt": {
@@ -7781,9 +7822,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The user or system that updated this resource.</p>"
                     }
+                },
+                "description": {
+                    "target": "com.amazonaws.deadline#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the farm.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
+                    }
+                },
+                "costScaleFactor": {
+                    "target": "com.amazonaws.deadline#CostScaleFactor",
+                    "traits": {
+                        "smithy.api#default": 1,
+                        "smithy.api#documentation": "<p>A multiplier applied to the farm's calculated costs for usage data and budget tracking. A value less than 1 represents a discount, a value greater than 1 represents a premium, and a value of 1 represents no adjustment.</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Mixin that adds an optional ARN field to response structures.\nApply to SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.",
                 "smithy.api#output": {}
             }
         },
@@ -7907,7 +7963,8 @@
                     "target": "com.amazonaws.deadline#FleetId",
                     "traits": {
                         "smithy.api#documentation": "<p>The fleet ID.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "fleetId"
                     }
                 },
                 "farmId": {
@@ -7922,12 +7979,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The display name of the fleet.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
-                    }
-                },
-                "description": {
-                    "target": "com.amazonaws.deadline#Description",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The description of the fleet.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "status": {
@@ -7983,25 +8034,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "hostConfiguration": {
-                    "target": "com.amazonaws.deadline#HostConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The script that runs as a worker is starting up that you can use to provide additional configuration for workers in your fleet.</p>"
-                    }
-                },
-                "capabilities": {
-                    "target": "com.amazonaws.deadline#FleetCapabilities",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Outlines what the fleet is capable of for minimums, maximums, and naming, in addition to attribute names and values.</p>"
-                    }
-                },
-                "roleArn": {
-                    "target": "com.amazonaws.deadline#IamRoleArn",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The IAM role ARN.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "createdAt": {
                     "target": "com.amazonaws.deadline#CreatedAt",
                     "traits": {
@@ -8027,9 +8059,35 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The user or system that updated this resource.</p>"
                     }
+                },
+                "description": {
+                    "target": "com.amazonaws.deadline#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the fleet.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
+                    }
+                },
+                "hostConfiguration": {
+                    "target": "com.amazonaws.deadline#HostConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The script that runs as a worker is starting up that you can use to provide additional configuration for workers in your fleet.</p>"
+                    }
+                },
+                "capabilities": {
+                    "target": "com.amazonaws.deadline#FleetCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Outlines what the fleet is capable of for minimums, maximums, and naming, in addition to attribute names and values.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.deadline#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role ARN.</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Mixin that adds an optional ARN field to response structures.\nApply to SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.",
                 "smithy.api#output": {}
             }
         },
@@ -8500,6 +8558,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Mixin that adds an optional ARN field to response structures.\nApply to SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.",
                 "smithy.api#output": {}
             }
         },
@@ -8672,6 +8731,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Mixin that adds an optional ARN field to response structures.\nApply to SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.",
                 "smithy.api#output": {}
             }
         },
@@ -8747,24 +8807,24 @@
         "com.amazonaws.deadline#GetLimitResponse": {
             "type": "structure",
             "members": {
-                "displayName": {
-                    "target": "com.amazonaws.deadline#ResourceName",
+                "farmId": {
+                    "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the limit.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
+                        "smithy.api#documentation": "<p>The unique identifier of the farm that contains the limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
-                "amountRequirementName": {
-                    "target": "com.amazonaws.deadline#AmountRequirementName",
+                "limitId": {
+                    "target": "com.amazonaws.deadline#LimitId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value that you specify as the <code>name</code> in the <code>amounts</code> field of the <code>hostRequirements</code> in a step of a job template to declare the limit requirement.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
-                "maxCount": {
-                    "target": "com.amazonaws.deadline#MaxCount",
+                "currentCount": {
+                    "target": "com.amazonaws.deadline#MinZeroMaxInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of resources constrained by this limit. When all of the resources are in use, steps that require the limit won't be scheduled until the resource is available.</p> <p>The <code>maxValue</code> must not be 0. If the value is -1, there is no restriction on the number of resources that can be acquired for this limit.</p>",
+                        "smithy.api#documentation": "<p>The number of resources from the limit that are being used by jobs. The result is delayed and may not be the count at the time that you called the operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8794,24 +8854,24 @@
                         "smithy.api#documentation": "<p>The user identifier of the person that last updated the limit.</p>"
                     }
                 },
-                "farmId": {
-                    "target": "com.amazonaws.deadline#FarmId",
+                "displayName": {
+                    "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the farm that contains the limit.</p>",
+                        "smithy.api#documentation": "<p>The display name of the limit.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
-                "limitId": {
-                    "target": "com.amazonaws.deadline#LimitId",
+                "amountRequirementName": {
+                    "target": "com.amazonaws.deadline#AmountRequirementName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the limit.</p>",
+                        "smithy.api#documentation": "<p>The value that you specify as the <code>name</code> in the <code>amounts</code> field of the <code>hostRequirements</code> in a step of a job template to declare the limit requirement.</p>",
                         "smithy.api#required": {}
                     }
                 },
-                "currentCount": {
-                    "target": "com.amazonaws.deadline#MinZeroMaxInteger",
+                "maxCount": {
+                    "target": "com.amazonaws.deadline#MaxCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of resources from the limit that are being used by jobs. The result is delayed and may not be the count at the time that you called the operation.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of resources constrained by this limit. When all of the resources are in use, steps that require the limit won't be scheduled until the resource is available.</p> <p>The <code>maxValue</code> must not be 0. If the value is -1, there is no restriction on the number of resources that can be acquired for this limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8823,7 +8883,11 @@
                 }
             },
             "traits": {
-                "smithy.api#output": {}
+                "smithy.api#documentation": "Domain fields for Limit summary/response shapes, ordered before timestamps.",
+                "smithy.api#output": {},
+                "smithy.api#tags": [
+                    "concurrent_limits"
+                ]
             }
         },
         "com.amazonaws.deadline#GetMonitor": {
@@ -8965,6 +9029,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Mixin that adds an optional ARN field to response structures.\nApply to SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.",
                 "smithy.api#output": {}
             }
         },
@@ -9302,6 +9367,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Identifier mixin for queue-fleet association operations.\nComposes QueueIdentifierMixin (farmId + queueId) and adds fleetId.",
                 "smithy.api#input": {}
             }
         },
@@ -9357,6 +9423,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Domain fields for QueueFleetAssociation summary/response shapes, ordered before timestamps.",
                 "smithy.api#output": {}
             }
         },
@@ -9465,6 +9532,27 @@
         "com.amazonaws.deadline#GetQueueLimitAssociationResponse": {
             "type": "structure",
             "members": {
+                "queueId": {
+                    "target": "com.amazonaws.deadline#QueueId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the queue associated with the limit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "limitId": {
+                    "target": "com.amazonaws.deadline#LimitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the limit associated with the queue.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.deadline#QueueLimitAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the limit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
                 "createdAt": {
                     "target": "com.amazonaws.deadline#CreatedAt",
                     "traits": {
@@ -9490,31 +9578,14 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The user identifier of the person that last updated the association.</p>"
                     }
-                },
-                "queueId": {
-                    "target": "com.amazonaws.deadline#QueueId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the queue associated with the limit.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "limitId": {
-                    "target": "com.amazonaws.deadline#LimitId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the limit associated with the queue.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "status": {
-                    "target": "com.amazonaws.deadline#QueueLimitAssociationStatus",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The current status of the limit.</p>",
-                        "smithy.api#required": {}
-                    }
                 }
             },
             "traits": {
-                "smithy.api#output": {}
+                "smithy.api#documentation": "Domain fields for QueueLimitAssociation summary/response shapes, ordered before timestamps.",
+                "smithy.api#output": {},
+                "smithy.api#tags": [
+                    "concurrent_limits"
+                ]
             }
         },
         "com.amazonaws.deadline#GetQueueRequest": {
@@ -9544,6 +9615,13 @@
         "com.amazonaws.deadline#GetQueueResponse": {
             "type": "structure",
             "members": {
+                "farmId": {
+                    "target": "com.amazonaws.deadline#FarmId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The farm ID for the queue.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
                 "queueId": {
                     "target": "com.amazonaws.deadline#QueueId",
                     "traits": {
@@ -9555,19 +9633,6 @@
                     "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
                         "smithy.api#documentation": "<p>The display name of the queue.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "description": {
-                    "target": "com.amazonaws.deadline#Description",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The description of the queue.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
-                    }
-                },
-                "farmId": {
-                    "target": "com.amazonaws.deadline#FarmId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The farm ID for the queue.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9589,6 +9654,38 @@
                     "target": "com.amazonaws.deadline#QueueBlockedReason",
                     "traits": {
                         "smithy.api#documentation": "<p>The reason the queue was blocked.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.deadline#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the resource was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.deadline#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user or system that created this resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.deadline#UpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the resource was updated.</p>"
+                    }
+                },
+                "updatedBy": {
+                    "target": "com.amazonaws.deadline#UpdatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user or system that updated this resource.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.deadline#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the queue.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>"
                     }
                 },
                 "jobAttachmentSettings": {
@@ -9620,35 +9717,10 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The jobs in the queue ran as this specified POSIX user.</p>"
                     }
-                },
-                "createdAt": {
-                    "target": "com.amazonaws.deadline#CreatedAt",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The date and time the resource was created.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "createdBy": {
-                    "target": "com.amazonaws.deadline#CreatedBy",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The user or system that created this resource.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "updatedAt": {
-                    "target": "com.amazonaws.deadline#UpdatedAt",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The date and time the resource was updated.</p>"
-                    }
-                },
-                "updatedBy": {
-                    "target": "com.amazonaws.deadline#UpdatedBy",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The user or system that updated this resource.</p>"
-                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Mixin that adds an optional ARN field to response structures.\nApply to SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.",
                 "smithy.api#output": {}
             }
         },
@@ -9834,6 +9906,12 @@
                         "smithy.api#documentation": "<p>The percentage completed for a session action.</p>"
                     }
                 },
+                "manifests": {
+                    "target": "com.amazonaws.deadline#TaskRunManifestPropertiesListResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of manifest properties that describe file attachments for the task run.</p>"
+                    }
+                },
                 "sessionId": {
                     "target": "com.amazonaws.deadline#SessionId",
                     "traits": {
@@ -9853,23 +9931,17 @@
                         "smithy.api#documentation": "<p>The message that communicates the progress of the session action.</p>"
                     }
                 },
-                "definition": {
-                    "target": "com.amazonaws.deadline#SessionActionDefinition",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The session action definition.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "acquiredLimits": {
                     "target": "com.amazonaws.deadline#AcquiredLimits",
                     "traits": {
                         "smithy.api#documentation": "<p>The limits and their amounts acquired during a session action. If no limits were acquired during the session, this field isn't returned.</p>"
                     }
                 },
-                "manifests": {
-                    "target": "com.amazonaws.deadline#TaskRunManifestPropertiesListResponse",
+                "definition": {
+                    "target": "com.amazonaws.deadline#SessionActionDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of manifest properties that describe file attachments for the task run.</p>"
+                        "smithy.api#documentation": "<p>The session action definition.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -9948,13 +10020,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "log": {
-                    "target": "com.amazonaws.deadline#LogConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The session log.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "lifecycleStatus": {
                     "target": "com.amazonaws.deadline#SessionLifecycleStatus",
                     "traits": {
@@ -9966,6 +10031,12 @@
                     "target": "com.amazonaws.deadline#EndedAt",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time the resource ended running.</p>"
+                    }
+                },
+                "targetLifecycleStatus": {
+                    "target": "com.amazonaws.deadline#SessionLifecycleTargetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The life cycle status with which the session started.</p>"
                     }
                 },
                 "updatedAt": {
@@ -9980,10 +10051,11 @@
                         "smithy.api#documentation": "<p>The user or system that updated this resource.</p>"
                     }
                 },
-                "targetLifecycleStatus": {
-                    "target": "com.amazonaws.deadline#SessionLifecycleTargetStatus",
+                "log": {
+                    "target": "com.amazonaws.deadline#LogConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The life cycle status with which the session started.</p>"
+                        "smithy.api#documentation": "<p>The session log.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "hostProperties": {
@@ -10000,6 +10072,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Session lifecycle/status fields, ordered after IDs in session shapes.",
                 "smithy.api#output": {}
             }
         },
@@ -10074,12 +10147,11 @@
                         "smithy.api#required": {}
                     }
                 },
-                "aggregationId": {
-                    "target": "com.amazonaws.deadline#AggregationId",
+                "nextToken": {
+                    "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier returned by the <code>StartSessionsStatisticsAggregation</code> operation that identifies the aggregated statistics.</p>",
-                        "smithy.api#httpQuery": "aggregationId",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
+                        "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
@@ -10090,15 +10162,17 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
-                "nextToken": {
-                    "target": "com.amazonaws.deadline#NextToken",
+                "aggregationId": {
+                    "target": "com.amazonaws.deadline#AggregationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
-                        "smithy.api#httpQuery": "nextToken"
+                        "smithy.api#documentation": "<p>The identifier returned by the <code>StartSessionsStatisticsAggregation</code> operation that identifies the aggregated statistics.</p>",
+                        "smithy.api#httpQuery": "aggregationId",
+                        "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -10109,12 +10183,6 @@
                     "target": "com.amazonaws.deadline#StatisticsList",
                     "traits": {
                         "smithy.api#documentation": "<p>The statistics for the specified fleets or queues.</p>"
-                    }
-                },
-                "nextToken": {
-                    "target": "com.amazonaws.deadline#NextToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
                     }
                 },
                 "status": {
@@ -10129,9 +10197,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A message that describes the status.</p>"
                     }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.deadline#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -10738,12 +10813,6 @@
                         "smithy.api#documentation": "<p>The number of times that the task failed and was retried.</p>"
                     }
                 },
-                "parameters": {
-                    "target": "com.amazonaws.deadline#TaskParameters",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The parameters for the task.</p>"
-                    }
-                },
                 "startedAt": {
                     "target": "com.amazonaws.deadline#StartedAt",
                     "traits": {
@@ -10772,6 +10841,12 @@
                     "target": "com.amazonaws.deadline#SessionActionId",
                     "traits": {
                         "smithy.api#documentation": "<p>The latest session action ID for the task.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.deadline#TaskParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters for the task.</p>"
                     }
                 }
             },
@@ -10933,6 +11008,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Mixin that adds an optional ARN field to response structures.\nApply to SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.",
                 "smithy.api#output": {}
             }
         },
@@ -12335,24 +12411,24 @@
         "com.amazonaws.deadline#LimitSummary": {
             "type": "structure",
             "members": {
-                "displayName": {
-                    "target": "com.amazonaws.deadline#ResourceName",
+                "farmId": {
+                    "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the limit used in lists to identify the limit.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
+                        "smithy.api#documentation": "<p>The unique identifier of the farm that contains the limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
-                "amountRequirementName": {
-                    "target": "com.amazonaws.deadline#AmountRequirementName",
+                "limitId": {
+                    "target": "com.amazonaws.deadline#LimitId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value that you specify as the <code>name</code> in the <code>amounts</code> field of the <code>hostRequirements</code> in a step of a job template to declare the limit requirement.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
-                "maxCount": {
-                    "target": "com.amazonaws.deadline#MaxCount",
+                "currentCount": {
+                    "target": "com.amazonaws.deadline#MinZeroMaxInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of resources constrained by this limit. When all of the resources are in use, steps that require the limit won't be scheduled until the resource is available.</p> <p>The <code>maxValue</code> must not be 0. If the value is -1, there is no restriction on the number of resources that can be acquired for this limit.</p>",
+                        "smithy.api#documentation": "<p>The number of resources from the limit that are being used by jobs. The result is delayed and may not be the count at the time that you called the operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12382,24 +12458,24 @@
                         "smithy.api#documentation": "<p>The user identifier of the person that last updated the limit.</p>"
                     }
                 },
-                "farmId": {
-                    "target": "com.amazonaws.deadline#FarmId",
+                "displayName": {
+                    "target": "com.amazonaws.deadline#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the farm that contains the limit.</p>",
+                        "smithy.api#documentation": "<p>The name of the limit used in lists to identify the limit.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
-                "limitId": {
-                    "target": "com.amazonaws.deadline#LimitId",
+                "amountRequirementName": {
+                    "target": "com.amazonaws.deadline#AmountRequirementName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the limit.</p>",
+                        "smithy.api#documentation": "<p>The value that you specify as the <code>name</code> in the <code>amounts</code> field of the <code>hostRequirements</code> in a step of a job template to declare the limit requirement.</p>",
                         "smithy.api#required": {}
                     }
                 },
-                "currentCount": {
-                    "target": "com.amazonaws.deadline#MinZeroMaxInteger",
+                "maxCount": {
+                    "target": "com.amazonaws.deadline#MaxCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of resources from the limit that are being used by jobs. The result is delayed and may not be the count at the time that you called the operation.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of resources constrained by this limit. When all of the resources are in use, steps that require the limit won't be scheduled until the resource is available.</p> <p>The <code>maxValue</code> must not be 0. If the value is -1, there is no restriction on the number of resources that can be acquired for this limit.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -12477,6 +12553,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -12498,6 +12575,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -12560,19 +12638,19 @@
         "com.amazonaws.deadline#ListBudgetsRequest": {
             "type": "structure",
             "members": {
-                "nextToken": {
-                    "target": "com.amazonaws.deadline#NextToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
-                        "smithy.api#httpQuery": "nextToken"
-                    }
-                },
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
                         "smithy.api#documentation": "<p>The farm ID associated with the budgets.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.deadline#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
+                        "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
@@ -12592,27 +12670,29 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
         "com.amazonaws.deadline#ListBudgetsResponse": {
             "type": "structure",
             "members": {
-                "nextToken": {
-                    "target": "com.amazonaws.deadline#NextToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
-                    }
-                },
                 "budgets": {
                     "target": "com.amazonaws.deadline#BudgetSummaries",
                     "traits": {
                         "smithy.api#documentation": "<p>The budgets to include on the list.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.deadline#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -12695,6 +12775,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -12716,6 +12797,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -12788,13 +12870,6 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
-                "principalId": {
-                    "target": "com.amazonaws.deadline#IdentityCenterPrincipalId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The principal ID of the member to list on the farm.</p>",
-                        "smithy.api#httpQuery": "principalId"
-                    }
-                },
                 "maxResults": {
                     "target": "com.amazonaws.deadline#MaxResults",
                     "traits": {
@@ -12802,30 +12877,39 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
+                },
+                "principalId": {
+                    "target": "com.amazonaws.deadline#IdentityCenterPrincipalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal ID of the member to list on the farm.</p>",
+                        "smithy.api#httpQuery": "principalId"
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
         "com.amazonaws.deadline#ListFarmsResponse": {
             "type": "structure",
             "members": {
-                "nextToken": {
-                    "target": "com.amazonaws.deadline#NextToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
-                    }
-                },
                 "farms": {
                     "target": "com.amazonaws.deadline#FarmSummaries",
                     "traits": {
                         "smithy.api#documentation": "<p>Farms on the list.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.deadline#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -12921,6 +13005,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -12942,6 +13027,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -13018,6 +13104,21 @@
                         "smithy.api#required": {}
                     }
                 },
+                "nextToken": {
+                    "target": "com.amazonaws.deadline#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.deadline#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#documentation": "<p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
                 "principalId": {
                     "target": "com.amazonaws.deadline#IdentityCenterPrincipalId",
                     "traits": {
@@ -13038,24 +13139,10 @@
                         "smithy.api#documentation": "<p>The status of the fleet.</p>",
                         "smithy.api#httpQuery": "status"
                     }
-                },
-                "nextToken": {
-                    "target": "com.amazonaws.deadline#NextToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
-                        "smithy.api#httpQuery": "nextToken"
-                    }
-                },
-                "maxResults": {
-                    "target": "com.amazonaws.deadline#MaxResults",
-                    "traits": {
-                        "smithy.api#default": 100,
-                        "smithy.api#documentation": "<p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>",
-                        "smithy.api#httpQuery": "maxResults"
-                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -13077,6 +13164,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -13180,6 +13268,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -13201,6 +13290,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -13271,18 +13361,18 @@
                         "smithy.api#required": {}
                     }
                 },
-                "jobId": {
-                    "target": "com.amazonaws.deadline#JobId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The job ID to include on the list.</p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "queueId": {
                     "target": "com.amazonaws.deadline#QueueId",
                     "traits": {
                         "smithy.api#documentation": "<p>The queue ID to include on the list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobId": {
+                    "target": "com.amazonaws.deadline#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job ID to include on the list.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -13304,6 +13394,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -13325,6 +13416,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -13400,13 +13492,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "principalId": {
-                    "target": "com.amazonaws.deadline#IdentityCenterPrincipalId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The principal ID of the members on the jobs.</p>",
-                        "smithy.api#httpQuery": "principalId"
-                    }
-                },
                 "queueId": {
                     "target": "com.amazonaws.deadline#QueueId",
                     "traits": {
@@ -13429,9 +13514,17 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
+                },
+                "principalId": {
+                    "target": "com.amazonaws.deadline#IdentityCenterPrincipalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal ID of the members on the jobs.</p>",
+                        "smithy.api#httpQuery": "principalId"
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -13453,6 +13546,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -13530,6 +13624,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -13551,6 +13646,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -13633,6 +13729,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -13654,6 +13751,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -13734,6 +13832,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -13755,6 +13854,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -13829,27 +13929,29 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
         "com.amazonaws.deadline#ListMonitorsResponse": {
             "type": "structure",
             "members": {
-                "nextToken": {
-                    "target": "com.amazonaws.deadline#NextToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
-                    }
-                },
                 "monitors": {
                     "target": "com.amazonaws.deadline#MonitorSummaries",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of <code>MonitorSummary</code> objects that describe your monitors in the Deadline Cloud.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.deadline#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -13945,6 +14047,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -13966,6 +14069,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -14037,20 +14141,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "queueId": {
-                    "target": "com.amazonaws.deadline#QueueId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The queue ID for the queue-fleet association list.</p>",
-                        "smithy.api#httpQuery": "queueId"
-                    }
-                },
-                "fleetId": {
-                    "target": "com.amazonaws.deadline#FleetId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The fleet ID for the queue-fleet association list.</p>",
-                        "smithy.api#httpQuery": "fleetId"
-                    }
-                },
                 "nextToken": {
                     "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
@@ -14065,9 +14155,24 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
+                },
+                "queueId": {
+                    "target": "com.amazonaws.deadline#QueueId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The queue ID for the queue-fleet association list.</p>",
+                        "smithy.api#httpQuery": "queueId"
+                    }
+                },
+                "fleetId": {
+                    "target": "com.amazonaws.deadline#FleetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fleet ID for the queue-fleet association list.</p>",
+                        "smithy.api#httpQuery": "fleetId"
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -14089,6 +14194,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -14159,20 +14265,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "queueId": {
-                    "target": "com.amazonaws.deadline#QueueId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Specifies that the operation should return only the queue limit associations for the specified queue. If you specify both the <code>queueId</code> and the <code>limitId</code>, only the specified limit is returned if it exists.</p>",
-                        "smithy.api#httpQuery": "queueId"
-                    }
-                },
-                "limitId": {
-                    "target": "com.amazonaws.deadline#LimitId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Specifies that the operation should return only the queue limit associations for the specified limit. If you specify both the <code>queueId</code> and the <code>limitId</code>, only the specified limit is returned if it exists.</p>",
-                        "smithy.api#httpQuery": "limitId"
-                    }
-                },
                 "nextToken": {
                     "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
@@ -14187,9 +14279,24 @@
                         "smithy.api#documentation": "<p>The maximum number of associations to return in each page of results.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
+                },
+                "queueId": {
+                    "target": "com.amazonaws.deadline#QueueId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that the operation should return only the queue limit associations for the specified queue. If you specify both the <code>queueId</code> and the <code>limitId</code>, only the specified limit is returned if it exists.</p>",
+                        "smithy.api#httpQuery": "queueId"
+                    }
+                },
+                "limitId": {
+                    "target": "com.amazonaws.deadline#LimitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that the operation should return only the queue limit associations for the specified limit. If you specify both the <code>queueId</code> and the <code>limitId</code>, only the specified limit is returned if it exists.</p>",
+                        "smithy.api#httpQuery": "limitId"
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -14211,6 +14318,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -14306,6 +14414,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -14327,6 +14436,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -14403,20 +14513,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "principalId": {
-                    "target": "com.amazonaws.deadline#IdentityCenterPrincipalId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The principal IDs to include in the list of queues.</p>",
-                        "smithy.api#httpQuery": "principalId"
-                    }
-                },
-                "status": {
-                    "target": "com.amazonaws.deadline#QueueStatus",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The status of the queues listed.</p> <ul> <li> <p> <code>ACTIVE</code>–The queues are active.</p> </li> <li> <p> <code>SCHEDULING</code>–The queues are scheduling.</p> </li> <li> <p> <code>SCHEDULING_BLOCKED</code>–The queue scheduling is blocked for these queues.</p> </li> </ul>",
-                        "smithy.api#httpQuery": "status"
-                    }
-                },
                 "nextToken": {
                     "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
@@ -14431,9 +14527,24 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
+                },
+                "principalId": {
+                    "target": "com.amazonaws.deadline#IdentityCenterPrincipalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal IDs to include in the list of queues.</p>",
+                        "smithy.api#httpQuery": "principalId"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.deadline#QueueStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the queues listed.</p> <ul> <li> <p> <code>ACTIVE</code>–The queues are active.</p> </li> <li> <p> <code>SCHEDULING</code>–The queues are scheduling.</p> </li> <li> <p> <code>SCHEDULING_BLOCKED</code>–The queue scheduling is blocked for these queues.</p> </li> </ul>",
+                        "smithy.api#httpQuery": "status"
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -14455,6 +14566,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -14540,20 +14652,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "sessionId": {
-                    "target": "com.amazonaws.deadline#SessionId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The session ID to include on the sessions action list.</p>",
-                        "smithy.api#httpQuery": "sessionId"
-                    }
-                },
-                "taskId": {
-                    "target": "com.amazonaws.deadline#TaskId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The task ID for the session actions list.</p>",
-                        "smithy.api#httpQuery": "taskId"
-                    }
-                },
                 "nextToken": {
                     "target": "com.amazonaws.deadline#NextToken",
                     "traits": {
@@ -14568,9 +14666,24 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.deadline#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session ID to include on the sessions action list.</p>",
+                        "smithy.api#httpQuery": "sessionId"
+                    }
+                },
+                "taskId": {
+                    "target": "com.amazonaws.deadline#TaskId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The task ID for the session actions list.</p>",
+                        "smithy.api#httpQuery": "taskId"
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -14592,6 +14705,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -14749,6 +14863,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -14770,6 +14885,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -14823,6 +14939,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -14844,6 +14961,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -14980,6 +15098,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -15116,6 +15235,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -15219,6 +15339,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -15240,6 +15361,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -15386,6 +15508,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -15407,6 +15530,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -15438,6 +15562,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -15459,6 +15584,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -15657,6 +15783,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
@@ -15678,6 +15805,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -15774,27 +15902,29 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
                 "smithy.api#input": {}
             }
         },
         "com.amazonaws.deadline#ListWorkersResponse": {
             "type": "structure",
             "members": {
-                "nextToken": {
-                    "target": "com.amazonaws.deadline#NextToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
-                    }
-                },
                 "workers": {
                     "target": "com.amazonaws.deadline#WorkerSummaries",
                     "traits": {
                         "smithy.api#documentation": "<p>The workers on the list.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.deadline#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
                 "smithy.api#output": {}
             }
         },
@@ -16822,6 +16952,27 @@
         "com.amazonaws.deadline#QueueLimitAssociationSummary": {
             "type": "structure",
             "members": {
+                "queueId": {
+                    "target": "com.amazonaws.deadline#QueueId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the queue in the association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "limitId": {
+                    "target": "com.amazonaws.deadline#LimitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the limit in the association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.deadline#QueueLimitAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of task scheduling in the queue-limit association.</p> <ul> <li> <p> <code>ACTIVE</code> - Association is active.</p> </li> <li> <p> <code>STOP_LIMIT_USAGE_AND_COMPLETE_TASKS</code> - Association has stopped scheduling new tasks and is completing current tasks.</p> </li> <li> <p> <code>STOP_LIMIT_USAGE_AND_CANCEL_TASKS</code> - Association has stopped scheduling new tasks and is canceling current tasks.</p> </li> <li> <p> <code>STOPPED</code> - Association has been stopped.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
                 "createdAt": {
                     "target": "com.amazonaws.deadline#CreatedAt",
                     "traits": {
@@ -16846,27 +16997,6 @@
                     "target": "com.amazonaws.deadline#UpdatedBy",
                     "traits": {
                         "smithy.api#documentation": "<p>The user identifier of the person that updated the association.</p>"
-                    }
-                },
-                "queueId": {
-                    "target": "com.amazonaws.deadline#QueueId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the queue in the association.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "limitId": {
-                    "target": "com.amazonaws.deadline#LimitId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the limit in the association.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "status": {
-                    "target": "com.amazonaws.deadline#QueueLimitAssociationStatus",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The status of task scheduling in the queue-limit association.</p> <ul> <li> <p> <code>ACTIVE</code> - Association is active.</p> </li> <li> <p> <code>STOP_LIMIT_USAGE_AND_COMPLETE_TASKS</code> - Association has stopped scheduling new tasks and is completing current tasks.</p> </li> <li> <p> <code>STOP_LIMIT_USAGE_AND_CANCEL_TASKS</code> - Association has stopped scheduling new tasks and is canceling current tasks.</p> </li> <li> <p> <code>STOPPED</code> - Association has been stopped.</p> </li> </ul>",
-                        "smithy.api#required": {}
                     }
                 }
             },
@@ -17446,17 +17576,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "queueIds": {
-                    "target": "com.amazonaws.deadline#QueueIds",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The queue ID to use in the job search.</p>",
-                        "smithy.api#length": {
-                            "min": 1,
-                            "max": 10
-                        },
-                        "smithy.api#required": {}
-                    }
-                },
                 "filterExpressions": {
                     "target": "com.amazonaws.deadline#SearchGroupedFilterExpressions",
                     "traits": {
@@ -17490,9 +17609,21 @@
                             "max": 100
                         }
                     }
+                },
+                "queueIds": {
+                    "target": "com.amazonaws.deadline#QueueIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The queue ID to use in the job search.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 10
+                        },
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared input fields for all Search operations (filterExpressions, sortExpressions, itemOffset, pageSize).",
                 "smithy.api#input": {}
             }
         },
@@ -17521,6 +17652,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared output fields for all Search operations (nextItemOffset, totalResults).",
                 "smithy.api#output": {}
             }
         },
@@ -17627,23 +17759,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "queueIds": {
-                    "target": "com.amazonaws.deadline#QueueIds",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The queue IDs in the step search.</p>",
-                        "smithy.api#length": {
-                            "min": 1,
-                            "max": 10
-                        },
-                        "smithy.api#required": {}
-                    }
-                },
-                "jobId": {
-                    "target": "com.amazonaws.deadline#JobId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The job ID to use in the step search.</p>"
-                    }
-                },
                 "filterExpressions": {
                     "target": "com.amazonaws.deadline#SearchGroupedFilterExpressions",
                     "traits": {
@@ -17677,9 +17792,27 @@
                             "max": 100
                         }
                     }
+                },
+                "queueIds": {
+                    "target": "com.amazonaws.deadline#QueueIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The queue IDs in the step search.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 10
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobId": {
+                    "target": "com.amazonaws.deadline#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job ID to use in the step search.</p>"
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared input fields for all Search operations (filterExpressions, sortExpressions, itemOffset, pageSize).",
                 "smithy.api#input": {}
             }
         },
@@ -17708,6 +17841,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared output fields for all Search operations (nextItemOffset, totalResults).",
                 "smithy.api#output": {}
             }
         },
@@ -17776,23 +17910,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "queueIds": {
-                    "target": "com.amazonaws.deadline#QueueIds",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The queue IDs to include in the search.</p>",
-                        "smithy.api#length": {
-                            "min": 1,
-                            "max": 10
-                        },
-                        "smithy.api#required": {}
-                    }
-                },
-                "jobId": {
-                    "target": "com.amazonaws.deadline#JobId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The job ID for the task search.</p>"
-                    }
-                },
                 "filterExpressions": {
                     "target": "com.amazonaws.deadline#SearchGroupedFilterExpressions",
                     "traits": {
@@ -17826,9 +17943,27 @@
                             "max": 100
                         }
                     }
+                },
+                "queueIds": {
+                    "target": "com.amazonaws.deadline#QueueIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The queue IDs to include in the search.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 10
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobId": {
+                    "target": "com.amazonaws.deadline#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job ID for the task search.</p>"
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared input fields for all Search operations (filterExpressions, sortExpressions, itemOffset, pageSize).",
                 "smithy.api#input": {}
             }
         },
@@ -17857,6 +17992,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared output fields for all Search operations (nextItemOffset, totalResults).",
                 "smithy.api#output": {}
             }
         },
@@ -17967,17 +18103,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "fleetIds": {
-                    "target": "com.amazonaws.deadline#FleetIds",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The fleet ID of the workers to search for.</p>",
-                        "smithy.api#length": {
-                            "min": 1,
-                            "max": 10
-                        },
-                        "smithy.api#required": {}
-                    }
-                },
                 "filterExpressions": {
                     "target": "com.amazonaws.deadline#SearchGroupedFilterExpressions",
                     "traits": {
@@ -18011,9 +18136,21 @@
                             "max": 100
                         }
                     }
+                },
+                "fleetIds": {
+                    "target": "com.amazonaws.deadline#FleetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fleet ID of the workers to search for.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 10
+                        },
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared input fields for all Search operations (filterExpressions, sortExpressions, itemOffset, pageSize).",
                 "smithy.api#input": {}
             }
         },
@@ -18042,6 +18179,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Shared output fields for all Search operations (nextItemOffset, totalResults).",
                 "smithy.api#output": {}
             }
         },
@@ -18067,6 +18205,33 @@
                     "min": 1,
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.deadline#ServiceManagedEc2AutoScalingConfiguration": {
+            "type": "structure",
+            "members": {
+                "standbyWorkerCount": {
+                    "target": "com.amazonaws.deadline#MinZeroMaxInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of standby workers to maintain for the fleet.</p>"
+                    }
+                },
+                "workerIdleDurationSeconds": {
+                    "target": "com.amazonaws.deadline#ServiceManagedEc2WorkerIdleDurationSeconds",
+                    "traits": {
+                        "smithy.api#default": 300,
+                        "smithy.api#documentation": "<p>The duration in seconds that a worker can be idle before it is scaled down.</p>"
+                    }
+                },
+                "scaleOutWorkersPerMinute": {
+                    "target": "com.amazonaws.deadline#MinOneMaxInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of workers that can be scaled out per minute.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The auto scaling configuration options for a service managed EC2 fleet.</p>"
             }
         },
         "com.amazonaws.deadline#ServiceManagedEc2FleetConfiguration": {
@@ -18096,6 +18261,12 @@
                     "target": "com.amazonaws.deadline#StorageProfileId",
                     "traits": {
                         "smithy.api#documentation": "<p>The storage profile ID for the service managed EC2 fleet.</p>"
+                    }
+                },
+                "autoScalingConfiguration": {
+                    "target": "com.amazonaws.deadline#ServiceManagedEc2AutoScalingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The auto scaling configuration options for the service managed EC2 fleet.</p>"
                     }
                 }
             },
@@ -18188,6 +18359,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details of the Amazon EC2 instance market options for a service managed fleet.</p>"
+            }
+        },
+        "com.amazonaws.deadline#ServiceManagedEc2WorkerIdleDurationSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "<p>The duration in seconds that a service managed EC2 worker can be idle before it is scaled down.</p>",
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 86400
+                }
             }
         },
         "com.amazonaws.deadline#ServiceManagedFleetOperatingSystemFamily": {
@@ -18505,17 +18686,17 @@
                         "smithy.api#documentation": "<p>The completion percentage for the session action.</p>"
                     }
                 },
+                "manifests": {
+                    "target": "com.amazonaws.deadline#TaskRunManifestPropertiesListResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of manifest properties that describe file attachments for the task run.</p>"
+                    }
+                },
                 "definition": {
                     "target": "com.amazonaws.deadline#SessionActionDefinitionSummary",
                     "traits": {
                         "smithy.api#documentation": "<p>The session action definition.</p>",
                         "smithy.api#required": {}
-                    }
-                },
-                "manifests": {
-                    "target": "com.amazonaws.deadline#TaskRunManifestPropertiesListResponse",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The list of manifest properties that describe file attachments for the task run.</p>"
                     }
                 }
             },
@@ -18625,6 +18806,12 @@
                         "smithy.api#documentation": "<p>The date and time the resource ended running.</p>"
                     }
                 },
+                "targetLifecycleStatus": {
+                    "target": "com.amazonaws.deadline#SessionLifecycleTargetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target life cycle status for the session.</p>"
+                    }
+                },
                 "updatedAt": {
                     "target": "com.amazonaws.deadline#UpdatedAt",
                     "traits": {
@@ -18635,12 +18822,6 @@
                     "target": "com.amazonaws.deadline#UpdatedBy",
                     "traits": {
                         "smithy.api#documentation": "<p>The user or system that updated this resource.</p>"
-                    }
-                },
-                "targetLifecycleStatus": {
-                    "target": "com.amazonaws.deadline#SessionLifecycleTargetStatus",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The target life cycle status for the session.</p>"
                     }
                 }
             },
@@ -20457,12 +20638,6 @@
                         "smithy.api#documentation": "<p>The number of times that the task failed and was retried.</p>"
                     }
                 },
-                "parameters": {
-                    "target": "com.amazonaws.deadline#TaskParameters",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The task parameters.</p>"
-                    }
-                },
                 "startedAt": {
                     "target": "com.amazonaws.deadline#StartedAt",
                     "traits": {
@@ -20491,6 +20666,12 @@
                     "target": "com.amazonaws.deadline#SessionActionId",
                     "traits": {
                         "smithy.api#documentation": "<p>The latest session action ID for the task.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.deadline#TaskParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The task parameters.</p>"
                     }
                 }
             },
@@ -20762,14 +20943,6 @@
         "com.amazonaws.deadline#UpdateBudgetRequest": {
             "type": "structure",
             "members": {
-                "clientToken": {
-                    "target": "com.amazonaws.deadline#ClientToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
-                        "smithy.api#httpHeader": "X-Amz-Client-Token",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                },
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
@@ -20784,6 +20957,14 @@
                         "smithy.api#documentation": "<p>The budget ID to update.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.deadline#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Client-Token",
+                        "smithy.api#idempotencyToken": {}
                     }
                 },
                 "displayName": {
@@ -20911,7 +21092,7 @@
                 "costScaleFactor": {
                     "target": "com.amazonaws.deadline#CostScaleFactor",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cost scale factor of the farm to update.</p>"
+                        "smithy.api#documentation": "<p>A multiplier applied to the farm's calculated costs for usage data and budget tracking. A value less than 1 represents a discount, a value greater than 1 represents a premium, and a value of 1 represents no adjustment.</p>"
                     }
                 }
             },
@@ -20986,14 +21167,6 @@
         "com.amazonaws.deadline#UpdateFleetRequest": {
             "type": "structure",
             "members": {
-                "clientToken": {
-                    "target": "com.amazonaws.deadline#ClientToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
-                        "smithy.api#httpHeader": "X-Amz-Client-Token",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                },
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
@@ -21008,6 +21181,14 @@
                         "smithy.api#documentation": "<p>The fleet ID to update.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.deadline#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Client-Token",
+                        "smithy.api#idempotencyToken": {}
                     }
                 },
                 "displayName": {
@@ -21132,6 +21313,30 @@
         "com.amazonaws.deadline#UpdateJobRequest": {
             "type": "structure",
             "members": {
+                "farmId": {
+                    "target": "com.amazonaws.deadline#FarmId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The farm ID of the job to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "queueId": {
+                    "target": "com.amazonaws.deadline#QueueId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The queue ID of the job to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobId": {
+                    "target": "com.amazonaws.deadline#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job ID to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
                 "clientToken": {
                     "target": "com.amazonaws.deadline#ClientToken",
                     "traits": {
@@ -21186,30 +21391,6 @@
                     "target": "com.amazonaws.deadline#JobDescriptionOverride",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated job description.</p>"
-                    }
-                },
-                "farmId": {
-                    "target": "com.amazonaws.deadline#FarmId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The farm ID of the job to update.</p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                },
-                "queueId": {
-                    "target": "com.amazonaws.deadline#QueueId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The queue ID of the job to update.</p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                },
-                "jobId": {
-                    "target": "com.amazonaws.deadline#JobId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The job ID to update.</p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
                     }
                 }
             },
@@ -21504,20 +21685,13 @@
                     "method": "PATCH",
                     "uri": "/2023-10-12/farms/{farmId}/queues/{queueId}/environments/{queueEnvironmentId}",
                     "code": 200
-                }
+                },
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.deadline#UpdateQueueEnvironmentRequest": {
             "type": "structure",
             "members": {
-                "clientToken": {
-                    "target": "com.amazonaws.deadline#ClientToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
-                        "smithy.api#httpHeader": "X-Amz-Client-Token",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                },
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
@@ -21540,6 +21714,14 @@
                         "smithy.api#documentation": "<p>The queue environment ID to update.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.deadline#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Client-Token",
+                        "smithy.api#idempotencyToken": {}
                     }
                 },
                 "priority": {
@@ -21659,6 +21841,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "Identifier mixin for queue-fleet association operations.\nComposes QueueIdentifierMixin (farmId + queueId) and adds fleetId.",
                 "smithy.api#input": {}
             }
         },
@@ -21815,14 +21998,6 @@
         "com.amazonaws.deadline#UpdateQueueRequest": {
             "type": "structure",
             "members": {
-                "clientToken": {
-                    "target": "com.amazonaws.deadline#ClientToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token to update in the queue.</p>",
-                        "smithy.api#httpHeader": "X-Amz-Client-Token",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                },
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
@@ -21837,6 +22012,14 @@
                         "smithy.api#documentation": "<p>The queue ID to update.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.deadline#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The idempotency token to update in the queue.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Client-Token",
+                        "smithy.api#idempotencyToken": {}
                     }
                 },
                 "displayName": {
@@ -21967,21 +22150,6 @@
         "com.amazonaws.deadline#UpdateSessionRequest": {
             "type": "structure",
             "members": {
-                "clientToken": {
-                    "target": "com.amazonaws.deadline#ClientToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
-                        "smithy.api#httpHeader": "X-Amz-Client-Token",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                },
-                "targetLifecycleStatus": {
-                    "target": "com.amazonaws.deadline#SessionLifecycleTargetStatus",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The life cycle status to update in the session.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
@@ -22011,6 +22179,21 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The session ID to update.</p>",
                         "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.deadline#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Client-Token",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "targetLifecycleStatus": {
+                    "target": "com.amazonaws.deadline#SessionLifecycleTargetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The life cycle status to update in the session.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -22083,21 +22266,6 @@
         "com.amazonaws.deadline#UpdateStepRequest": {
             "type": "structure",
             "members": {
-                "targetTaskRunStatus": {
-                    "target": "com.amazonaws.deadline#StepTargetTaskRunStatus",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The task status to update the step's tasks to.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "clientToken": {
-                    "target": "com.amazonaws.deadline#ClientToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
-                        "smithy.api#httpHeader": "X-Amz-Client-Token",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                },
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
@@ -22127,6 +22295,21 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The step ID to update.</p>",
                         "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.deadline#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Client-Token",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "targetTaskRunStatus": {
+                    "target": "com.amazonaws.deadline#StepTargetTaskRunStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The task status to update the step's tasks to.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -22190,14 +22373,6 @@
         "com.amazonaws.deadline#UpdateStorageProfileRequest": {
             "type": "structure",
             "members": {
-                "clientToken": {
-                    "target": "com.amazonaws.deadline#ClientToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
-                        "smithy.api#httpHeader": "X-Amz-Client-Token",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                },
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
@@ -22212,6 +22387,14 @@
                         "smithy.api#documentation": "<p>The storage profile ID to update.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.deadline#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Client-Token",
+                        "smithy.api#idempotencyToken": {}
                     }
                 },
                 "displayName": {
@@ -22307,21 +22490,6 @@
         "com.amazonaws.deadline#UpdateTaskRequest": {
             "type": "structure",
             "members": {
-                "clientToken": {
-                    "target": "com.amazonaws.deadline#ClientToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
-                        "smithy.api#httpHeader": "X-Amz-Client-Token",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                },
-                "targetRunStatus": {
-                    "target": "com.amazonaws.deadline#TaskTargetRunStatus",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The run status with which to start the task.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
@@ -22359,6 +22527,21 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The task ID to update.</p>",
                         "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.deadline#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique token which the server uses to recognize retries of the same request.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Client-Token",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "targetRunStatus": {
+                    "target": "com.amazonaws.deadline#TaskTargetRunStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The run status with which to start the task.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -23411,13 +23594,6 @@
         "com.amazonaws.deadline#WorkerSummary": {
             "type": "structure",
             "members": {
-                "workerId": {
-                    "target": "com.amazonaws.deadline#WorkerId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The worker ID.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "farmId": {
                     "target": "com.amazonaws.deadline#FarmId",
                     "traits": {
@@ -23432,10 +23608,10 @@
                         "smithy.api#required": {}
                     }
                 },
-                "status": {
-                    "target": "com.amazonaws.deadline#WorkerStatus",
+                "workerId": {
+                    "target": "com.amazonaws.deadline#WorkerId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the worker.</p>",
+                        "smithy.api#documentation": "<p>The worker ID.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -23443,6 +23619,13 @@
                     "target": "com.amazonaws.deadline#HostPropertiesResponse",
                     "traits": {
                         "smithy.api#documentation": "<p>The host properties of the worker.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.deadline#WorkerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the worker.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "log": {

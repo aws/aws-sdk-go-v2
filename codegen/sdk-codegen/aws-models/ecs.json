@@ -9457,7 +9457,13 @@
                 "storageConfiguration": {
                     "target": "com.amazonaws.ecs#ManagedInstancesStorageConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage configuration for Amazon ECS Managed Instances. This defines the root volume size and type for the instances.</p>"
+                        "smithy.api#documentation": "<p>The storage configuration for Amazon ECS Managed Instances. This defines the data volume properties for the instances.</p>"
+                    }
+                },
+                "localStorageConfiguration": {
+                    "target": "com.amazonaws.ecs#ManagedInstancesLocalStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The local storage configuration for Amazon ECS Managed Instances. This defines how ECS uses instance store volumes available on the container instance.</p>"
                     }
                 },
                 "monitoring": {
@@ -9526,6 +9532,12 @@
                     "target": "com.amazonaws.ecs#BoxedBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Determines whether tags are propagated to the instance metadata service (IMDS) for Amazon EC2 instances launched by the Managed Instances capacity provider. When enabled, all tags associated with the instance are available through the instance metadata service. When disabled, tags are not propagated to IMDS.</p> <p>Disable this setting if your tags contain characters that are not compatible with IMDS, such as <code>/</code>. IMDS requires tag keys to match the pattern <code>[0-9a-zA-Z\\-_+=,.@:]{1,255}</code>.</p> <p>The default value is <code>true</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS\">Work with instance tags in instance metadata</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+                    }
+                },
+                "localStorageConfiguration": {
+                    "target": "com.amazonaws.ecs#ManagedInstancesLocalStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated local storage configuration for Amazon ECS Managed Instances. Changes to local storage settings apply to new instances launched after the update.</p>"
                     }
                 },
                 "monitoring": {
@@ -11751,6 +11763,21 @@
                 "target": "com.amazonaws.ecs#ManagedIngressPath"
             }
         },
+        "com.amazonaws.ecs#ManagedInstancesLocalStorageConfiguration": {
+            "type": "structure",
+            "members": {
+                "useLocalStorage": {
+                    "target": "com.amazonaws.ecs#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Use instance store volumes for data storage when available. EBS volumes are not provisioned for data storage. If the container instance has multiple instance store volumes, a single data volume is created. Consider defining instance store requirements using the <code>localStorage</code>, <code>localStorageTypes</code> and <code>totalLocalStorageGB</code> properties.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The local storage configuration for Amazon ECS Managed Instances. This defines how ECS uses and configures instance store volumes available on container instance.</p>"
+            }
+        },
         "com.amazonaws.ecs#ManagedInstancesMonitoringOptions": {
             "type": "enum",
             "members": {
@@ -11826,12 +11853,12 @@
                 "storageSizeGiB": {
                     "target": "com.amazonaws.ecs#TaskVolumeStorageGiB",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the tasks volume.</p>"
+                        "smithy.api#documentation": "<p>The size of the data volume.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The storage configuration for Amazon ECS Managed Instances. This defines the root volume configuration for the instances.</p>"
+                "smithy.api#documentation": "<p>The storage configuration for Amazon ECS Managed Instances. This defines the data volume configuration for the instances.</p>"
             }
         },
         "com.amazonaws.ecs#ManagedListener": {
