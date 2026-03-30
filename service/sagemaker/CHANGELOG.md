@@ -1,3 +1,7 @@
+# v1.238.0 (2026-03-30)
+
+* **Feature**: Added support for placement strategy and consolidation for SageMaker inference component endpoints. Customers can now configure how inference component copies are distributed across instances and availability zones (AZs), and enable automatic consolidation to optimizes resource utilization.
+
 # v1.237.0 (2026-03-26)
 
 * **Feature**: Release support for ml.r5d.16xlarge instance types for SageMaker HyperPod

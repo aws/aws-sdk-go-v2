@@ -1,3 +1,7 @@
+# v1.65.0 (2026-03-30)
+
+* **Feature**: Adds support for new instance lifecycle states introduced by the instance lifecycle policy and replace root volume features.
+
 # v1.64.4 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

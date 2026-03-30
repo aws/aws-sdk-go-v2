@@ -1,3 +1,7 @@
+# v1.17.0 (2026-03-30)
+
+* **Feature**: Adds Ground Truth support for AgentCore Evaluations (Evaluate)
+
 # v1.16.0 (2026-03-27)
 
 * **Feature**: Adding AgentCore Code Interpreter Node.js Runtime Support with an optional runtime field

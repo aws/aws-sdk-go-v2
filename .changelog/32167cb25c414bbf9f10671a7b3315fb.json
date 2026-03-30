@@ -1,8 +1,0 @@
-{
-    "id": "32167cb2-5c41-4bbf-9f10-671a7b3315fb",
-    "type": "feature",
-    "description": "Add support for URL Redirection",
-    "modules": [
-        "service/appstream"
-    ]
-}

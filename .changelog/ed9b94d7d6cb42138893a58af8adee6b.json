@@ -1,8 +1,0 @@
-{
-    "id": "ed9b94d7-d6cb-4213-8893-a58af8adee6b",
-    "type": "feature",
-    "description": "AWS DevOps Agent General Availability.",
-    "modules": [
-        "service/devopsagent"
-    ]
-}

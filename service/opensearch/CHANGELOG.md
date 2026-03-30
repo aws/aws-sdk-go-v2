@@ -1,3 +1,7 @@
+# v1.62.0 (2026-03-30)
+
+* **Feature**: Added Cluster Insights API's In OpenSearch Service SDK.
+
 # v1.61.1 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

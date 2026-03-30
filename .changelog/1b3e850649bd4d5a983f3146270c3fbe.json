@@ -1,8 +1,0 @@
-{
-    "id": "1b3e8506-49bd-4d5a-983f-3146270c3fbe",
-    "type": "feature",
-    "description": "Adds support for new instance lifecycle states introduced by the instance lifecycle policy and replace root volume features.",
-    "modules": [
-        "service/autoscaling"
-    ]
-}

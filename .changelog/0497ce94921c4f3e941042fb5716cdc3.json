@@ -1,8 +1,0 @@
-{
-    "id": "0497ce94-921c-4f3e-9410-42fb5716cdc3",
-    "type": "feature",
-    "description": "Added Cluster Insights API's In OpenSearch Service SDK.",
-    "modules": [
-        "service/opensearch"
-    ]
-}

@@ -1,3 +1,32 @@
+# Release (2026-03-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.55.0](service/appstream/CHANGELOG.md#v1550-2026-03-30)
+  * **Feature**: Add support for URL Redirection
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.65.0](service/autoscaling/CHANGELOG.md#v1650-2026-03-30)
+  * **Feature**: Adds support for new instance lifecycle states introduced by the instance lifecycle policy and replace root volume features.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.17.0](service/bedrockagentcore/CHANGELOG.md#v1170-2026-03-30)
+  * **Feature**: Adds Ground Truth support for AgentCore Evaluations (Evaluate)
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.66.0](service/cloudwatchlogs/CHANGELOG.md#v1660-2026-03-30)
+  * **Feature**: Adds Lookup Tables to CloudWatch Logs for log enrichment using CSV key-value data with KMS encryption support.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.27.0](service/deadline/CHANGELOG.md#v1270-2026-03-30)
+  * **Feature**: AWS Deadline Cloud now supports three new fleet auto scaling settings. With scale out rate, you can configure how quickly workers launch. With worker idle duration, you can set how long workers wait before shutting down. With standby worker count, you can keep idle workers ready for fast job start.
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.0.0](service/devopsagent/CHANGELOG.md#v100-2026-03-30)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS DevOps Agent General Availability.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.75.0](service/ecs/CHANGELOG.md#v1750-2026-03-30)
+  * **Feature**: Adding Local Storage support for ECS Managed Instances by introducing a new field "localStorageConfiguration" for CreateCapacityProvider and UpdateCapacityProvider APIs.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.51.4](service/gamelift/CHANGELOG.md#v1514-2026-03-30)
+  * **Documentation**: Update CreateScript API documentation.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.47.6](service/lakeformation/CHANGELOG.md#v1476-2026-03-30)
+  * **Documentation**: Add setSourceIdentity to DataLakeSettings Parameters
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.62.0](service/opensearch/CHANGELOG.md#v1620-2026-03-30)
+  * **Feature**: Added Cluster Insights API's In OpenSearch Service SDK.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralaccount`: [v1.2.0](service/partnercentralaccount/CHANGELOG.md#v120-2026-03-30)
+  * **Feature**: KYB Supplemental Form enables partners who fail business verification to submit additional details and supporting documentation through a self-service form, triggering an automated re-verification without requiring manual intervention from support teams.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.238.0](service/sagemaker/CHANGELOG.md#v12380-2026-03-30)
+  * **Feature**: Added support for placement strategy and consolidation for SageMaker inference component endpoints. Customers can now configure how inference component copies are distributed across instances and availability zones (AZs), and enable automatic consolidation to optimizes resource utilization.
+
 # Release (2026-03-27)
 
 ## Module Highlights
