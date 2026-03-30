@@ -42,6 +42,10 @@ type AssumeQueueRoleForUserInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared response body for AssumeRole operations where credentials are required.
+// AssumeQueueRoleForWorkerResponse is excluded because credentials is optional
+// there because Queue.roleArn is optional, so the mixin's @required trait would be
+// incorrect.
 type AssumeQueueRoleForUserOutput struct {
 
 	// The credentials for the queue role that a user has access to.

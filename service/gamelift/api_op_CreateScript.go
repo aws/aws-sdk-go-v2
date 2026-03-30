@@ -76,6 +76,12 @@ type CreateScriptInput struct {
 	// The Node.js version used for execution of your Realtime script. The valid
 	// values are 10.x | 24.x . By default, NodeJsVersion is 10.x . This value cannot
 	// be updated later.
+	//
+	// Node.js 10 will reach end of support on September 30, 2026. See more details in
+	// the [Node.js 10 FAQs]. For migration guidance, see [Migrating from Node.js 10 to 24].
+	//
+	// [Migrating from Node.js 10 to 24]: https://docs.aws.amazon.com/gamelift/latest/realtimeguide/realtime-script.html#realtime-script-nodejs-migration
+	// [Node.js 10 FAQs]: http://aws.amazon.com/gamelift/faq/nodejs10/
 	NodeJsVersion *string
 
 	// The location of the Amazon S3 bucket where a zipped file containing your

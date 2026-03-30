@@ -130,6 +130,9 @@ func awsAwsjson10_deserializeOpErrorAcceptConnectionInvitation(response *smithyh
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsAwsjson10_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
 
@@ -759,6 +762,9 @@ func awsAwsjson10_deserializeOpErrorCreateConnectionInvitation(response *smithyh
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsAwsjson10_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
@@ -4152,6 +4158,28 @@ func awsAwsjson10_deserializeDocumentBusinessVerificationResponse(v **types.Busi
 				return err
 			}
 
+		case "CompletionUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CompletionUrl to be of type string, got %T instead", value)
+				}
+				sv.CompletionUrl = ptr.String(jtv)
+			}
+
+		case "CompletionUrlExpiresAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DateTime to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.CompletionUrlExpiresAt = ptr.Time(t)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6375,7 +6403,7 @@ func awsAwsjson10_deserializeOpDocumentCancelConnectionInvitationOutput(v **Canc
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected UnicodeString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected UnicodeStringIncludingNewLine to be of type string, got %T instead", value)
 				}
 				sv.InvitationMessage = ptr.String(jtv)
 			}
@@ -6741,7 +6769,7 @@ func awsAwsjson10_deserializeOpDocumentCreateConnectionInvitationOutput(v **Crea
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected UnicodeString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected UnicodeStringIncludingNewLine to be of type string, got %T instead", value)
 				}
 				sv.InvitationMessage = ptr.String(jtv)
 			}
@@ -7099,7 +7127,7 @@ func awsAwsjson10_deserializeOpDocumentGetConnectionInvitationOutput(v **GetConn
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected UnicodeString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected UnicodeStringIncludingNewLine to be of type string, got %T instead", value)
 				}
 				sv.InvitationMessage = ptr.String(jtv)
 			}
@@ -8128,7 +8156,7 @@ func awsAwsjson10_deserializeOpDocumentRejectConnectionInvitationOutput(v **Reje
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected UnicodeString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected UnicodeStringIncludingNewLine to be of type string, got %T instead", value)
 				}
 				sv.InvitationMessage = ptr.String(jtv)
 			}

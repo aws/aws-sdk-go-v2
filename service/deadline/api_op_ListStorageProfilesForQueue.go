@@ -27,6 +27,7 @@ func (c *Client) ListStorageProfilesForQueue(ctx context.Context, params *ListSt
 	return out, nil
 }
 
+// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListStorageProfilesForQueueInput struct {
 
 	// The farm ID of the queue's storage profile.
@@ -49,6 +50,7 @@ type ListStorageProfilesForQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type ListStorageProfilesForQueueOutput struct {
 
 	// The storage profiles in the queue.

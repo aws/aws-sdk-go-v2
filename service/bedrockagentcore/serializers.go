@@ -800,6 +800,13 @@ func awsRestjson1_serializeOpDocumentEvaluateInput(v *EvaluateInput, value smith
 		}
 	}
 
+	if v.EvaluationReferenceInputs != nil {
+		ok := object.Key("evaluationReferenceInputs")
+		if err := awsRestjson1_serializeDocumentEvaluationReferenceInputs(v.EvaluationReferenceInputs, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EvaluationTarget != nil {
 		ok := object.Key("evaluationTarget")
 		if err := awsRestjson1_serializeDocumentEvaluationTarget(v.EvaluationTarget, ok); err != nil {
@@ -4053,6 +4060,24 @@ func awsRestjson1_serializeDocumentContent(v types.Content, value smithyjson.Val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentContext(v types.Context, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ContextMemberSpanContext:
+		av := object.Key("spanContext")
+		if err := awsRestjson1_serializeDocumentSpanContext(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentConversational(v *types.Conversational, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4109,6 +4134,52 @@ func awsRestjson1_serializeDocumentDomainPatterns(v []string, value smithyjson.V
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEvaluationContent(v types.EvaluationContent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.EvaluationContentMemberText:
+		av := object.Key("text")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationContentList(v []types.EvaluationContent, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentEvaluationContent(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationExpectedTrajectory(v *types.EvaluationExpectedTrajectory, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ToolNames != nil {
+		ok := object.Key("toolNames")
+		if err := awsRestjson1_serializeDocumentEvaluationToolNames(v.ToolNames, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEvaluationInput(v types.EvaluationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4123,6 +4194,54 @@ func awsRestjson1_serializeDocumentEvaluationInput(v types.EvaluationInput, valu
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationReferenceInput(v *types.EvaluationReferenceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Assertions != nil {
+		ok := object.Key("assertions")
+		if err := awsRestjson1_serializeDocumentEvaluationContentList(v.Assertions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Context != nil {
+		ok := object.Key("context")
+		if err := awsRestjson1_serializeDocumentContext(v.Context, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExpectedResponse != nil {
+		ok := object.Key("expectedResponse")
+		if err := awsRestjson1_serializeDocumentEvaluationContent(v.ExpectedResponse, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExpectedTrajectory != nil {
+		ok := object.Key("expectedTrajectory")
+		if err := awsRestjson1_serializeDocumentEvaluationExpectedTrajectory(v.ExpectedTrajectory, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationReferenceInputs(v []types.EvaluationReferenceInput, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentEvaluationReferenceInput(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -4147,6 +4266,17 @@ func awsRestjson1_serializeDocumentEvaluationTarget(v types.EvaluationTarget, va
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEvaluationToolNames(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -4819,6 +4949,28 @@ func awsRestjson1_serializeDocumentSpan(v document.Interface, value smithyjson.V
 		return err
 	}
 	value.Write(db)
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSpanContext(v *types.SpanContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SessionId != nil {
+		ok := object.Key("sessionId")
+		ok.String(*v.SessionId)
+	}
+
+	if v.SpanId != nil {
+		ok := object.Key("spanId")
+		ok.String(*v.SpanId)
+	}
+
+	if v.TraceId != nil {
+		ok := object.Key("traceId")
+		ok.String(*v.TraceId)
+	}
+
 	return nil
 }
 

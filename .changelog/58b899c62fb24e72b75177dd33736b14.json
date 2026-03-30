@@ -1,0 +1,8 @@
+{
+    "id": "58b899c6-2fb2-4e72-b751-77dd33736b14",
+    "type": "documentation",
+    "description": "Add setSourceIdentity to DataLakeSettings Parameters",
+    "modules": [
+        "service/lakeformation"
+    ]
+}

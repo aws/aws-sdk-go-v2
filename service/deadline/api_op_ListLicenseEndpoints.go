@@ -27,6 +27,7 @@ func (c *Client) ListLicenseEndpoints(ctx context.Context, params *ListLicenseEn
 	return out, nil
 }
 
+// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListLicenseEndpointsInput struct {
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -39,6 +40,7 @@ type ListLicenseEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type ListLicenseEndpointsOutput struct {
 
 	// The license endpoints.

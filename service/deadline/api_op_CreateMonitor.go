@@ -71,6 +71,8 @@ type CreateMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+// Mixin that adds an optional ARN field to response structures. Apply to
+// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateMonitorOutput struct {
 
 	// The Amazon Resource Name that IAM Identity Center assigns to the monitor.

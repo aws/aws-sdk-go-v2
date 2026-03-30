@@ -42,6 +42,7 @@ type GetLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+// Domain fields for Limit summary/response shapes, ordered before timestamps.
 type GetLimitOutput struct {
 
 	// The value that you specify as the name in the amounts field of the

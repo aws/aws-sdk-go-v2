@@ -11540,9 +11540,38 @@ func awsRestjson1_serializeDocumentBudgetSchedule(v types.BudgetSchedule, value 
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCustomerManagedAutoScalingConfiguration(v *types.CustomerManagedAutoScalingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ScaleOutWorkersPerMinute != nil {
+		ok := object.Key("scaleOutWorkersPerMinute")
+		ok.Integer(*v.ScaleOutWorkersPerMinute)
+	}
+
+	if v.StandbyWorkerCount != nil {
+		ok := object.Key("standbyWorkerCount")
+		ok.Integer(*v.StandbyWorkerCount)
+	}
+
+	if v.WorkerIdleDurationSeconds != nil {
+		ok := object.Key("workerIdleDurationSeconds")
+		ok.Integer(*v.WorkerIdleDurationSeconds)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCustomerManagedFleetConfiguration(v *types.CustomerManagedFleetConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AutoScalingConfiguration != nil {
+		ok := object.Key("autoScalingConfiguration")
+		if err := awsRestjson1_serializeDocumentCustomerManagedAutoScalingConfiguration(v.AutoScalingConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.Mode) > 0 {
 		ok := object.Key("mode")
@@ -12478,9 +12507,38 @@ func awsRestjson1_serializeDocumentSecurityGroupIdList(v []string, value smithyj
 	return nil
 }
 
+func awsRestjson1_serializeDocumentServiceManagedEc2AutoScalingConfiguration(v *types.ServiceManagedEc2AutoScalingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ScaleOutWorkersPerMinute != nil {
+		ok := object.Key("scaleOutWorkersPerMinute")
+		ok.Integer(*v.ScaleOutWorkersPerMinute)
+	}
+
+	if v.StandbyWorkerCount != nil {
+		ok := object.Key("standbyWorkerCount")
+		ok.Integer(*v.StandbyWorkerCount)
+	}
+
+	if v.WorkerIdleDurationSeconds != nil {
+		ok := object.Key("workerIdleDurationSeconds")
+		ok.Integer(*v.WorkerIdleDurationSeconds)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentServiceManagedEc2FleetConfiguration(v *types.ServiceManagedEc2FleetConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AutoScalingConfiguration != nil {
+		ok := object.Key("autoScalingConfiguration")
+		if err := awsRestjson1_serializeDocumentServiceManagedEc2AutoScalingConfiguration(v.AutoScalingConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.InstanceCapabilities != nil {
 		ok := object.Key("instanceCapabilities")

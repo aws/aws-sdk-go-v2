@@ -5799,6 +5799,13 @@ func awsAwsjson11_serializeDocumentInstanceLaunchTemplate(v *types.InstanceLaunc
 		}
 	}
 
+	if v.LocalStorageConfiguration != nil {
+		ok := object.Key("localStorageConfiguration")
+		if err := awsAwsjson11_serializeDocumentManagedInstancesLocalStorageConfiguration(v.LocalStorageConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.Monitoring) > 0 {
 		ok := object.Key("monitoring")
 		ok.String(string(v.Monitoring))
@@ -5845,6 +5852,13 @@ func awsAwsjson11_serializeDocumentInstanceLaunchTemplateUpdate(v *types.Instanc
 	if v.InstanceRequirements != nil {
 		ok := object.Key("instanceRequirements")
 		if err := awsAwsjson11_serializeDocumentInstanceRequirementsRequest(v.InstanceRequirements, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LocalStorageConfiguration != nil {
+		ok := object.Key("localStorageConfiguration")
+		if err := awsAwsjson11_serializeDocumentManagedInstancesLocalStorageConfiguration(v.LocalStorageConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -6291,6 +6305,18 @@ func awsAwsjson11_serializeDocumentManagedAgentStateChanges(v []types.ManagedAge
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentManagedInstancesLocalStorageConfiguration(v *types.ManagedInstancesLocalStorageConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.UseLocalStorage {
+		ok := object.Key("useLocalStorage")
+		ok.Boolean(v.UseLocalStorage)
+	}
+
 	return nil
 }
 

@@ -5563,6 +5563,20 @@ func awsAwsjson11_serializeDocumentComputeCapacity(v *types.ComputeCapacity, val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentContentRedirection(v *types.ContentRedirection, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HostToClient != nil {
+		ok := object.Key("HostToClient")
+		if err := awsAwsjson11_serializeDocumentUrlRedirectionConfig(v.HostToClient, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDirectoryNameList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5971,6 +5985,43 @@ func awsAwsjson11_serializeDocumentThemeFooterLinks(v []types.ThemeFooterLink, v
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUrlPatternList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUrlRedirectionConfig(v *types.UrlRedirectionConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedUrls != nil {
+		ok := object.Key("AllowedUrls")
+		if err := awsAwsjson11_serializeDocumentUrlPatternList(v.AllowedUrls, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeniedUrls != nil {
+		ok := object.Key("DeniedUrls")
+		if err := awsAwsjson11_serializeDocumentUrlPatternList(v.DeniedUrls, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
 	return nil
 }
 
@@ -6892,6 +6943,13 @@ func awsAwsjson11_serializeOpDocumentCreateStackInput(v *CreateStackInput, value
 	if v.ApplicationSettings != nil {
 		ok := object.Key("ApplicationSettings")
 		if err := awsAwsjson11_serializeDocumentApplicationSettings(v.ApplicationSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ContentRedirection != nil {
+		ok := object.Key("ContentRedirection")
+		if err := awsAwsjson11_serializeDocumentContentRedirection(v.ContentRedirection, ok); err != nil {
 			return err
 		}
 	}

@@ -53,6 +53,7 @@ type GetSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+// Session lifecycle/status fields, ordered after IDs in session shapes.
 type GetSessionOutput struct {
 
 	// The fleet ID for the session.

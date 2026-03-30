@@ -37,9 +37,13 @@ type GetFarmInput struct {
 	noSmithyDocumentSerde
 }
 
+// Mixin that adds an optional ARN field to response structures. Apply to
+// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type GetFarmOutput struct {
 
-	// The cost scale factor applied on the farm.
+	// A multiplier applied to the farm's calculated costs for usage data and budget
+	// tracking. A value less than 1 represents a discount, a value greater than 1
+	// represents a premium, and a value of 1 represents no adjustment.
 	//
 	// This member is required.
 	CostScaleFactor *float32

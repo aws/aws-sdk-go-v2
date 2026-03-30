@@ -27,6 +27,7 @@ func (c *Client) ListAvailableMeteredProducts(ctx context.Context, params *ListA
 	return out, nil
 }
 
+// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListAvailableMeteredProductsInput struct {
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -39,6 +40,7 @@ type ListAvailableMeteredProductsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type ListAvailableMeteredProductsOutput struct {
 
 	// The metered products.

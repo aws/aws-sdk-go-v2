@@ -1,0 +1,8 @@
+{
+    "id": "2aefc0dd-0c3b-45fe-9bd9-52a218c23726",
+    "type": "feature",
+    "description": "Added support for placement strategy and consolidation for SageMaker inference component endpoints. Customers can now configure how inference component copies are distributed across instances and availability zones (AZs), and enable automatic consolidation to optimizes resource utilization.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

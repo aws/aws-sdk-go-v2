@@ -65755,6 +65755,59 @@ func awsAwsjson11_deserializeDocumentImageVersions(v *[]types.ImageVersion, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentInferenceComponentAvailabilityZoneBalance(v **types.InferenceComponentAvailabilityZoneBalance, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InferenceComponentAvailabilityZoneBalance
+	if *v == nil {
+		sv = &types.InferenceComponentAvailabilityZoneBalance{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EnforcementMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AvailabilityZoneBalanceEnforcementMode to be of type string, got %T instead", value)
+				}
+				sv.EnforcementMode = types.AvailabilityZoneBalanceEnforcementMode(jtv)
+			}
+
+		case "MaxImbalance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AvailabilityZoneBalanceMaxImbalance to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxImbalance = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInferenceComponentCapacitySize(v **types.InferenceComponentCapacitySize, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -66228,6 +66281,51 @@ func awsAwsjson11_deserializeDocumentInferenceComponentRuntimeConfigSummary(v **
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentInferenceComponentSchedulingConfig(v **types.InferenceComponentSchedulingConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InferenceComponentSchedulingConfig
+	if *v == nil {
+		sv = &types.InferenceComponentSchedulingConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityZoneBalance":
+			if err := awsAwsjson11_deserializeDocumentInferenceComponentAvailabilityZoneBalance(&sv.AvailabilityZoneBalance, value); err != nil {
+				return err
+			}
+
+		case "PlacementStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InferenceComponentPlacementStrategy to be of type string, got %T instead", value)
+				}
+				sv.PlacementStrategy = types.InferenceComponentPlacementStrategy(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInferenceComponentSpecificationSummary(v **types.InferenceComponentSpecificationSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -66281,6 +66379,11 @@ func awsAwsjson11_deserializeDocumentInferenceComponentSpecificationSummary(v **
 					return fmt.Errorf("expected ModelName to be of type string, got %T instead", value)
 				}
 				sv.ModelName = ptr.String(jtv)
+			}
+
+		case "SchedulingConfig":
+			if err := awsAwsjson11_deserializeDocumentInferenceComponentSchedulingConfig(&sv.SchedulingConfig, value); err != nil {
+				return err
 			}
 
 		case "StartupParameters":
@@ -83364,6 +83467,11 @@ func awsAwsjson11_deserializeDocumentProductionVariantManagedInstanceScaling(v *
 				sv.MinInstanceCount = ptr.Int32(int32(i64))
 			}
 
+		case "ScaleInPolicy":
+			if err := awsAwsjson11_deserializeDocumentProductionVariantManagedInstanceScalingScaleInPolicy(&sv.ScaleInPolicy, value); err != nil {
+				return err
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -83371,6 +83479,72 @@ func awsAwsjson11_deserializeDocumentProductionVariantManagedInstanceScaling(v *
 					return fmt.Errorf("expected ManagedInstanceScalingStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.ManagedInstanceScalingStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentProductionVariantManagedInstanceScalingScaleInPolicy(v **types.ProductionVariantManagedInstanceScalingScaleInPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProductionVariantManagedInstanceScalingScaleInPolicy
+	if *v == nil {
+		sv = &types.ProductionVariantManagedInstanceScalingScaleInPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CooldownInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ManagedInstanceScalingCooldownInMinutes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CooldownInMinutes = ptr.Int32(int32(i64))
+			}
+
+		case "MaximumStepSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ManagedInstanceScalingMaximumStepSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaximumStepSize = ptr.Int32(int32(i64))
+			}
+
+		case "Strategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ManagedInstanceScalingScaleInStrategy to be of type string, got %T instead", value)
+				}
+				sv.Strategy = types.ManagedInstanceScalingScaleInStrategy(jtv)
 			}
 
 		default:

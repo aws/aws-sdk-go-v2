@@ -41,6 +41,8 @@ type GetLicenseEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+// Mixin that adds an optional ARN field to response structures. Apply to
+// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type GetLicenseEndpointOutput struct {
 
 	// The license endpoint ID.

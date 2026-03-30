@@ -27,6 +27,8 @@ func (c *Client) SearchJobs(ctx context.Context, params *SearchJobsInput, optFns
 	return out, nil
 }
 
+// Shared input fields for all Search operations (filterExpressions,
+// sortExpressions, itemOffset, pageSize).
 type SearchJobsInput struct {
 
 	// The farm ID of the job.
@@ -56,6 +58,7 @@ type SearchJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared output fields for all Search operations (nextItemOffset, totalResults).
 type SearchJobsOutput struct {
 
 	// The jobs in the search.

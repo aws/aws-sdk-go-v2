@@ -30,6 +30,7 @@ func (c *Client) GetSessionsStatisticsAggregation(ctx context.Context, params *G
 	return out, nil
 }
 
+// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type GetSessionsStatisticsAggregationInput struct {
 
 	// The identifier returned by the StartSessionsStatisticsAggregation operation
@@ -55,6 +56,7 @@ type GetSessionsStatisticsAggregationInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type GetSessionsStatisticsAggregationOutput struct {
 
 	// The status of the aggregated results. An aggregation may fail or time out if

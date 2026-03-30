@@ -458,6 +458,18 @@ func TestCheckSnapshot_DescribeInboundConnections(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeInsightDetails(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInsightDetails(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeInsightDetails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeInstanceTypeLimits(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeInstanceTypeLimits(context.Background(), nil, func(o *Options) {
@@ -739,6 +751,18 @@ func TestCheckSnapshot_ListDomainsForPackage(t *testing.T) {
 	_, err := svc.ListDomainsForPackage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListDomainsForPackage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListInsights(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInsights(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListInsights")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1441,6 +1465,18 @@ func TestUpdateSnapshot_DescribeInboundConnections(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeInsightDetails(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInsightDetails(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeInsightDetails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeInstanceTypeLimits(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeInstanceTypeLimits(context.Background(), nil, func(o *Options) {
@@ -1722,6 +1758,18 @@ func TestUpdateSnapshot_ListDomainsForPackage(t *testing.T) {
 	_, err := svc.ListDomainsForPackage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListDomainsForPackage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListInsights(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInsights(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListInsights")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

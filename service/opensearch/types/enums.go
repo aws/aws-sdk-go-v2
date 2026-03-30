@@ -548,6 +548,126 @@ func (InitiatedBy) Values() []InitiatedBy {
 	}
 }
 
+type InsightEntityType string
+
+// Enum values for InsightEntityType
+const (
+	InsightEntityTypeAccount InsightEntityType = "Account"
+	InsightEntityTypeDomain  InsightEntityType = "DomainName"
+)
+
+// Values returns all known values for InsightEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightEntityType) Values() []InsightEntityType {
+	return []InsightEntityType{
+		"Account",
+		"DomainName",
+	}
+}
+
+type InsightFieldType string
+
+// Enum values for InsightFieldType
+const (
+	InsightFieldTypeText   InsightFieldType = "text"
+	InsightFieldTypeMetric InsightFieldType = "metric"
+)
+
+// Values returns all known values for InsightFieldType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightFieldType) Values() []InsightFieldType {
+	return []InsightFieldType{
+		"text",
+		"metric",
+	}
+}
+
+type InsightPriorityLevel string
+
+// Enum values for InsightPriorityLevel
+const (
+	InsightPriorityLevelCritical InsightPriorityLevel = "CRITICAL"
+	InsightPriorityLevelHigh     InsightPriorityLevel = "HIGH"
+	InsightPriorityLevelMedium   InsightPriorityLevel = "MEDIUM"
+	InsightPriorityLevelLow      InsightPriorityLevel = "LOW"
+)
+
+// Values returns all known values for InsightPriorityLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightPriorityLevel) Values() []InsightPriorityLevel {
+	return []InsightPriorityLevel{
+		"CRITICAL",
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+	}
+}
+
+type InsightSortOrder string
+
+// Enum values for InsightSortOrder
+const (
+	InsightSortOrderAsc  InsightSortOrder = "ASC"
+	InsightSortOrderDesc InsightSortOrder = "DESC"
+)
+
+// Values returns all known values for InsightSortOrder. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightSortOrder) Values() []InsightSortOrder {
+	return []InsightSortOrder{
+		"ASC",
+		"DESC",
+	}
+}
+
+type InsightStatus string
+
+// Enum values for InsightStatus
+const (
+	InsightStatusActive    InsightStatus = "ACTIVE"
+	InsightStatusResolved  InsightStatus = "RESOLVED"
+	InsightStatusDismissed InsightStatus = "DISMISSED"
+)
+
+// Values returns all known values for InsightStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightStatus) Values() []InsightStatus {
+	return []InsightStatus{
+		"ACTIVE",
+		"RESOLVED",
+		"DISMISSED",
+	}
+}
+
+type InsightType string
+
+// Enum values for InsightType
+const (
+	InsightTypeEvent          InsightType = "EVENT"
+	InsightTypeRecommendation InsightType = "RECOMMENDATION"
+)
+
+// Values returns all known values for InsightType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightType) Values() []InsightType {
+	return []InsightType{
+		"EVENT",
+		"RECOMMENDATION",
+	}
+}
+
 type IPAddressType string
 
 // Enum values for IPAddressType

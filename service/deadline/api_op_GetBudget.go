@@ -43,6 +43,8 @@ type GetBudgetInput struct {
 	noSmithyDocumentSerde
 }
 
+// Mixin that adds an optional ARN field to response structures. Apply to
+// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type GetBudgetOutput struct {
 
 	// The budget actions for the budget.

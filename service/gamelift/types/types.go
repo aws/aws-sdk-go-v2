@@ -2896,7 +2896,9 @@ type MatchedPlayerSession struct {
 	// A unique identifier for a player
 	PlayerId *string
 
-	// A unique identifier for a player session
+	// A unique identifier for a player session. PlayerSessionId will only be
+	// populated for player sessions that are in ACTIVE or RESERVED status when the
+	// ticket is completed.
 	PlayerSessionId *string
 
 	noSmithyDocumentSerde
@@ -3785,6 +3787,12 @@ type Script struct {
 	// The Node.js version used for execution of your Realtime script. The valid
 	// values are 10.x | 24.x . By default, NodeJsVersion is 10.x . This value cannot
 	// be updated later.
+	//
+	// Node.js 10 will reach end of support on September 30, 2026. See more details in
+	// the [Node.js 10 FAQs]. For migration guidance, see [Migrating from Node.js 10 to 24].
+	//
+	// [Migrating from Node.js 10 to 24]: https://docs.aws.amazon.com/gamelift/latest/realtimeguide/realtime-script.html#realtime-script-nodejs-migration
+	// [Node.js 10 FAQs]: http://aws.amazon.com/gamelift/faq/nodejs10/
 	NodeJsVersion *string
 
 	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift Servers

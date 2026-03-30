@@ -3809,9 +3809,6 @@ func validateOpAssociateMemberToFarmInput(v *AssociateMemberToFarmInput) error {
 	if v.FarmId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
 	}
-	if v.PrincipalId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
-	}
 	if len(v.PrincipalType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PrincipalType"))
 	}
@@ -3820,6 +3817,9 @@ func validateOpAssociateMemberToFarmInput(v *AssociateMemberToFarmInput) error {
 	}
 	if len(v.MembershipLevel) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MembershipLevel"))
+	}
+	if v.PrincipalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3839,9 +3839,6 @@ func validateOpAssociateMemberToFleetInput(v *AssociateMemberToFleetInput) error
 	if v.FleetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
 	}
-	if v.PrincipalId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
-	}
 	if len(v.PrincipalType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PrincipalType"))
 	}
@@ -3850,6 +3847,9 @@ func validateOpAssociateMemberToFleetInput(v *AssociateMemberToFleetInput) error
 	}
 	if len(v.MembershipLevel) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MembershipLevel"))
+	}
+	if v.PrincipalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3872,9 +3872,6 @@ func validateOpAssociateMemberToJobInput(v *AssociateMemberToJobInput) error {
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
-	if v.PrincipalId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
-	}
 	if len(v.PrincipalType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PrincipalType"))
 	}
@@ -3883,6 +3880,9 @@ func validateOpAssociateMemberToJobInput(v *AssociateMemberToJobInput) error {
 	}
 	if len(v.MembershipLevel) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MembershipLevel"))
+	}
+	if v.PrincipalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3902,9 +3902,6 @@ func validateOpAssociateMemberToQueueInput(v *AssociateMemberToQueueInput) error
 	if v.QueueId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
 	}
-	if v.PrincipalId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
-	}
 	if len(v.PrincipalType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PrincipalType"))
 	}
@@ -3913,6 +3910,9 @@ func validateOpAssociateMemberToQueueInput(v *AssociateMemberToQueueInput) error
 	}
 	if len(v.MembershipLevel) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MembershipLevel"))
+	}
+	if v.PrincipalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4056,11 +4056,11 @@ func validateOpCopyJobTemplateInput(v *CopyJobTemplateInput) error {
 	if v.FarmId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
 	}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
-	}
 	if v.QueueId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if v.TargetS3Location == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetS3Location"))
@@ -4084,11 +4084,11 @@ func validateOpCreateBudgetInput(v *CreateBudgetInput) error {
 	if v.FarmId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
 	}
-	if v.UsageTrackingResource == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UsageTrackingResource"))
-	}
 	if v.DisplayName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
+	}
+	if v.UsageTrackingResource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UsageTrackingResource"))
 	}
 	if v.ApproximateDollarLimit == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApproximateDollarLimit"))
@@ -4217,6 +4217,9 @@ func validateOpCreateLimitInput(v *CreateLimitInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLimitInput"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
 	if v.DisplayName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
 	}
@@ -4225,9 +4228,6 @@ func validateOpCreateLimitInput(v *CreateLimitInput) error {
 	}
 	if v.MaxCount == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaxCount"))
-	}
-	if v.FarmId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5192,11 +5192,11 @@ func validateOpListJobParameterDefinitionsInput(v *ListJobParameterDefinitionsIn
 	if v.FarmId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
 	}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
-	}
 	if v.QueueId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5582,9 +5582,6 @@ func validateOpSearchJobsInput(v *SearchJobsInput) error {
 	if v.FarmId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
 	}
-	if v.QueueIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueueIds"))
-	}
 	if v.FilterExpressions != nil {
 		if err := validateSearchGroupedFilterExpressions(v.FilterExpressions); err != nil {
 			invalidParams.AddNested("FilterExpressions", err.(smithy.InvalidParamsError))
@@ -5597,6 +5594,9 @@ func validateOpSearchJobsInput(v *SearchJobsInput) error {
 	}
 	if v.ItemOffset == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ItemOffset"))
+	}
+	if v.QueueIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5613,9 +5613,6 @@ func validateOpSearchStepsInput(v *SearchStepsInput) error {
 	if v.FarmId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
 	}
-	if v.QueueIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueueIds"))
-	}
 	if v.FilterExpressions != nil {
 		if err := validateSearchGroupedFilterExpressions(v.FilterExpressions); err != nil {
 			invalidParams.AddNested("FilterExpressions", err.(smithy.InvalidParamsError))
@@ -5628,6 +5625,9 @@ func validateOpSearchStepsInput(v *SearchStepsInput) error {
 	}
 	if v.ItemOffset == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ItemOffset"))
+	}
+	if v.QueueIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5644,9 +5644,6 @@ func validateOpSearchTasksInput(v *SearchTasksInput) error {
 	if v.FarmId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
 	}
-	if v.QueueIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueueIds"))
-	}
 	if v.FilterExpressions != nil {
 		if err := validateSearchGroupedFilterExpressions(v.FilterExpressions); err != nil {
 			invalidParams.AddNested("FilterExpressions", err.(smithy.InvalidParamsError))
@@ -5659,6 +5656,9 @@ func validateOpSearchTasksInput(v *SearchTasksInput) error {
 	}
 	if v.ItemOffset == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ItemOffset"))
+	}
+	if v.QueueIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5675,9 +5675,6 @@ func validateOpSearchWorkersInput(v *SearchWorkersInput) error {
 	if v.FarmId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
 	}
-	if v.FleetIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FleetIds"))
-	}
 	if v.FilterExpressions != nil {
 		if err := validateSearchGroupedFilterExpressions(v.FilterExpressions); err != nil {
 			invalidParams.AddNested("FilterExpressions", err.(smithy.InvalidParamsError))
@@ -5690,6 +5687,9 @@ func validateOpSearchWorkersInput(v *SearchWorkersInput) error {
 	}
 	if v.ItemOffset == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ItemOffset"))
+	}
+	if v.FleetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5993,9 +5993,6 @@ func validateOpUpdateSessionInput(v *UpdateSessionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSessionInput"}
-	if len(v.TargetLifecycleStatus) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetLifecycleStatus"))
-	}
 	if v.FarmId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
 	}
@@ -6007,6 +6004,9 @@ func validateOpUpdateSessionInput(v *UpdateSessionInput) error {
 	}
 	if v.SessionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if len(v.TargetLifecycleStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetLifecycleStatus"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6020,9 +6020,6 @@ func validateOpUpdateStepInput(v *UpdateStepInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateStepInput"}
-	if len(v.TargetTaskRunStatus) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetTaskRunStatus"))
-	}
 	if v.FarmId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
 	}
@@ -6034,6 +6031,9 @@ func validateOpUpdateStepInput(v *UpdateStepInput) error {
 	}
 	if v.StepId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StepId"))
+	}
+	if len(v.TargetTaskRunStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetTaskRunStatus"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6075,9 +6075,6 @@ func validateOpUpdateTaskInput(v *UpdateTaskInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTaskInput"}
-	if len(v.TargetRunStatus) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetRunStatus"))
-	}
 	if v.FarmId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
 	}
@@ -6092,6 +6089,9 @@ func validateOpUpdateTaskInput(v *UpdateTaskInput) error {
 	}
 	if v.TaskId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
+	}
+	if len(v.TargetRunStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetRunStatus"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

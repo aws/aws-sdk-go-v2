@@ -811,6 +811,7 @@ const (
 	StackAttributeIamRoleArn                  StackAttribute = "IAM_ROLE_ARN"
 	StackAttributeAccessEndpoints             StackAttribute = "ACCESS_ENDPOINTS"
 	StackAttributeStreamingExperienceSettings StackAttribute = "STREAMING_EXPERIENCE_SETTINGS"
+	StackAttributeContentRedirection          StackAttribute = "CONTENT_REDIRECTION"
 )
 
 // Values returns all known values for StackAttribute. Note that this can be
@@ -831,6 +832,7 @@ func (StackAttribute) Values() []StackAttribute {
 		"IAM_ROLE_ARN",
 		"ACCESS_ENDPOINTS",
 		"STREAMING_EXPERIENCE_SETTINGS",
+		"CONTENT_REDIRECTION",
 	}
 }
 

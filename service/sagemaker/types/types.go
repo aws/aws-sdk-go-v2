@@ -10683,6 +10683,31 @@ type ImageVersion struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for balancing inference component copies across Availability
+// Zones.
+type InferenceComponentAvailabilityZoneBalance struct {
+
+	// Determines how strictly the Availability Zone balance constraint is enforced.
+	//
+	// PERMISSIVE The endpoint attempts to balance copies across Availability Zones
+	// but proceeds with scheduling even if balance can't be achieved due to available
+	// capacity or instance distribution across Availability Zones.
+	//
+	// This member is required.
+	EnforcementMode AvailabilityZoneBalanceEnforcementMode
+
+	// The maximum allowed difference in the number of inference component copies
+	// between any two Availability Zones. This parameter applies only when the
+	// endpoint has instances across two or more Availability Zones. A copy placement
+	// is allowed if it reduces imbalance or the resulting imbalance is within this
+	// value.
+	//
+	// Default value: 0 .
+	MaxImbalance *int32
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the type and size of the endpoint capacity to activate for a rolling
 // deployment or a rollback strategy. You can specify your batches as either of the
 // following:
@@ -10901,6 +10926,29 @@ type InferenceComponentRuntimeConfigSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The scheduling configuration that determines how inference component copies are
+// placed across available instances when copies are added or removed.
+type InferenceComponentSchedulingConfig struct {
+
+	// The strategy for placing inference component copies across available instances.
+	// If you also set AvailabilityZoneBalance , this strategy applies to placement
+	// within each Availability Zone.
+	//
+	// SPREAD Distributes copies evenly across available instances for better
+	// resilience.
+	//
+	// BINPACK Packs copies onto fewer instances to optimize resource utilization.
+	//
+	// This member is required.
+	PlacementStrategy InferenceComponentPlacementStrategy
+
+	// Configuration for balancing inference component copies across Availability
+	// Zones.
+	AvailabilityZoneBalance *InferenceComponentAvailabilityZoneBalance
+
+	noSmithyDocumentSerde
+}
+
 // Details about the resources to deploy with this inference component, including
 // the model, container, and compute resources.
 type InferenceComponentSpecification struct {
@@ -10942,6 +10990,10 @@ type InferenceComponentSpecification struct {
 	// to deploy with the inference component.
 	ModelName *string
 
+	// The scheduling configuration that determines how inference component copies are
+	// placed across available instances when copies are added or removed.
+	SchedulingConfig *InferenceComponentSchedulingConfig
+
 	// Settings that take effect while the model container starts up.
 	StartupParameters *InferenceComponentStartupParameters
 
@@ -10968,6 +11020,10 @@ type InferenceComponentSpecificationSummary struct {
 	// The name of the SageMaker AI model object that is deployed with the inference
 	// component.
 	ModelName *string
+
+	// The scheduling configuration that determines how inference component copies are
+	// placed across available instances when copies are added or removed.
+	SchedulingConfig *InferenceComponentSchedulingConfig
 
 	// Settings that take effect while the model container starts up.
 	StartupParameters *InferenceComponentStartupParameters
@@ -16978,8 +17034,42 @@ type ProductionVariantManagedInstanceScaling struct {
 	// down to accommodate a decrease in traffic.
 	MinInstanceCount *int32
 
+	// Configures the scale-in behavior for managed instance scaling.
+	ScaleInPolicy *ProductionVariantManagedInstanceScalingScaleInPolicy
+
 	// Indicates whether managed instance scaling is enabled.
 	Status ManagedInstanceScalingStatus
+
+	noSmithyDocumentSerde
+}
+
+// Configures the scale-in behavior for managed instance scaling.
+type ProductionVariantManagedInstanceScalingScaleInPolicy struct {
+
+	// The strategy for scaling in instances.
+	//
+	// IDLE_RELEASE Releases instances that have no hosted inference component copies.
+	//
+	// CONSOLIDATION Consolidates inference component copies onto fewer instances to
+	// release more instances. Consolidation honors the scheduling configuration of
+	// each inference component. For example, if an inference component specifies
+	// Availability Zone balance, consolidation only proceeds when the resulting
+	// distribution does not increase the imbalance.
+	//
+	// This member is required.
+	Strategy ManagedInstanceScalingScaleInStrategy
+
+	// The cooldown period, in minutes, after the last endpoint operation before the
+	// endpoint evaluates consolidation scale-in opportunities.
+	//
+	// Default value: 20 .
+	CooldownInMinutes *int32
+
+	// The maximum number of instances that the endpoint can terminate at a time
+	// during a consolidation scale-in operation.
+	//
+	// Default value: 1 .
+	MaximumStepSize *int32
 
 	noSmithyDocumentSerde
 }

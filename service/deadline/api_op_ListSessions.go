@@ -27,6 +27,7 @@ func (c *Client) ListSessions(ctx context.Context, params *ListSessionsInput, op
 	return out, nil
 }
 
+// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListSessionsInput struct {
 
 	// The farm ID for the list of sessions.
@@ -54,6 +55,7 @@ type ListSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type ListSessionsOutput struct {
 
 	// The sessions on the list.

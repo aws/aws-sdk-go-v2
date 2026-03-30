@@ -451,8 +451,11 @@ type ServiceQuotaExceededExceptionReason string
 
 // Enum values for ServiceQuotaExceededExceptionReason
 const (
-	ServiceQuotaExceededExceptionReasonLimitExceededNumberOfEmail  ServiceQuotaExceededExceptionReason = "LIMIT_EXCEEDED_NUMBER_OF_EMAIL"
-	ServiceQuotaExceededExceptionReasonLimitExceededNumberOfDomain ServiceQuotaExceededExceptionReason = "LIMIT_EXCEEDED_NUMBER_OF_DOMAIN"
+	ServiceQuotaExceededExceptionReasonLimitExceededNumberOfEmail                      ServiceQuotaExceededExceptionReason = "LIMIT_EXCEEDED_NUMBER_OF_EMAIL"
+	ServiceQuotaExceededExceptionReasonLimitExceededNumberOfDomain                     ServiceQuotaExceededExceptionReason = "LIMIT_EXCEEDED_NUMBER_OF_DOMAIN"
+	ServiceQuotaExceededExceptionReasonLimitExceededNumberOfConnectionInvitationPerDay ServiceQuotaExceededExceptionReason = "LIMIT_EXCEEDED_NUMBER_OF_CONNECTION_INVITATION_PER_DAY"
+	ServiceQuotaExceededExceptionReasonLimitExceededNumberOfActiveConnection           ServiceQuotaExceededExceptionReason = "LIMIT_EXCEEDED_NUMBER_OF_ACTIVE_CONNECTION"
+	ServiceQuotaExceededExceptionReasonLimitExceededNumberOfOpenConnectionInvitation   ServiceQuotaExceededExceptionReason = "LIMIT_EXCEEDED_NUMBER_OF_OPEN_CONNECTION_INVITATION"
 )
 
 // Values returns all known values for ServiceQuotaExceededExceptionReason. Note
@@ -464,6 +467,9 @@ func (ServiceQuotaExceededExceptionReason) Values() []ServiceQuotaExceededExcept
 	return []ServiceQuotaExceededExceptionReason{
 		"LIMIT_EXCEEDED_NUMBER_OF_EMAIL",
 		"LIMIT_EXCEEDED_NUMBER_OF_DOMAIN",
+		"LIMIT_EXCEEDED_NUMBER_OF_CONNECTION_INVITATION_PER_DAY",
+		"LIMIT_EXCEEDED_NUMBER_OF_ACTIVE_CONNECTION",
+		"LIMIT_EXCEEDED_NUMBER_OF_OPEN_CONNECTION_INVITATION",
 	}
 }
 

@@ -27,6 +27,9 @@ func (c *Client) AssociateMemberToFleet(ctx context.Context, params *AssociateMe
 	return out, nil
 }
 
+// Shared member fields for Associate inputs and {Resource}Member response
+// structures. principalId is excluded because it has @httpLabel on inputs but not
+// on responses.
 type AssociateMemberToFleetInput struct {
 
 	// The farm ID of the fleet to associate with the member.

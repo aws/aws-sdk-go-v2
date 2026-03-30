@@ -1,0 +1,8 @@
+{
+    "id": "29ff671a-2320-4e91-9669-79ca2dd4bf52",
+    "type": "feature",
+    "description": "Adding Local Storage support for ECS Managed Instances by introducing a new field \"localStorageConfiguration\" for CreateCapacityProvider and UpdateCapacityProvider APIs.",
+    "modules": [
+        "service/ecs"
+    ]
+}

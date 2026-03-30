@@ -29305,6 +29305,23 @@ func awsAwsjson11_serializeDocumentImageDeletePropertyList(v []string, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentInferenceComponentAvailabilityZoneBalance(v *types.InferenceComponentAvailabilityZoneBalance, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.EnforcementMode) > 0 {
+		ok := object.Key("EnforcementMode")
+		ok.String(string(v.EnforcementMode))
+	}
+
+	if v.MaxImbalance != nil {
+		ok := object.Key("MaxImbalance")
+		ok.Integer(*v.MaxImbalance)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInferenceComponentCapacitySize(v *types.InferenceComponentCapacitySize, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -29475,6 +29492,25 @@ func awsAwsjson11_serializeDocumentInferenceComponentRuntimeConfig(v *types.Infe
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentInferenceComponentSchedulingConfig(v *types.InferenceComponentSchedulingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AvailabilityZoneBalance != nil {
+		ok := object.Key("AvailabilityZoneBalance")
+		if err := awsAwsjson11_serializeDocumentInferenceComponentAvailabilityZoneBalance(v.AvailabilityZoneBalance, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.PlacementStrategy) > 0 {
+		ok := object.Key("PlacementStrategy")
+		ok.String(string(v.PlacementStrategy))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInferenceComponentSpecification(v *types.InferenceComponentSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -29508,6 +29544,13 @@ func awsAwsjson11_serializeDocumentInferenceComponentSpecification(v *types.Infe
 	if v.ModelName != nil {
 		ok := object.Key("ModelName")
 		ok.String(*v.ModelName)
+	}
+
+	if v.SchedulingConfig != nil {
+		ok := object.Key("SchedulingConfig")
+		if err := awsAwsjson11_serializeDocumentInferenceComponentSchedulingConfig(v.SchedulingConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.StartupParameters != nil {
@@ -33130,9 +33173,38 @@ func awsAwsjson11_serializeDocumentProductionVariantManagedInstanceScaling(v *ty
 		ok.Integer(*v.MinInstanceCount)
 	}
 
+	if v.ScaleInPolicy != nil {
+		ok := object.Key("ScaleInPolicy")
+		if err := awsAwsjson11_serializeDocumentProductionVariantManagedInstanceScalingScaleInPolicy(v.ScaleInPolicy, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.Status) > 0 {
 		ok := object.Key("Status")
 		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentProductionVariantManagedInstanceScalingScaleInPolicy(v *types.ProductionVariantManagedInstanceScalingScaleInPolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CooldownInMinutes != nil {
+		ok := object.Key("CooldownInMinutes")
+		ok.Integer(*v.CooldownInMinutes)
+	}
+
+	if v.MaximumStepSize != nil {
+		ok := object.Key("MaximumStepSize")
+		ok.Integer(*v.MaximumStepSize)
+	}
+
+	if len(v.Strategy) > 0 {
+		ok := object.Key("Strategy")
+		ok.String(string(v.Strategy))
 	}
 
 	return nil

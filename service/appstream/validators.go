@@ -1844,6 +1844,23 @@ func validateApplicationSettings(v *types.ApplicationSettings) error {
 	}
 }
 
+func validateContentRedirection(v *types.ContentRedirection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContentRedirection"}
+	if v.HostToClient != nil {
+		if err := validateUrlRedirectionConfig(v.HostToClient); err != nil {
+			invalidParams.AddNested("HostToClient", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEntitlementAttribute(v *types.EntitlementAttribute) error {
 	if v == nil {
 		return nil
@@ -1996,6 +2013,21 @@ func validateStorageConnectorList(v []types.StorageConnector) error {
 		if err := validateStorageConnector(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUrlRedirectionConfig(v *types.UrlRedirectionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UrlRedirectionConfig"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2524,6 +2556,11 @@ func validateOpCreateStackInput(v *CreateStackInput) error {
 	if v.AccessEndpoints != nil {
 		if err := validateAccessEndpointList(v.AccessEndpoints); err != nil {
 			invalidParams.AddNested("AccessEndpoints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContentRedirection != nil {
+		if err := validateContentRedirection(v.ContentRedirection); err != nil {
+			invalidParams.AddNested("ContentRedirection", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -1717,6 +1717,94 @@ type InboundConnectionStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Represents an insight returned by the ListInsights operation. An insight is a
+// notification about a domain event or recommendation that helps you optimize your
+// Amazon OpenSearch Service domain.
+type Insight struct {
+
+	// The timestamp when the insight was created, in epoch milliseconds.
+	CreationTime *time.Time
+
+	// The display name of the insight.
+	DisplayName *string
+
+	// The unique identifier of the insight.
+	InsightId *string
+
+	// Indicates whether the insight is experimental.
+	IsExperimental *bool
+
+	// The priority level of the insight. Possible values are CRITICAL , HIGH , MEDIUM
+	// , and LOW .
+	Priority InsightPriorityLevel
+
+	// The current status of the insight. Possible values are ACTIVE , RESOLVED , and
+	// DISMISSED .
+	Status InsightStatus
+
+	// The type of the insight. Possible values are EVENT and RECOMMENDATION .
+	Type InsightType
+
+	// The timestamp when the insight was last updated, in epoch milliseconds.
+	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the entity for which to retrieve insights. An entity can be an Amazon
+// OpenSearch Service domain or an Amazon Web Services account.
+type InsightEntity struct {
+
+	// The type of the entity. Possible values are Account and DomainName .
+	//
+	// This member is required.
+	Type InsightEntityType
+
+	// The value of the entity. For DomainName , this is the domain name. For Account ,
+	// this is the Amazon Web Services account ID.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a field in the detailed view of an insight, returned by the
+// DescribeInsightDetails operation.
+type InsightField struct {
+
+	// The name of the insight field.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of the insight field. Possible values are text and metric .
+	//
+	// This member is required.
+	Type InsightFieldType
+
+	// The value of the insight field.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the time range for filtering insights.
+type InsightTimeRange struct {
+
+	// The start of the time range, in epoch milliseconds.
+	//
+	// This member is required.
+	From *int64
+
+	// The end of the time range, in epoch milliseconds.
+	//
+	// This member is required.
+	To *int64
+
+	noSmithyDocumentSerde
+}
+
 // Limits on the number of instances that can be created in OpenSearch Service for
 // a given instance type.
 type InstanceCountLimits struct {

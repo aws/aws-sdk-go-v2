@@ -27,6 +27,8 @@ func (c *Client) SearchTasks(ctx context.Context, params *SearchTasksInput, optF
 	return out, nil
 }
 
+// Shared input fields for all Search operations (filterExpressions,
+// sortExpressions, itemOffset, pageSize).
 type SearchTasksInput struct {
 
 	// The farm ID of the task.
@@ -59,6 +61,7 @@ type SearchTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared output fields for all Search operations (nextItemOffset, totalResults).
 type SearchTasksOutput struct {
 
 	// Tasks in the search.

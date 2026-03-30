@@ -80,6 +80,24 @@ func ExampleContext_outputUsage() {
 
 var _ *types.SpanContext
 
+func ExampleEvaluationContent_outputUsage() {
+	var union types.EvaluationContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EvaluationContentMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleEvaluationInput_outputUsage() {
 	var union types.EvaluationInput
 	// type switches can be used to check the union value

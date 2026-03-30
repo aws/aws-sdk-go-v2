@@ -59,6 +59,7 @@ type ListStepConsumersInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type ListStepConsumersOutput struct {
 
 	// The consumers on the list.

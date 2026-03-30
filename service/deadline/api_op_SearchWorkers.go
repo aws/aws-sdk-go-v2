@@ -27,6 +27,8 @@ func (c *Client) SearchWorkers(ctx context.Context, params *SearchWorkersInput, 
 	return out, nil
 }
 
+// Shared input fields for all Search operations (filterExpressions,
+// sortExpressions, itemOffset, pageSize).
 type SearchWorkersInput struct {
 
 	// The farm ID in the workers search.
@@ -56,6 +58,7 @@ type SearchWorkersInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared output fields for all Search operations (nextItemOffset, totalResults).
 type SearchWorkersOutput struct {
 
 	// The total number of results in the search.

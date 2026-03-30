@@ -47,6 +47,10 @@ type AssumeFleetRoleForWorkerInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared response body for AssumeRole operations where credentials are required.
+// AssumeQueueRoleForWorkerResponse is excluded because credentials is optional
+// there because Queue.roleArn is optional, so the mixin's @required trait would be
+// incorrect.
 type AssumeFleetRoleForWorkerOutput struct {
 
 	// The credentials for the worker.

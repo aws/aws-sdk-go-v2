@@ -27,6 +27,9 @@ func (c *Client) CreateBudget(ctx context.Context, params *CreateBudgetInput, op
 	return out, nil
 }
 
+// Shared displayName + description for Create operations where both are present.
+// displayName is @required here - this mixin is Create-only by design (Update has
+// optional displayName).
 type CreateBudgetInput struct {
 
 	// The budget actions to specify what happens when the budget runs out.
@@ -80,6 +83,8 @@ type CreateBudgetInput struct {
 	noSmithyDocumentSerde
 }
 
+// Mixin that adds an optional ARN field to response structures. Apply to
+// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateBudgetOutput struct {
 
 	// The budget ID.

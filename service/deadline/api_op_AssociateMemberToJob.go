@@ -27,6 +27,9 @@ func (c *Client) AssociateMemberToJob(ctx context.Context, params *AssociateMemb
 	return out, nil
 }
 
+// Shared member fields for Associate inputs and {Resource}Member response
+// structures. principalId is excluded because it has @httpLabel on inputs but not
+// on responses.
 type AssociateMemberToJobInput struct {
 
 	// The farm ID of the job to associate with the member.

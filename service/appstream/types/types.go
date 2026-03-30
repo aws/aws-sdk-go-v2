@@ -464,6 +464,18 @@ type ComputeCapacityStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for bidirectional URL redirection between the streaming session
+// and the local client. Use HostToClient to redirect URLs from the remote desktop
+// to the local browser.
+type ContentRedirection struct {
+
+	// Configuration for redirecting URLs from the remote desktop to the local client
+	// browser.
+	HostToClient *UrlRedirectionConfig
+
+	noSmithyDocumentSerde
+}
+
 // Describes the configuration information required to join fleets and image
 // builders to Microsoft Active Directory domains.
 type DirectoryConfig struct {
@@ -1547,6 +1559,11 @@ type Stack struct {
 	// The ARN of the stack.
 	Arn *string
 
+	// Configuration for bidirectional URL redirection between the streaming session
+	// and the local client. Use HostToClient to redirect URLs from the remote desktop
+	// to the local browser.
+	ContentRedirection *ContentRedirection
+
 	// The time the stack was created.
 	CreatedTime *time.Time
 
@@ -1670,6 +1687,27 @@ type ThemeFooterLink struct {
 
 	// The URL of the websites that display in the catalog page footer.
 	FooterLinkURL *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for URL redirection in a specific direction (host-to-client or
+// client-to-host). When enabled, URLs matching the allowed or denied patterns are
+// redirected accordingly. The denied list takes precedence over the allowed list.
+type UrlRedirectionConfig struct {
+
+	// Whether URL redirection is enabled for this direction.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// List of URL patterns that are allowed to be redirected. URLs matching these
+	// patterns will be redirected unless they also match a pattern in the denied list.
+	AllowedUrls []string
+
+	// List of URL patterns that are denied from redirection. This list takes
+	// precedence over the allowed list.
+	DeniedUrls []string
 
 	noSmithyDocumentSerde
 }

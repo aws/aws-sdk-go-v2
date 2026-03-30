@@ -12289,6 +12289,42 @@ func awsAwsjson11_deserializeDocumentConcurrentModificationException(v **types.C
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentContentRedirection(v **types.ContentRedirection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContentRedirection
+	if *v == nil {
+		sv = &types.ContentRedirection{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "HostToClient":
+			if err := awsAwsjson11_deserializeDocumentUrlRedirectionConfig(&sv.HostToClient, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDirectoryConfig(v **types.DirectoryConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15561,6 +15597,11 @@ func awsAwsjson11_deserializeDocumentStack(v **types.Stack, value interface{}) e
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "ContentRedirection":
+			if err := awsAwsjson11_deserializeDocumentContentRedirection(&sv.ContentRedirection, value); err != nil {
+				return err
+			}
+
 		case "CreatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -16200,6 +16241,92 @@ func awsAwsjson11_deserializeDocumentThemeFooterLinks(v *[]types.ThemeFooterLink
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentUrlPatternList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected UrlPattern to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentUrlRedirectionConfig(v **types.UrlRedirectionConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UrlRedirectionConfig
+	if *v == nil {
+		sv = &types.UrlRedirectionConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AllowedUrls":
+			if err := awsAwsjson11_deserializeDocumentUrlPatternList(&sv.AllowedUrls, value); err != nil {
+				return err
+			}
+
+		case "DeniedUrls":
+			if err := awsAwsjson11_deserializeDocumentUrlPatternList(&sv.DeniedUrls, value); err != nil {
+				return err
+			}
+
+		case "Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

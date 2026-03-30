@@ -20279,6 +20279,76 @@ func awsRestjson1_deserializeDocumentConsumedUsages(v **types.ConsumedUsages, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCustomerManagedAutoScalingConfiguration(v **types.CustomerManagedAutoScalingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomerManagedAutoScalingConfiguration
+	if *v == nil {
+		sv = &types.CustomerManagedAutoScalingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "scaleOutWorkersPerMinute":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MinOneMaxInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ScaleOutWorkersPerMinute = ptr.Int32(int32(i64))
+			}
+
+		case "standbyWorkerCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MinZeroMaxInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StandbyWorkerCount = ptr.Int32(int32(i64))
+			}
+
+		case "workerIdleDurationSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MinZeroMaxInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WorkerIdleDurationSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCustomerManagedFleetConfiguration(v **types.CustomerManagedFleetConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20301,6 +20371,11 @@ func awsRestjson1_deserializeDocumentCustomerManagedFleetConfiguration(v **types
 
 	for key, value := range shape {
 		switch key {
+		case "autoScalingConfiguration":
+			if err := awsRestjson1_deserializeDocumentCustomerManagedAutoScalingConfiguration(&sv.AutoScalingConfiguration, value); err != nil {
+				return err
+			}
+
 		case "mode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -25744,6 +25819,76 @@ func awsRestjson1_deserializeDocumentSecurityGroupIdList(v *[]string, value inte
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentServiceManagedEc2AutoScalingConfiguration(v **types.ServiceManagedEc2AutoScalingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceManagedEc2AutoScalingConfiguration
+	if *v == nil {
+		sv = &types.ServiceManagedEc2AutoScalingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "scaleOutWorkersPerMinute":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MinOneMaxInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ScaleOutWorkersPerMinute = ptr.Int32(int32(i64))
+			}
+
+		case "standbyWorkerCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MinZeroMaxInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StandbyWorkerCount = ptr.Int32(int32(i64))
+			}
+
+		case "workerIdleDurationSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ServiceManagedEc2WorkerIdleDurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WorkerIdleDurationSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentServiceManagedEc2FleetConfiguration(v **types.ServiceManagedEc2FleetConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -25766,6 +25911,11 @@ func awsRestjson1_deserializeDocumentServiceManagedEc2FleetConfiguration(v **typ
 
 	for key, value := range shape {
 		switch key {
+		case "autoScalingConfiguration":
+			if err := awsRestjson1_deserializeDocumentServiceManagedEc2AutoScalingConfiguration(&sv.AutoScalingConfiguration, value); err != nil {
+				return err
+			}
+
 		case "instanceCapabilities":
 			if err := awsRestjson1_deserializeDocumentServiceManagedEc2InstanceCapabilities(&sv.InstanceCapabilities, value); err != nil {
 				return err

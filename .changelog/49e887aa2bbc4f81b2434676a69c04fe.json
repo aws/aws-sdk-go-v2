@@ -1,0 +1,8 @@
+{
+    "id": "49e887aa-2bbc-4f81-b243-4676a69c04fe",
+    "type": "feature",
+    "description": "Adds Lookup Tables to CloudWatch Logs for log enrichment using CSV key-value data with KMS encryption support.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

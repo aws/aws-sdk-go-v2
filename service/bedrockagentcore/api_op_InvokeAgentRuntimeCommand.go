@@ -12,8 +12,18 @@ import (
 	"sync"
 )
 
-// Executes a command in a runtime session container. Returns streaming output
-// with contentStart, contentDelta, and contentStop events.
+// Executes a command in a runtime session container and streams the output back
+// to the caller. This operation allows you to run shell commands within the agent
+// runtime environment and receive real-time streaming responses including standard
+// output and standard error.
+//
+// To invoke a command, you must specify the agent runtime ARN and a runtime
+// session ID. The command execution supports streaming responses, allowing you to
+// receive output as it becomes available through contentStart , contentDelta , and
+// contentStop events.
+//
+// To use this operation, you must have the
+// bedrock-agentcore:InvokeAgentRuntimeCommand permission.
 func (c *Client) InvokeAgentRuntimeCommand(ctx context.Context, params *InvokeAgentRuntimeCommandInput, optFns ...func(*Options)) (*InvokeAgentRuntimeCommandOutput, error) {
 	if params == nil {
 		params = &InvokeAgentRuntimeCommandInput{}
@@ -29,15 +39,18 @@ func (c *Client) InvokeAgentRuntimeCommand(ctx context.Context, params *InvokeAg
 	return out, nil
 }
 
-// Request for InvokeAgentRuntimeCommand operation
+// Request for InvokeAgentRuntimeCommand operation.
 type InvokeAgentRuntimeCommandInput struct {
 
-	// ARN of the agent runtime
+	// The Amazon Resource Name (ARN) of the agent runtime on which to execute the
+	// command. This identifies the specific agent runtime environment where the
+	// command will run.
 	//
 	// This member is required.
 	AgentRuntimeArn *string
 
-	// Request body containing command and timeout
+	// The request body containing the command to execute and optional configuration
+	// parameters such as timeout settings.
 	//
 	// This member is required.
 	Body *types.InvokeAgentRuntimeCommandRequestBody
@@ -47,7 +60,9 @@ type InvokeAgentRuntimeCommandInput struct {
 	// include application/json for JSON data.
 	Accept *string
 
-	// Account ID (12 digits)
+	// The identifier of the Amazon Web Services account for the agent runtime
+	// resource. This parameter is required when you specify an agent ID instead of the
+	// full ARN for agentRuntimeArn .
 	AccountId *string
 
 	// Additional context information for distributed tracing.
@@ -58,10 +73,14 @@ type InvokeAgentRuntimeCommandInput struct {
 	// application/json for JSON data.
 	ContentType *string
 
-	// Version or alias qualifier
+	// The qualifier to use for the agent runtime. This is an endpoint name that
+	// points to a specific version. If not specified, Amazon Bedrock AgentCore uses
+	// the default endpoint of the agent runtime.
 	Qualifier *string
 
-	// Runtime session identifier
+	// The unique identifier of the runtime session in which to execute the command.
+	// This session ID is used to maintain state and context across multiple command
+	// invocations.
 	RuntimeSessionId *string
 
 	// The trace identifier for request tracking.
@@ -91,7 +110,7 @@ func (o *InvokeAgentRuntimeCommandOutput) GetStream() *InvokeAgentRuntimeCommand
 	return o.eventStream
 }
 
-// Response for InvokeAgentRuntimeCommand operation
+// Response for InvokeAgentRuntimeCommand operation.
 type InvokeAgentRuntimeCommandInitialReply struct {
 
 	// The MIME type of the response data. This indicates how to interpret the
@@ -103,7 +122,7 @@ type InvokeAgentRuntimeCommandInitialReply struct {
 	// Additional context information for distributed tracing.
 	Baggage *string
 
-	// Runtime session identifier
+	// The unique identifier of the runtime session in which the command was executed.
 	RuntimeSessionId *string
 
 	// The HTTP status code of the response. A status code of 200 indicates a

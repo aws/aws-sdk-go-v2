@@ -29,6 +29,9 @@ func (c *Client) CreateFarm(ctx context.Context, params *CreateFarmInput, optFns
 	return out, nil
 }
 
+// Shared displayName + description for Create operations where both are present.
+// displayName is @required here - this mixin is Create-only by design (Update has
+// optional displayName).
 type CreateFarmInput struct {
 
 	// The display name of the farm.
@@ -43,7 +46,10 @@ type CreateFarmInput struct {
 	// The unique token which the server uses to recognize retries of the same request.
 	ClientToken *string
 
-	// The cost scale factor to apply on the farm.
+	// A multiplier applied to the farm's calculated costs for usage data and budget
+	// tracking. A value less than 1 represents a discount, a value greater than 1
+	// represents a premium, and a value of 1 represents no adjustment. The default
+	// value is 1.
 	CostScaleFactor *float32
 
 	// The description of the farm.
@@ -63,6 +69,8 @@ type CreateFarmInput struct {
 	noSmithyDocumentSerde
 }
 
+// Mixin that adds an optional ARN field to response structures. Apply to
+// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateFarmOutput struct {
 
 	// The farm ID.

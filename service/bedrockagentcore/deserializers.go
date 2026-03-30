@@ -9752,6 +9752,11 @@ func awsRestjson1_deserializeDocumentEvaluationResultContent(v **types.Evaluatio
 				sv.Explanation = ptr.String(jtv)
 			}
 
+		case "ignoredReferenceInputFields":
+			if err := awsRestjson1_deserializeDocumentIgnoredReferenceInputFields(&sv.IgnoredReferenceInputFields, value); err != nil {
+				return err
+			}
+
 		case "label":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10193,6 +10198,42 @@ func awsRestjson1_deserializeDocumentExtractionJobMetadataList(v *[]types.Extrac
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIgnoredReferenceInputFields(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected IgnoredReferenceInputField to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}

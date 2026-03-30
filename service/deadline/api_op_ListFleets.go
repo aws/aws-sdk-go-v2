@@ -27,6 +27,7 @@ func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns
 	return out, nil
 }
 
+// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListFleetsInput struct {
 
 	// The farm ID of the fleets.
@@ -57,6 +58,7 @@ type ListFleetsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type ListFleetsOutput struct {
 
 	// The fleets on the list.

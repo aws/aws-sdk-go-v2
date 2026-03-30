@@ -141,6 +141,10 @@ type UpdateAutoScalingGroupInput struct {
 	// The valid values are none , prevent-force-deletion , and prevent-all-deletion .
 	//
 	// Default: none
+	//
+	// For more information, see [Configure deletion protection for your Amazon EC2 Auto Scaling resources] in the Amazon EC2 Auto Scaling User Guide.
+	//
+	// [Configure deletion protection for your Amazon EC2 Auto Scaling resources]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/resource-deletion-protection.html
 	DeletionProtection types.DeletionProtection
 
 	// The desired capacity is the initial capacity of the Auto Scaling group after

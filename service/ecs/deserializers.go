@@ -15211,6 +15211,11 @@ func awsAwsjson11_deserializeDocumentInstanceLaunchTemplate(v **types.InstanceLa
 				return err
 			}
 
+		case "localStorageConfiguration":
+			if err := awsAwsjson11_deserializeDocumentManagedInstancesLocalStorageConfiguration(&sv.LocalStorageConfiguration, value); err != nil {
+				return err
+			}
+
 		case "monitoring":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16546,6 +16551,46 @@ func awsAwsjson11_deserializeDocumentManagedIngressPaths(v *[]types.ManagedIngre
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentManagedInstancesLocalStorageConfiguration(v **types.ManagedInstancesLocalStorageConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedInstancesLocalStorageConfiguration
+	if *v == nil {
+		sv = &types.ManagedInstancesLocalStorageConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "useLocalStorage":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.UseLocalStorage = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

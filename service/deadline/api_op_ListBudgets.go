@@ -27,6 +27,7 @@ func (c *Client) ListBudgets(ctx context.Context, params *ListBudgetsInput, optF
 	return out, nil
 }
 
+// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListBudgetsInput struct {
 
 	// The farm ID associated with the budgets.
@@ -47,6 +48,7 @@ type ListBudgetsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type ListBudgetsOutput struct {
 
 	// The budgets to include on the list.

@@ -27,6 +27,9 @@ func (c *Client) AssociateMemberToQueue(ctx context.Context, params *AssociateMe
 	return out, nil
 }
 
+// Shared member fields for Associate inputs and {Resource}Member response
+// structures. principalId is excluded because it has @httpLabel on inputs but not
+// on responses.
 type AssociateMemberToQueueInput struct {
 
 	// The farm ID of the queue to associate with the member.

@@ -29,6 +29,9 @@ func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optF
 	return out, nil
 }
 
+// Shared displayName + description for Create operations where both are present.
+// displayName is @required here - this mixin is Create-only by design (Update has
+// optional displayName).
 type CreateFleetInput struct {
 
 	// The configuration settings for the fleet. Customer managed fleets are
@@ -93,6 +96,8 @@ type CreateFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+// Mixin that adds an optional ARN field to response structures. Apply to
+// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateFleetOutput struct {
 
 	// The fleet ID.

@@ -1,0 +1,8 @@
+{
+    "id": "86e08f12-ee47-463a-848c-8339451c0e99",
+    "type": "feature",
+    "description": "Adds Ground Truth support for AgentCore Evaluations (Evaluate)",
+    "modules": [
+        "service/bedrockagentcore"
+    ]
+}

@@ -3466,6 +3466,10 @@ type InstanceLaunchTemplate struct {
 	// criteria.
 	InstanceRequirements *InstanceRequirementsRequest
 
+	// The local storage configuration for Amazon ECS Managed Instances. This defines
+	// how ECS uses instance store volumes available on the container instance.
+	LocalStorageConfiguration *ManagedInstancesLocalStorageConfiguration
+
 	// CloudWatch provides two categories of monitoring: basic monitoring and detailed
 	// monitoring. By default, your managed instance is configured for basic
 	// monitoring. You can optionally enable detailed monitoring to help you more
@@ -3477,7 +3481,7 @@ type InstanceLaunchTemplate struct {
 	Monitoring ManagedInstancesMonitoringOptions
 
 	// The storage configuration for Amazon ECS Managed Instances. This defines the
-	// root volume size and type for the instances.
+	// data volume properties for the instances.
 	StorageConfiguration *ManagedInstancesStorageConfiguration
 
 	noSmithyDocumentSerde
@@ -3525,6 +3529,11 @@ type InstanceLaunchTemplateUpdate struct {
 	// Changes to instance requirements affect which instance types Amazon ECS selects
 	// for new instances.
 	InstanceRequirements *InstanceRequirementsRequest
+
+	// The updated local storage configuration for Amazon ECS Managed Instances.
+	// Changes to local storage settings apply to new instances launched after the
+	// update.
+	LocalStorageConfiguration *ManagedInstancesLocalStorageConfiguration
 
 	// CloudWatch provides two categories of monitoring: basic monitoring and detailed
 	// monitoring. By default, your managed instance is configured for basic
@@ -4321,6 +4330,21 @@ type ManagedIngressPath struct {
 	noSmithyDocumentSerde
 }
 
+// The local storage configuration for Amazon ECS Managed Instances. This defines
+// how ECS uses and configures instance store volumes available on container
+// instance.
+type ManagedInstancesLocalStorageConfiguration struct {
+
+	// Use instance store volumes for data storage when available. EBS volumes are not
+	// provisioned for data storage. If the container instance has multiple instance
+	// store volumes, a single data volume is created. Consider defining instance store
+	// requirements using the localStorage , localStorageTypes and totalLocalStorageGB
+	// properties.
+	UseLocalStorage bool
+
+	noSmithyDocumentSerde
+}
+
 // The network configuration for Amazon ECS Managed Instances. This specifies the
 // VPC subnets and security groups that instances use for network connectivity.
 // Amazon ECS Managed Instances support multiple network modes including awsvpc
@@ -4383,10 +4407,10 @@ type ManagedInstancesProvider struct {
 }
 
 // The storage configuration for Amazon ECS Managed Instances. This defines the
-// root volume configuration for the instances.
+// data volume configuration for the instances.
 type ManagedInstancesStorageConfiguration struct {
 
-	// The size of the tasks volume.
+	// The size of the data volume.
 	StorageSizeGiB *int32
 
 	noSmithyDocumentSerde

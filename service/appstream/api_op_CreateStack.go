@@ -45,6 +45,11 @@ type CreateStackInput struct {
 	// automatically saved after each session and applied to the next session.
 	ApplicationSettings *types.ApplicationSettings
 
+	// Configuration for bidirectional URL redirection between the streaming session
+	// and the local client. Use HostToClient to redirect URLs from the remote desktop
+	// to the local browser.
+	ContentRedirection *types.ContentRedirection
+
 	// The description to display.
 	Description *string
 

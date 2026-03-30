@@ -1241,6 +1241,24 @@ func (AutotuneMode) Values() []AutotuneMode {
 	}
 }
 
+type AvailabilityZoneBalanceEnforcementMode string
+
+// Enum values for AvailabilityZoneBalanceEnforcementMode
+const (
+	AvailabilityZoneBalanceEnforcementModePermissive AvailabilityZoneBalanceEnforcementMode = "PERMISSIVE"
+)
+
+// Values returns all known values for AvailabilityZoneBalanceEnforcementMode.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AvailabilityZoneBalanceEnforcementMode) Values() []AvailabilityZoneBalanceEnforcementMode {
+	return []AvailabilityZoneBalanceEnforcementMode{
+		"PERMISSIVE",
+	}
+}
+
 type AwsManagedHumanLoopRequestSource string
 
 // Enum values for AwsManagedHumanLoopRequestSource
@@ -3745,6 +3763,26 @@ func (InferenceComponentCapacitySizeType) Values() []InferenceComponentCapacityS
 	}
 }
 
+type InferenceComponentPlacementStrategy string
+
+// Enum values for InferenceComponentPlacementStrategy
+const (
+	InferenceComponentPlacementStrategySpread  InferenceComponentPlacementStrategy = "SPREAD"
+	InferenceComponentPlacementStrategyBinpack InferenceComponentPlacementStrategy = "BINPACK"
+)
+
+// Values returns all known values for InferenceComponentPlacementStrategy. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InferenceComponentPlacementStrategy) Values() []InferenceComponentPlacementStrategy {
+	return []InferenceComponentPlacementStrategy{
+		"SPREAD",
+		"BINPACK",
+	}
+}
+
 type InferenceComponentSortKey string
 
 // Enum values for InferenceComponentSortKey
@@ -4663,6 +4701,26 @@ func (MaintenanceStatus) Values() []MaintenanceStatus {
 		"MaintenanceInProgress",
 		"MaintenanceComplete",
 		"MaintenanceFailed",
+	}
+}
+
+type ManagedInstanceScalingScaleInStrategy string
+
+// Enum values for ManagedInstanceScalingScaleInStrategy
+const (
+	ManagedInstanceScalingScaleInStrategyIdleRelease   ManagedInstanceScalingScaleInStrategy = "IDLE_RELEASE"
+	ManagedInstanceScalingScaleInStrategyConsolidation ManagedInstanceScalingScaleInStrategy = "CONSOLIDATION"
+)
+
+// Values returns all known values for ManagedInstanceScalingScaleInStrategy. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedInstanceScalingScaleInStrategy) Values() []ManagedInstanceScalingScaleInStrategy {
+	return []ManagedInstanceScalingScaleInStrategy{
+		"IDLE_RELEASE",
+		"CONSOLIDATION",
 	}
 }
 

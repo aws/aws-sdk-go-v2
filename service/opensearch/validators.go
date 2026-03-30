@@ -650,6 +650,26 @@ func (m *validateOpDescribeDryRunProgress) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeInsightDetails struct {
+}
+
+func (*validateOpDescribeInsightDetails) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeInsightDetails) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeInsightDetailsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeInsightDetailsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeInstanceTypeLimits struct {
 }
 
@@ -945,6 +965,26 @@ func (m *validateOpListDomainsForPackage) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDomainsForPackageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListInsights struct {
+}
+
+func (*validateOpListInsights) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInsights) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInsightsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInsightsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1538,6 +1578,10 @@ func addOpDescribeDryRunProgressValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDescribeDryRunProgress{}, middleware.After)
 }
 
+func addOpDescribeInsightDetailsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeInsightDetails{}, middleware.After)
+}
+
 func addOpDescribeInstanceTypeLimitsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeInstanceTypeLimits{}, middleware.After)
 }
@@ -1596,6 +1640,10 @@ func addOpListDomainMaintenancesValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListDomainsForPackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDomainsForPackage{}, middleware.After)
+}
+
+func addOpListInsightsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInsights{}, middleware.After)
 }
 
 func addOpListInstanceTypeDetailsValidationMiddleware(stack *middleware.Stack) error {
@@ -1822,6 +1870,39 @@ func validateDomainInformationContainer(v *types.DomainInformationContainer) err
 		if err := validateAWSDomainInformation(v.AWSDomainInformation); err != nil {
 			invalidParams.AddNested("AWSDomainInformation", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInsightEntity(v *types.InsightEntity) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InsightEntity"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInsightTimeRange(v *types.InsightTimeRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InsightTimeRange"}
+	if v.From == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("From"))
+	}
+	if v.To == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("To"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2696,6 +2777,28 @@ func validateOpDescribeDryRunProgressInput(v *DescribeDryRunProgressInput) error
 	}
 }
 
+func validateOpDescribeInsightDetailsInput(v *DescribeInsightDetailsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeInsightDetailsInput"}
+	if v.Entity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entity"))
+	} else if v.Entity != nil {
+		if err := validateInsightEntity(v.Entity); err != nil {
+			invalidParams.AddNested("Entity", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InsightId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InsightId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeInstanceTypeLimitsInput(v *DescribeInstanceTypeLimitsInput) error {
 	if v == nil {
 		return nil
@@ -2931,6 +3034,30 @@ func validateOpListDomainsForPackageInput(v *ListDomainsForPackageInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListDomainsForPackageInput"}
 	if v.PackageID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PackageID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListInsightsInput(v *ListInsightsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInsightsInput"}
+	if v.Entity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entity"))
+	} else if v.Entity != nil {
+		if err := validateInsightEntity(v.Entity); err != nil {
+			invalidParams.AddNested("Entity", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TimeRange != nil {
+		if err := validateInsightTimeRange(v.TimeRange); err != nil {
+			invalidParams.AddNested("TimeRange", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

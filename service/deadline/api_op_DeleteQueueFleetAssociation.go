@@ -26,6 +26,8 @@ func (c *Client) DeleteQueueFleetAssociation(ctx context.Context, params *Delete
 	return out, nil
 }
 
+// Identifier mixin for queue-fleet association operations. Composes
+// QueueIdentifierMixin (farmId + queueId) and adds fleetId.
 type DeleteQueueFleetAssociationInput struct {
 
 	// The farm ID of the farm that holds the queue-fleet association.

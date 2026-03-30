@@ -27,6 +27,8 @@ func (c *Client) SearchSteps(ctx context.Context, params *SearchStepsInput, optF
 	return out, nil
 }
 
+// Shared input fields for all Search operations (filterExpressions,
+// sortExpressions, itemOffset, pageSize).
 type SearchStepsInput struct {
 
 	// The farm ID to use for the step search.
@@ -59,6 +61,7 @@ type SearchStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared output fields for all Search operations (nextItemOffset, totalResults).
 type SearchStepsOutput struct {
 
 	// The steps in the search.

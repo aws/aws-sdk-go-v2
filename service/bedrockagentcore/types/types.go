@@ -380,32 +380,42 @@ type ContentBlock struct {
 	noSmithyDocumentSerde
 }
 
-// Content event containing stdout or stderr output
+// An event that contains incremental output from a command execution. This event
+// streams standard output and standard error content as it becomes available
+// during command execution.
 type ContentDeltaEvent struct {
 
-	// Standard error content
+	// The standard error content from the command execution. This field contains the
+	// incremental output written to stderr by the executing command.
 	Stderr *string
 
-	// Standard output content
+	// The standard output content from the command execution. This field contains the
+	// incremental output written to stdout by the executing command.
 	Stdout *string
 
 	noSmithyDocumentSerde
 }
 
-// First event indicating command execution has started
+// An event that signals the start of content streaming from a command execution.
+// This event is sent when the command begins producing output.
 type ContentStartEvent struct {
 	noSmithyDocumentSerde
 }
 
-// Final event indicating command execution has completed
+// An event that signals the completion of a command execution. This event
+// contains the final status and exit code of the executed command.
 type ContentStopEvent struct {
 
-	// Exit code: 0 = success, -1 = platform error, >0 = command error
+	// The exit code returned by the executed command. An exit code of 0 indicates
+	// successful execution, -1 indicates a platform error, and values greater than 0
+	// indicate command-specific errors.
 	//
 	// This member is required.
 	ExitCode *int32
 
-	// Execution status
+	// The final status of the command execution. Valid values are COMPLETED for
+	// successful completion or TIMED_OUT if the command exceeded the specified
+	// timeout.
 	//
 	// This member is required.
 	Status CommandExecutionStatus
@@ -454,6 +464,37 @@ type Conversational struct {
 	noSmithyDocumentSerde
 }
 
+//	A content block for ground truth data in evaluation reference inputs. Supports
+//
+// text content for expected responses and assertions.
+//
+// The following types satisfy this interface:
+//
+//	EvaluationContentMemberText
+type EvaluationContent interface {
+	isEvaluationContent()
+}
+
+//	The text content of the ground truth data. Used for expected response text and
+//
+// assertion statements.
+type EvaluationContentMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationContentMemberText) isEvaluationContent() {}
+
+// The expected tool call trajectory for trajectory-based evaluation.
+type EvaluationExpectedTrajectory struct {
+
+	//  The list of tool names representing the expected tool call sequence.
+	ToolNames []string
+
+	noSmithyDocumentSerde
+}
+
 //	The input data structure containing agent session spans in OpenTelemetry
 //
 // format. Supports traces from frameworks like Strands (AgentCore Runtime) and
@@ -477,6 +518,37 @@ type EvaluationInputMemberSessionSpans struct {
 }
 
 func (*EvaluationInputMemberSessionSpans) isEvaluationInput() {}
+
+//	A reference input containing ground truth data for evaluation, scoped to a
+//
+// specific context level (session or trace) through its span context.
+type EvaluationReferenceInput struct {
+
+	//  The contextual information associated with an evaluation, including span
+	// context details that identify the specific traces and sessions being evaluated
+	// within the agent's execution flow.
+	//
+	// This member is required.
+	Context Context
+
+	//  A list of assertion statements for session-level evaluation. Each assertion
+	// describes an expected behavior or outcome the agent should demonstrate during
+	// the session.
+	Assertions []EvaluationContent
+
+	//  The expected response for trace-level evaluation. Built-in evaluators that
+	// support this field compare the agent's actual response against this value for
+	// assessment. Custom evaluators can access it through the {expected_response}
+	// placeholder in their instructions.
+	ExpectedResponse EvaluationContent
+
+	//  The expected tool call sequence for session-level trajectory evaluation.
+	// Contains a list of tool names representing the tools the agent is expected to
+	// invoke.
+	ExpectedTrajectory *EvaluationExpectedTrajectory
+
+	noSmithyDocumentSerde
+}
 
 //	The comprehensive result of an evaluation containing the score, explanation,
 //
@@ -526,6 +598,11 @@ type EvaluationResultContent struct {
 	// behind the assigned score. This qualitative feedback helps understand why
 	// specific ratings were given and provides actionable insights for improvement.
 	Explanation *string
+
+	//  The list of reference input field names that were provided but not used by the
+	// evaluator. Helps identify which ground truth data was not consumed during
+	// evaluation.
+	IgnoredReferenceInputFields []string
 
 	//  The categorical label assigned by the evaluator when using a categorical
 	// rating scale. This provides a human-readable description of the evaluation
@@ -788,22 +865,27 @@ type InputContentBlock struct {
 	noSmithyDocumentSerde
 }
 
-// Request body for InvokeAgentRuntimeCommand
+// The request body structure for the InvokeAgentRuntimeCommand operation,
+// containing the command to execute and optional configuration parameters.
 type InvokeAgentRuntimeCommandRequestBody struct {
 
-	// The command to execute in the runtime container
+	// The shell command to execute on the agent runtime. This command is executed in
+	// the runtime environment and its output is streamed back to the caller.
 	//
 	// This member is required.
 	Command *string
 
-	// Command timeout in seconds (default: 300, min:1, max: 3600)
+	// The maximum duration in seconds to wait for the command to complete. If the
+	// command execution exceeds this timeout, it will be terminated. Default is 300
+	// seconds. Minimum is 1 second. Maximum is 3600 seconds.
 	Timeout *int32
 
 	noSmithyDocumentSerde
 }
 
-// Streaming output for InvokeAgentRuntimeCommand operation Delivers typed events:
-// contentStart (first), contentDelta (middle), contentStop (last)
+// The streaming output union for the InvokeAgentRuntimeCommand operation. This
+// union delivers typed events: contentStart (first), contentDelta (middle), and
+// contentStop (last).
 //
 // The following types satisfy this interface:
 //
@@ -812,7 +894,8 @@ type InvokeAgentRuntimeCommandStreamOutput interface {
 	isInvokeAgentRuntimeCommandStreamOutput()
 }
 
-// Response chunk containing command execution events
+// A response chunk containing command execution events such as content start,
+// content delta, or content stop events.
 type InvokeAgentRuntimeCommandStreamOutputMemberChunk struct {
 	Value ResponseChunk
 
@@ -1235,17 +1318,20 @@ type ResourceLocationMemberS3 struct {
 
 func (*ResourceLocationMemberS3) isResourceLocation() {}
 
-// Response chunk containing exactly one of: contentStart, contentDelta, or
-// contentStop
+// A structure representing a response chunk that contains exactly one of the
+// possible event types: contentStart , contentDelta , or contentStop .
 type ResponseChunk struct {
 
-	// Middle chunks - stdout/stderr output
+	// An event containing incremental output (stdout or stderr) from the command
+	// execution. These are the middle chunks.
 	ContentDelta *ContentDeltaEvent
 
-	// First chunk - indicates command execution has started
+	// An event indicating the start of content streaming from the command execution.
+	// This is the first chunk received.
 	ContentStart *ContentStartEvent
 
-	// Last chunk - indicates command execution has completed
+	// An event indicating the completion of the command execution, including the exit
+	// code and final status. This is the last chunk received.
 	ContentStop *ContentStopEvent
 
 	noSmithyDocumentSerde
@@ -1561,6 +1647,7 @@ func (*UnknownUnionMember) isCertificateLocation()                   {}
 func (*UnknownUnionMember) isCodeInterpreterStreamOutput()           {}
 func (*UnknownUnionMember) isContent()                               {}
 func (*UnknownUnionMember) isContext()                               {}
+func (*UnknownUnionMember) isEvaluationContent()                     {}
 func (*UnknownUnionMember) isEvaluationInput()                       {}
 func (*UnknownUnionMember) isEvaluationTarget()                      {}
 func (*UnknownUnionMember) isExtractionJobMessages()                 {}

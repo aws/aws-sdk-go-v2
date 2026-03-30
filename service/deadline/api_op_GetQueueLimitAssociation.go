@@ -50,6 +50,8 @@ type GetQueueLimitAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+// Domain fields for QueueLimitAssociation summary/response shapes, ordered before
+// timestamps.
 type GetQueueLimitAssociationOutput struct {
 
 	// The Unix timestamp of the date and time that the association was created.

@@ -1,0 +1,8 @@
+{
+    "id": "4ef85ad4-6736-45f5-800e-0fe991e858ee",
+    "type": "documentation",
+    "description": "Update CreateScript API documentation.",
+    "modules": [
+        "service/gamelift"
+    ]
+}

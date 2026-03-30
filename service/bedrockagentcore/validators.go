@@ -1085,6 +1085,25 @@ func validateCertificates(v []types.Certificate) error {
 	}
 }
 
+func validateContext(v types.Context) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Context"}
+	switch uv := v.(type) {
+	case *types.ContextMemberSpanContext:
+		if err := validateSpanContext(&uv.Value); err != nil {
+			invalidParams.AddNested("[spanContext]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConversational(v *types.Conversational) error {
 	if v == nil {
 		return nil
@@ -1095,6 +1114,42 @@ func validateConversational(v *types.Conversational) error {
 	}
 	if len(v.Role) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvaluationReferenceInput(v *types.EvaluationReferenceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluationReferenceInput"}
+	if v.Context == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Context"))
+	} else if v.Context != nil {
+		if err := validateContext(v.Context); err != nil {
+			invalidParams.AddNested("Context", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvaluationReferenceInputs(v []types.EvaluationReferenceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluationReferenceInputs"}
+	for i := range v {
+		if err := validateEvaluationReferenceInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1570,6 +1625,21 @@ func validateSecretsManagerLocation(v *types.SecretsManagerLocation) error {
 	}
 }
 
+func validateSpanContext(v *types.SpanContext) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SpanContext"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateToolArguments(v *types.ToolArguments) error {
 	if v == nil {
 		return nil
@@ -1774,6 +1844,11 @@ func validateOpEvaluateInput(v *EvaluateInput) error {
 	}
 	if v.EvaluationInput == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EvaluationInput"))
+	}
+	if v.EvaluationReferenceInputs != nil {
+		if err := validateEvaluationReferenceInputs(v.EvaluationReferenceInputs); err != nil {
+			invalidParams.AddNested("EvaluationReferenceInputs", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

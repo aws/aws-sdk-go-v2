@@ -475,6 +475,21 @@ type ConsumedUsages struct {
 	noSmithyDocumentSerde
 }
 
+// The auto scaling configuration options for a customer managed fleet.
+type CustomerManagedAutoScalingConfiguration struct {
+
+	// The number of workers that can be scaled out per minute.
+	ScaleOutWorkersPerMinute *int32
+
+	// The number of standby workers to maintain for the fleet.
+	StandbyWorkerCount *int32
+
+	// The duration in seconds that a worker can be idle before it is scaled down.
+	WorkerIdleDurationSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // The configuration details for a customer managed fleet.
 type CustomerManagedFleetConfiguration struct {
 
@@ -487,6 +502,9 @@ type CustomerManagedFleetConfiguration struct {
 	//
 	// This member is required.
 	WorkerCapabilities *CustomerManagedWorkerCapabilities
+
+	// The auto scaling configuration options for the customer managed fleet.
+	AutoScalingConfiguration *CustomerManagedAutoScalingConfiguration
 
 	// The storage profile ID for the customer managed fleet.
 	StorageProfileId *string
@@ -2394,6 +2412,21 @@ type SearchTermFilterExpression struct {
 	noSmithyDocumentSerde
 }
 
+// The auto scaling configuration options for a service managed EC2 fleet.
+type ServiceManagedEc2AutoScalingConfiguration struct {
+
+	// The number of workers that can be scaled out per minute.
+	ScaleOutWorkersPerMinute *int32
+
+	// The number of standby workers to maintain for the fleet.
+	StandbyWorkerCount *int32
+
+	// The duration in seconds that a worker can be idle before it is scaled down.
+	WorkerIdleDurationSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // The configuration details for a service managed EC2 fleet.
 type ServiceManagedEc2FleetConfiguration struct {
 
@@ -2406,6 +2439,9 @@ type ServiceManagedEc2FleetConfiguration struct {
 	//
 	// This member is required.
 	InstanceMarketOptions *ServiceManagedEc2InstanceMarketOptions
+
+	// The auto scaling configuration options for the service managed EC2 fleet.
+	AutoScalingConfiguration *ServiceManagedEc2AutoScalingConfiguration
 
 	// The storage profile ID for the service managed EC2 fleet.
 	StorageProfileId *string

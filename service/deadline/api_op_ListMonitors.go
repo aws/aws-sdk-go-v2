@@ -27,6 +27,7 @@ func (c *Client) ListMonitors(ctx context.Context, params *ListMonitorsInput, op
 	return out, nil
 }
 
+// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListMonitorsInput struct {
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -39,6 +40,7 @@ type ListMonitorsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type ListMonitorsOutput struct {
 
 	// A list of MonitorSummary objects that describe your monitors in the Deadline

@@ -11088,6 +11088,21 @@ func validateImageConfig(v *types.ImageConfig) error {
 	}
 }
 
+func validateInferenceComponentAvailabilityZoneBalance(v *types.InferenceComponentAvailabilityZoneBalance) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceComponentAvailabilityZoneBalance"}
+	if len(v.EnforcementMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EnforcementMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInferenceComponentCapacitySize(v *types.InferenceComponentCapacitySize) error {
 	if v == nil {
 		return nil
@@ -11197,6 +11212,26 @@ func validateInferenceComponentRuntimeConfig(v *types.InferenceComponentRuntimeC
 	}
 }
 
+func validateInferenceComponentSchedulingConfig(v *types.InferenceComponentSchedulingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceComponentSchedulingConfig"}
+	if len(v.PlacementStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PlacementStrategy"))
+	}
+	if v.AvailabilityZoneBalance != nil {
+		if err := validateInferenceComponentAvailabilityZoneBalance(v.AvailabilityZoneBalance); err != nil {
+			invalidParams.AddNested("AvailabilityZoneBalance", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInferenceComponentSpecification(v *types.InferenceComponentSpecification) error {
 	if v == nil {
 		return nil
@@ -11210,6 +11245,11 @@ func validateInferenceComponentSpecification(v *types.InferenceComponentSpecific
 	if v.DataCacheConfig != nil {
 		if err := validateInferenceComponentDataCacheConfig(v.DataCacheConfig); err != nil {
 			invalidParams.AddNested("DataCacheConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SchedulingConfig != nil {
+		if err := validateInferenceComponentSchedulingConfig(v.SchedulingConfig); err != nil {
+			invalidParams.AddNested("SchedulingConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -13393,6 +13433,11 @@ func validateProductionVariant(v *types.ProductionVariant) error {
 			invalidParams.AddNested("ServerlessConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ManagedInstanceScaling != nil {
+		if err := validateProductionVariantManagedInstanceScaling(v.ManagedInstanceScaling); err != nil {
+			invalidParams.AddNested("ManagedInstanceScaling", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.RoutingConfig != nil {
 		if err := validateProductionVariantRoutingConfig(v.RoutingConfig); err != nil {
 			invalidParams.AddNested("RoutingConfig", err.(smithy.InvalidParamsError))
@@ -13429,6 +13474,38 @@ func validateProductionVariantList(v []types.ProductionVariant) error {
 		if err := validateProductionVariant(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProductionVariantManagedInstanceScaling(v *types.ProductionVariantManagedInstanceScaling) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProductionVariantManagedInstanceScaling"}
+	if v.ScaleInPolicy != nil {
+		if err := validateProductionVariantManagedInstanceScalingScaleInPolicy(v.ScaleInPolicy); err != nil {
+			invalidParams.AddNested("ScaleInPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProductionVariantManagedInstanceScalingScaleInPolicy(v *types.ProductionVariantManagedInstanceScalingScaleInPolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProductionVariantManagedInstanceScalingScaleInPolicy"}
+	if len(v.Strategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Strategy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

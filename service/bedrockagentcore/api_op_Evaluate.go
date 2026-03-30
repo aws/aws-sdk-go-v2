@@ -46,6 +46,13 @@ type EvaluateInput struct {
 	// This member is required.
 	EvaluatorId *string
 
+	//  Ground truth data to compare against agent responses during evaluation. Allows
+	// to provide expected responses, assertions, and expected tool trajectories at
+	// different evaluation levels. Session-level reference inputs apply to the entire
+	// conversation, while trace-level reference inputs target specific
+	// request-response interactions identified by trace ID.
+	EvaluationReferenceInputs []types.EvaluationReferenceInput
+
 	//  The specific trace or span IDs to evaluate within the provided input. Allows
 	// targeting evaluation at different levels: individual tool calls, single
 	// request-response interactions (traces), or entire conversation sessions.
