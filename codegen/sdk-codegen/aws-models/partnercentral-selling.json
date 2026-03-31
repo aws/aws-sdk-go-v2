@@ -1695,8 +1695,7 @@
                 "CurrencyCode": {
                     "target": "com.amazonaws.partnercentralselling#CurrencyCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>ISO 4217 currency code.</p>",
-                        "smithy.api#pattern": "^USD$",
+                        "smithy.api#documentation": "<p>ISO 4217 currency code. Supported values are <code>USD</code> and <code>EUR</code>. Returns <code>EUR</code> when the opportunity is in the <code>aws-eusc</code> (AWS European Sovereign Cloud) partition.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6570,7 +6569,7 @@
         "com.amazonaws.partnercentralselling#EstimationUrl": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^https://calculator\\.aws/#/estimate\\?id=[a-f0-9]{32,64}$"
+                "smithy.api#pattern": "^https://(calculator\\.aws|pricing\\.calculator\\.aws\\.eu)/#/estimate\\?id=[a-f0-9]{32,64}$"
             }
         },
         "com.amazonaws.partnercentralselling#ExpectedCustomerSpend": {
@@ -6587,8 +6586,7 @@
                 "CurrencyCode": {
                     "target": "com.amazonaws.partnercentralselling#CurrencyCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the currency in which the revenue estimate is provided. This helps in understanding the financial impact across different markets.</p>",
-                        "smithy.api#pattern": "^USD$",
+                        "smithy.api#documentation": "Currency code for the expected customer spend. Supported currencies: USD, EUR",
                         "smithy.api#required": {}
                     }
                 },
@@ -10330,7 +10328,7 @@
                 "CurrencyCode": {
                     "target": "com.amazonaws.partnercentralselling#CurrencyCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the payment currency.</p>",
+                        "smithy.api#documentation": "<p>Specifies the payment currency. Accepted values are <code>USD</code> (US Dollars) and <code>EUR</code> (Euros). If the AWS Partition is <code>aws-eusc</code> (AWS European Sovereign Cloud), the currency code must be <code>EUR</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }

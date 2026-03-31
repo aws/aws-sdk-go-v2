@@ -1647,6 +1647,12 @@
                         "smithy.api#documentation": "<p>Each state represents a specific phase in the account lifecycle. Use this information\n            to manage account access, automate workflows, or trigger actions based on account state\n            changes.</p>\n         <p>For more information about account states and their implications, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_account_state.html\">Monitor the state of your Amazon Web Services accounts </a> in the\n                <i>Organizations User Guide</i>.</p>"
                     }
                 },
+                "Paths": {
+                    "target": "com.amazonaws.organizations#Paths",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The paths in the organization where the account exists.</p>"
+                    }
+                },
                 "JoinedMethod": {
                     "target": "com.amazonaws.organizations#AccountJoinedMethod",
                     "traits": {
@@ -8673,6 +8679,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The friendly name of this OU.</p>\n         <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> \n    that is used to validate this parameter is a string of any of the characters in the ASCII \n    character range.</p>"
                     }
+                },
+                "Path": {
+                    "target": "com.amazonaws.organizations#Path",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path in the organization where this OU exists.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8811,6 +8823,12 @@
         },
         "com.amazonaws.organizations#PathToError": {
             "type": "string"
+        },
+        "com.amazonaws.organizations#Paths": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.organizations#Path"
+            }
         },
         "com.amazonaws.organizations#Policies": {
             "type": "list",

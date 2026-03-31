@@ -2977,6 +2977,24 @@
                     "traits": {
                         "smithy.api#enumValue": "USAGE_LOGS"
                     }
+                },
+                "SECURITY_FINDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECURITY_FINDING_LOGS"
+                    }
+                },
+                "ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_LOGS"
+                    }
+                },
+                "CONNECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTION_LOGS"
+                    }
                 }
             }
         },
@@ -4089,6 +4107,30 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AWS::BedrockAgentCore::CodeInterpreter"
+                    }
+                },
+                "AWS_BEDROCK_AGENTCORE_GATEWAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::BedrockAgentCore::Gateway"
+                    }
+                },
+                "AWS_BEDROCK_AGENTCORE_MEMORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::BedrockAgentCore::Memory"
+                    }
+                },
+                "AWS_SECURITY_HUB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::SecurityHub::Hub"
+                    }
+                },
+                "AWS_CLOUDFRONT_DISTRIBUTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::CloudFront::Distribution"
                     }
                 }
             }

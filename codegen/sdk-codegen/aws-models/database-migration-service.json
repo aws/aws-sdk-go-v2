@@ -11683,6 +11683,18 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>"
                     }
                 },
+                "EncryptionAlgorithm": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The encryption algorithm used for securing the connection to the IBM DB2 LUW database server.\n         You can provide an integer value corresponding to a specific encryption algorithm,\n         or leave this parameter empty to use the default behavior.\n      </p>"
+                    }
+                },
+                "SecurityMechanism": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The security mechanism used for authenticating the connection to the IBM DB2 LUW database server.\n         You can provide an integer value corresponding to a specific security mechanism,\n         or leave this parameter empty to use the default behavior.\n      </p>"
+                    }
+                },
                 "S3Path": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {

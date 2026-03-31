@@ -849,6 +849,83 @@
                 "target": "com.amazonaws.mailmanager#Archive"
             }
         },
+        "com.amazonaws.mailmanager#BounceAction": {
+            "type": "structure",
+            "members": {
+                "ActionFailurePolicy": {
+                    "target": "com.amazonaws.mailmanager#ActionFailurePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A policy that states what to do in the case of failure. The action will fail if there are configuration errors. For example, the caller does not have the permissions to call the SendBounce API.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.mailmanager#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to use to send the bounce message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Sender": {
+                    "target": "com.amazonaws.mailmanager#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sender email address of the bounce message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusCode": {
+                    "target": "com.amazonaws.mailmanager#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enhanced status code for the bounce, in the format of x.y.z (e.g. 5.1.1).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SmtpReplyCode": {
+                    "target": "com.amazonaws.mailmanager#SmtpReplyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SMTP reply code for the bounce, as defined by RFC 5321.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DiagnosticMessage": {
+                    "target": "com.amazonaws.mailmanager#DiagnosticMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The diagnostic message included in the Diagnostic-Code header of the bounce.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.mailmanager#BounceMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The human-readable text to include in the bounce message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The action to send a bounce response for the email. When executed, this action generates a non-delivery report (bounce) back to the sender.</p>"
+            }
+        },
+        "com.amazonaws.mailmanager#BounceMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^[\\r\\n\\x20-\\x7e]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.mailmanager#CAContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500000
+                },
+                "smithy.api#pattern": "^[\\P{C}\\s]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.mailmanager#ConflictException": {
             "type": "structure",
             "members": {
@@ -946,6 +1023,9 @@
                 },
                 {
                     "target": "com.amazonaws.mailmanager#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.mailmanager#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.mailmanager#ValidationException"
@@ -1380,6 +1460,12 @@
                         "smithy.api#documentation": "<p>Specifies the network configuration for the ingress point. This allows you to create an IPv4-only, Dual-Stack, or PrivateLink type of ingress point. If not specified, the default network type is IPv4-only. </p>"
                     }
                 },
+                "TlsPolicy": {
+                    "target": "com.amazonaws.mailmanager#TlsPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Transport Layer Security (TLS) policy for the ingress point. The FIPS value is only valid in US and Canada regions.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.mailmanager#TagList",
                     "traits": {
@@ -1685,6 +1771,17 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.mailmanager#CrlContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500000
+                },
+                "smithy.api#pattern": "^[\\P{C}\\s]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.mailmanager#DeleteAddonInstance": {
             "type": "operation",
             "input": {
@@ -1788,6 +1885,9 @@
                 },
                 {
                     "target": "com.amazonaws.mailmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.mailmanager#ValidationException"
                 }
             ],
             "traits": {
@@ -2143,6 +2243,9 @@
                     "target": "com.amazonaws.mailmanager#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.mailmanager#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.mailmanager#ResourceNotFoundException"
                 },
                 {
@@ -2184,6 +2287,17 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.mailmanager#DiagnosticMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\x20-\\x7e]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.mailmanager#DropAction": {
@@ -3230,6 +3344,12 @@
                         "smithy.api#documentation": "<p>The identifier of an ingress endpoint.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "IncludeTrustStoreContents": {
+                    "target": "com.amazonaws.mailmanager#TrustStoreResponseOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to include the trust store contents in the response. Use INCLUDE to retrieve trust store certificate and CRL contents.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3299,6 +3419,12 @@
                     "target": "com.amazonaws.mailmanager#NetworkConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The network configuration for the ingress point.</p>"
+                    }
+                },
+                "TlsPolicy": {
+                    "target": "com.amazonaws.mailmanager#TlsPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selected Transport Layer Security (TLS) policy of the ingress point.</p>"
                     }
                 },
                 "CreatedTimestamp": {
@@ -4224,6 +4350,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ingress endpoint SecretsManager::Secret ARN configuration for the ingress endpoint resource.</p>"
                     }
+                },
+                "TlsAuthConfiguration": {
+                    "target": "com.amazonaws.mailmanager#TlsAuthConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mutual TLS authentication configuration for the ingress endpoint resource.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4243,6 +4375,12 @@
                     "target": "com.amazonaws.mailmanager#SecretArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The SecretsManager::Secret ARN of the ingress endpoint resource.</p>"
+                    }
+                },
+                "TlsAuthConfiguration": {
+                    "target": "com.amazonaws.mailmanager#TlsAuthConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mutual TLS authentication configuration of the ingress endpoint resource.</p>"
                     }
                 }
             },
@@ -4361,6 +4499,12 @@
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
                     }
+                },
+                "ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST"
+                    }
                 }
             }
         },
@@ -4394,6 +4538,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AUTH"
+                    }
+                },
+                "MTLS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MTLS"
                     }
                 }
             }
@@ -4587,6 +4737,47 @@
                 "smithy.api#documentation": "<p>The union type representing the allowed types for the left hand side of a TLS condition.</p>"
             }
         },
+        "com.amazonaws.mailmanager#InvokeLambdaAction": {
+            "type": "structure",
+            "members": {
+                "ActionFailurePolicy": {
+                    "target": "com.amazonaws.mailmanager#ActionFailurePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A policy that states what to do in the case of failure. The action will fail if there are configuration errors. For example, the Amazon Web Services Lambda function no longer exists.</p>"
+                    }
+                },
+                "FunctionArn": {
+                    "target": "com.amazonaws.mailmanager#LambdaFunctionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function to invoke.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InvocationType": {
+                    "target": "com.amazonaws.mailmanager#LambdaInvocationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The invocation type of the Lambda function. Use EVENT for asynchronous invocation or REQUEST_RESPONSE for synchronous invocation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.mailmanager#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to use to invoke the Lambda function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RetryTimeMinutes": {
+                    "target": "com.amazonaws.mailmanager#LambdaRetryTimeMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time in minutes that the email processing can be retried if the Lambda invocation fails. The maximum value is 2160 minutes (36 hours).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The action to invoke an Amazon Web Services Lambda function for processing the email.</p>"
+            }
+        },
         "com.amazonaws.mailmanager#IpType": {
             "type": "enum",
             "members": {
@@ -4668,6 +4859,45 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9-:/]+$"
+            }
+        },
+        "com.amazonaws.mailmanager#LambdaFunctionArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::Lambda::Function"
+                },
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9:_/+=,@.#-]+$"
+            }
+        },
+        "com.amazonaws.mailmanager#LambdaInvocationType": {
+            "type": "enum",
+            "members": {
+                "EVENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVENT"
+                    }
+                },
+                "REQUEST_RESPONSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUEST_RESPONSE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mailmanager#LambdaRetryTimeMinutes": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 2160
+                }
             }
         },
         "com.amazonaws.mailmanager#ListAddonInstances": {
@@ -6776,6 +7006,9 @@
                     "target": "com.amazonaws.mailmanager#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.mailmanager#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.mailmanager#ResourceNotFoundException"
                 },
                 {
@@ -7361,6 +7594,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This action publishes the email content to an Amazon SNS topic.</p>"
                     }
+                },
+                "Bounce": {
+                    "target": "com.amazonaws.mailmanager#BounceAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This action sends a bounce response for the email.</p>"
+                    }
+                },
+                "InvokeLambda": {
+                    "target": "com.amazonaws.mailmanager#InvokeLambdaAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This action invokes an Amazon Web Services Lambda function to process the email.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7519,6 +7764,62 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The union type representing the allowed types of operands for a boolean condition.</p>"
+            }
+        },
+        "com.amazonaws.mailmanager#RuleClientCertificateAttribute": {
+            "type": "enum",
+            "members": {
+                "CN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CN"
+                    }
+                },
+                "SAN_RFC822_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAN_RFC822_NAME"
+                    }
+                },
+                "SAN_DNS_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAN_DNS_NAME"
+                    }
+                },
+                "SAN_DIRECTORY_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAN_DIRECTORY_NAME"
+                    }
+                },
+                "SAN_UNIFORM_RESOURCE_IDENTIFIER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAN_UNIFORM_RESOURCE_IDENTIFIER"
+                    }
+                },
+                "SAN_IP_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAN_IP_ADDRESS"
+                    }
+                },
+                "SAN_REGISTERED_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAN_REGISTERED_ID"
+                    }
+                },
+                "SERIAL_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERIAL_NUMBER"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The client certificate attribute to evaluate in a rule condition. These attributes are extracted from the client certificate presented during mutual TLS authentication.</p>"
             }
         },
         "com.amazonaws.mailmanager#RuleCondition": {
@@ -8125,6 +8426,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Add On ARN and its returned value to evaluate in a string condition expression.</p>"
                     }
+                },
+                "ClientCertificateAttribute": {
+                    "target": "com.amazonaws.mailmanager#RuleClientCertificateAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client certificate attribute to evaluate in a string condition expression.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8137,7 +8444,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 4096
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.mailmanager#RuleVerdict": {
@@ -8558,6 +8866,16 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.mailmanager#SmtpReplyCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 3
+                },
+                "smithy.api#pattern": "^[45][0-9][0-9]$"
+            }
+        },
         "com.amazonaws.mailmanager#SnsAction": {
             "type": "structure",
             "members": {
@@ -8891,6 +9209,16 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.mailmanager#StatusCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 9
+                },
+                "smithy.api#pattern": "^[45]\\.[0-9]{1,3}\\.[0-9]{1,3}$"
+            }
+        },
         "com.amazonaws.mailmanager#StopAddressListImportJob": {
             "type": "operation",
             "input": {
@@ -9210,6 +9538,43 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.mailmanager#TlsAuthConfiguration": {
+            "type": "structure",
+            "members": {
+                "TrustStore": {
+                    "target": "com.amazonaws.mailmanager#TrustStore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust store configuration for mutual TLS authentication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The mutual TLS authentication configuration for an ingress endpoint.</p>"
+            }
+        },
+        "com.amazonaws.mailmanager#TlsPolicy": {
+            "type": "enum",
+            "members": {
+                "REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUIRED"
+                    }
+                },
+                "OPTIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPTIONAL"
+                    }
+                },
+                "FIPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIPS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.mailmanager#TrafficPolicy": {
             "type": "structure",
             "members": {
@@ -9296,6 +9661,53 @@
                 "aws.cloudformation#cfnResource": {
                     "name": "MailManagerTrafficPolicy"
                 }
+            }
+        },
+        "com.amazonaws.mailmanager#TrustStore": {
+            "type": "structure",
+            "members": {
+                "CAContent": {
+                    "target": "com.amazonaws.mailmanager#CAContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The PEM-encoded certificate authority (CA) certificates bundle for the trust store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CrlContent": {
+                    "target": "com.amazonaws.mailmanager#CrlContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The PEM-encoded certificate revocation lists (CRLs) for the trust store. There can be one CRL per certificate authority (CA) in the trust store.</p>"
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.mailmanager#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the trust store contents.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The trust store used for mutual TLS authentication. It contains the certificate authority (CA) certificates and optional certificate revocation list (CRL).</p>"
+            }
+        },
+        "com.amazonaws.mailmanager#TrustStoreResponseOption": {
+            "type": "enum",
+            "members": {
+                "EXCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUDE"
+                    }
+                },
+                "INCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUDE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether to include trust store contents in the GetIngressPoint response.</p>"
             }
         },
         "com.amazonaws.mailmanager#UntagResource": {
@@ -9521,6 +9933,12 @@
                     "target": "com.amazonaws.mailmanager#IngressPointConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>If you choose an Authenticated ingress endpoint, you must configure either an SMTP password or a secret ARN.</p>"
+                    }
+                },
+                "TlsPolicy": {
+                    "target": "com.amazonaws.mailmanager#TlsPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Transport Layer Security (TLS) policy for the ingress point. Valid values are REQUIRED, OPTIONAL. Only ingress endpoints using REQUIRED or OPTIONAL as TlsPolicy can be updated.</p>"
                     }
                 }
             },

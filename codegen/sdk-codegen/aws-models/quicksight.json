@@ -1361,6 +1361,12 @@
                         "smithy.api#documentation": "<p>An array of sheet definitions for an analysis. Each <code>SheetDefinition</code> provides detailed information about\n            a sheet within this analysis.</p>"
                     }
                 },
+                "TooltipSheets": {
+                    "target": "com.amazonaws.quicksight#TooltipSheetDefinitionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of tooltip sheet definitions for an analysis. Each <code>TooltipSheetDefinition</code> provides detailed information about\n            a tooltip sheet within this analysis.</p>"
+                    }
+                },
                 "CalculatedFields": {
                     "target": "com.amazonaws.quicksight#CalculatedFields",
                     "traits": {
@@ -4598,6 +4604,12 @@
                         "smithy.api#enumValue": "PASSWORD"
                     }
                 },
+                "KEYPAIR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KEYPAIR"
+                    }
+                },
                 "TOKEN": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -4820,6 +4832,47 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.quicksight#String"
+            }
+        },
+        "com.amazonaws.quicksight#AutomateId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+            }
+        },
+        "com.amazonaws.quicksight#AutomationJobStatus": {
+            "type": "enum",
+            "members": {
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "QUEUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUED"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#AwsAccountId": {
@@ -8206,6 +8259,18 @@
                         "smithy.api#documentation": "<p>The ability to perform space-related actions.</p>"
                     }
                 },
+                "CreateSpaces": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create spaces.</p>"
+                    }
+                },
+                "ShareSpaces": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share spaces with other users and groups.</p>"
+                    }
+                },
                 "ChatAgent": {
                     "target": "com.amazonaws.quicksight#CapabilityState",
                     "traits": {
@@ -8216,6 +8281,12 @@
                     "target": "com.amazonaws.quicksight#CapabilityState",
                     "traits": {
                         "smithy.api#documentation": "<p>The ability to create chat agents.</p>"
+                    }
+                },
+                "ShareChatAgents": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share chat agents with other users and groups.</p>"
                     }
                 },
                 "Research": {
@@ -15617,6 +15688,12 @@
                         "smithy.api#documentation": "<p>An array of sheet definitions for a dashboard.</p>"
                     }
                 },
+                "TooltipSheets": {
+                    "target": "com.amazonaws.quicksight#TooltipSheetDefinitionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of tooltip sheet definitions for a dashboard.</p>"
+                    }
+                },
                 "CalculatedFields": {
                     "target": "com.amazonaws.quicksight#CalculatedFields",
                     "traits": {
@@ -17701,6 +17778,12 @@
                     "target": "com.amazonaws.quicksight#WebProxyCredentials",
                     "traits": {
                         "smithy.api#documentation": "<p>The credentials for connecting through a web proxy server.</p>"
+                    }
+                },
+                "OAuthClientCredentials": {
+                    "target": "com.amazonaws.quicksight#OAuthClientCredentials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth client credentials for connecting to a data source using OAuth 2.0 client\n            credentials (2LO) authentication. For more information, see\n            <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_OAuthClientCredentials.html\">OAuthClientCredentials</a>\n            </code>.</p>"
                     }
                 }
             },
@@ -24331,6 +24414,155 @@
                     "target": "com.amazonaws.quicksight#AssetBundleImportJobWarningList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of warning records that describe all permitted errors that are encountered\n         during the import job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAutomationJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeAutomationJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeAutomationJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the status and details of a specified automation job, including its status and outputs.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/automation-groups/{AutomationGroupId}/automations/{AutomationId}/jobs/{JobId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAutomationJobRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the automation job.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AutomationGroupId": {
+                    "target": "com.amazonaws.quicksight#AutomateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the automation group that contains the automation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AutomationId": {
+                    "target": "com.amazonaws.quicksight#AutomateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the automation that the job belongs to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IncludeInputPayload": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether to include the input payload in the response. If set to <code>true</code>, the input payload will be included. If set to <code>false</code>, the input payload will be returned as <code>null</code>.</p>",
+                        "smithy.api#httpQuery": "includeInputPayload"
+                    }
+                },
+                "IncludeOutputPayload": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether to include the output payload in the response. If set to <code>true</code>, the output payload will be included. If set to <code>false</code>, the output payload will be returned as <code>null</code>.</p>",
+                        "smithy.api#httpQuery": "includeOutputPayload"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.quicksight#AutomateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the automation job to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAutomationJobResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the automation job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the automation job was created.</p>"
+                    }
+                },
+                "StartedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the automation job started running.</p>"
+                    }
+                },
+                "EndedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the automation job finished running.</p>"
+                    }
+                },
+                "JobStatus": {
+                    "target": "com.amazonaws.quicksight#AutomationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the automation job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InputPayload": {
+                    "target": "com.amazonaws.quicksight#SensitiveIOPayload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input payload that was provided when the automation job was started. This field is only included when <code>IncludeInputPayload</code> is set to <code>true</code> in the request.</p>"
+                    }
+                },
+                "OutputPayload": {
+                    "target": "com.amazonaws.quicksight#SensitiveIOPayload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output payload that was generated by the automation job. This field is only included when <code>IncludeOutputPayload</code> is set to <code>true</code> in the request.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             },
@@ -45807,6 +46039,52 @@
                 "smithy.api#documentation": "<p>The measure type field with numerical type columns.</p>"
             }
         },
+        "com.amazonaws.quicksight#OAuthClientCredentials": {
+            "type": "structure",
+            "members": {
+                "ClientId": {
+                    "target": "com.amazonaws.quicksight#OAuthClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client ID of the OAuth 2.0 application that is registered with the data source\n            provider.</p>"
+                    }
+                },
+                "ClientSecret": {
+                    "target": "com.amazonaws.quicksight#OAuthClientSecret",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client secret of the OAuth 2.0 application that is registered with the data source\n            provider.</p>"
+                    }
+                },
+                "Username": {
+                    "target": "com.amazonaws.quicksight#OAuthUsername",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The username of the account that is used for OAuth 2.0 client credentials\n            authentication with the data source provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The OAuth 2.0 client credentials used for authenticating a data source connection.\n            Use this structure to provide a client ID, client secret, and username directly\n            instead of referencing a secret stored in Amazon Secrets Manager. This structure\n            supports data sources that use two-legged OAuth (2LO) authentication, such as\n            Snowflake.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#OAuthClientId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.quicksight#OAuthClientSecret": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.quicksight#OAuthParameters": {
             "type": "structure",
             "members": {
@@ -45844,6 +46122,16 @@
                     "min": 1,
                     "max": 128
                 }
+            }
+        },
+        "com.amazonaws.quicksight#OAuthUsername": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.quicksight#OnClause": {
@@ -47639,6 +47927,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The paginated report options for a pivot table visual.</p>"
                     }
+                },
+                "Tooltip": {
+                    "target": "com.amazonaws.quicksight#TooltipOptions"
                 },
                 "DashboardCustomizationVisualOptions": {
                     "target": "com.amazonaws.quicksight#DashboardCustomizationVisualOptions",
@@ -49553,6 +49844,9 @@
                     "target": "com.amazonaws.quicksight#DescribeAssetBundleImportJob"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DescribeAutomationJob"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DescribeBrand"
                 },
                 {
@@ -49863,6 +50157,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#StartAssetBundleImportJob"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#StartAutomationJob"
                 },
                 {
                     "target": "com.amazonaws.quicksight#StartDashboardSnapshotJob"
@@ -55576,6 +55873,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DETAILED"
                     }
+                },
+                "SHEET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHEET"
+                    }
                 }
             }
         },
@@ -55896,6 +56199,17 @@
         "com.amazonaws.quicksight#SensitiveDoubleObject": {
             "type": "double",
             "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.quicksight#SensitiveIOPayload": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 7000000
+                },
+                "smithy.api#pattern": "^[\\s\\S]*[{\\[].*[}\\]]\\s*$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -56936,6 +57250,20 @@
                     "min": 1,
                     "max": 1024
                 }
+            }
+        },
+        "com.amazonaws.quicksight#SheetTooltip": {
+            "type": "structure",
+            "members": {
+                "SheetId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sheet ID of the tooltip sheet that is used by the tooltip.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of the sheet tooltip.</p>"
             }
         },
         "com.amazonaws.quicksight#SheetVisualScopingConfiguration": {
@@ -57983,6 +58311,94 @@
                 "smithy.api#documentation": "<p>The parameters for Spark.</p>"
             }
         },
+        "com.amazonaws.quicksight#SparklineAxisBehavior": {
+            "type": "enum",
+            "members": {
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED"
+                    }
+                },
+                "INDEPENDENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INDEPENDENT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SparklineVisualType": {
+            "type": "enum",
+            "members": {
+                "LINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINE"
+                    }
+                },
+                "AREA_LINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AREA_LINE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SparklinesOptions": {
+            "type": "structure",
+            "members": {
+                "FieldId": {
+                    "target": "com.amazonaws.quicksight#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field ID of the value column that the sparkline is applied to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "XAxisField": {
+                    "target": "com.amazonaws.quicksight#DimensionField",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "YAxisBehavior": {
+                    "target": "com.amazonaws.quicksight#SparklineAxisBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether the Y axis is shared across all sparklines or independent for each sparkline.</p>"
+                    }
+                },
+                "VisualType": {
+                    "target": "com.amazonaws.quicksight#SparklineVisualType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the sparkline. Valid values are <code>LINE</code> and <code>AREA_LINE</code>.</p>"
+                    }
+                },
+                "LineColor": {
+                    "target": "com.amazonaws.quicksight#HexColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color of the sparkline line.</p>"
+                    }
+                },
+                "LineInterpolation": {
+                    "target": "com.amazonaws.quicksight#LineInterpolation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interpolation style for the sparkline line.</p>"
+                    }
+                },
+                "AllPointsMarker": {
+                    "target": "com.amazonaws.quicksight#LineChartMarkerStyleSettings"
+                },
+                "MaxValueMarker": {
+                    "target": "com.amazonaws.quicksight#LineChartMarkerStyleSettings"
+                },
+                "MinValueMarker": {
+                    "target": "com.amazonaws.quicksight#LineChartMarkerStyleSettings"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The options for sparklines in a table.</p>"
+            }
+        },
         "com.amazonaws.quicksight#SpatialStaticFile": {
             "type": "structure",
             "members": {
@@ -58444,6 +58860,117 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the response.</p>",
                         "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#StartAutomationJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#StartAutomationJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#StartAutomationJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a new job for a specified automation. The job runs the automation with the provided input payload.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/automation-groups/{AutomationGroupId}/automations/{AutomationId}/jobs",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#StartAutomationJobRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the automation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AutomationGroupId": {
+                    "target": "com.amazonaws.quicksight#AutomateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the automation group that contains the automation to run.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AutomationId": {
+                    "target": "com.amazonaws.quicksight#AutomateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the automation to run.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InputPayload": {
+                    "target": "com.amazonaws.quicksight#SensitiveIOPayload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input payload for the automation job, provided as a JSON string.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#StartAutomationJobResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the automation job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.quicksight#AutomateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the automation job that was started.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             },
@@ -59473,6 +60000,9 @@
                         "smithy.api#documentation": "<p>A collection of inline visualizations to display within a chart.</p>"
                     }
                 },
+                "Tooltip": {
+                    "target": "com.amazonaws.quicksight#TooltipOptions"
+                },
                 "DashboardCustomizationVisualOptions": {
                     "target": "com.amazonaws.quicksight#DashboardCustomizationVisualOptions",
                     "traits": {
@@ -59744,6 +60274,12 @@
                     "target": "com.amazonaws.quicksight#DataBarsOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of the inline visualization of the data bars within a chart.</p>"
+                    }
+                },
+                "Sparklines": {
+                    "target": "com.amazonaws.quicksight#SparklinesOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the inline visualization of the sparklines within a chart.</p>"
                     }
                 }
             },
@@ -60661,6 +61197,12 @@
                     "target": "com.amazonaws.quicksight#SheetDefinitionList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of sheet definitions for a template.</p>"
+                    }
+                },
+                "TooltipSheets": {
+                    "target": "com.amazonaws.quicksight#TooltipSheetDefinitionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of tooltip sheet definitions for a template.</p>"
                     }
                 },
                 "CalculatedFields": {
@@ -61791,10 +62333,106 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The setup for the detailed tooltip. The tooltip setup is always saved. The display type is decided based on the tooltip type.</p>"
                     }
+                },
+                "SheetTooltip": {
+                    "target": "com.amazonaws.quicksight#SheetTooltip"
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The display options for the visual tooltip.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TooltipSheetDefinition": {
+            "type": "structure",
+            "members": {
+                "SheetId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a tooltip sheet.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#SheetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tooltip sheet. This name is displayed on the sheet's tab in the Quick\n            console.</p>"
+                    }
+                },
+                "Visuals": {
+                    "target": "com.amazonaws.quicksight#TooltipSheetVisualList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the visuals that are on a tooltip sheet.</p>"
+                    }
+                },
+                "TextBoxes": {
+                    "target": "com.amazonaws.quicksight#TooltipSheetTextBoxList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text boxes that are on a tooltip sheet.</p>"
+                    }
+                },
+                "Images": {
+                    "target": "com.amazonaws.quicksight#TooltipSheetImageList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of images on a tooltip sheet.</p>"
+                    }
+                },
+                "Layouts": {
+                    "target": "com.amazonaws.quicksight#LayoutList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Layouts define how the components of a tooltip sheet are arranged.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/types-of-layout.html\">Types of layout</a> in the <i>Amazon Quick Suite User Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A tooltip sheet is an object that contains a set of visuals that\n            are used as a tooltip. Every analysis and dashboard must contain at least one non-tooltip sheet.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TooltipSheetDefinitionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#TooltipSheetDefinition"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#TooltipSheetImageList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SheetImage"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.quicksight#TooltipSheetTextBoxList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SheetTextBox"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.quicksight#TooltipSheetVisualList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#Visual"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.quicksight#TooltipTarget": {

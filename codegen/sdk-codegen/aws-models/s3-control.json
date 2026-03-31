@@ -9730,6 +9730,16 @@
                 "smithy.api#documentation": "<p>A container for the response details that are returned when querying about an\n         asynchronous request.</p>"
             }
         },
+        "com.amazonaws.s3control#AuditContext": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
+            }
+        },
         "com.amazonaws.s3control#AwsLambdaTransformation": {
             "type": "structure",
             "members": {
@@ -14375,6 +14385,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of <code>Target</code>. The only possible value is <code>Object</code>. Pass this value if the target data that you would like to access is a path to an object. Do not pass this value if the target data is a bucket or a bucket and a prefix. </p>",
                         "smithy.api#httpQuery": "targetType"
+                    }
+                },
+                "AuditContext": {
+                    "target": "com.amazonaws.s3control#AuditContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The context to identify the job or query associated with the credential request. This information will be displayed in CloudTrail log in your account.</p>",
+                        "smithy.api#httpQuery": "auditContext"
                     }
                 }
             },

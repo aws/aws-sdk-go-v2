@@ -122,12 +122,6 @@
                     "traits": {
                         "smithy.api#documentation": "Pagerduty service details."
                     }
-                },
-                "mcpserversigv4": {
-                    "target": "com.amazonaws.devopsagent#RegisteredMCPServerSigV4Details",
-                    "traits": {
-                        "smithy.api#documentation": "SigV4-authenticated MCP server-specific service details."
-                    }
                 }
             },
             "traits": {
@@ -314,7 +308,7 @@
                 "target": "com.amazonaws.devopsagent#AllowVendedLogDeliveryForResourceOutput"
             },
             "traits": {
-                "smithy.api#documentation": "Authorize Ingestion Hub subscription operation. Looks to see if the derived accountId from FAS has an AgentSpace.",
+                "smithy.api#documentation": "Authorize Ingestion Hub subscription operation.",
                 "smithy.api#endpoint": {
                     "hostPrefix": "cp."
                 },
@@ -651,17 +645,6 @@
                 "smithy.api#documentation": "Authentication flow type for operator app."
             }
         },
-        "com.amazonaws.devopsagent#AwsRegion": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "AWS region identifier.",
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 50
-                },
-                "smithy.api#pattern": "^[a-z]{2,4}(-[a-z]+)+-\\d+$"
-            }
-        },
         "com.amazonaws.devopsagent#AzureConfiguration": {
             "type": "structure",
             "members": {
@@ -780,35 +763,6 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.devopsagent#ChatExecution"
-            }
-        },
-        "com.amazonaws.devopsagent#ChatParticipantConnection": {
-            "type": "structure",
-            "members": {
-                "initialContactId": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "The identifier of the contact in this instance of Amazon Connect",
-                        "smithy.api#required": {}
-                    }
-                },
-                "participantId": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "The identifier for a chat participant",
-                        "smithy.api#required": {}
-                    }
-                },
-                "participantToken": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "The token used by the chat participant to call CreateParticipantConnection",
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "Represents a chat participant connection with all its properties and metadata"
             }
         },
         "com.amazonaws.devopsagent#ClientId": {
@@ -1737,105 +1691,6 @@
                 "smithy.api#output": {}
             }
         },
-        "com.amazonaws.devopsagent#DescribeSupportLevel": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.devopsagent#DescribeSupportLevelRequest"
-            },
-            "output": {
-                "target": "com.amazonaws.devopsagent#DescribeSupportLevelResponse"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#InternalServerException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ValidationException"
-                }
-            ],
-            "traits": {
-                "aws.iam#iamAction": {
-                    "documentation": "Grants permission to describe a chat for a case",
-                    "resources": {
-                        "required": {
-                            "AgentSpaceResource": {}
-                        }
-                    }
-                },
-                "smithy.api#documentation": "Describe the support level of a CloudSmith customer account.",
-                "smithy.api#endpoint": {
-                    "hostPrefix": "dp."
-                },
-                "smithy.api#http": {
-                    "code": 201,
-                    "method": "POST",
-                    "uri": "/support/agent-space/{agentSpaceId}/tasks/{taskId}/supportLevel"
-                },
-                "smithy.api#idempotent": {}
-            }
-        },
-        "com.amazonaws.devopsagent#DescribeSupportLevelRequest": {
-            "type": "structure",
-            "members": {
-                "agentSpaceId": {
-                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
-                    "traits": {
-                        "smithy.api#documentation": "The unique identifier for the agent space containing the task",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                },
-                "taskId": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "The unique identifier for this task",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "Request structure for desribing support level for an account",
-                "smithy.api#input": {}
-            }
-        },
-        "com.amazonaws.devopsagent#DescribeSupportLevelResponse": {
-            "type": "structure",
-            "members": {
-                "supportLevel": {
-                    "target": "com.amazonaws.devopsagent#SupportLevel",
-                    "traits": {
-                        "smithy.api#documentation": "The account's support level",
-                        "smithy.api#required": {}
-                    }
-                },
-                "mosaicSupportLevel": {
-                    "target": "com.amazonaws.devopsagent#SupportLevel",
-                    "traits": {
-                        "smithy.api#documentation": "The account's Mosaic equivalent support level"
-                    }
-                },
-                "activeSubscription": {
-                    "target": "smithy.api#Boolean",
-                    "traits": {
-                        "smithy.api#documentation": "Whether or not the account's subscription is active"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "Response structure containing detailed support level for an account",
-                "smithy.api#output": {}
-            }
-        },
         "com.amazonaws.devopsagent#Description": {
             "type": "string",
             "traits": {
@@ -1862,12 +1717,6 @@
                     "target": "com.amazonaws.devopsagent#CreateChat"
                 },
                 {
-                    "target": "com.amazonaws.devopsagent#DescribeSupportLevel"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#EndChatForCase"
-                },
-                {
                     "target": "com.amazonaws.devopsagent#GetAccountUsage"
                 },
                 {
@@ -1875,9 +1724,6 @@
                 },
                 {
                     "target": "com.amazonaws.devopsagent#GetRecommendation"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#InitiateChatForCase"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ListBacklogTasks"
@@ -2654,124 +2500,6 @@
                 "smithy.api#output": {}
             }
         },
-        "com.amazonaws.devopsagent#EndChatForCase": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.devopsagent#EndChatForCaseRequest"
-            },
-            "output": {
-                "target": "com.amazonaws.devopsagent#EndChatForCaseResponse"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#InternalServerException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ValidationException"
-                }
-            ],
-            "traits": {
-                "aws.iam#iamAction": {
-                    "documentation": "Grants permission to end a chat for a case",
-                    "resources": {
-                        "required": {
-                            "AgentSpaceResource": {}
-                        }
-                    }
-                },
-                "smithy.api#documentation": "End a chat session for a support case in the specified agent space",
-                "smithy.api#endpoint": {
-                    "hostPrefix": "dp."
-                },
-                "smithy.api#http": {
-                    "code": 200,
-                    "method": "POST",
-                    "uri": "/support/agent-space/{agentSpaceId}/tasks/{taskId}/end-chat-for-case"
-                },
-                "smithy.api#idempotent": {}
-            }
-        },
-        "com.amazonaws.devopsagent#EndChatForCaseRequest": {
-            "type": "structure",
-            "members": {
-                "agentSpaceId": {
-                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
-                    "traits": {
-                        "smithy.api#documentation": "The unique identifier for the agent space containing the task",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                },
-                "taskId": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "The unique identifier for the task execution to end",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                },
-                "reason": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "Reason for ending the chat session (optional, defaults to 'Chat Ended by CloudSmith')"
-                    }
-                },
-                "requester": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "Who initiated the chat end request (optional, defaults to 'CloudSmith')"
-                    }
-                },
-                "clientToken": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "Client-provided token for idempotent operations",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "Request structure for ending a chat session",
-                "smithy.api#input": {}
-            }
-        },
-        "com.amazonaws.devopsagent#EndChatForCaseResponse": {
-            "type": "structure",
-            "members": {
-                "isDisconnected": {
-                    "target": "smithy.api#Boolean",
-                    "traits": {
-                        "smithy.api#documentation": "Whether the chat session was successfully ended",
-                        "smithy.api#required": {}
-                    }
-                },
-                "executionId": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "The execution ID that was ended"
-                    }
-                },
-                "errorMessage": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "Error message if the disconnect failed"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "Response structure for end chat operation",
-                "smithy.api#output": {}
-            }
-        },
         "com.amazonaws.devopsagent#EventChannelConfiguration": {
             "type": "structure",
             "members": {},
@@ -3065,6 +2793,12 @@
                     "target": "com.amazonaws.devopsagent#UsageMetric",
                     "traits": {
                         "smithy.api#documentation": "Monthly system learning hours usage and limit for an account"
+                    }
+                },
+                "monthlyAccountOnDemandHours": {
+                    "target": "com.amazonaws.devopsagent#UsageMetric",
+                    "traits": {
+                        "smithy.api#documentation": "Monthly on-demand hours usage and limit for an account"
                     }
                 },
                 "usagePeriodStartTime": {
@@ -4171,103 +3905,6 @@
                     "max": 1024
                 },
                 "smithy.api#sensitive": {}
-            }
-        },
-        "com.amazonaws.devopsagent#InitiateChatForCase": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.devopsagent#InitiateChatForCaseRequest"
-            },
-            "output": {
-                "target": "com.amazonaws.devopsagent#InitiateChatForCaseResponse"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ConflictException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#InternalServerException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ValidationException"
-                }
-            ],
-            "traits": {
-                "aws.iam#iamAction": {
-                    "documentation": "Grants permission to initiate a chat for a case",
-                    "resources": {
-                        "required": {
-                            "AgentSpaceResource": {}
-                        }
-                    }
-                },
-                "smithy.api#documentation": "Initiate a chat for support case in the specified agent space",
-                "smithy.api#endpoint": {
-                    "hostPrefix": "dp."
-                },
-                "smithy.api#http": {
-                    "code": 201,
-                    "method": "POST",
-                    "uri": "/support/agent-space/{agentSpaceId}/tasks/{taskId}/chats"
-                },
-                "smithy.api#idempotent": {}
-            }
-        },
-        "com.amazonaws.devopsagent#InitiateChatForCaseRequest": {
-            "type": "structure",
-            "members": {
-                "agentSpaceId": {
-                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
-                    "traits": {
-                        "smithy.api#documentation": "The unique identifier for the agent space containing the task",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                },
-                "taskId": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "The unique identifier for this task",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                },
-                "clientToken": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "Client-provided token for idempotent operations",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "Request structure for initiating a chat for support case",
-                "smithy.api#input": {}
-            }
-        },
-        "com.amazonaws.devopsagent#InitiateChatForCaseResponse": {
-            "type": "structure",
-            "members": {
-                "chatParticipantConnection": {
-                    "target": "com.amazonaws.devopsagent#ChatParticipantConnection",
-                    "traits": {
-                        "smithy.api#documentation": "The newly created chat participant connection",
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "Response structure containing the chat participant connection",
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devopsagent#InternalServerException": {
@@ -6165,79 +5802,6 @@
                 "smithy.api#documentation": "OAuth client credentials configuration for MCP server."
             }
         },
-        "com.amazonaws.devopsagent#MCPServerSigV4AuthorizationConfig": {
-            "type": "structure",
-            "members": {
-                "region": {
-                    "target": "com.amazonaws.devopsagent#AwsRegion",
-                    "traits": {
-                        "smithy.api#documentation": "AWS region for SigV4 signing.",
-                        "smithy.api#required": {}
-                    }
-                },
-                "service": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "AWS service name for SigV4 signing.",
-                        "smithy.api#length": {
-                            "min": 1,
-                            "max": 100
-                        },
-                        "smithy.api#required": {}
-                    }
-                },
-                "roleArn": {
-                    "target": "com.amazonaws.devopsagent#RoleArn",
-                    "traits": {
-                        "smithy.api#documentation": "IAM role ARN to assume for SigV4 signing.",
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "Authorization configuration for SigV4-authenticated MCP server."
-            }
-        },
-        "com.amazonaws.devopsagent#MCPServerSigV4ServiceDetails": {
-            "type": "structure",
-            "members": {
-                "name": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "MCP server name.",
-                        "smithy.api#pattern": "^[a-zA-Z0-9_-]+$",
-                        "smithy.api#required": {}
-                    }
-                },
-                "endpoint": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "MCP server endpoint URL.",
-                        "smithy.api#pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$",
-                        "smithy.api#required": {}
-                    }
-                },
-                "description": {
-                    "target": "com.amazonaws.devopsagent#Description",
-                    "traits": {
-                        "smithy.api#documentation": "Optional description for the MCP server.",
-                        "smithy.api#length": {
-                            "max": 500
-                        }
-                    }
-                },
-                "authorizationConfig": {
-                    "target": "com.amazonaws.devopsagent#MCPServerSigV4AuthorizationConfig",
-                    "traits": {
-                        "smithy.api#documentation": "MCP Server SigV4 authorization configuration.",
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "Complete service details for SigV4-authenticated MCP server integration."
-            }
-        },
         "com.amazonaws.devopsagent#MCPToolsList": {
             "type": "list",
             "member": {
@@ -6248,77 +5812,6 @@
             },
             "traits": {
                 "smithy.api#documentation": "List of MCP tool names available for the association."
-            }
-        },
-        "com.amazonaws.devopsagent#MSTeamsChannel": {
-            "type": "structure",
-            "members": {
-                "channelName": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "MS Teams channel name",
-                        "smithy.api#required": {}
-                    }
-                },
-                "channelId": {
-                    "target": "com.amazonaws.devopsagent#Guid",
-                    "traits": {
-                        "smithy.api#documentation": "MS Teams Channel ID",
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "Represents a Teams channel with its ID and name."
-            }
-        },
-        "com.amazonaws.devopsagent#MSTeamsConfiguration": {
-            "type": "structure",
-            "members": {
-                "teamId": {
-                    "target": "com.amazonaws.devopsagent#Guid",
-                    "traits": {
-                        "smithy.api#documentation": "Associated MS Teams teams ID",
-                        "smithy.api#required": {}
-                    }
-                },
-                "teamName": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "Associated MS Teams team name",
-                        "smithy.api#required": {}
-                    }
-                },
-                "transmissionTarget": {
-                    "target": "com.amazonaws.devopsagent#MSTeamsTransmissionTarget",
-                    "traits": {
-                        "smithy.api#documentation": "Transmission targets for agent notification",
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "Configuration for MS Teams workspace integration."
-            }
-        },
-        "com.amazonaws.devopsagent#MSTeamsTransmissionTarget": {
-            "type": "structure",
-            "members": {
-                "opsOncallTarget": {
-                    "target": "com.amazonaws.devopsagent#MSTeamsChannel",
-                    "traits": {
-                        "smithy.api#documentation": "Destination for On-call Agent(Ops1)"
-                    }
-                },
-                "opsSRETarget": {
-                    "target": "com.amazonaws.devopsagent#MSTeamsChannel",
-                    "traits": {
-                        "smithy.api#documentation": "Destination for SRE Agent (Ops1.5)"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "Defines MS Teams channels for different types of agent notifications."
             }
         },
         "com.amazonaws.devopsagent#MaxIpv4AddressesPerEni": {
@@ -6709,7 +6202,7 @@
         "com.amazonaws.devopsagent#PortRange": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "TCP port range expression (single port or range e.g. '443' or '8080-8090'). Valid port values are 0-65535, enforced at runtime.",
+                "smithy.api#documentation": "TCP port range expression (single port or range e.g. '443' or '8080-8090'). Valid port values are 1-65535, enforced at runtime.",
                 "smithy.api#length": {
                     "min": 1
                 },
@@ -6801,13 +6294,6 @@
                     "traits": {
                         "smithy.api#documentation": "Azure Service with AWS Outbound Identity Federation.",
                         "smithy.api#enumValue": "azureidentity"
-                    }
-                },
-                "MCP_SERVER_SIGV4": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#documentation": "SigV4-authenticated MCP server.",
-                        "smithy.api#enumValue": "mcpserversigv4"
                     }
                 }
             },
@@ -7648,64 +7134,6 @@
                 "smithy.api#documentation": "Details specific to a registered MCP (Model Context Protocol) server."
             }
         },
-        "com.amazonaws.devopsagent#RegisteredMCPServerSigV4Details": {
-            "type": "structure",
-            "members": {
-                "name": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "MCP server name.",
-                        "smithy.api#pattern": "^[a-zA-Z0-9_-]+$",
-                        "smithy.api#required": {}
-                    }
-                },
-                "endpoint": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "MCP server endpoint URL.",
-                        "smithy.api#pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$",
-                        "smithy.api#required": {}
-                    }
-                },
-                "description": {
-                    "target": "com.amazonaws.devopsagent#Description",
-                    "traits": {
-                        "smithy.api#documentation": "Optional description for the MCP server.",
-                        "smithy.api#length": {
-                            "max": 500
-                        }
-                    }
-                },
-                "region": {
-                    "target": "com.amazonaws.devopsagent#AwsRegion",
-                    "traits": {
-                        "smithy.api#documentation": "AWS region for SigV4 signing.",
-                        "smithy.api#required": {}
-                    }
-                },
-                "service": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "AWS service name for SigV4 signing.",
-                        "smithy.api#length": {
-                            "min": 1,
-                            "max": 100
-                        },
-                        "smithy.api#required": {}
-                    }
-                },
-                "roleArn": {
-                    "target": "com.amazonaws.devopsagent#RoleArn",
-                    "traits": {
-                        "smithy.api#documentation": "IAM role ARN to assume for SigV4 signing.",
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "Details specific to a registered SigV4-authenticated MCP server."
-            }
-        },
         "com.amazonaws.devopsagent#RegisteredNewRelicDetails": {
             "type": "structure",
             "members": {
@@ -8495,12 +7923,6 @@
                         "smithy.api#enumValue": "azuredevops"
                     }
                 },
-                "MS_TEAMS": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "msteams"
-                    }
-                },
                 "DYNATRACE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -8571,13 +7993,6 @@
                     "traits": {
                         "smithy.api#documentation": "Azure Service with AWS Outbound Identity Federation.",
                         "smithy.api#enumValue": "azureidentity"
-                    }
-                },
-                "MCP_SERVER_SIGV4": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#documentation": "SigV4-authenticated MCP server.",
-                        "smithy.api#enumValue": "mcpserversigv4"
                     }
                 }
             },
@@ -8665,12 +8080,6 @@
                     "traits": {
                         "smithy.api#documentation": "PagerDuty integration configuration"
                     }
-                },
-                "msteams": {
-                    "target": "com.amazonaws.devopsagent#MSTeamsConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "MS Teams integration configuration"
-                    }
                 }
             },
             "traits": {
@@ -8744,12 +8153,6 @@
                     "target": "com.amazonaws.devopsagent#RegisteredAzureIdentityDetails",
                     "traits": {
                         "smithy.api#documentation": "Azure integration with AWS Outbound Identity Federation specific service details."
-                    }
-                },
-                "mcpserversigv4": {
-                    "target": "com.amazonaws.devopsagent#MCPServerSigV4ServiceDetails",
-                    "traits": {
-                        "smithy.api#documentation": "SigV4-authenticated MCP server-specific service details."
                     }
                 }
             },
@@ -9136,28 +8539,6 @@
                     "max": 24
                 },
                 "smithy.api#pattern": "^subnet-(([0-9a-z]{8})|([0-9a-z]{17}))$"
-            }
-        },
-        "com.amazonaws.devopsagent#SupportLevel": {
-            "type": "structure",
-            "members": {
-                "code": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "The support level code",
-                        "smithy.api#required": {}
-                    }
-                },
-                "name": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "The support level name",
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "Represents a support level with all its properties and metadata"
             }
         },
         "com.amazonaws.devopsagent#TagKey": {

@@ -8067,6 +8067,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The managed services configuration for the ODB network.</p>"
                     }
+                },
+                "ec2PlacementGroupIds": {
+                    "target": "com.amazonaws.odb#ResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of EC2 Placement Group IDs associated with your ODB network.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8271,6 +8277,12 @@
                     "target": "com.amazonaws.odb#ManagedServices",
                     "traits": {
                         "smithy.api#documentation": "<p>The managed services configuration for the ODB network.</p>"
+                    }
+                },
+                "ec2PlacementGroupIds": {
+                    "target": "com.amazonaws.odb#ResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of EC2 Placement Group IDs associated with your ODB network.</p>"
                     }
                 }
             },
@@ -8672,6 +8684,12 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9_~.-]+$"
+            }
+        },
+        "com.amazonaws.odb#ResourceIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.odb#ResourceId"
             }
         },
         "com.amazonaws.odb#ResourceIdOrArn": {

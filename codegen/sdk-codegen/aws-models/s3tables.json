@@ -2765,8 +2765,13 @@
                 "schema": {
                     "target": "com.amazonaws.s3tables#IcebergSchema",
                     "traits": {
-                        "smithy.api#documentation": "<p>The schema for an Iceberg table.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The schema for an Iceberg table. Use this property to define table schemas with primitive types only. For schemas that include nested or complex types such as <code>struct</code>, <code>list</code>, or <code>map</code>, use <code>schemaV2</code> instead.</p>"
+                    }
+                },
+                "schemaV2": {
+                    "target": "com.amazonaws.s3tables#IcebergSchemaV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema for an Iceberg table using the V2 format. Use this property to define table schemas that include nested or complex data types such as <code>struct</code>, <code>list</code>, or <code>map</code>, in addition to primitive types. For schemas with only primitive types, you can use either <code>schema</code> or <code>schemaV2</code>.</p>"
                     }
                 },
                 "partitionSpec": {
@@ -2887,6 +2892,42 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains details about the schema for an Iceberg table.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#IcebergSchemaV2": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.s3tables#SchemaV2FieldType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the top-level schema, which is always a <code>struct</code> type as defined in the <a href=\"https://iceberg.apache.org/spec/#schemas-and-data-types\">Apache Iceberg specification</a>. This value must be <code>struct</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.s3tables#SchemaV2FieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema fields for the table. Each field defines a column in the table, including its name, type, and whether it is required.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "schemaId": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional unique identifier for the schema. Schema IDs are used by Apache Iceberg to track schema evolution.</p>",
+                        "smithy.api#jsonName": "schema-id"
+                    }
+                },
+                "identifierFieldIds": {
+                    "target": "com.amazonaws.s3tables#IntegerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of field IDs that are used as the identifier fields for the table. Identifier fields uniquely identify a row in the table.</p>",
+                        "smithy.api#jsonName": "identifier-field-ids"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the schema for an Iceberg table using the V2 format. This schema format supports nested and complex data types such as <code>struct</code>, <code>list</code>, and <code>map</code>, in addition to primitive types.</p>"
             }
         },
         "com.amazonaws.s3tables#IcebergSnapshotManagementSettings": {
@@ -3011,6 +3052,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains details about the unreferenced file removal settings for an Iceberg table bucket.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#IntegerList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#Integer"
             }
         },
         "com.amazonaws.s3tables#InternalServerErrorException": {
@@ -5403,6 +5450,65 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.s3tables#SchemaField"
+            }
+        },
+        "com.amazonaws.s3tables#SchemaV2Field": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the schema field. Field IDs are used by Apache Iceberg to track schema evolution and maintain compatibility across schema changes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the field. This can be a primitive type string such as <code>boolean</code>, <code>int</code>, <code>long</code>, <code>float</code>, <code>double</code>, <code>string</code>, <code>binary</code>, <code>date</code>, <code>timestamp</code>, or <code>timestamptz</code>, or a complex type represented as a JSON object for nested types such as <code>struct</code>, <code>list</code>, or <code>map</code>. For more information, see the <a href=\"https://iceberg.apache.org/spec/#schemas-and-data-types\">Apache Iceberg schemas and data types documentation</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "required": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean value that specifies whether values are required for each row in this field. If this is <code>true</code>, the field does not allow null values.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "doc": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description of the field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a schema field in the V2 format. This field format supports nested and complex data types such as <code>struct</code>, <code>list</code>, and <code>map</code>, in addition to primitive types.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#SchemaV2FieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3tables#SchemaV2Field"
+            }
+        },
+        "com.amazonaws.s3tables#SchemaV2FieldType": {
+            "type": "enum",
+            "members": {
+                "STRUCT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "struct"
+                    }
+                }
             }
         },
         "com.amazonaws.s3tables#StorageClass": {

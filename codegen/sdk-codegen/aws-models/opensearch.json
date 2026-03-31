@@ -29,6 +29,13 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.opensearch#AIConfig": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for AI-powered capabilities of an OpenSearch UI application.</p>"
+            }
+        },
         "com.amazonaws.opensearch#AIMLOptionsInput": {
             "type": "structure",
             "members": {
@@ -843,6 +850,9 @@
                     "target": "com.amazonaws.opensearch#DeleteVpcEndpoint"
                 },
                 {
+                    "target": "com.amazonaws.opensearch#DeregisterCapability"
+                },
+                {
                     "target": "com.amazonaws.opensearch#DescribeDomain"
                 },
                 {
@@ -898,6 +908,9 @@
                 },
                 {
                     "target": "com.amazonaws.opensearch#GetApplication"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#GetCapability"
                 },
                 {
                     "target": "com.amazonaws.opensearch#GetCompatibleVersions"
@@ -976,6 +989,9 @@
                 },
                 {
                     "target": "com.amazonaws.opensearch#PutDefaultApplicationSetting"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#RegisterCapability"
                 },
                 {
                     "target": "com.amazonaws.opensearch#RejectInboundConnection"
@@ -2123,6 +2139,12 @@
                 }
             }
         },
+        "com.amazonaws.opensearch#ApplicationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-z0-9]{3,30}$"
+            }
+        },
         "com.amazonaws.opensearch#ApplicationName": {
             "type": "string",
             "traits": {
@@ -3091,6 +3113,152 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.opensearch#CancelledChangeProperty"
+            }
+        },
+        "com.amazonaws.opensearch#CapabilityBaseRequestConfig": {
+            "type": "union",
+            "members": {
+                "aiConfig": {
+                    "target": "com.amazonaws.opensearch#AIConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for AI-powered capabilities.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The base configuration for registering a capability. Contains capability-specific configuration such as AI settings.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#CapabilityBaseResponseConfig": {
+            "type": "union",
+            "members": {
+                "aiConfig": {
+                    "target": "com.amazonaws.opensearch#AIConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for AI-powered capabilities.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The base configuration returned for a registered capability.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#CapabilityExtendedResponseConfig": {
+            "type": "union",
+            "members": {
+                "aiConfig": {
+                    "target": "com.amazonaws.opensearch#AIConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for AI-powered capabilities.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The extended configuration returned for a registered capability, including additional details beyond the base configuration.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#CapabilityFailure": {
+            "type": "structure",
+            "members": {
+                "reason": {
+                    "target": "com.amazonaws.opensearch#CapabilityFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the capability failure. Possible values: <code>KMS_KEY_INSUFFICIENT_PERMISSION</code>.</p>"
+                    }
+                },
+                "details": {
+                    "target": "com.amazonaws.opensearch#CapabilityFailureDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional details about the capability failure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a capability failure.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#CapabilityFailureDetails": {
+            "type": "string"
+        },
+        "com.amazonaws.opensearch#CapabilityFailureReason": {
+            "type": "enum",
+            "members": {
+                "KMS_KEY_INSUFFICIENT_PERMISSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KMS_KEY_INSUFFICIENT_PERMISSION"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.opensearch#CapabilityFailures": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearch#CapabilityFailure"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of failures associated with a capability.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#CapabilityName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of a capability. Must be between 3 and 30 characters and contain only alphanumeric characters and hyphens.</p>",
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 30
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.opensearch#CapabilityStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "creating"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "create_failed"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "active"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "updating"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "update_failed"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleting"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "delete_failed"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a capability. Possible values: <code>creating</code>, <code>create_failed</code>, <code>active</code>, <code>updating</code>, <code>update_failed</code>, <code>deleting</code>, <code>delete_failed</code>.</p>"
             }
         },
         "com.amazonaws.opensearch#ChangeProgressDetails": {
@@ -5217,6 +5385,83 @@
                     "min": 2,
                     "max": 128
                 }
+            }
+        },
+        "com.amazonaws.opensearch#DeregisterCapability": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#DeregisterCapabilityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#DeregisterCapabilityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deregisters a capability from an OpenSearch UI application. This operation removes the capability and its associated configuration.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2021-01-01/opensearch/application/{applicationId}/capability/deregister/{capabilityName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#DeregisterCapabilityRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.opensearch#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the OpenSearch UI application to deregister the capability from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "capabilityName": {
+                    "target": "com.amazonaws.opensearch#CapabilityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capability to deregister.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>DeregisterCapability</code> operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#DeregisterCapabilityResponse": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.opensearch#CapabilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the deregistration operation. Returns <code>deleting</code> when the capability is being removed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a <code>DeregisterCapability</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.opensearch#DescribeDomain": {
@@ -8218,6 +8463,104 @@
                 }
             },
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.opensearch#GetCapability": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#GetCapabilityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#GetCapabilityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about a registered capability for an OpenSearch UI application, including its configuration and current status.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2021-01-01/opensearch/application/{applicationId}/capability/{capabilityName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#GetCapabilityRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.opensearch#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the OpenSearch UI application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "capabilityName": {
+                    "target": "com.amazonaws.opensearch#CapabilityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capability to retrieve information about.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>GetCapability</code> operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#GetCapabilityResponse": {
+            "type": "structure",
+            "members": {
+                "capabilityName": {
+                    "target": "com.amazonaws.opensearch#CapabilityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capability.</p>"
+                    }
+                },
+                "applicationId": {
+                    "target": "com.amazonaws.opensearch#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the OpenSearch UI application.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.opensearch#CapabilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the capability. Possible values: <code>creating</code>, <code>create_failed</code>, <code>active</code>, <code>updating</code>, <code>update_failed</code>, <code>deleting</code>, <code>delete_failed</code>.</p>"
+                    }
+                },
+                "capabilityConfig": {
+                    "target": "com.amazonaws.opensearch#CapabilityExtendedResponseConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for the capability, including capability-specific settings such as AI configuration.</p>"
+                    }
+                },
+                "failures": {
+                    "target": "com.amazonaws.opensearch#CapabilityFailures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of failures associated with the capability, if any. Each failure includes a reason and details about what went wrong.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a <code>GetCapability</code> request. Contains details about the capability.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -13665,6 +14008,110 @@
                 "smithy.api#pattern": "^[a-z][a-z0-9\\-]+$"
             }
         },
+        "com.amazonaws.opensearch#RegisterCapability": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#RegisterCapabilityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#RegisterCapabilityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Registers a capability for an OpenSearch UI application. Use this operation to enable specific capabilities, such as AI features, for a given application. The capability configuration defines the type and settings of the capability to register. For more information about the AI features, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/application-ai-assistant.html\">Agentic AI for OpenSearch UI</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2021-01-01/opensearch/application/{applicationId}/capability/register",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#RegisterCapabilityRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.opensearch#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the OpenSearch UI application to register the capability for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "capabilityName": {
+                    "target": "com.amazonaws.opensearch#CapabilityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capability to register. Must be between 3 and 30 characters and contain only alphanumeric characters and hyphens. This identifies the type of capability being enabled for the application. For registering AI Assistant capability, use <code>ai-capability</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "capabilityConfig": {
+                    "target": "com.amazonaws.opensearch#CapabilityBaseRequestConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for the capability being registered. This includes capability-specific settings such as AI configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>RegisterCapability</code> operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#RegisterCapabilityResponse": {
+            "type": "structure",
+            "members": {
+                "capabilityName": {
+                    "target": "com.amazonaws.opensearch#CapabilityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the registered capability.</p>"
+                    }
+                },
+                "applicationId": {
+                    "target": "com.amazonaws.opensearch#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the OpenSearch UI application.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.opensearch#CapabilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the capability. Possible values: <code>creating</code>, <code>create_failed</code>, <code>active</code>, <code>updating</code>, <code>update_failed</code>, <code>deleting</code>, <code>delete_failed</code>.</p>"
+                    }
+                },
+                "capabilityConfig": {
+                    "target": "com.amazonaws.opensearch#CapabilityBaseResponseConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for the registered capability.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a <code>RegisterCapability</code> request. Contains details about the registered capability.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.opensearch#RejectInboundConnection": {
             "type": "operation",
             "input": {
@@ -14559,6 +15006,22 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for serverless vector acceleration, which provides <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gpu-acceleration-vector-index.html\">GPU-accelerated</a> vector\n         search capabilities for improved performance on vector workloads.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.opensearch#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An exception for when a request would cause a service quota to be exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
             }
         },
         "com.amazonaws.opensearch#ServiceSoftwareOptions": {
