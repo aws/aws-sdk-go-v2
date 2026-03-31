@@ -226,7 +226,7 @@ use smithy.test#httpResponseTests
         body: """
 {
     "ETag": "\\"9bb58f26192e4ba00f01e2e7b136bbd8\\"",
-    "LastModified": "2021-01-01T00:00:00.000Z",
+    "LastModified": 1609459200,
     "ChecksumType": "SHA256",
     "ChecksumCRC32": "checksum-crc32",
     "ChecksumCRC32C": "checksum-crc32c",

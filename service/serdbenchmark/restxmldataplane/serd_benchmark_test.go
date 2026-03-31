@@ -79,18 +79,7 @@ func findBenchmarkDir() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	for {
-		if filepath.Base(dir) == "benchmark" {
-			return dir, nil
-		}
-		parent := filepath.Dir(dir)
-		if parent == dir {
-			break
-		}
-		dir = parent
-	}
-	wd, _ := os.Getwd()
-	return wd, nil
+	return dir, nil
 }
 
 func TestMain(m *testing.M) {
