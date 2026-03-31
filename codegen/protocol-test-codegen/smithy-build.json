@@ -243,7 +243,7 @@
       "plugins": {
         "go-codegen": {
           "service": "com.amazonaws.sdk.benchmark#AwsJsonRpc10DataPlane",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/benchmark/jsonrpc10dataplane"
+          "module": "github.com/aws/aws-sdk-go-v2/service/serdbenchmark/jsonrpc10dataplane"
         }
       }
     },
@@ -254,7 +254,7 @@
       "plugins": {
         "go-codegen": {
           "service": "com.amazonaws.sdk.benchmark#AwsRestJsonDataPlane",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/benchmark/restjsondataplane"
+          "module": "github.com/aws/aws-sdk-go-v2/service/serdbenchmark/restjsondataplane"
         }
       }
     },
@@ -265,7 +265,7 @@
       "plugins": {
         "go-codegen": {
           "service": "com.amazonaws.sdk.benchmark#AwsRestXmlDataPlane",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/benchmark/restxmldataplane"
+          "module": "github.com/aws/aws-sdk-go-v2/service/serdbenchmark/restxmldataplane"
         }
       }
     },
@@ -276,7 +276,7 @@
       "plugins": {
         "go-codegen": {
           "service": "com.amazonaws.sdk.benchmark#AwsQueryDataPlane",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/benchmark/querydataplane"
+          "module": "github.com/aws/aws-sdk-go-v2/service/serdbenchmark/querydataplane"
         }
       }
     },
@@ -287,7 +287,7 @@
       "plugins": {
         "go-codegen": {
           "service": "com.amazonaws.sdk.benchmark#SmithyRpcV2CborDataPlane",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/benchmark/rpcv2cbordataplane"
+          "module": "github.com/aws/aws-sdk-go-v2/service/serdbenchmark/rpcv2cbordataplane"
         }
       }
     }

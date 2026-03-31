@@ -1,0 +1,17 @@
+{
+    "id": "41575353-444b-40ff-bf47-4f4155544f00",
+    "type": "release",
+    "description": "New AWS service client module",
+    "modules": [
+        "internal/protocoltest/benchmark/jsonrpc10dataplane",
+        "internal/protocoltest/benchmark/querydataplane",
+        "internal/protocoltest/benchmark/restjsondataplane",
+        "internal/protocoltest/benchmark/restxmldataplane",
+        "internal/protocoltest/benchmark/rpcv2cbordataplane",
+        "service/serdbenchmark/jsonrpc10dataplane",
+        "service/serdbenchmark/querydataplane",
+        "service/serdbenchmark/restjsondataplane",
+        "service/serdbenchmark/restxmldataplane",
+        "service/serdbenchmark/rpcv2cbordataplane"
+    ]
+}

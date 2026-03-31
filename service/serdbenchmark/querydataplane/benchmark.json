@@ -1,0 +1,120 @@
+{
+  "metadata": {
+    "lang": "Go",
+    "software": [
+      [
+        "smithy-go",
+        "tip"
+      ],
+      [
+        "AWS SDK for Go v2",
+        "tip"
+      ]
+    ],
+    "os": "darwin/arm64",
+    "instance": "",
+    "precision": "-9"
+  },
+  "serde_benchmarks": [
+    {
+      "id": "awsQuery_GetMetricDataRequest_M",
+      "n": 9000,
+      "mean": 27691.715999999844,
+      "p50": 24167,
+      "p90": 29083,
+      "p95": 31917,
+      "p99": 133250,
+      "std_dev": 17329.958406445247
+    },
+    {
+      "id": "awsQuery_GetMetricDataRequest_L",
+      "n": 9000,
+      "mean": 47367.17999999998,
+      "p50": 41916,
+      "p90": 49166,
+      "p95": 56166,
+      "p99": 180125,
+      "std_dev": 22583.103928833356
+    },
+    {
+      "id": "awsQuery_GetMetricDataRequest_S",
+      "n": 9000,
+      "mean": 10975.032777777706,
+      "p50": 9292,
+      "p90": 11875,
+      "p95": 13833,
+      "p99": 64625,
+      "std_dev": 9508.668886765805
+    },
+    {
+      "id": "awsQuery_GetMetricDataResponse_L",
+      "n": 9000,
+      "mean": 936715.774555554,
+      "p50": 910167,
+      "p90": 1044542,
+      "p95": 1093583,
+      "p99": 1211916,
+      "std_dev": 82053.82688390012
+    },
+    {
+      "id": "awsQuery_GetMetricDataResponse_S",
+      "n": 9000,
+      "mean": 24508.134444444193,
+      "p50": 22958,
+      "p90": 25833,
+      "p95": 29208,
+      "p99": 71666,
+      "std_dev": 10290.097083449386
+    },
+    {
+      "id": "awsQuery_GetMetricDataResponse_M",
+      "n": 9000,
+      "mean": 84373.74922222235,
+      "p50": 80834,
+      "p90": 87750,
+      "p95": 91791,
+      "p99": 198208,
+      "std_dev": 17737.792719441968
+    },
+    {
+      "id": "awsQuery_PutMetricDataRequest_S",
+      "n": 9000,
+      "mean": 7838.557888888685,
+      "p50": 6833,
+      "p90": 7750,
+      "p95": 8958,
+      "p99": 41584,
+      "std_dev": 7587.217622802184
+    },
+    {
+      "id": "awsQuery_PutMetricDataRequest_M",
+      "n": 9000,
+      "mean": 23243.256555555545,
+      "p50": 20792,
+      "p90": 24292,
+      "p95": 26375,
+      "p99": 107292,
+      "std_dev": 14241.390297410555
+    },
+    {
+      "id": "awsQuery_PutMetricDataRequest_L",
+      "n": 9000,
+      "mean": 193377.49333333358,
+      "p50": 179959,
+      "p90": 198958,
+      "p95": 332792,
+      "p99": 362542,
+      "std_dev": 44252.304804133666
+    },
+    {
+      "id": "awsQuery_PutMetricDataRequest_Baseline",
+      "n": 9000,
+      "mean": 5982.218111111129,
+      "p50": 5167,
+      "p90": 6250,
+      "p95": 6959,
+      "p99": 29375,
+      "std_dev": 6582.186065188437
+    }
+  ]
+}
