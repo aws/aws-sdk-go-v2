@@ -1,8 +1,0 @@
-{
-    "id": "c70f5ff2-4543-4de2-838d-4e9e96346986",
-    "type": "feature",
-    "description": "Add Bucket Metrics configuration support to directory buckets",
-    "modules": [
-        "service/s3"
-    ]
-}

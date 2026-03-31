@@ -1,3 +1,58 @@
+# Release (2026-03-31)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.38.0](service/acm/CHANGELOG.md#v1380-2026-03-31)
+  * **Feature**: Adds support for searching for ACM certificates using the new SearchCertificates API.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.61.0](service/cloudfront/CHANGELOG.md#v1610-2026-03-31)
+  * **Feature**: This release adds bring your own IP (BYOIP) IPv6 support to CloudFront's CreateAnycastIpList and UpdateAnycastIpList API through the IpamCidrConfigs field.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.62.0](service/databasemigrationservice/CHANGELOG.md#v1620-2026-03-31)
+  * **Feature**: To successfully connect to the IBM DB2 LUW database server, you may need to specify additional security parameters that are passed to the JDBC driver. These parameters are EncryptionAlgorithm and SecurityMechanism. Both parameters accept integer values.
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.41.0](service/dataexchange/CHANGELOG.md#v1410-2026-03-31)
+  * **Feature**: Support Tags for AWS Data Exchange resource Assets
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.55.0](service/datazone/CHANGELOG.md#v1550-2026-03-31)
+  * **Feature**: Adds environmentConfigurationName field to CreateEnvironmentInput and UpdateEnvironmentInput, so that Domain Owners can now recover orphaned environments by recreating deleted configurations with the same name, and will auto-recover orphaned environments
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.1.0](service/devopsagent/CHANGELOG.md#v110-2026-03-31)
+  * **Feature**: AWS DevOps Agent service General Availability release.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.296.2](service/ec2/CHANGELOG.md#v12962-2026-03-31)
+  * **Documentation**: This release updates the examples in the documentation for DescribeRegions and DescribeAvailabilityZones.
+* `github.com/aws/aws-sdk-go-v2/service/geomaps`: [v1.10.0](service/geomaps/CHANGELOG.md#v1100-2026-03-31)
+  * **Feature**: This release expands map customization options with adjustable contour line density, dark mode support for Hybrid and Satellite views, enhanced traffic information across multiple map styles, and transit and truck travel modes for Monochrome and Hybrid map styles.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.37.0](service/kinesisanalyticsv2/CHANGELOG.md#v1370-2026-03-31)
+  * **Feature**: Support for Flink 2.2 in Managed Service for Apache Flink
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.18.0](service/mailmanager/CHANGELOG.md#v1180-2026-03-31)
+  * **Feature**: Amazon SES Mail Manager now supports optional TLS policy for accepting unencrypted connections and mTLS authentication for ingress endpoints with configurable trust stores. Two new rule actions are available, Bounce for sending non-delivery reports and Lambda invocation for custom email processing.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.14.0](service/marketplaceagreement/CHANGELOG.md#v1140-2026-03-31)
+  * **Feature**: This release adds 8 new APIs for AWS Marketplace sellers. 4 APIs for Cancellations (Send, List, Get, Cancel action on AgreementCancellationRequest), 3 APIs for Billing Adjustments (BatchCreate, List, Get action on BillingAdjustmentRequest), and 1 API to List Invoices (ListAgreementInvoiceLineItems)
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.12.0](service/observabilityadmin/CHANGELOG.md#v1120-2026-03-31)
+  * **Feature**: This release adds the Bedrock and Security Hub resource types for Omnia Enablement launch for March 31.
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.10.0](service/odb/CHANGELOG.md#v1100-2026-03-31)
+  * **Feature**: Adds support for EC2 Placement Group integration with ODB Network. The GetOdbNetwork and ListOdbNetworks API responses now include the ec2PlacementGroupIds field.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.63.0](service/opensearch/CHANGELOG.md#v1630-2026-03-31)
+  * **Feature**: Support RegisterCapability, GetCapability, DeregisterCapability API for AI Assistant feature management for OpenSearch UI Applications
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.51.0](service/organizations/CHANGELOG.md#v1510-2026-03-31)
+  * **Feature**: Added Path field to Account and OrganizationalUnit objects in AWS Organizations API responses.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.16.0](service/partnercentralselling/CHANGELOG.md#v1160-2026-03-31)
+  * **Feature**: Adding EURO Currency for MRR Amount
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.28.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1280-2026-03-31)
+  * **Feature**: This release adds RCS for Business messaging and Notify support. RCS lets you create and manage agents, send and receive messages in the US and Canada via SendTextMessage API, and configure SMS fallback. Notify lets you send templated OTP messages globally in minutes with no phone number required.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.106.0](service/quicksight/CHANGELOG.md#v11060-2026-03-31)
+  * **Feature**: Adds StartAutomationJob and DescribeAutomationJob APIs for automation jobs. Adds three custom permission capabilities that allow admins to control whether users can manage Spaces and chat agents. Adds an OAuthClientCredentials structure to provide OAuth 2.0 client credentials inline to data sources.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.98.0](service/s3/CHANGELOG.md#v1980-2026-03-31)
+  * **Feature**: Add Bucket Metrics configuration support to directory buckets
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.69.0](service/s3control/CHANGELOG.md#v1690-2026-03-31)
+  * **Feature**: Adding an optional auditContext parameter to S3 Access Grants credential vending API GetDataAccess to enable job-level audit correlation in S3 CloudTrail logs
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.15.0](service/s3tables/CHANGELOG.md#v1150-2026-03-31)
+  * **Feature**: S3 Tables now supports nested types when creating tables. Users can define complex column schemas using struct, list, and map types. These types can be composed together to model complex, hierarchical data structures within table schemas.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.0.0](service/securityagent/CHANGELOG.md#v100-2026-03-31)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Security Agent is a service that proactively secures applications throughout the development lifecycle with automated security reviews and on-demand penetration testing.
+* `github.com/aws/aws-sdk-go-v2/service/sustainability`: [v1.0.0](service/sustainability/CHANGELOG.md#v100-2026-03-31)
+  * **Release**: New AWS service client module
+  * **Feature**: This is the first release of the AWS Sustainability SDK, which enables customers to access their sustainability impact data via API.
+
 # Release (2026-03-30)
 
 ## Module Highlights

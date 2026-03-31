@@ -1,3 +1,7 @@
+# v1.63.0 (2026-03-31)
+
+* **Feature**: Support RegisterCapability, GetCapability, DeregisterCapability API for AI Assistant feature management for OpenSearch UI Applications
+
 # v1.62.0 (2026-03-30)
 
 * **Feature**: Added Cluster Insights API's In OpenSearch Service SDK.

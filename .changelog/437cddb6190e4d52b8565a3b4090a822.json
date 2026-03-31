@@ -1,8 +1,0 @@
-{
-    "id": "437cddb6-190e-4d52-b856-5a3b4090a822",
-    "type": "feature",
-    "description": "This release adds RCS for Business messaging and Notify support. RCS lets you create and manage agents, send and receive messages in the US and Canada via SendTextMessage API, and configure SMS fallback. Notify lets you send templated OTP messages globally in minutes with no phone number required.",
-    "modules": [
-        "service/pinpointsmsvoicev2"
-    ]
-}

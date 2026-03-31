@@ -1,8 +1,0 @@
-{
-    "id": "8a19e75c-d3d3-4357-8e82-224dcb04eac9",
-    "type": "feature",
-    "description": "Adding an optional auditContext parameter to S3 Access Grants credential vending API GetDataAccess to enable job-level audit correlation in S3 CloudTrail logs",
-    "modules": [
-        "service/s3control"
-    ]
-}

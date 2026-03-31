@@ -1,8 +1,0 @@
-{
-    "id": "06e5fffb-b1e3-42a8-a122-1b17fb3f686d",
-    "type": "feature",
-    "description": "AWS Security Agent is a service that proactively secures applications throughout the development lifecycle with automated security reviews and on-demand penetration testing.",
-    "modules": [
-        "service/securityagent"
-    ]
-}

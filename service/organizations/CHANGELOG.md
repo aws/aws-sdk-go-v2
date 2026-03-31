@@ -1,3 +1,7 @@
+# v1.51.0 (2026-03-31)
+
+* **Feature**: Added Path field to Account and OrganizationalUnit objects in AWS Organizations API responses.
+
 # v1.50.6 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

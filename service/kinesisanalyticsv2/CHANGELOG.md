@@ -1,3 +1,7 @@
+# v1.37.0 (2026-03-31)
+
+* **Feature**: Support for Flink 2.2 in Managed Service for Apache Flink
+
 # v1.36.24 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

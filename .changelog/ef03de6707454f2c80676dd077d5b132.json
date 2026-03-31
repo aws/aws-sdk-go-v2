@@ -1,8 +1,0 @@
-{
-    "id": "ef03de67-0745-4f2c-8067-6dd077d5b132",
-    "type": "feature",
-    "description": "This is the first release of the AWS Sustainability SDK, which enables customers to access their sustainability impact data via API.",
-    "modules": [
-        "service/sustainability"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "4faacf7f-c7f1-4cd5-8069-db6578393c21",
-    "type": "feature",
-    "description": "This release adds 8 new APIs for AWS Marketplace sellers. 4 APIs for Cancellations (Send, List, Get, Cancel action on AgreementCancellationRequest), 3 APIs for Billing Adjustments (BatchCreate, List, Get action on BillingAdjustmentRequest), and 1 API to List Invoices (ListAgreementInvoiceLineItems)",
-    "modules": [
-        "service/marketplaceagreement"
-    ]
-}

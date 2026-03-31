@@ -1,8 +1,0 @@
-{
-    "id": "dab7d23d-8c15-4de3-9fe8-84790d0aee4d",
-    "type": "feature",
-    "description": "This release adds the Bedrock and Security Hub resource types for Omnia Enablement launch for March 31.",
-    "modules": [
-        "service/observabilityadmin"
-    ]
-}

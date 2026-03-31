@@ -1,3 +1,7 @@
+# v1.41.0 (2026-03-31)
+
+* **Feature**: Support Tags for AWS Data Exchange resource Assets
+
 # v1.40.14 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

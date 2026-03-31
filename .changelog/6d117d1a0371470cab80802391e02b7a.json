@@ -1,8 +1,0 @@
-{
-    "id": "6d117d1a-0371-470c-ab80-802391e02b7a",
-    "type": "feature",
-    "description": "This release adds bring your own IP (BYOIP) IPv6 support to CloudFront's CreateAnycastIpList and UpdateAnycastIpList API through the IpamCidrConfigs field.",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

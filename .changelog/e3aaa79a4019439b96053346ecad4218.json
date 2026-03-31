@@ -1,8 +1,0 @@
-{
-    "id": "e3aaa79a-4019-439b-9605-3346ecad4218",
-    "type": "feature",
-    "description": "Support RegisterCapability, GetCapability, DeregisterCapability API for AI Assistant feature management for OpenSearch UI Applications",
-    "modules": [
-        "service/opensearch"
-    ]
-}
