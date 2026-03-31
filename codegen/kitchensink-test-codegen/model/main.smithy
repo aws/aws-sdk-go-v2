@@ -76,6 +76,56 @@ namespace aws.kitchensinktest
         }
     ]
 })
+@smithy.rules#endpointBdd(
+    version: "1.1"
+    parameters: {
+        Region: {
+            builtIn: "AWS::Region"
+            required: true
+            documentation: "The AWS region"
+            type: "string"
+        }
+        Id: {
+            required: false
+            documentation: "The item id"
+            type: "string"
+        }
+    }
+    conditions: [
+        {
+            fn: "isSet"
+            argv: [
+                {
+                    ref: "Id"
+                }
+            ]
+        }
+    ]
+    results: [
+        {
+            conditions: []
+            endpoint: {
+                url: "https://{Id}.example.{Region}.amazonaws.com"
+                properties: {}
+                headers: {}
+            }
+            type: "endpoint"
+        }
+        {
+            documentation: "Default regional endpoint"
+            conditions: []
+            endpoint: {
+                url: "https://example.{Region}.amazonaws.com"
+                properties: {}
+                headers: {}
+            }
+            type: "endpoint"
+        }
+    ]
+    root: 2
+    nodeCount: 2
+    nodes: "/////wAAAAH/////AAAAAAX14QEF9eEC"
+)
 service AwsJson1KitchenSink {
     version: "2025-03-01",
     operations: [GetItem],
