@@ -85,6 +85,9 @@ type GetAssetOutput struct {
 	// copy of its owned asset.
 	SourceId *string
 
+	// The tags for the asset.
+	Tags map[string]string
+
 	// The date and time that the asset was last updated, in ISO 8601 format.
 	UpdatedAt *time.Time
 

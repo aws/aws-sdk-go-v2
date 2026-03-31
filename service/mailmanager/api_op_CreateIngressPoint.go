@@ -68,6 +68,10 @@ type CreateIngressPointInput struct {
 	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags []types.Tag
 
+	// The Transport Layer Security (TLS) policy for the ingress point. The FIPS value
+	// is only valid in US and Canada regions.
+	TlsPolicy types.TlsPolicy
+
 	noSmithyDocumentSerde
 }
 

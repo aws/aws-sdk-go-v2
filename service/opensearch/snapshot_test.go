@@ -350,6 +350,18 @@ func TestCheckSnapshot_DeleteVpcEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeregisterCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeregisterCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeregisterCapability")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDomain(context.Background(), nil, func(o *Options) {
@@ -571,6 +583,18 @@ func TestCheckSnapshot_GetApplication(t *testing.T) {
 	_, err := svc.GetApplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCapability")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -883,6 +907,18 @@ func TestCheckSnapshot_PutDefaultApplicationSetting(t *testing.T) {
 	_, err := svc.PutDefaultApplicationSetting(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutDefaultApplicationSetting")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RegisterCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RegisterCapability")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1357,6 +1393,18 @@ func TestUpdateSnapshot_DeleteVpcEndpoint(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeregisterCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeregisterCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeregisterCapability")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDomain(context.Background(), nil, func(o *Options) {
@@ -1578,6 +1626,18 @@ func TestUpdateSnapshot_GetApplication(t *testing.T) {
 	_, err := svc.GetApplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCapability")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1890,6 +1950,18 @@ func TestUpdateSnapshot_PutDefaultApplicationSetting(t *testing.T) {
 	_, err := svc.PutDefaultApplicationSetting(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutDefaultApplicationSetting")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RegisterCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RegisterCapability")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

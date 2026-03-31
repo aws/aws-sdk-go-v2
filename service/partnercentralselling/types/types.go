@@ -392,7 +392,8 @@ type AwsProductInsights struct {
 	// This member is required.
 	AwsProducts []AwsProductDetails
 
-	// ISO 4217 currency code.
+	// ISO 4217 currency code. Supported values are USD and EUR . Returns EUR when the
+	// opportunity is in the aws-eusc (AWS European Sovereign Cloud) partition.
 	//
 	// This member is required.
 	CurrencyCode CurrencyCode
@@ -886,8 +887,7 @@ type EngagementSummary struct {
 // of the project.
 type ExpectedCustomerSpend struct {
 
-	// Indicates the currency in which the revenue estimate is provided. This helps in
-	// understanding the financial impact across different markets.
+	// Currency code for the expected customer spend. Supported currencies: USD, EUR
 	//
 	// This member is required.
 	CurrencyCode CurrencyCode
@@ -1729,7 +1729,9 @@ type MonetaryValue struct {
 	// This member is required.
 	Amount *string
 
-	// Specifies the payment currency.
+	// Specifies the payment currency. Accepted values are USD (US Dollars) and EUR
+	// (Euros). If the AWS Partition is aws-eusc (AWS European Sovereign Cloud), the
+	// currency code must be EUR .
 	//
 	// This member is required.
 	CurrencyCode CurrencyCode

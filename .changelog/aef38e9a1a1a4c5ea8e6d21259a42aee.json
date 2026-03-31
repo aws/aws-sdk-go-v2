@@ -1,0 +1,8 @@
+{
+    "id": "aef38e9a-1a1a-4c5e-a8e6-d21259a42aee",
+    "type": "feature",
+    "description": "S3 Tables now supports nested types when creating tables. Users can define complex column schemas using struct, list, and map types. These types can be composed together to model complex, hierarchical data structures within table schemas.",
+    "modules": [
+        "service/s3tables"
+    ]
+}

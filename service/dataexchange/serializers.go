@@ -541,6 +541,13 @@ func awsRestjson1_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.AssetConfiguration != nil {
+		ok := object.Key("AssetConfiguration")
+		if err := awsRestjson1_serializeDocumentAssetConfiguration(v.AssetConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Details != nil {
 		ok := object.Key("Details")
 		if err := awsRestjson1_serializeDocumentRequestDetails(v.Details, ok); err != nil {
@@ -3182,6 +3189,20 @@ func awsRestjson1_serializeDocumentAction(v *types.Action, value smithyjson.Valu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAssetConfiguration(v *types.AssetConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentListOfTag(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAssetDestinationEntry(v *types.AssetDestinationEntry, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3828,6 +3849,19 @@ func awsRestjson1_serializeDocumentListOfTableTagPolicyLFPermissions(v []types.T
 	return nil
 }
 
+func awsRestjson1_serializeDocumentListOfTag(v []types.Tag, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTag(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMapOf__string(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4159,6 +4193,23 @@ func awsRestjson1_serializeDocumentTableLFTagPolicyAndPermissions(v *types.Table
 		if err := awsRestjson1_serializeDocumentListOfTableTagPolicyLFPermissions(v.Permissions, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTag(v *types.Tag, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("Key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
 	}
 
 	return nil

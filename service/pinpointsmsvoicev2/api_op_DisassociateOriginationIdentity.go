@@ -31,12 +31,6 @@ func (c *Client) DisassociateOriginationIdentity(ctx context.Context, params *Di
 
 type DisassociateOriginationIdentityInput struct {
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
-	// region.
-	//
-	// This member is required.
-	IsoCountryCode *string
-
 	// The origination identity to use such as a PhoneNumberId, PhoneNumberArn,
 	// SenderId or SenderIdArn. You can use DescribePhoneNumbersfind the values for PhoneNumberId and
 	// PhoneNumberArn, or use DescribeSenderIdsto get the values for SenderId and SenderIdArn.
@@ -60,6 +54,11 @@ type DisassociateOriginationIdentityInput struct {
 	// request. If you don't specify a client token, a randomly generated token is used
 	// for the request to ensure idempotency.
 	ClientToken *string
+
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region. This field is optional and is not required for origination identity
+	// types that are not country-specific, such as RCS agents.
+	IsoCountryCode *string
 
 	noSmithyDocumentSerde
 }

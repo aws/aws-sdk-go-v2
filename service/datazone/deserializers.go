@@ -5169,6 +5169,15 @@ func awsRestjson1_deserializeOpDocumentCreateEnvironmentOutput(v **CreateEnviron
 				sv.EnvironmentConfigurationId = ptr.String(jtv)
 			}
 
+		case "environmentConfigurationName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnvironmentConfigurationName to be of type string, got %T instead", value)
+				}
+				sv.EnvironmentConfigurationName = ptr.String(jtv)
+			}
+
 		case "environmentProfileId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16154,6 +16163,15 @@ func awsRestjson1_deserializeOpDocumentGetEnvironmentOutput(v **GetEnvironmentOu
 					return fmt.Errorf("expected EnvironmentConfigurationId to be of type string, got %T instead", value)
 				}
 				sv.EnvironmentConfigurationId = ptr.String(jtv)
+			}
+
+		case "environmentConfigurationName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnvironmentConfigurationName to be of type string, got %T instead", value)
+				}
+				sv.EnvironmentConfigurationName = ptr.String(jtv)
 			}
 
 		case "environmentProfileId":
@@ -33554,6 +33572,15 @@ func awsRestjson1_deserializeOpDocumentUpdateEnvironmentOutput(v **UpdateEnviron
 				sv.EnvironmentConfigurationId = ptr.String(jtv)
 			}
 
+		case "environmentConfigurationName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnvironmentConfigurationName to be of type string, got %T instead", value)
+				}
+				sv.EnvironmentConfigurationName = ptr.String(jtv)
+			}
+
 		case "environmentProfileId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -45024,6 +45051,15 @@ func awsRestjson1_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSum
 					return fmt.Errorf("expected EnvironmentConfigurationId to be of type string, got %T instead", value)
 				}
 				sv.EnvironmentConfigurationId = ptr.String(jtv)
+			}
+
+		case "environmentConfigurationName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnvironmentConfigurationName to be of type string, got %T instead", value)
+				}
+				sv.EnvironmentConfigurationName = ptr.String(jtv)
 			}
 
 		case "environmentProfileId":

@@ -7143,6 +7143,112 @@ func awsRestjson1_serializeOpHttpBindingsDescribeAssetBundleImportJobInput(v *De
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribeAutomationJob struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeAutomationJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeAutomationJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeAutomationJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/automation-groups/{AutomationGroupId}/automations/{AutomationId}/jobs/{JobId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeAutomationJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeAutomationJobInput(v *DescribeAutomationJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AutomationGroupId == nil || len(*v.AutomationGroupId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AutomationGroupId must not be empty")}
+	}
+	if v.AutomationGroupId != nil {
+		if err := encoder.SetURI("AutomationGroupId").String(*v.AutomationGroupId); err != nil {
+			return err
+		}
+	}
+
+	if v.AutomationId == nil || len(*v.AutomationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AutomationId must not be empty")}
+	}
+	if v.AutomationId != nil {
+		if err := encoder.SetURI("AutomationId").String(*v.AutomationId); err != nil {
+			return err
+		}
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	if v.IncludeInputPayload {
+		encoder.SetQuery("includeInputPayload").Boolean(v.IncludeInputPayload)
+	}
+
+	if v.IncludeOutputPayload {
+		encoder.SetQuery("includeOutputPayload").Boolean(v.IncludeOutputPayload)
+	}
+
+	if v.JobId == nil || len(*v.JobId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
+	}
+	if v.JobId != nil {
+		if err := encoder.SetURI("JobId").String(*v.JobId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribeBrand struct {
 }
 
@@ -16410,6 +16516,118 @@ func awsRestjson1_serializeOpDocumentStartAssetBundleImportJobInput(v *StartAsse
 	return nil
 }
 
+type awsRestjson1_serializeOpStartAutomationJob struct {
+}
+
+func (*awsRestjson1_serializeOpStartAutomationJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartAutomationJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartAutomationJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/automation-groups/{AutomationGroupId}/automations/{AutomationId}/jobs")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartAutomationJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartAutomationJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartAutomationJobInput(v *StartAutomationJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AutomationGroupId == nil || len(*v.AutomationGroupId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AutomationGroupId must not be empty")}
+	}
+	if v.AutomationGroupId != nil {
+		if err := encoder.SetURI("AutomationGroupId").String(*v.AutomationGroupId); err != nil {
+			return err
+		}
+	}
+
+	if v.AutomationId == nil || len(*v.AutomationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AutomationId must not be empty")}
+	}
+	if v.AutomationId != nil {
+		if err := encoder.SetURI("AutomationId").String(*v.AutomationId); err != nil {
+			return err
+		}
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartAutomationJobInput(v *StartAutomationJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InputPayload != nil {
+		ok := object.Key("InputPayload")
+		ok.String(*v.InputPayload)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpStartDashboardSnapshotJob struct {
 }
 
@@ -22832,6 +23050,13 @@ func awsRestjson1_serializeDocumentAnalysisDefinition(v *types.AnalysisDefinitio
 		}
 	}
 
+	if v.TooltipSheets != nil {
+		ok := object.Key("TooltipSheets")
+		if err := awsRestjson1_serializeDocumentTooltipSheetDefinitionList(v.TooltipSheets, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -26970,6 +27195,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 		ok.String(string(v.CreateSharedFolders))
 	}
 
+	if len(v.CreateSpaces) > 0 {
+		ok := object.Key("CreateSpaces")
+		ok.String(string(v.CreateSpaces))
+	}
+
 	if len(v.CreateSPICEDataset) > 0 {
 		ok := object.Key("CreateSPICEDataset")
 		ok.String(string(v.CreateSPICEDataset))
@@ -27250,6 +27480,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 		ok.String(string(v.ShareCanvaAgentAction))
 	}
 
+	if len(v.ShareChatAgents) > 0 {
+		ok := object.Key("ShareChatAgents")
+		ok.String(string(v.ShareChatAgents))
+	}
+
 	if len(v.ShareComprehendAction) > 0 {
 		ok := object.Key("ShareComprehendAction")
 		ok.String(string(v.ShareComprehendAction))
@@ -27433,6 +27668,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 	if len(v.ShareSmartsheetAction) > 0 {
 		ok := object.Key("ShareSmartsheetAction")
 		ok.String(string(v.ShareSmartsheetAction))
+	}
+
+	if len(v.ShareSpaces) > 0 {
+		ok := object.Key("ShareSpaces")
+		ok.String(string(v.ShareSpaces))
 	}
 
 	if len(v.ShareTextractAction) > 0 {
@@ -30379,6 +30619,13 @@ func awsRestjson1_serializeDocumentDashboardVersionDefinition(v *types.Dashboard
 		}
 	}
 
+	if v.TooltipSheets != nil {
+		ok := object.Key("TooltipSheets")
+		if err := awsRestjson1_serializeDocumentTooltipSheetDefinitionList(v.TooltipSheets, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -31668,6 +31915,13 @@ func awsRestjson1_serializeDocumentDataSourceCredentials(v *types.DataSourceCred
 	if v.KeyPairCredentials != nil {
 		ok := object.Key("KeyPairCredentials")
 		if err := awsRestjson1_serializeDocumentKeyPairCredentials(v.KeyPairCredentials, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OAuthClientCredentials != nil {
+		ok := object.Key("OAuthClientCredentials")
+		if err := awsRestjson1_serializeDocumentOAuthClientCredentials(v.OAuthClientCredentials, ok); err != nil {
 			return err
 		}
 	}
@@ -40960,6 +41214,28 @@ func awsRestjson1_serializeDocumentNumericSeparatorConfiguration(v *types.Numeri
 	return nil
 }
 
+func awsRestjson1_serializeDocumentOAuthClientCredentials(v *types.OAuthClientCredentials, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientId != nil {
+		ok := object.Key("ClientId")
+		ok.String(*v.ClientId)
+	}
+
+	if v.ClientSecret != nil {
+		ok := object.Key("ClientSecret")
+		ok.String(*v.ClientSecret)
+	}
+
+	if v.Username != nil {
+		ok := object.Key("Username")
+		ok.String(*v.Username)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOAuthParameters(v *types.OAuthParameters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -42478,6 +42754,13 @@ func awsRestjson1_serializeDocumentPivotTableConfiguration(v *types.PivotTableCo
 	if v.TableOptions != nil {
 		ok := object.Key("TableOptions")
 		if err := awsRestjson1_serializeDocumentPivotTableOptions(v.TableOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tooltip != nil {
+		ok := object.Key("Tooltip")
+		if err := awsRestjson1_serializeDocumentTooltipOptions(v.Tooltip, ok); err != nil {
 			return err
 		}
 	}
@@ -46457,6 +46740,18 @@ func awsRestjson1_serializeDocumentSheetTextBoxList(v []types.SheetTextBox, valu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSheetTooltip(v *types.SheetTooltip, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SheetId != nil {
+		ok := object.Key("SheetId")
+		ok.String(*v.SheetId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSheetVisualScopingConfiguration(v *types.SheetVisualScopingConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -46967,6 +47262,66 @@ func awsRestjson1_serializeDocumentSpacing(v *types.Spacing, value smithyjson.Va
 	if v.Top != nil {
 		ok := object.Key("Top")
 		ok.String(*v.Top)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSparklinesOptions(v *types.SparklinesOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllPointsMarker != nil {
+		ok := object.Key("AllPointsMarker")
+		if err := awsRestjson1_serializeDocumentLineChartMarkerStyleSettings(v.AllPointsMarker, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FieldId != nil {
+		ok := object.Key("FieldId")
+		ok.String(*v.FieldId)
+	}
+
+	if v.LineColor != nil {
+		ok := object.Key("LineColor")
+		ok.String(*v.LineColor)
+	}
+
+	if len(v.LineInterpolation) > 0 {
+		ok := object.Key("LineInterpolation")
+		ok.String(string(v.LineInterpolation))
+	}
+
+	if v.MaxValueMarker != nil {
+		ok := object.Key("MaxValueMarker")
+		if err := awsRestjson1_serializeDocumentLineChartMarkerStyleSettings(v.MaxValueMarker, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MinValueMarker != nil {
+		ok := object.Key("MinValueMarker")
+		if err := awsRestjson1_serializeDocumentLineChartMarkerStyleSettings(v.MinValueMarker, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.VisualType) > 0 {
+		ok := object.Key("VisualType")
+		ok.String(string(v.VisualType))
+	}
+
+	if v.XAxisField != nil {
+		ok := object.Key("XAxisField")
+		if err := awsRestjson1_serializeDocumentDimensionField(v.XAxisField, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.YAxisBehavior) > 0 {
+		ok := object.Key("YAxisBehavior")
+		ok.String(string(v.YAxisBehavior))
 	}
 
 	return nil
@@ -47704,6 +48059,13 @@ func awsRestjson1_serializeDocumentTableConfiguration(v *types.TableConfiguratio
 		}
 	}
 
+	if v.Tooltip != nil {
+		ok := object.Key("Tooltip")
+		if err := awsRestjson1_serializeDocumentTooltipOptions(v.Tooltip, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TotalOptions != nil {
 		ok := object.Key("TotalOptions")
 		if err := awsRestjson1_serializeDocumentTotalOptions(v.TotalOptions, ok); err != nil {
@@ -47941,6 +48303,13 @@ func awsRestjson1_serializeDocumentTableInlineVisualization(v *types.TableInline
 	if v.DataBars != nil {
 		ok := object.Key("DataBars")
 		if err := awsRestjson1_serializeDocumentDataBarsOptions(v.DataBars, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Sparklines != nil {
+		ok := object.Key("Sparklines")
+		if err := awsRestjson1_serializeDocumentSparklinesOptions(v.Sparklines, ok); err != nil {
 			return err
 		}
 	}
@@ -48432,6 +48801,13 @@ func awsRestjson1_serializeDocumentTemplateVersionDefinition(v *types.TemplateVe
 	if v.StaticFiles != nil {
 		ok := object.Key("StaticFiles")
 		if err := awsRestjson1_serializeDocumentStaticFileList(v.StaticFiles, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TooltipSheets != nil {
+		ok := object.Key("TooltipSheets")
+		if err := awsRestjson1_serializeDocumentTooltipSheetDefinitionList(v.TooltipSheets, ok); err != nil {
 			return err
 		}
 	}
@@ -48983,11 +49359,115 @@ func awsRestjson1_serializeDocumentTooltipOptions(v *types.TooltipOptions, value
 		ok.String(string(v.SelectedTooltipType))
 	}
 
+	if v.SheetTooltip != nil {
+		ok := object.Key("SheetTooltip")
+		if err := awsRestjson1_serializeDocumentSheetTooltip(v.SheetTooltip, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.TooltipVisibility) > 0 {
 		ok := object.Key("TooltipVisibility")
 		ok.String(string(v.TooltipVisibility))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTooltipSheetDefinition(v *types.TooltipSheetDefinition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Images != nil {
+		ok := object.Key("Images")
+		if err := awsRestjson1_serializeDocumentTooltipSheetImageList(v.Images, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Layouts != nil {
+		ok := object.Key("Layouts")
+		if err := awsRestjson1_serializeDocumentLayoutList(v.Layouts, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.SheetId != nil {
+		ok := object.Key("SheetId")
+		ok.String(*v.SheetId)
+	}
+
+	if v.TextBoxes != nil {
+		ok := object.Key("TextBoxes")
+		if err := awsRestjson1_serializeDocumentTooltipSheetTextBoxList(v.TextBoxes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Visuals != nil {
+		ok := object.Key("Visuals")
+		if err := awsRestjson1_serializeDocumentTooltipSheetVisualList(v.Visuals, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTooltipSheetDefinitionList(v []types.TooltipSheetDefinition, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTooltipSheetDefinition(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTooltipSheetImageList(v []types.SheetImage, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSheetImage(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTooltipSheetTextBoxList(v []types.SheetTextBox, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSheetTextBox(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTooltipSheetVisualList(v []types.Visual, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentVisual(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

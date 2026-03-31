@@ -42,7 +42,9 @@ type ContourDensity string
 
 // Enum values for ContourDensity
 const (
+	ContourDensityLow    ContourDensity = "Low"
 	ContourDensityMedium ContourDensity = "Medium"
+	ContourDensityHigh   ContourDensity = "High"
 )
 
 // Values returns all known values for ContourDensity. Note that this can be
@@ -51,7 +53,9 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ContourDensity) Values() []ContourDensity {
 	return []ContourDensity{
+		"Low",
 		"Medium",
+		"High",
 	}
 }
 
@@ -208,7 +212,8 @@ type Traffic string
 
 // Enum values for Traffic
 const (
-	TrafficAll Traffic = "All"
+	TrafficAll        Traffic = "All"
+	TrafficCongestion Traffic = "Congestion"
 )
 
 // Values returns all known values for Traffic. Note that this can be expanded in
@@ -218,6 +223,7 @@ const (
 func (Traffic) Values() []Traffic {
 	return []Traffic{
 		"All",
+		"Congestion",
 	}
 }
 

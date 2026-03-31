@@ -1,0 +1,8 @@
+{
+    "id": "06f31f06-2368-474d-9a0b-fca54e5c61bd",
+    "type": "feature",
+    "description": "Adds support for searching for ACM certificates using the new SearchCertificates API.",
+    "modules": [
+        "service/acm"
+    ]
+}

@@ -172,6 +172,12 @@ type AdvancedSecurityOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for AI-powered capabilities of an OpenSearch UI
+// application.
+type AIConfig struct {
+	noSmithyDocumentSerde
+}
+
 // Container for parameters required to enable all machine learning features.
 type AIMLOptionsInput struct {
 
@@ -509,6 +515,75 @@ type CancelledChangeProperty struct {
 
 	// The name of the property whose change was cancelled.
 	PropertyName *string
+
+	noSmithyDocumentSerde
+}
+
+// The base configuration for registering a capability. Contains
+// capability-specific configuration such as AI settings.
+//
+// The following types satisfy this interface:
+//
+//	CapabilityBaseRequestConfigMemberAiConfig
+type CapabilityBaseRequestConfig interface {
+	isCapabilityBaseRequestConfig()
+}
+
+// Configuration settings for AI-powered capabilities.
+type CapabilityBaseRequestConfigMemberAiConfig struct {
+	Value AIConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*CapabilityBaseRequestConfigMemberAiConfig) isCapabilityBaseRequestConfig() {}
+
+// The base configuration returned for a registered capability.
+//
+// The following types satisfy this interface:
+//
+//	CapabilityBaseResponseConfigMemberAiConfig
+type CapabilityBaseResponseConfig interface {
+	isCapabilityBaseResponseConfig()
+}
+
+// Configuration settings for AI-powered capabilities.
+type CapabilityBaseResponseConfigMemberAiConfig struct {
+	Value AIConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*CapabilityBaseResponseConfigMemberAiConfig) isCapabilityBaseResponseConfig() {}
+
+// The extended configuration returned for a registered capability, including
+// additional details beyond the base configuration.
+//
+// The following types satisfy this interface:
+//
+//	CapabilityExtendedResponseConfigMemberAiConfig
+type CapabilityExtendedResponseConfig interface {
+	isCapabilityExtendedResponseConfig()
+}
+
+// Configuration settings for AI-powered capabilities.
+type CapabilityExtendedResponseConfigMemberAiConfig struct {
+	Value AIConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*CapabilityExtendedResponseConfigMemberAiConfig) isCapabilityExtendedResponseConfig() {}
+
+// Information about a capability failure.
+type CapabilityFailure struct {
+
+	// Additional details about the capability failure.
+	Details *string
+
+	// The reason for the capability failure. Possible values:
+	// KMS_KEY_INSUFFICIENT_PERMISSION .
+	Reason CapabilityFailureReason
 
 	noSmithyDocumentSerde
 }
@@ -3136,5 +3211,8 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isDataSourceType()            {}
-func (*UnknownUnionMember) isDirectQueryDataSourceType() {}
+func (*UnknownUnionMember) isCapabilityBaseRequestConfig()      {}
+func (*UnknownUnionMember) isCapabilityBaseResponseConfig()     {}
+func (*UnknownUnionMember) isCapabilityExtendedResponseConfig() {}
+func (*UnknownUnionMember) isDataSourceType()                   {}
+func (*UnknownUnionMember) isDirectQueryDataSourceType()        {}

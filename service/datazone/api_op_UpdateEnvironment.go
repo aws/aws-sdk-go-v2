@@ -47,6 +47,9 @@ type UpdateEnvironmentInput struct {
 	// The description to be updated as part of the UpdateEnvironment action.
 	Description *string
 
+	// The configuration name of the environment.
+	EnvironmentConfigurationName *string
+
 	// The glossary terms to be updated as part of the UpdateEnvironment action.
 	GlossaryTerms []string
 
@@ -110,6 +113,9 @@ type UpdateEnvironmentOutput struct {
 
 	// The configuration ID of the environment.
 	EnvironmentConfigurationId *string
+
+	// The configuration name of the environment.
+	EnvironmentConfigurationName *string
 
 	// The profile identifier of the environment.
 	EnvironmentProfileId *string

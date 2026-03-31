@@ -44,6 +44,22 @@ type AccountLimit struct {
 	noSmithyDocumentSerde
 }
 
+// Contains carrier-level launch status details for an RCS agent within a country.
+type CarrierStatusInformation struct {
+
+	// The name of the carrier.
+	//
+	// This member is required.
+	CarrierName *string
+
+	// The launch status for this carrier.
+	//
+	// This member is required.
+	Status CarrierStatus
+
+	noSmithyDocumentSerde
+}
+
 // Contains the destination configuration to use when publishing message sending
 // events.
 type CloudWatchLogsDestination struct {
@@ -118,6 +134,52 @@ type ConfigurationSetInformation struct {
 
 	// The unique identifier for the protect configuration.
 	ProtectConfigurationId *string
+
+	noSmithyDocumentSerde
+}
+
+// The information for a country launch status that meets a specified criteria.
+type CountryLaunchStatusFilter struct {
+
+	// The name of the attribute to filter on.
+	//
+	// This member is required.
+	Name CountryLaunchStatusFilterName
+
+	// An array values to filter for.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains per-country launch status details for an RCS agent.
+type CountryLaunchStatusInformation struct {
+
+	// An array of CarrierStatusInformation objects containing carrier-level launch
+	// status details.
+	//
+	// This member is required.
+	CarrierStatus []CarrierStatusInformation
+
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	//
+	// This member is required.
+	IsoCountryCode *string
+
+	// The unique identifier of the registration associated with this country launch.
+	//
+	// This member is required.
+	RegistrationId *string
+
+	// The launch status for this country.
+	//
+	// This member is required.
+	Status CountryLaunchStatus
+
+	// The RCS platform identifier for this country.
+	RcsPlatformId *string
 
 	noSmithyDocumentSerde
 }
@@ -219,6 +281,204 @@ type KinesisFirehoseDestination struct {
 	noSmithyDocumentSerde
 }
 
+// The information for notify configurations that meet a specified criteria.
+type NotifyConfigurationFilter struct {
+
+	// The name of the attribute to filter on.
+	//
+	// This member is required.
+	Name NotifyConfigurationFilterName
+
+	// An array values to filter for.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// The information for a notify configuration in an Amazon Web Services account.
+type NotifyConfigurationInformation struct {
+
+	// The time when the notify configuration was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
+	//
+	// This member is required.
+	CreatedTimestamp *time.Time
+
+	// When set to true deletion protection is enabled. By default this is set to
+	// false.
+	//
+	// This member is required.
+	DeletionProtectionEnabled bool
+
+	// The display name associated with the notify configuration.
+	//
+	// This member is required.
+	DisplayName *string
+
+	// An array of channels enabled for the notify configuration. Supported values
+	// include SMS and VOICE .
+	//
+	// This member is required.
+	EnabledChannels []NumberCapability
+
+	// The Amazon Resource Name (ARN) for the notify configuration.
+	//
+	// This member is required.
+	NotifyConfigurationArn *string
+
+	// The unique identifier for the notify configuration.
+	//
+	// This member is required.
+	NotifyConfigurationId *string
+
+	// The current status of the notify configuration.
+	//
+	// This member is required.
+	Status NotifyConfigurationStatus
+
+	// The tier of the notify configuration.
+	//
+	// This member is required.
+	Tier NotifyConfigurationTier
+
+	// The tier upgrade status of the notify configuration.
+	//
+	// This member is required.
+	TierUpgradeStatus TierUpgradeStatus
+
+	// The use case for the notify configuration.
+	//
+	// This member is required.
+	UseCase NotifyConfigurationUseCase
+
+	// The default template identifier associated with the notify configuration.
+	DefaultTemplateId *string
+
+	// An array of two-character ISO country codes, in ISO 3166-1 alpha-2 format, that
+	// are enabled for the notify configuration.
+	EnabledCountries []string
+
+	// The identifier of the pool associated with the notify configuration.
+	PoolId *string
+
+	// The reason the notify configuration was rejected, if applicable.
+	RejectionReason *string
+
+	noSmithyDocumentSerde
+}
+
+// The information for a country that supports notify messaging.
+type NotifyCountryInformation struct {
+
+	// The name of the country.
+	//
+	// This member is required.
+	CountryName *string
+
+	// Whether a customer-owned identity is required to send notify messages to this
+	// country.
+	//
+	// This member is required.
+	CustomerOwnedIdentityRequired bool
+
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	//
+	// This member is required.
+	IsoCountryCode *string
+
+	// An array of supported channels for the country. Supported values include SMS
+	// and VOICE .
+	//
+	// This member is required.
+	SupportedChannels []NumberCapability
+
+	// An array of supported tiers for the country.
+	//
+	// This member is required.
+	SupportedTiers []NotifyConfigurationTier
+
+	// An array of supported use cases for the country.
+	//
+	// This member is required.
+	SupportedUseCases []NotifyConfigurationUseCase
+
+	noSmithyDocumentSerde
+}
+
+// The information for notify templates that meet a specified criteria.
+type NotifyTemplateFilter struct {
+
+	// The name of the attribute to filter on.
+	//
+	// This member is required.
+	Name NotifyTemplateFilterName
+
+	// An array values to filter for.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// The information for a system-managed notify template in an Amazon Web Services
+// account.
+type NotifyTemplateInformation struct {
+
+	// The channels for the template. Supported values are SMS and VOICE .
+	//
+	// This member is required.
+	Channels []NumberCapability
+
+	// The time when the notify template was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
+	//
+	// This member is required.
+	CreatedTimestamp *time.Time
+
+	// The unique identifier for the template.
+	//
+	// This member is required.
+	TemplateId *string
+
+	// The type of the template.
+	//
+	// This member is required.
+	TemplateType NotifyTemplateType
+
+	// The version of the template.
+	//
+	// This member is required.
+	Version *int32
+
+	// The content of the template.
+	Content *string
+
+	// The language code for the template.
+	LanguageCode *string
+
+	// The current status of the template.
+	Status NotifyTemplateStatus
+
+	// An array of supported country codes for the template.
+	SupportedCountries []string
+
+	// An array of supported voice IDs for voice templates.
+	SupportedVoiceIds []VoiceId
+
+	// The tier access level for the template.
+	TierAccess []NotifyConfigurationTier
+
+	// An array of template variable metadata for the template.
+	Variables map[string]TemplateVariableMetadata
+
+	noSmithyDocumentSerde
+}
+
 // The information for opted out numbers that meet a specified criteria.
 type OptedOutFilter struct {
 
@@ -285,7 +545,8 @@ type OptOutListInformation struct {
 type OriginationIdentityMetadata struct {
 
 	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
-	// region.
+	// region. This field is optional and may not be present for origination identity
+	// types that are not country-specific, such as RCS agents.
 	//
 	// This member is required.
 	IsoCountryCode *string
@@ -658,6 +919,83 @@ type ProtectConfigurationRuleSetNumberOverrideFilterItem struct {
 	noSmithyDocumentSerde
 }
 
+// The information for an RCS agent that meets a specified criteria.
+type RcsAgentFilter struct {
+
+	// The name of the attribute to filter on.
+	//
+	// This member is required.
+	Name RcsAgentFilterName
+
+	// An array values to filter for.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// The information for an RCS agent in an Amazon Web Services account.
+type RcsAgentInformation struct {
+
+	// The time when the RCS agent was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
+	//
+	// This member is required.
+	CreatedTimestamp *time.Time
+
+	// When set to true the RCS agent can't be deleted.
+	//
+	// This member is required.
+	DeletionProtectionEnabled bool
+
+	// The Amazon Resource Name (ARN) of the RCS agent.
+	//
+	// This member is required.
+	RcsAgentArn *string
+
+	// The unique identifier for the RCS agent.
+	//
+	// This member is required.
+	RcsAgentId *string
+
+	// When set to true you're responsible for responding to HELP and STOP requests.
+	// You're also responsible for tracking and honoring opt-out requests.
+	//
+	// This member is required.
+	SelfManagedOptOutsEnabled bool
+
+	// The current status of the RCS agent.
+	//
+	// This member is required.
+	Status RcsAgentStatus
+
+	// When set to true you can receive incoming text messages from your end
+	// recipients using the TwoWayChannelArn.
+	//
+	// This member is required.
+	TwoWayEnabled bool
+
+	// The name of the OptOutList associated with the RCS agent.
+	OptOutListName *string
+
+	// The unique identifier of the pool associated with the RCS agent.
+	PoolId *string
+
+	// The testing agent information associated with the RCS agent.
+	TestingAgent *TestingAgentInformation
+
+	// The Amazon Resource Name (ARN) of the two way channel.
+	TwoWayChannelArn *string
+
+	// An optional IAM Role Arn for a service to assume, to be able to post inbound
+	// SMS messages.
+	TwoWayChannelRole *string
+
+	noSmithyDocumentSerde
+}
+
 // The filter definition for filtering registrations that meets a specified
 // criteria.
 type RegistrationAssociationFilter struct {
@@ -756,6 +1094,9 @@ type RegistrationAttachmentsInformation struct {
 
 	// A description of why the upload didn't successfully complete.
 	AttachmentUploadErrorReason AttachmentUploadErrorReason
+
+	// The URL to the document that's associated with the registration attachment.
+	AttachmentUrl *string
 
 	noSmithyDocumentSerde
 }
@@ -868,9 +1209,9 @@ type RegistrationFieldValueInformation struct {
 	// A description of why the registration was denied.
 	DeniedReason *string
 
-	// Feedback provided for this specific field during the registration review
-	// process. This may include validation errors, suggestions for improvement, or
-	// additional requirements.
+	// Generative AI feedback information provided for this specific field during the
+	// registration review process. This may include validation errors, suggestions for
+	// improvement, or additional requirements.
 	Feedback *string
 
 	// The unique identifier for the registration attachment.
@@ -1131,8 +1472,8 @@ type RegistrationVersionInformation struct {
 	// An array of RegistrationDeniedReasonInformation objects.
 	DeniedReasons []RegistrationDeniedReasonInformation
 
-	// Feedback information provided during the registration review process. This
-	// includes comments, suggestions, or additional requirements.
+	// Generative AI feedback information provided during the registration review
+	// process. This includes comments, suggestions, or additional requirements.
 	Feedback *string
 
 	noSmithyDocumentSerde
@@ -1430,6 +1771,65 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// Contains metadata about a template variable.
+type TemplateVariableMetadata struct {
+
+	// Whether the variable is required.
+	//
+	// This member is required.
+	Required bool
+
+	// The type of the variable.
+	//
+	// This member is required.
+	Type TemplateVariableType
+
+	// The default value for the variable.
+	DefaultValue *string
+
+	// A description of the variable.
+	Description *string
+
+	// The maximum length for string variables.
+	MaxLength *int32
+
+	// The maximum value for numeric variables.
+	MaxValue *int32
+
+	// The minimum value for numeric variables.
+	MinValue *int32
+
+	// The regex pattern the variable value must match.
+	Pattern *string
+
+	// A sample value for the variable.
+	Sample *string
+
+	// The source of the variable, either CUSTOMER or SYSTEM .
+	Source TemplateVariableSource
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the testing agent associated with an RCS agent.
+type TestingAgentInformation struct {
+
+	// The unique identifier of the registration associated with the testing agent.
+	//
+	// This member is required.
+	RegistrationId *string
+
+	// The current status of the testing agent.
+	//
+	// This member is required.
+	Status TestingAgentStatus
+
+	// The unique identifier for the testing agent.
+	TestingAgentId *string
+
+	noSmithyDocumentSerde
+}
+
 // Validation rules for a text field.
 type TextValidation struct {
 
@@ -1518,6 +1918,10 @@ type VerifiedDestinationNumberInformation struct {
 	//
 	// This member is required.
 	VerifiedDestinationNumberId *string
+
+	// The unique identifier of the RCS agent associated with the verified destination
+	// number.
+	RcsAgentId *string
 
 	noSmithyDocumentSerde
 }

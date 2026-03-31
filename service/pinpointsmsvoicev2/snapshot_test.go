@@ -122,6 +122,18 @@ func TestCheckSnapshot_CreateEventDestination(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateNotifyConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateNotifyConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateNotifyConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateOptOutList(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateOptOutList(context.Background(), nil, func(o *Options) {
@@ -151,6 +163,18 @@ func TestCheckSnapshot_CreateProtectConfiguration(t *testing.T) {
 	_, err := svc.CreateProtectConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateProtectConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateRcsAgent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRcsAgent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRcsAgent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -302,6 +326,30 @@ func TestCheckSnapshot_DeleteMediaMessageSpendLimitOverride(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteNotifyConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNotifyConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteNotifyConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteNotifyMessageSpendLimitOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNotifyMessageSpendLimitOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteNotifyMessageSpendLimitOverride")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteOptedOutNumber(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteOptedOutNumber(context.Background(), nil, func(o *Options) {
@@ -355,6 +403,18 @@ func TestCheckSnapshot_DeleteProtectConfigurationRuleSetNumberOverride(t *testin
 	_, err := svc.DeleteProtectConfigurationRuleSetNumberOverride(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteProtectConfigurationRuleSetNumberOverride")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRcsAgent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRcsAgent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRcsAgent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -494,6 +554,30 @@ func TestCheckSnapshot_DescribeKeywords(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeNotifyConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeNotifyConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeNotifyConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeNotifyTemplates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeNotifyTemplates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeNotifyTemplates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeOptedOutNumbers(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeOptedOutNumbers(context.Background(), nil, func(o *Options) {
@@ -547,6 +631,30 @@ func TestCheckSnapshot_DescribeProtectConfigurations(t *testing.T) {
 	_, err := svc.DescribeProtectConfigurations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeProtectConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeRcsAgentCountryLaunchStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeRcsAgentCountryLaunchStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeRcsAgentCountryLaunchStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeRcsAgents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeRcsAgents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeRcsAgents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -727,6 +835,18 @@ func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
 	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListNotifyCountries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNotifyCountries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNotifyCountries")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -926,6 +1046,30 @@ func TestCheckSnapshot_SendMediaMessage(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SendNotifyTextMessage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendNotifyTextMessage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SendNotifyTextMessage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SendNotifyVoiceMessage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendNotifyVoiceMessage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SendNotifyVoiceMessage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SendTextMessage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SendTextMessage(context.Background(), nil, func(o *Options) {
@@ -1010,6 +1154,18 @@ func TestCheckSnapshot_SetMediaMessageSpendLimitOverride(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SetNotifyMessageSpendLimitOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SetNotifyMessageSpendLimitOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SetNotifyMessageSpendLimitOverride")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SetTextMessageSpendLimitOverride(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SetTextMessageSpendLimitOverride(context.Background(), nil, func(o *Options) {
@@ -1082,6 +1238,18 @@ func TestCheckSnapshot_UpdateEventDestination(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateNotifyConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateNotifyConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateNotifyConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdatePhoneNumber(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdatePhoneNumber(context.Background(), nil, func(o *Options) {
@@ -1123,6 +1291,18 @@ func TestCheckSnapshot_UpdateProtectConfigurationCountryRuleSet(t *testing.T) {
 	_, err := svc.UpdateProtectConfigurationCountryRuleSet(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateProtectConfigurationCountryRuleSet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateRcsAgent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRcsAgent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRcsAgent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1213,6 +1393,18 @@ func TestUpdateSnapshot_CreateEventDestination(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateNotifyConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateNotifyConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateNotifyConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateOptOutList(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateOptOutList(context.Background(), nil, func(o *Options) {
@@ -1242,6 +1434,18 @@ func TestUpdateSnapshot_CreateProtectConfiguration(t *testing.T) {
 	_, err := svc.CreateProtectConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateProtectConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateRcsAgent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRcsAgent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRcsAgent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1393,6 +1597,30 @@ func TestUpdateSnapshot_DeleteMediaMessageSpendLimitOverride(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteNotifyConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNotifyConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteNotifyConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteNotifyMessageSpendLimitOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNotifyMessageSpendLimitOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteNotifyMessageSpendLimitOverride")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteOptedOutNumber(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteOptedOutNumber(context.Background(), nil, func(o *Options) {
@@ -1446,6 +1674,18 @@ func TestUpdateSnapshot_DeleteProtectConfigurationRuleSetNumberOverride(t *testi
 	_, err := svc.DeleteProtectConfigurationRuleSetNumberOverride(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteProtectConfigurationRuleSetNumberOverride")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRcsAgent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRcsAgent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRcsAgent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1585,6 +1825,30 @@ func TestUpdateSnapshot_DescribeKeywords(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeNotifyConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeNotifyConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeNotifyConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeNotifyTemplates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeNotifyTemplates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeNotifyTemplates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeOptedOutNumbers(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeOptedOutNumbers(context.Background(), nil, func(o *Options) {
@@ -1638,6 +1902,30 @@ func TestUpdateSnapshot_DescribeProtectConfigurations(t *testing.T) {
 	_, err := svc.DescribeProtectConfigurations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeProtectConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeRcsAgentCountryLaunchStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeRcsAgentCountryLaunchStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeRcsAgentCountryLaunchStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeRcsAgents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeRcsAgents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeRcsAgents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1818,6 +2106,18 @@ func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
 	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListNotifyCountries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNotifyCountries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNotifyCountries")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2017,6 +2317,30 @@ func TestUpdateSnapshot_SendMediaMessage(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SendNotifyTextMessage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendNotifyTextMessage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SendNotifyTextMessage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SendNotifyVoiceMessage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendNotifyVoiceMessage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SendNotifyVoiceMessage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_SendTextMessage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SendTextMessage(context.Background(), nil, func(o *Options) {
@@ -2101,6 +2425,18 @@ func TestUpdateSnapshot_SetMediaMessageSpendLimitOverride(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SetNotifyMessageSpendLimitOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SetNotifyMessageSpendLimitOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SetNotifyMessageSpendLimitOverride")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_SetTextMessageSpendLimitOverride(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SetTextMessageSpendLimitOverride(context.Background(), nil, func(o *Options) {
@@ -2173,6 +2509,18 @@ func TestUpdateSnapshot_UpdateEventDestination(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateNotifyConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateNotifyConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateNotifyConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdatePhoneNumber(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdatePhoneNumber(context.Background(), nil, func(o *Options) {
@@ -2214,6 +2562,18 @@ func TestUpdateSnapshot_UpdateProtectConfigurationCountryRuleSet(t *testing.T) {
 	_, err := svc.UpdateProtectConfigurationCountryRuleSet(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateProtectConfigurationCountryRuleSet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRcsAgent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRcsAgent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRcsAgent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

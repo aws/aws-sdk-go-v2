@@ -2598,6 +2598,9 @@ type EnvironmentSummary struct {
 	// The configuration ID with which the environment is created.
 	EnvironmentConfigurationId *string
 
+	// The configuration name with which the environment is created.
+	EnvironmentConfigurationName *string
+
 	// The identifier of the environment profile with which the environment was
 	// created.
 	EnvironmentProfileId *string

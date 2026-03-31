@@ -12031,6 +12031,19 @@ func awsRestxml_serializeOpDocumentUpdateAnycastIpListInput(v *UpdateAnycastIpLi
 		el := value.MemberElement(root)
 		el.String(string(v.IpAddressType))
 	}
+	if v.IpamCidrConfigs != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "IpamCidrConfigs",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentIpamCidrConfigList(v.IpamCidrConfigs, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

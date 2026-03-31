@@ -1,0 +1,8 @@
+{
+    "id": "ab6cd992-9115-4e8b-b7fb-f369697452a1",
+    "type": "feature",
+    "description": "Support Tags for AWS Data Exchange resource Assets",
+    "modules": [
+        "service/dataexchange"
+    ]
+}

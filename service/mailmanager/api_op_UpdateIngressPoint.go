@@ -48,6 +48,11 @@ type UpdateIngressPointInput struct {
 	// The update status of an ingress endpoint.
 	StatusToUpdate types.IngressPointStatusToUpdate
 
+	// The Transport Layer Security (TLS) policy for the ingress point. Valid values
+	// are REQUIRED, OPTIONAL. Only ingress endpoints using REQUIRED or OPTIONAL as
+	// TlsPolicy can be updated.
+	TlsPolicy types.TlsPolicy
+
 	// The identifier of an existing traffic policy that you attach to an ingress
 	// endpoint resource.
 	TrafficPolicyId *string

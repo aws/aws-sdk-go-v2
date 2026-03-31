@@ -201,6 +201,52 @@ func (AWSServicePrincipal) Values() []AWSServicePrincipal {
 	}
 }
 
+type CapabilityFailureReason string
+
+// Enum values for CapabilityFailureReason
+const (
+	CapabilityFailureReasonKmsKeyInsufficientPermission CapabilityFailureReason = "KMS_KEY_INSUFFICIENT_PERMISSION"
+)
+
+// Values returns all known values for CapabilityFailureReason. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapabilityFailureReason) Values() []CapabilityFailureReason {
+	return []CapabilityFailureReason{
+		"KMS_KEY_INSUFFICIENT_PERMISSION",
+	}
+}
+
+type CapabilityStatus string
+
+// Enum values for CapabilityStatus
+const (
+	CapabilityStatusCreating     CapabilityStatus = "creating"
+	CapabilityStatusCreateFailed CapabilityStatus = "create_failed"
+	CapabilityStatusActive       CapabilityStatus = "active"
+	CapabilityStatusUpdating     CapabilityStatus = "updating"
+	CapabilityStatusUpdateFailed CapabilityStatus = "update_failed"
+	CapabilityStatusDeleting     CapabilityStatus = "deleting"
+	CapabilityStatusDeleteFailed CapabilityStatus = "delete_failed"
+)
+
+// Values returns all known values for CapabilityStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapabilityStatus) Values() []CapabilityStatus {
+	return []CapabilityStatus{
+		"creating",
+		"create_failed",
+		"active",
+		"updating",
+		"update_failed",
+		"deleting",
+		"delete_failed",
+	}
+}
+
 type ConfigChangeStatus string
 
 // Enum values for ConfigChangeStatus

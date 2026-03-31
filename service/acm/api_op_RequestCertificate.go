@@ -115,7 +115,7 @@ type RequestCertificateInput struct {
 	//
 	// Default: RSA_2048
 	//
-	// [Key algorithms]: https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate.html#algorithms
+	// [Key algorithms]: https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate-characteristics.html#algorithms-term
 	KeyAlgorithm types.KeyAlgorithm
 
 	// Identifies the Amazon Web Services service that manages the certificate issued

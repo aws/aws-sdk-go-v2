@@ -270,6 +270,26 @@ func (m *validateOpRevokeCertificate) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchCertificates struct {
+}
+
+func (*validateOpSearchCertificates) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchCertificates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchCertificatesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchCertificatesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCertificateOptions struct {
 }
 
@@ -342,8 +362,118 @@ func addOpRevokeCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRevokeCertificate{}, middleware.After)
 }
 
+func addOpSearchCertificatesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchCertificates{}, middleware.After)
+}
+
 func addOpUpdateCertificateOptionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCertificateOptions{}, middleware.After)
+}
+
+func validateCertificateFilter(v types.CertificateFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CertificateFilter"}
+	switch uv := v.(type) {
+	case *types.CertificateFilterMemberX509AttributeFilter:
+		if err := validateX509AttributeFilter(uv.Value); err != nil {
+			invalidParams.AddNested("[X509AttributeFilter]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCertificateFilterStatement(v types.CertificateFilterStatement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CertificateFilterStatement"}
+	switch uv := v.(type) {
+	case *types.CertificateFilterStatementMemberAnd:
+		if err := validateCertificateFilterStatementList(uv.Value); err != nil {
+			invalidParams.AddNested("[And]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CertificateFilterStatementMemberFilter:
+		if err := validateCertificateFilter(uv.Value); err != nil {
+			invalidParams.AddNested("[Filter]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CertificateFilterStatementMemberNot:
+		if err := validateCertificateFilterStatement(uv.Value); err != nil {
+			invalidParams.AddNested("[Not]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CertificateFilterStatementMemberOr:
+		if err := validateCertificateFilterStatementList(uv.Value); err != nil {
+			invalidParams.AddNested("[Or]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCertificateFilterStatementList(v []types.CertificateFilterStatement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CertificateFilterStatementList"}
+	for i := range v {
+		if err := validateCertificateFilterStatement(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCommonNameFilter(v *types.CommonNameFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CommonNameFilter"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if len(v.ComparisonOperator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDnsNameFilter(v *types.DnsNameFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DnsNameFilter"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if len(v.ComparisonOperator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateDomainValidationOption(v *types.DomainValidationOption) error {
@@ -381,6 +511,44 @@ func validateDomainValidationOptionList(v []types.DomainValidationOption) error 
 	}
 }
 
+func validateSubjectAlternativeNameFilter(v types.SubjectAlternativeNameFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubjectAlternativeNameFilter"}
+	switch uv := v.(type) {
+	case *types.SubjectAlternativeNameFilterMemberDnsName:
+		if err := validateDnsNameFilter(&uv.Value); err != nil {
+			invalidParams.AddNested("[DnsName]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSubjectFilter(v types.SubjectFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubjectFilter"}
+	switch uv := v.(type) {
+	case *types.SubjectFilterMemberCommonName:
+		if err := validateCommonNameFilter(&uv.Value); err != nil {
+			invalidParams.AddNested("[CommonName]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
@@ -405,6 +573,30 @@ func validateTagList(v []types.Tag) error {
 		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateX509AttributeFilter(v types.X509AttributeFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "X509AttributeFilter"}
+	switch uv := v.(type) {
+	case *types.X509AttributeFilterMemberSubject:
+		if err := validateSubjectFilter(uv.Value); err != nil {
+			invalidParams.AddNested("[Subject]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.X509AttributeFilterMemberSubjectAlternativeName:
+		if err := validateSubjectAlternativeNameFilter(uv.Value); err != nil {
+			invalidParams.AddNested("[SubjectAlternativeName]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -644,6 +836,23 @@ func validateOpRevokeCertificateInput(v *RevokeCertificateInput) error {
 	}
 	if len(v.RevocationReason) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RevocationReason"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchCertificatesInput(v *SearchCertificatesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchCertificatesInput"}
+	if v.FilterStatement != nil {
+		if err := validateCertificateFilterStatement(v.FilterStatement); err != nil {
+			invalidParams.AddNested("FilterStatement", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

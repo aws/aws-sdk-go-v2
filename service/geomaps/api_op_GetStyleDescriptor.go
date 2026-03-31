@@ -47,8 +47,7 @@ type GetStyleDescriptorInput struct {
 	// Buildings3D is valid only for the Standard and Monochrome map styles.
 	Buildings types.Buildings
 
-	// Sets color tone for map such as dark and light for specific map styles. It
-	// applies to only vector map styles such as Standard and Monochrome.
+	// Sets the color tone for the map, such as dark and light.
 	//
 	// Example: Light
 	//
@@ -61,8 +60,7 @@ type GetStyleDescriptorInput struct {
 	// density value controls how densely the available contour line information is
 	// rendered on the map.
 	//
-	// This parameter is valid only for the Standard , Monochrome , and Hybrid map
-	// styles.
+	// This parameter is valid for all map styles except Satellite .
 	ContourDensity types.ContourDensity
 
 	// Optional: The API key to be used for authorization. Either an API key or valid
@@ -119,14 +117,14 @@ type GetStyleDescriptorInput struct {
 	// Displays real-time traffic information overlay on map, such as incident events
 	// and flow events.
 	//
-	// This parameter is valid only for the Standard map style.
+	// This parameter is valid for all map styles except Satellite .
 	Traffic types.Traffic
 
 	// Renders additional map information relevant to selected travel modes.
 	// Information for multiple travel modes can be displayed simultaneously, although
 	// this increases the overall information density rendered on the map.
 	//
-	// This parameter is valid only for the Standard map style.
+	// This parameter is valid for all map styles except Satellite .
 	TravelModes []types.TravelMode
 
 	noSmithyDocumentSerde

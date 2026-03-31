@@ -2,6 +2,64 @@
 
 package types
 
+type AgreementCancellationRequestReasonCode string
+
+// Enum values for AgreementCancellationRequestReasonCode
+const (
+	AgreementCancellationRequestReasonCodeIncorrectTermsAccepted        AgreementCancellationRequestReasonCode = "INCORRECT_TERMS_ACCEPTED"
+	AgreementCancellationRequestReasonCodeReplacingAgreement            AgreementCancellationRequestReasonCode = "REPLACING_AGREEMENT"
+	AgreementCancellationRequestReasonCodeTestAgreement                 AgreementCancellationRequestReasonCode = "TEST_AGREEMENT"
+	AgreementCancellationRequestReasonCodeAlternativeProcurementChannel AgreementCancellationRequestReasonCode = "ALTERNATIVE_PROCUREMENT_CHANNEL"
+	AgreementCancellationRequestReasonCodeProductDiscontinued           AgreementCancellationRequestReasonCode = "PRODUCT_DISCONTINUED"
+	AgreementCancellationRequestReasonCodeUnintendedRenewal             AgreementCancellationRequestReasonCode = "UNINTENDED_RENEWAL"
+	AgreementCancellationRequestReasonCodeBuyerDissatisfaction          AgreementCancellationRequestReasonCode = "BUYER_DISSATISFACTION"
+	AgreementCancellationRequestReasonCodeOther                         AgreementCancellationRequestReasonCode = "OTHER"
+)
+
+// Values returns all known values for AgreementCancellationRequestReasonCode.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgreementCancellationRequestReasonCode) Values() []AgreementCancellationRequestReasonCode {
+	return []AgreementCancellationRequestReasonCode{
+		"INCORRECT_TERMS_ACCEPTED",
+		"REPLACING_AGREEMENT",
+		"TEST_AGREEMENT",
+		"ALTERNATIVE_PROCUREMENT_CHANNEL",
+		"PRODUCT_DISCONTINUED",
+		"UNINTENDED_RENEWAL",
+		"BUYER_DISSATISFACTION",
+		"OTHER",
+	}
+}
+
+type AgreementCancellationRequestStatus string
+
+// Enum values for AgreementCancellationRequestStatus
+const (
+	AgreementCancellationRequestStatusPendingApproval  AgreementCancellationRequestStatus = "PENDING_APPROVAL"
+	AgreementCancellationRequestStatusApproved         AgreementCancellationRequestStatus = "APPROVED"
+	AgreementCancellationRequestStatusRejected         AgreementCancellationRequestStatus = "REJECTED"
+	AgreementCancellationRequestStatusCancelled        AgreementCancellationRequestStatus = "CANCELLED"
+	AgreementCancellationRequestStatusValidationFailed AgreementCancellationRequestStatus = "VALIDATION_FAILED"
+)
+
+// Values returns all known values for AgreementCancellationRequestStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgreementCancellationRequestStatus) Values() []AgreementCancellationRequestStatus {
+	return []AgreementCancellationRequestStatus{
+		"PENDING_APPROVAL",
+		"APPROVED",
+		"REJECTED",
+		"CANCELLED",
+		"VALIDATION_FAILED",
+	}
+}
+
 type AgreementStatus string
 
 // Enum values for AgreementStatus
@@ -32,6 +90,115 @@ func (AgreementStatus) Values() []AgreementStatus {
 		"ROLLED_BACK",
 		"SUPERSEDED",
 		"TERMINATED",
+	}
+}
+
+type BillingAdjustmentErrorCode string
+
+// Enum values for BillingAdjustmentErrorCode
+const (
+	BillingAdjustmentErrorCodeConflictException         BillingAdjustmentErrorCode = "CONFLICT_EXCEPTION"
+	BillingAdjustmentErrorCodeValidationException       BillingAdjustmentErrorCode = "VALIDATION_EXCEPTION"
+	BillingAdjustmentErrorCodeResourceNotFoundException BillingAdjustmentErrorCode = "RESOURCE_NOT_FOUND_EXCEPTION"
+	BillingAdjustmentErrorCodeInternalFailure           BillingAdjustmentErrorCode = "INTERNAL_FAILURE"
+)
+
+// Values returns all known values for BillingAdjustmentErrorCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BillingAdjustmentErrorCode) Values() []BillingAdjustmentErrorCode {
+	return []BillingAdjustmentErrorCode{
+		"CONFLICT_EXCEPTION",
+		"VALIDATION_EXCEPTION",
+		"RESOURCE_NOT_FOUND_EXCEPTION",
+		"INTERNAL_FAILURE",
+	}
+}
+
+type BillingAdjustmentReasonCode string
+
+// Enum values for BillingAdjustmentReasonCode
+const (
+	BillingAdjustmentReasonCodeIncorrectTermsAccepted        BillingAdjustmentReasonCode = "INCORRECT_TERMS_ACCEPTED"
+	BillingAdjustmentReasonCodeIncorrectMetering             BillingAdjustmentReasonCode = "INCORRECT_METERING"
+	BillingAdjustmentReasonCodeTestEnvironmentCharges        BillingAdjustmentReasonCode = "TEST_ENVIRONMENT_CHARGES"
+	BillingAdjustmentReasonCodeAlternativeProcurementChannel BillingAdjustmentReasonCode = "ALTERNATIVE_PROCUREMENT_CHANNEL"
+	BillingAdjustmentReasonCodeUnintendedRenewal             BillingAdjustmentReasonCode = "UNINTENDED_RENEWAL"
+	BillingAdjustmentReasonCodeBuyerDissatisfaction          BillingAdjustmentReasonCode = "BUYER_DISSATISFACTION"
+	BillingAdjustmentReasonCodeOther                         BillingAdjustmentReasonCode = "OTHER"
+)
+
+// Values returns all known values for BillingAdjustmentReasonCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BillingAdjustmentReasonCode) Values() []BillingAdjustmentReasonCode {
+	return []BillingAdjustmentReasonCode{
+		"INCORRECT_TERMS_ACCEPTED",
+		"INCORRECT_METERING",
+		"TEST_ENVIRONMENT_CHARGES",
+		"ALTERNATIVE_PROCUREMENT_CHANNEL",
+		"UNINTENDED_RENEWAL",
+		"BUYER_DISSATISFACTION",
+		"OTHER",
+	}
+}
+
+type BillingAdjustmentStatus string
+
+// Enum values for BillingAdjustmentStatus
+const (
+	BillingAdjustmentStatusPending          BillingAdjustmentStatus = "PENDING"
+	BillingAdjustmentStatusValidationFailed BillingAdjustmentStatus = "VALIDATION_FAILED"
+	BillingAdjustmentStatusCompleted        BillingAdjustmentStatus = "COMPLETED"
+)
+
+// Values returns all known values for BillingAdjustmentStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BillingAdjustmentStatus) Values() []BillingAdjustmentStatus {
+	return []BillingAdjustmentStatus{
+		"PENDING",
+		"VALIDATION_FAILED",
+		"COMPLETED",
+	}
+}
+
+type InvoiceType string
+
+// Enum values for InvoiceType
+const (
+	InvoiceTypeInvoice    InvoiceType = "INVOICE"
+	InvoiceTypeCreditMemo InvoiceType = "CREDIT_MEMO"
+)
+
+// Values returns all known values for InvoiceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InvoiceType) Values() []InvoiceType {
+	return []InvoiceType{
+		"INVOICE",
+		"CREDIT_MEMO",
+	}
+}
+
+type LineItemGroupBy string
+
+// Enum values for LineItemGroupBy
+const (
+	LineItemGroupByInvoiceId LineItemGroupBy = "INVOICE_ID"
+)
+
+// Values returns all known values for LineItemGroupBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LineItemGroupBy) Values() []LineItemGroupBy {
+	return []LineItemGroupBy{
+		"INVOICE_ID",
 	}
 }
 

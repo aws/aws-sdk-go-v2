@@ -36,9 +36,6 @@ func ExampleAdditionalServiceDetails_outputUsage() {
 	case *types.AdditionalServiceDetailsMemberMcpservernewrelic:
 		_ = v.Value // Value is types.RegisteredNewRelicDetails
 
-	case *types.AdditionalServiceDetailsMemberMcpserversigv4:
-		_ = v.Value // Value is types.RegisteredMCPServerSigV4Details
-
 	case *types.AdditionalServiceDetailsMemberMcpserversplunk:
 		_ = v.Value // Value is types.RegisteredMCPServerDetails
 
@@ -68,7 +65,6 @@ var _ *types.RegisteredGithubServiceDetails
 var _ *types.RegisteredSlackServiceDetails
 var _ *types.RegisteredGitLabServiceDetails
 var _ *types.RegisteredPagerDutyDetails
-var _ *types.RegisteredMCPServerSigV4Details
 var _ *types.RegisteredGrafanaServerDetails
 var _ *types.RegisteredServiceNowDetails
 
@@ -365,9 +361,6 @@ func ExampleServiceConfiguration_outputUsage() {
 	case *types.ServiceConfigurationMemberMcpservernewrelic:
 		_ = v.Value // Value is types.MCPServerNewRelicConfiguration
 
-	case *types.ServiceConfigurationMemberMsteams:
-		_ = v.Value // Value is types.MSTeamsConfiguration
-
 	case *types.ServiceConfigurationMemberPagerduty:
 		_ = v.Value // Value is types.PagerDutyConfiguration
 
@@ -396,7 +389,6 @@ var _ *types.PagerDutyConfiguration
 var _ *types.ServiceNowConfiguration
 var _ *types.EventChannelConfiguration
 var _ *types.GitLabConfiguration
-var _ *types.MSTeamsConfiguration
 var _ *types.AzureConfiguration
 var _ *types.SlackConfiguration
 var _ *types.MCPServerGrafanaConfiguration
@@ -432,9 +424,6 @@ func ExampleServiceDetails_outputUsage() {
 	case *types.ServiceDetailsMemberMcpservernewrelic:
 		_ = v.Value // Value is types.NewRelicServiceDetails
 
-	case *types.ServiceDetailsMemberMcpserversigv4:
-		_ = v.Value // Value is types.MCPServerSigV4ServiceDetails
-
 	case *types.ServiceDetailsMemberMcpserversplunk:
 		_ = v.Value // Value is types.MCPServerDetails
 
@@ -454,7 +443,6 @@ func ExampleServiceDetails_outputUsage() {
 }
 
 var _ *types.GrafanaServiceDetails
-var _ *types.MCPServerSigV4ServiceDetails
 var _ *types.DynatraceServiceDetails
 var _ *types.ServiceNowServiceDetails
 var _ *types.RegisteredAzureIdentityDetails

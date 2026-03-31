@@ -182,18 +182,6 @@ func TestCheckSnapshot_DescribePrivateConnection(t *testing.T) {
 	}
 }
 
-func TestCheckSnapshot_DescribeSupportLevel(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.DescribeSupportLevel(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "DescribeSupportLevel")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckSnapshot_DisableOperatorApp(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableOperatorApp(context.Background(), nil, func(o *Options) {
@@ -223,18 +211,6 @@ func TestCheckSnapshot_EnableOperatorApp(t *testing.T) {
 	_, err := svc.EnableOperatorApp(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "EnableOperatorApp")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckSnapshot_EndChatForCase(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.EndChatForCase(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "EndChatForCase")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -319,18 +295,6 @@ func TestCheckSnapshot_GetService(t *testing.T) {
 	_, err := svc.GetService(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetService")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckSnapshot_InitiateChatForCase(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.InitiateChatForCase(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "InitiateChatForCase")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -757,18 +721,6 @@ func TestUpdateSnapshot_DescribePrivateConnection(t *testing.T) {
 	}
 }
 
-func TestUpdateSnapshot_DescribeSupportLevel(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.DescribeSupportLevel(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "DescribeSupportLevel")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateSnapshot_DisableOperatorApp(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableOperatorApp(context.Background(), nil, func(o *Options) {
@@ -798,18 +750,6 @@ func TestUpdateSnapshot_EnableOperatorApp(t *testing.T) {
 	_, err := svc.EnableOperatorApp(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "EnableOperatorApp")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateSnapshot_EndChatForCase(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.EndChatForCase(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "EndChatForCase")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -894,18 +834,6 @@ func TestUpdateSnapshot_GetService(t *testing.T) {
 	_, err := svc.GetService(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetService")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateSnapshot_InitiateChatForCase(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.InitiateChatForCase(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "InitiateChatForCase")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

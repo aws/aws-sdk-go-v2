@@ -65,6 +65,9 @@ type CreateEnvironmentInput struct {
 	// The configuration ID of the environment.
 	EnvironmentConfigurationId *string
 
+	// The configuration name of the environment.
+	EnvironmentConfigurationName *string
+
 	// The identifier of the environment profile that is used to create this Amazon
 	// DataZone environment.
 	EnvironmentProfileIdentifier *string
@@ -131,6 +134,9 @@ type CreateEnvironmentOutput struct {
 
 	// The configuration ID of the environment.
 	EnvironmentConfigurationId *string
+
+	// The configuration name of the environment.
+	EnvironmentConfigurationName *string
 
 	// The ID of the environment profile with which this Amazon DataZone environment
 	// was created.

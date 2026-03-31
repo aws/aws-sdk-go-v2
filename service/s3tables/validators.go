@@ -1158,11 +1158,14 @@ func validateIcebergMetadata(v *types.IcebergMetadata) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IcebergMetadata"}
-	if v.Schema == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Schema"))
-	} else if v.Schema != nil {
+	if v.Schema != nil {
 		if err := validateIcebergSchema(v.Schema); err != nil {
 			invalidParams.AddNested("Schema", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SchemaV2 != nil {
+		if err := validateIcebergSchemaV2(v.SchemaV2); err != nil {
+			invalidParams.AddNested("SchemaV2", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.PartitionSpec != nil {
@@ -1248,6 +1251,28 @@ func validateIcebergSchema(v *types.IcebergSchema) error {
 		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
 	} else if v.Fields != nil {
 		if err := validateSchemaFieldList(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergSchemaV2(v *types.IcebergSchemaV2) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergSchemaV2"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateSchemaV2FieldList(v.Fields); err != nil {
 			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1378,6 +1403,47 @@ func validateSchemaFieldList(v []types.SchemaField) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SchemaFieldList"}
 	for i := range v {
 		if err := validateSchemaField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSchemaV2Field(v *types.SchemaV2Field) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SchemaV2Field"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Required == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Required"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSchemaV2FieldList(v []types.SchemaV2Field) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SchemaV2FieldList"}
+	for i := range v {
+		if err := validateSchemaV2Field(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

@@ -1,0 +1,8 @@
+{
+    "id": "0409ae39-c956-4f31-b20b-55d342e18b8a",
+    "type": "feature",
+    "description": "Amazon SES Mail Manager now supports optional TLS policy for accepting unencrypted connections and mTLS authentication for ingress endpoints with configurable trust stores. Two new rule actions are available, Bounce for sending non-delivery reports and Lambda invocation for custom email processing.",
+    "modules": [
+        "service/mailmanager"
+    ]
+}

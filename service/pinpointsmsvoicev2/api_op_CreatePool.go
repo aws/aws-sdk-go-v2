@@ -41,12 +41,6 @@ func (c *Client) CreatePool(ctx context.Context, params *CreatePoolInput, optFns
 
 type CreatePoolInput struct {
 
-	// The new two-character code, in ISO 3166-1 alpha-2 format, for the country or
-	// region of the new pool.
-	//
-	// This member is required.
-	IsoCountryCode *string
-
 	// The type of message. Valid values are TRANSACTIONAL for messages that are
 	// critical or time-sensitive and PROMOTIONAL for messages that aren't critical or
 	// time-sensitive. After the pool is created the MessageType can't be changed.
@@ -82,6 +76,11 @@ type CreatePoolInput struct {
 	//
 	// [UpdatePool]: https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_UpdatePool.html
 	DeletionProtectionEnabled *bool
+
+	// The new two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region of the new pool. This field is optional and is not required for
+	// origination identity types that are not country-specific, such as RCS agents.
+	IsoCountryCode *string
 
 	// An array of tags (key and value pairs) associated with the pool.
 	Tags []types.Tag

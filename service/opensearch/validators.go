@@ -490,6 +490,26 @@ func (m *validateOpDeleteVpcEndpoint) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeregisterCapability struct {
+}
+
+func (*validateOpDeregisterCapability) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeregisterCapability) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeregisterCapabilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeregisterCapabilityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDomainAutoTunes struct {
 }
 
@@ -765,6 +785,26 @@ func (m *validateOpGetApplication) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCapability struct {
+}
+
+func (*validateOpGetCapability) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCapability) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCapabilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCapabilityInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1145,6 +1185,26 @@ func (m *validateOpPutDefaultApplicationSetting) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutDefaultApplicationSettingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRegisterCapability struct {
+}
+
+func (*validateOpRegisterCapability) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterCapability) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterCapabilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterCapabilityInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1546,6 +1606,10 @@ func addOpDeleteVpcEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteVpcEndpoint{}, middleware.After)
 }
 
+func addOpDeregisterCapabilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeregisterCapability{}, middleware.After)
+}
+
 func addOpDescribeDomainAutoTunesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDomainAutoTunes{}, middleware.After)
 }
@@ -1600,6 +1664,10 @@ func addOpDissociatePackagesValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetApplication{}, middleware.After)
+}
+
+func addOpGetCapabilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCapability{}, middleware.After)
 }
 
 func addOpGetDataSourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1676,6 +1744,10 @@ func addOpPurchaseReservedInstanceOfferingValidationMiddleware(stack *middleware
 
 func addOpPutDefaultApplicationSettingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutDefaultApplicationSetting{}, middleware.After)
+}
+
+func addOpRegisterCapabilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterCapability{}, middleware.After)
 }
 
 func addOpRejectInboundConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -2657,6 +2729,24 @@ func validateOpDeleteVpcEndpointInput(v *DeleteVpcEndpointInput) error {
 	}
 }
 
+func validateOpDeregisterCapabilityInput(v *DeregisterCapabilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeregisterCapabilityInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.CapabilityName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapabilityName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeDomainAutoTunesInput(v *DescribeDomainAutoTunesInput) error {
 	if v == nil {
 		return nil
@@ -2875,6 +2965,24 @@ func validateOpGetApplicationInput(v *GetApplicationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetApplicationInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCapabilityInput(v *GetCapabilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCapabilityInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.CapabilityName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapabilityName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3184,6 +3292,27 @@ func validateOpPutDefaultApplicationSettingInput(v *PutDefaultApplicationSetting
 	}
 	if v.SetAsDefault == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SetAsDefault"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRegisterCapabilityInput(v *RegisterCapabilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterCapabilityInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.CapabilityName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapabilityName"))
+	}
+	if v.CapabilityConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapabilityConfig"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

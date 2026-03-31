@@ -20,7 +20,6 @@ import (
 //	AdditionalServiceDetailsMemberMcpserverdatadog
 //	AdditionalServiceDetailsMemberMcpservergrafana
 //	AdditionalServiceDetailsMemberMcpservernewrelic
-//	AdditionalServiceDetailsMemberMcpserversigv4
 //	AdditionalServiceDetailsMemberMcpserversplunk
 //	AdditionalServiceDetailsMemberPagerduty
 //	AdditionalServiceDetailsMemberServicenow
@@ -100,15 +99,6 @@ type AdditionalServiceDetailsMemberMcpservernewrelic struct {
 }
 
 func (*AdditionalServiceDetailsMemberMcpservernewrelic) isAdditionalServiceDetails() {}
-
-// SigV4-authenticated MCP server-specific service details.
-type AdditionalServiceDetailsMemberMcpserversigv4 struct {
-	Value RegisteredMCPServerSigV4Details
-
-	noSmithyDocumentSerde
-}
-
-func (*AdditionalServiceDetailsMemberMcpserversigv4) isAdditionalServiceDetails() {}
 
 // Splunk MCP server-specific service details.
 type AdditionalServiceDetailsMemberMcpserversplunk struct {
@@ -342,27 +332,6 @@ type ChatExecution struct {
 
 	// Timestamp when the chat was last updated
 	UpdatedAt *time.Time
-
-	noSmithyDocumentSerde
-}
-
-// Represents a chat participant connection with all its properties and metadata
-type ChatParticipantConnection struct {
-
-	// The identifier of the contact in this instance of Amazon Connect
-	//
-	// This member is required.
-	InitialContactId *string
-
-	// The identifier for a chat participant
-	//
-	// This member is required.
-	ParticipantId *string
-
-	// The token used by the chat participant to call CreateParticipantConnection
-	//
-	// This member is required.
-	ParticipantToken *string
 
 	noSmithyDocumentSerde
 }
@@ -1131,51 +1100,6 @@ type MCPServerOAuthClientCredentialsConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Authorization configuration for SigV4-authenticated MCP server.
-type MCPServerSigV4AuthorizationConfig struct {
-
-	// AWS region for SigV4 signing.
-	//
-	// This member is required.
-	Region *string
-
-	// IAM role ARN to assume for SigV4 signing.
-	//
-	// This member is required.
-	RoleArn *string
-
-	// AWS service name for SigV4 signing.
-	//
-	// This member is required.
-	Service *string
-
-	noSmithyDocumentSerde
-}
-
-// Complete service details for SigV4-authenticated MCP server integration.
-type MCPServerSigV4ServiceDetails struct {
-
-	// MCP Server SigV4 authorization configuration.
-	//
-	// This member is required.
-	AuthorizationConfig *MCPServerSigV4AuthorizationConfig
-
-	// MCP server endpoint URL.
-	//
-	// This member is required.
-	Endpoint *string
-
-	// MCP server name.
-	//
-	// This member is required.
-	Name *string
-
-	// Optional description for the MCP server.
-	Description *string
-
-	noSmithyDocumentSerde
-}
-
 // A message in a conversation, either from the user or the assistant.
 //
 // The following types satisfy this interface:
@@ -1203,55 +1127,6 @@ type MessageMemberUserMessage struct {
 }
 
 func (*MessageMemberUserMessage) isMessage() {}
-
-// Represents a Teams channel with its ID and name.
-type MSTeamsChannel struct {
-
-	// MS Teams Channel ID
-	//
-	// This member is required.
-	ChannelId *string
-
-	// MS Teams channel name
-	//
-	// This member is required.
-	ChannelName *string
-
-	noSmithyDocumentSerde
-}
-
-// Configuration for MS Teams workspace integration.
-type MSTeamsConfiguration struct {
-
-	// Associated MS Teams teams ID
-	//
-	// This member is required.
-	TeamId *string
-
-	// Associated MS Teams team name
-	//
-	// This member is required.
-	TeamName *string
-
-	// Transmission targets for agent notification
-	//
-	// This member is required.
-	TransmissionTarget *MSTeamsTransmissionTarget
-
-	noSmithyDocumentSerde
-}
-
-// Defines MS Teams channels for different types of agent notifications.
-type MSTeamsTransmissionTarget struct {
-
-	// Destination for On-call Agent(Ops1)
-	OpsOncallTarget *MSTeamsChannel
-
-	// Destination for SRE Agent (Ops1.5)
-	OpsSRETarget *MSTeamsChannel
-
-	noSmithyDocumentSerde
-}
 
 // API key authentication configuration for New Relic service.
 type NewRelicApiKeyConfig struct {
@@ -1740,40 +1615,6 @@ type RegisteredMCPServerDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Details specific to a registered SigV4-authenticated MCP server.
-type RegisteredMCPServerSigV4Details struct {
-
-	// MCP server endpoint URL.
-	//
-	// This member is required.
-	Endpoint *string
-
-	// MCP server name.
-	//
-	// This member is required.
-	Name *string
-
-	// AWS region for SigV4 signing.
-	//
-	// This member is required.
-	Region *string
-
-	// IAM role ARN to assume for SigV4 signing.
-	//
-	// This member is required.
-	RoleArn *string
-
-	// AWS service name for SigV4 signing.
-	//
-	// This member is required.
-	Service *string
-
-	// Optional description for the MCP server.
-	Description *string
-
-	noSmithyDocumentSerde
-}
-
 // Details specific to a registered NewRelic instance.
 type RegisteredNewRelicDetails struct {
 
@@ -2201,7 +2042,6 @@ type SendMessageUsageInfo struct {
 //	ServiceConfigurationMemberGitlab
 //	ServiceConfigurationMemberMcpservergrafana
 //	ServiceConfigurationMemberMcpservernewrelic
-//	ServiceConfigurationMemberMsteams
 //	ServiceConfigurationMemberPagerduty
 //	ServiceConfigurationMemberServicenow
 //	ServiceConfigurationMemberSlack
@@ -2291,15 +2131,6 @@ type ServiceConfigurationMemberMcpservernewrelic struct {
 
 func (*ServiceConfigurationMemberMcpservernewrelic) isServiceConfiguration() {}
 
-// MS Teams integration configuration
-type ServiceConfigurationMemberMsteams struct {
-	Value MSTeamsConfiguration
-
-	noSmithyDocumentSerde
-}
-
-func (*ServiceConfigurationMemberMsteams) isServiceConfiguration() {}
-
 // PagerDuty integration configuration
 type ServiceConfigurationMemberPagerduty struct {
 	Value PagerDutyConfiguration
@@ -2348,7 +2179,6 @@ func (*ServiceConfigurationMemberSourceAws) isServiceConfiguration() {}
 //	ServiceDetailsMemberMcpserverdatadog
 //	ServiceDetailsMemberMcpservergrafana
 //	ServiceDetailsMemberMcpservernewrelic
-//	ServiceDetailsMemberMcpserversigv4
 //	ServiceDetailsMemberMcpserversplunk
 //	ServiceDetailsMemberPagerduty
 //	ServiceDetailsMemberServicenow
@@ -2428,15 +2258,6 @@ type ServiceDetailsMemberMcpservernewrelic struct {
 }
 
 func (*ServiceDetailsMemberMcpservernewrelic) isServiceDetails() {}
-
-// SigV4-authenticated MCP server-specific service details.
-type ServiceDetailsMemberMcpserversigv4 struct {
-	Value MCPServerSigV4ServiceDetails
-
-	noSmithyDocumentSerde
-}
-
-func (*ServiceDetailsMemberMcpserversigv4) isServiceDetails() {}
 
 // Splunk MCP server-specific service details.
 type ServiceDetailsMemberMcpserversplunk struct {
@@ -2641,22 +2462,6 @@ type SourceAwsConfiguration struct {
 	// External ID for additional security when assuming the role. Used to prevent the
 	// confused deputy problem.
 	ExternalId *string
-
-	noSmithyDocumentSerde
-}
-
-// Represents a support level with all its properties and metadata
-type SupportLevel struct {
-
-	// The support level code
-	//
-	// This member is required.
-	Code *string
-
-	// The support level name
-	//
-	// This member is required.
-	Name *string
 
 	noSmithyDocumentSerde
 }

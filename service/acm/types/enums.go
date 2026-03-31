@@ -108,6 +108,25 @@ func (CertificateType) Values() []CertificateType {
 	}
 }
 
+type ComparisonOperator string
+
+// Enum values for ComparisonOperator
+const (
+	ComparisonOperatorContains ComparisonOperator = "CONTAINS"
+	ComparisonOperatorEquals   ComparisonOperator = "EQUALS"
+)
+
+// Values returns all known values for ComparisonOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonOperator) Values() []ComparisonOperator {
+	return []ComparisonOperator{
+		"CONTAINS",
+		"EQUALS",
+	}
+}
+
 type DomainStatus string
 
 // Enum values for DomainStatus
@@ -376,6 +395,76 @@ func (RevocationReason) Values() []RevocationReason {
 		"REMOVE_FROM_CRL",
 		"PRIVILEGE_WITHDRAWN",
 		"A_A_COMPROMISE",
+	}
+}
+
+type SearchCertificatesSortBy string
+
+// Enum values for SearchCertificatesSortBy
+const (
+	SearchCertificatesSortByCreatedAt          SearchCertificatesSortBy = "CREATED_AT"
+	SearchCertificatesSortByNotAfter           SearchCertificatesSortBy = "NOT_AFTER"
+	SearchCertificatesSortByStatus             SearchCertificatesSortBy = "STATUS"
+	SearchCertificatesSortByRenewalStatus      SearchCertificatesSortBy = "RENEWAL_STATUS"
+	SearchCertificatesSortByExported           SearchCertificatesSortBy = "EXPORTED"
+	SearchCertificatesSortByInUse              SearchCertificatesSortBy = "IN_USE"
+	SearchCertificatesSortByNotBefore          SearchCertificatesSortBy = "NOT_BEFORE"
+	SearchCertificatesSortByKeyAlgorithm       SearchCertificatesSortBy = "KEY_ALGORITHM"
+	SearchCertificatesSortByType               SearchCertificatesSortBy = "TYPE"
+	SearchCertificatesSortByCertificateArn     SearchCertificatesSortBy = "CERTIFICATE_ARN"
+	SearchCertificatesSortByCommonName         SearchCertificatesSortBy = "COMMON_NAME"
+	SearchCertificatesSortByRevokedAt          SearchCertificatesSortBy = "REVOKED_AT"
+	SearchCertificatesSortByRenewalEligibility SearchCertificatesSortBy = "RENEWAL_ELIGIBILITY"
+	SearchCertificatesSortByIssuedAt           SearchCertificatesSortBy = "ISSUED_AT"
+	SearchCertificatesSortByManagedBy          SearchCertificatesSortBy = "MANAGED_BY"
+	SearchCertificatesSortByExportOption       SearchCertificatesSortBy = "EXPORT_OPTION"
+	SearchCertificatesSortByValidationMethod   SearchCertificatesSortBy = "VALIDATION_METHOD"
+	SearchCertificatesSortByImportedAt         SearchCertificatesSortBy = "IMPORTED_AT"
+)
+
+// Values returns all known values for SearchCertificatesSortBy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchCertificatesSortBy) Values() []SearchCertificatesSortBy {
+	return []SearchCertificatesSortBy{
+		"CREATED_AT",
+		"NOT_AFTER",
+		"STATUS",
+		"RENEWAL_STATUS",
+		"EXPORTED",
+		"IN_USE",
+		"NOT_BEFORE",
+		"KEY_ALGORITHM",
+		"TYPE",
+		"CERTIFICATE_ARN",
+		"COMMON_NAME",
+		"REVOKED_AT",
+		"RENEWAL_ELIGIBILITY",
+		"ISSUED_AT",
+		"MANAGED_BY",
+		"EXPORT_OPTION",
+		"VALIDATION_METHOD",
+		"IMPORTED_AT",
+	}
+}
+
+type SearchCertificatesSortOrder string
+
+// Enum values for SearchCertificatesSortOrder
+const (
+	SearchCertificatesSortOrderAscending  SearchCertificatesSortOrder = "ASCENDING"
+	SearchCertificatesSortOrderDescending SearchCertificatesSortOrder = "DESCENDING"
+)
+
+// Values returns all known values for SearchCertificatesSortOrder. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchCertificatesSortOrder) Values() []SearchCertificatesSortOrder {
+	return []SearchCertificatesSortOrder{
+		"ASCENDING",
+		"DESCENDING",
 	}
 }
 

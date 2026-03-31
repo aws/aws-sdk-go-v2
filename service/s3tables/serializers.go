@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/s3tables/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
@@ -4251,6 +4253,13 @@ func awsRestjson1_serializeDocumentIcebergMetadata(v *types.IcebergMetadata, val
 		}
 	}
 
+	if v.SchemaV2 != nil {
+		ok := object.Key("schemaV2")
+		if err := awsRestjson1_serializeDocumentIcebergSchemaV2(v.SchemaV2, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.WriteOrder != nil {
 		ok := object.Key("writeOrder")
 		if err := awsRestjson1_serializeDocumentIcebergSortOrder(v.WriteOrder, ok); err != nil {
@@ -4329,6 +4338,37 @@ func awsRestjson1_serializeDocumentIcebergSchema(v *types.IcebergSchema, value s
 		if err := awsRestjson1_serializeDocumentSchemaFieldList(v.Fields, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIcebergSchemaV2(v *types.IcebergSchemaV2, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Fields != nil {
+		ok := object.Key("fields")
+		if err := awsRestjson1_serializeDocumentSchemaV2FieldList(v.Fields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IdentifierFieldIds != nil {
+		ok := object.Key("identifier-field-ids")
+		if err := awsRestjson1_serializeDocumentIntegerList(v.IdentifierFieldIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SchemaId != nil {
+		ok := object.Key("schema-id")
+		ok.Integer(*v.SchemaId)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
 	}
 
 	return nil
@@ -4427,6 +4467,17 @@ func awsRestjson1_serializeDocumentIcebergUnreferencedFileRemovalSettings(v *typ
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIntegerList(v []int32, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentNamespaceList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4497,6 +4548,53 @@ func awsRestjson1_serializeDocumentSchemaFieldList(v []types.SchemaField, value 
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentSchemaField(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSchemaV2Field(v *types.SchemaV2Field, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Doc != nil {
+		ok := object.Key("doc")
+		ok.String(*v.Doc)
+	}
+
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.Integer(*v.Id)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Required != nil {
+		ok := object.Key("required")
+		ok.Boolean(*v.Required)
+	}
+
+	if v.Type != nil {
+		ok := object.Key("type")
+		if err := awsRestjson1_serializeDocumentDocument(v.Type, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSchemaV2FieldList(v []types.SchemaV2Field, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSchemaV2Field(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4755,5 +4853,20 @@ func awsRestjson1_serializeDocumentTags(v map[string]string, value smithyjson.Va
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDocument(v document.Interface, value smithyjson.Value) error {
+	if v == nil {
+		return nil
+	}
+	if !internaldocument.IsInterface(v) {
+		return fmt.Errorf("%T is not a compatible document type", v)
+	}
+	db, err := v.MarshalSmithyDocument()
+	if err != nil {
+		return err
+	}
+	value.Write(db)
 	return nil
 }

@@ -1,0 +1,8 @@
+{
+    "id": "e1767d5c-8f39-451d-b21f-99a4f708ce15",
+    "type": "documentation",
+    "description": "This release updates the examples in the documentation for DescribeRegions and DescribeAvailabilityZones.",
+    "modules": [
+        "service/ec2"
+    ]
+}

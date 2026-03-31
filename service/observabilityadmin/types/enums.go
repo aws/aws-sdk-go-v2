@@ -186,8 +186,11 @@ type LogType string
 
 // Enum values for LogType
 const (
-	LogTypeApplication LogType = "APPLICATION_LOGS"
-	LogTypeUsage       LogType = "USAGE_LOGS"
+	LogTypeApplication     LogType = "APPLICATION_LOGS"
+	LogTypeUsage           LogType = "USAGE_LOGS"
+	LogTypeSecurityFinding LogType = "SECURITY_FINDING_LOGS"
+	LogTypeAccess          LogType = "ACCESS_LOGS"
+	LogTypeConnection      LogType = "CONNECTION_LOGS"
 )
 
 // Values returns all known values for LogType. Note that this can be expanded in
@@ -198,6 +201,9 @@ func (LogType) Values() []LogType {
 	return []LogType{
 		"APPLICATION_LOGS",
 		"USAGE_LOGS",
+		"SECURITY_FINDING_LOGS",
+		"ACCESS_LOGS",
+		"CONNECTION_LOGS",
 	}
 }
 
@@ -254,6 +260,10 @@ const (
 	ResourceTypeAwsBedrockAgentcoreRuntime         ResourceType = "AWS::BedrockAgentCore::Runtime"
 	ResourceTypeAwsBedrockAgentcoreBrowser         ResourceType = "AWS::BedrockAgentCore::Browser"
 	ResourceTypeAwsBedrockAgentcoreCodeInterpreter ResourceType = "AWS::BedrockAgentCore::CodeInterpreter"
+	ResourceTypeAwsBedrockAgentcoreGateway         ResourceType = "AWS::BedrockAgentCore::Gateway"
+	ResourceTypeAwsBedrockAgentcoreMemory          ResourceType = "AWS::BedrockAgentCore::Memory"
+	ResourceTypeAwsSecurityHub                     ResourceType = "AWS::SecurityHub::Hub"
+	ResourceTypeAwsCloudfrontDistribution          ResourceType = "AWS::CloudFront::Distribution"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -273,6 +283,10 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::BedrockAgentCore::Runtime",
 		"AWS::BedrockAgentCore::Browser",
 		"AWS::BedrockAgentCore::CodeInterpreter",
+		"AWS::BedrockAgentCore::Gateway",
+		"AWS::BedrockAgentCore::Memory",
+		"AWS::SecurityHub::Hub",
+		"AWS::CloudFront::Distribution",
 	}
 }
 

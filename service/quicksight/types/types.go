@@ -535,6 +535,11 @@ type AnalysisDefinition struct {
 	// The static files for the definition.
 	StaticFiles []StaticFile
 
+	// An array of tooltip sheet definitions for an analysis. Each
+	// TooltipSheetDefinition provides detailed information about a tooltip sheet
+	// within this analysis.
+	TooltipSheets []TooltipSheetDefinition
+
 	noSmithyDocumentSerde
 }
 
@@ -3295,6 +3300,9 @@ type Capabilities struct {
 	// The ability to create shared folders.
 	CreateSharedFolders CapabilityState
 
+	// The ability to create spaces.
+	CreateSpaces CapabilityState
+
 	// The ability to perform dashboard-related actions.
 	Dashboard CapabilityState
 
@@ -3466,6 +3474,9 @@ type Capabilities struct {
 	// The ability to share Canva Agent actions.
 	ShareCanvaAgentAction CapabilityState
 
+	// The ability to share chat agents with other users and groups.
+	ShareChatAgents CapabilityState
+
 	// The ability to share Comprehend actions.
 	ShareComprehendAction CapabilityState
 
@@ -3576,6 +3587,9 @@ type Capabilities struct {
 
 	// The ability to share Smartsheet actions.
 	ShareSmartsheetAction CapabilityState
+
+	// The ability to share spaces with other users and groups.
+	ShareSpaces CapabilityState
 
 	// The ability to share Textract actions.
 	ShareTextractAction CapabilityState
@@ -5561,6 +5575,9 @@ type DashboardVersionDefinition struct {
 	// The static files for the definition.
 	StaticFiles []StaticFile
 
+	// An array of tooltip sheet definitions for a dashboard.
+	TooltipSheets []TooltipSheetDefinition
+
 	noSmithyDocumentSerde
 }
 
@@ -6669,6 +6686,12 @@ type DataSourceCredentials struct {
 
 	// The credentials for connecting using key-pair.
 	KeyPairCredentials *KeyPairCredentials
+
+	// The OAuth client credentials for connecting to a data source using OAuth 2.0
+	// client credentials (2LO) authentication. For more information, see [OAuthClientCredentials].
+	//
+	// [OAuthClientCredentials]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_OAuthClientCredentials.html
+	OAuthClientCredentials *OAuthClientCredentials
 
 	// The Amazon Resource Name (ARN) of the secret associated with the data source in
 	// Amazon Secrets Manager.
@@ -13246,6 +13269,28 @@ type NumericSeparatorConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The OAuth 2.0 client credentials used for authenticating a data source
+// connection. Use this structure to provide a client ID, client secret, and
+// username directly instead of referencing a secret stored in Amazon Secrets
+// Manager. This structure supports data sources that use two-legged OAuth (2LO)
+// authentication, such as Snowflake.
+type OAuthClientCredentials struct {
+
+	// The client ID of the OAuth 2.0 application that is registered with the data
+	// source provider.
+	ClientId *string
+
+	// The client secret of the OAuth 2.0 application that is registered with the data
+	// source provider.
+	ClientSecret *string
+
+	// The username of the account that is used for OAuth 2.0 client credentials
+	// authentication with the data source provider.
+	Username *string
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains information needed to create a data source connection
 // that uses OAuth client credentials. This option is available for data source
 // connections that are made with Snowflake and Starburst.
@@ -14243,6 +14288,9 @@ type PivotTableConfiguration struct {
 
 	// The table options for a pivot table visual.
 	TableOptions *PivotTableOptions
+
+	// The display options for the visual tooltip.
+	Tooltip *TooltipOptions
 
 	// The total options for a pivot table visual.
 	TotalOptions *PivotTableTotalOptions
@@ -17345,6 +17393,15 @@ type SheetTextBox struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration of the sheet tooltip.
+type SheetTooltip struct {
+
+	// The sheet ID of the tooltip sheet that is used by the tooltip.
+	SheetId *string
+
+	noSmithyDocumentSerde
+}
+
 // The filter that is applied to the options.
 type SheetVisualScopingConfiguration struct {
 
@@ -17792,6 +17849,44 @@ type Spacing struct {
 
 	// Define the top spacing.
 	Top *string
+
+	noSmithyDocumentSerde
+}
+
+// The options for sparklines in a table.
+type SparklinesOptions struct {
+
+	// The field ID of the value column that the sparkline is applied to.
+	//
+	// This member is required.
+	FieldId *string
+
+	// The dimension type field.
+	//
+	// This member is required.
+	XAxisField *DimensionField
+
+	// Marker styles options for a line series in LineChartVisual .
+	AllPointsMarker *LineChartMarkerStyleSettings
+
+	// The color of the sparkline line.
+	LineColor *string
+
+	// The interpolation style for the sparkline line.
+	LineInterpolation LineInterpolation
+
+	// Marker styles options for a line series in LineChartVisual .
+	MaxValueMarker *LineChartMarkerStyleSettings
+
+	// Marker styles options for a line series in LineChartVisual .
+	MinValueMarker *LineChartMarkerStyleSettings
+
+	// The type of the sparkline. Valid values are LINE and AREA_LINE .
+	VisualType SparklineVisualType
+
+	// Determines whether the Y axis is shared across all sparklines or independent
+	// for each sparkline.
+	YAxisBehavior SparklineAxisBehavior
 
 	noSmithyDocumentSerde
 }
@@ -18272,6 +18367,9 @@ type TableConfiguration struct {
 	// The table options for a table visual.
 	TableOptions *TableOptions
 
+	// The display options for the visual tooltip.
+	Tooltip *TooltipOptions
+
 	// The total options for a table visual.
 	TotalOptions *TotalOptions
 
@@ -18415,6 +18513,9 @@ type TableInlineVisualization struct {
 
 	// The configuration of the inline visualization of the data bars within a chart.
 	DataBars *DataBarsOptions
+
+	// The configuration of the inline visualization of the sparklines within a chart.
+	Sparklines *SparklinesOptions
 
 	noSmithyDocumentSerde
 }
@@ -18839,6 +18940,9 @@ type TemplateVersionDefinition struct {
 
 	// The static files for the definition.
 	StaticFiles []StaticFile
+
+	// An array of tooltip sheet definitions for a template.
+	TooltipSheets []TooltipSheetDefinition
 
 	noSmithyDocumentSerde
 }
@@ -19362,8 +19466,44 @@ type TooltipOptions struct {
 	//   - DETAILED : A detailed tooltip.
 	SelectedTooltipType SelectedTooltipType
 
+	// The configuration of the sheet tooltip.
+	SheetTooltip *SheetTooltip
+
 	// Determines whether or not the tooltip is visible.
 	TooltipVisibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// A tooltip sheet is an object that contains a set of visuals that are used as a
+// tooltip. Every analysis and dashboard must contain at least one non-tooltip
+// sheet.
+type TooltipSheetDefinition struct {
+
+	// The unique identifier of a tooltip sheet.
+	//
+	// This member is required.
+	SheetId *string
+
+	// A list of images on a tooltip sheet.
+	Images []SheetImage
+
+	// Layouts define how the components of a tooltip sheet are arranged.
+	//
+	// For more information, see [Types of layout] in the Amazon Quick Suite User Guide.
+	//
+	// [Types of layout]: https://docs.aws.amazon.com/quicksight/latest/user/types-of-layout.html
+	Layouts []Layout
+
+	// The name of the tooltip sheet. This name is displayed on the sheet's tab in the
+	// Quick console.
+	Name *string
+
+	// The text boxes that are on a tooltip sheet.
+	TextBoxes []SheetTextBox
+
+	// A list of the visuals that are on a tooltip sheet.
+	Visuals []Visual
 
 	noSmithyDocumentSerde
 }

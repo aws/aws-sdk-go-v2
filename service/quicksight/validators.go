@@ -1450,6 +1450,26 @@ func (m *validateOpDescribeAssetBundleImportJob) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeAutomationJob struct {
+}
+
+func (*validateOpDescribeAutomationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAutomationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAutomationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAutomationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeBrandAssignment struct {
 }
 
@@ -3530,6 +3550,26 @@ func (m *validateOpStartAssetBundleImportJob) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartAutomationJob struct {
+}
+
+func (*validateOpStartAutomationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartAutomationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartAutomationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartAutomationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartDashboardSnapshotJob struct {
 }
 
@@ -4898,6 +4938,10 @@ func addOpDescribeAssetBundleImportJobValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpDescribeAssetBundleImportJob{}, middleware.After)
 }
 
+func addOpDescribeAutomationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAutomationJob{}, middleware.After)
+}
+
 func addOpDescribeBrandAssignmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeBrandAssignment{}, middleware.After)
 }
@@ -5312,6 +5356,10 @@ func addOpStartAssetBundleExportJobValidationMiddleware(stack *middleware.Stack)
 
 func addOpStartAssetBundleImportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartAssetBundleImportJob{}, middleware.After)
+}
+
+func addOpStartAutomationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartAutomationJob{}, middleware.After)
 }
 
 func addOpStartDashboardSnapshotJobValidationMiddleware(stack *middleware.Stack) error {
@@ -5791,6 +5839,11 @@ func validateAnalysisDefinition(v *types.AnalysisDefinition) error {
 	if v.Sheets != nil {
 		if err := validateSheetDefinitionList(v.Sheets); err != nil {
 			invalidParams.AddNested("Sheets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TooltipSheets != nil {
+		if err := validateTooltipSheetDefinitionList(v.TooltipSheets); err != nil {
+			invalidParams.AddNested("TooltipSheets", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.CalculatedFields != nil {
@@ -10017,6 +10070,11 @@ func validateDashboardVersionDefinition(v *types.DashboardVersionDefinition) err
 	if v.Sheets != nil {
 		if err := validateSheetDefinitionList(v.Sheets); err != nil {
 			invalidParams.AddNested("Sheets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TooltipSheets != nil {
+		if err := validateTooltipSheetDefinitionList(v.TooltipSheets); err != nil {
+			invalidParams.AddNested("TooltipSheets", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.CalculatedFields != nil {
@@ -17574,6 +17632,11 @@ func validatePivotTableConfiguration(v *types.PivotTableConfiguration) error {
 			invalidParams.AddNested("FieldOptions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Tooltip != nil {
+		if err := validateTooltipOptions(v.Tooltip); err != nil {
+			invalidParams.AddNested("Tooltip", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.DashboardCustomizationVisualOptions != nil {
 		if err := validateDashboardCustomizationVisualOptions(v.DashboardCustomizationVisualOptions); err != nil {
 			invalidParams.AddNested("DashboardCustomizationVisualOptions", err.(smithy.InvalidParamsError))
@@ -20465,6 +20528,28 @@ func validateSourceTableMap(v map[string]types.SourceTable) error {
 	}
 }
 
+func validateSparklinesOptions(v *types.SparklinesOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SparklinesOptions"}
+	if v.FieldId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldId"))
+	}
+	if v.XAxisField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("XAxisField"))
+	} else if v.XAxisField != nil {
+		if err := validateDimensionField(v.XAxisField); err != nil {
+			invalidParams.AddNested("XAxisField", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSparkParameters(v *types.SparkParameters) error {
 	if v == nil {
 		return nil
@@ -20927,6 +21012,11 @@ func validateTableConfiguration(v *types.TableConfiguration) error {
 			invalidParams.AddNested("TableInlineVisualizations", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Tooltip != nil {
+		if err := validateTooltipOptions(v.Tooltip); err != nil {
+			invalidParams.AddNested("Tooltip", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.DashboardCustomizationVisualOptions != nil {
 		if err := validateDashboardCustomizationVisualOptions(v.DashboardCustomizationVisualOptions); err != nil {
 			invalidParams.AddNested("DashboardCustomizationVisualOptions", err.(smithy.InvalidParamsError))
@@ -21099,6 +21189,11 @@ func validateTableInlineVisualization(v *types.TableInlineVisualization) error {
 	if v.DataBars != nil {
 		if err := validateDataBarsOptions(v.DataBars); err != nil {
 			invalidParams.AddNested("DataBars", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Sparklines != nil {
+		if err := validateSparklinesOptions(v.Sparklines); err != nil {
+			invalidParams.AddNested("Sparklines", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -21390,6 +21485,11 @@ func validateTemplateVersionDefinition(v *types.TemplateVersionDefinition) error
 			invalidParams.AddNested("Sheets", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TooltipSheets != nil {
+		if err := validateTooltipSheetDefinitionList(v.TooltipSheets); err != nil {
+			invalidParams.AddNested("TooltipSheets", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.CalculatedFields != nil {
 		if err := validateCalculatedFields(v.CalculatedFields); err != nil {
 			invalidParams.AddNested("CalculatedFields", err.(smithy.InvalidParamsError))
@@ -21661,6 +21761,109 @@ func validateTooltipOptions(v *types.TooltipOptions) error {
 	if v.FieldBasedTooltip != nil {
 		if err := validateFieldBasedTooltip(v.FieldBasedTooltip); err != nil {
 			invalidParams.AddNested("FieldBasedTooltip", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTooltipSheetDefinition(v *types.TooltipSheetDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TooltipSheetDefinition"}
+	if v.SheetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SheetId"))
+	}
+	if v.Visuals != nil {
+		if err := validateTooltipSheetVisualList(v.Visuals); err != nil {
+			invalidParams.AddNested("Visuals", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TextBoxes != nil {
+		if err := validateTooltipSheetTextBoxList(v.TextBoxes); err != nil {
+			invalidParams.AddNested("TextBoxes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Images != nil {
+		if err := validateTooltipSheetImageList(v.Images); err != nil {
+			invalidParams.AddNested("Images", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Layouts != nil {
+		if err := validateLayoutList(v.Layouts); err != nil {
+			invalidParams.AddNested("Layouts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTooltipSheetDefinitionList(v []types.TooltipSheetDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TooltipSheetDefinitionList"}
+	for i := range v {
+		if err := validateTooltipSheetDefinition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTooltipSheetImageList(v []types.SheetImage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TooltipSheetImageList"}
+	for i := range v {
+		if err := validateSheetImage(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTooltipSheetTextBoxList(v []types.SheetTextBox) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TooltipSheetTextBoxList"}
+	for i := range v {
+		if err := validateSheetTextBox(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTooltipSheetVisualList(v []types.Visual) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TooltipSheetVisualList"}
+	for i := range v {
+		if err := validateVisual(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -25358,6 +25561,30 @@ func validateOpDescribeAssetBundleImportJobInput(v *DescribeAssetBundleImportJob
 	}
 }
 
+func validateOpDescribeAutomationJobInput(v *DescribeAutomationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAutomationJobInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.AutomationGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutomationGroupId"))
+	}
+	if v.AutomationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutomationId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeBrandAssignmentInput(v *DescribeBrandAssignmentInput) error {
 	if v == nil {
 		return nil
@@ -27308,6 +27535,27 @@ func validateOpStartAssetBundleImportJobInput(v *StartAssetBundleImportJobInput)
 		if err := validateAssetBundleImportJobOverrideTags(v.OverrideTags); err != nil {
 			invalidParams.AddNested("OverrideTags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartAutomationJobInput(v *StartAutomationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartAutomationJobInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.AutomationGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutomationGroupId"))
+	}
+	if v.AutomationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutomationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

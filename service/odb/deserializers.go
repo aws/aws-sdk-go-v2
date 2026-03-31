@@ -12711,6 +12711,11 @@ func awsAwsjson10_deserializeDocumentOdbNetwork(v **types.OdbNetwork, value inte
 				sv.DisplayName = ptr.String(jtv)
 			}
 
+		case "ec2PlacementGroupIds":
+			if err := awsAwsjson10_deserializeDocumentResourceIdList(&sv.Ec2PlacementGroupIds, value); err != nil {
+				return err
+			}
+
 		case "managedServices":
 			if err := awsAwsjson10_deserializeDocumentManagedServices(&sv.ManagedServices, value); err != nil {
 				return err
@@ -12980,6 +12985,11 @@ func awsAwsjson10_deserializeDocumentOdbNetworkSummary(v **types.OdbNetworkSumma
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.DisplayName = ptr.String(jtv)
+			}
+
+		case "ec2PlacementGroupIds":
+			if err := awsAwsjson10_deserializeDocumentResourceIdList(&sv.Ec2PlacementGroupIds, value); err != nil {
+				return err
 			}
 
 		case "managedServices":
@@ -13491,6 +13501,42 @@ func awsAwsjson10_deserializeDocumentPeeredCidrList(v *[]string, value interface
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected PeeredCidr to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentResourceIdList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}

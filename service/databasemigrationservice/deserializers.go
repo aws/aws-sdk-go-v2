@@ -19246,6 +19246,19 @@ func awsAwsjson11_deserializeDocumentIbmDb2LuwDataProviderSettings(v **types.Ibm
 				sv.DatabaseName = ptr.String(jtv)
 			}
 
+		case "EncryptionAlgorithm":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EncryptionAlgorithm = ptr.Int32(int32(i64))
+			}
+
 		case "Port":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -19275,6 +19288,19 @@ func awsAwsjson11_deserializeDocumentIbmDb2LuwDataProviderSettings(v **types.Ibm
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.S3Path = ptr.String(jtv)
+			}
+
+		case "SecurityMechanism":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SecurityMechanism = ptr.Int32(int32(i64))
 			}
 
 		case "ServerName":

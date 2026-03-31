@@ -40,6 +40,10 @@ type CreateJobInput struct {
 	// This member is required.
 	Type types.Type
 
+	// The configuration for the asset, including tags to be applied to assets created
+	// by the job.
+	AssetConfiguration *types.AssetConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -47,6 +51,10 @@ type CreateJobOutput struct {
 
 	// The ARN for the job.
 	Arn *string
+
+	// The configuration for the asset, including tags applied to assets created by
+	// the job.
+	AssetConfiguration *types.AssetConfiguration
 
 	// The date and time that the job was created, in ISO 8601 format.
 	CreatedAt *time.Time

@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Authorize Ingestion Hub subscription operation. Looks to see if the derived
-// accountId from FAS has an AgentSpace.
+// Authorize Ingestion Hub subscription operation.
 func (c *Client) AllowVendedLogDeliveryForResource(ctx context.Context, params *AllowVendedLogDeliveryForResourceInput, optFns ...func(*Options)) (*AllowVendedLogDeliveryForResourceOutput, error) {
 	if params == nil {
 		params = &AllowVendedLogDeliveryForResourceInput{}

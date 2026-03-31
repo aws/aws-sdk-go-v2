@@ -35,6 +35,10 @@ type GetIngressPointInput struct {
 	// This member is required.
 	IngressPointId *string
 
+	// Whether to include the trust store contents in the response. Use INCLUDE to
+	// retrieve trust store certificate and CRL contents.
+	IncludeTrustStoreContents types.TrustStoreResponseOption
+
 	noSmithyDocumentSerde
 }
 
@@ -74,6 +78,9 @@ type GetIngressPointOutput struct {
 
 	// The status of the ingress endpoint resource.
 	Status types.IngressPointStatus
+
+	// The selected Transport Layer Security (TLS) policy of the ingress point.
+	TlsPolicy types.TlsPolicy
 
 	// The identifier of the traffic policy resource associated with the ingress
 	// endpoint.

@@ -59,8 +59,7 @@ type ResendValidationEmailInput struct {
 	// that are used to send the emails. This must be the same as the Domain value or
 	// a superdomain of the Domain value. For example, if you requested a certificate
 	// for site.subdomain.example.com and specify a ValidationDomain of
-	// subdomain.example.com , ACM sends email to the domain registrant, technical
-	// contact, and administrative contact in WHOIS and the following five addresses:
+	// subdomain.example.com , ACM sends email to the the following five addresses:
 	//
 	//   - admin@subdomain.example.com
 	//

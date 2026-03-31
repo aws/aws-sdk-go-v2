@@ -358,6 +358,8 @@ type ThrottlingException struct {
 
 	ErrorCodeOverride *string
 
+	ThrottlingReasons []ThrottlingReason
+
 	noSmithyDocumentSerde
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "68cc6739-b671-4d32-879a-1c6f5b50abc8",
+    "type": "feature",
+    "description": "This release expands map customization options with adjustable contour line density, dark mode support for Hybrid and Satellite views, enhanced traffic information across multiple map styles, and transit and truck travel modes for Monochrome and Hybrid map styles.",
+    "modules": [
+        "service/geomaps"
+    ]
+}

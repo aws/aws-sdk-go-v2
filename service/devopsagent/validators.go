@@ -210,26 +210,6 @@ func (m *validateOpDescribePrivateConnection) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpDescribeSupportLevel struct {
-}
-
-func (*validateOpDescribeSupportLevel) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDescribeSupportLevel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DescribeSupportLevelInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDescribeSupportLevelInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpDisableOperatorApp struct {
 }
 
@@ -285,26 +265,6 @@ func (m *validateOpEnableOperatorApp) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpEnableOperatorAppInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpEndChatForCase struct {
-}
-
-func (*validateOpEndChatForCase) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpEndChatForCase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*EndChatForCaseInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpEndChatForCaseInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -425,26 +385,6 @@ func (m *validateOpGetService) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetServiceInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpInitiateChatForCase struct {
-}
-
-func (*validateOpInitiateChatForCase) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpInitiateChatForCase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*InitiateChatForCaseInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpInitiateChatForCaseInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -930,10 +870,6 @@ func addOpDescribePrivateConnectionValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpDescribePrivateConnection{}, middleware.After)
 }
 
-func addOpDescribeSupportLevelValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDescribeSupportLevel{}, middleware.After)
-}
-
 func addOpDisableOperatorAppValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisableOperatorApp{}, middleware.After)
 }
@@ -944,10 +880,6 @@ func addOpDisassociateServiceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpEnableOperatorAppValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableOperatorApp{}, middleware.After)
-}
-
-func addOpEndChatForCaseValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpEndChatForCase{}, middleware.After)
 }
 
 func addOpGetAgentSpaceValidationMiddleware(stack *middleware.Stack) error {
@@ -972,10 +904,6 @@ func addOpGetRecommendationValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetService{}, middleware.After)
-}
-
-func addOpInitiateChatForCaseValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpInitiateChatForCase{}, middleware.After)
 }
 
 func addOpListAssociationsValidationMiddleware(stack *middleware.Stack) error {
@@ -1538,117 +1466,6 @@ func validateMCPServerOAuthClientCredentialsConfig(v *types.MCPServerOAuthClient
 	}
 }
 
-func validateMCPServerSigV4AuthorizationConfig(v *types.MCPServerSigV4AuthorizationConfig) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "MCPServerSigV4AuthorizationConfig"}
-	if v.Region == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Region"))
-	}
-	if v.Service == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Service"))
-	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateMCPServerSigV4ServiceDetails(v *types.MCPServerSigV4ServiceDetails) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "MCPServerSigV4ServiceDetails"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.Endpoint == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
-	}
-	if v.AuthorizationConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationConfig"))
-	} else if v.AuthorizationConfig != nil {
-		if err := validateMCPServerSigV4AuthorizationConfig(v.AuthorizationConfig); err != nil {
-			invalidParams.AddNested("AuthorizationConfig", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateMSTeamsChannel(v *types.MSTeamsChannel) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "MSTeamsChannel"}
-	if v.ChannelName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
-	}
-	if v.ChannelId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateMSTeamsConfiguration(v *types.MSTeamsConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "MSTeamsConfiguration"}
-	if v.TeamId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TeamId"))
-	}
-	if v.TeamName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TeamName"))
-	}
-	if v.TransmissionTarget == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TransmissionTarget"))
-	} else if v.TransmissionTarget != nil {
-		if err := validateMSTeamsTransmissionTarget(v.TransmissionTarget); err != nil {
-			invalidParams.AddNested("TransmissionTarget", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateMSTeamsTransmissionTarget(v *types.MSTeamsTransmissionTarget) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "MSTeamsTransmissionTarget"}
-	if v.OpsOncallTarget != nil {
-		if err := validateMSTeamsChannel(v.OpsOncallTarget); err != nil {
-			invalidParams.AddNested("OpsOncallTarget", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.OpsSRETarget != nil {
-		if err := validateMSTeamsChannel(v.OpsSRETarget); err != nil {
-			invalidParams.AddNested("OpsSRETarget", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateNewRelicApiKeyConfig(v *types.NewRelicApiKeyConfig) error {
 	if v == nil {
 		return nil
@@ -1918,11 +1735,6 @@ func validateServiceConfiguration(v types.ServiceConfiguration) error {
 			invalidParams.AddNested("[mcpservernewrelic]", err.(smithy.InvalidParamsError))
 		}
 
-	case *types.ServiceConfigurationMemberMsteams:
-		if err := validateMSTeamsConfiguration(&uv.Value); err != nil {
-			invalidParams.AddNested("[msteams]", err.(smithy.InvalidParamsError))
-		}
-
 	case *types.ServiceConfigurationMemberPagerduty:
 		if err := validatePagerDutyConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[pagerduty]", err.(smithy.InvalidParamsError))
@@ -1985,11 +1797,6 @@ func validateServiceDetails(v types.ServiceDetails) error {
 	case *types.ServiceDetailsMemberMcpservernewrelic:
 		if err := validateNewRelicServiceDetails(&uv.Value); err != nil {
 			invalidParams.AddNested("[mcpservernewrelic]", err.(smithy.InvalidParamsError))
-		}
-
-	case *types.ServiceDetailsMemberMcpserversigv4:
-		if err := validateMCPServerSigV4ServiceDetails(&uv.Value); err != nil {
-			invalidParams.AddNested("[mcpserversigv4]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.ServiceDetailsMemberMcpserversplunk:
@@ -2365,24 +2172,6 @@ func validateOpDescribePrivateConnectionInput(v *DescribePrivateConnectionInput)
 	}
 }
 
-func validateOpDescribeSupportLevelInput(v *DescribeSupportLevelInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DescribeSupportLevelInput"}
-	if v.AgentSpaceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
-	}
-	if v.TaskId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpDisableOperatorAppInput(v *DisableOperatorAppInput) error {
 	if v == nil {
 		return nil
@@ -2429,24 +2218,6 @@ func validateOpEnableOperatorAppInput(v *EnableOperatorAppInput) error {
 	}
 	if v.OperatorAppRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OperatorAppRoleArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpEndChatForCaseInput(v *EndChatForCaseInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "EndChatForCaseInput"}
-	if v.AgentSpaceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
-	}
-	if v.TaskId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2546,24 +2317,6 @@ func validateOpGetServiceInput(v *GetServiceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetServiceInput"}
 	if v.ServiceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpInitiateChatForCaseInput(v *InitiateChatForCaseInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "InitiateChatForCaseInput"}
-	if v.AgentSpaceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
-	}
-	if v.TaskId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

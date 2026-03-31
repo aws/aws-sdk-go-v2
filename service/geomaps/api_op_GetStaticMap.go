@@ -87,8 +87,7 @@ type GetStaticMapInput struct {
 	// Example: 49.295,-123.108
 	Center *string
 
-	// Sets color tone for map, such as dark and light for specific map styles. It
-	// only applies to vector map styles, such as Standard.
+	// Sets the color tone for the map, such as dark and light.
 	//
 	// Example: Light
 	//

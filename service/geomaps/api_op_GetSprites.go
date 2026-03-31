@@ -33,8 +33,7 @@ func (c *Client) GetSprites(ctx context.Context, params *GetSpritesInput, optFns
 
 type GetSpritesInput struct {
 
-	// Sets color tone for map such as dark and light for specific map styles. It
-	// applies to only vector map styles such as Standard and Monochrome.
+	// Sets the color tone for the map sprites, such as dark and light.
 	//
 	// Example: Light
 	//

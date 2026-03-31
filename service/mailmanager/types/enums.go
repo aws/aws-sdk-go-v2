@@ -305,12 +305,13 @@ type IngressPointStatus string
 
 // Enum values for IngressPointStatus
 const (
-	IngressPointStatusProvisioning   IngressPointStatus = "PROVISIONING"
-	IngressPointStatusDeprovisioning IngressPointStatus = "DEPROVISIONING"
-	IngressPointStatusUpdating       IngressPointStatus = "UPDATING"
-	IngressPointStatusActive         IngressPointStatus = "ACTIVE"
-	IngressPointStatusClosed         IngressPointStatus = "CLOSED"
-	IngressPointStatusFailed         IngressPointStatus = "FAILED"
+	IngressPointStatusProvisioning                      IngressPointStatus = "PROVISIONING"
+	IngressPointStatusDeprovisioning                    IngressPointStatus = "DEPROVISIONING"
+	IngressPointStatusUpdating                          IngressPointStatus = "UPDATING"
+	IngressPointStatusActive                            IngressPointStatus = "ACTIVE"
+	IngressPointStatusClosed                            IngressPointStatus = "CLOSED"
+	IngressPointStatusFailed                            IngressPointStatus = "FAILED"
+	IngressPointStatusAssociatedVpcEndpointDoesNotExist IngressPointStatus = "ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST"
 )
 
 // Values returns all known values for IngressPointStatus. Note that this can be
@@ -325,6 +326,7 @@ func (IngressPointStatus) Values() []IngressPointStatus {
 		"ACTIVE",
 		"CLOSED",
 		"FAILED",
+		"ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST",
 	}
 }
 
@@ -353,6 +355,7 @@ type IngressPointType string
 const (
 	IngressPointTypeOpen IngressPointType = "OPEN"
 	IngressPointTypeAuth IngressPointType = "AUTH"
+	IngressPointTypeMtls IngressPointType = "MTLS"
 )
 
 // Values returns all known values for IngressPointType. Note that this can be
@@ -363,6 +366,7 @@ func (IngressPointType) Values() []IngressPointType {
 	return []IngressPointType{
 		"OPEN",
 		"AUTH",
+		"MTLS",
 	}
 }
 
@@ -479,6 +483,25 @@ func (IpType) Values() []IpType {
 	return []IpType{
 		"IPV4",
 		"DUAL_STACK",
+	}
+}
+
+type LambdaInvocationType string
+
+// Enum values for LambdaInvocationType
+const (
+	LambdaInvocationTypeEvent           LambdaInvocationType = "EVENT"
+	LambdaInvocationTypeRequestResponse LambdaInvocationType = "REQUEST_RESPONSE"
+)
+
+// Values returns all known values for LambdaInvocationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LambdaInvocationType) Values() []LambdaInvocationType {
+	return []LambdaInvocationType{
+		"EVENT",
+		"REQUEST_RESPONSE",
 	}
 }
 
@@ -613,6 +636,38 @@ func (RuleBooleanOperator) Values() []RuleBooleanOperator {
 	return []RuleBooleanOperator{
 		"IS_TRUE",
 		"IS_FALSE",
+	}
+}
+
+type RuleClientCertificateAttribute string
+
+// Enum values for RuleClientCertificateAttribute
+const (
+	RuleClientCertificateAttributeCn                           RuleClientCertificateAttribute = "CN"
+	RuleClientCertificateAttributeSanRfc822Name                RuleClientCertificateAttribute = "SAN_RFC822_NAME"
+	RuleClientCertificateAttributeSanDnsName                   RuleClientCertificateAttribute = "SAN_DNS_NAME"
+	RuleClientCertificateAttributeSanDirectoryName             RuleClientCertificateAttribute = "SAN_DIRECTORY_NAME"
+	RuleClientCertificateAttributeSanUniformResourceIdentifier RuleClientCertificateAttribute = "SAN_UNIFORM_RESOURCE_IDENTIFIER"
+	RuleClientCertificateAttributeSanIpAddress                 RuleClientCertificateAttribute = "SAN_IP_ADDRESS"
+	RuleClientCertificateAttributeSanRegisteredId              RuleClientCertificateAttribute = "SAN_REGISTERED_ID"
+	RuleClientCertificateAttributeSerialNumber                 RuleClientCertificateAttribute = "SERIAL_NUMBER"
+)
+
+// Values returns all known values for RuleClientCertificateAttribute. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleClientCertificateAttribute) Values() []RuleClientCertificateAttribute {
+	return []RuleClientCertificateAttribute{
+		"CN",
+		"SAN_RFC822_NAME",
+		"SAN_DNS_NAME",
+		"SAN_DIRECTORY_NAME",
+		"SAN_UNIFORM_RESOURCE_IDENTIFIER",
+		"SAN_IP_ADDRESS",
+		"SAN_REGISTERED_ID",
+		"SERIAL_NUMBER",
 	}
 }
 
@@ -913,5 +968,45 @@ func (SnsNotificationPayloadType) Values() []SnsNotificationPayloadType {
 	return []SnsNotificationPayloadType{
 		"HEADERS",
 		"CONTENT",
+	}
+}
+
+type TlsPolicy string
+
+// Enum values for TlsPolicy
+const (
+	TlsPolicyRequired TlsPolicy = "REQUIRED"
+	TlsPolicyOptional TlsPolicy = "OPTIONAL"
+	TlsPolicyFips     TlsPolicy = "FIPS"
+)
+
+// Values returns all known values for TlsPolicy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TlsPolicy) Values() []TlsPolicy {
+	return []TlsPolicy{
+		"REQUIRED",
+		"OPTIONAL",
+		"FIPS",
+	}
+}
+
+type TrustStoreResponseOption string
+
+// Enum values for TrustStoreResponseOption
+const (
+	TrustStoreResponseOptionExclude TrustStoreResponseOption = "EXCLUDE"
+	TrustStoreResponseOptionInclude TrustStoreResponseOption = "INCLUDE"
+)
+
+// Values returns all known values for TrustStoreResponseOption. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrustStoreResponseOption) Values() []TrustStoreResponseOption {
+	return []TrustStoreResponseOption{
+		"EXCLUDE",
+		"INCLUDE",
 	}
 }

@@ -50,6 +50,9 @@ type GetAccountUsageOutput struct {
 	// Monthly investigation hours usage and limit for an account
 	MonthlyAccountInvestigationHours *types.UsageMetric
 
+	// Monthly on-demand hours usage and limit for an account
+	MonthlyAccountOnDemandHours *types.UsageMetric
+
 	// Monthly system learning hours usage and limit for an account
 	MonthlyAccountSystemLearningHours *types.UsageMetric
 

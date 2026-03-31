@@ -13,6 +13,9 @@ import (
 
 // Revokes a public ACM certificate. You can only revoke certificates that have
 // been previously exported.
+//
+// Once a certificate is revoked, you cannot reuse the certificate. Revoking a
+// certificate is permanent.
 func (c *Client) RevokeCertificate(ctx context.Context, params *RevokeCertificateInput, optFns ...func(*Options)) (*RevokeCertificateOutput, error) {
 	if params == nil {
 		params = &RevokeCertificateInput{}

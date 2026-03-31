@@ -1,0 +1,8 @@
+{
+    "id": "3ea46d72-9071-47bc-b0b9-557758d15fb0",
+    "type": "feature",
+    "description": "Adds StartAutomationJob and DescribeAutomationJob APIs for automation jobs. Adds three custom permission capabilities that allow admins to control whether users can manage Spaces and chat agents. Adds an OAuthClientCredentials structure to provide OAuth 2.0 client credentials inline to data sources.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

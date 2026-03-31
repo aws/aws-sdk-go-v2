@@ -166,6 +166,67 @@ type Acceptor struct {
 	noSmithyDocumentSerde
 }
 
+// Summary view of an agreement cancellation request.
+type AgreementCancellationRequestSummary struct {
+
+	// The unique identifier of the cancellation request.
+	AgreementCancellationRequestId *string
+
+	// The unique identifier of the agreement associated with this cancellation
+	// request.
+	AgreementId *string
+
+	// The type of agreement.
+	AgreementType *string
+
+	// The catalog in which the agreement was created.
+	Catalog *string
+
+	// The date and time when the cancellation request was created, as a POSIX
+	// timestamp (Unix epoch seconds).
+	CreatedAt *time.Time
+
+	// The reason code provided for the cancellation.
+	ReasonCode AgreementCancellationRequestReasonCode
+
+	// The current status of the cancellation request. Possible values include
+	// PENDING_APPROVAL , APPROVED , REJECTED , CANCELLED , and VALIDATION_FAILED .
+	Status AgreementCancellationRequestStatus
+
+	// The date and time when the cancellation request was last updated, as a POSIX
+	// timestamp (Unix epoch seconds).
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A summary of grouped billing data for an agreement invoice line item.
+type AgreementInvoiceLineItemGroupSummary struct {
+
+	// The unique identifier of the agreement.
+	AgreementId *string
+
+	// The billing period associated with this group.
+	InvoiceBillingPeriod *InvoiceBillingPeriod
+
+	// The identifier of the invoice for this group.
+	InvoiceId *string
+
+	// The type of invoice. Valid values are INVOICE and CREDIT_MEMO .
+	InvoiceType InvoiceType
+
+	// The entity that issues the invoice.
+	InvoicingEntity *InvoicingEntity
+
+	// The timestamp when the invoice containing this group was created.
+	IssuedTime *time.Time
+
+	// Monetary amounts for this invoice group.
+	PricingCurrencyAmount *PricingCurrencyAmount
+
+	noSmithyDocumentSerde
+}
+
 // A summary of the agreement, including top-level attributes (for example, the
 // agreement ID, proposer, and acceptor).
 type AgreementViewSummary struct {
@@ -180,7 +241,7 @@ type AgreementViewSummary struct {
 	// The unique identifier of the agreement.
 	AgreementId *string
 
-	// The type of agreement. Value is PurchaseAgreement .
+	// The type of agreement.
 	AgreementType *string
 
 	// The date and time when the agreement ends. The field is null for pay-as-you-go
@@ -199,6 +260,147 @@ type AgreementViewSummary struct {
 
 	// The current status of the agreement.
 	Status AgreementStatus
+
+	noSmithyDocumentSerde
+}
+
+// An error for a billing adjustment request entry that failed validation.
+type BatchCreateBillingAdjustmentError struct {
+
+	// The client token of the request entry that failed.
+	//
+	// This member is required.
+	ClientToken *string
+
+	// The error code indicating the reason for failure.
+	//
+	// This member is required.
+	Code BillingAdjustmentErrorCode
+
+	// A human-readable message describing the error.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// A successfully created billing adjustment request item.
+type BatchCreateBillingAdjustmentItem struct {
+
+	// The unique identifier of the created billing adjustment request.
+	//
+	// This member is required.
+	BillingAdjustmentRequestId *string
+
+	// The client token provided in the corresponding request entry.
+	//
+	// This member is required.
+	ClientToken *string
+
+	noSmithyDocumentSerde
+}
+
+// An individual entry in a batch billing adjustment request, specifying the
+// invoice and adjustment details.
+type BatchCreateBillingAdjustmentRequestEntry struct {
+
+	// The adjustment amount as a string representation of a decimal number in the
+	// currency of the invoice.
+	//
+	// This member is required.
+	AdjustmentAmount *string
+
+	// The reason code for the billing adjustment. Valid values include
+	// INCORRECT_TERMS_ACCEPTED , INCORRECT_METERING , TEST_ENVIRONMENT_CHARGES ,
+	// ALTERNATIVE_PROCUREMENT_CHANNEL , UNINTENDED_RENEWAL , BUYER_DISSATISFACTION ,
+	// and OTHER .
+	//
+	// This member is required.
+	AdjustmentReasonCode BillingAdjustmentReasonCode
+
+	// The unique identifier of the agreement associated with the invoice.
+	//
+	// This member is required.
+	AgreementId *string
+
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
+	//
+	// This member is required.
+	ClientToken *string
+
+	// The 3-letter ISO 4217 currency code for the adjustment amount (e.g., USD ).
+	//
+	// This member is required.
+	CurrencyCode *string
+
+	// The identifier of the original invoice to adjust.
+	//
+	// This member is required.
+	OriginalInvoiceId *string
+
+	// An optional detailed description of the adjustment reason.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary view of a billing adjustment request.
+type BillingAdjustmentSummary struct {
+
+	// The adjustment amount as a string representation of a decimal number.
+	//
+	// This member is required.
+	AdjustmentAmount *string
+
+	// The unique identifier of the agreement associated with this billing adjustment
+	// request.
+	//
+	// This member is required.
+	AgreementId *string
+
+	// The type of agreement.
+	//
+	// This member is required.
+	AgreementType *string
+
+	// The unique identifier of the billing adjustment request.
+	//
+	// This member is required.
+	BillingAdjustmentRequestId *string
+
+	// The catalog in which the agreement was created.
+	//
+	// This member is required.
+	Catalog *string
+
+	// The date and time when the billing adjustment request was created, as a POSIX
+	// timestamp (Unix epoch seconds).
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The currency code for the adjustment amount.
+	//
+	// This member is required.
+	CurrencyCode *string
+
+	// The identifier of the original invoice being adjusted.
+	//
+	// This member is required.
+	OriginalInvoiceId *string
+
+	// The current status of the billing adjustment request.
+	//
+	// This member is required.
+	Status BillingAdjustmentStatus
+
+	// The date and time when the billing adjustment request was last updated, as a
+	// POSIX timestamp (Unix epoch seconds).
+	//
+	// This member is required.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -444,6 +646,34 @@ type GrantItem struct {
 	noSmithyDocumentSerde
 }
 
+// The billing period for an invoice, specified by month and year.
+type InvoiceBillingPeriod struct {
+
+	// The billing period month. Valid range: 1-12.
+	//
+	// This member is required.
+	Month *int32
+
+	// The billing period year.
+	//
+	// This member is required.
+	Year *int32
+
+	noSmithyDocumentSerde
+}
+
+// The entity that issues the AWS invoice.
+type InvoicingEntity struct {
+
+	// The branch name of the invoicing entity.
+	BranchName *string
+
+	// The legal name of the invoicing entity.
+	LegalName *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines the list of text agreements proposed to the acceptors. An example is
 // the end user license agreement (EULA).
 type LegalTerm struct {
@@ -507,6 +737,21 @@ type PaymentScheduleTerm struct {
 
 	// Type of the term.
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Monetary amounts associated with an invoice line item group.
+type PricingCurrencyAmount struct {
+
+	// The monetary amount before tax.
+	Amount *string
+
+	// The 3-letter ISO 4217 currency code (e.g., USD , EUR , JPY ).
+	CurrencyCode *string
+
+	// The maximum refundable amount as a string representation of a decimal number.
+	MaxAdjustmentAmount *string
 
 	noSmithyDocumentSerde
 }

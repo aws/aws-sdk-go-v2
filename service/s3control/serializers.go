@@ -4625,6 +4625,10 @@ func awsRestxml_serializeOpHttpBindingsGetDataAccessInput(v *GetDataAccessInput,
 		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
+	if v.AuditContext != nil {
+		encoder.SetQuery("auditContext").String(*v.AuditContext)
+	}
+
 	if v.DurationSeconds != nil {
 		encoder.SetQuery("durationSeconds").Integer(*v.DurationSeconds)
 	}

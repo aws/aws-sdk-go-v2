@@ -242,6 +242,18 @@ func TestCheckSnapshot_RevokeCertificate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SearchCertificates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchCertificates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchCertificates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateCertificateOptions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateCertificateOptions(context.Background(), nil, func(o *Options) {
@@ -426,6 +438,18 @@ func TestUpdateSnapshot_RevokeCertificate(t *testing.T) {
 	_, err := svc.RevokeCertificate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RevokeCertificate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchCertificates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchCertificates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchCertificates")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

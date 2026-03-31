@@ -2621,6 +2621,11 @@ func awsRestjson1_serializeOpDocumentCreateEnvironmentInput(v *CreateEnvironment
 		ok.String(*v.EnvironmentConfigurationId)
 	}
 
+	if v.EnvironmentConfigurationName != nil {
+		ok := object.Key("environmentConfigurationName")
+		ok.String(*v.EnvironmentConfigurationName)
+	}
+
 	if v.EnvironmentProfileIdentifier != nil {
 		ok := object.Key("environmentProfileIdentifier")
 		ok.String(*v.EnvironmentProfileIdentifier)
@@ -16157,6 +16162,11 @@ func awsRestjson1_serializeOpDocumentUpdateEnvironmentInput(v *UpdateEnvironment
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.EnvironmentConfigurationName != nil {
+		ok := object.Key("environmentConfigurationName")
+		ok.String(*v.EnvironmentConfigurationName)
 	}
 
 	if v.GlossaryTerms != nil {

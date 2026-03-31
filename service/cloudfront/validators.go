@@ -8425,6 +8425,11 @@ func validateOpUpdateAnycastIpListInput(v *UpdateAnycastIpListInput) error {
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
+	if v.IpamCidrConfigs != nil {
+		if err := validateIpamCidrConfigList(v.IpamCidrConfigs); err != nil {
+			invalidParams.AddNested("IpamCidrConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.IfMatch == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IfMatch"))
 	}

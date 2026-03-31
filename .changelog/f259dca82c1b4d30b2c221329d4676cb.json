@@ -1,0 +1,8 @@
+{
+    "id": "f259dca8-2c1b-4d30-b2c2-21329d4676cb",
+    "type": "feature",
+    "description": "To successfully connect to the IBM DB2 LUW database server, you may need to specify additional security parameters that are passed to the JDBC driver. These parameters are EncryptionAlgorithm and SecurityMechanism. Both parameters accept integer values.",
+    "modules": [
+        "service/databasemigrationservice"
+    ]
+}

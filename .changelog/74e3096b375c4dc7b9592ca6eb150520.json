@@ -1,0 +1,8 @@
+{
+    "id": "74e3096b-375c-4dc7-b959-2ca6eb150520",
+    "type": "feature",
+    "description": "Adding EURO Currency for MRR Amount",
+    "modules": [
+        "service/partnercentralselling"
+    ]
+}

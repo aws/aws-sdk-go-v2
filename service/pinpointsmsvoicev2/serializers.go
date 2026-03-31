@@ -322,6 +322,67 @@ func (m *awsAwsjson10_serializeOpCreateEventDestination) HandleSerialize(ctx con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpCreateNotifyConfiguration struct {
+}
+
+func (*awsAwsjson10_serializeOpCreateNotifyConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpCreateNotifyConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateNotifyConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.CreateNotifyConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentCreateNotifyConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpCreateOptOutList struct {
 }
 
@@ -488,6 +549,67 @@ func (m *awsAwsjson10_serializeOpCreateProtectConfiguration) HandleSerialize(ctx
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentCreateProtectConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpCreateRcsAgent struct {
+}
+
+func (*awsAwsjson10_serializeOpCreateRcsAgent) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpCreateRcsAgent) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateRcsAgentInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.CreateRcsAgent")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentCreateRcsAgentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1237,6 +1359,128 @@ func (m *awsAwsjson10_serializeOpDeleteMediaMessageSpendLimitOverride) HandleSer
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpDeleteNotifyConfiguration struct {
+}
+
+func (*awsAwsjson10_serializeOpDeleteNotifyConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDeleteNotifyConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteNotifyConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.DeleteNotifyConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDeleteNotifyConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpDeleteNotifyMessageSpendLimitOverride struct {
+}
+
+func (*awsAwsjson10_serializeOpDeleteNotifyMessageSpendLimitOverride) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDeleteNotifyMessageSpendLimitOverride) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteNotifyMessageSpendLimitOverrideInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.DeleteNotifyMessageSpendLimitOverride")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDeleteNotifyMessageSpendLimitOverrideInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpDeleteOptedOutNumber struct {
 }
 
@@ -1525,6 +1769,67 @@ func (m *awsAwsjson10_serializeOpDeleteProtectConfigurationRuleSetNumberOverride
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentDeleteProtectConfigurationRuleSetNumberOverrideInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpDeleteRcsAgent struct {
+}
+
+func (*awsAwsjson10_serializeOpDeleteRcsAgent) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDeleteRcsAgent) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteRcsAgentInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.DeleteRcsAgent")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDeleteRcsAgentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2213,6 +2518,128 @@ func (m *awsAwsjson10_serializeOpDescribeKeywords) HandleSerialize(ctx context.C
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpDescribeNotifyConfigurations struct {
+}
+
+func (*awsAwsjson10_serializeOpDescribeNotifyConfigurations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDescribeNotifyConfigurations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeNotifyConfigurationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.DescribeNotifyConfigurations")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDescribeNotifyConfigurationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpDescribeNotifyTemplates struct {
+}
+
+func (*awsAwsjson10_serializeOpDescribeNotifyTemplates) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDescribeNotifyTemplates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeNotifyTemplatesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.DescribeNotifyTemplates")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDescribeNotifyTemplatesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpDescribeOptedOutNumbers struct {
 }
 
@@ -2501,6 +2928,128 @@ func (m *awsAwsjson10_serializeOpDescribeProtectConfigurations) HandleSerialize(
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentDescribeProtectConfigurationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpDescribeRcsAgentCountryLaunchStatus struct {
+}
+
+func (*awsAwsjson10_serializeOpDescribeRcsAgentCountryLaunchStatus) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDescribeRcsAgentCountryLaunchStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeRcsAgentCountryLaunchStatusInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.DescribeRcsAgentCountryLaunchStatus")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDescribeRcsAgentCountryLaunchStatusInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpDescribeRcsAgents struct {
+}
+
+func (*awsAwsjson10_serializeOpDescribeRcsAgents) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDescribeRcsAgents) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeRcsAgentsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.DescribeRcsAgents")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDescribeRcsAgentsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3416,6 +3965,67 @@ func (m *awsAwsjson10_serializeOpGetResourcePolicy) HandleSerialize(ctx context.
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentGetResourcePolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpListNotifyCountries struct {
+}
+
+func (*awsAwsjson10_serializeOpListNotifyCountries) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpListNotifyCountries) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListNotifyCountriesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.ListNotifyCountries")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListNotifyCountriesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4409,6 +5019,128 @@ func (m *awsAwsjson10_serializeOpSendMediaMessage) HandleSerialize(ctx context.C
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpSendNotifyTextMessage struct {
+}
+
+func (*awsAwsjson10_serializeOpSendNotifyTextMessage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpSendNotifyTextMessage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SendNotifyTextMessageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.SendNotifyTextMessage")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentSendNotifyTextMessageInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpSendNotifyVoiceMessage struct {
+}
+
+func (*awsAwsjson10_serializeOpSendNotifyVoiceMessage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpSendNotifyVoiceMessage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SendNotifyVoiceMessageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.SendNotifyVoiceMessage")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentSendNotifyVoiceMessageInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpSendTextMessage struct {
 }
 
@@ -4836,6 +5568,67 @@ func (m *awsAwsjson10_serializeOpSetMediaMessageSpendLimitOverride) HandleSerial
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpSetNotifyMessageSpendLimitOverride struct {
+}
+
+func (*awsAwsjson10_serializeOpSetNotifyMessageSpendLimitOverride) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpSetNotifyMessageSpendLimitOverride) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SetNotifyMessageSpendLimitOverrideInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.SetNotifyMessageSpendLimitOverride")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentSetNotifyMessageSpendLimitOverrideInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpSetTextMessageSpendLimitOverride struct {
 }
 
@@ -5202,6 +5995,67 @@ func (m *awsAwsjson10_serializeOpUpdateEventDestination) HandleSerialize(ctx con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpUpdateNotifyConfiguration struct {
+}
+
+func (*awsAwsjson10_serializeOpUpdateNotifyConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpUpdateNotifyConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateNotifyConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.UpdateNotifyConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdateNotifyConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpUpdatePhoneNumber struct {
 }
 
@@ -5446,6 +6300,67 @@ func (m *awsAwsjson10_serializeOpUpdateProtectConfigurationCountryRuleSet) Handl
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpUpdateRcsAgent struct {
+}
+
+func (*awsAwsjson10_serializeOpUpdateRcsAgent) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpUpdateRcsAgent) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateRcsAgentInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.UpdateRcsAgent")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdateRcsAgentInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpUpdateSenderId struct {
 }
 
@@ -5638,6 +6553,38 @@ func awsAwsjson10_serializeDocumentContextMap(v map[string]string, value smithyj
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentCountryLaunchStatusFilter(v *types.CountryLaunchStatusFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("Name")
+		ok.String(string(v.Name))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsAwsjson10_serializeDocumentFilterValueList(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentCountryLaunchStatusFilterList(v []types.CountryLaunchStatusFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentCountryLaunchStatusFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentDestinationCountryParameters(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5683,6 +6630,17 @@ func awsAwsjson10_serializeDocumentFieldPathList(v []string, value smithyjson.Va
 }
 
 func awsAwsjson10_serializeDocumentFilterValueList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentIsoCountryCodeList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -5797,6 +6755,114 @@ func awsAwsjson10_serializeDocumentNonEmptyTagList(v []types.Tag, value smithyjs
 		if err := awsAwsjson10_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentNotifyConfigurationFilter(v *types.NotifyConfigurationFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("Name")
+		ok.String(string(v.Name))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsAwsjson10_serializeDocumentFilterValueList(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentNotifyConfigurationFilterList(v []types.NotifyConfigurationFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentNotifyConfigurationFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentNotifyConfigurationIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentNotifyEnabledChannelsList(v []types.NumberCapability, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentNotifyTemplateFilter(v *types.NotifyTemplateFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("Name")
+		ok.String(string(v.Name))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsAwsjson10_serializeDocumentFilterValueList(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentNotifyTemplateFilterList(v []types.NotifyTemplateFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentNotifyTemplateFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentNotifyTemplateIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentNotifyUseCaseList(v []types.NotifyConfigurationUseCase, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }
@@ -6069,6 +7135,49 @@ func awsAwsjson10_serializeDocumentProtectConfigurationRuleSetNumberOverrideFilt
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsAgentFilter(v *types.RcsAgentFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("Name")
+		ok.String(string(v.Name))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsAwsjson10_serializeDocumentFilterValueList(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsAgentFilterList(v []types.RcsAgentFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentRcsAgentFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRcsAgentIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -6413,6 +7522,17 @@ func awsAwsjson10_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentTemplateVariableSubstitutionMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentVerifiedDestinationNumberFilter(v *types.VerifiedDestinationNumberFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6586,6 +7706,64 @@ func awsAwsjson10_serializeOpDocumentCreateEventDestinationInput(v *CreateEventD
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentCreateNotifyConfigurationInput(v *CreateNotifyConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.DefaultTemplateId != nil {
+		ok := object.Key("DefaultTemplateId")
+		ok.String(*v.DefaultTemplateId)
+	}
+
+	if v.DeletionProtectionEnabled != nil {
+		ok := object.Key("DeletionProtectionEnabled")
+		ok.Boolean(*v.DeletionProtectionEnabled)
+	}
+
+	if v.DisplayName != nil {
+		ok := object.Key("DisplayName")
+		ok.String(*v.DisplayName)
+	}
+
+	if v.EnabledChannels != nil {
+		ok := object.Key("EnabledChannels")
+		if err := awsAwsjson10_serializeDocumentNotifyEnabledChannelsList(v.EnabledChannels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EnabledCountries != nil {
+		ok := object.Key("EnabledCountries")
+		if err := awsAwsjson10_serializeDocumentIsoCountryCodeList(v.EnabledCountries, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PoolId != nil {
+		ok := object.Key("PoolId")
+		ok.String(*v.PoolId)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson10_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.UseCase) > 0 {
+		ok := object.Key("UseCase")
+		ok.String(string(v.UseCase))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentCreateOptOutListInput(v *CreateOptOutListInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6661,6 +7839,35 @@ func awsAwsjson10_serializeOpDocumentCreateProtectConfigurationInput(v *CreatePr
 	if v.DeletionProtectionEnabled != nil {
 		ok := object.Key("DeletionProtectionEnabled")
 		ok.Boolean(*v.DeletionProtectionEnabled)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson10_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentCreateRcsAgentInput(v *CreateRcsAgentInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.DeletionProtectionEnabled != nil {
+		ok := object.Key("DeletionProtectionEnabled")
+		ok.Boolean(*v.DeletionProtectionEnabled)
+	}
+
+	if v.OptOutListName != nil {
+		ok := object.Key("OptOutListName")
+		ok.String(*v.OptOutListName)
 	}
 
 	if v.Tags != nil {
@@ -6769,6 +7976,11 @@ func awsAwsjson10_serializeOpDocumentCreateVerifiedDestinationNumberInput(v *Cre
 		ok.String(*v.DestinationPhoneNumber)
 	}
 
+	if v.RcsAgentId != nil {
+		ok := object.Key("RcsAgentId")
+		ok.String(*v.RcsAgentId)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson10_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -6863,6 +8075,25 @@ func awsAwsjson10_serializeOpDocumentDeleteMediaMessageSpendLimitOverrideInput(v
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentDeleteNotifyConfigurationInput(v *DeleteNotifyConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NotifyConfigurationId != nil {
+		ok := object.Key("NotifyConfigurationId")
+		ok.String(*v.NotifyConfigurationId)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentDeleteNotifyMessageSpendLimitOverrideInput(v *DeleteNotifyMessageSpendLimitOverrideInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentDeleteOptedOutNumberInput(v *DeleteOptedOutNumberInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6928,6 +8159,18 @@ func awsAwsjson10_serializeOpDocumentDeleteProtectConfigurationRuleSetNumberOver
 	if v.ProtectConfigurationId != nil {
 		ok := object.Key("ProtectConfigurationId")
 		ok.String(*v.ProtectConfigurationId)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentDeleteRcsAgentInput(v *DeleteRcsAgentInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RcsAgentId != nil {
+		ok := object.Key("RcsAgentId")
+		ok.String(*v.RcsAgentId)
 	}
 
 	return nil
@@ -7113,6 +8356,68 @@ func awsAwsjson10_serializeOpDocumentDescribeKeywordsInput(v *DescribeKeywordsIn
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentDescribeNotifyConfigurationsInput(v *DescribeNotifyConfigurationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson10_serializeDocumentNotifyConfigurationFilterList(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.NotifyConfigurationIds != nil {
+		ok := object.Key("NotifyConfigurationIds")
+		if err := awsAwsjson10_serializeDocumentNotifyConfigurationIdList(v.NotifyConfigurationIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentDescribeNotifyTemplatesInput(v *DescribeNotifyTemplatesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson10_serializeDocumentNotifyTemplateFilterList(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.TemplateIds != nil {
+		ok := object.Key("TemplateIds")
+		if err := awsAwsjson10_serializeDocumentNotifyTemplateIdList(v.TemplateIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentDescribeOptedOutNumbersInput(v *DescribeOptedOutNumbersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7274,6 +8579,78 @@ func awsAwsjson10_serializeOpDocumentDescribeProtectConfigurationsInput(v *Descr
 	if v.ProtectConfigurationIds != nil {
 		ok := object.Key("ProtectConfigurationIds")
 		if err := awsAwsjson10_serializeDocumentProtectConfigurationIdList(v.ProtectConfigurationIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentDescribeRcsAgentCountryLaunchStatusInput(v *DescribeRcsAgentCountryLaunchStatusInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson10_serializeDocumentCountryLaunchStatusFilterList(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IsoCountryCodes != nil {
+		ok := object.Key("IsoCountryCodes")
+		if err := awsAwsjson10_serializeDocumentIsoCountryCodeList(v.IsoCountryCodes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.RcsAgentId != nil {
+		ok := object.Key("RcsAgentId")
+		ok.String(*v.RcsAgentId)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentDescribeRcsAgentsInput(v *DescribeRcsAgentsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson10_serializeDocumentRcsAgentFilterList(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if len(v.Owner) > 0 {
+		ok := object.Key("Owner")
+		ok.String(string(v.Owner))
+	}
+
+	if v.RcsAgentIds != nil {
+		ok := object.Key("RcsAgentIds")
+		if err := awsAwsjson10_serializeDocumentRcsAgentIdList(v.RcsAgentIds, ok); err != nil {
 			return err
 		}
 	}
@@ -7683,6 +9060,42 @@ func awsAwsjson10_serializeOpDocumentGetResourcePolicyInput(v *GetResourcePolicy
 	if v.ResourceArn != nil {
 		ok := object.Key("ResourceArn")
 		ok.String(*v.ResourceArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentListNotifyCountriesInput(v *ListNotifyCountriesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Channels != nil {
+		ok := object.Key("Channels")
+		if err := awsAwsjson10_serializeDocumentNotifyEnabledChannelsList(v.Channels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if len(v.Tier) > 0 {
+		ok := object.Key("Tier")
+		ok.String(string(v.Tier))
+	}
+
+	if v.UseCases != nil {
+		ok := object.Key("UseCases")
+		if err := awsAwsjson10_serializeDocumentNotifyUseCaseList(v.UseCases, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -8179,6 +9592,123 @@ func awsAwsjson10_serializeOpDocumentSendMediaMessageInput(v *SendMediaMessageIn
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentSendNotifyTextMessageInput(v *SendNotifyTextMessageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConfigurationSetName != nil {
+		ok := object.Key("ConfigurationSetName")
+		ok.String(*v.ConfigurationSetName)
+	}
+
+	if v.Context != nil {
+		ok := object.Key("Context")
+		if err := awsAwsjson10_serializeDocumentContextMap(v.Context, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DestinationPhoneNumber != nil {
+		ok := object.Key("DestinationPhoneNumber")
+		ok.String(*v.DestinationPhoneNumber)
+	}
+
+	if v.DryRun {
+		ok := object.Key("DryRun")
+		ok.Boolean(v.DryRun)
+	}
+
+	if v.MessageFeedbackEnabled != nil {
+		ok := object.Key("MessageFeedbackEnabled")
+		ok.Boolean(*v.MessageFeedbackEnabled)
+	}
+
+	if v.NotifyConfigurationId != nil {
+		ok := object.Key("NotifyConfigurationId")
+		ok.String(*v.NotifyConfigurationId)
+	}
+
+	if v.TemplateId != nil {
+		ok := object.Key("TemplateId")
+		ok.String(*v.TemplateId)
+	}
+
+	if v.TemplateVariables != nil {
+		ok := object.Key("TemplateVariables")
+		if err := awsAwsjson10_serializeDocumentTemplateVariableSubstitutionMap(v.TemplateVariables, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimeToLive != nil {
+		ok := object.Key("TimeToLive")
+		ok.Integer(*v.TimeToLive)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentSendNotifyVoiceMessageInput(v *SendNotifyVoiceMessageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConfigurationSetName != nil {
+		ok := object.Key("ConfigurationSetName")
+		ok.String(*v.ConfigurationSetName)
+	}
+
+	if v.Context != nil {
+		ok := object.Key("Context")
+		if err := awsAwsjson10_serializeDocumentContextMap(v.Context, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DestinationPhoneNumber != nil {
+		ok := object.Key("DestinationPhoneNumber")
+		ok.String(*v.DestinationPhoneNumber)
+	}
+
+	if v.DryRun {
+		ok := object.Key("DryRun")
+		ok.Boolean(v.DryRun)
+	}
+
+	if v.MessageFeedbackEnabled != nil {
+		ok := object.Key("MessageFeedbackEnabled")
+		ok.Boolean(*v.MessageFeedbackEnabled)
+	}
+
+	if v.NotifyConfigurationId != nil {
+		ok := object.Key("NotifyConfigurationId")
+		ok.String(*v.NotifyConfigurationId)
+	}
+
+	if v.TemplateId != nil {
+		ok := object.Key("TemplateId")
+		ok.String(*v.TemplateId)
+	}
+
+	if v.TemplateVariables != nil {
+		ok := object.Key("TemplateVariables")
+		if err := awsAwsjson10_serializeDocumentTemplateVariableSubstitutionMap(v.TemplateVariables, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimeToLive != nil {
+		ok := object.Key("TimeToLive")
+		ok.Integer(*v.TimeToLive)
+	}
+
+	if len(v.VoiceId) > 0 {
+		ok := object.Key("VoiceId")
+		ok.String(string(v.VoiceId))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentSendTextMessageInput(v *SendTextMessageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8399,6 +9929,18 @@ func awsAwsjson10_serializeOpDocumentSetMediaMessageSpendLimitOverrideInput(v *S
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentSetNotifyMessageSpendLimitOverrideInput(v *SetNotifyMessageSpendLimitOverrideInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MonthlyLimit != nil {
+		ok := object.Key("MonthlyLimit")
+		ok.Long(*v.MonthlyLimit)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentSetTextMessageSpendLimitOverrideInput(v *SetTextMessageSpendLimitOverrideInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8523,6 +10065,47 @@ func awsAwsjson10_serializeOpDocumentUpdateEventDestinationInput(v *UpdateEventD
 		if err := awsAwsjson10_serializeDocumentSnsDestination(v.SnsDestination, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentUpdateNotifyConfigurationInput(v *UpdateNotifyConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultTemplateId != nil {
+		ok := object.Key("DefaultTemplateId")
+		ok.String(*v.DefaultTemplateId)
+	}
+
+	if v.DeletionProtectionEnabled != nil {
+		ok := object.Key("DeletionProtectionEnabled")
+		ok.Boolean(*v.DeletionProtectionEnabled)
+	}
+
+	if v.EnabledChannels != nil {
+		ok := object.Key("EnabledChannels")
+		if err := awsAwsjson10_serializeDocumentNotifyEnabledChannelsList(v.EnabledChannels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EnabledCountries != nil {
+		ok := object.Key("EnabledCountries")
+		if err := awsAwsjson10_serializeDocumentIsoCountryCodeList(v.EnabledCountries, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NotifyConfigurationId != nil {
+		ok := object.Key("NotifyConfigurationId")
+		ok.String(*v.NotifyConfigurationId)
+	}
+
+	if v.PoolId != nil {
+		ok := object.Key("PoolId")
+		ok.String(*v.PoolId)
 	}
 
 	return nil
@@ -8658,6 +10241,48 @@ func awsAwsjson10_serializeOpDocumentUpdateProtectConfigurationInput(v *UpdatePr
 	if v.ProtectConfigurationId != nil {
 		ok := object.Key("ProtectConfigurationId")
 		ok.String(*v.ProtectConfigurationId)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentUpdateRcsAgentInput(v *UpdateRcsAgentInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeletionProtectionEnabled != nil {
+		ok := object.Key("DeletionProtectionEnabled")
+		ok.Boolean(*v.DeletionProtectionEnabled)
+	}
+
+	if v.OptOutListName != nil {
+		ok := object.Key("OptOutListName")
+		ok.String(*v.OptOutListName)
+	}
+
+	if v.RcsAgentId != nil {
+		ok := object.Key("RcsAgentId")
+		ok.String(*v.RcsAgentId)
+	}
+
+	if v.SelfManagedOptOutsEnabled != nil {
+		ok := object.Key("SelfManagedOptOutsEnabled")
+		ok.Boolean(*v.SelfManagedOptOutsEnabled)
+	}
+
+	if v.TwoWayChannelArn != nil {
+		ok := object.Key("TwoWayChannelArn")
+		ok.String(*v.TwoWayChannelArn)
+	}
+
+	if v.TwoWayChannelRole != nil {
+		ok := object.Key("TwoWayChannelRole")
+		ok.String(*v.TwoWayChannelRole)
+	}
+
+	if v.TwoWayEnabled != nil {
+		ok := object.Key("TwoWayEnabled")
+		ok.Boolean(*v.TwoWayEnabled)
 	}
 
 	return nil

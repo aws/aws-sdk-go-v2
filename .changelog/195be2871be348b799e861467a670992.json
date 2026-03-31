@@ -1,0 +1,8 @@
+{
+    "id": "195be287-1be3-48b7-99e8-61467a670992",
+    "type": "feature",
+    "description": "Added Path field to Account and OrganizationalUnit objects in AWS Organizations API responses.",
+    "modules": [
+        "service/organizations"
+    ]
+}

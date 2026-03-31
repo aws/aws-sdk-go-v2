@@ -301,6 +301,47 @@ type ArchiveStringToEvaluateMemberAttribute struct {
 
 func (*ArchiveStringToEvaluateMemberAttribute) isArchiveStringToEvaluate() {}
 
+// The action to send a bounce response for the email. When executed, this action
+// generates a non-delivery report (bounce) back to the sender.
+type BounceAction struct {
+
+	// The diagnostic message included in the Diagnostic-Code header of the bounce.
+	//
+	// This member is required.
+	DiagnosticMessage *string
+
+	// The Amazon Resource Name (ARN) of the IAM role to use to send the bounce
+	// message.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The sender email address of the bounce message.
+	//
+	// This member is required.
+	Sender *string
+
+	// The SMTP reply code for the bounce, as defined by RFC 5321.
+	//
+	// This member is required.
+	SmtpReplyCode *string
+
+	// The enhanced status code for the bounce, in the format of x.y.z (e.g. 5.1.1).
+	//
+	// This member is required.
+	StatusCode *string
+
+	// A policy that states what to do in the case of failure. The action will fail if
+	// there are configuration errors. For example, the caller does not have the
+	// permissions to call the SendBounce API.
+	ActionFailurePolicy ActionFailurePolicy
+
+	// The human-readable text to include in the bounce message.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // This action to delivers an email to a mailbox.
 type DeliverToMailboxAction struct {
 
@@ -698,6 +739,9 @@ type IngressPointAuthConfiguration struct {
 	// endpoint resource.
 	SecretArn *string
 
+	// The mutual TLS authentication configuration for the ingress endpoint resource.
+	TlsAuthConfiguration *TlsAuthConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -707,6 +751,7 @@ type IngressPointAuthConfiguration struct {
 //
 //	IngressPointConfigurationMemberSecretArn
 //	IngressPointConfigurationMemberSmtpPassword
+//	IngressPointConfigurationMemberTlsAuthConfiguration
 type IngressPointConfiguration interface {
 	isIngressPointConfiguration()
 }
@@ -728,6 +773,15 @@ type IngressPointConfigurationMemberSmtpPassword struct {
 }
 
 func (*IngressPointConfigurationMemberSmtpPassword) isIngressPointConfiguration() {}
+
+// The mutual TLS authentication configuration of the ingress endpoint resource.
+type IngressPointConfigurationMemberTlsAuthConfiguration struct {
+	Value TlsAuthConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*IngressPointConfigurationMemberTlsAuthConfiguration) isIngressPointConfiguration() {}
 
 // The password configuration of the ingress endpoint resource.
 type IngressPointPasswordConfiguration struct {
@@ -834,6 +888,39 @@ type IngressTlsProtocolToEvaluateMemberAttribute struct {
 }
 
 func (*IngressTlsProtocolToEvaluateMemberAttribute) isIngressTlsProtocolToEvaluate() {}
+
+// The action to invoke an Amazon Web Services Lambda function for processing the
+// email.
+type InvokeLambdaAction struct {
+
+	// The Amazon Resource Name (ARN) of the Lambda function to invoke.
+	//
+	// This member is required.
+	FunctionArn *string
+
+	// The invocation type of the Lambda function. Use EVENT for asynchronous
+	// invocation or REQUEST_RESPONSE for synchronous invocation.
+	//
+	// This member is required.
+	InvocationType LambdaInvocationType
+
+	// The Amazon Resource Name (ARN) of the IAM role to use to invoke the Lambda
+	// function.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// A policy that states what to do in the case of failure. The action will fail if
+	// there are configuration errors. For example, the Amazon Web Services Lambda
+	// function no longer exists.
+	ActionFailurePolicy ActionFailurePolicy
+
+	// The maximum time in minutes that the email processing can be retried if the
+	// Lambda invocation fails. The maximum value is 2160 minutes (36 hours).
+	RetryTimeMinutes *int32
+
+	noSmithyDocumentSerde
+}
 
 // The textual body content of an email message.
 type MessageBody struct {
@@ -1232,9 +1319,11 @@ type Rule struct {
 //
 //	RuleActionMemberAddHeader
 //	RuleActionMemberArchive
+//	RuleActionMemberBounce
 //	RuleActionMemberDeliverToMailbox
 //	RuleActionMemberDeliverToQBusiness
 //	RuleActionMemberDrop
+//	RuleActionMemberInvokeLambda
 //	RuleActionMemberPublishToSns
 //	RuleActionMemberRelay
 //	RuleActionMemberReplaceRecipient
@@ -1263,6 +1352,15 @@ type RuleActionMemberArchive struct {
 
 func (*RuleActionMemberArchive) isRuleAction() {}
 
+// This action sends a bounce response for the email.
+type RuleActionMemberBounce struct {
+	Value BounceAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RuleActionMemberBounce) isRuleAction() {}
+
 // This action delivers an email to a WorkMail mailbox.
 type RuleActionMemberDeliverToMailbox struct {
 	Value DeliverToMailboxAction
@@ -1290,6 +1388,15 @@ type RuleActionMemberDrop struct {
 }
 
 func (*RuleActionMemberDrop) isRuleAction() {}
+
+// This action invokes an Amazon Web Services Lambda function to process the email.
+type RuleActionMemberInvokeLambda struct {
+	Value InvokeLambdaAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RuleActionMemberInvokeLambda) isRuleAction() {}
 
 // This action publishes the email content to an Amazon SNS topic.
 type RuleActionMemberPublishToSns struct {
@@ -1635,6 +1742,7 @@ type RuleStringExpression struct {
 //
 //	RuleStringToEvaluateMemberAnalysis
 //	RuleStringToEvaluateMemberAttribute
+//	RuleStringToEvaluateMemberClientCertificateAttribute
 //	RuleStringToEvaluateMemberMimeHeaderAttribute
 type RuleStringToEvaluate interface {
 	isRuleStringToEvaluate()
@@ -1658,6 +1766,15 @@ type RuleStringToEvaluateMemberAttribute struct {
 }
 
 func (*RuleStringToEvaluateMemberAttribute) isRuleStringToEvaluate() {}
+
+// The client certificate attribute to evaluate in a string condition expression.
+type RuleStringToEvaluateMemberClientCertificateAttribute struct {
+	Value RuleClientCertificateAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RuleStringToEvaluateMemberClientCertificateAttribute) isRuleStringToEvaluate() {}
 
 // The email MIME X-Header attribute to evaluate in a string condition expression.
 type RuleStringToEvaluateMemberMimeHeaderAttribute struct {
@@ -1876,6 +1993,15 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// The mutual TLS authentication configuration for an ingress endpoint.
+type TlsAuthConfiguration struct {
+
+	// The trust store configuration for mutual TLS authentication.
+	TrustStore *TrustStore
+
+	noSmithyDocumentSerde
+}
+
 // The structure of a traffic policy resource which is a container for policy
 // statements.
 type TrafficPolicy struct {
@@ -1896,6 +2022,27 @@ type TrafficPolicy struct {
 	//
 	// This member is required.
 	TrafficPolicyName *string
+
+	noSmithyDocumentSerde
+}
+
+// The trust store used for mutual TLS authentication. It contains the certificate
+// authority (CA) certificates and optional certificate revocation list (CRL).
+type TrustStore struct {
+
+	// The PEM-encoded certificate authority (CA) certificates bundle for the trust
+	// store.
+	//
+	// This member is required.
+	CAContent *string
+
+	// The PEM-encoded certificate revocation lists (CRLs) for the trust store. There
+	// can be one CRL per certificate authority (CA) in the trust store.
+	CrlContent *string
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the trust store
+	// contents.
+	KmsKeyArn *string
 
 	noSmithyDocumentSerde
 }

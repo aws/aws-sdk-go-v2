@@ -94,6 +94,9 @@ type GetEnvironmentOutput struct {
 	// The configuration ID that is used to create the environment.
 	EnvironmentConfigurationId *string
 
+	// The configuration name that is used to create the environment.
+	EnvironmentConfigurationName *string
+
 	// The ID of the environment profile with which the environment is created.
 	EnvironmentProfileId *string
 
