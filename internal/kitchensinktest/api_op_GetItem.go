@@ -27,9 +27,17 @@ func (c *Client) GetItem(ctx context.Context, params *GetItemInput, optFns ...fu
 }
 
 type GetItemInput struct {
+	Id *string
+
 	Item *types.Item
 
 	noSmithyDocumentSerde
+}
+
+func (in *GetItemInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.Id = in.Id
+
 }
 
 type GetItemOutput struct {
