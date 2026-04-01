@@ -39,9 +39,9 @@ func (m *RecursionDetection) HandleBuild(
 	}
 
 	_, hasLambdaEnv := os.LookupEnv(envAwsLambdaFunctionName)
-	xAmznTraceID, hasTraceID := ctx.Value(ctxKeyAmznTraceID).(string)
+	xAmznTraceID, hasTraceID := os.LookupEnv(envAmznTraceID)
 	if !hasTraceID {
-		xAmznTraceID, hasTraceID = os.LookupEnv(envAmznTraceID)
+		xAmznTraceID, hasTraceID = ctx.Value(ctxKeyAmznTraceID).(string)
 	}
 	value := req.Header.Get(amznTraceIDHeader)
 	// only set the X-Amzn-Trace-Id header when it is not set initially, the

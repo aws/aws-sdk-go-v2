@@ -11,58 +11,58 @@ import (
 func TestRecursionDetection(t *testing.T) {
 	cases := map[string]struct {
 		LambdaFuncName string
-		TraceID        string
 		EnvTraceID     string
+		CtxTraceID     string
 		HeaderBefore   string
 		HeaderAfter    string
 	}{
 		"non lambda env and no trace ID header before": {},
-		"with lambda env but no trace ID ctx value, no trace ID header before": {
+		"with lambda env but no trace ID env value, no trace ID header before": {
 			LambdaFuncName: "some-function1",
 		},
-		"with lambda env and trace ID ctx value, no trace ID header before": {
+		"with lambda env and trace ID env value, no trace ID header before": {
 			LambdaFuncName: "some-function2",
-			TraceID:        "traceID1",
+			EnvTraceID:     "traceID1",
 			HeaderAfter:    "traceID1",
 		},
-		"with lambda env and trace ID ctx value, has trace ID header before": {
+		"with lambda env and trace ID env value, has trace ID header before": {
 			LambdaFuncName: "some-function3",
-			TraceID:        "traceID2",
+			EnvTraceID:     "traceID2",
 			HeaderBefore:   "traceID1",
 			HeaderAfter:    "traceID1",
 		},
-		"with lambda env and trace ID (needs encoding) ctx value, no trace ID header before": {
+		"with lambda env and trace ID (needs encoding) env value, no trace ID header before": {
 			LambdaFuncName: "some-function4",
-			TraceID:        "traceID3\n",
+			EnvTraceID:     "traceID3\n",
 			HeaderAfter:    "traceID3%0A",
 		},
-		"with lambda env and trace ID (contains chars must not be encoded) ctx value, no trace ID header before": {
+		"with lambda env and trace ID (contains chars must not be encoded) env value, no trace ID header before": {
 			LambdaFuncName: "some-function5",
-			TraceID:        "traceID4-=;:+&[]{}\"'",
+			EnvTraceID:     "traceID4-=;:+&[]{}\"'",
 			HeaderAfter:    "traceID4-=;:+&[]{}\"'",
 		},
-		"with lambda env but no trace ID ctx value, no trace ID header before, with fallback trace ID env": {
+		"with lambda env but no trace ID env value, no trace ID header before, with fallback trace ID in ctx": {
 			LambdaFuncName: "some-function1",
-			EnvTraceID:     "traceIDEnv",
+			CtxTraceID:     "traceIDEnv",
 			HeaderAfter:    "traceIDEnv",
 		},
-		"with lambda env and trace ID ctx value, has trace ID header before, with fallback trace ID env": {
+		"with lambda env and trace ID env value, has trace ID header before, with fallback trace ID in ctx": {
 			LambdaFuncName: "some-function3",
-			TraceID:        "traceID2",
-			EnvTraceID:     "traceIDEnv",
+			EnvTraceID:     "traceID2",
+			CtxTraceID:     "traceIDEnv",
 			HeaderBefore:   "traceID1",
 			HeaderAfter:    "traceID1",
 		},
-		"with lambda env and trace ID (needs encoding) ctx value, no trace ID header before, with fallback trace ID env": {
+		"with lambda env and trace ID (needs encoding) env value, no trace ID header before, with fallback trace ID in ctx": {
 			LambdaFuncName: "some-function4",
-			TraceID:        "traceID3\n",
-			EnvTraceID:     "traceIDEnv",
+			EnvTraceID:     "traceID3\n",
+			CtxTraceID:     "traceIDEnv",
 			HeaderAfter:    "traceID3%0A",
 		},
-		"with lambda env and trace ID (contains chars must not be encoded) ctx value, no trace ID header before, with fallback trace ID env": {
+		"with lambda env and trace ID (contains chars must not be encoded) env value, no trace ID header before, with fallback trace ID in ctx": {
 			LambdaFuncName: "some-function5",
-			TraceID:        "traceID4-=;:+&[]{}\"'",
-			EnvTraceID:     "traceIDEnv",
+			EnvTraceID:     "traceID4-=;:+&[]{}\"'",
+			CtxTraceID:     "traceIDEnv",
 			HeaderAfter:    "traceID4-=;:+&[]{}\"'",
 		},
 	}
@@ -76,8 +76,8 @@ func TestRecursionDetection(t *testing.T) {
 			setEnvVar(t, envAwsLambdaFunctionName, c.LambdaFuncName)
 			setEnvVar(t, envAmznTraceID, c.EnvTraceID)
 			ctx := context.Background()
-			if (c.TraceID != "") {
-				ctx = context.WithValue(context.Background(), ctxKeyAmznTraceID, c.TraceID)
+			if c.CtxTraceID != "" {
+				ctx = context.WithValue(context.Background(), ctxKeyAmznTraceID, c.CtxTraceID)
 			}
 
 			req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
