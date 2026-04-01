@@ -1,3 +1,7 @@
+# v1.64.0 (2026-04-01)
+
+* **Feature**: Adding Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08 as TLS Policy in Supported Regions
+
 # v1.63.0 (2026-03-31)
 
 * **Feature**: Support RegisterCapability, GetCapability, DeregisterCapability API for AI Assistant feature management for OpenSearch UI Applications

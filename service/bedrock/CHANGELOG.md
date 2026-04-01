@@ -1,3 +1,7 @@
+# v1.58.0 (2026-04-01)
+
+* **Feature**: Adds support for Bedrock Batch Inference Job Progress Monitoring
+
 # v1.57.1 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

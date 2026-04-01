@@ -1,8 +1,0 @@
-{
-    "id": "56d9cc8b-f6de-4005-a275-c948c40899d4",
-    "type": "feature",
-    "description": "Adding Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08 as TLS Policy in Supported Regions",
-    "modules": [
-        "service/elasticsearchservice"
-    ]
-}

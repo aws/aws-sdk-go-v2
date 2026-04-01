@@ -1,3 +1,7 @@
+# v1.27.0 (2026-04-01)
+
+* **Feature**: Adds support for VPC egress private endpoints for Amazon Bedrock AgentCore gateway targets, enabling private connectivity through managed VPC Lattice resources. Also adds IAM credential provider for gateway targets, enabling IAM-based authentication to target endpoints
+
 # v1.26.0 (2026-03-27)
 
 * **Feature**: Adds support for custom code-based evaluators using customer-managed Lambda functions.

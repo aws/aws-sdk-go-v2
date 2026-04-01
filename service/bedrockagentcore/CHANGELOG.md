@@ -1,3 +1,7 @@
+# v1.18.0 (2026-04-01)
+
+* **Feature**: Added the ability to filter out empty sessions when listing sessions. Customers can now retrieve only sessions that still contain events, eliminating the need to check each session individually. No changes required for existing integrations.
+
 # v1.17.0 (2026-03-30)
 
 * **Feature**: Adds Ground Truth support for AgentCore Evaluations (Evaluate)

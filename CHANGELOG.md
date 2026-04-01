@@ -1,3 +1,25 @@
+# Release (2026-04-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.58.0](service/bedrock/CHANGELOG.md#v1580-2026-04-01)
+  * **Feature**: Adds support for Bedrock Batch Inference Job Progress Monitoring
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.18.0](service/bedrockagentcore/CHANGELOG.md#v1180-2026-04-01)
+  * **Feature**: Added the ability to filter out empty sessions when listing sessions. Customers can now retrieve only sessions that still contain events, eliminating the need to check each session individually. No changes required for existing integrations.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.27.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1270-2026-04-01)
+  * **Feature**: Adds support for VPC egress private endpoints for Amazon Bedrock AgentCore gateway targets, enabling private connectivity through managed VPC Lattice resources. Also adds IAM credential provider for gateway targets, enabling IAM-based authentication to target endpoints
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.76.0](service/ecs/CHANGELOG.md#v1760-2026-04-01)
+  * **Feature**: Amazon ECS now supports Managed Daemons with dedicated APIs for registering daemon task definitions, creating daemons, and managing daemon deployments.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.52.0](service/elasticache/CHANGELOG.md#v1520-2026-04-01)
+  * **Feature**: Updated SnapshotRetentionLimit documentation for ServerlessCache to correctly describe the parameter as number of days (max 35) instead of number of snapshots.
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.40.0](service/elasticsearchservice/CHANGELOG.md#v1400-2026-04-01)
+  * **Feature**: Adding Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08 as TLS Policy in Supported Regions
+* `github.com/aws/aws-sdk-go-v2/service/georoutes`: [v1.8.0](service/georoutes/CHANGELOG.md#v180-2026-04-01)
+  * **Feature**: This release makes RoutingBoundary optional in CalculateRouteMatrix, set StopDuration with a maximum value of 49999 for CalculateRoutes, set TrailerCount with a maximum value of 4, and introduces region restrictions for Grab Maps users.
+* `github.com/aws/aws-sdk-go-v2/service/medicalimaging`: [v1.24.0](service/medicalimaging/CHANGELOG.md#v1240-2026-04-01)
+  * **Feature**: Added new boolean flag to persist metadata updates to all primary image sets in the same study as the requested image set.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.64.0](service/opensearch/CHANGELOG.md#v1640-2026-04-01)
+  * **Feature**: Adding Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08 as TLS Policy in Supported Regions
+
 # Release (2026-03-31)
 
 ## General Highlights

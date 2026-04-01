@@ -1,3 +1,7 @@
+# v1.76.0 (2026-04-01)
+
+* **Feature**: Amazon ECS now supports Managed Daemons with dedicated APIs for registering daemon task definitions, creating daemons, and managing daemon deployments.
+
 # v1.75.0 (2026-03-30)
 
 * **Feature**: Adding Local Storage support for ECS Managed Instances by introducing a new field "localStorageConfiguration" for CreateCapacityProvider and UpdateCapacityProvider APIs.

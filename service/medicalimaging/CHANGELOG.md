@@ -1,3 +1,7 @@
+# v1.24.0 (2026-04-01)
+
+* **Feature**: Added new boolean flag to persist metadata updates to all primary image sets in the same study as the requested image set.
+
 # v1.23.10 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

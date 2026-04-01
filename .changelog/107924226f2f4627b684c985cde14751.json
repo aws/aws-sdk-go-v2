@@ -1,8 +1,0 @@
-{
-    "id": "10792422-6f2f-4627-b684-c985cde14751",
-    "type": "feature",
-    "description": "Adds support for Bedrock Batch Inference Job Progress Monitoring",
-    "modules": [
-        "service/bedrock"
-    ]
-}

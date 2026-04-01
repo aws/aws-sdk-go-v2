@@ -1,3 +1,7 @@
+# v1.52.0 (2026-04-01)
+
+* **Feature**: Updated SnapshotRetentionLimit documentation for ServerlessCache to correctly describe the parameter as number of days (max 35) instead of number of snapshots.
+
 # v1.51.13 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
