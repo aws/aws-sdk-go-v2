@@ -4611,7 +4611,7 @@
                 "TLSSecurityPolicy": {
                     "target": "com.amazonaws.elasticsearchservice#TLSSecurityPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain.\n        <br></br> It can be one of the following values:\n        <ul>\n            <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy that supports TLS version 1.0 to TLS version 1.2</li>\n            <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy that supports only TLS version 1.2</li>\n            <li><b>Policy-Min-TLS-1-2-PFS-2023-10: </b> TLS security policy that supports TLS version 1.2 to TLS version 1.3 with perfect forward secrecy cipher suites</li>\n        </ul>\n    </p>"
+                        "smithy.api#documentation": "<p>Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain.\n        <br></br> It can be one of the following values:\n        <ul>\n            <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy that supports TLS version 1.0 to TLS version 1.2</li>\n            <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy that supports only TLS version 1.2</li>\n            <li><b>Policy-Min-TLS-1-2-PFS-2023-10: </b> TLS security policy that supports TLS version 1.2 to TLS version 1.3 with perfect forward secrecy cipher suites</li>\n            <li><b>Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08: </b> TLS security policy that supports TLS version 1.3 with FIPS</li>\n        </ul>\n    </p>"
                     }
                 },
                 "CustomEndpointEnabled": {
@@ -9014,6 +9014,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Policy-Min-TLS-1-2-PFS-2023-10"
+                    }
+                },
+                "POLICY_MIN_TLS_1_2_RFC9151_FIPS_2024_08": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"
                     }
                 }
             }

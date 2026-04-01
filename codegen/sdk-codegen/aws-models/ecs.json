@@ -385,6 +385,18 @@
                     "target": "com.amazonaws.ecs#ContainerInstanceResource"
                 },
                 {
+                    "target": "com.amazonaws.ecs#DaemonDeploymentResource"
+                },
+                {
+                    "target": "com.amazonaws.ecs#DaemonResource"
+                },
+                {
+                    "target": "com.amazonaws.ecs#DaemonRevisionResource"
+                },
+                {
+                    "target": "com.amazonaws.ecs#DaemonTaskDefinitionResource"
+                },
+                {
                     "target": "com.amazonaws.ecs#ServiceDeploymentResource"
                 },
                 {
@@ -527,6 +539,11 @@
                         "documentation": "Filters access by the tag propagation configuration of your Amazon ECS task or Amazon ECS service",
                         "relativeDocumentation": "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"
                     },
+                    "ecs:instance-metadata-tags-propagation": {
+                        "type": "Bool",
+                        "documentation": "Filters access by the instance metadata tags propagation setting of your Amazon ECS capacity provider",
+                        "relativeDocumentation": "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"
+                    },
                     "ecs:subnet": {
                         "type": "ArrayOfString",
                         "documentation": "Filters access by the subnet configuration of your Amazon ECS task or Amazon ECS service that uses awsvpc network mode",
@@ -550,6 +567,16 @@
                     "ecs:task-memory": {
                         "type": "Numeric",
                         "documentation": "Filters access by the task memory, as an integer representing MiB, provided in the request",
+                        "relativeDocumentation": "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"
+                    },
+                    "ecs:daemon": {
+                        "type": "ARN",
+                        "documentation": "Filters access by the ARN of an Amazon ECS daemon",
+                        "relativeDocumentation": "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"
+                    },
+                    "ecs:daemon-task-definition": {
+                        "type": "ARN",
+                        "documentation": "Filters access by the ARN of an Amazon ECS daemon task definition",
                         "relativeDocumentation": "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"
                     }
                 },
@@ -3697,9 +3724,10 @@
             ],
             "traits": {
                 "aws.iam#conditionKeys": [
-                    "aws:TagKeys",
+                    "ecs:instance-metadata-tags-propagation",
                     "ecs:propagate-tags",
-                    "aws:RequestTag/${TagKey}"
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
                 ],
                 "aws.iam#iamAction": {
                     "createsResources": [
@@ -3944,6 +3972,201 @@
             },
             "traits": {
                 "smithy.api#documentation": "",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#CreateDaemon": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#CreateDaemonRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#CreateDaemonResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClusterNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#PlatformUnknownException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
+                    "ecs:capacity-provider",
+                    "ecs:daemon-task-definition",
+                    "ecs:enable-ecs-managed-tags",
+                    "ecs:enable-execute-command",
+                    "ecs:propagate-tags",
+                    "ecs:task-cpu",
+                    "ecs:task-memory"
+                ],
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a new daemon in a specified cluster",
+                    "createsResources": [
+                        "daemon"
+                    ],
+                    "resources": {
+                        "required": {
+                            "daemon": {
+                                "conditionKeys": [
+                                    "ecs:cluster",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Creates a new daemon in the specified cluster and capacity providers. A daemon deploys cross-cutting software agents such as security monitoring, telemetry, and logging independently across your Amazon ECS infrastructure.</p> <p>Amazon ECS deploys exactly one daemon task on each container instance of the specified capacity providers. When a container instance registers with the cluster, Amazon ECS automatically starts daemon tasks. Amazon ECS starts a daemon task before scheduling other tasks.</p> <p>Daemons are essential for instance health - if a daemon task stops, Amazon ECS automatically drains and replaces that container instance.</p> <note> <p>ECS Managed Daemons is only supported for Amazon ECS Managed Instances Capacity Providers.</p> </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a daemon",
+                        "documentation": "This example creates a daemon named my-monitoring-daemon in the specified cluster that uses the monitoring-agent daemon task definition and deploys to the specified capacity provider.",
+                        "input": {
+                            "daemonName": "my-monitoring-daemon",
+                            "clusterArn": "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster",
+                            "daemonTaskDefinitionArn": "arn:aws:ecs:us-east-1:123456789012:daemon-task-definition/monitoring-agent:1",
+                            "capacityProviderArns": [
+                                "arn:aws:ecs:us-east-1:123456789012:capacity-provider/my-capacity-provider"
+                            ],
+                            "deploymentConfiguration": {
+                                "drainPercent": 10.0,
+                                "bakeTimeInMinutes": 5
+                            }
+                        },
+                        "output": {
+                            "daemonArn": "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon",
+                            "status": "ACTIVE",
+                            "createdAt": "2025-03-15T12:00:00.000Z",
+                            "deploymentArn": "arn:aws:ecs:us-east-1:123456789012:daemon-deployment/my-cluster/my-monitoring-daemon/aB1cD2eF3gH4iJ5k"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ecs#CreateDaemonRequest": {
+            "type": "structure",
+            "members": {
+                "daemonName": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the daemon. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clusterArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster to create the daemon in.</p>"
+                    }
+                },
+                "daemonTaskDefinitionArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon task definition to use for the daemon.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "capacityProviderArns": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the capacity providers to associate with the daemon. The daemon deploys tasks on container instances managed by these capacity providers.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deploymentConfiguration": {
+                    "target": "com.amazonaws.ecs#DaemonDeploymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional deployment parameters that control how the daemon rolls out updates, including the drain percentage, alarm-based rollback, and bake time.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ecs#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata that you apply to the daemon to help you categorize and organize them. Each tag consists of a key and an optional value. You define both of them.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case-sensitive.</p> </li> <li> <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.</p> </li> </ul>"
+                    }
+                },
+                "propagateTags": {
+                    "target": "com.amazonaws.ecs#DaemonPropagateTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to propagate the tags from the daemon to the daemon tasks. If you don't specify a value, the tags aren't propagated. You can only propagate tags to daemon tasks during task creation. To add tags to a task after task creation, use the <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html\">TagResource</a> API action.</p>"
+                    }
+                },
+                "enableECSManagedTags": {
+                    "target": "com.amazonaws.ecs#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to turn on Amazon ECS managed tags for the tasks in the daemon. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html\">Tagging your Amazon ECS resources</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
+                },
+                "enableExecuteCommand": {
+                    "target": "com.amazonaws.ecs#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Determines whether the execute command functionality is turned on for the daemon. If <code>true</code>, the execute command functionality is turned on for all tasks in the daemon.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier that you provide to ensure the idempotency of the request. It must be unique and is case sensitive. Up to 36 ASCII characters in the range of 33-126 (inclusive) are allowed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#CreateDaemonResponse": {
+            "type": "structure",
+            "members": {
+                "daemonArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#DaemonStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the daemon.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the daemon was created.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "deploymentArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the initial daemon deployment. This deployment places daemon tasks on each container instance of the specified capacity providers.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -4759,6 +4982,1380 @@
                 "smithy.api#documentation": "<p>The optional filter to narrow the <code>ListServiceDeployment</code> results.</p> <p> If you do not specify a value, service deployments that were created before the current time are included in the result.</p>"
             }
         },
+        "com.amazonaws.ecs#DaemonAlarmConfiguration": {
+            "type": "structure",
+            "members": {
+                "alarmNames": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch alarm names to monitor during a daemon deployment.</p>"
+                    }
+                },
+                "enable": {
+                    "target": "com.amazonaws.ecs#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Determines whether to use the CloudWatch alarm option in the daemon deployment process. The default value is <code>false</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CloudWatch alarm configuration for a daemon. When enabled, CloudWatch alarms determine whether a daemon deployment has failed.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonCapacityProvider": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the capacity provider.</p>"
+                    }
+                },
+                "runningCount": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of daemon tasks running on this capacity provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a capacity provider associated with a daemon revision.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonCapacityProviderList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#DaemonCapacityProvider"
+            }
+        },
+        "com.amazonaws.ecs#DaemonCircuitBreaker": {
+            "type": "structure",
+            "members": {
+                "failureCount": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of times the circuit breaker detected a daemon deployment failure.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#DaemonDeploymentRollbackMonitorsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The circuit breaker status. Amazon ECS is not using the circuit breaker for daemon deployment failures when the status is <code>DISABLED</code>.</p>"
+                    }
+                },
+                "threshold": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The threshold which determines that the daemon deployment failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the circuit breaker used to determine when a daemon deployment has failed.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonContainerDefinition": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the container. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.</p>"
+                    }
+                },
+                "image": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image used to start the container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with either <code> <i>repository-url</i>/<i>image</i>:<i>tag</i> </code> or <code> <i>repository-url</i>/<i>image</i>@<i>digest</i> </code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "memory": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount (in MiB) of memory to present to the container. If the container attempts to exceed the memory specified here, the container is killed.</p>"
+                    }
+                },
+                "memoryReservation": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The soft limit (in MiB) of memory to reserve for the container.</p>"
+                    }
+                },
+                "repositoryCredentials": {
+                    "target": "com.amazonaws.ecs#RepositoryCredentials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private repository authentication credentials to use.</p>"
+                    }
+                },
+                "healthCheck": {
+                    "target": "com.amazonaws.ecs#HealthCheck",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container health check command and associated configuration parameters for the container.</p>"
+                    }
+                },
+                "cpu": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of <code>cpu</code> units reserved for the container.</p>"
+                    }
+                },
+                "essential": {
+                    "target": "com.amazonaws.ecs#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the <code>essential</code> parameter of a container is marked as <code>true</code>, and that container fails or stops for any reason, all other containers that are part of the task are stopped.</p>"
+                    }
+                },
+                "entryPoint": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entry point that's passed to the container.</p>"
+                    }
+                },
+                "command": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The command that's passed to the container.</p>"
+                    }
+                },
+                "workingDirectory": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The working directory to run commands inside the container in.</p>"
+                    }
+                },
+                "environmentFiles": {
+                    "target": "com.amazonaws.ecs#EnvironmentFiles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of files containing the environment variables to pass to a container.</p>"
+                    }
+                },
+                "environment": {
+                    "target": "com.amazonaws.ecs#EnvironmentVariables",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment variables to pass to a container.</p>"
+                    }
+                },
+                "secrets": {
+                    "target": "com.amazonaws.ecs#SecretList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secrets to pass to the container.</p>"
+                    }
+                },
+                "readonlyRootFilesystem": {
+                    "target": "com.amazonaws.ecs#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When this parameter is true, the container is given read-only access to its root file system.</p>"
+                    }
+                },
+                "mountPoints": {
+                    "target": "com.amazonaws.ecs#MountPointList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mount points for data volumes in your container.</p>"
+                    }
+                },
+                "logConfiguration": {
+                    "target": "com.amazonaws.ecs#LogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The log configuration specification for the container.</p>"
+                    }
+                },
+                "firelensConfiguration": {
+                    "target": "com.amazonaws.ecs#FirelensConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The FireLens configuration for the container. This is used to specify and configure a log router for container logs.</p>"
+                    }
+                },
+                "privileged": {
+                    "target": "com.amazonaws.ecs#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When this parameter is true, the container is given elevated privileges on the host container instance (similar to the <code>root</code> user).</p>"
+                    }
+                },
+                "user": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user to use inside the container.</p>"
+                    }
+                },
+                "ulimits": {
+                    "target": "com.amazonaws.ecs#UlimitList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>ulimits</code> to set in the container.</p>"
+                    }
+                },
+                "linuxParameters": {
+                    "target": "com.amazonaws.ecs#DaemonLinuxParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Linux-specific modifications that are applied to the container configuration, such as Linux kernel capabilities.</p>"
+                    }
+                },
+                "dependsOn": {
+                    "target": "com.amazonaws.ecs#ContainerDependencies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dependencies defined for container startup and shutdown. A container can contain multiple dependencies on other containers in a task definition.</p>"
+                    }
+                },
+                "startTimeout": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time duration (in seconds) to wait before giving up on resolving dependencies for a container.</p>"
+                    }
+                },
+                "stopTimeout": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time duration (in seconds) to wait before the container is forcefully killed if it doesn't exit normally on its own.</p>"
+                    }
+                },
+                "systemControls": {
+                    "target": "com.amazonaws.ecs#SystemControls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of namespaced kernel parameters to set in the container.</p>"
+                    }
+                },
+                "interactive": {
+                    "target": "com.amazonaws.ecs#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When this parameter is <code>true</code>, you can deploy containerized applications that require <code>stdin</code> or a <code>tty</code> to be allocated.</p>"
+                    }
+                },
+                "pseudoTerminal": {
+                    "target": "com.amazonaws.ecs#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When this parameter is <code>true</code>, a TTY is allocated.</p>"
+                    }
+                },
+                "restartPolicy": {
+                    "target": "com.amazonaws.ecs#ContainerRestartPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The restart policy for the container. When you set up a restart policy, Amazon ECS can restart the container without needing to replace the task.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container definition for a daemon task. Daemon container definitions describe the containers that run as part of a daemon task on container instances managed by capacity providers.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonContainerDefinitionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#DaemonContainerDefinition"
+            }
+        },
+        "com.amazonaws.ecs#DaemonContainerImage": {
+            "type": "structure",
+            "members": {
+                "containerName": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the container.</p>"
+                    }
+                },
+                "imageDigest": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container image digest.</p>"
+                    }
+                },
+                "image": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container image.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details about the container image a daemon revision uses.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonContainerImages": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#DaemonContainerImage"
+            }
+        },
+        "com.amazonaws.ecs#DaemonDeployment": {
+            "type": "structure",
+            "members": {
+                "daemonDeploymentArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon deployment.</p>"
+                    }
+                },
+                "clusterArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster that hosts the daemon.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#DaemonDeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the daemon deployment.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about why the daemon deployment is in the current status.</p>"
+                    }
+                },
+                "targetDaemonRevision": {
+                    "target": "com.amazonaws.ecs#DaemonDeploymentRevisionDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The daemon revision being deployed.</p>"
+                    }
+                },
+                "sourceDaemonRevisions": {
+                    "target": "com.amazonaws.ecs#DaemonDeploymentRevisionDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The currently deployed daemon revisions that are being replaced.</p>"
+                    }
+                },
+                "circuitBreaker": {
+                    "target": "com.amazonaws.ecs#DaemonCircuitBreaker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The circuit breaker configuration that determines when a daemon deployment has failed.</p>"
+                    }
+                },
+                "alarms": {
+                    "target": "com.amazonaws.ecs#DaemonDeploymentAlarms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch alarms that determine when a daemon deployment fails.</p>"
+                    }
+                },
+                "rollback": {
+                    "target": "com.amazonaws.ecs#DaemonRollback",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rollback options for the daemon deployment.</p>"
+                    }
+                },
+                "deploymentConfiguration": {
+                    "target": "com.amazonaws.ecs#DaemonDeploymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration used for this daemon deployment.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the daemon deployment was created. The format is yyyy-MM-dd HH:mm:ss.SSSSSS.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the daemon deployment started. The format is yyyy-MM-dd HH:mm:ss.SSSSSS.</p>"
+                    }
+                },
+                "stoppedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the daemon deployment stopped. The format is yyyy-MM-dd HH:mm:ss.SSSSSS.</p>"
+                    }
+                },
+                "finishedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the daemon deployment finished. The format is yyyy-MM-dd HH:mm:ss.SSSSSS.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a daemon deployment. A daemon deployment orchestrates the progressive rollout of daemon task updates across container instances.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonDeploymentAlarms": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.ecs#DaemonDeploymentRollbackMonitorsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the alarms check. Amazon ECS is not using alarms for daemon deployment failures when the status is <code>DISABLED</code>.</p>"
+                    }
+                },
+                "alarmNames": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CloudWatch alarms that determine when a daemon deployment failed.</p>"
+                    }
+                },
+                "triggeredAlarmNames": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more CloudWatch alarm names that have been triggered during the daemon deployment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CloudWatch alarms used to determine a daemon deployment failed.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonDeploymentCapacityProvider": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the capacity provider.</p>"
+                    }
+                },
+                "runningInstanceCount": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances running daemon tasks on this capacity provider.</p>"
+                    }
+                },
+                "drainingInstanceCount": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances being drained on this capacity provider during the deployment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a capacity provider during a daemon deployment.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonDeploymentCapacityProviderList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#DaemonDeploymentCapacityProvider"
+            }
+        },
+        "com.amazonaws.ecs#DaemonDeploymentConfiguration": {
+            "type": "structure",
+            "members": {
+                "drainPercent": {
+                    "target": "com.amazonaws.ecs#DaemonDrainPercent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of container instances to drain simultaneously during a daemon deployment. Valid values are between 0.0 and 100.0.</p>"
+                    }
+                },
+                "alarms": {
+                    "target": "com.amazonaws.ecs#DaemonAlarmConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch alarm configuration for the daemon deployment. When alarms are triggered during a deployment, the deployment can be automatically rolled back.</p>"
+                    }
+                },
+                "bakeTimeInMinutes": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The amount of time (in minutes) to wait after a successful deployment step before proceeding. This allows time to monitor for issues before continuing. The default value is 0.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Optional deployment parameters that control how a daemon rolls out updates across container instances.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonDeploymentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#DaemonDeployment"
+            }
+        },
+        "com.amazonaws.ecs#DaemonDeploymentResource": {
+            "type": "resource",
+            "identifiers": {
+                "ClusterName": {
+                    "target": "com.amazonaws.ecs#String"
+                },
+                "DaemonDeploymentId": {
+                    "target": "com.amazonaws.ecs#String"
+                },
+                "DaemonName": {
+                    "target": "com.amazonaws.ecs#String"
+                }
+            },
+            "collectionOperations": [
+                {
+                    "target": "com.amazonaws.ecs#DescribeDaemonDeployments"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "daemon-deployment/{ClusterName}/{DaemonName}/{DaemonDeploymentId}"
+                },
+                "aws.api#taggable": {},
+                "aws.iam#conditionKeys": [
+                    "ecs:cluster",
+                    "ecs:daemon",
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#iamResource": {
+                    "name": "daemon-deployment",
+                    "relativeDocumentation": "daemon-deployment.html",
+                    "disableConditionKeyInheritance": true
+                },
+                "smithy.api#documentation": "Represents a deployment that moves a daemon from one daemon revision to another"
+            }
+        },
+        "com.amazonaws.ecs#DaemonDeploymentRevisionDetail": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon revision.</p>"
+                    }
+                },
+                "capacityProviders": {
+                    "target": "com.amazonaws.ecs#DaemonDeploymentCapacityProviderList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity providers associated with this daemon revision during the deployment.</p>"
+                    }
+                },
+                "totalRunningInstanceCount": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of instances running daemon tasks for this revision.</p>"
+                    }
+                },
+                "totalDrainingInstanceCount": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of instances being drained for this revision during the deployment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a daemon revision during a deployment, including running and draining instance counts per capacity provider.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonDeploymentRevisionDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#DaemonDeploymentRevisionDetail"
+            }
+        },
+        "com.amazonaws.ecs#DaemonDeploymentRollbackMonitorsStatus": {
+            "type": "enum",
+            "members": {
+                "TRIGGERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRIGGERED"
+                    }
+                },
+                "MONITORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONITORING"
+                    }
+                },
+                "MONITORING_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONITORING_COMPLETE"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#DaemonDeploymentStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESSFUL"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                },
+                "STOP_REQUESTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOP_REQUESTED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "ROLLBACK_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLBACK_IN_PROGRESS"
+                    }
+                },
+                "ROLLBACK_SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLBACK_SUCCESSFUL"
+                    }
+                },
+                "ROLLBACK_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLBACK_FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#DaemonDeploymentStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#DaemonDeploymentStatus"
+            }
+        },
+        "com.amazonaws.ecs#DaemonDeploymentSummary": {
+            "type": "structure",
+            "members": {
+                "daemonDeploymentArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon deployment.</p>"
+                    }
+                },
+                "daemonArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon.</p>"
+                    }
+                },
+                "clusterArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster that hosts the daemon.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#DaemonDeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the daemon deployment.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about why the daemon deployment is in the current status.</p>"
+                    }
+                },
+                "targetDaemonRevisionArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the daemon revision being deployed.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the daemon deployment was created.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the daemon deployment started.</p>"
+                    }
+                },
+                "stoppedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the daemon deployment stopped.</p>"
+                    }
+                },
+                "finishedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the daemon deployment finished.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a daemon deployment.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonDeploymentSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#DaemonDeploymentSummary"
+            }
+        },
+        "com.amazonaws.ecs#DaemonDetail": {
+            "type": "structure",
+            "members": {
+                "daemonArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon.</p>"
+                    }
+                },
+                "clusterArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster that the daemon is running in.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#DaemonStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the daemon.</p>"
+                    }
+                },
+                "currentRevisions": {
+                    "target": "com.amazonaws.ecs#DaemonRevisionDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current daemon revision details, including the running task counts per capacity provider.</p>"
+                    }
+                },
+                "deploymentArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the most recent daemon deployment.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the daemon was created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the daemon was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The detailed information about a daemon.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonDrainPercent": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0.0,
+                    "max": 100.0
+                }
+            }
+        },
+        "com.amazonaws.ecs#DaemonLinuxParameters": {
+            "type": "structure",
+            "members": {
+                "capabilities": {
+                    "target": "com.amazonaws.ecs#KernelCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker.</p>"
+                    }
+                },
+                "devices": {
+                    "target": "com.amazonaws.ecs#DevicesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any host devices to expose to the container.</p>"
+                    }
+                },
+                "initProcessEnabled": {
+                    "target": "com.amazonaws.ecs#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Run an <code>init</code> process inside the container that forwards signals and reaps processes.</p>"
+                    }
+                },
+                "tmpfs": {
+                    "target": "com.amazonaws.ecs#TmpfsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container path, mount options, and size (in MiB) of the tmpfs mount.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Linux-specific options that are applied to the daemon container, such as Linux kernel capabilities.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonNotActiveException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecs#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified daemon isn't active. You can't update a daemon that's inactive. If you have previously deleted a daemon, you can re-create it with <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateDaemon.html\">CreateDaemon</a>.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecs#DaemonNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecs#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified daemon wasn't found. You can view your available daemons with <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListDaemons.html\">ListDaemons</a>. Amazon ECS daemons are cluster specific and Region specific.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecs#DaemonPropagateTags": {
+            "type": "enum",
+            "members": {
+                "DAEMON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAEMON"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#DaemonResource": {
+            "type": "resource",
+            "identifiers": {
+                "ClusterName": {
+                    "target": "com.amazonaws.ecs#String"
+                },
+                "DaemonName": {
+                    "target": "com.amazonaws.ecs#String"
+                }
+            },
+            "collectionOperations": [
+                {
+                    "target": "com.amazonaws.ecs#CreateDaemon"
+                },
+                {
+                    "target": "com.amazonaws.ecs#DeleteDaemon"
+                },
+                {
+                    "target": "com.amazonaws.ecs#DescribeDaemon"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ListDaemonDeployments"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ListDaemons"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UpdateDaemon"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "daemon/{ClusterName}/{DaemonName}"
+                },
+                "aws.api#taggable": {},
+                "aws.iam#conditionKeys": [
+                    "ecs:cluster",
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#iamResource": {
+                    "name": "daemon",
+                    "relativeDocumentation": "ecs_daemons.html",
+                    "disableConditionKeyInheritance": true
+                },
+                "smithy.api#documentation": "Represents an independent process that runs alongside applications to perform devops related functions in an ECS cluster"
+            }
+        },
+        "com.amazonaws.ecs#DaemonRevision": {
+            "type": "structure",
+            "members": {
+                "daemonRevisionArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon revision.</p>"
+                    }
+                },
+                "clusterArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster that hosts the daemon.</p>"
+                    }
+                },
+                "daemonArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon for this revision.</p>"
+                    }
+                },
+                "daemonTaskDefinitionArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon task definition used by this revision.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the daemon revision was created.</p>"
+                    }
+                },
+                "containerImages": {
+                    "target": "com.amazonaws.ecs#DaemonContainerImages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container images used by the daemon revision.</p>"
+                    }
+                },
+                "propagateTags": {
+                    "target": "com.amazonaws.ecs#DaemonPropagateTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether tags are propagated from the daemon to the daemon tasks.</p>"
+                    }
+                },
+                "enableECSManagedTags": {
+                    "target": "com.amazonaws.ecs#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Amazon ECS managed tags are turned on for the daemon tasks.</p>"
+                    }
+                },
+                "enableExecuteCommand": {
+                    "target": "com.amazonaws.ecs#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the execute command functionality is turned on for the daemon tasks.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a daemon revision. A daemon revision is a snapshot of the daemon's configuration at the time a deployment was initiated.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonRevisionDetail": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon revision.</p>"
+                    }
+                },
+                "capacityProviders": {
+                    "target": "com.amazonaws.ecs#DaemonCapacityProviderList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity providers associated with this daemon revision.</p>"
+                    }
+                },
+                "totalRunningCount": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of daemon tasks running for this revision.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a daemon revision, including the running task counts per capacity provider.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonRevisionDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#DaemonRevisionDetail"
+            }
+        },
+        "com.amazonaws.ecs#DaemonRevisionResource": {
+            "type": "resource",
+            "identifiers": {
+                "ClusterName": {
+                    "target": "com.amazonaws.ecs#String"
+                },
+                "DaemonRevisionId": {
+                    "target": "com.amazonaws.ecs#String"
+                },
+                "DaemonName": {
+                    "target": "com.amazonaws.ecs#String"
+                }
+            },
+            "collectionOperations": [
+                {
+                    "target": "com.amazonaws.ecs#DescribeDaemonRevisions"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "daemon-revision/{ClusterName}/{DaemonName}/{DaemonRevisionId}"
+                },
+                "aws.api#taggable": {},
+                "aws.iam#conditionKeys": [
+                    "ecs:cluster",
+                    "ecs:daemon",
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#iamResource": {
+                    "name": "daemon-revision",
+                    "relativeDocumentation": "daemon-revision.html",
+                    "disableConditionKeyInheritance": true
+                },
+                "smithy.api#documentation": "Represents a unique configuration that makes up a daemon at a point in time"
+            }
+        },
+        "com.amazonaws.ecs#DaemonRevisions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#DaemonRevision"
+            }
+        },
+        "com.amazonaws.ecs#DaemonRollback": {
+            "type": "structure",
+            "members": {
+                "reason": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the rollback happened. For example, the circuit breaker initiated the rollback operation.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the rollback started. The format is yyyy-MM-dd HH:mm:ss.SSSSSS.</p>"
+                    }
+                },
+                "rollbackTargetDaemonRevisionArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the daemon revision deployed as part of the rollback.</p>"
+                    }
+                },
+                "rollbackCapacityProviders": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity providers involved in the rollback.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a daemon deployment rollback.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DELETE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_IN_PROGRESS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#DaemonSummariesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#DaemonSummary"
+            }
+        },
+        "com.amazonaws.ecs#DaemonSummary": {
+            "type": "structure",
+            "members": {
+                "daemonArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#DaemonStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the daemon.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the daemon was created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the daemon was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a daemon.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonTaskDefinition": {
+            "type": "structure",
+            "members": {
+                "daemonTaskDefinitionArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the daemon task definition.</p>"
+                    }
+                },
+                "family": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a family that this daemon task definition is registered to.</p>"
+                    }
+                },
+                "revision": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The revision of the daemon task in a particular family. The revision is a version number of a daemon task definition in a family. When you register a daemon task definition for the first time, the revision is <code>1</code>. Each time that you register a new revision of a daemon task definition in the same family, the revision value always increases by one.</p>"
+                    }
+                },
+                "taskRoleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The short name or full Amazon Resource Name (ARN) of the IAM role that grants containers in the daemon task permission to call Amazon Web Services APIs on your behalf.</p>"
+                    }
+                },
+                "executionRoleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task execution role that grants the Amazon ECS container agent permission to make Amazon Web Services API calls on your behalf.</p>"
+                    }
+                },
+                "containerDefinitions": {
+                    "target": "com.amazonaws.ecs#DaemonContainerDefinitionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of container definitions in JSON format that describe the containers that make up the daemon task.</p>"
+                    }
+                },
+                "volumes": {
+                    "target": "com.amazonaws.ecs#DaemonVolumeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of data volume definitions for the daemon task.</p>"
+                    }
+                },
+                "cpu": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of CPU units used by the daemon task.</p>"
+                    }
+                },
+                "memory": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of memory (in MiB) used by the daemon task.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#DaemonTaskDefinitionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the daemon task definition. The valid values are <code>ACTIVE</code>, <code>DELETE_IN_PROGRESS</code>, and <code>DELETED</code>.</p>"
+                    }
+                },
+                "registeredAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the daemon task definition was registered.</p>"
+                    }
+                },
+                "deleteRequestedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the daemon task definition delete was requested.</p>"
+                    }
+                },
+                "registeredBy": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal that registered the daemon task definition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a daemon task definition. A daemon task definition is a template that describes the containers that form a daemon. Daemons deploy cross-cutting software agents independently across your Amazon ECS infrastructure.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonTaskDefinitionResource": {
+            "type": "resource",
+            "identifiers": {
+                "DaemonTaskDefinitionFamilyName": {
+                    "target": "com.amazonaws.ecs#String"
+                },
+                "DaemonTaskDefinitionRevisionNumber": {
+                    "target": "com.amazonaws.ecs#String"
+                }
+            },
+            "collectionOperations": [
+                {
+                    "target": "com.amazonaws.ecs#DeleteDaemonTaskDefinition"
+                },
+                {
+                    "target": "com.amazonaws.ecs#DescribeDaemonTaskDefinition"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ListDaemonTaskDefinitions"
+                },
+                {
+                    "target": "com.amazonaws.ecs#RegisterDaemonTaskDefinition"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "daemon-task-definition/{DaemonTaskDefinitionFamilyName}:{DaemonTaskDefinitionRevisionNumber}"
+                },
+                "aws.api#taggable": {},
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#iamResource": {
+                    "name": "daemon-task-definition",
+                    "relativeDocumentation": "daemon-task-definitions.html",
+                    "disableConditionKeyInheritance": true
+                },
+                "smithy.api#documentation": "Represents a collection of settings that are used to run daemon tasks in Amazon ECS"
+            }
+        },
+        "com.amazonaws.ecs#DaemonTaskDefinitionRevisionFilter": {
+            "type": "enum",
+            "members": {
+                "LAST_REGISTERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAST_REGISTERED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#DaemonTaskDefinitionStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DELETE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_IN_PROGRESS"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#DaemonTaskDefinitionStatusFilter": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DELETE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_IN_PROGRESS"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#DaemonTaskDefinitionSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#DaemonTaskDefinitionSummary"
+            }
+        },
+        "com.amazonaws.ecs#DaemonTaskDefinitionSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon task definition.</p>"
+                    }
+                },
+                "registeredAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the daemon task definition was registered.</p>"
+                    }
+                },
+                "registeredBy": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal that registered the daemon task definition.</p>"
+                    }
+                },
+                "deleteRequestedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the daemon task definition delete was requested.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#DaemonTaskDefinitionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the daemon task definition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a daemon task definition.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonVolume": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.</p>"
+                    }
+                },
+                "host": {
+                    "target": "com.amazonaws.ecs#HostVolumeProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contents of the <code>host</code> parameter determine whether your bind mount host volume persists on the host container instance and where it's stored.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A data volume definition for a daemon task.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DaemonVolumeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#DaemonVolume"
+            }
+        },
         "com.amazonaws.ecs#DeleteAccountSetting": {
             "type": "operation",
             "input": {
@@ -5164,6 +6761,212 @@
             },
             "traits": {
                 "smithy.api#documentation": "",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#DeleteDaemon": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#DeleteDaemonRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#DeleteDaemonResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClusterNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#DaemonNotActiveException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#DaemonNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete a specified daemon within a cluster",
+                    "resources": {
+                        "required": {
+                            "daemon": {
+                                "conditionKeys": [
+                                    "ecs:cluster",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Deletes the specified daemon. The daemon must be in an <code>ACTIVE</code> state to be deleted. Deleting a daemon stops all running daemon tasks on the associated container instances. Amazon ECS drains existing container instances and provisions new instances without the deleted daemon. Amazon ECS automatically launches replacement tasks for your Amazon ECS services.</p> <note> <p>ECS Managed Daemons is only supported for Amazon ECS Managed Instances Capacity Providers.</p> </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a daemon",
+                        "documentation": "This example deletes the my-monitoring-daemon daemon.",
+                        "input": {
+                            "daemonArn": "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon"
+                        },
+                        "output": {
+                            "daemonArn": "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon",
+                            "status": "DELETE_IN_PROGRESS",
+                            "createdAt": "2025-03-15T12:00:00.000Z",
+                            "updatedAt": "2025-03-25T09:00:00.000Z",
+                            "deploymentArn": "arn:aws:ecs:us-east-1:123456789012:daemon-deployment/my-cluster/my-monitoring-daemon/mN3oP4qR5sT6uV7w"
+                        }
+                    }
+                ],
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ecs#DeleteDaemonRequest": {
+            "type": "structure",
+            "members": {
+                "daemonArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#DeleteDaemonResponse": {
+            "type": "structure",
+            "members": {
+                "daemonArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#DaemonStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the daemon. After you call <code>DeleteDaemon</code>, the status changes to <code>DELETE_IN_PROGRESS</code>.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the daemon was created.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the daemon was last updated.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "deploymentArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon deployment that was triggered by the delete operation. This deployment drains existing daemon tasks from the container instances.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#DeleteDaemonTaskDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#DeleteDaemonTaskDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#DeleteDaemonTaskDefinitionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete the specified daemon task definition",
+                    "resources": {
+                        "required": {
+                            "daemon-task-definition": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Deletes the specified daemon task definition. After a daemon task definition is deleted, no new daemons can be created using this definition. Existing daemons that reference the deleted daemon task definition continue to run.</p> <p>A daemon task definition must be in an <code>ACTIVE</code> state to be deleted.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a daemon task definition",
+                        "documentation": "This example deletes the first revision of the monitoring-agent daemon task definition.",
+                        "input": {
+                            "daemonTaskDefinition": "monitoring-agent:1"
+                        },
+                        "output": {
+                            "daemonTaskDefinitionArn": "arn:aws:ecs:us-east-1:123456789012:daemon-task-definition/monitoring-agent:1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ecs#DeleteDaemonTaskDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "daemonTaskDefinition": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full Amazon Resource Name (ARN) of the daemon task definition to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#DeleteDaemonTaskDefinitionResponse": {
+            "type": "structure",
+            "members": {
+                "daemonTaskDefinitionArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the deleted daemon task definition.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -6718,6 +8521,664 @@
             },
             "traits": {
                 "smithy.api#documentation": "",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeDaemon": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#DescribeDaemonRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#DescribeDaemonResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClusterNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#DaemonNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to describe the specified daemon running in your cluster",
+                    "resources": {
+                        "required": {
+                            "daemon": {
+                                "conditionKeys": [
+                                    "ecs:cluster",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Describes the specified daemon.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe a daemon",
+                        "documentation": "This example describes the my-monitoring-daemon daemon.",
+                        "input": {
+                            "daemonArn": "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon"
+                        },
+                        "output": {
+                            "daemon": {
+                                "daemonArn": "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon",
+                                "clusterArn": "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster",
+                                "status": "ACTIVE",
+                                "currentRevisions": [
+                                    {
+                                        "arn": "arn:aws:ecs:us-east-1:123456789012:daemon-revision/my-cluster/my-monitoring-daemon/4980306466373577095",
+                                        "capacityProviders": [
+                                            {
+                                                "arn": "arn:aws:ecs:us-east-1:123456789012:capacity-provider/my-capacity-provider",
+                                                "runningCount": 3
+                                            }
+                                        ],
+                                        "totalRunningCount": 3
+                                    }
+                                ],
+                                "deploymentArn": "arn:aws:ecs:us-east-1:123456789012:daemon-deployment/my-cluster/my-monitoring-daemon/aB1cD2eF3gH4iJ5k",
+                                "createdAt": "2025-03-15T12:00:00.000Z",
+                                "updatedAt": "2025-03-20T15:30:00.000Z"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "DaemonActive": {
+                        "minDelay": 15,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "daemon.status",
+                                        "expected": "ACTIVE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "daemon.status",
+                                        "expected": "DELETE_IN_PROGRESS",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#DescribeDaemonDeployments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#DescribeDaemonDeploymentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#DescribeDaemonDeploymentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClusterNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to describe one or more of your daemon deployments",
+                    "resources": {
+                        "required": {
+                            "daemon-deployment": {
+                                "conditionKeys": [
+                                    "ecs:cluster",
+                                    "ecs:daemon",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            },
+                            "daemon": {
+                                "conditionKeys": [
+                                    "ecs:cluster",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Describes one or more of your daemon deployments.</p> <p>A daemon deployment orchestrates the progressive rollout of daemon task updates across container instances managed by the daemon's capacity providers. Each deployment includes circuit breaker and alarm-based rollback capabilities.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe daemon deployments",
+                        "documentation": "This example describes a daemon deployment for the my-monitoring-daemon daemon.",
+                        "input": {
+                            "daemonDeploymentArns": [
+                                "arn:aws:ecs:us-east-1:123456789012:daemon-deployment/my-cluster/my-monitoring-daemon/aB1cD2eF3gH4iJ5k"
+                            ]
+                        },
+                        "output": {
+                            "daemonDeployments": [
+                                {
+                                    "daemonDeploymentArn": "arn:aws:ecs:us-east-1:123456789012:daemon-deployment/my-cluster/my-monitoring-daemon/aB1cD2eF3gH4iJ5k",
+                                    "clusterArn": "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster",
+                                    "status": "SUCCESSFUL",
+                                    "statusReason": "Deployment completed successfully.",
+                                    "targetDaemonRevision": {
+                                        "arn": "arn:aws:ecs:us-east-1:123456789012:daemon-revision/my-cluster/my-monitoring-daemon/4980306466373577095",
+                                        "capacityProviders": [
+                                            {
+                                                "arn": "arn:aws:ecs:us-east-1:123456789012:capacity-provider/my-capacity-provider",
+                                                "runningInstanceCount": 3,
+                                                "drainingInstanceCount": 0
+                                            }
+                                        ],
+                                        "totalRunningInstanceCount": 3,
+                                        "totalDrainingInstanceCount": 0
+                                    },
+                                    "sourceDaemonRevisions": [],
+                                    "circuitBreaker": {
+                                        "failureCount": 0,
+                                        "status": "MONITORING_COMPLETE",
+                                        "threshold": 10
+                                    },
+                                    "alarms": {
+                                        "status": "DISABLED",
+                                        "alarmNames": [],
+                                        "triggeredAlarmNames": []
+                                    },
+                                    "deploymentConfiguration": {
+                                        "drainPercent": 10.0,
+                                        "bakeTimeInMinutes": 5,
+                                        "alarms": {
+                                            "alarmNames": [],
+                                            "enable": false
+                                        }
+                                    },
+                                    "createdAt": "2025-03-15T12:00:00.000Z",
+                                    "startedAt": "2025-03-15T12:00:05.000Z",
+                                    "finishedAt": "2025-03-15T12:15:00.000Z"
+                                }
+                            ],
+                            "failures": []
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "DaemonDeploymentSuccessful": {
+                        "minDelay": 15,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "daemonDeployments[].status",
+                                        "expected": "SUCCESSFUL",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "daemonDeployments[].status",
+                                        "expected": "STOPPED",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "daemonDeployments[].status",
+                                        "expected": "ROLLBACK_FAILED",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "daemonDeployments[].status",
+                                        "expected": "ROLLBACK_SUCCESSFUL",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "failures[].reason",
+                                        "expected": "MISSING",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "DaemonDeploymentStopped": {
+                        "minDelay": 15,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "daemonDeployments[].status",
+                                        "expected": "STOPPED",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "failures[].reason",
+                                        "expected": "MISSING",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#DescribeDaemonDeploymentsRequest": {
+            "type": "structure",
+            "members": {
+                "daemonDeploymentArns": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the daemon deployments to describe. You can specify up to 20 ARNs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeDaemonDeploymentsResponse": {
+            "type": "structure",
+            "members": {
+                "failures": {
+                    "target": "com.amazonaws.ecs#Failures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any failures associated with the call.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "daemonDeployments": {
+                    "target": "com.amazonaws.ecs#DaemonDeploymentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of daemon deployments.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeDaemonRequest": {
+            "type": "structure",
+            "members": {
+                "daemonArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeDaemonResponse": {
+            "type": "structure",
+            "members": {
+                "daemon": {
+                    "target": "com.amazonaws.ecs#DaemonDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full description of the daemon, including the current revisions, deployment ARN, cluster, and status information.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeDaemonRevisions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#DescribeDaemonRevisionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#DescribeDaemonRevisionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClusterNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to describe one or more of your daemon revisions",
+                    "resources": {
+                        "required": {
+                            "daemon-revision": {
+                                "conditionKeys": [
+                                    "ecs:cluster",
+                                    "ecs:daemon",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            },
+                            "daemon": {
+                                "conditionKeys": [
+                                    "ecs:cluster",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Describes one or more of your daemon revisions.</p> <p>A daemon revision is a snapshot of a daemon's configuration at the time a deployment was initiated. It captures the daemon task definition, container images, tag propagation, and execute command settings. Daemon revisions are immutable.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe daemon revisions",
+                        "documentation": "This example describes a daemon revision for the my-monitoring-daemon daemon.",
+                        "input": {
+                            "daemonRevisionArns": [
+                                "arn:aws:ecs:us-east-1:123456789012:daemon-revision/my-cluster/my-monitoring-daemon/4980306466373577095"
+                            ]
+                        },
+                        "output": {
+                            "daemonRevisions": [
+                                {
+                                    "daemonRevisionArn": "arn:aws:ecs:us-east-1:123456789012:daemon-revision/my-cluster/my-monitoring-daemon/4980306466373577095",
+                                    "clusterArn": "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster",
+                                    "daemonArn": "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon",
+                                    "daemonTaskDefinitionArn": "arn:aws:ecs:us-east-1:123456789012:daemon-task-definition/monitoring-agent:1",
+                                    "createdAt": "2025-03-15T12:00:00.000Z",
+                                    "containerImages": [
+                                        {
+                                            "containerName": "cloudwatch-agent",
+                                            "imageDigest": "sha256:a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2",
+                                            "image": "public.ecr.aws/cloudwatch-agent/cloudwatch-agent:latest"
+                                        }
+                                    ],
+                                    "propagateTags": "NONE",
+                                    "enableECSManagedTags": false,
+                                    "enableExecuteCommand": false
+                                }
+                            ],
+                            "failures": []
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeDaemonRevisionsRequest": {
+            "type": "structure",
+            "members": {
+                "daemonRevisionArns": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the daemon revisions to describe. You can specify up to 20 ARNs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeDaemonRevisionsResponse": {
+            "type": "structure",
+            "members": {
+                "daemonRevisions": {
+                    "target": "com.amazonaws.ecs#DaemonRevisions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of daemon revisions.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "failures": {
+                    "target": "com.amazonaws.ecs#Failures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any failures associated with the call.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeDaemonTaskDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#DescribeDaemonTaskDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#DescribeDaemonTaskDefinitionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to describe a daemon task definition",
+                    "resources": {
+                        "required": {
+                            "daemon-task-definition": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Describes a daemon task definition. You can specify a <code>family</code> and <code>revision</code> to find information about a specific daemon task definition, or you can simply specify the family to find the latest <code>ACTIVE</code> revision in that family.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe a daemon task definition",
+                        "documentation": "This example describes the first revision of the monitoring-agent daemon task definition.",
+                        "input": {
+                            "daemonTaskDefinition": "monitoring-agent:1"
+                        },
+                        "output": {
+                            "daemonTaskDefinition": {
+                                "daemonTaskDefinitionArn": "arn:aws:ecs:us-east-1:123456789012:daemon-task-definition/monitoring-agent:1",
+                                "family": "monitoring-agent",
+                                "revision": 1,
+                                "containerDefinitions": [
+                                    {
+                                        "name": "cloudwatch-agent",
+                                        "image": "public.ecr.aws/cloudwatch-agent/cloudwatch-agent:latest",
+                                        "memory": 256,
+                                        "cpu": 128,
+                                        "essential": true,
+                                        "logConfiguration": {
+                                            "logDriver": "awslogs",
+                                            "options": {
+                                                "awslogs-group": "/ecs/daemon/monitoring-agent",
+                                                "awslogs-region": "us-east-1",
+                                                "awslogs-stream-prefix": "ecs"
+                                            }
+                                        },
+                                        "environment": [
+                                            {
+                                                "name": "USE_DEFAULT_CONFIG",
+                                                "value": "true"
+                                            }
+                                        ],
+                                        "mountPoints": [],
+                                        "secrets": []
+                                    }
+                                ],
+                                "cpu": "128",
+                                "memory": "256",
+                                "executionRoleArn": "arn:aws:iam::123456789012:role/ecsTaskExecutionRole",
+                                "taskRoleArn": "arn:aws:iam::123456789012:role/ecsDaemonTaskRole",
+                                "volumes": [],
+                                "status": "ACTIVE",
+                                "registeredAt": "2025-03-15T10:30:00.000Z",
+                                "registeredBy": "arn:aws:iam::123456789012:user/admin"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "DaemonTaskDefinitionActive": {
+                        "minDelay": 15,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "daemonTaskDefinition.status",
+                                        "expected": "ACTIVE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "daemonTaskDefinition.status",
+                                        "expected": "DELETE_IN_PROGRESS",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "daemonTaskDefinition.status",
+                                        "expected": "DELETED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "DaemonTaskDefinitionDeleted": {
+                        "minDelay": 15,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "daemonTaskDefinition.status",
+                                        "expected": "DELETED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#DescribeDaemonTaskDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "daemonTaskDefinition": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>family</code> for the latest <code>ACTIVE</code> revision, <code>family</code> and <code>revision</code> (<code>family:revision</code>) for a specific revision in the family, or full Amazon Resource Name (ARN) of the daemon task definition to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeDaemonTaskDefinitionResponse": {
+            "type": "structure",
+            "members": {
+                "daemonTaskDefinition": {
+                    "target": "com.amazonaws.ecs#DaemonTaskDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full daemon task definition description.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -9434,6 +11895,18 @@
                     "traits": {
                         "smithy.api#enumValue": "CONTAINER_RUNTIME"
                     }
+                },
+                "ACCELERATED_COMPUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCELERATED_COMPUTE"
+                    }
+                },
+                "DAEMON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAEMON"
+                    }
                 }
             }
         },
@@ -9493,7 +11966,7 @@
                 "fipsEnabled": {
                     "target": "com.amazonaws.ecs#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines whether to enable FIPS 140-2 validated cryptographic modules on EC2 instances launched by the capacity provider. If <code>true</code>, instances use FIPS-compliant cryptographic algorithms and modules for enhanced security compliance. If <code>false</code>, instances use standard cryptographic implementations.</p> <p>If not specified, instances are launched with FIPS enabled in AWS GovCloud (US) regions and FIPS disabled in other regions.</p>"
+                        "smithy.api#documentation": "<p>Determines whether to enable FIPS 140-2 validated cryptographic modules on EC2 instances launched by the capacity provider. If <code>true</code>, instances use FIPS-compliant cryptographic algorithms and modules for enhanced security compliance. If <code>false</code>, instances use standard cryptographic implementations.</p> <p>If not specified, instances are launched with FIPS enabled in Amazon Web Services GovCloud (US) regions and FIPS disabled in other regions.</p>"
                     }
                 },
                 "capacityReservations": {
@@ -10441,6 +12914,385 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecs#ListDaemonDeployments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#ListDaemonDeploymentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#ListDaemonDeploymentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClusterNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get a list of daemon deployments for a specified daemon",
+                    "resources": {
+                        "required": {
+                            "daemon": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}",
+                                    "ecs:cluster"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Returns a list of daemon deployments for a specified daemon. You can filter the results by status or creation time.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list daemon deployments",
+                        "documentation": "This example lists all successful daemon deployments for the my-monitoring-daemon daemon.",
+                        "input": {
+                            "daemonArn": "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon",
+                            "status": [
+                                "SUCCESSFUL"
+                            ]
+                        },
+                        "output": {
+                            "daemonDeployments": [
+                                {
+                                    "daemonDeploymentArn": "arn:aws:ecs:us-east-1:123456789012:daemon-deployment/my-cluster/my-monitoring-daemon/aB1cD2eF3gH4iJ5k",
+                                    "daemonArn": "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon",
+                                    "clusterArn": "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster",
+                                    "status": "SUCCESSFUL",
+                                    "statusReason": "Deployment completed successfully.",
+                                    "targetDaemonRevisionArn": "arn:aws:ecs:us-east-1:123456789012:daemon-revision/my-cluster/my-monitoring-daemon/4980306466373577095",
+                                    "createdAt": "2025-03-15T12:00:00.000Z",
+                                    "startedAt": "2025-03-15T12:00:05.000Z",
+                                    "finishedAt": "2025-03-15T12:15:00.000Z"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ecs#ListDaemonDeploymentsRequest": {
+            "type": "structure",
+            "members": {
+                "daemonArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon to list deployments for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#DaemonDeploymentStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional filter to narrow the <code>ListDaemonDeployments</code> results by deployment status. If you don't specify a status, all deployments are returned.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecs#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional filter to narrow the <code>ListDaemonDeployments</code> results by creation time. If you don't specify a time range, all deployments are returned.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of daemon deployment results that <code>ListDaemonDeployments</code> returned in paginated output. When this parameter is used, <code>ListDaemonDeployments</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListDaemonDeployments</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter isn't used, then <code>ListDaemonDeployments</code> returns up to 20 results and a <code>nextToken</code> value if applicable.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a <code>ListDaemonDeployments</code> request indicating that more results are available to fulfill the request and further calls will be needed. If <code>maxResults</code> was provided, it's possible for the number of results to be fewer than <code>maxResults</code>.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#ListDaemonDeploymentsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListDaemonDeployments</code> request. When the results of a <code>ListDaemonDeployments</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "daemonDeployments": {
+                    "target": "com.amazonaws.ecs#DaemonDeploymentSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of daemon deployment summaries.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#ListDaemonTaskDefinitions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#ListDaemonTaskDefinitionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#ListDaemonTaskDefinitionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get a list of daemon task definitions that are registered to your account"
+                },
+                "smithy.api#documentation": "<p>Returns a list of daemon task definitions that are registered to your account. You can filter the results by family name, status, or both to find daemon task definitions that match your criteria.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list daemon task definitions",
+                        "documentation": "This example lists all daemon task definitions in your account that start with the monitoring prefix.",
+                        "input": {
+                            "familyPrefix": "monitoring"
+                        },
+                        "output": {
+                            "daemonTaskDefinitions": [
+                                {
+                                    "arn": "arn:aws:ecs:us-east-1:123456789012:daemon-task-definition/monitoring-agent:2",
+                                    "registeredAt": "2025-03-20T14:00:00.000Z",
+                                    "registeredBy": "arn:aws:iam::123456789012:user/admin",
+                                    "status": "ACTIVE"
+                                },
+                                {
+                                    "arn": "arn:aws:ecs:us-east-1:123456789012:daemon-task-definition/monitoring-agent:1",
+                                    "registeredAt": "2025-03-15T10:30:00.000Z",
+                                    "registeredBy": "arn:aws:iam::123456789012:user/admin",
+                                    "status": "ACTIVE"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ecs#ListDaemonTaskDefinitionsRequest": {
+            "type": "structure",
+            "members": {
+                "familyPrefix": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full family name to filter the <code>ListDaemonTaskDefinitions</code> results with. Specifying a <code>familyPrefix</code> limits the listed daemon task definitions to daemon task definition families that start with the <code>familyPrefix</code> string.</p>"
+                    }
+                },
+                "family": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exact name of the daemon task definition family to filter results with.</p>"
+                    }
+                },
+                "revision": {
+                    "target": "com.amazonaws.ecs#DaemonTaskDefinitionRevisionFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision filter to apply. Specify <code>LAST_REGISTERED</code> to return only the last registered revision for each daemon task definition family.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#DaemonTaskDefinitionStatusFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The daemon task definition status to filter the <code>ListDaemonTaskDefinitions</code> results with. By default, only <code>ACTIVE</code> daemon task definitions are listed. If you set this parameter to <code>DELETE_IN_PROGRESS</code>, only daemon task definitions that are in the process of being deleted are listed. If you set this parameter to <code>ALL</code>, all daemon task definitions are listed regardless of status.</p>"
+                    }
+                },
+                "sort": {
+                    "target": "com.amazonaws.ecs#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order to sort the results. Valid values are <code>ASC</code> and <code>DESC</code>. By default (<code>ASC</code>), daemon task definitions are listed in ascending order by family name and revision number.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a <code>ListDaemonTaskDefinitions</code> request indicating that more results are available to fulfill the request and further calls will be needed. If <code>maxResults</code> was provided, it's possible for the number of results to be fewer than <code>maxResults</code>.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of daemon task definition results that <code>ListDaemonTaskDefinitions</code> returned in paginated output. When this parameter is used, <code>ListDaemonTaskDefinitions</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListDaemonTaskDefinitions</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter isn't used, then <code>ListDaemonTaskDefinitions</code> returns up to 100 results and a <code>nextToken</code> value if applicable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#ListDaemonTaskDefinitionsResponse": {
+            "type": "structure",
+            "members": {
+                "daemonTaskDefinitions": {
+                    "target": "com.amazonaws.ecs#DaemonTaskDefinitionSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of daemon task definition summaries.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListDaemonTaskDefinitions</code> request. When the results of a <code>ListDaemonTaskDefinitions</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#ListDaemons": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#ListDaemonsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#ListDaemonsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClusterNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "ecs:cluster"
+                ],
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get a list of daemons that are running in a specified cluster"
+                },
+                "smithy.api#documentation": "<p>Returns a list of daemons. You can filter the results by cluster or capacity provider.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list daemons in a cluster",
+                        "documentation": "This example lists all daemons in the specified cluster.",
+                        "input": {
+                            "clusterArn": "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster"
+                        },
+                        "output": {
+                            "daemonSummariesList": [
+                                {
+                                    "daemonArn": "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon",
+                                    "status": "ACTIVE",
+                                    "createdAt": "2025-03-15T12:00:00.000Z",
+                                    "updatedAt": "2025-03-20T15:30:00.000Z"
+                                },
+                                {
+                                    "daemonArn": "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-logging-daemon",
+                                    "status": "ACTIVE",
+                                    "createdAt": "2025-03-16T09:00:00.000Z",
+                                    "updatedAt": "2025-03-16T09:00:00.000Z"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ecs#ListDaemonsRequest": {
+            "type": "structure",
+            "members": {
+                "clusterArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster to filter daemons by. If not specified, daemons from all clusters are returned.</p>"
+                    }
+                },
+                "capacityProviderArns": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the capacity providers to filter daemons by. Only daemons associated with the specified capacity providers are returned.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of daemon results that <code>ListDaemons</code> returned in paginated output. When this parameter is used, <code>ListDaemons</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListDaemons</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter isn't used, then <code>ListDaemons</code> returns up to 100 results and a <code>nextToken</code> value if applicable.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a <code>ListDaemons</code> request indicating that more results are available to fulfill the request and further calls will be needed. If <code>maxResults</code> was provided, it's possible for the number of results to be fewer than <code>maxResults</code>.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#ListDaemonsResponse": {
+            "type": "structure",
+            "members": {
+                "daemonSummariesList": {
+                    "target": "com.amazonaws.ecs#DaemonSummariesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of daemon summaries.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListDaemons</code> request. When the results of a <code>ListDaemons</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecs#ListServiceDeployments": {
             "type": "operation",
             "input": {
@@ -11250,6 +14102,12 @@
                     "target": "com.amazonaws.ecs#LaunchType",
                     "traits": {
                         "smithy.api#documentation": "<p>The launch type to use when filtering the <code>ListTasks</code> results.</p>"
+                    }
+                },
+                "daemonName": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the daemon to use when filtering the <code>ListTasks</code> results. Specifying a <code>daemonName</code> limits the results to tasks that belong to that daemon.</p>"
                     }
                 }
             },
@@ -13816,6 +16674,169 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecs#RegisterDaemonTaskDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#RegisterDaemonTaskDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#RegisterDaemonTaskDefinitionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
+                    "ecs:privileged",
+                    "ecs:task-cpu",
+                    "ecs:task-memory"
+                ],
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to register a new daemon task definition from the supplied family and containerDefinitions",
+                    "createsResources": [
+                        "daemon-task-definition"
+                    ],
+                    "resources": {
+                        "required": {
+                            "daemon-task-definition": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Registers a new daemon task definition from the supplied <code>family</code> and <code>containerDefinitions</code>. Optionally, you can add data volumes to your containers with the <code>volumes</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/daemon-task-definitions.html\">Daemon task definitions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <p>A daemon task definition is a template that describes the containers that form a daemon. Daemons deploy cross-cutting software agents such as security monitoring, telemetry, and logging across your Amazon ECS infrastructure.</p> <p>Each time you call <code>RegisterDaemonTaskDefinition</code>, a new revision of the daemon task definition is created. You can't modify a revision after you register it.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To register a daemon task definition",
+                        "documentation": "This example registers a daemon task definition in the monitoring-agent family with a single container that runs a CloudWatch agent.",
+                        "input": {
+                            "family": "monitoring-agent",
+                            "containerDefinitions": [
+                                {
+                                    "name": "cloudwatch-agent",
+                                    "image": "public.ecr.aws/cloudwatch-agent/cloudwatch-agent:latest",
+                                    "memory": 256,
+                                    "cpu": 128,
+                                    "essential": true,
+                                    "logConfiguration": {
+                                        "logDriver": "awslogs",
+                                        "options": {
+                                            "awslogs-group": "/ecs/daemon/monitoring-agent",
+                                            "awslogs-region": "us-east-1",
+                                            "awslogs-stream-prefix": "ecs"
+                                        }
+                                    },
+                                    "environment": [
+                                        {
+                                            "name": "USE_DEFAULT_CONFIG",
+                                            "value": "true"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "cpu": "128",
+                            "memory": "256",
+                            "executionRoleArn": "arn:aws:iam::123456789012:role/ecsTaskExecutionRole",
+                            "taskRoleArn": "arn:aws:iam::123456789012:role/ecsDaemonTaskRole"
+                        },
+                        "output": {
+                            "daemonTaskDefinitionArn": "arn:aws:ecs:us-east-1:123456789012:daemon-task-definition/monitoring-agent:1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ecs#RegisterDaemonTaskDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "family": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You must specify a <code>family</code> for a daemon task definition. This family is used as a name for your daemon task definition. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "taskRoleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The short name or full Amazon Resource Name (ARN) of the IAM role that containers in this daemon task can assume. All containers in this daemon task are granted the permissions that are specified in this role.</p>"
+                    }
+                },
+                "executionRoleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task execution role that grants the Amazon ECS container agent permission to make Amazon Web Services API calls on your behalf. The task execution role is required for daemon tasks that pull container images from Amazon ECR or send container logs to CloudWatch.</p>"
+                    }
+                },
+                "containerDefinitions": {
+                    "target": "com.amazonaws.ecs#DaemonContainerDefinitionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of container definitions in JSON format that describe the containers that make up your daemon task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cpu": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of CPU units used by the daemon task. It can be expressed as an integer using CPU units (for example, <code>1024</code>).</p>"
+                    }
+                },
+                "memory": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of memory (in MiB) used by the daemon task. It can be expressed as an integer using MiB (for example, <code>1024</code>).</p>"
+                    }
+                },
+                "volumes": {
+                    "target": "com.amazonaws.ecs#DaemonVolumeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of volume definitions in JSON format that containers in your daemon task can use.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ecs#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata that you apply to the daemon task definition to help you categorize and organize them. Each tag consists of a key and an optional value. You define both of them.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case-sensitive.</p> </li> <li> <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#RegisterDaemonTaskDefinitionResponse": {
+            "type": "structure",
+            "members": {
+                "daemonTaskDefinitionArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the registered daemon task definition.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecs#RegisterTaskDefinition": {
             "type": "operation",
             "input": {
@@ -14066,7 +17087,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The repository credentials for private registry authentication.</p>"
+                "smithy.api#documentation": "<p>The repository credentials for private registry authentication.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.ecs#RequiresAttributes": {
@@ -17305,7 +20327,9 @@
                             "task-definition": {},
                             "service": {},
                             "task-set": {},
-                            "capacity-provider": {}
+                            "capacity-provider": {},
+                            "daemon": {},
+                            "daemon-task-definition": {}
                         }
                     }
                 },
@@ -17786,6 +20810,12 @@
                     "target": "com.amazonaws.ecs#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The Unix timestamp for the time when the task definition was deregistered.</p>"
+                    }
+                },
+                "deleteRequestedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the task definition delete was requested.</p>"
                     }
                 },
                 "registeredBy": {
@@ -18823,7 +21853,9 @@
                             "task-definition": {},
                             "service": {},
                             "task-set": {},
-                            "capacity-provider": {}
+                            "capacity-provider": {},
+                            "daemon": {},
+                            "daemon-task-definition": {}
                         }
                     }
                 },
@@ -18899,6 +21931,7 @@
             ],
             "traits": {
                 "aws.iam#conditionKeys": [
+                    "ecs:instance-metadata-tags-propagation",
                     "ecs:propagate-tags",
                     "aws:ResourceTag/${TagKey}"
                 ],
@@ -19746,6 +22779,191 @@
             },
             "traits": {
                 "smithy.api#documentation": "",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#UpdateDaemon": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#UpdateDaemonRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#UpdateDaemonResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClusterNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#DaemonNotActiveException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#DaemonNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#PlatformUnknownException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "ecs:capacity-provider",
+                    "ecs:daemon-task-definition",
+                    "ecs:enable-ecs-managed-tags",
+                    "ecs:enable-execute-command",
+                    "ecs:propagate-tags",
+                    "ecs:task-cpu",
+                    "ecs:task-memory"
+                ],
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to modify the parameters of a daemon",
+                    "resources": {
+                        "required": {
+                            "daemon": {
+                                "conditionKeys": [
+                                    "ecs:cluster",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Updates the specified daemon. When you update a daemon, a new deployment is triggered that progressively rolls out the changes to the container instances associated with the daemon's capacity providers. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/daemon-deployments.html\">Daemon deployments</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <p>Amazon ECS drains existing container instances and provisions new instances with the updated daemon. Amazon ECS automatically launches replacement tasks for your services.</p> <important> <p>Updating a daemon triggers a rolling deployment that drains and replaces container instances. Plan updates during maintenance windows to minimize impact on running services.</p> </important> <note> <p>ECS Managed Daemons is only supported for Amazon ECS Managed Instances Capacity Providers.</p> </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update a daemon",
+                        "documentation": "This example updates the my-monitoring-daemon daemon to use a new daemon task definition revision.",
+                        "input": {
+                            "daemonArn": "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon",
+                            "daemonTaskDefinitionArn": "arn:aws:ecs:us-east-1:123456789012:daemon-task-definition/monitoring-agent:2",
+                            "capacityProviderArns": [
+                                "arn:aws:ecs:us-east-1:123456789012:capacity-provider/my-capacity-provider"
+                            ],
+                            "deploymentConfiguration": {
+                                "drainPercent": 10.0,
+                                "bakeTimeInMinutes": 5
+                            }
+                        },
+                        "output": {
+                            "daemonArn": "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon",
+                            "status": "ACTIVE",
+                            "createdAt": "2025-03-15T12:00:00.000Z",
+                            "updatedAt": "2025-03-20T15:30:00.000Z",
+                            "deploymentArn": "arn:aws:ecs:us-east-1:123456789012:daemon-deployment/my-cluster/my-monitoring-daemon/xY9zA8bC7dE6fG5h"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ecs#UpdateDaemonRequest": {
+            "type": "structure",
+            "members": {
+                "daemonArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "daemonTaskDefinitionArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon task definition to use for the updated daemon.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "capacityProviderArns": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the capacity providers to associate with the daemon.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deploymentConfiguration": {
+                    "target": "com.amazonaws.ecs#DaemonDeploymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional deployment parameters that control how the daemon rolls out updates, including the drain percentage, alarm-based rollback, and bake time.</p>"
+                    }
+                },
+                "propagateTags": {
+                    "target": "com.amazonaws.ecs#DaemonPropagateTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to propagate the tags from the daemon to the daemon tasks. If you don't specify a value, the tags aren't propagated. You can only propagate tags to daemon tasks during task creation.</p>"
+                    }
+                },
+                "enableECSManagedTags": {
+                    "target": "com.amazonaws.ecs#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to turn on Amazon ECS managed tags for the tasks in the daemon. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html\">Tagging your Amazon ECS resources</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
+                },
+                "enableExecuteCommand": {
+                    "target": "com.amazonaws.ecs#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If <code>true</code>, the execute command functionality is turned on for all tasks in the daemon. If <code>false</code>, the execute command functionality is turned off.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#UpdateDaemonResponse": {
+            "type": "structure",
+            "members": {
+                "daemonArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#DaemonStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the daemon.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the daemon was created.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the daemon was last updated.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "deploymentArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the daemon deployment that was triggered by the update.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },

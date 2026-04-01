@@ -12351,6 +12351,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The invocation endpoint for ModelInvocationJob</p>"
                     }
+                },
+                "totalRecordCount": {
+                    "target": "com.amazonaws.bedrock#NonNegativeLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of records in the batch inference job.</p>"
+                    }
+                },
+                "processedRecordCount": {
+                    "target": "com.amazonaws.bedrock#NonNegativeLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of records that have been processed in the batch inference job.</p>"
+                    }
+                },
+                "successRecordCount": {
+                    "target": "com.amazonaws.bedrock#NonNegativeLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of records that were successfully processed in the batch inference job.</p>"
+                    }
+                },
+                "errorRecordCount": {
+                    "target": "com.amazonaws.bedrock#NonNegativeLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of records that failed to process in the batch inference job.</p>"
+                    }
                 }
             },
             "traits": {
@@ -18984,6 +19008,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The invocation endpoint for ModelInvocationJob</p>"
                     }
+                },
+                "totalRecordCount": {
+                    "target": "com.amazonaws.bedrock#NonNegativeLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of records in the batch inference job.</p>"
+                    }
+                },
+                "processedRecordCount": {
+                    "target": "com.amazonaws.bedrock#NonNegativeLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of records that have been processed in the batch inference job.</p>"
+                    }
+                },
+                "successRecordCount": {
+                    "target": "com.amazonaws.bedrock#NonNegativeLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of records that were successfully processed in the batch inference job.</p>"
+                    }
+                },
+                "errorRecordCount": {
+                    "target": "com.amazonaws.bedrock#NonNegativeLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of records that failed to process in the batch inference job.</p>"
+                    }
                 }
             },
             "traits": {
@@ -19102,6 +19150,15 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.bedrock#NonNegativeLong": {
+            "type": "long",
+            "traits": {
+                "smithy.api#documentation": "<p>A non-negative long value.</p>",
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.bedrock#Offer": {

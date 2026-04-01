@@ -2752,6 +2752,20 @@
                 "smithy.api#documentation": "<p>Contains information about an event in an AgentCore Memory resource.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcore#EventFilterCondition": {
+            "type": "enum",
+            "members": {
+                "HAS_EVENTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HAS_EVENTS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The condition to use for filtering sessions by events.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcore#EventId": {
             "type": "string",
             "traits": {
@@ -5427,6 +5441,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>"
                     }
+                },
+                "filter": {
+                    "target": "com.amazonaws.bedrockagentcore#SessionFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria to apply when listing sessions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6831,6 +6851,20 @@
                 "smithy.api#documentation": "<p>The exception that occurs when the request would cause a service quota to be exceeded. Review your service quotas and either reduce your request rate or request a quota increase.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.bedrockagentcore#SessionFilter": {
+            "type": "structure",
+            "members": {
+                "eventFilter": {
+                    "target": "com.amazonaws.bedrockagentcore#EventFilterCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event filter condition to apply. Use this to filter sessions based on event presence.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains filter criteria for listing sessions.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#SessionId": {
