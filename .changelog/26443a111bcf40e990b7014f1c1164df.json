@@ -1,0 +1,8 @@
+{
+    "id": "26443a11-1bcf-40e9-90b7-014f1c1164df",
+    "type": "feature",
+    "description": "Added new boolean flag to persist metadata updates to all primary image sets in the same study as the requested image set.",
+    "modules": [
+        "service/medicalimaging"
+    ]
+}

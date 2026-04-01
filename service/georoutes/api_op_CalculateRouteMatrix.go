@@ -16,6 +16,10 @@ import (
 // Destinations. Each row corresponds to one entry in Origins. Each entry in the
 // row corresponds to the route from that entry in Origins to an entry in
 // Destinations positions.
+//
+// For more information, see [Calculate route matrix] in the Amazon Location Service Developer Guide.
+//
+// [Calculate route matrix]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html
 func (c *Client) CalculateRouteMatrix(ctx context.Context, params *CalculateRouteMatrixInput, optFns ...func(*Options)) (*CalculateRouteMatrixOutput, error) {
 	if params == nil {
 		params = &CalculateRouteMatrixInput{}
@@ -37,46 +41,42 @@ type CalculateRouteMatrixInput struct {
 	//
 	// Route calculations are billed for each origin and destination pair. If you use
 	// a large matrix of origins and destinations, your costs will increase
-	// accordingly. See [Amazon Location's pricing page]for more information.
+	// accordingly. For more information, see [Routes pricing]in the Amazon Location Service Developer
+	// Guide.
 	//
-	// [Amazon Location's pricing page]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`
+	// [Routes pricing]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html
 	//
 	// This member is required.
 	Destinations []types.RouteMatrixDestination
 
-	// The position in longitude and latitude for the origin.
+	// The position for the origin in World Geodetic System (WGS 84) format:
+	// [longitude, latitude].
 	//
 	// Route calculations are billed for each origin and destination pair. Using a
 	// large amount of Origins in a request can lead you to incur unexpected charges.
-	// See [Amazon Location's pricing page]for more information.
+	// For more information, see [Routes pricing]in the Amazon Location Service Developer Guide.
 	//
-	// [Amazon Location's pricing page]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`
+	// [Routes pricing]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html
 	//
 	// This member is required.
 	Origins []types.RouteMatrixOrigin
 
-	// Boundary within which the matrix is to be calculated. All data, origins and
-	// destinations outside the boundary are considered invalid.
-	//
-	// When request routing boundary was set as AutoCircle, the response routing
-	// boundary will return Circle derived from the AutoCircle settings.
-	//
-	// This member is required.
-	RoutingBoundary *types.RouteMatrixBoundary
-
 	// Features that are allowed while calculating a route.
 	Allow *types.RouteMatrixAllowOptions
 
-	// Features that are avoided while calculating a route. Avoidance is on a
+	//  Features that are avoided while calculating a route. Avoidance is on a
 	// best-case basis. If an avoidance can't be satisfied for a particular case, it
 	// violates the avoidance and the returned response produces a notice for the
-	// violation.
+	// violation. For [GrabMaps]customers, ap-southeast-1 and ap-southeast-5 regions support
+	// only TollRoads , Ferries , and ControlledAccessHighways .
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Avoid *types.RouteMatrixAvoidanceOptions
 
 	// Uses the current time as the time of departure.
 	DepartNow *bool
 
-	// Time of departure from thr origin.
+	// Time of departure from the origin.
 	//
 	// Time format: YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm
 	//
@@ -87,28 +87,53 @@ type CalculateRouteMatrixInput struct {
 	//     2020-04-22T17:57:24+02:00
 	DepartureTime *string
 
-	// Features to be strictly excluded while calculating the route.
+	//  Features to be strictly excluded while calculating the route. Not supported in
+	// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Exclude *types.RouteMatrixExclusionOptions
 
 	// Optional: The API key to be used for authorization. Either an API key or valid
 	// SigV4 signature must be provided when making a request.
 	Key *string
 
-	// Specifies the optimization criteria for calculating a route.
+	// Controls the trade-off between finding the shortest travel time ( FastestRoute )
+	// and the shortest distance ( ShortestRoute ) when calculating reachable areas.
 	//
-	// Default Value: FastestRoute
+	// Default value: FastestRoute
 	OptimizeRoutingFor types.RoutingObjective
 
-	// Traffic related options.
+	//  Boundary within which the matrix is to be calculated. All data, origins and
+	// destinations outside the boundary are considered invalid. For [GrabMaps]customers,
+	// ap-southeast-1 and ap-southeast-5 regions support only Unbounded set to true .
+	//
+	// Default value: Unbounded set to true
+	//
+	// When request routing boundary was set as AutoCircle, the response routing
+	// boundary will return Circle derived from the AutoCircle settings.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+	RoutingBoundary *types.RouteMatrixBoundary
+
+	//  Traffic related options. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Traffic *types.RouteMatrixTrafficOptions
 
-	// Specifies the mode of transport when calculating a route. Used in estimating
-	// the speed of travel and road compatibility.
+	//  Specifies the mode of transport when calculating a route. Used in estimating
+	// the speed of travel and road compatibility. For [GrabMaps]customers, ap-southeast-1 and
+	// ap-southeast-5 regions support only Car , Pedestrian , and Scooter .
 	//
-	// Default Value: Car
+	// Default value: Car
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	TravelMode types.RouteMatrixTravelMode
 
-	// Travel mode related options for the provided travel mode.
+	//  Travel mode related options for the provided travel mode. Not supported in
+	// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	TravelModeOptions *types.RouteMatrixTravelModeOptions
 
 	noSmithyDocumentSerde

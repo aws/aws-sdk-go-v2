@@ -1115,6 +1115,13 @@ func awsRestjson1_serializeOpDocumentCreateGatewayTargetInput(v *CreateGatewayTa
 		ok.String(*v.Name)
 	}
 
+	if v.PrivateEndpoint != nil {
+		ok := object.Key("privateEndpoint")
+		if err := awsRestjson1_serializeDocumentPrivateEndpoint(v.PrivateEndpoint, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TargetConfiguration != nil {
 		ok := object.Key("targetConfiguration")
 		if err := awsRestjson1_serializeDocumentTargetConfiguration(v.TargetConfiguration, ok); err != nil {
@@ -7179,6 +7186,13 @@ func awsRestjson1_serializeOpDocumentUpdateGatewayTargetInput(v *UpdateGatewayTa
 		ok.String(*v.Name)
 	}
 
+	if v.PrivateEndpoint != nil {
+		ok := object.Key("privateEndpoint")
+		if err := awsRestjson1_serializeDocumentPrivateEndpoint(v.PrivateEndpoint, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TargetConfiguration != nil {
 		ok := object.Key("targetConfiguration")
 		if err := awsRestjson1_serializeDocumentTargetConfiguration(v.TargetConfiguration, ok); err != nil {
@@ -8503,6 +8517,12 @@ func awsRestjson1_serializeDocumentCredentialProvider(v types.CredentialProvider
 			return err
 		}
 
+	case *types.CredentialProviderMemberIamCredentialProvider:
+		av := object.Key("iamCredentialProvider")
+		if err := awsRestjson1_serializeDocumentIamCredentialProvider(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.CredentialProviderMemberOauthCredentialProvider:
 		av := object.Key("oauthCredentialProvider")
 		if err := awsRestjson1_serializeDocumentOAuthCredentialProvider(&uv.Value, av); err != nil {
@@ -9360,6 +9380,23 @@ func awsRestjson1_serializeDocumentGoogleOauth2ProviderConfigInput(v *types.Goog
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIamCredentialProvider(v *types.IamCredentialProvider, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Region != nil {
+		ok := object.Key("region")
+		ok.String(*v.Region)
+	}
+
+	if v.Service != nil {
+		ok := object.Key("service")
+		ok.String(*v.Service)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentIncludedOauth2ProviderConfigInput(v *types.IncludedOauth2ProviderConfigInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9627,6 +9664,49 @@ func awsRestjson1_serializeDocumentLogGroupNamesList(v []string, value smithyjso
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentManagedLatticeResource(v *types.ManagedLatticeResource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.EndpointIpAddressType) > 0 {
+		ok := object.Key("endpointIpAddressType")
+		ok.String(string(v.EndpointIpAddressType))
+	}
+
+	if v.RoutingDomain != nil {
+		ok := object.Key("routingDomain")
+		ok.String(*v.RoutingDomain)
+	}
+
+	if v.SecurityGroupIds != nil {
+		ok := object.Key("securityGroupIds")
+		if err := awsRestjson1_serializeDocumentSecurityGroupIds(v.SecurityGroupIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SubnetIds != nil {
+		ok := object.Key("subnetIds")
+		if err := awsRestjson1_serializeDocumentSubnetIds(v.SubnetIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcIdentifier != nil {
+		ok := object.Key("vpcIdentifier")
+		ok.String(*v.VpcIdentifier)
+	}
+
 	return nil
 }
 
@@ -10398,6 +10478,30 @@ func awsRestjson1_serializeDocumentPolicyGenerationDetails(v *types.PolicyGenera
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPrivateEndpoint(v types.PrivateEndpoint, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.PrivateEndpointMemberManagedLatticeResource:
+		av := object.Key("managedLatticeResource")
+		if err := awsRestjson1_serializeDocumentManagedLatticeResource(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.PrivateEndpointMemberSelfManagedLatticeResource:
+		av := object.Key("selfManagedLatticeResource")
+		if err := awsRestjson1_serializeDocumentSelfManagedLatticeResource(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentProtocolConfiguration(v *types.ProtocolConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10745,6 +10849,17 @@ func awsRestjson1_serializeDocumentSecretsManagerLocation(v *types.SecretsManage
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSecurityGroupIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSecurityGroups(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -10779,6 +10894,22 @@ func awsRestjson1_serializeDocumentSelfManagedConfigurationInput(v *types.SelfMa
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSelfManagedLatticeResource(v types.SelfManagedLatticeResource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier:
+		av := object.Key("resourceConfigurationIdentifier")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -10964,6 +11095,17 @@ func awsRestjson1_serializeDocumentStreamDeliveryResourcesList(v []types.StreamD
 		if err := awsRestjson1_serializeDocumentStreamDeliveryResource(v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSubnetIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

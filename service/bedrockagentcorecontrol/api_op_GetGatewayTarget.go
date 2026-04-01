@@ -96,6 +96,12 @@ type GetGatewayTargetOutput struct {
 	// the retrieved gateway target.
 	MetadataConfiguration *types.MetadataConfiguration
 
+	// The private endpoint configuration for the gateway target.
+	PrivateEndpoint types.PrivateEndpoint
+
+	// The managed resources created by the gateway for private endpoint connectivity.
+	PrivateEndpointManagedResources []types.ManagedResourceDetails
+
 	// The reasons for the current status of the gateway target.
 	StatusReasons []string
 

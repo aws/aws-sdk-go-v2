@@ -9724,6 +9724,19 @@ func awsRestjson1_deserializeOpDocumentGetModelInvocationJobOutput(v **GetModelI
 				sv.EndTime = ptr.Time(t)
 			}
 
+		case "errorRecordCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonNegativeLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ErrorRecordCount = ptr.Int64(i64)
+			}
+
 		case "inputDataConfig":
 			if err := awsRestjson1_deserializeDocumentModelInvocationJobInputDataConfig(&sv.InputDataConfig, value); err != nil {
 				return err
@@ -9805,6 +9818,19 @@ func awsRestjson1_deserializeOpDocumentGetModelInvocationJobOutput(v **GetModelI
 				return err
 			}
 
+		case "processedRecordCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonNegativeLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ProcessedRecordCount = ptr.Int64(i64)
+			}
+
 		case "roleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9836,6 +9862,19 @@ func awsRestjson1_deserializeOpDocumentGetModelInvocationJobOutput(v **GetModelI
 				sv.SubmitTime = ptr.Time(t)
 			}
 
+		case "successRecordCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonNegativeLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SuccessRecordCount = ptr.Int64(i64)
+			}
+
 		case "timeoutDurationInHours":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9847,6 +9886,19 @@ func awsRestjson1_deserializeOpDocumentGetModelInvocationJobOutput(v **GetModelI
 					return err
 				}
 				sv.TimeoutDurationInHours = ptr.Int32(int32(i64))
+			}
+
+		case "totalRecordCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonNegativeLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalRecordCount = ptr.Int64(i64)
 			}
 
 		case "vpcConfig":
@@ -30957,6 +31009,19 @@ func awsRestjson1_deserializeDocumentModelInvocationJobSummary(v **types.ModelIn
 				sv.EndTime = ptr.Time(t)
 			}
 
+		case "errorRecordCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonNegativeLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ErrorRecordCount = ptr.Int64(i64)
+			}
+
 		case "inputDataConfig":
 			if err := awsRestjson1_deserializeDocumentModelInvocationJobInputDataConfig(&sv.InputDataConfig, value); err != nil {
 				return err
@@ -31038,6 +31103,19 @@ func awsRestjson1_deserializeDocumentModelInvocationJobSummary(v **types.ModelIn
 				return err
 			}
 
+		case "processedRecordCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonNegativeLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ProcessedRecordCount = ptr.Int64(i64)
+			}
+
 		case "roleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -31069,6 +31147,19 @@ func awsRestjson1_deserializeDocumentModelInvocationJobSummary(v **types.ModelIn
 				sv.SubmitTime = ptr.Time(t)
 			}
 
+		case "successRecordCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonNegativeLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SuccessRecordCount = ptr.Int64(i64)
+			}
+
 		case "timeoutDurationInHours":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -31080,6 +31171,19 @@ func awsRestjson1_deserializeDocumentModelInvocationJobSummary(v **types.ModelIn
 					return err
 				}
 				sv.TimeoutDurationInHours = ptr.Int32(int32(i64))
+			}
+
+		case "totalRecordCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonNegativeLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalRecordCount = ptr.Int64(i64)
 			}
 
 		case "vpcConfig":

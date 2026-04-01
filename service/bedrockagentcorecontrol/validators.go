@@ -2310,6 +2310,11 @@ func validateCredentialProvider(v types.CredentialProvider) error {
 			invalidParams.AddNested("[apiKeyCredentialProvider]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.CredentialProviderMemberIamCredentialProvider:
+		if err := validateIamCredentialProvider(&uv.Value); err != nil {
+			invalidParams.AddNested("[iamCredentialProvider]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.CredentialProviderMemberOauthCredentialProvider:
 		if err := validateOAuthCredentialProvider(&uv.Value); err != nil {
 			invalidParams.AddNested("[oauthCredentialProvider]", err.(smithy.InvalidParamsError))
@@ -2965,6 +2970,21 @@ func validateGoogleOauth2ProviderConfigInput(v *types.GoogleOauth2ProviderConfig
 	}
 }
 
+func validateIamCredentialProvider(v *types.IamCredentialProvider) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IamCredentialProvider"}
+	if v.Service == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Service"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIncludedOauth2ProviderConfigInput(v *types.IncludedOauth2ProviderConfigInput) error {
 	if v == nil {
 		return nil
@@ -3141,6 +3161,27 @@ func validateLlmAsAJudgeEvaluatorConfig(v *types.LlmAsAJudgeEvaluatorConfig) err
 		if err := validateEvaluatorModelConfig(v.ModelConfig); err != nil {
 			invalidParams.AddNested("ModelConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateManagedLatticeResource(v *types.ManagedLatticeResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedLatticeResource"}
+	if v.VpcIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcIdentifier"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if len(v.EndpointIpAddressType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointIpAddressType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3646,6 +3687,25 @@ func validatePolicyGenerationDetails(v *types.PolicyGenerationDetails) error {
 	}
 	if v.PolicyGenerationAssetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyGenerationAssetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrivateEndpoint(v types.PrivateEndpoint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrivateEndpoint"}
+	switch uv := v.(type) {
+	case *types.PrivateEndpointMemberManagedLatticeResource:
+		if err := validateManagedLatticeResource(&uv.Value); err != nil {
+			invalidParams.AddNested("[managedLatticeResource]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4555,6 +4615,11 @@ func validateOpCreateGatewayTargetInput(v *CreateGatewayTargetInput) error {
 	if v.CredentialProviderConfigurations != nil {
 		if err := validateCredentialProviderConfigurations(v.CredentialProviderConfigurations); err != nil {
 			invalidParams.AddNested("CredentialProviderConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PrivateEndpoint != nil {
+		if err := validatePrivateEndpoint(v.PrivateEndpoint); err != nil {
+			invalidParams.AddNested("PrivateEndpoint", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5623,6 +5688,11 @@ func validateOpUpdateGatewayTargetInput(v *UpdateGatewayTargetInput) error {
 	if v.CredentialProviderConfigurations != nil {
 		if err := validateCredentialProviderConfigurations(v.CredentialProviderConfigurations); err != nil {
 			invalidParams.AddNested("CredentialProviderConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PrivateEndpoint != nil {
+		if err := validatePrivateEndpoint(v.PrivateEndpoint); err != nil {
+			invalidParams.AddNested("PrivateEndpoint", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

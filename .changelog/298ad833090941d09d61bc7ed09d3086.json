@@ -1,0 +1,8 @@
+{
+    "id": "298ad833-0909-41d0-9d61-bc7ed09d3086",
+    "type": "feature",
+    "description": "Added the ability to filter out empty sessions when listing sessions. Customers can now retrieve only sessions that still contain events, eliminating the need to check each session individually. No changes required for existing integrations.",
+    "modules": [
+        "service/bedrockagentcore"
+    ]
+}

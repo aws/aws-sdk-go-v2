@@ -1407,6 +1407,16 @@ type SecretsManagerLocation struct {
 	noSmithyDocumentSerde
 }
 
+// Contains filter criteria for listing sessions.
+type SessionFilter struct {
+
+	// The event filter condition to apply. Use this to filter sessions based on event
+	// presence.
+	EventFilter EventFilterCondition
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary information about a session in an AgentCore Memory resource.
 type SessionSummary struct {
 

@@ -762,9 +762,6 @@ const (
 	RoutePedestrianTravelStepTypeRoundaboutExit  RoutePedestrianTravelStepType = "RoundaboutExit"
 	RoutePedestrianTravelStepTypeRoundaboutPass  RoutePedestrianTravelStepType = "RoundaboutPass"
 	RoutePedestrianTravelStepTypeTurn            RoutePedestrianTravelStepType = "Turn"
-	RoutePedestrianTravelStepTypeExit            RoutePedestrianTravelStepType = "Exit"
-	RoutePedestrianTravelStepTypeRamp            RoutePedestrianTravelStepType = "Ramp"
-	RoutePedestrianTravelStepTypeUTurn           RoutePedestrianTravelStepType = "UTurn"
 )
 
 // Values returns all known values for RoutePedestrianTravelStepType. Note that
@@ -782,9 +779,6 @@ func (RoutePedestrianTravelStepType) Values() []RoutePedestrianTravelStepType {
 		"RoundaboutExit",
 		"RoundaboutPass",
 		"Turn",
-		"Exit",
-		"Ramp",
-		"UTurn",
 	}
 }
 

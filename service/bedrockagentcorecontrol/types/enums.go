@@ -401,6 +401,25 @@ func (CredentialProviderVendorType) Values() []CredentialProviderVendorType {
 	}
 }
 
+type EndpointIpAddressType string
+
+// Enum values for EndpointIpAddressType
+const (
+	EndpointIpAddressTypeIpv4 EndpointIpAddressType = "IPV4"
+	EndpointIpAddressTypeIpv6 EndpointIpAddressType = "IPV6"
+)
+
+// Values returns all known values for EndpointIpAddressType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointIpAddressType) Values() []EndpointIpAddressType {
+	return []EndpointIpAddressType{
+		"IPV4",
+		"IPV6",
+	}
+}
+
 type EvaluatorLevel string
 
 // Enum values for EvaluatorLevel

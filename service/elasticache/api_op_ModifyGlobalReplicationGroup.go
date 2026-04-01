@@ -54,7 +54,7 @@ type ModifyGlobalReplicationGroupInput struct {
 	CacheParameterGroupName *string
 
 	// Modifies the engine listed in a global replication group message. The options
-	// are redis, memcached or valkey.
+	// are valkey, memcached or redis.
 	Engine *string
 
 	// The upgraded version of the cache engine to be run on the clusters in the

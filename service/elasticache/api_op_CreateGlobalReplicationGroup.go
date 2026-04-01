@@ -55,7 +55,7 @@ type CreateGlobalReplicationGroupInput struct {
 	GlobalReplicationGroupIdSuffix *string
 
 	// The name of the primary cluster that accepts writes and will replicate updates
-	// to the secondary cluster.
+	// to the secondary cluster. This value is stored as a lowercase string.
 	//
 	// This member is required.
 	PrimaryReplicationGroupId *string

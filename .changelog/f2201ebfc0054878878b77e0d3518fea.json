@@ -1,0 +1,8 @@
+{
+    "id": "f2201ebf-c005-4878-878b-77e0d3518fea",
+    "type": "feature",
+    "description": "Amazon ECS now supports Managed Daemons with dedicated APIs for registering daemon task definitions, creating daemons, and managing daemon deployments.",
+    "modules": [
+        "service/ecs"
+    ]
+}

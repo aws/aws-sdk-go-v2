@@ -127,7 +127,7 @@ type ModifyReplicationGroupInput struct {
 	ClusterMode types.ClusterMode
 
 	// Modifies the engine listed in a replication group message. The options are
-	// redis, memcached or valkey.
+	// valkey, memcached or redis.
 	Engine *string
 
 	// The upgraded version of the cache engine to be run on the clusters in the

@@ -33,6 +33,32 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request is invalid or malformed.
+type BadRequestException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *BadRequestException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *BadRequestException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *BadRequestException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "BadRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Updating or deleting a resource can cause an inconsistent state.
 type ConflictException struct {
 	Message *string
@@ -84,6 +110,32 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// The request content type or accept header is not supported.
+type NotAcceptableException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *NotAcceptableException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NotAcceptableException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NotAcceptableException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "NotAcceptableException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *NotAcceptableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request references a resource which does not exist.
 type ResourceNotFoundException struct {

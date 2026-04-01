@@ -50,6 +50,26 @@ func (m *validateOpCreateCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDaemon struct {
+}
+
+func (*validateOpCreateDaemon) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDaemon) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDaemonInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDaemonInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateExpressGatewayService struct {
 }
 
@@ -190,6 +210,46 @@ func (m *validateOpDeleteCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDaemon struct {
+}
+
+func (*validateOpDeleteDaemon) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDaemon) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDaemonInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDaemonInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDaemonTaskDefinition struct {
+}
+
+func (*validateOpDeleteDaemonTaskDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDaemonTaskDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDaemonTaskDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDaemonTaskDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteExpressGatewayService struct {
 }
 
@@ -325,6 +385,86 @@ func (m *validateOpDescribeContainerInstances) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeContainerInstancesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeDaemonDeployments struct {
+}
+
+func (*validateOpDescribeDaemonDeployments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDaemonDeployments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDaemonDeploymentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDaemonDeploymentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeDaemon struct {
+}
+
+func (*validateOpDescribeDaemon) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDaemon) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDaemonInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDaemonInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeDaemonRevisions struct {
+}
+
+func (*validateOpDescribeDaemonRevisions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDaemonRevisions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDaemonRevisionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDaemonRevisionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeDaemonTaskDefinition struct {
+}
+
+func (*validateOpDescribeDaemonTaskDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDaemonTaskDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDaemonTaskDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDaemonTaskDefinitionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -530,6 +670,26 @@ func (m *validateOpListAttributes) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListDaemonDeployments struct {
+}
+
+func (*validateOpListDaemonDeployments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDaemonDeployments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDaemonDeploymentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDaemonDeploymentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListServiceDeployments struct {
 }
 
@@ -685,6 +845,26 @@ func (m *validateOpRegisterContainerInstance) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRegisterContainerInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRegisterDaemonTaskDefinition struct {
+}
+
+func (*validateOpRegisterDaemonTaskDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterDaemonTaskDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterDaemonTaskDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterDaemonTaskDefinitionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -970,6 +1150,26 @@ func (m *validateOpUpdateContainerInstancesState) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDaemon struct {
+}
+
+func (*validateOpUpdateDaemon) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDaemon) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDaemonInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDaemonInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateExpressGatewayService struct {
 }
 
@@ -1078,6 +1278,10 @@ func addOpCreateClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCluster{}, middleware.After)
 }
 
+func addOpCreateDaemonValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDaemon{}, middleware.After)
+}
+
 func addOpCreateExpressGatewayServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateExpressGatewayService{}, middleware.After)
 }
@@ -1106,6 +1310,14 @@ func addOpDeleteClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCluster{}, middleware.After)
 }
 
+func addOpDeleteDaemonValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDaemon{}, middleware.After)
+}
+
+func addOpDeleteDaemonTaskDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDaemonTaskDefinition{}, middleware.After)
+}
+
 func addOpDeleteExpressGatewayServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteExpressGatewayService{}, middleware.After)
 }
@@ -1132,6 +1344,22 @@ func addOpDeregisterTaskDefinitionValidationMiddleware(stack *middleware.Stack) 
 
 func addOpDescribeContainerInstancesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeContainerInstances{}, middleware.After)
+}
+
+func addOpDescribeDaemonDeploymentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDaemonDeployments{}, middleware.After)
+}
+
+func addOpDescribeDaemonValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDaemon{}, middleware.After)
+}
+
+func addOpDescribeDaemonRevisionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDaemonRevisions{}, middleware.After)
+}
+
+func addOpDescribeDaemonTaskDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDaemonTaskDefinition{}, middleware.After)
 }
 
 func addOpDescribeExpressGatewayServiceValidationMiddleware(stack *middleware.Stack) error {
@@ -1174,6 +1402,10 @@ func addOpListAttributesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAttributes{}, middleware.After)
 }
 
+func addOpListDaemonDeploymentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDaemonDeployments{}, middleware.After)
+}
+
 func addOpListServiceDeploymentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListServiceDeployments{}, middleware.After)
 }
@@ -1204,6 +1436,10 @@ func addOpPutClusterCapacityProvidersValidationMiddleware(stack *middleware.Stac
 
 func addOpRegisterContainerInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterContainerInstance{}, middleware.After)
+}
+
+func addOpRegisterDaemonTaskDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterDaemonTaskDefinition{}, middleware.After)
 }
 
 func addOpRegisterTaskDefinitionValidationMiddleware(stack *middleware.Stack) error {
@@ -1260,6 +1496,10 @@ func addOpUpdateContainerAgentValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpUpdateContainerInstancesStateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateContainerInstancesState{}, middleware.After)
+}
+
+func addOpUpdateDaemonValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDaemon{}, middleware.After)
 }
 
 func addOpUpdateExpressGatewayServiceValidationMiddleware(stack *middleware.Stack) error {
@@ -1617,6 +1857,110 @@ func validateCreateManagedInstancesProviderConfiguration(v *types.CreateManagedI
 	} else if v.InstanceLaunchTemplate != nil {
 		if err := validateInstanceLaunchTemplate(v.InstanceLaunchTemplate); err != nil {
 			invalidParams.AddNested("InstanceLaunchTemplate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDaemonContainerDefinition(v *types.DaemonContainerDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DaemonContainerDefinition"}
+	if v.Image == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Image"))
+	}
+	if v.RepositoryCredentials != nil {
+		if err := validateRepositoryCredentials(v.RepositoryCredentials); err != nil {
+			invalidParams.AddNested("RepositoryCredentials", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HealthCheck != nil {
+		if err := validateHealthCheck(v.HealthCheck); err != nil {
+			invalidParams.AddNested("HealthCheck", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EnvironmentFiles != nil {
+		if err := validateEnvironmentFiles(v.EnvironmentFiles); err != nil {
+			invalidParams.AddNested("EnvironmentFiles", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Secrets != nil {
+		if err := validateSecretList(v.Secrets); err != nil {
+			invalidParams.AddNested("Secrets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LogConfiguration != nil {
+		if err := validateLogConfiguration(v.LogConfiguration); err != nil {
+			invalidParams.AddNested("LogConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FirelensConfiguration != nil {
+		if err := validateFirelensConfiguration(v.FirelensConfiguration); err != nil {
+			invalidParams.AddNested("FirelensConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Ulimits != nil {
+		if err := validateUlimitList(v.Ulimits); err != nil {
+			invalidParams.AddNested("Ulimits", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LinuxParameters != nil {
+		if err := validateDaemonLinuxParameters(v.LinuxParameters); err != nil {
+			invalidParams.AddNested("LinuxParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DependsOn != nil {
+		if err := validateContainerDependencies(v.DependsOn); err != nil {
+			invalidParams.AddNested("DependsOn", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RestartPolicy != nil {
+		if err := validateContainerRestartPolicy(v.RestartPolicy); err != nil {
+			invalidParams.AddNested("RestartPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDaemonContainerDefinitionList(v []types.DaemonContainerDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DaemonContainerDefinitionList"}
+	for i := range v {
+		if err := validateDaemonContainerDefinition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDaemonLinuxParameters(v *types.DaemonLinuxParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DaemonLinuxParameters"}
+	if v.Devices != nil {
+		if err := validateDevicesList(v.Devices); err != nil {
+			invalidParams.AddNested("Devices", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tmpfs != nil {
+		if err := validateTmpfsList(v.Tmpfs); err != nil {
+			invalidParams.AddNested("Tmpfs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2886,6 +3230,27 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 	}
 }
 
+func validateOpCreateDaemonInput(v *CreateDaemonInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDaemonInput"}
+	if v.DaemonName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DaemonName"))
+	}
+	if v.DaemonTaskDefinitionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DaemonTaskDefinitionArn"))
+	}
+	if v.CapacityProviderArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityProviderArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateExpressGatewayServiceInput(v *CreateExpressGatewayServiceInput) error {
 	if v == nil {
 		return nil
@@ -3056,6 +3421,36 @@ func validateOpDeleteClusterInput(v *DeleteClusterInput) error {
 	}
 }
 
+func validateOpDeleteDaemonInput(v *DeleteDaemonInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDaemonInput"}
+	if v.DaemonArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DaemonArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDaemonTaskDefinitionInput(v *DeleteDaemonTaskDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDaemonTaskDefinitionInput"}
+	if v.DaemonTaskDefinition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DaemonTaskDefinition"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteExpressGatewayServiceInput(v *DeleteExpressGatewayServiceInput) error {
 	if v == nil {
 		return nil
@@ -3159,6 +3554,66 @@ func validateOpDescribeContainerInstancesInput(v *DescribeContainerInstancesInpu
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeContainerInstancesInput"}
 	if v.ContainerInstances == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContainerInstances"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDaemonDeploymentsInput(v *DescribeDaemonDeploymentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDaemonDeploymentsInput"}
+	if v.DaemonDeploymentArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DaemonDeploymentArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDaemonInput(v *DescribeDaemonInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDaemonInput"}
+	if v.DaemonArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DaemonArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDaemonRevisionsInput(v *DescribeDaemonRevisionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDaemonRevisionsInput"}
+	if v.DaemonRevisionArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DaemonRevisionArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDaemonTaskDefinitionInput(v *DescribeDaemonTaskDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDaemonTaskDefinitionInput"}
+	if v.DaemonTaskDefinition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DaemonTaskDefinition"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3323,6 +3778,21 @@ func validateOpListAttributesInput(v *ListAttributesInput) error {
 	}
 }
 
+func validateOpListDaemonDeploymentsInput(v *ListDaemonDeploymentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDaemonDeploymentsInput"}
+	if v.DaemonArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DaemonArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListServiceDeploymentsInput(v *ListServiceDeploymentsInput) error {
 	if v == nil {
 		return nil
@@ -3461,6 +3931,28 @@ func validateOpRegisterContainerInstanceInput(v *RegisterContainerInstanceInput)
 	if v.PlatformDevices != nil {
 		if err := validatePlatformDevices(v.PlatformDevices); err != nil {
 			invalidParams.AddNested("PlatformDevices", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRegisterDaemonTaskDefinitionInput(v *RegisterDaemonTaskDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterDaemonTaskDefinitionInput"}
+	if v.Family == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Family"))
+	}
+	if v.ContainerDefinitions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerDefinitions"))
+	} else if v.ContainerDefinitions != nil {
+		if err := validateDaemonContainerDefinitionList(v.ContainerDefinitions); err != nil {
+			invalidParams.AddNested("ContainerDefinitions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3770,6 +4262,27 @@ func validateOpUpdateContainerInstancesStateInput(v *UpdateContainerInstancesSta
 	}
 	if len(v.Status) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDaemonInput(v *UpdateDaemonInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDaemonInput"}
+	if v.DaemonArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DaemonArn"))
+	}
+	if v.DaemonTaskDefinitionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DaemonTaskDefinitionArn"))
+	}
+	if v.CapacityProviderArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityProviderArns"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

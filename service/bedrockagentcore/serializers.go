@@ -2830,6 +2830,13 @@ func awsRestjson1_serializeOpDocumentListSessionsInput(v *ListSessionsInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.Filter != nil {
+		ok := object.Key("filter")
+		if err := awsRestjson1_serializeDocumentSessionFilter(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
 		ok.Integer(*v.MaxResults)
@@ -4932,6 +4939,18 @@ func awsRestjson1_serializeDocumentSecretsManagerLocation(v *types.SecretsManage
 	if v.SecretArn != nil {
 		ok := object.Key("secretArn")
 		ok.String(*v.SecretArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSessionFilter(v *types.SessionFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.EventFilter) > 0 {
+		ok := object.Key("eventFilter")
+		ok.String(string(v.EventFilter))
 	}
 
 	return nil

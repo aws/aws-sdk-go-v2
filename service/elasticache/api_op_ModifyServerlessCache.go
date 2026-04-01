@@ -49,7 +49,7 @@ type ModifyServerlessCacheInput struct {
 	Description *string
 
 	// Modifies the engine listed in a serverless cache request. The options are
-	// redis, memcached or valkey.
+	// valkey, memcached or redis.
 	Engine *string
 
 	// Modifies the engine vesion listed in a serverless cache request.

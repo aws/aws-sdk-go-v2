@@ -836,6 +836,7 @@ type ContentConfiguration struct {
 // The following types satisfy this interface:
 //
 //	CredentialProviderMemberApiKeyCredentialProvider
+//	CredentialProviderMemberIamCredentialProvider
 //	CredentialProviderMemberOauthCredentialProvider
 type CredentialProvider interface {
 	isCredentialProvider()
@@ -850,6 +851,16 @@ type CredentialProviderMemberApiKeyCredentialProvider struct {
 }
 
 func (*CredentialProviderMemberApiKeyCredentialProvider) isCredentialProvider() {}
+
+// The IAM credential provider. This provider uses IAM authentication with SigV4
+// signing to access the target endpoint.
+type CredentialProviderMemberIamCredentialProvider struct {
+	Value IamCredentialProvider
+
+	noSmithyDocumentSerde
+}
+
+func (*CredentialProviderMemberIamCredentialProvider) isCredentialProvider() {}
 
 // The OAuth credential provider. This provider uses OAuth authentication to
 // access the target endpoint.
@@ -1968,6 +1979,15 @@ type GatewayTarget struct {
 	// and from this gateway target.
 	MetadataConfiguration *MetadataConfiguration
 
+	// The private endpoint configuration for a gateway target. Defines how the
+	// gateway connects to private resources in your VPC.
+	PrivateEndpoint PrivateEndpoint
+
+	// A list of managed resources created by the gateway for private endpoint
+	// connectivity. These resources are created in your account when you use a managed
+	// VPC Lattice resource configuration.
+	PrivateEndpointManagedResources []ManagedResourceDetails
+
 	// The status reasons for the target status.
 	StatusReasons []string
 
@@ -2030,6 +2050,25 @@ type GoogleOauth2ProviderConfigOutput struct {
 
 	// The client ID for the Google OAuth2 provider.
 	ClientId *string
+
+	noSmithyDocumentSerde
+}
+
+// An IAM credential provider for gateway authentication. This structure contains
+// the configuration for authenticating with the target endpoint using IAM
+// credentials and SigV4 signing.
+type IamCredentialProvider struct {
+
+	// The target Amazon Web Services service name used for SigV4 signing. This value
+	// identifies the service that the gateway authenticates with when making requests
+	// to the target endpoint.
+	//
+	// This member is required.
+	Service *string
+
+	// The Amazon Web Services Region used for SigV4 signing. If not specified,
+	// defaults to the gateway's Region.
+	Region *string
 
 	noSmithyDocumentSerde
 }
@@ -2301,6 +2340,57 @@ type LlmAsAJudgeEvaluatorConfig struct {
 	//
 	// This member is required.
 	RatingScale RatingScale
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for a managed VPC Lattice resource. The gateway creates and
+// manages the VPC Lattice resource gateway and resource configuration on your
+// behalf using a service-linked role.
+type ManagedLatticeResource struct {
+
+	// The IP address type for the resource configuration endpoint.
+	//
+	// This member is required.
+	EndpointIpAddressType EndpointIpAddressType
+
+	// The subnet IDs within the VPC where the VPC Lattice resource gateway is placed.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	// The ID of the VPC that contains your private resource.
+	//
+	// This member is required.
+	VpcIdentifier *string
+
+	// An intermediate publicly resolvable domain used as the VPC Lattice resource
+	// configuration endpoint. Required when your private endpoint uses a domain that
+	// is not publicly resolvable.
+	RoutingDomain *string
+
+	// The security group IDs to associate with the VPC Lattice resource gateway. If
+	// not specified, the default security group for the VPC is used.
+	SecurityGroupIds []string
+
+	// Tags to apply to the managed VPC Lattice resource gateway.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Details of a resource created and managed by the gateway for private endpoint
+// connectivity.
+type ManagedResourceDetails struct {
+
+	// The domain associated with this managed resource.
+	Domain *string
+
+	// The ARN of the service network resource association.
+	ResourceAssociationArn *string
+
+	// The ARN of the VPC Lattice resource gateway created in your account.
+	ResourceGatewayArn *string
 
 	noSmithyDocumentSerde
 }
@@ -3571,6 +3661,38 @@ type PolicyGenerationDetails struct {
 	noSmithyDocumentSerde
 }
 
+// The private endpoint configuration for a gateway target. Defines how the
+// gateway connects to private resources in your VPC.
+//
+// The following types satisfy this interface:
+//
+//	PrivateEndpointMemberManagedLatticeResource
+//	PrivateEndpointMemberSelfManagedLatticeResource
+type PrivateEndpoint interface {
+	isPrivateEndpoint()
+}
+
+// Configuration for connecting to a private resource using a managed VPC Lattice
+// resource. The gateway creates and manages the VPC Lattice resources on your
+// behalf.
+type PrivateEndpointMemberManagedLatticeResource struct {
+	Value ManagedLatticeResource
+
+	noSmithyDocumentSerde
+}
+
+func (*PrivateEndpointMemberManagedLatticeResource) isPrivateEndpoint() {}
+
+// Configuration for connecting to a private resource using a self-managed VPC
+// Lattice resource configuration.
+type PrivateEndpointMemberSelfManagedLatticeResource struct {
+	Value SelfManagedLatticeResource
+
+	noSmithyDocumentSerde
+}
+
+func (*PrivateEndpointMemberSelfManagedLatticeResource) isPrivateEndpoint() {}
+
 // The protocol configuration for an agent runtime. This structure defines how the
 // agent runtime communicates with clients.
 type ProtocolConfiguration struct {
@@ -3925,6 +4047,27 @@ type SelfManagedConfigurationInput struct {
 	TriggerConditions []TriggerConditionInput
 
 	noSmithyDocumentSerde
+}
+
+// Configuration for a self-managed VPC Lattice resource. You create and manage
+// the VPC Lattice resource gateway and resource configuration, then provide the
+// resource configuration identifier.
+//
+// The following types satisfy this interface:
+//
+//	SelfManagedLatticeResourceMemberResourceConfigurationIdentifier
+type SelfManagedLatticeResource interface {
+	isSelfManagedLatticeResource()
+}
+
+// The ARN or ID of the VPC Lattice resource configuration.
+type SelfManagedLatticeResourceMemberResourceConfigurationIdentifier struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SelfManagedLatticeResourceMemberResourceConfigurationIdentifier) isSelfManagedLatticeResource() {
 }
 
 // Contains semantic consolidation override configuration.
@@ -4644,11 +4787,13 @@ func (*UnknownUnionMember) isOauth2Discovery()                       {}
 func (*UnknownUnionMember) isOauth2ProviderConfigInput()             {}
 func (*UnknownUnionMember) isOauth2ProviderConfigOutput()            {}
 func (*UnknownUnionMember) isPolicyDefinition()                      {}
+func (*UnknownUnionMember) isPrivateEndpoint()                       {}
 func (*UnknownUnionMember) isRatingScale()                           {}
 func (*UnknownUnionMember) isReflectionConfiguration()               {}
 func (*UnknownUnionMember) isRequestHeaderConfiguration()            {}
 func (*UnknownUnionMember) isResource()                              {}
 func (*UnknownUnionMember) isResourceLocation()                      {}
+func (*UnknownUnionMember) isSelfManagedLatticeResource()            {}
 func (*UnknownUnionMember) isStreamDeliveryResource()                {}
 func (*UnknownUnionMember) isTargetConfiguration()                   {}
 func (*UnknownUnionMember) isToolSchema()                            {}

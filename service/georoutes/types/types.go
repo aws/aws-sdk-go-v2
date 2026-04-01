@@ -11,7 +11,8 @@ import (
 // AutoCircle settings.
 type Circle struct {
 
-	// Center of the Circle defined in longitude and latitude coordinates.
+	// Center of the Circle in World Geodetic System (WGS 84) format: [longitude,
+	// latitude].
 	//
 	// Example: [-123.1174, 49.2847] represents the position with longitude -123.1174
 	// and latitude 49.2847 .
@@ -48,39 +49,49 @@ type Corridor struct {
 	noSmithyDocumentSerde
 }
 
-// Calculated isolines and associated properties.
+// Represents a single reachable area calculated for a specific threshold.
 type Isoline struct {
 
-	// Isolines may contain multiple components, if these components are connected by
-	// ferry links. These components are returned as separate polygons while the ferry
-	// links are returned as connections.
+	// Lines connecting separate parts of the reachable area that can be reached
+	// within the same threshold. These occur when areas are reachable but not
+	// contiguous, such as when separated by water or unroutable areas. When present,
+	// these lines represent actual transportation network segments (such as ferry
+	// routes or bridges) that connect the separated areas.
 	//
 	// This member is required.
 	Connections []IsolineConnection
 
-	// Geometries for the Calculated isolines.
+	// The shapes that define the reachable area, provided in the requested geometry
+	// format.
 	//
 	// This member is required.
 	Geometries []IsolineShapeGeometry
 
-	// Distance threshold corresponding to the calculated Isoline.
+	// The travel distance in meters used to calculate this isoline, if distance-based
+	// thresholds were specified in the request.
 	DistanceThreshold int64
 
-	// Time threshold corresponding to the calculated isoline.
+	// The travel time in seconds used to calculate this isoline, if time-based
+	// thresholds were specified in the request.
 	TimeThreshold int64
 
 	noSmithyDocumentSerde
 }
 
-// Features that are allowed while calculating an isoline.
+// Special road types or features that should be considered available for routing.
+// For example, this attribute can be used to allow the use of HOV (high-occupancy
+// vehicle) or HOT (high-occupancy toll) lanes, even if they would otherwise not
+// be.
 type IsolineAllowOptions struct {
 
-	// Allow Hot (High Occupancy Toll) lanes while calculating an isoline.
+	// When true, allows the use of HOT (high-occupancy toll) lanes, which may affect
+	// travel times and reachable areas.
 	//
 	// Default value: false
 	Hot *bool
 
-	// Allow Hov (High Occupancy vehicle) lanes while calculating an isoline.
+	// When true, allows the use of HOV (high-occupancy vehicle) lanes, which may
+	// affect travel times and reachable areas.
 	//
 	// Default value: false
 	Hov *bool
@@ -88,151 +99,194 @@ type IsolineAllowOptions struct {
 	noSmithyDocumentSerde
 }
 
-// The area to be avoided.
+// Defines an area to avoid when calculating routes. Consists of a primary
+// geometry to avoid, with the ability to specify exception areas within that
+// geometry where travel is permitted.
 type IsolineAvoidanceArea struct {
 
-	// Geometry of the area to be avoided.
+	// The primary area to avoid, specified using a bounding box, corridor, polygon,
+	// or polyline corridor.
 	//
 	// This member is required.
 	Geometry *IsolineAvoidanceAreaGeometry
 
-	// Exceptions to the provided avoidance geometry, to be included while calculating
-	// an isoline.
+	// Areas within the primary avoidance geometry where travel is allowed. For
+	// example, you might want to avoid a neighborhood but allow travel on a major road
+	// that passes through it.
 	Except []IsolineAvoidanceAreaGeometry
 
 	noSmithyDocumentSerde
 }
 
-// The avoidance geometry, to be included while calculating an isoline.
+// Defines an area to avoid during calculations using one of several supported
+// geometry types. The service will prefer routes that avoid these areas when
+// possible.
 type IsolineAvoidanceAreaGeometry struct {
 
-	// Geometry defined as a bounding box. The first pair represents the X and Y
-	// coordinates (longitude and latitude,) of the southwest corner of the bounding
-	// box; the second pair represents the X and Y coordinates (longitude and latitude)
-	// of the northeast corner.
+	// A rectangular area defined by its southwest and northeast corners: [min
+	// longitude, min latitude, max longitude, max latitude] .
 	BoundingBox []float64
 
-	// Geometry defined as a corridor - a LineString with a radius that defines the
-	// width of the corridor.
+	// A buffer zone around a line, defined by a series of coordinates and a radius in
+	// meters.
 	Corridor *Corridor
 
-	// A list of Polygon will be excluded for calculating isolines, the list can only
-	// contain 1 polygon.
+	// A polygon defined by a list of coordinate rings. The first ring defines the
+	// outer boundary; subsequent rings will be ignored.
 	Polygon [][][]float64
 
-	// Geometry defined as an encoded corridor – a polyline with a radius that defines
-	// the width of the corridor. For more information on polyline encoding, see [https://github.com/heremaps/flexiblepolyline/blob/master/README.md].
+	// A buffer zone around a compressed polyline, defined by an encoded polyline
+	// string and a radius in meters. For more information on polyline encoding, see [https://github.com/aws-geospatial/polyline].
 	//
-	// [https://github.com/heremaps/flexiblepolyline/blob/master/README.md]: https://github.com/heremaps/flexiblepolyline/blob/master/README.md
+	// [https://github.com/aws-geospatial/polyline]: https://github.com/aws-geospatial/polyline
 	PolylineCorridor *PolylineCorridor
 
-	// A list of PolylinePolygon's that are excluded for calculating isolines, the
-	// list can only contain 1 polygon. For more information on polyline encoding, see [https://github.com/heremaps/flexiblepolyline/blob/master/README.md]
-	// .
+	// A polygon defined by encoded polyline strings. The first string defines the
+	// outer boundary; subsequent strings will be ignored. For more information on
+	// polyline encoding, see [https://github.com/aws-geospatial/polyline].
 	//
-	// [https://github.com/heremaps/flexiblepolyline/blob/master/README.md]: https://github.com/heremaps/flexiblepolyline/blob/master/README.md
+	// [https://github.com/aws-geospatial/polyline]: https://github.com/aws-geospatial/polyline
 	PolylinePolygon []string
 
 	noSmithyDocumentSerde
 }
 
-// Features that are avoided while calculating isolines. Avoidance is on a
-// best-case basis. If an avoidance can't be satisfied for a particular case, it
-// violates the avoidance and the returned response produces a notice for the
-// violation.
+// Specifies features of the road network to avoid when calculating reachable
+// areas. These preferences guide route calculations but may be overridden when no
+// reasonable alternative exists. For example, if avoiding toll roads would make an
+// area unreachable, toll roads may still be used.
+//
+// Avoidance options include physical features (like ferries and tunnels), road
+// characteristics (like dirt roads and highways), and regulated areas (like
+// congestion zones). They can be combined to match specific routing needs, such as
+// avoiding both toll roads and ferries.
 type IsolineAvoidanceOptions struct {
 
-	// Areas to be avoided.
+	// Specifies geographic areas to avoid where possible. Routes may still pass
+	// through these areas if no reasonable alternative exists.
 	Areas []IsolineAvoidanceArea
 
-	// Avoid car-shuttle-trains while calculating an isoline.
+	// Indicates a preference to avoid car shuttle trains (auto trains) where
+	// possible. These may still be included if no reasonable alternative route exists.
 	CarShuttleTrains *bool
 
-	// Avoid controlled access highways while calculating an isoline.
+	// Indicates a preference to avoid controlled-access highways (such as interstate
+	// highways or motorways) where possible. If a viable route cannot be calculated
+	// using only local roads, controlled-access highways may still be included.
 	ControlledAccessHighways *bool
 
-	// Avoid dirt roads while calculating an isoline.
+	// Indicates a preference to avoid unpaved or dirt roads where possible. Routes
+	// may still include dirt roads if no reasonable paved alternative exists.
 	DirtRoads *bool
 
-	// Avoid ferries while calculating an isoline.
+	// Indicates a preference to avoid ferries where possible. If a viable route
+	// cannot be calculated without using ferries, they may still be included.
 	Ferries *bool
 
-	// Avoid roads that have seasonal closure while calculating an isoline.
+	// Indicates a preference to avoid roads that may be subject to seasonal closures
+	// where possible. These roads may still be included if no reasonable year-round
+	// alternative exists.
 	SeasonalClosure *bool
 
-	// Avoids roads where the specified toll transponders are the only mode of payment.
+	// Indicates a preference to avoid toll roads where possible. If a viable route
+	// cannot be calculated without using toll roads, they may still be included.
 	TollRoads *bool
 
-	// Avoids roads where the specified toll transponders are the only mode of payment.
+	// Indicates a preference to avoid roads that require electronic toll collection
+	// transponders where possible. These roads may still be included if no viable
+	// alternative route exists.
 	TollTransponders *bool
 
-	// Truck road type identifiers. BK1 through BK4 apply only to Sweden.
-	// A2,A4,B2,B4,C,D,ET2,ET4 apply only to Mexico.
+	// For truck travel modes, indicates specific road classification types in Sweden (
+	// BK1 through BK4 ) and Mexico ( A2, A4, B2, B4, C, D, ET2, ET4 ) to avoid where
+	// possible. These road types may still be used if no reasonable alternative
+	// exists.
 	//
 	// There are currently no other supported values as of 26th April 2024.
 	TruckRoadTypes []string
 
-	// Avoid tunnels while calculating an isoline.
+	// Indicates a preference to avoid tunnels where possible. If a viable route
+	// cannot be calculated without using tunnels, they may still be included.
 	Tunnels *bool
 
-	// Avoid U-turns for calculation on highways and motorways.
+	// Indicates a preference to avoid U-turns where possible. U-turns may still be
+	// included if necessary to reach certain areas or when no reasonable alternative
+	// exists.
 	UTurns *bool
 
-	// Zone categories to be avoided.
+	// Indicates types of regulated zones (such as congestion pricing or environmental
+	// zones) to avoid where possible. Routes may still pass through these zones if no
+	// reasonable alternative exists.
 	ZoneCategories []IsolineAvoidanceZoneCategory
 
 	noSmithyDocumentSerde
 }
 
-// Zone category to be avoided.
+// Types of regulated zones that may affect routing.
 type IsolineAvoidanceZoneCategory struct {
 
-	// Zone category to be avoided.
+	// The type of regulated zone: CongestionPricing for toll zones based on traffic
+	// levels, Environmental for low-emission zones, or Vignette for areas requiring
+	// special permits or stickers.
 	Category IsolineZoneCategory
 
 	noSmithyDocumentSerde
 }
 
-// Travel mode options when the provided travel mode is Car .
+// Vehicle characteristics and preferences that affect routing for passenger cars.
+// This includes vehicle type, occupancy, and speed restrictions that may influence
+// which roads can be used and expected travel times.
 type IsolineCarOptions struct {
 
-	// Engine type of the vehicle.
+	// The type of engine powering the vehicle, which may affect route calculation due
+	// to road restrictions or vehicle characteristics.
+	//
+	//   - INTERNAL_COMBUSTION —Standard gasoline or diesel engine.
+	//
+	//   - ELECTRIC —Battery electric vehicle.
+	//
+	//   - PLUGIN_HYBRID —Combination of electric and internal combustion engines with
+	//   plug-in charging capability.
 	EngineType IsolineEngineType
 
-	// The vehicle License Plate.
+	// License plate information used in regions where road access or routing
+	// restrictions are based on license plate numbers.
 	LicensePlate *IsolineVehicleLicensePlate
 
-	// Maximum speed.
+	// The maximum speed of the vehicle in kilometers per hour. When specified, routes
+	// will not include roads with higher speed limits. Valid values range from 3.6
+	// km/h (1 m/s) to 252 km/h (70 m/s).
 	//
-	// Unit: KilometersPerHour
+	// Unit: kilometers per hour
 	MaxSpeed *float64
 
-	// The number of occupants in the vehicle.
+	// The number of occupants in the vehicle. This can affect route calculations by
+	// enabling the use of high-occupancy vehicle (HOV) lanes where minimum occupancy
+	// requirements are met.
 	//
-	// Default Value: 1
+	// Default value: 1
 	Occupancy *int32
 
 	noSmithyDocumentSerde
 }
 
-// Isolines may contain multiple components, if these components are connected by
-// ferry links. These components are returned as separate polygons while the ferry
-// links are returned as connections.
+// Represents a segment of the transportation network that connects separate parts
+// of a reachable area. These connections show how discontinuous areas are linked,
+// such as by ferry routes or bridges crossing unroutable terrain.
 type IsolineConnection struct {
 
-	// Index of the polygon corresponding to the "from" component of the connection.
-	// The polygon is available from Isoline[].Geometries .
+	// The index of the starting polygon in the isoline's Geometries list.
 	//
 	// This member is required.
 	FromPolygonIndex *int32
 
-	// The isoline geometry.
+	// The shape of the connection, representing the actual path through the
+	// transportation network that links the polygons.
 	//
 	// This member is required.
 	Geometry *IsolineConnectionGeometry
 
-	// Index of the polygon corresponding to the "to" component of the connection. The
-	// polygon is available from Isoline[].Geometries .
+	// The index of the ending polygon in the isoline's Geometries list.
 	//
 	// This member is required.
 	ToPolygonIndex *int32
@@ -240,16 +294,24 @@ type IsolineConnection struct {
 	noSmithyDocumentSerde
 }
 
-// Geometry of the connection between different isoline components.
+// Represents the geometry of connections between non-contiguous parts of an
+// isoline. These connections can be provided in either coordinate pairs
+// (LineString) or encoded (Polyline) format, matching the format specified in the
+// request.
 type IsolineConnectionGeometry struct {
 
-	// An ordered list of positions used to plot a route on a map.
+	// A series of [longitude, latitude] coordinate pairs defining the connection path
+	// when Simple geometry format is requested. These coordinates can be directly
+	// used as the coordinates array in a GeoJSON LineString without transformation.
 	//
 	// LineString and Polyline are mutually exclusive properties.
 	LineString [][]float64
 
-	// An ordered list of positions used to plot a route on a map in a lossy
-	// compression format.
+	// An encoded representation of the connection path when FlexiblePolyline geometry
+	// format is requested. This provides a more compact representation suitable for
+	// transmission and storage. To convert to GeoJSON, first decode to obtain
+	// coordinate pairs, then use those coordinates as the coordinates array in a
+	// GeoJSON LineString.
 	//
 	// LineString and Polyline are mutually exclusive properties.
 	Polyline *string
@@ -257,33 +319,45 @@ type IsolineConnectionGeometry struct {
 	noSmithyDocumentSerde
 }
 
-// Destination related options.
+// Options that control how the destination point is interpreted and matched to
+// the road network when calculating reachable areas. This affects which roads are
+// considered accessible near the destination and how the final approach is
+// calculated.
 type IsolineDestinationOptions struct {
 
-	// Avoids actions for the provided distance. This is typically to consider for
-	// users in moving vehicles who may not have sufficient time to make an action at
-	// an origin or a destination.
+	// The distance in meters from the destination point within which certain routing
+	// actions (such as U-turns or left turns across traffic) are restricted. This
+	// helps generate more practical routes by avoiding potentially dangerous maneuvers
+	// near the endpoint.
 	AvoidActionsForDistance int64
 
-	// GPS Heading at the position.
+	// The initial direction of travel in degrees (0-360, where 0 is north). This can
+	// affect which road segments are considered accessible from the starting point.
 	Heading float64
 
-	// Options to configure matching the provided position to the road network.
+	// Controls how the destination point is matched to the road network, including
+	// search radius and name-based matching preferences.
 	Matching *IsolineMatchingOptions
 
-	// Options to configure matching the provided position to a side of the street.
+	// Specifies which side of the street should be considered accessible, which is
+	// important when building entrances or parking access points are only reachable
+	// from one side of the road.
 	SideOfStreet *IsolineSideOfStreetOptions
 
 	noSmithyDocumentSerde
 }
 
-// Isoline granularity related options.
+// Controls the detail level and smoothness of generated isolines. More detailed
+// isolines provide better visual representation of reachable areas but require
+// more processing time and result in larger responses.
 type IsolineGranularityOptions struct {
 
-	// Maximum number of points of returned Isoline.
+	// The maximum number of points used to define each isoline. Higher values create
+	// smoother, more detailed shapes.
 	MaxPoints *int32
 
-	// Maximum resolution of the returned isoline.
+	// The maximum distance in meters between points along the isoline. Smaller values
+	// create more detailed shapes.
 	//
 	// Unit: meters
 	MaxResolution int64
@@ -291,238 +365,353 @@ type IsolineGranularityOptions struct {
 	noSmithyDocumentSerde
 }
 
-// Isoline matching related options.
+// Controls how origin and destination points are matched to the road network when
+// they don't fall exactly on a road. Matching options help ensure realistic
+// routing by connecting points to appropriate roads.
 type IsolineMatchingOptions struct {
 
-	// Attempts to match the provided position to a road similar to the provided name.
+	// The expected street name near the point. Helps disambiguate matching when
+	// multiple roads are within range.
 	NameHint *string
 
-	// If the distance to a highway/bridge/tunnel/sliproad is within threshold, the
-	// waypoint will be snapped to the highway/bridge/tunnel/sliproad.
+	// The maximum distance in meters that a point can be from a road while still
+	// being considered "on" that road. Points further than this distance require
+	// explicit matching.
 	//
 	// Unit: meters
 	OnRoadThreshold int64
 
-	// Considers all roads within the provided radius to match the provided
-	// destination to. The roads that are considered are determined by the provided
-	// Strategy.
+	// The maximum distance in meters to search for roads to match to. Points with no
+	// roads within this radius will fail to match. The roads that are considered
+	// within this radius are determined by the specified Strategy
 	//
-	// Unit: Meters
+	// Unit: meters
 	Radius int64
 
-	// Strategy that defines matching of the position onto the road network. MatchAny
-	// considers all roads possible, whereas MatchMostSignificantRoad matches to the
-	// most significant road.
+	// Determines how points are matched to the road network. MatchAny finds the
+	// nearest viable road segment, while MatchMostSignificantRoad prioritizes major
+	// roads.
 	Strategy MatchingStrategy
 
 	noSmithyDocumentSerde
 }
 
-// Origin related options.
+// Options that control how the origin point is interpreted when calculating
+// reachable areas. These options affect which roads are considered accessible from
+// the starting point and how initial routing decisions are made.
 type IsolineOriginOptions struct {
 
-	// Avoids actions for the provided distance. This is typically to consider for
-	// users in moving vehicles who may not have sufficient time to make an action at
-	// an origin or a destination.
+	// The distance in meters from the origin point within which certain routing
+	// actions (such as U-turns or left turns across traffic) are restricted. This
+	// helps generate more practical routes by avoiding potentially dangerous maneuvers
+	// near the starting point.
 	AvoidActionsForDistance int64
 
-	// GPS Heading at the position.
+	// Initial direction of travel in degrees (0-360, where 0 is north). This affects
+	// which road segments are considered accessible from the starting point and is
+	// particularly useful when the origin is on a divided road or at a complex
+	// intersection.
 	Heading float64
 
-	// Options to configure matching the provided position to the road network.
+	// Controls how the origin point is matched to the road network, including search
+	// radius and matching strategy.
 	Matching *IsolineMatchingOptions
 
-	// Options to configure matching the provided position to a side of the street.
+	// Controls which side of the street is considered accessible from the origin
+	// point, particularly important for divided roads where building entrances or
+	// parking access may only be available from one direction.
 	SideOfStreet *IsolineSideOfStreetOptions
 
 	noSmithyDocumentSerde
 }
 
-// Travel mode options when the provided travel mode is Scooter
+// Vehicle characteristics that affect which roads and paths can be used when
+// calculating reachable areas for scooters. This includes areas such as bike
+// lanes, shared paths, and roads where scooters are permitted.
 type IsolineScooterOptions struct {
 
-	// Engine type of the vehicle.
+	// The type of engine powering the vehicle, which may affect route calculation due
+	// to road restrictions or vehicle characteristics.
+	//
+	//   - INTERNAL_COMBUSTION —Standard gasoline or diesel engine.
+	//
+	//   - ELECTRIC —Battery electric vehicle.
+	//
+	//   - PLUGIN_HYBRID —Combination of electric and internal combustion engines with
+	//   plug-in charging capability.
 	EngineType IsolineEngineType
 
-	// The vehicle License Plate.
+	// License plate information used in regions where road access or routing
+	// restrictions are based on license plate numbers.
 	LicensePlate *IsolineVehicleLicensePlate
 
-	// Maximum speed specified.
+	// The maximum speed of the vehicle in kilometers per hour. When specified, routes
+	// will not include roads with higher speed limits. Valid values range from 3.6
+	// km/h (1 m/s) to 252 km/h (70 m/s).
 	//
-	// Unit: KilometersPerHour
+	// Unit: kilometers per hour
 	MaxSpeed *float64
 
-	// The number of occupants in the vehicle.
+	// The number of occupants in the vehicle. This can affect route calculations by
+	// enabling the use of high-occupancy vehicle (HOV) lanes where minimum occupancy
+	// requirements are met.
 	//
-	// Default Value: 1
+	// Default value: 1
 	Occupancy *int32
 
 	noSmithyDocumentSerde
 }
 
-// Geometry of the connection between different Isoline components.
+// Represents the shape of a reachable area. The geometry can be provided either
+// as coordinate pairs ( Polygon ) or in encoded format ( PolylinePolygon ),
+// matching the format specified in the request.
 type IsolineShapeGeometry struct {
 
-	// A list of Isoline Polygons, for each isoline polygon, it contains polygons of
-	// the first linear ring (the outer ring) and from 2nd item to the last item (the
-	// inner rings).
+	// A series of coordinate rings defining the reachable area when Simple geometry
+	// format is requested. Each ring is a list of [longitude, latitude] coordinate
+	// pairs. The first ring defines the outer boundary; subsequent rings define holes
+	// representing unreachable areas.
+	//
+	// Polygon and PolylinePolygon are mutually exclusive properties.
 	Polygon [][][]float64
 
-	// A list of Isoline PolylinePolygon, for each isoline PolylinePolygon, it
-	// contains PolylinePolygon of the first linear ring (the outer ring) and from 2nd
-	// item to the last item (the inner rings). For more information on polyline
-	// encoding, see [https://github.com/heremaps/flexiblepolyline/blob/master/README.md].
+	// An encoded representation of the reachable area when FlexiblePolyline geometry
+	// format is requested. Provides a compact representation suitable for transmission
+	// and storage. The first string defines the outer boundary; subsequent strings
+	// define holes representing unreachable areas. For more information on polyline
+	// encoding, see [https://github.com/aws-geospatial/polyline].
 	//
-	// [https://github.com/heremaps/flexiblepolyline/blob/master/README.md]: https://github.com/heremaps/flexiblepolyline/blob/master/README.md
+	// Polygon and PolylinePolygon are mutually exclusive properties.
+	//
+	// [https://github.com/aws-geospatial/polyline]: https://github.com/aws-geospatial/polyline
 	PolylinePolygon []string
 
 	noSmithyDocumentSerde
 }
 
-// Options to configure matching the provided position to a side of the street.
+// Controls how points are matched to specific sides of streets. This is important
+// when the side of the street matters for accessibility - for example, when
+// building entrances or parking lot access points can only be reached from one
+// side of a divided road.
 type IsolineSideOfStreetOptions struct {
 
-	// Position defined as [longitude, latitude] .
+	// The [longitude, latitude] coordinates of the point that should be matched to a
+	// specific side of the street.
 	//
 	// This member is required.
 	Position []float64
 
-	// Strategy that defines when the side of street position should be used.
-	// AnyStreet will always use the provided position.
+	// Controls whether side-of-street matching is applied to any street ( AnyStreet )
+	// or only to divided roads ( DividedStreetOnly ). This is important when the exact
+	// side of the street matters - for example, if a building entrance is only
+	// accessible from one side of a divided highway, or if a parking lot can only be
+	// entered from northbound lanes. Without correct side-of-street matching, travel
+	// time estimates may be inaccurate because they don't account for necessary
+	// U-turns or detours to reach the correct side.
 	//
-	// Default Value: DividedStreetOnly
+	// Default value: DividedStreetOnly
 	UseWith SideOfStreetMatchingStrategy
 
 	noSmithyDocumentSerde
 }
 
-// Threshold to be used for the isoline calculation. Up to 5 thresholds per
-// provided type can be requested.
+// Specifies the time or distance limits used to calculate reachable areas. You
+// can provide up to five thresholds for a single type to generate multiple
+// isolines in a single request. For example, you might request areas reachable
+// within 5, 10, and 15 minutes, or within 1, 2, and 5 kilometers.
 type IsolineThresholds struct {
 
-	// Distance to be used for the isoline calculation.
+	// List of travel distances in meters. For example, [1000, 2000, 5000] would
+	// calculate areas reachable within 1, 2, and 5 kilometers.
 	Distance []int64
 
-	// Time to be used for the isoline calculation.
+	// List of travel times in seconds. For example, [300, 600, 900] would calculate
+	// areas reachable within 5, 10, and 15 minutes.
 	Time []int64
 
 	noSmithyDocumentSerde
 }
 
-// Options related to traffic.
+// Controls how real-time and historical traffic data is used when calculating
+// reachable areas. This affects both the size and shape of isolines by accounting
+// for expected travel speeds based on congestion patterns.
 type IsolineTrafficOptions struct {
 
-	// Duration for which flow traffic is considered valid. For this period, the flow
-	// traffic is used over historical traffic data. Flow traffic refers to congestion,
-	// which changes very quickly. Duration in seconds for which flow traffic event
-	// would be considered valid. While flow traffic event is valid it will be used
-	// over the historical traffic data.
+	// The duration in seconds that real-time congestion data is considered valid
+	// before reverting to historical traffic patterns. This helps balance between
+	// using current conditions and more predictable historical data when calculating
+	// travel times.
 	//
 	// Unit: seconds
 	FlowEventThresholdOverride int64
 
-	// Determines if traffic should be used or ignored while calculating the route.
+	// Controls whether traffic data is used in calculations. UseTrafficData considers
+	// both real-time congestion and historical patterns, while IgnoreTrafficData
+	// calculates routes based solely on road types and speed limits. Using traffic
+	// data provides more accurate real-world estimates but may produce different
+	// results at different times of day.
 	//
-	// Default Value: UseTrafficData
+	// Default value: UseTrafficData
 	Usage TrafficUsage
 
 	noSmithyDocumentSerde
 }
 
-// Trailer options corresponding to the vehicle.
+// Additional specifications when the vehicle includes one or more trailers.
 type IsolineTrailerOptions struct {
 
-	// Total number of axles of the vehicle.
+	// The total number of axles across all trailers. Used for weight distribution
+	// calculations and road restrictions.
 	AxleCount *int32
 
-	// Number of trailers attached to the vehicle.
+	// The number of trailers being pulled. Affects which roads can be used based on
+	// local regulations.
 	//
-	// Default Value: 0
+	// Default value: 0
 	TrailerCount *int32
 
 	noSmithyDocumentSerde
 }
 
-// Travel mode related options for the provided travel mode.
+// Mode-specific routing options that further refine how reachable areas are
+// calculated. Options are only considered when they match the selected travel
+// mode.
 type IsolineTravelModeOptions struct {
 
-	// Travel mode options when the provided travel mode is "Car"
+	// Options specific to passenger vehicle routing ( Car , such as vehicle
+	// characteristics and license plate restrictions.
 	Car *IsolineCarOptions
 
-	// Travel mode options when the provided travel mode is Scooter
+	// Options specific to scooter routing ( Scooter , such as vehicle characteristics
+	// and license plate restrictions.
 	//
-	// When travel mode is set to Scooter , then the avoidance option
-	// ControlledAccessHighways defaults to true .
+	// When using the Scooter travel mode, controlled-access highways are
+	// automatically avoided unless explicitly allowed.
 	Scooter *IsolineScooterOptions
 
-	// Travel mode options when the provided travel mode is "Truck"
+	// Options specific to commercial truck routing ( Truck , including vehicle
+	// dimensions, weight limits, and hazardous cargo specifications.
 	Truck *IsolineTruckOptions
 
 	noSmithyDocumentSerde
 }
 
-// Travel mode options when the provided travel mode is "Truck"
+// Vehicle characteristics and restrictions that affect which roads can be used
+// when calculating reachable areas for trucks. These details ensure that routes
+// respect physical limitations and legal requirements.
+//
+// These apply when the provided travel mode is Truck
 type IsolineTruckOptions struct {
 
-	// Total number of axles of the vehicle.
+	// The total number of axles on the vehicle. Required for certain road
+	// restrictions and weight limit calculations.
 	AxleCount *int32
 
-	// Engine type of the vehicle.
+	// The type of engine powering the vehicle, which may affect route calculation due
+	// to road restrictions or vehicle characteristics.
+	//
+	//   - INTERNAL_COMBUSTION —Standard gasoline or diesel engine.
+	//
+	//   - ELECTRIC —Battery electric vehicle.
+	//
+	//   - PLUGIN_HYBRID —Combination of electric and internal combustion engines with
+	//   plug-in charging capability.
 	EngineType IsolineEngineType
 
-	// Gross weight of the vehicle including trailers, and goods at capacity.
+	// The gross vehicle weight (the maximum weight a vehicle can safely operate at,
+	// as specified by the manufacturer) in kilograms. Used to avoid roads with weight
+	// restrictions and ensure compliance with maximum allowed vehicle weight
+	// regulations.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	GrossWeight int64
 
-	// List of Hazardous cargo contained in the vehicle.
+	// Types of hazardous materials being transported. This affects which roads and
+	// tunnels can be used based on local regulations.
+	//
+	//   - Combustible —Materials that can burn readily
+	//
+	//   - Corrosive —Materials that can destroy or irreversibly damage other substances
+	//
+	//   - Explosive —Materials that can produce an explosion by chemical reaction
+	//
+	//   - Flammable —Materials that can easily ignite
+	//
+	//   - Gas —Hazardous materials in gaseous form
+	//
+	//   - HarmfulToWater —Materials that pose a risk to water sources if released
+	//
+	//   - Organic —Hazardous organic compounds
+	//
+	//   - Other —Hazardous materials not covered by other categories
+	//
+	//   - Poison —Toxic materials
+	//
+	//   - PoisonousInhalation —Materials that are toxic when inhaled
+	//
+	//   - Radioactive —Materials that emit ionizing radiation
 	HazardousCargos []IsolineHazardousCargoType
 
-	// Height of the vehicle.
+	// The vehicle height in centimeters. Used to avoid routes with low bridges or
+	// other height restrictions.
 	//
 	// Unit: centimeters
 	Height int64
 
-	// Height of the vehicle above its first axle.
+	// The height in centimeters measured from the ground to the highest point above
+	// the first axle. Used for specific bridge and tunnel clearance restrictions.
 	//
 	// Unit: centimeters
 	HeightAboveFirstAxle int64
 
-	// Kingpin to rear axle length of the vehicle.
+	// The kingpin to rear axle (KPRA) length in centimeters. Used to determine if the
+	// vehicle can safely navigate turns and intersections.
 	//
 	// Unit: centimeters
 	KpraLength int64
 
-	// Length of the vehicle.
+	// The total vehicle length in centimeters. Used to avoid roads with length
+	// restrictions and determine if the vehicle can safely navigate turns.
 	//
 	// Unit: centimeters
 	Length int64
 
-	// The vehicle License Plate.
+	// License plate information used in regions where road access or routing
+	// restrictions are based on license plate numbers.
 	LicensePlate *IsolineVehicleLicensePlate
 
-	// Maximum speed specified.
+	// The maximum speed in kilometers per hour at which the vehicle can or is
+	// permitted to travel. This affects travel time calculations and may result in
+	// different reachable areas compared to using default speed limits. Value must be
+	// between 3.6 and 252 kilometers per hour.
 	//
-	// Unit: KilometersPerHour
+	// Unit: kilometers per hour
 	MaxSpeed *float64
 
-	// The number of occupants in the vehicle.
+	// The number of occupants in the vehicle. This can affect route calculations by
+	// enabling the use of high-occupancy vehicle (HOV) lanes where minimum occupancy
+	// requirements are met.
 	//
-	// Default Value: 1
+	// Default value: 1
 	Occupancy *int32
 
-	// Payload capacity of the vehicle and trailers attached.
+	// The maximum cargo weight in kilograms that the vehicle (including attached
+	// trailers) is rated to carry.
 	//
 	// Unit: kilograms
 	PayloadCapacity int64
 
-	// Number of tires on the vehicle.
+	// The total number of tires on the vehicle.
 	TireCount *int32
 
-	// Trailer options corresponding to the vehicle.
+	// Optional specifications for attached trailers. When provided, trailer
+	// characteristics affect route calculations to ensure compliance with
+	// trailer-specific restrictions such as length limits, weight distribution
+	// requirements, and access restrictions for multi-trailer configurations.
 	Trailer *IsolineTrailerOptions
 
-	// Type of the truck.
+	// The type of truck: LightTruck for smaller delivery vehicles,  StraightTruck
+	// for rigid body trucks, or Tractor for tractor-trailer combinations.
 	TruckType IsolineTruckType
 
 	// The tunnel restriction code.
@@ -556,20 +745,20 @@ type IsolineTruckOptions struct {
 	//   - Restrictions: Restricted tunnel
 	TunnelRestrictionCode *string
 
-	// Heaviest weight per axle irrespective of the axle type or the axle group. Meant
-	// for usage in countries where the differences in axle types or axle groups are
-	// not distinguished.
+	// The heaviest weight per axle in kilograms, regardless of axle type or grouping.
+	// Used for roads with axle-weight restrictions in regions where regulations don't
+	// distinguish between different axle configurations.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	WeightPerAxle int64
 
-	// Specifies the total weight for the specified axle group. Meant for usage in
-	// countries that have different regulations based on the axle group type.
+	// Specifies the total weight for different axle group configurations. Used in
+	// regions where regulations set different weight limits based on axle group types.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	WeightPerAxleGroup *WeightPerAxleGroup
 
-	// Width of the vehicle.
+	// The vehicle width in centimeters. Used to avoid routes with width restrictions.
 	//
 	// Unit: centimeters
 	Width int64
@@ -577,10 +766,13 @@ type IsolineTruckOptions struct {
 	noSmithyDocumentSerde
 }
 
-// The vehicle license plate.
+// License plate information used in regions where road access or routing
+// restrictions are based on license plate numbers.
 type IsolineVehicleLicensePlate struct {
 
-	// The last character of the License Plate.
+	// The last character of the vehicle's license plate. Used to determine road
+	// access restrictions in regions with license plate-based traffic management
+	// systems.
 	LastCharacter *string
 
 	noSmithyDocumentSerde
@@ -618,7 +810,7 @@ type PolylineCorridor struct {
 	// destination to. The roads that are considered are determined by the provided
 	// Strategy.
 	//
-	// Unit: Meters
+	// Unit: meters
 	//
 	// This member is required.
 	Radius *int32
@@ -690,7 +882,7 @@ type RoadSnapSnappedTracePoint struct {
 // TracePoint indices for which the provided notice code corresponds to.
 type RoadSnapTracePoint struct {
 
-	// Position defined as [longitude, latitude] .
+	// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	//
 	// This member is required.
 	Position []float64
@@ -700,7 +892,7 @@ type RoadSnapTracePoint struct {
 
 	// Speed at the specified trace point .
 	//
-	// Unit: KilometersPerHour
+	// Unit: kilometers per hour
 	Speed float64
 
 	// Timestamp of the event.
@@ -714,7 +906,7 @@ type RoadSnapTrailerOptions struct {
 
 	// Number of trailers attached to the vehicle.
 	//
-	// Default Value: 0
+	// Default value: 0
 	TrailerCount *int32
 
 	noSmithyDocumentSerde
@@ -723,18 +915,18 @@ type RoadSnapTrailerOptions struct {
 // Travel mode related options for the provided travel mode.
 type RoadSnapTravelModeOptions struct {
 
-	// Travel mode options when the provided travel mode is "Truck".
+	// Travel mode options when the provided travel mode is Truck .
 	Truck *RoadSnapTruckOptions
 
 	noSmithyDocumentSerde
 }
 
-// Travel mode options when the provided travel mode is "Truck".
+// Travel mode options when the provided travel mode is Truck .
 type RoadSnapTruckOptions struct {
 
 	// Gross weight of the vehicle including trailers, and goods at capacity.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	GrossWeight int64
 
 	// List of Hazardous cargos contained in the vehicle.
@@ -784,7 +976,7 @@ type RoadSnapTruckOptions struct {
 	//   - Restrictions: Restricted tunnel
 	TunnelRestrictionCode *string
 
-	// Width of the vehicle in centimenters.
+	// Width of the vehicle in centimeters.
 	Width int64
 
 	noSmithyDocumentSerde
@@ -868,9 +1060,9 @@ type RouteAvoidanceAreaGeometry struct {
 	// A list of Isoline PolylinePolygon, for each isoline PolylinePolygon, it
 	// contains PolylinePolygon of the first linear ring (the outer ring) and from 2nd
 	// item to the last item (the inner rings). For more information on polyline
-	// encoding, see [https://github.com/heremaps/flexiblepolyline/blob/master/README.md].
+	// encoding, see [https://github.com/aws-geospatial/polyline].
 	//
-	// [https://github.com/heremaps/flexiblepolyline/blob/master/README.md]: https://github.com/heremaps/flexiblepolyline/blob/master/README.md
+	// [https://github.com/aws-geospatial/polyline]: https://github.com/aws-geospatial/polyline
 	PolylinePolygon []string
 
 	noSmithyDocumentSerde
@@ -883,49 +1075,81 @@ type RouteAvoidanceAreaGeometry struct {
 // will indicate that the avoidance criteria were violated.
 type RouteAvoidanceOptions struct {
 
-	// Areas to be avoided.
+	//  Areas to be avoided. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Areas []RouteAvoidanceArea
 
-	// Avoid car-shuttle-trains while calculating the route.
+	//  Avoid car-shuttle-trains while calculating the route. Not supported in
+	// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	CarShuttleTrains *bool
 
 	// Avoid controlled access highways while calculating the route.
 	ControlledAccessHighways *bool
 
-	// Avoid dirt roads while calculating the route.
+	//  Avoid dirt roads while calculating the route. Not supported in ap-southeast-1
+	// and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	DirtRoads *bool
 
 	// Avoid ferries while calculating the route.
 	Ferries *bool
 
-	// Avoid roads that have seasonal closure while calculating the route.
+	//  Avoid roads that have seasonal closure while calculating the route. Not
+	// supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	SeasonalClosure *bool
 
 	// Avoids roads where the specified toll transponders are the only mode of payment.
 	TollRoads *bool
 
-	// Avoids roads where the specified toll transponders are the only mode of payment.
+	//  Avoids roads where the specified toll transponders are the only mode of
+	// payment. Not supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps]
+	// customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	TollTransponders *bool
 
-	// Truck road type identifiers. BK1 through BK4 apply only to Sweden.
-	// A2,A4,B2,B4,C,D,ET2,ET4 apply only to Mexico.
+	//  Truck road type identifiers. BK1 through BK4 apply only to Sweden.
+	// A2,A4,B2,B4,C,D,ET2,ET4 apply only to Mexico. Not supported in ap-southeast-1
+	// and ap-southeast-5 regions for [GrabMaps] customers.
 	//
 	// There are currently no other supported values as of 26th April 2024.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	TruckRoadTypes []string
 
-	// Avoid tunnels while calculating the route.
+	//  Avoid tunnels while calculating the route. Not supported in ap-southeast-1 and
+	// ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Tunnels *bool
 
-	// Avoid U-turns for calculation on highways and motorways.
+	//  Avoid U-turns for calculation on highways and motorways. Not supported in
+	// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	UTurns *bool
 
-	// Zone categories to be avoided.
+	//  Zone categories to be avoided. Not supported in ap-southeast-1 and
+	// ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	ZoneCategories []RouteAvoidanceZoneCategory
 
 	noSmithyDocumentSerde
 }
 
-// Zone categories to be avoided.
+//	Zone categories to be avoided. Not supported in ap-southeast-1 and
+//
+// ap-southeast-5 regions for [GrabMaps] customers.
+//
+// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 type RouteAvoidanceZoneCategory struct {
 
 	// Zone category to be avoided.
@@ -936,23 +1160,36 @@ type RouteAvoidanceZoneCategory struct {
 	noSmithyDocumentSerde
 }
 
-// Travel mode options when the provided travel mode is Car .
+//	Travel mode options when the provided travel mode is Car . For [GrabMaps] customers,
+//
+// ap-southeast-1 and ap-southeast-5 regions support only LicensePlate options.
+//
+// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 type RouteCarOptions struct {
 
-	// Engine type of the vehicle.
+	//  Engine type of the vehicle. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	EngineType RouteEngineType
 
 	// The vehicle License Plate.
 	LicensePlate *RouteVehicleLicensePlate
 
-	// Maximum speed specified.
+	//  Maximum speed specified. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
 	//
-	// Unit: KilometersPerHour
+	// Unit: kilometers per hour
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	MaxSpeed *float64
 
-	// The number of occupants in the vehicle.
+	//  The number of occupants in the vehicle. Not supported in ap-southeast-1 and
+	// ap-southeast-5 regions for [GrabMaps] customers.
 	//
-	// Default Value: 1
+	// Default value: 1
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Occupancy *int32
 
 	noSmithyDocumentSerde
@@ -992,9 +1229,10 @@ type RouteContinueStepDetails struct {
 // Options related to the destination.
 type RouteDestinationOptions struct {
 
-	// Avoids actions for the provided distance. This is typically to consider for
-	// users in moving vehicles who may not have sufficient time to make an action at
-	// an origin or a destination.
+	// The distance in meters from the destination point within which certain routing
+	// actions (such as U-turns or left turns across traffic) are restricted. This
+	// helps generate more practical routes by avoiding potentially dangerous maneuvers
+	// near the endpoint.
 	AvoidActionsForDistance int64
 
 	// Avoid U-turns for calculation on highways and motorways.
@@ -1196,8 +1434,9 @@ type RouteFerryDeparture struct {
 	noSmithyDocumentSerde
 }
 
-// FerryLegDetails is populated when the Leg type is Ferry, and provides
-// additional information that is specific
+//	FerryLegDetails is populated when the Leg type is Ferry, and provides
+//
+// additional information that is specific to ferry travel.
 type RouteFerryLegDetails struct {
 
 	// Steps of a leg that must be performed after the travel portion of the leg.
@@ -1288,7 +1527,7 @@ type RouteFerryOverviewSummary struct {
 // Position provided in the request.
 type RouteFerryPlace struct {
 
-	// Position defined as [longitude, latitude] .
+	// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	//
 	// This member is required.
 	Position []float64
@@ -1432,7 +1671,7 @@ type RouteLeg struct {
 	// Specifies the mode of transport when calculating a route. Used in estimating
 	// the speed of travel and road compatibility.
 	//
-	// Default Value: Car
+	// Default value: Car
 	//
 	// This member is required.
 	TravelMode RouteLegTravelMode
@@ -1442,11 +1681,17 @@ type RouteLeg struct {
 	// This member is required.
 	Type RouteLegType
 
-	// FerryLegDetails is populated when the Leg type is Ferry, and provides
-	// additional information that is specific
+	//  FerryLegDetails is populated when the Leg type is Ferry, and provides
+	// additional information that is specific to ferry travel. Not supported in
+	// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	FerryLegDetails *RouteFerryLegDetails
 
-	// List of languages for instructions within steps in the response.
+	//  List of languages for instructions within steps in the response. Not supported
+	// in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Language *string
 
 	// Details related to the pedestrian leg.
@@ -1504,7 +1749,7 @@ type RouteMatchingOptions struct {
 	// destination to. The roads that are considered are determined by the provided
 	// Strategy.
 	//
-	// Unit: Meters
+	// Unit: meters
 	Radius int64
 
 	// Strategy that defines matching of the position onto the road network. MatchAny
@@ -1569,9 +1814,9 @@ type RouteMatrixAvoidanceAreaGeometry struct {
 	// A list of Isoline PolylinePolygon, for each isoline PolylinePolygon, it
 	// contains PolylinePolygon of the first linear ring (the outer ring) and from
 	// second item to the last item (the inner rings). For more information on polyline
-	// encoding, see [https://github.com/heremaps/flexiblepolyline/blob/master/README.md].
+	// encoding, see [https://github.com/aws-geospatial/polyline].
 	//
-	// [https://github.com/heremaps/flexiblepolyline/blob/master/README.md]: https://github.com/heremaps/flexiblepolyline/blob/master/README.md
+	// [https://github.com/aws-geospatial/polyline]: https://github.com/aws-geospatial/polyline
 	PolylinePolygon []string
 
 	noSmithyDocumentSerde
@@ -1677,12 +1922,12 @@ type RouteMatrixCarOptions struct {
 
 	// Maximum speed
 	//
-	// Unit: KilometersPerHour
+	// Unit: kilometers per hour
 	MaxSpeed *float64
 
 	// The number of occupants in the vehicle.
 	//
-	// Default Value: 1
+	// Default value: 1
 	Occupancy *int32
 
 	noSmithyDocumentSerde
@@ -1691,12 +1936,15 @@ type RouteMatrixCarOptions struct {
 // The route destination.
 type RouteMatrixDestination struct {
 
-	// Position defined as [longitude, latitude] .
+	// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	//
 	// This member is required.
 	Position []float64
 
-	// Destination related options.
+	//  Destination related options. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Options *RouteMatrixDestinationOptions
 
 	noSmithyDocumentSerde
@@ -1776,7 +2024,7 @@ type RouteMatrixMatchingOptions struct {
 	// destination to. The roads that are considered are determined by the provided
 	// Strategy.
 	//
-	// Unit: Meters
+	// Unit: meters
 	Radius int64
 
 	// Strategy that defines matching of the position onto the road network. MatchAny
@@ -1787,15 +2035,19 @@ type RouteMatrixMatchingOptions struct {
 	noSmithyDocumentSerde
 }
 
-// The start position for the route.
+// The start position for the route in World Geodetic System (WGS 84) format:
+// [longitude, latitude].
 type RouteMatrixOrigin struct {
 
-	// Position defined as [longitude, latitude] .
+	// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	//
 	// This member is required.
 	Position []float64
 
-	// Origin related options.
+	//  Origin related options. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Options *RouteMatrixOriginOptions
 
 	noSmithyDocumentSerde
@@ -1821,7 +2073,7 @@ type RouteMatrixOriginOptions struct {
 	noSmithyDocumentSerde
 }
 
-// Travel mode options when the provided travel mode is Scooter
+// Travel mode options when the provided travel mode is Scooter .
 type RouteMatrixScooterOptions struct {
 
 	// The vehicle License Plate.
@@ -1829,12 +2081,12 @@ type RouteMatrixScooterOptions struct {
 
 	// Maximum speed.
 	//
-	// Unit: KilometersPerHour
+	// Unit: kilometers per hour
 	MaxSpeed *float64
 
 	// The number of occupants in the vehicle.
 	//
-	// Default Value: 1
+	// Default value: 1
 	Occupancy *int32
 
 	noSmithyDocumentSerde
@@ -1843,7 +2095,7 @@ type RouteMatrixScooterOptions struct {
 // Options to configure matching the provided position to a side of the street.
 type RouteMatrixSideOfStreetOptions struct {
 
-	// Position defined as [longitude, latitude] .
+	// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	//
 	// This member is required.
 	Position []float64
@@ -1851,7 +2103,7 @@ type RouteMatrixSideOfStreetOptions struct {
 	// Strategy that defines when the side of street position should be used.
 	// AnyStreet will always use the provided position.
 	//
-	// Default Value: DividedStreetOnly
+	// Default value: DividedStreetOnly
 	UseWith SideOfStreetMatchingStrategy
 
 	noSmithyDocumentSerde
@@ -1869,7 +2121,7 @@ type RouteMatrixTrafficOptions struct {
 
 	// Determines if traffic should be used or ignored while calculating the route.
 	//
-	// Default Value: UseTrafficData
+	// Default value: UseTrafficData
 	Usage TrafficUsage
 
 	noSmithyDocumentSerde
@@ -1880,7 +2132,7 @@ type RouteMatrixTrailerOptions struct {
 
 	// Number of trailers attached to the vehicle.
 	//
-	// Default Value: 0
+	// Default value: 0
 	TrailerCount *int32
 
 	noSmithyDocumentSerde
@@ -1889,22 +2141,22 @@ type RouteMatrixTrailerOptions struct {
 // Travel mode related options for the provided travel mode.
 type RouteMatrixTravelModeOptions struct {
 
-	// Travel mode options when the provided travel mode is "Car"
+	// Travel mode options when the provided travel mode is Car .
 	Car *RouteMatrixCarOptions
 
-	// Travel mode options when the provided travel mode is Scooter
+	// Travel mode options when the provided travel mode is Scooter .
 	//
 	// When travel mode is set to Scooter , then the avoidance option
 	// ControlledAccessHighways defaults to true .
 	Scooter *RouteMatrixScooterOptions
 
-	// Travel mode options when the provided travel mode is "Truck"
+	// Travel mode options when the provided travel mode is Truck .
 	Truck *RouteMatrixTruckOptions
 
 	noSmithyDocumentSerde
 }
 
-// Travel mode options when the provided travel mode is "Truck"
+// Travel mode options when the provided travel mode is Truck .
 type RouteMatrixTruckOptions struct {
 
 	// Total number of axles of the vehicle.
@@ -1912,7 +2164,7 @@ type RouteMatrixTruckOptions struct {
 
 	// Gross weight of the vehicle including trailers, and goods at capacity.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	GrossWeight int64
 
 	// List of Hazardous cargo contained in the vehicle.
@@ -1938,12 +2190,12 @@ type RouteMatrixTruckOptions struct {
 
 	// Maximum speed
 	//
-	// Unit: KilometersPerHour
+	// Unit: kilometers per hour
 	MaxSpeed *float64
 
 	// The number of occupants in the vehicle.
 	//
-	// Default Value: 1
+	// Default value: 1
 	Occupancy *int32
 
 	// Payload capacity of the vehicle and trailers attached.
@@ -1954,7 +2206,8 @@ type RouteMatrixTruckOptions struct {
 	// Trailer options corresponding to the vehicle.
 	Trailer *RouteMatrixTrailerOptions
 
-	// Type of the truck.
+	// The type of truck: LightTruck for smaller delivery vehicles,  StraightTruck for
+	// rigid body trucks, or Tractor for tractor-trailer combinations.
 	TruckType RouteMatrixTruckType
 
 	// The tunnel restriction code.
@@ -1992,7 +2245,7 @@ type RouteMatrixTruckOptions struct {
 	// for usage in countries where the differences in axle types or axle groups are
 	// not distinguished.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	WeightPerAxle int64
 
 	// Specifies the total weight for the specified axle group. Meant for usage in
@@ -2071,7 +2324,7 @@ type RouteOriginOptions struct {
 // The place where the waypoint is passed through and not treated as a stop.
 type RoutePassThroughPlace struct {
 
-	// Position defined as [longitude, latitude] .
+	// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	//
 	// This member is required.
 	Position []float64
@@ -2157,8 +2410,11 @@ type RoutePedestrianLegDetails struct {
 	// This member is required.
 	Departure *RoutePedestrianDeparture
 
-	// Notices are additional information returned that indicate issues that occurred
-	// during route calculation.
+	//  Notices are additional information returned that indicate issues that occurred
+	// during route calculation. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	//
 	// This member is required.
 	Notices []RoutePedestrianNotice
@@ -2169,7 +2425,10 @@ type RoutePedestrianLegDetails struct {
 	// This member is required.
 	PassThroughWaypoints []RoutePassThroughWaypoint
 
-	// Spans that were computed for the requested SpanAdditionalFeatures.
+	//  Spans that were computed for the requested SpanAdditionalFeatures. Not
+	// supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	//
 	// This member is required.
 	Spans []RoutePedestrianSpan
@@ -2201,7 +2460,11 @@ type RoutePedestrianNotice struct {
 	noSmithyDocumentSerde
 }
 
-// Options related to the pedestrian.
+//	Options related to the pedestrian. Not supported in ap-southeast-1 and
+//
+// ap-southeast-5 regions for [GrabMaps] customers.
+//
+// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 type RoutePedestrianOptions struct {
 
 	// Walking speed in Kilometers per hour.
@@ -2229,7 +2492,7 @@ type RoutePedestrianOverviewSummary struct {
 // Place details corresponding to the arrival or departure.
 type RoutePedestrianPlace struct {
 
-	// Position defined as [longitude, latitude] .
+	// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	//
 	// This member is required.
 	Position []float64
@@ -2272,10 +2535,29 @@ type RoutePedestrianSpan struct {
 
 	// Dynamic speed details corresponding to the span.
 	//
-	// Unit: KilometersPerHour
+	// Unit: kilometers per hour
 	DynamicSpeed *RouteSpanDynamicSpeedDetails
 
-	// Functional classification of the road segment corresponding to the span.
+	// A numerical value indicating the functional classification of the road segment
+	// corresponding to the span.
+	//
+	// Classification values are part of the hierarchical network that helps determine
+	// a logical and efficient route, and have the following definitions:
+	//
+	//   - Roads that allow for high volume, maximum speed traffic movement between
+	//   and through major metropolitan areas.
+	//
+	//   - Roads that are used to channel traffic to functional class 1 roads for
+	//   travel between and through cities in the shortest amount of time.
+	//
+	//   - Roads that intersect functional class 2 roads and provide a high volume of
+	//   traffic movement at a lower level of mobility than functional class 2 roads.
+	//
+	//   - Roads that provide for a high volume of traffic movement at moderate speeds
+	//   between neighborhoods.
+	//
+	//   - Roads with volume and traffic movement below the level of any other
+	//   functional class.
 	FunctionalClassification *int32
 
 	// Offset in the leg geometry corresponding to the start of this span.
@@ -2303,7 +2585,7 @@ type RoutePedestrianSpan struct {
 
 	// Speed limit details corresponding to the span.
 	//
-	// Unit: KilometersPerHour
+	// Unit: kilometers per hour
 	SpeedLimit *RouteSpanSpeedLimitDetails
 
 	// Duration of the computed span under typical traffic congestion.
@@ -2522,23 +2804,36 @@ type RouteRoundaboutPassStepDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Travel mode options when the provided travel mode is Scooter
+//	Travel mode options when the provided travel mode is Scooter . For [GrabMaps] customers,
+//
+// ap-southeast-1 and ap-southeast-5 regions support only LicensePlate options.
+//
+// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 type RouteScooterOptions struct {
 
-	// Engine type of the vehicle.
+	//  Engine type of the vehicle. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	EngineType RouteEngineType
 
 	// The vehicle License Plate.
 	LicensePlate *RouteVehicleLicensePlate
 
-	// Maximum speed
+	//  Maximum speed Not supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps]
+	// customers.
 	//
-	// Unit: KilometersPerHour
+	// Unit: kilometers per hour
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	MaxSpeed *float64
 
-	// The number of occupants in the vehicle.
+	//  The number of occupants in the vehicle. Not supported in ap-southeast-1 and
+	// ap-southeast-5 regions for [GrabMaps] customers.
 	//
-	// Default Value: 1
+	// Default value: 1
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Occupancy *int32
 
 	noSmithyDocumentSerde
@@ -2547,14 +2842,14 @@ type RouteScooterOptions struct {
 // Options to configure matching the provided position to a side of the street.
 type RouteSideOfStreetOptions struct {
 
-	// Position defined as [longitude, latitude] .
+	// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	//
 	// This member is required.
 	Position []float64
 
 	// Strategy that defines when the side of street position should be used.
 	//
-	// Default Value: DividedStreetOnly
+	// Default value: DividedStreetOnly
 	UseWith SideOfStreetMatchingStrategy
 
 	noSmithyDocumentSerde
@@ -2586,12 +2881,12 @@ type RouteSignpostLabel struct {
 
 // Details about the dynamic speed.
 //
-// Unit: KilometersPerHour
+// Unit: kilometers per hour
 type RouteSpanDynamicSpeedDetails struct {
 
 	// Estimated speed while traversing the span without traffic congestion.
 	//
-	// Unit: KilometersPerHour
+	// Unit: kilometers per hour
 	BestCaseSpeed float64
 
 	// Estimated time to turn from this span into the next.
@@ -2601,7 +2896,7 @@ type RouteSpanDynamicSpeedDetails struct {
 
 	// Estimated speed while traversing the span under typical traffic congestion.
 	//
-	// Unit: KilometersPerHour
+	// Unit: kilometers per hour
 	TypicalSpeed float64
 
 	noSmithyDocumentSerde
@@ -2609,12 +2904,12 @@ type RouteSpanDynamicSpeedDetails struct {
 
 // Details about the speed limit corresponding to the span.
 //
-// Unit: KilometersPerHour
+// Unit: kilometers per hour
 type RouteSpanSpeedLimitDetails struct {
 
 	// Maximum speed.
 	//
-	// Unit: KilometersPerHour
+	// Unit: kilometers per hour
 	MaxSpeed float64
 
 	// If the span doesn't have a speed limit like the Autobahn.
@@ -2733,7 +3028,7 @@ type RouteTollPassValidityPeriod struct {
 // Locations or sites where the toll fare is collected.
 type RouteTollPaymentSite struct {
 
-	// Position defined as [longitude, latitude] .
+	// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	//
 	// This member is required.
 	Position []float64
@@ -2896,9 +3191,22 @@ type RouteTrafficOptions struct {
 	// over the historical traffic data.
 	FlowEventThresholdOverride int64
 
-	// Determines if traffic should be used or ignored while calculating the route.
+	// Specifies how traffic data should be used when calculating routes.
 	//
 	// Default Value: UseTrafficData
+	//
+	// Traffic data usage depends on the time parameters in your route request:
+	//
+	//   - When Usage is set to UseTrafficData :
+	//
+	//   - If DepartNow is set to true , or if you specify DepartureTime or ArrivalTime
+	//   , then all traffic data is considered (including live traffic and closures).
+	//
+	//   - If DepartNow , DepartureTime , and ArrivalTime are all unspecified, then
+	//   only long-term closures are considered, regardless of this setting.
+	//
+	//   - When Usage is set to IgnoreTrafficData , then all traffic data is ignored
+	//   regardless of the time parameters in your route request.
 	Usage TrafficUsage
 
 	noSmithyDocumentSerde
@@ -2912,7 +3220,7 @@ type RouteTrailerOptions struct {
 
 	// Number of trailers attached to the vehicle.
 	//
-	// Default Value: 0
+	// Default value: 0
 	TrailerCount *int32
 
 	noSmithyDocumentSerde
@@ -2930,25 +3238,29 @@ type RouteTransponder struct {
 // Travel mode related options for the provided travel mode.
 type RouteTravelModeOptions struct {
 
-	// Travel mode options when the provided travel mode is "Car"
+	// Travel mode options when the provided travel mode is Car .
 	Car *RouteCarOptions
 
-	// Travel mode options when the provided travel mode is "Pedestrian"
+	// Travel mode options when the provided travel mode is Pedestrian .
 	Pedestrian *RoutePedestrianOptions
 
-	// Travel mode options when the provided travel mode is Scooter
+	// Travel mode options when the provided travel mode is Scooter .
 	//
 	// When travel mode is set to Scooter , then the avoidance option
 	// ControlledAccessHighways defaults to true .
 	Scooter *RouteScooterOptions
 
-	// Travel mode options when the provided travel mode is "Truck"
+	// Travel mode options when the provided travel mode is Truck .
 	Truck *RouteTruckOptions
 
 	noSmithyDocumentSerde
 }
 
-// Travel mode options when the provided travel mode is "Truck"
+//	Travel mode options when the provided travel mode is Truck . Not supported in
+//
+// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+//
+// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 type RouteTruckOptions struct {
 
 	// Total number of axles of the vehicle.
@@ -2959,7 +3271,7 @@ type RouteTruckOptions struct {
 
 	// Gross weight of the vehicle including trailers, and goods at capacity.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	GrossWeight int64
 
 	// List of Hazardous cargo contained in the vehicle.
@@ -2990,12 +3302,12 @@ type RouteTruckOptions struct {
 
 	// Maximum speed
 	//
-	// Unit: KilometersPerHour
+	// Unit: kilometers per hour
 	MaxSpeed *float64
 
 	// The number of occupants in the vehicle.
 	//
-	// Default Value: 1
+	// Default value: 1
 	Occupancy *int32
 
 	// Payload capacity of the vehicle and trailers attached.
@@ -3009,7 +3321,8 @@ type RouteTruckOptions struct {
 	// Trailer options corresponding to the vehicle.
 	Trailer *RouteTrailerOptions
 
-	// Type of the truck.
+	// The type of truck: LightTruck for smaller delivery vehicles,  StraightTruck for
+	// rigid body trucks, or Tractor for tractor-trailer combinations.
 	TruckType RouteTruckType
 
 	// The tunnel restriction code.
@@ -3047,13 +3360,13 @@ type RouteTruckOptions struct {
 	// for usage in countries where the differences in axle types or axle groups are
 	// not distinguished.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	WeightPerAxle int64
 
 	// Specifies the total weight for the specified axle group. Meant for usage in
 	// countries that have different regulations based on the axle group type.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	WeightPerAxleGroup *WeightPerAxleGroup
 
 	// Width of the vehicle.
@@ -3169,13 +3482,19 @@ type RouteVehicleLegDetails struct {
 	// This member is required.
 	Departure *RouteVehicleDeparture
 
-	// Incidents corresponding to this leg of the route.
+	//  Incidents corresponding to this leg of the route. Not supported in
+	// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	//
 	// This member is required.
 	Incidents []RouteVehicleIncident
 
-	// Notices are additional information returned that indicate issues that occurred
-	// during route calculation.
+	//  Notices are additional information returned that indicate issues that occurred
+	// during route calculation. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	//
 	// This member is required.
 	Notices []RouteVehicleNotice
@@ -3186,17 +3505,26 @@ type RouteVehicleLegDetails struct {
 	// This member is required.
 	PassThroughWaypoints []RoutePassThroughWaypoint
 
-	// Spans that were computed for the requested SpanAdditionalFeatures.
+	//  Spans that were computed for the requested SpanAdditionalFeatures. Not
+	// supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	//
 	// This member is required.
 	Spans []RouteVehicleSpan
 
-	// Toll systems are authorities that collect payments for the toll.
+	//  Toll systems are authorities that collect payments for the toll. Not supported
+	// in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	//
 	// This member is required.
 	TollSystems []RouteTollSystem
 
-	// Toll related options.
+	//  Toll related options. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	//
 	// This member is required.
 	Tolls []RouteToll
@@ -3206,15 +3534,21 @@ type RouteVehicleLegDetails struct {
 	// This member is required.
 	TravelSteps []RouteVehicleTravelStep
 
-	// Truck road type identifiers. BK1 through BK4 apply only to Sweden.
-	// A2,A4,B2,B4,C,D,ET2,ET4 apply only to Mexico.
+	//  Truck road type identifiers. BK1 through BK4 apply only to Sweden.
+	// A2,A4,B2,B4,C,D,ET2,ET4 apply only to Mexico. Not supported in ap-southeast-1
+	// and ap-southeast-5 regions for [GrabMaps] customers.
 	//
 	// There are currently no other supported values as of 26th April 2024.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	//
 	// This member is required.
 	TruckRoadTypes []string
 
-	// Zones corresponding to this leg of the route.
+	//  Zones corresponding to this leg of the route. Not supported in ap-southeast-1
+	// and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	//
 	// This member is required.
 	Zones []RouteZone
@@ -3300,7 +3634,7 @@ type RouteVehicleOverviewSummary struct {
 // Place details corresponding to the arrival or departure.
 type RouteVehiclePlace struct {
 
-	// Position defined as [longitude, latitude] .
+	// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	//
 	// This member is required.
 	Position []float64
@@ -3346,10 +3680,29 @@ type RouteVehicleSpan struct {
 
 	// Dynamic speed details corresponding to the span.
 	//
-	// Unit: KilometersPerHour
+	// Unit: kilometers per hour
 	DynamicSpeed *RouteSpanDynamicSpeedDetails
 
-	// Functional classification of the road segment corresponding to the span.
+	// A numerical value indicating the functional classification of the road segment
+	// corresponding to the span.
+	//
+	// Classification values are part of the hierarchical network that helps determine
+	// a logical and efficient route, and have the following definitions:
+	//
+	//   - Roads that allow for high volume, maximum speed traffic movement between
+	//   and through major metropolitan areas.
+	//
+	//   - Roads that are used to channel traffic to functional class 1 roads for
+	//   travel between and through cities in the shortest amount of time.
+	//
+	//   - Roads that intersect functional class 2 roads and provide a high volume of
+	//   traffic movement at a lower level of mobility than functional class 2 roads.
+	//
+	//   - Roads that provide for a high volume of traffic movement at moderate speeds
+	//   between neighborhoods.
+	//
+	//   - Roads with volume and traffic movement below the level of any other
+	//   functional class.
 	FunctionalClassification *int32
 
 	// Attributes corresponding to a gate. The gate is present at the end of the
@@ -3389,7 +3742,7 @@ type RouteVehicleSpan struct {
 
 	// Speed limit details corresponding to the span.
 	//
-	// Unit: KilometersPerHour
+	// Unit: kilometers per hour
 	SpeedLimit *RouteSpanSpeedLimitDetails
 
 	// Toll systems are authorities that collect payments for the toll.
@@ -3561,17 +3914,17 @@ type RouteViolatedConstraints struct {
 
 	// The maximum weight of the route.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	MaxWeight *RouteWeightConstraint
 
 	// The maximum weight per axle of the vehicle.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	MaxWeightPerAxle int64
 
 	// The maximum weight per axle group of the vehicle.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	MaxWeightPerAxleGroup *WeightPerAxleGroup
 
 	// The maximum width of the vehicle.
@@ -3579,7 +3932,7 @@ type RouteViolatedConstraints struct {
 
 	// The number of occupants in the vehicle.
 	//
-	// Default Value: 1
+	// Default value: 1
 	Occupancy *RouteNoticeDetailRange
 
 	// Access radius restrictions based on time.
@@ -3590,7 +3943,7 @@ type RouteViolatedConstraints struct {
 
 	// Number of trailers attached to the vehicle.
 	//
-	// Default Value: 0
+	// Default value: 0
 	TrailerCount *RouteNoticeDetailRange
 
 	// Travel mode corresponding to the leg.
@@ -3602,7 +3955,8 @@ type RouteViolatedConstraints struct {
 	// There are currently no other supported values as of 26th April 2024.
 	TruckRoadType *string
 
-	// Type of the truck.
+	// The type of truck: LightTruck for smaller delivery vehicles,  StraightTruck for
+	// rigid body trucks, or Tractor for tractor-trailer combinations.
 	TruckType RouteTruckType
 
 	// The tunnel restriction code.
@@ -3642,35 +3996,56 @@ type RouteViolatedConstraints struct {
 // Waypoint between the Origin and Destination.
 type RouteWaypoint struct {
 
-	// Position defined as [longitude, latitude] .
+	// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	//
 	// This member is required.
 	Position []float64
 
-	// Avoids actions for the provided distance. This is typically to consider for
+	//  Avoids actions for the provided distance. This is typically to consider for
 	// users in moving vehicles who may not have sufficient time to make an action at
-	// an origin or a destination.
+	// an origin or a destination. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	AvoidActionsForDistance int64
 
-	// Avoid U-turns for calculation on highways and motorways.
+	//  Avoid U-turns for calculation on highways and motorways. Not supported in
+	// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	AvoidUTurns *bool
 
-	// GPS Heading at the position.
+	//  GPS Heading at the position. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Heading float64
 
-	// Options to configure matching the provided position to the road network.
+	//  Options to configure matching the provided position to the road network. Not
+	// supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Matching *RouteMatchingOptions
 
-	// If the waypoint should not be treated as a stop. If yes, the waypoint is passed
-	// through and doesn't split the route into different legs.
+	//  If the waypoint should not be treated as a stop. If yes, the waypoint is
+	// passed through and doesn't split the route into different legs. Not supported in
+	// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	PassThrough *bool
 
-	// Options to configure matching the provided position to a side of the street.
+	//  Options to configure matching the provided position to a side of the street.
+	// Not supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	SideOfStreet *RouteSideOfStreetOptions
 
-	// Duration of the stop.
+	//  Duration of the stop. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
 	//
 	// Unit: seconds
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	StopDuration int64
 
 	noSmithyDocumentSerde
@@ -3678,7 +4053,7 @@ type RouteWaypoint struct {
 
 // The weight constraint for the route.
 //
-// Unit: Kilograms
+// Unit: kilograms
 type RouteWeightConstraint struct {
 
 	// The type of constraint.
@@ -3688,7 +4063,7 @@ type RouteWeightConstraint struct {
 
 	// The constraint value.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	//
 	// This member is required.
 	Value int64
@@ -3973,7 +4348,7 @@ type WaypointOptimizationImpedingWaypoint struct {
 	// This member is required.
 	Id *string
 
-	// Position defined as [longitude, latitude] .
+	// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	//
 	// This member is required.
 	Position []float64
@@ -3984,7 +4359,7 @@ type WaypointOptimizationImpedingWaypoint struct {
 // The optimized waypoint.
 type WaypointOptimizationOptimizedWaypoint struct {
 
-	// Estimated time of departure from thr origin.
+	// Estimated time of departure from the origin.
 	//
 	// Time format: YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm
 	//
@@ -4002,7 +4377,7 @@ type WaypointOptimizationOptimizedWaypoint struct {
 	// This member is required.
 	Id *string
 
-	// Position defined as [longitude, latitude] .
+	// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	//
 	// This member is required.
 	Position []float64
@@ -4039,7 +4414,7 @@ type WaypointOptimizationPedestrianOptions struct {
 
 	// Walking speed.
 	//
-	// Unit: KilometersPerHour
+	// Unit: kilometers per hour
 	Speed *float64
 
 	noSmithyDocumentSerde
@@ -4102,7 +4477,7 @@ type WaypointOptimizationRestProfile struct {
 // Options to configure matching the provided position to a side of the street.
 type WaypointOptimizationSideOfStreetOptions struct {
 
-	// Position defined as [longitude, latitude] .
+	// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	//
 	// This member is required.
 	Position []float64
@@ -4110,7 +4485,7 @@ type WaypointOptimizationSideOfStreetOptions struct {
 	// Strategy that defines when the side of street position should be used.
 	// AnyStreet will always use the provided position.
 	//
-	// Default Value: DividedStreetOnly
+	// Default value: DividedStreetOnly
 	UseWith SideOfStreetMatchingStrategy
 
 	noSmithyDocumentSerde
@@ -4156,7 +4531,7 @@ type WaypointOptimizationTrafficOptions struct {
 
 	// Determines if traffic should be used or ignored while calculating the route.
 	//
-	// Default Value: UseTrafficData
+	// Default value: UseTrafficData
 	Usage TrafficUsage
 
 	noSmithyDocumentSerde
@@ -4167,7 +4542,7 @@ type WaypointOptimizationTrailerOptions struct {
 
 	// Number of trailers attached to the vehicle.
 	//
-	// Default Value: 0
+	// Default value: 0
 	TrailerCount *int32
 
 	noSmithyDocumentSerde
@@ -4176,21 +4551,21 @@ type WaypointOptimizationTrailerOptions struct {
 // Travel mode related options for the provided travel mode.
 type WaypointOptimizationTravelModeOptions struct {
 
-	// Travel mode options when the provided travel mode is "Pedestrian"
+	// Travel mode options when the provided travel mode is Pedestrian .
 	Pedestrian *WaypointOptimizationPedestrianOptions
 
-	// Travel mode options when the provided travel mode is "Truck"
+	// Travel mode options when the provided travel mode is Truck .
 	Truck *WaypointOptimizationTruckOptions
 
 	noSmithyDocumentSerde
 }
 
-// Travel mode options when the provided travel mode is "Truck"
+// Travel mode options when the provided travel mode is Truck .
 type WaypointOptimizationTruckOptions struct {
 
 	// Gross weight of the vehicle including trailers, and goods at capacity.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	GrossWeight int64
 
 	// List of Hazardous cargo contained in the vehicle.
@@ -4209,7 +4584,8 @@ type WaypointOptimizationTruckOptions struct {
 	// Trailer options corresponding to the vehicle.
 	Trailer *WaypointOptimizationTrailerOptions
 
-	// Type of the truck.
+	// The type of truck: LightTruck for smaller delivery vehicles,  StraightTruck for
+	// rigid body trucks, or Tractor for tractor-trailer combinations.
 	TruckType WaypointOptimizationTruckType
 
 	// The tunnel restriction code.
@@ -4247,7 +4623,7 @@ type WaypointOptimizationTruckOptions struct {
 	// for usage in countries where the differences in axle types or axle groups are
 	// not distinguished.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	WeightPerAxle int64
 
 	// Width of the vehicle.
@@ -4261,7 +4637,7 @@ type WaypointOptimizationTruckOptions struct {
 // Waypoint between the Origin and Destination.
 type WaypointOptimizationWaypoint struct {
 
-	// Position defined as [longitude, latitude] .
+	// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	//
 	// This member is required.
 	Position []float64
@@ -4293,35 +4669,35 @@ type WaypointOptimizationWaypoint struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the total weight for the specified axle group. Meant for usage in
-// countries that have different regulations based on the axle group type.
+// Specifies the total weight for different axle group configurations. Used in
+// regions where regulations set different weight limits based on axle group types.
 //
-// Unit: Kilograms
+// Unit: kilograms
 type WeightPerAxleGroup struct {
 
-	// Weight for quad axle group.
+	// Total weight in kilograms for quad (four adjacent) axle configurations.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	Quad int64
 
-	// Weight for quad quint group.
+	// Total weight in kilograms for quint (five adjacent) axle configurations.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	Quint int64
 
-	// Weight for single axle group.
+	// Total weight in kilograms for single axle configurations.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	Single int64
 
-	// Weight for tandem axle group.
+	// Total weight in kilograms for tandem (two adjacent) axle configurations.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	Tandem int64
 
-	// Weight for triple axle group.
+	// Total weight in kilograms for triple (three adjacent) axle configurations.
 	//
-	// Unit: Kilograms
+	// Unit: kilograms
 	Triple int64
 
 	noSmithyDocumentSerde

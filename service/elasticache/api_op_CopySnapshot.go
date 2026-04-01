@@ -106,7 +106,7 @@ type CopySnapshotInput struct {
 
 	// A name for the snapshot copy. ElastiCache does not permit overwriting a
 	// snapshot, therefore this name must be unique within its context - ElastiCache or
-	// an Amazon S3 bucket if exporting.
+	// an Amazon S3 bucket if exporting. This value is stored as a lowercase string.
 	//
 	// This member is required.
 	TargetSnapshotName *string

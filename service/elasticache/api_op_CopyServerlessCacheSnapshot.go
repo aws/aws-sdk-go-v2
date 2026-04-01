@@ -37,7 +37,7 @@ type CopyServerlessCacheSnapshotInput struct {
 	SourceServerlessCacheSnapshotName *string
 
 	// The identifier for the snapshot to be created. Available for Valkey, Redis OSS
-	// and Serverless Memcached only.
+	// and Serverless Memcached only. This value is stored as a lowercase string.
 	//
 	// This member is required.
 	TargetServerlessCacheSnapshotName *string

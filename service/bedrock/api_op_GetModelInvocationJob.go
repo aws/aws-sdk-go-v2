@@ -86,6 +86,9 @@ type GetModelInvocationJobOutput struct {
 	// The time at which the batch inference job ended.
 	EndTime *time.Time
 
+	// The number of records that failed to process in the batch inference job.
+	ErrorRecordCount *int64
+
 	// The time at which the batch inference job times or timed out.
 	JobExpirationTime *time.Time
 
@@ -101,6 +104,9 @@ type GetModelInvocationJobOutput struct {
 
 	// The invocation endpoint for ModelInvocationJob
 	ModelInvocationType types.ModelInvocationType
+
+	// The number of records that have been processed in the batch inference job.
+	ProcessedRecordCount *int64
 
 	// The status of the batch inference job.
 	//
@@ -149,8 +155,15 @@ type GetModelInvocationJobOutput struct {
 	// [Amazon Web Services Support Center]: https://console.aws.amazon.com/support/home/
 	Status types.ModelInvocationJobStatus
 
+	// The number of records that were successfully processed in the batch inference
+	// job.
+	SuccessRecordCount *int64
+
 	// The number of hours after which batch inference job was set to time out.
 	TimeoutDurationInHours *int32
+
+	// The total number of records in the batch inference job.
+	TotalRecordCount *int64
 
 	// The configuration of the Virtual Private Cloud (VPC) for the data in the batch
 	// inference job. For more information, see [Protect batch inference jobs using a VPC].

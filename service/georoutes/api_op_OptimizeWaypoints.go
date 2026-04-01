@@ -14,6 +14,10 @@ import (
 // OptimizeWaypoints calculates the optimal order to travel between a set of
 // waypoints to minimize either the travel time or the distance travelled during
 // the journey, based on road network restrictions and the traffic pattern data.
+//
+// For more information, see [Optimize waypoints] in the Amazon Location Service Developer Guide.
+//
+// [Optimize waypoints]: https://docs.aws.amazon.com/location/latest/developerguide/actions-optimize-waypoints.html
 func (c *Client) OptimizeWaypoints(ctx context.Context, params *OptimizeWaypointsInput, optFns ...func(*Options)) (*OptimizeWaypointsOutput, error) {
 	if params == nil {
 		params = &OptimizeWaypointsInput{}
@@ -31,7 +35,8 @@ func (c *Client) OptimizeWaypoints(ctx context.Context, params *OptimizeWaypoint
 
 type OptimizeWaypointsInput struct {
 
-	// The start position for the route.
+	// The start position for the route in World Geodetic System (WGS 84) format:
+	// [longitude, latitude].
 	//
 	// This member is required.
 	Origin []float64
@@ -74,7 +79,7 @@ type OptimizeWaypointsInput struct {
 
 	// Specifies the optimization criteria for the calculated sequence.
 	//
-	// Default Value: FastestRoute .
+	// Default value: FastestRoute .
 	OptimizeSequencingFor types.WaypointOptimizationSequencingObjective
 
 	// Origin related options.
@@ -86,7 +91,7 @@ type OptimizeWaypointsInput struct {
 	// Specifies the mode of transport when calculating a route. Used in estimating
 	// the speed of travel and road compatibility.
 	//
-	// Default Value: Car
+	// Default value: Car
 	TravelMode types.WaypointOptimizationTravelMode
 
 	// Travel mode related options for the provided travel mode.

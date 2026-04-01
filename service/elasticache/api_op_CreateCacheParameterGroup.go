@@ -56,7 +56,8 @@ type CreateCacheParameterGroupInput struct {
 	// This member is required.
 	CacheParameterGroupFamily *string
 
-	// A user-specified name for the cache parameter group.
+	// A user-specified name for the cache parameter group. This value is stored as a
+	// lowercase string.
 	//
 	// This member is required.
 	CacheParameterGroupName *string

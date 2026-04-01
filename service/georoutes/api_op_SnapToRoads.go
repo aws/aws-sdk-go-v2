@@ -12,6 +12,10 @@ import (
 )
 
 // SnapToRoads matches GPS trace to roads most likely traveled on.
+//
+// For more information, see [Snap to Roads] in the Amazon Location Service Developer Guide.
+//
+// [Snap to Roads]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-roads.html
 func (c *Client) SnapToRoads(ctx context.Context, params *SnapToRoadsInput, optFns ...func(*Options)) (*SnapToRoadsOutput, error) {
 	if params == nil {
 		params = &SnapToRoadsInput{}
@@ -47,13 +51,13 @@ type SnapToRoadsInput struct {
 
 	// Chooses what the returned SnappedGeometry format should be.
 	//
-	// Default Value: FlexiblePolyline
+	// Default value: FlexiblePolyline
 	SnappedGeometryFormat types.GeometryFormat
 
 	// Specifies the mode of transport when calculating a route. Used in estimating
 	// the speed of travel and road compatibility.
 	//
-	// Default Value: Car
+	// Default value: Car
 	TravelMode types.RoadSnapTravelMode
 
 	// Travel mode related options for the provided travel mode.

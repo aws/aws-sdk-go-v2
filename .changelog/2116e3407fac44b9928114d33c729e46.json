@@ -1,0 +1,8 @@
+{
+    "id": "2116e340-7fac-44b9-9281-14d33c729e46",
+    "type": "feature",
+    "description": "This release makes RoutingBoundary optional in CalculateRouteMatrix, set StopDuration with a maximum value of 49999 for CalculateRoutes, set TrailerCount with a maximum value of 4, and introduces region restrictions for Grab Maps users.",
+    "modules": [
+        "service/georoutes"
+    ]
+}

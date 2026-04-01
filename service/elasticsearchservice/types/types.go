@@ -537,6 +537,8 @@ type DomainEndpointOptions struct {
 	//   version 1.2
 	//   - Policy-Min-TLS-1-2-PFS-2023-10: TLS security policy that supports TLS
 	//   version 1.2 to TLS version 1.3 with perfect forward secrecy cipher suites
+	//   - Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08: TLS security policy that supports
+	//   TLS version 1.3 with FIPS
 	TLSSecurityPolicy TLSSecurityPolicy
 
 	noSmithyDocumentSerde

@@ -52,19 +52,20 @@ type ImageSetWorkflowStatus string
 
 // Enum values for ImageSetWorkflowStatus
 const (
-	ImageSetWorkflowStatusCreated                   ImageSetWorkflowStatus = "CREATED"
-	ImageSetWorkflowStatusCopied                    ImageSetWorkflowStatus = "COPIED"
-	ImageSetWorkflowStatusCopying                   ImageSetWorkflowStatus = "COPYING"
-	ImageSetWorkflowStatusCopyingWithReadOnlyAccess ImageSetWorkflowStatus = "COPYING_WITH_READ_ONLY_ACCESS"
-	ImageSetWorkflowStatusCopyFailed                ImageSetWorkflowStatus = "COPY_FAILED"
-	ImageSetWorkflowStatusUpdating                  ImageSetWorkflowStatus = "UPDATING"
-	ImageSetWorkflowStatusUpdated                   ImageSetWorkflowStatus = "UPDATED"
-	ImageSetWorkflowStatusUpdateFailed              ImageSetWorkflowStatus = "UPDATE_FAILED"
-	ImageSetWorkflowStatusDeleting                  ImageSetWorkflowStatus = "DELETING"
-	ImageSetWorkflowStatusDeleted                   ImageSetWorkflowStatus = "DELETED"
-	ImageSetWorkflowStatusImporting                 ImageSetWorkflowStatus = "IMPORTING"
-	ImageSetWorkflowStatusImported                  ImageSetWorkflowStatus = "IMPORTED"
-	ImageSetWorkflowStatusImportFailed              ImageSetWorkflowStatus = "IMPORT_FAILED"
+	ImageSetWorkflowStatusCreated                     ImageSetWorkflowStatus = "CREATED"
+	ImageSetWorkflowStatusCopied                      ImageSetWorkflowStatus = "COPIED"
+	ImageSetWorkflowStatusCopying                     ImageSetWorkflowStatus = "COPYING"
+	ImageSetWorkflowStatusCopyingWithReadOnlyAccess   ImageSetWorkflowStatus = "COPYING_WITH_READ_ONLY_ACCESS"
+	ImageSetWorkflowStatusCopyFailed                  ImageSetWorkflowStatus = "COPY_FAILED"
+	ImageSetWorkflowStatusUpdating                    ImageSetWorkflowStatus = "UPDATING"
+	ImageSetWorkflowStatusUpdatingForStudyConsistency ImageSetWorkflowStatus = "UPDATING_FOR_STUDY_CONSISTENCY"
+	ImageSetWorkflowStatusUpdated                     ImageSetWorkflowStatus = "UPDATED"
+	ImageSetWorkflowStatusUpdateFailed                ImageSetWorkflowStatus = "UPDATE_FAILED"
+	ImageSetWorkflowStatusDeleting                    ImageSetWorkflowStatus = "DELETING"
+	ImageSetWorkflowStatusDeleted                     ImageSetWorkflowStatus = "DELETED"
+	ImageSetWorkflowStatusImporting                   ImageSetWorkflowStatus = "IMPORTING"
+	ImageSetWorkflowStatusImported                    ImageSetWorkflowStatus = "IMPORTED"
+	ImageSetWorkflowStatusImportFailed                ImageSetWorkflowStatus = "IMPORT_FAILED"
 )
 
 // Values returns all known values for ImageSetWorkflowStatus. Note that this can
@@ -79,6 +80,7 @@ func (ImageSetWorkflowStatus) Values() []ImageSetWorkflowStatus {
 		"COPYING_WITH_READ_ONLY_ACCESS",
 		"COPY_FAILED",
 		"UPDATING",
+		"UPDATING_FOR_STUDY_CONSISTENCY",
 		"UPDATED",
 		"UPDATE_FAILED",
 		"DELETING",

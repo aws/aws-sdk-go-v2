@@ -43,6 +43,10 @@ type ListTasksInput struct {
 	// results to tasks that belong to that container instance.
 	ContainerInstance *string
 
+	// The name of the daemon to use when filtering the ListTasks results. Specifying
+	// a daemonName limits the results to tasks that belong to that daemon.
+	DaemonName *string
+
 	// The task desired status to use when filtering the ListTasks results. Specifying
 	// a desiredStatus of STOPPED limits the results to tasks that Amazon ECS has set
 	// the desired status to STOPPED . This can be useful for debugging tasks that

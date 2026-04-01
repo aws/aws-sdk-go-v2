@@ -33,7 +33,8 @@ func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput
 // Represents the input of a CreateSnapshot operation.
 type CreateSnapshotInput struct {
 
-	// A name for the snapshot being created.
+	// A name for the snapshot being created. This value is stored as a lowercase
+	// string.
 	//
 	// This member is required.
 	SnapshotName *string

@@ -1618,6 +1618,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateImageSetMetadataInput(v *UpdateIm
 		}
 	}
 
+	if v.IncludeStudyImageSets != nil {
+		encoder.SetQuery("includeStudyImageSets").Boolean(*v.IncludeStudyImageSets)
+	}
+
 	if v.LatestVersionId != nil {
 		encoder.SetQuery("latestVersion").String(*v.LatestVersionId)
 	}

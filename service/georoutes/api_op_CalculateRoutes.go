@@ -13,6 +13,10 @@ import (
 
 // CalculateRoutes computes routes given the following required parameters: Origin
 // and Destination .
+//
+// For more information, see [Calculate routes] in the Amazon Location Service Developer Guide.
+//
+// [Calculate routes]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-routes.html
 func (c *Client) CalculateRoutes(ctx context.Context, params *CalculateRoutesInput, optFns ...func(*Options)) (*CalculateRoutesOutput, error) {
 	if params == nil {
 		params = &CalculateRoutesInput{}
@@ -36,15 +40,20 @@ type CalculateRoutesInput struct {
 	// This member is required.
 	Destination []float64
 
-	// The start position for the route.
+	// The start position for the route in World Geodetic System (WGS 84) format:
+	// [longitude, latitude].
 	//
 	// This member is required.
 	Origin []float64
 
-	// Features that are allowed while calculating a route.
+	//  Features that are allowed while calculating a route. Not supported in
+	// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Allow *types.RouteAllowOptions
 
-	// Time of arrival at the destination.
+	//  Time of arrival at the destination. Not supported in ap-southeast-1 and
+	// ap-southeast-5 regions for [GrabMaps] customers.
 	//
 	// Time format: YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm
 	//
@@ -53,18 +62,23 @@ type CalculateRoutesInput struct {
 	//     2020-04-22T17:57:24Z
 	//
 	//     2020-04-22T17:57:24+02:00
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	ArrivalTime *string
 
-	// Features that are avoided while calculating a route. Avoidance is on a
+	//  Features that are avoided while calculating a route. Avoidance is on a
 	// best-case basis. If an avoidance can't be satisfied for a particular case, it
 	// violates the avoidance and the returned response produces a notice for the
-	// violation.
+	// violation. For [GrabMaps]customers, ap-southeast-1 and ap-southeast-5 regions support
+	// only ControlledAccessHighways , Ferries , and TollRoads
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Avoid *types.RouteAvoidanceOptions
 
 	// Uses the current time as the time of departure.
 	DepartNow *bool
 
-	// Time of departure from thr origin.
+	// Time of departure from the origin.
 	//
 	// Time format: YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm
 	//
@@ -75,13 +89,22 @@ type CalculateRoutesInput struct {
 	//     2020-04-22T17:57:24+02:00
 	DepartureTime *string
 
-	// Destination related options.
+	//  Destination related options. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	DestinationOptions *types.RouteDestinationOptions
 
-	// Driver related options.
+	//  Driver related options. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Driver *types.RouteDriverOptions
 
-	// Features to be strictly excluded while calculating the route.
+	//  Features to be strictly excluded while calculating the route. Not supported in
+	// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Exclude *types.RouteExclusionOptions
 
 	// Measurement system to be used for instructions within steps in the response.
@@ -91,13 +114,17 @@ type CalculateRoutesInput struct {
 	// SigV4 signature must be provided when making a request.
 	Key *string
 
-	// List of languages for instructions within steps in the response.
+	//  List of languages for instructions within steps in the response. Not supported
+	// in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
 	//
 	// Instructions in the requested language are returned only if they are available.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Languages []string
 
-	// A list of optional additional parameters such as timezone that can be requested
-	// for each result.
+	//  A list of optional additional parameters such as timezone that can be
+	// requested for each result. For [GrabMaps]customers, ap-southeast-1 and ap-southeast-5
+	// regions support only PassThroughWaypoints , Summary , and TravelStepInstructions
 	//
 	//   - Elevation : Retrieves the elevation information for each location.
 	//
@@ -118,59 +145,93 @@ type CalculateRoutesInput struct {
 	//   - TypicalDuration : Gives typical travel duration based on historical data.
 	//
 	//   - Zones : Specifies the time zone information for each waypoint.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	LegAdditionalFeatures []types.RouteLegAdditionalFeature
 
 	// Specifies the format of the geometry returned for each leg of the route. You
 	// can choose between two different geometry encoding formats.
 	//
 	// FlexiblePolyline : A compact and precise encoding format for the leg geometry.
-	// For more information on the format, see the GitHub repository for [FlexiblePolyline]
-	// FlexiblePolyline .
+	// For more information on the format, see the GitHub repository for [https://github.com/aws-geospatial/polyline].
 	//
 	// Simple : A less compact encoding, which is easier to decode but may be less
 	// precise and result in larger payloads.
 	//
-	// [FlexiblePolyline]: https://github.com/heremaps/flexible-polyline
+	// [https://github.com/aws-geospatial/polyline]: https://github.com/aws-geospatial/polyline
 	LegGeometryFormat types.GeometryFormat
 
 	// Maximum number of alternative routes to be provided in the response, if
-	// available.
+	// available. For [GrabMaps]customers, ap-southeast-1 and ap-southeast-5 regions support
+	// only up to 3 alternative routes.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	MaxAlternatives *int32
 
-	// Specifies the optimization criteria for calculating a route.
+	// Controls the trade-off between achieving the shortest travel time ( FastestRoute
+	// ) and achieving the shortest physical distance (( ShortestRoute ) when
+	// calculating each route in the matrix.
 	//
-	// Default Value: FastestRoute
+	// Default value: FastestRoute
 	OptimizeRoutingFor types.RoutingObjective
 
-	// Origin related options.
+	//  Specifies how the origin point should be matched to the road network and any
+	// routing constraints that apply when the traveler is departing the origin. Not
+	// supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	OriginOptions *types.RouteOriginOptions
 
-	// A list of optional features such as SpeedLimit that can be requested for a
+	//  A list of optional features such as SpeedLimit that can be requested for a
 	// Span. A span is a section of a Leg for which the requested features have the
-	// same values.
+	// same values. Not supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps]
+	// customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	SpanAdditionalFeatures []types.RouteSpanAdditionalFeature
 
-	// Toll related options.
+	//  Toll related options. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Tolls *types.RouteTollOptions
 
-	// Traffic related options.
+	//  Traffic related options. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Traffic *types.RouteTrafficOptions
 
-	// Specifies the mode of transport when calculating a route. Used in estimating
-	// the speed of travel and road compatibility.
+	//  Specifies the mode of transport when calculating a route. Used in estimating
+	// the speed of travel and road compatibility. For [GrabMaps]customers, ap-southeast-1 and
+	// ap-southeast-5 regions support only Car , Pedestrian , and Scooter values.
 	//
-	// Default Value: Car
+	// Default value: Car
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	TravelMode types.RouteTravelMode
 
-	// Travel mode related options for the provided travel mode.
+	//  Travel mode related options for the provided travel mode. For [GrabMaps] customers,
+	// ap-southeast-1 and ap-southeast-5 regions support only Car and Pedestrian
+	// travel mode options.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	TravelModeOptions *types.RouteTravelModeOptions
 
 	// Type of step returned by the response. Default provides basic steps intended
 	// for web based applications. TurnByTurn provides detailed instructions with more
-	// granularity intended for a turn based navigation system.
+	// granularity intended for a turn based navigation system. For [GrabMaps]customers,
+	// ap-southeast-1 and ap-southeast-5 regions Default does not return any steps.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	TravelStepType types.RouteTravelStepType
 
-	// List of waypoints between the Origin and Destination.
+	//  List of waypoints between the Origin and Destination. For [GrabMaps] customers,
+	// ap-southeast-1 and ap-southeast-5 regions max length is 100 .
+	//
+	// Max length: 23
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Waypoints []types.RouteWaypoint
 
 	noSmithyDocumentSerde
@@ -183,8 +244,11 @@ type CalculateRoutesOutput struct {
 	// This member is required.
 	LegGeometryFormat types.GeometryFormat
 
-	// Notices are additional information returned that indicate issues that occurred
-	// during route calculation.
+	//  Notices are additional information returned that indicate issues that occurred
+	// during route calculation. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	//
 	// This member is required.
 	Notices []types.RouteResponseNotice

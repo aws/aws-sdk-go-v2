@@ -121,6 +121,23 @@ func (ContentBlockType) Values() []ContentBlockType {
 	}
 }
 
+type EventFilterCondition string
+
+// Enum values for EventFilterCondition
+const (
+	EventFilterConditionHasEvents EventFilterCondition = "HAS_EVENTS"
+)
+
+// Values returns all known values for EventFilterCondition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventFilterCondition) Values() []EventFilterCondition {
+	return []EventFilterCondition{
+		"HAS_EVENTS",
+	}
+}
+
 type ExtractionJobStatus string
 
 // Enum values for ExtractionJobStatus

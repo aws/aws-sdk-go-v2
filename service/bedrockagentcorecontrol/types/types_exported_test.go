@@ -188,6 +188,9 @@ func ExampleCredentialProvider_outputUsage() {
 	case *types.CredentialProviderMemberApiKeyCredentialProvider:
 		_ = v.Value // Value is types.GatewayApiKeyCredentialProvider
 
+	case *types.CredentialProviderMemberIamCredentialProvider:
+		_ = v.Value // Value is types.IamCredentialProvider
+
 	case *types.CredentialProviderMemberOauthCredentialProvider:
 		_ = v.Value // Value is types.OAuthCredentialProvider
 
@@ -200,6 +203,7 @@ func ExampleCredentialProvider_outputUsage() {
 	}
 }
 
+var _ *types.IamCredentialProvider
 var _ *types.GatewayApiKeyCredentialProvider
 var _ *types.OAuthCredentialProvider
 
@@ -828,6 +832,28 @@ func ExamplePolicyDefinition_outputUsage() {
 var _ *types.PolicyGenerationDetails
 var _ *types.CedarPolicy
 
+func ExamplePrivateEndpoint_outputUsage() {
+	var union types.PrivateEndpoint
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PrivateEndpointMemberManagedLatticeResource:
+		_ = v.Value // Value is types.ManagedLatticeResource
+
+	case *types.PrivateEndpointMemberSelfManagedLatticeResource:
+		_ = v.Value // Value is types.SelfManagedLatticeResource
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.SelfManagedLatticeResource
+var _ *types.ManagedLatticeResource
+
 func ExampleRatingScale_outputUsage() {
 	var union types.RatingScale
 	// type switches can be used to check the union value
@@ -925,6 +951,24 @@ func ExampleResourceLocation_outputUsage() {
 }
 
 var _ *types.S3Location
+
+func ExampleSelfManagedLatticeResource_outputUsage() {
+	var union types.SelfManagedLatticeResource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
 
 func ExampleStreamDeliveryResource_outputUsage() {
 	var union types.StreamDeliveryResource

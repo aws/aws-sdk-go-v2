@@ -59,6 +59,10 @@ type UpdateImageSetMetadataInput struct {
 	//   - Adding, removing, or updating private tags for an individual SOP Instance
 	Force *bool
 
+	// Flag to apply the metadata updates to all image sets in the same Study as the
+	// requested image set ID.
+	IncludeStudyImageSets *bool
+
 	noSmithyDocumentSerde
 }
 

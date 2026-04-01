@@ -44,6 +44,9 @@ type ListSessionsInput struct {
 	// This member is required.
 	MemoryId *string
 
+	// Filter criteria to apply when listing sessions.
+	Filter *types.SessionFilter
+
 	// The maximum number of results to return in a single call. The default value is
 	// 20.
 	MaxResults *int32

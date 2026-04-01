@@ -37,7 +37,7 @@ type CreateUserGroupInput struct {
 	// This member is required.
 	Engine *string
 
-	// The ID of the user group.
+	// The ID of the user group. This value is stored as a lowercase string.
 	//
 	// This member is required.
 	UserGroupId *string

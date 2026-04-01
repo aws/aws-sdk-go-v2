@@ -86,6 +86,9 @@ type GetImageFrameOutput struct {
 	//
 	//   - If the stored transfer syntax is 1.2.840.10008.1.2.4.203 , the returned
 	//   contentType is image/jphc .
+	//
+	//   - If the stored transfer syntax is 1.2.840.10008.1.2.4.112 the returned
+	//   contentType is image/jxl .
 	ContentType *string
 
 	// Metadata pertaining to the operation's result.

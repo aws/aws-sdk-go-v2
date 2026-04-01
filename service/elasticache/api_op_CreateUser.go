@@ -42,7 +42,7 @@ type CreateUserInput struct {
 	// This member is required.
 	Engine *string
 
-	// The ID of the user.
+	// The ID of the user. This value is stored as a lowercase string.
 	//
 	// This member is required.
 	UserId *string

@@ -2018,6 +2018,16 @@ func awsRestjson1_deserializeOpDocumentCreateGatewayTargetOutput(v **CreateGatew
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "privateEndpoint":
+			if err := awsRestjson1_deserializeDocumentPrivateEndpoint(&sv.PrivateEndpoint, value); err != nil {
+				return err
+			}
+
+		case "privateEndpointManagedResources":
+			if err := awsRestjson1_deserializeDocumentPrivateEndpointManagedResources(&sv.PrivateEndpointManagedResources, value); err != nil {
+				return err
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8551,6 +8561,16 @@ func awsRestjson1_deserializeOpDocumentGetGatewayTargetOutput(v **GetGatewayTarg
 					return fmt.Errorf("expected TargetName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "privateEndpoint":
+			if err := awsRestjson1_deserializeDocumentPrivateEndpoint(&sv.PrivateEndpoint, value); err != nil {
+				return err
+			}
+
+		case "privateEndpointManagedResources":
+			if err := awsRestjson1_deserializeDocumentPrivateEndpointManagedResources(&sv.PrivateEndpointManagedResources, value); err != nil {
+				return err
 			}
 
 		case "status":
@@ -16304,6 +16324,16 @@ func awsRestjson1_deserializeOpDocumentUpdateGatewayTargetOutput(v **UpdateGatew
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "privateEndpoint":
+			if err := awsRestjson1_deserializeDocumentPrivateEndpoint(&sv.PrivateEndpoint, value); err != nil {
+				return err
+			}
+
+		case "privateEndpointManagedResources":
+			if err := awsRestjson1_deserializeDocumentPrivateEndpointManagedResources(&sv.PrivateEndpointManagedResources, value); err != nil {
+				return err
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20866,6 +20896,16 @@ loop:
 			uv = &types.CredentialProviderMemberApiKeyCredentialProvider{Value: mv}
 			break loop
 
+		case "iamCredentialProvider":
+			var mv types.IamCredentialProvider
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentIamCredentialProvider(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.CredentialProviderMemberIamCredentialProvider{Value: mv}
+			break loop
+
 		case "oauthCredentialProvider":
 			var mv types.OAuthCredentialProvider
 			destAddr := &mv
@@ -22923,6 +22963,16 @@ func awsRestjson1_deserializeDocumentGatewayTarget(v **types.GatewayTarget, valu
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "privateEndpoint":
+			if err := awsRestjson1_deserializeDocumentPrivateEndpoint(&sv.PrivateEndpoint, value); err != nil {
+				return err
+			}
+
+		case "privateEndpointManagedResources":
+			if err := awsRestjson1_deserializeDocumentPrivateEndpointManagedResources(&sv.PrivateEndpointManagedResources, value); err != nil {
+				return err
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23086,6 +23136,55 @@ func awsRestjson1_deserializeDocumentGoogleOauth2ProviderConfigOutput(v **types.
 		case "oauthDiscovery":
 			if err := awsRestjson1_deserializeDocumentOauth2Discovery(&sv.OauthDiscovery, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIamCredentialProvider(v **types.IamCredentialProvider, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IamCredentialProvider
+	if *v == nil {
+		sv = &types.IamCredentialProvider{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		case "service":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Service = ptr.String(jtv)
 			}
 
 		default:
@@ -23800,6 +23899,137 @@ func awsRestjson1_deserializeDocumentLogGroupNamesList(v *[]string, value interf
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentManagedLatticeResource(v **types.ManagedLatticeResource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedLatticeResource
+	if *v == nil {
+		sv = &types.ManagedLatticeResource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "endpointIpAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EndpointIpAddressType to be of type string, got %T instead", value)
+				}
+				sv.EndpointIpAddressType = types.EndpointIpAddressType(jtv)
+			}
+
+		case "routingDomain":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoutingDomain to be of type string, got %T instead", value)
+				}
+				sv.RoutingDomain = ptr.String(jtv)
+			}
+
+		case "securityGroupIds":
+			if err := awsRestjson1_deserializeDocumentSecurityGroupIds(&sv.SecurityGroupIds, value); err != nil {
+				return err
+			}
+
+		case "subnetIds":
+			if err := awsRestjson1_deserializeDocumentSubnetIds(&sv.SubnetIds, value); err != nil {
+				return err
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "vpcIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VpcIdentifier to be of type string, got %T instead", value)
+				}
+				sv.VpcIdentifier = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentManagedResourceDetails(v **types.ManagedResourceDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedResourceDetails
+	if *v == nil {
+		sv = &types.ManagedResourceDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "domain":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DomainName to be of type string, got %T instead", value)
+				}
+				sv.Domain = ptr.String(jtv)
+			}
+
+		case "resourceAssociationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceAssociationArn to be of type string, got %T instead", value)
+				}
+				sv.ResourceAssociationArn = ptr.String(jtv)
+			}
+
+		case "resourceGatewayArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceGatewayArn to be of type string, got %T instead", value)
+				}
+				sv.ResourceGatewayArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -26286,6 +26516,88 @@ func awsRestjson1_deserializeDocumentPolicyStatusReasons(v *[]string, value inte
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPrivateEndpoint(v *types.PrivateEndpoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.PrivateEndpoint
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "managedLatticeResource":
+			var mv types.ManagedLatticeResource
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentManagedLatticeResource(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.PrivateEndpointMemberManagedLatticeResource{Value: mv}
+			break loop
+
+		case "selfManagedLatticeResource":
+			var mv types.SelfManagedLatticeResource
+			if err := awsRestjson1_deserializeDocumentSelfManagedLatticeResource(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.PrivateEndpointMemberSelfManagedLatticeResource{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPrivateEndpointManagedResources(v *[]types.ManagedResourceDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ManagedResourceDetails
+	if *v == nil {
+		cv = []types.ManagedResourceDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ManagedResourceDetails
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentManagedResourceDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentProtocolConfiguration(v **types.ProtocolConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -27327,6 +27639,42 @@ func awsRestjson1_deserializeDocumentSecretsManagerLocation(v **types.SecretsMan
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSecurityGroupIds(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SecurityGroupIdentifier to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSecurityGroups(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -27414,6 +27762,48 @@ func awsRestjson1_deserializeDocumentSelfManagedConfiguration(v **types.SelfMana
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSelfManagedLatticeResource(v *types.SelfManagedLatticeResource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.SelfManagedLatticeResource
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "resourceConfigurationIdentifier":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceConfigurationIdentifier to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -27956,6 +28346,42 @@ func awsRestjson1_deserializeDocumentStreamDeliveryResourcesList(v *[]types.Stre
 		var col types.StreamDeliveryResource
 		if err := awsRestjson1_deserializeDocumentStreamDeliveryResource(&col, value); err != nil {
 			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSubnetIds(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SubnetId to be of type string, got %T instead", value)
+			}
+			col = jtv
 		}
 		cv = append(cv, col)
 
