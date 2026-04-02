@@ -1,3 +1,7 @@
+# v1.28.0 (2026-04-02)
+
+* **Feature**: AWS Deadline Cloud now supports configurable scheduling on each queue. The scheduling configuration controls how workers are distributed across jobs.
+
 # v1.27.0 (2026-03-30)
 
 * **Feature**: AWS Deadline Cloud now supports three new fleet auto scaling settings. With scale out rate, you can configure how quickly workers launch. With worker idle duration, you can set how long workers wait before shutting down. With standby worker count, you can keep idle workers ready for fast job start.

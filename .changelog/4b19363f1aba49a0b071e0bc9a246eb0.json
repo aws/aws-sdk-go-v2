@@ -1,8 +1,0 @@
-{
-    "id": "4b19363f-1aba-49a0-b071-e0bc9a246eb0",
-    "type": "feature",
-    "description": "This release increases the MaxResults parameter of the GetAttributeValues API from 100 to 10000.",
-    "modules": [
-        "service/pricing"
-    ]
-}

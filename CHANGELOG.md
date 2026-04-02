@@ -1,3 +1,30 @@
+# Release (2026-04-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.56.0](service/appstream/CHANGELOG.md#v1560-2026-04-02)
+  * **Feature**: Amazon WorkSpaces Applications now supports drain mode for instances in multi-session fleets. This capability allows administrators to instruct individual fleet instances to stop accepting new user sessions while allowing existing sessions to continue uninterrupted.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.28.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1280-2026-04-02)
+  * **Feature**: Adds support for three-legged (Authorization Code grant type) OAuth along with predefined MCP tool schema configuration for Amazon Bedrock AgentCore gateway MCP server targets.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation`: [v1.14.0](service/bedrockdataautomation/CHANGELOG.md#v1140-2026-04-02)
+  * **Feature**: Data Automation Library is a BDA capability that lets you create reusable entity resources to improve extraction accuracy. Libraries support Custom Vocabulary entities that enhance speech recognition for audio and video content with domain-specific terminology shared across projects
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.56.0](service/cloudwatch/CHANGELOG.md#v1560-2026-04-02)
+  * **Feature**: CloudWatch now supports OTel enrichment to make vended metrics for supported AWS resources queryable via PromQL with resource ARN and tag labels, and PromQL alarms for metrics ingested via the OTLP endpoint with multi-contributor evaluation.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.67.0](service/cloudwatchlogs/CHANGELOG.md#v1670-2026-04-02)
+  * **Feature**: We are pleased to announce that our logs transformation csv processor now has a destination field, allowing you to specify under which parent node parsed columns be placed under.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.167.0](service/connect/CHANGELOG.md#v11670-2026-04-02)
+  * **Feature**: Include CUSTOMER to evaluation target and participant role. Support Korean, Japanese and Simplified Chinese in evaluation forms.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.28.0](service/deadline/CHANGELOG.md#v1280-2026-04-02)
+  * **Feature**: AWS Deadline Cloud now supports configurable scheduling on each queue. The scheduling configuration controls how workers are distributed across jobs.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.52.0](service/gamelift/CHANGELOG.md#v1520-2026-04-02)
+  * **Feature**: Amazon GameLift Servers now includes a ComputeName field in game session API responses, making it easier to identify which compute is hosting a game session without cross-referencing IP addresses.
+* `github.com/aws/aws-sdk-go-v2/service/geoplaces`: [v1.8.6](service/geoplaces/CHANGELOG.md#v186-2026-04-02)
+  * **Documentation**: This release updates API reference documentation for Amazon Location Service Places APIs to reflect regional restrictions for Grab Maps users in ReverseGeocode, Suggest, SearchText, and GetPlace operations
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.41.0](service/pricing/CHANGELOG.md#v1410-2026-04-02)
+  * **Feature**: This release increases the MaxResults parameter of the GetAttributeValues API from 100 to 10000.
+
 # Release (2026-04-01)
 
 ## Module Highlights

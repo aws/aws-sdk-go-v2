@@ -1,3 +1,7 @@
+# v1.167.0 (2026-04-02)
+
+* **Feature**: Include CUSTOMER to evaluation target and participant role. Support Korean, Japanese and Simplified Chinese in evaluation forms.
+
 # v1.166.1 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

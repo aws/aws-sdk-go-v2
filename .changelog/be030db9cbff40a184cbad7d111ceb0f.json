@@ -1,8 +1,0 @@
-{
-    "id": "be030db9-cbff-40a1-84cb-ad7d111ceb0f",
-    "type": "feature",
-    "description": "Data Automation Library is a BDA capability that lets you create reusable entity resources to improve extraction accuracy. Libraries support Custom Vocabulary entities that enhance speech recognition for audio and video content with domain-specific terminology shared across projects",
-    "modules": [
-        "service/bedrockdataautomation"
-    ]
-}

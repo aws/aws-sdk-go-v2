@@ -1,8 +1,0 @@
-{
-    "id": "589e18e8-a1b4-44ab-9dc7-fb46d4d24a7d",
-    "type": "feature",
-    "description": "Adds support for three-legged (Authorization Code grant type) OAuth along with predefined MCP tool schema configuration for Amazon Bedrock AgentCore gateway MCP server targets.",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.52.0 (2026-04-02)
+
+* **Feature**: Amazon GameLift Servers now includes a ComputeName field in game session API responses, making it easier to identify which compute is hosting a game session without cross-referencing IP addresses.
+
 # v1.51.4 (2026-03-30)
 
 * **Documentation**: Update CreateScript API documentation.

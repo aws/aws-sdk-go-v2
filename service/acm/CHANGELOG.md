@@ -1,3 +1,7 @@
+# v1.38.1 (2026-04-02)
+
+* No change notes available for this release.
+
 # v1.38.0 (2026-03-31)
 
 * **Feature**: Adds support for searching for ACM certificates using the new SearchCertificates API.

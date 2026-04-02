@@ -1,3 +1,7 @@
+# v1.28.0 (2026-04-02)
+
+* **Feature**: Adds support for three-legged (Authorization Code grant type) OAuth along with predefined MCP tool schema configuration for Amazon Bedrock AgentCore gateway MCP server targets.
+
 # v1.27.0 (2026-04-01)
 
 * **Feature**: Adds support for VPC egress private endpoints for Amazon Bedrock AgentCore gateway targets, enabling private connectivity through managed VPC Lattice resources. Also adds IAM credential provider for gateway targets, enabling IAM-based authentication to target endpoints
