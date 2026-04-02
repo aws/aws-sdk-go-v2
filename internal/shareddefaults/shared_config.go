@@ -4,6 +4,7 @@ import (
 	"os"
 	"os/user"
 	"path/filepath"
+	"strings"
 )
 
 // SharedCredentialsFilename returns the SDK's default file path
@@ -26,6 +27,25 @@ func SharedCredentialsFilename() string {
 //   - Windows: %USERPROFILE%\.aws\config
 func SharedConfigFilename() string {
 	return filepath.Join(UserHomeDir(), ".aws", "config")
+}
+
+// ExpandHomePath expands a leading ~ in the path to the user's home
+// directory. This is necessary because the Go os package does not
+// perform shell-style tilde expansion, unlike Python's
+// os.path.expanduser which is used by botocore.
+//
+// Per the AWS SDKs and Tools Reference Guide, ~ followed by / (or the
+// platform-specific path separator) at the start of a file path should
+// resolve to the home directory:
+// https://docs.aws.amazon.com/sdkref/latest/guide/file-location.html
+func ExpandHomePath(path string) string {
+	if path == "~" {
+		return UserHomeDir()
+	}
+	if strings.HasPrefix(path, "~/") || strings.HasPrefix(path, "~"+string(filepath.Separator)) {
+		return filepath.Join(UserHomeDir(), path[2:])
+	}
+	return path
 }
 
 // UserHomeDir returns the home directory for the user the process is
