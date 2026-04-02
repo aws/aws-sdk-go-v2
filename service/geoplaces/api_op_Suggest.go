@@ -50,8 +50,11 @@ type SuggestInput struct {
 	// This member is required.
 	QueryText *string
 
-	// A list of optional additional parameters, such as time zone, that can be
-	// requested for each result.
+	//  A list of optional additional parameters, such as time zone, that can be
+	// requested for each result. For [GrabMaps]customers, ap-southeast-1 and ap-southeast-5
+	// regions support only the Core and TimeZone values.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	AdditionalFeatures []types.SuggestAdditionalFeature
 
 	// The position, in longitude and latitude, that the results should be close to.
@@ -66,31 +69,42 @@ type SuggestInput struct {
 	// must possess in order to be returned as a result.
 	Filter *types.SuggestFilter
 
-	// Indicates if the results will be stored. Defaults to SingleUse , if left empty.
+	//  Indicates if the query results will be persisted in customer infrastructure.
+	// Defaults to SingleUse (not stored). Currently, Suggest does not support storage
+	// of results.
 	IntendedUse types.SuggestIntendedUse
 
 	// Optional: The API key to be used for authorization. Either an API key or valid
 	// SigV4 signature must be provided when making a request.
 	Key *string
 
-	// A list of [BCP 47] compliant language codes for the results to be rendered in. If there
-	// is no data for the result in the requested language, data will be returned in
-	// the default language for the entry.
+	//  A list of [BCP 47] compliant language codes for the results to be rendered in. If
+	// there is no data for the result in the requested language, data will be returned
+	// in the default language for the entry. For [GrabMaps]customers, ap-southeast-1 and
+	// ap-southeast-5 regions support only the following codes: en, id, km, lo, ms,
+	// my, pt, th, tl, vi, zh
 	//
 	// [BCP 47]: https://en.wikipedia.org/wiki/IETF_language_tag
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Language *string
 
-	// Maximum number of query terms to be returned for use with a search text query.
+	//  Maximum number of query terms to be returned for use with a search text query.
+	// Not supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	MaxQueryRefinements *int32
 
-	// An optional limit for the number of results returned in a single call.
+	//  An optional limit for the number of results returned in a single call.
 	//
 	// Default value: 20
 	MaxResults *int32
 
-	// The alpha-2 or alpha-3 character code for the political view of a country. The
+	//  The alpha-2 or alpha-3 character code for the political view of a country. The
 	// political view applies to the results of the request to represent unresolved
-	// territorial claims through the point of view of the specified country.
+	// territorial claims through the point of view of the specified country. Not
+	// supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	PoliticalView *string
 
 	noSmithyDocumentSerde
@@ -107,7 +121,10 @@ type SuggestOutput struct {
 	// This member is required.
 	PricingBucket *string
 
-	// Maximum number of query terms to be returned for use with a search text query.
+	//  Maximum number of query terms to be returned for use with a search text query.
+	// Not available in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	QueryRefinements []types.QueryRefinement
 
 	// List of places or results returned for a query.

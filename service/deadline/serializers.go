@@ -2225,6 +2225,13 @@ func awsRestjson1_serializeOpDocumentCreateQueueInput(v *CreateQueueInput, value
 		ok.String(*v.RoleArn)
 	}
 
+	if v.SchedulingConfiguration != nil {
+		ok := object.Key("schedulingConfiguration")
+		if err := awsRestjson1_serializeDocumentSchedulingConfiguration(v.SchedulingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
@@ -10186,6 +10193,13 @@ func awsRestjson1_serializeOpDocumentUpdateQueueInput(v *UpdateQueueInput, value
 		ok.String(*v.RoleArn)
 	}
 
+	if v.SchedulingConfiguration != nil {
+		ok := object.Key("schedulingConfiguration")
+		if err := awsRestjson1_serializeDocumentSchedulingConfiguration(v.SchedulingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -12311,6 +12325,25 @@ func awsRestjson1_serializeDocumentPosixUser(v *types.PosixUser, value smithyjso
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPriorityBalancedSchedulingConfiguration(v *types.PriorityBalancedSchedulingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RenderingTaskBuffer != nil {
+		ok := object.Key("renderingTaskBuffer")
+		ok.Integer(*v.RenderingTaskBuffer)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPriorityFifoSchedulingConfiguration(v *types.PriorityFifoSchedulingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentQueueIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -12346,6 +12379,86 @@ func awsRestjson1_serializeDocumentS3Location(v *types.S3Location, value smithyj
 		ok := object.Key("key")
 		ok.String(*v.Key)
 	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSchedulingConfiguration(v types.SchedulingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.SchedulingConfigurationMemberPriorityBalanced:
+		av := object.Key("priorityBalanced")
+		if err := awsRestjson1_serializeDocumentPriorityBalancedSchedulingConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.SchedulingConfigurationMemberPriorityFifo:
+		av := object.Key("priorityFifo")
+		if err := awsRestjson1_serializeDocumentPriorityFifoSchedulingConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.SchedulingConfigurationMemberWeightedBalanced:
+		av := object.Key("weightedBalanced")
+		if err := awsRestjson1_serializeDocumentWeightedBalancedSchedulingConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSchedulingMaxPriorityOverride(v types.SchedulingMaxPriorityOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.SchedulingMaxPriorityOverrideMemberAlwaysScheduleFirst:
+		av := object.Key("alwaysScheduleFirst")
+		if err := awsRestjson1_serializeDocumentSchedulingMaxPriorityOverrideAlwaysScheduleFirst(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSchedulingMaxPriorityOverrideAlwaysScheduleFirst(v *types.SchedulingMaxPriorityOverrideAlwaysScheduleFirst, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSchedulingMinPriorityOverride(v types.SchedulingMinPriorityOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.SchedulingMinPriorityOverrideMemberAlwaysScheduleLast:
+		av := object.Key("alwaysScheduleLast")
+		if err := awsRestjson1_serializeDocumentSchedulingMinPriorityOverrideAlwaysScheduleLast(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSchedulingMinPriorityOverrideAlwaysScheduleLast(v *types.SchedulingMinPriorityOverrideAlwaysScheduleLast, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	return nil
 }
@@ -12969,6 +13082,104 @@ func awsRestjson1_serializeDocumentVpcResourceConfigurationArns(v []string, valu
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWeightedBalancedSchedulingConfiguration(v *types.WeightedBalancedSchedulingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ErrorWeight != nil {
+		ok := object.Key("errorWeight")
+		switch {
+		case math.IsNaN(*v.ErrorWeight):
+			ok.String("NaN")
+
+		case math.IsInf(*v.ErrorWeight, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.ErrorWeight, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.ErrorWeight)
+
+		}
+	}
+
+	if v.MaxPriorityOverride != nil {
+		ok := object.Key("maxPriorityOverride")
+		if err := awsRestjson1_serializeDocumentSchedulingMaxPriorityOverride(v.MaxPriorityOverride, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MinPriorityOverride != nil {
+		ok := object.Key("minPriorityOverride")
+		if err := awsRestjson1_serializeDocumentSchedulingMinPriorityOverride(v.MinPriorityOverride, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PriorityWeight != nil {
+		ok := object.Key("priorityWeight")
+		switch {
+		case math.IsNaN(*v.PriorityWeight):
+			ok.String("NaN")
+
+		case math.IsInf(*v.PriorityWeight, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.PriorityWeight, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.PriorityWeight)
+
+		}
+	}
+
+	if v.RenderingTaskBuffer != nil {
+		ok := object.Key("renderingTaskBuffer")
+		ok.Integer(*v.RenderingTaskBuffer)
+	}
+
+	if v.RenderingTaskWeight != nil {
+		ok := object.Key("renderingTaskWeight")
+		switch {
+		case math.IsNaN(*v.RenderingTaskWeight):
+			ok.String("NaN")
+
+		case math.IsInf(*v.RenderingTaskWeight, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.RenderingTaskWeight, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.RenderingTaskWeight)
+
+		}
+	}
+
+	if v.SubmissionTimeWeight != nil {
+		ok := object.Key("submissionTimeWeight")
+		switch {
+		case math.IsNaN(*v.SubmissionTimeWeight):
+			ok.String("NaN")
+
+		case math.IsInf(*v.SubmissionTimeWeight, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.SubmissionTimeWeight, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.SubmissionTimeWeight)
+
+		}
+	}
+
 	return nil
 }
 

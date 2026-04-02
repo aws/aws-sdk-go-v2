@@ -71,6 +71,7 @@
         "api_op_DisassociateApplicationFromEntitlement.go",
         "api_op_DisassociateFleet.go",
         "api_op_DisassociateSoftwareFromImageBuilder.go",
+        "api_op_DrainSessionInstance.go",
         "api_op_EnableUser.go",
         "api_op_ExpireSession.go",
         "api_op_GetExportImageTask.go",

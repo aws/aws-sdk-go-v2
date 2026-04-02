@@ -36,12 +36,18 @@ type Address struct {
 	// The number that identifies an address within a street.
 	AddressNumber *string
 
-	// Name of the block.
+	//  Name of the block. Not available in ap-southeast-1 and ap-southeast-5 regions
+	// for [GrabMaps]customers.
 	//
 	// Example: Sunny Mansion 203 block: 2 Chome
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Block *string
 
-	// The name of the building at the address.
+	//  The name of the building at the address. Not available in ap-southeast-1 and
+	// ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Building *string
 
 	// The country component of the address.
@@ -50,9 +56,12 @@ type Address struct {
 	// The district or division of a locality associated with this address.
 	District *string
 
-	// Name of the streets in the intersection.
+	//  Name of the streets in the intersection. Not available in ap-southeast-1 and
+	// ap-southeast-5 regions for [GrabMaps] customers.
 	//
 	// Example: ["Friedrichstraße","Unter den Linden"]
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Intersection []string
 
 	// Assembled address value built out of the address components, according to the
@@ -73,27 +82,36 @@ type Address struct {
 	// Example: North Rhine-Westphalia .
 	Region *Region
 
-	// Components that correspond to secondary identifiers on an Address. Secondary
+	//  Components that correspond to secondary identifiers on an Address. Secondary
 	// address components include information such as Suite or Unit Number, Building,
-	// or Floor.
+	// or Floor. Not available in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps]
+	// customers.
 	//
 	// Coverage for Address.SecondaryAddressComponents is available in the following
 	// countries:
 	//
 	// AUS, CAN, NZL, USA, PRI
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	SecondaryAddressComponents []SecondaryAddressComponent
 
 	// The name of the street results should be present in.
 	Street *string
 
-	// Components of the street.
+	//  Components of the street. Not available in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
 	//
-	// Example: Younge from the "Younge street".
+	// Example: Yonge from "Yonge street".
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	StreetComponents []StreetComponents
 
-	// Name of sub-block.
+	//  Name of sub-block. Not available in ap-southeast-1 and ap-southeast-5 regions
+	// for [GrabMaps]customers.
 	//
 	// Example: Sunny Mansion 203 sub-block: 4
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	SubBlock *string
 
 	// A subdivision of a district.
@@ -478,7 +496,10 @@ type FilterCircle struct {
 	// This member is required.
 	Center []float64
 
-	// The radius, in meters, of the FilterCircle .
+	//  The radius, in meters, of the FilterCircle . For [GrabMaps] customers, ap-southeast-1
+	// and ap-southeast-5 regions support only up to a maximum value of 300,000.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	//
 	// This member is required.
 	Radius *int64
@@ -957,9 +978,12 @@ type QueryRefinement struct {
 // Example: North Rhine-Westphalia .
 type Region struct {
 
-	// Abbreviated code for a the state, province or region of the country.
+	//  Abbreviated code for a the state, province or region of the country. Not
+	// available in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
 	//
 	// Example: BC .
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Code *string
 
 	// Name for a the state, province, or region of the country.
@@ -1020,7 +1044,10 @@ type RelatedPlace struct {
 // The included place types.
 type ReverseGeocodeFilter struct {
 
-	// The included place types.
+	//  The included place types. For [GrabMaps] customers, ap-southeast-1 and ap-southeast-5
+	// regions support only Street and PointAddress values.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	IncludePlaceTypes []ReverseGeocodeFilterPlaceType
 
 	noSmithyDocumentSerde
@@ -1045,14 +1072,20 @@ type ReverseGeocodeResultItem struct {
 	// This member is required.
 	Title *string
 
-	// Position of the access point in World Geodetic System (WGS 84) format:
-	// [longitude, latitude].
+	//  Position of the access point in World Geodetic System (WGS 84) format:
+	// [longitude, latitude]. Not available in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	AccessPoints []AccessPoint
 
 	// The place's address.
 	Address *Address
 
-	// Boolean indicating if the address provided has been corrected.
+	//  Boolean indicating if the address provided has been corrected. Not available
+	// in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	AddressNumberCorrected *bool
 
 	// Categories of results that results must belong to.
@@ -1061,10 +1094,16 @@ type ReverseGeocodeResultItem struct {
 	// The distance in meters from the QueryPosition.
 	Distance int64
 
-	// List of food types offered by this result.
+	//  List of food types offered by this result. Not available in ap-southeast-1 and
+	// ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	FoodTypes []FoodType
 
-	// All Intersections that are near the provided address.
+	//  All Intersections that are near the provided address. Not available in
+	// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Intersections []Intersection
 
 	// The bounding box enclosing the geometric shape (area or line) that an
@@ -1074,15 +1113,21 @@ type ReverseGeocodeResultItem struct {
 	// {southern lat}, {eastward lng}, {northern lat}]
 	MapView []float64
 
-	// The alpha-2 or alpha-3 character code for the political view of a country. The
+	//  The alpha-2 or alpha-3 character code for the political view of a country. The
 	// political view applies to the results of the request to represent unresolved
-	// territorial claims through the point of view of the specified country.
+	// territorial claims through the point of view of the specified country. Not
+	// available in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	PoliticalView *string
 
 	// The position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	Position []float64
 
-	// Contains details about the postal code of the place/result.
+	//  Contains details about the postal code of the place/result. Not available in
+	// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	PostalCodeDetails []PostalCodeDetails
 
 	// The time zone in which the place is located.
@@ -1373,7 +1418,10 @@ type StreetComponents struct {
 // The sub-region.
 type SubRegion struct {
 
-	// Abbreviated code for the county or sub-region.
+	//  Abbreviated code for the county or sub-region. Not available in ap-southeast-1
+	// and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Code *string
 
 	// Name for the county or sub-region.
@@ -1448,19 +1496,28 @@ type SuggestHighlights struct {
 // The suggested place results.
 type SuggestPlaceResult struct {
 
-	// Position of the access point in World Geodetic System (WGS 84) format:
-	// [longitude, latitude].
+	//  Position of the access point in World Geodetic System (WGS 84) format:
+	// [longitude, latitude]. Not available in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	AccessPoints []AccessPoint
 
-	// Indicates known access restrictions on a vehicle access point. The index
+	//  Indicates known access restrictions on a vehicle access point. The index
 	// correlates to an access point and indicates if access through this point has
-	// some form of restriction.
+	// some form of restriction. Not available in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	AccessRestrictions []AccessRestriction
 
 	// The place's address.
 	Address *Address
 
-	// The Business Chains associated with the place.
+	//  The Business Chains associated with the place. Not available in ap-southeast-1
+	// and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	BusinessChains []BusinessChain
 
 	// Categories of results that results must belong to.
@@ -1469,7 +1526,10 @@ type SuggestPlaceResult struct {
 	// The distance in meters from the QueryPosition.
 	Distance int64
 
-	// List of food types offered by this result.
+	//  List of food types offered by this result. Not available in ap-southeast-1 and
+	// ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	FoodTypes []FoodType
 
 	// The bounding box enclosing the geometric shape (area or line) that an
@@ -1479,8 +1539,11 @@ type SuggestPlaceResult struct {
 	// {southern lat}, {eastward lng}, {northern lat}]
 	MapView []float64
 
-	// How the various components of the result's address are pronounced in various
-	// languages.
+	//  How the various components of the result's address are pronounced in various
+	// languages. Not available in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps]
+	// customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Phonemes *PhonemeDetails
 
 	// The PlaceId of the place you wish to receive the information for.
@@ -1489,9 +1552,12 @@ type SuggestPlaceResult struct {
 	// A PlaceType is a category that the result place must belong to.
 	PlaceType PlaceType
 
-	// The alpha-2 or alpha-3 character code for the political view of a country. The
+	//  The alpha-2 or alpha-3 character code for the political view of a country. The
 	// political view applies to the results of the request to represent unresolved
-	// territorial claims through the point of view of the specified country.
+	// territorial claims through the point of view of the specified country. Not
+	// available in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	PoliticalView *string
 
 	// The position in World Geodetic System (WGS 84) format: [longitude, latitude].
@@ -1509,16 +1575,21 @@ type SuggestQueryResult struct {
 	// QueryId can be used to complete a follow up query through the SearchText API.
 	// The QueryId retains context from the original Suggest request such as filters,
 	// political view and language. See the SearchText API documentation for more
-	// details [SearchText API docs].
+	// details [SearchText API docs]. Not supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps]
+	// customers.
 	//
 	// The fields QueryText , and QueryID are mutually exclusive.
 	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	// [SearchText API docs]: https://docs.aws.amazon.com/location/latest/APIReference/API_geoplaces_SearchText.html
 	QueryId *string
 
-	// The query type. Category queries will search for places which have an entry
+	//  The query type. Category queries will search for places which have an entry
 	// matching the given category, for example "doctor office". BusinessChain queries
-	// will search for instances of a given business.
+	// will search for instances of a given business. Not supported in ap-southeast-1
+	// and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	QueryType QueryType
 
 	noSmithyDocumentSerde

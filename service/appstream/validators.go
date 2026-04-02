@@ -990,6 +990,26 @@ func (m *validateOpDisassociateSoftwareFromImageBuilder) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDrainSessionInstance struct {
+}
+
+func (*validateOpDrainSessionInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDrainSessionInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DrainSessionInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDrainSessionInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpEnableUser struct {
 }
 
@@ -1664,6 +1684,10 @@ func addOpDisassociateFleetValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDisassociateSoftwareFromImageBuilderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateSoftwareFromImageBuilder{}, middleware.After)
+}
+
+func addOpDrainSessionInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDrainSessionInstance{}, middleware.After)
 }
 
 func addOpEnableUserValidationMiddleware(stack *middleware.Stack) error {
@@ -3062,6 +3086,21 @@ func validateOpDisassociateSoftwareFromImageBuilderInput(v *DisassociateSoftware
 	}
 	if v.SoftwareNames == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SoftwareNames"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDrainSessionInstanceInput(v *DrainSessionInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DrainSessionInstanceInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

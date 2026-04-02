@@ -1955,6 +1955,11 @@ func awsRestjson1_deserializeOpDocumentCreateGatewayTargetOutput(v **CreateGatew
 
 	for key, value := range shape {
 		switch key {
+		case "authorizationData":
+			if err := awsRestjson1_deserializeDocumentAuthorizationData(&sv.AuthorizationData, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8500,6 +8505,11 @@ func awsRestjson1_deserializeOpDocumentGetGatewayTargetOutput(v **GetGatewayTarg
 
 	for key, value := range shape {
 		switch key {
+		case "authorizationData":
+			if err := awsRestjson1_deserializeDocumentAuthorizationData(&sv.AuthorizationData, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16261,6 +16271,11 @@ func awsRestjson1_deserializeOpDocumentUpdateGatewayTargetOutput(v **UpdateGatew
 
 	for key, value := range shape {
 		switch key {
+		case "authorizationData":
+			if err := awsRestjson1_deserializeDocumentAuthorizationData(&sv.AuthorizationData, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19345,6 +19360,46 @@ func awsRestjson1_deserializeDocumentAtlassianOauth2ProviderConfigOutput(v **typ
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAuthorizationData(v *types.AuthorizationData, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.AuthorizationData
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "oauth2":
+			var mv types.OAuth2AuthorizationData
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentOAuth2AuthorizationData(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AuthorizationDataMemberOauth2{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -22900,6 +22955,11 @@ func awsRestjson1_deserializeDocumentGatewayTarget(v **types.GatewayTarget, valu
 
 	for key, value := range shape {
 		switch key {
+		case "authorizationData":
+			if err := awsRestjson1_deserializeDocumentAuthorizationData(&sv.AuthorizationData, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24199,6 +24259,11 @@ func awsRestjson1_deserializeDocumentMcpServerTargetConfiguration(v **types.McpS
 				sv.Endpoint = ptr.String(jtv)
 			}
 
+		case "mcpToolSchema":
+			if err := awsRestjson1_deserializeDocumentMcpToolSchemaConfiguration(&sv.McpToolSchema, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -24308,6 +24373,58 @@ loop:
 				return err
 			}
 			uv = &types.McpTargetConfigurationMemberSmithyModel{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMcpToolSchemaConfiguration(v *types.McpToolSchemaConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.McpToolSchemaConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "inlinePayload":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InlinePayload to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.McpToolSchemaConfigurationMemberInlinePayload{Value: mv}
+			break loop
+
+		case "s3":
+			var mv types.S3Configuration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentS3Configuration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.McpToolSchemaConfigurationMemberS3{Value: mv}
 			break loop
 
 		default:
@@ -25125,6 +25242,55 @@ func awsRestjson1_deserializeDocumentNumericalScaleDefinitions(v *[]types.Numeri
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOAuth2AuthorizationData(v **types.OAuth2AuthorizationData, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OAuth2AuthorizationData
+	if *v == nil {
+		sv = &types.OAuth2AuthorizationData{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "authorizationUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AuthorizationUrl = ptr.String(jtv)
+			}
+
+		case "userId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.UserId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

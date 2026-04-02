@@ -7721,6 +7721,11 @@ func awsRestjson1_deserializeOpDocumentGetQueueOutput(v **GetQueueOutput, value 
 				sv.RoleArn = ptr.String(jtv)
 			}
 
+		case "schedulingConfiguration":
+			if err := awsRestjson1_deserializeDocumentSchedulingConfiguration(&sv.SchedulingConfiguration, value); err != nil {
+				return err
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24917,6 +24922,81 @@ func awsRestjson1_deserializeDocumentPosixUser(v **types.PosixUser, value interf
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPriorityBalancedSchedulingConfiguration(v **types.PriorityBalancedSchedulingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PriorityBalancedSchedulingConfiguration
+	if *v == nil {
+		sv = &types.PriorityBalancedSchedulingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "renderingTaskBuffer":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SchedulingRenderingTaskBuffer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RenderingTaskBuffer = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPriorityFifoSchedulingConfiguration(v **types.PriorityFifoSchedulingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PriorityFifoSchedulingConfiguration
+	if *v == nil {
+		sv = &types.PriorityFifoSchedulingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentQueueEnvironmentSummaries(v *[]types.QueueEnvironmentSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -25780,6 +25860,208 @@ func awsRestjson1_deserializeDocumentResponseBudgetActionList(v *[]types.Respons
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSchedulingConfiguration(v *types.SchedulingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.SchedulingConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "priorityBalanced":
+			var mv types.PriorityBalancedSchedulingConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentPriorityBalancedSchedulingConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.SchedulingConfigurationMemberPriorityBalanced{Value: mv}
+			break loop
+
+		case "priorityFifo":
+			var mv types.PriorityFifoSchedulingConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentPriorityFifoSchedulingConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.SchedulingConfigurationMemberPriorityFifo{Value: mv}
+			break loop
+
+		case "weightedBalanced":
+			var mv types.WeightedBalancedSchedulingConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentWeightedBalancedSchedulingConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.SchedulingConfigurationMemberWeightedBalanced{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSchedulingMaxPriorityOverride(v *types.SchedulingMaxPriorityOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.SchedulingMaxPriorityOverride
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "alwaysScheduleFirst":
+			var mv types.SchedulingMaxPriorityOverrideAlwaysScheduleFirst
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentSchedulingMaxPriorityOverrideAlwaysScheduleFirst(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.SchedulingMaxPriorityOverrideMemberAlwaysScheduleFirst{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSchedulingMaxPriorityOverrideAlwaysScheduleFirst(v **types.SchedulingMaxPriorityOverrideAlwaysScheduleFirst, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SchedulingMaxPriorityOverrideAlwaysScheduleFirst
+	if *v == nil {
+		sv = &types.SchedulingMaxPriorityOverrideAlwaysScheduleFirst{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSchedulingMinPriorityOverride(v *types.SchedulingMinPriorityOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.SchedulingMinPriorityOverride
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "alwaysScheduleLast":
+			var mv types.SchedulingMinPriorityOverrideAlwaysScheduleLast
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentSchedulingMinPriorityOverrideAlwaysScheduleLast(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.SchedulingMinPriorityOverrideMemberAlwaysScheduleLast{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSchedulingMinPriorityOverrideAlwaysScheduleLast(v **types.SchedulingMinPriorityOverrideAlwaysScheduleLast, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SchedulingMinPriorityOverrideAlwaysScheduleLast
+	if *v == nil {
+		sv = &types.SchedulingMinPriorityOverrideAlwaysScheduleLast{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -29587,6 +29869,196 @@ func awsRestjson1_deserializeDocumentVpcResourceConfigurationArns(v *[]string, v
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWeightedBalancedSchedulingConfiguration(v **types.WeightedBalancedSchedulingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WeightedBalancedSchedulingConfiguration
+	if *v == nil {
+		sv = &types.WeightedBalancedSchedulingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorWeight":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ErrorWeight = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.ErrorWeight = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected SchedulingErrorWeight to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "maxPriorityOverride":
+			if err := awsRestjson1_deserializeDocumentSchedulingMaxPriorityOverride(&sv.MaxPriorityOverride, value); err != nil {
+				return err
+			}
+
+		case "minPriorityOverride":
+			if err := awsRestjson1_deserializeDocumentSchedulingMinPriorityOverride(&sv.MinPriorityOverride, value); err != nil {
+				return err
+			}
+
+		case "priorityWeight":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.PriorityWeight = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.PriorityWeight = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected SchedulingPriorityWeight to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "renderingTaskBuffer":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SchedulingRenderingTaskBuffer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RenderingTaskBuffer = ptr.Int32(int32(i64))
+			}
+
+		case "renderingTaskWeight":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.RenderingTaskWeight = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.RenderingTaskWeight = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected SchedulingRenderingTaskWeight to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "submissionTimeWeight":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.SubmissionTimeWeight = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.SubmissionTimeWeight = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected SchedulingSubmissionTimeWeight to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

@@ -308,6 +308,25 @@ type AtlassianOauth2ProviderConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the authorization data that is returned when a gateway target requires
+// user authorization through an authorization code grant type.
+//
+// The following types satisfy this interface:
+//
+//	AuthorizationDataMemberOauth2
+type AuthorizationData interface {
+	isAuthorizationData()
+}
+
+// OAuth2 authorization data for the gateway target.
+type AuthorizationDataMemberOauth2 struct {
+	Value OAuth2AuthorizationData
+
+	noSmithyDocumentSerde
+}
+
+func (*AuthorizationDataMemberOauth2) isAuthorizationData() {}
+
 // Represents inbound authorization configuration options used to authenticate
 // incoming requests.
 //
@@ -1969,6 +1988,11 @@ type GatewayTarget struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// OAuth2 authorization data for the gateway target. This data is returned when a
+	// target is configured with a credential provider with authorization code grant
+	// type and requires user federation.
+	AuthorizationData AuthorizationData
+
 	// The description for the gateway target.
 	Description *string
 
@@ -2441,6 +2465,12 @@ type McpServerTargetConfiguration struct {
 	// This member is required.
 	Endpoint *string
 
+	// The tool schema configuration for the MCP server target. Supported only when
+	// the credential provider is configured with an authorization code grant type.
+	// Dynamic tool discovery/synchronization will be disabled when target is
+	// configured with mcpToolSchema.
+	McpToolSchema McpToolSchemaConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -2506,6 +2536,36 @@ type McpTargetConfigurationMemberSmithyModel struct {
 }
 
 func (*McpTargetConfigurationMemberSmithyModel) isMcpTargetConfiguration() {}
+
+// The MCP tool schema configuration for an MCP server target. The tool schema
+// must be aligned with the MCP specification.
+//
+// The following types satisfy this interface:
+//
+//	McpToolSchemaConfigurationMemberInlinePayload
+//	McpToolSchemaConfigurationMemberS3
+type McpToolSchemaConfiguration interface {
+	isMcpToolSchemaConfiguration()
+}
+
+// The inline payload containing the MCP tool schema definition.
+type McpToolSchemaConfigurationMemberInlinePayload struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*McpToolSchemaConfigurationMemberInlinePayload) isMcpToolSchemaConfiguration() {}
+
+// The Amazon S3 location of the tool schema. This location contains the schema
+// definition file.
+type McpToolSchemaConfigurationMemberS3 struct {
+	Value S3Configuration
+
+	noSmithyDocumentSerde
+}
+
+func (*McpToolSchemaConfigurationMemberS3) isMcpToolSchemaConfiguration() {}
 
 // Contains information about a memory resource.
 type Memory struct {
@@ -2956,6 +3016,23 @@ type NumericalScaleDefinition struct {
 	//
 	// This member is required.
 	Value *float64
+
+	noSmithyDocumentSerde
+}
+
+// OAuth2-specific authorization data, including the authorization URL and user
+// identifier for the authorization session.
+type OAuth2AuthorizationData struct {
+
+	// The URL to initiate the authorization process. This URL is provided when the
+	// OAuth2 access token requires user authorization.
+	//
+	// This member is required.
+	AuthorizationUrl *string
+
+	// The user identifier associated with the OAuth2 authorization session that is
+	// defined by AgentCore Gateway.
+	UserId *string
 
 	noSmithyDocumentSerde
 }
@@ -4754,6 +4831,7 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isAgentRuntimeArtifact()                  {}
 func (*UnknownUnionMember) isApiSchemaConfiguration()                {}
+func (*UnknownUnionMember) isAuthorizationData()                     {}
 func (*UnknownUnionMember) isAuthorizerConfiguration()               {}
 func (*UnknownUnionMember) isCertificateLocation()                   {}
 func (*UnknownUnionMember) isClaimMatchValueType()                   {}
@@ -4779,6 +4857,7 @@ func (*UnknownUnionMember) isFilterValue()                           {}
 func (*UnknownUnionMember) isGatewayProtocolConfiguration()          {}
 func (*UnknownUnionMember) isInterceptorConfiguration()              {}
 func (*UnknownUnionMember) isMcpTargetConfiguration()                {}
+func (*UnknownUnionMember) isMcpToolSchemaConfiguration()            {}
 func (*UnknownUnionMember) isMemoryStrategyInput()                   {}
 func (*UnknownUnionMember) isModifyConsolidationConfiguration()      {}
 func (*UnknownUnionMember) isModifyExtractionConfiguration()         {}

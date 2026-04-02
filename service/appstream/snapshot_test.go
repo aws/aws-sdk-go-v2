@@ -818,6 +818,18 @@ func TestCheckSnapshot_DisassociateSoftwareFromImageBuilder(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DrainSessionInstance(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DrainSessionInstance(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DrainSessionInstance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_EnableUser(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableUser(context.Background(), nil, func(o *Options) {
@@ -1866,6 +1878,18 @@ func TestUpdateSnapshot_DisassociateSoftwareFromImageBuilder(t *testing.T) {
 	_, err := svc.DisassociateSoftwareFromImageBuilder(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisassociateSoftwareFromImageBuilder")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DrainSessionInstance(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DrainSessionInstance(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DrainSessionInstance")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

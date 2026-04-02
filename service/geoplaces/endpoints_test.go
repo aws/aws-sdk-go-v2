@@ -105,7 +105,7 @@ func TestEndpointCase3(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://places.geo-fips.us-east-1.api.aws/v2")
+	uri, _ := url.Parse("https://places.geo-fips.us-east-1.api.aws")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,
@@ -142,7 +142,7 @@ func TestEndpointCase4(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://places.geo-fips.us-east-1.amazonaws.com/v2")
+	uri, _ := url.Parse("https://places.geo-fips.us-east-1.amazonaws.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,
@@ -179,7 +179,7 @@ func TestEndpointCase5(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://places.geo.us-east-1.api.aws/v2")
+	uri, _ := url.Parse("https://places.geo.us-east-1.api.aws")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,
@@ -216,7 +216,7 @@ func TestEndpointCase6(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://places.geo.us-east-1.amazonaws.com/v2")
+	uri, _ := url.Parse("https://places.geo.us-east-1.amazonaws.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,
@@ -771,7 +771,7 @@ func TestEndpointCase21(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://places.geo-fips.us-gov-west-1.api.aws/v2")
+	uri, _ := url.Parse("https://places.geo-fips.us-gov-west-1.api.aws")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,
@@ -808,7 +808,7 @@ func TestEndpointCase22(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://places.geo-fips.us-gov-west-1.amazonaws.com/v2")
+	uri, _ := url.Parse("https://places.geo-fips.us-gov-west-1.amazonaws.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,
@@ -845,7 +845,7 @@ func TestEndpointCase23(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://places.geo.us-gov-west-1.api.aws/v2")
+	uri, _ := url.Parse("https://places.geo.us-gov-west-1.api.aws")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,
@@ -882,7 +882,7 @@ func TestEndpointCase24(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://places.geo.us-gov-west-1.amazonaws.com/v2")
+	uri, _ := url.Parse("https://places.geo.us-gov-west-1.amazonaws.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,

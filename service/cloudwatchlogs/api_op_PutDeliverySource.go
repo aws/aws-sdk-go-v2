@@ -91,6 +91,8 @@ type PutDeliverySourceInput struct {
 	//
 	//   - For CloudFront, the valid value is ACCESS_LOGS .
 	//
+	//   - For DevOps Agent, the valid value is APPLICATION_LOGS .
+	//
 	//   - For Amazon CodeWhisperer, the valid value is EVENT_LOGS .
 	//
 	//   - For Elemental MediaPackage, the valid values are EGRESS_ACCESS_LOGS and

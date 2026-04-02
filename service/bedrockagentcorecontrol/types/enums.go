@@ -1114,6 +1114,9 @@ const (
 	TargetStatusFailed                  TargetStatus = "FAILED"
 	TargetStatusSynchronizing           TargetStatus = "SYNCHRONIZING"
 	TargetStatusSynchronizeUnsuccessful TargetStatus = "SYNCHRONIZE_UNSUCCESSFUL"
+	TargetStatusCreatePendingAuth       TargetStatus = "CREATE_PENDING_AUTH"
+	TargetStatusUpdatePendingAuth       TargetStatus = "UPDATE_PENDING_AUTH"
+	TargetStatusSynchronizePendingAuth  TargetStatus = "SYNCHRONIZE_PENDING_AUTH"
 )
 
 // Values returns all known values for TargetStatus. Note that this can be
@@ -1130,6 +1133,9 @@ func (TargetStatus) Values() []TargetStatus {
 		"FAILED",
 		"SYNCHRONIZING",
 		"SYNCHRONIZE_UNSUCCESSFUL",
+		"CREATE_PENDING_AUTH",
+		"UPDATE_PENDING_AUTH",
+		"SYNCHRONIZE_PENDING_AUTH",
 	}
 }
 

@@ -15776,6 +15776,15 @@ func awsAwsjson11_deserializeDocumentCSV(v **types.CSV, value interface{}) error
 				sv.Delimiter = ptr.String(jtv)
 			}
 
+		case "destination":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DestinationField to be of type string, got %T instead", value)
+				}
+				sv.Destination = ptr.String(jtv)
+			}
+
 		case "quoteCharacter":
 			if value != nil {
 				jtv, ok := value.(string)

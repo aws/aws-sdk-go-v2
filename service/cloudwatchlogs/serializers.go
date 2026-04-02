@@ -7045,6 +7045,11 @@ func awsAwsjson11_serializeDocumentCSV(v *types.CSV, value smithyjson.Value) err
 		ok.String(*v.Delimiter)
 	}
 
+	if v.Destination != nil {
+		ok := object.Key("destination")
+		ok.String(*v.Destination)
+	}
+
 	if v.QuoteCharacter != nil {
 		ok := object.Key("quoteCharacter")
 		ok.String(*v.QuoteCharacter)

@@ -43,6 +43,9 @@ type UpdateDataAutomationProjectInput struct {
 	// Custom output configuration
 	CustomOutputConfiguration *types.CustomOutputConfiguration
 
+	// DataAutomation Library configuration
+	DataAutomationLibraryConfiguration *types.DataAutomationLibraryConfiguration
+
 	// KMS Encryption Configuration
 	EncryptionConfiguration *types.EncryptionConfiguration
 

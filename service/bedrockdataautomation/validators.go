@@ -70,6 +70,26 @@ func (m *validateOpCreateBlueprintVersion) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDataAutomationLibrary struct {
+}
+
+func (*validateOpCreateDataAutomationLibrary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataAutomationLibrary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDataAutomationLibraryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDataAutomationLibraryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDataAutomationProject struct {
 }
 
@@ -105,6 +125,26 @@ func (m *validateOpDeleteBlueprint) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteBlueprintInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDataAutomationLibrary struct {
+}
+
+func (*validateOpDeleteDataAutomationLibrary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDataAutomationLibrary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDataAutomationLibraryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDataAutomationLibraryInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -170,6 +210,66 @@ func (m *validateOpGetBlueprintOptimizationStatus) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataAutomationLibraryEntity struct {
+}
+
+func (*validateOpGetDataAutomationLibraryEntity) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataAutomationLibraryEntity) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataAutomationLibraryEntityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataAutomationLibraryEntityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDataAutomationLibraryIngestionJob struct {
+}
+
+func (*validateOpGetDataAutomationLibraryIngestionJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataAutomationLibraryIngestionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataAutomationLibraryIngestionJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataAutomationLibraryIngestionJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDataAutomationLibrary struct {
+}
+
+func (*validateOpGetDataAutomationLibrary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataAutomationLibrary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataAutomationLibraryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataAutomationLibraryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDataAutomationProject struct {
 }
 
@@ -210,6 +310,26 @@ func (m *validateOpInvokeBlueprintOptimizationAsync) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpInvokeDataAutomationLibraryIngestionJob struct {
+}
+
+func (*validateOpInvokeDataAutomationLibraryIngestionJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInvokeDataAutomationLibraryIngestionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InvokeDataAutomationLibraryIngestionJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInvokeDataAutomationLibraryIngestionJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListBlueprints struct {
 }
 
@@ -225,6 +345,66 @@ func (m *validateOpListBlueprints) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListBlueprintsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDataAutomationLibraries struct {
+}
+
+func (*validateOpListDataAutomationLibraries) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataAutomationLibraries) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataAutomationLibrariesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataAutomationLibrariesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDataAutomationLibraryEntities struct {
+}
+
+func (*validateOpListDataAutomationLibraryEntities) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataAutomationLibraryEntities) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataAutomationLibraryEntitiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataAutomationLibraryEntitiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDataAutomationLibraryIngestionJobs struct {
+}
+
+func (*validateOpListDataAutomationLibraryIngestionJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataAutomationLibraryIngestionJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataAutomationLibraryIngestionJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataAutomationLibraryIngestionJobsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -330,6 +510,26 @@ func (m *validateOpUpdateBlueprint) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDataAutomationLibrary struct {
+}
+
+func (*validateOpUpdateDataAutomationLibrary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDataAutomationLibrary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDataAutomationLibraryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDataAutomationLibraryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDataAutomationProject struct {
 }
 
@@ -362,12 +562,20 @@ func addOpCreateBlueprintVersionValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateBlueprintVersion{}, middleware.After)
 }
 
+func addOpCreateDataAutomationLibraryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataAutomationLibrary{}, middleware.After)
+}
+
 func addOpCreateDataAutomationProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataAutomationProject{}, middleware.After)
 }
 
 func addOpDeleteBlueprintValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBlueprint{}, middleware.After)
+}
+
+func addOpDeleteDataAutomationLibraryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataAutomationLibrary{}, middleware.After)
 }
 
 func addOpDeleteDataAutomationProjectValidationMiddleware(stack *middleware.Stack) error {
@@ -382,6 +590,18 @@ func addOpGetBlueprintOptimizationStatusValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpGetBlueprintOptimizationStatus{}, middleware.After)
 }
 
+func addOpGetDataAutomationLibraryEntityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataAutomationLibraryEntity{}, middleware.After)
+}
+
+func addOpGetDataAutomationLibraryIngestionJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataAutomationLibraryIngestionJob{}, middleware.After)
+}
+
+func addOpGetDataAutomationLibraryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataAutomationLibrary{}, middleware.After)
+}
+
 func addOpGetDataAutomationProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataAutomationProject{}, middleware.After)
 }
@@ -390,8 +610,24 @@ func addOpInvokeBlueprintOptimizationAsyncValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpInvokeBlueprintOptimizationAsync{}, middleware.After)
 }
 
+func addOpInvokeDataAutomationLibraryIngestionJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInvokeDataAutomationLibraryIngestionJob{}, middleware.After)
+}
+
 func addOpListBlueprintsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListBlueprints{}, middleware.After)
+}
+
+func addOpListDataAutomationLibrariesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataAutomationLibraries{}, middleware.After)
+}
+
+func addOpListDataAutomationLibraryEntitiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataAutomationLibraryEntities{}, middleware.After)
+}
+
+func addOpListDataAutomationLibraryIngestionJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataAutomationLibraryIngestionJobs{}, middleware.After)
 }
 
 func addOpListDataAutomationProjectsValidationMiddleware(stack *middleware.Stack) error {
@@ -412,6 +648,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateBlueprintValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateBlueprint{}, middleware.After)
+}
+
+func addOpUpdateDataAutomationLibraryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDataAutomationLibrary{}, middleware.After)
 }
 
 func addOpUpdateDataAutomationProjectValidationMiddleware(stack *middleware.Stack) error {
@@ -684,6 +924,70 @@ func validateCustomOutputConfiguration(v *types.CustomOutputConfiguration) error
 	}
 }
 
+func validateDataAutomationLibraryConfiguration(v *types.DataAutomationLibraryConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataAutomationLibraryConfiguration"}
+	if v.Libraries != nil {
+		if err := validateDataAutomationLibraryItems(v.Libraries); err != nil {
+			invalidParams.AddNested("Libraries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataAutomationLibraryFilter(v *types.DataAutomationLibraryFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataAutomationLibraryFilter"}
+	if v.LibraryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LibraryArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataAutomationLibraryItem(v *types.DataAutomationLibraryItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataAutomationLibraryItem"}
+	if v.LibraryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LibraryArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataAutomationLibraryItems(v []types.DataAutomationLibraryItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataAutomationLibraryItems"}
+	for i := range v {
+		if err := validateDataAutomationLibraryItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataAutomationProjectFilter(v *types.DataAutomationProjectFilter) error {
 	if v == nil {
 		return nil
@@ -691,6 +995,21 @@ func validateDataAutomationProjectFilter(v *types.DataAutomationProjectFilter) e
 	invalidParams := smithy.InvalidParamsError{Context: "DataAutomationProjectFilter"}
 	if v.ProjectArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeleteEntitiesInfo(v *types.DeleteEntitiesInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEntitiesInfo"}
+	if v.EntityIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -847,6 +1166,21 @@ func validateEncryptionConfiguration(v *types.EncryptionConfiguration) error {
 	}
 }
 
+func validateEventBridgeConfiguration(v *types.EventBridgeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventBridgeConfiguration"}
+	if v.EventBridgeEnabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventBridgeEnabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateImageBoundingBox(v *types.ImageBoundingBox) error {
 	if v == nil {
 		return nil
@@ -957,6 +1291,86 @@ func validateImageStandardOutputConfiguration(v *types.ImageStandardOutputConfig
 	}
 }
 
+func validateInlinePayload(v types.InlinePayload) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InlinePayload"}
+	switch uv := v.(type) {
+	case *types.InlinePayloadMemberDeleteEntitiesInfo:
+		if err := validateDeleteEntitiesInfo(&uv.Value); err != nil {
+			invalidParams.AddNested("[deleteEntitiesInfo]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.InlinePayloadMemberUpsertEntitiesInfo:
+		if err := validateUpsertEntitiesInfo(uv.Value); err != nil {
+			invalidParams.AddNested("[upsertEntitiesInfo]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInputConfiguration(v *types.InputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InputConfiguration"}
+	if v.S3Object != nil {
+		if err := validateS3Object(v.S3Object); err != nil {
+			invalidParams.AddNested("S3Object", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InlinePayload != nil {
+		if err := validateInlinePayload(v.InlinePayload); err != nil {
+			invalidParams.AddNested("InlinePayload", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotificationConfiguration(v *types.NotificationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotificationConfiguration"}
+	if v.EventBridgeConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventBridgeConfiguration"))
+	} else if v.EventBridgeConfiguration != nil {
+		if err := validateEventBridgeConfiguration(v.EventBridgeConfiguration); err != nil {
+			invalidParams.AddNested("EventBridgeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutputConfiguration(v *types.OutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutputConfiguration"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOverrideConfiguration(v *types.OverrideConfiguration) error {
 	if v == nil {
 		return nil
@@ -980,6 +1394,38 @@ func validateOverrideConfiguration(v *types.OverrideConfiguration) error {
 	if v.Audio != nil {
 		if err := validateAudioOverrideConfiguration(v.Audio); err != nil {
 			invalidParams.AddNested("Audio", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePhrase(v *types.Phrase) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Phrase"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePhraseList(v []types.Phrase) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PhraseList"}
+	for i := range v {
+		if err := validatePhrase(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1123,6 +1569,42 @@ func validateTranscriptConfiguration(v *types.TranscriptConfiguration) error {
 	}
 }
 
+func validateUpsertEntitiesInfo(v []types.UpsertEntityInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpsertEntitiesInfo"}
+	for i := range v {
+		if err := validateUpsertEntityInfo(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpsertEntityInfo(v types.UpsertEntityInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpsertEntityInfo"}
+	switch uv := v.(type) {
+	case *types.UpsertEntityInfoMemberVocabulary:
+		if err := validateVocabularyEntityInfo(&uv.Value); err != nil {
+			invalidParams.AddNested("[vocabulary]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVideoBoundingBox(v *types.VideoBoundingBox) error {
 	if v == nil {
 		return nil
@@ -1233,6 +1715,28 @@ func validateVideoStandardOutputConfiguration(v *types.VideoStandardOutputConfig
 	}
 }
 
+func validateVocabularyEntityInfo(v *types.VocabularyEntityInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VocabularyEntityInfo"}
+	if len(v.Language) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Language"))
+	}
+	if v.Phrases == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Phrases"))
+	} else if v.Phrases != nil {
+		if err := validatePhraseList(v.Phrases); err != nil {
+			invalidParams.AddNested("Phrases", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCopyBlueprintStageInput(v *CopyBlueprintStageInput) error {
 	if v == nil {
 		return nil
@@ -1300,6 +1804,31 @@ func validateOpCreateBlueprintVersionInput(v *CreateBlueprintVersionInput) error
 	}
 }
 
+func validateOpCreateDataAutomationLibraryInput(v *CreateDataAutomationLibraryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataAutomationLibraryInput"}
+	if v.LibraryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LibraryName"))
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDataAutomationProjectInput(v *CreateDataAutomationProjectInput) error {
 	if v == nil {
 		return nil
@@ -1323,6 +1852,11 @@ func validateOpCreateDataAutomationProjectInput(v *CreateDataAutomationProjectIn
 	if v.OverrideConfiguration != nil {
 		if err := validateOverrideConfiguration(v.OverrideConfiguration); err != nil {
 			invalidParams.AddNested("OverrideConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataAutomationLibraryConfiguration != nil {
+		if err := validateDataAutomationLibraryConfiguration(v.DataAutomationLibraryConfiguration); err != nil {
+			invalidParams.AddNested("DataAutomationLibraryConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.EncryptionConfiguration != nil {
@@ -1349,6 +1883,21 @@ func validateOpDeleteBlueprintInput(v *DeleteBlueprintInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBlueprintInput"}
 	if v.BlueprintArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BlueprintArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDataAutomationLibraryInput(v *DeleteDataAutomationLibraryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataAutomationLibraryInput"}
+	if v.LibraryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LibraryArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1394,6 +1943,60 @@ func validateOpGetBlueprintOptimizationStatusInput(v *GetBlueprintOptimizationSt
 	invalidParams := smithy.InvalidParamsError{Context: "GetBlueprintOptimizationStatusInput"}
 	if v.InvocationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InvocationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDataAutomationLibraryEntityInput(v *GetDataAutomationLibraryEntityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataAutomationLibraryEntityInput"}
+	if v.LibraryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LibraryArn"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.EntityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDataAutomationLibraryIngestionJobInput(v *GetDataAutomationLibraryIngestionJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataAutomationLibraryIngestionJobInput"}
+	if v.LibraryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LibraryArn"))
+	}
+	if v.JobArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDataAutomationLibraryInput(v *GetDataAutomationLibraryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataAutomationLibraryInput"}
+	if v.LibraryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LibraryArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1463,6 +2066,51 @@ func validateOpInvokeBlueprintOptimizationAsyncInput(v *InvokeBlueprintOptimizat
 	}
 }
 
+func validateOpInvokeDataAutomationLibraryIngestionJobInput(v *InvokeDataAutomationLibraryIngestionJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvokeDataAutomationLibraryIngestionJobInput"}
+	if v.LibraryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LibraryArn"))
+	}
+	if v.InputConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputConfiguration"))
+	} else if v.InputConfiguration != nil {
+		if err := validateInputConfiguration(v.InputConfiguration); err != nil {
+			invalidParams.AddNested("InputConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if len(v.OperationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OperationType"))
+	}
+	if v.OutputConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfiguration"))
+	} else if v.OutputConfiguration != nil {
+		if err := validateOutputConfiguration(v.OutputConfiguration); err != nil {
+			invalidParams.AddNested("OutputConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NotificationConfiguration != nil {
+		if err := validateNotificationConfiguration(v.NotificationConfiguration); err != nil {
+			invalidParams.AddNested("NotificationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListBlueprintsInput(v *ListBlueprintsInput) error {
 	if v == nil {
 		return nil
@@ -1480,6 +2128,56 @@ func validateOpListBlueprintsInput(v *ListBlueprintsInput) error {
 	}
 }
 
+func validateOpListDataAutomationLibrariesInput(v *ListDataAutomationLibrariesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataAutomationLibrariesInput"}
+	if v.ProjectFilter != nil {
+		if err := validateDataAutomationProjectFilter(v.ProjectFilter); err != nil {
+			invalidParams.AddNested("ProjectFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDataAutomationLibraryEntitiesInput(v *ListDataAutomationLibraryEntitiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataAutomationLibraryEntitiesInput"}
+	if v.LibraryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LibraryArn"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDataAutomationLibraryIngestionJobsInput(v *ListDataAutomationLibraryIngestionJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataAutomationLibraryIngestionJobsInput"}
+	if v.LibraryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LibraryArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListDataAutomationProjectsInput(v *ListDataAutomationProjectsInput) error {
 	if v == nil {
 		return nil
@@ -1488,6 +2186,11 @@ func validateOpListDataAutomationProjectsInput(v *ListDataAutomationProjectsInpu
 	if v.BlueprintFilter != nil {
 		if err := validateBlueprintFilter(v.BlueprintFilter); err != nil {
 			invalidParams.AddNested("BlueprintFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LibraryFilter != nil {
+		if err := validateDataAutomationLibraryFilter(v.LibraryFilter); err != nil {
+			invalidParams.AddNested("LibraryFilter", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1575,6 +2278,21 @@ func validateOpUpdateBlueprintInput(v *UpdateBlueprintInput) error {
 	}
 }
 
+func validateOpUpdateDataAutomationLibraryInput(v *UpdateDataAutomationLibraryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDataAutomationLibraryInput"}
+	if v.LibraryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LibraryArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateDataAutomationProjectInput(v *UpdateDataAutomationProjectInput) error {
 	if v == nil {
 		return nil
@@ -1598,6 +2316,11 @@ func validateOpUpdateDataAutomationProjectInput(v *UpdateDataAutomationProjectIn
 	if v.OverrideConfiguration != nil {
 		if err := validateOverrideConfiguration(v.OverrideConfiguration); err != nil {
 			invalidParams.AddNested("OverrideConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataAutomationLibraryConfiguration != nil {
+		if err := validateDataAutomationLibraryConfiguration(v.DataAutomationLibraryConfiguration); err != nil {
+			invalidParams.AddNested("DataAutomationLibraryConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.EncryptionConfiguration != nil {

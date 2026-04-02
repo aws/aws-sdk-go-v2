@@ -26,6 +26,11 @@ import (
 // For more information about updating a traffic distribution group, see [Update telephony traffic distribution across Amazon Web Services Regions] in the
 // Amazon Connect Administrator Guide.
 //
+// Important things to know
+//
+//   - Invoke the UpdateTrafficDistribution API in the region that should handle
+//     traffic.
+//
 // [TrafficDistributionGroup]: https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html
 // [Update telephony traffic distribution across Amazon Web Services Regions]: https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html
 func (c *Client) UpdateTrafficDistribution(ctx context.Context, params *UpdateTrafficDistributionInput, optFns ...func(*Options)) (*UpdateTrafficDistributionOutput, error) {

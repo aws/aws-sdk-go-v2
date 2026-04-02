@@ -119,6 +119,10 @@ type GetQueueOutput struct {
 	// The IAM role ARN.
 	RoleArn *string
 
+	// The scheduling configuration for the queue. This configuration determines how
+	// workers are assigned to jobs in the queue.
+	SchedulingConfiguration types.SchedulingConfiguration
+
 	// The date and time the resource was updated.
 	UpdatedAt *time.Time
 

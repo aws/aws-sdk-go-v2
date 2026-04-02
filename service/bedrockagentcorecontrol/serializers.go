@@ -9773,6 +9773,13 @@ func awsRestjson1_serializeDocumentMcpServerTargetConfiguration(v *types.McpServ
 		ok.String(*v.Endpoint)
 	}
 
+	if v.McpToolSchema != nil {
+		ok := object.Key("mcpToolSchema")
+		if err := awsRestjson1_serializeDocumentMcpToolSchemaConfiguration(v.McpToolSchema, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -9819,6 +9826,28 @@ func awsRestjson1_serializeDocumentMcpTargetConfiguration(v types.McpTargetConfi
 	case *types.McpTargetConfigurationMemberSmithyModel:
 		av := object.Key("smithyModel")
 		if err := awsRestjson1_serializeDocumentApiSchemaConfiguration(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMcpToolSchemaConfiguration(v types.McpToolSchemaConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.McpToolSchemaConfigurationMemberInlinePayload:
+		av := object.Key("inlinePayload")
+		av.String(uv.Value)
+
+	case *types.McpToolSchemaConfigurationMemberS3:
+		av := object.Key("s3")
+		if err := awsRestjson1_serializeDocumentS3Configuration(&uv.Value, av); err != nil {
 			return err
 		}
 

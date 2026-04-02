@@ -475,16 +475,19 @@ type ConsumedUsages struct {
 	noSmithyDocumentSerde
 }
 
-// The auto scaling configuration options for a customer managed fleet.
+// The auto scaling configuration settings for a customer managed fleet.
 type CustomerManagedAutoScalingConfiguration struct {
 
-	// The number of workers that can be scaled out per minute.
+	// The number of workers that can be added per minute to the fleet. The default is
+	// a service-defined value that balances efficiency with cost.
 	ScaleOutWorkersPerMinute *int32
 
-	// The number of standby workers to maintain for the fleet.
+	// The number of idle workers maintained and ready to process incoming tasks. The
+	// default is 0.
 	StandbyWorkerCount *int32
 
-	// The duration in seconds that a worker can be idle before it is scaled down.
+	// The number of seconds that a worker can remain idle before it is shut down. The
+	// default is 300 seconds (5 minutes).
 	WorkerIdleDurationSeconds *int32
 
 	noSmithyDocumentSerde
@@ -503,7 +506,7 @@ type CustomerManagedFleetConfiguration struct {
 	// This member is required.
 	WorkerCapabilities *CustomerManagedWorkerCapabilities
 
-	// The auto scaling configuration options for the customer managed fleet.
+	// The auto scaling configuration settings for the customer managed fleet.
 	AutoScalingConfiguration *CustomerManagedAutoScalingConfiguration
 
 	// The storage profile ID for the customer managed fleet.
@@ -2027,6 +2030,26 @@ type PosixUser struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for priority balanced scheduling. Workers are distributed evenly
+// across all jobs at the highest priority level.
+type PriorityBalancedSchedulingConfiguration struct {
+
+	// The rendering task buffer controls worker stickiness. A worker only switches
+	// from its current job to another job at the same priority if the other job has
+	// fewer rendering tasks by more than this buffer value. Higher values make workers
+	// stickier to their current jobs. The default value is 1 .
+	RenderingTaskBuffer *int32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for priority first-in, first-out (FIFO) scheduling. Workers are
+// assigned to the highest-priority job first. When multiple jobs share the same
+// priority, the job submitted earliest receives workers first.
+type PriorityFifoSchedulingConfiguration struct {
+	noSmithyDocumentSerde
+}
+
 // The summary of a queue environment.
 type QueueEnvironmentSummary struct {
 
@@ -2271,6 +2294,106 @@ type S3Location struct {
 	noSmithyDocumentSerde
 }
 
+// The scheduling configuration for a queue. Defines the strategy used to assign
+// workers to jobs.
+//
+// The following types satisfy this interface:
+//
+//	SchedulingConfigurationMemberPriorityBalanced
+//	SchedulingConfigurationMemberPriorityFifo
+//	SchedulingConfigurationMemberWeightedBalanced
+type SchedulingConfiguration interface {
+	isSchedulingConfiguration()
+}
+
+// Workers are distributed evenly across all jobs at the highest priority level.
+// When workers cannot be evenly divided, the extra workers are assigned to the
+// jobs submitted earliest. If a job has fewer remaining tasks than its share of
+// workers, the surplus workers are redistributed to other jobs at the same
+// priority level.
+type SchedulingConfigurationMemberPriorityBalanced struct {
+	Value PriorityBalancedSchedulingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SchedulingConfigurationMemberPriorityBalanced) isSchedulingConfiguration() {}
+
+// Workers are assigned to the highest-priority job first. When multiple jobs
+// share the same priority, the job submitted earliest receives workers first. This
+// is the default scheduling configuration for new queues.
+type SchedulingConfigurationMemberPriorityFifo struct {
+	Value PriorityFifoSchedulingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SchedulingConfigurationMemberPriorityFifo) isSchedulingConfiguration() {}
+
+// Workers are assigned to jobs based on a weighted formula that considers job
+// priority, error count, submission time, and the number of tasks currently
+// rendering. Each factor has a configurable weight that determines its influence
+// on scheduling decisions.
+type SchedulingConfigurationMemberWeightedBalanced struct {
+	Value WeightedBalancedSchedulingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SchedulingConfigurationMemberWeightedBalanced) isSchedulingConfiguration() {}
+
+// Defines the override behavior for jobs at the maximum priority (100) in
+// weighted balanced scheduling.
+//
+// The following types satisfy this interface:
+//
+//	SchedulingMaxPriorityOverrideMemberAlwaysScheduleFirst
+type SchedulingMaxPriorityOverride interface {
+	isSchedulingMaxPriorityOverride()
+}
+
+// Jobs at the maximum priority (100) are always scheduled before other jobs,
+// regardless of the weighted scheduling formula. If multiple jobs have priority
+// 100, ties are broken using the standard weighted formula.
+type SchedulingMaxPriorityOverrideMemberAlwaysScheduleFirst struct {
+	Value SchedulingMaxPriorityOverrideAlwaysScheduleFirst
+
+	noSmithyDocumentSerde
+}
+
+func (*SchedulingMaxPriorityOverrideMemberAlwaysScheduleFirst) isSchedulingMaxPriorityOverride() {}
+
+// Specifies that jobs at the maximum priority (100) are always scheduled first.
+type SchedulingMaxPriorityOverrideAlwaysScheduleFirst struct {
+	noSmithyDocumentSerde
+}
+
+// Defines the override behavior for jobs at the minimum priority (0) in weighted
+// balanced scheduling.
+//
+// The following types satisfy this interface:
+//
+//	SchedulingMinPriorityOverrideMemberAlwaysScheduleLast
+type SchedulingMinPriorityOverride interface {
+	isSchedulingMinPriorityOverride()
+}
+
+// Jobs at the minimum priority (0) are always scheduled after all other jobs,
+// regardless of the weighted scheduling formula. If multiple jobs have priority 0,
+// ties are broken using the standard weighted formula.
+type SchedulingMinPriorityOverrideMemberAlwaysScheduleLast struct {
+	Value SchedulingMinPriorityOverrideAlwaysScheduleLast
+
+	noSmithyDocumentSerde
+}
+
+func (*SchedulingMinPriorityOverrideMemberAlwaysScheduleLast) isSchedulingMinPriorityOverride() {}
+
+// Specifies that jobs at the minimum priority (0) are always scheduled last.
+type SchedulingMinPriorityOverrideAlwaysScheduleLast struct {
+	noSmithyDocumentSerde
+}
+
 // The type of search filter to apply.
 //
 // The following types satisfy this interface:
@@ -2412,16 +2535,19 @@ type SearchTermFilterExpression struct {
 	noSmithyDocumentSerde
 }
 
-// The auto scaling configuration options for a service managed EC2 fleet.
+// The auto scaling configuration settings for a service managed EC2 fleet.
 type ServiceManagedEc2AutoScalingConfiguration struct {
 
-	// The number of workers that can be scaled out per minute.
+	// The number of workers that can be added per minute to the fleet. The default is
+	// a service-defined value that balances efficiency with cost.
 	ScaleOutWorkersPerMinute *int32
 
-	// The number of standby workers to maintain for the fleet.
+	// The number of idle workers maintained and ready to process incoming tasks. The
+	// default is 0.
 	StandbyWorkerCount *int32
 
-	// The duration in seconds that a worker can be idle before it is scaled down.
+	// The number of seconds that a worker can remain idle before it is shut down. The
+	// default is 300 seconds (5 minutes).
 	WorkerIdleDurationSeconds *int32
 
 	noSmithyDocumentSerde
@@ -2440,7 +2566,7 @@ type ServiceManagedEc2FleetConfiguration struct {
 	// This member is required.
 	InstanceMarketOptions *ServiceManagedEc2InstanceMarketOptions
 
-	// The auto scaling configuration options for the service managed EC2 fleet.
+	// The auto scaling configuration settings for the service managed EC2 fleet.
 	AutoScalingConfiguration *ServiceManagedEc2AutoScalingConfiguration
 
 	// The storage profile ID for the service managed EC2 fleet.
@@ -3548,6 +3674,59 @@ type VpcConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for weighted balanced scheduling. Workers are assigned to jobs
+// based on a weighted formula:
+//
+//	weight = (priority * priorityWeight) + (errors * errorWeight) + ((currentTime -
+//	submissionTime) * submissionTimeWeight) + ((renderingTasks -
+//	renderingTaskBuffer) * renderingTaskWeight)
+//
+// The job with the highest calculated weight is scheduled first. Workers are
+// distributed evenly amongst jobs with the same weight.
+type WeightedBalancedSchedulingConfiguration struct {
+
+	// The weight applied to the number of errors on a job. A negative value means
+	// jobs without errors are scheduled first. A value of 0 means errors are ignored.
+	// The default value is -10.0 .
+	ErrorWeight *float64
+
+	// Overrides the weighted scheduling formula for jobs at the maximum priority
+	// (100). When set, jobs with priority 100 are always scheduled first regardless of
+	// their calculated weight. When absent, maximum priority jobs use the standard
+	// weighted formula.
+	MaxPriorityOverride SchedulingMaxPriorityOverride
+
+	// Overrides the weighted scheduling formula for jobs at the minimum priority (0).
+	// When set, jobs with priority 0 are always scheduled last regardless of their
+	// calculated weight. When absent, minimum priority jobs use the standard weighted
+	// formula.
+	MinPriorityOverride SchedulingMinPriorityOverride
+
+	// The weight applied to job priority in the scheduling formula. Higher values
+	// give more influence to job priority. A value of 0 means priority is ignored.
+	// The default value is 100.0 .
+	PriorityWeight *float64
+
+	// The rendering task buffer is subtracted from the number of rendering tasks
+	// before applying the rendering task weight. This creates a stickiness effect
+	// where workers prefer to stay with their current job. Higher values make workers
+	// stickier. The default value is 1 . The buffer is only applied in the weight
+	// calculation for a job if the worker is currently assigned to that job.
+	RenderingTaskBuffer *int32
+
+	// The weight applied to the number of tasks currently rendering on a job. A
+	// negative value means jobs that are not already rendering are scheduled next. A
+	// value of 0 means the rendering state is ignored. The default value is -100.0 .
+	RenderingTaskWeight *float64
+
+	// The weight applied to job submission time. A positive value means earlier jobs
+	// are scheduled first. A value of 0 means submission time is ignored. The default
+	// value is 3.0 .
+	SubmissionTimeWeight *float64
+
+	noSmithyDocumentSerde
+}
+
 // The Windows user details.
 type WindowsUser struct {
 
@@ -3745,6 +3924,9 @@ func (*UnknownUnionMember) isGetJobEntityError()               {}
 func (*UnknownUnionMember) isJobEntity()                       {}
 func (*UnknownUnionMember) isJobEntityIdentifiersUnion()       {}
 func (*UnknownUnionMember) isJobParameter()                    {}
+func (*UnknownUnionMember) isSchedulingConfiguration()         {}
+func (*UnknownUnionMember) isSchedulingMaxPriorityOverride()   {}
+func (*UnknownUnionMember) isSchedulingMinPriorityOverride()   {}
 func (*UnknownUnionMember) isSearchFilterExpression()          {}
 func (*UnknownUnionMember) isSearchSortExpression()            {}
 func (*UnknownUnionMember) isSessionActionDefinition()         {}

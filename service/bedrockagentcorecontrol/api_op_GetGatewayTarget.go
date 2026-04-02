@@ -86,6 +86,10 @@ type GetGatewayTargetOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// OAuth2 authorization data for the gateway target. This data is returned when
+	// the target requires user authorization through an authorization code grant type.
+	AuthorizationData types.AuthorizationData
+
 	// The description of the gateway target.
 	Description *string
 

@@ -1,0 +1,8 @@
+{
+    "id": "6ba16b6e-a03e-4c95-af0c-5be40ed201fd",
+    "type": "feature",
+    "description": "Relax ToolUseId pattern to allow dots and colons",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

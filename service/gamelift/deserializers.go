@@ -19228,6 +19228,15 @@ func awsAwsjson11_deserializeDocumentGameSession(v **types.GameSession, value in
 
 	for key, value := range shape {
 		switch key {
+		case "ComputeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComputeName to be of type string, got %T instead", value)
+				}
+				sv.ComputeName = ptr.String(jtv)
+			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {

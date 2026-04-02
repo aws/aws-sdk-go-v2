@@ -1,0 +1,8 @@
+{
+    "id": "03250ee1-e538-4e41-b602-f0ab9d1a2df5",
+    "type": "feature",
+    "description": "Include CUSTOMER to evaluation target and participant role. Support Korean, Japanese and Simplified Chinese in evaluation forms.",
+    "modules": [
+        "service/connect"
+    ]
+}

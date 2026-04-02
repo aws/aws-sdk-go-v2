@@ -52,13 +52,16 @@ type SearchNearbyInput struct {
 	// must possess in order to be returned as a result.
 	Filter *types.SearchNearbyFilter
 
-	// Indicates if the results will be stored. Defaults to SingleUse , if left empty.
+	//  Indicates if the query results will be persisted in customer infrastructure.
+	// Defaults to SingleUse (not stored). Not supported in ap-southeast-1 and
+	// ap-southeast-5 regions for [GrabMaps] customers.
 	//
-	// Storing the response of an SearchNearby query is required to comply with
-	// service terms, but charged at a higher cost per request. Please review the [user agreement]and [service pricing structure]
-	// to determine the correct setting for your use case.
+	// When storing SearchNearby responses, you must set this field to Storage to
+	// comply with the terms of service. These requests will be charged at a higher
+	// rate. Please review the [user agreement]and [service pricing structure] to determine the correct setting for your use case.
 	//
 	// [service pricing structure]: https://aws.amazon.com/location/pricing/
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	// [user agreement]: https://aws.amazon.com/location/sla/
 	IntendedUse types.SearchNearbyIntendedUse
 

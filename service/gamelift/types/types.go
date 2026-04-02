@@ -2030,6 +2030,12 @@ type GameServerInstance struct {
 // [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 type GameSession struct {
 
+	// A descriptive label for the compute resource. The compute resource that is
+	// hosting the game session. For EC2 fleets, this is the EC2 instance ID. For
+	// Container fleets, each game server container group on a fleet instance is
+	// assigned a compute name. For Anywhere fleets, this is the custom compute name.
+	ComputeName *string
+
 	// A time stamp indicating when this data object was created. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057" ).
 	CreationTime *time.Time

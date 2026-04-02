@@ -1401,6 +1401,71 @@ func (m *smithyRpcv2cbor_deserializeOpGetMetricWidgetImage) HandleDeserialize(ct
 	return out, metadata, nil
 }
 
+type smithyRpcv2cbor_deserializeOpGetOTelEnrichment struct {
+}
+
+func (*smithyRpcv2cbor_deserializeOpGetOTelEnrichment) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *smithyRpcv2cbor_deserializeOpGetOTelEnrichment) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if err != nil {
+		return out, metadata, err
+	}
+
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
+	}
+
+	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf(
+				"unexpected smithy-protocol response header '%s' (HTTP status: %s)",
+				resp.Header.Get("smithy-protocol"),
+				resp.Status,
+			),
+		}
+	}
+
+	if resp.StatusCode != 200 {
+		return out, metadata, rpc2_deserializeOpErrorGetOTelEnrichment(resp)
+	}
+
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	if len(payload) == 0 {
+		out.Result = &GetOTelEnrichmentOutput{}
+		return out, metadata, nil
+	}
+
+	cv, err := smithycbor.Decode(payload)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	output, err := deserializeCBOR_GetOTelEnrichmentOutput(cv)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	out.Result = output
+
+	return out, metadata, nil
+}
+
 type smithyRpcv2cbor_deserializeOpListAlarmMuteRules struct {
 }
 
@@ -2378,6 +2443,55 @@ func (m *smithyRpcv2cbor_deserializeOpStartMetricStreams) HandleDeserialize(ctx 
 	return out, metadata, nil
 }
 
+type smithyRpcv2cbor_deserializeOpStartOTelEnrichment struct {
+}
+
+func (*smithyRpcv2cbor_deserializeOpStartOTelEnrichment) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *smithyRpcv2cbor_deserializeOpStartOTelEnrichment) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if err != nil {
+		return out, metadata, err
+	}
+
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
+	}
+
+	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf(
+				"unexpected smithy-protocol response header '%s' (HTTP status: %s)",
+				resp.Header.Get("smithy-protocol"),
+				resp.Status,
+			),
+		}
+	}
+
+	if resp.StatusCode != 200 {
+		return out, metadata, rpc2_deserializeOpErrorStartOTelEnrichment(resp)
+	}
+
+	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+		return out, metadata, fmt.Errorf("discard response body: %w", err)
+	}
+
+	out.Result = &StartOTelEnrichmentOutput{}
+
+	return out, metadata, nil
+}
+
 type smithyRpcv2cbor_deserializeOpStopMetricStreams struct {
 }
 
@@ -2423,6 +2537,55 @@ func (m *smithyRpcv2cbor_deserializeOpStopMetricStreams) HandleDeserialize(ctx c
 	}
 
 	out.Result = &StopMetricStreamsOutput{}
+
+	return out, metadata, nil
+}
+
+type smithyRpcv2cbor_deserializeOpStopOTelEnrichment struct {
+}
+
+func (*smithyRpcv2cbor_deserializeOpStopOTelEnrichment) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *smithyRpcv2cbor_deserializeOpStopOTelEnrichment) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if err != nil {
+		return out, metadata, err
+	}
+
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
+	}
+
+	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf(
+				"unexpected smithy-protocol response header '%s' (HTTP status: %s)",
+				resp.Header.Get("smithy-protocol"),
+				resp.Status,
+			),
+		}
+	}
+
+	if resp.StatusCode != 200 {
+		return out, metadata, rpc2_deserializeOpErrorStopOTelEnrichment(resp)
+	}
+
+	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+		return out, metadata, fmt.Errorf("discard response body: %w", err)
+	}
+
+	out.Result = &StopOTelEnrichmentOutput{}
 
 	return out, metadata, nil
 }
@@ -2800,6 +2963,50 @@ func deserializeCBOR_AlarmMuteRuleSummary(v smithycbor.Value) (*types.AlarmMuteR
 				return nil, err
 			}
 			ds.LastUpdatedTimestamp = ptr.Time(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_AlarmPromQLCriteria(v smithycbor.Value) (*types.AlarmPromQLCriteria, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.AlarmPromQLCriteria{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Query" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Query = ptr.String(dv)
+		}
+
+		if key == "PendingPeriod" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.PendingPeriod = ptr.Int32(dv)
+		}
+
+		if key == "RecoveryPeriod" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.RecoveryPeriod = ptr.Int32(dv)
 		}
 	}
 	return ds, nil
@@ -3688,6 +3895,26 @@ func deserializeCBOR_Dimensions(v smithycbor.Value) ([]types.Dimension, error) {
 		dl = append(dl, *di)
 	}
 	return dl, nil
+}
+
+func deserializeCBOR_EvaluationCriteria(v smithycbor.Value) (types.EvaluationCriteria, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	for key, sv := range av {
+		if key == "PromQLCriteria" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_AlarmPromQLCriteria(sv)
+			if err != nil {
+				return nil, err
+			}
+			return &types.EvaluationCriteriaMemberPromQLCriteria{Value: *dv}, nil
+		}
+	}
+	return nil, fmt.Errorf("unrecognized variant")
 }
 
 func deserializeCBOR_EvaluationState(v smithycbor.Value) (types.EvaluationState, error) {
@@ -4702,6 +4929,26 @@ func deserializeCBOR_MetricAlarm(v smithycbor.Value) (*types.MetricAlarm, error)
 			}
 			ds.StateTransitionedTimestamp = ptr.Time(dv)
 		}
+
+		if key == "EvaluationCriteria" {
+
+			dv, err := deserializeCBOR_EvaluationCriteria(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.EvaluationCriteria = dv
+		}
+
+		if key == "EvaluationInterval" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.EvaluationInterval = ptr.Int32(dv)
+		}
 	}
 	return ds, nil
 }
@@ -5405,6 +5652,14 @@ func deserializeCBOR_MuteTargets(v smithycbor.Value) (*types.MuteTargets, error)
 		}
 	}
 	return ds, nil
+}
+
+func deserializeCBOR_OTelEnrichmentStatus(v smithycbor.Value) (types.OTelEnrichmentStatus, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return types.OTelEnrichmentStatus(""), fmt.Errorf("unexpected value type %T", v)
+	}
+	return types.OTelEnrichmentStatus(av), nil
 }
 
 func deserializeCBOR_OwningAccounts(v smithycbor.Value) ([]string, error) {
@@ -6603,6 +6858,26 @@ func deserializeCBOR_GetMetricWidgetImageOutput(v smithycbor.Value) (*GetMetricW
 				return nil, err
 			}
 			ds.MetricWidgetImage = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_GetOTelEnrichmentOutput(v smithycbor.Value) (*GetOTelEnrichmentOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &GetOTelEnrichmentOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Status" {
+
+			dv, err := deserializeCBOR_OTelEnrichmentStatus(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Status = dv
 		}
 	}
 	return ds, nil
@@ -8141,6 +8416,38 @@ func rpc2_deserializeOpErrorGetMetricWidgetImage(resp *smithyhttp.Response) erro
 	}
 }
 
+func rpc2_deserializeOpErrorGetOTelEnrichment(resp *smithyhttp.Response) error {
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("read response body: %w", err)}
+	}
+
+	typ, msg, v, err := getProtocolErrorInfo(payload)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("get error info: %w", err)}
+	}
+
+	if len(typ) == 0 {
+		typ = "UnknownError"
+	}
+	if len(msg) == 0 {
+		msg = "UnknownError"
+	}
+
+	_ = v
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
+
+	default:
+		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
+			typ = qtype
+		}
+		return &smithy.GenericAPIError{Code: typ, Message: msg}
+	}
+}
+
 func rpc2_deserializeOpErrorListAlarmMuteRules(resp *smithyhttp.Response) error {
 	payload, err := io.ReadAll(resp.Body)
 	if err != nil {
@@ -9220,6 +9527,38 @@ func rpc2_deserializeOpErrorStartMetricStreams(resp *smithyhttp.Response) error 
 	}
 }
 
+func rpc2_deserializeOpErrorStartOTelEnrichment(resp *smithyhttp.Response) error {
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("read response body: %w", err)}
+	}
+
+	typ, msg, v, err := getProtocolErrorInfo(payload)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("get error info: %w", err)}
+	}
+
+	if len(typ) == 0 {
+		typ = "UnknownError"
+	}
+	if len(msg) == 0 {
+		msg = "UnknownError"
+	}
+
+	_ = v
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
+
+	default:
+		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
+			typ = qtype
+		}
+		return &smithy.GenericAPIError{Code: typ, Message: msg}
+	}
+}
+
 func rpc2_deserializeOpErrorStopMetricStreams(resp *smithyhttp.Response) error {
 	payload, err := io.ReadAll(resp.Body)
 	if err != nil {
@@ -9279,6 +9618,38 @@ func rpc2_deserializeOpErrorStopMetricStreams(resp *smithyhttp.Response) error {
 			verr.ErrorCodeOverride = ptr.String(qtype)
 		}
 		return verr
+	default:
+		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
+			typ = qtype
+		}
+		return &smithy.GenericAPIError{Code: typ, Message: msg}
+	}
+}
+
+func rpc2_deserializeOpErrorStopOTelEnrichment(resp *smithyhttp.Response) error {
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("read response body: %w", err)}
+	}
+
+	typ, msg, v, err := getProtocolErrorInfo(payload)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("get error info: %w", err)}
+	}
+
+	if len(typ) == 0 {
+		typ = "UnknownError"
+	}
+	if len(msg) == 0 {
+		msg = "UnknownError"
+	}
+
+	_ = v
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
+
 	default:
 		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
 			typ = qtype

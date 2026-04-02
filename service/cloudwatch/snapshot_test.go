@@ -338,6 +338,18 @@ func TestCheckSnapshot_GetMetricWidgetImage(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetOTelEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOTelEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetOTelEnrichment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAlarmMuteRules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAlarmMuteRules(context.Background(), nil, func(o *Options) {
@@ -542,11 +554,35 @@ func TestCheckSnapshot_StartMetricStreams(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartOTelEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartOTelEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartOTelEnrichment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopMetricStreams(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopMetricStreams(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StopMetricStreams")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopOTelEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopOTelEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopOTelEnrichment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -853,6 +889,18 @@ func TestUpdateSnapshot_GetMetricWidgetImage(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetOTelEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOTelEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetOTelEnrichment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListAlarmMuteRules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAlarmMuteRules(context.Background(), nil, func(o *Options) {
@@ -1057,11 +1105,35 @@ func TestUpdateSnapshot_StartMetricStreams(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartOTelEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartOTelEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartOTelEnrichment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StopMetricStreams(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopMetricStreams(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StopMetricStreams")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopOTelEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopOTelEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopOTelEnrichment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

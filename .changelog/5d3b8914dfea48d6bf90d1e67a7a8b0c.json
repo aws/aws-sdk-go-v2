@@ -1,0 +1,8 @@
+{
+    "id": "5d3b8914-dfea-48d6-bf90-d1e67a7a8b0c",
+    "type": "feature",
+    "description": "Amazon GameLift Servers now includes a ComputeName field in game session API responses, making it easier to identify which compute is hosting a game session without cross-referencing IP addresses.",
+    "modules": [
+        "service/gamelift"
+    ]
+}

@@ -11,7 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The gateway targets.
+// Synchronizes the gateway targets by fetching the latest tool definitions from
+// the target endpoints.
+//
+// You cannot synchronize a target that is in a pending authorization state (
+// CREATE_PENDING_AUTH , UPDATE_PENDING_AUTH , or SYNCHRONIZE_PENDING_AUTH ). Wait
+// for the authorization to complete or fail before synchronizing.
+//
+// You cannot synchronize a target that has a static tool schema ( mcpToolSchema )
+// configured. Remove the static schema through an UpdateGatewayTarget call to
+// enable dynamic tool synchronization.
 func (c *Client) SynchronizeGatewayTargets(ctx context.Context, params *SynchronizeGatewayTargetsInput, optFns ...func(*Options)) (*SynchronizeGatewayTargetsOutput, error) {
 	if params == nil {
 		params = &SynchronizeGatewayTargetsInput{}

@@ -1,0 +1,8 @@
+{
+    "id": "b21832e4-34f3-4966-9f3b-ce6330240e14",
+    "type": "feature",
+    "description": "We are pleased to announce that our logs transformation csv processor now has a destination field, allowing you to specify under which parent node parsed columns be placed under.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

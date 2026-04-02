@@ -13,6 +13,10 @@ import (
 )
 
 // Updates an existing gateway target.
+//
+// You cannot update a target that is in a pending authorization state (
+// CREATE_PENDING_AUTH , UPDATE_PENDING_AUTH , or SYNCHRONIZE_PENDING_AUTH ). Wait
+// for the authorization to complete or fail before updating the target.
 func (c *Client) UpdateGatewayTarget(ctx context.Context, params *UpdateGatewayTargetInput, optFns ...func(*Options)) (*UpdateGatewayTargetOutput, error) {
 	if params == nil {
 		params = &UpdateGatewayTargetInput{}
@@ -110,6 +114,11 @@ type UpdateGatewayTargetOutput struct {
 	//
 	// This member is required.
 	UpdatedAt *time.Time
+
+	// OAuth2 authorization data for the updated gateway target. This data is returned
+	// when the target requires user authorization through an authorization code grant
+	// type.
+	AuthorizationData types.AuthorizationData
 
 	// The updated description of the gateway target.
 	Description *string

@@ -33,6 +33,9 @@ type ListDataAutomationProjectsInput struct {
 	// Blueprint Filter
 	BlueprintFilter *types.BlueprintFilter
 
+	// Data Automation Library Filter
+	LibraryFilter *types.DataAutomationLibraryFilter
+
 	// Max Results
 	MaxResults *int32
 

@@ -1189,6 +1189,57 @@ func (m *smithyRpcv2cbor_serializeOpGetMetricWidgetImage) HandleSerialize(ctx co
 	return next.HandleSerialize(ctx, in)
 }
 
+type smithyRpcv2cbor_serializeOpGetOTelEnrichment struct {
+}
+
+func (*smithyRpcv2cbor_serializeOpGetOTelEnrichment) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *smithyRpcv2cbor_serializeOpGetOTelEnrichment) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	input, ok := in.Parameters.(*GetOTelEnrichmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+	}
+
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/GraniteServiceVersion20100801/operation/GetOTelEnrichment"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+	req.Header.Set("X-Amzn-Query-Mode", "true")
+
+	cv, err := serializeCBOR_GetOTelEnrichmentInput(input)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	in.Request = req
+
+	endTimer()
+	span.End()
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type smithyRpcv2cbor_serializeOpListAlarmMuteRules struct {
 }
 
@@ -2056,6 +2107,57 @@ func (m *smithyRpcv2cbor_serializeOpStartMetricStreams) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type smithyRpcv2cbor_serializeOpStartOTelEnrichment struct {
+}
+
+func (*smithyRpcv2cbor_serializeOpStartOTelEnrichment) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *smithyRpcv2cbor_serializeOpStartOTelEnrichment) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	input, ok := in.Parameters.(*StartOTelEnrichmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+	}
+
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/GraniteServiceVersion20100801/operation/StartOTelEnrichment"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+	req.Header.Set("X-Amzn-Query-Mode", "true")
+
+	cv, err := serializeCBOR_StartOTelEnrichmentInput(input)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	in.Request = req
+
+	endTimer()
+	span.End()
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type smithyRpcv2cbor_serializeOpStopMetricStreams struct {
 }
 
@@ -2090,6 +2192,57 @@ func (m *smithyRpcv2cbor_serializeOpStopMetricStreams) HandleSerialize(ctx conte
 	req.Header.Set("X-Amzn-Query-Mode", "true")
 
 	cv, err := serializeCBOR_StopMetricStreamsInput(input)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	in.Request = req
+
+	endTimer()
+	span.End()
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type smithyRpcv2cbor_serializeOpStopOTelEnrichment struct {
+}
+
+func (*smithyRpcv2cbor_serializeOpStopOTelEnrichment) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *smithyRpcv2cbor_serializeOpStopOTelEnrichment) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	input, ok := in.Parameters.(*StopOTelEnrichmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+	}
+
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/GraniteServiceVersion20100801/operation/StopOTelEnrichment"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+	req.Header.Set("X-Amzn-Query-Mode", "true")
+
+	cv, err := serializeCBOR_StopOTelEnrichmentInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2236,6 +2389,32 @@ func serializeCBOR_AlarmNames(v []string) (smithycbor.Value, error) {
 		vl = append(vl, ser)
 	}
 	return vl, nil
+}
+
+func serializeCBOR_AlarmPromQLCriteria(v *types.AlarmPromQLCriteria) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.Query != nil {
+		ser, err := serializeCBOR_String(*v.Query)
+		if err != nil {
+			return nil, err
+		}
+		vm["Query"] = ser
+	}
+	if v.PendingPeriod != nil {
+		ser, err := serializeCBOR_Int32(*v.PendingPeriod)
+		if err != nil {
+			return nil, err
+		}
+		vm["PendingPeriod"] = ser
+	}
+	if v.RecoveryPeriod != nil {
+		ser, err := serializeCBOR_Int32(*v.RecoveryPeriod)
+		if err != nil {
+			return nil, err
+		}
+		vm["RecoveryPeriod"] = ser
+	}
+	return vm, nil
 }
 
 func serializeCBOR_AlarmType(v types.AlarmType) (smithycbor.Value, error) {
@@ -2473,6 +2652,21 @@ func serializeCBOR_EntityMetricDataList(v []types.EntityMetricData) (smithycbor.
 		vl = append(vl, ser)
 	}
 	return vl, nil
+}
+
+func serializeCBOR_EvaluationCriteria(v types.EvaluationCriteria) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	switch uv := v.(type) {
+	case *types.EvaluationCriteriaMemberPromQLCriteria:
+		ser, err := serializeCBOR_AlarmPromQLCriteria(&uv.Value)
+		if err != nil {
+			return nil, err
+		}
+		vm["PromQLCriteria"] = ser
+	default:
+		return nil, fmt.Errorf("unknown variant type %T", v)
+	}
+	return vm, nil
 }
 
 func serializeCBOR_ExtendedStatistics(v []string) (smithycbor.Value, error) {
@@ -3885,6 +4079,12 @@ func serializeCBOR_GetMetricWidgetImageInput(v *GetMetricWidgetImageInput) (smit
 	return vm, nil
 }
 
+func serializeCBOR_GetOTelEnrichmentInput(v *GetOTelEnrichmentInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+
+	return vm, nil
+}
+
 func serializeCBOR_ListAlarmMuteRulesInput(v *ListAlarmMuteRulesInput) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
 	if v.AlarmName != nil {
@@ -4472,6 +4672,20 @@ func serializeCBOR_PutMetricAlarmInput(v *PutMetricAlarmInput) (smithycbor.Value
 		}
 		vm["ThresholdMetricId"] = ser
 	}
+	if v.EvaluationCriteria != nil {
+		ser, err := serializeCBOR_EvaluationCriteria(v.EvaluationCriteria)
+		if err != nil {
+			return nil, err
+		}
+		vm["EvaluationCriteria"] = ser
+	}
+	if v.EvaluationInterval != nil {
+		ser, err := serializeCBOR_Int32(*v.EvaluationInterval)
+		if err != nil {
+			return nil, err
+		}
+		vm["EvaluationInterval"] = ser
+	}
 	return vm, nil
 }
 
@@ -4621,6 +4835,12 @@ func serializeCBOR_StartMetricStreamsInput(v *StartMetricStreamsInput) (smithycb
 	return vm, nil
 }
 
+func serializeCBOR_StartOTelEnrichmentInput(v *StartOTelEnrichmentInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+
+	return vm, nil
+}
+
 func serializeCBOR_StopMetricStreamsInput(v *StopMetricStreamsInput) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
 	if v.Names != nil {
@@ -4630,6 +4850,12 @@ func serializeCBOR_StopMetricStreamsInput(v *StopMetricStreamsInput) (smithycbor
 		}
 		vm["Names"] = ser
 	}
+	return vm, nil
+}
+
+func serializeCBOR_StopOTelEnrichmentInput(v *StopOTelEnrichmentInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+
 	return vm, nil
 }
 

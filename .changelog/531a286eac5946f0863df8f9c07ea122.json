@@ -1,0 +1,8 @@
+{
+    "id": "531a286e-ac59-46f0-863d-f8f9c07ea122",
+    "type": "feature",
+    "description": "AWS Deadline Cloud now supports configurable scheduling on each queue. The scheduling configuration controls how workers are distributed across jobs.",
+    "modules": [
+        "service/deadline"
+    ]
+}

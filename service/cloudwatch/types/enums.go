@@ -199,6 +199,25 @@ func (MetricStreamOutputFormat) Values() []MetricStreamOutputFormat {
 	}
 }
 
+type OTelEnrichmentStatus string
+
+// Enum values for OTelEnrichmentStatus
+const (
+	OTelEnrichmentStatusRunning OTelEnrichmentStatus = "Running"
+	OTelEnrichmentStatusStopped OTelEnrichmentStatus = "Stopped"
+)
+
+// Values returns all known values for OTelEnrichmentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OTelEnrichmentStatus) Values() []OTelEnrichmentStatus {
+	return []OTelEnrichmentStatus{
+		"Running",
+		"Stopped",
+	}
+}
+
 type RecentlyActive string
 
 // Enum values for RecentlyActive

@@ -45,8 +45,11 @@ type ReverseGeocodeInput struct {
 	// This member is required.
 	QueryPosition []float64
 
-	// A list of optional additional parameters, such as time zone that can be
-	// requested for each result.
+	//  A list of optional additional parameters, such as time zone that can be
+	// requested for each result. For [GrabMaps]customers, ap-southeast-1 and ap-southeast-5
+	// regions support only the TimeZone value.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	AdditionalFeatures []types.ReverseGeocodeAdditionalFeature
 
 	// A structure which contains a set of inclusion/exclusion properties that results
@@ -60,11 +63,12 @@ type ReverseGeocodeInput struct {
 	// is 270 degrees.
 	Heading float64
 
-	// Indicates if the results will be stored. Defaults to SingleUse , if left empty.
+	//  Indicates if the query results will be persisted in customer infrastructure.
+	// Defaults to SingleUse (not stored).
 	//
-	// Storing the response of an ReverseGeocode query is required to comply with
-	// service terms, but charged at a higher cost per request. Please review the [user agreement]and [service pricing structure]
-	// to determine the correct setting for your use case.
+	// When storing ReverseGeocode responses, you must set this field to Storage to
+	// comply with the terms of service. These requests will be charged at a higher
+	// rate. Please review the [user agreement]and [service pricing structure] to determine the correct setting for your use case.
 	//
 	// [service pricing structure]: https://aws.amazon.com/location/pricing/
 	// [user agreement]: https://aws.amazon.com/location/sla/
@@ -74,25 +78,34 @@ type ReverseGeocodeInput struct {
 	// SigV4 signature must be provided when making a request.
 	Key *string
 
-	// A list of [BCP 47] compliant language codes for the results to be rendered in. If there
-	// is no data for the result in the requested language, data will be returned in
-	// the default language for the entry.
+	//  A list of [BCP 47] compliant language codes for the results to be rendered in. If
+	// there is no data for the result in the requested language, data will be returned
+	// in the default language for the entry. For [GrabMaps]customers, ap-southeast-1 and
+	// ap-southeast-5 regions support only the following codes: en, id, km, lo, ms,
+	// my, pt, th, tl, vi, zh
 	//
 	// [BCP 47]: https://en.wikipedia.org/wiki/IETF_language_tag
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Language *string
 
-	// An optional limit for the number of results returned in a single call.
+	//  An optional limit for the number of results returned in a single call.
 	//
 	// Default value: 1
 	MaxResults *int32
 
-	// The alpha-2 or alpha-3 character code for the political view of a country. The
+	//  The alpha-2 or alpha-3 character code for the political view of a country. The
 	// political view applies to the results of the request to represent unresolved
-	// territorial claims through the point of view of the specified country.
+	// territorial claims through the point of view of the specified country. Not
+	// supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	PoliticalView *string
 
-	// The maximum distance in meters from the QueryPosition from which a result will
-	// be returned.
+	//  The maximum distance in meters from the QueryPosition from which a result will
+	// be returned. For [GrabMaps]customers, ap-southeast-1 and ap-southeast-5 regions support
+	// only up to a maximum value of 100,000.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	QueryRadius *int64
 
 	noSmithyDocumentSerde

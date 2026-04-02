@@ -1,0 +1,8 @@
+{
+    "id": "fe1f3dee-1f94-4b86-be12-55220ac99993",
+    "type": "feature",
+    "description": "Amazon WorkSpaces Applications now supports drain mode for instances in multi-session fleets. This capability allows administrators to instruct individual fleet instances to stop accepting new user sessions while allowing existing sessions to continue uninterrupted.",
+    "modules": [
+        "service/appstream"
+    ]
+}

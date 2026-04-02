@@ -401,6 +401,10 @@ type CSV struct {
 	// character as the delimiter.
 	Delimiter *string
 
+	// The path to the parent field to put transformed key value pairs under. If you
+	// omit this value, the key value pairs will be placed under the root node.
+	Destination *string
+
 	// The character used used as a text qualifier for a single column of data. If you
 	// omit this, the double quotation mark " character is used.
 	QuoteCharacter *string
@@ -2662,10 +2666,10 @@ type S3Configuration struct {
 	RoleArn *string
 
 	// The Amazon Resource Name (ARN) of the KMS encryption key. Must belong to the
-	// same AWS Region as the destination Amazon S3 bucket.
+	// same Amazon Web Services Region as the destination Amazon S3 bucket.
 	KmsKeyId *string
 
-	// The AWS accountId for the bucket owning account.
+	// The Amazon Web Services accountId for the bucket owning account.
 	OwnerAccountId *string
 
 	noSmithyDocumentSerde

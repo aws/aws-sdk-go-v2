@@ -98,6 +98,18 @@ func TestCheckSnapshot_CreateBlueprintVersion(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateDataAutomationLibrary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataAutomationLibrary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDataAutomationLibrary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDataAutomationProject(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDataAutomationProject(context.Background(), nil, func(o *Options) {
@@ -115,6 +127,18 @@ func TestCheckSnapshot_DeleteBlueprint(t *testing.T) {
 	_, err := svc.DeleteBlueprint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteBlueprint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteDataAutomationLibrary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataAutomationLibrary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDataAutomationLibrary")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -158,6 +182,42 @@ func TestCheckSnapshot_GetBlueprintOptimizationStatus(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDataAutomationLibrary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataAutomationLibrary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataAutomationLibrary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDataAutomationLibraryEntity(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataAutomationLibraryEntity(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataAutomationLibraryEntity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDataAutomationLibraryIngestionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataAutomationLibraryIngestionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataAutomationLibraryIngestionJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDataAutomationProject(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataAutomationProject(context.Background(), nil, func(o *Options) {
@@ -182,11 +242,59 @@ func TestCheckSnapshot_InvokeBlueprintOptimizationAsync(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_InvokeDataAutomationLibraryIngestionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeDataAutomationLibraryIngestionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "InvokeDataAutomationLibraryIngestionJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListBlueprints(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListBlueprints(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListBlueprints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDataAutomationLibraries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataAutomationLibraries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDataAutomationLibraries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDataAutomationLibraryEntities(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataAutomationLibraryEntities(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDataAutomationLibraryEntities")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDataAutomationLibraryIngestionJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataAutomationLibraryIngestionJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDataAutomationLibraryIngestionJobs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -254,6 +362,18 @@ func TestCheckSnapshot_UpdateBlueprint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateDataAutomationLibrary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDataAutomationLibrary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDataAutomationLibrary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateDataAutomationProject(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDataAutomationProject(context.Background(), nil, func(o *Options) {
@@ -301,6 +421,18 @@ func TestUpdateSnapshot_CreateBlueprintVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateDataAutomationLibrary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataAutomationLibrary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDataAutomationLibrary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateDataAutomationProject(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDataAutomationProject(context.Background(), nil, func(o *Options) {
@@ -318,6 +450,18 @@ func TestUpdateSnapshot_DeleteBlueprint(t *testing.T) {
 	_, err := svc.DeleteBlueprint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteBlueprint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteDataAutomationLibrary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataAutomationLibrary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDataAutomationLibrary")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -361,6 +505,42 @@ func TestUpdateSnapshot_GetBlueprintOptimizationStatus(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetDataAutomationLibrary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataAutomationLibrary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataAutomationLibrary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDataAutomationLibraryEntity(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataAutomationLibraryEntity(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataAutomationLibraryEntity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDataAutomationLibraryIngestionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataAutomationLibraryIngestionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataAutomationLibraryIngestionJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDataAutomationProject(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataAutomationProject(context.Background(), nil, func(o *Options) {
@@ -385,11 +565,59 @@ func TestUpdateSnapshot_InvokeBlueprintOptimizationAsync(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_InvokeDataAutomationLibraryIngestionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeDataAutomationLibraryIngestionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "InvokeDataAutomationLibraryIngestionJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListBlueprints(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListBlueprints(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListBlueprints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDataAutomationLibraries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataAutomationLibraries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDataAutomationLibraries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDataAutomationLibraryEntities(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataAutomationLibraryEntities(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDataAutomationLibraryEntities")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDataAutomationLibraryIngestionJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataAutomationLibraryIngestionJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDataAutomationLibraryIngestionJobs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -450,6 +678,18 @@ func TestUpdateSnapshot_UpdateBlueprint(t *testing.T) {
 	_, err := svc.UpdateBlueprint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateBlueprint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDataAutomationLibrary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDataAutomationLibrary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDataAutomationLibrary")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

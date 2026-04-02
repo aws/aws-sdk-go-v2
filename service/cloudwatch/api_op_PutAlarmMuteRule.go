@@ -36,8 +36,8 @@ import (
 // specific alarms named "WebServerCPUAlarm" and "DatabaseConnectionAlarm", you
 // would create an IAM policy with one statement granting
 // cloudwatch:PutAlarmMuteRule on the alarm mute rule resource (
-// arn:aws:cloudwatch:[REGION]:123456789012:alarm-mute:* ), and another statement
-// granting cloudwatch:PutAlarmMuteRule on the targeted alarm resources (
+// arn:aws:cloudwatch:[REGION]:123456789012:alarm-mute-rule:* ), and another
+// statement granting cloudwatch:PutAlarmMuteRule on the targeted alarm resources (
 // arn:aws:cloudwatch:[REGION]:123456789012:alarm:WebServerCPUAlarm and
 // arn:aws:cloudwatch:[REGION]:123456789012:alarm:DatabaseConnectionAlarm ).
 //

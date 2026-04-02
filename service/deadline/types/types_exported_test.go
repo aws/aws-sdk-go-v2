@@ -197,6 +197,68 @@ var _ *string
 var _ *string
 var _ *string
 
+func ExampleSchedulingConfiguration_outputUsage() {
+	var union types.SchedulingConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SchedulingConfigurationMemberPriorityBalanced:
+		_ = v.Value // Value is types.PriorityBalancedSchedulingConfiguration
+
+	case *types.SchedulingConfigurationMemberPriorityFifo:
+		_ = v.Value // Value is types.PriorityFifoSchedulingConfiguration
+
+	case *types.SchedulingConfigurationMemberWeightedBalanced:
+		_ = v.Value // Value is types.WeightedBalancedSchedulingConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PriorityBalancedSchedulingConfiguration
+var _ *types.PriorityFifoSchedulingConfiguration
+var _ *types.WeightedBalancedSchedulingConfiguration
+
+func ExampleSchedulingMaxPriorityOverride_outputUsage() {
+	var union types.SchedulingMaxPriorityOverride
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SchedulingMaxPriorityOverrideMemberAlwaysScheduleFirst:
+		_ = v.Value // Value is types.SchedulingMaxPriorityOverrideAlwaysScheduleFirst
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SchedulingMaxPriorityOverrideAlwaysScheduleFirst
+
+func ExampleSchedulingMinPriorityOverride_outputUsage() {
+	var union types.SchedulingMinPriorityOverride
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SchedulingMinPriorityOverrideMemberAlwaysScheduleLast:
+		_ = v.Value // Value is types.SchedulingMinPriorityOverrideAlwaysScheduleLast
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SchedulingMinPriorityOverrideAlwaysScheduleLast
+
 func ExampleSearchFilterExpression_outputUsage() {
 	var union types.SearchFilterExpression
 	// type switches can be used to check the union value

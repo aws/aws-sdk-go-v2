@@ -93,6 +93,28 @@ type AlarmMuteRuleSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the configuration that determines how a PromQL alarm evaluates its
+// contributors, including the query to run and the durations that define when
+// contributors transition between states.
+type AlarmPromQLCriteria struct {
+
+	// The PromQL query that the alarm evaluates. The query must return a result of
+	// vector type. Each entry in the vector result represents an alarm contributor.
+	//
+	// This member is required.
+	Query *string
+
+	// The duration, in seconds, that a contributor must be continuously breaching
+	// before it transitions to the ALARM state.
+	PendingPeriod *int32
+
+	// The duration, in seconds, that a contributor must continuously not be breaching
+	// before it transitions back to the OK state.
+	RecoveryPeriod *int32
+
+	noSmithyDocumentSerde
+}
+
 // An anomaly detection model associated with a particular CloudWatch metric,
 // statistic, or metric math expression. You can use the model to display a band of
 // expected, normal values when the metric is graphed.
@@ -402,6 +424,25 @@ type EntityMetricData struct {
 
 	noSmithyDocumentSerde
 }
+
+// The evaluation criteria for an alarm. This is a union type that currently
+// supports PromQLCriteria .
+//
+// The following types satisfy this interface:
+//
+//	EvaluationCriteriaMemberPromQLCriteria
+type EvaluationCriteria interface {
+	isEvaluationCriteria()
+}
+
+// The PromQL criteria for the alarm evaluation.
+type EvaluationCriteriaMemberPromQLCriteria struct {
+	Value AlarmPromQLCriteria
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationCriteriaMemberPromQLCriteria) isEvaluationCriteria() {}
 
 // This structure contains the definition for a Contributor Insights rule. For
 // more information about this rule, see[Using Constributor Insights to analyze high-cardinality data] in the Amazon CloudWatch User Guide.
@@ -727,6 +768,12 @@ type MetricAlarm struct {
 	// possibly changes state no matter how many data points are available.
 	EvaluateLowSampleCountPercentile *string
 
+	// The evaluation criteria for the alarm.
+	EvaluationCriteria EvaluationCriteria
+
+	// The frequency, in seconds, at which the alarm is evaluated.
+	EvaluationInterval *int32
+
 	// The number of periods over which data is compared to the specified threshold.
 	EvaluationPeriods *int32
 
@@ -804,6 +851,8 @@ type MetricAlarm struct {
 	// breaching , notBreaching , ignore , and missing . For more information, see [Configuring how CloudWatch alarms treat missing data].
 	//
 	// If this parameter is omitted, the default behavior of missing is used.
+	//
+	// This parameter is not applicable to PromQL alarms.
 	//
 	// [Configuring how CloudWatch alarms treat missing data]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
 	TreatMissingData *string
@@ -1458,3 +1507,14 @@ type Tag struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isEvaluationCriteria() {}

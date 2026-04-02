@@ -62,7 +62,9 @@ type AutocompleteInput struct {
 	// must possess in order to be returned as a result.
 	Filter *types.AutocompleteFilter
 
-	// Indicates if the results will be stored. Defaults to SingleUse , if left empty.
+	//  Indicates if the query results will be persisted in customer infrastructure.
+	// Defaults to SingleUse (not stored). Currently, Autocomplete does not support
+	// storage of results.
 	IntendedUse types.AutocompleteIntendedUse
 
 	// Optional: The API key to be used for authorization. Either an API key or valid

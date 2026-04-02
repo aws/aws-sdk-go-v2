@@ -571,6 +571,7 @@ type ContactInteractionType string
 const (
 	ContactInteractionTypeAgent     ContactInteractionType = "AGENT"
 	ContactInteractionTypeAutomated ContactInteractionType = "AUTOMATED"
+	ContactInteractionTypeCustomer  ContactInteractionType = "CUSTOMER"
 )
 
 // Values returns all known values for ContactInteractionType. Note that this can
@@ -581,6 +582,7 @@ func (ContactInteractionType) Values() []ContactInteractionType {
 	return []ContactInteractionType{
 		"AGENT",
 		"AUTOMATED",
+		"CUSTOMER",
 	}
 }
 
@@ -630,6 +632,7 @@ const (
 	ContactParticipantRoleAgent     ContactParticipantRole = "AGENT"
 	ContactParticipantRoleSystem    ContactParticipantRole = "SYSTEM"
 	ContactParticipantRoleCustomBot ContactParticipantRole = "CUSTOM_BOT"
+	ContactParticipantRoleCustomer  ContactParticipantRole = "CUSTOMER"
 )
 
 // Values returns all known values for ContactParticipantRole. Note that this can
@@ -641,6 +644,7 @@ func (ContactParticipantRole) Values() []ContactParticipantRole {
 		"AGENT",
 		"SYSTEM",
 		"CUSTOM_BOT",
+		"CUSTOMER",
 	}
 }
 
@@ -1145,6 +1149,9 @@ const (
 	EvaluationFormLanguageCodeFrFr EvaluationFormLanguageCode = "fr-FR"
 	EvaluationFormLanguageCodeItIt EvaluationFormLanguageCode = "it-IT"
 	EvaluationFormLanguageCodePtBr EvaluationFormLanguageCode = "pt-BR"
+	EvaluationFormLanguageCodeJaJp EvaluationFormLanguageCode = "ja-JP"
+	EvaluationFormLanguageCodeKoKr EvaluationFormLanguageCode = "ko-KR"
+	EvaluationFormLanguageCodeZhCn EvaluationFormLanguageCode = "zh-CN"
 )
 
 // Values returns all known values for EvaluationFormLanguageCode. Note that this
@@ -1159,6 +1166,9 @@ func (EvaluationFormLanguageCode) Values() []EvaluationFormLanguageCode {
 		"fr-FR",
 		"it-IT",
 		"pt-BR",
+		"ja-JP",
+		"ko-KR",
+		"zh-CN",
 	}
 }
 

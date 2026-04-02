@@ -455,6 +455,18 @@ type ComputeCapacityStatus struct {
 	// This only applies to multi-session fleets.
 	DesiredUserSessions *int32
 
+	// The number of active user sessions on instances in drain mode. This only
+	// applies to multi-session fleets.
+	DrainModeActiveUserSessions *int32
+
+	// The number of unused session slots on instances in drain mode that cannot be
+	// used for user session provisioning. This only applies to multi-session fleets.
+	DrainModeUnusedUserSessions *int32
+
+	// The number of instances in drain mode. This only applies to multi-session
+	// fleets.
+	Draining *int32
+
 	// The number of instances in use for streaming.
 	InUse *int32
 
@@ -1436,6 +1448,10 @@ type Session struct {
 
 	// Specifies whether a user is connected to the streaming session.
 	ConnectionState SessionConnectionState
+
+	// The drain status of the instance hosting the streaming session. This only
+	// applies to multi-session fleets.
+	InstanceDrainStatus InstanceDrainStatus
 
 	// The identifier for the instance hosting the session.
 	InstanceId *string

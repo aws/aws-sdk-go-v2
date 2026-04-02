@@ -898,6 +898,21 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func validateAlarmPromQLCriteria(v *types.AlarmPromQLCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AlarmPromQLCriteria"}
+	if v.Query == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Query"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAnomalyDetectorConfiguration(v *types.AnomalyDetectorConfiguration) error {
 	if v == nil {
 		return nil
@@ -1025,6 +1040,25 @@ func validateEntityMetricDataList(v []types.EntityMetricData) error {
 		if err := validateEntityMetricData(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvaluationCriteria(v types.EvaluationCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluationCriteria"}
+	switch uv := v.(type) {
+	case *types.EvaluationCriteriaMemberPromQLCriteria:
+		if err := validateAlarmPromQLCriteria(&uv.Value); err != nil {
+			invalidParams.AddNested("[PromQLCriteria]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1996,12 +2030,6 @@ func validateOpPutMetricAlarmInput(v *PutMetricAlarmInput) error {
 			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.EvaluationPeriods == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EvaluationPeriods"))
-	}
-	if len(v.ComparisonOperator) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
-	}
 	if v.Metrics != nil {
 		if err := validateMetricDataQueries(v.Metrics); err != nil {
 			invalidParams.AddNested("Metrics", err.(smithy.InvalidParamsError))
@@ -2010,6 +2038,11 @@ func validateOpPutMetricAlarmInput(v *PutMetricAlarmInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EvaluationCriteria != nil {
+		if err := validateEvaluationCriteria(v.EvaluationCriteria); err != nil {
+			invalidParams.AddNested("EvaluationCriteria", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

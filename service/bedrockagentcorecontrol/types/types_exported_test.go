@@ -51,6 +51,24 @@ func ExampleApiSchemaConfiguration_outputUsage() {
 var _ *types.S3Configuration
 var _ *string
 
+func ExampleAuthorizationData_outputUsage() {
+	var union types.AuthorizationData
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AuthorizationDataMemberOauth2:
+		_ = v.Value // Value is types.OAuth2AuthorizationData
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OAuth2AuthorizationData
+
 func ExampleAuthorizerConfiguration_outputUsage() {
 	var union types.AuthorizerConfiguration
 	// type switches can be used to check the union value
@@ -595,6 +613,28 @@ var _ *types.McpLambdaTargetConfiguration
 var _ *types.ApiGatewayTargetConfiguration
 var _ types.ApiSchemaConfiguration
 var _ *types.McpServerTargetConfiguration
+
+func ExampleMcpToolSchemaConfiguration_outputUsage() {
+	var union types.McpToolSchemaConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.McpToolSchemaConfigurationMemberInlinePayload:
+		_ = v.Value // Value is string
+
+	case *types.McpToolSchemaConfigurationMemberS3:
+		_ = v.Value // Value is types.S3Configuration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.S3Configuration
+var _ *string
 
 func ExampleMemoryStrategyInput_outputUsage() {
 	var union types.MemoryStrategyInput

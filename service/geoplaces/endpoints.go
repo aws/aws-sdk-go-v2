@@ -373,7 +373,6 @@ func (r *resolver) ResolveEndpoint(
 							out.WriteString(_Region)
 							out.WriteString(".")
 							out.WriteString(_PartitionResult.DnsSuffix)
-							out.WriteString("/v2")
 							return out.String()
 						}()
 
@@ -398,7 +397,6 @@ func (r *resolver) ResolveEndpoint(
 							out.WriteString(_Region)
 							out.WriteString(".")
 							out.WriteString(_PartitionResult.DualStackDnsSuffix)
-							out.WriteString("/v2")
 							return out.String()
 						}()
 
@@ -423,7 +421,6 @@ func (r *resolver) ResolveEndpoint(
 							out.WriteString(_Region)
 							out.WriteString(".")
 							out.WriteString(_PartitionResult.DnsSuffix)
-							out.WriteString("/v2")
 							return out.String()
 						}()
 
@@ -448,7 +445,6 @@ func (r *resolver) ResolveEndpoint(
 							out.WriteString(_Region)
 							out.WriteString(".")
 							out.WriteString(_PartitionResult.DualStackDnsSuffix)
-							out.WriteString("/v2")
 							return out.String()
 						}()
 
@@ -473,7 +469,6 @@ func (r *resolver) ResolveEndpoint(
 							out.WriteString(_Region)
 							out.WriteString(".")
 							out.WriteString(_PartitionResult.DnsSuffix)
-							out.WriteString("/v2")
 							return out.String()
 						}()
 
@@ -498,7 +493,6 @@ func (r *resolver) ResolveEndpoint(
 							out.WriteString(_Region)
 							out.WriteString(".")
 							out.WriteString(_PartitionResult.DualStackDnsSuffix)
-							out.WriteString("/v2")
 							return out.String()
 						}()
 
@@ -523,7 +517,6 @@ func (r *resolver) ResolveEndpoint(
 							out.WriteString(_Region)
 							out.WriteString(".")
 							out.WriteString(_PartitionResult.DnsSuffix)
-							out.WriteString("/v2")
 							return out.String()
 						}()
 
@@ -548,7 +541,6 @@ func (r *resolver) ResolveEndpoint(
 							out.WriteString(_Region)
 							out.WriteString(".")
 							out.WriteString(_PartitionResult.DualStackDnsSuffix)
-							out.WriteString("/v2")
 							return out.String()
 						}()
 

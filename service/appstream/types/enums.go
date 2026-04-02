@@ -598,6 +598,27 @@ func (ImageType) Values() []ImageType {
 	}
 }
 
+type InstanceDrainStatus string
+
+// Enum values for InstanceDrainStatus
+const (
+	InstanceDrainStatusActive        InstanceDrainStatus = "ACTIVE"
+	InstanceDrainStatusDraining      InstanceDrainStatus = "DRAINING"
+	InstanceDrainStatusNotApplicable InstanceDrainStatus = "NOT_APPLICABLE"
+)
+
+// Values returns all known values for InstanceDrainStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceDrainStatus) Values() []InstanceDrainStatus {
+	return []InstanceDrainStatus{
+		"ACTIVE",
+		"DRAINING",
+		"NOT_APPLICABLE",
+	}
+}
+
 type LatestAppstreamAgentVersion string
 
 // Enum values for LatestAppstreamAgentVersion

@@ -77,6 +77,13 @@ type CreateQueueInput struct {
 	// The IAM role ARN that workers will use while running jobs for this queue.
 	RoleArn *string
 
+	// The scheduling configuration for the queue. This configuration determines how
+	// workers are assigned to jobs in the queue.
+	//
+	// If not specified, the queue defaults to the priorityFifo scheduling
+	// configuration.
+	SchedulingConfiguration types.SchedulingConfiguration
+
 	// Each tag consists of a tag key and a tag value. Tag keys and values are both
 	// required, but tag values can be empty strings.
 	Tags map[string]string
