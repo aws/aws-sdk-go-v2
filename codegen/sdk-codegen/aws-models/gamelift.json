@@ -13770,6 +13770,12 @@
                         "smithy.api#documentation": "<p>The fleet location where the game session is running. This value might specify the\n            fleet's home Region or a remote location. Location is expressed as an Amazon Web Services Region code\n            such as <code>us-west-2</code>. </p>"
                     }
                 },
+                "ComputeName": {
+                    "target": "com.amazonaws.gamelift#ComputeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A descriptive label for the compute resource. The compute resource that is hosting the game session. For EC2 fleets, this is the EC2 instance ID. For Container fleets, each game server container group on a fleet instance is assigned a compute name. For Anywhere fleets, this is the custom compute name.</p>"
+                    }
+                },
                 "PlayerGatewayStatus": {
                     "target": "com.amazonaws.gamelift#PlayerGatewayStatus",
                     "traits": {
@@ -17085,7 +17091,7 @@
                     "min": 0,
                     "max": 16
                 },
-                "smithy.api#pattern": "^\\d+\\.[x0-9]+$"
+                "smithy.api#pattern": "^[0-9]+\\.(?:x|[0-9]+)$"
             }
         },
         "com.amazonaws.gamelift#NonBlankAndLengthConstraintString": {

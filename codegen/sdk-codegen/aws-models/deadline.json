@@ -3698,6 +3698,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.</p>"
                     }
+                },
+                "schedulingConfiguration": {
+                    "target": "com.amazonaws.deadline#SchedulingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scheduling configuration for the queue. This configuration determines how workers are assigned to jobs in the queue.</p> <p>If not specified, the queue defaults to the <code>priorityFifo</code> scheduling configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3985,25 +3991,25 @@
                 "standbyWorkerCount": {
                     "target": "com.amazonaws.deadline#MinZeroMaxInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of standby workers to maintain for the fleet.</p>"
+                        "smithy.api#documentation": "<p>The number of idle workers maintained and ready to process incoming tasks. The default is 0.</p>"
                     }
                 },
                 "workerIdleDurationSeconds": {
                     "target": "com.amazonaws.deadline#MinZeroMaxInteger",
                     "traits": {
                         "smithy.api#default": 300,
-                        "smithy.api#documentation": "<p>The duration in seconds that a worker can be idle before it is scaled down.</p>"
+                        "smithy.api#documentation": "<p>The number of seconds that a worker can remain idle before it is shut down. The default is 300 seconds (5 minutes).</p>"
                     }
                 },
                 "scaleOutWorkersPerMinute": {
                     "target": "com.amazonaws.deadline#MinOneMaxInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of workers that can be scaled out per minute.</p>"
+                        "smithy.api#documentation": "<p>The number of workers that can be added per minute to the fleet. The default is a service-defined value that balances efficiency with cost.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The auto scaling configuration options for a customer managed fleet.</p>"
+                "smithy.api#documentation": "<p>The auto scaling configuration settings for a customer managed fleet.</p>"
             }
         },
         "com.amazonaws.deadline#CustomerManagedFleetConfiguration": {
@@ -4019,7 +4025,7 @@
                 "autoScalingConfiguration": {
                     "target": "com.amazonaws.deadline#CustomerManagedAutoScalingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The auto scaling configuration options for the customer managed fleet.</p>"
+                        "smithy.api#documentation": "<p>The auto scaling configuration settings for the customer managed fleet.</p>"
                     }
                 },
                 "workerCapabilities": {
@@ -9716,6 +9722,12 @@
                     "target": "com.amazonaws.deadline#JobRunAsUser",
                     "traits": {
                         "smithy.api#documentation": "<p>The jobs in the queue ran as this specified POSIX user.</p>"
+                    }
+                },
+                "schedulingConfiguration": {
+                    "target": "com.amazonaws.deadline#SchedulingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scheduling configuration for the queue. This configuration determines how workers are assigned to jobs in the queue.</p>"
                     }
                 }
             },
@@ -16666,6 +16678,28 @@
                 }
             }
         },
+        "com.amazonaws.deadline#PriorityBalancedSchedulingConfiguration": {
+            "type": "structure",
+            "members": {
+                "renderingTaskBuffer": {
+                    "target": "com.amazonaws.deadline#SchedulingRenderingTaskBuffer",
+                    "traits": {
+                        "smithy.api#default": 1,
+                        "smithy.api#documentation": "<p>The rendering task buffer controls worker stickiness. A worker only switches from its current job to another job at the same priority if the other job has fewer rendering tasks by more than this buffer value. Higher values make workers stickier to their current jobs. The default value is <code>1</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for priority balanced scheduling. Workers are distributed evenly across all jobs at the highest priority level.</p>"
+            }
+        },
+        "com.amazonaws.deadline#PriorityFifoSchedulingConfiguration": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for priority first-in, first-out (FIFO) scheduling. Workers are assigned to the highest-priority job first. When multiple jobs share the same priority, the job submitted earliest receives workers first.</p>"
+            }
+        },
         "com.amazonaws.deadline#ProcessExitCode": {
             "type": "integer",
             "traits": {
@@ -17432,6 +17466,124 @@
                     "max": 63
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9-_/]+$"
+            }
+        },
+        "com.amazonaws.deadline#SchedulingConfiguration": {
+            "type": "union",
+            "members": {
+                "priorityFifo": {
+                    "target": "com.amazonaws.deadline#PriorityFifoSchedulingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Workers are assigned to the highest-priority job first. When multiple jobs share the same priority, the job submitted earliest receives workers first. This is the default scheduling configuration for new queues.</p>"
+                    }
+                },
+                "priorityBalanced": {
+                    "target": "com.amazonaws.deadline#PriorityBalancedSchedulingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Workers are distributed evenly across all jobs at the highest priority level. When workers cannot be evenly divided, the extra workers are assigned to the jobs submitted earliest. If a job has fewer remaining tasks than its share of workers, the surplus workers are redistributed to other jobs at the same priority level.</p>"
+                    }
+                },
+                "weightedBalanced": {
+                    "target": "com.amazonaws.deadline#WeightedBalancedSchedulingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Workers are assigned to jobs based on a weighted formula that considers job priority, error count, submission time, and the number of tasks currently rendering. Each factor has a configurable weight that determines its influence on scheduling decisions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The scheduling configuration for a queue. Defines the strategy used to assign workers to jobs.</p>"
+            }
+        },
+        "com.amazonaws.deadline#SchedulingErrorWeight": {
+            "type": "double",
+            "traits": {
+                "smithy.api#documentation": "<p>The weight applied to the number of errors on a job in the weighted balanced scheduling formula.</p>",
+                "smithy.api#range": {
+                    "min": -10000,
+                    "max": 10000
+                }
+            }
+        },
+        "com.amazonaws.deadline#SchedulingMaxPriorityOverride": {
+            "type": "union",
+            "members": {
+                "alwaysScheduleFirst": {
+                    "target": "com.amazonaws.deadline#SchedulingMaxPriorityOverrideAlwaysScheduleFirst",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Jobs at the maximum priority (100) are always scheduled before other jobs, regardless of the weighted scheduling formula. If multiple jobs have priority 100, ties are broken using the standard weighted formula.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the override behavior for jobs at the maximum priority (100) in weighted balanced scheduling.</p>"
+            }
+        },
+        "com.amazonaws.deadline#SchedulingMaxPriorityOverrideAlwaysScheduleFirst": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies that jobs at the maximum priority (100) are always scheduled first.</p>"
+            }
+        },
+        "com.amazonaws.deadline#SchedulingMinPriorityOverride": {
+            "type": "union",
+            "members": {
+                "alwaysScheduleLast": {
+                    "target": "com.amazonaws.deadline#SchedulingMinPriorityOverrideAlwaysScheduleLast",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Jobs at the minimum priority (0) are always scheduled after all other jobs, regardless of the weighted scheduling formula. If multiple jobs have priority 0, ties are broken using the standard weighted formula.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the override behavior for jobs at the minimum priority (0) in weighted balanced scheduling.</p>"
+            }
+        },
+        "com.amazonaws.deadline#SchedulingMinPriorityOverrideAlwaysScheduleLast": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies that jobs at the minimum priority (0) are always scheduled last.</p>"
+            }
+        },
+        "com.amazonaws.deadline#SchedulingPriorityWeight": {
+            "type": "double",
+            "traits": {
+                "smithy.api#documentation": "<p>The weight applied to job priority in the weighted balanced scheduling formula.</p>",
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10000
+                }
+            }
+        },
+        "com.amazonaws.deadline#SchedulingRenderingTaskBuffer": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "<p>The rendering task buffer used in balanced scheduling.</p>",
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.deadline#SchedulingRenderingTaskWeight": {
+            "type": "double",
+            "traits": {
+                "smithy.api#documentation": "<p>The weight applied to the number of rendering tasks in the weighted balanced scheduling formula.</p>",
+                "smithy.api#range": {
+                    "min": -10000,
+                    "max": 10000
+                }
+            }
+        },
+        "com.amazonaws.deadline#SchedulingSubmissionTimeWeight": {
+            "type": "double",
+            "traits": {
+                "smithy.api#documentation": "<p>The weight applied to job submission time in the weighted balanced scheduling formula.</p>",
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10000
+                }
             }
         },
         "com.amazonaws.deadline#SearchFilterExpression": {
@@ -18213,25 +18365,25 @@
                 "standbyWorkerCount": {
                     "target": "com.amazonaws.deadline#MinZeroMaxInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of standby workers to maintain for the fleet.</p>"
+                        "smithy.api#documentation": "<p>The number of idle workers maintained and ready to process incoming tasks. The default is 0.</p>"
                     }
                 },
                 "workerIdleDurationSeconds": {
                     "target": "com.amazonaws.deadline#ServiceManagedEc2WorkerIdleDurationSeconds",
                     "traits": {
                         "smithy.api#default": 300,
-                        "smithy.api#documentation": "<p>The duration in seconds that a worker can be idle before it is scaled down.</p>"
+                        "smithy.api#documentation": "<p>The number of seconds that a worker can remain idle before it is shut down. The default is 300 seconds (5 minutes).</p>"
                     }
                 },
                 "scaleOutWorkersPerMinute": {
                     "target": "com.amazonaws.deadline#MinOneMaxInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of workers that can be scaled out per minute.</p>"
+                        "smithy.api#documentation": "<p>The number of workers that can be added per minute to the fleet. The default is a service-defined value that balances efficiency with cost.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The auto scaling configuration options for a service managed EC2 fleet.</p>"
+                "smithy.api#documentation": "<p>The auto scaling configuration settings for a service managed EC2 fleet.</p>"
             }
         },
         "com.amazonaws.deadline#ServiceManagedEc2FleetConfiguration": {
@@ -18266,7 +18418,7 @@
                 "autoScalingConfiguration": {
                     "target": "com.amazonaws.deadline#ServiceManagedEc2AutoScalingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The auto scaling configuration options for the service managed EC2 fleet.</p>"
+                        "smithy.api#documentation": "<p>The auto scaling configuration settings for the service managed EC2 fleet.</p>"
                     }
                 }
             },
@@ -22081,6 +22233,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The storage profile ID to remove.</p>"
                     }
+                },
+                "schedulingConfiguration": {
+                    "target": "com.amazonaws.deadline#SchedulingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scheduling configuration for the queue. This configuration determines how workers are assigned to jobs in the queue.</p> <p>When updating the scheduling configuration, the entire configuration is replaced.</p> <p>In-progress tasks run to completion before the new scheduling configuration takes effect.</p>"
+                    }
                 }
             },
             "traits": {
@@ -23223,6 +23381,61 @@
                 "smithy.api#length": {
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.deadline#WeightedBalancedSchedulingConfiguration": {
+            "type": "structure",
+            "members": {
+                "priorityWeight": {
+                    "target": "com.amazonaws.deadline#SchedulingPriorityWeight",
+                    "traits": {
+                        "smithy.api#default": 100.0,
+                        "smithy.api#documentation": "<p>The weight applied to job priority in the scheduling formula. Higher values give more influence to job priority. A value of <code>0</code> means priority is ignored. The default value is <code>100.0</code>.</p>"
+                    }
+                },
+                "errorWeight": {
+                    "target": "com.amazonaws.deadline#SchedulingErrorWeight",
+                    "traits": {
+                        "smithy.api#default": -10.0,
+                        "smithy.api#documentation": "<p>The weight applied to the number of errors on a job. A negative value means jobs without errors are scheduled first. A value of <code>0</code> means errors are ignored. The default value is <code>-10.0</code>.</p>"
+                    }
+                },
+                "submissionTimeWeight": {
+                    "target": "com.amazonaws.deadline#SchedulingSubmissionTimeWeight",
+                    "traits": {
+                        "smithy.api#default": 3.0,
+                        "smithy.api#documentation": "<p>The weight applied to job submission time. A positive value means earlier jobs are scheduled first. A value of <code>0</code> means submission time is ignored. The default value is <code>3.0</code>.</p>"
+                    }
+                },
+                "renderingTaskWeight": {
+                    "target": "com.amazonaws.deadline#SchedulingRenderingTaskWeight",
+                    "traits": {
+                        "smithy.api#default": -100.0,
+                        "smithy.api#documentation": "<p>The weight applied to the number of tasks currently rendering on a job. A negative value means jobs that are not already rendering are scheduled next. A value of <code>0</code> means the rendering state is ignored. The default value is <code>-100.0</code>.</p>"
+                    }
+                },
+                "renderingTaskBuffer": {
+                    "target": "com.amazonaws.deadline#SchedulingRenderingTaskBuffer",
+                    "traits": {
+                        "smithy.api#default": 1,
+                        "smithy.api#documentation": "<p>The rendering task buffer is subtracted from the number of rendering tasks before applying the rendering task weight. This creates a stickiness effect where workers prefer to stay with their current job. Higher values make workers stickier. The default value is <code>1</code>. The buffer is only applied in the weight calculation for a job if the worker is currently assigned to that job.</p>"
+                    }
+                },
+                "maxPriorityOverride": {
+                    "target": "com.amazonaws.deadline#SchedulingMaxPriorityOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Overrides the weighted scheduling formula for jobs at the maximum priority (100). When set, jobs with priority 100 are always scheduled first regardless of their calculated weight. When absent, maximum priority jobs use the standard weighted formula.</p>"
+                    }
+                },
+                "minPriorityOverride": {
+                    "target": "com.amazonaws.deadline#SchedulingMinPriorityOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Overrides the weighted scheduling formula for jobs at the minimum priority (0). When set, jobs with priority 0 are always scheduled last regardless of their calculated weight. When absent, minimum priority jobs use the standard weighted formula.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for weighted balanced scheduling. Workers are assigned to jobs based on a weighted formula:</p> <p> <code>weight = (priority * priorityWeight) + (errors * errorWeight) + ((currentTime - submissionTime) * submissionTimeWeight) + ((renderingTasks - renderingTaskBuffer) * renderingTaskWeight)</code> </p> <p>The job with the highest calculated weight is scheduled first. Workers are distributed evenly amongst jobs with the same weight.</p>"
             }
         },
         "com.amazonaws.deadline#WindowsUser": {

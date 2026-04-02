@@ -9190,6 +9190,12 @@
                     "traits": {
                         "smithy.api#enumValue": "AUTOMATED"
                     }
+                },
+                "CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER"
+                    }
                 }
             }
         },
@@ -9334,6 +9340,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CUSTOM_BOT"
+                    }
+                },
+                "CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER"
                     }
                 }
             }
@@ -23885,6 +23897,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "pt-BR"
+                    }
+                },
+                "JA_JP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ja-JP"
+                    }
+                },
+                "KO_KR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ko-KR"
+                    }
+                },
+                "ZH_CN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh-CN"
                     }
                 }
             }
@@ -59790,7 +59820,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the traffic distribution for a given traffic distribution group. </p>\n         <important>\n            <p>When you shift telephony traffic, also shift agents and/or agent sign-ins to ensure they can handle the calls\n    in the other Region. If you don't shift the agents, voice calls will go to the shifted Region but there won't be any\n    agents available to receive the calls.</p>\n         </important>\n         <note>\n            <p>The <code>SignInConfig</code> distribution is available only on a \ndefault <code>TrafficDistributionGroup</code> (see the <code>IsDefault</code> parameter in the \n<a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html\">TrafficDistributionGroup</a>\n data type). If you call\n    <code>UpdateTrafficDistribution</code> with a modified <code>SignInConfig</code> and a non-default <code>TrafficDistributionGroup</code>,\n    an <code>InvalidRequestException</code> is returned.</p>\n         </note>\n         <p>For more information about updating a traffic distribution group, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html\">Update telephony traffic distribution\n    across Amazon Web Services Regions\n   </a> in the <i>Amazon Connect Administrator Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Updates the traffic distribution for a given traffic distribution group. </p>\n         <important>\n            <p>When you shift telephony traffic, also shift agents and/or agent sign-ins to ensure they can handle the calls\n    in the other Region. If you don't shift the agents, voice calls will go to the shifted Region but there won't be any\n    agents available to receive the calls.</p>\n         </important>\n         <note>\n            <p>The <code>SignInConfig</code> distribution is available only on a \ndefault <code>TrafficDistributionGroup</code> (see the <code>IsDefault</code> parameter in the \n<a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html\">TrafficDistributionGroup</a>\n data type). If you call\n    <code>UpdateTrafficDistribution</code> with a modified <code>SignInConfig</code> and a non-default <code>TrafficDistributionGroup</code>,\n    an <code>InvalidRequestException</code> is returned.</p>\n         </note>\n         <p>For more information about updating a traffic distribution group, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html\">Update telephony traffic distribution\n    across Amazon Web Services Regions\n   </a> in the <i>Amazon Connect Administrator Guide</i>. </p>\n         <p>\n            <b>Important things to know</b>\n         </p>\n         <ul>\n            <li>\n               <p>Invoke the UpdateTrafficDistribution API in the region that should handle traffic.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/traffic-distribution/{Id}",

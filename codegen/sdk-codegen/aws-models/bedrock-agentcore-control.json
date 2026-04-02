@@ -1553,6 +1553,20 @@
                 "smithy.api#documentation": "<p>The configuration details returned for an Atlassian OAuth2 provider, including the client ID and OAuth2 discovery information.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#AuthorizationData": {
+            "type": "union",
+            "members": {
+                "oauth2": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#OAuth2AuthorizationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>OAuth2 authorization data for the gateway target.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the authorization data that is returned when a gateway target requires user authorization through an authorization code grant type.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#AuthorizationEndpointType": {
             "type": "string"
         },
@@ -4030,6 +4044,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The managed resources created by the gateway for private endpoint connectivity.</p>"
                     }
+                },
+                "authorizationData": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AuthorizationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>OAuth2 authorization data for the created gateway target. This data is returned when the target requires user authorization through an authorization code grant type.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6253,7 +6273,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a gateway target.</p>",
+                "smithy.api#documentation": "<p>Deletes a gateway target.</p> <p>You cannot delete a target that is in a pending authorization state (<code>CREATE_PENDING_AUTH</code>, <code>UPDATE_PENDING_AUTH</code>, or <code>SYNCHRONIZE_PENDING_AUTH</code>). Wait for the authorization to complete or fail before deleting the target.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "DELETE",
@@ -8361,6 +8381,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of managed resources created by the gateway for private endpoint connectivity. These resources are created in your account when you use a managed VPC Lattice resource configuration.</p>"
                     }
+                },
+                "authorizationData": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AuthorizationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>OAuth2 authorization data for the gateway target. This data is returned when a target is configured with a credential provider with authorization code grant type and requires user federation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9695,6 +9721,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#PrivateEndpointManagedResources",
                     "traits": {
                         "smithy.api#documentation": "<p>The managed resources created by the gateway for private endpoint connectivity.</p>"
+                    }
+                },
+                "authorizationData": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AuthorizationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>OAuth2 authorization data for the gateway target. This data is returned when the target requires user authorization through an authorization code grant type.</p>"
                     }
                 }
             },
@@ -13405,6 +13437,12 @@
                         "smithy.api#pattern": "^https://.*",
                         "smithy.api#required": {}
                     }
+                },
+                "mcpToolSchema": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#McpToolSchemaConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tool schema configuration for the MCP server target. Supported only when the credential provider is configured with an authorization code grant type. Dynamic tool discovery/synchronization will be disabled when target is configured with mcpToolSchema.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13453,6 +13491,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The Model Context Protocol (MCP) configuration for a target. This structure defines how the gateway uses MCP to communicate with the target.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#McpToolSchemaConfiguration": {
+            "type": "union",
+            "members": {
+                "s3": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#S3Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the tool schema. This location contains the schema definition file.</p>"
+                    }
+                },
+                "inlinePayload": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InlinePayload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inline payload containing the MCP tool schema definition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The MCP tool schema configuration for an MCP server target. The tool schema must be aligned with the MCP specification.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#McpVersion": {
@@ -14363,6 +14421,34 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.bedrockagentcorecontrol#NumericalScaleDefinition"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#OAuth2AuthorizationData": {
+            "type": "structure",
+            "members": {
+                "authorizationUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL to initiate the authorization process. This URL is provided when the OAuth2 access token requires user authorization.</p>",
+                        "smithy.api#length": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "userId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user identifier associated with the OAuth2 authorization session that is defined by AgentCore Gateway.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>OAuth2-specific authorization data, including the authorization URL and user identifier for the authorization session.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#OAuthCredentialProvider": {
@@ -17312,7 +17398,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The gateway targets.</p>",
+                "smithy.api#documentation": "<p>Synchronizes the gateway targets by fetching the latest tool definitions from the target endpoints.</p> <p>You cannot synchronize a target that is in a pending authorization state (<code>CREATE_PENDING_AUTH</code>, <code>UPDATE_PENDING_AUTH</code>, or <code>SYNCHRONIZE_PENDING_AUTH</code>). Wait for the authorization to complete or fail before synchronizing.</p> <p>You cannot synchronize a target that has a static tool schema (<code>mcpToolSchema</code>) configured. Remove the static schema through an <code>UpdateGatewayTarget</code> call to enable dynamic tool synchronization.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "PUT",
@@ -17599,6 +17685,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SYNCHRONIZE_UNSUCCESSFUL"
+                    }
+                },
+                "CREATE_PENDING_AUTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_PENDING_AUTH"
+                    }
+                },
+                "UPDATE_PENDING_AUTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_PENDING_AUTH"
+                    }
+                },
+                "SYNCHRONIZE_PENDING_AUTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYNCHRONIZE_PENDING_AUTH"
                     }
                 }
             }
@@ -18853,7 +18957,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing gateway target.</p>",
+                "smithy.api#documentation": "<p>Updates an existing gateway target.</p> <p>You cannot update a target that is in a pending authorization state (<code>CREATE_PENDING_AUTH</code>, <code>UPDATE_PENDING_AUTH</code>, or <code>SYNCHRONIZE_PENDING_AUTH</code>). Wait for the authorization to complete or fail before updating the target.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "PUT",
@@ -19015,6 +19119,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#PrivateEndpointManagedResources",
                     "traits": {
                         "smithy.api#documentation": "<p>The managed resources created by the gateway for private endpoint connectivity.</p>"
+                    }
+                },
+                "authorizationData": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AuthorizationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>OAuth2 authorization data for the updated gateway target. This data is returned when the target requires user authorization through an authorization code grant type.</p>"
                     }
                 }
             },

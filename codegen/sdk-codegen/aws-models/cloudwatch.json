@@ -313,6 +313,34 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatch#AlarmPromQLCriteria": {
+            "type": "structure",
+            "members": {
+                "Query": {
+                    "target": "com.amazonaws.cloudwatch#Query",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The PromQL query that the alarm evaluates. The query must return a result of vector\n            type. Each entry in the vector result represents an alarm contributor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PendingPeriod": {
+                    "target": "com.amazonaws.cloudwatch#PendingPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration, in seconds, that a contributor must be continuously breaching before\n            it transitions to the <code>ALARM</code> state.</p>"
+                    }
+                },
+                "RecoveryPeriod": {
+                    "target": "com.amazonaws.cloudwatch#RecoveryPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration, in seconds, that a contributor must continuously not be breaching\n            before it transitions back to the <code>OK</code> state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration that determines how a PromQL alarm evaluates its\n            contributors, including the query to run and the durations that define when contributors\n            transition between states.</p>"
+            }
+        },
         "com.amazonaws.cloudwatch#AlarmRule": {
             "type": "string",
             "traits": {
@@ -2249,6 +2277,29 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatch#EvaluationCriteria": {
+            "type": "union",
+            "members": {
+                "PromQLCriteria": {
+                    "target": "com.amazonaws.cloudwatch#AlarmPromQLCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The PromQL criteria for the alarm evaluation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The evaluation criteria for an alarm. This is a union type that currently\n            supports <code>PromQLCriteria</code>.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#EvaluationInterval": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 10,
+                    "max": 3600
+                }
+            }
+        },
         "com.amazonaws.cloudwatch#EvaluationPeriods": {
             "type": "integer",
             "traits": {
@@ -3030,6 +3081,41 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudwatch#GetOTelEnrichment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#GetOTelEnrichmentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#GetOTelEnrichmentOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the current status of vended metric enrichment for the account, including\n            whether CloudWatch vended metrics are enriched with resource ARN and resource tag\n            labels and queryable using PromQL. For the list of supported resources, see\n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html\">Supported AWS infrastructure metrics</a>.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#GetOTelEnrichmentInput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#GetOTelEnrichmentOutput": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.cloudwatch#OTelEnrichmentStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of OTel enrichment for the account. Valid values are\n            <code>Running</code> (enrichment is enabled) and <code>Stopped</code>\n            (enrichment is disabled).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudwatch#GraniteServiceVersion20100801": {
             "type": "service",
             "version": "2010-08-01",
@@ -3104,6 +3190,9 @@
                     "target": "com.amazonaws.cloudwatch#GetMetricWidgetImage"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatch#GetOTelEnrichment"
+                },
+                {
                     "target": "com.amazonaws.cloudwatch#ListAlarmMuteRules"
                 },
                 {
@@ -3155,7 +3244,13 @@
                     "target": "com.amazonaws.cloudwatch#StartMetricStreams"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatch#StartOTelEnrichment"
+                },
+                {
                     "target": "com.amazonaws.cloudwatch#StopMetricStreams"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#StopOTelEnrichment"
                 },
                 {
                     "target": "com.amazonaws.cloudwatch#TagResource"
@@ -5235,7 +5330,7 @@
                 "TreatMissingData": {
                     "target": "com.amazonaws.cloudwatch#TreatMissingData",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets how this alarm is to handle missing data points. The valid values are\n            <code>breaching</code>, <code>notBreaching</code>, <code>ignore</code>, and\n            <code>missing</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data\">Configuring how CloudWatch alarms treat missing data</a>.</p>\n         <p>If this parameter is omitted, the default behavior of <code>missing</code> is\n            used.</p>"
+                        "smithy.api#documentation": "<p>Sets how this alarm is to handle missing data points. The valid values are\n            <code>breaching</code>, <code>notBreaching</code>, <code>ignore</code>, and\n            <code>missing</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data\">Configuring how CloudWatch alarms treat missing data</a>.</p>\n         <p>If this parameter is omitted, the default behavior of <code>missing</code> is\n            used.</p>\n         <note>\n            <p>This parameter is not applicable to PromQL alarms.</p>\n         </note>"
                     }
                 },
                 "EvaluateLowSampleCountPercentile": {
@@ -5266,6 +5361,18 @@
                     "target": "com.amazonaws.cloudwatch#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the alarm's <code>StateValue</code> most recently\n            changed.</p>"
+                    }
+                },
+                "EvaluationCriteria": {
+                    "target": "com.amazonaws.cloudwatch#EvaluationCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The evaluation criteria for the alarm.</p>"
+                    }
+                },
+                "EvaluationInterval": {
+                    "target": "com.amazonaws.cloudwatch#EvaluationInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frequency, in seconds, at which the alarm is evaluated.</p>"
                     }
                 }
             },
@@ -5848,6 +5955,26 @@
         "com.amazonaws.cloudwatch#NextToken": {
             "type": "string"
         },
+        "com.amazonaws.cloudwatch#OTelEnrichmentStatus": {
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Running"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopped"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of OTel enrichment for the account.</p>"
+            }
+        },
         "com.amazonaws.cloudwatch#OutputFormat": {
             "type": "string"
         },
@@ -5889,6 +6016,15 @@
                 "smithy.api#documentation": "<p>This array is empty if the API operation was successful for all the rules specified in\n            the request. If the operation could not process one of the rules, the following data is\n            returned for each of those rules.</p>"
             }
         },
+        "com.amazonaws.cloudwatch#PendingPeriod": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 86400
+                }
+            }
+        },
         "com.amazonaws.cloudwatch#Period": {
             "type": "integer",
             "traits": {
@@ -5914,7 +6050,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates an alarm mute rule.</p>\n         <p>Alarm mute rules automatically mute alarm actions during predefined time windows. When a mute rule is active, targeted alarms continue to evaluate metrics and transition between states, but their configured actions (such as Amazon SNS notifications or Auto Scaling actions) are muted.</p>\n         <p>You can create mute rules with recurring schedules using <code>cron</code> expressions or one-time mute windows using <code>at</code> expressions. Each mute rule can target up to 100 specific alarms by name.</p>\n         <p>If you specify a rule name that already exists, this operation updates the existing rule with the new configuration.</p>\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>To create or update a mute rule, you must have the <code>cloudwatch:PutAlarmMuteRule</code> permission on two types of resources: the alarm mute rule resource itself, and each alarm that the rule targets.</p>\n         <p>For example, If you want to allow a user to create mute rules that target only specific alarms named \"WebServerCPUAlarm\" and \"DatabaseConnectionAlarm\", you would create an IAM policy with one statement granting <code>cloudwatch:PutAlarmMuteRule</code> on the alarm mute rule resource (<code>arn:aws:cloudwatch:[REGION]:123456789012:alarm-mute:*</code>), and another statement granting <code>cloudwatch:PutAlarmMuteRule</code> on the targeted alarm resources (<code>arn:aws:cloudwatch:[REGION]:123456789012:alarm:WebServerCPUAlarm</code> and <code>arn:aws:cloudwatch:[REGION]:123456789012:alarm:DatabaseConnectionAlarm</code>).</p>\n         <p>You can also use IAM policy conditions to allow targeting alarms based on resource tags. For example, you can restrict users to create/update mute rules to only target alarms that have a specific tag key-value pair, such as <code>Team=TeamA</code>.</p>"
+                "smithy.api#documentation": "<p>Creates or updates an alarm mute rule.</p>\n         <p>Alarm mute rules automatically mute alarm actions during predefined time windows. When a mute rule is active, targeted alarms continue to evaluate metrics and transition between states, but their configured actions (such as Amazon SNS notifications or Auto Scaling actions) are muted.</p>\n         <p>You can create mute rules with recurring schedules using <code>cron</code> expressions or one-time mute windows using <code>at</code> expressions. Each mute rule can target up to 100 specific alarms by name.</p>\n         <p>If you specify a rule name that already exists, this operation updates the existing rule with the new configuration.</p>\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>To create or update a mute rule, you must have the <code>cloudwatch:PutAlarmMuteRule</code> permission on two types of resources: the alarm mute rule resource itself, and each alarm that the rule targets.</p>\n         <p>For example, If you want to allow a user to create mute rules that target only specific alarms named \"WebServerCPUAlarm\" and \"DatabaseConnectionAlarm\", you would create an IAM policy with one statement granting <code>cloudwatch:PutAlarmMuteRule</code> on the alarm mute rule resource (<code>arn:aws:cloudwatch:[REGION]:123456789012:alarm-mute-rule:*</code>), and another statement granting <code>cloudwatch:PutAlarmMuteRule</code> on the targeted alarm resources (<code>arn:aws:cloudwatch:[REGION]:123456789012:alarm:WebServerCPUAlarm</code> and <code>arn:aws:cloudwatch:[REGION]:123456789012:alarm:DatabaseConnectionAlarm</code>).</p>\n         <p>You can also use IAM policy conditions to allow targeting alarms based on resource tags. For example, you can restrict users to create/update mute rules to only target alarms that have a specific tag key-value pair, such as <code>Team=TeamA</code>.</p>"
             }
         },
         "com.amazonaws.cloudwatch#PutAlarmMuteRuleInput": {
@@ -6367,7 +6503,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates an alarm and associates it with the specified metric, metric\n            math expression, anomaly detection model, or Metrics Insights query. For more\n            information about using a Metrics Insights query for an alarm, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html\">Create\n            alarms on Metrics Insights queries</a>.</p>\n         <p>Alarms based on anomaly detection models cannot have Auto Scaling actions.</p>\n         <p>When this operation creates an alarm, the alarm state is immediately set to\n            <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set\n            appropriately. Any actions associated with the new state are then executed.</p>\n         <p>When you update an existing alarm, its state is left unchanged, but the update\n            completely overwrites the previous configuration of the alarm.</p>\n         <p>If you are an IAM user, you must have Amazon EC2 permissions for\n            some alarm operations:</p>\n         <ul>\n            <li>\n               <p>The <code>iam:CreateServiceLinkedRole</code> permission for all alarms with\n                    EC2 actions</p>\n            </li>\n            <li>\n               <p>The <code>iam:CreateServiceLinkedRole</code> permissions to create an alarm\n                    with Systems Manager OpsItem or response plan actions.</p>\n            </li>\n         </ul>\n         <p>The first time you create an alarm in the Amazon Web Services Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary\n            service-linked role for you. The service-linked roles are called\n            <code>AWSServiceRoleForCloudWatchEvents</code> and\n            <code>AWSServiceRoleForCloudWatchAlarms_ActionSSM</code>. For more information, see\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role\">Amazon Web Services service-linked role</a>.</p>\n         <p>Each <code>PutMetricAlarm</code> action has a maximum uncompressed payload of 120\n            KB.</p>\n         <p>\n            <b>Cross-account alarms</b>\n         </p>\n         <p>You can set an alarm on metrics in the current account, or in another account. To\n            create a cross-account alarm that watches a metric in a different account, you must have\n            completed the following pre-requisites:</p>\n         <ul>\n            <li>\n               <p>The account where the metrics are located (the <i>sharing\n                    account</i>) must already have a sharing role named <b>CloudWatch-CrossAccountSharingRole</b>. If it does not\n                    already have this role, you must create it using the instructions in <b>Set up a sharing account</b> in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region\"> Cross-account cross-Region CloudWatch console</a>. The policy\n                    for that role must grant access to the ID of the account where you are creating\n                    the alarm. </p>\n            </li>\n            <li>\n               <p>The account where you are creating the alarm (the <i>monitoring\n                    account</i>) must already have a service-linked role named <b>AWSServiceRoleForCloudWatchCrossAccount</b> to allow\n                    CloudWatch to assume the sharing role in the sharing account. If it\n                    does not, you must create it following the directions in <b>Set up a monitoring account</b> in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region\"> Cross-account cross-Region CloudWatch console</a>.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates or updates an alarm and associates it with the specified metric, metric\n            math expression, anomaly detection model, Metrics Insights query, or PromQL query. For more\n            information about using a Metrics Insights query for an alarm, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html\">Create\n            alarms on Metrics Insights queries</a>.</p>\n         <p>Alarms based on anomaly detection models cannot have Auto Scaling actions.</p>\n         <p>When this operation creates an alarm, the alarm state is immediately set to\n            <code>INSUFFICIENT_DATA</code>. For PromQL alarms, the alarm state is instead\n            immediately set to <code>OK</code>. The alarm is then evaluated and its state is set\n            appropriately. Any actions associated with the new state are then executed.</p>\n         <p>When you update an existing alarm, its state is left unchanged, but the update\n            completely overwrites the previous configuration of the alarm.</p>\n         <p>If you are an IAM user, you must have Amazon EC2 permissions for\n            some alarm operations:</p>\n         <ul>\n            <li>\n               <p>The <code>iam:CreateServiceLinkedRole</code> permission for all alarms with\n                    EC2 actions</p>\n            </li>\n            <li>\n               <p>The <code>iam:CreateServiceLinkedRole</code> permissions to create an alarm\n                    with Systems Manager OpsItem or response plan actions.</p>\n            </li>\n         </ul>\n         <p>The first time you create an alarm in the Amazon Web Services Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary\n            service-linked role for you. The service-linked roles are called\n            <code>AWSServiceRoleForCloudWatchEvents</code> and\n            <code>AWSServiceRoleForCloudWatchAlarms_ActionSSM</code>. For more information, see\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role\">Amazon Web Services service-linked role</a>.</p>\n         <p>Each <code>PutMetricAlarm</code> action has a maximum uncompressed payload of 120\n            KB.</p>\n         <p>\n            <b>Cross-account alarms</b>\n         </p>\n         <p>You can set an alarm on metrics in the current account, or in another account. To\n            create a cross-account alarm that watches a metric in a different account, you must have\n            completed the following pre-requisites:</p>\n         <ul>\n            <li>\n               <p>The account where the metrics are located (the <i>sharing\n                    account</i>) must already have a sharing role named <b>CloudWatch-CrossAccountSharingRole</b>. If it does not\n                    already have this role, you must create it using the instructions in <b>Set up a sharing account</b> in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region\"> Cross-account cross-Region CloudWatch console</a>. The policy\n                    for that role must grant access to the ID of the account where you are creating\n                    the alarm. </p>\n            </li>\n            <li>\n               <p>The account where you are creating the alarm (the <i>monitoring\n                    account</i>) must already have a service-linked role named <b>AWSServiceRoleForCloudWatchCrossAccount</b> to allow\n                    CloudWatch to assume the sharing role in the sharing account. If it\n                    does not, you must create it following the directions in <b>Set up a monitoring account</b> in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region\"> Cross-account cross-Region CloudWatch console</a>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.cloudwatch#PutMetricAlarmInput": {
@@ -6414,7 +6550,7 @@
                 "MetricName": {
                     "target": "com.amazonaws.cloudwatch#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the metric associated with the alarm. For each\n            <code>PutMetricAlarm</code> operation, you must specify either\n            <code>MetricName</code> or a <code>Metrics</code> array.</p>\n         <p>If you are creating an alarm based on a math expression, you cannot specify this\n            parameter, or any of the <code>Namespace</code>, <code>Dimensions</code>,\n            <code>Period</code>, <code>Unit</code>, <code>Statistic</code>, or\n            <code>ExtendedStatistic</code> parameters. Instead, you specify all this information\n            in the <code>Metrics</code> array.</p>"
+                        "smithy.api#documentation": "<p>The name for the metric associated with the alarm. For each\n            <code>PutMetricAlarm</code> operation, you must specify either\n            <code>MetricName</code>, a <code>Metrics</code> array, or an\n            <code>EvaluationCriteria</code>.</p>\n         <p>If you are creating an alarm based on a math expression, you cannot specify this\n            parameter, or any of the <code>Namespace</code>, <code>Dimensions</code>,\n            <code>Period</code>, <code>Unit</code>, <code>Statistic</code>, or\n            <code>ExtendedStatistic</code> parameters. Instead, you specify all this information\n            in the <code>Metrics</code> array.</p>"
                     }
                 },
                 "Namespace": {
@@ -6456,9 +6592,7 @@
                 "EvaluationPeriods": {
                     "target": "com.amazonaws.cloudwatch#EvaluationPeriods",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The number of periods over which data is compared to the specified threshold. If\n            you are setting an alarm that requires that a number of consecutive data points be\n            breaching to trigger the alarm, this value specifies that number. If you are setting an\n            \"M out of N\" alarm, this value is the N.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The number of periods over which data is compared to the specified threshold. If\n            you are setting an alarm that requires that a number of consecutive data points be\n            breaching to trigger the alarm, this value specifies that number. If you are setting an\n            \"M out of N\" alarm, this value is the N.</p>"
                     }
                 },
                 "DatapointsToAlarm": {
@@ -6476,15 +6610,13 @@
                 "ComparisonOperator": {
                     "target": "com.amazonaws.cloudwatch#ComparisonOperator",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p> The arithmetic operation to use when comparing the specified statistic and\n            threshold. The specified statistic value is used as the first operand.</p>\n         <p>The values <code>LessThanLowerOrGreaterThanUpperThreshold</code>,\n            <code>LessThanLowerThreshold</code>, and <code>GreaterThanUpperThreshold</code> are\n            used only for alarms based on anomaly detection models.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p> The arithmetic operation to use when comparing the specified statistic and\n            threshold. The specified statistic value is used as the first operand.</p>\n         <p>The values <code>LessThanLowerOrGreaterThanUpperThreshold</code>,\n            <code>LessThanLowerThreshold</code>, and <code>GreaterThanUpperThreshold</code> are\n            used only for alarms based on anomaly detection models.</p>"
                     }
                 },
                 "TreatMissingData": {
                     "target": "com.amazonaws.cloudwatch#TreatMissingData",
                     "traits": {
-                        "smithy.api#documentation": "<p> Sets how this alarm is to handle missing data points. If\n            <code>TreatMissingData</code> is omitted, the default behavior of\n            <code>missing</code> is used. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data\">Configuring How CloudWatch Alarms Treats Missing Data</a>.</p>\n         <p>Valid Values: <code>breaching | notBreaching | ignore | missing</code>\n         </p>\n         <note>\n            <p>Alarms that evaluate metrics in the <code>AWS/DynamoDB</code> namespace always\n                <code>ignore</code> missing data even if you choose a different option for\n                <code>TreatMissingData</code>. When an <code>AWS/DynamoDB</code> metric has\n                missing data, alarms that evaluate that metric remain in their current state.</p>\n         </note>"
+                        "smithy.api#documentation": "<p> Sets how this alarm is to handle missing data points. If\n            <code>TreatMissingData</code> is omitted, the default behavior of\n            <code>missing</code> is used. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data\">Configuring How CloudWatch Alarms Treats Missing Data</a>.</p>\n         <p>Valid Values: <code>breaching | notBreaching | ignore | missing</code>\n         </p>\n         <note>\n            <p>Alarms that evaluate metrics in the <code>AWS/DynamoDB</code> namespace always\n                <code>ignore</code> missing data even if you choose a different option for\n                <code>TreatMissingData</code>. When an <code>AWS/DynamoDB</code> metric has\n                missing data, alarms that evaluate that metric remain in their current state.</p>\n         </note>\n         <note>\n            <p>This parameter is not applicable to PromQL alarms.</p>\n         </note>"
                     }
                 },
                 "EvaluateLowSampleCountPercentile": {
@@ -6496,7 +6628,7 @@
                 "Metrics": {
                     "target": "com.amazonaws.cloudwatch#MetricDataQueries",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of <code>MetricDataQuery</code> structures that enable you to create an alarm\n            based on the result of a metric math expression. For each <code>PutMetricAlarm</code>\n            operation, you must specify either <code>MetricName</code> or a <code>Metrics</code>\n            array.</p>\n         <p>Each item in the <code>Metrics</code> array either retrieves a metric or performs a\n            math expression.</p>\n         <p>One item in the <code>Metrics</code> array is the expression that the alarm watches.\n            You designate this expression by setting <code>ReturnData</code> to true for this object\n            in the array. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html\">MetricDataQuery</a>.</p>\n         <p>If you use the <code>Metrics</code> parameter, you cannot include the\n            <code>Namespace</code>, <code>MetricName</code>, <code>Dimensions</code>,\n            <code>Period</code>, <code>Unit</code>, <code>Statistic</code>, or\n            <code>ExtendedStatistic</code> parameters of <code>PutMetricAlarm</code> in the same\n            operation. Instead, you retrieve the metrics you are using in your math expression as\n            part of the <code>Metrics</code> array.</p>"
+                        "smithy.api#documentation": "<p>An array of <code>MetricDataQuery</code> structures that enable you to create an alarm\n            based on the result of a metric math expression. For each <code>PutMetricAlarm</code>\n            operation, you must specify either <code>MetricName</code>, a <code>Metrics</code>\n            array, or an <code>EvaluationCriteria</code>.</p>\n         <p>Each item in the <code>Metrics</code> array either retrieves a metric or performs a\n            math expression.</p>\n         <p>One item in the <code>Metrics</code> array is the expression that the alarm watches.\n            You designate this expression by setting <code>ReturnData</code> to true for this object\n            in the array. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html\">MetricDataQuery</a>.</p>\n         <p>If you use the <code>Metrics</code> parameter, you cannot include the\n            <code>Namespace</code>, <code>MetricName</code>, <code>Dimensions</code>,\n            <code>Period</code>, <code>Unit</code>, <code>Statistic</code>,\n            or <code>ExtendedStatistic</code> parameters of <code>PutMetricAlarm</code>\n            in the same operation. Instead, you retrieve the metrics you are using in your\n            math expression as part of the <code>Metrics</code> array.</p>"
                     }
                 },
                 "Tags": {
@@ -6509,6 +6641,18 @@
                     "target": "com.amazonaws.cloudwatch#MetricId",
                     "traits": {
                         "smithy.api#documentation": "<p>If this is an alarm based on an anomaly detection model, make this value match the ID\n            of the <code>ANOMALY_DETECTION_BAND</code> function.</p>\n         <p>For an example of how to use this parameter, see the <b>Anomaly\n            Detection Model Alarm</b> example on this page.</p>\n         <p>If your alarm uses this parameter, it cannot have Auto Scaling actions.</p>"
+                    }
+                },
+                "EvaluationCriteria": {
+                    "target": "com.amazonaws.cloudwatch#EvaluationCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The evaluation criteria for the alarm. For each <code>PutMetricAlarm</code>\n            operation, you must specify either <code>MetricName</code>, a <code>Metrics</code>\n            array, or an <code>EvaluationCriteria</code>.</p>\n         <p>If you use the <code>EvaluationCriteria</code> parameter, you cannot include the\n            <code>Namespace</code>, <code>MetricName</code>, <code>Dimensions</code>,\n            <code>Period</code>, <code>Unit</code>, <code>Statistic</code>,\n            <code>ExtendedStatistic</code>, <code>Metrics</code>, <code>Threshold</code>,\n            <code>ComparisonOperator</code>, <code>ThresholdMetricId</code>,\n            <code>EvaluationPeriods</code>, or <code>DatapointsToAlarm</code> parameters of\n            <code>PutMetricAlarm</code> in the same operation. Instead, all evaluation parameters\n            are defined within this structure.</p>\n         <p>For an example of how to use this parameter, see the <b>PromQL\n            alarm</b> example on this page.</p>"
+                    }
+                },
+                "EvaluationInterval": {
+                    "target": "com.amazonaws.cloudwatch#EvaluationInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frequency, in seconds, at which the alarm is evaluated. Valid values are 10,\n            20, 30, and any multiple of 60.</p>\n         <p>This parameter is required for alarms that use <code>EvaluationCriteria</code>, and\n            cannot be specified for alarms configured with <code>MetricName</code> or\n            <code>Metrics</code>.</p>"
                     }
                 }
             },
@@ -6694,6 +6838,15 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudwatch#Query": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10000
+                }
+            }
+        },
         "com.amazonaws.cloudwatch#Range": {
             "type": "structure",
             "members": {
@@ -6726,6 +6879,15 @@
                     "traits": {
                         "smithy.api#enumValue": "PT3H"
                     }
+                }
+            }
+        },
+        "com.amazonaws.cloudwatch#RecoveryPeriod": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 86400
                 }
             }
         },
@@ -7177,6 +7339,32 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudwatch#StartOTelEnrichment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#StartOTelEnrichmentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#StartOTelEnrichmentOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enables enrichment and PromQL access for CloudWatch vended metrics for\n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html\">supported AWS resources</a> in the account. Once enabled, metrics that\n            contain a resource identifier dimension (for example, EC2\n            <code>CPUUtilization</code> with an <code>InstanceId</code> dimension) are enriched\n            with resource ARN and resource tag labels and become queryable using\n            PromQL.</p>\n         <p>Before calling this operation, you must enable resource tags on telemetry for\n            your account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/EnableResourceTagsOnTelemetry.html\">Enable resource tags on telemetry</a>.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#StartOTelEnrichmentInput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#StartOTelEnrichmentOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudwatch#Stat": {
             "type": "string"
         },
@@ -7377,6 +7565,32 @@
             }
         },
         "com.amazonaws.cloudwatch#StopMetricStreamsOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#StopOTelEnrichment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#StopOTelEnrichmentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#StopOTelEnrichmentOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Disables enrichment and PromQL access for CloudWatch vended metrics for\n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html\">supported AWS resources</a> in the account. After disabling, these metrics\n            are no longer enriched with resource ARN and resource tag labels, and cannot be\n            queried using PromQL.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#StopOTelEnrichmentInput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#StopOTelEnrichmentOutput": {
             "type": "structure",
             "members": {},
             "traits": {

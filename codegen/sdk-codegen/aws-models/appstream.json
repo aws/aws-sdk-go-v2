@@ -1527,6 +1527,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The total number of session slots that are available for streaming or are currently streaming.</p>\n         <p>ActualUserSessionCapacity = AvailableUserSessionCapacity + ActiveUserSessions</p>\n         <p>This only applies to multi-session fleets.</p>"
                     }
+                },
+                "Draining": {
+                    "target": "com.amazonaws.appstream#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances in drain mode. This only applies to multi-session fleets.</p>"
+                    }
+                },
+                "DrainModeActiveUserSessions": {
+                    "target": "com.amazonaws.appstream#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of active user sessions on instances in drain mode. This only applies to multi-session fleets.</p>"
+                    }
+                },
+                "DrainModeUnusedUserSessions": {
+                    "target": "com.amazonaws.appstream#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of unused session slots on instances in drain mode that cannot be used for user session provisioning. This only applies to multi-session fleets.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5968,6 +5986,52 @@
                 }
             }
         },
+        "com.amazonaws.appstream#DrainSessionInstance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#DrainSessionInstanceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#DrainSessionInstanceResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Drains the instance hosting the specified streaming session. The instance stops accepting new sessions while existing sessions continue uninterrupted. Once all sessions end, the instance is reclaimed and replaced. This only applies to multi-session fleets.</p>"
+            }
+        },
+        "com.amazonaws.appstream#DrainSessionInstanceRequest": {
+            "type": "structure",
+            "members": {
+                "SessionId": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The identifier of the streaming session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#DrainSessionInstanceResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.appstream#DryRunOperationException": {
             "type": "structure",
             "members": {
@@ -7640,6 +7704,32 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.appstream#InstanceDrainStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DRAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRAINING"
+                    }
+                },
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_APPLICABLE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Possible values for the drain status of a streaming instance.</p>"
+            }
+        },
         "com.amazonaws.appstream#InstanceType": {
             "type": "string",
             "traits": {
@@ -8376,6 +8466,9 @@
                 },
                 {
                     "target": "com.amazonaws.appstream#DisassociateSoftwareFromImageBuilder"
+                },
+                {
+                    "target": "com.amazonaws.appstream#DrainSessionInstance"
                 },
                 {
                     "target": "com.amazonaws.appstream#EnableUser"
@@ -9711,6 +9804,12 @@
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier for the instance hosting the session.</p>"
+                    }
+                },
+                "InstanceDrainStatus": {
+                    "target": "com.amazonaws.appstream#InstanceDrainStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The drain status of the instance hosting the streaming session. This only applies to multi-session fleets.</p>"
                     }
                 }
             },

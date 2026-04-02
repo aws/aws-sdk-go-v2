@@ -7377,7 +7377,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.:-]+$"
             }
         },
         "com.amazonaws.bedrockruntime#ToolUseType": {
