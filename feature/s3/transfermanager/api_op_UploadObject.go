@@ -900,7 +900,14 @@ func (u *uploader) nextReader(ctx context.Context) (io.Reader, int, func(), erro
 			return nil, 0, func() {}, err
 		}
 		n := len(firstPart)
-		if int64(n) < u.options.PartSizeBytes {
+		// Use the minimum of MultipartUploadThreshold and PartSizeBytes as the cutoff
+		// for single vs multipart upload. We can only observe up to PartSizeBytes of
+		// data here, so the threshold is capped to avoid silent data truncation.
+		threshold := u.options.MultipartUploadThreshold
+		if u.options.PartSizeBytes < threshold {
+			threshold = u.options.PartSizeBytes
+		}
+		if int64(n) < threshold {
 			return bytes.NewReader(firstPart), n, func() {}, io.EOF
 		}
 		return bytes.NewReader(firstPart), n, func() {}, nil
