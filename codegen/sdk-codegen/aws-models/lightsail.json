@@ -486,6 +486,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the alarm is enabled.</p>"
                     }
+                },
+                "tags": {
+                    "target": "com.amazonaws.lightsail#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys and optional values for the resource. For more information about tags in\n      Lightsail, see the <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3815,7 +3821,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an email or SMS text message contact method.</p>\n         <p>A contact method is used to send you notifications about your Amazon Lightsail resources.\n      You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services\n      Regions, and SMS text messages cannot be sent to some countries/regions. For more information,\n      see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-notifications\">Notifications in Amazon Lightsail</a>.</p>",
+                "smithy.api#documentation": "<p>Creates an email or SMS text message contact method.</p>\n         <p>A contact method is used to send you notifications about your Amazon Lightsail resources.\n      You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services\n      Regions, and SMS text messages cannot be sent to some countries/regions. For more information,\n      see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-notifications\">Notifications in Amazon Lightsail</a>.</p>\n         <p>The <code>create contact method</code> operation supports tag-based access control via request\n      tags. For more information, see the <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags\">Lightsail Developer Guide</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/CreateContactMethod",
@@ -19664,7 +19670,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates an alarm, and associates it with the specified metric.</p>\n         <p>An alarm is used to monitor a single metric for one of your resources. When a metric\n      condition is met, the alarm can notify you by email, SMS text message, and a banner displayed\n      on the Amazon Lightsail console. For more information, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-alarms\">Alarms\n        in Amazon Lightsail</a>.</p>\n         <p>When this action creates an alarm, the alarm state is immediately set to\n        <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set\n      appropriately. Any actions associated with the new state are then executed.</p>\n         <p>When you update an existing alarm, its state is left unchanged, but the update completely\n      overwrites the previous configuration of the alarm. The alarm is then evaluated with the\n      updated configuration.</p>",
+                "smithy.api#documentation": "<p>Creates or updates an alarm, and associates it with the specified metric.</p>\n         <p>An alarm is used to monitor a single metric for one of your resources. When a metric\n      condition is met, the alarm can notify you by email, SMS text message, and a banner displayed\n      on the Amazon Lightsail console. For more information, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-alarms\">Alarms\n        in Amazon Lightsail</a>.</p>\n         <p>When this action creates an alarm, the alarm state is immediately set to\n        <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set\n      appropriately. Any actions associated with the new state are then executed.</p>\n         <p>When you update an existing alarm, its state is left unchanged, but the update completely\n      overwrites the previous configuration of the alarm. The alarm is then evaluated with the\n      updated configuration.</p>\n         <p>The <code>put alarm</code> operation supports tag-based access control via request\n      tags. For more information, see the <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags\">Lightsail Developer Guide</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/PutAlarm",
@@ -19745,6 +19751,12 @@
                     "target": "com.amazonaws.lightsail#boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the alarm is enabled.</p>\n         <p>Notifications are enabled by default if you don't specify this parameter.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.lightsail#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys and optional values to add to the alarm during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
                     }
                 }
             },

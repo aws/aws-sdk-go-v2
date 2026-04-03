@@ -466,7 +466,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 36
+                    "max": 64
                 }
             }
         },
@@ -9017,7 +9017,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }

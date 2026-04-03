@@ -16966,6 +16966,12 @@
                         "smithy.api#documentation": "<p>The input schema for the tool.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "strict": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Whether to enforce strict JSON schema adherence for the tool input"
+                    }
                 }
             },
             "traits": {

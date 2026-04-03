@@ -1605,6 +1605,12 @@
                     "traits": {
                         "smithy.api#jsonName": "rec709Settings"
                     }
+                },
+                "Hlg2020Settings": {
+                    "target": "com.amazonaws.medialive#Hlg2020Settings",
+                    "traits": {
+                        "smithy.api#jsonName": "hlg2020Settings"
+                    }
                 }
             },
             "traits": {

@@ -43,11 +43,10 @@
                         "smithy.api#required": {}
                     }
                 },
-                "inputTags": {
-                    "target": "com.amazonaws.bedrock#InputTags",
+                "selectiveContentGuarding": {
+                    "target": "com.amazonaws.bedrock#SelectiveContentGuarding",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to honor or ignore input tags at runtime.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Selective content guarding controls for enforced guardrails.</p>"
                     }
                 },
                 "modelEnforcement": {
@@ -85,7 +84,17 @@
                 "inputTags": {
                     "target": "com.amazonaws.bedrock#InputTags",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This field is being deprecated and will be removed once customers transition their existing policies to the new schema.",
+                            "since": "2026-04-03"
+                        },
                         "smithy.api#documentation": "<p>Whether to honor or ignore input tags at runtime.</p>"
+                    }
+                },
+                "selectiveContentGuarding": {
+                    "target": "com.amazonaws.bedrock#SelectiveContentGuarding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Selective content guarding controls for enforced guardrails.</p>"
                     }
                 },
                 "guardrailVersion": {
@@ -295,6 +304,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrock#ProvisionedModelThroughputResource"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourcePolicyResource"
                 },
                 {
                     "target": "com.amazonaws.bedrock#SubscriptionResource"
@@ -8363,6 +8375,67 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrock#DeleteResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#DeleteResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#DeleteResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a previously created Bedrock resource policy.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/resource-policy/{resourceArn}"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "resource-policy"
+                ]
+            }
+        },
+        "com.amazonaws.bedrock#DeleteResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.bedrock#ResourcePolicyResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Bedrock resource to which this resource policy applies.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#DeleteResourcePolicyResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrock#DeregisterMarketplaceModelEndpoint": {
             "type": "operation",
             "input": {
@@ -12697,6 +12770,74 @@
                     "target": "com.amazonaws.bedrock#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp for when the commitment term for the Provisioned Throughput expires.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#GetResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#GetResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the resource policy document for a Bedrock resource</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/resource-policy/{resourceArn}"
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "resource-policy"
+                ]
+            }
+        },
+        "com.amazonaws.bedrock#GetResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.bedrock#ResourcePolicyResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Bedrock resource to which this resource policy applies.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "resourcePolicy": {
+                    "target": "com.amazonaws.bedrock#ResourcePolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON string representing the Bedrock resource policy.</p>"
                     }
                 }
             },
@@ -19830,6 +19971,81 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrock#PutResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#PutResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#PutResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a resource policy for a Bedrock resource.</p>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/resource-policy"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "resource-policy",
+                    "resource-policy-internal"
+                ]
+            }
+        },
+        "com.amazonaws.bedrock#PutResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.bedrock#ResourcePolicyResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Bedrock resource to which this resource policy applies.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourcePolicy": {
+                    "target": "com.amazonaws.bedrock#ResourcePolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON string representing the Bedrock resource policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.bedrock#ResourcePolicyResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Bedrock resource to which this resource policy applies.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrock#PutUseCaseForModelAccess": {
             "type": "operation",
             "input": {
@@ -20422,6 +20638,39 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.bedrock#ResourcePolicyDocument": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20480
+                },
+                "smithy.api#pattern": "^[\t\n\r -ÿ]+$"
+            }
+        },
+        "com.amazonaws.bedrock#ResourcePolicyResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrock#DeleteResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#GetResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#PutResourcePolicy"
+                }
+            ]
+        },
+        "com.amazonaws.bedrock#ResourcePolicyResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
         "com.amazonaws.bedrock#RetrievalFilter": {
             "type": "union",
             "members": {
@@ -20771,6 +21020,43 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 5
+                }
+            }
+        },
+        "com.amazonaws.bedrock#SelectiveContentGuarding": {
+            "type": "structure",
+            "members": {
+                "system": {
+                    "target": "com.amazonaws.bedrock#SelectiveGuardingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Selective guarding mode for system prompts.\"</p>"
+                    }
+                },
+                "messages": {
+                    "target": "com.amazonaws.bedrock#SelectiveGuardingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Selective guarding mode for user messages.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Selective content guarding controls for enforced guardrails.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#SelectiveGuardingMode": {
+            "type": "enum",
+            "members": {
+                "SELECTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELECTIVE"
+                    }
+                },
+                "COMPREHENSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPREHENSIVE"
+                    }
                 }
             }
         },
