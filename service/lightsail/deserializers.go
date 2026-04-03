@@ -21995,6 +21995,11 @@ func awsAwsjson11_deserializeDocumentAlarm(v **types.Alarm, value interface{}) e
 				sv.SupportCode = ptr.String(jtv)
 			}
 
+		case "tags":
+			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		case "threshold":
 			if value != nil {
 				switch jtv := value.(type) {

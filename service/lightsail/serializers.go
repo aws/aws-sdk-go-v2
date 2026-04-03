@@ -13537,6 +13537,13 @@ func awsAwsjson11_serializeOpDocumentPutAlarmInput(v *PutAlarmInput, value smith
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Threshold != nil {
 		ok := object.Key("threshold")
 		switch {

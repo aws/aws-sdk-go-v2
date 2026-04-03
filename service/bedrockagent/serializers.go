@@ -11244,6 +11244,11 @@ func awsRestjson1_serializeDocumentToolSpecification(v *types.ToolSpecification,
 		ok.String(*v.Name)
 	}
 
+	if v.Strict != nil {
+		ok := object.Key("strict")
+		ok.Boolean(*v.Strict)
+	}
+
 	return nil
 }
 

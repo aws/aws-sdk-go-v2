@@ -29681,6 +29681,11 @@ func awsRestjson1_deserializeDocumentAv1ColorSpaceSettings(v **types.Av1ColorSpa
 				return err
 			}
 
+		case "hlg2020Settings":
+			if err := awsRestjson1_deserializeDocumentHlg2020Settings(&sv.Hlg2020Settings, value); err != nil {
+				return err
+			}
+
 		case "rec601Settings":
 			if err := awsRestjson1_deserializeDocumentRec601Settings(&sv.Rec601Settings, value); err != nil {
 				return err

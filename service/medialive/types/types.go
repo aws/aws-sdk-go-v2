@@ -567,6 +567,9 @@ type Av1ColorSpaceSettings struct {
 	// Hdr10 Settings
 	Hdr10Settings *Hdr10Settings
 
+	// Hlg2020 Settings
+	Hlg2020Settings *Hlg2020Settings
+
 	// Rec601 Settings
 	Rec601Settings *Rec601Settings
 

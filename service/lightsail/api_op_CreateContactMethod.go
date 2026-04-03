@@ -19,6 +19,10 @@ import (
 // supported in some Amazon Web Services Regions, and SMS text messages cannot be
 // sent to some countries/regions. For more information, see [Notifications in Amazon Lightsail].
 //
+// The create contact method operation supports tag-based access control via
+// request tags. For more information, see the [Lightsail Developer Guide].
+//
+// [Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags
 // [Notifications in Amazon Lightsail]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-notifications
 func (c *Client) CreateContactMethod(ctx context.Context, params *CreateContactMethodInput, optFns ...func(*Options)) (*CreateContactMethodOutput, error) {
 	if params == nil {

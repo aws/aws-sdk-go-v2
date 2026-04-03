@@ -650,6 +650,26 @@ func (m *validateOpDeleteProvisionedModelThroughput) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteResourcePolicy struct {
+}
+
+func (*validateOpDeleteResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeregisterMarketplaceModelEndpoint struct {
 }
 
@@ -1130,6 +1150,26 @@ func (m *validateOpGetProvisionedModelThroughput) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetResourcePolicy struct {
+}
+
+func (*validateOpGetResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAutomatedReasoningPolicyBuildWorkflows struct {
 }
 
@@ -1265,6 +1305,26 @@ func (m *validateOpPutModelInvocationLoggingConfiguration) HandleInitialize(ctx 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutModelInvocationLoggingConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutResourcePolicy struct {
+}
+
+func (*validateOpPutResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutResourcePolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1718,6 +1778,10 @@ func addOpDeleteProvisionedModelThroughputValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpDeleteProvisionedModelThroughput{}, middleware.After)
 }
 
+func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
+}
+
 func addOpDeregisterMarketplaceModelEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeregisterMarketplaceModelEndpoint{}, middleware.After)
 }
@@ -1814,6 +1878,10 @@ func addOpGetProvisionedModelThroughputValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpGetProvisionedModelThroughput{}, middleware.After)
 }
 
+func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
+}
+
 func addOpListAutomatedReasoningPolicyBuildWorkflowsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAutomatedReasoningPolicyBuildWorkflows{}, middleware.After)
 }
@@ -1840,6 +1908,10 @@ func addOpPutEnforcedGuardrailConfigurationValidationMiddleware(stack *middlewar
 
 func addOpPutModelInvocationLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutModelInvocationLoggingConfiguration{}, middleware.After)
+}
+
+func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutResourcePolicy{}, middleware.After)
 }
 
 func addOpPutUseCaseForModelAccessValidationMiddleware(stack *middleware.Stack) error {
@@ -1916,9 +1988,6 @@ func validateAccountEnforcedGuardrailInferenceInputConfiguration(v *types.Accoun
 	}
 	if v.GuardrailVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GuardrailVersion"))
-	}
-	if len(v.InputTags) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("InputTags"))
 	}
 	if v.ModelEnforcement != nil {
 		if err := validateModelEnforcement(v.ModelEnforcement); err != nil {
@@ -5663,6 +5732,21 @@ func validateOpDeleteProvisionedModelThroughputInput(v *DeleteProvisionedModelTh
 	}
 }
 
+func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeregisterMarketplaceModelEndpointInput(v *DeregisterMarketplaceModelEndpointInput) error {
 	if v == nil {
 		return nil
@@ -6047,6 +6131,21 @@ func validateOpGetProvisionedModelThroughputInput(v *GetProvisionedModelThroughp
 	}
 }
 
+func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAutomatedReasoningPolicyBuildWorkflowsInput(v *ListAutomatedReasoningPolicyBuildWorkflowsInput) error {
 	if v == nil {
 		return nil
@@ -6155,6 +6254,24 @@ func validateOpPutModelInvocationLoggingConfigurationInput(v *PutModelInvocation
 		if err := validateLoggingConfig(v.LoggingConfig); err != nil {
 			invalidParams.AddNested("LoggingConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.ResourcePolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourcePolicy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

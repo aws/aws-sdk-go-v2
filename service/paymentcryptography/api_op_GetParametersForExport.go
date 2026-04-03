@@ -20,6 +20,9 @@ import (
 // operational before calling [ExportKey]. The export token expires in 30 days. You can use
 // the same export token to export multiple keys from your service account.
 //
+// To return a previously generated export token and signing key certificate
+// instead of generating new ones, set ReuseLastGeneratedToken to true .
+//
 // Cross-account use: This operation can't be used across different Amazon Web
 // Services accounts.
 //
@@ -61,6 +64,15 @@ type GetParametersForExportInput struct {
 	//
 	// This member is required.
 	SigningKeyAlgorithm types.KeyAlgorithm
+
+	// Specifies whether to reuse the existing export token and signing key
+	// certificate. If set to true and a valid export token exists for the same key
+	// material type and signing key algorithm with at least 7 days of remaining
+	// validity, the existing token and signing key certificate are returned.
+	// Otherwise, a new export token and signing key certificate are generated. The
+	// default value is false , which generates a new export token and signing key
+	// certificate on every call.
+	ReuseLastGeneratedToken *bool
 
 	noSmithyDocumentSerde
 }

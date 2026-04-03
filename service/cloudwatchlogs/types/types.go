@@ -2404,11 +2404,18 @@ type QueryDefinition struct {
 // in a DescribeQueries operation.
 type QueryInfo struct {
 
+	// The total number of bytes scanned by the query. This indicates the cost
+	// associated with the query.
+	BytesScanned *float64
+
 	// The date and time that this query was created.
 	CreateTime *int64
 
 	// The name of the log group scanned by this query.
 	LogGroupName *string
+
+	// The duration in milliseconds that the query took to execute.
+	QueryDuration *int64
 
 	// The unique ID number of this query.
 	QueryId *string
@@ -2425,6 +2432,9 @@ type QueryInfo struct {
 	// The status of this query. Possible values are Cancelled , Complete , Failed ,
 	// Running , Scheduled , and Unknown .
 	Status QueryStatus
+
+	// The ARN of the user who ran the query.
+	UserIdentity *string
 
 	noSmithyDocumentSerde
 }

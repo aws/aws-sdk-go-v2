@@ -1473,6 +1473,25 @@ func (SearchType) Values() []SearchType {
 	}
 }
 
+type SelectiveGuardingMode string
+
+// Enum values for SelectiveGuardingMode
+const (
+	SelectiveGuardingModeSelective     SelectiveGuardingMode = "SELECTIVE"
+	SelectiveGuardingModeComprehensive SelectiveGuardingMode = "COMPREHENSIVE"
+)
+
+// Values returns all known values for SelectiveGuardingMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SelectiveGuardingMode) Values() []SelectiveGuardingMode {
+	return []SelectiveGuardingMode{
+		"SELECTIVE",
+		"COMPREHENSIVE",
+	}
+}
+
 type SortByProvisionedModels string
 
 // Enum values for SortByProvisionedModels

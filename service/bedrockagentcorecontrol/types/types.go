@@ -308,8 +308,9 @@ type AtlassianOauth2ProviderConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the authorization data that is returned when a gateway target requires
-// user authorization through an authorization code grant type.
+// Contains the authorization data that is returned when a gateway target is
+// configured with a credential provider with authorization code grant type and
+// requires user federation.
 //
 // The following types satisfy this interface:
 //

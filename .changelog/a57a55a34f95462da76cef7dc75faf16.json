@@ -1,0 +1,8 @@
+{
+    "id": "a57a55a3-4f95-462d-a76c-ef7dc75faf16",
+    "type": "documentation",
+    "description": "Updates close Account quota for member accounts in an Organization.",
+    "modules": [
+        "service/organizations"
+    ]
+}

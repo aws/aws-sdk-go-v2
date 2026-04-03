@@ -12424,6 +12424,13 @@ func awsRestjson1_serializeDocumentAv1ColorSpaceSettings(v *types.Av1ColorSpaceS
 		}
 	}
 
+	if v.Hlg2020Settings != nil {
+		ok := object.Key("hlg2020Settings")
+		if err := awsRestjson1_serializeDocumentHlg2020Settings(v.Hlg2020Settings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Rec601Settings != nil {
 		ok := object.Key("rec601Settings")
 		if err := awsRestjson1_serializeDocumentRec601Settings(v.Rec601Settings, ok); err != nil {

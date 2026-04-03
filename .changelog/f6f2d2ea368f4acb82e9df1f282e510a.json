@@ -1,0 +1,8 @@
+{
+    "id": "f6f2d2ea-368f-4acb-82e9-df1f282e510a",
+    "type": "feature",
+    "description": "Added queryDuration, bytesScanned, and userIdentity fields to the QueryInfo response object returned by DescribeQueries. Customers can now view detailed query cost information including who ran the query, how long it took, and the volume of data scanned.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

@@ -21715,6 +21715,40 @@ func awsAwsjson11_deserializeDocumentQueryInfo(v **types.QueryInfo, value interf
 
 	for key, value := range shape {
 		switch key {
+		case "bytesScanned":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.BytesScanned = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.BytesScanned = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected BytesScannedValue to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "createTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -21735,6 +21769,19 @@ func awsAwsjson11_deserializeDocumentQueryInfo(v **types.QueryInfo, value interf
 					return fmt.Errorf("expected LogGroupName to be of type string, got %T instead", value)
 				}
 				sv.LogGroupName = ptr.String(jtv)
+			}
+
+		case "queryDuration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected QueryDuration to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.QueryDuration = ptr.Int64(i64)
 			}
 
 		case "queryId":
@@ -21771,6 +21818,15 @@ func awsAwsjson11_deserializeDocumentQueryInfo(v **types.QueryInfo, value interf
 					return fmt.Errorf("expected QueryStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.QueryStatus(jtv)
+			}
+
+		case "userIdentity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserIdentity to be of type string, got %T instead", value)
+				}
+				sv.UserIdentity = ptr.String(jtv)
 			}
 
 		default:

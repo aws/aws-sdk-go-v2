@@ -5595,6 +5595,9 @@ type ToolSpecification struct {
 	// The description of the tool.
 	Description *string
 
+	// Whether to enforce strict JSON schema adherence for the tool input
+	Strict *bool
+
 	noSmithyDocumentSerde
 }
 

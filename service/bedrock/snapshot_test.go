@@ -458,6 +458,18 @@ func TestCheckSnapshot_DeleteProvisionedModelThroughput(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeregisterMarketplaceModelEndpoint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeregisterMarketplaceModelEndpoint(context.Background(), nil, func(o *Options) {
@@ -758,6 +770,18 @@ func TestCheckSnapshot_GetProvisionedModelThroughput(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetUseCaseForModelAccess(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetUseCaseForModelAccess(context.Background(), nil, func(o *Options) {
@@ -1039,6 +1063,18 @@ func TestCheckSnapshot_PutModelInvocationLoggingConfiguration(t *testing.T) {
 	_, err := svc.PutModelInvocationLoggingConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutModelInvocationLoggingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1633,6 +1669,18 @@ func TestUpdateSnapshot_DeleteProvisionedModelThroughput(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeregisterMarketplaceModelEndpoint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeregisterMarketplaceModelEndpoint(context.Background(), nil, func(o *Options) {
@@ -1933,6 +1981,18 @@ func TestUpdateSnapshot_GetProvisionedModelThroughput(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetUseCaseForModelAccess(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetUseCaseForModelAccess(context.Background(), nil, func(o *Options) {
@@ -2214,6 +2274,18 @@ func TestUpdateSnapshot_PutModelInvocationLoggingConfiguration(t *testing.T) {
 	_, err := svc.PutModelInvocationLoggingConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutModelInvocationLoggingConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

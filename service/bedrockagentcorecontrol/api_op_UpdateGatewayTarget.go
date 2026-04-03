@@ -116,8 +116,8 @@ type UpdateGatewayTargetOutput struct {
 	UpdatedAt *time.Time
 
 	// OAuth2 authorization data for the updated gateway target. This data is returned
-	// when the target requires user authorization through an authorization code grant
-	// type.
+	// when a target is configured with a credential provider with authorization code
+	// grant type and requires user federation.
 	AuthorizationData types.AuthorizationData
 
 	// The updated description of the gateway target.

@@ -21,14 +21,12 @@ type AccountEnforcedGuardrailInferenceInputConfiguration struct {
 	// This member is required.
 	GuardrailVersion *string
 
-	// Whether to honor or ignore input tags at runtime.
-	//
-	// This member is required.
-	InputTags InputTags
-
 	// Model-specific information for the enforced guardrail configuration. If not
 	// present, the configuration is enforced on all models
 	ModelEnforcement *ModelEnforcement
+
+	// Selective content guarding controls for enforced guardrails.
+	SelectiveContentGuarding *SelectiveContentGuarding
 
 	noSmithyDocumentSerde
 }
@@ -55,6 +53,9 @@ type AccountEnforcedGuardrailOutputConfiguration struct {
 	GuardrailVersion *string
 
 	// Whether to honor or ignore input tags at runtime.
+	//
+	// Deprecated: This field is being deprecated and will be removed once customers
+	// transition their existing policies to the new schema.
 	InputTags InputTags
 
 	// Model-specific information for the enforced guardrail configuration.
@@ -62,6 +63,9 @@ type AccountEnforcedGuardrailOutputConfiguration struct {
 
 	// Configuration owner type.
 	Owner ConfigurationOwner
+
+	// Selective content guarding controls for enforced guardrails.
+	SelectiveContentGuarding *SelectiveContentGuarding
 
 	// Timestamp.
 	UpdatedAt *time.Time
@@ -6309,6 +6313,18 @@ type SageMakerEndpoint struct {
 
 	// The VPC configuration for the endpoint.
 	Vpc *VpcConfig
+
+	noSmithyDocumentSerde
+}
+
+// Selective content guarding controls for enforced guardrails.
+type SelectiveContentGuarding struct {
+
+	// Selective guarding mode for user messages.
+	Messages SelectiveGuardingMode
+
+	// Selective guarding mode for system prompts."
+	System SelectiveGuardingMode
 
 	noSmithyDocumentSerde
 }

@@ -2579,6 +2579,11 @@ func awsAwsjson10_serializeOpDocumentGetParametersForExportInput(v *GetParameter
 		ok.String(string(v.KeyMaterialType))
 	}
 
+	if v.ReuseLastGeneratedToken != nil {
+		ok := object.Key("ReuseLastGeneratedToken")
+		ok.Boolean(*v.ReuseLastGeneratedToken)
+	}
+
 	if len(v.SigningKeyAlgorithm) > 0 {
 		ok := object.Key("SigningKeyAlgorithm")
 		ok.String(string(v.SigningKeyAlgorithm))
@@ -2594,6 +2599,11 @@ func awsAwsjson10_serializeOpDocumentGetParametersForImportInput(v *GetParameter
 	if len(v.KeyMaterialType) > 0 {
 		ok := object.Key("KeyMaterialType")
 		ok.String(string(v.KeyMaterialType))
+	}
+
+	if v.ReuseLastGeneratedToken != nil {
+		ok := object.Key("ReuseLastGeneratedToken")
+		ok.Boolean(*v.ReuseLastGeneratedToken)
 	}
 
 	if len(v.WrappingKeyAlgorithm) > 0 {

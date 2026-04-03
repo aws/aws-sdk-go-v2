@@ -1,0 +1,8 @@
+{
+    "id": "076a6a3a-0c20-4aaf-83e0-000afae37f9f",
+    "type": "feature",
+    "description": "AWS Elemental MediaLive released a new features that allows customers to use HLG 2020 as a color space for AV1 video codec.",
+    "modules": [
+        "service/medialive"
+    ]
+}
