@@ -1,3 +1,7 @@
+# v1.59.0 (2026-04-03)
+
+* **Feature**: Amazon Bedrock Guardrails enforcement configuration APIs now support selective guarding controls for system prompts as well as user and assistant messages, along with SDK support for Amazon Bedrock resource policy APIs.
+
 # v1.58.0 (2026-04-01)
 
 * **Feature**: Adds support for Bedrock Batch Inference Job Progress Monitoring

@@ -1,3 +1,7 @@
+# v1.94.0 (2026-04-03)
+
+* **Feature**: AWS Elemental MediaLive released a new features that allows customers to use HLG 2020 as a color space for AV1 video codec.
+
 # v1.93.3 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

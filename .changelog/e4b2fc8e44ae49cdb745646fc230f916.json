@@ -1,8 +1,0 @@
-{
-    "id": "e4b2fc8e-44ae-49cd-b745-646fc230f916",
-    "type": "feature",
-    "description": "Add support for tagging of Alarm resource type",
-    "modules": [
-        "service/lightsail"
-    ]
-}

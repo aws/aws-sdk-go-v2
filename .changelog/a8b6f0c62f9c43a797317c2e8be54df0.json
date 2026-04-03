@@ -1,8 +1,0 @@
-{
-    "id": "a8b6f0c6-2f9c-43a7-9731-7c2e8be54df0",
-    "type": "feature",
-    "description": "Updated pagination token validation for ListContainerRecipes API to support maximum size of 65K characters",
-    "modules": [
-        "service/imagebuilder"
-    ]
-}

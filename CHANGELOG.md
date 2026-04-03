@@ -1,3 +1,23 @@
+# Release (2026-04-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.59.0](service/bedrock/CHANGELOG.md#v1590-2026-04-03)
+  * **Feature**: Amazon Bedrock Guardrails enforcement configuration APIs now support selective guarding controls for system prompts as well as user and assistant messages, along with SDK support for Amazon Bedrock resource policy APIs.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.53.0](service/bedrockagent/CHANGELOG.md#v1530-2026-04-03)
+  * **Feature**: Added strict parameter to ToolSpecification to allow users to enforce strict JSON schema adherence for tool input schemas.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.28.1](service/bedrockagentcorecontrol/CHANGELOG.md#v1281-2026-04-03)
+  * **Documentation**: Documentation Update for Adds support for three-legged (Authorization Code grant type) OAuth along with predefined MCP tool schema configuration for Amazon Bedrock AgentCore gateway MCP server targets.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.68.0](service/cloudwatchlogs/CHANGELOG.md#v1680-2026-04-03)
+  * **Feature**: Added queryDuration, bytesScanned, and userIdentity fields to the QueryInfo response object returned by DescribeQueries. Customers can now view detailed query cost information including who ran the query, how long it took, and the volume of data scanned.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.52.0](service/lightsail/CHANGELOG.md#v1520-2026-04-03)
+  * **Feature**: Add support for tagging of Alarm resource type
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.94.0](service/medialive/CHANGELOG.md#v1940-2026-04-03)
+  * **Feature**: AWS Elemental MediaLive released a new features that allows customers to use HLG 2020 as a color space for AV1 video codec.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.51.1](service/organizations/CHANGELOG.md#v1511-2026-04-03)
+  * **Documentation**: Updates close Account quota for member accounts in an Organization.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.28.0](service/paymentcryptography/CHANGELOG.md#v1280-2026-04-03)
+  * **Feature**: Adds optional support to retrieve previously generated import and export tokens to simplify import and export functions
+
 # Release (2026-04-02)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.51.1 (2026-04-03)
+
+* **Documentation**: Updates close Account quota for member accounts in an Organization.
+
 # v1.51.0 (2026-03-31)
 
 * **Feature**: Added Path field to Account and OrganizationalUnit objects in AWS Organizations API responses.

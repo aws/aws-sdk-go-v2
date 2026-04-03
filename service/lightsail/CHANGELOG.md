@@ -1,3 +1,7 @@
+# v1.52.0 (2026-04-03)
+
+* **Feature**: Add support for tagging of Alarm resource type
+
 # v1.51.1 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
