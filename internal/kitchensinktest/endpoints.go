@@ -17,6 +17,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"net/http"
 	"net/url"
 	"os"
 	"strings"
@@ -229,6 +230,31 @@ func bindRegion(region string) (*string, error) {
 // EndpointParameters provides the parameters that influence how endpoints are
 // resolved.
 type EndpointParameters struct {
+	// The AWS region
+	//
+	// AWS::Region
+	Region *string
+
+	// The item id
+	//
+	// Parameter is required.
+	Id *string
+}
+
+// ValidateRequired validates required parameters are set.
+func (p EndpointParameters) ValidateRequired() error {
+	if p.Region == nil {
+		return fmt.Errorf("parameter Region is required")
+	}
+
+	return nil
+}
+
+// WithDefaults returns a shallow copy of EndpointParameterswith default values
+// applied to members where applicable.
+func (p EndpointParameters) WithDefaults() EndpointParameters {
+
+	return p
 }
 
 type stringSlice []string
@@ -265,7 +291,55 @@ func (r *resolver) ResolveEndpoint(
 ) (
 	endpoint smithyendpoints.Endpoint, err error,
 ) {
-	return endpoint, fmt.Errorf("no endpoint rules defined")
+	params = params.WithDefaults()
+	if err = params.ValidateRequired(); err != nil {
+		return endpoint, fmt.Errorf("endpoint parameters are not valid, %w", err)
+	}
+	_Region := *params.Region
+	_ = _Region
+
+	// id-specific endpoint
+	if exprVal := params.Id; exprVal != nil {
+		_Id := *exprVal
+		_ = _Id
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(_Id)
+			out.WriteString(".example.")
+			out.WriteString(_Region)
+			out.WriteString(".amazonaws.com")
+			return out.String()
+		}()
+
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	}
+	// Default regional endpoint
+	uriString := func() string {
+		var out strings.Builder
+		out.WriteString("https://example.")
+		out.WriteString(_Region)
+		out.WriteString(".amazonaws.com")
+		return out.String()
+	}()
+
+	uri, err := url.Parse(uriString)
+	if err != nil {
+		return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+	}
+
+	return smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+	}, nil
 }
 
 type endpointParamsBinder interface {
@@ -274,6 +348,12 @@ type endpointParamsBinder interface {
 
 func bindEndpointParams(ctx context.Context, input interface{}, options Options) (*EndpointParameters, error) {
 	params := &EndpointParameters{}
+
+	region, err := bindRegion(options.Region)
+	if err != nil {
+		return nil, err
+	}
+	params.Region = region
 
 	if b, ok := input.(endpointParamsBinder); ok {
 		b.bindEndpointParams(params)
