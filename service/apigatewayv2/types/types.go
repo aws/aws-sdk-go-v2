@@ -475,8 +475,7 @@ type DomainNameConfiguration struct {
 	// imported or private CA certificate ARN as the regionalCertificateArn
 	OwnershipVerificationCertificateArn *string
 
-	// The Transport Layer Security (TLS) version of the security policy for this
-	// domain name. The valid values are TLS_1_0 and TLS_1_2.
+	// The Transport Layer Security (TLS) version + cipher suite for this DomainName.
 	SecurityPolicy SecurityPolicy
 
 	noSmithyDocumentSerde
