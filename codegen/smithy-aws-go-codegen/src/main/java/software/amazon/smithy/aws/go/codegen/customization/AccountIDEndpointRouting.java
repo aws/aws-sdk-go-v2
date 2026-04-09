@@ -11,7 +11,9 @@ import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.rulesengine.language.syntax.Identifier;
+import software.amazon.smithy.rulesengine.language.syntax.parameters.Parameters;
 import software.amazon.smithy.rulesengine.traits.EndpointRuleSetTrait;
+import software.amazon.smithy.rulesengine.traits.EndpointBddTrait;
 import software.amazon.smithy.utils.MapUtils;
 
 import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
@@ -76,12 +78,17 @@ public class AccountIDEndpointRouting implements GoIntegration {
     }
 
     public static boolean hasAccountIdEndpoints(Model model, ServiceShape service) {
-        if (!service.hasTrait(EndpointRuleSetTrait.class)) {
+        if (!service.hasTrait(EndpointRuleSetTrait.class) && !service.hasTrait(EndpointBddTrait.class)) {
             return false;
         }
-
-        var rules = service.expectTrait(EndpointRuleSetTrait.class).getEndpointRuleSet();
-        for (var param : rules.getParameters()) {
+        Parameters parameters;
+        if (service.hasTrait(EndpointRuleSetTrait.class)) {
+            var rules = service.expectTrait(EndpointRuleSetTrait.class).getEndpointRuleSet();
+            parameters = rules.getParameters();
+        } else {
+            parameters = service.expectTrait(EndpointBddTrait.class).getParameters();
+        }
+        for (var param : parameters) {
             if (param.getBuiltIn().orElse("").equals("AWS::Auth::AccountId")) {
                 return true;
             }
