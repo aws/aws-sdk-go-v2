@@ -5966,7 +5966,7 @@ func validateOpPutObjectInput(v *PutObjectInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutObjectInput"}
-	if v.Bucket == nil {
+	if v.Bucket == nil || *v.Bucket == "" {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if v.Key == nil {
