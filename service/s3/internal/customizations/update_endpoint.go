@@ -278,7 +278,7 @@ func hostCompatibleBucketName(u *url.URL, bucket string) bool {
 // dnsCompatibleBucketName returns true if the bucket name is DNS compatible.
 // Buckets created outside of the classic region MUST be DNS compatible.
 func dnsCompatibleBucketName(bucket string) bool {
-	if strings.Contains(bucket, "..") {
+	if bucket == "" || strings.Contains(bucket, "..") {
 		return false
 	}
 

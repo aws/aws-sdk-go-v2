@@ -74,3 +74,49 @@ func TestRemoveBucketFromPath(t *testing.T) {
 		})
 	}
 }
+
+func TestDNSCompatibleBucketName(t *testing.T) {
+	cases := []struct {
+		bucket   string
+		expected bool
+	}{
+		// valid bucket names
+		{"abc", true},
+		{"a", true},
+		{"ab", true},
+		{"my-bucket", true},
+		{"my.bucket", true},
+		{"my-bucket-123", true},
+		{"123bucket", true},
+		{"a1b2c3", true},
+		{"bucket.with.dots", true},
+		// empty bucket
+		{"", false},
+		// consecutive dots
+		{"a..bc", false},
+		// invalid characters
+		{"a$b$c", false},
+		{"bucket_name", false},
+		{"UPPERCASE", false},
+		{"Bucket", false},
+		{"bucket name", false},
+		{"bucket@name", false},
+		// starts with invalid character
+		{".bucket", false},
+		{"-bucket", false},
+		// IP address
+		{"127.0.0.1", false},
+		{"192.168.1.1", false},
+		// not IP (4 parts but with non-numeric chars)
+		{"a.b.c.d", true},
+		{"1.2.3.abc", true},
+	}
+
+	for _, tt := range cases {
+		t.Run(tt.bucket, func(t *testing.T) {
+			if got := dnsCompatibleBucketName(tt.bucket); got != tt.expected {
+				t.Errorf("dnsCompatibleBucketName(%q) = %v, want %v", tt.bucket, got, tt.expected)
+			}
+		})
+	}
+}
