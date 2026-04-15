@@ -3,8 +3,7 @@
 // Package socialmessaging provides the API client, operations, and parameter
 // types for AWS End User Messaging Social.
 //
-//	Amazon Web Services End User Messaging Social, also referred to as Social
-//
+//  Amazon Web Services End User Messaging Social, also referred to as Social
 // messaging, is a messaging service that enables application developers to
 // incorporate WhatsApp into their existing workflows. The Amazon Web Services End
 // User Messaging Social API provides information about the Amazon Web Services End
@@ -23,7 +22,7 @@
 // information, such as integration with other Amazon Web Services services, and
 // the quotas that apply to use of the service.
 //
-// # Regional availability
+// Regional availability
 //
 // The Amazon Web Services End User Messaging Social API is available across
 // several Amazon Web Services Regions and it provides a dedicated endpoint for
@@ -45,3 +44,5 @@
 // [Amazon Web Services End User Messaging endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/end-user-messaging.html
 // [What is Amazon Web Services End User Messaging Social]: https://docs.aws.amazon.com/sms-voice/latest/userguide/what-is-service.html
 package socialmessaging
+
+

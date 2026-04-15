@@ -3,7 +3,7 @@
 // Package customerprofiles provides the API client, operations, and parameter
 // types for Amazon Connect Customer Profiles.
 //
-// # Amazon Connect Customer Profiles
+// Amazon Connect Customer Profiles
 //
 // [Customer Profiles actions]
 //
@@ -22,3 +22,5 @@
 // [Customer Profiles actions]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Customer_Profiles.html
 // [Use Customer Profiles]: https://docs.aws.amazon.com/connect/latest/adminguide/customer-profiles.html
 package customerprofiles
+
+

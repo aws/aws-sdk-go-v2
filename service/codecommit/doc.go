@@ -3,7 +3,7 @@
 // Package codecommit provides the API client, operations, and parameter types for
 // AWS CodeCommit.
 //
-// # CodeCommit
+// CodeCommit
 //
 // This is the CodeCommit API Reference. This reference provides descriptions of
 // the operations and data types for CodeCommit API along with usage examples.
@@ -14,7 +14,7 @@
 //
 // BatchGetRepositories
 //   - , which returns information about one or more repositories associated with
-//     your Amazon Web Services account.
+//   your Amazon Web Services account.
 //
 // CreateRepository
 //   - , which creates an CodeCommit repository.
@@ -27,19 +27,19 @@
 //
 // ListRepositories
 //   - , which lists all CodeCommit repositories associated with your Amazon Web
-//     Services account.
+//   Services account.
 //
 // UpdateRepositoryDescription
 //   - , which sets or updates the description of the repository.
 //
 // UpdateRepositoryEncryptionKey
 //   - , which updates the Key Management Service encryption key used to encrypt
-//     and decrypt a repository.
+//   and decrypt a repository.
 //
 // UpdateRepositoryName
 //   - , which changes the name of the repository. If you change the name of a
-//     repository, no other users of that repository can access it until you send them
-//     the new HTTPS or SSH URL to use.
+//   repository, no other users of that repository can access it until you send them
+//   the new HTTPS or SSH URL to use.
 //
 // Branches, by calling the following:
 //
@@ -48,7 +48,7 @@
 //
 // DeleteBranch
 //   - , which deletes the specified branch in a repository unless it is the
-//     default branch.
+//   default branch.
 //
 // GetBranch
 //   - , which returns information about a specified branch.
@@ -66,7 +66,7 @@
 //
 // GetBlob
 //   - , which returns the base-64 encoded content of an individual Git blob
-//     object in a repository.
+//   object in a repository.
 //
 // GetFile
 //   - , which returns the base-64 encoded content of a specified file.
@@ -90,38 +90,38 @@
 //
 // GetCommit
 //   - , which returns information about a commit, including commit messages and
-//     author and committer information.
+//   author and committer information.
 //
 // GetDifferences
 //   - , which returns information about the differences in a valid commit
-//     specifier (such as a branch, tag, HEAD, commit ID, or other fully qualified
-//     reference).
+//   specifier (such as a branch, tag, HEAD, commit ID, or other fully qualified
+//   reference).
 //
 // Merges, by calling the following:
 //
 // BatchDescribeMergeConflicts
 //   - , which returns information about conflicts in a merge between commits in a
-//     repository.
+//   repository.
 //
 // CreateUnreferencedMergeCommit
 //   - , which creates an unreferenced commit between two branches or commits for
-//     the purpose of comparing them and identifying any potential conflicts.
+//   the purpose of comparing them and identifying any potential conflicts.
 //
 // DescribeMergeConflicts
 //   - , which returns information about merge conflicts between the base, source,
-//     and destination versions of a file in a potential merge.
+//   and destination versions of a file in a potential merge.
 //
 // GetMergeCommit
 //   - , which returns information about the merge between a source and
-//     destination commit.
+//   destination commit.
 //
 // GetMergeConflicts
 //   - , which returns information about merge conflicts between the source and
-//     destination branch in a pull request.
+//   destination branch in a pull request.
 //
 // GetMergeOptions
 //   - , which returns information about the available merge options between two
-//     branches or commit specifiers.
+//   branches or commit specifiers.
 //
 // MergeBranchesByFastForward
 //   - , which merges two branches using the fast-forward merge option.
@@ -148,7 +148,7 @@
 //
 // EvaluatePullRequestApprovalRules
 //   - , which evaluates whether a pull request has met all the conditions
-//     specified in its associated approval rules.
+//   specified in its associated approval rules.
 //
 // GetCommentsForPullRequest
 //   - , which returns information about comments on a specified pull request.
@@ -158,38 +158,38 @@
 //
 // GetPullRequestApprovalStates
 //   - , which returns information about the approval states for a specified pull
-//     request.
+//   request.
 //
 // GetPullRequestOverrideState
 //   - , which returns information about whether approval rules have been set
-//     aside (overriden) for a pull request, and if so, the Amazon Resource Name (ARN)
-//     of the user or identity that overrode the rules and their requirements for the
-//     pull request.
+//   aside (overriden) for a pull request, and if so, the Amazon Resource Name (ARN)
+//   of the user or identity that overrode the rules and their requirements for the
+//   pull request.
 //
 // ListPullRequests
 //   - , which lists all pull requests for a repository.
 //
 // MergePullRequestByFastForward
 //   - , which merges the source destination branch of a pull request into the
-//     specified destination branch for that pull request using the fast-forward merge
-//     option.
+//   specified destination branch for that pull request using the fast-forward merge
+//   option.
 //
 // MergePullRequestBySquash
 //   - , which merges the source destination branch of a pull request into the
-//     specified destination branch for that pull request using the squash merge
-//     option.
+//   specified destination branch for that pull request using the squash merge
+//   option.
 //
 // MergePullRequestByThreeWay
 //   - , which merges the source destination branch of a pull request into the
-//     specified destination branch for that pull request using the three-way merge
-//     option.
+//   specified destination branch for that pull request using the three-way merge
+//   option.
 //
 // OverridePullRequestApprovalRules
 //   - , which sets aside all approval rule requirements for a pull request.
 //
 // PostCommentForPullRequest
 //   - , which posts a comment to a pull request at the specified line, file, or
-//     request.
+//   request.
 //
 // UpdatePullRequestApprovalRuleContent
 //   - , which updates the structure of an approval rule for a pull request.
@@ -210,48 +210,48 @@
 //
 // AssociateApprovalRuleTemplateWithRepository
 //   - , which associates a template with a specified repository. After the
-//     template is associated with a repository, CodeCommit creates approval rules that
-//     match the template conditions on every pull request created in the specified
-//     repository.
+//   template is associated with a repository, CodeCommit creates approval rules that
+//   match the template conditions on every pull request created in the specified
+//   repository.
 //
 // BatchAssociateApprovalRuleTemplateWithRepositories
 //   - , which associates a template with one or more specified repositories.
-//     After the template is associated with a repository, CodeCommit creates approval
-//     rules that match the template conditions on every pull request created in the
-//     specified repositories.
+//   After the template is associated with a repository, CodeCommit creates approval
+//   rules that match the template conditions on every pull request created in the
+//   specified repositories.
 //
 // BatchDisassociateApprovalRuleTemplateFromRepositories
 //   - , which removes the association between a template and specified
-//     repositories so that approval rules based on the template are not automatically
-//     created when pull requests are created in those repositories.
+//   repositories so that approval rules based on the template are not automatically
+//   created when pull requests are created in those repositories.
 //
 // CreateApprovalRuleTemplate
 //   - , which creates a template for approval rules that can then be associated
-//     with one or more repositories in your Amazon Web Services account.
+//   with one or more repositories in your Amazon Web Services account.
 //
 // DeleteApprovalRuleTemplate
 //   - , which deletes the specified template. It does not remove approval rules
-//     on pull requests already created with the template.
+//   on pull requests already created with the template.
 //
 // DisassociateApprovalRuleTemplateFromRepository
 //   - , which removes the association between a template and a repository so that
-//     approval rules based on the template are not automatically created when pull
-//     requests are created in the specified repository.
+//   approval rules based on the template are not automatically created when pull
+//   requests are created in the specified repository.
 //
 // GetApprovalRuleTemplate
 //   - , which returns information about an approval rule template.
 //
 // ListApprovalRuleTemplates
 //   - , which lists all approval rule templates in the Amazon Web Services Region
-//     in your Amazon Web Services account.
+//   in your Amazon Web Services account.
 //
 // ListAssociatedApprovalRuleTemplatesForRepository
 //   - , which lists all approval rule templates that are associated with a
-//     specified repository.
+//   specified repository.
 //
 // ListRepositoriesForApprovalRuleTemplate
 //   - , which lists all repositories associated with the specified approval rule
-//     template.
+//   template.
 //
 // UpdateApprovalRuleTemplateDescription
 //   - , which updates the description of an approval rule template.
@@ -275,11 +275,11 @@
 //
 // GetCommentsForComparedCommit
 //   - , which returns information about comments on the comparison between two
-//     commit specifiers in a repository.
+//   commit specifiers in a repository.
 //
 // PostCommentForComparedCommit
 //   - , which creates a comment on the comparison between two commit specifiers
-//     in a repository.
+//   in a repository.
 //
 // PostCommentReply
 //   - , which creates a reply to a comment.
@@ -295,7 +295,7 @@
 //
 // ListTagsForResource
 //   - , which gets information about Amazon Web Servicestags for a specified
-//     Amazon Resource Name (ARN) in CodeCommit.
+//   Amazon Resource Name (ARN) in CodeCommit.
 //
 // TagResource
 //   - , which adds or updates tags for a resource in CodeCommit.
@@ -310,13 +310,15 @@
 //
 // PutRepositoryTriggers
 //   - , which replaces all triggers for a repository and can be used to create or
-//     delete triggers.
+//   delete triggers.
 //
 // TestRepositoryTriggers
 //   - , which tests the functionality of a repository trigger by sending data to
-//     the trigger target.
+//   the trigger target.
 //
 // For information about how to use CodeCommit, see the [CodeCommit User Guide].
 //
 // [CodeCommit User Guide]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
 package codecommit
+
+

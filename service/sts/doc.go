@@ -3,7 +3,7 @@
 // Package sts provides the API client, operations, and parameter types for AWS
 // Security Token Service.
 //
-// # Security Token Service
+// Security Token Service
 //
 // Security Token Service (STS) enables you to request temporary,
 // limited-privilege credentials for users. This guide provides descriptions of the
@@ -11,3 +11,5 @@
 //
 // [Temporary Security Credentials]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html
 package sts
+
+

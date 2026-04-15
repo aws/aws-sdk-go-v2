@@ -3,7 +3,7 @@
 // Package elasticloadbalancing provides the API client, operations, and parameter
 // types for Elastic Load Balancing.
 //
-// # Elastic Load Balancing
+// Elastic Load Balancing
 //
 // A load balancer can distribute incoming traffic across your EC2 instances. This
 // enables you to increase the availability of your application. The load balancer
@@ -31,3 +31,5 @@
 //
 // [Elastic Load Balancing User Guide]: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/
 package elasticloadbalancing
+
+

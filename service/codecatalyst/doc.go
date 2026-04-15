@@ -17,7 +17,7 @@
 //
 // GetSubscription
 //   - , which returns information about the Amazon Web Services account used for
-//     billing purposes and the billing plan for the space.
+//   billing purposes and the billing plan for the space.
 //
 // ListSpaces
 //   - , which retrieves a list of spaces.
@@ -48,7 +48,7 @@
 //
 // CreateSourceRepositoryBranch
 //   - , which creates a branch in a specified repository where you can work on
-//     code.
+//   code.
 //
 // DeleteSourceRepository
 //   - , which deletes a source repository.
@@ -58,7 +58,7 @@
 //
 // GetSourceRepositoryCloneUrls
 //   - , which returns information about the URLs that can be used with a Git
-//     client to clone a source repository.
+//   client to clone a source repository.
 //
 // ListSourceRepositories
 //   - , which retrieves a list of source repositories in a project.
@@ -70,7 +70,7 @@
 //
 // CreateDevEnvironment
 //   - , which creates a Dev Environment, where you can quickly work on the code
-//     stored in the source repositories of your project.
+//   stored in the source repositories of your project.
 //
 // DeleteDevEnvironment
 //   - , which deletes a Dev Environment.
@@ -130,11 +130,11 @@
 //
 // ListEventLogs
 //   - , which retrieves a list of events that occurred during a specified time
-//     period in a space.
+//   period in a space.
 //
 // VerifySession
 //   - , which verifies whether the calling user has a valid Amazon CodeCatalyst
-//     login and session.
+//   login and session.
 //
 // If you are using the Amazon CodeCatalyst APIs with an SDK or the CLI, you must
 // configure your computer to work with Amazon CodeCatalyst and single sign-on
@@ -142,3 +142,5 @@
 //
 // [Setting up to use the CLI with Amazon CodeCatalyst]: https://docs.aws.amazon.com/codecatalyst/latest/userguide/set-up-cli.html
 package codecatalyst
+
+

@@ -3,7 +3,7 @@
 // Package cognitoidentity provides the API client, operations, and parameter
 // types for Amazon Cognito Identity.
 //
-// # Amazon Cognito Federated Identities
+// Amazon Cognito Federated Identities
 //
 // Amazon Cognito Federated Identities is a web service that delivers scoped
 // temporary credentials to mobile devices and other untrusted environments. It
@@ -25,3 +25,5 @@
 // [Authentication Flow]: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html
 // [Amazon Cognito Federated Identities]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html
 package cognitoidentity
+
+

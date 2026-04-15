@@ -19,3 +19,5 @@
 // [What is Amazon Web Services IoT FleetWise?]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/
 // [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
 package iotfleetwise
+
+

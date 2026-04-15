@@ -3,8 +3,7 @@
 // Package geoplaces provides the API client, operations, and parameter types for
 // Amazon Location Service Places V2.
 //
-//	The Places API enables powerful location search and geocoding capabilities for
-//
+//  The Places API enables powerful location search and geocoding capabilities for
 // your applications, offering global coverage with rich, detailed information. Key
 // features include:
 //
@@ -28,3 +27,5 @@
 //
 //   - Regular data updates to ensure accuracy and relevance
 package geoplaces
+
+

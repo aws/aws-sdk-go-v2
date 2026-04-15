@@ -13,9 +13,9 @@
 //
 // In this guide:
 //
-// # CommonParameters
+// CommonParameters
 //
-// # CommonErrors
+// CommonErrors
 //
 // Available languages for AWS SDK:
 //
@@ -54,3 +54,5 @@
 // [AWS Command Line Interface]: https://docs.aws.amazon.com/cli/latest/reference/braket/
 // [Ruby]: https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket.html
 package braket
+
+

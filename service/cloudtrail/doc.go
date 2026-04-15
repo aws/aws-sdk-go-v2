@@ -3,7 +3,7 @@
 // Package cloudtrail provides the API client, operations, and parameter types for
 // AWS CloudTrail.
 //
-// # CloudTrail
+// CloudTrail
 //
 // This is the CloudTrail API Reference. It provides descriptions of actions, data
 // types, common parameters, and common errors for CloudTrail.
@@ -28,3 +28,5 @@
 // [CloudTrail User Guide]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html
 // [Tools to Build on Amazon Web Services]: http://aws.amazon.com/tools/
 package cloudtrail
+
+

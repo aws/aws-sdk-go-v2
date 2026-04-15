@@ -3,7 +3,7 @@
 // Package elasticsearchservice provides the API client, operations, and parameter
 // types for Amazon Elasticsearch Service.
 //
-// # Amazon Elasticsearch Configuration Service
+// Amazon Elasticsearch Configuration Service
 //
 // Use the Amazon Elasticsearch Configuration API to create, configure, and manage
 // Elasticsearch domains.
@@ -19,3 +19,5 @@
 // [Regions and Endpoints]: http://docs.aws.amazon.com/general/latest/gr/rande.html#elasticsearch-service-regions
 // [Amazon Elasticsearch Service Developer Guide]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-configuration-samples.html
 package elasticsearchservice
+
+

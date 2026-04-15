@@ -3,7 +3,7 @@
 // Package applicationdiscoveryservice provides the API client, operations, and
 // parameter types for AWS Application Discovery Service.
 //
-// # Amazon Web Services Application Discovery Service
+// Amazon Web Services Application Discovery Service
 //
 // Amazon Web Services Application Discovery Service (Application Discovery
 // Service) helps you plan application migration projects. It automatically
@@ -14,42 +14,42 @@
 // collecting data about your on-premises servers:
 //
 //   - Agentless discovery using Amazon Web Services Application Discovery Service
-//     Agentless Collector (Agentless Collector), which doesn't require you to install
-//     an agent on each host.
+//   Agentless Collector (Agentless Collector), which doesn't require you to install
+//   an agent on each host.
 //
 //   - Agentless Collector gathers server information regardless of the operating
-//     systems, which minimizes the time required for initial on-premises
-//     infrastructure assessment.
+//   systems, which minimizes the time required for initial on-premises
+//   infrastructure assessment.
 //
 //   - Agentless Collector doesn't collect information about network dependencies,
-//     only agent-based discovery collects that information.
+//   only agent-based discovery collects that information.
 //
 //   - Agent-based discovery using the Amazon Web Services Application Discovery
-//     Agent (Application Discovery Agent) collects a richer set of data than agentless
-//     discovery, which you install on one or more hosts in your data center.
+//   Agent (Application Discovery Agent) collects a richer set of data than agentless
+//   discovery, which you install on one or more hosts in your data center.
 //
 //   - The agent captures infrastructure and application information, including an
-//     inventory of running processes, system performance information, resource
-//     utilization, and network dependencies.
+//   inventory of running processes, system performance information, resource
+//   utilization, and network dependencies.
 //
 //   - The information collected by agents is secured at rest and in transit to
-//     the Application Discovery Service database in the Amazon Web Services cloud. For
-//     more information, see [Amazon Web Services Application Discovery Agent].
+//   the Application Discovery Service database in the Amazon Web Services cloud. For
+//   more information, see [Amazon Web Services Application Discovery Agent].
 //
 //   - Amazon Web Services Partner Network (APN) solutions integrate with
-//     Application Discovery Service, enabling you to import details of your
-//     on-premises environment directly into Amazon Web Services Migration Hub
-//     (Migration Hub) without using Agentless Collector or Application Discovery
-//     Agent.
+//   Application Discovery Service, enabling you to import details of your
+//   on-premises environment directly into Amazon Web Services Migration Hub
+//   (Migration Hub) without using Agentless Collector or Application Discovery
+//   Agent.
 //
 //   - Third-party application discovery tools can query Amazon Web Services
-//     Application Discovery Service, and they can write to the Application Discovery
-//     Service database using the public API.
+//   Application Discovery Service, and they can write to the Application Discovery
+//   Service database using the public API.
 //
 //   - In this way, you can import data into Migration Hub and view it, so that
-//     you can associate applications with servers and track migrations.
+//   you can associate applications with servers and track migrations.
 //
-// # Working With This Guide
+// Working With This Guide
 //
 // This API reference provides descriptions, syntax, and usage examples for each
 // of the actions and data types for Application Discovery Service. The topic for
@@ -59,17 +59,17 @@
 // information, see [Amazon Web Services SDKs].
 //
 //   - Remember that you must set your Migration Hub home Region before you call
-//     any of these APIs.
+//   any of these APIs.
 //
 //   - You must make API calls for write actions (create, notify, associate,
-//     disassociate, import, or put) while in your home Region, or a
-//     HomeRegionNotSetException error is returned.
+//   disassociate, import, or put) while in your home Region, or a
+//   HomeRegionNotSetException error is returned.
 //
 //   - API calls for read actions (list, describe, stop, and delete) are permitted
-//     outside of your home Region.
+//   outside of your home Region.
 //
 //   - Although it is unlikely, the Migration Hub home Region could change. If you
-//     call APIs outside the home Region, an InvalidInputException is returned.
+//   call APIs outside the home Region, an InvalidInputException is returned.
 //
 //   - You must call GetHomeRegion to obtain the latest Migration Hub home Region.
 //
@@ -84,3 +84,5 @@
 // [Amazon Web Services Application Discovery Service FAQ]: http://aws.amazon.com/application-discovery/faqs/
 // [Amazon Web Services Application Discovery Service User Guide]: https://docs.aws.amazon.com/application-discovery/latest/userguide/
 package applicationdiscoveryservice
+
+

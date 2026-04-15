@@ -3,7 +3,7 @@
 // Package mwaa provides the API client, operations, and parameter types for
 // AmazonMWAA.
 //
-// # Amazon Managed Workflows for Apache Airflow
+// Amazon Managed Workflows for Apache Airflow
 //
 // This section contains the Amazon Managed Workflows for Apache Airflow (MWAA)
 // API reference documentation. For more information, see [What is Amazon MWAA?].
@@ -11,7 +11,7 @@
 // Endpoints
 //
 //   - api.airflow.{region}.amazonaws.com - This endpoint is used for environment
-//     management.
+//   management.
 //
 // [CreateEnvironment]
 //
@@ -30,7 +30,7 @@
 // [UpdateEnvironment]
 //
 //   - env.airflow.{region}.amazonaws.com - This endpoint is used to operate the
-//     Airflow environment.
+//   Airflow environment.
 //
 // [CreateCliToken]
 //
@@ -38,7 +38,7 @@
 //
 // [InvokeRestApi]
 //
-// # Regions
+// Regions
 //
 // For a list of supported regions, see [Amazon MWAA endpoints and quotas] in the Amazon Web Services General
 // Reference.
@@ -57,3 +57,5 @@
 // [UpdateEnvironment]: https://docs.aws.amazon.com/mwaa/latest/API/API_UpdateEnvironment.html
 // [ListTagsForResource]: https://docs.aws.amazon.com/mwaa/latest/API/API_ListTagsForResource.html
 package mwaa
+
+

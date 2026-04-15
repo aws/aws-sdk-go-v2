@@ -3,7 +3,7 @@
 // Package docdbelastic provides the API client, operations, and parameter types
 // for Amazon DocumentDB Elastic Clusters.
 //
-// # Amazon DocumentDB elastic clusters
+// Amazon DocumentDB elastic clusters
 //
 // Amazon DocumentDB elastic-clusters support workloads with millions of
 // reads/writes per second and petabytes of storage capacity. Amazon DocumentDB
@@ -13,12 +13,14 @@
 // Amazon DocumentDB elastic-clusters were created to:
 //
 //   - provide a solution for customers looking for a database that provides
-//     virtually limitless scale with rich query capabilities and MongoDB API
-//     compatibility.
+//   virtually limitless scale with rich query capabilities and MongoDB API
+//   compatibility.
 //
 //   - give customers higher connection limits, and to reduce downtime from
-//     patching.
+//   patching.
 //
 //   - continue investing in a cloud-native, elastic, and class leading
-//     architecture for JSON workloads.
+//   architecture for JSON workloads.
 package docdbelastic
+
+

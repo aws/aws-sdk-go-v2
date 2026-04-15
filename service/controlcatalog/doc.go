@@ -28,3 +28,5 @@
 // [Data types]: https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_Types.html
 // [Common parameters]: https://docs.aws.amazon.com/controlcatalog/latest/APIReference/CommonParameters.html
 package controlcatalog
+
+

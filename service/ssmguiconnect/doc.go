@@ -3,7 +3,7 @@
 // Package ssmguiconnect provides the API client, operations, and parameter types
 // for AWS SSM-GUIConnect.
 //
-// # AWS Systems Manager GUI Connect
+// AWS Systems Manager GUI Connect
 //
 // Systems Manager GUI Connect, a component of Fleet Manager, lets you connect to
 // your Window Server-type Amazon Elastic Compute Cloud (Amazon EC2) instances
@@ -25,3 +25,5 @@
 // [Setting up Amazon Web Services Systems Manager]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html
 // [Connect to a Windows Server managed instance using Remote Desktop]: https://docs.aws.amazon.com/systems-manager/latest/userguide/fleet-rdp.html
 package ssmguiconnect
+
+

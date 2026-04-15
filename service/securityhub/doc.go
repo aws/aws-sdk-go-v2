@@ -67,24 +67,26 @@
 // The following throttling limits apply to Security Hub CSPM API operations.
 //
 //   - BatchEnableStandards - RateLimit of 1 request per second. BurstLimit of 1
-//     request per second.
+//   request per second.
 //
 //   - GetFindings - RateLimit of 3 requests per second. BurstLimit of 6 requests
-//     per second.
+//   per second.
 //
 //   - BatchImportFindings - RateLimit of 10 requests per second. BurstLimit of 30
-//     requests per second.
+//   requests per second.
 //
 //   - BatchUpdateFindings - RateLimit of 10 requests per second. BurstLimit of 30
-//     requests per second.
+//   requests per second.
 //
 //   - UpdateStandardsControl - RateLimit of 1 request per second. BurstLimit of 5
-//     requests per second.
+//   requests per second.
 //
 //   - All other operations - RateLimit of 10 requests per second. BurstLimit of 30
-//     requests per second.
+//   requests per second.
 //
 // [Security Hub CSPM User Guide]: https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html
 // [Tools to Build on Amazon Web Services]: http://aws.amazon.com/developer/tools/
 // [Central configuration terms and concepts]: https://docs.aws.amazon.com/securityhub/latest/userguide/central-configuration-intro.html#central-configuration-concepts
 package securityhub
+
+

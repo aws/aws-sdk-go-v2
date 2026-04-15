@@ -12,10 +12,6 @@ require github.com/aws/smithy-go v1.24.2
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../
 
-replace github.com/aws/aws-sdk-go-v2/internal/configsources => ../../../internal/configsources/
-
-replace github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 => ../../../internal/endpoints/v2/
-
 replace github.com/aws/aws-sdk-go-v2/service/dynamodb => ../../../service/dynamodb/
 
 replace github.com/aws/aws-sdk-go-v2/service/dynamodbstreams => ../../../service/dynamodbstreams/

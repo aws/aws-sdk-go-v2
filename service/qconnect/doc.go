@@ -34,3 +34,5 @@
 // [automated abuse detection]: https://docs.aws.amazon.com/bedrock/latest/userguide/abuse-detection.html
 // [Amazon Q data types]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Q_Connect.html
 package qconnect
+
+

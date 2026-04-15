@@ -2,4 +2,7 @@
 
 // Package kitchensinktest provides the API client, operations, and parameter
 // types for the API.
+//
 package kitchensinktest
+
+

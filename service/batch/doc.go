@@ -3,7 +3,7 @@
 // Package batch provides the API client, operations, and parameter types for AWS
 // Batch.
 //
-// # Batch
+// Batch
 //
 // Using Batch, you can run batch computing workloads on the Amazon Web Services
 // Cloud. Batch computing is a common means for developers, scientists, and
@@ -22,3 +22,5 @@
 // that you can focus on analyzing results and solving your specific problems
 // instead.
 package batch
+
+

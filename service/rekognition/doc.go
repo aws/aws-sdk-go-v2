@@ -6,7 +6,7 @@
 // This is the API Reference for [Amazon Rekognition Image], [Amazon Rekognition Custom Labels], [Amazon Rekognition Stored Video], [Amazon Rekognition Streaming Video]. It provides descriptions of actions, data
 // types, common parameters, and common errors.
 //
-// # Amazon Rekognition Image
+// Amazon Rekognition Image
 //
 // [AssociateFaces]
 //
@@ -62,7 +62,7 @@
 //
 // [StartMediaAnalysisJob]
 //
-// # Amazon Rekognition Custom Labels
+// Amazon Rekognition Custom Labels
 //
 // [CopyProjectVersion]
 //
@@ -104,7 +104,7 @@
 //
 // [UpdateDatasetEntries]
 //
-// # Amazon Rekognition Video Stored Video
+// Amazon Rekognition Video Stored Video
 //
 // [GetCelebrityRecognition]
 //
@@ -138,7 +138,7 @@
 //
 // [StartTextDetection]
 //
-// # Amazon Rekognition Video Streaming Video
+// Amazon Rekognition Video Streaming Video
 //
 // [CreateStreamProcessor]
 //
@@ -229,3 +229,5 @@
 // [StartProjectVersion]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartProjectVersion.html
 // [GetFaceDetection]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetFaceDetection.html
 package rekognition
+
+

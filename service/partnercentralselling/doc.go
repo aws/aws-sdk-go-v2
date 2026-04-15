@@ -3,9 +3,9 @@
 // Package partnercentralselling provides the API client, operations, and
 // parameter types for Partner Central Selling API.
 //
-// # AWS Partner Central API for Selling
+// AWS Partner Central API for Selling
 //
-// # AWS Partner Central API for Selling Reference Guide
+// AWS Partner Central API for Selling Reference Guide
 //
 // This Amazon Web Services (AWS) Partner Central API reference is designed to
 // help [AWS Partners]integrate Customer Relationship Management (CRM) systems with AWS Partner
@@ -19,30 +19,32 @@
 // Features offered by AWS Partner Central API
 //
 //   - Opportunity management: Manages coselling opportunities through API actions
-//     such as CreateOpportunity , UpdateOpportunity , ListOpportunities ,
-//     GetOpportunity , and AssignOpportunity .
+//   such as CreateOpportunity , UpdateOpportunity , ListOpportunities ,
+//   GetOpportunity , and AssignOpportunity .
 //
 //   - AWS referral management: Manages referrals shared by AWS using actions such
-//     as ListEngagementInvitations , GetEngagementInvitation ,
-//     StartEngagementByAcceptingInvitation , and RejectEngagementInvitation .
+//   as ListEngagementInvitations , GetEngagementInvitation ,
+//   StartEngagementByAcceptingInvitation , and RejectEngagementInvitation .
 //
 //   - Entity association: Associates related entities such as AWS Products,
-//     Partner Solutions, and AWS Marketplace Private Offers with opportunities using
-//     the actions AssociateOpportunity , and DisassociateOpportunity .
+//   Partner Solutions, and AWS Marketplace Private Offers with opportunities using
+//   the actions AssociateOpportunity , and DisassociateOpportunity .
 //
 //   - View AWS opportunity details: Retrieves real-time summaries of AWS
-//     opportunities using the GetAWSOpportunitySummary action.
+//   opportunities using the GetAWSOpportunitySummary action.
 //
 //   - List solutions: Provides list APIs for listing partner offers using
-//     ListSolutions .
+//   ListSolutions .
 //
 //   - Event subscription: Subscribe to real-time opportunity updates through AWS
-//     EventBridge by using actions such as Opportunity Created, Opportunity Updated,
-//     Engagement Invitation Accepted, Engagement Invitation Rejected, and Engagement
-//     Invitation Created.
+//   EventBridge by using actions such as Opportunity Created, Opportunity Updated,
+//   Engagement Invitation Accepted, Engagement Invitation Rejected, and Engagement
+//   Invitation Created.
 //
 // [Tools to Build on AWS]: http://aws.amazon.com/developer/tools/
 // [AWS Partners]: http://aws.amazon.com/partners/programs/
 // [Actions]: https://docs.aws.amazon.com/partner-central/latest/selling-api/API_Operations.html
 // [Getting Started with AWS]: http://aws.amazon.com/getting-started
 package partnercentralselling
+
+

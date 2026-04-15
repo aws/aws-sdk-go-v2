@@ -14,16 +14,18 @@
 // Application Signals provides the following benefits:
 //
 //   - Automatically collect metrics and traces from your applications, and
-//     display key metrics such as call volume, availability, latency, faults, and
-//     errors.
+//   display key metrics such as call volume, availability, latency, faults, and
+//   errors.
 //
 //   - Create and monitor service level objectives (SLOs).
 //
 //   - See a map of your application topology that Application Signals
-//     automatically discovers, that gives you a visual representation of your
-//     applications, dependencies, and their connectivity.
+//   automatically discovers, that gives you a visual representation of your
+//   applications, dependencies, and their connectivity.
 //
 // Application Signals works with CloudWatch RUM, CloudWatch Synthetics canaries,
 // and Amazon Web Services Service Catalog AppRegistry, to display your client
 // pages, Synthetics canaries, and application names within dashboards and maps.
 package applicationsignals
+
+

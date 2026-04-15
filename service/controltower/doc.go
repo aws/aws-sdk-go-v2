@@ -73,7 +73,7 @@
 //
 // For more information about these types of resources, see the [Amazon Web Services Control Tower User Guide].
 //
-// # About control APIs
+// About control APIs
 //
 // These interfaces allow you to apply the Amazon Web Services library of
 // pre-defined controls to your organizational units, programmatically. In Amazon
@@ -84,7 +84,7 @@
 //   - the controlIdentifier for the control--or guardrail--you are targeting.
 //
 //   - the ARN associated with the target organizational unit (OU), which we call
-//     the targetIdentifier .
+//   the targetIdentifier .
 //
 //   - the ARN associated with a resource that you wish to tag or untag.
 //
@@ -95,7 +95,7 @@
 // view the controlIdentifier in the console on the Control details page, as well
 // as in the documentation.
 //
-// # About identifiers for Amazon Web Services Control Tower
+// About identifiers for Amazon Web Services Control Tower
 //
 // The Amazon Web Services Control Tower controlIdentifier is unique in each
 // Amazon Web Services Region for each control. You can find the controlIdentifier
@@ -109,14 +109,14 @@
 // Some controls have two identifiers
 //
 //   - ARN format for Amazon Web Services Control Tower:
-//     arn:aws:controltower:{REGION}::control/{CONTROL_TOWER_OPAQUE_ID}
+//   arn:aws:controltower:{REGION}::control/{CONTROL_TOWER_OPAQUE_ID}
 //
 // Example:
 //
-//	arn:aws:controltower:us-west-2::control/AWS-GR_AUTOSCALING_LAUNCH_CONFIG_PUBLIC_IP_DISABLED
+//   arn:aws:controltower:us-west-2::control/AWS-GR_AUTOSCALING_LAUNCH_CONFIG_PUBLIC_IP_DISABLED
 //
-//	- ARN format for Amazon Web Services Control Catalog:
-//	arn:{PARTITION}:controlcatalog:::control/{CONTROL_CATALOG_OPAQUE_ID}
+//   - ARN format for Amazon Web Services Control Catalog:
+//   arn:{PARTITION}:controlcatalog:::control/{CONTROL_CATALOG_OPAQUE_ID}
 //
 // You can find the {CONTROL_CATALOG_OPAQUE_ID} in the [Amazon Web Services Control Tower Controls Reference Guide], or in the Amazon Web
 // Services Control Tower console, on the Control details page.
@@ -134,9 +134,9 @@
 //
 // OU ARN format:
 //
-//	arn:${Partition}:organizations::${MasterAccountId}:ou/o-${OrganizationId}/ou-${OrganizationalUnitId}
+//     arn:${Partition}:organizations::${MasterAccountId}:ou/o-${OrganizationId}/ou-${OrganizationalUnitId}
 //
-// # About landing zone APIs
+// About landing zone APIs
 //
 // You can configure and launch an Amazon Web Services Control Tower landing zone
 // with APIs. For an introduction and steps, see [Getting started with Amazon Web Services Control Tower using APIs].
@@ -145,7 +145,7 @@
 // operations for landing zones are detailed in this document, the [API reference manual], in the
 // "Actions" section.
 //
-// # About baseline APIs
+// About baseline APIs
 //
 // You can apply the AWSControlTowerBaseline baseline to an organizational unit
 // (OU) as a way to register the OU with Amazon Web Services Control Tower,
@@ -161,20 +161,20 @@
 // About Amazon Web Services Control Catalog identifiers
 //
 //   - The EnableControl and DisableControl API operations can be called by
-//     specifying either the Amazon Web Services Control Tower identifer or the Amazon
-//     Web Services Control Catalog identifier. The API response returns the same type
-//     of identifier that you specified when calling the API.
+//   specifying either the Amazon Web Services Control Tower identifer or the Amazon
+//   Web Services Control Catalog identifier. The API response returns the same type
+//   of identifier that you specified when calling the API.
 //
 //   - If you use an Amazon Web Services Control Tower identifier to call the
-//     EnableControl API, and then call EnableControl again with an Amazon Web
-//     Services Control Catalog identifier, Amazon Web Services Control Tower returns
-//     an error message stating that the control is already enabled. Similar behavior
-//     applies to the DisableControl API operation.
+//   EnableControl API, and then call EnableControl again with an Amazon Web
+//   Services Control Catalog identifier, Amazon Web Services Control Tower returns
+//   an error message stating that the control is already enabled. Similar behavior
+//   applies to the DisableControl API operation.
 //
 //   - Mandatory controls and the landing-zone-level Region deny control have
-//     Amazon Web Services Control Tower identifiers only.
+//   Amazon Web Services Control Tower identifiers only.
 //
-// # Details and examples
+// Details and examples
 //
 // [Control API input and output examples with CLI]
 //
@@ -198,7 +198,7 @@
 //
 // To view the open source resource repository on GitHub, see [aws-cloudformation/aws-cloudformation-resource-providers-controltower]
 //
-// # Recording API Requests
+// Recording API Requests
 //
 // Amazon Web Services Control Tower supports Amazon Web Services CloudTrail, a
 // service that records Amazon Web Services API calls for your Amazon Web Services
@@ -264,3 +264,5 @@
 // [ListLandingZones]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListLandingZones.html
 // [UpdateEnabledBaseline]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_UpdateEnabledBaseline.html
 package controltower
+
+

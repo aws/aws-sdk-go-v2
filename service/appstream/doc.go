@@ -3,7 +3,7 @@
 // Package appstream provides the API client, operations, and parameter types for
 // Amazon AppStream.
 //
-// # Amazon WorkSpaces Applications
+// Amazon WorkSpaces Applications
 //
 // This is the Amazon WorkSpaces Applications API Reference. This documentation
 // provides descriptions and syntax for each of the actions and data types in
@@ -27,3 +27,5 @@
 // [Access WorkSpaces Applications API Operations and CLI Commands Through an Interface VPC Endpoint]: https://docs.aws.amazon.com/appstream2/latest/developerguide/access-api-cli-through-interface-vpc-endpoint.html
 // [Amazon WorkSpaces Applications product page]: http://aws.amazon.com/appstream2
 package appstream
+
+

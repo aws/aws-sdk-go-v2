@@ -3,7 +3,7 @@
 // Package sfn provides the API client, operations, and parameter types for AWS
 // Step Functions.
 //
-// # Step Functions
+// Step Functions
 //
 // With Step Functions, you can create workflows, also called state machines, to
 // build distributed applications, automate processes, orchestrate microservices,
@@ -26,3 +26,5 @@
 //
 // [Step Functions Developer Guide]: https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html
 package sfn
+
+

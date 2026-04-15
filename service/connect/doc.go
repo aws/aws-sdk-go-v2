@@ -27,3 +27,5 @@
 // [Amazon Connect data types]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Service.html
 // [Amazon Connect actions]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Service.html
 package connect
+
+

@@ -3,7 +3,7 @@
 // Package applicationinsights provides the API client, operations, and parameter
 // types for Amazon CloudWatch Application Insights.
 //
-// # Amazon CloudWatch Application Insights
+// Amazon CloudWatch Application Insights
 //
 // Amazon CloudWatch Application Insights is a service that helps you detect
 // common problems with your applications. It enables you to pinpoint the source of
@@ -20,3 +20,5 @@
 // SQL Server database is occurring. It bases this analysis on impactful metrics
 // and log errors.
 package applicationinsights
+
+

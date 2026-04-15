@@ -17,13 +17,13 @@
 // Amazon Cognito user pools API as any of the following subjects.
 //
 //   - An administrator who wants to configure user pools, app clients, users,
-//     groups, or other user pool functions.
+//   groups, or other user pool functions.
 //
 //   - A server-side app, like a web application, that wants to use its Amazon Web
-//     Services privileges to manage, authenticate, or authorize a user.
+//   Services privileges to manage, authenticate, or authorize a user.
 //
 //   - A client-side app, like a mobile app, that wants to make unauthenticated
-//     requests to manage, authenticate, or authorize a user.
+//   requests to manage, authenticate, or authorize a user.
 //
 // For more information, see [Understanding API, OIDC, and managed login pages authentication] in the Amazon Cognito Developer Guide.
 //
@@ -43,3 +43,5 @@
 // [Tools to Build on Amazon Web Services]: http://aws.amazon.com/developer/tools/
 // [Code examples for Amazon Cognito Identity Provider using Amazon Web Services SDKs]: https://docs.aws.amazon.com/cognito/latest/developerguide/service_code_examples_cognito-identity-provider.html
 package cognitoidentityprovider
+
+

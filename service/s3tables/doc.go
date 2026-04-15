@@ -18,3 +18,5 @@
 // [Amazon Athena]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/athena/
 // [Amazon S3 table buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets.html
 package s3tables
+
+

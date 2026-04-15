@@ -27,3 +27,5 @@
 // [Amazon Keyspaces change data capture (CDC) CloudWatch metrics]: https://docs.aws.amazon.com/keyspaces/latest/devguide/metrics-dimensions.html#keyspaces-cdc-metrics
 // [Amazon Keyspaces information in CloudTrail]: https://docs.aws.amazon.com/keyspaces/latest/devguide/logging-using-cloudtrail.html#service-name-info-in-cloudtrail
 package keyspacesstreams
+
+

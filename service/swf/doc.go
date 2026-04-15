@@ -3,7 +3,7 @@
 // Package swf provides the API client, operations, and parameter types for Amazon
 // Simple Workflow Service.
 //
-// # Amazon Simple Workflow Service
+// Amazon Simple Workflow Service
 //
 // The Amazon Simple Workflow Service (Amazon SWF) makes it easy to build
 // applications that use Amazon's cloud to coordinate work across distributed
@@ -21,3 +21,5 @@
 //
 // [Amazon SWF Developer Guide]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/
 package swf
+
+

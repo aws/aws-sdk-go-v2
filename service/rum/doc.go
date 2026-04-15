@@ -16,3 +16,5 @@
 // stack traces, and user sessions. You can also use RUM to understand the range of
 // end-user impact including the number of users, geolocations, and browsers used.
 package rum
+
+

@@ -3,7 +3,7 @@
 // Package gameliftstreams provides the API client, operations, and parameter
 // types for Amazon GameLift Streams.
 //
-// # Amazon GameLift Streams
+// Amazon GameLift Streams
 //
 // Amazon GameLift Streams provides a global cloud solution for content streaming
 // experiences. Use Amazon GameLift Streams tools to upload and configure content
@@ -17,3 +17,5 @@
 // See the Amazon GameLift Streams Developer Guide for more information on how
 // Amazon GameLift Streams works and how to work with it.
 package gameliftstreams
+
+

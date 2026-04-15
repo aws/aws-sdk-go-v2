@@ -3,7 +3,7 @@
 // Package ecs provides the API client, operations, and parameter types for Amazon
 // EC2 Container Service.
 //
-// # Amazon Elastic Container Service
+// Amazon Elastic Container Service
 //
 // Amazon Elastic Container Service (Amazon ECS) is a highly scalable, fast,
 // container management service. It makes it easy to run, stop, and manage Docker
@@ -22,3 +22,5 @@
 // management and configuration management systems. You also don't need to worry
 // about scaling your management infrastructure.
 package ecs
+
+

@@ -20,3 +20,5 @@
 // [Contact Lens actions]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Contact_Lens.html
 // [Analyze conversations using speech analytics]: https://docs.aws.amazon.com/connect/latest/adminguide/analyze-conversations.html
 package connectcontactlens
+
+

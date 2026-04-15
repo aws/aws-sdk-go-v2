@@ -3,8 +3,7 @@
 // Package observabilityadmin provides the API client, operations, and parameter
 // types for CloudWatch Observability Admin Service.
 //
-//	You can use Amazon CloudWatch Observability Admin to discover and understand
-//
+//  You can use Amazon CloudWatch Observability Admin to discover and understand
 // the state of telemetry configuration in CloudWatch for your Amazon Web Services
 // Organization or account. This simplifies the process of auditing your telemetry
 // collection configurations across multiple resource types within your Amazon Web
@@ -19,3 +18,5 @@
 // [Auditing CloudWatch telemetry conﬁgurations]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/telemetry-config-cloudwatch.html
 // [Identity and access management for Amazon CloudWatch]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/auth-and-access-control-cw.html
 package observabilityadmin
+
+

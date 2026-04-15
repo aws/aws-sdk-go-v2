@@ -3,7 +3,7 @@
 // Package ses provides the API client, operations, and parameter types for Amazon
 // Simple Email Service.
 //
-// # Amazon Simple Email Service
+// Amazon Simple Email Service
 //
 // This document contains reference information for the [Amazon Simple Email Service] (Amazon SES) API, version
 // 2010-12-01. This document is best used in conjunction with the [Amazon SES Developer Guide].
@@ -28,3 +28,5 @@
 // [Common Parameters]: https://docs.aws.amazon.com/ses/latest/APIReference/CommonParameters.html
 // [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html
 package ses
+
+

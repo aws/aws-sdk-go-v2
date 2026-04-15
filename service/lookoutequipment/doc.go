@@ -7,3 +7,5 @@
 // analytics to identify anomalies in machines from sensor data for use in
 // predictive maintenance.
 package lookoutequipment
+
+

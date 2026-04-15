@@ -3,7 +3,7 @@
 // Package elasticloadbalancingv2 provides the API client, operations, and
 // parameter types for Elastic Load Balancing.
 //
-// # Elastic Load Balancing
+// Elastic Load Balancing
 //
 // A load balancer distributes incoming traffic across targets, such as your EC2
 // instances. This enables you to increase the availability of your application.
@@ -20,10 +20,10 @@
 // Classic Load Balancers. This reference covers the following load balancer types:
 //
 //   - Application Load Balancer - Operates at the application layer (layer 7) and
-//     supports HTTP and HTTPS.
+//   supports HTTP and HTTPS.
 //
 //   - Network Load Balancer - Operates at the transport layer (layer 4) and
-//     supports TCP, TLS, UDP, and QUIC.
+//   supports TCP, TLS, UDP, and QUIC.
 //
 //   - Gateway Load Balancer - Operates at the network layer (layer 3).
 //
@@ -34,3 +34,5 @@
 //
 // [Elastic Load Balancing User Guide]: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/
 package elasticloadbalancingv2
+
+

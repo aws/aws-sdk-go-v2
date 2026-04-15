@@ -3,7 +3,7 @@
 // Package cloudformation provides the API client, operations, and parameter types
 // for AWS CloudFormation.
 //
-// # CloudFormation
+// CloudFormation
 //
 // CloudFormation allows you to create and manage Amazon Web Services
 // infrastructure deployments predictably and repeatedly. You can use
@@ -27,3 +27,5 @@
 // [docs.aws.amazon.com]: https://docs.aws.amazon.com/
 // [CloudFormation product page]: http://aws.amazon.com/cloudformation/
 package cloudformation
+
+

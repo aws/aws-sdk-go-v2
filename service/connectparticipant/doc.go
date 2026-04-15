@@ -21,3 +21,5 @@
 // [Participant Service data types]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Participant_Service.html
 // [Participant Service actions]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Participant_Service.html
 package connectparticipant
+
+

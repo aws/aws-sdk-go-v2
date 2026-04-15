@@ -3,7 +3,7 @@
 // Package codestarconnections provides the API client, operations, and parameter
 // types for AWS CodeStar connections.
 //
-// # AWS CodeStar Connections
+// AWS CodeStar Connections
 //
 // This Amazon Web Services CodeStar Connections API Reference provides
 // descriptions and usage examples of the operations and data types for the Amazon
@@ -31,14 +31,14 @@
 //
 // CreateConnection
 //   - , which creates a uniquely named connection that can be referenced by
-//     services such as CodePipeline.
+//   services such as CodePipeline.
 //
 // DeleteConnection
 //   - , which deletes the specified connection.
 //
 // GetConnection
 //   - , which returns information about the connection, including the connection
-//     status.
+//   status.
 //
 // ListConnections
 //   - , which lists the connections associated with your account.
@@ -47,7 +47,7 @@
 //
 // CreateHost
 //   - , which creates a host that represents the infrastructure where your
-//     provider is installed.
+//   provider is installed.
 //
 // DeleteHost
 //   - , which deletes the specified host.
@@ -63,18 +63,20 @@
 //
 // ListTagsForResource
 //   - , which gets information about Amazon Web Services tags for a specified
-//     Amazon Resource Name (ARN) in Amazon Web Services CodeStar Connections.
+//   Amazon Resource Name (ARN) in Amazon Web Services CodeStar Connections.
 //
 // TagResource
 //   - , which adds or updates tags for a resource in Amazon Web Services CodeStar
-//     Connections.
+//   Connections.
 //
 // UntagResource
 //   - , which removes tags for a resource in Amazon Web Services CodeStar
-//     Connections.
+//   Connections.
 //
 // For information about how to use Amazon Web Services CodeStar Connections, see
 // the [Developer Tools User Guide].
 //
 // [Developer Tools User Guide]: https://docs.aws.amazon.com/dtconsole/latest/userguide/welcome-connections.html
 package codestarconnections
+
+

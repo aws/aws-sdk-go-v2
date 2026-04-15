@@ -15,10 +15,10 @@
 // information:
 //
 //   - Identifiers (ID or name) of an AppConfig application, environment, and
-//     configuration profile that the session tracks.
+//   configuration profile that the session tracks.
 //
 //   - (Optional) The minimum amount of time the session's client must wait
-//     between calls to GetLatestConfiguration .
+//   between calls to GetLatestConfiguration .
 //
 // In response, AppConfig provides an InitialConfigurationToken to be given to the
 // session's client and used the first time it calls GetLatestConfiguration for
@@ -32,15 +32,15 @@
 // ConfigurationToken value it has and receives in response:
 //
 //   - NextPollConfigurationToken : the ConfigurationToken value to use on the next
-//     call to GetLatestConfiguration .
+//   call to GetLatestConfiguration .
 //
 //   - NextPollIntervalInSeconds : the duration the client should wait before
-//     making its next call to GetLatestConfiguration . This duration may vary over
-//     the course of the session, so it should be used instead of the value sent on the
-//     StartConfigurationSession call.
+//   making its next call to GetLatestConfiguration . This duration may vary over
+//   the course of the session, so it should be used instead of the value sent on the
+//   StartConfigurationSession call.
 //
 //   - The configuration: the latest data intended for the session. This may be
-//     empty if the client already has the latest version of the configuration.
+//   empty if the client already has the latest version of the configuration.
 //
 // The InitialConfigurationToken and NextPollConfigurationToken should only be
 // used once. To support long poll use cases, the tokens are valid for up to 24
@@ -53,3 +53,5 @@
 //
 // [Retrieving the configuration]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration
 package appconfigdata
+
+

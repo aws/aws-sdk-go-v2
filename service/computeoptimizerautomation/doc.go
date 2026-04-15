@@ -3,8 +3,7 @@
 // Package computeoptimizerautomation provides the API client, operations, and
 // parameter types for Compute Optimizer Automation.
 //
-//	Automation is a feature within Amazon Web Services Compute Optimizer that
-//
+//  Automation is a feature within Amazon Web Services Compute Optimizer that
 // enables you to apply optimization recommendations to your Amazon Web Services
 // resources, reducing costs and improving performance. You can apply recommended
 // actions directly or create automation rules that implement recommendations on a
@@ -16,3 +15,5 @@
 // history, estimate savings achieved, and reverse actions directly from Compute
 // Optimizer when needed.
 package computeoptimizerautomation
+
+

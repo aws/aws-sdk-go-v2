@@ -3,7 +3,7 @@
 // Package workspaces provides the API client, operations, and parameter types for
 // Amazon WorkSpaces.
 //
-// # Amazon WorkSpaces Service
+// Amazon WorkSpaces Service
 //
 // Amazon WorkSpaces enables you to provision virtual, cloud-based Microsoft
 // Windows or Amazon Linux desktops for your users, known as WorkSpaces. WorkSpaces
@@ -28,3 +28,5 @@
 // [WorkSpaces section of the CLI Reference]: https://docs.aws.amazon.com/cli/latest/reference/workspaces/index.html
 // [Amazon WorkSpaces User Guide]: https://docs.aws.amazon.com/workspaces/latest/userguide/
 package workspaces
+
+

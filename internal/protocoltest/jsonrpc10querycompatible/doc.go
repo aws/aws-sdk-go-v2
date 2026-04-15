@@ -2,4 +2,7 @@
 
 // Package jsonrpc10querycompatible provides the API client, operations, and
 // parameter types for the API.
+//
 package jsonrpc10querycompatible
+
+

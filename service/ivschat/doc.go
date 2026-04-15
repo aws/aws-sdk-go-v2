@@ -3,7 +3,7 @@
 // Package ivschat provides the API client, operations, and parameter types for
 // Amazon Interactive Video Service Chat.
 //
-//	Introduction
+//  Introduction
 //
 // The Amazon IVS Chat control-plane API enables you to create and manage Amazon
 // IVS Chat resources. You also need to integrate with the [Amazon IVS Chat Messaging API], to enable users to
@@ -19,23 +19,23 @@
 // Notes on terminology:
 //
 //   - You create service applications using the Amazon IVS Chat API. We refer to
-//     these as applications.
+//   these as applications.
 //
 //   - You create front-end client applications (browser and Android/iOS apps)
-//     using the Amazon IVS Chat Messaging API. We refer to these as clients.
+//   using the Amazon IVS Chat Messaging API. We refer to these as clients.
 //
-// # Resources
+// Resources
 //
 // The following resources are part of Amazon IVS Chat:
 //
 //   - LoggingConfiguration — A configuration that allows customers to store and
-//     record sent messages in a chat room. See the Logging Configuration endpoints for
-//     more information.
+//   record sent messages in a chat room. See the Logging Configuration endpoints for
+//   more information.
 //
 //   - Room — The central Amazon IVS Chat resource through which clients connect
-//     to and exchange chat messages. See the Room endpoints for more information.
+//   to and exchange chat messages. See the Room endpoints for more information.
 //
-// # Tagging
+// Tagging
 //
 // A tag is a metadata label that you assign to an AWS resource. A tag comprises a
 // key and a value, both set by you. For example, you might set a tag as
@@ -53,24 +53,24 @@
 //
 // At most 50 tags can be applied to a resource.
 //
-// # API Access Security
+// API Access Security
 //
 // Your Amazon IVS Chat applications (service applications and clients) must be
 // authenticated and authorized to access Amazon IVS Chat resources. Note the
 // differences between these concepts:
 //
 //   - Authentication is about verifying identity. Requests to the Amazon IVS Chat
-//     API must be signed to verify your identity.
+//   API must be signed to verify your identity.
 //
 //   - Authorization is about granting permissions. Your IAM roles need to have
-//     permissions for Amazon IVS Chat API requests.
+//   permissions for Amazon IVS Chat API requests.
 //
 // Users (viewers) connect to a room using secure access tokens that you create
 // using the CreateChatTokenoperation through the AWS SDK. You call CreateChatToken for every
 // user’s chat session, passing identity and authorization information about the
 // user.
 //
-// # Signing API Requests
+// Signing API Requests
 //
 // HTTP API requests must be signed with an AWS SigV4 signature using your AWS
 // security credentials. The AWS Command Line Interface (CLI) and the AWS SDKs take
@@ -85,10 +85,10 @@
 // For more information:
 //
 //   - Authentication and generating signatures — See [Authenticating Requests (Amazon Web Services Signature Version 4)]in the Amazon Web Services
-//     General Reference.
+//   General Reference.
 //
 //   - Managing Amazon IVS permissions — See [Identity and Access Management]on the Security page of the Amazon
-//     IVS User Guide.
+//   IVS User Guide.
 //
 // Amazon Resource Names (ARNs)
 //
@@ -105,3 +105,5 @@
 // [Access Tags]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
 // [Authenticating Requests (Amazon Web Services Signature Version 4)]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
 package ivschat
+
+

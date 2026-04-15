@@ -3,7 +3,7 @@
 // Package neptune provides the API client, operations, and parameter types for
 // Amazon Neptune.
 //
-// # Amazon Neptune
+// Amazon Neptune
 //
 // Amazon Neptune is a fast, reliable, fully-managed graph database service that
 // makes it easy to build and run applications that work with highly connected
@@ -25,3 +25,5 @@
 // the maintenance window. The reference structure is as follows, and we list
 // following some related topics from the user guide.
 package neptune
+
+

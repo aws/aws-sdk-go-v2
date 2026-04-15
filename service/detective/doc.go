@@ -37,7 +37,7 @@
 // the following:
 //
 //   - Enable and disable Detective. Enabling Detective creates a new behavior
-//     graph.
+//   graph.
 //
 //   - View the list of member accounts in a behavior graph.
 //
@@ -56,7 +56,7 @@
 //   - Perform all of the functions of an administrator account.
 //
 //   - Determine whether to automatically enable new organization accounts as
-//     member accounts in the organization behavior graph.
+//   member accounts in the organization behavior graph.
 //
 // An invited member account can use the Detective API to do the following:
 //
@@ -77,3 +77,5 @@
 //
 // [Logging Detective API Calls with CloudTrail]: https://docs.aws.amazon.com/detective/latest/userguide/logging-using-cloudtrail.html
 package detective
+
+

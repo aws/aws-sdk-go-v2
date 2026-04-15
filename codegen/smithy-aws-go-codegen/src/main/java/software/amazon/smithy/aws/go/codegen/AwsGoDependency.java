@@ -47,18 +47,15 @@ public class AwsGoDependency {
     public static final GoDependency INTERNAL_CONTEXT = aws("internal/context", "internalcontext");
     public static final GoDependency INTERNAL_MIDDLEWARE = aws("internal/middleware", "internalmiddleware");
 
-    public static final GoDependency INTERNAL_ENDPOINTS_V2 = awsModuleDep("internal/endpoints/v2", null,
-            Versions.INTERNAL_ENDPOINTS_V2, "endpoints");
+    public static final GoDependency INTERNAL_ENDPOINTS_V2 = aws("internal/endpoints/v2", "endpoints");
     public static final GoDependency S3_SHARED_CONFIG = aws("service/internal/s3shared/config", "s3sharedconfig");
-    public static final GoDependency SERVICE_INTERNAL_CONFIG = awsModuleDep("internal/configsources",
-            null, Versions.SERVICE_INTERNAL_CONFIG, "internalConfig");
+    public static final GoDependency SERVICE_INTERNAL_CONFIG = aws("internal/configsources", "internalConfig");
     public static final GoDependency SERVICE_INTERNAL_ENDPOINT_DISCOVERY = awsModuleDep("service/internal/endpoint-discovery",
             null, Versions.SERVICE_INTERNAL_ENDPOINT_DISCOVERY, "internalEndpointDiscovery");
     public static final GoDependency AWS_DEFAULTS = aws("aws/defaults");
     public static final GoDependency SERVICE_INTERNAL_CHECKSUM = awsModuleDep("service/internal/checksum",
             null, Versions.SERVICE_INTERNAL_CHECKSUM, "internalChecksum");
-    public static final GoDependency INTERNAL_SIGV4A = awsModuleDep("internal/v4a",
-            null, Versions.INTERNAL_SIGV4A, "v4a");
+    public static final GoDependency INTERNAL_SIGV4A = aws("internal/v4a", "v4a");
     public static final GoDependency S3_INTERNAL_ARN = aws("service/internal/s3shared/arn", "s3arn");
     public static final GoDependency AWS_ARN = aws("aws/arn", "awsarn");
     public static final GoDependency AWS_PROTOCOL_TEST_HTTP_CLIENT = aws("internal/protocoltest", "protocoltesthttp");
@@ -110,11 +107,8 @@ public class AwsGoDependency {
 
     private static final class Versions {
         private static final String AWS_SDK = "v1.4.0";
-        private static final String SERVICE_INTERNAL_CONFIG = "v0.0.0-00010101000000-000000000000";
         private static final String SERVICE_INTERNAL_ENDPOINT_DISCOVERY = "v0.0.0-00010101000000-000000000000";
-        private static final String INTERNAL_ENDPOINTS_V2 = "v2.0.0-00010101000000-000000000000";
         private static final String AWS_PROTOCOL_EVENTSTREAM = "v0.0.0-00010101000000-000000000000";
         private static final String SERVICE_INTERNAL_CHECKSUM = "v0.0.0-00010101000000-000000000000";
-        private static final String INTERNAL_SIGV4A = "v0.0.0-00010101000000-000000000000";
     }
 }

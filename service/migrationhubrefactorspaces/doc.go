@@ -3,7 +3,7 @@
 // Package migrationhubrefactorspaces provides the API client, operations, and
 // parameter types for AWS Migration Hub Refactor Spaces.
 //
-// # Amazon Web Services Migration Hub Refactor Spaces
+// Amazon Web Services Migration Hub Refactor Spaces
 //
 // This API reference provides descriptions, syntax, and other details about each
 // of the actions and data types for Amazon Web Services Migration Hub Refactor
@@ -19,3 +19,5 @@
 // [Amazon Web Services SDKs]: https://aws.amazon.com/tools/#SDKs
 // [CreateResourceShare]: https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html
 package migrationhubrefactorspaces
+
+

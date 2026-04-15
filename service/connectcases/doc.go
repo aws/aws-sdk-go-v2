@@ -17,3 +17,5 @@
 // [Amazon Connect Cases]: https://docs.aws.amazon.com/connect/latest/adminguide/cases.html
 // [Cases actions]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Cases.html
 package connectcases
+
+

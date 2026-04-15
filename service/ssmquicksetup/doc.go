@@ -7,3 +7,5 @@
 // with recommended best practices. Quick Setup simplifies setting up services,
 // including Systems Manager, by automating common or recommended tasks.
 package ssmquicksetup
+
+

@@ -11,3 +11,5 @@
 //
 // See https://github.com/smithy-lang/smithy/issues/616
 package restxmlwithnamespace
+
+

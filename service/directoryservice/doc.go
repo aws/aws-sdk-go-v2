@@ -3,7 +3,7 @@
 // Package directoryservice provides the API client, operations, and parameter
 // types for AWS Directory Service.
 //
-// # Directory Service
+// Directory Service
 //
 // Directory Service is a web service that makes it easy for you to setup and run
 // directories in the Amazon Web Services cloud, or connect your Amazon Web
@@ -23,3 +23,5 @@
 // [Tools for Amazon Web Services]: http://aws.amazon.com/tools/
 // [Directory Service]: https://aws.amazon.com/directoryservice/
 package directoryservice
+
+

@@ -3,8 +3,7 @@
 // Package directoryservicedata provides the API client, operations, and parameter
 // types for AWS Directory Service Data.
 //
-//	Amazon Web Services Directory Service Data is an extension of Directory
-//
+//  Amazon Web Services Directory Service Data is an extension of Directory
 // Service. This API reference provides detailed information about Directory
 // Service Data operations and object types.
 //
@@ -39,15 +38,15 @@
 // Administration Guide. Directory limits vary by Managed Microsoft AD edition:
 //
 //   - Standard edition – Supports 8 transactions per second (TPS) for read
-//     operations and 4 TPS for write operations per directory. There's a concurrency
-//     limit of 10 concurrent requests.
+//   operations and 4 TPS for write operations per directory. There's a concurrency
+//   limit of 10 concurrent requests.
 //
 //   - Enterprise edition – Supports 16 transactions per second (TPS) for read
-//     operations and 8 TPS for write operations per directory. There's a concurrency
-//     limit of 10 concurrent requests.
+//   operations and 8 TPS for write operations per directory. There's a concurrency
+//   limit of 10 concurrent requests.
 //
 //   - Amazon Web Services Account - Supports a total of 100 TPS for Directory
-//     Service Data operations across all directories.
+//   Service Data operations across all directories.
 //
 // Directory Service Data only supports the Managed Microsoft AD directory type
 // and is only available in the primary Amazon Web Services Region. For more
@@ -58,3 +57,5 @@
 // [Manage users and groups]: https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_manage_users_groups.html
 // [What gets created]: https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_what_gets_created.html
 package directoryservicedata
+
+

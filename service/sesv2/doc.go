@@ -3,7 +3,7 @@
 // Package sesv2 provides the API client, operations, and parameter types for
 // Amazon Simple Email Service.
 //
-// # Amazon SES API v2
+// Amazon SES API v2
 //
 // [Amazon SES]is an Amazon Web Services service that you can use to send email messages to
 // your customers.
@@ -15,3 +15,5 @@
 // [Amazon Simple Email Service Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/
 // [Amazon SES]: http://aws.amazon.com/ses
 package sesv2
+
+

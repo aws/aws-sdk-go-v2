@@ -3,7 +3,7 @@
 // Package datasync provides the API client, operations, and parameter types for
 // AWS DataSync.
 //
-// # DataSync
+// DataSync
 //
 // DataSync is an online data movement service that simplifies data migration and
 // helps you quickly, easily, and securely transfer your file or object data to,
@@ -14,3 +14,5 @@
 //
 // [DataSync User Guide]: https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html
 package datasync
+
+

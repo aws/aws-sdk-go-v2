@@ -3,7 +3,7 @@
 // Package wafv2 provides the API client, operations, and parameter types for AWS
 // WAFV2.
 //
-// # WAF
+// WAF
 //
 // This is the latest version of the WAF API, released in November, 2019. The
 // names of the entities that you use to access this API, like endpoints and
@@ -36,12 +36,12 @@
 // You can make calls using the endpoints listed in [WAF endpoints and quotas].
 //
 //   - For regional resources, you can use any of the endpoints in the list. A
-//     regional application can be an Application Load Balancer (ALB), an Amazon API
-//     Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App
-//     Runner service, or an Amazon Web Services Verified Access instance.
+//   regional application can be an Application Load Balancer (ALB), an Amazon API
+//   Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App
+//   Runner service, or an Amazon Web Services Verified Access instance.
 //
 //   - For Amazon CloudFront and Amplify, you must use the API endpoint listed for
-//     US East (N. Virginia): us-east-1.
+//   US East (N. Virginia): us-east-1.
 //
 // Alternatively, you can use one of the Amazon Web Services SDKs to access an API
 // that's tailored to the programming language or platform that you're using. For
@@ -51,3 +51,5 @@
 // [Amazon Web Services SDKs]: http://aws.amazon.com/tools/#SDKs
 // [WAF Developer Guide]: https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html
 package wafv2
+
+

@@ -3,7 +3,7 @@
 // Package iotthingsgraph provides the API client, operations, and parameter types
 // for AWS IoT Things Graph.
 //
-// # AWS IoT Things Graph
+// AWS IoT Things Graph
 //
 // AWS IoT Things Graph provides an integrated set of tools that enable developers
 // to connect devices and services that use different standards, such as units of
@@ -17,3 +17,5 @@
 //
 // [User Guide]: https://docs.aws.amazon.com/thingsgraph/latest/ug/iot-tg-whatis.html
 package iotthingsgraph
+
+

@@ -17,7 +17,7 @@
 //   - Forecast future spend for budgeting purposes
 //
 //   - Provide cost benefit analysis that compare your internal workloads with
-//     Amazon Web Services
+//   Amazon Web Services
 //
 // Use GetServices without a service code to retrieve the service codes for all
 // Amazon Web Services services, then GetServices with a service code to retrieve
@@ -31,3 +31,5 @@
 //
 // [Using the Amazon Web Services Price List API]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/price-changes.html
 package pricing
+
+

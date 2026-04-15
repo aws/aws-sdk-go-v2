@@ -3,7 +3,7 @@
 // Package iot provides the API client, operations, and parameter types for AWS
 // IoT.
 //
-// # IoT
+// IoT
 //
 // IoT provides secure, bi-directional communication between Internet-connected
 // devices (such as sensors, actuators, embedded devices, or smart appliances) and
@@ -26,3 +26,5 @@
 // [Amazon Web Services Signature Version 4]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 // [Authorizing Direct Calls to Amazon Web Services Services]: https://docs.aws.amazon.com/iot/latest/developerguide/authorizing-direct-aws.html
 package iot
+
+

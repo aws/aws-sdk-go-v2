@@ -14,19 +14,19 @@
 // Web Services CLI, or the REST API to make API calls for Amazon Web Services
 // Wickr.
 //
-// # Using Amazon Web Services SDK
+// Using Amazon Web Services SDK
 //
 // The SDK clients authenticate your requests by using access keys that you
 // provide. For more information, see [Authentication and access using Amazon Web Services SDKs and tools]in the Amazon Web Services SDKs and Tools
 // Reference Guide.
 //
-// # Using Amazon Web Services CLI
+// Using Amazon Web Services CLI
 //
 // Use your access keys with the Amazon Web Services CLI to make API calls. For
 // more information about setting up the Amazon Web Services CLI, see [Getting started with the Amazon Web Services CLI]in the
 // Amazon Web Services Command Line Interface User Guide for Version 2.
 //
-// # Using REST APIs
+// Using REST APIs
 //
 // If you use REST to make API calls, you must authenticate your request by
 // providing a signature. Amazon Web Services Wickr supports Signature Version 4.
@@ -58,3 +58,5 @@
 // [Amazon Web Services Signature Version 4 for API requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html
 // [Amazon Web ServicesWickrFullAccess]: https://docs.aws.amazon.com/wickr/latest/adminguide/security-iam-awsmanpol.html#security-iam-awsmanpol-AWSWickrFullAccess
 package wickr
+
+

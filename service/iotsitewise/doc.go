@@ -12,3 +12,5 @@
 // [IoT SiteWise User Guide]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/
 // [Industrial Internet of Things (IIoT)]: https://en.wikipedia.org/wiki/Internet_of_things#Industrial_applications
 package iotsitewise
+
+

@@ -12,8 +12,10 @@
 //
 //   - Learning your resources and their relationships.
 //   - Working with your observability tools, runbooks, code repositories, and
-//     CI/CD pipelines.
+//   CI/CD pipelines.
 //   - Correlating telemetry, code, and deployment data to understand
-//     relationships between your application resources.
+//   relationships between your application resources.
 //   - Supporting applications in multicloud and hybrid environments.
 package devopsagent
+
+

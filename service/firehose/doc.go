@@ -3,7 +3,7 @@
 // Package firehose provides the API client, operations, and parameter types for
 // Amazon Kinesis Firehose.
 //
-// # Amazon Data Firehose
+// Amazon Data Firehose
 //
 // Amazon Data Firehose was previously known as Amazon Kinesis Data Firehose.
 //
@@ -12,3 +12,5 @@
 // S3), Amazon OpenSearch Service, Amazon Redshift, Splunk, and various other
 // supported destinations.
 package firehose
+
+

@@ -1,0 +1,8 @@
+{
+    "id": "a4b6a684-be6a-480f-bbb7-620f6b69b4cb",
+    "type": "dependency",
+    "description": "Fold internal/ modules into the core runtime.",
+    "modules": [
+        "."
+    ]
+}

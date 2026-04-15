@@ -26,3 +26,5 @@
 // [commercial partition Regions]: https://docs.aws.amazon.com/notifications/latest/userguide/supported-regions.html
 // [User Notifications Contacts API Reference Guide]: https://docs.aws.amazon.com/notificationscontacts/latest/APIReference/Welcome.html
 package notifications
+
+

@@ -3,7 +3,7 @@
 // Package ecrpublic provides the API client, operations, and parameter types for
 // Amazon Elastic Container Registry Public.
 //
-// # Amazon Elastic Container Registry Public
+// Amazon Elastic Container Registry Public
 //
 // Amazon Elastic Container Registry Public (Amazon ECR Public) is a managed
 // container image registry service. Amazon ECR provides both public and private
@@ -15,3 +15,5 @@
 //
 // [Amazon Elastic Container Registry API Reference]: https://docs.aws.amazon.com/AmazonECR/latest/APIReference/Welcome.html
 package ecrpublic
+
+

@@ -11,15 +11,15 @@
 // When to use Multi-party approval:
 //
 //   - You need to align with the Zero Trust principle of "never trust, always
-//     verify"
+//   verify"
 //
 //   - You need to make sure that the right humans have access to the right things
-//     in the right way
+//   in the right way
 //
 //   - You need distributed decision-making for sensitive or critical operations
 //
 //   - You need to protect against unintended operations on sensitive or critical
-//     resources
+//   resources
 //
 //   - You need formal reviews and approvals for auditing or compliance reasons
 //
@@ -28,3 +28,5 @@
 // [What is Multi-party approval]: https://docs.aws.amazon.com/mpa/latest/userguide/what-is.html
 // [Organizations]: http://aws.amazon.com/organizations
 package mpa
+
+

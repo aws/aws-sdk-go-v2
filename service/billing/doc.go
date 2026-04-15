@@ -3,12 +3,13 @@
 // Package billing provides the API client, operations, and parameter types for
 // AWS Billing.
 //
-//	You can use the Billing API to programatically list the billing views
-//
+//  You can use the Billing API to programatically list the billing views
 // available to you for a given time period. A billing view represents a set of
 // billing data.
 //
 // The Billing API provides the following endpoint:
 //
-//	https://billing.us-east-1.api.aws
+//     https://billing.us-east-1.api.aws
 package billing
+
+

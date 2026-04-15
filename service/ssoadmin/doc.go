@@ -35,3 +35,5 @@
 // [Tools for Amazon Web Services]: http://aws.amazon.com/tools/
 // [Identity Store API Reference]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html
 package ssoadmin
+
+

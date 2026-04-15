@@ -3,7 +3,7 @@
 // Package elasticache provides the API client, operations, and parameter types
 // for Amazon ElastiCache.
 //
-// # Amazon ElastiCache
+// Amazon ElastiCache
 //
 // Amazon ElastiCache is a web service that makes it easier to set up, operate,
 // and scale a distributed cache in the cloud.
@@ -17,3 +17,5 @@
 // visibility into the key performance statistics associated with their cache and
 // can receive alarms if a part of their cache runs hot.
 package elasticache
+
+

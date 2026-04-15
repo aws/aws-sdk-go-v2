@@ -23,7 +23,7 @@
 //
 // UpdateNotificationRule
 //   - , which changes the name, events, or targets associated with a notification
-//     rule.
+//   rule.
 //
 // Subscribe
 //   - , which subscribes a target to a notification rule.
@@ -48,11 +48,11 @@
 //
 // ListTagsForResource
 //   - , which lists the tags already associated with a notification rule in your
-//     account.
+//   account.
 //
 // TagResource
 //   - , which associates a tag you provide with a notification rule in your
-//     account.
+//   account.
 //
 // UntagResource
 //   - , which removes a tag from a notification rule in your account.
@@ -61,3 +61,5 @@
 //
 // [Amazon Web Services Developer Tools Console User Guide]: https://docs.aws.amazon.com/dtconsole/latest/userguide/what-is-dtconsole.html
 package codestarnotifications
+
+

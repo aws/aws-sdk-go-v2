@@ -3,7 +3,7 @@
 // Package autoscaling provides the API client, operations, and parameter types
 // for Auto Scaling.
 //
-// # Amazon EC2 Auto Scaling
+// Amazon EC2 Auto Scaling
 //
 // The [DescribeAutoScalingGroups] API operation might be throttled when retrieving details for an Auto
 // Scaling group that contains many instances. By default, this operation returns
@@ -21,3 +21,5 @@
 // [Amazon EC2 Auto Scaling User Guide]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html
 // [Amazon EC2 Auto Scaling API Reference]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/Welcome.html
 package autoscaling
+
+

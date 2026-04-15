@@ -2,4 +2,7 @@
 
 // Package smithyrpcv2cborquerycompatible provides the API client, operations, and
 // parameter types for the API.
+//
 package smithyrpcv2cborquerycompatible
+
+

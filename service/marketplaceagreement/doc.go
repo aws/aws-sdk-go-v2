@@ -16,11 +16,13 @@
 // AWS:
 //
 //   - DescribeAgreement – Grants permission to users to obtain detailed meta data
-//     about any of their agreements.
+//   about any of their agreements.
 //
 //   - GetAgreementTerms – Grants permission to users to obtain details about the
-//     terms of an agreement.
+//   terms of an agreement.
 //
 //   - SearchAgreements – Grants permission to users to search through all their
-//     agreements.
+//   agreements.
 package marketplaceagreement
+
+

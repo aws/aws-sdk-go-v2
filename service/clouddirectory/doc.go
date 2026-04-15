@@ -3,7 +3,7 @@
 // Package clouddirectory provides the API client, operations, and parameter types
 // for Amazon CloudDirectory.
 //
-// # Amazon Cloud Directory
+// Amazon Cloud Directory
 //
 // Amazon Cloud Directory is a component of the AWS Directory Service that
 // simplifies the development and management of cloud-scale web, mobile, and IoT
@@ -14,3 +14,5 @@
 // [Amazon Cloud Directory Developer Guide]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/what_is_cloud_directory.html
 // [AWS Directory Service]: https://aws.amazon.com/directoryservice/
 package clouddirectory
+
+

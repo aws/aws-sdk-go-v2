@@ -10,12 +10,12 @@
 // This guide provides descriptions of the Organizations operations. For more
 // information about using this service, see the [Organizations User Guide].
 //
-// # Support and feedback for Organizations
+// Support and feedback for Organizations
 //
 // We welcome your feedback. You can post your feedback and questions in the [Organizations support forum]. For
 // more information about the Amazon Web Services Support forums, see [Forums Help].
 //
-// # Endpoint to call When using the CLI or the Amazon Web Services SDK
+// Endpoint to call When using the CLI or the Amazon Web Services SDK
 //
 // For the current release of Organizations, specify the us-east-1 region for all
 // Amazon Web Services API and CLI calls made from the commercial Amazon Web
@@ -24,42 +24,37 @@
 // CLI by using these parameters and commands:
 //
 //   - Use the following parameter with each command to specify both the endpoint
-//     and its region:
+//   and its region:
 //
 // --endpoint-url https://organizations.us-east-1.amazonaws.com (from commercial
-//
-//	Amazon Web Services Regions outside of China)
+//   Amazon Web Services Regions outside of China)
 //
 // or
 //
 // --endpoint-url https://organizations.cn-northwest-1.amazonaws.com.cn (from
+//   Amazon Web Services Regions in China)
 //
-//	Amazon Web Services Regions in China)
-//
-//	- Use the default endpoint, but configure your default region with this
-//	command:
+//   - Use the default endpoint, but configure your default region with this
+//   command:
 //
 // aws configure set default.region us-east-1 (from commercial Amazon Web Services
-//
-//	Regions outside of China)
+//   Regions outside of China)
 //
 // or
 //
 // aws configure set default.region cn-northwest-1 (from Amazon Web Services
+//   Regions in China)
 //
-//	Regions in China)
-//
-//	- Use the following parameter with each command to specify the endpoint:
+//   - Use the following parameter with each command to specify the endpoint:
 //
 // --region us-east-1 (from commercial Amazon Web Services Regions outside of
-//
-//	China)
+//   China)
 //
 // or
 //
 // --region cn-northwest-1 (from Amazon Web Services Regions in China)
 //
-// # Recording API Requests
+// Recording API Requests
 //
 // Organizations supports CloudTrail, a service that records Amazon Web Services
 // API calls for your Amazon Web Services account and delivers log files to an
@@ -75,3 +70,5 @@
 // [Organizations User Guide]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
 // [Logging Organizations API calls with CloudTrail]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_incident-response.html#orgs_cloudtrail-integration
 package organizations
+
+

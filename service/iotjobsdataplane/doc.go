@@ -12,7 +12,7 @@
 // Find the endpoint address for actions in the IoT jobs data plane by running
 // this CLI command:
 //
-//	aws iot describe-endpoint --endpoint-type iot:Jobs
+//     aws iot describe-endpoint --endpoint-type iot:Jobs
 //
 // The service name used by [Amazon Web Services Signature Version 4] to sign requests is: iot-jobs-data.
 //
@@ -29,3 +29,5 @@
 //
 // [Amazon Web Services Signature Version 4]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 package iotjobsdataplane
+
+

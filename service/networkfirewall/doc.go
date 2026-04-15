@@ -40,15 +40,15 @@
 // number of ways. The following are just a few examples:
 //
 //   - Allow domains or IP addresses for known Amazon Web Services service
-//     endpoints, such as Amazon S3, and block all other forms of traffic.
+//   endpoints, such as Amazon S3, and block all other forms of traffic.
 //
 //   - Use custom lists of known bad domains to limit the types of domain names
-//     that your applications can access.
+//   that your applications can access.
 //
 //   - Perform deep packet inspection on traffic entering or leaving your VPC.
 //
 //   - Use stateful protocol detection to filter protocols like HTTPS, regardless
-//     of the port used.
+//   of the port used.
 //
 // To enable Network Firewall for your VPCs, you perform steps in both Amazon VPC
 // and in Network Firewall. For information about using Amazon VPC, see [Amazon VPC User Guide].
@@ -56,25 +56,25 @@
 // To start using Network Firewall, do the following:
 //
 //   - (Optional) If you don't already have a VPC that you want to protect, create
-//     it in Amazon VPC.
+//   it in Amazon VPC.
 //
 //   - In Amazon VPC, in each Availability Zone where you want to have a firewall
-//     endpoint, create a subnet for the sole use of Network Firewall.
+//   endpoint, create a subnet for the sole use of Network Firewall.
 //
 //   - In Network Firewall, define the firewall behavior as follows:
 //
 //   - Create stateless and stateful rule groups, to define the components of the
-//     network traffic filtering behavior that you want your firewall to have.
+//   network traffic filtering behavior that you want your firewall to have.
 //
 //   - Create a firewall policy that uses your rule groups and specifies
-//     additional default traffic filtering behavior.
+//   additional default traffic filtering behavior.
 //
 //   - In Network Firewall, create a firewall and specify your new firewall policy
-//     and VPC subnets. Network Firewall creates a firewall endpoint in each subnet
-//     that you specify, with the behavior that's defined in the firewall policy.
+//   and VPC subnets. Network Firewall creates a firewall endpoint in each subnet
+//   that you specify, with the behavior that's defined in the firewall policy.
 //
 //   - In Amazon VPC, use ingress routing enhancements to route traffic through
-//     the new firewall endpoints.
+//   the new firewall endpoints.
 //
 // After your firewall is established, you can add firewall endpoints for new
 // Availability Zones by following the prior steps for the Amazon VPC setup and
@@ -91,3 +91,5 @@
 // [Amazon Web Services APIs]: https://docs.aws.amazon.com/general/latest/gr/aws-apis.html
 // [Amazon VPC User Guide]: https://docs.aws.amazon.com/vpc/latest/userguide/
 package networkfirewall
+
+

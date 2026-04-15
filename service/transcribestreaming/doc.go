@@ -9,15 +9,17 @@
 //   - Standard transcriptions are the most common option. Refer to for details.
 //
 //   - Medical transcriptions are tailored to medical professionals and
-//     incorporate medical terms. A common use case for this service is transcribing
-//     doctor-patient dialogue in real time, so doctors can focus on their patient
-//     instead of taking notes. Refer to for details.
+//   incorporate medical terms. A common use case for this service is transcribing
+//   doctor-patient dialogue in real time, so doctors can focus on their patient
+//   instead of taking notes. Refer to for details.
 //
 //   - Call Analytics transcriptions are designed for use with call center audio
-//     on two different channels; if you're looking for insight into customer service
-//     calls, use this option. Refer to for details.
+//   on two different channels; if you're looking for insight into customer service
+//   calls, use this option. Refer to for details.
 //
 //   - HealthScribe transcriptions are designed to automatically create clinical
-//     notes from patient-clinician conversations using generative AI. Refer to [here]
-//     for details.
+//   notes from patient-clinician conversations using generative AI. Refer to [here]
+//   for details.
 package transcribestreaming
+
+

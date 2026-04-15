@@ -3,7 +3,7 @@
 // Package shield provides the API client, operations, and parameter types for AWS
 // Shield.
 //
-// # Shield Advanced
+// Shield Advanced
 //
 // This is the Shield Advanced API Reference. This guide is for developers who
 // need detailed information about the Shield Advanced API actions, data types, and
@@ -12,3 +12,5 @@
 //
 // [WAF and Shield Developer Guide]: https://docs.aws.amazon.com/waf/latest/developerguide/
 package shield
+
+

@@ -3,7 +3,7 @@
 // Package pi provides the API client, operations, and parameter types for AWS
 // Performance Insights.
 //
-// # Amazon RDS Performance Insights
+// Amazon RDS Performance Insights
 //
 // Amazon RDS Performance Insights enables you to monitor and explore different
 // dimensions of database load based on data captured from a running DB instance.
@@ -23,15 +23,17 @@
 // measured at that time point. Examples include SQL, Wait event, User, and Host.
 //
 //   - To learn more about Performance Insights and Amazon Aurora DB instances, go
-//     to the [Amazon Aurora User Guide].
+//   to the [Amazon Aurora User Guide].
 //
 //   - To learn more about Performance Insights and Amazon RDS DB instances, go to
-//     the [Amazon RDS User Guide].
+//   the [Amazon RDS User Guide].
 //
 //   - To learn more about Performance Insights and Amazon DocumentDB clusters, go
-//     to the [Amazon DocumentDB Developer Guide].
+//   to the [Amazon DocumentDB Developer Guide].
 //
 // [Amazon RDS User Guide]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
 // [Amazon DocumentDB Developer Guide]: https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html
 // [Amazon Aurora User Guide]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html
 package pi
+
+

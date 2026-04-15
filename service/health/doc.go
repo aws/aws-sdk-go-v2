@@ -3,7 +3,7 @@
 // Package health provides the API client, operations, and parameter types for AWS
 // Health APIs and Notifications.
 //
-// # Health
+// Health
 //
 // The Health API provides access to the Health information that appears in the [Health Dashboard].
 // You can use the API operations to get information about events that might affect
@@ -41,12 +41,12 @@
 // following recommendations:
 //
 //   - Use the [eventScopeCode]parameter to specify whether to return Health events that are
-//     public or account-specific.
+//   public or account-specific.
 //
 //   - Use pagination to view all events from the response. For example, if you
-//     call the DescribeEventsForOrganization operation to get all events in your
-//     organization, you might receive several page results. Specify the nextToken in
-//     the next request to return more results.
+//   call the DescribeEventsForOrganization operation to get all events in your
+//   organization, you might receive several page results. Specify the nextToken in
+//   the next request to return more results.
 //
 // [Amazon Web Services Support]: http://aws.amazon.com/premiumsupport/
 // [Aggregating Health events]: https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html
@@ -56,3 +56,5 @@
 // [Signature Version 4 Signing Process]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 // [Best practices for managing Amazon Web Services access keys]: https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html
 package health
+
+

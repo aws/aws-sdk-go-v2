@@ -12,39 +12,39 @@
 //   - Stage — A virtual space where participants can exchange video in real time.
 //
 //   - Participant token — A token that authenticates a participant when they join
-//     a stage.
+//   a stage.
 //
 //   - Participant object — Represents participants (people) in the stage and
-//     contains information about them. When a token is created, it includes a
-//     participant ID; when a participant uses that token to join a stage, the
-//     participant is associated with that participant ID. There is a 1:1 mapping
-//     between participant tokens and participants.
+//   contains information about them. When a token is created, it includes a
+//   participant ID; when a participant uses that token to join a stage, the
+//   participant is associated with that participant ID. There is a 1:1 mapping
+//   between participant tokens and participants.
 //
 // For server-side composition:
 //
 //   - Composition process — Composites participants of a stage into a single
-//     video and forwards it to a set of outputs (e.g., IVS channels). Composition
-//     operations support this process.
+//   video and forwards it to a set of outputs (e.g., IVS channels). Composition
+//   operations support this process.
 //
 //   - Composition — Controls the look of the outputs, including how participants
-//     are positioned in the video.
+//   are positioned in the video.
 //
 // For participant replication:
 //
 //   - Source stage — The stage where the participant originally joined, which is
-//     used as the source for replication.
+//   used as the source for replication.
 //
 //   - Destination stage — The stage to which the participant is replicated.
 //
 //   - Replicated participant — A participant in a stage that is replicated to one
-//     or more destination stages.
+//   or more destination stages.
 //
 //   - Replica participant — A participant in a destination stage that is
-//     replicated from another stage (the source stage).
+//   replicated from another stage (the source stage).
 //
 // For more information about your IVS live stream, also see [Getting Started with Amazon IVS Real-Time Streaming].
 //
-// # Tagging
+// Tagging
 //
 // A tag is a metadata label that you assign to an AWS resource. A tag comprises a
 // key and a value, both set by you. For example, you might set a tag as
@@ -66,3 +66,5 @@
 // [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 // [Access Tags]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
 package ivsrealtime
+
+

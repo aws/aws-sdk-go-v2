@@ -3,8 +3,7 @@
 // Package devopsguru provides the API client, operations, and parameter types for
 // Amazon DevOps Guru.
 //
-//	Amazon DevOps Guru is a fully managed service that helps you identify
-//
+//  Amazon DevOps Guru is a fully managed service that helps you identify
 // anomalous behavior in business critical operational applications. You specify
 // the Amazon Web Services resources that you want DevOps Guru to cover, then the
 // Amazon CloudWatch metrics and Amazon Web Services CloudTrail events related to
@@ -25,3 +24,5 @@
 // [What is Amazon DevOps Guru]: https://docs.aws.amazon.com/devops-guru/latest/userguide/welcome.html
 // [Concepts in DevOps Guru]: https://docs.aws.amazon.com/devops-guru/latest/userguide/concepts.html
 package devopsguru
+
+

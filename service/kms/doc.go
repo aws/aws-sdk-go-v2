@@ -3,7 +3,7 @@
 // Package kms provides the API client, operations, and parameter types for AWS
 // Key Management Service.
 //
-// # Key Management Service
+// Key Management Service
 //
 // Key Management Service (KMS) is an encryption and key management web service.
 // This guide describes the KMS operations that you can call programmatically. For
@@ -37,7 +37,7 @@
 // as Ephemeral Diffie-Hellman (DHE) or Elliptic Curve Ephemeral Diffie-Hellman
 // (ECDHE). Most modern systems such as Java 7 and later support these modes.
 //
-// # Signing Requests
+// Signing Requests
 //
 // Requests must be signed using an access key ID and a secret access key. We
 // strongly recommend that you do not use your Amazon Web Services account root
@@ -48,7 +48,7 @@
 //
 // All KMS requests must be signed with [Signature Version 4].
 //
-// # Logging API Requests
+// Logging API Requests
 //
 // KMS supports CloudTrail, a service that logs Amazon Web Services API calls and
 // related events for your Amazon Web Services account and delivers them to an
@@ -57,35 +57,35 @@
 // request, when it was made, and so on. To learn more about CloudTrail, including
 // how to turn it on and find your log files, see the [CloudTrail User Guide].
 //
-// # Additional Resources
+// Additional Resources
 //
 // For more information about credentials and request signing, see the following:
 //
 // [Amazon Web Services Security Credentials]
 //   - - This topic provides general information about the types of credentials
-//     used to access Amazon Web Services.
+//   used to access Amazon Web Services.
 //
 // [Temporary Security Credentials]
 //   - - This section of the IAM User Guide describes how to create and use
-//     temporary security credentials.
+//   temporary security credentials.
 //
 // [Signature Version 4 Signing Process]
 //   - - This set of topics walks you through the process of signing a request
-//     using an access key ID and a secret access key.
+//   using an access key ID and a secret access key.
 //
-// # Commonly Used API Operations
+// Commonly Used API Operations
 //
 // Of the API operations discussed in this guide, the following will prove the
 // most useful for most applications. You will likely perform operations other than
 // these, such as creating keys and assigning policies, by using the console.
 //
-// # Encrypt
+// Encrypt
 //
-// # Decrypt
+// Decrypt
 //
-// # GenerateDataKey
+// GenerateDataKey
 //
-// # GenerateDataKeyWithoutPlaintext
+// GenerateDataKeyWithoutPlaintext
 //
 // [Dual-stack endpoint support]: https://docs.aws.amazon.com/kms/latest/developerguide/ipv6-kms.html
 // [Signature Version 4]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
@@ -97,3 +97,5 @@
 // [CloudTrail User Guide]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/
 // [Signature Version 4 Signing Process]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 package kms
+
+

@@ -3,7 +3,7 @@
 // Package dynamodbstreams provides the API client, operations, and parameter
 // types for Amazon DynamoDB Streams.
 //
-// # Amazon DynamoDB
+// Amazon DynamoDB
 //
 // Amazon DynamoDB Streams provides API actions for accessing streams and
 // processing stream records. To learn more about application development with
@@ -11,3 +11,5 @@
 //
 // [Capturing Table Activity with DynamoDB Streams]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
 package dynamodbstreams
+
+

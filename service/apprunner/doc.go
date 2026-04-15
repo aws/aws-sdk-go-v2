@@ -3,7 +3,7 @@
 // Package apprunner provides the API client, operations, and parameter types for
 // AWS App Runner.
 //
-// # App Runner
+// App Runner
 //
 // App Runner is an application service that provides a fast, simple, and
 // cost-effective way to go directly from an existing container image or source
@@ -22,7 +22,7 @@
 // Environment (IDE) Toolkits, and command line tools that you can use to access
 // the API, see [Tools for Amazon Web Services].
 //
-// # Endpoints
+// Endpoints
 //
 // For a list of Region-specific endpoints that App Runner supports, see [App Runner endpoints and quotas] in the
 // Amazon Web Services General Reference.
@@ -32,3 +32,5 @@
 // [App Runner Release Notes]: https://docs.aws.amazon.com/apprunner/latest/relnotes/
 // [App Runner endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/apprunner.html
 package apprunner
+
+

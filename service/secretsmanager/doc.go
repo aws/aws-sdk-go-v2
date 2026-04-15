@@ -3,7 +3,7 @@
 // Package secretsmanager provides the API client, operations, and parameter types
 // for AWS Secrets Manager.
 //
-// # Amazon Web Services Secrets Manager
+// Amazon Web Services Secrets Manager
 //
 // Amazon Web Services Secrets Manager provides a service to enable you to store,
 // manage, and retrieve, secrets.
@@ -11,20 +11,20 @@
 // This guide provides descriptions of the Secrets Manager API. For more
 // information about using this service, see the [Amazon Web Services Secrets Manager User Guide].
 //
-// # API Version
+// API Version
 //
 // This version of the Secrets Manager API Reference documents the Secrets Manager
 // API version 2017-10-17.
 //
 // For a list of endpoints, see [Amazon Web Services Secrets Manager endpoints].
 //
-// # Support and Feedback for Amazon Web Services Secrets Manager
+// Support and Feedback for Amazon Web Services Secrets Manager
 //
 // We welcome your feedback. Send your comments to awssecretsmanager-feedback@amazon.com, or post your feedback and
 // questions in the [Amazon Web Services Secrets Manager Discussion Forum]. For more information about the Amazon Web Services
 // Discussion Forums, see [Forums Help].
 //
-// # Logging API Requests
+// Logging API Requests
 //
 // Amazon Web Services Secrets Manager supports Amazon Web Services CloudTrail, a
 // service that records Amazon Web Services API calls for your Amazon Web Services
@@ -43,3 +43,5 @@
 // [Amazon Web Services Secrets Manager Discussion Forum]: http://forums.aws.amazon.com/forum.jspa?forumID=296
 // [Logging Amazon Web Services Secrets Manager Events with Amazon Web Services CloudTrail]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/monitoring.html#monitoring_cloudtrail
 package secretsmanager
+
+

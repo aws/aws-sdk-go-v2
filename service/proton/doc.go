@@ -29,7 +29,7 @@
 //
 // To learn more about Proton, see the [Proton User Guide].
 //
-// # Ensuring Idempotency
+// Ensuring Idempotency
 //
 // When you make a mutating API request, the request typically returns a result
 // before the asynchronous workflows of the operation are complete. Operations
@@ -50,7 +50,7 @@
 // The following lists of APIs are grouped according to methods that ensure
 // idempotency.
 //
-// # Idempotent create APIs with a client token
+// Idempotent create APIs with a client token
 //
 // The API actions in this list support idempotency with the use of a client
 // token. The corresponding Amazon Web Services CLI commands also support
@@ -85,7 +85,7 @@
 //
 //   - CreateEnvironmentAccountConnection
 //
-// # Idempotent create APIs
+// Idempotent create APIs
 //
 // Given a request action that has succeeded:
 //
@@ -109,7 +109,7 @@
 //
 //   - CreateService
 //
-// # Idempotent delete APIs
+// Idempotent delete APIs
 //
 // Given a request action that has succeeded:
 //
@@ -132,7 +132,7 @@
 //
 //   - DeleteEnvironmentAccountConnection
 //
-// # Asynchronous idempotent delete APIs
+// Asynchronous idempotent delete APIs
 //
 // Given a request action that has succeeded:
 //
@@ -154,3 +154,5 @@
 // [Amazon Web Services Command Line Interface User Guide]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html
 // [Proton User Guide]: https://docs.aws.amazon.com/proton/latest/userguide/Welcome.html
 package proton
+
+

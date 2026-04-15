@@ -3,9 +3,9 @@
 // Package lambda provides the API client, operations, and parameter types for AWS
 // Lambda.
 //
-// # Lambda
+// Lambda
 //
-// # Overview
+// Overview
 //
 // Lambda is a compute service that lets you run code without provisioning or
 // managing servers. Lambda runs your code on a high-availability compute
@@ -29,7 +29,7 @@
 // providing a signature. Lambda supports signature version 4. For more
 // information, see [Signature Version 4 signing process]in the Amazon Web Services General Reference..
 //
-// # CA certificates
+// CA certificates
 //
 // Because Amazon Web Services SDKs use the CA certificates from your computer,
 // changes to the certificates on the Amazon Web Services servers can cause
@@ -41,18 +41,18 @@
 // versions:
 //
 //   - Microsoft Windows versions that have updates from January 2005 or later
-//     installed contain at least one of the required CAs in their trust list.
+//   installed contain at least one of the required CAs in their trust list.
 //
 //   - Mac OS X 10.4 with Java for Mac OS X 10.4 Release 5 (February 2007), Mac OS
-//     X 10.5 (October 2007), and later versions contain at least one of the required
-//     CAs in their trust list.
+//   X 10.5 (October 2007), and later versions contain at least one of the required
+//   CAs in their trust list.
 //
 //   - Red Hat Enterprise Linux 5 (March 2007), 6, and 7 and CentOS 5, 6, and 7
-//     all contain at least one of the required CAs in their default trusted CA list.
+//   all contain at least one of the required CAs in their default trusted CA list.
 //
 //   - Java 1.4.2_12 (May 2006), 5 Update 2 (March 2005), and all later versions,
-//     including Java 6 (December 2006), 7, and 8, contain at least one of the required
-//     CAs in their default trusted CA list.
+//   including Java 6 (December 2006), 7, and 8, contain at least one of the required
+//   CAs in their default trusted CA list.
 //
 // When accessing the Lambda management console or Lambda API endpoints, whether
 // through browsers or programmatically, you will need to ensure your client
@@ -75,3 +75,5 @@
 // [Amazon trust services]: https://www.amazontrust.com/repository/
 // [Lambda endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/lambda-service.html
 package lambda
+
+

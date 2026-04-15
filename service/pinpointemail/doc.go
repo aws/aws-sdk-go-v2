@@ -3,7 +3,7 @@
 // Package pinpointemail provides the API client, operations, and parameter types
 // for Amazon Pinpoint Email Service.
 //
-// # Amazon Pinpoint Email Service
+// Amazon Pinpoint Email Service
 //
 // Welcome to the Amazon Pinpoint Email API Reference. This guide provides
 // information about the Amazon Pinpoint Email API (version 1.0), including
@@ -42,3 +42,5 @@
 // [Amazon Pinpoint]: https://aws.amazon.com/pinpoint
 // [AWS Global Infrastructure]: http://aws.amazon.com/about-aws/global-infrastructure/
 package pinpointemail
+
+

@@ -30,3 +30,5 @@
 // [Amazon Web Services Payment Cryptography Data Plane]: https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/Welcome.html
 // [CloudTrail User Guide]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/
 package paymentcryptography
+
+

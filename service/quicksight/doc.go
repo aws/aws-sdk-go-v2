@@ -3,10 +3,12 @@
 // Package quicksight provides the API client, operations, and parameter types for
 // Amazon QuickSight.
 //
-// # Amazon Quick API Reference
+// Amazon Quick API Reference
 //
 // Amazon Quick Sight is a fully managed, serverless business intelligence service
 // for the Amazon Web Services Cloud that makes it easy to extend data and insights
 // to every user in your organization. This API reference contains documentation
 // for a programming interface that you can use to manage Amazon Quick Sight.
 package quicksight
+
+

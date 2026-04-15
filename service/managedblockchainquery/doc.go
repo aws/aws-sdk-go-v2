@@ -13,3 +13,5 @@
 // such as transaction events, which you can further analyze or use in business
 // logic for your applications.
 package managedblockchainquery
+
+

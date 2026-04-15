@@ -3,7 +3,7 @@
 // Package configservice provides the API client, operations, and parameter types
 // for AWS Config.
 //
-// # Config
+// Config
 //
 // Config provides a way to keep track of the configurations of all the Amazon Web
 // Services resources associated with your Amazon Web Services account. You can use
@@ -28,3 +28,5 @@
 // [Supported Amazon Web Services resources]: https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources
 // [Signature Version 4 Signing Process]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 package configservice
+
+

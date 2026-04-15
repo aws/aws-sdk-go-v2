@@ -3,8 +3,7 @@
 // Package chime provides the API client, operations, and parameter types for
 // Amazon Chime.
 //
-//	Most of these APIs are no longer supported and will not be updated. We
-//
+//  Most of these APIs are no longer supported and will not be updated. We
 // recommend using the latest versions in the [Amazon Chime SDK API reference], in the Amazon Chime SDK.
 //
 // Using the latest versions requires migrating to dedicated namespaces. For more
@@ -42,8 +41,6 @@
 // Management (IAM). For more information, see [Identity and Access Management for Amazon Chime]in the Amazon Chime Administration
 // Guide.
 //
-// Deprecated: This namespace has been deprecated
-//
 // [Identity and Access Management for Amazon Chime]: https://docs.aws.amazon.com/chime/latest/ag/security-iam.html
 // [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
 // [Installing the AWS Command Line Interface]: https://docs.aws.amazon.com/cli/latest/userguide/installing.html
@@ -51,4 +48,8 @@
 // [Amazon Chime SDK API reference]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/welcome.html
 // [Signature Version 4 Signing Process]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 // [Amazon Chime commands]: https://docs.aws.amazon.com/cli/latest/reference/chime/index.html
+//
+// Deprecated: This namespace has been deprecated
 package chime
+
+

@@ -3,7 +3,7 @@
 // Package wellarchitected provides the API client, operations, and parameter
 // types for AWS Well-Architected Tool.
 //
-// # Well-Architected Tool
+// Well-Architected Tool
 //
 // This is the Well-Architected Tool API Reference. The WA Tool API provides
 // programmatic access to the [Well-Architected Tool]in the [Amazon Web Services Management Console]. For information about the Well-Architected
@@ -13,3 +13,5 @@
 // [Well-Architected Tool]: http://aws.amazon.com/well-architected-tool
 // [Amazon Web Services Management Console]: https://console.aws.amazon.com/wellarchitected
 package wellarchitected
+
+

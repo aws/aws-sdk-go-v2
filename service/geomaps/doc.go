@@ -3,18 +3,17 @@
 // Package geomaps provides the API client, operations, and parameter types for
 // Amazon Location Service Maps V2.
 //
-//	Integrate high-quality base map data into your applications using [MapLibre].
-//
+//  Integrate high-quality base map data into your applications using [MapLibre].
 // Capabilities include:
 //
 //   - Access to comprehensive base map data, allowing you to tailor the map
-//     display to your specific needs.
+//   display to your specific needs.
 //
 //   - Multiple pre-designed map styles suited for various application types, such
-//     as navigation, logistics, or data visualization.
+//   as navigation, logistics, or data visualization.
 //
 //   - Generation of static map images for scenarios where interactive maps aren't
-//     suitable, such as:
+//   suitable, such as:
 //
 //   - Embedding in emails or documents
 //
@@ -26,3 +25,5 @@
 //
 // [MapLibre]: https://maplibre.org
 package geomaps
+
+

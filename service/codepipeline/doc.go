@@ -3,9 +3,9 @@
 // Package codepipeline provides the API client, operations, and parameter types
 // for AWS CodePipeline.
 //
-// # CodePipeline
+// CodePipeline
 //
-// # Overview
+// Overview
 //
 // This is the CodePipeline API Reference. This guide provides descriptions of the
 // actions and data types for CodePipeline. Some functionality for your pipeline
@@ -27,20 +27,20 @@
 //
 // GetPipeline
 //   - , which returns information about the pipeline structure and pipeline
-//     metadata, including the pipeline Amazon Resource Name (ARN).
+//   metadata, including the pipeline Amazon Resource Name (ARN).
 //
 // GetPipelineExecution
 //   - , which returns information about a specific execution of a pipeline.
 //
 // GetPipelineState
 //   - , which returns information about the current state of the stages and
-//     actions of a pipeline.
+//   actions of a pipeline.
 //
 // ListActionExecutions
 //   - , which returns action-level details for past executions. The details
-//     include full stage and action-level details, including individual action
-//     duration, status, any errors that occurred during the execution, and input and
-//     output artifact location details.
+//   include full stage and action-level details, including individual action
+//   duration, status, any errors that occurred during the execution, and input and
+//   output artifact location details.
 //
 // ListPipelines
 //   - , which gets a summary of all of the pipelines associated with your account.
@@ -53,11 +53,11 @@
 //
 // StopPipelineExecution
 //   - , which stops the specified pipeline execution from continuing through the
-//     pipeline.
+//   pipeline.
 //
 // UpdatePipeline
 //   - , which updates a pipeline with edits or changes to the structure of the
-//     pipeline.
+//   pipeline.
 //
 // Pipelines include stages. Each stage contains one or more actions that must
 // complete before the next stage begins. A stage results in success or failure. If
@@ -98,12 +98,12 @@
 //
 // DisableStageTransition
 //   - , which prevents artifacts from transitioning to the next stage in a
-//     pipeline.
+//   pipeline.
 //
 // EnableStageTransition
 //   - , which enables transition of artifacts between stages in a pipeline.
 //
-// # Using the API to integrate with CodePipeline
+// Using the API to integrate with CodePipeline
 //
 // For third-party integrators or developers who want to create their own
 // integrations with CodePipeline, the expected sequence varies from the standard
@@ -154,3 +154,5 @@
 // [CodePipeline User Guide]: https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html
 // [CodePipeline Pipeline Structure Reference]: https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-structure.html
 package codepipeline
+
+

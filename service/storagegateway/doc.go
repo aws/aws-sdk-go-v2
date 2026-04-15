@@ -3,7 +3,7 @@
 // Package storagegateway provides the API client, operations, and parameter types
 // for AWS Storage Gateway.
 //
-// # Storage Gateway Service
+// Storage Gateway Service
 //
 // Amazon FSx File Gateway is no longer available to new customers. Existing
 // customers of FSx File Gateway can continue to use the service normally. For
@@ -20,23 +20,23 @@
 //
 // [Storage Gateway required request headers]
 //   - : Describes the required headers that you must send with every POST request
-//     to Storage Gateway.
+//   to Storage Gateway.
 //
 // [Signing requests]
 //   - : Storage Gateway requires that you authenticate every request you send;
-//     this topic describes how sign such a request.
+//   this topic describes how sign such a request.
 //
 // [Error responses]
 //   - : Provides reference information about Storage Gateway errors.
 //
 // [Operations in Storage Gateway]
 //   - : Contains detailed descriptions of all Storage Gateway operations, their
-//     request parameters, response elements, possible errors, and examples of requests
-//     and responses.
+//   request parameters, response elements, possible errors, and examples of requests
+//   and responses.
 //
 // [Storage Gateway endpoints and quotas]
 //   - : Provides a list of each Amazon Web Services Region and the endpoints
-//     available for use with Storage Gateway.
+//   available for use with Storage Gateway.
 //
 // Storage Gateway resource IDs are in uppercase. When you use these resource IDs
 // with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change
@@ -71,3 +71,5 @@
 // [Announcement: Heads-up – Longer Storage Gateway volume and snapshot IDs coming in 2016]: http://forums.aws.amazon.com/ann.jspa?annID=3557
 // [Longer EC2 and EBS resource IDs]: http://aws.amazon.com/ec2/faqs/#longer-ids
 package storagegateway
+
+

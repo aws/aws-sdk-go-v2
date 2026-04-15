@@ -21,3 +21,5 @@
 // [IAM role for the Amazon Q Business web experience including Amazon Q Apps]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/deploy-experience-iam-role.html
 // [Amazon Q Apps capabilities]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/deploy-experience-iam-role.html#q-apps-actions
 package qapps
+
+

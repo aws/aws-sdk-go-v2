@@ -16,3 +16,5 @@
 // resources. That is, for example, specify --region us-east-2 on Amazon Web
 // Services CLI commands.
 package route53globalresolver
+
+

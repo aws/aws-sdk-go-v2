@@ -3,7 +3,7 @@
 // Package cloudhsm provides the API client, operations, and parameter types for
 // Amazon CloudHSM.
 //
-// # AWS CloudHSM Service
+// AWS CloudHSM Service
 //
 // This is documentation for AWS CloudHSM Classic. For more information, see [AWS CloudHSM Classic FAQs], the [AWS CloudHSM Classic User Guide]
 // , and the [AWS CloudHSM Classic API Reference].
@@ -17,3 +17,5 @@
 // [AWS CloudHSM Classic User Guide]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
 // [AWS CloudHSM Classic API Reference]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
 package cloudhsm
+
+

@@ -6,3 +6,5 @@
 // AWS Partner Central Channel service for managing partner relationships,
 // handshakes, and program management accounts.
 package partnercentralchannel
+
+

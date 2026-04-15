@@ -17,3 +17,5 @@
 // [Amazon Web Services Payment Cryptography Control Plane]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/Welcome.html
 // [Data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/data-operations.html
 package paymentcryptographydata
+
+

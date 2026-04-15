@@ -3,7 +3,7 @@
 // Package dynamodb provides the API client, operations, and parameter types for
 // Amazon DynamoDB.
 //
-// # Amazon DynamoDB
+// Amazon DynamoDB
 //
 // Amazon DynamoDB is a fully managed NoSQL database service that provides fast
 // and predictable performance with seamless scalability. DynamoDB lets you offload
@@ -24,3 +24,5 @@
 // Availability Zones in an Amazon Web Services Region, providing built-in high
 // availability and data durability.
 package dynamodb
+
+

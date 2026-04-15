@@ -3,7 +3,7 @@
 // Package ecr provides the API client, operations, and parameter types for Amazon
 // Elastic Container Registry.
 //
-// # Amazon Elastic Container Registry
+// Amazon Elastic Container Registry
 //
 // Amazon Elastic Container Registry (Amazon ECR) is a managed container image
 // registry service. Customers can use the familiar Docker CLI, or their preferred
@@ -18,3 +18,5 @@
 //
 // [Amazon ECR endpoints]: https://docs.aws.amazon.com/general/latest/gr/ecr.html
 package ecr
+
+

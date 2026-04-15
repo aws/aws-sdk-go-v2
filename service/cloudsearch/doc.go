@@ -3,7 +3,7 @@
 // Package cloudsearch provides the API client, operations, and parameter types
 // for Amazon CloudSearch.
 //
-// # Amazon CloudSearch Configuration Service
+// Amazon CloudSearch Configuration Service
 //
 // You use the Amazon CloudSearch configuration service to create, configure, and
 // manage search domains. Configuration service requests are submitted using the
@@ -17,3 +17,5 @@
 //
 // [Regions and Endpoints]: http://docs.aws.amazon.com/general/latest/gr/rande.html#cloudsearch_region
 package cloudsearch
+
+

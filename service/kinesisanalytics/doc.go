@@ -3,9 +3,9 @@
 // Package kinesisanalytics provides the API client, operations, and parameter
 // types for Amazon Kinesis Analytics.
 //
-// # Amazon Kinesis Analytics
+// Amazon Kinesis Analytics
 //
-// # Overview
+// Overview
 //
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
@@ -14,3 +14,5 @@
 // This is the Amazon Kinesis Analytics v1 API Reference. The Amazon Kinesis
 // Analytics Developer Guide provides additional information.
 package kinesisanalytics
+
+

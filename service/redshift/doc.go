@@ -3,9 +3,9 @@
 // Package redshift provides the API client, operations, and parameter types for
 // Amazon Redshift.
 //
-// # Amazon Redshift
+// Amazon Redshift
 //
-// # Overview
+// Overview
 //
 // This is an interface reference for Amazon Redshift. It contains documentation
 // for one of the programming or command line interfaces you can use to manage
@@ -31,3 +31,5 @@
 // [Amazon Redshift Database Developer Guide]: https://docs.aws.amazon.com/redshift/latest/dg/welcome.html
 // [Amazon Redshift Getting Started Guide]: https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html
 package redshift
+
+

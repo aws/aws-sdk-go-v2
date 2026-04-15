@@ -21,3 +21,5 @@
 // [Amazon WorkSpaces Thin Client Administrator Guide]: https://docs.aws.amazon.com/workspaces-thin-client/latest/ag/
 // [WorkSpaces Thin Client section of the CLI Reference]: https://docs.aws.amazon.com/cli/latest/reference/workspaces-thin-client/index.html
 package workspacesthinclient
+
+

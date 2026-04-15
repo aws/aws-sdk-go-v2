@@ -10,7 +10,7 @@
 // associated with your Amazon Web Services account. You can use the Free Tier API
 // to filter and show only the data that you want.
 //
-// # Service endpoint
+// Service endpoint
 //
 // The Free Tier API provides the following endpoint:
 //
@@ -18,3 +18,5 @@
 //
 // [Using the Amazon Web Services Free Tier]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-free-tier.html
 package freetier
+
+

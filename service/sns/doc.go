@@ -3,7 +3,7 @@
 // Package sns provides the API client, operations, and parameter types for Amazon
 // Simple Notification Service.
 //
-// # Amazon Simple Notification Service
+// Amazon Simple Notification Service
 //
 // Amazon Simple Notification Service (Amazon SNS) is a web service that enables
 // you to build distributed web-enabled applications. Applications can use Amazon
@@ -25,3 +25,5 @@
 // [Tools for Amazon Web Services]: http://aws.amazon.com/tools/
 // [Amazon SNS Developer Guide]: https://docs.aws.amazon.com/sns/latest/dg/
 package sns
+
+

@@ -12,16 +12,16 @@
 // Related resources
 //
 //   - For information about each of the tools that comprise Systems Manager, see [Using Systems Manager tools]
-//     in the Amazon Web Services Systems Manager User Guide.
+//   in the Amazon Web Services Systems Manager User Guide.
 //
 //   - For details about predefined runbooks for Automation, a tool in Amazon Web
-//     Services Systems Manager, see the [Systems Manager Automation Runbook Reference].
+//   Services Systems Manager, see the [Systems Manager Automation Runbook Reference].
 //
 //   - For information about AppConfig, a tool in Systems Manager, see the [AppConfig User Guide]and the [AppConfig API Reference]
-//     .
+//   .
 //
 //   - For information about Incident Manager, a tool in Systems Manager, see the [Systems Manager Incident Manager User Guide]
-//     and the [Systems Manager Incident Manager API Reference].
+//   and the [Systems Manager Incident Manager API Reference].
 //
 // [Amazon Web Services Systems Manager User Guide]: https://docs.aws.amazon.com/systems-manager/latest/userguide/
 // [AppConfig User Guide]: https://docs.aws.amazon.com/appconfig/latest/userguide/
@@ -32,3 +32,5 @@
 // [Systems Manager Incident Manager User Guide]: https://docs.aws.amazon.com/incident-manager/latest/userguide/
 // [Using Systems Manager tools]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-tools.html
 package ssm
+
+

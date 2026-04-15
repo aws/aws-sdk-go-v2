@@ -22,3 +22,5 @@
 // [Amazon AppIntegrations data types]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_AppIntegrations_Service.html
 // [Third-party applications (3p apps) in the agent workspace]: https://docs.aws.amazon.com/connect/latest/adminguide/3p-apps.html
 package appintegrations
+
+

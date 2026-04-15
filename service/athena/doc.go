@@ -18,3 +18,5 @@
 // [Accessing Amazon Athena with JDBC]: https://docs.aws.amazon.com/athena/latest/ug/connect-with-jdbc.html
 // [What is Amazon Athena]: http://docs.aws.amazon.com/athena/latest/ug/what-is.html
 package athena
+
+

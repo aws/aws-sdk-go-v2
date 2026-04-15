@@ -3,7 +3,7 @@
 // Package timestreamwrite provides the API client, operations, and parameter
 // types for Amazon Timestream Write.
 //
-// # Amazon Timestream Write
+// Amazon Timestream Write
 //
 // Amazon Timestream is a fast, scalable, fully managed time-series database
 // service that makes it easy to store and analyze trillions of time-series data
@@ -20,3 +20,5 @@
 // data. As your data grows over time, Timestream’s adaptive query processing
 // engine spans across storage tiers to provide fast analysis while reducing costs.
 package timestreamwrite
+
+

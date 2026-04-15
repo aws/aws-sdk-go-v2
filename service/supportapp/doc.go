@@ -3,7 +3,7 @@
 // Package supportapp provides the API client, operations, and parameter types for
 // AWS Support App.
 //
-// # Amazon Web Services Support App in Slack
+// Amazon Web Services Support App in Slack
 //
 // You can use the Amazon Web Services Support App in Slack API to manage your
 // support cases in Slack for your Amazon Web Services account. After you configure
@@ -15,7 +15,7 @@
 //   - Request service quota increases for your account
 //
 //   - Invite Amazon Web Services Support agents to your channel so that you can
-//     chat directly about your support cases
+//   chat directly about your support cases
 //
 // For more information about how to perform these actions in Slack, see the
 // following documentation in the Amazon Web Services Support User Guide:
@@ -33,10 +33,10 @@
 // more information, see [Authorize a Slack workspace to enable the Amazon Web Services Support App].
 //
 //   - You must have a Business or Enterprise Support plan to use the Amazon Web
-//     Services Support App API.
+//   Services Support App API.
 //
 //   - For more information about the Amazon Web Services Support App endpoints,
-//     see the [Amazon Web Services Support App in Slack endpoints]in the Amazon Web Services General Reference.
+//   see the [Amazon Web Services Support App in Slack endpoints]in the Amazon Web Services General Reference.
 //
 // [Requesting service quota increases]: https://docs.aws.amazon.com/awssupport/latest/user/service-quota-increase.html
 // [Amazon Web Services Support App in Slack]: https://docs.aws.amazon.com/awssupport/latest/user/aws-support-app-for-slack.html
@@ -45,3 +45,5 @@
 // [Amazon Web Services Support App commands in Slack]: https://docs.aws.amazon.com/awssupport/latest/user/support-app-commands.html
 // [Authorize a Slack workspace to enable the Amazon Web Services Support App]: https://docs.aws.amazon.com/awssupport/latest/user/authorize-slack-workspace.html
 package supportapp
+
+

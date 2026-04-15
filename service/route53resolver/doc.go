@@ -12,7 +12,7 @@
 // You can also configure DNS resolution between your VPC and your network over a
 // Direct Connect or VPN connection:
 //
-// # Forward DNS queries from resolvers on your network to Route 53 Resolver
+// Forward DNS queries from resolvers on your network to Route 53 Resolver
 //
 // DNS resolvers on your network can forward DNS queries to Resolver in a
 // specified VPC. This allows your DNS resolvers to easily resolve domain names for
@@ -20,7 +20,7 @@
 // private hosted zone. For more information, see [How DNS Resolvers on Your Network Forward DNS Queries to Route 53 Resolver]in the Amazon Route 53 Developer
 // Guide.
 //
-// # Conditionally forward queries from a VPC to resolvers on your network
+// Conditionally forward queries from a VPC to resolvers on your network
 //
 // You can configure Resolver to forward queries that it receives from EC2
 // instances in your VPCs to DNS resolvers on your network. To forward selected
@@ -39,3 +39,5 @@
 // [How DNS Resolvers on Your Network Forward DNS Queries to Route 53 Resolver]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html#resolver-overview-forward-network-to-vpc
 // [How Route 53 Resolver Forwards DNS Queries from Your VPCs to Your Network]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html#resolver-overview-forward-vpc-to-network
 package route53resolver
+
+

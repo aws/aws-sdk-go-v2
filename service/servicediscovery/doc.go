@@ -3,7 +3,7 @@
 // Package servicediscovery provides the API client, operations, and parameter
 // types for AWS Cloud Map.
 //
-// # Cloud Map
+// Cloud Map
 //
 // With Cloud Map, you can configure public DNS, private DNS, or HTTP namespaces
 // that your microservice applications run in. When an instance becomes available,
@@ -13,3 +13,5 @@
 // or HTTP requests, for the service receive an answer that contains up to eight
 // healthy records.
 package servicediscovery
+
+

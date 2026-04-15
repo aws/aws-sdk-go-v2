@@ -21,21 +21,21 @@
 // cover a broad spectrum of customer needs:
 //
 //   - Feature flags and toggles - Safely release new capabilities to your
-//     customers in a controlled environment. Instantly roll back changes if you
-//     experience a problem.
+//   customers in a controlled environment. Instantly roll back changes if you
+//   experience a problem.
 //
 //   - Application tuning - Carefully introduce application changes while testing
-//     the impact of those changes with users in production environments.
+//   the impact of those changes with users in production environments.
 //
 //   - Allow list or block list - Control access to premium features or instantly
-//     block specific users without deploying new code.
+//   block specific users without deploying new code.
 //
 //   - Centralized configuration storage - Keep your configuration data organized
-//     and consistent across all of your workloads. You can use AppConfig to deploy
-//     configuration data stored in the AppConfig hosted configuration store, Secrets
-//     Manager, Systems Manager, Parameter Store, or Amazon S3.
+//   and consistent across all of your workloads. You can use AppConfig to deploy
+//   configuration data stored in the AppConfig hosted configuration store, Secrets
+//   Manager, Systems Manager, Parameter Store, or Amazon S3.
 //
-// # How AppConfig works
+// How AppConfig works
 //
 // This section provides a high-level description of how AppConfig works and how
 // you get started.
@@ -91,19 +91,19 @@
 //   - An environment ID where you want to deploy the configuration data
 //
 //   - A deployment strategy ID that defines how fast you want the changes to take
-//     effect
+//   effect
 //
 // When you call the [StartDeployment] API action, AppConfig performs the following tasks:
 //
 //   - Retrieves the configuration data from the underlying data store by using
-//     the location URI in the configuration profile.
+//   the location URI in the configuration profile.
 //
 //   - Verifies the configuration data is syntactically and semantically correct
-//     by using the validators you specified when you created your configuration
-//     profile.
+//   by using the validators you specified when you created your configuration
+//   profile.
 //
 //   - Caches a copy of the data so it is ready to be retrieved by your
-//     application. This cached copy is called the deployed data.
+//   application. This cached copy is called the deployed data.
 //
 // 6. Retrieve the configuration You can configure AppConfig Agent as a local host
 // and have the agent poll AppConfig for configuration updates. The agent calls the
@@ -125,3 +125,5 @@
 // [Creating a free form configuration profile]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-free-form-configurations-creating.html
 // [Simplified retrieval methods]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-simplified-methods.html
 package appconfig
+
+

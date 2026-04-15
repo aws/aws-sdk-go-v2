@@ -33,3 +33,5 @@
 // [promote a local index in a Region to become the aggregator index for the account]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region-turn-on.html
 // [search across all of the indexed Regions in your account]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html
 package resourceexplorer2
+
+

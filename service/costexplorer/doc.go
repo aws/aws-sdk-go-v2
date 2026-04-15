@@ -9,7 +9,7 @@
 // of daily write operations for Amazon DynamoDB database tables in your production
 // environment.
 //
-// # Service Endpoint
+// Service Endpoint
 //
 // The Cost Explorer API provides the following endpoint:
 //
@@ -20,3 +20,5 @@
 //
 // [Amazon Web Services Cost Management Pricing]: http://aws.amazon.com/aws-cost-management/pricing/
 package costexplorer
+
+

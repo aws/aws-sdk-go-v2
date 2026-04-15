@@ -3,7 +3,7 @@
 // Package marketplaceentitlementservice provides the API client, operations, and
 // parameter types for AWS Marketplace Entitlement Service.
 //
-// # AWS Marketplace Entitlement Service
+// AWS Marketplace Entitlement Service
 //
 // This reference provides descriptions of the AWS Marketplace Entitlement Service
 // API.
@@ -18,3 +18,5 @@
 //
 //   - GetEntitlements- Gets the entitlements for a Marketplace product.
 package marketplaceentitlementservice
+
+

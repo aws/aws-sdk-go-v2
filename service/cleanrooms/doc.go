@@ -20,3 +20,5 @@
 // [Clean Rooms User Guide]: https://docs.aws.amazon.com/clean-rooms/latest/userguide/what-is.html
 // [Clean Rooms SQL Reference]: https://docs.aws.amazon.com/clean-rooms/latest/sql-reference/sql-reference.html
 package cleanrooms
+
+

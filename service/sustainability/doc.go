@@ -11,17 +11,17 @@
 // With the AWS Sustainability service, you can:
 //
 //   - Retrieve estimated carbon emissions for your Amazon Web Services usage
-//     across different time periods
+//   across different time periods
 //
 //   - Group emissions data by dimensions such as account, region, and service
 //
 //   - Filter emissions data to focus on specific accounts, regions, or services
 //
 //   - Access multiple emissions calculation methodologies including
-//     Location-based Method (LBM) and Market-based Method (MBM)
+//   Location-based Method (LBM) and Market-based Method (MBM)
 //
 //   - Aggregate emissions data at various time granularities including monthly,
-//     quarterly, and yearly periods
+//   quarterly, and yearly periods
 //
 // The API supports pagination for efficient data retrieval and provides dimension
 // values to help you understand the available grouping and filtering options for
@@ -31,3 +31,5 @@
 // Greenhouse Gas (GHG) Protocol and are provided in metric tons of carbon
 // dioxide-equivalent (MTCO2e).
 package sustainability
+
+

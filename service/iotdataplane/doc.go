@@ -3,7 +3,7 @@
 // Package iotdataplane provides the API client, operations, and parameter types
 // for AWS IoT Data Plane.
 //
-// # IoT data
+// IoT data
 //
 // IoT data enables secure, bi-directional communication between
 // Internet-connected things (such as sensors, actuators, embedded devices, or
@@ -14,9 +14,11 @@
 //
 // Find the endpoint address for actions in IoT data by running this CLI command:
 //
-//	aws iot describe-endpoint --endpoint-type iot:Data-ATS
+//     aws iot describe-endpoint --endpoint-type iot:Data-ATS
 //
 // The service name used by [Amazon Web ServicesSignature Version 4] to sign requests is: iotdevicegateway.
 //
 // [Amazon Web ServicesSignature Version 4]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 package iotdataplane
+
+

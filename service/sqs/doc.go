@@ -21,7 +21,7 @@
 //
 //   - Handle error responses
 //
-// # Additional information
+// Additional information
 //
 // [Amazon SQS Product Page]
 //
@@ -48,3 +48,5 @@
 // [Amazon SQS Message Attributes]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes
 // [Amazon SQS in the Command Line Interface]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sqs/index.html
 package sqs
+
+

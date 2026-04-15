@@ -3,8 +3,7 @@
 // Package bcmpricingcalculator provides the API client, operations, and parameter
 // types for AWS Billing and Cost Management Pricing Calculator.
 //
-//	You can use the Pricing Calculator API to programmatically create estimates
-//
+//  You can use the Pricing Calculator API to programmatically create estimates
 // for your planned cloud use. You can model usage and commitments such as Savings
 // Plans and Reserved Instances, and generate estimated costs using your discounts
 // and benefit sharing preferences.
@@ -13,3 +12,5 @@
 //
 //   - https://bcm-pricing-calculator.us-east-1.api.aws
 package bcmpricingcalculator
+
+

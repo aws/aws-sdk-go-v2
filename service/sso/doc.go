@@ -25,3 +25,5 @@
 // [Tools for Amazon Web Services]: http://aws.amazon.com/tools/
 // [IAM Identity Center rename]: https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html#renamed
 package sso
+
+

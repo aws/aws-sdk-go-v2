@@ -3,7 +3,7 @@
 // Package cognitosync provides the API client, operations, and parameter types
 // for Amazon Cognito Sync.
 //
-// # Amazon Cognito Sync
+// Amazon Cognito Sync
 //
 // Amazon Cognito Sync provides an AWS service and client library that enable
 // cross-device syncing of application-related user data. High-level client
@@ -26,3 +26,5 @@
 // [Amazon Cognito Identity service]: http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/Welcome.html
 // [Developer Guide for Android]: http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/cognito-sync.html
 package cognitosync
+
+

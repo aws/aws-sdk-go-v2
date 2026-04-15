@@ -3,7 +3,7 @@
 // Package migrationhubstrategy provides the API client, operations, and parameter
 // types for Migration Hub Strategy Recommendations.
 //
-// # Migration Hub Strategy Recommendations
+// Migration Hub Strategy Recommendations
 //
 // This API reference provides descriptions, syntax, and other details about each
 // of the actions and data types for Migration Hub Strategy Recommendations
@@ -14,3 +14,5 @@
 //
 // [AWS SDKs]: http://aws.amazon.com/tools/#SDKs
 package migrationhubstrategy
+
+

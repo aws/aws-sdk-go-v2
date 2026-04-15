@@ -24,3 +24,5 @@
 // [Amazon Fraud Detector User Guide]: https://docs.aws.amazon.com/frauddetector/latest/ug/
 // [Tools to build on AWS]: https://aws.amazon.com/developer/tools/
 package frauddetector
+
+

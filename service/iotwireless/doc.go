@@ -30,3 +30,5 @@
 // [Using IPv6 with AWS IoT Wireless]: https://docs.aws.amazon.com/iot-wireless/latest/developerguide/wireless-ipv6-access.html
 // [Sidewalk]: https://docs.aws.amazon.com/iot-wireless/latest/developerguide/iot-sidewalk.html
 package iotwireless
+
+

@@ -3,7 +3,7 @@
 // Package invoicing provides the API client, operations, and parameter types for
 // AWS Invoicing.
 //
-//	Amazon Web Services Invoice Configuration
+//  Amazon Web Services Invoice Configuration
 //
 // You can use Amazon Web Services Invoice Configuration APIs to programmatically
 // create, update, delete, get, and list invoice units. You can also
@@ -20,7 +20,7 @@
 // Invoice Configuration APIs, you can automate the creation of new invoice units
 // and subsequently automate the addition of new accounts to your invoice units.
 //
-// # Amazon Web Services Procurement Portal Preferences
+// Amazon Web Services Procurement Portal Preferences
 //
 // You can use Amazon Web Services Procurement Portal Preferences APIs to
 // programmatically create, update, delete, get, and list procurement portal
@@ -43,7 +43,7 @@
 // ensure appropriate access controls are in place for procurement portal
 // preferences.
 //
-// # Amazon Web Services Invoice Management
+// Amazon Web Services Invoice Management
 //
 // You can use Amazon Web Services Invoice Management APIs to programmatically
 // list invoice summaries and get invoice documents. You can also programmatically
@@ -59,7 +59,7 @@
 // create invoice retrieval processes and integrate invoice data into your
 // financial systems.
 //
-// # Service endpoint
+// Service endpoint
 //
 // You can use the following endpoints for Amazon Web Services Invoice
 // Configuration, Amazon Web Services Procurement Portal Preferences, and Amazon
@@ -67,3 +67,5 @@
 //
 //   - https://invoicing.us-east-1.api.aws
 package invoicing
+
+

@@ -3,7 +3,7 @@
 // Package backupgateway provides the API client, operations, and parameter types
 // for AWS Backup Gateway.
 //
-// # Backup gateway
+// Backup gateway
 //
 // Backup gateway connects Backup to your hypervisor, so you can create, store,
 // and restore backups of your virtual machines (VMs) anywhere, whether on-premises
@@ -19,3 +19,5 @@
 // To download the Amazon Web Services software to get started, navigate to the
 // Backup console, choose Gateways, then choose Create gateway.
 package backupgateway
+
+

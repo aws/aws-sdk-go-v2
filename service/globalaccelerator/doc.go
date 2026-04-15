@@ -3,7 +3,7 @@
 // Package globalaccelerator provides the API client, operations, and parameter
 // types for AWS Global Accelerator.
 //
-// # Global Accelerator
+// Global Accelerator
 //
 // This is the Global Accelerator API Reference. This guide is for developers who
 // need detailed information about Global Accelerator API actions, data types, and
@@ -14,13 +14,13 @@
 // type of accelerator you choose, you can gain additional benefits.
 //
 //   - By using a standard accelerator, you can improve availability of your
-//     internet applications that are used by a global audience. With a standard
-//     accelerator, Global Accelerator directs traffic to optimal endpoints over the
-//     Amazon Web Services global network.
+//   internet applications that are used by a global audience. With a standard
+//   accelerator, Global Accelerator directs traffic to optimal endpoints over the
+//   Amazon Web Services global network.
 //
 //   - For other scenarios, you might choose a custom routing accelerator. With a
-//     custom routing accelerator, you can use application logic to directly map one or
-//     more users to a specific endpoint among many endpoints.
+//   custom routing accelerator, you can use application logic to directly map one or
+//   more users to a specific endpoint among many endpoints.
 //
 // Global Accelerator is a global service that supports endpoints in multiple
 // Amazon Web Services Regions but you must specify the US West (Oregon) Region to
@@ -65,3 +65,5 @@
 // [Tag-based policies]: https://docs.aws.amazon.com/global-accelerator/latest/dg/access-control-manage-access-tag-policies.html
 // [Global Accelerator Developer Guide]: https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html
 package globalaccelerator
+
+

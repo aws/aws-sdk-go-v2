@@ -21,7 +21,7 @@
 // provides key information, such as End User Messaging SMS integration with other
 // Amazon Web Services services, and the quotas that apply to use of the service.
 //
-// # Regional availability
+// Regional availability
 //
 // The End User Messaging SMS version 2 API Reference is available in several
 // Amazon Web Services Regions and it provides an endpoint for each of these
@@ -43,3 +43,5 @@
 // [Amazon Pinpoint endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/pinpoint.html
 // [Amazon Web Services Service Endpoints]: https://docs.aws.amazon.com/hgeneral/latest/gr/rande.html#pinpoint_region
 package pinpointsmsvoicev2
+
+

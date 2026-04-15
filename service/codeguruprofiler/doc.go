@@ -3,8 +3,7 @@
 // Package codeguruprofiler provides the API client, operations, and parameter
 // types for Amazon CodeGuru Profiler.
 //
-//	This section provides documentation for the Amazon CodeGuru Profiler API
-//
+//  This section provides documentation for the Amazon CodeGuru Profiler API
 // operations.
 //
 // Amazon CodeGuru Profiler collects runtime performance data from your live
@@ -27,3 +26,5 @@
 //
 // [What is Amazon CodeGuru Profiler]: https://docs.aws.amazon.com/codeguru/latest/profiler-ug/what-is-codeguru-profiler.html
 package codeguruprofiler
+
+
