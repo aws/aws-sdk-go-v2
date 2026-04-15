@@ -13,7 +13,6 @@ import (
 	internalendpoints "github.com/aws/aws-sdk-go-v2/internal/kitchensinktest/internal/endpoints"
 	smithyauth "github.com/aws/smithy-go/auth"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
-	"github.com/aws/smithy-go/endpoints/private/bdd"
 	"github.com/aws/smithy-go/endpoints/private/rulesfn"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/tracing"
@@ -258,66 +257,21 @@ func (p EndpointParameters) WithDefaults() EndpointParameters {
 	return p
 }
 
-const bddRoot int32 = 2
+type stringSlice []string
 
-var bddNodes = [6]int32{
-	-1, 1, -1, 0, 100000001, 100000002}
-
-type conditionContext struct {
-}
-
-func evalCondition(idx int, params *EndpointParameters, c *conditionContext) bool {
-	switch idx {
-	case 0:
-		return params.Id != nil
+func (s stringSlice) Get(i int) *string {
+	if i < 0 || i >= len(s) {
+		return nil
 	}
-	return false
-}
 
-func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (smithyendpoints.Endpoint, error) {
-	switch idx {
-	case 0:
-		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint resolution failed: no matching rule")
-	case 1:
-		uriString := func() string {
-			var out strings.Builder
-			out.WriteString("https://")
-			out.WriteString(*params.Id)
-			out.WriteString(".example.")
-			out.WriteString(*params.Region)
-			out.WriteString(".amazonaws.com")
-			return out.String()
-		}()
-		uri, err := url.Parse(uriString)
-		if err != nil {
-			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
-		}
-		return smithyendpoints.Endpoint{
-			URI:     *uri,
-			Headers: http.Header{},
-		}, nil
-	case 2:
-		uriString := func() string {
-			var out strings.Builder
-			out.WriteString("https://example.")
-			out.WriteString(*params.Region)
-			out.WriteString(".amazonaws.com")
-			return out.String()
-		}()
-		uri, err := url.Parse(uriString)
-		if err != nil {
-			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
-		}
-		return smithyendpoints.Endpoint{
-			URI:     *uri,
-			Headers: http.Header{},
-		}, nil
-	}
-	return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, invalid result index: %d", idx)
+	v := s[i]
+	return &v
 }
 
 // EndpointResolverV2 provides the interface for resolving service endpoints.
 type EndpointResolverV2 interface {
+	// ResolveEndpoint attempts to resolve the endpoint with the provided options,
+	// returning the endpoint if found. Otherwise an error is returned.
 	ResolveEndpoint(ctx context.Context, params EndpointParameters) (
 		smithyendpoints.Endpoint, error,
 	)
@@ -341,12 +295,51 @@ func (r *resolver) ResolveEndpoint(
 	if err = params.ValidateRequired(); err != nil {
 		return endpoint, fmt.Errorf("endpoint parameters are not valid, %w", err)
 	}
+	_Region := *params.Region
+	_ = _Region
 
-	c := &conditionContext{}
-	ref := bdd.Evaluate(bddNodes[:], bddRoot, func(idx int) bool {
-		return evalCondition(idx, &params, c)
-	})
-	return resolveResult(ref, &params, c)
+	// id-specific endpoint
+	if exprVal := params.Id; exprVal != nil {
+		_Id := *exprVal
+		_ = _Id
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(_Id)
+			out.WriteString(".example.")
+			out.WriteString(_Region)
+			out.WriteString(".amazonaws.com")
+			return out.String()
+		}()
+
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	}
+	// Default regional endpoint
+	uriString := func() string {
+		var out strings.Builder
+		out.WriteString("https://example.")
+		out.WriteString(_Region)
+		out.WriteString(".amazonaws.com")
+		return out.String()
+	}()
+
+	uri, err := url.Parse(uriString)
+	if err != nil {
+		return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+	}
+
+	return smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+	}, nil
 }
 
 type endpointParamsBinder interface {
