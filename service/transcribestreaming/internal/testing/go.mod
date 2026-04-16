@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.8
 	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.6.41
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.34.5
-	github.com/aws/smithy-go v1.24.2
+	github.com/aws/smithy-go v1.25.0
 )
 
 require (

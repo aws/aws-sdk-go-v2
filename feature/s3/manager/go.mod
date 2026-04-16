@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.32.14
 	github.com/aws/aws-sdk-go-v2/credentials v1.19.14
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.99.0
-	github.com/aws/smithy-go v1.24.2
+	github.com/aws/smithy-go v1.25.0
 )
 
 require (
@@ -40,7 +40,6 @@ replace github.com/aws/aws-sdk-go-v2/feature/ec2/imds => ../../../feature/ec2/im
 replace github.com/aws/aws-sdk-go-v2/internal/configsources => ../../../internal/configsources/
 
 replace github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 => ../../../internal/endpoints/v2/
-
 
 replace github.com/aws/aws-sdk-go-v2/internal/v4a => ../../../internal/v4a/
 
