@@ -251,12 +251,17 @@ func TestConcurrentReaderReadRepeatAfterError(t *testing.T) {
 		t.Fatalf("expected first read to return stored error, got %v and stored %v", err, r.getErr())
 	}
 
+	firstReadInvocations := s3Client.GetObjectInvocations
+	if firstReadInvocations != 2 {
+		t.Fatalf("expected first read to schedule 2 GetObject calls, got %d", firstReadInvocations)
+	}
+
 	_, err = r.Read(buf)
 	if !errors.Is(err, r.getErr()) {
 		t.Fatalf("expected repeated read to return stored error, got %v and stored %v", err, r.getErr())
 	}
 
-	if got := s3Client.GetObjectInvocations; got != 2 {
-		t.Fatalf("expected repeated read not to schedule more downloads, got %d GetObject calls", got)
+	if got := s3Client.GetObjectInvocations; got != firstReadInvocations {
+		t.Fatalf("expected repeated read not to schedule more downloads, got %d GetObject calls after %d on first read", got, firstReadInvocations)
 	}
 }
