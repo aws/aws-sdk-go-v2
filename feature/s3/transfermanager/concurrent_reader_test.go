@@ -3,14 +3,16 @@ package transfermanager
 import (
 	"bytes"
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	s3testing "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/testing"
-	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"errors"
 	"io"
 	"math"
 	"math/rand"
 	"testing"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
+	s3testing "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/testing"
+	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
 func TestConcurrentReader(t *testing.T) {
@@ -211,5 +213,50 @@ func TestConcurrentReader(t *testing.T) {
 				t.Errorf("expect data sent to be %v, got %v", e, a)
 			}
 		})
+	}
+}
+
+func TestConcurrentReaderReadRepeatAfterError(t *testing.T) {
+	ctx := context.Background()
+	s3Client := &s3testing.TransferManagerLoggingClient{}
+	s3Client.GetObjectFn = s3testing.ErrRangeGetObjectFn
+	s3Client.Data = []byte("abcdefghijkl")
+
+	r := &concurrentReader{
+		partSize:     4,
+		partsCount:   3,
+		sectionParts: 3,
+		options: Options{
+			GetObjectType: types.GetObjectRanges,
+			Concurrency:   1,
+			S3:            s3Client,
+		},
+		in: &GetObjectInput{
+			Bucket: aws.String("bucket"),
+			Key:    aws.String("key"),
+		},
+		capacity:   3,
+		buf:        make(map[int32]*outChunk),
+		ctx:        ctx,
+		ch:         make(chan outChunk, 1),
+		totalBytes: int64(len(s3Client.Data)),
+	}
+
+	buf := make([]byte, 4)
+	_, err := r.Read(buf)
+	if err == nil {
+		t.Fatal("expected first read to return an error")
+	}
+	if !errors.Is(err, r.getErr()) {
+		t.Fatalf("expected first read to return stored error, got %v and stored %v", err, r.getErr())
+	}
+
+	_, err = r.Read(buf)
+	if !errors.Is(err, r.getErr()) {
+		t.Fatalf("expected repeated read to return stored error, got %v and stored %v", err, r.getErr())
+	}
+
+	if got := s3Client.GetObjectInvocations; got != 2 {
+		t.Fatalf("expected repeated read not to schedule more downloads, got %d GetObject calls", got)
 	}
 }
