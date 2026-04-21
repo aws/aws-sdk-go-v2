@@ -36,6 +36,12 @@ type SimpleInputParamsInput struct {
 
 	Boo *float64
 
+	DistinctQueryAndXmlName *string
+
+	DistinctQueryName *string
+
+	DistinctXmlName *string
+
 	FloatValue *float32
 
 	Foo *string

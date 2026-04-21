@@ -390,40 +390,9 @@ func TestClient_RpcV2CborDenseMaps_Deserialize(t *testing.T) {
 				},
 			},
 		},
-		// Clients SHOULD tolerate seeing a null value in a dense map, and they SHOULD
-		// drop the null key-value pair.
-		"RpcV2CborDeserializesDenseSetMapAndSkipsNull": {
-			StatusCode: 200,
-			Header: http.Header{
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`oWtkZW5zZVNldE1hcKNheIBheYJhYWFiYXr2`)
-				if err != nil {
-					panic(err)
-				}
-
-				return p
-			}(),
-			ExpectResult: &RpcV2CborDenseMapsOutput{
-				DenseSetMap: map[string][]string{
-					"x": {},
-					"y": {
-						"a",
-						"b",
-					},
-				},
-			},
-		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if name == "RpcV2CborDeserializesDenseSetMapAndSkipsNull" {
-				t.Skip("disabled test smithy.protocoltests.rpcv2Cbor#RpcV2Protocol smithy.protocoltests.rpcv2Cbor#RpcV2CborDenseMaps")
-			}
-
 			serverURL := "http://localhost:8888/"
 			client := New(Options{
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
@@ -541,31 +510,6 @@ func BenchmarkClient_RpcV2CborDenseMaps_Deserialize(b *testing.B) {
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
 				p, err := base64.StdEncoding.DecodeString(`oWtkZW5zZVNldE1hcKJheIBheYJhYWFi`)
-				if err != nil {
-					panic(err)
-				}
-
-				return p
-			}(),
-			ExpectResult: &RpcV2CborDenseMapsOutput{
-				DenseSetMap: map[string][]string{
-					"x": {},
-					"y": {
-						"a",
-						"b",
-					},
-				},
-			},
-		},
-		"RpcV2CborDeserializesDenseSetMapAndSkipsNull": {
-			StatusCode: 200,
-			Header: http.Header{
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`oWtkZW5zZVNldE1hcKNheIBheYJhYWFiYXr2`)
 				if err != nil {
 					panic(err)
 				}

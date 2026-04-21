@@ -407,7 +407,7 @@ func TestClient_GreetingWithErrors_FooError_Deserialize(t *testing.T) {
 		"AwsJson11FooErrorUsingXAmznErrorTypeWithUriAndNamespace": {
 			StatusCode: 500,
 			Header: http.Header{
-				"X-Amzn-Errortype": []string{"aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"},
+				"X-Amzn-Errortype": []string{"aws.protocoltests.json#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"},
 			},
 			ExpectError: &types.FooError{},
 		},
@@ -437,7 +437,7 @@ func TestClient_GreetingWithErrors_FooError_Deserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "code": "aws.protocoltests.restjson#FooError"
+			    "code": "aws.protocoltests.json#FooError"
 			}`),
 			ExpectError: &types.FooError{},
 		},
@@ -452,7 +452,7 @@ func TestClient_GreetingWithErrors_FooError_Deserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "code": "aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
+			    "code": "aws.protocoltests.json#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
 			}`),
 			ExpectError: &types.FooError{},
 		},
@@ -477,7 +477,7 @@ func TestClient_GreetingWithErrors_FooError_Deserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "__type": "aws.protocoltests.restjson#FooError"
+			    "__type": "aws.protocoltests.json#FooError"
 			}`),
 			ExpectError: &types.FooError{},
 		},
@@ -492,7 +492,7 @@ func TestClient_GreetingWithErrors_FooError_Deserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "__type": "aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
+			    "__type": "aws.protocoltests.json#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
 			}`),
 			ExpectError: &types.FooError{},
 		},
@@ -509,7 +509,7 @@ func TestClient_GreetingWithErrors_FooError_Deserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "__type": "aws.protocoltests.restjson#FooError",
+			    "__type": "aws.protocoltests.json#FooError",
 			    "ErrorDetails": [
 			      {
 			          "__type": "com.amazon.internal#ErrorDetails",
@@ -614,7 +614,7 @@ func BenchmarkClient_GreetingWithErrors_FooError_Deserialize(b *testing.B) {
 		"AwsJson11FooErrorUsingXAmznErrorTypeWithUriAndNamespace": {
 			StatusCode: 500,
 			Header: http.Header{
-				"X-Amzn-Errortype": []string{"aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"},
+				"X-Amzn-Errortype": []string{"aws.protocoltests.json#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"},
 			},
 			ExpectError: &types.FooError{},
 		},
@@ -636,7 +636,7 @@ func BenchmarkClient_GreetingWithErrors_FooError_Deserialize(b *testing.B) {
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "code": "aws.protocoltests.restjson#FooError"
+			    "code": "aws.protocoltests.json#FooError"
 			}`),
 			ExpectError: &types.FooError{},
 		},
@@ -647,7 +647,7 @@ func BenchmarkClient_GreetingWithErrors_FooError_Deserialize(b *testing.B) {
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "code": "aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
+			    "code": "aws.protocoltests.json#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
 			}`),
 			ExpectError: &types.FooError{},
 		},
@@ -669,7 +669,7 @@ func BenchmarkClient_GreetingWithErrors_FooError_Deserialize(b *testing.B) {
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "__type": "aws.protocoltests.restjson#FooError"
+			    "__type": "aws.protocoltests.json#FooError"
 			}`),
 			ExpectError: &types.FooError{},
 		},
@@ -680,7 +680,7 @@ func BenchmarkClient_GreetingWithErrors_FooError_Deserialize(b *testing.B) {
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "__type": "aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
+			    "__type": "aws.protocoltests.json#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
 			}`),
 			ExpectError: &types.FooError{},
 		},
@@ -691,7 +691,7 @@ func BenchmarkClient_GreetingWithErrors_FooError_Deserialize(b *testing.B) {
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "__type": "aws.protocoltests.restjson#FooError",
+			    "__type": "aws.protocoltests.json#FooError",
 			    "ErrorDetails": [
 			      {
 			          "__type": "com.amazon.internal#ErrorDetails",
