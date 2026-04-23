@@ -280,6 +280,27 @@ func TestDownloadDirectory(t *testing.T) {
 				l.expectFailed(t, in, err)
 			},
 		},
+		"object key with double dots in name": {
+			destination: "double-dots-in-name",
+			objectsLists: [][]s3types.Object{
+				{
+					{
+						Key: aws.String("foo/bar..baz"),
+					},
+					{
+						Key: aws.String("a..b"),
+					},
+				},
+			},
+			expectTokens:            []string{""},
+			expectKeys:              []string{"foo/bar..baz", "a..b"},
+			expectFiles:             []string{"foo/bar..baz", "a..b"},
+			expectObjectsDownloaded: 2,
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 2)
+			},
+		},
 		"multiple objects with filter applied": {
 			destination: "multiple-objects-with-filter-applied",
 			objectsLists: [][]s3types.Object{
