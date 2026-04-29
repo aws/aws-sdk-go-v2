@@ -1,0 +1,8 @@
+{
+    "id": "2d985a53-97e5-4093-835a-d0df5998435f",
+    "type": "feature",
+    "description": "Support ECDSA for CloudFront sign cookies",
+    "modules": [
+        "feature/cloudfront/sign"
+    ]
+}
