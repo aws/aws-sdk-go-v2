@@ -1,0 +1,8 @@
+{
+    "id": "0c4b7e99-a5ee-402c-a426-e7bbd66c0bf5",
+    "type": "bugfix",
+    "description": "Reinstate Location output field on Upload operations.",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}
