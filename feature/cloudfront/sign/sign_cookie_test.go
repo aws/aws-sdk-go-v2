@@ -144,3 +144,45 @@ func TestSignCookie_ECDSA(t *testing.T) {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 }
+
+
+func TestSignCookieSHA256(t *testing.T) {
+	privKey, err := rsa.GenerateKey(randReader, 1024)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	signer := NewCookieSigner("keyID", privKey)
+	signer.HashAlg = HashSHA256
+	cookies, err := signer.Sign("http*://*", time.Now().Add(1*time.Hour))
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if e, a := 4, len(cookies); e != a {
+		t.Fatalf("expect %v cookies, got %v", e, a)
+	}
+	if e, a := CookieHashAlgorithmName, cookies[3].Name; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "SHA256", cookies[3].Value; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+}
+
+func TestSignCookieSHA1NoHashCookie(t *testing.T) {
+	privKey, err := rsa.GenerateKey(randReader, 1024)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	signer := NewCookieSigner("keyID", privKey)
+	cookies, err := signer.Sign("http*://*", time.Now().Add(1*time.Hour))
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if e, a := 3, len(cookies); e != a {
+		t.Fatalf("expect %v cookies, got %v", e, a)
+	}
+}

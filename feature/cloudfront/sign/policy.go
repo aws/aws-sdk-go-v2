@@ -5,15 +5,42 @@ import (
 	"crypto"
 	"crypto/rand"
 	"crypto/sha1"
+	"crypto/sha256"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"hash"
 	"io"
 	"net/url"
 	"strings"
 	"time"
 	"unicode"
 )
+
+// HashAlgorithm determines the hash algorithm used when signing CloudFront
+// URLs and cookies. The zero value (empty string) defaults to SHA-1 for
+// backward compatibility.
+type HashAlgorithm string
+
+const (
+	// HashSHA1 uses SHA-1 for signing (default, backward compatible).
+	HashSHA1 HashAlgorithm = "SHA1"
+
+	// HashSHA256 uses SHA-256 for signing. Requires appending
+	// Hash-Algorithm=SHA256 to the signed URL or cookie.
+	HashSHA256 HashAlgorithm = "SHA256"
+)
+
+func (h HashAlgorithm) hash() (hash.Hash, crypto.Hash, error) {
+	switch h {
+	case HashSHA256:
+		return sha256.New(), crypto.SHA256, nil
+	case HashSHA1, "":
+		return sha1.New(), crypto.SHA1, nil
+	default:
+		return nil, 0, fmt.Errorf("unsupported hash algorithm %q", h)
+	}
+}
 
 // An AWSEpochTime wraps a time value providing JSON serialization needed for
 // AWS Policy epoch time fields.
@@ -92,19 +119,23 @@ var randReader = rand.Reader
 // guidelines in:
 // http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-signed-urls.html
 func (p *Policy) Sign(signer crypto.Signer) (b64Signature, b64Policy []byte, err error) {
+	return p.SignWithHash(signer, HashSHA1)
+}
+
+// SignWithHash will sign a policy using the specified hash algorithm. It will
+// return a base 64 encoded signature and policy if no error is encountered.
+func (p *Policy) SignWithHash(signer crypto.Signer, hash HashAlgorithm) (b64Signature, b64Policy []byte, err error) {
 	if err = p.Validate(); err != nil {
 		return nil, nil, err
 	}
 
-	// Build and escape the policy
 	b64Policy, jsonPolicy, err := encodePolicy(p)
 	if err != nil {
 		return nil, nil, err
 	}
 	awsEscapeEncoded(b64Policy)
 
-	// Build and escape the signature
-	b64Signature, err = signEncodedPolicy(randReader, jsonPolicy, signer)
+	b64Signature, err = signEncodedPolicy(randReader, jsonPolicy, signer, hash)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -198,13 +229,16 @@ func encodePolicy(p *Policy) (b64Policy, jsonPolicy []byte, err error) {
 }
 
 // signEncodedPolicy will sign and base 64 encode the JSON encoded policy.
-func signEncodedPolicy(randReader io.Reader, jsonPolicy []byte, signer crypto.Signer) ([]byte, error) {
-	hash := sha1.New()
-	if _, err := bytes.NewReader(jsonPolicy).WriteTo(hash); err != nil {
+func signEncodedPolicy(randReader io.Reader, jsonPolicy []byte, signer crypto.Signer, hashAlg HashAlgorithm) ([]byte, error) {
+	h, cryptoHash, err := hashAlg.hash()
+	if err != nil {
+		return nil, err
+	}
+	if _, err := bytes.NewReader(jsonPolicy).WriteTo(h); err != nil {
 		return nil, fmt.Errorf("failed to calculate signing hash, %s", err.Error())
 	}
 
-	sig, err := signer.Sign(randReader, hash.Sum(nil), crypto.SHA1)
+	sig, err := signer.Sign(randReader, h.Sum(nil), cryptoHash)
 	if err != nil {
 		return nil, fmt.Errorf("failed to sign policy, %s", err.Error())
 	}

@@ -113,10 +113,62 @@ var testBuildSignedURL = []struct {
 
 func TestBuildSignedURL(t *testing.T) {
 	for i, v := range testBuildSignedURL {
-		u := buildSignedURL(v.u, v.keyID, v.p, v.customPolicy, v.b64Policy, v.b64Sig)
+		u := buildSignedURL(v.u, v.keyID, v.p, v.customPolicy, v.b64Policy, v.b64Sig, "")
 		if u != v.out {
 			t.Errorf("%d, Unexpected URL\nexpect: %s\nactual: %s\n", i, v.out, u)
 		}
+	}
+}
+
+func TestSignURLSHA256(t *testing.T) {
+	privKey := unit.RSAPrivateKey
+	s := NewURLSigner("KeyID", privKey)
+	s.HashAlg = HashSHA256
+
+	u, err := s.Sign("http://example.com/a", testSignTime)
+	if err != nil {
+		t.Fatalf("Unexpected error, %s", err.Error())
+	}
+
+	if !strings.HasSuffix(u, "&Hash-Algorithm=SHA256") {
+		t.Errorf("Expected URL to end with &Hash-Algorithm=SHA256, got: %s", u)
+	}
+}
+
+func TestSignURLSHA1Explicit(t *testing.T) {
+	privKey := unit.RSAPrivateKey
+	s := NewURLSigner("KeyID", privKey)
+	s.HashAlg = HashSHA1
+
+	u, err := s.Sign("http://example.com/a", testSignTime)
+	if err != nil {
+		t.Fatalf("Unexpected error, %s", err.Error())
+	}
+
+	if !strings.HasSuffix(u, "&Hash-Algorithm=SHA1") {
+		t.Errorf("Expected URL to end with &Hash-Algorithm=SHA1, got: %s", u)
+	}
+}
+
+func TestSignURLDefaultNoHashParam(t *testing.T) {
+	privKey := unit.RSAPrivateKey
+	s := NewURLSigner("KeyID", privKey)
+
+	u, err := s.Sign("http://example.com/a", testSignTime)
+	if err != nil {
+		t.Fatalf("Unexpected error, %s", err.Error())
+	}
+
+	if strings.Contains(u, "Hash-Algorithm") {
+		t.Errorf("Expected no Hash-Algorithm param for default signer, got: %s", u)
+	}
+}
+
+func TestBuildSignedURLSHA256(t *testing.T) {
+	u := buildSignedURL("https://example.com/a", "KeyID", NewCannedPolicy("", testSignTime), false, []byte("b64Policy"), []byte("b64Sig"), HashSHA256)
+	expect := "https://example.com/a?Expires=1257894000&Signature=b64Sig&Key-Pair-Id=KeyID&Hash-Algorithm=SHA256"
+	if u != expect {
+		t.Errorf("Unexpected URL\nexpect: %s\nactual: %s\n", expect, u)
 	}
 }
 
