@@ -64,7 +64,7 @@ type CookieSigner struct {
 	// HashSHA1. Set to HashSHA256 to produce SHA-256 signed cookies
 	// with a CloudFront-Hash-Algorithm cookie.
 	HashAlg HashAlgorithm
-	Opts CookieOptions
+	Opts    CookieOptions
 }
 
 // NewCookieSigner constructs and returns a new CookieSigner to be used to for
@@ -214,7 +214,7 @@ func (s CookieSigner) SignWithPolicy(p *Policy, opts ...func(*CookieOptions)) ([
 // Prepares the cookies to be attached to the header. An (optional) options
 // struct is provided in case people don't want to manually edit their cookies.
 func createCookies(p *Policy, keyID string, signer crypto.Signer, hashAlg HashAlgorithm, opt CookieOptions) ([]*http.Cookie, error) {
-	b64Sig, b64Policy, err := p.SignWithHash(signer, hashAlg)
+	b64Sig, b64Policy, err := p.SignWithAlgorithm(signer, hashAlg)
 	if err != nil {
 		return nil, err
 	}

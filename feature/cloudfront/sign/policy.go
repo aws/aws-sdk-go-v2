@@ -119,12 +119,12 @@ var randReader = rand.Reader
 // guidelines in:
 // http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-signed-urls.html
 func (p *Policy) Sign(signer crypto.Signer) (b64Signature, b64Policy []byte, err error) {
-	return p.SignWithHash(signer, HashSHA1)
+	return p.SignWithAlgorithm(signer, HashSHA1)
 }
 
-// SignWithHash will sign a policy using the specified hash algorithm. It will
+// SignWithAlgorithm will sign a policy using the specified hash algorithm. It will
 // return a base 64 encoded signature and policy if no error is encountered.
-func (p *Policy) SignWithHash(signer crypto.Signer, hash HashAlgorithm) (b64Signature, b64Policy []byte, err error) {
+func (p *Policy) SignWithAlgorithm(signer crypto.Signer, hash HashAlgorithm) (b64Signature, b64Policy []byte, err error) {
 	if err = p.Validate(); err != nil {
 		return nil, nil, err
 	}

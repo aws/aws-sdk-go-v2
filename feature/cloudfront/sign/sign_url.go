@@ -136,7 +136,7 @@ func signURL(scheme, url, keyID string, p *Policy, customPolicy bool, signer cry
 		return "", err
 	}
 
-	b64Signature, b64Policy, err := p.SignWithHash(signer, hashAlg)
+	b64Signature, b64Policy, err := p.SignWithAlgorithm(signer, hashAlg)
 	if err != nil {
 		return "", err
 	}
