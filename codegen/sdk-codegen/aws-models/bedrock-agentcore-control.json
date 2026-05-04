@@ -15003,7 +15003,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^(Authorization|X-Amzn-Bedrock-AgentCore-Runtime-Custom-[a-zA-Z0-9-]+)$"
+                "smithy.api#pattern": "^[A-Za-z][A-Za-z0-9_-]{0,255}$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#HttpHeaderKey": {
@@ -17999,6 +17999,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The search type for the Model Context Protocol gateway. This field specifies how the gateway handles search operations.</p>"
                     }
+                },
+                "sessionConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#SessionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session configuration for the MCP gateway. This configuration controls session behavior, including session timeout settings.</p>"
+                    }
+                },
+                "streamingConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#StreamingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The streaming configuration for the MCP gateway. This configuration controls whether response streaming is enabled for the gateway.</p>"
+                    }
                 }
             },
             "traits": {
@@ -18070,7 +18082,7 @@
                 "routingDomain": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#RoutingDomain",
                     "traits": {
-                        "smithy.api#documentation": "<p>An intermediate publicly resolvable domain used as the VPC Lattice resource configuration endpoint. Required when your private endpoint uses a domain that is not publicly resolvable.</p>"
+                        "smithy.api#documentation": "<p>An intermediate domain to use as the resource configuration endpoint instead of the actual target domain. Use this when you want to route traffic through an intermediate component such as a VPC endpoint or internal load balancer. For more information, see xref:lattice-vpc-egress-routing-domain[Route traffic through an intermediate domain].</p>"
                     }
                 }
             },
@@ -19842,12 +19854,12 @@
                 "tokenExchangeGrantTypeConfig": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#TokenExchangeGrantTypeConfigType",
                     "traits": {
-                        "smithy.api#documentation": "Configuration specific to TOKEN_EXCHANGE grant type (RFC 8693)"
+                        "smithy.api#documentation": "<p>Configuration specific to the TOKEN_EXCHANGE grant type (RFC 8693).</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Configuration for on-behalf-of token exchange"
+                "smithy.api#documentation": "<p>Configuration for on-behalf-of token exchange.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#OnBehalfOfTokenExchangeGrantTypeType": {
@@ -19856,14 +19868,14 @@
                 "TOKEN_EXCHANGE": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "RFC 8693 - Adopted by majority of IDPs supporting OBO\ngrant type = urn:ietf:params:oauth:grant-type:token-exchange",
+                        "smithy.api#documentation": "<p>RFC 8693 token exchange, adopted by the majority of identity providers supporting on-behalf-of flows.</p>",
                         "smithy.api#enumValue": "TOKEN_EXCHANGE"
                     }
                 },
                 "JWT_AUTHORIZATION_GRANT": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "RFC 7523 - Adopted by Microsoft Entra ID\ngrant type = urn:ietf:params:oauth:grant-type:jwt-bearer",
+                        "smithy.api#documentation": "<p>RFC 7523 JWT authorization grant, adopted by Microsoft Entra ID.</p>",
                         "smithy.api#enumValue": "JWT_AUTHORIZATION_GRANT"
                     }
                 }
@@ -22583,6 +22595,24 @@
                 "smithy.api#documentation": "<p> The configuration that defines how agent sessions are detected and when they are considered complete for evaluation. </p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#SessionConfiguration": {
+            "type": "structure",
+            "members": {
+                "sessionTimeoutInSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session timeout in seconds. After this timeout, the session expires and subsequent requests to this session will receive an error. The minimum value is 900 seconds (15 minutes), the maximum value is 28800 seconds (8 hours), and the default value is 3600 seconds (1 hour).</p>",
+                        "smithy.api#range": {
+                            "min": 900,
+                            "max": 28800
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The session configuration for an MCP gateway. This structure defines settings that control session behavior.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#SessionStorageConfiguration": {
             "type": "structure",
             "members": {
@@ -23125,6 +23155,20 @@
                 "smithy.api#length": {
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#StreamingConfiguration": {
+            "type": "structure",
+            "members": {
+                "enableResponseStreaming": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether response streaming is enabled for the gateway. When set to <code>true</code>, the gateway streams responses from targets back to the client.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The streaming configuration for an MCP gateway. This structure defines settings that control response streaming behavior.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#String": {
@@ -24083,12 +24127,12 @@
                 "actorTokenScopes": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#ScopesListType",
                     "traits": {
-                        "smithy.api#documentation": "Only valid when actorTokenContent is M2M"
+                        "smithy.api#documentation": "<p>The scopes for the actor token. Only valid when actorTokenContent is M2M.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Configuration for RFC 8693 Token Exchange"
+                "smithy.api#documentation": "<p>Configuration for RFC 8693 token exchange.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#TokenVaultIdType": {

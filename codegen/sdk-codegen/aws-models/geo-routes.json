@@ -838,38 +838,52 @@
             }
         },
         "com.amazonaws.georoutes#DayOfWeek": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "MONDAY",
-                        "value": "Monday"
-                    },
-                    {
-                        "name": "TUESDAY",
-                        "value": "Tuesday"
-                    },
-                    {
-                        "name": "WEDNESDAY",
-                        "value": "Wednesday"
-                    },
-                    {
-                        "name": "THURSDAY",
-                        "value": "Thursday"
-                    },
-                    {
-                        "name": "FRIDAY",
-                        "value": "Friday"
-                    },
-                    {
-                        "name": "SATURDAY",
-                        "value": "Saturday"
-                    },
-                    {
-                        "name": "SUNDAY",
-                        "value": "Sunday"
+            "type": "enum",
+            "members": {
+                "MONDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Monday"
                     }
-                ],
+                },
+                "TUESDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Tuesday"
+                    }
+                },
+                "WEDNESDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Wednesday"
+                    }
+                },
+                "THURSDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Thursday"
+                    }
+                },
+                "FRIDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Friday"
+                    }
+                },
+                "SATURDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Saturday"
+                    }
+                },
+                "SUNDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Sunday"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#sensitive": {}
             }
         },
@@ -925,18 +939,20 @@
             }
         },
         "com.amazonaws.georoutes#GeometryFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "FLEXIBLE_POLYLINE",
-                        "value": "FlexiblePolyline"
-                    },
-                    {
-                        "name": "SIMPLE",
-                        "value": "Simple"
+            "type": "enum",
+            "members": {
+                "FLEXIBLE_POLYLINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FlexiblePolyline"
                     }
-                ]
+                },
+                "SIMPLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Simple"
+                    }
+                }
             }
         },
         "com.amazonaws.georoutes#Heading": {
@@ -2085,18 +2101,20 @@
             }
         },
         "com.amazonaws.georoutes#MeasurementSystem": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "METRIC",
-                        "value": "Metric"
-                    },
-                    {
-                        "name": "IMPERIAL",
-                        "value": "Imperial"
+            "type": "enum",
+            "members": {
+                "METRIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Metric"
                     }
-                ]
+                },
+                "IMPERIAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Imperial"
+                    }
+                }
             }
         },
         "com.amazonaws.georoutes#OptimizeWaypoints": {
@@ -3645,6 +3663,14 @@
                     {
                         "name": "POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE",
                         "value": "PotentialViolatedVehicleRestrictionUsage"
+                    },
+                    {
+                        "name": "VIOLATED_AVOID_AREAS",
+                        "value": "ViolatedAvoidAreas"
+                    },
+                    {
+                        "name": "VIOLATED_VEHICLE_RESTRICTION",
+                        "value": "ViolatedVehicleRestriction"
                     }
                 ]
             }
@@ -5523,6 +5549,10 @@
                     {
                         "name": "VIOLATED_PEDESTRIAN_OPTION",
                         "value": "ViolatedPedestrianOption"
+                    },
+                    {
+                        "name": "VIOLATED_AVOID_AREAS",
+                        "value": "ViolatedAvoidAreas"
                     }
                 ]
             }
@@ -8059,6 +8089,10 @@
                     {
                         "name": "VIOLATED_ZONE_RESTRICTION",
                         "value": "ViolatedZoneRestriction"
+                    },
+                    {
+                        "name": "TRAVEL_TIME_EXCEEDS_DRIVER_WORK_HOURS",
+                        "value": "TravelTimeExceedsDriverWorkHours"
                     }
                 ]
             }
@@ -10367,40 +10401,48 @@
             }
         },
         "com.amazonaws.georoutes#ValidationExceptionReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "UNKNOWN_OPERATION",
-                        "value": "UnknownOperation",
-                        "documentation": "No such operation is supported."
-                    },
-                    {
-                        "name": "MISSING",
-                        "value": "Missing",
-                        "documentation": "The required input is missing."
-                    },
-                    {
-                        "name": "CANNOT_PARSE",
-                        "value": "CannotParse",
-                        "documentation": "    The input cannot be parsed. For example a required JSON document, ARN identifier,\n    date value, or numeric field cannot be parsed.\n"
-                    },
-                    {
-                        "name": "FIELD_VALIDATION_FAILED",
-                        "value": "FieldValidationFailed",
-                        "documentation": "    The input is present and parsable, but it is otherwise invalid. For example, a\n    required numeric argument is outside the allowed range.\n"
-                    },
-                    {
-                        "name": "OTHER",
-                        "value": "Other",
-                        "documentation": "The input is invalid but no more specific reason is applicable."
-                    },
-                    {
-                        "name": "UNKNOWN_FIELD",
-                        "value": "UnknownField",
-                        "documentation": "No such field is supported."
+            "type": "enum",
+            "members": {
+                "UNKNOWN_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "No such operation is supported.",
+                        "smithy.api#enumValue": "UnknownOperation"
                     }
-                ]
+                },
+                "MISSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The required input is missing.",
+                        "smithy.api#enumValue": "Missing"
+                    }
+                },
+                "CANNOT_PARSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CannotParse"
+                    }
+                },
+                "FIELD_VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FieldValidationFailed"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The input is invalid but no more specific reason is applicable.",
+                        "smithy.api#enumValue": "Other"
+                    }
+                },
+                "UNKNOWN_FIELD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "No such field is supported.",
+                        "smithy.api#enumValue": "UnknownField"
+                    }
+                }
             }
         },
         "com.amazonaws.georoutes#WaypointId": {
@@ -10558,18 +10600,22 @@
             }
         },
         "com.amazonaws.georoutes#WaypointOptimizationClusteringAlgorithm": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "DRIVING_DISTANCE",
-                        "value": "DrivingDistance"
-                    },
-                    {
-                        "name": "TOPOLOGY_SEGMENT",
-                        "value": "TopologySegment"
+            "type": "enum",
+            "members": {
+                "DRIVING_DISTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DrivingDistance"
                     }
-                ],
+                },
+                "TOPOLOGY_SEGMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TopologySegment"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#sensitive": {}
             }
         },
@@ -10758,14 +10804,21 @@
                 "smithy.api#documentation": "<p>Driver related options.</p>"
             }
         },
+        "com.amazonaws.georoutes#WaypointOptimizationDrivingDistance": {
+            "type": "long"
+        },
         "com.amazonaws.georoutes#WaypointOptimizationDrivingDistanceOptions": {
             "type": "structure",
             "members": {
                 "DrivingDistance": {
-                    "target": "com.amazonaws.georoutes#DistanceMeters",
+                    "target": "com.amazonaws.georoutes#WaypointOptimizationDrivingDistance",
                     "traits": {
-                        "smithy.api#default": 0,
+                        "smithy.api#default": 5,
                         "smithy.api#documentation": "<p>DrivingDistance assigns all the waypoints that are within driving distance of each other into a single cluster.</p>",
+                        "smithy.api#range": {
+                            "min": 5,
+                            "max": 50000
+                        },
                         "smithy.api#required": {}
                     }
                 }

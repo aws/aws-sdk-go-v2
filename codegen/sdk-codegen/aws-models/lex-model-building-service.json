@@ -1578,6 +1578,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Creates a new version of the bot based on the <code>$LATEST</code>\n      version. If the <code>$LATEST</code> version of this resource hasn't\n      changed since you created the last version, Amazon Lex doesn't create a new\n      version. It returns the last created version.</p>\n         <note>\n            <p>You can update only the <code>$LATEST</code> version of the bot.\n        You can't update the numbered versions that you create with the\n          <code>CreateBotVersion</code> operation.</p>\n         </note>\n         <p> When you create the first version of a bot, Amazon Lex sets the version\n      to 1. Subsequent versions increment by 1. For more information, see <a>versioning-intro</a>. </p>\n         <p> This operation requires permission for the\n        <code>lex:CreateBotVersion</code> action. </p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1605,6 +1609,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -1715,6 +1723,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -1747,6 +1759,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Creates a new version of an intent based on the\n        <code>$LATEST</code> version of the intent. If the <code>$LATEST</code>\n      version of this intent hasn't changed since you last updated it, Amazon Lex\n      doesn't create a new version. It returns the last version you\n      created.</p>\n         <note>\n            <p>You can update only the <code>$LATEST</code> version of the\n        intent. You can't update the numbered versions that you create with the\n          <code>CreateIntentVersion</code> operation.</p>\n         </note>\n         <p> When you create a version of an intent, Amazon Lex sets the version to\n      1. Subsequent versions increment by 1. For more information, see <a>versioning-intro</a>. </p>\n         <p>This operation requires permissions to perform the\n        <code>lex:CreateIntentVersion</code> action. </p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1774,6 +1790,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -1890,6 +1910,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -1922,6 +1946,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Creates a new version of a slot type based on the\n        <code>$LATEST</code> version of the specified slot type. If the\n        <code>$LATEST</code> version of this resource has not changed since the\n      last version that you created, Amazon Lex doesn't create a new version. It\n      returns the last version that you created. </p>\n         <note>\n            <p>You can update only the <code>$LATEST</code> version of a slot\n        type. You can't update the numbered versions that you create with the\n          <code>CreateSlotTypeVersion</code> operation.</p>\n         </note>\n         <p>When you create a version of a slot type, Amazon Lex sets the version to\n      1. Subsequent versions increment by 1. For more information, see <a>versioning-intro</a>. </p>\n         <p>This operation requires permissions for the\n        <code>lex:CreateSlotTypeVersion</code> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1949,6 +1977,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -2017,6 +2049,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -2059,6 +2095,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Deletes all versions of the bot, including the <code>$LATEST</code>\n      version. To delete a specific version of the bot, use the <a>DeleteBotVersion</a> operation. The <code>DeleteBot</code>\n      operation doesn't immediately remove the bot schema. Instead, it is marked\n      for deletion and removed later.</p>\n         <p>Amazon Lex stores utterances indefinitely for improving the ability of\n      your bot to respond to user inputs. These utterances are not removed when\n      the bot is deleted. To remove the utterances, use the <a>DeleteUtterances</a> operation.</p>\n         <p>If a bot has an alias, you can't delete it. Instead, the\n        <code>DeleteBot</code> operation returns a\n        <code>ResourceInUseException</code> exception that includes a reference\n      to the alias that refers to the bot. To remove the reference to the bot,\n      delete the alias. If you get the same exception again, delete the\n      referring alias until the <code>DeleteBot</code> operation is\n      successful.</p>\n         <p>This operation requires permissions for the\n        <code>lex:DeleteBot</code> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -2096,6 +2136,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Deletes an alias for the specified bot. </p>\n         <p>You can't delete an alias that is used in the association between a\n      bot and a messaging channel. If an alias is used in a channel association,\n      the <code>DeleteBot</code> operation returns a\n        <code>ResourceInUseException</code> exception that includes a reference\n      to the channel association that refers to the bot. You can remove the\n      reference to the alias by deleting the channel association. If you get the\n      same exception again, delete the referring association until the\n        <code>DeleteBotAlias</code> operation is successful.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -2125,6 +2169,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -2154,6 +2202,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Deletes the association between an Amazon Lex bot and a messaging\n      platform.</p>\n         <p>This operation requires permission for the\n        <code>lex:DeleteBotChannelAssociation</code> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -2191,6 +2243,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -2207,6 +2263,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -2239,6 +2299,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Deletes a specific version of a bot. To delete all versions of a\n      bot, use the <a>DeleteBot</a> operation. </p>\n         <p>This operation requires permissions for the\n        <code>lex:DeleteBotVersion</code> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -2268,6 +2332,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -2300,6 +2368,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Deletes all versions of the intent, including the\n        <code>$LATEST</code> version. To delete a specific version of the\n      intent, use the <a>DeleteIntentVersion</a> operation.</p>\n         <p> You can delete a version of an intent only if it is not\n      referenced. To delete an intent that is referred to in one or more bots\n      (see <a>how-it-works</a>), you must remove those references\n      first. </p>\n         <note>\n            <p> If you get the <code>ResourceInUseException</code> exception, it\n        provides an example reference that shows where the intent is referenced.\n        To remove the reference to the intent, either update the bot or delete\n        it. If you get the same exception when you attempt to delete the intent\n        again, repeat until the intent has no references and the call to\n          <code>DeleteIntent</code> is successful. </p>\n         </note>\n         <p> This operation requires permission for the\n        <code>lex:DeleteIntent</code> action. </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -2321,6 +2393,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -2353,6 +2429,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Deletes a specific version of an intent. To delete all versions of\n      a intent, use the <a>DeleteIntent</a> operation. </p>\n         <p>This operation requires permissions for the\n        <code>lex:DeleteIntentVersion</code> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -2382,6 +2462,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -2414,6 +2498,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Deletes all versions of the slot type, including the\n        <code>$LATEST</code> version. To delete a specific version of the slot\n      type, use the <a>DeleteSlotTypeVersion</a> operation.</p>\n         <p> You can delete a version of a slot type only if it is not\n      referenced. To delete a slot type that is referred to in one or more\n      intents, you must remove those references first. </p>\n         <note>\n            <p> If you get the <code>ResourceInUseException</code> exception,\n        the exception provides an example reference that shows the intent where\n        the slot type is referenced. To remove the reference to the slot type,\n        either update the intent or delete it. If you get the same exception\n        when you attempt to delete the slot type again, repeat until the slot\n        type has no references and the <code>DeleteSlotType</code> call is\n        successful. </p>\n         </note>\n         <p>This operation requires permission for the\n        <code>lex:DeleteSlotType</code> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -2435,6 +2523,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -2467,6 +2559,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Deletes a specific version of a slot type. To delete all versions\n      of a slot type, use the <a>DeleteSlotType</a> operation. </p>\n         <p>This operation requires permissions for the\n        <code>lex:DeleteSlotTypeVersion</code> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -2496,6 +2592,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -2522,6 +2622,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Deletes stored utterances.</p>\n         <p>Amazon Lex stores the utterances that users send to your bot. Utterances\n      are stored for 15 days for use with the <a>GetUtterancesView</a> operation, and then stored indefinitely for use in improving the\n      ability of your bot to respond to user input.</p>\n         <p>Use the <code>DeleteUtterances</code> operation to manually delete\n      stored utterances for a specific user. When you use the\n        <code>DeleteUtterances</code> operation, utterances stored for improving\n      your bot's ability to respond to user input are deleted immediately.\n      Utterances stored for use with the <code>GetUtterancesView</code>\n      operation are deleted after 15 days.</p>\n         <p>This operation requires permissions for the\n        <code>lex:DeleteUtterances</code> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -2551,6 +2655,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -2736,6 +2844,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Returns metadata information for a specific bot. You must provide\n      the bot name and the bot version or alias. </p>\n         <p> This operation requires permissions for the\n        <code>lex:GetBot</code> action. </p>",
                 "smithy.api#examples": [
                     {
@@ -2820,6 +2932,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Returns information about an Amazon Lex bot alias. For more information\n      about aliases, see <a>versioning-aliases</a>.</p>\n         <p>This operation requires permissions for the\n        <code>lex:GetBotAlias</code> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -2849,6 +2965,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -2905,6 +3025,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -2928,6 +3052,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Returns a list of aliases for a specified Amazon Lex bot.</p>\n         <p>This operation requires permissions for the\n        <code>lex:GetBotAliases</code> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -2975,6 +3103,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -2995,6 +3127,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -3021,6 +3157,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Returns information about the association between an Amazon Lex bot and\n      a messaging platform.</p>\n         <p>This operation requires permissions for the\n        <code>lex:GetBotChannelAssociation</code> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3058,6 +3198,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -3120,6 +3264,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -3143,6 +3291,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p> Returns a list of all of the channels associated with the\n      specified bot. </p>\n         <p>The <code>GetBotChannelAssociations</code> operation requires\n      permissions for the <code>lex:GetBotChannelAssociations</code>\n      action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3198,6 +3350,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -3218,6 +3374,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -3242,6 +3402,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -3358,6 +3522,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -3384,6 +3552,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Gets information about all of the versions of a bot.</p>\n         <p>The <code>GetBotVersions</code> operation returns a\n        <code>BotMetadata</code> object for each version of a bot. For example,\n      if a bot has three numbered versions, the <code>GetBotVersions</code>\n      operation returns four <code>BotMetadata</code> objects in the response,\n      one for each numbered version and one for the <code>$LATEST</code>\n      version. </p>\n         <p>The <code>GetBotVersions</code> operation always returns at least\n      one version, the <code>$LATEST</code> version.</p>\n         <p>This operation requires permissions for the\n        <code>lex:GetBotVersions</code> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3424,6 +3596,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -3444,6 +3620,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -3470,6 +3650,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Returns bot information as follows: </p>\n         <ul>\n            <li>\n               <p>If you provide the <code>nameContains</code> field, the\n          response includes information for the <code>$LATEST</code> version of\n          all bots whose name contains the specified string.</p>\n            </li>\n            <li>\n               <p>If you don't specify the <code>nameContains</code> field, the\n          operation returns information about the <code>$LATEST</code> version\n          of all of your bots.</p>\n            </li>\n         </ul>\n         <p>This operation requires permission for the <code>lex:GetBots</code>\n      action.</p>",
                 "smithy.api#examples": [
                     {
@@ -3531,6 +3715,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -3551,6 +3739,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -3577,6 +3769,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Returns information about a built-in intent.</p>\n         <p>This operation requires permission for the\n        <code>lex:GetBuiltinIntent</code> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3598,6 +3794,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -3624,6 +3824,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -3647,6 +3851,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Gets a list of built-in intents that meet the specified\n      criteria.</p>\n         <p>This operation requires permission for the\n        <code>lex:GetBuiltinIntents</code> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3693,6 +3901,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -3713,6 +3925,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -3736,6 +3952,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Gets a list of built-in slot types that meet the specified\n      criteria.</p>\n         <p>For a list of built-in slot types, see <a href=\"https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference\">Slot Type Reference</a> in the <i>Alexa Skills\n        Kit</i>.</p>\n         <p>This operation requires permission for the\n        <code>lex:GetBuiltInSlotTypes</code> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3782,6 +4002,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -3802,6 +4026,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -3828,6 +4056,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Exports the contents of a Amazon Lex resource in a specified format.\n    </p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3873,6 +4105,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -3923,6 +4159,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -3949,6 +4189,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Gets information about an import job started with the\n        <code>StartImport</code> operation.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3970,6 +4214,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -4020,6 +4268,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -4046,6 +4298,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p> Returns information about an intent. In addition to the intent\n      name, you must specify the intent version. </p>\n         <p> This operation requires permissions to perform the\n        <code>lex:GetIntent</code> action. </p>",
                 "smithy.api#examples": [
                     {
@@ -4218,6 +4474,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -4334,6 +4594,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -4360,6 +4624,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Gets information about all of the versions of an intent.</p>\n         <p>The <code>GetIntentVersions</code> operation returns an\n        <code>IntentMetadata</code> object for each version of an intent. For\n      example, if an intent has three numbered versions, the\n        <code>GetIntentVersions</code> operation returns four\n        <code>IntentMetadata</code> objects in the response, one for each\n      numbered version and one for the <code>$LATEST</code> version. </p>\n         <p>The <code>GetIntentVersions</code> operation always returns at\n      least one version, the <code>$LATEST</code> version.</p>\n         <p>This operation requires permissions for the\n        <code>lex:GetIntentVersions</code> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -4400,6 +4668,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -4420,6 +4692,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -4446,6 +4722,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Returns intent information as follows: </p>\n         <ul>\n            <li>\n               <p>If you specify the <code>nameContains</code> field, returns the\n            <code>$LATEST</code> version of all intents that contain the\n          specified string.</p>\n            </li>\n            <li>\n               <p> If you don't specify the <code>nameContains</code> field,\n          returns information about the <code>$LATEST</code> version of all\n          intents. </p>\n            </li>\n         </ul>\n         <p> The operation requires permission for the\n        <code>lex:GetIntents</code> action. </p>",
                 "smithy.api#examples": [
                     {
@@ -4506,6 +4786,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -4526,6 +4810,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -4552,6 +4840,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Provides details about an ongoing or complete migration from an\n      Amazon Lex V1 bot to an Amazon Lex V2 bot. Use this operation to view the migration\n      alerts and warnings related to the migration.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -4573,6 +4865,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -4641,6 +4937,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -4664,6 +4964,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Gets a list of migrations between Amazon Lex V1 and Amazon Lex V2.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -4724,6 +5028,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -4744,6 +5052,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -4770,6 +5082,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Returns information about a specific version of a slot type. In\n      addition to specifying the slot type name, you must specify the slot type\n      version.</p>\n         <p>This operation requires permissions for the\n        <code>lex:GetSlotType</code> action.</p>",
                 "smithy.api#examples": [
                     {
@@ -4825,6 +5141,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -4893,6 +5213,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -4919,6 +5243,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Gets information about all versions of a slot type.</p>\n         <p>The <code>GetSlotTypeVersions</code> operation returns a\n        <code>SlotTypeMetadata</code> object for each version of a slot type.\n      For example, if a slot type has three numbered versions, the\n        <code>GetSlotTypeVersions</code> operation returns four\n        <code>SlotTypeMetadata</code> objects in the response, one for each\n      numbered version and one for the <code>$LATEST</code> version. </p>\n         <p>The <code>GetSlotTypeVersions</code> operation always returns at\n      least one version, the <code>$LATEST</code> version.</p>\n         <p>This operation requires permissions for the\n        <code>lex:GetSlotTypeVersions</code> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -4959,6 +5287,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -4979,6 +5311,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -5005,6 +5341,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Returns slot type information as follows: </p>\n         <ul>\n            <li>\n               <p>If you specify the <code>nameContains</code> field, returns the\n            <code>$LATEST</code> version of all slot types that contain the\n          specified string.</p>\n            </li>\n            <li>\n               <p> If you don't specify the <code>nameContains</code> field,\n          returns information about the <code>$LATEST</code> version of all slot\n          types. </p>\n            </li>\n         </ul>\n         <p> The operation requires permission for the\n        <code>lex:GetSlotTypes</code> action. </p>",
                 "smithy.api#examples": [
                     {
@@ -5079,6 +5419,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -5099,6 +5443,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -5122,6 +5470,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Use the <code>GetUtterancesView</code> operation to get information\n      about the utterances that your users have made to your bot. You can use\n      this list to tune the utterances that your bot responds to.</p>\n         <p>For example, say that you have created a bot to order flowers.\n      After your users have used your bot for a while, use the\n        <code>GetUtterancesView</code> operation to see the requests that they\n      have made and whether they have been successful. You might find that the\n      utterance \"I want flowers\" is not being recognized. You could add this\n      utterance to the <code>OrderFlowers</code> intent so that your bot\n      recognizes that utterance.</p>\n         <p>After you publish a new version of a bot, you can get information\n      about the old version and the new so that you can compare the performance\n      across the two versions. </p>\n         <p>Utterance statistics are generated once a day. Data is available\n      for the last 15 days. You can request information for up to 5 versions of\n      your bot in each request. Amazon Lex returns the most frequent utterances\n      received by the bot in the last 15 days. The response contains information\n      about a maximum of 100 utterances for each version.</p>\n         <p>If you set <code>childDirected</code> field to true when you\n      created your bot, if you are using slot obfuscation with one or more\n      slots, or if you opted out of participating in improving Amazon Lex, utterances\n      are not available.</p>\n         <p>This operation requires permissions for the\n        <code>lex:GetUtterancesView</code> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -5159,6 +5511,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -5179,6 +5535,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -5474,6 +5834,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Gets a list of tags associated with the specified resource. Only bots,\n      bot aliases, and bot channels can have tags associated with them.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -5495,6 +5859,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -5509,6 +5877,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -6201,6 +6573,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Creates an Amazon Lex conversational bot or replaces an existing bot.\n      When you create or update a bot you are only required to specify a name, a\n      locale, and whether the bot is directed toward children under age 13. You\n      can use this to add intents later, or to remove intents from an existing\n      bot. When you create a bot with the minimum information, the bot is\n      created or updated but Amazon Lex returns the <code></code> response\n        <code>FAILED</code>. You can build the bot after you add one or more\n      intents. For more information about Amazon Lex bots, see <a>how-it-works</a>. </p>\n         <p>If you specify the name of an existing bot, the fields in the\n      request replace the existing values in the <code>$LATEST</code> version of\n      the bot. Amazon Lex removes any fields that you don't provide values for in the\n      request, except for the <code>idleTTLInSeconds</code> and\n        <code>privacySettings</code> fields, which are set to their default\n      values. If you don't specify values for required fields, Amazon Lex throws an\n      exception.</p>\n         <p>This operation requires permissions for the <code>lex:PutBot</code>\n      action. For more information, see <a>security-iam</a>.</p>",
                 "smithy.api#examples": [
                     {
@@ -6323,6 +6699,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Creates an alias for the specified version of the bot or replaces\n      an alias for the specified bot. To change the version of the bot that the\n      alias points to, replace the alias. For more information about aliases,\n      see <a>versioning-aliases</a>.</p>\n         <p>This operation requires permissions for the\n        <code>lex:PutBotAlias</code> action. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
@@ -6383,6 +6763,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -6445,6 +6829,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -6553,6 +6941,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -6681,6 +7073,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -6710,6 +7106,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Creates an intent or replaces an existing intent.</p>\n         <p>To define the interaction between the user and your bot, you use\n      one or more intents. For a pizza ordering bot, for example, you would\n      create an <code>OrderPizza</code> intent. </p>\n         <p>To create an intent or replace an existing intent, you must provide\n      the following:</p>\n         <ul>\n            <li>\n               <p>Intent name. For example, <code>OrderPizza</code>.</p>\n            </li>\n            <li>\n               <p>Sample utterances. For example, \"Can I order a pizza, please.\"\n          and \"I want to order a pizza.\"</p>\n            </li>\n            <li>\n               <p>Information to be gathered. You specify slot types for the\n          information that your bot will request from the user. You can specify\n          standard slot types, such as a date or a time, or custom slot types\n          such as the size and crust of a pizza.</p>\n            </li>\n            <li>\n               <p>How the intent will be fulfilled. You can provide a Lambda\n          function or configure the intent to return the intent information to\n          the client application. If you use a Lambda function, when all of the\n          intent information is available, Amazon Lex invokes your Lambda function.\n          If you configure your intent to return the intent information to the\n          client application. </p>\n            </li>\n         </ul>\n         <p>You can specify other optional information in the request, such\n      as:</p>\n         <ul>\n            <li>\n               <p>A confirmation prompt to ask the user to confirm an intent. For\n          example, \"Shall I order your pizza?\"</p>\n            </li>\n            <li>\n               <p>A conclusion statement to send to the user after the intent has\n          been fulfilled. For example, \"I placed your pizza order.\"</p>\n            </li>\n            <li>\n               <p>A follow-up prompt that asks the user for additional activity.\n          For example, asking \"Do you want to order a drink with your\n          pizza?\"</p>\n            </li>\n         </ul>\n         <p>If you specify an existing intent name to update the intent, Amazon Lex\n      replaces the values in the <code>$LATEST</code> version of the intent with\n      the values in the request. Amazon Lex removes fields that you don't provide in\n      the request. If you don't specify the required fields, Amazon Lex throws an\n      exception. When you update the <code>$LATEST</code> version of an intent,\n      the <code>status</code> field of any bot that uses the\n        <code>$LATEST</code> version of the intent is set to\n        <code>NOT_BUILT</code>.</p>\n         <p>For more information, see <a>how-it-works</a>.</p>\n         <p>This operation requires permissions for the\n        <code>lex:PutIntent</code> action.</p>",
                 "smithy.api#examples": [
                     {
@@ -7089,6 +7489,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -7211,6 +7615,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -7240,6 +7648,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Creates a custom slot type or replaces an existing custom slot\n      type.</p>\n         <p>To create a custom slot type, specify a name for the slot type and\n      a set of enumeration values, which are the values that a slot of this type\n      can assume. For more information, see <a>how-it-works</a>.</p>\n         <p>If you specify the name of an existing slot type, the fields in the\n      request replace the existing values in the <code>$LATEST</code> version of\n      the slot type. Amazon Lex removes the fields that you don't provide in the\n      request. If you don't specify required fields, Amazon Lex throws an exception.\n      When you update the <code>$LATEST</code> version of a slot type, if a bot\n      uses the <code>$LATEST</code> version of an intent that contains the slot\n      type, the bot's <code>status</code> field is set to\n      <code>NOT_BUILT</code>.</p>\n         <p>This operation requires permissions for the\n        <code>lex:PutSlotType</code> action.</p>",
                 "smithy.api#examples": [
                     {
@@ -7337,6 +7749,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -7411,6 +7827,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -7883,6 +8303,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Starts a job to import a resource to Amazon Lex.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -7923,6 +8347,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -7973,6 +8401,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -8002,6 +8434,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Starts migrating a bot from Amazon Lex V1 to Amazon Lex V2. Migrate your bot when\n      you want to take advantage of the new features of Amazon Lex V2.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/migrate.html\">Migrating a bot</a> in the <i>Amazon Lex\n        developer guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -8050,6 +8486,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -8106,6 +8546,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -8278,6 +8722,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Adds the specified tags to the specified resource. If a tag key\n      already exists, the existing value is replaced with the new value.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -8306,6 +8754,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -8313,6 +8765,10 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },
@@ -8354,6 +8810,10 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#documentation": "<p>Removes tags from a bot, bot alias or bot channel.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -8383,6 +8843,10 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#input": {}
             }
         },
@@ -8390,6 +8854,10 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "smithy.api#deprecated": {
+                    "since": "2025-09-08",
+                    "message": "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."
+                },
                 "smithy.api#output": {}
             }
         },

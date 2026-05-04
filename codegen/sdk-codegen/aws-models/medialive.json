@@ -26059,6 +26059,21 @@
                 "smithy.api#documentation": "Media Connect Router Group Settings"
             }
         },
+        "com.amazonaws.medialive#MediaConnectRouterOutputConnection": {
+            "type": "structure",
+            "members": {
+                "RouterInputArn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the MediaConnect Router Input connected to this pipeline.",
+                        "smithy.api#jsonName": "routerInputArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Connection details for a single pipeline of a MediaConnect Router output."
+            }
+        },
         "com.amazonaws.medialive#MediaConnectRouterOutputConnectionMap": {
             "type": "structure",
             "members": {
@@ -26079,6 +26094,18 @@
             },
             "traits": {
                 "smithy.api#documentation": "Map of MediaLive pipeline IDs to the ARNs of the MediaConnect Router Inputs to which this Output is connected."
+            }
+        },
+        "com.amazonaws.medialive#MediaConnectRouterOutputConnections": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.medialive#__string"
+            },
+            "value": {
+                "target": "com.amazonaws.medialive#MediaConnectRouterOutputConnection"
+            },
+            "traits": {
+                "smithy.api#documentation": "A map of output names to the MediaConnect Router connection for this pipeline."
             }
         },
         "com.amazonaws.medialive#MediaConnectRouterOutputDestinationSettings": {
@@ -26129,7 +26156,7 @@
                 "ConnectedRouterInputs": {
                     "target": "com.amazonaws.medialive#MediaConnectRouterOutputConnectionMap",
                     "traits": {
-                        "smithy.api#documentation": "Shows the MediaConnect Router Inputs that are connected to this output. This parameter is purely informative, and editing it will have no effect. To connect or disconnect MediaConnect Router Inputs, go to MediaConnect.",
+                        "smithy.api#documentation": "This parameter is deprecated and unused.",
                         "smithy.api#jsonName": "connectedRouterInputs"
                     }
                 },
@@ -30408,6 +30435,13 @@
                     "traits": {
                         "smithy.api#documentation": "Current engine version of the encoder for this pipeline.",
                         "smithy.api#jsonName": "channelEngineVersion"
+                    }
+                },
+                "MediaConnectRouterOutputConnectionMap": {
+                    "target": "com.amazonaws.medialive#MediaConnectRouterOutputConnections",
+                    "traits": {
+                        "smithy.api#documentation": "A map of output names to the MediaConnect Router connection for this pipeline. Only present for channels with MediaConnect Router outputs.",
+                        "smithy.api#jsonName": "mediaConnectRouterOutputConnectionMap"
                     }
                 }
             },
