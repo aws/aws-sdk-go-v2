@@ -1,3 +1,7 @@
+# v1.35.0 (2026-05-04)
+
+* **Feature**: Lex V1 is deprecated, use Lex V2 instead
+
 # v1.34.16 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

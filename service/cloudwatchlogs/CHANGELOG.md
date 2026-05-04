@@ -1,3 +1,7 @@
+# v1.73.0 (2026-05-04)
+
+* **Feature**: Adding an additional optional deliverySourceConfiguration field to PutDeliverySource API. This enables customers to pass service-specific configurations through IngestionHub such as tracing enablement or sampling rates that will be propagated to the source resource.
+
 # v1.72.0 (2026-05-01)
 
 * **Feature**: Adds support for filtering log groups by tags in the ListLogGroups API via the new logGroupTags parameter.

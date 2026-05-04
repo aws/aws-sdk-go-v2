@@ -1,3 +1,7 @@
+# v1.300.0 (2026-05-04)
+
+* **Feature**: This feature allows customers to change the tunnel bandwidth on existing VPN connections using the ModifyVpnConnectionOptions API
+
 # v1.299.1 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

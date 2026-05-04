@@ -1,8 +1,0 @@
-{
-    "id": "41a03e3f-7566-4f41-af1e-e5525214ae17",
-    "type": "feature",
-    "description": "Updates the type of the MediaLiveRouterOutputConnectionMap.",
-    "modules": [
-        "service/medialive"
-    ]
-}

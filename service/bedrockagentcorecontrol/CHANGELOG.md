@@ -1,3 +1,7 @@
+# v1.35.0 (2026-05-04)
+
+* **Feature**: Amazon Bedrock AgentCore gateways now support MCP Sessions and response streaming from MCP targets. Session timeouts can be set between 15 minutes and 8 hours, and response streaming enables forwarding stream events sent by MCP targets to gateway users.
+
 # v1.34.0 (2026-04-30)
 
 * **Feature**: AgentCore Identity now supports on-behalf-of token exchange OAuth2. AgentCore Memory now supports metadata for LongTerm Memory Records.

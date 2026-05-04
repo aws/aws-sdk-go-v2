@@ -1,3 +1,23 @@
+# Release (2026-05-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.35.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1350-2026-05-04)
+  * **Feature**: Amazon Bedrock AgentCore gateways now support MCP Sessions and response streaming from MCP targets. Session timeouts can be set between 15 minutes and 8 hours, and response streaming enables forwarding stream events sent by MCP targets to gateway users.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.73.0](service/cloudwatchlogs/CHANGELOG.md#v1730-2026-05-04)
+  * **Feature**: Adding an additional optional deliverySourceConfiguration field to PutDeliverySource API. This enables customers to pass service-specific configurations through IngestionHub such as tracing enablement or sampling rates that will be propagated to the source resource.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.300.0](service/ec2/CHANGELOG.md#v13000-2026-05-04)
+  * **Feature**: This feature allows customers to change the tunnel bandwidth on existing VPN connections using the ModifyVpnConnectionOptions API
+* `github.com/aws/aws-sdk-go-v2/service/georoutes`: [v1.9.0](service/georoutes/CHANGELOG.md#v190-2026-05-04)
+  * **Feature**: Added support for TravelTimeExceedsDriverWorkHours, ViolatedBlockedRoad, and ViolatedVehicleRestriction notice codes to the CalculateRoutes API response.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice`: [v1.35.0](service/lexmodelbuildingservice/CHANGELOG.md#v1350-2026-05-04)
+  * **Feature**: Lex V1 is deprecated, use Lex V2 instead
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.96.0](service/medialive/CHANGELOG.md#v1960-2026-05-04)
+  * **Feature**: Updates the type of the MediaLiveRouterOutputConnectionMap.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.1.0](service/securityagent/CHANGELOG.md#v110-2026-05-04)
+  * **Feature**: AWS Security Agent is adding a new target domain verification method for private VPC penetration testing. Additionally, the target domain resource will now have a verification status reason field to surface additional details about domain verification
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.21.0](service/vpclattice/CHANGELOG.md#v1210-2026-05-04)
+  * **Feature**: Amazon VPC Lattice now supports privately resolvable DNS resources
+
 # Release (2026-05-01)
 
 ## Module Highlights

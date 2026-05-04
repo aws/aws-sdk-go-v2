@@ -1,8 +1,0 @@
-{
-    "id": "7acdbc78-310c-457f-8dae-e99d7f6c48a0",
-    "type": "feature",
-    "description": "Amazon VPC Lattice now supports privately resolvable DNS resources",
-    "modules": [
-        "service/vpclattice"
-    ]
-}

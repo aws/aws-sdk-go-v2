@@ -1,8 +1,0 @@
-{
-    "id": "dcd12510-7640-48b8-89e6-b0ec750cc47e",
-    "type": "feature",
-    "description": "Added support for TravelTimeExceedsDriverWorkHours, ViolatedBlockedRoad, and ViolatedVehicleRestriction notice codes to the CalculateRoutes API response.",
-    "modules": [
-        "service/georoutes"
-    ]
-}

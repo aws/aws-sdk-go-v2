@@ -1,8 +1,0 @@
-{
-    "id": "5e457cd0-a4bf-48a9-84e8-0d693f12d22e",
-    "type": "feature",
-    "description": "AWS Security Agent is adding a new target domain verification method for private VPC penetration testing. Additionally, the target domain resource will now have a verification status reason field to surface additional details about domain verification",
-    "modules": [
-        "service/securityagent"
-    ]
-}
