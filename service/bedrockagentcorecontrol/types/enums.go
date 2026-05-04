@@ -1080,11 +1080,10 @@ type OnBehalfOfTokenExchangeGrantTypeType string
 
 // Enum values for OnBehalfOfTokenExchangeGrantTypeType
 const (
-	// RFC 8693 - Adopted by majority of IDPs supporting OBO grant type =
-	// urn:ietf:params:oauth:grant-type:token-exchange
+	// RFC 8693 token exchange, adopted by the majority of identity providers
+	// supporting on-behalf-of flows.
 	OnBehalfOfTokenExchangeGrantTypeTypeTokenExchange OnBehalfOfTokenExchangeGrantTypeType = "TOKEN_EXCHANGE"
-	// RFC 7523 - Adopted by Microsoft Entra ID grant type =
-	// urn:ietf:params:oauth:grant-type:jwt-bearer
+	// RFC 7523 JWT authorization grant, adopted by Microsoft Entra ID.
 	OnBehalfOfTokenExchangeGrantTypeTypeJwtAuthorizationGrant OnBehalfOfTokenExchangeGrantTypeType = "JWT_AUTHORIZATION_GRANT"
 )
 

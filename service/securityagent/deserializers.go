@@ -2462,6 +2462,15 @@ func awsRestjson1_deserializeOpDocumentCreateTargetDomainOutput(v **CreateTarget
 				sv.VerificationStatus = types.TargetDomainStatus(jtv)
 			}
 
+		case "verificationStatusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.VerificationStatusReason = ptr.String(jtv)
+			}
+
 		case "verifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5053,6 +5062,9 @@ func awsRestjson1_deserializeOpErrorListIntegrations(response *smithyhttp.Respon
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -7556,6 +7568,15 @@ func awsRestjson1_deserializeOpDocumentUpdateTargetDomainOutput(v **UpdateTarget
 				sv.VerificationStatus = types.TargetDomainStatus(jtv)
 			}
 
+		case "verificationStatusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.VerificationStatusReason = ptr.String(jtv)
+			}
+
 		case "verifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7764,6 +7785,15 @@ func awsRestjson1_deserializeOpDocumentVerifyTargetDomainOutput(v **VerifyTarget
 					return err
 				}
 				sv.UpdatedAt = ptr.Time(t)
+			}
+
+		case "verificationStatusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.VerificationStatusReason = ptr.String(jtv)
 			}
 
 		case "verifiedAt":
@@ -12735,6 +12765,15 @@ func awsRestjson1_deserializeDocumentTargetDomain(v **types.TargetDomain, value 
 					return fmt.Errorf("expected TargetDomainStatus to be of type string, got %T instead", value)
 				}
 				sv.VerificationStatus = types.TargetDomainStatus(jtv)
+			}
+
+		case "verificationStatusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.VerificationStatusReason = ptr.String(jtv)
 			}
 
 		case "verifiedAt":

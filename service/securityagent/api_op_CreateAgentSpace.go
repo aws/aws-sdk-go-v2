@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Creates an agent space record
+// Creates a new agent space. An agent space is a dedicated workspace for securing
+// a specific application.
 func (c *Client) CreateAgentSpace(ctx context.Context, params *CreateAgentSpaceInput, optFns ...func(*Options)) (*CreateAgentSpaceOutput, error) {
 	if params == nil {
 		params = &CreateAgentSpaceInput{}
@@ -28,71 +29,67 @@ func (c *Client) CreateAgentSpace(ctx context.Context, params *CreateAgentSpaceI
 	return out, nil
 }
 
-// Input for creating a new agent space
+// Input for creating a new agent space.
 type CreateAgentSpaceInput struct {
 
-	// Name of the agent space
+	// The name of the agent space.
 	//
 	// This member is required.
 	Name *string
 
-	// AWS resource configurations associated with the agent space
+	// The AWS resources to associate with the agent space.
 	AwsResources *types.AWSResources
 
-	// Configuration for code review analysis, including controls scanning and general
-	// purpose scanning settings
+	// The code review settings for the agent space.
 	CodeReviewSettings *types.CodeReviewSettings
 
-	// Description of the agent space
+	// A description of the agent space.
 	Description *string
 
-	// Identifier of the KMS key used to encrypt data. Can be a key ID, key ARN, alias
-	// name, or alias ARN. If not specified, an AWS managed key is used.
+	// The identifier of the AWS KMS key to use for encrypting data in the agent space.
 	KmsKeyId *string
 
-	// Tags to associate with the agent space
+	// The tags to associate with the agent space.
 	Tags map[string]string
 
-	// Target domain IDs to associate with the agent space
+	// The list of target domain identifiers to associate with the agent space.
 	TargetDomainIds []string
 
 	noSmithyDocumentSerde
 }
 
-// Output for the CreateAgentSpace operation
+// Output for the CreateAgentSpace operation.
 type CreateAgentSpaceOutput struct {
 
-	// Unique identifier of the created agent space
+	// The unique identifier of the created agent space.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Name of the created agent space
+	// The name of the agent space.
 	//
 	// This member is required.
 	Name *string
 
-	// AWS resource configurations associated with the agent space
+	// The AWS resources associated with the agent space.
 	AwsResources *types.AWSResources
 
-	// Configuration for code review analysis, including controls scanning and general
-	// purpose scanning settings
+	// The code review settings for the agent space.
 	CodeReviewSettings *types.CodeReviewSettings
 
-	// Timestamp when the agent space was created
+	// The date and time the agent space was created, in UTC format.
 	CreatedAt *time.Time
 
-	// Description of the created agent space
+	// The description of the agent space.
 	Description *string
 
-	// Identifier of the KMS key used to encrypt data. Can be a key ID, key ARN, alias
-	// name, or alias ARN. If not specified, an AWS managed key is used.
+	// The identifier of the AWS KMS key used to encrypt data in the agent space.
 	KmsKeyId *string
 
-	// List of target domain IDs registered with the agent space
+	// The list of target domain identifiers associated with the agent space.
 	TargetDomainIds []string
 
-	// Timestamp when the agent space was last updated
+	// The date and time the agent space was last updated, in UTC format.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

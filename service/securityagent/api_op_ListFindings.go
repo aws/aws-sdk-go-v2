@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists findings with filtering and pagination support. When filters are applied,
-// the actual number of results returned may be less than the specified limit
+// Lists the security findings for a pentest job.
 func (c *Client) ListFindings(ctx context.Context, params *ListFindingsInput, optFns ...func(*Options)) (*ListFindingsOutput, error) {
 	if params == nil {
 		params = &ListFindingsInput{}
@@ -28,50 +27,54 @@ func (c *Client) ListFindings(ctx context.Context, params *ListFindingsInput, op
 	return out, nil
 }
 
-// Input for ListFindings operation with filtering support
+// Input for ListFindings operation with filtering support.
 type ListFindingsInput struct {
 
-	// ID of the agent space where the pentest job exists
+	// The unique identifier of the agent space.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Identifier of the pentest job for which to retrieve associated findings
+	// The unique identifier of the pentest job to list findings for.
 	//
 	// This member is required.
 	PentestJobId *string
 
-	// Filter findings by confidence level
+	// Filter findings by confidence level.
 	Confidence types.ConfidenceLevel
 
-	// Maximum number of findings to return in a single request (default: 50)
+	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
-	// Filter findings by name (case-insensitive substring search)
+	// Filter findings by name.
 	Name *string
 
-	// Token for pagination
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request. For subsequent calls,
+	// use the nextToken value returned from the previous request.
 	NextToken *string
 
-	// Filter findings by risk level
+	// Filter findings by risk level.
 	RiskLevel types.RiskLevel
 
-	// Filter findings by risk type
+	// Filter findings by risk type.
 	RiskType *string
 
-	// Filter findings by status
+	// Filter findings by status.
 	Status types.FindingStatus
 
 	noSmithyDocumentSerde
 }
 
-// Output for the ListFindings operation
+// Output for the ListFindings operation.
 type ListFindingsOutput struct {
 
-	// List of finding summaries matching the filter criteria
+	// The list of finding summaries.
 	FindingsSummaries []types.FindingSummary
 
-	// Token for pagination to retrieve the next set of results
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request. For subsequent calls,
+	// use the nextToken value returned from the previous request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -179,7 +182,7 @@ func (c *Client) addOperationListFindingsMiddlewares(stack *middleware.Stack, op
 
 // ListFindingsPaginatorOptions is the paginator options for ListFindings
 type ListFindingsPaginatorOptions struct {
-	// Maximum number of findings to return in a single request (default: 50)
+	// The maximum number of results to return in a single call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

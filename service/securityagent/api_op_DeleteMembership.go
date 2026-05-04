@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a single member associated to an agent space
+// Deletes a membership, revoking a user's access to an agent space.
 func (c *Client) DeleteMembership(ctx context.Context, params *DeleteMembershipInput, optFns ...func(*Options)) (*DeleteMembershipOutput, error) {
 	if params == nil {
 		params = &DeleteMembershipInput{}
@@ -27,31 +27,31 @@ func (c *Client) DeleteMembership(ctx context.Context, params *DeleteMembershipI
 	return out, nil
 }
 
-// Request structure for removing a single member from an agent space
+// Request structure for removing a single member from an agent space.
 type DeleteMembershipInput struct {
 
-	// Agent space identifier
+	// The unique identifier of the agent space to revoke access from.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Application identifier
+	// The unique identifier of the application that contains the agent space.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// Member identifier (userId or agentSpaceId)
+	// The unique identifier of the membership to delete.
 	//
 	// This member is required.
 	MembershipId *string
 
-	// Type of member (USER or AGENT_SPACE)
+	// The type of member to remove.
 	MemberType types.MembershipType
 
 	noSmithyDocumentSerde
 }
 
-// Response structure for removing a single member from an agent space
+// Response structure for removing a single member from an agent space.
 type DeleteMembershipOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

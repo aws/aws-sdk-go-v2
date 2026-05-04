@@ -37,6 +37,8 @@ import (
 // participating in improving Amazon Lex, utterances are not available.
 //
 // This operation requires permissions for the lex:GetUtterancesView action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetUtterancesView(ctx context.Context, params *GetUtterancesViewInput, optFns ...func(*Options)) (*GetUtterancesViewOutput, error) {
 	if params == nil {
 		params = &GetUtterancesViewInput{}

@@ -20,6 +20,8 @@ import (
 //     $LATEST version of all slot types.
 //
 // The operation requires permission for the lex:GetSlotTypes action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetSlotTypes(ctx context.Context, params *GetSlotTypesInput, optFns ...func(*Options)) (*GetSlotTypesOutput, error) {
 	if params == nil {
 		params = &GetSlotTypesInput{}

@@ -23,6 +23,8 @@ import (
 // Subsequent versions increment by 1. For more information, see versioning-intro.
 //
 // This operation requires permission for the lex:CreateBotVersion action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) CreateBotVersion(ctx context.Context, params *CreateBotVersionInput, optFns ...func(*Options)) (*CreateBotVersionOutput, error) {
 	if params == nil {
 		params = &CreateBotVersionInput{}

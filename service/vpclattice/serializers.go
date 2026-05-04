@@ -586,6 +586,11 @@ func awsRestjson1_serializeOpDocumentCreateResourceGatewayInput(v *CreateResourc
 		ok.String(*v.Name)
 	}
 
+	if len(v.ResourceConfigDnsResolution) > 0 {
+		ok := object.Key("resourceConfigDnsResolution")
+		ok.String(string(v.ResourceConfigDnsResolution))
+	}
+
 	if v.SecurityGroupIds != nil {
 		ok := object.Key("securityGroupIds")
 		if err := awsRestjson1_serializeDocumentSecurityGroupList(v.SecurityGroupIds, ok); err != nil {

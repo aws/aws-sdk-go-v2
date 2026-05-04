@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing security finding with new details or status
+// Updates the status or risk level of a security finding.
 func (c *Client) UpdateFinding(ctx context.Context, params *UpdateFindingInput, optFns ...func(*Options)) (*UpdateFindingOutput, error) {
 	if params == nil {
 		params = &UpdateFindingInput{}
@@ -27,29 +27,29 @@ func (c *Client) UpdateFinding(ctx context.Context, params *UpdateFindingInput, 
 	return out, nil
 }
 
-// Input for updating an existing security finding
+// Input for updating an existing security finding.
 type UpdateFindingInput struct {
 
-	// ID of the agent space where the finding exists
+	// The unique identifier of the agent space that contains the finding.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Identifier of the finding to update
+	// The unique identifier of the finding to update.
 	//
 	// This member is required.
 	FindingId *string
 
-	// Updated severity level of the identified risk
+	// The updated risk level for the finding.
 	RiskLevel types.RiskLevel
 
-	// Updated status of the finding
+	// The updated status for the finding.
 	Status types.FindingStatus
 
 	noSmithyDocumentSerde
 }
 
-// Output for the UpdateFinding operation
+// Output for the UpdateFinding operation.
 type UpdateFindingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

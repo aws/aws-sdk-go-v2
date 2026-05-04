@@ -3780,9 +3780,9 @@ func awsRestjson1_serializeDocumentWaypointOptimizationDrivingDistanceOptions(v 
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.DrivingDistance != nil {
 		ok := object.Key("DrivingDistance")
-		ok.Long(v.DrivingDistance)
+		ok.Long(*v.DrivingDistance)
 	}
 
 	return nil

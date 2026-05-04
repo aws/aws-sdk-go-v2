@@ -13,6 +13,8 @@ import (
 )
 
 // Starts a job to import a resource to Amazon Lex.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) StartImport(ctx context.Context, params *StartImportInput, optFns ...func(*Options)) (*StartImportOutput, error) {
 	if params == nil {
 		params = &StartImportInput{}

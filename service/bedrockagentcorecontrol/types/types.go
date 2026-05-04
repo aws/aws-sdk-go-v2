@@ -3576,9 +3576,11 @@ type ManagedVpcResource struct {
 	// This member is required.
 	VpcIdentifier *string
 
-	// An intermediate publicly resolvable domain used as the VPC Lattice resource
-	// configuration endpoint. Required when your private endpoint uses a domain that
-	// is not publicly resolvable.
+	// An intermediate domain to use as the resource configuration endpoint instead of
+	// the actual target domain. Use this when you want to route traffic through an
+	// intermediate component such as a VPC endpoint or internal load balancer. For
+	// more information, see xref:lattice-vpc-egress-routing-domain[Route traffic
+	// through an intermediate domain].
 	RoutingDomain *string
 
 	// The security group IDs to associate with the VPC Lattice resource gateway. If
@@ -3661,6 +3663,14 @@ type MCPGatewayConfiguration struct {
 	// The search type for the Model Context Protocol gateway. This field specifies
 	// how the gateway handles search operations.
 	SearchType SearchType
+
+	// The session configuration for the MCP gateway. This configuration controls
+	// session behavior, including session timeout settings.
+	SessionConfiguration *SessionConfiguration
+
+	// The streaming configuration for the MCP gateway. This configuration controls
+	// whether response streaming is enabled for the gateway.
+	StreamingConfiguration *StreamingConfiguration
 
 	// The supported versions of the Model Context Protocol. This field specifies
 	// which versions of the protocol the gateway can use.
@@ -4651,7 +4661,7 @@ type OAuthCredentialProvider struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration for on-behalf-of token exchange
+// Configuration for on-behalf-of token exchange.
 type OnBehalfOfTokenExchangeConfigType struct {
 
 	// The grant type for the on-behalf-of token exchange.
@@ -4659,7 +4669,7 @@ type OnBehalfOfTokenExchangeConfigType struct {
 	// This member is required.
 	GrantType OnBehalfOfTokenExchangeGrantTypeType
 
-	// Configuration specific to TOKEN_EXCHANGE grant type (RFC 8693)
+	// Configuration specific to the TOKEN_EXCHANGE grant type (RFC 8693).
 	TokenExchangeGrantTypeConfig *TokenExchangeGrantTypeConfigType
 
 	noSmithyDocumentSerde
@@ -5845,6 +5855,19 @@ type SessionConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The session configuration for an MCP gateway. This structure defines settings
+// that control session behavior.
+type SessionConfiguration struct {
+
+	// The session timeout in seconds. After this timeout, the session expires and
+	// subsequent requests to this session will receive an error. The minimum value is
+	// 900 seconds (15 minutes), the maximum value is 28800 seconds (8 hours), and the
+	// default value is 3600 seconds (1 hour).
+	SessionTimeoutInSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for a session storage filesystem mounted into the AgentCore
 // Runtime. Session storage provides persistent storage that is preserved across
 // AgentCore Runtime session invocations.
@@ -5984,6 +6007,17 @@ type StreamDeliveryResources struct {
 	//
 	// This member is required.
 	Resources []StreamDeliveryResource
+
+	noSmithyDocumentSerde
+}
+
+// The streaming configuration for an MCP gateway. This structure defines settings
+// that control response streaming behavior.
+type StreamingConfiguration struct {
+
+	// Indicates whether response streaming is enabled for the gateway. When set to
+	// true , the gateway streams responses from targets back to the client.
+	EnableResponseStreaming *bool
 
 	noSmithyDocumentSerde
 }
@@ -6232,7 +6266,7 @@ type TokenBasedTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration for RFC 8693 Token Exchange
+// Configuration for RFC 8693 token exchange.
 type TokenExchangeGrantTypeConfigType struct {
 
 	// The content type for the actor token in the token exchange.
@@ -6240,7 +6274,7 @@ type TokenExchangeGrantTypeConfigType struct {
 	// This member is required.
 	ActorTokenContent ActorTokenContentType
 
-	// Only valid when actorTokenContent is M2M
+	// The scopes for the actor token. Only valid when actorTokenContent is M2M.
 	ActorTokenScopes []string
 
 	noSmithyDocumentSerde

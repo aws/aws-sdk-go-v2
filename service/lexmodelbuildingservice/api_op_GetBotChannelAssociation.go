@@ -16,6 +16,8 @@ import (
 // messaging platform.
 //
 // This operation requires permissions for the lex:GetBotChannelAssociation action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetBotChannelAssociation(ctx context.Context, params *GetBotChannelAssociationInput, optFns ...func(*Options)) (*GetBotChannelAssociationOutput, error) {
 	if params == nil {
 		params = &GetBotChannelAssociationInput{}

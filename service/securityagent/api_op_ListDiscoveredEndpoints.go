@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists discovered endpoints associated with a pentest job with optional URI
-// prefix filtering
+// Returns a paginated list of endpoints discovered during a pentest job execution.
 func (c *Client) ListDiscoveredEndpoints(ctx context.Context, params *ListDiscoveredEndpointsInput, optFns ...func(*Options)) (*ListDiscoveredEndpointsOutput, error) {
 	if params == nil {
 		params = &ListDiscoveredEndpointsInput{}
@@ -28,39 +27,42 @@ func (c *Client) ListDiscoveredEndpoints(ctx context.Context, params *ListDiscov
 	return out, nil
 }
 
-// Input for ListDiscoveredEndpoints operation
+// Input for ListDiscoveredEndpoints operation.
 type ListDiscoveredEndpointsInput struct {
 
-	// ID of the agent space where the pentest job exists
+	// The unique identifier of the agent space.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Identifier of the pentest job for which to retrieve discovered endpoints
+	// The unique identifier of the pentest job to list discovered endpoints for.
 	//
 	// This member is required.
 	PentestJobId *string
 
-	// Maximum number of discovered endpoints to return in a single request (default:
-	// 50)
+	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
-	// Token for pagination
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request. For subsequent calls,
+	// use the nextToken value returned from the previous request.
 	NextToken *string
 
-	// Optional URI prefix filter to narrow down results
+	// A prefix to filter discovered endpoints by URI.
 	Prefix *string
 
 	noSmithyDocumentSerde
 }
 
-// Output for the ListDiscoveredEndpoints operation
+// Output for the ListDiscoveredEndpoints operation.
 type ListDiscoveredEndpointsOutput struct {
 
-	// List of discovered endpoints for the pentest job
+	// The list of discovered endpoints.
 	DiscoveredEndpoints []types.DiscoveredEndpoint
 
-	// Token for pagination to retrieve the next set of results
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request. For subsequent calls,
+	// use the nextToken value returned from the previous request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -169,8 +171,7 @@ func (c *Client) addOperationListDiscoveredEndpointsMiddlewares(stack *middlewar
 // ListDiscoveredEndpointsPaginatorOptions is the paginator options for
 // ListDiscoveredEndpoints
 type ListDiscoveredEndpointsPaginatorOptions struct {
-	// Maximum number of discovered endpoints to return in a single request (default:
-	// 50)
+	// The maximum number of results to return in a single call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Retrieve an Artifact for the given agent space
+// Retrieves an artifact from an agent space.
 func (c *Client) GetArtifact(ctx context.Context, params *GetArtifactInput, optFns ...func(*Options)) (*GetArtifactOutput, error) {
 	if params == nil {
 		params = &GetArtifactInput{}
@@ -30,12 +30,12 @@ func (c *Client) GetArtifact(ctx context.Context, params *GetArtifactInput, optF
 
 type GetArtifactInput struct {
 
-	// Unique identifier of the agent space
+	// The unique identifier of the agent space that contains the artifact.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Unique identifier of the artifact
+	// The unique identifier of the artifact to retrieve.
 	//
 	// This member is required.
 	ArtifactId *string
@@ -45,27 +45,27 @@ type GetArtifactInput struct {
 
 type GetArtifactOutput struct {
 
-	// Unique identifier of the agent space
+	// The unique identifier of the agent space that contains the artifact.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Artifact details
+	// The artifact content and type.
 	//
 	// This member is required.
 	Artifact *types.Artifact
 
-	// Unique identifier of the artifact
+	// The unique identifier of the artifact.
 	//
 	// This member is required.
 	ArtifactId *string
 
-	// Name of the artifact file
+	// The file name of the artifact.
 	//
 	// This member is required.
 	FileName *string
 
-	// Timestamp when the artifact was last updated
+	// The date and time the artifact was last updated, in UTC format.
 	//
 	// This member is required.
 	UpdatedAt *time.Time

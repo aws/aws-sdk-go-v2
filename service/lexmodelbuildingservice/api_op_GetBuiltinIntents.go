@@ -14,6 +14,8 @@ import (
 // Gets a list of built-in intents that meet the specified criteria.
 //
 // This operation requires permission for the lex:GetBuiltinIntents action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetBuiltinIntents(ctx context.Context, params *GetBuiltinIntentsInput, optFns ...func(*Options)) (*GetBuiltinIntentsOutput, error) {
 	if params == nil {
 		params = &GetBuiltinIntentsInput{}

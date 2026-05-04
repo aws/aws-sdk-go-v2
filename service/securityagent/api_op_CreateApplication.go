@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new application
+// Creates a new application. An application is the top-level organizational unit
+// that supports IAM Identity Center integration.
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}
@@ -28,18 +29,19 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 
 type CreateApplicationInput struct {
 
-	// Default KMS key identifier used to encrypt application data
+	// The identifier of the default AWS KMS key to use for encrypting data in the
+	// application.
 	DefaultKmsKeyId *string
 
-	// ARN of the IAM Identity Center instance used for user authentication. Optional
-	// for non-IdC applications
+	// The Amazon Resource Name (ARN) of the IAM Identity Center instance to associate
+	// with the application.
 	IdcInstanceArn *string
 
-	// ARN of the IAM role that the application uses to access AWS resources on your
-	// behalf
+	// The Amazon Resource Name (ARN) of the IAM role to associate with the
+	// application.
 	RoleArn *string
 
-	// Tags to associate with the application
+	// The tags to associate with the application.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -47,7 +49,7 @@ type CreateApplicationInput struct {
 
 type CreateApplicationOutput struct {
 
-	// Application ID
+	// The unique identifier of the created application.
 	//
 	// This member is required.
 	ApplicationId *string

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists tags for a Security Agent resource
+// Returns the tags associated with the specified resource.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -26,10 +26,10 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 	return out, nil
 }
 
-// Input for ListTagsForResource operation
+// Input for ListTagsForResource operation.
 type ListTagsForResourceInput struct {
 
-	// ARN of the resource to list tags for
+	// The Amazon Resource Name (ARN) of the resource to list tags for.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -37,10 +37,10 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-// Output for ListTagsForResource operation
+// Output for ListTagsForResource operation.
 type ListTagsForResourceOutput struct {
 
-	// Tags associated with the resource
+	// The tags associated with the resource.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

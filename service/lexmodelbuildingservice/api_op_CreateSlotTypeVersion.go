@@ -24,6 +24,8 @@ import (
 // Subsequent versions increment by 1. For more information, see versioning-intro.
 //
 // This operation requires permissions for the lex:CreateSlotTypeVersion action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) CreateSlotTypeVersion(ctx context.Context, params *CreateSlotTypeVersionInput, optFns ...func(*Options)) (*CreateSlotTypeVersionOutput, error) {
 	if params == nil {
 		params = &CreateSlotTypeVersionInput{}

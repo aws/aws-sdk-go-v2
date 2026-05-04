@@ -17,6 +17,8 @@ import (
 //
 // For more information, see [Migrating a bot] in the Amazon Lex developer guide.
 //
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+//
 // [Migrating a bot]: https://docs.aws.amazon.com/lex/latest/dg/migrate.html
 func (c *Client) StartMigration(ctx context.Context, params *StartMigrationInput, optFns ...func(*Options)) (*StartMigrationOutput, error) {
 	if params == nil {

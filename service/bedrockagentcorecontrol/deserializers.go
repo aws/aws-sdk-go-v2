@@ -33854,6 +33854,16 @@ func awsRestjson1_deserializeDocumentMCPGatewayConfiguration(v **types.MCPGatewa
 				sv.SearchType = types.SearchType(jtv)
 			}
 
+		case "sessionConfiguration":
+			if err := awsRestjson1_deserializeDocumentSessionConfiguration(&sv.SessionConfiguration, value); err != nil {
+				return err
+			}
+
+		case "streamingConfiguration":
+			if err := awsRestjson1_deserializeDocumentStreamingConfiguration(&sv.StreamingConfiguration, value); err != nil {
+				return err
+			}
+
 		case "supportedVersions":
 			if err := awsRestjson1_deserializeDocumentMcpSupportedVersions(&sv.SupportedVersions, value); err != nil {
 				return err
@@ -39086,6 +39096,50 @@ func awsRestjson1_deserializeDocumentSessionConfig(v **types.SessionConfig, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSessionConfiguration(v **types.SessionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SessionConfiguration
+	if *v == nil {
+		sv = &types.SessionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "sessionTimeoutInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SessionTimeoutInSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSessionStorageConfiguration(v **types.SessionStorageConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -39550,6 +39604,46 @@ func awsRestjson1_deserializeDocumentStreamDeliveryResourcesList(v *[]types.Stre
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStreamingConfiguration(v **types.StreamingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StreamingConfiguration
+	if *v == nil {
+		sv = &types.StreamingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enableResponseStreaming":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableResponseStreaming = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

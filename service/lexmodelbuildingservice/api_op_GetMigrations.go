@@ -12,6 +12,8 @@ import (
 )
 
 // Gets a list of migrations between Amazon Lex V1 and Amazon Lex V2.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetMigrations(ctx context.Context, params *GetMigrationsInput, optFns ...func(*Options)) (*GetMigrationsOutput, error) {
 	if params == nil {
 		params = &GetMigrationsInput{}

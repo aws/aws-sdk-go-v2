@@ -1,0 +1,8 @@
+{
+    "id": "5f1b250e-1a5a-4645-8e8d-3296b3aa13d4",
+    "type": "feature",
+    "description": "Lex V1 is deprecated, use Lex V2 instead",
+    "modules": [
+        "service/lexmodelbuildingservice"
+    ]
+}

@@ -14,6 +14,8 @@ import (
 //
 // This operation requires permission for the lex:DeleteBotChannelAssociation
 // action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) DeleteBotChannelAssociation(ctx context.Context, params *DeleteBotChannelAssociationInput, optFns ...func(*Options)) (*DeleteBotChannelAssociationOutput, error) {
 	if params == nil {
 		params = &DeleteBotChannelAssociationInput{}

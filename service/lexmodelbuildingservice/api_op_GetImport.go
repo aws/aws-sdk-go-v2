@@ -13,6 +13,8 @@ import (
 )
 
 // Gets information about an import job started with the StartImport operation.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetImport(ctx context.Context, params *GetImportInput, optFns ...func(*Options)) (*GetImportOutput, error) {
 	if params == nil {
 		params = &GetImportInput{}

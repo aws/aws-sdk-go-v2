@@ -13,6 +13,8 @@ import (
 
 // Adds the specified tags to the specified resource. If a tag key already exists,
 // the existing value is replaced with the new value.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

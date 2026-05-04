@@ -59,11 +59,21 @@ type GetResourceGatewayOutput struct {
 	// format.
 	LastUpdatedAt *time.Time
 
+	// The AWS service that manages the resource gateway.
+	ManagedBy *string
+
 	// The name of the resource gateway.
 	Name *string
 
+	// The DNS resolution type for resource configurations that are associated with
+	// this resource gateway.
+	ResourceConfigDnsResolution types.ResourceConfigDnsResolution
+
 	// The security group IDs associated with the resource gateway.
 	SecurityGroupIds []string
+
+	// Indicates whether the resource gateway is managed by an AWS service.
+	ServiceManaged *bool
 
 	// The status for the resource gateway.
 	Status types.ResourceGatewayStatus

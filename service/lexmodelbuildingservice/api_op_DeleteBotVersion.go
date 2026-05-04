@@ -14,6 +14,8 @@ import (
 // operation.
 //
 // This operation requires permissions for the lex:DeleteBotVersion action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) DeleteBotVersion(ctx context.Context, params *DeleteBotVersionInput, optFns ...func(*Options)) (*DeleteBotVersionOutput, error) {
 	if params == nil {
 		params = &DeleteBotVersionInput{}

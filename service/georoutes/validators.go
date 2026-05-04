@@ -1058,6 +1058,9 @@ func validateWaypointOptimizationDrivingDistanceOptions(v *types.WaypointOptimiz
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WaypointOptimizationDrivingDistanceOptions"}
+	if v.DrivingDistance == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DrivingDistance"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

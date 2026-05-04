@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists agent spaces
+// Returns a paginated list of agent space summaries in your account.
 func (c *Client) ListAgentSpaces(ctx context.Context, params *ListAgentSpacesInput, optFns ...func(*Options)) (*ListAgentSpacesOutput, error) {
 	if params == nil {
 		params = &ListAgentSpacesInput{}
@@ -27,25 +27,29 @@ func (c *Client) ListAgentSpaces(ctx context.Context, params *ListAgentSpacesInp
 	return out, nil
 }
 
-// Input for listing agent spaces
+// Input for listing agent spaces.
 type ListAgentSpacesInput struct {
 
-	// Maximum number of agent spaces to return
+	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
-	// Token for pagination
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request. For subsequent calls,
+	// use the nextToken value returned from the previous request.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// Output for the ListAgentSpaces operation
+// Output for the ListAgentSpaces operation.
 type ListAgentSpacesOutput struct {
 
-	// List of agent space summaries
+	// The list of agent space summaries.
 	AgentSpaceSummaries []types.AgentSpaceSummary
 
-	// Token for next page of results
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request. For subsequent calls,
+	// use the nextToken value returned from the previous request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -150,7 +154,7 @@ func (c *Client) addOperationListAgentSpacesMiddlewares(stack *middleware.Stack,
 
 // ListAgentSpacesPaginatorOptions is the paginator options for ListAgentSpaces
 type ListAgentSpacesPaginatorOptions struct {
-	// Maximum number of agent spaces to return
+	// The maximum number of results to return in a single call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

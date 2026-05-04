@@ -13,6 +13,8 @@ import (
 
 // Gets a list of tags associated with the specified resource. Only bots, bot
 // aliases, and bot channels can have tags associated with them.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

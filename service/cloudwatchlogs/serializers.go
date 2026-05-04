@@ -7213,6 +7213,17 @@ func awsAwsjson11_serializeDocumentDeliveryDestinationTypes(v []types.DeliveryDe
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDeliverySourceConfiguration(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDescribeFieldIndexesLogGroupIdentifiers(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -10498,6 +10509,13 @@ func awsAwsjson11_serializeOpDocumentPutDeliveryDestinationPolicyInput(v *PutDel
 func awsAwsjson11_serializeOpDocumentPutDeliverySourceInput(v *PutDeliverySourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DeliverySourceConfiguration != nil {
+		ok := object.Key("deliverySourceConfiguration")
+		if err := awsAwsjson11_serializeDocumentDeliverySourceConfiguration(v.DeliverySourceConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.LogType != nil {
 		ok := object.Key("logType")

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieve the list of artifact metadata for the given agent space
+// Retrieves metadata for one or more artifacts in an agent space.
 func (c *Client) BatchGetArtifactMetadata(ctx context.Context, params *BatchGetArtifactMetadataInput, optFns ...func(*Options)) (*BatchGetArtifactMetadataOutput, error) {
 	if params == nil {
 		params = &BatchGetArtifactMetadataInput{}
@@ -29,12 +29,12 @@ func (c *Client) BatchGetArtifactMetadata(ctx context.Context, params *BatchGetA
 
 type BatchGetArtifactMetadataInput struct {
 
-	// Unique identifier of the agent space
+	// The unique identifier of the agent space that contains the artifacts.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// List of artifact identifiers
+	// The list of artifact identifiers to retrieve metadata for.
 	//
 	// This member is required.
 	ArtifactIds []string
@@ -44,7 +44,7 @@ type BatchGetArtifactMetadataInput struct {
 
 type BatchGetArtifactMetadataOutput struct {
 
-	// List of artifact metadata
+	// The list of artifact metadata items that were found.
 	//
 	// This member is required.
 	ArtifactMetadataList []types.ArtifactMetadataItem

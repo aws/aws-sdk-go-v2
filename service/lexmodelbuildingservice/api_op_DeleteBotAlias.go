@@ -19,6 +19,8 @@ import (
 // to the alias by deleting the channel association. If you get the same exception
 // again, delete the referring association until the DeleteBotAlias operation is
 // successful.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) DeleteBotAlias(ctx context.Context, params *DeleteBotAliasInput, optFns ...func(*Options)) (*DeleteBotAliasOutput, error) {
 	if params == nil {
 		params = &DeleteBotAliasInput{}

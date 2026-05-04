@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves application details by application ID
+// Retrieves information about an application.
 func (c *Client) GetApplication(ctx context.Context, params *GetApplicationInput, optFns ...func(*Options)) (*GetApplicationOutput, error) {
 	if params == nil {
 		params = &GetApplicationInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetApplication(ctx context.Context, params *GetApplicationInput
 
 type GetApplicationInput struct {
 
-	// Application ID
+	// The unique identifier of the application to retrieve.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -39,27 +39,27 @@ type GetApplicationInput struct {
 
 type GetApplicationOutput struct {
 
-	// Application ID
+	// The unique identifier of the application.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// Domain where the application is available
+	// The domain associated with the application.
 	//
 	// This member is required.
 	Domain *string
 
-	// Name of the application, automatically assigned by the service
+	// The name of the application.
 	ApplicationName *string
 
-	// Default KMS key identifier used to encrypt application data
+	// The identifier of the default AWS KMS key used to encrypt data for the
+	// application.
 	DefaultKmsKeyId *string
 
-	// IAM Identity Center configuration for the application
+	// The IAM Identity Center configuration for the application.
 	IdcConfiguration *types.IdCConfiguration
 
-	// ARN of the IAM role that the application uses to access AWS resources on your
-	// behalf
+	// The Amazon Resource Name (ARN) of the IAM role associated with the application.
 	RoleArn *string
 
 	// Metadata pertaining to the operation's result.

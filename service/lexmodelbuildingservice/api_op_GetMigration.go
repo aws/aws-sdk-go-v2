@@ -15,6 +15,8 @@ import (
 // Provides details about an ongoing or complete migration from an Amazon Lex V1
 // bot to an Amazon Lex V2 bot. Use this operation to view the migration alerts and
 // warnings related to the migration.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetMigration(ctx context.Context, params *GetMigrationInput, optFns ...func(*Options)) (*GetMigrationOutput, error) {
 	if params == nil {
 		params = &GetMigrationInput{}

@@ -4304,7 +4304,7 @@ type WaypointOptimizationDrivingDistanceOptions struct {
 	// each other into a single cluster.
 	//
 	// This member is required.
-	DrivingDistance int64
+	DrivingDistance *int64
 
 	noSmithyDocumentSerde
 }

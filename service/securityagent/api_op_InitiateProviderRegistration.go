@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Initiates the registration of Security Agent App for an external Provider
+// Initiates the OAuth registration flow with a third-party provider. Returns a
+// redirect URL and CSRF state token for completing the authorization.
 func (c *Client) InitiateProviderRegistration(ctx context.Context, params *InitiateProviderRegistrationInput, optFns ...func(*Options)) (*InitiateProviderRegistrationOutput, error) {
 	if params == nil {
 		params = &InitiateProviderRegistrationInput{}
@@ -29,7 +30,7 @@ func (c *Client) InitiateProviderRegistration(ctx context.Context, params *Initi
 
 type InitiateProviderRegistrationInput struct {
 
-	// Provider to register with
+	// The provider to initiate registration with. Currently, only GITHUB is supported.
 	//
 	// This member is required.
 	Provider types.Provider
@@ -39,12 +40,12 @@ type InitiateProviderRegistrationInput struct {
 
 type InitiateProviderRegistrationOutput struct {
 
-	// CSRF state token for OAuth security
+	// The CSRF state token to use when completing the OAuth flow.
 	//
 	// This member is required.
 	CsrfState *string
 
-	// OAuth redirect URL
+	// The URL to redirect the user to for completing the OAuth authorization.
 	//
 	// This member is required.
 	RedirectTo *string

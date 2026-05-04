@@ -41771,6 +41771,46 @@ func awsRestjson1_deserializeDocumentMediaConnectRouterGroupSettings(v **types.M
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMediaConnectRouterOutputConnection(v **types.MediaConnectRouterOutputConnection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MediaConnectRouterOutputConnection
+	if *v == nil {
+		sv = &types.MediaConnectRouterOutputConnection{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "routerInputArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.RouterInputArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMediaConnectRouterOutputConnectionMap(v **types.MediaConnectRouterOutputConnectionMap, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -41817,6 +41857,41 @@ func awsRestjson1_deserializeDocumentMediaConnectRouterOutputConnectionMap(v **t
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMediaConnectRouterOutputConnections(v *map[string]types.MediaConnectRouterOutputConnection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.MediaConnectRouterOutputConnection
+	if *v == nil {
+		mv = map[string]types.MediaConnectRouterOutputConnection{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.MediaConnectRouterOutputConnection
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentMediaConnectRouterOutputConnection(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -46120,6 +46195,11 @@ func awsRestjson1_deserializeDocumentPipelineDetail(v **types.PipelineDetail, va
 
 		case "channelEngineVersion":
 			if err := awsRestjson1_deserializeDocumentChannelEngineVersionResponse(&sv.ChannelEngineVersion, value); err != nil {
+				return err
+			}
+
+		case "mediaConnectRouterOutputConnectionMap":
+			if err := awsRestjson1_deserializeDocumentMediaConnectRouterOutputConnections(&sv.MediaConnectRouterOutputConnectionMap, value); err != nil {
 				return err
 			}
 

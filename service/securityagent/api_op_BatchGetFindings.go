@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves multiple findings in a single request
+// Retrieves information about one or more security findings in an agent space.
 func (c *Client) BatchGetFindings(ctx context.Context, params *BatchGetFindingsInput, optFns ...func(*Options)) (*BatchGetFindingsOutput, error) {
 	if params == nil {
 		params = &BatchGetFindingsInput{}
@@ -27,15 +27,15 @@ func (c *Client) BatchGetFindings(ctx context.Context, params *BatchGetFindingsI
 	return out, nil
 }
 
-// Input for BatchGetFindings operation
+// Input for BatchGetFindings operation.
 type BatchGetFindingsInput struct {
 
-	// ID of the agent space where the findings exist
+	// The unique identifier of the agent space that contains the findings.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// List of finding IDs to retrieve
+	// The list of finding identifiers to retrieve.
 	//
 	// This member is required.
 	FindingIds []string
@@ -43,13 +43,13 @@ type BatchGetFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Output for the BatchGetFindings operation
+// Output for the BatchGetFindings operation.
 type BatchGetFindingsOutput struct {
 
-	// List of successfully retrieved findings
+	// The list of findings that were found.
 	Findings []types.Finding
 
-	// List of finding IDs that could not be found
+	// The list of finding identifiers that were not found.
 	NotFound []string
 
 	// Metadata pertaining to the operation's result.

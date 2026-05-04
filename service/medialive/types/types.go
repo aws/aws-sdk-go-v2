@@ -5324,6 +5324,15 @@ type MediaConnectRouterGroupSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Connection details for a single pipeline of a MediaConnect Router output.
+type MediaConnectRouterOutputConnection struct {
+
+	// The ARN of the MediaConnect Router Input connected to this pipeline.
+	RouterInputArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Map of MediaLive pipeline IDs to the ARNs of the MediaConnect Router Inputs to
 // which this Output is connected.
 type MediaConnectRouterOutputConnectionMap struct {
@@ -5367,9 +5376,7 @@ type MediaConnectRouterOutputSettings struct {
 	// This member is required.
 	Destination *OutputLocationRef
 
-	// Shows the MediaConnect Router Inputs that are connected to this output. This
-	// parameter is purely informative, and editing it will have no effect. To connect
-	// or disconnect MediaConnect Router Inputs, go to MediaConnect.
+	// This parameter is deprecated and unused.
 	ConnectedRouterInputs *MediaConnectRouterOutputConnectionMap
 
 	noSmithyDocumentSerde
@@ -6784,6 +6791,10 @@ type PipelineDetail struct {
 
 	// Current engine version of the encoder for this pipeline.
 	ChannelEngineVersion *ChannelEngineVersionResponse
+
+	// A map of output names to the MediaConnect Router connection for this pipeline.
+	// Only present for channels with MediaConnect Router outputs.
+	MediaConnectRouterOutputConnectionMap map[string]MediaConnectRouterOutputConnection
 
 	// Pipeline ID
 	PipelineId *string

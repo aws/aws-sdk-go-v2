@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates application configuration
+// Updates the configuration of an existing application, including the IAM role
+// and default KMS key.
 func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicationInput, optFns ...func(*Options)) (*UpdateApplicationOutput, error) {
 	if params == nil {
 		params = &UpdateApplicationInput{}
@@ -28,16 +29,15 @@ func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicatio
 
 type UpdateApplicationInput struct {
 
-	// Application ID
+	// The unique identifier of the application to update.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// Default KMS key identifier. Use an empty string to remove the default KMS key.
+	// The updated identifier of the default AWS KMS key for the application.
 	DefaultKmsKeyId *string
 
-	// ARN of the IAM role that the application uses to access AWS resources on your
-	// behalf
+	// The updated Amazon Resource Name (ARN) of the IAM role for the application.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -45,7 +45,7 @@ type UpdateApplicationInput struct {
 
 type UpdateApplicationOutput struct {
 
-	// Application ID
+	// The unique identifier of the updated application.
 	//
 	// This member is required.
 	ApplicationId *string

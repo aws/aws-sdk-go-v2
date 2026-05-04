@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete an Artifact from the given agent space
+// Deletes an artifact from an agent space.
 func (c *Client) DeleteArtifact(ctx context.Context, params *DeleteArtifactInput, optFns ...func(*Options)) (*DeleteArtifactOutput, error) {
 	if params == nil {
 		params = &DeleteArtifactInput{}
@@ -28,12 +28,12 @@ func (c *Client) DeleteArtifact(ctx context.Context, params *DeleteArtifactInput
 
 type DeleteArtifactInput struct {
 
-	// Unique identifier of the agent space
+	// The unique identifier of the agent space that contains the artifact.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Unique identifier of the artifact
+	// The unique identifier of the artifact to delete.
 	//
 	// This member is required.
 	ArtifactId *string

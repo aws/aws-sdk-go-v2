@@ -298,11 +298,22 @@ type ConfigurationTemplate struct {
 	// to.
 	DeliveryDestinationType DeliveryDestinationType
 
+	// The schema of the delivery source configuration that is available for this log
+	// type. Each element describes a configuration that can be set when calling [PutDeliverySource],
+	// including the configuration name, type, and default value.
+	//
+	// [PutDeliverySource]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
+	DeliverySourceConfiguration []DeliverySourceConfigurationSchema
+
 	// A string specifying which log type this configuration template applies to.
 	LogType *string
 
 	// A string specifying which resource type this configuration template applies to.
 	ResourceType *string
+
+	// The S3 Tables integration configuration for this configuration template,
+	// including the datasource name and type.
+	S3TablesIntegration *S3TablesIntegration
 
 	// A string specifying which service this configuration template applies to. For
 	// more information about supported services see [Enable logging from Amazon Web Services services.].
@@ -659,6 +670,9 @@ type DeliverySource struct {
 	// The Amazon Resource Name (ARN) that uniquely identifies this delivery source.
 	Arn *string
 
+	// The map of key-value pairs that configure the delivery source.
+	DeliverySourceConfiguration map[string]string
+
 	// The type of log that the source is sending. For valid values for this
 	// parameter, see the documentation for the source service.
 	LogType *string
@@ -674,8 +688,55 @@ type DeliverySource struct {
 	// The Amazon Web Services service that is sending logs.
 	Service *string
 
+	// The status of the delivery source. A delivery source can have the status ACTIVE
+	// or INACTIVE . Note: This value is defined for selective log types.
+	Status DeliverySourceStatus
+
+	// The reason for the status of the delivery source. A status reason of
+	// RESOURCE_DELETED indicates that the resource associated with the delivery source
+	// has been deleted. Note: This value is defined for selective log types.
+	StatusReason DeliverySourceStatusReason
+
 	// The tags that have been assigned to this delivery source.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes a single configuration for a log type, including its
+// name, value type, default value, and the range of supported values.
+type DeliverySourceConfigurationSchema struct {
+
+	// The default value of the configuration that is used when a value is not
+	// specified in a [PutDeliverySource]request.
+	//
+	// [PutDeliverySource]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
+	//
+	// This member is required.
+	DefaultValue *string
+
+	// The name of the configuration.
+	//
+	// This member is required.
+	KeyName *string
+
+	// The data type of the configuration value. Valid values are string , boolean ,
+	// int , double , and long .
+	//
+	// This member is required.
+	ValueType DeliverySourceConfigurationSchemaValueType
+
+	// The maximum numeric value allowed for the configuration. This applies only when
+	// the valueType is a numeric type.
+	MaxValue *float64
+
+	// The minimum numeric value allowed for the configuration. This applies only when
+	// the valueType is a numeric type.
+	MinValue *float64
+
+	// The list of allowed values for the configuration. Empty for free-form
+	// configuration.
+	SupportedValues []string
 
 	noSmithyDocumentSerde
 }
@@ -2726,6 +2787,19 @@ type S3TableIntegrationSource struct {
 
 	// Additional information about the status of the data source association.
 	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the S3 Tables integration configuration for a
+// configuration template.
+type S3TablesIntegration struct {
+
+	// The name of the S3 Tables datasource.
+	DatasourceName *string
+
+	// The type of the S3 Tables datasource.
+	DatasourceType *string
 
 	noSmithyDocumentSerde
 }

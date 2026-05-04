@@ -13977,6 +13977,20 @@ func awsRestjson1_serializeDocumentMCPGatewayConfiguration(v *types.MCPGatewayCo
 		ok.String(string(v.SearchType))
 	}
 
+	if v.SessionConfiguration != nil {
+		ok := object.Key("sessionConfiguration")
+		if err := awsRestjson1_serializeDocumentSessionConfiguration(v.SessionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StreamingConfiguration != nil {
+		ok := object.Key("streamingConfiguration")
+		if err := awsRestjson1_serializeDocumentStreamingConfiguration(v.StreamingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SupportedVersions != nil {
 		ok := object.Key("supportedVersions")
 		if err := awsRestjson1_serializeDocumentMcpSupportedVersions(v.SupportedVersions, ok); err != nil {
@@ -15666,6 +15680,18 @@ func awsRestjson1_serializeDocumentSessionConfig(v *types.SessionConfig, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSessionConfiguration(v *types.SessionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SessionTimeoutInSeconds != nil {
+		ok := object.Key("sessionTimeoutInSeconds")
+		ok.Integer(*v.SessionTimeoutInSeconds)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSessionStorageConfiguration(v *types.SessionStorageConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -15798,6 +15824,18 @@ func awsRestjson1_serializeDocumentStreamDeliveryResourcesList(v []types.StreamD
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStreamingConfiguration(v *types.StreamingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableResponseStreaming != nil {
+		ok := object.Key("enableResponseStreaming")
+		ok.Boolean(*v.EnableResponseStreaming)
+	}
+
 	return nil
 }
 

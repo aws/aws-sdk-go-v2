@@ -1,0 +1,8 @@
+{
+    "id": "9294e83c-dca2-42f0-b342-016549005a74",
+    "type": "feature",
+    "description": "This feature allows customers to change the tunnel bandwidth on existing VPN connections using the ModifyVpnConnectionOptions API",
+    "modules": [
+        "service/ec2"
+    ]
+}

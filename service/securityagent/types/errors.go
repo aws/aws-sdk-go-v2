@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Request denied due to insufficient permissions
+// You do not have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
 
@@ -33,7 +33,8 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Request conflicts with current resource state
+// The request could not be completed due to a conflict with the current state of
+// the resource.
 type ConflictException struct {
 	Message *string
 
@@ -59,7 +60,7 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Unexpected server error occurred
+// An unexpected error occurred during the processing of your request.
 type InternalServerException struct {
 	Message *string
 
@@ -85,7 +86,8 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Specified resource was not found
+// The specified resource was not found. Verify that the resource identifier is
+// correct and that the resource exists in the specified agent space or account.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -111,7 +113,7 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Request denied due to throttling
+// The request was denied due to request throttling.
 type ThrottlingException struct {
 	Message *string
 
@@ -140,9 +142,7 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A standard error for input validation failures. This should be thrown by
-// services when a member of the input structure falls outside of the modeled or
-// documented constraints.
+// The input fails to satisfy the constraints specified by the service.
 type ValidationException struct {
 	Message *string
 

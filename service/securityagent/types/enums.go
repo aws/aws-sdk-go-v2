@@ -6,9 +6,9 @@ type AccessType string
 
 // Enum values for AccessType
 const (
-	// Resource is private and has restricted access
+	// Resource is private and has restricted access.
 	AccessTypePrivate AccessType = "PRIVATE"
-	// Resource is public and openly accessible
+	// Resource is public and openly accessible.
 	AccessTypePublic AccessType = "PUBLIC"
 )
 
@@ -60,13 +60,13 @@ type AuthenticationProviderType string
 
 // Enum values for AuthenticationProviderType
 const (
-	// Credentials stored in AWS Secrets Manager
+	// Credentials stored in AWS Secrets Manager.
 	AuthenticationProviderTypeSecretsManager AuthenticationProviderType = "SECRETS_MANAGER"
-	// Credentials retrieved via AWS Lambda function
+	// Credentials retrieved via AWS Lambda function.
 	AuthenticationProviderTypeAwsLambda AuthenticationProviderType = "AWS_LAMBDA"
-	// Authentication using an AWS IAM role
+	// Authentication using an AWS IAM role.
 	AuthenticationProviderTypeAwsIamRole AuthenticationProviderType = "AWS_IAM_ROLE"
-	// Internal AWS authentication
+	// Internal AWS authentication.
 	AuthenticationProviderTypeAwsInternal AuthenticationProviderType = "AWS_INTERNAL"
 )
 
@@ -87,9 +87,9 @@ type CodeRemediationStrategy string
 
 // Enum values for CodeRemediationStrategy
 const (
-	// Automatically generate code remediation for findings
+	// Automatically generate code remediation for findings.
 	CodeRemediationStrategyAutomatic CodeRemediationStrategy = "AUTOMATIC"
-	// Code remediation is disabled
+	// Code remediation is disabled.
 	CodeRemediationStrategyDisabled CodeRemediationStrategy = "DISABLED"
 )
 
@@ -154,13 +154,13 @@ type ContextType string
 
 // Enum values for ContextType
 const (
-	// Error encountered during execution
+	// Error encountered during execution.
 	ContextTypeError ContextType = "ERROR"
-	// Client-side error encountered during execution
+	// Client-side error encountered during execution.
 	ContextTypeClientError ContextType = "CLIENT_ERROR"
-	// Warning encountered during execution
+	// Warning encountered during execution.
 	ContextTypeWarning ContextType = "WARNING"
-	// Informational message during execution
+	// Informational message during execution.
 	ContextTypeInfo ContextType = "INFO"
 )
 
@@ -181,7 +181,7 @@ type DNSRecordType string
 
 // Enum values for DNSRecordType
 const (
-	// DNS TXT record
+	// DNS TXT record.
 	DNSRecordTypeTxt DNSRecordType = "TXT"
 )
 
@@ -199,10 +199,12 @@ type DomainVerificationMethod string
 
 // Enum values for DomainVerificationMethod
 const (
-	// Verify ownership via DNS TXT record
+	// Verify ownership via DNS TXT record.
 	DomainVerificationMethodDnsTxt DomainVerificationMethod = "DNS_TXT"
-	// Verify ownership via HTTP route
+	// Verify ownership via HTTP route.
 	DomainVerificationMethodHttpRoute DomainVerificationMethod = "HTTP_ROUTE"
+	// Verify ownership via IP for private VPC pentests.
+	DomainVerificationMethodPrivateVpc DomainVerificationMethod = "PRIVATE_VPC"
 )
 
 // Values returns all known values for DomainVerificationMethod. Note that this
@@ -213,6 +215,7 @@ func (DomainVerificationMethod) Values() []DomainVerificationMethod {
 	return []DomainVerificationMethod{
 		"DNS_TXT",
 		"HTTP_ROUTE",
+		"PRIVATE_VPC",
 	}
 }
 
@@ -220,11 +223,11 @@ type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	// Failure caused by a client-side error
+	// Failure caused by a client-side error.
 	ErrorCodeClientError ErrorCode = "CLIENT_ERROR"
-	// Failure caused by an internal error
+	// Failure caused by an internal error.
 	ErrorCodeInternalError ErrorCode = "INTERNAL_ERROR"
-	// Pentest job was stopped by the user
+	// Pentest job was stopped by the user.
 	ErrorCodeStoppedByUser ErrorCode = "STOPPED_BY_USER"
 )
 
@@ -267,15 +270,15 @@ type JobStatus string
 
 // Enum values for JobStatus
 const (
-	// Pentest job is currently running
+	// Pentest job is currently running.
 	JobStatusInProgress JobStatus = "IN_PROGRESS"
-	// Pentest job is being stopped
+	// Pentest job is being stopped.
 	JobStatusStopping JobStatus = "STOPPING"
-	// Pentest job was stopped by the user
+	// Pentest job was stopped by the user.
 	JobStatusStopped JobStatus = "STOPPED"
-	// Pentest job failed during execution
+	// Pentest job failed during execution.
 	JobStatusFailed JobStatus = "FAILED"
-	// Pentest job completed successfully
+	// Pentest job completed successfully.
 	JobStatusCompleted JobStatus = "COMPLETED"
 )
 
@@ -297,7 +300,7 @@ type LogType string
 
 // Enum values for LogType
 const (
-	// Logs stored in CloudWatch
+	// Logs stored in CloudWatch.
 	LogTypeCloudwatch LogType = "CLOUDWATCH"
 )
 
@@ -315,7 +318,7 @@ type MembershipType string
 
 // Enum values for MembershipType
 const (
-	// Human user member
+	// Human user member.
 	MembershipTypeUser MembershipType = "USER"
 )
 
@@ -333,9 +336,9 @@ type MembershipTypeFilter string
 
 // Enum values for MembershipTypeFilter
 const (
-	// Show only user members
+	// Show only user members.
 	MembershipTypeFilterUser MembershipTypeFilter = "USER"
-	// Show all member types
+	// Show all member types.
 	MembershipTypeFilterAll MembershipTypeFilter = "ALL"
 )
 
@@ -354,9 +357,9 @@ type NetworkTrafficRuleEffect string
 
 // Enum values for NetworkTrafficRuleEffect
 const (
-	// Allow matching traffic
+	// Allow matching traffic.
 	NetworkTrafficRuleEffectAllow NetworkTrafficRuleEffect = "ALLOW"
-	// Deny matching traffic
+	// Deny matching traffic.
 	NetworkTrafficRuleEffectDeny NetworkTrafficRuleEffect = "DENY"
 )
 
@@ -375,7 +378,7 @@ type NetworkTrafficRuleType string
 
 // Enum values for NetworkTrafficRuleType
 const (
-	// URL-based traffic rule
+	// URL-based traffic rule.
 	NetworkTrafficRuleTypeUrl NetworkTrafficRuleType = "URL"
 )
 
@@ -473,61 +476,61 @@ type RiskType string
 
 // Enum values for RiskType
 const (
-	// Cross-site scripting vulnerability
+	// Cross-site scripting vulnerability.
 	RiskTypeCrossSiteScripting RiskType = "CROSS_SITE_SCRIPTING"
-	// Default or weak credentials detected
+	// Default or weak credentials detected.
 	RiskTypeDefaultCredentials RiskType = "DEFAULT_CREDENTIALS"
-	// Insecure direct object reference vulnerability
+	// Insecure direct object reference vulnerability.
 	RiskTypeInsecureDirectObjectReference RiskType = "INSECURE_DIRECT_OBJECT_REFERENCE"
-	// Privilege escalation vulnerability
+	// Privilege escalation vulnerability.
 	RiskTypePrivilegeEscalation RiskType = "PRIVILEGE_ESCALATION"
-	// Server-side template injection vulnerability
+	// Server-side template injection vulnerability.
 	RiskTypeServerSideTemplateInjection RiskType = "SERVER_SIDE_TEMPLATE_INJECTION"
-	// Command injection vulnerability
+	// Command injection vulnerability.
 	RiskTypeCommandInjection RiskType = "COMMAND_INJECTION"
-	// Code injection vulnerability
+	// Code injection vulnerability.
 	RiskTypeCodeInjection RiskType = "CODE_INJECTION"
-	// SQL injection vulnerability
+	// SQL injection vulnerability.
 	RiskTypeSqlInjection RiskType = "SQL_INJECTION"
-	// Arbitrary file upload vulnerability
+	// Arbitrary file upload vulnerability.
 	RiskTypeArbitraryFileUpload RiskType = "ARBITRARY_FILE_UPLOAD"
-	// Insecure deserialization vulnerability
+	// Insecure deserialization vulnerability.
 	RiskTypeInsecureDeserialization RiskType = "INSECURE_DESERIALIZATION"
-	// Local file inclusion vulnerability
+	// Local file inclusion vulnerability.
 	RiskTypeLocalFileInclusion RiskType = "LOCAL_FILE_INCLUSION"
-	// Information disclosure vulnerability
+	// Information disclosure vulnerability.
 	RiskTypeInformationDisclosure RiskType = "INFORMATION_DISCLOSURE"
-	// Path traversal vulnerability
+	// Path traversal vulnerability.
 	RiskTypePathTraversal RiskType = "PATH_TRAVERSAL"
-	// Server-side request forgery vulnerability
+	// Server-side request forgery vulnerability.
 	RiskTypeServerSideRequestForgery RiskType = "SERVER_SIDE_REQUEST_FORGERY"
-	// JSON Web Token vulnerability
+	// JSON Web Token vulnerability.
 	RiskTypeJsonWebTokenVulnerabilities RiskType = "JSON_WEB_TOKEN_VULNERABILITIES"
-	// XML external entity vulnerability
+	// XML external entity vulnerability.
 	RiskTypeXmlExternalEntity RiskType = "XML_EXTERNAL_ENTITY"
-	// File deletion vulnerability
+	// File deletion vulnerability.
 	RiskTypeFileDeletion RiskType = "FILE_DELETION"
-	// Other risk type not covered by specific categories
+	// Other risk type not covered by specific categories.
 	RiskTypeOther RiskType = "OTHER"
-	// GraphQL-specific vulnerability
+	// GraphQL-specific vulnerability.
 	RiskTypeGraphqlVulnerabilities RiskType = "GRAPHQL_VULNERABILITIES"
-	// Business logic vulnerability
+	// Business logic vulnerability.
 	RiskTypeBusinessLogicVulnerabilities RiskType = "BUSINESS_LOGIC_VULNERABILITIES"
-	// Cryptographic vulnerability
+	// Cryptographic vulnerability.
 	RiskTypeCryptographicVulnerabilities RiskType = "CRYPTOGRAPHIC_VULNERABILITIES"
-	// Denial of service vulnerability
+	// Denial of service vulnerability.
 	RiskTypeDenialOfService RiskType = "DENIAL_OF_SERVICE"
-	// Unauthorized file access vulnerability
+	// Unauthorized file access vulnerability.
 	RiskTypeFileAccess RiskType = "FILE_ACCESS"
-	// Unauthorized file creation vulnerability
+	// Unauthorized file creation vulnerability.
 	RiskTypeFileCreation RiskType = "FILE_CREATION"
-	// Unauthorized database modification
+	// Unauthorized database modification.
 	RiskTypeDatabaseModification RiskType = "DATABASE_MODIFICATION"
-	// Unauthorized database access
+	// Unauthorized database access.
 	RiskTypeDatabaseAccess RiskType = "DATABASE_ACCESS"
-	// Outbound service request vulnerability
+	// Outbound service request vulnerability.
 	RiskTypeOutboundServiceRequest RiskType = "OUTBOUND_SERVICE_REQUEST"
-	// Unknown risk type
+	// Unknown risk type.
 	RiskTypeUnknown RiskType = "UNKNOWN"
 )
 
@@ -572,13 +575,13 @@ type StepName string
 
 // Enum values for StepName
 const (
-	// Pre-flight validation and setup step
+	// Pre-flight validation and setup step.
 	StepNamePreflight StepName = "PREFLIGHT"
-	// Static code and network scan analysis step
+	// Static code and network scan analysis step.
 	StepNameStaticAnalysis StepName = "STATIC_ANALYSIS"
-	// Active pentest step
+	// Active pentest step.
 	StepNamePentest StepName = "PENTEST"
-	// Cleanup of infrastructure and resources created by the agent
+	// Cleanup of infrastructure and resources created by the agent.
 	StepNameFinalizing StepName = "FINALIZING"
 )
 
@@ -599,15 +602,15 @@ type StepStatus string
 
 // Enum values for StepStatus
 const (
-	// Step has not started yet
+	// Step has not started yet.
 	StepStatusNotStarted StepStatus = "NOT_STARTED"
-	// Step is currently running
+	// Step is currently running.
 	StepStatusInProgress StepStatus = "IN_PROGRESS"
-	// Step completed successfully
+	// Step completed successfully.
 	StepStatusCompleted StepStatus = "COMPLETED"
-	// Step failed during execution
+	// Step failed during execution.
 	StepStatusFailed StepStatus = "FAILED"
-	// Step was stopped by the user
+	// Step was stopped by the user.
 	StepStatusStopped StepStatus = "STOPPED"
 )
 
@@ -629,13 +632,13 @@ type TargetDomainStatus string
 
 // Enum values for TargetDomainStatus
 const (
-	// Domain verification is pending
+	// Domain verification is pending.
 	TargetDomainStatusPending TargetDomainStatus = "PENDING"
-	// Domain ownership has been verified
+	// Domain ownership has been verified.
 	TargetDomainStatusVerified TargetDomainStatus = "VERIFIED"
-	// Domain verification failed
+	// Domain verification failed.
 	TargetDomainStatusFailed TargetDomainStatus = "FAILED"
-	// Domain is unreachable for verification
+	// Domain is unreachable for verification.
 	TargetDomainStatusUnreachable TargetDomainStatus = "UNREACHABLE"
 )
 
@@ -656,15 +659,15 @@ type TaskExecutionStatus string
 
 // Enum values for TaskExecutionStatus
 const (
-	// Task is currently running
+	// Task is currently running.
 	TaskExecutionStatusInProgress TaskExecutionStatus = "IN_PROGRESS"
-	// Task was aborted
+	// Task was aborted.
 	TaskExecutionStatusAborted TaskExecutionStatus = "ABORTED"
-	// Task completed successfully
+	// Task completed successfully.
 	TaskExecutionStatusCompleted TaskExecutionStatus = "COMPLETED"
-	// Task failed due to an internal error
+	// Task failed due to an internal error.
 	TaskExecutionStatusInternalError TaskExecutionStatus = "INTERNAL_ERROR"
-	// Task failed during execution
+	// Task failed during execution.
 	TaskExecutionStatusFailed TaskExecutionStatus = "FAILED"
 )
 
@@ -686,7 +689,7 @@ type UserRole string
 
 // Enum values for UserRole
 const (
-	// Default member role with standard permissions
+	// Default member role with standard permissions.
 	UserRoleMember UserRole = "MEMBER"
 )
 

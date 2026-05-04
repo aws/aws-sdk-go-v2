@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the integrated resources for an agent space
+// Updates the integrated resources for an agent space, including their
+// capabilities.
 func (c *Client) UpdateIntegratedResources(ctx context.Context, params *UpdateIntegratedResourcesInput, optFns ...func(*Options)) (*UpdateIntegratedResourcesOutput, error) {
 	if params == nil {
 		params = &UpdateIntegratedResourcesInput{}
@@ -29,17 +30,17 @@ func (c *Client) UpdateIntegratedResources(ctx context.Context, params *UpdateIn
 
 type UpdateIntegratedResourcesInput struct {
 
-	// Unique identifier of the agent space
+	// The unique identifier of the agent space.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Unique identifier of the integration
+	// The unique identifier of the integration.
 	//
 	// This member is required.
 	IntegrationId *string
 
-	// List of integrated resources to update
+	// The list of integrated resource items to update.
 	//
 	// This member is required.
 	Items []types.IntegratedResourceInputItem

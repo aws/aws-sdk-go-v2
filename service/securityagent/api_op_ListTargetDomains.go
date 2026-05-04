@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists target domains
+// Returns a paginated list of target domain summaries in your account.
 func (c *Client) ListTargetDomains(ctx context.Context, params *ListTargetDomainsInput, optFns ...func(*Options)) (*ListTargetDomainsOutput, error) {
 	if params == nil {
 		params = &ListTargetDomainsInput{}
@@ -27,25 +27,29 @@ func (c *Client) ListTargetDomains(ctx context.Context, params *ListTargetDomain
 	return out, nil
 }
 
-// Input for listing target domains
+// Input for listing target domains.
 type ListTargetDomainsInput struct {
 
-	// Maximum number of target domains to return
+	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
-	// Token for pagination
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request. For subsequent calls,
+	// use the nextToken value returned from the previous request.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// Output for the ListTargetDomains operation
+// Output for the ListTargetDomains operation.
 type ListTargetDomainsOutput struct {
 
-	// Token for next page of results
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request. For subsequent calls,
+	// use the nextToken value returned from the previous request.
 	NextToken *string
 
-	// List of target domain summaries
+	// The list of target domain summaries.
 	TargetDomainSummaries []types.TargetDomainSummary
 
 	// Metadata pertaining to the operation's result.
@@ -150,7 +154,7 @@ func (c *Client) addOperationListTargetDomainsMiddlewares(stack *middleware.Stac
 
 // ListTargetDomainsPaginatorOptions is the paginator options for ListTargetDomains
 type ListTargetDomainsPaginatorOptions struct {
-	// Maximum number of target domains to return
+	// The maximum number of results to return in a single call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

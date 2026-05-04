@@ -159,6 +159,11 @@ type PutDeliverySourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
+	// A map of key-value pairs to configure the delivery source. Both keys and values
+	// must be between 1 and 255 characters in length. For example, {"samplingRate":
+	// "50"} .
+	DeliverySourceConfiguration map[string]string
+
 	// An optional list of key-value pairs to associate with the resource.
 	//
 	// For more information about tagging, see [Tagging Amazon Web Services resources]

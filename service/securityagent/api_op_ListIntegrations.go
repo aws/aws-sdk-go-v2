@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the Integrations associated with the user's account
+// Lists the integrations in your account, optionally filtered by provider or
+// provider type.
 func (c *Client) ListIntegrations(ctx context.Context, params *ListIntegrationsInput, optFns ...func(*Options)) (*ListIntegrationsOutput, error) {
 	if params == nil {
 		params = &ListIntegrationsInput{}
@@ -29,13 +30,15 @@ func (c *Client) ListIntegrations(ctx context.Context, params *ListIntegrationsI
 
 type ListIntegrationsInput struct {
 
-	// Filter criteria for integrations
+	// A filter to apply to the list of integrations.
 	Filter types.IntegrationFilter
 
-	// Maximum number of results to return
+	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
-	// Token for pagination
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request. For subsequent calls,
+	// use the nextToken value returned from the previous request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -43,12 +46,14 @@ type ListIntegrationsInput struct {
 
 type ListIntegrationsOutput struct {
 
-	// List of integration summaries
+	// The list of integration summaries.
 	//
 	// This member is required.
 	IntegrationSummaries []types.IntegrationSummary
 
-	// Token for pagination to retrieve the next set of results
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request. For subsequent calls,
+	// use the nextToken value returned from the previous request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -153,7 +158,7 @@ func (c *Client) addOperationListIntegrationsMiddlewares(stack *middleware.Stack
 
 // ListIntegrationsPaginatorOptions is the paginator options for ListIntegrations
 type ListIntegrationsPaginatorOptions struct {
-	// Maximum number of results to return
+	// The maximum number of results to return in a single call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

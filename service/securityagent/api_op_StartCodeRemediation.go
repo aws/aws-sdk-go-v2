@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts code remediation for the specified findings
+// Initiates code remediation for one or more security findings. This creates pull
+// requests in integrated repositories to fix the identified vulnerabilities.
 func (c *Client) StartCodeRemediation(ctx context.Context, params *StartCodeRemediationInput, optFns ...func(*Options)) (*StartCodeRemediationOutput, error) {
 	if params == nil {
 		params = &StartCodeRemediationInput{}
@@ -26,20 +27,20 @@ func (c *Client) StartCodeRemediation(ctx context.Context, params *StartCodeReme
 	return out, nil
 }
 
-// Input for the StartCodeRemediation operation
+// Input for the StartCodeRemediation operation.
 type StartCodeRemediationInput struct {
 
-	// ID of the agent space where the pentest job exists
+	// The unique identifier of the agent space.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Identifiers of the findings to start code remediation for
+	// The list of finding identifiers to initiate code remediation for.
 	//
 	// This member is required.
 	FindingIds []string
 
-	// Identifier of the pentest job to start code remediation for
+	// The unique identifier of the pentest job that produced the findings.
 	//
 	// This member is required.
 	PentestJobId *string
@@ -47,7 +48,7 @@ type StartCodeRemediationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Output for the StartCodeRemediation operation
+// Output for the StartCodeRemediation operation.
 type StartCodeRemediationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

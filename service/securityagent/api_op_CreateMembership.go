@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a single member to an agent space with specified role
+// Creates a new membership, granting a user access to an agent space within an
+// application.
 func (c *Client) CreateMembership(ctx context.Context, params *CreateMembershipInput, optFns ...func(*Options)) (*CreateMembershipOutput, error) {
 	if params == nil {
 		params = &CreateMembershipInput{}
@@ -27,36 +28,36 @@ func (c *Client) CreateMembership(ctx context.Context, params *CreateMembershipI
 	return out, nil
 }
 
-// Request structure for adding a single member to an agent space
+// Request structure for adding a single member to an agent space.
 type CreateMembershipInput struct {
 
-	// Agent space identifier
+	// The unique identifier of the agent space to grant access to.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Application identifier
+	// The unique identifier of the application that contains the agent space.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// Type of member (USER or AGENT_SPACE)
+	// The type of member. Currently, only USER is supported.
 	//
 	// This member is required.
 	MemberType types.MembershipType
 
-	// Member identifier (userId or agentSpaceId)
+	// The unique identifier for the membership.
 	//
 	// This member is required.
 	MembershipId *string
 
-	// Membership details (user or agent specific)
+	// The configuration for the membership, such as the user role.
 	Config types.MembershipConfig
 
 	noSmithyDocumentSerde
 }
 
-// Response structure for adding a single member to an agent space
+// Response structure for adding a single member to an agent space.
 type CreateMembershipOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

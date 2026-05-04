@@ -23,6 +23,8 @@ import (
 // deleted after 15 days.
 //
 // This operation requires permissions for the lex:DeleteUtterances action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) DeleteUtterances(ctx context.Context, params *DeleteUtterancesInput, optFns ...func(*Options)) (*DeleteUtterancesOutput, error) {
 	if params == nil {
 		params = &DeleteUtterancesInput{}

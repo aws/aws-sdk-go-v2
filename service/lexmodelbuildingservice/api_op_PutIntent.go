@@ -57,6 +57,8 @@ import (
 // For more information, see how-it-works.
 //
 // This operation requires permissions for the lex:PutIntent action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) PutIntent(ctx context.Context, params *PutIntentInput, optFns ...func(*Options)) (*PutIntentOutput, error) {
 	if params == nil {
 		params = &PutIntentInput{}

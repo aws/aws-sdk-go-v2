@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves multiple target domains in a single request
+// Retrieves information about one or more target domains.
 func (c *Client) BatchGetTargetDomains(ctx context.Context, params *BatchGetTargetDomainsInput, optFns ...func(*Options)) (*BatchGetTargetDomainsOutput, error) {
 	if params == nil {
 		params = &BatchGetTargetDomainsInput{}
@@ -27,10 +27,10 @@ func (c *Client) BatchGetTargetDomains(ctx context.Context, params *BatchGetTarg
 	return out, nil
 }
 
-// Input for batch retrieving target domains
+// Input for batch retrieving target domains.
 type BatchGetTargetDomainsInput struct {
 
-	// List of target domain IDs to retrieve
+	// The list of target domain identifiers to retrieve.
 	//
 	// This member is required.
 	TargetDomainIds []string
@@ -38,13 +38,13 @@ type BatchGetTargetDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Output for the BatchGetTargetDomains operation
+// Output for the BatchGetTargetDomains operation.
 type BatchGetTargetDomainsOutput struct {
 
-	// List of target domain IDs that could not be found
+	// The list of target domain identifiers that were not found.
 	NotFound []string
 
-	// List of target domains that were successfully retrieved
+	// The list of target domains that were found.
 	TargetDomains []types.TargetDomain
 
 	// Metadata pertaining to the operation's result.

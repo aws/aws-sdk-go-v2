@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the Integration of the Security Agent App with an external Provider
+// Deletes an integration with a third-party provider.
 func (c *Client) DeleteIntegration(ctx context.Context, params *DeleteIntegrationInput, optFns ...func(*Options)) (*DeleteIntegrationOutput, error) {
 	if params == nil {
 		params = &DeleteIntegrationInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteIntegration(ctx context.Context, params *DeleteIntegratio
 
 type DeleteIntegrationInput struct {
 
-	// Unique identifier of the integration
+	// The unique identifier of the integration to delete.
 	//
 	// This member is required.
 	IntegrationId *string

@@ -87314,6 +87314,11 @@ func awsEc2query_serializeOpDocumentModifyVpnConnectionOptionsInput(v *ModifyVpn
 		objectKey.String(*v.RemoteIpv6NetworkCidr)
 	}
 
+	if len(v.TunnelBandwidth) > 0 {
+		objectKey := object.Key("TunnelBandwidth")
+		objectKey.String(string(v.TunnelBandwidth))
+	}
+
 	if v.VpnConnectionId != nil {
 		objectKey := object.Key("VpnConnectionId")
 		objectKey.String(*v.VpnConnectionId)
