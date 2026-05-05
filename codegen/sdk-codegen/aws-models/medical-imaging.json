@@ -1274,6 +1274,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The error message thrown if an import job fails.</p>"
                     }
+                },
+                "importConfiguration": {
+                    "target": "com.amazonaws.medicalimaging#ImportConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object containing <code>DicomJsonMetadataImportConfiguration</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2019,6 +2025,61 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DicomJsonMetadataImportConfiguration": {
+            "type": "structure",
+            "members": {
+                "dicomMetadataMappings": {
+                    "target": "com.amazonaws.medicalimaging#DicomMetadataMappings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maps DCM files to their metadata.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration parameters that are specific to DICOM JSON metadata import operations.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#DicomMetadataMapping": {
+            "type": "structure",
+            "members": {
+                "studyInstanceUID": {
+                    "target": "com.amazonaws.medicalimaging#DICOMStudyInstanceUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Study Instance UID that identifies the study.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "seriesInstanceUID": {
+                    "target": "com.amazonaws.medicalimaging#DICOMSeriesInstanceUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Series Instance UID that identifies the series. This parameter is optional because the mapping might be at the study level.</p>"
+                    }
+                },
+                "metadataFilePath": {
+                    "target": "com.amazonaws.medicalimaging#MetadataFilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the JSON metadata file relative to inputS3Uri.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Maps DCM files to their metadata.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#DicomMetadataMappings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medicalimaging#DicomMetadataMapping"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
             }
         },
         "com.amazonaws.medicalimaging#GetDICOMImportJob": {
@@ -2842,6 +2903,17 @@
                 "smithy.api#documentation": "<p>Summary of the image set metadata.</p>"
             }
         },
+        "com.amazonaws.medicalimaging#ImportConfiguration": {
+            "type": "union",
+            "members": {
+                "dicomJsonMetadataImportConfiguration": {
+                    "target": "com.amazonaws.medicalimaging#DicomJsonMetadataImportConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration options for different types of import operations.</p>"
+            }
+        },
         "com.amazonaws.medicalimaging#InternalServerException": {
             "type": "structure",
             "members": {
@@ -3336,6 +3408,16 @@
                 "smithy.api#documentation": "<p>Contains copiable <code>Attributes</code> structure and wraps information related to specific copy use cases. For example, when copying subsets.</p>"
             }
         },
+        "com.amazonaws.medicalimaging#MetadataFilePath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9!-~]+([a-zA-Z0-9!-~ ]*[a-zA-Z0-9!-~]+)*$"
+            }
+        },
         "com.amazonaws.medicalimaging#MetadataUpdates": {
             "type": "union",
             "members": {
@@ -3806,7 +3888,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Start importing bulk data into an <code>ACTIVE</code> data store. The import job imports DICOM P10 files found in the S3 prefix specified by the <code>inputS3Uri</code> parameter. The import job stores processing results in the file specified by the <code>outputS3Uri</code> parameter.</p>",
+                "smithy.api#documentation": "<p>Start importing bulk data into an <code>ACTIVE</code> data store. The import job imports DICOM P10 files or enhances existing DICOM files with JSON metadata. The <code>importConfiguration</code> parameter specifies the import type. The data is found in the S3 prefix specified by the <code>inputS3Uri</code> parameter. The import job stores processing results in the file specified by the <code>outputS3Uri</code> parameter.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/startDICOMImportJob/datastore/{datastoreId}"
@@ -3864,6 +3946,12 @@
                     "target": "com.amazonaws.medicalimaging#AwsAccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the source S3 bucket owner.</p>"
+                    }
+                },
+                "importConfiguration": {
+                    "target": "com.amazonaws.medicalimaging#ImportConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The import configuration for the import job.</p>"
                     }
                 }
             },

@@ -17062,6 +17062,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of security group IDs associated with the VPC endpoints for the\n            domain.</p>"
                     }
+                },
+                "EgressEnabled": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether egress traffic from the domain is routed through the customer VPC.\n            When <code>true</code>, outbound traffic flows through the VPC. When\n            <code>false</code>, outbound traffic goes through the public internet.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17096,13 +17102,19 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.opensearch#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of subnet IDs associated with the VPC endpoints for the domain. If your domain\n            uses multiple Availability Zones, you need to provide two subnet IDs, one per zone.\n            Otherwise, provide only one.</p>"
+                        "smithy.api#documentation": "<p>A list of subnet IDs associated with the VPC endpoints for the domain. If your domain uses\n        multiple Availability Zones, you need to provide two subnet IDs, one per zone. Otherwise, provide\n        only one.</p>"
                     }
                 },
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.opensearch#StringList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of security group IDs associated with the VPC endpoints for the domain. If\n            you do not provide a security group ID, OpenSearch Service uses the default security\n            group for the VPC.</p>"
+                    }
+                },
+                "EgressEnabled": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls whether egress traffic from the domain is routed through the customer VPC.\n            When <code>true</code>, outbound traffic flows through the VPC. When\n            <code>false</code>, outbound traffic goes through the public internet.</p>"
                     }
                 }
             },

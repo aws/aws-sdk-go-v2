@@ -430,6 +430,18 @@
                     "traits": {
                         "smithy.api#enumValue": "INTERSTITIAL_VOD_FAILURE"
                     }
+                },
+                "PRE_ADS_REQUEST_HOOK_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRE_ADS_REQUEST_HOOK_ERROR"
+                    }
+                },
+                "PRE_ADS_REQUEST_FUNCTION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRE_ADS_REQUEST_FUNCTION_ERROR"
+                    }
                 }
             }
         },
@@ -466,6 +478,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RAW_ADS_REQUEST"
+                    }
+                },
+                "PRE_ADS_REQUEST_HOOK_SUMMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRE_ADS_REQUEST_HOOK_SUMMARY"
+                    }
+                },
+                "PRE_ADS_REQUEST_FUNCTION_COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRE_ADS_REQUEST_FUNCTION_COMPLETED"
                     }
                 }
             }
@@ -1525,7 +1549,7 @@
                 "Tags": {
                     "target": "com.amazonaws.mediatailor#__mapOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to assign to the prefetch schedule. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html\">Tagging AWS Elemental MediaTailor Resources</a>.</p>",
+                        "smithy.api#documentation": "<p>The tags assigned to the prefetch schedule. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html\">Tagging AWS Elemental MediaTailor Resources</a>.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 }
@@ -1693,7 +1717,7 @@
                 "Tags": {
                     "target": "com.amazonaws.mediatailor#__mapOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to assign to the program. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html\">Tagging AWS Elemental MediaTailor Resources</a>.</p>",
+                        "smithy.api#documentation": "<p>The tags assigned to the program. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html\">Tagging AWS Elemental MediaTailor Resources</a>.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 }
@@ -1923,6 +1947,27 @@
                 }
             }
         },
+        "com.amazonaws.mediatailor#CustomOutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "Runtime": {
+                    "target": "com.amazonaws.mediatailor#RuntimeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expression language used to evaluate expressions in the function configuration. Set this to <code>JSONata</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Output": {
+                    "target": "com.amazonaws.mediatailor#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of output bindings. Each key is a namespaced output path (such as <code>player_params.device_type</code> or <code>temp.variant</code>), and each value is an expression that MediaTailor evaluates at runtime against the current session state. For more information about expression syntax, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-jsonata.html\">JSONata expression reference</a> in the <i>MediaTailor User Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a <code>CUSTOM_OUTPUT</code> function. MediaTailor evaluates the output expressions against the current session state and commits the results as output bindings. <code>CUSTOM_OUTPUT</code> functions do not make external calls. For more information, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-types-custom-output.html\">CUSTOM_OUTPUT</a> in the <i>MediaTailor User Guide</i>.</p>"
+            }
+        },
         "com.amazonaws.mediatailor#DashConfiguration": {
             "type": "structure",
             "members": {
@@ -2084,6 +2129,52 @@
         "com.amazonaws.mediatailor#DeleteChannelResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.mediatailor#DeleteFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediatailor#DeleteFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediatailor#DeleteFunctionResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a function. MediaTailor prevents deletion of a function that is still referenced by a playback configuration or by another function. Remove all references before deleting. For more information about functions, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions.html\">Working with functions</a> in the <i>MediaTailor User Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/function/{FunctionId}",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.mediatailor#DeleteFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "FunctionId": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the function to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.mediatailor#FunctionResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mediatailor#DeleteFunctionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mediatailor#DeleteLiveSource": {
             "type": "operation",
@@ -2843,6 +2934,23 @@
                 }
             }
         },
+        "com.amazonaws.mediatailor#EventName": {
+            "type": "enum",
+            "members": {
+                "PRE_SESSION_INITIALIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRE_SESSION_INITIALIZATION"
+                    }
+                },
+                "PRE_ADS_REQUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRE_ADS_REQUEST"
+                    }
+                }
+            }
+        },
         "com.amazonaws.mediatailor#FillPolicy": {
             "type": "enum",
             "members": {
@@ -2858,6 +2966,145 @@
                         "smithy.api#enumValue": "PARTIAL_AVAIL"
                     }
                 }
+            }
+        },
+        "com.amazonaws.mediatailor#Function": {
+            "type": "structure",
+            "members": {
+                "FunctionId": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FunctionType": {
+                    "target": "com.amazonaws.mediatailor#FunctionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the function.</p>"
+                    }
+                },
+                "HttpRequestConfiguration": {
+                    "target": "com.amazonaws.mediatailor#HttpRequestConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for an <code>HTTP_REQUEST</code> function.</p>"
+                    }
+                },
+                "CustomOutputConfiguration": {
+                    "target": "com.amazonaws.mediatailor#CustomOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a <code>CUSTOM_OUTPUT</code> function.</p>"
+                    }
+                },
+                "SequentialExecutorConfiguration": {
+                    "target": "com.amazonaws.mediatailor#SequentialExecutorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a <code>SEQUENTIAL_EXECUTOR</code> function.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.mediatailor#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the function. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html\">Tagging AWS Elemental MediaTailor Resources</a>.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "-- Define Mixin --"
+            }
+        },
+        "com.amazonaws.mediatailor#FunctionMapping": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.mediatailor#EventName"
+            },
+            "value": {
+                "target": "com.amazonaws.mediatailor#__string"
+            }
+        },
+        "com.amazonaws.mediatailor#FunctionRef": {
+            "type": "structure",
+            "members": {
+                "RunCondition": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional expression that evaluates to a boolean. MediaTailor evaluates this expression immediately before running the step, using the accumulated state at that point in the sequence. If the expression evaluates to <code>false</code>, MediaTailor skips the step and moves to the next one. If omitted, the step always runs.</p>"
+                    }
+                },
+                "FunctionId": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the child function to execute in this step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A reference to a child function within a <code>SEQUENTIAL_EXECUTOR</code> function.</p>"
+            }
+        },
+        "com.amazonaws.mediatailor#FunctionResource": {
+            "type": "resource",
+            "identifiers": {
+                "FunctionId": {
+                    "target": "com.amazonaws.mediatailor#__string"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.mediatailor#PutFunction"
+            },
+            "read": {
+                "target": "com.amazonaws.mediatailor#GetFunction"
+            },
+            "delete": {
+                "target": "com.amazonaws.mediatailor#DeleteFunction"
+            },
+            "list": {
+                "target": "com.amazonaws.mediatailor#ListFunctions"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "function/{FunctionId}"
+                }
+            }
+        },
+        "com.amazonaws.mediatailor#FunctionType": {
+            "type": "enum",
+            "members": {
+                "HTTP_REQUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP_REQUEST"
+                    }
+                },
+                "CUSTOM_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_OUTPUT"
+                    }
+                },
+                "SEQUENTIAL_EXECUTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEQUENTIAL_EXECUTOR"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "-- Define Enums"
             }
         },
         "com.amazonaws.mediatailor#GetChannelPolicy": {
@@ -2982,6 +3229,111 @@
                         "smithy.api#documentation": "<p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.mediatailor#GetFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediatailor#GetFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediatailor#GetFunctionResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the configuration and metadata for a function. For more information about functions, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions.html\">Working with functions</a> in the <i>MediaTailor User Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/function/{FunctionId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.mediatailor#GetFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "FunctionId": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the function.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "-- Request/Response DataStructures --",
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.mediatailor#FunctionResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mediatailor#GetFunctionResponse": {
+            "type": "structure",
+            "members": {
+                "FunctionId": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FunctionType": {
+                    "target": "com.amazonaws.mediatailor#FunctionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the function.</p>"
+                    }
+                },
+                "HttpRequestConfiguration": {
+                    "target": "com.amazonaws.mediatailor#HttpRequestConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for an <code>HTTP_REQUEST</code> function.</p>"
+                    }
+                },
+                "CustomOutputConfiguration": {
+                    "target": "com.amazonaws.mediatailor#CustomOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a <code>CUSTOM_OUTPUT</code> function.</p>"
+                    }
+                },
+                "SequentialExecutorConfiguration": {
+                    "target": "com.amazonaws.mediatailor#SequentialExecutorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a <code>SEQUENTIAL_EXECUTOR</code> function.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.mediatailor#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the function. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html\">Tagging AWS Elemental MediaTailor Resources</a>.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "-- Define Mixin --",
+                "smithy.api#output": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.mediatailor#FunctionResource"
+                    }
+                ]
             }
         },
         "com.amazonaws.mediatailor#GetPlaybackConfiguration": {
@@ -3150,6 +3502,12 @@
                     "target": "com.amazonaws.mediatailor#AdDecisionServerConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for customizing HTTP requests to the ad decision server (ADS). This includes settings for request method, headers, body content, and compression options.</p>"
+                    }
+                },
+                "FunctionMapping": {
+                    "target": "com.amazonaws.mediatailor#FunctionMapping",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of lifecycle hook event names to function identifiers. The function mapping specifies which function MediaTailor executes at each lifecycle hook during ad insertion. Valid keys are <code>PRE_SESSION_INITIALIZATION</code> and <code>PRE_ADS_REQUEST</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html\">Functions lifecycle hooks</a> in the <i>MediaTailor User Guide</i>.</p>"
                     }
                 }
             }
@@ -3372,6 +3730,60 @@
                 "smithy.api#documentation": "<p>HTTP request configuration parameters that define how MediaTailor communicates with the ad decision server.</p>"
             }
         },
+        "com.amazonaws.mediatailor#HttpRequestConfiguration": {
+            "type": "structure",
+            "members": {
+                "Runtime": {
+                    "target": "com.amazonaws.mediatailor#RuntimeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expression language used to evaluate expressions in the function configuration. Set this to <code>JSONata</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Output": {
+                    "target": "com.amazonaws.mediatailor#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of output bindings. Each key is a namespaced output path (such as <code>player_params.device_type</code> or <code>temp.identity</code>), and each value is an expression that MediaTailor evaluates at runtime. Output expressions in an <code>HTTP_REQUEST</code> function can reference the <code>response</code> object returned by the HTTP call. For more information about expression syntax, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-jsonata.html\">JSONata expression reference</a> in the <i>MediaTailor User Guide</i>.</p>"
+                    }
+                },
+                "MethodType": {
+                    "target": "com.amazonaws.mediatailor#MethodType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP method for the request. Valid values: <code>GET</code> and <code>POST</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestTimeoutMilliseconds": {
+                    "target": "com.amazonaws.mediatailor#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time, in milliseconds, that MediaTailor waits for a response from the external service. If the call exceeds this timeout, MediaTailor sets the response status code to <code>null</code> and proceeds with output expression evaluation. Valid values: <code>100</code> to <code>2000</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Url": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An expression that evaluates to the request URL. Use <code>{%...%}</code> delimiters for dynamic expressions. The maximum length after evaluation is 2,048 characters.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Body": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An expression that evaluates to the request body. Used with <code>POST</code> requests. The maximum size after evaluation is 64 KB.</p>"
+                    }
+                },
+                "Headers": {
+                    "target": "com.amazonaws.mediatailor#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of HTTP header names to expression values. MediaTailor evaluates each header value expression at runtime and includes the result in the outbound HTTP request. Maximum 50 headers.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "-- Function Configuration DataStructure"
+            }
+        },
         "com.amazonaws.mediatailor#InsertionMode": {
             "type": "enum",
             "members": {
@@ -3540,6 +3952,72 @@
                         "smithy.api#documentation": "<p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.mediatailor#ListFunctions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediatailor#ListFunctionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediatailor#ListFunctionsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves all functions associated with your AWS account in the current Region. For more information about functions, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions.html\">Working with functions</a> in the <i>MediaTailor User Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/functions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Items",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.mediatailor#ListFunctionsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.mediatailor#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of functions that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> functions, use the value of <code>NextToken</code> in the response to get the next page of results.</p> <p>The default value is 100. MediaTailor uses token-based pagination, which means that a response might contain fewer than <code>MaxResults</code> items, including 0 items, even when more results are available. To retrieve all results, you must continue making requests using the <code>NextToken</code> value from each response until the response no longer includes a <code>NextToken</code> value.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p> <p>For the first <code>ListFunctions</code> request, omit this value. For subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value for <code>NextToken</code> in the request. Continue making requests until the response no longer includes a <code>NextToken</code> value, which indicates that all results have been retrieved.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mediatailor#ListFunctionsResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.mediatailor#__listOfFunctionsResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of functions associated with your account in the current Region.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p> <p>For the first <code>ListFunctions</code> request, omit this value. For subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value for <code>NextToken</code> in the request. Continue making requests until the response no longer includes a <code>NextToken</code> value, which indicates that all results have been retrieved.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediatailor#ListLiveSources": {
@@ -4357,12 +4835,30 @@
                     "traits": {
                         "smithy.api#enumValue": "ERROR_BUMPER_END_INTERPOLATION"
                     }
+                },
+                "PRE_SESSION_INIT_HOOK_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRE_SESSION_INIT_HOOK_ERROR"
+                    }
+                },
+                "PRE_SESSION_INIT_FUNCTION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRE_SESSION_INIT_FUNCTION_ERROR"
+                    }
                 }
             }
         },
         "com.amazonaws.mediatailor#ManifestServiceInteractionLog": {
             "type": "structure",
             "members": {
+                "PublishOptInEventTypes": {
+                    "target": "com.amazonaws.mediatailor#__manifestServicePublishOptInEventTypesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates that MediaTailor will emit the selected events in the logs for playback sessions that are initialized with this configuration. These events are not emitted by default and must be explicitly opted in.</p>"
+                    }
+                },
                 "ExcludeEventTypes": {
                     "target": "com.amazonaws.mediatailor#__manifestServiceExcludeEventTypesList",
                     "traits": {
@@ -4372,6 +4868,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Settings for customizing what events are included in logs for interactions with the origin server.</p> <p>For more information about manifest service logs, including descriptions of the event types, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/log-types.html\">MediaTailor manifest logs description and event types</a> in Elemental MediaTailor User Guide.</p>"
+            }
+        },
+        "com.amazonaws.mediatailor#ManifestServicePublishOptInEventType": {
+            "type": "enum",
+            "members": {
+                "PRE_SESSION_INIT_HOOK_SUMMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRE_SESSION_INIT_HOOK_SUMMARY"
+                    }
+                },
+                "PRE_SESSION_INIT_FUNCTION_COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRE_SESSION_INIT_FUNCTION_COMPLETED"
+                    }
+                }
             }
         },
         "com.amazonaws.mediatailor#MaxResults": {
@@ -4406,6 +4919,9 @@
             "resources": [
                 {
                     "target": "com.amazonaws.mediatailor#ChannelResource"
+                },
+                {
+                    "target": "com.amazonaws.mediatailor#FunctionResource"
                 },
                 {
                     "target": "com.amazonaws.mediatailor#LiveSourceResource"
@@ -4444,6 +4960,29 @@
                         ]
                     }
                 },
+                "aws.iam#defineConditionKeys": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access by tags associated with the resource",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access by tags that are passed in the request",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"
+                    },
+                    "aws:TagKeys": {
+                        "type": "ArrayOfString",
+                        "documentation": "Filters access by tag keys that are passed in the request",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"
+                    }
+                },
+                "aws.iam#supportedPrincipalTypes": [
+                    "Root",
+                    "IAMUser",
+                    "IAMRole",
+                    "FederatedUser"
+                ],
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {
                     "additionalAllowedHeaders": [
@@ -5224,6 +5763,23 @@
                 }
             }
         },
+        "com.amazonaws.mediatailor#MethodType": {
+            "type": "enum",
+            "members": {
+                "GET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GET"
+                    }
+                },
+                "POST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POST"
+                    }
+                }
+            }
+        },
         "com.amazonaws.mediatailor#Mode": {
             "type": "enum",
             "members": {
@@ -5408,6 +5964,12 @@
                 },
                 "AdDecisionServerConfiguration": {
                     "target": "com.amazonaws.mediatailor#AdDecisionServerConfiguration"
+                },
+                "FunctionMapping": {
+                    "target": "com.amazonaws.mediatailor#FunctionMapping",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of lifecycle hook event names to function identifiers. The function mapping specifies which function MediaTailor executes at each lifecycle hook during ad insertion. Valid keys are <code>PRE_SESSION_INITIALIZATION</code> and <code>PRE_ADS_REQUEST</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html\">Functions lifecycle hooks</a> in the <i>MediaTailor User Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5721,6 +6283,144 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.mediatailor#PutFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediatailor#PutFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediatailor#PutFunctionResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates a function. A function defines reusable logic that MediaTailor executes at lifecycle hooks during ad insertion. For more information about functions, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions.html\">Working with functions</a> in the <i>MediaTailor User Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/function/{FunctionId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.mediatailor#PutFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "FunctionId": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the function. The identifier must be unique within your account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FunctionType": {
+                    "target": "com.amazonaws.mediatailor#FunctionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the function. The function type determines what the function can do at runtime. Valid values: <code>CUSTOM_OUTPUT</code> evaluates expressions and produces output bindings with no external calls. <code>HTTP_REQUEST</code> makes an HTTP call to an external service and evaluates output expressions that can reference the response. <code>SEQUENTIAL_EXECUTOR</code> runs a sequence of child functions in order, passing data between steps through temporary data. For more information, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-types.html\">Function types and composition</a> in the <i>MediaTailor User Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the function.</p>"
+                    }
+                },
+                "HttpRequestConfiguration": {
+                    "target": "com.amazonaws.mediatailor#HttpRequestConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for an <code>HTTP_REQUEST</code> function. Specifies the HTTP method, URL, headers, body, timeout, and output expressions. Required when <code>FunctionType</code> is <code>HTTP_REQUEST</code>.</p>"
+                    }
+                },
+                "CustomOutputConfiguration": {
+                    "target": "com.amazonaws.mediatailor#CustomOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a <code>CUSTOM_OUTPUT</code> function. Specifies the runtime and output expressions. Required when <code>FunctionType</code> is <code>CUSTOM_OUTPUT</code>.</p>"
+                    }
+                },
+                "SequentialExecutorConfiguration": {
+                    "target": "com.amazonaws.mediatailor#SequentialExecutorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a <code>SEQUENTIAL_EXECUTOR</code> function. Specifies the ordered list of child functions to execute, an optional output block, and a timeout. Required when <code>FunctionType</code> is <code>SEQUENTIAL_EXECUTOR</code>.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.mediatailor#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to assign to the function. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html\">Tagging AWS Elemental MediaTailor Resources</a>.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "-- Define Mixin --",
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.mediatailor#FunctionResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mediatailor#PutFunctionResponse": {
+            "type": "structure",
+            "members": {
+                "FunctionId": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FunctionType": {
+                    "target": "com.amazonaws.mediatailor#FunctionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the function.</p>"
+                    }
+                },
+                "HttpRequestConfiguration": {
+                    "target": "com.amazonaws.mediatailor#HttpRequestConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for an <code>HTTP_REQUEST</code> function.</p>"
+                    }
+                },
+                "CustomOutputConfiguration": {
+                    "target": "com.amazonaws.mediatailor#CustomOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a <code>CUSTOM_OUTPUT</code> function.</p>"
+                    }
+                },
+                "SequentialExecutorConfiguration": {
+                    "target": "com.amazonaws.mediatailor#SequentialExecutorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a <code>SEQUENTIAL_EXECUTOR</code> function.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.mediatailor#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the function. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html\">Tagging AWS Elemental MediaTailor Resources</a>.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "-- Define Mixin --",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.mediatailor#PutPlaybackConfiguration": {
             "type": "operation",
             "input": {
@@ -5845,6 +6545,12 @@
                     "target": "com.amazonaws.mediatailor#AdDecisionServerConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for customizing HTTP requests to the ad decision server (ADS). This includes settings for request method, headers, body content, and compression options.</p>"
+                    }
+                },
+                "FunctionMapping": {
+                    "target": "com.amazonaws.mediatailor#FunctionMapping",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of lifecycle hook event names to function identifiers. The function mapping specifies which function MediaTailor executes at each lifecycle hook during ad insertion. Valid keys are <code>PRE_SESSION_INITIALIZATION</code> and <code>PRE_ADS_REQUEST</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html\">Functions lifecycle hooks</a> in the <i>MediaTailor User Guide</i>.</p>"
                     }
                 }
             }
@@ -5984,6 +6690,12 @@
                     "target": "com.amazonaws.mediatailor#AdDecisionServerConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for customizing HTTP requests to the ad decision server (ADS). This includes settings for request method, headers, body content, and compression options.</p>"
+                    }
+                },
+                "FunctionMapping": {
+                    "target": "com.amazonaws.mediatailor#FunctionMapping",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of lifecycle hook event names to function identifiers. The function mapping specifies which function MediaTailor executes at each lifecycle hook during ad insertion. Valid keys are <code>PRE_SESSION_INITIALIZATION</code> and <code>PRE_ADS_REQUEST</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html\">Functions lifecycle hooks</a> in the <i>MediaTailor User Guide</i>.</p>"
                     }
                 }
             }
@@ -6186,6 +6898,17 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediatailor#ResponseOutputItem"
+            }
+        },
+        "com.amazonaws.mediatailor#RuntimeType": {
+            "type": "enum",
+            "members": {
+                "JSONATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSONATA"
+                    }
+                }
             }
         },
         "com.amazonaws.mediatailor#ScheduleAdBreak": {
@@ -6448,6 +7171,41 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediatailor#SegmentationDescriptor"
+            }
+        },
+        "com.amazonaws.mediatailor#SequentialExecutorConfiguration": {
+            "type": "structure",
+            "members": {
+                "Runtime": {
+                    "target": "com.amazonaws.mediatailor#RuntimeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expression language used to evaluate expressions in the function configuration. Set this to <code>JSONata</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Output": {
+                    "target": "com.amazonaws.mediatailor#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional map of output bindings that controls which bindings the sequence commits to the session state after all steps complete. If omitted, MediaTailor commits all accumulated output bindings from all child steps.</p>"
+                    }
+                },
+                "FunctionList": {
+                    "target": "com.amazonaws.mediatailor#__listOfFunctionsRef",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ordered list of 1 to 10 steps. Each step specifies a child function to execute and an optional run condition expression that controls whether the step runs. MediaTailor executes steps in order, passing data between steps through temporary data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TimeoutMilliseconds": {
+                    "target": "com.amazonaws.mediatailor#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time, in milliseconds, for the entire sequence to complete. This timeout covers all steps, including any HTTP calls made by child functions. If the sequence exceeds this timeout, MediaTailor discards all output from the sequence and proceeds with default behavior.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a <code>SEQUENTIAL_EXECUTOR</code> function. A <code>SEQUENTIAL_EXECUTOR</code> runs a sequence of child functions in order, passing data between steps through temporary data. For more information, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-types-sequential-executor.html\">SEQUENTIAL_EXECUTOR</a> in the <i>MediaTailor User Guide</i>.</p>"
             }
         },
         "com.amazonaws.mediatailor#SlateSource": {
@@ -7736,6 +8494,18 @@
                 "target": "com.amazonaws.mediatailor#Channel"
             }
         },
+        "com.amazonaws.mediatailor#__listOfFunctionsRef": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediatailor#FunctionRef"
+            }
+        },
+        "com.amazonaws.mediatailor#__listOfFunctionsResponse": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediatailor#Function"
+            }
+        },
         "com.amazonaws.mediatailor#__listOfLiveSource": {
             "type": "list",
             "member": {
@@ -7803,6 +8573,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediatailor#ManifestServiceExcludeEventType"
+            }
+        },
+        "com.amazonaws.mediatailor#__manifestServicePublishOptInEventTypesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediatailor#ManifestServicePublishOptInEventType"
             }
         },
         "com.amazonaws.mediatailor#__mapOf__string": {

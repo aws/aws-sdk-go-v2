@@ -5637,6 +5637,9 @@
                         "smithy.api#documentation": "<p>The function code. For more information about writing a CloudFront function, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html\">Writing function code for CloudFront Functions</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.cloudfront#Tags"
                 }
             },
             "traits": {
@@ -6007,6 +6010,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The S3 bucket that provides the source for the import. The source must be in a valid JSON format.</p>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.cloudfront#Tags"
                 }
             },
             "traits": {
