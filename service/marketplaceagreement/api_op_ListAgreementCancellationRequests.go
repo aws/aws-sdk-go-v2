@@ -17,8 +17,7 @@ import (
 // filters.
 //
 // PartyType is a required parameter. A ValidationException is returned if
-// PartyType is not provided. Pagination is supported through maxResults (1-50,
-// default 20) and nextToken parameters.
+// PartyType is not provided.
 func (c *Client) ListAgreementCancellationRequests(ctx context.Context, params *ListAgreementCancellationRequestsInput, optFns ...func(*Options)) (*ListAgreementCancellationRequestsOutput, error) {
 	if params == nil {
 		params = &ListAgreementCancellationRequestsInput{}
@@ -57,13 +56,10 @@ type ListAgreementCancellationRequestsInput struct {
 	// The maximum number of cancellation requests to return in the response.
 	MaxResults *int32
 
-	// A token to specify where to start pagination. Use the nextToken value from a
-	// previous response to retrieve the next page of results.
+	// A token to specify where to start pagination.
 	NextToken *string
 
-	// An optional parameter to filter cancellation requests by status. Valid values
-	// include PENDING_APPROVAL , APPROVED , REJECTED , CANCELLED , and
-	// VALIDATION_FAILED .
+	// An optional parameter to filter cancellation requests by status.
 	Status types.AgreementCancellationRequestStatus
 
 	noSmithyDocumentSerde
@@ -75,8 +71,7 @@ type ListAgreementCancellationRequestsOutput struct {
 	// information about each cancellation request.
 	Items []types.AgreementCancellationRequestSummary
 
-	// A token to retrieve the next page of results. If null , there are no more
-	// results to retrieve.
+	// The token used for pagination. The field is null if there are no more results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

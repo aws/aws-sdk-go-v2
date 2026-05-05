@@ -9226,6 +9226,11 @@ func awsRestjson1_serializeDocumentVPCOptions(v *types.VPCOptions, value smithyj
 	object := value.Object()
 	defer object.Close()
 
+	if v.EgressEnabled != nil {
+		ok := object.Key("EgressEnabled")
+		ok.Boolean(*v.EgressEnabled)
+	}
+
 	if v.SecurityGroupIds != nil {
 		ok := object.Key("SecurityGroupIds")
 		if err := awsRestjson1_serializeDocumentStringList(v.SecurityGroupIds, ok); err != nil {

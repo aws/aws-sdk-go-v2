@@ -57,8 +57,7 @@ type ListAgreementPaymentRequestsInput struct {
 	// Default is 50.
 	MaxResults *int32
 
-	// A token to specify where to start pagination. Use the nextToken value from a
-	// previous response to retrieve the next page of results.
+	// A token to specify where to start pagination.
 	NextToken *string
 
 	// An optional parameter to list payment requests by status. Valid values include
@@ -77,8 +76,7 @@ type ListAgreementPaymentRequestsOutput struct {
 	// This member is required.
 	Items []types.PaymentRequestSummary
 
-	// A token to retrieve the next page of results. If null , there are no more
-	// results to retrieve.
+	// The token used for pagination. The field is null if there are no more results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

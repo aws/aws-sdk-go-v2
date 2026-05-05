@@ -15,8 +15,6 @@ import (
 // Lists billing adjustment requests for a specific agreement. Sellers (proposers)
 // can use this operation to view all billing adjustment requests associated with
 // an agreement.
-//
-// Pagination is supported through maxResults and nextToken parameters.
 func (c *Client) ListBillingAdjustmentRequests(ctx context.Context, params *ListBillingAdjustmentRequestsInput, optFns ...func(*Options)) (*ListBillingAdjustmentRequestsOutput, error) {
 	if params == nil {
 		params = &ListBillingAdjustmentRequestsInput{}
@@ -46,18 +44,17 @@ type ListBillingAdjustmentRequestsInput struct {
 	Catalog *string
 
 	// An optional filter to return billing adjustment requests created after the
-	// specified POSIX timestamp (Unix epoch seconds).
+	// specified timestamp.
 	CreatedAfter *time.Time
 
 	// An optional filter to return billing adjustment requests created before the
-	// specified POSIX timestamp (Unix epoch seconds).
+	// specified timestamp.
 	CreatedBefore *time.Time
 
 	// The maximum number of billing adjustment requests to return in the response.
 	MaxResults *int32
 
-	// A token to specify where to start pagination. Use the nextToken value from a
-	// previous response to retrieve the next page of results.
+	// A token to specify where to start pagination.
 	NextToken *string
 
 	// An optional filter to return billing adjustment requests with the specified
@@ -75,8 +72,7 @@ type ListBillingAdjustmentRequestsOutput struct {
 	// This member is required.
 	Items []types.BillingAdjustmentSummary
 
-	// A token to retrieve the next page of results. If null , there are no more
-	// results to retrieve.
+	// The token used for pagination. The field is null if there are no more results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

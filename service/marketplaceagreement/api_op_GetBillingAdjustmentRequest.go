@@ -15,9 +15,6 @@ import (
 // Retrieves detailed information about a specific billing adjustment request.
 // Sellers (proposers) can use this operation to view the status and details of a
 // billing adjustment request they submitted.
-//
-// A ResourceNotFoundException is returned if the billing adjustment request does
-// not exist or the caller does not have permission to access it.
 func (c *Client) GetBillingAdjustmentRequest(ctx context.Context, params *GetBillingAdjustmentRequestInput, optFns ...func(*Options)) (*GetBillingAdjustmentRequestOutput, error) {
 	if params == nil {
 		params = &GetBillingAdjustmentRequestInput{}
@@ -72,8 +69,7 @@ type GetBillingAdjustmentRequestOutput struct {
 	// This member is required.
 	BillingAdjustmentRequestId *string
 
-	// The date and time when the billing adjustment request was created, as a POSIX
-	// timestamp (Unix epoch seconds).
+	// The date and time when the billing adjustment request was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
@@ -93,8 +89,7 @@ type GetBillingAdjustmentRequestOutput struct {
 	// This member is required.
 	Status types.BillingAdjustmentStatus
 
-	// The date and time when the billing adjustment request was last updated, as a
-	// POSIX timestamp (Unix epoch seconds).
+	// The date and time when the billing adjustment request was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time

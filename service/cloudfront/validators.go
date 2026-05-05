@@ -6745,6 +6745,11 @@ func validateOpCreateFunctionInput(v *CreateFunctionInput) error {
 	if v.FunctionCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FunctionCode"))
 	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6826,6 +6831,11 @@ func validateOpCreateKeyValueStoreInput(v *CreateKeyValueStoreInput) error {
 	if v.ImportSource != nil {
 		if err := validateImportSource(v.ImportSource); err != nil {
 			invalidParams.AddNested("ImportSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

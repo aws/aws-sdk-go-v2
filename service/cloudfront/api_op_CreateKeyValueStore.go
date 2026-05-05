@@ -45,6 +45,9 @@ type CreateKeyValueStoreInput struct {
 	// valid JSON format.
 	ImportSource *types.ImportSource
 
+	// A complex type that contains zero or more Tag elements.
+	Tags *types.Tags
+
 	noSmithyDocumentSerde
 }
 

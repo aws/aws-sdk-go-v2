@@ -1,0 +1,8 @@
+{
+    "id": "16ec4edc-9344-4e49-b609-fd62cb8c964f",
+    "type": "feature",
+    "description": "Adds support for tagging CloudFront Functions and KeyValueStores resources.",
+    "modules": [
+        "service/cloudfront"
+    ]
+}

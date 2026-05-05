@@ -1,0 +1,8 @@
+{
+    "id": "1503fbc7-6887-47b8-b938-3d2049449f33",
+    "type": "feature",
+    "description": "With this release, Agreements API provides a programmatic way to generate quotes, accept offers, track charges and entitlements, manage renewals and cancellations, and streamline operations entirely through APIs without navigating to the AWS Marketplace website or AWS Management Console.",
+    "modules": [
+        "service/marketplaceagreement"
+    ]
+}

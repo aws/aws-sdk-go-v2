@@ -14,11 +14,9 @@ import (
 // Allows sellers (proposers) to submit billing adjustment requests for one or
 // more invoices within an agreement. Each entry in the batch specifies an invoice
 // and the adjustment amount. The operation returns successfully created adjustment
-// request IDs and any errors for entries that failed validation.
+// request IDs and any errors for entries that failed to process.
 //
-// Each entry requires a unique clientToken for idempotency. A ValidationException
-// is returned if the adjustment amount exceeds the maximum refundable amount for
-// the invoice.
+// Each entry requires a unique clientToken for idempotency.
 func (c *Client) BatchCreateBillingAdjustmentRequest(ctx context.Context, params *BatchCreateBillingAdjustmentRequestInput, optFns ...func(*Options)) (*BatchCreateBillingAdjustmentRequestOutput, error) {
 	if params == nil {
 		params = &BatchCreateBillingAdjustmentRequestInput{}

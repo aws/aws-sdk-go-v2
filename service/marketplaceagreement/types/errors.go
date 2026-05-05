@@ -14,6 +14,7 @@ type AccessDeniedException struct {
 	ErrorCodeOverride *string
 
 	RequestId *string
+	Reason    AccessDeniedExceptionReason
 
 	noSmithyDocumentSerde
 }
@@ -35,8 +36,7 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request could not be completed due to a conflict with the current state of
-// the resource.
+// Request was denied due to a resource conflict.
 type ConflictException struct {
 	Message *string
 
@@ -123,6 +123,39 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Request exceeded the maximum allowed limit (quota) for a specific resource or
+// API operation.
+type ServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	RequestId    *string
+	QuotaCode    *string
+	ServiceCode  *string
+	ResourceType *string
+	ResourceId   *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Request was denied due to request throttling.
 type ThrottlingException struct {

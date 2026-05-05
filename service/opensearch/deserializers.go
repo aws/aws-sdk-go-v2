@@ -26088,6 +26088,15 @@ func awsRestjson1_deserializeDocumentVPCDerivedInfo(v **types.VPCDerivedInfo, va
 				return err
 			}
 
+		case "EgressEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EgressEnabled = ptr.Bool(jtv)
+			}
+
 		case "SecurityGroupIds":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.SecurityGroupIds, value); err != nil {
 				return err

@@ -4188,6 +4188,11 @@ func awsRestjson1_deserializeDocumentDICOMImportJobProperties(v **types.DICOMImp
 				}
 			}
 
+		case "importConfiguration":
+			if err := awsRestjson1_deserializeDocumentImportConfiguration(&sv.ImportConfiguration, value); err != nil {
+				return err
+			}
+
 		case "inputS3Uri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4415,6 +4420,134 @@ func awsRestjson1_deserializeDocumentDICOMImportJobSummary(v **types.DICOMImport
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDicomJsonMetadataImportConfiguration(v **types.DicomJsonMetadataImportConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DicomJsonMetadataImportConfiguration
+	if *v == nil {
+		sv = &types.DicomJsonMetadataImportConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dicomMetadataMappings":
+			if err := awsRestjson1_deserializeDocumentDicomMetadataMappings(&sv.DicomMetadataMappings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDicomMetadataMapping(v **types.DicomMetadataMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DicomMetadataMapping
+	if *v == nil {
+		sv = &types.DicomMetadataMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "metadataFilePath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MetadataFilePath to be of type string, got %T instead", value)
+				}
+				sv.MetadataFilePath = ptr.String(jtv)
+			}
+
+		case "seriesInstanceUID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DICOMSeriesInstanceUID to be of type string, got %T instead", value)
+				}
+				sv.SeriesInstanceUID = ptr.String(jtv)
+			}
+
+		case "studyInstanceUID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DICOMStudyInstanceUID to be of type string, got %T instead", value)
+				}
+				sv.StudyInstanceUID = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDicomMetadataMappings(v *[]types.DicomMetadataMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DicomMetadataMapping
+	if *v == nil {
+		cv = []types.DicomMetadataMapping{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DicomMetadataMapping
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentDicomMetadataMapping(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -4932,6 +5065,46 @@ func awsRestjson1_deserializeDocumentImageSetsMetadataSummary(v **types.ImageSet
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImportConfiguration(v *types.ImportConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ImportConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "dicomJsonMetadataImportConfiguration":
+			var mv types.DicomJsonMetadataImportConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentDicomJsonMetadataImportConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ImportConfigurationMemberDicomJsonMetadataImportConfiguration{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 

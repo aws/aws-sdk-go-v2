@@ -1,0 +1,8 @@
+{
+    "id": "df5cfc60-792f-4791-b86d-0e683c0fd6ee",
+    "type": "feature",
+    "description": "Add support for DICOM Json Metadata Override features in startDICOMImportJob API",
+    "modules": [
+        "service/medicalimaging"
+    ]
+}

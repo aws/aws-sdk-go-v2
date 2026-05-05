@@ -64,8 +64,7 @@ type CancelAgreementCancellationRequestOutput struct {
 	// request.
 	AgreementId *string
 
-	// The date and time when the cancellation request was originally created, as a
-	// POSIX timestamp (Unix epoch seconds).
+	// The date and time when the cancellation request was originally created.
 	CreatedAt *time.Time
 
 	// The detailed description of the original cancellation reason, if provided.
@@ -80,8 +79,7 @@ type CancelAgreementCancellationRequestOutput struct {
 	// A message providing additional context about the cancellation request status.
 	StatusMessage *string
 
-	// The date and time when the cancellation request was cancelled, as a POSIX
-	// timestamp (Unix epoch seconds).
+	// The date and time when the cancellation request was cancelled.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

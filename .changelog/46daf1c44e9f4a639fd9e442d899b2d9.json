@@ -1,0 +1,8 @@
+{
+    "id": "46daf1c4-4e9f-4a63-9fd9-e442d899b2d9",
+    "type": "feature",
+    "description": "This release adds the TLDInMaintenance exception.",
+    "modules": [
+        "service/route53domains"
+    ]
+}

@@ -65,7 +65,7 @@ type GetAgreementPaymentRequestOutput struct {
 	// the pattern ch-[a-zA-Z0-9]+ .
 	ChargeId *string
 
-	// The date and time when the payment request was created, in ISO 8601 format.
+	// The date and time when the payment request was created.
 	CreatedAt *time.Time
 
 	// The currency code for the charge amount.
@@ -99,7 +99,7 @@ type GetAgreementPaymentRequestOutput struct {
 	// status, such as a rejection reason or validation failure details.
 	StatusMessage *string
 
-	// The date and time when the payment request was last updated, in ISO 8601 format.
+	// The date and time when the payment request was last updated.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

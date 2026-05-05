@@ -80,6 +80,14 @@ type PutPlaybackConfigurationInput struct {
 	// The configuration for DASH content.
 	DashConfiguration *types.DashConfigurationForPut
 
+	// A map of lifecycle hook event names to function identifiers. The function
+	// mapping specifies which function MediaTailor executes at each lifecycle hook
+	// during ad insertion. Valid keys are PRE_SESSION_INITIALIZATION and
+	// PRE_ADS_REQUEST . For more information, see [Functions lifecycle hooks] in the MediaTailor User Guide.
+	//
+	// [Functions lifecycle hooks]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html
+	FunctionMapping map[string]string
+
 	// The setting that controls whether players can use stitched or guided ad
 	// insertion. The default, STITCHED_ONLY , forces all player sessions to use
 	// stitched (server-side) ad insertion. Choosing PLAYER_SELECT allows players to
@@ -177,6 +185,14 @@ type PutPlaybackConfigurationOutput struct {
 
 	// The configuration for DASH content.
 	DashConfiguration *types.DashConfiguration
+
+	// A map of lifecycle hook event names to function identifiers. The function
+	// mapping specifies which function MediaTailor executes at each lifecycle hook
+	// during ad insertion. Valid keys are PRE_SESSION_INITIALIZATION and
+	// PRE_ADS_REQUEST . For more information, see [Functions lifecycle hooks] in the MediaTailor User Guide.
+	//
+	// [Functions lifecycle hooks]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html
+	FunctionMapping map[string]string
 
 	// The configuration for HLS content.
 	HlsConfiguration *types.HlsConfiguration

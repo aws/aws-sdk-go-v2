@@ -62,7 +62,8 @@ type GetDomainSuggestionsInput struct {
 	OnlyAvailable *bool
 
 	// The number of suggested domain names that you want Route 53 to return. Specify
-	// a value between 1 and 50.
+	// a value between 1 and 50. Note that fewer than the requested number might be
+	// returned.
 	//
 	// This member is required.
 	SuggestionCount int32

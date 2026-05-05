@@ -585,6 +585,7 @@ const (
 	AppInstanceTypeMlR6id16xlarge          AppInstanceType = "ml.r6id.16xlarge"
 	AppInstanceTypeMlR6id24xlarge          AppInstanceType = "ml.r6id.24xlarge"
 	AppInstanceTypeMlR6id32xlarge          AppInstanceType = "ml.r6id.32xlarge"
+	AppInstanceTypeMlP54xlarge             AppInstanceType = "ml.p5.4xlarge"
 )
 
 // Values returns all known values for AppInstanceType. Note that this can be
@@ -756,6 +757,7 @@ func (AppInstanceType) Values() []AppInstanceType {
 		"ml.r6id.16xlarge",
 		"ml.r6id.24xlarge",
 		"ml.r6id.32xlarge",
+		"ml.p5.4xlarge",
 	}
 }
 

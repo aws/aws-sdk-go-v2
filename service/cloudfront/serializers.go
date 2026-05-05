@@ -1721,6 +1721,19 @@ func awsRestxml_serializeOpDocumentCreateFunctionInput(v *CreateFunctionInput, v
 		el := value.MemberElement(root)
 		el.String(*v.Name)
 	}
+	if v.Tags != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Tags",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentTags(v.Tags, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -2108,6 +2121,19 @@ func awsRestxml_serializeOpDocumentCreateKeyValueStoreInput(v *CreateKeyValueSto
 		}
 		el := value.MemberElement(root)
 		el.String(*v.Name)
+	}
+	if v.Tags != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Tags",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentTags(v.Tags, el); err != nil {
+			return err
+		}
 	}
 	return nil
 }

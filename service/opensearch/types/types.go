@@ -3116,6 +3116,11 @@ type VPCDerivedInfo struct {
 	// The list of Availability Zones associated with the VPC subnets.
 	AvailabilityZones []string
 
+	// Indicates whether egress traffic from the domain is routed through the customer
+	// VPC. When true , outbound traffic flows through the VPC. When false , outbound
+	// traffic goes through the public internet.
+	EgressEnabled *bool
+
 	// The list of security group IDs associated with the VPC endpoints for the domain.
 	SecurityGroupIds []string
 
@@ -3209,6 +3214,11 @@ type VpcEndpointSummary struct {
 //
 // [Launching your Amazon OpenSearch Service domains using a VPC]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html
 type VPCOptions struct {
+
+	// Controls whether egress traffic from the domain is routed through the customer
+	// VPC. When true , outbound traffic flows through the VPC. When false , outbound
+	// traffic goes through the public internet.
+	EgressEnabled *bool
 
 	// The list of security group IDs associated with the VPC endpoints for the
 	// domain. If you do not provide a security group ID, OpenSearch Service uses the

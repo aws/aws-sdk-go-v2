@@ -87,6 +87,8 @@ const (
 	AdsInteractionExcludeEventTypeVodTimeBasedAvailPlanWarningNoAdvertisements AdsInteractionExcludeEventType = "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS"
 	AdsInteractionExcludeEventTypeInterstitialVodSuccess                       AdsInteractionExcludeEventType = "INTERSTITIAL_VOD_SUCCESS"
 	AdsInteractionExcludeEventTypeInterstitialVodFailure                       AdsInteractionExcludeEventType = "INTERSTITIAL_VOD_FAILURE"
+	AdsInteractionExcludeEventTypePreAdsRequestHookError                       AdsInteractionExcludeEventType = "PRE_ADS_REQUEST_HOOK_ERROR"
+	AdsInteractionExcludeEventTypePreAdsRequestFunctionError                   AdsInteractionExcludeEventType = "PRE_ADS_REQUEST_FUNCTION_ERROR"
 )
 
 // Values returns all known values for AdsInteractionExcludeEventType. Note that
@@ -137,6 +139,8 @@ func (AdsInteractionExcludeEventType) Values() []AdsInteractionExcludeEventType 
 		"VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS",
 		"INTERSTITIAL_VOD_SUCCESS",
 		"INTERSTITIAL_VOD_FAILURE",
+		"PRE_ADS_REQUEST_HOOK_ERROR",
+		"PRE_ADS_REQUEST_FUNCTION_ERROR",
 	}
 }
 
@@ -144,8 +148,10 @@ type AdsInteractionPublishOptInEventType string
 
 // Enum values for AdsInteractionPublishOptInEventType
 const (
-	AdsInteractionPublishOptInEventTypeRawAdsResponse AdsInteractionPublishOptInEventType = "RAW_ADS_RESPONSE"
-	AdsInteractionPublishOptInEventTypeRawAdsRequest  AdsInteractionPublishOptInEventType = "RAW_ADS_REQUEST"
+	AdsInteractionPublishOptInEventTypeRawAdsResponse                 AdsInteractionPublishOptInEventType = "RAW_ADS_RESPONSE"
+	AdsInteractionPublishOptInEventTypeRawAdsRequest                  AdsInteractionPublishOptInEventType = "RAW_ADS_REQUEST"
+	AdsInteractionPublishOptInEventTypePreAdsRequestHookSummary       AdsInteractionPublishOptInEventType = "PRE_ADS_REQUEST_HOOK_SUMMARY"
+	AdsInteractionPublishOptInEventTypePreAdsRequestFunctionCompleted AdsInteractionPublishOptInEventType = "PRE_ADS_REQUEST_FUNCTION_COMPLETED"
 )
 
 // Values returns all known values for AdsInteractionPublishOptInEventType. Note
@@ -157,6 +163,8 @@ func (AdsInteractionPublishOptInEventType) Values() []AdsInteractionPublishOptIn
 	return []AdsInteractionPublishOptInEventType{
 		"RAW_ADS_RESPONSE",
 		"RAW_ADS_REQUEST",
+		"PRE_ADS_REQUEST_HOOK_SUMMARY",
+		"PRE_ADS_REQUEST_FUNCTION_COMPLETED",
 	}
 }
 
@@ -219,6 +227,25 @@ func (CompressionMethod) Values() []CompressionMethod {
 	}
 }
 
+type EventName string
+
+// Enum values for EventName
+const (
+	EventNamePreSessionInitialization EventName = "PRE_SESSION_INITIALIZATION"
+	EventNamePreAdsRequest            EventName = "PRE_ADS_REQUEST"
+)
+
+// Values returns all known values for EventName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventName) Values() []EventName {
+	return []EventName{
+		"PRE_SESSION_INITIALIZATION",
+		"PRE_ADS_REQUEST",
+	}
+}
+
 type FillPolicy string
 
 // Enum values for FillPolicy
@@ -235,6 +262,27 @@ func (FillPolicy) Values() []FillPolicy {
 	return []FillPolicy{
 		"FULL_AVAIL_ONLY",
 		"PARTIAL_AVAIL",
+	}
+}
+
+type FunctionType string
+
+// Enum values for FunctionType
+const (
+	FunctionTypeHttpRequest        FunctionType = "HTTP_REQUEST"
+	FunctionTypeCustomOutput       FunctionType = "CUSTOM_OUTPUT"
+	FunctionTypeSequentialExecutor FunctionType = "SEQUENTIAL_EXECUTOR"
+)
+
+// Values returns all known values for FunctionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FunctionType) Values() []FunctionType {
+	return []FunctionType{
+		"HTTP_REQUEST",
+		"CUSTOM_OUTPUT",
+		"SEQUENTIAL_EXECUTOR",
 	}
 }
 
@@ -350,6 +398,8 @@ const (
 	ManifestServiceExcludeEventTypeErrorProfileNameInterpolation       ManifestServiceExcludeEventType = "ERROR_PROFILE_NAME_INTERPOLATION"
 	ManifestServiceExcludeEventTypeErrorBumperStartInterpolation       ManifestServiceExcludeEventType = "ERROR_BUMPER_START_INTERPOLATION"
 	ManifestServiceExcludeEventTypeErrorBumperEndInterpolation         ManifestServiceExcludeEventType = "ERROR_BUMPER_END_INTERPOLATION"
+	ManifestServiceExcludeEventTypePreSessionInitHookError             ManifestServiceExcludeEventType = "PRE_SESSION_INIT_HOOK_ERROR"
+	ManifestServiceExcludeEventTypePreSessionInitFunctionError         ManifestServiceExcludeEventType = "PRE_SESSION_INIT_FUNCTION_ERROR"
 )
 
 // Values returns all known values for ManifestServiceExcludeEventType. Note that
@@ -391,6 +441,28 @@ func (ManifestServiceExcludeEventType) Values() []ManifestServiceExcludeEventTyp
 		"ERROR_PROFILE_NAME_INTERPOLATION",
 		"ERROR_BUMPER_START_INTERPOLATION",
 		"ERROR_BUMPER_END_INTERPOLATION",
+		"PRE_SESSION_INIT_HOOK_ERROR",
+		"PRE_SESSION_INIT_FUNCTION_ERROR",
+	}
+}
+
+type ManifestServicePublishOptInEventType string
+
+// Enum values for ManifestServicePublishOptInEventType
+const (
+	ManifestServicePublishOptInEventTypePreSessionInitHookSummary       ManifestServicePublishOptInEventType = "PRE_SESSION_INIT_HOOK_SUMMARY"
+	ManifestServicePublishOptInEventTypePreSessionInitFunctionCompleted ManifestServicePublishOptInEventType = "PRE_SESSION_INIT_FUNCTION_COMPLETED"
+)
+
+// Values returns all known values for ManifestServicePublishOptInEventType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ManifestServicePublishOptInEventType) Values() []ManifestServicePublishOptInEventType {
+	return []ManifestServicePublishOptInEventType{
+		"PRE_SESSION_INIT_HOOK_SUMMARY",
+		"PRE_SESSION_INIT_FUNCTION_COMPLETED",
 	}
 }
 
@@ -427,6 +499,25 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (Method) Values() []Method {
 	return []Method{
+		"GET",
+		"POST",
+	}
+}
+
+type MethodType string
+
+// Enum values for MethodType
+const (
+	MethodTypeGet  MethodType = "GET"
+	MethodTypePost MethodType = "POST"
+)
+
+// Values returns all known values for MethodType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MethodType) Values() []MethodType {
+	return []MethodType{
 		"GET",
 		"POST",
 	}
@@ -543,6 +634,23 @@ func (RelativePosition) Values() []RelativePosition {
 	return []RelativePosition{
 		"BEFORE_PROGRAM",
 		"AFTER_PROGRAM",
+	}
+}
+
+type RuntimeType string
+
+// Enum values for RuntimeType
+const (
+	RuntimeTypeJsonata RuntimeType = "JSONATA"
+)
+
+// Values returns all known values for RuntimeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuntimeType) Values() []RuntimeType {
+	return []RuntimeType{
+		"JSONATA",
 	}
 }
 
