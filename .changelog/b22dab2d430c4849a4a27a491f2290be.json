@@ -1,8 +1,0 @@
-{
-    "id": "b22dab2d-430c-4849-a4a2-7a491f2290be",
-    "type": "feature",
-    "description": "Increase max configurable output limits in the Clean Rooms ML configured model algorithm association resource.",
-    "modules": [
-        "service/cleanroomsml"
-    ]
-}

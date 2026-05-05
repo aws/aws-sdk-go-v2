@@ -1,8 +1,0 @@
-{
-    "id": "f23bbfb6-8d5f-473e-a327-365c05e92fd5",
-    "type": "feature",
-    "description": "Added support for Monetization Functions. Monetization Functions let you enrich ad requests with external data and transform session parameters using JSONata expressions, without deploying custom infrastructure.",
-    "modules": [
-        "service/mediatailor"
-    ]
-}

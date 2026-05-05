@@ -1,3 +1,7 @@
+# v1.15.0 (2026-05-05)
+
+* **Feature**: With this release, Agreements API provides a programmatic way to generate quotes, accept offers, track charges and entitlements, manage renewals and cancellations, and streamline operations entirely through APIs without navigating to the AWS Marketplace website or AWS Management Console.
+
 # v1.14.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

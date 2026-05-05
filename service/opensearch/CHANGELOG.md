@@ -1,3 +1,7 @@
+# v1.68.0 (2026-05-05)
+
+* **Feature**: Amazon OpenSearch Service now supports VPC egress, enabling outbound traffic from your OpenSearch domain to route privately through your VPC instead of the public internet.
+
 # v1.67.1 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

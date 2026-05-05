@@ -1,3 +1,7 @@
+# v1.25.0 (2026-05-05)
+
+* **Feature**: Add support for DICOM Json Metadata Override features in startDICOMImportJob API
+
 # v1.24.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

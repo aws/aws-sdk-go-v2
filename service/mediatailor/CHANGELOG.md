@@ -1,3 +1,7 @@
+# v1.58.0 (2026-05-05)
+
+* **Feature**: Added support for Monetization Functions. Monetization Functions let you enrich ad requests with external data and transform session parameters using JSONata expressions, without deploying custom infrastructure.
+
 # v1.57.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.
