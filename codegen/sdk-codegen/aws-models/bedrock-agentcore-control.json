@@ -8852,6 +8852,37 @@
         "com.amazonaws.bedrockagentcorecontrol#DomainName": {
             "type": "string"
         },
+        "com.amazonaws.bedrockagentcorecontrol#EfsAccessPointArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:access-point/fsap-[0-9a-f]{8,40}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#EfsAccessPointConfiguration": {
+            "type": "structure",
+            "members": {
+                "accessPointArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EfsAccessPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the EFS access point to mount into the AgentCore Runtime.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "mountPath": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MountPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mount path for the EFS access point inside the AgentCore Runtime. The path must be under <code>/mnt</code> with exactly one subdirectory level (for example, <code>/mnt/data</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for an Amazon EFS access point filesystem mounted into the AgentCore Runtime. EFS access points provide shared file storage accessible from your AgentCore Runtime sessions.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#EncryptionFailure": {
             "type": "structure",
             "members": {
@@ -9604,6 +9635,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for session storage. Session storage provides persistent storage that is preserved across AgentCore Runtime session invocations.</p>"
                     }
+                },
+                "s3FilesAccessPoint": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#S3FilesAccessPointConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for an Amazon S3 Files access point to mount into the AgentCore Runtime.</p>"
+                    }
+                },
+                "efsAccessPoint": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#EfsAccessPointConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for an Amazon EFS access point to mount into the AgentCore Runtime.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9618,7 +9661,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 1
+                    "max": 5
                 }
             }
         },
@@ -21928,6 +21971,37 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The Amazon S3 configuration for a gateway. This structure defines how the gateway accesses files in Amazon S3.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#S3FilesAccessPointArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:aws[-a-z]*:s3files:[0-9a-z-:]+:file-system/fs-[0-9a-f]{17,40}/access-point/fsap-[0-9a-f]{17,40}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#S3FilesAccessPointConfiguration": {
+            "type": "structure",
+            "members": {
+                "accessPointArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#S3FilesAccessPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the S3 Files access point to mount into the AgentCore Runtime.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "mountPath": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MountPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mount path for the S3 Files access point inside the AgentCore Runtime. The path must be under <code>/mnt</code> with exactly one subdirectory level (for example, <code>/mnt/data</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for an Amazon S3 Files access point filesystem mounted into the AgentCore Runtime. S3 Files access points provide shared file storage accessible from your AgentCore Runtime sessions.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#S3Location": {
