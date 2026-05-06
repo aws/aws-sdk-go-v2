@@ -3449,6 +3449,24 @@ func validateDeleteMemoryStrategyInput(v *types.DeleteMemoryStrategyInput) error
 	}
 }
 
+func validateEfsAccessPointConfiguration(v *types.EfsAccessPointConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EfsAccessPointConfiguration"}
+	if v.AccessPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessPointArn"))
+	}
+	if v.MountPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MountPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEpisodicMemoryStrategyInput(v *types.EpisodicMemoryStrategyInput) error {
 	if v == nil {
 		return nil
@@ -3645,6 +3663,16 @@ func validateFilesystemConfiguration(v types.FilesystemConfiguration) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FilesystemConfiguration"}
 	switch uv := v.(type) {
+	case *types.FilesystemConfigurationMemberEfsAccessPoint:
+		if err := validateEfsAccessPointConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[efsAccessPoint]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.FilesystemConfigurationMemberS3FilesAccessPoint:
+		if err := validateS3FilesAccessPointConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3FilesAccessPoint]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.FilesystemConfigurationMemberSessionStorage:
 		if err := validateSessionStorageConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[sessionStorage]", err.(smithy.InvalidParamsError))
@@ -5422,6 +5450,24 @@ func validateRuntimeTargetConfiguration(v *types.RuntimeTargetConfiguration) err
 	invalidParams := smithy.InvalidParamsError{Context: "RuntimeTargetConfiguration"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3FilesAccessPointConfiguration(v *types.S3FilesAccessPointConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3FilesAccessPointConfiguration"}
+	if v.AccessPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessPointArn"))
+	}
+	if v.MountPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MountPath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

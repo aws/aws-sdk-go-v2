@@ -1,0 +1,8 @@
+{
+    "id": "dd976e5c-9d3d-4c92-9490-91fef6764c89",
+    "type": "feature",
+    "description": "Amazon Lex V2 introduces audio filler support for speech-to-speech bots. Configure melody or typing sounds that play during backend processing to reduce perceived latency and maintain a natural conversational experience for callers.",
+    "modules": [
+        "service/lexmodelsv2"
+    ]
+}

@@ -53548,6 +53548,15 @@ func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetails(v **types.Clust
 				sv.ExecutionRole = ptr.String(jtv)
 			}
 
+		case "ImageVersionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterImageVersionStatus to be of type string, got %T instead", value)
+				}
+				sv.ImageVersionStatus = types.ClusterImageVersionStatus(jtv)
+			}
+
 		case "InstanceGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -54545,6 +54554,15 @@ func awsAwsjson11_deserializeDocumentClusterNodeDetails(v **types.ClusterNodeDet
 				sv.DesiredImageId = ptr.String(jtv)
 			}
 
+		case "ImageVersionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterImageVersionStatus to be of type string, got %T instead", value)
+				}
+				sv.ImageVersionStatus = types.ClusterImageVersionStatus(jtv)
+			}
+
 		case "InstanceGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -54830,6 +54848,15 @@ func awsAwsjson11_deserializeDocumentClusterNodeSummary(v **types.ClusterNodeSum
 
 	for key, value := range shape {
 		switch key {
+		case "ImageVersionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterImageVersionStatus to be of type string, got %T instead", value)
+				}
+				sv.ImageVersionStatus = types.ClusterImageVersionStatus(jtv)
+			}
+
 		case "InstanceGroupName":
 			if value != nil {
 				jtv, ok := value.(string)

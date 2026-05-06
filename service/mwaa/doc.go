@@ -10,8 +10,8 @@
 //
 // Endpoints
 //
-//   - api.airflow.{region}.amazonaws.com - This endpoint is used for environment
-//     management.
+//   - api.airflow.{region}.amazonaws.com (use api.airflow.{region}.api.aws for
+//     IPv6) - This endpoint is used for environment management.
 //
 // [CreateEnvironment]
 //
@@ -29,8 +29,8 @@
 //
 // [UpdateEnvironment]
 //
-//   - env.airflow.{region}.amazonaws.com - This endpoint is used to operate the
-//     Airflow environment.
+//   - env.airflow.{region}.amazonaws.com (use env.airflow.{region}.api.aws for
+//     IPv6) - This endpoint is used to operate the Airflow environment.
 //
 // [CreateCliToken]
 //

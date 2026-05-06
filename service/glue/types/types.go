@@ -3514,6 +3514,11 @@ type DataQualityEvaluationRunAdditionalRunOptions struct {
 	// Set the evaluation method for composite rules in the ruleset to ROW/COLUMN
 	CompositeRuleEvaluationMethod DQCompositeRuleEvaluationMethod
 
+	// A custom prefix for the CloudWatch log group names. When specified, evaluation
+	// run logs are written to /error and /output instead of the default
+	// /aws-glue/data-quality/error and /aws-glue/data-quality/output log groups.
+	CustomLogGroupPrefix *string
+
 	// Prefix for Amazon S3 to store results.
 	ResultsS3Prefix *string
 
@@ -3783,6 +3788,9 @@ type DataQualityRulesetEvaluationRunFilter struct {
 	//
 	// This member is required.
 	DataSource *DataSource
+
+	// Filter results by the name of the ruleset.
+	RulesetName *string
 
 	// Filter results by runs that started after this time.
 	StartedAfter *time.Time

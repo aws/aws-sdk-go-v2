@@ -28416,6 +28416,55 @@ func awsRestjson1_deserializeDocumentDescriptors(v **types.Descriptors, value in
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEfsAccessPointConfiguration(v **types.EfsAccessPointConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EfsAccessPointConfiguration
+	if *v == nil {
+		sv = &types.EfsAccessPointConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accessPointArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EfsAccessPointArn to be of type string, got %T instead", value)
+				}
+				sv.AccessPointArn = ptr.String(jtv)
+			}
+
+		case "mountPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MountPath to be of type string, got %T instead", value)
+				}
+				sv.MountPath = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEncryptionFailure(v **types.EncryptionFailure, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -29174,6 +29223,26 @@ loop:
 			continue
 		}
 		switch key {
+		case "efsAccessPoint":
+			var mv types.EfsAccessPointConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentEfsAccessPointConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.FilesystemConfigurationMemberEfsAccessPoint{Value: mv}
+			break loop
+
+		case "s3FilesAccessPoint":
+			var mv types.S3FilesAccessPointConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentS3FilesAccessPointConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.FilesystemConfigurationMemberS3FilesAccessPoint{Value: mv}
+			break loop
+
 		case "sessionStorage":
 			var mv types.SessionStorageConfiguration
 			destAddr := &mv
@@ -38183,6 +38252,55 @@ func awsRestjson1_deserializeDocumentS3Configuration(v **types.S3Configuration, 
 					return fmt.Errorf("expected S3BucketUri to be of type string, got %T instead", value)
 				}
 				sv.Uri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3FilesAccessPointConfiguration(v **types.S3FilesAccessPointConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3FilesAccessPointConfiguration
+	if *v == nil {
+		sv = &types.S3FilesAccessPointConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accessPointArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3FilesAccessPointArn to be of type string, got %T instead", value)
+				}
+				sv.AccessPointArn = ptr.String(jtv)
+			}
+
+		case "mountPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MountPath to be of type string, got %T instead", value)
+				}
+				sv.MountPath = ptr.String(jtv)
 			}
 
 		default:

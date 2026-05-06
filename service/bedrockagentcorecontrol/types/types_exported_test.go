@@ -589,6 +589,12 @@ func ExampleFilesystemConfiguration_outputUsage() {
 	var union types.FilesystemConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.FilesystemConfigurationMemberEfsAccessPoint:
+		_ = v.Value // Value is types.EfsAccessPointConfiguration
+
+	case *types.FilesystemConfigurationMemberS3FilesAccessPoint:
+		_ = v.Value // Value is types.S3FilesAccessPointConfiguration
+
 	case *types.FilesystemConfigurationMemberSessionStorage:
 		_ = v.Value // Value is types.SessionStorageConfiguration
 
@@ -601,6 +607,8 @@ func ExampleFilesystemConfiguration_outputUsage() {
 	}
 }
 
+var _ *types.S3FilesAccessPointConfiguration
+var _ *types.EfsAccessPointConfiguration
 var _ *types.SessionStorageConfiguration
 
 func ExampleFilterValue_outputUsage() {

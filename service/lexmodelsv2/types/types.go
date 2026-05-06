@@ -1248,6 +1248,41 @@ type AudioAndDTMFInputSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration that plays background filler audio during speech-to-speech
+// interactions to mask processing delays and improve the perceived responsiveness
+// of the bot.
+//
+// Audio filler requires unifiedSpeechSettings (speech-to-speech) to be enabled on
+// the bot locale when enabled is true .
+type AudioFillerSettings struct {
+
+	// The identifier of the audio filler to play while Amazon Lex processes the
+	// user's input. This field is required when enabled is true .
+	AudioType AudioFillerType
+
+	// Specifies whether audio filler playback is enabled for the bot locale. Set to
+	// true to play filler audio while Amazon Lex processes a user utterance. Set to
+	// false to disable filler audio.
+	Enabled bool
+
+	// The minimum time, in milliseconds, that audio filler plays once it has started,
+	// even if the bot response becomes ready sooner. Valid range is 1000 to 5000
+	// milliseconds. If not specified, Amazon Lex uses a default of 3000 milliseconds.
+	MinimumPlayDurationInMilliseconds *int32
+
+	// The silent delay, in milliseconds, inserted between the end of audio filler
+	// playback and the start of the bot's response. Valid range is 200 to 1000
+	// milliseconds. If not specified, Amazon Lex uses a default of 500 milliseconds.
+	ResponseDeliveryDelayInMilliseconds *int32
+
+	// The time, in milliseconds, to wait after the end of the user's utterance before
+	// starting audio filler playback. Valid range is 500 to 5000 milliseconds. If not
+	// specified, Amazon Lex uses a default of 2500 milliseconds.
+	StartDelayInMilliseconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // The location of audio log files collected when conversation logging is enabled
 // for a bot.
 type AudioLogDestination struct {
@@ -1699,6 +1734,11 @@ type BotLocaleImportSpecification struct {
 	//
 	// This member is required.
 	LocaleId *string
+
+	// Audio filler settings to apply when importing the bot locale configuration.
+	// Audio filler requires unifiedSpeechSettings (speech-to-speech) to be enabled
+	// when enabled is true .
+	AudioFillerSettings *AudioFillerSettings
 
 	// Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent
 	// , AMAZON.KendraSearchIntent , or both when returning alternative intents.

@@ -19599,6 +19599,11 @@ func awsAwsjson11_serializeDocumentDataQualityEvaluationRunAdditionalRunOptions(
 		ok.String(string(v.CompositeRuleEvaluationMethod))
 	}
 
+	if v.CustomLogGroupPrefix != nil {
+		ok := object.Key("CustomLogGroupPrefix")
+		ok.String(*v.CustomLogGroupPrefix)
+	}
+
 	if v.ResultsS3Prefix != nil {
 		ok := object.Key("ResultsS3Prefix")
 		ok.String(*v.ResultsS3Prefix)
@@ -19724,6 +19729,11 @@ func awsAwsjson11_serializeDocumentDataQualityRulesetEvaluationRunFilter(v *type
 		if err := awsAwsjson11_serializeDocumentDataSource(v.DataSource, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.RulesetName != nil {
+		ok := object.Key("RulesetName")
+		ok.String(*v.RulesetName)
 	}
 
 	if v.StartedAfter != nil {

@@ -378,6 +378,25 @@ func (ControlStatus) Values() []ControlStatus {
 	}
 }
 
+type DateRangeComparison string
+
+// Enum values for DateRangeComparison
+const (
+	DateRangeComparisonWithin    DateRangeComparison = "WITHIN"
+	DateRangeComparisonOlderThan DateRangeComparison = "OLDER_THAN"
+)
+
+// Values returns all known values for DateRangeComparison. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DateRangeComparison) Values() []DateRangeComparison {
+	return []DateRangeComparison{
+		"WITHIN",
+		"OLDER_THAN",
+	}
+}
+
 type DateRangeUnit string
 
 // Enum values for DateRangeUnit
@@ -1057,6 +1076,44 @@ func (Partition) Values() []Partition {
 		"aws",
 		"aws-cn",
 		"aws-us-gov",
+	}
+}
+
+type RecommendationStatus string
+
+// Enum values for RecommendationStatus
+const (
+	RecommendationStatusInProgress RecommendationStatus = "IN_PROGRESS"
+	RecommendationStatusSucceeded  RecommendationStatus = "SUCCEEDED"
+	RecommendationStatusFailed     RecommendationStatus = "FAILED"
+)
+
+// Values returns all known values for RecommendationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationStatus) Values() []RecommendationStatus {
+	return []RecommendationStatus{
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
+type RecommendationType string
+
+// Enum values for RecommendationType
+const (
+	RecommendationTypeUnusedPermissionRecommendation RecommendationType = "UNUSED_PERMISSION_RECOMMENDATION"
+)
+
+// Values returns all known values for RecommendationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationType) Values() []RecommendationType {
+	return []RecommendationType{
+		"UNUSED_PERMISSION_RECOMMENDATION",
 	}
 }
 

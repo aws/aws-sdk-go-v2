@@ -1638,6 +1638,25 @@ type Descriptors struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for an Amazon EFS access point filesystem mounted into the
+// AgentCore Runtime. EFS access points provide shared file storage accessible from
+// your AgentCore Runtime sessions.
+type EfsAccessPointConfiguration struct {
+
+	// The ARN of the EFS access point to mount into the AgentCore Runtime.
+	//
+	// This member is required.
+	AccessPointArn *string
+
+	// The mount path for the EFS access point inside the AgentCore Runtime. The path
+	// must be under /mnt with exactly one subdirectory level (for example, /mnt/data ).
+	//
+	// This member is required.
+	MountPath *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains configurations to override the default consolidation step for the
 // episodic memory strategy.
 type EpisodicConsolidationOverride struct {
@@ -2032,10 +2051,32 @@ func (*ExtractionConfigurationMemberCustomExtractionConfiguration) isExtractionC
 //
 // The following types satisfy this interface:
 //
+//	FilesystemConfigurationMemberEfsAccessPoint
+//	FilesystemConfigurationMemberS3FilesAccessPoint
 //	FilesystemConfigurationMemberSessionStorage
 type FilesystemConfiguration interface {
 	isFilesystemConfiguration()
 }
+
+// Configuration for an Amazon EFS access point to mount into the AgentCore
+// Runtime.
+type FilesystemConfigurationMemberEfsAccessPoint struct {
+	Value EfsAccessPointConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FilesystemConfigurationMemberEfsAccessPoint) isFilesystemConfiguration() {}
+
+// Configuration for an Amazon S3 Files access point to mount into the AgentCore
+// Runtime.
+type FilesystemConfigurationMemberS3FilesAccessPoint struct {
+	Value S3FilesAccessPointConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FilesystemConfigurationMemberS3FilesAccessPoint) isFilesystemConfiguration() {}
 
 // Configuration for session storage. Session storage provides persistent storage
 // that is preserved across AgentCore Runtime session invocations.
@@ -5544,6 +5585,26 @@ type S3Configuration struct {
 	// The URI of the Amazon S3 object. This URI specifies the location of the object
 	// in Amazon S3.
 	Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for an Amazon S3 Files access point filesystem mounted into the
+// AgentCore Runtime. S3 Files access points provide shared file storage accessible
+// from your AgentCore Runtime sessions.
+type S3FilesAccessPointConfiguration struct {
+
+	// The ARN of the S3 Files access point to mount into the AgentCore Runtime.
+	//
+	// This member is required.
+	AccessPointArn *string
+
+	// The mount path for the S3 Files access point inside the AgentCore Runtime. The
+	// path must be under /mnt with exactly one subdirectory level (for example,
+	// /mnt/data ).
+	//
+	// This member is required.
+	MountPath *string
 
 	noSmithyDocumentSerde
 }

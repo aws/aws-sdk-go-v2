@@ -12147,6 +12147,23 @@ func awsRestjson1_serializeDocumentDescriptors(v *types.Descriptors, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEfsAccessPointConfiguration(v *types.EfsAccessPointConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessPointArn != nil {
+		ok := object.Key("accessPointArn")
+		ok.String(*v.AccessPointArn)
+	}
+
+	if v.MountPath != nil {
+		ok := object.Key("mountPath")
+		ok.String(*v.MountPath)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEntryPoints(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -12439,6 +12456,18 @@ func awsRestjson1_serializeDocumentFilesystemConfiguration(v types.FilesystemCon
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.FilesystemConfigurationMemberEfsAccessPoint:
+		av := object.Key("efsAccessPoint")
+		if err := awsRestjson1_serializeDocumentEfsAccessPointConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.FilesystemConfigurationMemberS3FilesAccessPoint:
+		av := object.Key("s3FilesAccessPoint")
+		if err := awsRestjson1_serializeDocumentS3FilesAccessPointConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.FilesystemConfigurationMemberSessionStorage:
 		av := object.Key("sessionStorage")
 		if err := awsRestjson1_serializeDocumentSessionStorageConfiguration(&uv.Value, av); err != nil {
@@ -15313,6 +15342,23 @@ func awsRestjson1_serializeDocumentS3Configuration(v *types.S3Configuration, val
 	if v.Uri != nil {
 		ok := object.Key("uri")
 		ok.String(*v.Uri)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3FilesAccessPointConfiguration(v *types.S3FilesAccessPointConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessPointArn != nil {
+		ok := object.Key("accessPointArn")
+		ok.String(*v.AccessPointArn)
+	}
+
+	if v.MountPath != nil {
+		ok := object.Key("mountPath")
+		ok.String(*v.MountPath)
 	}
 
 	return nil

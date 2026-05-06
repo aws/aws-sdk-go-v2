@@ -4539,6 +4539,10 @@ type ClusterInstanceGroupDetails struct {
 	// The execution role for the instance group to assume.
 	ExecutionRole *string
 
+	// The status of the image version for the instance group. Indicates whether the
+	// instance group is running the latest image version or if an update is available.
+	ImageVersionStatus ClusterImageVersionStatus
+
 	// The name of the instance group of a SageMaker HyperPod cluster.
 	InstanceGroupName *string
 
@@ -5087,6 +5091,9 @@ type ClusterNodeDetails struct {
 	// The ID of the Amazon Machine Image (AMI) desired for the node.
 	DesiredImageId *string
 
+	// The status of the image version for the cluster node.
+	ImageVersionStatus ClusterImageVersionStatus
+
 	// The instance group name in which the instance is.
 	InstanceGroupName *string
 
@@ -5182,6 +5189,9 @@ type ClusterNodeSummary struct {
 	//
 	// This member is required.
 	LaunchTime *time.Time
+
+	// The status of the image version for the cluster node.
+	ImageVersionStatus ClusterImageVersionStatus
 
 	// The time when SageMaker last updated the software of the instances in the
 	// cluster.

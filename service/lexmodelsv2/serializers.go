@@ -811,6 +811,13 @@ func awsRestjson1_serializeOpDocumentCreateBotLocaleInput(v *CreateBotLocaleInpu
 	object := value.Object()
 	defer object.Close()
 
+	if v.AudioFillerSettings != nil {
+		ok := object.Key("audioFillerSettings")
+		if err := awsRestjson1_serializeDocumentAudioFillerSettings(v.AudioFillerSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -10345,6 +10352,13 @@ func awsRestjson1_serializeOpDocumentUpdateBotLocaleInput(v *UpdateBotLocaleInpu
 	object := value.Object()
 	defer object.Close()
 
+	if v.AudioFillerSettings != nil {
+		ok := object.Key("audioFillerSettings")
+		if err := awsRestjson1_serializeDocumentAudioFillerSettings(v.AudioFillerSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -12002,6 +12016,38 @@ func awsRestjson1_serializeDocumentAudioAndDTMFInputSpecification(v *types.Audio
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAudioFillerSettings(v *types.AudioFillerSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AudioType) > 0 {
+		ok := object.Key("audioType")
+		ok.String(string(v.AudioType))
+	}
+
+	if v.Enabled {
+		ok := object.Key("enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	if v.MinimumPlayDurationInMilliseconds != nil {
+		ok := object.Key("minimumPlayDurationInMilliseconds")
+		ok.Integer(*v.MinimumPlayDurationInMilliseconds)
+	}
+
+	if v.ResponseDeliveryDelayInMilliseconds != nil {
+		ok := object.Key("responseDeliveryDelayInMilliseconds")
+		ok.Integer(*v.ResponseDeliveryDelayInMilliseconds)
+	}
+
+	if v.StartDelayInMilliseconds != nil {
+		ok := object.Key("startDelayInMilliseconds")
+		ok.Integer(*v.StartDelayInMilliseconds)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAudioLogDestination(v *types.AudioLogDestination, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -12373,6 +12419,13 @@ func awsRestjson1_serializeDocumentBotLocaleFilters(v []types.BotLocaleFilter, v
 func awsRestjson1_serializeDocumentBotLocaleImportSpecification(v *types.BotLocaleImportSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AudioFillerSettings != nil {
+		ok := object.Key("audioFillerSettings")
+		if err := awsRestjson1_serializeDocumentAudioFillerSettings(v.AudioFillerSettings, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.BotId != nil {
 		ok := object.Key("botId")

@@ -1,0 +1,8 @@
+{
+    "id": "1de994f4-abe4-493a-b03c-9636d71c0349",
+    "type": "feature",
+    "description": "Amazon SageMaker HyperPod now returns ImageVersionStatus in DescribeCluster, DescribeClusterNode, and ListClusterNodes responses, indicating whether cluster instances are running the latest available image version.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

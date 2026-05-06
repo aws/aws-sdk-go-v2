@@ -1,0 +1,8 @@
+{
+    "id": "b1f07f18-73df-4f06-bbb9-ffa9aff5ca6d",
+    "type": "feature",
+    "description": "The ImportDiskImage API now enforces a maximum character limit of 128 characters on the image name field.",
+    "modules": [
+        "service/imagebuilder"
+    ]
+}

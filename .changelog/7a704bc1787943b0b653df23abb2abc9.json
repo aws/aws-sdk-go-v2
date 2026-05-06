@@ -1,0 +1,8 @@
+{
+    "id": "7a704bc1-7879-43b0-b653-df23abb2abc9",
+    "type": "feature",
+    "description": "Release GenerateRecommendedPolicyV2 and GetRecommendedPolicyV2 APIs. This supports generating and retrieving policy recommendations to remediate unused permissions findings that are now being supported on Security Hub.",
+    "modules": [
+        "service/securityhub"
+    ]
+}
