@@ -1,8 +1,0 @@
-{
-    "id": "e451a207-c75d-4cff-9102-8578794ff793",
-    "type": "feature",
-    "description": "Validate outpost access point resource name",
-    "modules": [
-        "service/s3"
-    ]
-}

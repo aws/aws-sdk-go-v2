@@ -1,3 +1,7 @@
+# v1.61.0 (2026-05-06)
+
+* **Feature**: Amazon Lex V2 introduces audio filler support for speech-to-speech bots. Configure melody or typing sounds that play during backend processing to reduce perceived latency and maintain a natural conversational experience for callers.
+
 # v1.60.4 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

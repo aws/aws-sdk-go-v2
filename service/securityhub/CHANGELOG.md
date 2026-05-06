@@ -1,3 +1,7 @@
+# v1.70.0 (2026-05-06)
+
+* **Feature**: Release GenerateRecommendedPolicyV2 and GetRecommendedPolicyV2 APIs. This supports generating and retrieving policy recommendations to remediate unused permissions findings that are now being supported on Security Hub.
+
 # v1.69.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

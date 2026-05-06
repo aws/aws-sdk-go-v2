@@ -1,3 +1,26 @@
+# Release (2026-05-06)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.36.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1360-2026-05-06)
+  * **Feature**: Adds support for bring-your-own file system in AgentCore Runtime. Developers can mount Amazon S3 Files and Amazon EFS access points directly into agent sessions using filesystemConfigurations.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.141.0](service/glue/CHANGELOG.md#v11410-2026-05-06)
+  * **Feature**: Adds support for a CustomLogGroupPrefix parameter in StartDataQualityRulesetEvaluationRun to specify custom CloudWatch log group paths, and a RulesetName filter in ListDataQualityRulesetEvaluationRuns to filter evaluation runs by ruleset name.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.54.0](service/imagebuilder/CHANGELOG.md#v1540-2026-05-06)
+  * **Feature**: The ImportDiskImage API now enforces a maximum character limit of 128 characters on the image name field.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.61.0](service/lexmodelsv2/CHANGELOG.md#v1610-2026-05-06)
+  * **Feature**: Amazon Lex V2 introduces audio filler support for speech-to-speech bots. Configure melody or typing sounds that play during backend processing to reduce perceived latency and maintain a natural conversational experience for callers.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.40.0](service/mwaa/CHANGELOG.md#v1400-2026-05-06)
+  * **Feature**: Amazon MWAA now supports a PublicAndPrivate webserver access mode. The Airflow web server is accessible over both public and private endpoints, enabling workers in VPCs without internet access to reach the Task API privately while retaining public access to the Airflow UI.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.101.0](service/s3/CHANGELOG.md#v11010-2026-05-06)
+  * **Feature**: Validate outpost access point resource name
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.246.0](service/sagemaker/CHANGELOG.md#v12460-2026-05-06)
+  * **Feature**: Amazon SageMaker HyperPod now returns ImageVersionStatus in DescribeCluster, DescribeClusterNode, and ListClusterNodes responses, indicating whether cluster instances are running the latest available image version.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.70.0](service/securityhub/CHANGELOG.md#v1700-2026-05-06)
+  * **Feature**: Release GenerateRecommendedPolicyV2 and GetRecommendedPolicyV2 APIs. This supports generating and retrieving policy recommendations to remediate unused permissions findings that are now being supported on Security Hub.
+
 # Release (2026-05-05)
 
 ## Module Highlights

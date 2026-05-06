@@ -1,3 +1,7 @@
+# v1.54.0 (2026-05-06)
+
+* **Feature**: The ImportDiskImage API now enforces a maximum character limit of 128 characters on the image name field.
+
 # v1.53.1 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

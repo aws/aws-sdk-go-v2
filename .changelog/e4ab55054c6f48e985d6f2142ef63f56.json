@@ -1,8 +1,0 @@
-{
-    "id": "e4ab5505-4c6f-48e9-85d6-f2142ef63f56",
-    "type": "feature",
-    "description": "Adds support for bring-your-own file system in AgentCore Runtime. Developers can mount Amazon S3 Files and Amazon EFS access points directly into agent sessions using filesystemConfigurations.",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

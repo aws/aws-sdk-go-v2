@@ -1,3 +1,7 @@
+# v1.36.0 (2026-05-06)
+
+* **Feature**: Adds support for bring-your-own file system in AgentCore Runtime. Developers can mount Amazon S3 Files and Amazon EFS access points directly into agent sessions using filesystemConfigurations.
+
 # v1.35.0 (2026-05-04)
 
 * **Feature**: Amazon Bedrock AgentCore gateways now support MCP Sessions and response streaming from MCP targets. Session timeouts can be set between 15 minutes and 8 hours, and response streaming enables forwarding stream events sent by MCP targets to gateway users.

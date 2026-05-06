@@ -1,3 +1,7 @@
+# v1.141.0 (2026-05-06)
+
+* **Feature**: Adds support for a CustomLogGroupPrefix parameter in StartDataQualityRulesetEvaluationRun to specify custom CloudWatch log group paths, and a RulesetName filter in ListDataQualityRulesetEvaluationRuns to filter evaluation runs by ruleset name.
+
 # v1.140.1 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.
