@@ -1,3 +1,7 @@
+# v1.10.0 (2026-05-07)
+
+* **Feature**: Updated ListInvoiceSummaries API to add new ReceiverRole filter in Request and Response
+
 # v1.9.10 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

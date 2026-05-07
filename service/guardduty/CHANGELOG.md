@@ -1,3 +1,7 @@
+# v1.75.4 (2026-05-07)
+
+* **Documentation**: This is a documentation update
+
 # v1.75.3 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

@@ -1,3 +1,7 @@
+# v1.43.0 (2026-05-07)
+
+* **Feature**: Adds supports for DNS64 on inbound endpoints and IPv6 forwarding through the internet gateway (IGW) on outbound endpoints, making it easier to manage hybrid DNS across IPv4 and IPv6 networks.
+
 # v1.42.7 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

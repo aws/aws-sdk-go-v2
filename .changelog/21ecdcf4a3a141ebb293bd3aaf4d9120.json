@@ -1,8 +1,0 @@
-{
-    "id": "21ecdcf4-a3a1-41eb-b293-bd3aaf4d9120",
-    "type": "feature",
-    "description": "Adds supports for DNS64 on inbound endpoints and IPv6 forwarding through the internet gateway (IGW) on outbound endpoints, making it easier to manage hybrid DNS across IPv4 and IPv6 networks.",
-    "modules": [
-        "service/route53resolver"
-    ]
-}

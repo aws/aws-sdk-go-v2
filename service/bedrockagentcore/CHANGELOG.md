@@ -1,3 +1,7 @@
+# v1.25.0 (2026-05-07)
+
+* **Feature**: Launching AgentCore payments - a capability that provides secure, instant microtransaction payments for AI agents to access paid APIs, MCP servers, and content. It handles payment processing for x402 protocol, payment limits, and 3P wallet integrations with Coinbase CDP and Stripe (Privy).
+
 # v1.24.0 (2026-04-30)
 
 * **Feature**: AgentCore Identity now supports on-behalf-of token exchange OAuth2. AgentCore Memory now supports metadata for LongTerm Memory Records.

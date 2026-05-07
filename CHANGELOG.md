@@ -1,3 +1,21 @@
+# Release (2026-05-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bcmdataexports`: [v1.15.0](service/bcmdataexports/CHANGELOG.md#v1150-2026-05-07)
+  * **Feature**: With this release, customers can configure their data exports to generate additional integration artifacts for Athena and Redshift.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.25.0](service/bedrockagentcore/CHANGELOG.md#v1250-2026-05-07)
+  * **Feature**: Launching AgentCore payments - a capability that provides secure, instant microtransaction payments for AI agents to access paid APIs, MCP servers, and content. It handles payment processing for x402 protocol, payment limits, and 3P wallet integrations with Coinbase CDP and Stripe (Privy).
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.37.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1370-2026-05-07)
+  * **Feature**: Launching AgentCore payments - a capability that provides secure, instant microtransaction payments for AI agents to access paid APIs, MCP servers, and content. It handles payment processing for x402 protocol, payment limits, and 3P wallet integrations with Coinbase CDP and Stripe (Privy).
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.301.0](service/ec2/CHANGELOG.md#v13010-2026-05-07)
+  * **Feature**: DescribeInstanceTypes now accepts an IncludeUnsupportedInRegion parameter. When set, the response also lists instance types that are not available in the current Region. Each instance type includes a SupportedInRegion field indicating its regional availability.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.75.4](service/guardduty/CHANGELOG.md#v1754-2026-05-07)
+  * **Documentation**: This is a documentation update
+* `github.com/aws/aws-sdk-go-v2/service/invoicing`: [v1.10.0](service/invoicing/CHANGELOG.md#v1100-2026-05-07)
+  * **Feature**: Updated ListInvoiceSummaries API to add new ReceiverRole filter in Request and Response
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.43.0](service/route53resolver/CHANGELOG.md#v1430-2026-05-07)
+  * **Feature**: Adds supports for DNS64 on inbound endpoints and IPv6 forwarding through the internet gateway (IGW) on outbound endpoints, making it easier to manage hybrid DNS across IPv4 and IPv6 networks.
+
 # Release (2026-05-06)
 
 ## General Highlights

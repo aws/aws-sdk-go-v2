@@ -1,3 +1,7 @@
+# v1.15.0 (2026-05-07)
+
+* **Feature**: With this release, customers can configure their data exports to generate additional integration artifacts for Athena and Redshift.
+
 # v1.14.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.
