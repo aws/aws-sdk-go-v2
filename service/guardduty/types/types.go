@@ -54,10 +54,12 @@ type AccessKeyDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the account.
+// Contains information about the Amazon Web Services account within which the
+// activity took place.
 type Account struct {
 
-	// ID of the member's Amazon Web Services account
+	// The Amazon Web Services account ID within which the activity took place. This
+	// may differ from the account that owns the user identity.
 	//
 	// This member is required.
 	Uid *string
@@ -4879,7 +4881,9 @@ type User struct {
 	// This member is required.
 	Uid *string
 
-	// Contains information about the Amazon Web Services account.
+	// Contains information about the Amazon Web Services account within which the
+	// activity took place. This is not necessarily the account that owns the user
+	// identity.
 	Account *Account
 
 	// The credentials of the user ID.

@@ -1244,6 +1244,11 @@ func awsAwsjson10_serializeDocumentInvoiceSummariesFilter(v *types.InvoiceSummar
 		ok.String(*v.InvoicingEntity)
 	}
 
+	if len(v.ReceiverRole) > 0 {
+		ok := object.Key("ReceiverRole")
+		ok.String(string(v.ReceiverRole))
+	}
+
 	if v.TimeInterval != nil {
 		ok := object.Key("TimeInterval")
 		if err := awsAwsjson10_serializeDocumentDateInterval(v.TimeInterval, ok); err != nil {

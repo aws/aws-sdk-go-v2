@@ -2541,6 +2541,42 @@ func awsAwsjson10_deserializeDocumentBillingPeriod(v **types.BillingPeriod, valu
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentBillSourceAccountList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AccountIdString to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3051,6 +3087,15 @@ func awsAwsjson10_deserializeDocumentEntity(v **types.Entity, value interface{})
 
 	for key, value := range shape {
 		switch key {
+		case "BillingEntity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingEntity to be of type string, got %T instead", value)
+				}
+				sv.BillingEntity = types.BillingEntity(jtv)
+			}
+
 		case "InvoicingEntity":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3553,6 +3598,42 @@ func awsAwsjson10_deserializeDocumentInvoiceSummary(v **types.InvoiceSummary, va
 				return err
 			}
 
+		case "BillSourceAccounts":
+			if err := awsAwsjson10_deserializeDocumentBillSourceAccountList(&sv.BillSourceAccounts, value); err != nil {
+				return err
+			}
+
+		case "BillSourceAccountsTotalCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BillSourceAccountsTotalCount = ptr.Int32(int32(i64))
+			}
+
+		case "BillType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillType to be of type string, got %T instead", value)
+				}
+				sv.BillType = types.BillType(jtv)
+			}
+
+		case "CommercialInvoiceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
+				}
+				sv.CommercialInvoiceId = ptr.String(jtv)
+			}
+
 		case "DueDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3569,9 +3650,27 @@ func awsAwsjson10_deserializeDocumentInvoiceSummary(v **types.InvoiceSummary, va
 				}
 			}
 
+		case "EinvoiceDeliveryStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EinvoiceDeliveryStatus to be of type string, got %T instead", value)
+				}
+				sv.EinvoiceDeliveryStatus = types.EinvoiceDeliveryStatus(jtv)
+			}
+
 		case "Entity":
 			if err := awsAwsjson10_deserializeDocumentEntity(&sv.Entity, value); err != nil {
 				return err
+			}
+
+		case "InvoiceFrequency":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InvoiceFrequency to be of type string, got %T instead", value)
+				}
+				sv.InvoiceFrequency = types.InvoiceFrequency(jtv)
 			}
 
 		case "InvoiceId":
@@ -3629,6 +3728,24 @@ func awsAwsjson10_deserializeDocumentInvoiceSummary(v **types.InvoiceSummary, va
 					return fmt.Errorf("expected BasicString to be of type string, got %T instead", value)
 				}
 				sv.PurchaseOrderNumber = ptr.String(jtv)
+			}
+
+		case "ReceiverRole":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReceiverRole to be of type string, got %T instead", value)
+				}
+				sv.ReceiverRole = types.ReceiverRole(jtv)
+			}
+
+		case "TaxAuthorityStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TaxAuthorityStatus to be of type string, got %T instead", value)
+				}
+				sv.TaxAuthorityStatus = types.TaxAuthorityStatus(jtv)
 			}
 
 		case "TaxCurrencyAmount":
@@ -4861,6 +4978,24 @@ func awsAwsjson10_deserializeDocumentSupplementalDocument(v **types.Supplemental
 
 	for key, value := range shape {
 		switch key {
+		case "DocumentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringWithoutNewLine to be of type string, got %T instead", value)
+				}
+				sv.DocumentId = ptr.String(jtv)
+			}
+
+		case "DocumentType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SupplementalDocumentType to be of type string, got %T instead", value)
+				}
+				sv.DocumentType = types.SupplementalDocumentType(jtv)
+			}
+
 		case "DocumentUrl":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -134,6 +134,30 @@ func TestCheckSnapshot_CreateEvent(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreatePaymentInstrument(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePaymentInstrument(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePaymentInstrument")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreatePaymentSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePaymentSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePaymentSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteABTest(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteABTest(context.Background(), nil, func(o *Options) {
@@ -175,6 +199,30 @@ func TestCheckSnapshot_DeleteMemoryRecord(t *testing.T) {
 	_, err := svc.DeleteMemoryRecord(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteMemoryRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePaymentInstrument(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePaymentInstrument(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePaymentInstrument")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePaymentSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePaymentSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePaymentSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -290,6 +338,42 @@ func TestCheckSnapshot_GetMemoryRecord(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetPaymentInstrument(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPaymentInstrument(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPaymentInstrument")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPaymentInstrumentBalance(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPaymentInstrumentBalance(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPaymentInstrumentBalance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPaymentSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPaymentSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPaymentSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetRecommendation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRecommendation(context.Background(), nil, func(o *Options) {
@@ -319,6 +403,18 @@ func TestCheckSnapshot_GetResourceOauth2Token(t *testing.T) {
 	_, err := svc.GetResourceOauth2Token(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetResourceOauth2Token")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetResourcePaymentToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePaymentToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourcePaymentToken")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -518,6 +614,30 @@ func TestCheckSnapshot_ListMemoryRecords(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListPaymentInstruments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPaymentInstruments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPaymentInstruments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPaymentSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPaymentSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPaymentSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListRecommendations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListRecommendations(context.Background(), nil, func(o *Options) {
@@ -535,6 +655,18 @@ func TestCheckSnapshot_ListSessions(t *testing.T) {
 	_, err := svc.ListSessions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ProcessPayment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ProcessPayment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ProcessPayment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -781,6 +913,30 @@ func TestUpdateSnapshot_CreateEvent(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreatePaymentInstrument(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePaymentInstrument(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePaymentInstrument")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreatePaymentSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePaymentSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePaymentSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteABTest(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteABTest(context.Background(), nil, func(o *Options) {
@@ -822,6 +978,30 @@ func TestUpdateSnapshot_DeleteMemoryRecord(t *testing.T) {
 	_, err := svc.DeleteMemoryRecord(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteMemoryRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePaymentInstrument(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePaymentInstrument(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePaymentInstrument")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePaymentSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePaymentSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePaymentSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -937,6 +1117,42 @@ func TestUpdateSnapshot_GetMemoryRecord(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetPaymentInstrument(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPaymentInstrument(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPaymentInstrument")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPaymentInstrumentBalance(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPaymentInstrumentBalance(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPaymentInstrumentBalance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPaymentSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPaymentSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPaymentSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetRecommendation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRecommendation(context.Background(), nil, func(o *Options) {
@@ -966,6 +1182,18 @@ func TestUpdateSnapshot_GetResourceOauth2Token(t *testing.T) {
 	_, err := svc.GetResourceOauth2Token(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetResourceOauth2Token")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetResourcePaymentToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePaymentToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourcePaymentToken")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1165,6 +1393,30 @@ func TestUpdateSnapshot_ListMemoryRecords(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListPaymentInstruments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPaymentInstruments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPaymentInstruments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPaymentSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPaymentSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPaymentSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListRecommendations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListRecommendations(context.Background(), nil, func(o *Options) {
@@ -1182,6 +1434,18 @@ func TestUpdateSnapshot_ListSessions(t *testing.T) {
 	_, err := svc.ListSessions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ProcessPayment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ProcessPayment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ProcessPayment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

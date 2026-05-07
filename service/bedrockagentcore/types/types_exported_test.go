@@ -759,6 +759,66 @@ func ExampleLeftExpression_outputUsage() {
 
 var _ *string
 
+func ExampleLinkedAccount_outputUsage() {
+	var union types.LinkedAccount
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.LinkedAccountMemberDeveloperJwt:
+		_ = v.Value // Value is types.LinkedAccountDeveloperJwt
+
+	case *types.LinkedAccountMemberEmail:
+		_ = v.Value // Value is types.LinkedAccountEmail
+
+	case *types.LinkedAccountMemberOAuth2:
+		_ = v.Value // Value is types.LinkedAccountOAuth2
+
+	case *types.LinkedAccountMemberSms:
+		_ = v.Value // Value is types.LinkedAccountSms
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.LinkedAccountDeveloperJwt
+var _ *types.LinkedAccountSms
+var _ *types.LinkedAccountEmail
+var _ types.LinkedAccountOAuth2
+
+func ExampleLinkedAccountOAuth2_outputUsage() {
+	var union types.LinkedAccountOAuth2
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.LinkedAccountOAuth2MemberApple:
+		_ = v.Value // Value is types.OAuth2Authentication
+
+	case *types.LinkedAccountOAuth2MemberGithub:
+		_ = v.Value // Value is types.OAuth2Authentication
+
+	case *types.LinkedAccountOAuth2MemberGoogle:
+		_ = v.Value // Value is types.OAuth2Authentication
+
+	case *types.LinkedAccountOAuth2MemberTelegram:
+		_ = v.Value // Value is types.OAuth2Authentication
+
+	case *types.LinkedAccountOAuth2MemberX:
+		_ = v.Value // Value is types.OAuth2Authentication
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OAuth2Authentication
+
 func ExampleMemoryContent_outputUsage() {
 	var union types.MemoryContent
 	// type switches can be used to check the union value
@@ -900,6 +960,104 @@ func ExamplePayloadType_outputUsage() {
 
 var _ document.Interface
 var _ *types.Conversational
+
+func ExamplePaymentInput_outputUsage() {
+	var union types.PaymentInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PaymentInputMemberCryptoX402:
+		_ = v.Value // Value is types.CryptoX402PaymentInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CryptoX402PaymentInput
+
+func ExamplePaymentInstrumentDetails_outputUsage() {
+	var union types.PaymentInstrumentDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PaymentInstrumentDetailsMemberEmbeddedCryptoWallet:
+		_ = v.Value // Value is types.EmbeddedCryptoWallet
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EmbeddedCryptoWallet
+
+func ExamplePaymentOutput_outputUsage() {
+	var union types.PaymentOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PaymentOutputMemberCryptoX402:
+		_ = v.Value // Value is types.CryptoX402PaymentOutput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CryptoX402PaymentOutput
+
+func ExamplePaymentTokenRequestInput_outputUsage() {
+	var union types.PaymentTokenRequestInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PaymentTokenRequestInputMemberCoinbaseCdpTokenRequest:
+		_ = v.Value // Value is types.CoinbaseCdpTokenRequestInput
+
+	case *types.PaymentTokenRequestInputMemberStripePrivyTokenRequest:
+		_ = v.Value // Value is types.StripePrivyTokenRequestInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.StripePrivyTokenRequestInput
+var _ *types.CoinbaseCdpTokenRequestInput
+
+func ExamplePaymentTokenResponseOutput_outputUsage() {
+	var union types.PaymentTokenResponseOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PaymentTokenResponseOutputMemberCoinbaseCdpTokenResponse:
+		_ = v.Value // Value is types.CoinbaseCdpTokenResponseOutput
+
+	case *types.PaymentTokenResponseOutputMemberStripePrivyTokenResponse:
+		_ = v.Value // Value is types.StripePrivyTokenResponseOutput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CoinbaseCdpTokenResponseOutput
+var _ *types.StripePrivyTokenResponseOutput
 
 func ExampleProxy_outputUsage() {
 	var union types.Proxy

@@ -291,6 +291,27 @@ var _ *types.IamCredentialProvider
 var _ *types.GatewayApiKeyCredentialProvider
 var _ *types.OAuthCredentialProvider
 
+func ExampleCredentialsProviderConfiguration_outputUsage() {
+	var union types.CredentialsProviderConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CredentialsProviderConfigurationMemberCoinbaseCDP:
+		_ = v.Value // Value is types.PaymentCredentialProviderConfiguration
+
+	case *types.CredentialsProviderConfigurationMemberStripePrivy:
+		_ = v.Value // Value is types.PaymentCredentialProviderConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PaymentCredentialProviderConfiguration
+
 func ExampleCustomConfigurationInput_outputUsage() {
 	var union types.CustomConfigurationInput
 	// type switches can be used to check the union value
@@ -1192,6 +1213,50 @@ var _ *types.IncludedOauth2ProviderConfigOutput
 var _ *types.SalesforceOauth2ProviderConfigOutput
 var _ *types.GoogleOauth2ProviderConfigOutput
 var _ *types.LinkedinOauth2ProviderConfigOutput
+
+func ExamplePaymentProviderConfigurationInput_outputUsage() {
+	var union types.PaymentProviderConfigurationInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PaymentProviderConfigurationInputMemberCoinbaseCdpConfiguration:
+		_ = v.Value // Value is types.CoinbaseCdpConfigurationInput
+
+	case *types.PaymentProviderConfigurationInputMemberStripePrivyConfiguration:
+		_ = v.Value // Value is types.StripePrivyConfigurationInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CoinbaseCdpConfigurationInput
+var _ *types.StripePrivyConfigurationInput
+
+func ExamplePaymentProviderConfigurationOutput_outputUsage() {
+	var union types.PaymentProviderConfigurationOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PaymentProviderConfigurationOutputMemberCoinbaseCdpConfiguration:
+		_ = v.Value // Value is types.CoinbaseCdpConfigurationOutput
+
+	case *types.PaymentProviderConfigurationOutputMemberStripePrivyConfiguration:
+		_ = v.Value // Value is types.StripePrivyConfigurationOutput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CoinbaseCdpConfigurationOutput
+var _ *types.StripePrivyConfigurationOutput
 
 func ExamplePolicyDefinition_outputUsage() {
 	var union types.PolicyDefinition

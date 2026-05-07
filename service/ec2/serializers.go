@@ -76237,6 +76237,11 @@ func awsEc2query_serializeOpDocumentDescribeInstanceTypesInput(v *DescribeInstan
 		}
 	}
 
+	if v.IncludeUnsupportedInRegion != nil {
+		objectKey := object.Key("IncludeUnsupportedInRegion")
+		objectKey.Boolean(*v.IncludeUnsupportedInRegion)
+	}
+
 	if v.InstanceTypes != nil {
 		objectKey := object.FlatKey("InstanceType")
 		if err := awsEc2query_serializeDocumentRequestInstanceTypeList(v.InstanceTypes, objectKey); err != nil {

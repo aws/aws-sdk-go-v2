@@ -310,6 +310,66 @@ func (m *validateOpCreateOnlineEvaluationConfig) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePaymentConnector struct {
+}
+
+func (*validateOpCreatePaymentConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePaymentConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePaymentConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePaymentConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreatePaymentCredentialProvider struct {
+}
+
+func (*validateOpCreatePaymentCredentialProvider) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePaymentCredentialProvider) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePaymentCredentialProviderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePaymentCredentialProviderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreatePaymentManager struct {
+}
+
+func (*validateOpCreatePaymentManager) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePaymentManager) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePaymentManagerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePaymentManagerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreatePolicyEngine struct {
 }
 
@@ -705,6 +765,66 @@ func (m *validateOpDeleteOnlineEvaluationConfig) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteOnlineEvaluationConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePaymentConnector struct {
+}
+
+func (*validateOpDeletePaymentConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePaymentConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePaymentConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePaymentConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePaymentCredentialProvider struct {
+}
+
+func (*validateOpDeletePaymentCredentialProvider) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePaymentCredentialProvider) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePaymentCredentialProviderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePaymentCredentialProviderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePaymentManager struct {
+}
+
+func (*validateOpDeletePaymentManager) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePaymentManager) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePaymentManagerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePaymentManagerInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1150,6 +1270,66 @@ func (m *validateOpGetOnlineEvaluationConfig) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPaymentConnector struct {
+}
+
+func (*validateOpGetPaymentConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPaymentConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPaymentConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPaymentConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPaymentCredentialProvider struct {
+}
+
+func (*validateOpGetPaymentCredentialProvider) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPaymentCredentialProvider) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPaymentCredentialProviderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPaymentCredentialProviderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPaymentManager struct {
+}
+
+func (*validateOpGetPaymentManager) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPaymentManager) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPaymentManagerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPaymentManagerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetPolicyEngine struct {
 }
 
@@ -1385,6 +1565,26 @@ func (m *validateOpListGatewayTargets) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListGatewayTargetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPaymentConnectors struct {
+}
+
+func (*validateOpListPaymentConnectors) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPaymentConnectors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPaymentConnectorsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPaymentConnectorsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1870,6 +2070,66 @@ func (m *validateOpUpdateOnlineEvaluationConfig) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePaymentConnector struct {
+}
+
+func (*validateOpUpdatePaymentConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePaymentConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePaymentConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePaymentConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdatePaymentCredentialProvider struct {
+}
+
+func (*validateOpUpdatePaymentCredentialProvider) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePaymentCredentialProvider) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePaymentCredentialProviderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePaymentCredentialProviderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdatePaymentManager struct {
+}
+
+func (*validateOpUpdatePaymentManager) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePaymentManager) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePaymentManagerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePaymentManagerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePolicyEngine struct {
 }
 
@@ -2050,6 +2310,18 @@ func addOpCreateOnlineEvaluationConfigValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpCreateOnlineEvaluationConfig{}, middleware.After)
 }
 
+func addOpCreatePaymentConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePaymentConnector{}, middleware.After)
+}
+
+func addOpCreatePaymentCredentialProviderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePaymentCredentialProvider{}, middleware.After)
+}
+
+func addOpCreatePaymentManagerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePaymentManager{}, middleware.After)
+}
+
 func addOpCreatePolicyEngineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePolicyEngine{}, middleware.After)
 }
@@ -2128,6 +2400,18 @@ func addOpDeleteOauth2CredentialProviderValidationMiddleware(stack *middleware.S
 
 func addOpDeleteOnlineEvaluationConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteOnlineEvaluationConfig{}, middleware.After)
+}
+
+func addOpDeletePaymentConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePaymentConnector{}, middleware.After)
+}
+
+func addOpDeletePaymentCredentialProviderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePaymentCredentialProvider{}, middleware.After)
+}
+
+func addOpDeletePaymentManagerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePaymentManager{}, middleware.After)
 }
 
 func addOpDeletePolicyEngineValidationMiddleware(stack *middleware.Stack) error {
@@ -2218,6 +2502,18 @@ func addOpGetOnlineEvaluationConfigValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpGetOnlineEvaluationConfig{}, middleware.After)
 }
 
+func addOpGetPaymentConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPaymentConnector{}, middleware.After)
+}
+
+func addOpGetPaymentCredentialProviderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPaymentCredentialProvider{}, middleware.After)
+}
+
+func addOpGetPaymentManagerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPaymentManager{}, middleware.After)
+}
+
 func addOpGetPolicyEngineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPolicyEngine{}, middleware.After)
 }
@@ -2264,6 +2560,10 @@ func addOpListGatewayRulesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListGatewayTargetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListGatewayTargets{}, middleware.After)
+}
+
+func addOpListPaymentConnectorsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPaymentConnectors{}, middleware.After)
 }
 
 func addOpListPoliciesValidationMiddleware(stack *middleware.Stack) error {
@@ -2360,6 +2660,18 @@ func addOpUpdateOauth2CredentialProviderValidationMiddleware(stack *middleware.S
 
 func addOpUpdateOnlineEvaluationConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateOnlineEvaluationConfig{}, middleware.After)
+}
+
+func addOpUpdatePaymentConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePaymentConnector{}, middleware.After)
+}
+
+func addOpUpdatePaymentCredentialProviderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePaymentCredentialProvider{}, middleware.After)
+}
+
+func addOpUpdatePaymentManagerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePaymentManager{}, middleware.After)
 }
 
 func addOpUpdatePolicyEngineValidationMiddleware(stack *middleware.Stack) error {
@@ -2917,6 +3229,27 @@ func validateCodeInterpreterNetworkConfiguration(v *types.CodeInterpreterNetwork
 	}
 }
 
+func validateCoinbaseCdpConfigurationInput(v *types.CoinbaseCdpConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CoinbaseCdpConfigurationInput"}
+	if v.ApiKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiKeyId"))
+	}
+	if v.ApiKeySecret == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiKeySecret"))
+	}
+	if v.WalletSecret == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WalletSecret"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateComponentConfiguration(v *types.ComponentConfiguration) error {
 	if v == nil {
 		return nil
@@ -3136,6 +3469,47 @@ func validateCredentialProviderConfigurations(v []types.CredentialProviderConfig
 	invalidParams := smithy.InvalidParamsError{Context: "CredentialProviderConfigurations"}
 	for i := range v {
 		if err := validateCredentialProviderConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCredentialsProviderConfiguration(v types.CredentialsProviderConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CredentialsProviderConfiguration"}
+	switch uv := v.(type) {
+	case *types.CredentialsProviderConfigurationMemberCoinbaseCDP:
+		if err := validatePaymentCredentialProviderConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[coinbaseCDP]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CredentialsProviderConfigurationMemberStripePrivy:
+		if err := validatePaymentCredentialProviderConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[stripePrivy]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCredentialsProviderConfigurations(v []types.CredentialsProviderConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CredentialsProviderConfigurations"}
+	for i := range v {
+		if err := validateCredentialsProviderConfiguration(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -5127,6 +5501,45 @@ func validateOnBehalfOfTokenExchangeConfigType(v *types.OnBehalfOfTokenExchangeC
 	}
 }
 
+func validatePaymentCredentialProviderConfiguration(v *types.PaymentCredentialProviderConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PaymentCredentialProviderConfiguration"}
+	if v.CredentialProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CredentialProviderArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePaymentProviderConfigurationInput(v types.PaymentProviderConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PaymentProviderConfigurationInput"}
+	switch uv := v.(type) {
+	case *types.PaymentProviderConfigurationInputMemberCoinbaseCdpConfiguration:
+		if err := validateCoinbaseCdpConfigurationInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[coinbaseCdpConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.PaymentProviderConfigurationInputMemberStripePrivyConfiguration:
+		if err := validateStripePrivyConfigurationInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[stripePrivyConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePolicyDefinition(v types.PolicyDefinition) error {
 	if v == nil {
 		return nil
@@ -5825,6 +6238,30 @@ func validateStringValidation(v *types.StringValidation) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StringValidation"}
 	if v.AllowedValues == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AllowedValues"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStripePrivyConfigurationInput(v *types.StripePrivyConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StripePrivyConfigurationInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.AppSecret == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppSecret"))
+	}
+	if v.AuthorizationPrivateKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationPrivateKey"))
+	}
+	if v.AuthorizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6795,6 +7232,85 @@ func validateOpCreateOnlineEvaluationConfigInput(v *CreateOnlineEvaluationConfig
 	}
 }
 
+func validateOpCreatePaymentConnectorInput(v *CreatePaymentConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePaymentConnectorInput"}
+	if v.PaymentManagerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.CredentialProviderConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CredentialProviderConfigurations"))
+	} else if v.CredentialProviderConfigurations != nil {
+		if err := validateCredentialsProviderConfigurations(v.CredentialProviderConfigurations); err != nil {
+			invalidParams.AddNested("CredentialProviderConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePaymentCredentialProviderInput(v *CreatePaymentCredentialProviderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePaymentCredentialProviderInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.CredentialProviderVendor) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CredentialProviderVendor"))
+	}
+	if v.ProviderConfigurationInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderConfigurationInput"))
+	} else if v.ProviderConfigurationInput != nil {
+		if err := validatePaymentProviderConfigurationInput(v.ProviderConfigurationInput); err != nil {
+			invalidParams.AddNested("ProviderConfigurationInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePaymentManagerInput(v *CreatePaymentManagerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePaymentManagerInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.AuthorizerType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizerType"))
+	}
+	if v.AuthorizerConfiguration != nil {
+		if err := validateAuthorizerConfiguration(v.AuthorizerConfiguration); err != nil {
+			invalidParams.AddNested("AuthorizerConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreatePolicyEngineInput(v *CreatePolicyEngineInput) error {
 	if v == nil {
 		return nil
@@ -7122,6 +7638,54 @@ func validateOpDeleteOnlineEvaluationConfigInput(v *DeleteOnlineEvaluationConfig
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteOnlineEvaluationConfigInput"}
 	if v.OnlineEvaluationConfigId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OnlineEvaluationConfigId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePaymentConnectorInput(v *DeletePaymentConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePaymentConnectorInput"}
+	if v.PaymentManagerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerId"))
+	}
+	if v.PaymentConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentConnectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePaymentCredentialProviderInput(v *DeletePaymentCredentialProviderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePaymentCredentialProviderInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePaymentManagerInput(v *DeletePaymentManagerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePaymentManagerInput"}
+	if v.PaymentManagerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7478,6 +8042,54 @@ func validateOpGetOnlineEvaluationConfigInput(v *GetOnlineEvaluationConfigInput)
 	}
 }
 
+func validateOpGetPaymentConnectorInput(v *GetPaymentConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPaymentConnectorInput"}
+	if v.PaymentManagerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerId"))
+	}
+	if v.PaymentConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentConnectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPaymentCredentialProviderInput(v *GetPaymentCredentialProviderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPaymentCredentialProviderInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPaymentManagerInput(v *GetPaymentManagerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPaymentManagerInput"}
+	if v.PaymentManagerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetPolicyEngineInput(v *GetPolicyEngineInput) error {
 	if v == nil {
 		return nil
@@ -7659,6 +8271,21 @@ func validateOpListGatewayTargetsInput(v *ListGatewayTargetsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListGatewayTargetsInput"}
 	if v.GatewayIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPaymentConnectorsInput(v *ListPaymentConnectorsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPaymentConnectorsInput"}
+	if v.PaymentManagerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8237,6 +8864,74 @@ func validateOpUpdateOnlineEvaluationConfigInput(v *UpdateOnlineEvaluationConfig
 	if v.DataSourceConfig != nil {
 		if err := validateDataSourceConfig(v.DataSourceConfig); err != nil {
 			invalidParams.AddNested("DataSourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePaymentConnectorInput(v *UpdatePaymentConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePaymentConnectorInput"}
+	if v.PaymentManagerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerId"))
+	}
+	if v.PaymentConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentConnectorId"))
+	}
+	if v.CredentialProviderConfigurations != nil {
+		if err := validateCredentialsProviderConfigurations(v.CredentialProviderConfigurations); err != nil {
+			invalidParams.AddNested("CredentialProviderConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePaymentCredentialProviderInput(v *UpdatePaymentCredentialProviderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePaymentCredentialProviderInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.CredentialProviderVendor) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CredentialProviderVendor"))
+	}
+	if v.ProviderConfigurationInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderConfigurationInput"))
+	} else if v.ProviderConfigurationInput != nil {
+		if err := validatePaymentProviderConfigurationInput(v.ProviderConfigurationInput); err != nil {
+			invalidParams.AddNested("ProviderConfigurationInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePaymentManagerInput(v *UpdatePaymentManagerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePaymentManagerInput"}
+	if v.PaymentManagerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerId"))
+	}
+	if v.AuthorizerConfiguration != nil {
+		if err := validateAuthorizerConfiguration(v.AuthorizerConfiguration); err != nil {
+			invalidParams.AddNested("AuthorizerConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

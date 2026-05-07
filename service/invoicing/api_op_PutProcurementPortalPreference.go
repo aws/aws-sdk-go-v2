@@ -11,8 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This feature API is subject to changing at any time. For more information, see
+//
+// the [Amazon Web Services Service Terms](Betas and Previews).
+//
 // Updates an existing procurement portal preference configuration. This operation
 // can modify settings for e-invoice delivery and purchase order retrieval.
+//
+// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
 func (c *Client) PutProcurementPortalPreference(ctx context.Context, params *PutProcurementPortalPreferenceInput, optFns ...func(*Options)) (*PutProcurementPortalPreferenceOutput, error) {
 	if params == nil {
 		params = &PutProcurementPortalPreferenceInput{}

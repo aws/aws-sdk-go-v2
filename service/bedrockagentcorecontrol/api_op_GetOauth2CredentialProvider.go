@@ -80,8 +80,7 @@ type GetOauth2CredentialProviderOutput struct {
 	// after they complete the authorization flow.
 	CallbackUrl *string
 
-	// The reason for the failure if the OAuth2 credential provider is in a failed
-	// state.
+	// The reason for failure if the OAuth2 credential provider is in a failed state.
 	FailureReason *string
 
 	// The current status of the OAuth2 credential provider.

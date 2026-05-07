@@ -1,0 +1,8 @@
+{
+    "id": "f2aa49f6-8d20-4c21-ae3c-4597f8daa913",
+    "type": "feature",
+    "description": "Updated ListInvoiceSummaries API to add new ReceiverRole filter in Request and Response",
+    "modules": [
+        "service/invoicing"
+    ]
+}

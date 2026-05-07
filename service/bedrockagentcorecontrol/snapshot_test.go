@@ -242,6 +242,42 @@ func TestCheckSnapshot_CreateOnlineEvaluationConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreatePaymentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePaymentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePaymentConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreatePaymentCredentialProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePaymentCredentialProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePaymentCredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreatePaymentManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePaymentManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePaymentManager")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreatePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreatePolicy(context.Background(), nil, func(o *Options) {
@@ -475,6 +511,42 @@ func TestCheckSnapshot_DeleteOnlineEvaluationConfig(t *testing.T) {
 	_, err := svc.DeleteOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePaymentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePaymentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePaymentConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePaymentCredentialProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePaymentCredentialProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePaymentCredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePaymentManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePaymentManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePaymentManager")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -739,6 +811,42 @@ func TestCheckSnapshot_GetOnlineEvaluationConfig(t *testing.T) {
 	_, err := svc.GetOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPaymentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPaymentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPaymentConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPaymentCredentialProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPaymentCredentialProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPaymentCredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPaymentManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPaymentManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPaymentManager")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1039,6 +1147,42 @@ func TestCheckSnapshot_ListOnlineEvaluationConfigs(t *testing.T) {
 	_, err := svc.ListOnlineEvaluationConfigs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListOnlineEvaluationConfigs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPaymentConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPaymentConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPaymentConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPaymentCredentialProviders(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPaymentCredentialProviders(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPaymentCredentialProviders")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPaymentManagers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPaymentManagers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPaymentManagers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1370,6 +1514,42 @@ func TestCheckSnapshot_UpdateOnlineEvaluationConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdatePaymentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePaymentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePaymentConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdatePaymentCredentialProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePaymentCredentialProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePaymentCredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdatePaymentManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePaymentManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePaymentManager")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdatePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdatePolicy(context.Background(), nil, func(o *Options) {
@@ -1621,6 +1801,42 @@ func TestUpdateSnapshot_CreateOnlineEvaluationConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreatePaymentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePaymentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePaymentConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreatePaymentCredentialProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePaymentCredentialProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePaymentCredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreatePaymentManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePaymentManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePaymentManager")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreatePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreatePolicy(context.Background(), nil, func(o *Options) {
@@ -1854,6 +2070,42 @@ func TestUpdateSnapshot_DeleteOnlineEvaluationConfig(t *testing.T) {
 	_, err := svc.DeleteOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePaymentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePaymentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePaymentConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePaymentCredentialProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePaymentCredentialProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePaymentCredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePaymentManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePaymentManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePaymentManager")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2118,6 +2370,42 @@ func TestUpdateSnapshot_GetOnlineEvaluationConfig(t *testing.T) {
 	_, err := svc.GetOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPaymentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPaymentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPaymentConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPaymentCredentialProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPaymentCredentialProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPaymentCredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPaymentManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPaymentManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPaymentManager")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2418,6 +2706,42 @@ func TestUpdateSnapshot_ListOnlineEvaluationConfigs(t *testing.T) {
 	_, err := svc.ListOnlineEvaluationConfigs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListOnlineEvaluationConfigs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPaymentConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPaymentConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPaymentConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPaymentCredentialProviders(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPaymentCredentialProviders(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPaymentCredentialProviders")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPaymentManagers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPaymentManagers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPaymentManagers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2742,6 +3066,42 @@ func TestUpdateSnapshot_UpdateOnlineEvaluationConfig(t *testing.T) {
 	_, err := svc.UpdateOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdatePaymentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePaymentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePaymentConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdatePaymentCredentialProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePaymentCredentialProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePaymentCredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdatePaymentManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePaymentManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePaymentManager")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "dd2ebbb1-1a79-40be-ae2a-1fcdb81babb7",
+    "type": "feature",
+    "description": "Launching AgentCore payments - a capability that provides secure, instant microtransaction payments for AI agents to access paid APIs, MCP servers, and content. It handles payment processing for x402 protocol, payment limits, and 3P wallet integrations with Coinbase CDP and Stripe (Privy).",
+    "modules": [
+        "service/bedrockagentcore"
+    ]
+}

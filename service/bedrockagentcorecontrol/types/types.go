@@ -865,6 +865,48 @@ type CodeInterpreterSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Coinbase CDP configuration - credentials provided by Coinbase Developer Platform
+type CoinbaseCdpConfigurationInput struct {
+
+	// The API key identifier provided by Coinbase Developer Platform.
+	//
+	// This member is required.
+	ApiKeyId *string
+
+	// The API key secret provided by Coinbase Developer Platform.
+	//
+	// This member is required.
+	ApiKeySecret *string
+
+	// The wallet secret provided by Coinbase Developer Platform.
+	//
+	// This member is required.
+	WalletSecret *string
+
+	noSmithyDocumentSerde
+}
+
+// Coinbase CDP configuration output with secret ARNs
+type CoinbaseCdpConfigurationOutput struct {
+
+	// The API key identifier provided by Coinbase Developer Platform.
+	//
+	// This member is required.
+	ApiKeyId *string
+
+	// Contains information about a secret in AWS Secrets Manager.
+	//
+	// This member is required.
+	ApiKeySecretArn *Secret
+
+	// Contains information about a secret in AWS Secrets Manager.
+	//
+	// This member is required.
+	WalletSecretArn *Secret
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for a component within a configuration bundle. The component
 // type is inferred from the component identifier ARN.
 type ComponentConfiguration struct {
@@ -1131,6 +1173,35 @@ type CredentialProviderConfiguration struct {
 
 	noSmithyDocumentSerde
 }
+
+// The credential provider configuration for a payment connector. Specifies the
+// payment provider type and its associated credential provider.
+//
+// The following types satisfy this interface:
+//
+//	CredentialsProviderConfigurationMemberCoinbaseCDP
+//	CredentialsProviderConfigurationMemberStripePrivy
+type CredentialsProviderConfiguration interface {
+	isCredentialsProviderConfiguration()
+}
+
+// The credential provider configuration for a Coinbase CDP payment connector.
+type CredentialsProviderConfigurationMemberCoinbaseCDP struct {
+	Value PaymentCredentialProviderConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*CredentialsProviderConfigurationMemberCoinbaseCDP) isCredentialsProviderConfiguration() {}
+
+// The credential provider configuration for a Stripe Privy payment connector.
+type CredentialsProviderConfigurationMemberStripePrivy struct {
+	Value PaymentCredentialProviderConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*CredentialsProviderConfigurationMemberStripePrivy) isCredentialsProviderConfiguration() {}
 
 // Defines the name of a custom claim field and rules for finding matches to
 // authenticate its value.
@@ -1447,9 +1518,7 @@ type CustomJWTAuthorizerConfiguration struct {
 	// gateway connects to private resources in your VPC.
 	PrivateEndpoint PrivateEndpoint
 
-	// A list of private endpoint overrides for the JWT authorizer. Each override maps
-	// a specific domain to a private endpoint, enabling secure connectivity through
-	// VPC Lattice resource configurations.
+	// The private endpoint overrides for the custom JWT authorizer configuration.
 	PrivateEndpointOverrides []PrivateEndpointOverride
 
 	noSmithyDocumentSerde
@@ -1509,9 +1578,7 @@ type CustomOauth2ProviderConfigInput struct {
 	// connectivity through a VPC Lattice resource configuration.
 	PrivateEndpoint PrivateEndpoint
 
-	// The list of private endpoint overrides for the custom OAuth2 provider. Each
-	// override maps a specific domain to a private endpoint, enabling secure
-	// connectivity through VPC Lattice resource configurations.
+	// The private endpoint overrides for the custom OAuth2 provider configuration.
 	PrivateEndpointOverrides []PrivateEndpointOverride
 
 	noSmithyDocumentSerde
@@ -1539,9 +1606,7 @@ type CustomOauth2ProviderConfigOutput struct {
 	// connectivity through a VPC Lattice resource configuration.
 	PrivateEndpoint PrivateEndpoint
 
-	// The list of private endpoint overrides for the custom OAuth2 provider. Each
-	// override maps a specific domain to a private endpoint, enabling secure
-	// connectivity through VPC Lattice resource configurations.
+	// The private endpoint overrides for the custom OAuth2 provider configuration.
 	PrivateEndpointOverrides []PrivateEndpointOverride
 
 	noSmithyDocumentSerde
@@ -4781,6 +4846,196 @@ type OutputConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Contains summary information about a payment connector.
+type PaymentConnectorSummary struct {
+
+	// The timestamp when the payment connector was last updated.
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
+
+	// The name of the payment connector.
+	//
+	// This member is required.
+	Name *string
+
+	// The unique identifier of the payment connector.
+	//
+	// This member is required.
+	PaymentConnectorId *string
+
+	// The current status of the payment connector. Possible values include CREATING ,
+	// READY , UPDATING , DELETING , CREATE_FAILED , UPDATE_FAILED , and DELETE_FAILED .
+	//
+	// This member is required.
+	Status PaymentConnectorStatus
+
+	// The type of the payment connector, which determines the payment provider
+	// integration.
+	//
+	// This member is required.
+	Type PaymentConnectorType
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for a payment credential provider that stores authentication
+// credentials for a payment provider.
+type PaymentCredentialProviderConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the credential provider that stores the
+	// authentication credentials for the payment provider.
+	//
+	// This member is required.
+	CredentialProviderArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a payment credential provider.
+type PaymentCredentialProviderItem struct {
+
+	// The timestamp when the payment credential provider was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the payment credential provider.
+	//
+	// This member is required.
+	CredentialProviderArn *string
+
+	// Supported vendor types for payment providers using non-standard auth protocols
+	//
+	// This member is required.
+	CredentialProviderVendor PaymentCredentialProviderVendorType
+
+	// The timestamp when the payment credential provider was last updated.
+	//
+	// This member is required.
+	LastUpdatedTime *time.Time
+
+	// The name of the payment credential provider.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a payment manager.
+type PaymentManagerSummary struct {
+
+	// The type of authorizer used by the payment manager.
+	//
+	//   - CUSTOM_JWT - Authorize with a bearer token.
+	//
+	//   - AWS_IAM - Authorize with your Amazon Web Services IAM credentials.
+	//
+	// This member is required.
+	AuthorizerType PaymentsAuthorizerType
+
+	// The timestamp when the payment manager was last updated.
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
+
+	// The name of the payment manager.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the payment manager.
+	//
+	// This member is required.
+	PaymentManagerArn *string
+
+	// The unique identifier of the payment manager.
+	//
+	// This member is required.
+	PaymentManagerId *string
+
+	// The Amazon Resource Name (ARN) of the IAM role associated with the payment
+	// manager.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The current status of the payment manager. Possible values include CREATING ,
+	// READY , UPDATING , DELETING , CREATE_FAILED , UPDATE_FAILED , and DELETE_FAILED .
+	//
+	// This member is required.
+	Status PaymentManagerStatus
+
+	// The timestamp when the payment manager was created.
+	CreatedAt *time.Time
+
+	// The description of the payment manager.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// PROVIDER CONFIGURATION INPUT - Contains secrets for creation/update
+//
+// The following types satisfy this interface:
+//
+//	PaymentProviderConfigurationInputMemberCoinbaseCdpConfiguration
+//	PaymentProviderConfigurationInputMemberStripePrivyConfiguration
+type PaymentProviderConfigurationInput interface {
+	isPaymentProviderConfigurationInput()
+}
+
+// Coinbase CDP configuration - credentials provided by Coinbase Developer Platform
+type PaymentProviderConfigurationInputMemberCoinbaseCdpConfiguration struct {
+	Value CoinbaseCdpConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentProviderConfigurationInputMemberCoinbaseCdpConfiguration) isPaymentProviderConfigurationInput() {
+}
+
+// StripePrivy configuration - credentials provided by Stripe + Privy
+type PaymentProviderConfigurationInputMemberStripePrivyConfiguration struct {
+	Value StripePrivyConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentProviderConfigurationInputMemberStripePrivyConfiguration) isPaymentProviderConfigurationInput() {
+}
+
+// PROVIDER CONFIGURATION OUTPUT - No raw secrets, only ARNs
+//
+// The following types satisfy this interface:
+//
+//	PaymentProviderConfigurationOutputMemberCoinbaseCdpConfiguration
+//	PaymentProviderConfigurationOutputMemberStripePrivyConfiguration
+type PaymentProviderConfigurationOutput interface {
+	isPaymentProviderConfigurationOutput()
+}
+
+// Coinbase CDP configuration output with secret ARNs
+type PaymentProviderConfigurationOutputMemberCoinbaseCdpConfiguration struct {
+	Value CoinbaseCdpConfigurationOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentProviderConfigurationOutputMemberCoinbaseCdpConfiguration) isPaymentProviderConfigurationOutput() {
+}
+
+// StripePrivy configuration output with secret ARNs
+type PaymentProviderConfigurationOutputMemberStripePrivyConfiguration struct {
+	Value StripePrivyConfigurationOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentProviderConfigurationOutputMemberStripePrivyConfiguration) isPaymentProviderConfigurationOutput() {
+}
+
 // Represents a complete policy resource within the AgentCore Policy system.
 // Policies are ARN-able resources that contain Cedar policy statements and
 // associated metadata for controlling agent behavior and access decisions. Each
@@ -6106,6 +6361,58 @@ type StringValidation struct {
 	noSmithyDocumentSerde
 }
 
+// StripePrivy configuration - credentials provided by Stripe + Privy
+type StripePrivyConfigurationInput struct {
+
+	// The app ID provided by Privy.
+	//
+	// This member is required.
+	AppId *string
+
+	// The app secret provided by Privy.
+	//
+	// This member is required.
+	AppSecret *string
+
+	// The authorization ID for the Stripe Privy integration.
+	//
+	// This member is required.
+	AuthorizationId *string
+
+	// The authorization private key for the Stripe Privy integration.
+	//
+	// This member is required.
+	AuthorizationPrivateKey *string
+
+	noSmithyDocumentSerde
+}
+
+// StripePrivy configuration output with secret ARNs
+type StripePrivyConfigurationOutput struct {
+
+	// The app ID provided by Privy.
+	//
+	// This member is required.
+	AppId *string
+
+	// Contains information about a secret in AWS Secrets Manager.
+	//
+	// This member is required.
+	AppSecretArn *Secret
+
+	// The authorization ID for the Stripe Privy integration.
+	//
+	// This member is required.
+	AuthorizationId *string
+
+	// Contains information about a secret in AWS Secrets Manager.
+	//
+	// This member is required.
+	AuthorizationPrivateKeyArn *Secret
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary consolidation override configuration.
 type SummaryConsolidationOverride struct {
 
@@ -7056,6 +7363,7 @@ func (*UnknownUnionMember) isConfigurationBundleAction()              {}
 func (*UnknownUnionMember) isConsolidationConfiguration()             {}
 func (*UnknownUnionMember) isContent()                                {}
 func (*UnknownUnionMember) isCredentialProvider()                     {}
+func (*UnknownUnionMember) isCredentialsProviderConfiguration()       {}
 func (*UnknownUnionMember) isCustomConfigurationInput()               {}
 func (*UnknownUnionMember) isCustomConsolidationConfiguration()       {}
 func (*UnknownUnionMember) isCustomConsolidationConfigurationInput()  {}
@@ -7094,6 +7402,8 @@ func (*UnknownUnionMember) isModifyReflectionConfiguration()          {}
 func (*UnknownUnionMember) isOauth2Discovery()                        {}
 func (*UnknownUnionMember) isOauth2ProviderConfigInput()              {}
 func (*UnknownUnionMember) isOauth2ProviderConfigOutput()             {}
+func (*UnknownUnionMember) isPaymentProviderConfigurationInput()      {}
+func (*UnknownUnionMember) isPaymentProviderConfigurationOutput()     {}
 func (*UnknownUnionMember) isPolicyDefinition()                       {}
 func (*UnknownUnionMember) isPrivateEndpoint()                        {}
 func (*UnknownUnionMember) isRatingScale()                            {}

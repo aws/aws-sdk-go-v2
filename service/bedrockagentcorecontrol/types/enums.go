@@ -1174,6 +1174,124 @@ func (OverrideType) Values() []OverrideType {
 	}
 }
 
+type PaymentConnectorStatus string
+
+// Enum values for PaymentConnectorStatus
+const (
+	PaymentConnectorStatusCreating     PaymentConnectorStatus = "CREATING"
+	PaymentConnectorStatusUpdating     PaymentConnectorStatus = "UPDATING"
+	PaymentConnectorStatusDeleting     PaymentConnectorStatus = "DELETING"
+	PaymentConnectorStatusReady        PaymentConnectorStatus = "READY"
+	PaymentConnectorStatusCreateFailed PaymentConnectorStatus = "CREATE_FAILED"
+	PaymentConnectorStatusUpdateFailed PaymentConnectorStatus = "UPDATE_FAILED"
+	PaymentConnectorStatusDeleteFailed PaymentConnectorStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for PaymentConnectorStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentConnectorStatus) Values() []PaymentConnectorStatus {
+	return []PaymentConnectorStatus{
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"READY",
+		"CREATE_FAILED",
+		"UPDATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
+type PaymentConnectorType string
+
+// Enum values for PaymentConnectorType
+const (
+	PaymentConnectorTypeCoinbaseCdp PaymentConnectorType = "CoinbaseCDP"
+	PaymentConnectorTypeStripePrivy PaymentConnectorType = "StripePrivy"
+)
+
+// Values returns all known values for PaymentConnectorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentConnectorType) Values() []PaymentConnectorType {
+	return []PaymentConnectorType{
+		"CoinbaseCDP",
+		"StripePrivy",
+	}
+}
+
+type PaymentCredentialProviderVendorType string
+
+// Enum values for PaymentCredentialProviderVendorType
+const (
+	// Coinbase Developer Platform - https://docs.cdp.coinbase.com/
+	PaymentCredentialProviderVendorTypeCoinbaseCDP PaymentCredentialProviderVendorType = "CoinbaseCDP"
+	// Stripe + Privy - https://docs.privy.io/
+	PaymentCredentialProviderVendorTypeStripePrivy PaymentCredentialProviderVendorType = "StripePrivy"
+)
+
+// Values returns all known values for PaymentCredentialProviderVendorType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentCredentialProviderVendorType) Values() []PaymentCredentialProviderVendorType {
+	return []PaymentCredentialProviderVendorType{
+		"CoinbaseCDP",
+		"StripePrivy",
+	}
+}
+
+type PaymentManagerStatus string
+
+// Enum values for PaymentManagerStatus
+const (
+	PaymentManagerStatusCreating     PaymentManagerStatus = "CREATING"
+	PaymentManagerStatusUpdating     PaymentManagerStatus = "UPDATING"
+	PaymentManagerStatusDeleting     PaymentManagerStatus = "DELETING"
+	PaymentManagerStatusReady        PaymentManagerStatus = "READY"
+	PaymentManagerStatusCreateFailed PaymentManagerStatus = "CREATE_FAILED"
+	PaymentManagerStatusUpdateFailed PaymentManagerStatus = "UPDATE_FAILED"
+	PaymentManagerStatusDeleteFailed PaymentManagerStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for PaymentManagerStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentManagerStatus) Values() []PaymentManagerStatus {
+	return []PaymentManagerStatus{
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"READY",
+		"CREATE_FAILED",
+		"UPDATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
+type PaymentsAuthorizerType string
+
+// Enum values for PaymentsAuthorizerType
+const (
+	PaymentsAuthorizerTypeCustomJwt PaymentsAuthorizerType = "CUSTOM_JWT"
+	PaymentsAuthorizerTypeAwsIam    PaymentsAuthorizerType = "AWS_IAM"
+)
+
+// Values returns all known values for PaymentsAuthorizerType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentsAuthorizerType) Values() []PaymentsAuthorizerType {
+	return []PaymentsAuthorizerType{
+		"CUSTOM_JWT",
+		"AWS_IAM",
+	}
+}
+
 type PolicyEngineStatus string
 
 // Enum values for PolicyEngineStatus

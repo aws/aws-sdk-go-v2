@@ -798,6 +798,11 @@ type ResolverEndpoint struct {
 	//   zones from your network.
 	Direction ResolverEndpointDirection
 
+	// Indicates whether DNS64 is enabled for the inbound Resolver endpoint. When true
+	// , Route 53 Resolver synthesizes AAAA (IPv6) records for IPv4-only services by
+	// prepending the 64:ff9b::/96 prefix to the IPv4 address.
+	Dns64Enabled *bool
+
 	// The ID of the VPC that you want to create the Resolver endpoint in.
 	HostVPCId *string
 
@@ -806,6 +811,11 @@ type ResolverEndpoint struct {
 
 	// The number of IP addresses that the Resolver endpoint can use for DNS queries.
 	IpAddressCount *int32
+
+	// Indicates whether IPv6 internet access is enabled for the outbound Resolver
+	// endpoint. When true , the endpoint elastic network interfaces (ENIs) can forward
+	// DNS queries to public IPv6 targets through an internet gateway.
+	Ipv6InternetAccessEnabled *bool
 
 	// The date and time that the endpoint was last modified, in Unix time format and
 	// Coordinated Universal Time (UTC).

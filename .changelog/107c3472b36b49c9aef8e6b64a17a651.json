@@ -1,0 +1,8 @@
+{
+    "id": "107c3472-b36b-49c9-aef8-e6b64a17a651",
+    "type": "feature",
+    "description": "With this release, customers can configure their data exports to generate additional integration artifacts for Athena and Redshift.",
+    "modules": [
+        "service/bcmdataexports"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "61fb103f-315e-4856-b3e9-c16901a04eb7",
+    "type": "documentation",
+    "description": "This is a documentation update",
+    "modules": [
+        "service/guardduty"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "9863e15e-81a0-4954-8365-d9be47465603",
+    "type": "feature",
+    "description": "DescribeInstanceTypes now accepts an IncludeUnsupportedInRegion parameter. When set, the response also lists instance types that are not available in the current Region. Each instance type includes a SupportedInRegion field indicating its regional availability.",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -10,9 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This feature API is subject to changing at any time. For more information, see
+//
+// the [Amazon Web Services Service Terms](Betas and Previews).
+//
 // Deletes an existing procurement portal preference. This action cannot be
 // undone. Active e-invoice delivery and PO retrieval configurations will be
 // terminated.
+//
+// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
 func (c *Client) DeleteProcurementPortalPreference(ctx context.Context, params *DeleteProcurementPortalPreferenceInput, optFns ...func(*Options)) (*DeleteProcurementPortalPreferenceOutput, error) {
 	if params == nil {
 		params = &DeleteProcurementPortalPreferenceInput{}

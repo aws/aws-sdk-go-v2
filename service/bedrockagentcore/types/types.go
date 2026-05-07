@@ -180,6 +180,22 @@ type AgentTracesConfigMemberSessionSpans struct {
 
 func (*AgentTracesConfigMemberSessionSpans) isAgentTracesConfig() {}
 
+// Money amount with currency
+type Amount struct {
+
+	// The currency code for this amount.
+	//
+	// This member is required.
+	Currency Currency
+
+	// The numeric value of the amount.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for a stream that enables programmatic control of a browser
 // session in Amazon Bedrock AgentCore. This stream provides a bidirectional
 // communication channel for sending commands to the browser and receiving
@@ -208,6 +224,18 @@ type AutomationStreamUpdate struct {
 
 	// The status of the automation stream.
 	StreamStatus AutomationStreamStatus
+
+	noSmithyDocumentSerde
+}
+
+// Available session limits. Currently only budget is supported.
+type AvailableLimits struct {
+
+	// The available spend amount for this session.
+	AvailableSpendAmount *Amount
+
+	// The timestamp when the available limits were last updated.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -822,6 +850,45 @@ type CodeInterpreterStreamOutputMemberResult struct {
 
 func (*CodeInterpreterStreamOutputMemberResult) isCodeInterpreterStreamOutput() {}
 
+// Coinbase CDP token request parameters
+type CoinbaseCdpTokenRequestInput struct {
+
+	// The HTTP method for the payment API request.
+	//
+	// This member is required.
+	RequestMethod PaymentHttpMethodType
+
+	// The path of the payment API request.
+	//
+	// This member is required.
+	RequestPath *string
+
+	// Set to true for wallet write operations (requires walletSecret configured)
+	IncludeWalletAuthToken bool
+
+	// Request body JSON - used to generate wallet auth JWT
+	RequestBody *string
+
+	// Optional - defaults to "api.cdp.coinbase.com"
+	RequestHost *string
+
+	noSmithyDocumentSerde
+}
+
+// Coinbase CDP token response
+type CoinbaseCdpTokenResponseOutput struct {
+
+	// Bearer Token for Authorization header
+	//
+	// This member is required.
+	BearerToken *string
+
+	// Wallet Auth Token for X-Wallet-Auth header
+	WalletAuthToken *string
+
+	noSmithyDocumentSerde
+}
+
 // A confidence interval for a statistical measurement.
 type ConfidenceInterval struct {
 
@@ -1025,6 +1092,38 @@ type Conversational struct {
 	noSmithyDocumentSerde
 }
 
+// X402 payment requirement input
+type CryptoX402PaymentInput struct {
+
+	// This can hold any JSON-like object
+	//
+	// This member is required.
+	Payload document.Interface
+
+	// The X402 protocol version (e.g., "v1", "v2")
+	//
+	// This member is required.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// X402 payment requirement output
+type CryptoX402PaymentOutput struct {
+
+	// This can hold any JSON-like object
+	//
+	// This member is required.
+	Payload document.Interface
+
+	// The X402 protocol version (e.g., "1", "2")
+	//
+	// This member is required.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // A custom descriptor configuration for a registry record.
 type CustomDescriptor struct {
 
@@ -1072,6 +1171,33 @@ type Descriptors struct {
 	//  The MCP (Model Context Protocol) descriptor configuration. Populated when the
 	// record's descriptorType is MCP .
 	Mcp *McpDescriptor
+
+	noSmithyDocumentSerde
+}
+
+// Embedded Crypto wallet instrument details
+type EmbeddedCryptoWallet struct {
+
+	// List of linkedAccounts linked to this wallet. Each linkedAccount represents a
+	// way the end user can authenticate to this wallet. Can be empty when adding a new
+	// linkedAccount to an existing wallet.
+	//
+	// This member is required.
+	LinkedAccounts []LinkedAccount
+
+	// The blockchain network for this embedded crypto wallet. Supported networks:
+	// ETHEREUM, SOLANA
+	//
+	// This member is required.
+	Network CryptoWalletNetwork
+
+	// URL for the end user to complete a provider-specific action (e.g., wallet
+	// linking, onboarding). Returned by the payment connector during instrument
+	// creation.
+	RedirectUrl *string
+
+	// The wallet address on the specified blockchain network.
+	WalletAddress *string
 
 	noSmithyDocumentSerde
 }
@@ -2716,6 +2842,156 @@ type LeftExpressionMemberMetadataKey struct {
 
 func (*LeftExpressionMemberMetadataKey) isLeftExpression() {}
 
+// Represents different linkedAccounts that can be linked to an embedded wallet.
+// This union supports multiple linkedAccount approaches: email, SMS, JWT, and
+// OAuth2.
+//
+// The following types satisfy this interface:
+//
+//	LinkedAccountMemberDeveloperJwt
+//	LinkedAccountMemberEmail
+//	LinkedAccountMemberOAuth2
+//	LinkedAccountMemberSms
+type LinkedAccount interface {
+	isLinkedAccount()
+}
+
+// Developer JWT linkedAccount with key ID and subject
+type LinkedAccountMemberDeveloperJwt struct {
+	Value LinkedAccountDeveloperJwt
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkedAccountMemberDeveloperJwt) isLinkedAccount() {}
+
+// Email-based linkedAccount
+type LinkedAccountMemberEmail struct {
+	Value LinkedAccountEmail
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkedAccountMemberEmail) isLinkedAccount() {}
+
+// OAuth2 provider linkedAccount (Google, Apple, X, Telegram, GitHub)
+type LinkedAccountMemberOAuth2 struct {
+	Value LinkedAccountOAuth2
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkedAccountMemberOAuth2) isLinkedAccount() {}
+
+// SMS-based linkedAccount using phone number
+type LinkedAccountMemberSms struct {
+	Value LinkedAccountSms
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkedAccountMemberSms) isLinkedAccount() {}
+
+// Authentication method using JWT with key ID and subject claims.
+type LinkedAccountDeveloperJwt struct {
+
+	// The key ID (kid) from the JWT header. Identifies which key was used to sign the
+	// JWT.
+	//
+	// This member is required.
+	Kid *string
+
+	// The subject (sub) claim from the JWT payload. Identifies the principal that is
+	// the subject of the JWT.
+	//
+	// This member is required.
+	Sub *string
+
+	noSmithyDocumentSerde
+}
+
+// LinkedAccount using an email address.
+type LinkedAccountEmail struct {
+
+	// The email address used for linkedAccount. Must be a valid email format.
+	//
+	// This member is required.
+	EmailAddress *string
+
+	noSmithyDocumentSerde
+}
+
+// Authentication method using OAuth2 providers. Supports Google, Apple, X,
+// Telegram, and GitHub providers.
+//
+// The following types satisfy this interface:
+//
+//	LinkedAccountOAuth2MemberApple
+//	LinkedAccountOAuth2MemberGithub
+//	LinkedAccountOAuth2MemberGoogle
+//	LinkedAccountOAuth2MemberTelegram
+//	LinkedAccountOAuth2MemberX
+type LinkedAccountOAuth2 interface {
+	isLinkedAccountOAuth2()
+}
+
+// Apple OAuth2 authentication
+type LinkedAccountOAuth2MemberApple struct {
+	Value OAuth2Authentication
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkedAccountOAuth2MemberApple) isLinkedAccountOAuth2() {}
+
+// GitHub OAuth2 authentication
+type LinkedAccountOAuth2MemberGithub struct {
+	Value OAuth2Authentication
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkedAccountOAuth2MemberGithub) isLinkedAccountOAuth2() {}
+
+// Google OAuth2 authentication
+type LinkedAccountOAuth2MemberGoogle struct {
+	Value OAuth2Authentication
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkedAccountOAuth2MemberGoogle) isLinkedAccountOAuth2() {}
+
+// Telegram OAuth2 authentication
+type LinkedAccountOAuth2MemberTelegram struct {
+	Value OAuth2Authentication
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkedAccountOAuth2MemberTelegram) isLinkedAccountOAuth2() {}
+
+// X (formerly Twitter) OAuth2 authentication
+type LinkedAccountOAuth2MemberX struct {
+	Value OAuth2Authentication
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkedAccountOAuth2MemberX) isLinkedAccountOAuth2() {}
+
+// LinkedAccount using a phone number in E.164 format.
+type LinkedAccountSms struct {
+
+	// The phone number in E.164 format (e.g., +1234567890). Must be a valid E.164
+	// formatted phone number starting with + and containing 1-15 digits.
+	//
+	// This member is required.
+	PhoneNumber *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for a stream that provides a visual representation of a
 // browser session in Amazon Bedrock AgentCore. This stream enables agents to
 // observe the current state of the browser, including rendered web pages, visual
@@ -3223,6 +3499,28 @@ type MouseScrollResult struct {
 	noSmithyDocumentSerde
 }
 
+// OAuth2 authentication information for third-party providers. Supports Google,
+// Apple, X, Telegram, and GitHub providers.
+type OAuth2Authentication struct {
+
+	// The subject (sub) claim from the OAuth2 provider. Uniquely identifies the user
+	// at the provider.
+	//
+	// This member is required.
+	Sub *string
+
+	// The email address from the OAuth2 provider (optional).
+	EmailAddress *string
+
+	// The user's name from the OAuth2 provider (optional).
+	Name *string
+
+	// The username from the OAuth2 provider (optional).
+	Username *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for an OAuth 2.0 credential provider used to authenticate tool
 // calls.
 type OAuthCredentialProvider struct {
@@ -3294,6 +3592,293 @@ type PayloadTypeMemberConversational struct {
 }
 
 func (*PayloadTypeMemberConversational) isPayloadType() {}
+
+// Payment request details union
+//
+// The following types satisfy this interface:
+//
+//	PaymentInputMemberCryptoX402
+type PaymentInput interface {
+	isPaymentInput()
+}
+
+// X402 payment requirement input
+type PaymentInputMemberCryptoX402 struct {
+	Value CryptoX402PaymentInput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentInputMemberCryptoX402) isPaymentInput() {}
+
+// Represents a payment instrument
+type PaymentInstrument struct {
+
+	// The timestamp when this payment instrument was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The ID of the payment connector associated with this instrument.
+	//
+	// This member is required.
+	PaymentConnectorId *string
+
+	// The details specific to the payment instrument type.
+	//
+	// This member is required.
+	PaymentInstrumentDetails PaymentInstrumentDetails
+
+	// The unique identifier for this payment instrument.
+	//
+	// This member is required.
+	PaymentInstrumentId *string
+
+	// The type of payment instrument (e.g., EMBEDDED_CRYPTO_WALLET).
+	//
+	// This member is required.
+	PaymentInstrumentType PaymentInstrumentType
+
+	// The ARN of the payment manager that owns this payment instrument.
+	//
+	// This member is required.
+	PaymentManagerArn *string
+
+	// The current status of this payment instrument.
+	//
+	// This member is required.
+	Status PaymentInstrumentStatus
+
+	// The timestamp when this payment instrument was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The user ID associated with this payment instrument.
+	//
+	// This member is required.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// Details specific to the instrument type
+//
+// The following types satisfy this interface:
+//
+//	PaymentInstrumentDetailsMemberEmbeddedCryptoWallet
+type PaymentInstrumentDetails interface {
+	isPaymentInstrumentDetails()
+}
+
+// Embedded crypto wallet managed directly by end user
+type PaymentInstrumentDetailsMemberEmbeddedCryptoWallet struct {
+	Value EmbeddedCryptoWallet
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentInstrumentDetailsMemberEmbeddedCryptoWallet) isPaymentInstrumentDetails() {}
+
+// Summary of a payment instrument for list operations
+type PaymentInstrumentSummary struct {
+
+	// The timestamp when this payment instrument was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The ID of the payment connector associated with this instrument.
+	//
+	// This member is required.
+	PaymentConnectorId *string
+
+	// The unique identifier for this payment instrument.
+	//
+	// This member is required.
+	PaymentInstrumentId *string
+
+	// The type of payment instrument (e.g., EMBEDDED_CRYPTO_WALLET).
+	//
+	// This member is required.
+	PaymentInstrumentType PaymentInstrumentType
+
+	// The ARN of the payment manager that owns this payment instrument.
+	//
+	// This member is required.
+	PaymentManagerArn *string
+
+	// The current status of this payment instrument.
+	//
+	// This member is required.
+	Status PaymentInstrumentStatus
+
+	// The timestamp when this payment instrument was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The user ID associated with this payment instrument.
+	//
+	// This member is required.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// Payment response payload union. We will support versioning by introducing other
+// model in this union
+//
+// The following types satisfy this interface:
+//
+//	PaymentOutputMemberCryptoX402
+type PaymentOutput interface {
+	isPaymentOutput()
+}
+
+// X402 payment requirement output
+type PaymentOutputMemberCryptoX402 struct {
+	Value CryptoX402PaymentOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentOutputMemberCryptoX402) isPaymentOutput() {}
+
+// Payment manager session
+type PaymentSession struct {
+
+	// The timestamp when this payment session was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The session expiry time in minutes.
+	//
+	// This member is required.
+	ExpiryTimeInMinutes *int32
+
+	// The ARN of the payment manager that owns this session.
+	//
+	// This member is required.
+	PaymentManagerArn *string
+
+	// The unique identifier for this payment session.
+	//
+	// This member is required.
+	PaymentSessionId *string
+
+	// The timestamp when this payment session was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The user ID associated with this payment session.
+	//
+	// This member is required.
+	UserId *string
+
+	// The available limits for this session after accounting for processed payments.
+	AvailableLimits *AvailableLimits
+
+	// The spending limits for this session.
+	Limits *SessionLimits
+
+	noSmithyDocumentSerde
+}
+
+// Summary of a payment session for list operations
+type PaymentSessionSummary struct {
+
+	// The timestamp when this payment session was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The session expiry time in minutes.
+	//
+	// This member is required.
+	ExpiryTimeInMinutes *int32
+
+	// The ARN of the payment manager that owns this session.
+	//
+	// This member is required.
+	PaymentManagerArn *string
+
+	// The unique identifier for this payment session.
+	//
+	// This member is required.
+	PaymentSessionId *string
+
+	// The timestamp when this payment session was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The user ID associated with this payment session.
+	//
+	// This member is required.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// VENDOR-SPECIFIC TOKEN REQUEST CONFIGURATION - Input
+//
+// The following types satisfy this interface:
+//
+//	PaymentTokenRequestInputMemberCoinbaseCdpTokenRequest
+//	PaymentTokenRequestInputMemberStripePrivyTokenRequest
+type PaymentTokenRequestInput interface {
+	isPaymentTokenRequestInput()
+}
+
+// Coinbase CDP token request parameters
+type PaymentTokenRequestInputMemberCoinbaseCdpTokenRequest struct {
+	Value CoinbaseCdpTokenRequestInput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentTokenRequestInputMemberCoinbaseCdpTokenRequest) isPaymentTokenRequestInput() {}
+
+// StripePrivy token request parameters
+type PaymentTokenRequestInputMemberStripePrivyTokenRequest struct {
+	Value StripePrivyTokenRequestInput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentTokenRequestInputMemberStripePrivyTokenRequest) isPaymentTokenRequestInput() {}
+
+// VENDOR-SPECIFIC TOKEN RESPONSE CONFIGURATION - Output
+//
+// The following types satisfy this interface:
+//
+//	PaymentTokenResponseOutputMemberCoinbaseCdpTokenResponse
+//	PaymentTokenResponseOutputMemberStripePrivyTokenResponse
+type PaymentTokenResponseOutput interface {
+	isPaymentTokenResponseOutput()
+}
+
+// Coinbase CDP token response
+type PaymentTokenResponseOutputMemberCoinbaseCdpTokenResponse struct {
+	Value CoinbaseCdpTokenResponseOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentTokenResponseOutputMemberCoinbaseCdpTokenResponse) isPaymentTokenResponseOutput() {}
+
+// StripePrivy token response containing appId, basicAuthToken, and optionally
+// authorizationSignature
+type PaymentTokenResponseOutputMemberStripePrivyTokenResponse struct {
+	Value StripePrivyTokenResponseOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentTokenResponseOutputMemberStripePrivyTokenResponse) isPaymentTokenResponseOutput() {}
 
 // An online evaluation configuration associated with a specific A/B test variant.
 type PerVariantOnlineEvaluationConfig struct {
@@ -3781,6 +4366,17 @@ type SessionFilterConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Session spending limits
+type SessionLimits struct {
+
+	// The maximum amount that can be spent in this session.
+	//
+	// This member is required.
+	MaxSpendAmount *Amount
+
+	noSmithyDocumentSerde
+}
+
 // Metadata for a specific session in a batch evaluation, including ground truth
 // data and test scenario identifiers.
 type SessionMetadataShape struct {
@@ -3891,6 +4487,53 @@ type StreamUpdateMemberAutomationStreamUpdate struct {
 
 func (*StreamUpdateMemberAutomationStreamUpdate) isStreamUpdate() {}
 
+// StripePrivy token request parameters
+type StripePrivyTokenRequestInput struct {
+
+	// Request body JSON for the Privy API call
+	//
+	// This member is required.
+	RequestBody *string
+
+	// The path of the Stripe Privy API request.
+	//
+	// This member is required.
+	RequestPath *string
+
+	// Set to true to generate privy-authorization-signature
+	IncludeAuthorizationSignature bool
+
+	// Optional - defaults to "api.privy.io"
+	RequestHost *string
+
+	noSmithyDocumentSerde
+}
+
+// StripePrivy token response containing appId, basicAuthToken, and optionally
+// authorizationSignature
+type StripePrivyTokenResponseOutput struct {
+
+	// The Privy app ID for the privy-app-id header
+	//
+	// This member is required.
+	AppId *string
+
+	// Base64-encoded Basic Auth token (appId:appSecret) for the Authorization header
+	//
+	// This member is required.
+	BasicAuthToken *string
+
+	// Base64-encoded ECDSA P-256 authorization signature (only present when
+	// includeAuthorizationSignature is true)
+	AuthorizationSignature *string
+
+	// Unix timestamp in milliseconds when the authorization signature expires. Set as
+	// privy-request-expiry header.
+	RequestExpiry *int64
+
+	noSmithyDocumentSerde
+}
+
 // The system prompt input, either as inline text or from a configuration bundle.
 //
 // The following types satisfy this interface:
@@ -3988,6 +4631,38 @@ type TargetRef struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A single token balance entry
+type TokenBalance struct {
+
+	// Raw balance in the smallest denomination (e.g., USDC base units where 1 USDC =
+	// 1000000).
+	//
+	// This member is required.
+	Amount *string
+
+	// The specific blockchain chain.
+	//
+	// This member is required.
+	Chain BlockchainChainId
+
+	// Number of decimal places for the token (e.g., 6 for USDC).
+	//
+	// This member is required.
+	Decimals *int32
+
+	// The blockchain network family (ETHEREUM or SOLANA).
+	//
+	// This member is required.
+	Network CryptoWalletNetwork
+
+	// The supported token for this balance.
+	//
+	// This member is required.
+	Token InstrumentBalanceToken
 
 	noSmithyDocumentSerde
 }
@@ -4437,6 +5112,8 @@ func (*UnknownUnionMember) isHarnessToolResultContentBlock()         {}
 func (*UnknownUnionMember) isInvokeAgentRuntimeCommandStreamOutput() {}
 func (*UnknownUnionMember) isInvokeHarnessStreamOutput()             {}
 func (*UnknownUnionMember) isLeftExpression()                        {}
+func (*UnknownUnionMember) isLinkedAccount()                         {}
+func (*UnknownUnionMember) isLinkedAccountOAuth2()                   {}
 func (*UnknownUnionMember) isMemoryContent()                         {}
 func (*UnknownUnionMember) isMemoryRecordLeftExpression()            {}
 func (*UnknownUnionMember) isMemoryRecordMetadataValue()             {}
@@ -4444,6 +5121,11 @@ func (*UnknownUnionMember) isMemoryRecordRightExpression()           {}
 func (*UnknownUnionMember) isMetadataValue()                         {}
 func (*UnknownUnionMember) isOutputConfig()                          {}
 func (*UnknownUnionMember) isPayloadType()                           {}
+func (*UnknownUnionMember) isPaymentInput()                          {}
+func (*UnknownUnionMember) isPaymentInstrumentDetails()              {}
+func (*UnknownUnionMember) isPaymentOutput()                         {}
+func (*UnknownUnionMember) isPaymentTokenRequestInput()              {}
+func (*UnknownUnionMember) isPaymentTokenResponseOutput()            {}
 func (*UnknownUnionMember) isProxy()                                 {}
 func (*UnknownUnionMember) isProxyCredentials()                      {}
 func (*UnknownUnionMember) isRecommendationConfig()                  {}

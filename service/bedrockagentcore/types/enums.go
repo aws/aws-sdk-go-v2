@@ -106,6 +106,36 @@ func (BatchEvaluationStatus) Values() []BatchEvaluationStatus {
 	}
 }
 
+type BlockchainChainId string
+
+// Enum values for BlockchainChainId
+const (
+	// Base Mainnet (EVM L2)
+	BlockchainChainIdBase BlockchainChainId = "BASE"
+	// Base Sepolia testnet (EVM L2)
+	BlockchainChainIdBaseSepolia BlockchainChainId = "BASE_SEPOLIA"
+	// Ethereum Mainnet (EVM L1)
+	BlockchainChainIdEthereum BlockchainChainId = "ETHEREUM"
+	// Solana Mainnet
+	BlockchainChainIdSolana BlockchainChainId = "SOLANA"
+	// Solana Devnet testnet
+	BlockchainChainIdSolanaDevnet BlockchainChainId = "SOLANA_DEVNET"
+)
+
+// Values returns all known values for BlockchainChainId. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BlockchainChainId) Values() []BlockchainChainId {
+	return []BlockchainChainId{
+		"BASE",
+		"BASE_SEPOLIA",
+		"ETHEREUM",
+		"SOLANA",
+		"SOLANA_DEVNET",
+	}
+}
+
 type BrowserActionStatus string
 
 // Enum values for BrowserActionStatus
@@ -254,6 +284,42 @@ func (ContentBlockType) Values() []ContentBlockType {
 		"image",
 		"resource",
 		"resource_link",
+	}
+}
+
+type CryptoWalletNetwork string
+
+// Enum values for CryptoWalletNetwork
+const (
+	CryptoWalletNetworkEthereum CryptoWalletNetwork = "ETHEREUM"
+	CryptoWalletNetworkSolana   CryptoWalletNetwork = "SOLANA"
+)
+
+// Values returns all known values for CryptoWalletNetwork. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CryptoWalletNetwork) Values() []CryptoWalletNetwork {
+	return []CryptoWalletNetwork{
+		"ETHEREUM",
+		"SOLANA",
+	}
+}
+
+type Currency string
+
+// Enum values for Currency
+const (
+	CurrencyUsd Currency = "USD"
+)
+
+// Values returns all known values for Currency. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Currency) Values() []Currency {
+	return []Currency{
+		"USD",
 	}
 }
 
@@ -441,6 +507,23 @@ func (HarnessToolUseType) Values() []HarnessToolUseType {
 	}
 }
 
+type InstrumentBalanceToken string
+
+// Enum values for InstrumentBalanceToken
+const (
+	InstrumentBalanceTokenUsdc InstrumentBalanceToken = "USDC"
+)
+
+// Values returns all known values for InstrumentBalanceToken. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstrumentBalanceToken) Values() []InstrumentBalanceToken {
+	return []InstrumentBalanceToken{
+		"USDC",
+	}
+}
+
 type LanguageRuntime string
 
 // Enum values for LanguageRuntime
@@ -564,6 +647,7 @@ type OAuthGrantType string
 const (
 	OAuthGrantTypeClientCredentials OAuthGrantType = "CLIENT_CREDENTIALS"
 	OAuthGrantTypeAuthorizationCode OAuthGrantType = "AUTHORIZATION_CODE"
+	OAuthGrantTypeTokenExchange     OAuthGrantType = "TOKEN_EXCHANGE"
 )
 
 // Values returns all known values for OAuthGrantType. Note that this can be
@@ -574,6 +658,7 @@ func (OAuthGrantType) Values() []OAuthGrantType {
 	return []OAuthGrantType{
 		"CLIENT_CREDENTIALS",
 		"AUTHORIZATION_CODE",
+		"TOKEN_EXCHANGE",
 	}
 }
 
@@ -595,6 +680,126 @@ func (OperatorType) Values() []OperatorType {
 		"EQUALS_TO",
 		"EXISTS",
 		"NOT_EXISTS",
+	}
+}
+
+type PaymentHttpMethodType string
+
+// Enum values for PaymentHttpMethodType
+const (
+	PaymentHttpMethodTypeGet    PaymentHttpMethodType = "GET"
+	PaymentHttpMethodTypePost   PaymentHttpMethodType = "POST"
+	PaymentHttpMethodTypePut    PaymentHttpMethodType = "PUT"
+	PaymentHttpMethodTypeDelete PaymentHttpMethodType = "DELETE"
+	PaymentHttpMethodTypePatch  PaymentHttpMethodType = "PATCH"
+)
+
+// Values returns all known values for PaymentHttpMethodType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentHttpMethodType) Values() []PaymentHttpMethodType {
+	return []PaymentHttpMethodType{
+		"GET",
+		"POST",
+		"PUT",
+		"DELETE",
+		"PATCH",
+	}
+}
+
+type PaymentInstrumentStatus string
+
+// Enum values for PaymentInstrumentStatus
+const (
+	PaymentInstrumentStatusInitiated PaymentInstrumentStatus = "INITIATED"
+	PaymentInstrumentStatusActive    PaymentInstrumentStatus = "ACTIVE"
+	PaymentInstrumentStatusFailed    PaymentInstrumentStatus = "FAILED"
+	PaymentInstrumentStatusDeleted   PaymentInstrumentStatus = "DELETED"
+)
+
+// Values returns all known values for PaymentInstrumentStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentInstrumentStatus) Values() []PaymentInstrumentStatus {
+	return []PaymentInstrumentStatus{
+		"INITIATED",
+		"ACTIVE",
+		"FAILED",
+		"DELETED",
+	}
+}
+
+type PaymentInstrumentType string
+
+// Enum values for PaymentInstrumentType
+const (
+	PaymentInstrumentTypeEmbeddedCryptoWallet PaymentInstrumentType = "EMBEDDED_CRYPTO_WALLET"
+)
+
+// Values returns all known values for PaymentInstrumentType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentInstrumentType) Values() []PaymentInstrumentType {
+	return []PaymentInstrumentType{
+		"EMBEDDED_CRYPTO_WALLET",
+	}
+}
+
+type PaymentSessionStatus string
+
+// Enum values for PaymentSessionStatus
+const (
+	PaymentSessionStatusActive  PaymentSessionStatus = "ACTIVE"
+	PaymentSessionStatusExpired PaymentSessionStatus = "EXPIRED"
+	PaymentSessionStatusDeleted PaymentSessionStatus = "DELETED"
+)
+
+// Values returns all known values for PaymentSessionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentSessionStatus) Values() []PaymentSessionStatus {
+	return []PaymentSessionStatus{
+		"ACTIVE",
+		"EXPIRED",
+		"DELETED",
+	}
+}
+
+type PaymentStatus string
+
+// Enum values for PaymentStatus
+const (
+	PaymentStatusProofGenerated PaymentStatus = "PROOF_GENERATED"
+)
+
+// Values returns all known values for PaymentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentStatus) Values() []PaymentStatus {
+	return []PaymentStatus{
+		"PROOF_GENERATED",
+	}
+}
+
+type PaymentType string
+
+// Enum values for PaymentType
+const (
+	PaymentTypeCryptoX402 PaymentType = "CRYPTO_X402"
+)
+
+// Values returns all known values for PaymentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentType) Values() []PaymentType {
+	return []PaymentType{
+		"CRYPTO_X402",
 	}
 }
 
