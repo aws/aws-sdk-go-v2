@@ -260,7 +260,7 @@
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>ID of the member's Amazon Web Services account</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID within which the activity took place. This may differ from the account that owns the user identity.</p>",
                         "smithy.api#jsonName": "uid",
                         "smithy.api#required": {}
                     }
@@ -274,7 +274,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the account.</p>"
+                "smithy.api#documentation": "<p>Contains information about the Amazon Web Services account within which the activity took place.</p>"
             }
         },
         "com.amazonaws.guardduty#AccountDetail": {
@@ -20327,7 +20327,7 @@
                 "Account": {
                     "target": "com.amazonaws.guardduty#Account",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains information about the Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>Contains information about the Amazon Web Services account within which the activity took place. This is not necessarily the account that owns the user identity.</p>",
                         "smithy.api#jsonName": "account"
                     }
                 }
