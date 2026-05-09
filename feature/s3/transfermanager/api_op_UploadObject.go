@@ -898,17 +898,35 @@ func (u *uploader) singleUpload(ctx context.Context, r io.Reader, sz int, cleanU
 func (u *uploader) nextReader(ctx context.Context) (io.Reader, int, func(), error) {
 	if !u.multipleRead {
 		u.multipleRead = true
-		// read first part up to a maximum of PartSize to avoid allocating 8MB buffer out of the gate
-		r := io.LimitReader(u.in.Body, u.options.PartSizeBytes)
-		firstPart, err := io.ReadAll(r)
+		// Read up to max(MultipartUploadThreshold, PartSizeBytes) to decide
+		// between a single PutObject and a multipart upload. Reading at least
+		// MultipartUploadThreshold bytes is necessary: if all data arrives with
+		// an EOF before that boundary, the file is small enough for a single
+		// upload. Otherwise we fall through to multipart.
+		readLimit := u.options.MultipartUploadThreshold
+		if u.options.PartSizeBytes > readLimit {
+			readLimit = u.options.PartSizeBytes
+		}
+		lookahead, err := io.ReadAll(io.LimitReader(u.in.Body, readLimit))
 		if err != nil {
 			return nil, 0, func() {}, err
 		}
-		n := len(firstPart)
-		if int64(n) < u.options.PartSizeBytes {
-			return bytes.NewReader(firstPart), n, func() {}, io.EOF
+		n := len(lookahead)
+		if int64(n) < u.options.MultipartUploadThreshold {
+			// File fits within threshold: use a single PutObject.
+			return bytes.NewReader(lookahead), n, func() {}, io.EOF
 		}
-		return bytes.NewReader(firstPart), n, func() {}, nil
+		// File exceeds threshold: use multipart. Return the first PartSizeBytes
+		// as the first part, and re-inject any remaining lookahead bytes back
+		// into the body so that subsequent nextReader calls see them at the
+		// normal PartSizeBytes granularity.
+		if int64(n) > u.options.PartSizeBytes {
+			overflow := lookahead[u.options.PartSizeBytes:]
+			u.in.Body = io.MultiReader(bytes.NewReader(overflow), u.in.Body)
+			lookahead = lookahead[:u.options.PartSizeBytes]
+			n = int(u.options.PartSizeBytes)
+		}
+		return bytes.NewReader(lookahead), n, func() {}, nil
 	}
 	part, err := u.partPool.Get(ctx)
 	if err != nil {

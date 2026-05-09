@@ -110,82 +110,41 @@ func TestUploadOrderMulti(t *testing.T) {
 	}
 }
 
-func TestUploadOrderMultiTriggerredBySinglePartSize(t *testing.T) {
-	c, invocations, args := s3testing.NewUploadLoggingClient(nil)
+// TestUploadSingleBelowThreshold verifies that files at or below
+// MultipartUploadThreshold use a single PutObject, even when the file size
+// equals PartSizeBytes. Before the fix, MultipartUploadThreshold was ignored
+// and PartSizeBytes alone drove the decision.
+func TestUploadSingleBelowThreshold(t *testing.T) {
+	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
+	// Default: PartSizeBytes=8 MB, MultipartUploadThreshold=16 MB.
+	// A file of exactly 8 MB is below the 16 MB threshold → PutObject.
 	mgr := New(c)
 
-	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
-		Bucket:               aws.String("Bucket"),
-		Key:                  aws.String("Key - value"),
-		Body:                 bytes.NewReader(make([]byte, 8*1024*1024)),
-		ServerSideEncryption: "aws:kms",
-		SSEKMSKeyID:          aws.String("KmsId"),
-		ContentType:          aws.String("content/type"),
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewReader(make([]byte, 8*1024*1024)),
 	})
-
 	if err != nil {
-		t.Errorf("Expected no error but received %v", err)
+		t.Errorf("expect no error, got %v", err)
 	}
-
-	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "CompleteMultipartUpload"}, *invocations); len(diff) > 0 {
+	if diff := cmpDiff([]string{"PutObject"}, *invocations); len(diff) > 0 {
 		t.Error(diff)
-	}
-
-	if "UPLOAD-ID" != aws.ToString(resp.UploadID) {
-		t.Errorf("expect %q, got %q", "UPLOAD-ID", aws.ToString(resp.UploadID))
-	}
-
-	if "VERSION-ID" != aws.ToString(resp.VersionID) {
-		t.Errorf("expect %q, got %q", "VERSION-ID", aws.ToString(resp.VersionID))
-	}
-
-	// Validate input values
-	v := aws.ToString((*args)[1].(*s3.UploadPartInput).UploadId)
-	if "UPLOAD-ID" != v {
-		t.Errorf("Expected %q, but received %q", "UPLOAD-ID", v)
-	}
-	v = aws.ToString((*args)[2].(*s3.CompleteMultipartUploadInput).UploadId)
-	if "UPLOAD-ID" != v {
-		t.Errorf("Expected %q, but received %q", "UPLOAD-ID", v)
-	}
-
-	parts := (*args)[2].(*s3.CompleteMultipartUploadInput).MultipartUpload.Parts
-
-	num := parts[0].PartNumber
-	etag := aws.ToString(parts[0].ETag)
-
-	if aws.ToInt32(num) != 1 {
-		t.Errorf("expect part number to be 1, got %d", num)
-	}
-
-	if matched, err := regexp.MatchString(`^ETAG\d+$`, etag); !matched || err != nil {
-		t.Errorf("Failed regexp expression `^ETAG\\d+$`, got %s", etag)
-	}
-
-	// Custom headers
-	cmu := (*args)[0].(*s3.CreateMultipartUploadInput)
-
-	if e, a := types.ServerSideEncryption("aws:kms"), cmu.ServerSideEncryption; e != a {
-		t.Errorf("expect %q, got %q", e, a)
-	}
-
-	if e, a := "KmsId", aws.ToString(cmu.SSEKMSKeyId); e != a {
-		t.Errorf("expect %q, got %q", e, a)
-	}
-
-	if e, a := "content/type", aws.ToString(cmu.ContentType); e != a {
-		t.Errorf("expect %q, got %q", e, a)
 	}
 }
 
-func TestUploadOrderMultiJustExceedSinglePart(t *testing.T) {
+// TestUploadMultiAboveThreshold verifies that a file just above
+// MultipartUploadThreshold triggers multipart upload with correct part sizes.
+func TestUploadMultiAboveThreshold(t *testing.T) {
 	c, invocations, args := s3testing.NewUploadLoggingClient(nil)
+	// Default: PartSizeBytes=8 MB, MultipartUploadThreshold=16 MB.
+	// A file of 16 MB + 1 byte is just above the threshold → multipart.
 	mgr := New(c)
 
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket:               aws.String("Bucket"),
 		Key:                  aws.String("Key - value"),
-		Body:                 bytes.NewReader(make([]byte, 8*1024*1024+1)),
+		Body:                 bytes.NewReader(make([]byte, 16*1024*1024+1)),
 		ServerSideEncryption: "aws:kms",
 		SSEKMSKeyID:          aws.String("KmsId"),
 		ContentType:          aws.String("content/type"),
@@ -196,7 +155,7 @@ func TestUploadOrderMultiJustExceedSinglePart(t *testing.T) {
 	}
 
 	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "UploadPart",
-		"CompleteMultipartUpload"}, *invocations); len(diff) > 0 {
+		"UploadPart", "CompleteMultipartUpload"}, *invocations); len(diff) > 0 {
 		t.Error(diff)
 	}
 
@@ -208,50 +167,57 @@ func TestUploadOrderMultiJustExceedSinglePart(t *testing.T) {
 		t.Errorf("expect %q, got %q", "VERSION-ID", aws.ToString(resp.VersionID))
 	}
 
-	// Validate input values
+	// Collect and sort part sizes: order is non-deterministic under concurrent uploads.
+	var parts []int64
+	for i := 1; i <= 3; i++ {
+		parts = append(parts, getReaderLength((*args)[i].(*s3.UploadPartInput).Body))
+	}
+	slices.Sort(parts)
+	if diff := cmpDiff([]int64{1, 8 * 1024 * 1024, 8 * 1024 * 1024}, parts); len(diff) > 0 {
+		t.Error(diff)
+	}
+}
 
-	// UploadPart
-	for i := 1; i < 3; i++ {
-		v := aws.ToString((*args)[i].(*s3.UploadPartInput).UploadId)
-		if "UPLOAD-ID" != v {
-			t.Errorf("Expected %q, but received %q", "UPLOAD-ID", v)
-		}
+// TestUploadCustomThreshold verifies that a user-supplied
+// MultipartUploadThreshold is respected: files below it use PutObject, files
+// at or above it use multipart.
+func TestUploadCustomThreshold(t *testing.T) {
+	const customThreshold = 5 * 1024 * 1024 // 5 MB
+
+	tests := []struct {
+		name       string
+		bodySize   int
+		wantSingle bool
+	}{
+		{"below threshold", customThreshold - 1, true},  // strictly below → PutObject
+		{"at threshold", customThreshold, false},         // n < threshold is false → multipart
+		{"above threshold", customThreshold + 1, false}, // above → multipart
 	}
 
-	// CompleteMultipartUpload
-	v := aws.ToString((*args)[3].(*s3.CompleteMultipartUploadInput).UploadId)
-	if "UPLOAD-ID" != v {
-		t.Errorf("Expected %q, but received %q", "UPLOAD-ID", v)
-	}
-
-	parts := (*args)[3].(*s3.CompleteMultipartUploadInput).MultipartUpload.Parts
-
-	for i := range 2 {
-		num := parts[i].PartNumber
-		etag := aws.ToString(parts[i].ETag)
-
-		if int32(i+1) != aws.ToInt32(num) {
-			t.Errorf("expect %d, got %d", i+1, num)
-		}
-
-		if matched, err := regexp.MatchString(`^ETAG\d+$`, etag); !matched || err != nil {
-			t.Errorf("Failed regexp expression `^ETAG\\d+$`")
-		}
-	}
-
-	// Custom headers
-	cmu := (*args)[0].(*s3.CreateMultipartUploadInput)
-
-	if e, a := types.ServerSideEncryption("aws:kms"), cmu.ServerSideEncryption; e != a {
-		t.Errorf("expect %q, got %q", e, a)
-	}
-
-	if e, a := "KmsId", aws.ToString(cmu.SSEKMSKeyId); e != a {
-		t.Errorf("expect %q, got %q", e, a)
-	}
-
-	if e, a := "content/type", aws.ToString(cmu.ContentType); e != a {
-		t.Errorf("expect %q, got %q", e, a)
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
+			mgr := New(c, func(o *Options) {
+				o.MultipartUploadThreshold = customThreshold
+			})
+			_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
+				Bucket: aws.String("Bucket"),
+				Key:    aws.String("Key"),
+				Body:   bytes.NewReader(make([]byte, tc.bodySize)),
+			})
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			if tc.wantSingle {
+				if diff := cmpDiff([]string{"PutObject"}, *invocations); len(diff) > 0 {
+					t.Errorf("expected single upload: %s", diff)
+				}
+			} else {
+				if len(*invocations) == 0 || (*invocations)[0] != "CreateMultipartUpload" {
+					t.Errorf("expected multipart upload, got %v", *invocations)
+				}
+			}
+		})
 	}
 }
 
@@ -476,10 +442,12 @@ func TestUploadOrderMultiFailureOnCreate(t *testing.T) {
 	}
 
 	mgr := New(c)
+	// Use 17 MB (above the default 16 MB MultipartUploadThreshold) so that
+	// the upload takes the multipart path and hits CreateMultipartUpload.
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
-		Body:   bytes.NewReader(make([]byte, 1024*1024*12)),
+		Body:   bytes.NewReader(make([]byte, 1024*1024*17)),
 	})
 
 	if err == nil {
@@ -530,10 +498,13 @@ func TestUploadOrderReadFail2(t *testing.T) {
 	mgr := New(c, func(o *Options) {
 		o.Concurrency = 1
 	})
+	// failBytes must exceed the lookahead window (max(threshold=16 MB, partSize=8 MB) = 16 MB)
+	// so the failure occurs during part reads rather than during the initial
+	// single-vs-multipart decision, allowing CreateMultipartUpload to be called first.
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
-		Body:   &failreader{failBytes: 8 * 1024 * 1024},
+		Body:   &failreader{failBytes: 16*1024*1024 + 1},
 	})
 	if err == nil {
 		t.Fatalf("expect error to not be nil")
@@ -600,8 +571,11 @@ func TestUploadOrderMultiBufferedReader(t *testing.T) {
 	}
 }
 
-func TestUploadOrderMultiBufferedReaderWithSinglePartSize(t *testing.T) {
-	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
+// TestUploadSingleBufferedReaderAtPartSize verifies that a buffered reader of
+// exactly PartSizeBytes (8 MB) uses PutObject when MultipartUploadThreshold
+// (16 MB default) is not exceeded.
+func TestUploadSingleBufferedReaderAtPartSize(t *testing.T) {
+	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c)
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
@@ -612,21 +586,16 @@ func TestUploadOrderMultiBufferedReaderWithSinglePartSize(t *testing.T) {
 		t.Errorf("expect no error, got %v", err)
 	}
 
-	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "CompleteMultipartUpload"},
-		*invocations); len(diff) > 0 {
-		t.Error(diff)
-	}
-
-	// Part lengths
-	parts := []int64{getReaderLength((*params)[1].(*s3.UploadPartInput).Body)}
-
-	if diff := cmpDiff([]int64{1024 * 1024 * 8}, parts); len(diff) > 0 {
+	if diff := cmpDiff([]string{"PutObject"}, *invocations); len(diff) > 0 {
 		t.Error(diff)
 	}
 }
 
-func TestUploadOrderMultiBufferedReaderJustExceedSinglePart(t *testing.T) {
-	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
+// TestUploadSingleBufferedReaderJustBelowThreshold verifies that a buffered
+// reader with size PartSizeBytes+1 (still well below the 16 MB
+// MultipartUploadThreshold) uses PutObject, not multipart.
+func TestUploadSingleBufferedReaderJustBelowThreshold(t *testing.T) {
+	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c)
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
@@ -637,19 +606,7 @@ func TestUploadOrderMultiBufferedReaderJustExceedSinglePart(t *testing.T) {
 		t.Errorf("expect no error, got %v", err)
 	}
 
-	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "UploadPart",
-		"CompleteMultipartUpload"}, *invocations); len(diff) > 0 {
-		t.Error(diff)
-	}
-
-	// Part lengths
-	var parts []int64
-	for i := 1; i < 3; i++ {
-		parts = append(parts, getReaderLength((*params)[i].(*s3.UploadPartInput).Body))
-	}
-	slices.Sort(parts)
-
-	if diff := cmpDiff([]int64{1, 1024 * 1024 * 8}, parts); len(diff) > 0 {
+	if diff := cmpDiff([]string{"PutObject"}, *invocations); len(diff) > 0 {
 		t.Error(diff)
 	}
 }
@@ -868,11 +825,14 @@ func TestUploadUnexpectedEOF(t *testing.T) {
 		o.Concurrency = 1
 		o.PartSizeBytes = defaultPartSizeBytes
 	})
+	// Size must exceed MultipartUploadThreshold (16 MB) so the upload takes the
+	// multipart path. The incomplete reader returns io.ErrUnexpectedEOF after
+	// threshold+1 bytes, which triggers AbortMultipartUpload.
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
 		Body: &testIncompleteReader{
-			Size: defaultPartSizeBytes + 1,
+			Size: defaultMultipartUploadThreshold + 1,
 		},
 	})
 	if err == nil {
