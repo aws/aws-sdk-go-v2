@@ -1,0 +1,8 @@
+{
+    "id": "3154470d-f97d-4f7e-83dc-11463ef5a4c3",
+    "type": "feature",
+    "description": "Validate discovered endpoint before overwriting request host in case cached tampered endpoints pollute request",
+    "modules": [
+        "service/internal/endpoint-discovery"
+    ]
+}
