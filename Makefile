@@ -70,15 +70,15 @@ all: generate unit
 ###################
 # Code Generation #
 ###################
-.PHONY: generate smithy-generate smithy-build smithy-build-% smithy-clean smithy-go-publish-local format \
+.PHONY: generate smithy-generate generate-smithy-build smithy-build-% smithy-clean smithy-go-publish-local format \
 gen-config-asserts gen-repo-mod-replace gen-mod-replace-smithy gen-mod-dropreplace-smithy-% gen-aws-ptrs tidy-modules-% \
 add-module-license-files sync-models sync-endpoints-model sync-endpoints.json clone-v1-models gen-internal-codegen \
 sync-api-models copy-attributevalue-feature min-go-version-% update-requires smithy-annotate-stable \
 update-module-metadata download-modules-%
 
-generate: smithy-generate update-requires gen-repo-mod-replace update-module-metadata smithy-annotate-stable \
+generate: smithy-generate generate-smithy-build update-requires gen-repo-mod-replace update-module-metadata smithy-annotate-stable \
 gen-config-asserts gen-internal-codegen copy-attributevalue-feature gen-mod-dropreplace-smithy-. min-go-version-. \
-tidy-modules-. add-module-license-files gen-aws-ptrs format
+tidy-modules-. test-update-snapshot-internal_protocoltest add-module-license-files gen-aws-ptrs format
 
 generate-tmpreplace-smithy: smithy-generate update-requires gen-repo-mod-replace gen-mod-replace-smithy-. update-module-metadata smithy-annotate-stable \
 gen-config-asserts gen-internal-codegen copy-attributevalue-feature min-go-version-. \
@@ -99,8 +99,8 @@ reset-sum:
 smithy-generate:
 	cd codegen && ./gradlew clean build -Plog-tests && ./gradlew clean
 
-smithy-build:
-	cd codegen && ./gradlew clean build -Plog-tests
+generate-smithy-build:
+	cd codegen && ./gradlew :protocol-test-codegen:generate-smithy-build
 
 # suffix-to-path pattern
 # Targets with pattern suffix -% convert the suffix to a path by:
