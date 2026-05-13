@@ -1041,7 +1041,6 @@ type DkimSigningAttributes struct {
 	//   - AWS_SES_US_WEST_2 – Configure DKIM for the identity by replicating from a
 	//   parent identity in US West (Oregon) region using Deterministic Easy-DKIM (DEED).
 	//
-	//
 	// [SigningAttributesOrigin]: https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_PutEmailIdentityDkimSigningAttributes.html#SES-PutEmailIdentityDkimSigningAttributes-request-SigningAttributesOrigin
 	DomainSigningAttributesOrigin DkimSigningAttributesOrigin
 

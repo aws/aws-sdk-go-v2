@@ -13730,7 +13730,7 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 	{
 		headerValue := msg.Headers.Get("booleanHeader")
 		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.BoolValue)
+			hv, ok := headerValue.(eventstream.BoolValue)
 			if !ok {
 				return fmt.Errorf("unexpected event header %s with type %T:", "booleanHeader", headerValue)
 			}
@@ -13743,7 +13743,7 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 	{
 		headerValue := msg.Headers.Get("byteHeader")
 		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.Int8Value)
+			hv, ok := headerValue.(eventstream.Int8Value)
 			if !ok {
 				return fmt.Errorf("unexpected event header %s with type %T:", "byteHeader", headerValue)
 			}
@@ -13756,7 +13756,7 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 	{
 		headerValue := msg.Headers.Get("intHeader")
 		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.Int32Value)
+			hv, ok := headerValue.(eventstream.Int32Value)
 			if !ok {
 				return fmt.Errorf("unexpected event header %s with type %T:", "intHeader", headerValue)
 			}
@@ -13769,7 +13769,7 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 	{
 		headerValue := msg.Headers.Get("longHeader")
 		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.Int64Value)
+			hv, ok := headerValue.(eventstream.Int64Value)
 			if !ok {
 				return fmt.Errorf("unexpected event header %s with type %T:", "longHeader", headerValue)
 			}
@@ -13782,7 +13782,7 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 	{
 		headerValue := msg.Headers.Get("shortHeader")
 		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.Int16Value)
+			hv, ok := headerValue.(eventstream.Int16Value)
 			if !ok {
 				return fmt.Errorf("unexpected event header %s with type %T:", "shortHeader", headerValue)
 			}
@@ -13795,7 +13795,7 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 	{
 		headerValue := msg.Headers.Get("stringHeader")
 		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.StringValue)
+			hv, ok := headerValue.(eventstream.StringValue)
 			if !ok {
 				return fmt.Errorf("unexpected event header %s with type %T:", "stringHeader", headerValue)
 			}
@@ -13808,7 +13808,7 @@ func awsRestjson1_deserializeEventMessageHeadersEvent(v *types.HeadersEvent, msg
 	{
 		headerValue := msg.Headers.Get("timestampHeader")
 		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.TimestampValue)
+			hv, ok := headerValue.(eventstream.TimestampValue)
 			if !ok {
 				return fmt.Errorf("unexpected event header %s with type %T:", "timestampHeader", headerValue)
 			}
@@ -13930,7 +13930,7 @@ func awsRestjson1_deserializeEventMessageHeadersAndExplicitPayloadEvent(v *types
 	{
 		headerValue := msg.Headers.Get("header")
 		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.StringValue)
+			hv, ok := headerValue.(eventstream.StringValue)
 			if !ok {
 				return fmt.Errorf("unexpected event header %s with type %T:", "header", headerValue)
 			}
@@ -13981,7 +13981,7 @@ func awsRestjson1_deserializeEventMessageHeadersAndImplicitPayloadEvent(v *types
 	{
 		headerValue := msg.Headers.Get("header")
 		if headerValue != nil {
-			hv, ok := headerValue.(*eventstream.StringValue)
+			hv, ok := headerValue.(eventstream.StringValue)
 			if !ok {
 				return fmt.Errorf("unexpected event header %s with type %T:", "header", headerValue)
 			}
