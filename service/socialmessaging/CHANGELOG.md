@@ -1,3 +1,7 @@
+# v1.9.0 (2026-05-13)
+
+* **Feature**: Adds parameters to call the GetWhatsAppMessageTemplate and UpdateWhatsAppMessageTemplate APIs with a template name and language code in place of the template ID. Linked WhatsApp accounts also describe whether the WABA is onboarded to Meta's Marketing Messages API.
+
 # v1.8.6 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

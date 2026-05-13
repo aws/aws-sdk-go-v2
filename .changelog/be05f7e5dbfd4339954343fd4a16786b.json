@@ -1,8 +1,0 @@
-{
-    "id": "be05f7e5-dbfd-4339-9543-43fd4a16786b",
-    "type": "feature",
-    "description": "Adds support for AutomatedSnapshotPauseOptions.",
-    "modules": [
-        "service/elasticsearchservice"
-    ]
-}

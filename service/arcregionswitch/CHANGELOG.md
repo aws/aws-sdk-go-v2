@@ -1,3 +1,7 @@
+# v1.7.0 (2026-05-13)
+
+* **Feature**: Adds support for enabling and disabling Lambda event source mappings in Region switch plans.
+
 # v1.6.5 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

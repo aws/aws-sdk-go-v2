@@ -1,3 +1,7 @@
+# v1.29.0 (2026-05-13)
+
+* **Feature**: Add ConflictException to UpdateCustomLineItem operation.
+
 # v1.28.7 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

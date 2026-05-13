@@ -1,8 +1,0 @@
-{
-    "id": "7dcc0ad1-42c2-4d41-8cca-2850fe9f668f",
-    "type": "documentation",
-    "description": "Adds a billing callout to docs regarding using the CE Scale Down Delay feature",
-    "modules": [
-        "service/batch"
-    ]
-}

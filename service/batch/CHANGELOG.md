@@ -1,3 +1,7 @@
+# v1.64.2 (2026-05-13)
+
+* **Documentation**: Adds a billing callout to docs regarding using the CE Scale Down Delay feature
+
 # v1.64.1 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

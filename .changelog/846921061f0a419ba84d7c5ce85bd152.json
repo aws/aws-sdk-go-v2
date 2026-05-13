@@ -1,8 +1,0 @@
-{
-    "id": "84692106-1f0a-419b-a84d-7c5ce85bd152",
-    "type": "documentation",
-    "description": "Added rg.xlarge and rg.4xlarge to valid NodeType values and updated documentation for CreateCluster, ModifyCluster, ResizeCluster, and RestoreFromClusterSnapshot APIs to reflect RG node type support.",
-    "modules": [
-        "service/redshift"
-    ]
-}

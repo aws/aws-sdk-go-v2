@@ -1,3 +1,7 @@
+# v1.62.8 (2026-05-13)
+
+* **Documentation**: Added rg.xlarge and rg.4xlarge to valid NodeType values and updated documentation for CreateCluster, ModifyCluster, ResizeCluster, and RestoreFromClusterSnapshot APIs to reflect RG node type support.
+
 # v1.62.7 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

@@ -1,3 +1,7 @@
+# v1.51.24 (2026-05-13)
+
+* No change notes available for this release.
+
 # v1.51.23 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

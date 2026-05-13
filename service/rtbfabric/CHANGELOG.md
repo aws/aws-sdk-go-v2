@@ -1,3 +1,7 @@
+# v1.5.0 (2026-05-13)
+
+* **Feature**: Customers can now configure custom domain names for their RTB Fabric gateways. This enables partners to use their own branded domain for RTB traffic instead of the default rtbfabric endpoint
+
 # v1.4.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

@@ -1,3 +1,7 @@
+# v1.18.0 (2026-05-13)
+
+* **Feature**: Add support for Amazon EC2 Interruptible-ODCR
+
 # v1.17.4 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

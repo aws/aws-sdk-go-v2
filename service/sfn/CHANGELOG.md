@@ -1,3 +1,7 @@
+# v1.41.0 (2026-05-13)
+
+* **Feature**: Updated default SDK endpoints for AWS Step Functions in AWS GovCloud (US) regions. The default Dual-Stack endpoints now resolve to "states-fips" prefixed hostnames. There are no changes to service behavior. No customer action is required.
+
 # v1.40.12 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

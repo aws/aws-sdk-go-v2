@@ -1,3 +1,7 @@
+# v1.13.0 (2026-05-13)
+
+* **Feature**: Added support for Amazon Aurora DSQL change data capture (CDC) streams that deliver row-level database changes to Amazon Kinesis in JSON format. Includes CreateStream, GetStream, ListStreams, and DeleteStream operations.
+
 # v1.12.10 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

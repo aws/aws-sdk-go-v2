@@ -1,3 +1,7 @@
+# v1.69.0 (2026-05-13)
+
+* **Feature**: Adds support for AutomatedSnapshotPauseOptions.
+
 # v1.68.0 (2026-05-05)
 
 * **Feature**: Amazon OpenSearch Service now supports VPC egress, enabling outbound traffic from your OpenSearch domain to route privately through your VPC instead of the public internet.

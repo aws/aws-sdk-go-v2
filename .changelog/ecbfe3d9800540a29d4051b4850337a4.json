@@ -1,8 +1,0 @@
-{
-    "id": "ecbfe3d9-8005-40a2-9d40-51b4850337a4",
-    "type": "feature",
-    "description": "Added ServiceQuotaExceededExceptions for Profile operations",
-    "modules": [
-        "service/partnercentralaccount"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "c9f92041-7213-46bd-a100-ad797c7f39ef",
-    "type": "feature",
-    "description": "Add ConflictException to UpdateCustomLineItem operation.",
-    "modules": [
-        "service/billingconductor"
-    ]
-}

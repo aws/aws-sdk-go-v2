@@ -1,3 +1,7 @@
+# v1.41.0 (2026-05-13)
+
+* **Feature**: Amazon Connect Cases now supports SLA durations of up to 2 years (1,051,200 minutes), increased from the previous maximum of 90 days (129,600 minutes). This enables you to track long-running service level agreements for cases that require extended resolution timelines.
+
 # v1.40.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

@@ -1,3 +1,7 @@
+# v1.41.0 (2026-05-13)
+
+* **Feature**: Adds support for AutomatedSnapshotPauseOptions.
+
 # v1.40.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

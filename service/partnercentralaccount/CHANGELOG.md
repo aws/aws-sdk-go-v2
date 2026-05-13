@@ -1,3 +1,7 @@
+# v1.3.0 (2026-05-13)
+
+* **Feature**: Added ServiceQuotaExceededExceptions for Profile operations
+
 # v1.2.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

@@ -1,3 +1,51 @@
+# Release (2026-05-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.7.0](service/arcregionswitch/CHANGELOG.md#v170-2026-05-13)
+  * **Feature**: Adds support for enabling and disabling Lambda event source mappings in Region switch plans.
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.64.2](service/batch/CHANGELOG.md#v1642-2026-05-13)
+  * **Documentation**: Adds a billing callout to docs regarding using the CE Scale Down Delay feature
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.38.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1380-2026-05-13)
+  * **Feature**: Adds support for read-only summary APIs for Policy Engine, Policy, and Policy Generation resources, enabling metadata retrieval without KMS decryption for AWS Config integration.
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.29.0](service/billingconductor/CHANGELOG.md#v1290-2026-05-13)
+  * **Feature**: Add ConflictException to UpdateCustomLineItem operation.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.173.0](service/connect/CHANGELOG.md#v11730-2026-05-13)
+  * **Feature**: This change added three new EventSourceName for schedule notification feature
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.13.0](service/connectcampaignsv2/CHANGELOG.md#v1130-2026-05-13)
+  * **Feature**: This release added support for Outbound Campaign timezone detection using all available contact methods
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.41.0](service/connectcases/CHANGELOG.md#v1410-2026-05-13)
+  * **Feature**: Amazon Connect Cases now supports SLA durations of up to 2 years (1,051,200 minutes), increased from the previous maximum of 90 days (129,600 minutes). This enables you to track long-running service level agreements for cases that require extended resolution timelines.
+* `github.com/aws/aws-sdk-go-v2/service/dsql`: [v1.13.0](service/dsql/CHANGELOG.md#v1130-2026-05-13)
+  * **Feature**: Added support for Amazon Aurora DSQL change data capture (CDC) streams that deliver row-level database changes to Amazon Kinesis in JSON format. Includes CreateStream, GetStream, ListStreams, and DeleteStream operations.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.302.0](service/ec2/CHANGELOG.md#v13020-2026-05-13)
+  * **Feature**: Include length limits in the SDK and documentation for text fields in Image (AMI) APIs such as the image name and description
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.41.0](service/elasticsearchservice/CHANGELOG.md#v1410-2026-05-13)
+  * **Feature**: Adds support for AutomatedSnapshotPauseOptions.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.141.1](service/glue/CHANGELOG.md#v11411-2026-05-13)
+  * **Documentation**: AWS Glue now defaults the job timeout to 480 minutes for Glue version 5.0 and later when no timeout value is specified. The default remains 2,880 minutes for Glue version 4.0 and earlier.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.54.0](service/lightsail/CHANGELOG.md#v1540-2026-05-13)
+  * **Feature**: Added OriginIpAddressTypeEnum (ipv4, ipv6, dualstack) and ipAddressType field to Origin and InputOrigin structures for Lightsail CDN distributions. Allows customers to specify how the distribution connects to origins, using IPv4, IPv6, or dualstack networking
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.69.0](service/opensearch/CHANGELOG.md#v1690-2026-05-13)
+  * **Feature**: Adds support for AutomatedSnapshotPauseOptions.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralaccount`: [v1.3.0](service/partnercentralaccount/CHANGELOG.md#v130-2026-05-13)
+  * **Feature**: Added ServiceQuotaExceededExceptions for Profile operations
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.18.0](service/pcs/CHANGELOG.md#v1180-2026-05-13)
+  * **Feature**: Add support for Amazon EC2 Interruptible-ODCR
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.109.0](service/quicksight/CHANGELOG.md#v11090-2026-05-13)
+  * **Feature**: Adds five new custom permission option for Quick Apps so that these capabilities can be controlled by public SDK and CLI.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.62.8](service/redshift/CHANGELOG.md#v1628-2026-05-13)
+  * **Documentation**: Added rg.xlarge and rg.4xlarge to valid NodeType values and updated documentation for CreateCluster, ModifyCluster, ResizeCluster, and RestoreFromClusterSnapshot APIs to reflect RG node type support.
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.5.0](service/rtbfabric/CHANGELOG.md#v150-2026-05-13)
+  * **Feature**: Customers can now configure custom domain names for their RTB Fabric gateways. This enables partners to use their own branded domain for RTB traffic instead of the default rtbfabric endpoint
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.247.0](service/sagemaker/CHANGELOG.md#v12470-2026-05-13)
+  * **Feature**: Adds execution role session name mode to reflect user identity in Studio. Adds Flexible Training Plans on Studio apps. Adds restricted model packages to control access to proprietary model artifacts via IAM. Fixed instance type parity between inference endpoints and managed shadow tests.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.2.0](service/securityagent/CHANGELOG.md#v120-2026-05-13)
+  * **Feature**: Add support for code reviews, a new resource type that enables automated security-focused static analysis of source code repositories.
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.41.0](service/sfn/CHANGELOG.md#v1410-2026-05-13)
+  * **Feature**: Updated default SDK endpoints for AWS Step Functions in AWS GovCloud (US) regions. The default Dual-Stack endpoints now resolve to "states-fips" prefixed hostnames. There are no changes to service behavior. No customer action is required.
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.9.0](service/socialmessaging/CHANGELOG.md#v190-2026-05-13)
+  * **Feature**: Adds parameters to call the GetWhatsAppMessageTemplate and UpdateWhatsAppMessageTemplate APIs with a template name and language code in place of the template ID. Linked WhatsApp accounts also describe whether the WABA is onboarded to Meta's Marketing Messages API.
+
 # Release (2026-05-07)
 
 ## Module Highlights

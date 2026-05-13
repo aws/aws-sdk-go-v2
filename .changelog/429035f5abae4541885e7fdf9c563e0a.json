@@ -1,8 +1,0 @@
-{
-    "id": "429035f5-abae-4541-885e-7fdf9c563e0a",
-    "type": "feature",
-    "description": "Include length limits in the SDK and documentation for text fields in Image (AMI) APIs such as the image name and description",
-    "modules": [
-        "service/ec2"
-    ]
-}
