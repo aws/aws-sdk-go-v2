@@ -34,6 +34,9 @@ type CreateModelPackageGroupInput struct {
 	// This member is required.
 	ModelPackageGroupName *string
 
+	// The managed configuration of the model package group.
+	ManagedConfiguration *types.ManagedConfiguration
+
 	// A description for the model group.
 	ModelPackageGroupDescription *string
 

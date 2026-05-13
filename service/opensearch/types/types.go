@@ -296,6 +296,68 @@ type AuthorizedPrincipal struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the automated snapshot pause options for the domain. These options
+// allow you to temporarily pause automated snapshots for a specified time period.
+type AutomatedSnapshotPauseOptions struct {
+
+	// Whether automated snapshot pause is enabled for the domain.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The timestamp at which the automated snapshot pause ends.
+	EndTime *time.Time
+
+	// The timestamp at which the automated snapshot pause begins.
+	StartTime *time.Time
+
+	// The current state of the automated snapshot pause. Valid values are Active ,
+	// Completed , Scheduled , and Disabled .
+	State PauseState
+
+	noSmithyDocumentSerde
+}
+
+// The status of automated snapshot pause options for the domain.
+type AutomatedSnapshotPauseOptionsStatus struct {
+
+	// Automated snapshot pause options for the domain.
+	//
+	// This member is required.
+	Options *AutomatedSnapshotPauseOptions
+
+	// The current status of the automated snapshot pause options for the domain.
+	//
+	// This member is required.
+	Status *OptionStatus
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the automated snapshot pause request options for the domain.
+//
+// Suspending snapshots reduces data protection. You cannot restore your domain to
+// points in time when snapshots are suspended. Use this feature only for
+// short-term operational needs such as migrations or maintenance windows.
+//
+// Maximum suspension duration: 3 days.
+type AutomatedSnapshotPauseRequestOptions struct {
+
+	// Whether to enable or disable automated snapshot pause for the domain.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The timestamp at which the automated snapshot pause should end. The maximum
+	// allowed duration between StartTime and EndTime is 3 days.
+	EndTime *time.Time
+
+	// The timestamp at which the automated snapshot pause should begin.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Information about an Auto-Tune action. For more information, see [Auto-Tune for Amazon OpenSearch Service].
 //
 // [Auto-Tune for Amazon OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
@@ -1041,6 +1103,9 @@ type DomainConfig struct {
 	// Container for Auto-Tune settings for the domain.
 	AutoTuneOptions *AutoTuneOptionsStatus
 
+	// Specifies AutomatedSnapshotPauseOptions for the domain.
+	AutomatedSnapshotPauseOptions *AutomatedSnapshotPauseOptionsStatus
+
 	// Container for information about the progress of an existing configuration
 	// change.
 	ChangeProgressDetails *ChangeProgressDetails
@@ -1324,6 +1389,9 @@ type DomainStatus struct {
 
 	// Auto-Tune settings for the domain.
 	AutoTuneOptions *AutoTuneOptionsOutput
+
+	// The current status of the domain's automated snapshot pause options.
+	AutomatedSnapshotPauseOptions *AutomatedSnapshotPauseOptions
 
 	// Information about a configuration change happening on the domain.
 	ChangeProgressDetails *ChangeProgressDetails

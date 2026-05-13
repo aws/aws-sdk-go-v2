@@ -1587,6 +1587,36 @@ func serializeCBOR_EksResourceScalingUngraceful(v *types.EksResourceScalingUngra
 	return vm, nil
 }
 
+func serializeCBOR_EventSourceMapping(v *types.EventSourceMapping) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.CrossAccountRole != nil {
+		ser, err := serializeCBOR_String(*v.CrossAccountRole)
+		if err != nil {
+			return nil, err
+		}
+		vm["crossAccountRole"] = ser
+	}
+	if v.ExternalId != nil {
+		ser, err := serializeCBOR_String(*v.ExternalId)
+		if err != nil {
+			return nil, err
+		}
+		vm["externalId"] = ser
+	}
+	if v.Arn != nil {
+		ser, err := serializeCBOR_String(*v.Arn)
+		if err != nil {
+			return nil, err
+		}
+		vm["arn"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_EventSourceMappingAction(v types.EventSourceMappingAction) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
 func serializeCBOR_ExecutionAction(v types.ExecutionAction) (smithycbor.Value, error) {
 	return smithycbor.String(string(v)), nil
 }
@@ -1691,6 +1721,12 @@ func serializeCBOR_ExecutionBlockConfiguration(v types.ExecutionBlockConfigurati
 			return nil, err
 		}
 		vm["rdsCreateCrossRegionReadReplicaConfig"] = ser
+	case *types.ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig:
+		ser, err := serializeCBOR_LambdaEventSourceMappingConfiguration(&uv.Value)
+		if err != nil {
+			return nil, err
+		}
+		vm["lambdaEventSourceMappingConfig"] = ser
 	default:
 		return nil, fmt.Errorf("unknown variant type %T", v)
 	}
@@ -1858,6 +1894,55 @@ func serializeCBOR_KubernetesScalingResource(v *types.KubernetesScalingResource)
 		vm["hpaName"] = ser
 	}
 	return vm, nil
+}
+
+func serializeCBOR_LambdaEventSourceMappingConfiguration(v *types.LambdaEventSourceMappingConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.TimeoutMinutes != nil {
+		ser, err := serializeCBOR_Int32(*v.TimeoutMinutes)
+		if err != nil {
+			return nil, err
+		}
+		vm["timeoutMinutes"] = ser
+	}
+	if len(v.Action) > 0 {
+		ser, err := serializeCBOR_EventSourceMappingAction(v.Action)
+		if err != nil {
+			return nil, err
+		}
+		vm["action"] = ser
+	}
+	if v.RegionEventSourceMappings != nil {
+		ser, err := serializeCBOR_RegionEventSourceMappingMap(v.RegionEventSourceMappings)
+		if err != nil {
+			return nil, err
+		}
+		vm["regionEventSourceMappings"] = ser
+	}
+	if v.Ungraceful != nil {
+		ser, err := serializeCBOR_LambdaEventSourceMappingUngraceful(v.Ungraceful)
+		if err != nil {
+			return nil, err
+		}
+		vm["ungraceful"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_LambdaEventSourceMappingUngraceful(v *types.LambdaEventSourceMappingUngraceful) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if len(v.Behavior) > 0 {
+		ser, err := serializeCBOR_LambdaEventSourceMappingUngracefulBehavior(v.Behavior)
+		if err != nil {
+			return nil, err
+		}
+		vm["behavior"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_LambdaEventSourceMappingUngracefulBehavior(v types.LambdaEventSourceMappingUngracefulBehavior) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
 }
 
 func serializeCBOR_LambdaList(v []types.Lambdas) (smithycbor.Value, error) {
@@ -2031,6 +2116,19 @@ func serializeCBOR_RegionAndRoutingControls(v map[string][]types.ArcRoutingContr
 			continue
 		}
 		ser, err := serializeCBOR_ArcRoutingControlStates(vv)
+		if err != nil {
+			return nil, err
+		}
+		vm[k] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_RegionEventSourceMappingMap(v map[string]types.EventSourceMapping) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	for k, vv := range v {
+
+		ser, err := serializeCBOR_EventSourceMapping(&vv)
 		if err != nil {
 			return nil, err
 		}

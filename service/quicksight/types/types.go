@@ -3096,6 +3096,9 @@ type CalculatedMeasureField struct {
 // A set of actions that correspond to Amazon Quick Sight permissions.
 type Capabilities struct {
 
+	// The ability to access the native data store for new and existing apps.
+	AccessAppsNativeDataStore CapabilityState
+
 	// The ability to perform actions in external services through Action connectors.
 	// Actions allow users to interact with third-party systems.
 	Action CapabilityState
@@ -3120,6 +3123,9 @@ type Capabilities struct {
 
 	// The ability to review and approve sharing requests of Flows.
 	ApproveFlowShareRequests CapabilityState
+
+	// The ability to perform apps-related actions.
+	Apps CapabilityState
 
 	// The ability to perform actions using Asana connectors.
 	AsanaAction CapabilityState
@@ -3162,6 +3168,9 @@ type Capabilities struct {
 
 	// The ability to create and update Amazon S3 actions.
 	CreateAndUpdateAmazonSThreeAction CapabilityState
+
+	// The ability to create or update apps.
+	CreateAndUpdateApps CapabilityState
 
 	// The ability to create and update Asana actions.
 	CreateAndUpdateAsanaAction CapabilityState
@@ -3367,6 +3376,9 @@ type Capabilities struct {
 	// The ability to perform actions using Intercom connectors.
 	IntercomAction CapabilityState
 
+	// The ability to add and invoke AI inference in new and existing apps.
+	InvokeAppsAIInference CapabilityState
+
 	// The ability to perform actions using Jira connectors.
 	JiraAction CapabilityState
 
@@ -3474,6 +3486,9 @@ type Capabilities struct {
 
 	// The ability to share analyses.
 	ShareAnalyses CapabilityState
+
+	// The ability to share apps with other users.
+	ShareApps CapabilityState
 
 	// The ability to share Asana actions.
 	ShareAsanaAction CapabilityState

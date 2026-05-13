@@ -1,0 +1,8 @@
+{
+    "id": "1f5a40e6-67f6-40b3-97b0-ff216302885b",
+    "type": "feature",
+    "description": "Adds execution role session name mode to reflect user identity in Studio. Adds Flexible Training Plans on Studio apps. Adds restricted model packages to control access to proprietary model artifacts via IAM. Fixed instance type parity between inference endpoints and managed shadow tests.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

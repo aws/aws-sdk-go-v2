@@ -117,6 +117,9 @@ type DescribeModelPackageOutput struct {
 	// The last time that the model package was modified.
 	LastModifiedTime *time.Time
 
+	// The storage type of the model package.
+	ManagedStorageType types.ManagedStorageType
+
 	// Metadata properties of the tracking entity, trial, or trial component.
 	MetadataProperties *types.MetadataProperties
 

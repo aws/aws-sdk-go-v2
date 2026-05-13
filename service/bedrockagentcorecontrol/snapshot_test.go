@@ -878,11 +878,47 @@ func TestCheckSnapshot_GetPolicyEngine(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetPolicyEngineSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicyEngineSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPolicyEngineSummary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetPolicyGeneration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPolicyGeneration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetPolicyGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPolicyGenerationSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicyGenerationSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPolicyGenerationSummary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPolicySummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicySummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPolicySummary")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1214,6 +1250,18 @@ func TestCheckSnapshot_ListPolicyEngines(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListPolicyEngineSummaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyEngineSummaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPolicyEngineSummaries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListPolicyGenerationAssets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPolicyGenerationAssets(context.Background(), nil, func(o *Options) {
@@ -1231,6 +1279,30 @@ func TestCheckSnapshot_ListPolicyGenerations(t *testing.T) {
 	_, err := svc.ListPolicyGenerations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListPolicyGenerations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPolicyGenerationSummaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyGenerationSummaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPolicyGenerationSummaries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPolicySummaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicySummaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPolicySummaries")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2437,11 +2509,47 @@ func TestUpdateSnapshot_GetPolicyEngine(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetPolicyEngineSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicyEngineSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPolicyEngineSummary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetPolicyGeneration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPolicyGeneration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetPolicyGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPolicyGenerationSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicyGenerationSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPolicyGenerationSummary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPolicySummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicySummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPolicySummary")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2773,6 +2881,18 @@ func TestUpdateSnapshot_ListPolicyEngines(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListPolicyEngineSummaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyEngineSummaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPolicyEngineSummaries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListPolicyGenerationAssets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPolicyGenerationAssets(context.Background(), nil, func(o *Options) {
@@ -2790,6 +2910,30 @@ func TestUpdateSnapshot_ListPolicyGenerations(t *testing.T) {
 	_, err := svc.ListPolicyGenerations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListPolicyGenerations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPolicyGenerationSummaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyGenerationSummaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPolicyGenerationSummaries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPolicySummaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicySummaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPolicySummaries")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

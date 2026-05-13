@@ -1,0 +1,8 @@
+{
+    "id": "02db760d-24f0-402c-86d1-363240d46c35",
+    "type": "feature",
+    "description": "Add support for Amazon EC2 Interruptible-ODCR",
+    "modules": [
+        "service/pcs"
+    ]
+}

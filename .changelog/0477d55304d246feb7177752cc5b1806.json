@@ -1,0 +1,8 @@
+{
+    "id": "0477d553-04d2-46fe-b717-7752cc5b1806",
+    "type": "feature",
+    "description": "Adds support for read-only summary APIs for Policy Engine, Policy, and Policy Generation resources, enabling metadata retrieval without KMS decryption for AWS Config integration.",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

@@ -1226,9 +1226,9 @@ type PaymentCredentialProviderVendorType string
 
 // Enum values for PaymentCredentialProviderVendorType
 const (
-	// Coinbase Developer Platform - https://docs.cdp.coinbase.com/
+	// Coinbase Developer Platform.
 	PaymentCredentialProviderVendorTypeCoinbaseCDP PaymentCredentialProviderVendorType = "CoinbaseCDP"
-	// Stripe + Privy - https://docs.privy.io/
+	// Stripe and Privy.
 	PaymentCredentialProviderVendorTypeStripePrivy PaymentCredentialProviderVendorType = "StripePrivy"
 )
 

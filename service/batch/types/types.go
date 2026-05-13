@@ -241,16 +241,15 @@ type ComputeEnvironmentDetail struct {
 	// progress normally. Managed compute environments in the DISABLED state don't
 	// scale out.
 	//
-	// Compute environments in a DISABLED state may continue to incur billing charges.
-	// To prevent additional charges, turn off and then delete the compute environment.
-	// For more information, see [State]in the Batch User Guide.
+	// Compute environments in a DISABLED state may continue to incur billing charges,
+	// for example, if they have running instances due to jobs that are still executing
+	// or a non-zero minvCpus setting. To prevent additional charges, disable and
+	// delete the compute environment.
 	//
 	// When an instance is idle, the instance scales down to the minvCpus value.
 	// However, the instance size doesn't change. For example, consider a c5.8xlarge
 	// instance with a minvCpus value of 4 and a desiredvCpus value of 36 . This
 	// instance doesn't scale down to a c5.large instance.
-	//
-	// [State]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state
 	State CEState
 
 	// The current status of the compute environment (for example, CREATING or VALID ).
@@ -985,6 +984,9 @@ type ComputeScalingPolicy struct {
 	//
 	// Valid Range: Minimum value of 20. Maximum value of 10080. Use 0 to unset and
 	// disable the scale down delay.
+	//
+	// Idle instances retained during the scale-down delay period are billable at
+	// standard EC2 pricing.
 	//
 	// The scale down delay does not apply to:
 	//

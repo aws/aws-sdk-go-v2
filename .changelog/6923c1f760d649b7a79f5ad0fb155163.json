@@ -1,0 +1,8 @@
+{
+    "id": "6923c1f7-60d6-49b7-a79f-5ad0fb155163",
+    "type": "feature",
+    "description": "Added support for Amazon Aurora DSQL change data capture (CDC) streams that deliver row-level database changes to Amazon Kinesis in JSON format. Includes CreateStream, GetStream, ListStreams, and DeleteStream operations.",
+    "modules": [
+        "service/dsql"
+    ]
+}

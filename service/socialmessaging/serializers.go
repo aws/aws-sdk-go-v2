@@ -885,6 +885,14 @@ func awsRestjson1_serializeOpHttpBindingsGetWhatsAppMessageTemplateInput(v *GetW
 		encoder.SetQuery("metaTemplateId").String(*v.MetaTemplateId)
 	}
 
+	if v.TemplateLanguageCode != nil {
+		encoder.SetQuery("templateLanguageCode").String(*v.TemplateLanguageCode)
+	}
+
+	if v.TemplateName != nil {
+		encoder.SetQuery("templateName").String(*v.TemplateName)
+	}
+
 	return nil
 }
 
@@ -1750,6 +1758,16 @@ func awsRestjson1_serializeOpDocumentUpdateWhatsAppMessageTemplateInput(v *Updat
 	if v.TemplateComponents != nil {
 		ok := object.Key("templateComponents")
 		ok.Base64EncodeBytes(v.TemplateComponents)
+	}
+
+	if v.TemplateLanguageCode != nil {
+		ok := object.Key("templateLanguageCode")
+		ok.String(*v.TemplateLanguageCode)
+	}
+
+	if v.TemplateName != nil {
+		ok := object.Key("templateName")
+		ok.String(*v.TemplateName)
 	}
 
 	return nil

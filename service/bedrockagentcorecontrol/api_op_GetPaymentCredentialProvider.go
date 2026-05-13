@@ -50,7 +50,7 @@ type GetPaymentCredentialProviderOutput struct {
 	// This member is required.
 	CredentialProviderArn *string
 
-	// Supported vendor types for payment providers using non-standard auth protocols
+	// The vendor type for the payment credential provider.
 	//
 	// This member is required.
 	CredentialProviderVendor types.PaymentCredentialProviderVendorType
@@ -65,7 +65,7 @@ type GetPaymentCredentialProviderOutput struct {
 	// This member is required.
 	Name *string
 
-	// Output configuration (contains secret ARNs, excludes actual secret values)
+	// Output configuration (contains secret ARNs, excludes actual secret values).
 	//
 	// This member is required.
 	ProviderConfigurationOutput types.PaymentProviderConfigurationOutput

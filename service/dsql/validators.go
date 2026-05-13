@@ -5,9 +5,30 @@ package dsql
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dsql/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
+
+type validateOpCreateStream struct {
+}
+
+func (*validateOpCreateStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
 
 type validateOpDeleteCluster struct {
 }
@@ -44,6 +65,26 @@ func (m *validateOpDeleteClusterPolicy) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteClusterPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteStream struct {
+}
+
+func (*validateOpDeleteStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteStreamInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -89,6 +130,26 @@ func (m *validateOpGetClusterPolicy) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetStream struct {
+}
+
+func (*validateOpGetStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetVpcEndpointServiceName struct {
 }
 
@@ -104,6 +165,26 @@ func (m *validateOpGetVpcEndpointServiceName) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetVpcEndpointServiceNameInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListStreams struct {
+}
+
+func (*validateOpListStreams) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListStreams) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListStreamsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListStreamsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -209,12 +290,20 @@ func (m *validateOpUpdateCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateStream{}, middleware.After)
+}
+
 func addOpDeleteClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCluster{}, middleware.After)
 }
 
 func addOpDeleteClusterPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteClusterPolicy{}, middleware.After)
+}
+
+func addOpDeleteStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteStream{}, middleware.After)
 }
 
 func addOpGetClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -225,8 +314,16 @@ func addOpGetClusterPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetClusterPolicy{}, middleware.After)
 }
 
+func addOpGetStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetStream{}, middleware.After)
+}
+
 func addOpGetVpcEndpointServiceNameValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetVpcEndpointServiceName{}, middleware.After)
+}
+
+func addOpListStreamsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListStreams{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -247,6 +344,71 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCluster{}, middleware.After)
+}
+
+func validateKinesisTargetDefinition(v *types.KinesisTargetDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KinesisTargetDefinition"}
+	if v.StreamArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamArn"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetDefinition(v types.TargetDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetDefinition"}
+	switch uv := v.(type) {
+	case *types.TargetDefinitionMemberKinesis:
+		if err := validateKinesisTargetDefinition(&uv.Value); err != nil {
+			invalidParams.AddNested("[kinesis]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateStreamInput(v *CreateStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateStreamInput"}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if v.TargetDefinition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetDefinition"))
+	} else if v.TargetDefinition != nil {
+		if err := validateTargetDefinition(v.TargetDefinition); err != nil {
+			invalidParams.AddNested("TargetDefinition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Ordering) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Ordering"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpDeleteClusterInput(v *DeleteClusterInput) error {
@@ -271,6 +433,24 @@ func validateOpDeleteClusterPolicyInput(v *DeleteClusterPolicyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteClusterPolicyInput"}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteStreamInput(v *DeleteStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteStreamInput"}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if v.StreamIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -309,6 +489,24 @@ func validateOpGetClusterPolicyInput(v *GetClusterPolicyInput) error {
 	}
 }
 
+func validateOpGetStreamInput(v *GetStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetStreamInput"}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if v.StreamIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetVpcEndpointServiceNameInput(v *GetVpcEndpointServiceNameInput) error {
 	if v == nil {
 		return nil
@@ -316,6 +514,21 @@ func validateOpGetVpcEndpointServiceNameInput(v *GetVpcEndpointServiceNameInput)
 	invalidParams := smithy.InvalidParamsError{Context: "GetVpcEndpointServiceNameInput"}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListStreamsInput(v *ListStreamsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListStreamsInput"}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

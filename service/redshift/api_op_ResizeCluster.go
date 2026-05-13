@@ -24,6 +24,10 @@ import (
 //
 //   - dc2.8xlarge
 //
+//   - rg.xlarge
+//
+//   - rg.4xlarge
+//
 //   - ra3.large
 //
 //   - ra3.xlplus

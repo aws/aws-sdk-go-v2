@@ -1,0 +1,8 @@
+{
+    "id": "b1a9b391-e693-46d1-a63f-03f8948d3824",
+    "type": "feature",
+    "description": "Adds five new custom permission option for Quick Apps so that these capabilities can be controlled by public SDK and CLI.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

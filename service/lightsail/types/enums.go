@@ -1704,6 +1704,27 @@ func (OperationType) Values() []OperationType {
 	}
 }
 
+type OriginIpAddressTypeEnum string
+
+// Enum values for OriginIpAddressTypeEnum
+const (
+	OriginIpAddressTypeEnumIpv4      OriginIpAddressTypeEnum = "ipv4"
+	OriginIpAddressTypeEnumIpv6      OriginIpAddressTypeEnum = "ipv6"
+	OriginIpAddressTypeEnumDualstack OriginIpAddressTypeEnum = "dualstack"
+)
+
+// Values returns all known values for OriginIpAddressTypeEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OriginIpAddressTypeEnum) Values() []OriginIpAddressTypeEnum {
+	return []OriginIpAddressTypeEnum{
+		"ipv4",
+		"ipv6",
+		"dualstack",
+	}
+}
+
 type OriginProtocolPolicyEnum string
 
 // Enum values for OriginProtocolPolicyEnum

@@ -12,7 +12,8 @@ import (
 )
 
 // Lists all registries in the account. You can optionally filter results by
-// status using the status parameter.
+// status using the status parameter, or by authorizer type using the
+// authorizerType parameter.
 func (c *Client) ListRegistries(ctx context.Context, params *ListRegistriesInput, optFns ...func(*Options)) (*ListRegistriesOutput, error) {
 	if params == nil {
 		params = &ListRegistriesInput{}
@@ -29,6 +30,11 @@ func (c *Client) ListRegistries(ctx context.Context, params *ListRegistriesInput
 }
 
 type ListRegistriesInput struct {
+
+	// Filter registries by their authorizer type. Possible values are CUSTOM_JWT and
+	// AWS_IAM . For more information about authorizer types, see the
+	// RegistryAuthorizerType enum.
+	AuthorizerType types.RegistryAuthorizerType
 
 	// The maximum number of results to return in the response. If the total number of
 	// results is greater than this value, use the token returned in the response in

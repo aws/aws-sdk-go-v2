@@ -33,14 +33,12 @@ type UpdateWhatsAppMessageTemplateInput struct {
 	// This member is required.
 	Id *string
 
-	// The numeric ID of the template assigned by Meta.
-	//
-	// This member is required.
-	MetaTemplateId *string
-
 	// When true, disables click tracking for call-to-action URL buttons in the
 	// template.
 	CtaUrlLinkTrackingOptedOut *bool
+
+	// The numeric ID of the template assigned by Meta.
+	MetaTemplateId *string
 
 	// The format specification for parameters in the template, this can be either
 	// 'named' or 'positional'.
@@ -51,6 +49,15 @@ type UpdateWhatsAppMessageTemplateInput struct {
 
 	// The updated components of the template as a JSON blob (maximum 3000 characters).
 	TemplateComponents []byte
+
+	// The language code of the message template (for example, en or en_US ). Use
+	// together with templateName as an alternative to metaTemplateId to identify a
+	// template.
+	TemplateLanguageCode *string
+
+	// The name of the message template. Use together with templateLanguageCode as an
+	// alternative to metaTemplateId to identify a template.
+	TemplateName *string
 
 	noSmithyDocumentSerde
 }

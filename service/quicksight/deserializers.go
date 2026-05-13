@@ -58010,6 +58010,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 
 	for key, value := range shape {
 		switch key {
+		case "AccessAppsNativeDataStore":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.AccessAppsNativeDataStore = types.CapabilityState(jtv)
+			}
+
 		case "Action":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -58080,6 +58089,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
 				}
 				sv.ApproveFlowShareRequests = types.CapabilityState(jtv)
+			}
+
+		case "Apps":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.Apps = types.CapabilityState(jtv)
 			}
 
 		case "AsanaAction":
@@ -58206,6 +58224,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
 				}
 				sv.CreateAndUpdateAmazonSThreeAction = types.CapabilityState(jtv)
+			}
+
+		case "CreateAndUpdateApps":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.CreateAndUpdateApps = types.CapabilityState(jtv)
 			}
 
 		case "CreateAndUpdateAsanaAction":
@@ -58820,6 +58847,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 				sv.IntercomAction = types.CapabilityState(jtv)
 			}
 
+		case "InvokeAppsAIInference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.InvokeAppsAIInference = types.CapabilityState(jtv)
+			}
+
 		case "JiraAction":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -59124,6 +59160,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
 				}
 				sv.ShareAnalyses = types.CapabilityState(jtv)
+			}
+
+		case "ShareApps":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.ShareApps = types.CapabilityState(jtv)
 			}
 
 		case "ShareAsanaAction":

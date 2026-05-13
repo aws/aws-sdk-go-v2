@@ -31748,6 +31748,18 @@ func awsAwsjson11_serializeDocumentListTrialComponentKey256(v []string, value sm
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentManagedConfiguration(v *types.ManagedConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ManagedStorageType) > 0 {
+		ok := object.Key("ManagedStorageType")
+		ok.String(string(v.ManagedStorageType))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentMemberDefinition(v *types.MemberDefinition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -35572,6 +35584,11 @@ func awsAwsjson11_serializeDocumentResourceSpec(v *types.ResourceSpec, value smi
 		ok.String(*v.SageMakerImageVersionArn)
 	}
 
+	if v.TrainingPlanArn != nil {
+		ok := object.Key("TrainingPlanArn")
+		ok.String(*v.TrainingPlanArn)
+	}
+
 	return nil
 }
 
@@ -36639,6 +36656,11 @@ func awsAwsjson11_serializeDocumentStoppingCondition(v *types.StoppingCondition,
 func awsAwsjson11_serializeDocumentStudioWebPortalSettings(v *types.StudioWebPortalSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.ExecutionRoleSessionNameMode) > 0 {
+		ok := object.Key("ExecutionRoleSessionNameMode")
+		ok.String(string(v.ExecutionRoleSessionNameMode))
+	}
 
 	if v.HiddenAppTypes != nil {
 		ok := object.Key("HiddenAppTypes")
@@ -40727,6 +40749,13 @@ func awsAwsjson11_serializeOpDocumentCreateModelPackageGroupInput(v *CreateModel
 	object := value.Object()
 	defer object.Close()
 
+	if v.ManagedConfiguration != nil {
+		ok := object.Key("ManagedConfiguration")
+		if err := awsAwsjson11_serializeDocumentManagedConfiguration(v.ManagedConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ModelPackageGroupDescription != nil {
 		ok := object.Key("ModelPackageGroupDescription")
 		ok.String(*v.ModelPackageGroupDescription)
@@ -40792,6 +40821,11 @@ func awsAwsjson11_serializeOpDocumentCreateModelPackageInput(v *CreateModelPacka
 		if err := awsAwsjson11_serializeDocumentInferenceSpecification(v.InferenceSpecification, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ManagedStorageType) > 0 {
+		ok := object.Key("ManagedStorageType")
+		ok.String(string(v.ManagedStorageType))
 	}
 
 	if v.MetadataProperties != nil {

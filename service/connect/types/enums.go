@@ -1462,19 +1462,23 @@ type EventSourceName string
 
 // Enum values for EventSourceName
 const (
-	EventSourceNameOnPostCallAnalysisAvailable     EventSourceName = "OnPostCallAnalysisAvailable"
-	EventSourceNameOnRealTimeCallAnalysisAvailable EventSourceName = "OnRealTimeCallAnalysisAvailable"
-	EventSourceNameOnRealTimeChatAnalysisAvailable EventSourceName = "OnRealTimeChatAnalysisAvailable"
-	EventSourceNameOnPostChatAnalysisAvailable     EventSourceName = "OnPostChatAnalysisAvailable"
-	EventSourceNameOnEmailAnalysisAvailable        EventSourceName = "OnEmailAnalysisAvailable"
-	EventSourceNameOnZendeskTicketCreate           EventSourceName = "OnZendeskTicketCreate"
-	EventSourceNameOnZendeskTicketStatusUpdate     EventSourceName = "OnZendeskTicketStatusUpdate"
-	EventSourceNameOnSalesforceCaseCreate          EventSourceName = "OnSalesforceCaseCreate"
-	EventSourceNameOnContactEvaluationSubmit       EventSourceName = "OnContactEvaluationSubmit"
-	EventSourceNameOnMetricDataUpdate              EventSourceName = "OnMetricDataUpdate"
-	EventSourceNameOnCaseCreate                    EventSourceName = "OnCaseCreate"
-	EventSourceNameOnCaseUpdate                    EventSourceName = "OnCaseUpdate"
-	EventSourceNameOnSlaBreach                     EventSourceName = "OnSlaBreach"
+	EventSourceNameOnPostCallAnalysisAvailable      EventSourceName = "OnPostCallAnalysisAvailable"
+	EventSourceNameOnRealTimeCallAnalysisAvailable  EventSourceName = "OnRealTimeCallAnalysisAvailable"
+	EventSourceNameOnRealTimeChatAnalysisAvailable  EventSourceName = "OnRealTimeChatAnalysisAvailable"
+	EventSourceNameOnPostChatAnalysisAvailable      EventSourceName = "OnPostChatAnalysisAvailable"
+	EventSourceNameOnEmailAnalysisAvailable         EventSourceName = "OnEmailAnalysisAvailable"
+	EventSourceNameOnZendeskTicketCreate            EventSourceName = "OnZendeskTicketCreate"
+	EventSourceNameOnZendeskTicketStatusUpdate      EventSourceName = "OnZendeskTicketStatusUpdate"
+	EventSourceNameOnSalesforceCaseCreate           EventSourceName = "OnSalesforceCaseCreate"
+	EventSourceNameOnContactEvaluationSubmit        EventSourceName = "OnContactEvaluationSubmit"
+	EventSourceNameOnMetricDataUpdate               EventSourceName = "OnMetricDataUpdate"
+	EventSourceNameOnCaseCreate                     EventSourceName = "OnCaseCreate"
+	EventSourceNameOnCaseUpdate                     EventSourceName = "OnCaseUpdate"
+	EventSourceNameOnSlaBreach                      EventSourceName = "OnSlaBreach"
+	EventSourceNameOnAlertUpdate                    EventSourceName = "OnAlertUpdate"
+	EventSourceNameOnSchedulePublish                EventSourceName = "OnSchedulePublish"
+	EventSourceNameOnScheduleUpdate                 EventSourceName = "OnScheduleUpdate"
+	EventSourceNameOnScheduleTimeOffRequestActivity EventSourceName = "OnScheduleTimeOffRequestActivity"
 )
 
 // Values returns all known values for EventSourceName. Note that this can be
@@ -1496,6 +1500,10 @@ func (EventSourceName) Values() []EventSourceName {
 		"OnCaseCreate",
 		"OnCaseUpdate",
 		"OnSlaBreach",
+		"OnAlertUpdate",
+		"OnSchedulePublish",
+		"OnScheduleUpdate",
+		"OnScheduleTimeOffRequestActivity",
 	}
 }
 

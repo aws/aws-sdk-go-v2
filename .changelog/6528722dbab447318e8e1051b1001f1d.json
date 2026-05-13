@@ -1,0 +1,8 @@
+{
+    "id": "6528722d-bab4-4731-8e8e-1051b1001f1d",
+    "type": "feature",
+    "description": "This change added three new EventSourceName for schedule notification feature",
+    "modules": [
+        "service/connect"
+    ]
+}

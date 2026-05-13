@@ -138,7 +138,8 @@ type StartJobRunInput struct {
 	// Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the
 	// jobs will throw an exception.
 	//
-	// When the value is left blank, the timeout is defaulted to 2880 minutes.
+	// When the value is left blank, the timeout is defaulted to 2,880 minutes for
+	// Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.
 	//
 	// Any existing Glue jobs that had a timeout value greater than 7 days will be
 	// defaulted to 7 days. For instance if you have specified a timeout of 20 days for

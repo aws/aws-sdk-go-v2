@@ -80,8 +80,8 @@ type ModifyClusterInput struct {
 	// existing automated snapshots that fall outside of the new retention period will
 	// be immediately deleted.
 	//
-	// You can't disable automated snapshots for RA3 node types. Set the automated
-	// retention period from 1-35 days.
+	// You can't disable automated snapshots for RG or RA3 node types. Set the
+	// automated retention period from 1-35 days.
 	//
 	// Default: Uses existing setting.
 	//
@@ -278,8 +278,8 @@ type ModifyClusterInput struct {
 	// For more information about resizing clusters, go to [Resizing Clusters in Amazon Redshift] in the Amazon Redshift
 	// Cluster Management Guide.
 	//
-	// Valid Values: dc2.large | dc2.8xlarge | ra3.large | ra3.xlplus | ra3.4xlarge |
-	// ra3.16xlarge
+	// Valid Values: dc2.large | dc2.8xlarge | rg.xlarge | rg.4xlarge | ra3.large |
+	// ra3.xlplus | ra3.4xlarge | ra3.16xlarge
 	//
 	// [Resizing Clusters in Amazon Redshift]: https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html
 	NodeType *string
@@ -299,9 +299,9 @@ type ModifyClusterInput struct {
 	//
 	// Valid Values:
 	//
-	//   - For clusters with ra3 nodes - Select a port within the ranges 5431-5455 or
-	//   8191-8215 . (If you have an existing cluster with ra3 nodes, it isn't required
-	//   that you change the port to these ranges.)
+	//   - For clusters with RG or RA3 nodes - Select a port within the ranges
+	//   5431-5455 or 8191-8215 . (If you have an existing cluster with RG or RA3
+	//   nodes, it isn't required that you change the port to these ranges.)
 	//
 	//   - For clusters with dc2 nodes - Select a port within the range 1150-65535 .
 	Port *int32

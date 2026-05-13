@@ -56,6 +56,15 @@ type CreateElasticsearchDomainInput struct {
 	// Specifies Auto-Tune options.
 	AutoTuneOptions *types.AutoTuneOptionsInput
 
+	// Specifies the automated snapshot pause options for the domain.
+	//
+	// Suspending snapshots reduces data protection. You cannot restore your domain to
+	// points in time when snapshots are suspended. Use this feature only for
+	// short-term operational needs such as migrations or maintenance windows.
+	//
+	// Maximum suspension duration: 3 days.
+	AutomatedSnapshotPauseOptions *types.AutomatedSnapshotPauseRequestOptions
+
 	// Options to specify the Cognito user and identity pools for Kibana
 	// authentication. For more information, see [Amazon Cognito Authentication for Kibana].
 	//

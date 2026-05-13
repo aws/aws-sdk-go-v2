@@ -2073,6 +2073,27 @@ func (ClusterConfigMode) Values() []ClusterConfigMode {
 	}
 }
 
+type ClusterEventLevel string
+
+// Enum values for ClusterEventLevel
+const (
+	ClusterEventLevelInfo  ClusterEventLevel = "Info"
+	ClusterEventLevelWarn  ClusterEventLevel = "Warn"
+	ClusterEventLevelError ClusterEventLevel = "Error"
+)
+
+// Values returns all known values for ClusterEventLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterEventLevel) Values() []ClusterEventLevel {
+	return []ClusterEventLevel{
+		"Info",
+		"Warn",
+		"Error",
+	}
+}
+
 type ClusterEventResourceType string
 
 // Enum values for ClusterEventResourceType
@@ -3224,6 +3245,26 @@ func (ExecutionRoleIdentityConfig) Values() []ExecutionRoleIdentityConfig {
 	return []ExecutionRoleIdentityConfig{
 		"USER_PROFILE_NAME",
 		"DISABLED",
+	}
+}
+
+type ExecutionRoleSessionNameMode string
+
+// Enum values for ExecutionRoleSessionNameMode
+const (
+	ExecutionRoleSessionNameModeStatic       ExecutionRoleSessionNameMode = "STATIC"
+	ExecutionRoleSessionNameModeUserIdentity ExecutionRoleSessionNameMode = "USER_IDENTITY"
+)
+
+// Values returns all known values for ExecutionRoleSessionNameMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionRoleSessionNameMode) Values() []ExecutionRoleSessionNameMode {
+	return []ExecutionRoleSessionNameMode{
+		"STATIC",
+		"USER_IDENTITY",
 	}
 }
 
@@ -5082,6 +5123,23 @@ func (ManagedInstanceScalingStatus) Values() []ManagedInstanceScalingStatus {
 	return []ManagedInstanceScalingStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type ManagedStorageType string
+
+// Enum values for ManagedStorageType
+const (
+	ManagedStorageTypeRestricted ManagedStorageType = "Restricted"
+)
+
+// Values returns all known values for ManagedStorageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedStorageType) Values() []ManagedStorageType {
+	return []ManagedStorageType{
+		"Restricted",
 	}
 }
 
@@ -8289,6 +8347,7 @@ const (
 	SageMakerResourceNameTrainingJob     SageMakerResourceName = "training-job"
 	SageMakerResourceNameHyperpodCluster SageMakerResourceName = "hyperpod-cluster"
 	SageMakerResourceNameEndpoint        SageMakerResourceName = "endpoint"
+	SageMakerResourceNameStudioApps      SageMakerResourceName = "studio-apps"
 )
 
 // Values returns all known values for SageMakerResourceName. Note that this can
@@ -8300,6 +8359,7 @@ func (SageMakerResourceName) Values() []SageMakerResourceName {
 		"training-job",
 		"hyperpod-cluster",
 		"endpoint",
+		"studio-apps",
 	}
 }
 

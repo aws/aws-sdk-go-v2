@@ -7211,6 +7211,15 @@ func awsRestjson1_deserializeDocumentLocalTimeZoneConfig(v **types.LocalTimeZone
 				return err
 			}
 
+		case "localTimeZoneDetectionScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LocalTimeZoneDetectionScope to be of type string, got %T instead", value)
+				}
+				sv.LocalTimeZoneDetectionScope = types.LocalTimeZoneDetectionScope(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

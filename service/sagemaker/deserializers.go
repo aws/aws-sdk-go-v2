@@ -53168,6 +53168,15 @@ func awsAwsjson11_deserializeDocumentClusterEventDetail(v **types.ClusterEventDe
 				sv.EventId = ptr.String(jtv)
 			}
 
+		case "EventLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterEventLevel to be of type string, got %T instead", value)
+				}
+				sv.EventLevel = types.ClusterEventLevel(jtv)
+			}
+
 		case "EventTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -53310,6 +53319,15 @@ func awsAwsjson11_deserializeDocumentClusterEventSummary(v **types.ClusterEventS
 					return fmt.Errorf("expected EventId to be of type string, got %T instead", value)
 				}
 				sv.EventId = ptr.String(jtv)
+			}
+
+		case "EventLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterEventLevel to be of type string, got %T instead", value)
+				}
+				sv.EventLevel = types.ClusterEventLevel(jtv)
 			}
 
 		case "EventTime":
@@ -72149,6 +72167,11 @@ func awsAwsjson11_deserializeDocumentInstanceMetadata(v **types.InstanceMetadata
 				sv.FailureMessage = ptr.String(jtv)
 			}
 
+		case "InstanceRequirementsEniConfigurations":
+			if err := awsAwsjson11_deserializeDocumentInstanceRequirementsEniConfigurations(&sv.InstanceRequirementsEniConfigurations, value); err != nil {
+				return err
+			}
+
 		case "LcsExecutionState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -72434,6 +72457,85 @@ func awsAwsjson11_deserializeDocumentInstancePoolSummaryList(v *[]types.Instance
 		var col types.InstancePoolSummary
 		destAddr := &col
 		if err := awsAwsjson11_deserializeDocumentInstancePoolSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInstanceRequirementsEniConfiguration(v **types.InstanceRequirementsEniConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InstanceRequirementsEniConfiguration
+	if *v == nil {
+		sv = &types.InstanceRequirementsEniConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdditionalEnis":
+			if err := awsAwsjson11_deserializeDocumentAdditionalEnis(&sv.AdditionalEnis, value); err != nil {
+				return err
+			}
+
+		case "CustomerEni":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CustomerEni = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInstanceRequirementsEniConfigurations(v *[]types.InstanceRequirementsEniConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InstanceRequirementsEniConfiguration
+	if *v == nil {
+		cv = []types.InstanceRequirementsEniConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InstanceRequirementsEniConfiguration
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentInstanceRequirementsEniConfiguration(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -74255,6 +74357,46 @@ func awsAwsjson11_deserializeDocumentLineageMetadata(v **types.LineageMetadata, 
 		case "ContextArns":
 			if err := awsAwsjson11_deserializeDocumentMapString2048(&sv.ContextArns, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentManagedConfiguration(v **types.ManagedConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedConfiguration
+	if *v == nil {
+		sv = &types.ManagedConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ManagedStorageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ManagedStorageType to be of type string, got %T instead", value)
+				}
+				sv.ManagedStorageType = types.ManagedStorageType(jtv)
 			}
 
 		default:
@@ -78282,6 +78424,11 @@ func awsAwsjson11_deserializeDocumentModelPackageGroupSummary(v **types.ModelPac
 					return fmt.Errorf("expected CreationTime to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "ManagedConfiguration":
+			if err := awsAwsjson11_deserializeDocumentManagedConfiguration(&sv.ManagedConfiguration, value); err != nil {
+				return err
 			}
 
 		case "ModelPackageGroupArn":
@@ -89318,9 +89465,9 @@ func awsAwsjson11_deserializeDocumentRealTimeInferenceConfig(v **types.RealTimeI
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected InstanceType to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ProductionVariantInstanceType to be of type string, got %T instead", value)
 				}
-				sv.InstanceType = types.InstanceType(jtv)
+				sv.InstanceType = types.ProductionVariantInstanceType(jtv)
 			}
 
 		default:
@@ -91694,6 +91841,15 @@ func awsAwsjson11_deserializeDocumentResourceSpec(v **types.ResourceSpec, value 
 					return fmt.Errorf("expected ImageVersionArn to be of type string, got %T instead", value)
 				}
 				sv.SageMakerImageVersionArn = ptr.String(jtv)
+			}
+
+		case "TrainingPlanArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StudioResourceSpecTrainingPlanArn to be of type string, got %T instead", value)
+				}
+				sv.TrainingPlanArn = ptr.String(jtv)
 			}
 
 		default:
@@ -94891,6 +95047,15 @@ func awsAwsjson11_deserializeDocumentStudioWebPortalSettings(v **types.StudioWeb
 
 	for key, value := range shape {
 		switch key {
+		case "ExecutionRoleSessionNameMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionRoleSessionNameMode to be of type string, got %T instead", value)
+				}
+				sv.ExecutionRoleSessionNameMode = types.ExecutionRoleSessionNameMode(jtv)
+			}
+
 		case "HiddenAppTypes":
 			if err := awsAwsjson11_deserializeDocumentHiddenAppTypesList(&sv.HiddenAppTypes, value); err != nil {
 				return err
@@ -96927,6 +97092,11 @@ func awsAwsjson11_deserializeDocumentTrainingJob(v **types.TrainingJob, value in
 
 		case "VpcConfig":
 			if err := awsAwsjson11_deserializeDocumentVpcConfig(&sv.VpcConfig, value); err != nil {
+				return err
+			}
+
+		case "WarmPoolStatus":
+			if err := awsAwsjson11_deserializeDocumentWarmPoolStatus(&sv.WarmPoolStatus, value); err != nil {
 				return err
 			}
 
@@ -113614,6 +113784,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeModelPackageGroupOutput(v **Descr
 				}
 			}
 
+		case "ManagedConfiguration":
+			if err := awsAwsjson11_deserializeDocumentManagedConfiguration(&sv.ManagedConfiguration, value); err != nil {
+				return err
+			}
+
 		case "ModelPackageGroupArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -113768,6 +113943,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeModelPackageOutput(v **DescribeMo
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "ManagedStorageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ManagedStorageType to be of type string, got %T instead", value)
+				}
+				sv.ManagedStorageType = types.ManagedStorageType(jtv)
 			}
 
 		case "MetadataProperties":

@@ -42,6 +42,10 @@ type AssociateWhatsAppBusinessAccountInput struct {
 
 type AssociateWhatsAppBusinessAccountOutput struct {
 
+	// The ID of the WhatsApp Business Account that was linked to your Amazon Web
+	// Services account.
+	LinkedWhatsAppBusinessAccountId *string
+
 	// Contains your WhatsApp registration status.
 	SignupCallbackResult *types.WhatsAppSignupCallbackResult
 

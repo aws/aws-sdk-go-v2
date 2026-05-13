@@ -1,0 +1,8 @@
+{
+    "id": "20dc4c45-61ab-4566-9260-4c7f66fa129b",
+    "type": "feature",
+    "description": "Add support for code reviews, a new resource type that enables automated security-focused static analysis of source code repositories.",
+    "modules": [
+        "service/securityagent"
+    ]
+}

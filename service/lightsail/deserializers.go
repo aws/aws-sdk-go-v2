@@ -31491,6 +31491,15 @@ func awsAwsjson11_deserializeDocumentOrigin(v **types.Origin, value interface{})
 
 	for key, value := range shape {
 		switch key {
+		case "ipAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OriginIpAddressTypeEnum to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.OriginIpAddressTypeEnum(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -1,0 +1,8 @@
+{
+    "id": "6be8948e-0586-4d36-8770-d5e248067ead",
+    "type": "feature",
+    "description": "Added OriginIpAddressTypeEnum (ipv4, ipv6, dualstack) and ipAddressType field to Origin and InputOrigin structures for Lightsail CDN distributions. Allows customers to specify how the distribution connects to origins, using IPv4, IPv6, or dualstack networking",
+    "modules": [
+        "service/lightsail"
+    ]
+}

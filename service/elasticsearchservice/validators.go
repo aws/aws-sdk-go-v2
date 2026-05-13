@@ -1011,6 +1011,21 @@ func validateAdvancedSecurityOptionsInput(v *types.AdvancedSecurityOptionsInput)
 	}
 }
 
+func validateAutomatedSnapshotPauseRequestOptions(v *types.AutomatedSnapshotPauseRequestOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedSnapshotPauseRequestOptions"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateColdStorageOptions(v *types.ColdStorageOptions) error {
 	if v == nil {
 		return nil
@@ -1272,6 +1287,11 @@ func validateOpCreateElasticsearchDomainInput(v *CreateElasticsearchDomainInput)
 	if v.DeploymentStrategyOptions != nil {
 		if err := validateDeploymentStrategyOptions(v.DeploymentStrategyOptions); err != nil {
 			invalidParams.AddNested("DeploymentStrategyOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AutomatedSnapshotPauseOptions != nil {
+		if err := validateAutomatedSnapshotPauseRequestOptions(v.AutomatedSnapshotPauseOptions); err != nil {
+			invalidParams.AddNested("AutomatedSnapshotPauseOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1790,6 +1810,11 @@ func validateOpUpdateElasticsearchDomainConfigInput(v *UpdateElasticsearchDomain
 	if v.DeploymentStrategyOptions != nil {
 		if err := validateDeploymentStrategyOptions(v.DeploymentStrategyOptions); err != nil {
 			invalidParams.AddNested("DeploymentStrategyOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AutomatedSnapshotPauseOptions != nil {
+		if err := validateAutomatedSnapshotPauseRequestOptions(v.AutomatedSnapshotPauseOptions); err != nil {
+			invalidParams.AddNested("AutomatedSnapshotPauseOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

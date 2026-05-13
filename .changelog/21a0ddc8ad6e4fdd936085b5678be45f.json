@@ -1,0 +1,8 @@
+{
+    "id": "21a0ddc8-ad6e-4fdd-9360-85b5678be45f",
+    "type": "feature",
+    "description": "Adds support for AutomatedSnapshotPauseOptions.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "37f45956-e673-47b8-b36d-aa0e9509b562",
+    "type": "feature",
+    "description": "Adds support for enabling and disabling Lambda event source mappings in Region switch plans.",
+    "modules": [
+        "service/arcregionswitch"
+    ]
+}

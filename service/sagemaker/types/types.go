@@ -4423,6 +4423,9 @@ type ClusterEventDetail struct {
 	// Additional details about the event, including event-specific metadata.
 	EventDetails *EventDetails
 
+	// The severity level of the event. Valid values are Info , Warn , and Error .
+	EventLevel ClusterEventLevel
+
 	// The name of the instance group associated with the event, if applicable.
 	InstanceGroupName *string
 
@@ -4464,6 +4467,9 @@ type ClusterEventSummary struct {
 
 	// A brief, human-readable description of the event.
 	Description *string
+
+	// The severity level of the event. Valid values are Info , Warn , and Error .
+	EventLevel ClusterEventLevel
 
 	// The name of the instance group associated with the event, if applicable.
 	InstanceGroupName *string
@@ -12327,6 +12333,11 @@ type InstanceMetadata struct {
 	// applicable.
 	FailureMessage *string
 
+	// The ENI configurations for the instance types in the instance requirements,
+	// grouped by network interface category (for example, ENI-only or EFA with ENIs).
+	// At most one configuration per category.
+	InstanceRequirementsEniConfigurations []InstanceRequirementsEniConfiguration
+
 	// The execution state of the Lifecycle Script (LCS) for the instance.
 	LcsExecutionState *string
 
@@ -12409,6 +12420,21 @@ type InstancePoolSummary struct {
 	//
 	// This member is required.
 	InstanceType ProductionVariantInstanceType
+
+	noSmithyDocumentSerde
+}
+
+// The customer ENI and additional ENIs associated with a network interface
+// category.
+type InstanceRequirementsEniConfiguration struct {
+
+	// Information about additional Elastic Network Interfaces (ENIs) associated with
+	// the instance type category.
+	AdditionalEnis *AdditionalEnis
+
+	// The ID of the customer-managed Elastic Network Interface (ENI) associated with
+	// the instance type category.
+	CustomerEni *string
 
 	noSmithyDocumentSerde
 }
@@ -13057,6 +13083,15 @@ type LineageMetadata struct {
 
 	//  The Amazon Resource Name (ARN) of the lineage context.
 	ContextArns map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The managed configuration of a model package group.
+type ManagedConfiguration struct {
+
+	// The storage type of the model package.
+	ManagedStorageType ManagedStorageType
 
 	noSmithyDocumentSerde
 }
@@ -14420,6 +14455,9 @@ type ModelPackageGroupSummary struct {
 	//
 	// This member is required.
 	ModelPackageGroupStatus ModelPackageGroupStatus
+
+	// The managed configuration of the model package group.
+	ManagedConfiguration *ManagedConfiguration
 
 	// A description of the model group.
 	ModelPackageGroupDescription *string
@@ -18524,7 +18562,7 @@ type RealTimeInferenceConfig struct {
 	// The instance type the model is deployed to.
 	//
 	// This member is required.
-	InstanceType InstanceType
+	InstanceType ProductionVariantInstanceType
 
 	noSmithyDocumentSerde
 }
@@ -19341,6 +19379,16 @@ type ResourceSpec struct {
 	// The ARN of the image version created on the instance. To clear the value set
 	// for SageMakerImageVersionArn , pass None as the value.
 	SageMakerImageVersionArn *string
+
+	// The ARN of the SageMaker AI Training Plan to use for this app. When you specify
+	// a training plan, the app launches on reserved GPU capacity. This field is
+	// supported for JupyterLab and CodeEditor app types.
+	//
+	// For more information about how to reserve GPU capacity with SageMaker AI
+	// Training Plans, see [Using training plans in Studio applications].
+	//
+	// [Using training plans in Studio applications]: https://docs.aws.amazon.com/sagemaker/latest/dg/training-plan-utilization-for-studio-apps.html
+	TrainingPlanArn *string
 
 	noSmithyDocumentSerde
 }
@@ -20832,6 +20880,14 @@ type StudioLifecycleConfigDetails struct {
 // priority over the settings applied on a domain level.
 type StudioWebPortalSettings struct {
 
+	// The execution role session name mode. If this value is set to USER_IDENTITY ,
+	// the session name of the execution role corresponds to the user's identity. For
+	// IAM domains, the session name is the IAM session name used to generate the
+	// presigned URL. For IAM Identity Center domains, the session name is the username
+	// of the associated IAM Identity Center user. If this value is set to STATIC or
+	// is not set, the session name defaults to SageMaker .
+	ExecutionRoleSessionNameMode ExecutionRoleSessionNameMode
+
 	// The [Applications supported in Studio] that are hidden from the Studio left navigation pane.
 	//
 	// [Applications supported in Studio]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-updated-apps.html
@@ -21869,6 +21925,9 @@ type TrainingJob struct {
 	// [Protect Training Jobs by Using an Amazon Virtual Private Cloud]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
 	VpcConfig *VpcConfig
 
+	// The status of the warm pool associated with the training job.
+	WarmPoolStatus *WarmPoolStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -22142,7 +22201,7 @@ type TrainingPlanFilter struct {
 type TrainingPlanOffering struct {
 
 	// The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod,
-	// SageMaker Endpoints) for this training plan offering.
+	// SageMaker Endpoints, Studio apps) for this training plan offering.
 	//
 	// Training plans are specific to their target resource.
 	//
@@ -22154,6 +22213,9 @@ type TrainingPlanOffering struct {
 	//
 	//   - A training plan for SageMaker endpoints can be used exclusively to provide
 	//   compute resources to SageMaker endpoints for model deployment.
+	//
+	//   - A training plan for Studio apps can be used to launch JupyterLab and Code
+	//   Editor apps on reserved training plan capacity.
 	//
 	// This member is required.
 	TargetResources []SageMakerResourceName
@@ -22248,8 +22310,8 @@ type TrainingPlanSummary struct {
 	// training plan.
 	StatusMessage *string
 
-	// The target resources (e.g., training jobs, HyperPod clusters, Endpoints) that
-	// can use this training plan.
+	// The target resources (e.g., training jobs, HyperPod clusters, Endpoints, Studio
+	// apps) that can use this training plan.
 	//
 	// Training plans are specific to their target resource.
 	//
@@ -22261,6 +22323,9 @@ type TrainingPlanSummary struct {
 	//
 	//   - A training plan for SageMaker endpoints can be used exclusively to provide
 	//   compute resources to SageMaker endpoints for model deployment.
+	//
+	//   - A training plan for Studio apps can be used to launch JupyterLab and Code
+	//   Editor apps on reserved training plan capacity.
 	TargetResources []SageMakerResourceName
 
 	// The total number of instances reserved in this training plan.

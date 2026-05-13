@@ -65,6 +65,9 @@ type DescribeModelPackageGroupOutput struct {
 	// This member is required.
 	ModelPackageGroupStatus types.ModelPackageGroupStatus
 
+	// The managed configuration of the model package group.
+	ManagedConfiguration *types.ManagedConfiguration
+
 	// A description of the model group.
 	ModelPackageGroupDescription *string
 

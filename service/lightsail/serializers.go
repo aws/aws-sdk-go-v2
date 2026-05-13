@@ -10500,6 +10500,11 @@ func awsAwsjson11_serializeDocumentInputOrigin(v *types.InputOrigin, value smith
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("ipAddressType")
+		ok.String(string(v.IpAddressType))
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)

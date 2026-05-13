@@ -35,10 +35,9 @@ type ListFindingsInput struct {
 	// This member is required.
 	AgentSpaceId *string
 
-	// The unique identifier of the pentest job to list findings for.
-	//
-	// This member is required.
-	PentestJobId *string
+	// The unique identifier of the code review job to list findings for. Mutually
+	// exclusive with pentestJobId.
+	CodeReviewJobId *string
 
 	// Filter findings by confidence level.
 	Confidence types.ConfidenceLevel
@@ -53,6 +52,9 @@ type ListFindingsInput struct {
 	// the value of this parameter to null for the first request. For subsequent calls,
 	// use the nextToken value returned from the previous request.
 	NextToken *string
+
+	// The unique identifier of the pentest job to list findings for.
+	PentestJobId *string
 
 	// Filter findings by risk level.
 	RiskLevel types.RiskLevel

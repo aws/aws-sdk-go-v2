@@ -56510,7 +56510,7 @@ func awsEc2query_serializeDocumentImageCriterionRequest(v *types.ImageCriterionR
 
 	if v.ImageNames != nil {
 		objectKey := object.FlatKey("ImageName")
-		if err := awsEc2query_serializeDocumentImageNameRequestList(v.ImageNames, objectKey); err != nil {
+		if err := awsEc2query_serializeDocumentImageNameCriteriaRequestList(v.ImageNames, objectKey); err != nil {
 			return err
 		}
 	}
@@ -56627,7 +56627,7 @@ func awsEc2query_serializeDocumentImageIdStringList(v []string, value query.Valu
 	return nil
 }
 
-func awsEc2query_serializeDocumentImageNameRequestList(v []string, value query.Value) error {
+func awsEc2query_serializeDocumentImageNameCriteriaRequestList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}

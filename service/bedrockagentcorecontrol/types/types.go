@@ -492,7 +492,8 @@ type BrowserNetworkConfiguration struct {
 	// This member is required.
 	NetworkMode BrowserNetworkMode
 
-	// VpcConfig for the Agent.
+	// The VPC configuration for the browser. This configuration is required when the
+	// network mode is set to VPC .
 	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
@@ -823,7 +824,8 @@ type CodeInterpreterNetworkConfiguration struct {
 	// This member is required.
 	NetworkMode CodeInterpreterNetworkMode
 
-	// VpcConfig for the Agent.
+	// The VPC configuration for the code interpreter. This configuration is required
+	// when the network mode is set to VPC .
 	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
@@ -865,7 +867,8 @@ type CodeInterpreterSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Coinbase CDP configuration - credentials provided by Coinbase Developer Platform
+// Coinbase CDP configuration — credentials provided by Coinbase Developer
+// Platform.
 type CoinbaseCdpConfigurationInput struct {
 
 	// The API key identifier provided by Coinbase Developer Platform.
@@ -886,7 +889,7 @@ type CoinbaseCdpConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Coinbase CDP configuration output with secret ARNs
+// Coinbase CDP configuration output with secret ARNs.
 type CoinbaseCdpConfigurationOutput struct {
 
 	// The API key identifier provided by Coinbase Developer Platform.
@@ -1544,7 +1547,8 @@ type CustomMemoryStrategyInput struct {
 	// The namespaceTemplates associated with the custom memory strategy.
 	NamespaceTemplates []string
 
-	// The namespaces associated with the custom memory strategy.
+	// This is a legacy parameter, use namespaceTemplates . The namespaces associated
+	// with the custom memory strategy.
 	//
 	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
@@ -1775,7 +1779,8 @@ type EpisodicMemoryStrategyInput struct {
 	// The namespaceTemplates for which to create episodes.
 	NamespaceTemplates []string
 
-	// The namespaces for which to create episodes.
+	// This is a legacy parameter, use namespaceTemplates . The namespaces for which to
+	// create episodes.
 	//
 	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
@@ -1862,8 +1867,8 @@ type EpisodicOverrideReflectionConfigurationInput struct {
 	// the episodic namespaces.
 	NamespaceTemplates []string
 
-	// The namespaces to use for episodic reflection. Can be less nested than the
-	// episodic namespaces.
+	// This is a legacy parameter, use namespaceTemplates . The namespaces to use for
+	// episodic reflection. Can be less nested than the episodic namespaces.
 	//
 	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
@@ -1881,8 +1886,8 @@ type EpisodicReflectionConfiguration struct {
 	// the episodic namespaces.
 	NamespaceTemplates []string
 
-	// The namespaces for which to create reflections. Can be less nested than the
-	// episodic namespaces.
+	// This is a legacy parameter, use namespaceTemplates . The namespaces for which to
+	// create reflections. Can be less nested than the episodic namespaces.
 	//
 	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
@@ -1900,8 +1905,8 @@ type EpisodicReflectionConfigurationInput struct {
 	// than episode namespaces.
 	NamespaceTemplates []string
 
-	// The namespaces over which to create reflections. Can be less nested than
-	// episode namespaces.
+	// This is a legacy parameter, use namespaceTemplates . The namespaces over which
+	// to create reflections. Can be less nested than episode namespaces.
 	//
 	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
@@ -1931,8 +1936,8 @@ type EpisodicReflectionOverride struct {
 	// than the episodic namespaces.
 	NamespaceTemplates []string
 
-	// The namespaces over which reflections were created. Can be less nested than the
-	// episodic namespaces.
+	// This is a legacy parameter. The namespaces over which reflections were created.
+	// Can be less nested than the episodic namespaces.
 	//
 	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
@@ -3712,7 +3717,7 @@ type MatchPaths struct {
 }
 
 // Union for principal matching. Currently supports IAM principal ARN glob
-// matching. Extensible for future principal types (e.g., OAuth client ID).
+// matching.
 //
 // The following types satisfy this interface:
 //
@@ -4008,7 +4013,7 @@ type MemoryStrategy struct {
 	// This member is required.
 	NamespaceTemplates []string
 
-	// The namespaces associated with the memory strategy.
+	// This is a legacy parameter. The namespaces associated with the memory strategy.
 	//
 	// This member is required.
 	//
@@ -4304,7 +4309,8 @@ type ModifyMemoryStrategyInput struct {
 	// The updated namespaceTemplates for the memory strategy.
 	NamespaceTemplates []string
 
-	// The updated namespaces for the memory strategy.
+	// This is a legacy parameter, use namespaceTemplates . The updated namespaces for
+	// the memory strategy.
 	//
 	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
@@ -4762,6 +4768,10 @@ type OAuthCredentialProvider struct {
 	//
 	//   - AUTHORIZATION_CODE - Authorization with a token that is specific to an
 	//   individual end user.
+	//
+	//   - TOKEN_EXCHANGE - Authorization using on-behalf-of token exchange. An inbound
+	//   user token is exchanged for a downstream access token scoped to the target
+	//   audience.
 	GrantType OAuthGrantType
 
 	noSmithyDocumentSerde
@@ -4905,7 +4915,7 @@ type PaymentCredentialProviderItem struct {
 	// This member is required.
 	CredentialProviderArn *string
 
-	// Supported vendor types for payment providers using non-standard auth protocols
+	// The vendor type for the payment credential provider.
 	//
 	// This member is required.
 	CredentialProviderVendor PaymentCredentialProviderVendorType
@@ -4976,7 +4986,8 @@ type PaymentManagerSummary struct {
 	noSmithyDocumentSerde
 }
 
-// PROVIDER CONFIGURATION INPUT - Contains secrets for creation/update
+// Provider configuration input — contains secrets for creation and update. Varies
+// by vendor type.
 //
 // The following types satisfy this interface:
 //
@@ -4986,7 +4997,7 @@ type PaymentProviderConfigurationInput interface {
 	isPaymentProviderConfigurationInput()
 }
 
-// Coinbase CDP configuration - credentials provided by Coinbase Developer Platform
+// The Coinbase CDP configuration.
 type PaymentProviderConfigurationInputMemberCoinbaseCdpConfiguration struct {
 	Value CoinbaseCdpConfigurationInput
 
@@ -4996,7 +5007,7 @@ type PaymentProviderConfigurationInputMemberCoinbaseCdpConfiguration struct {
 func (*PaymentProviderConfigurationInputMemberCoinbaseCdpConfiguration) isPaymentProviderConfigurationInput() {
 }
 
-// StripePrivy configuration - credentials provided by Stripe + Privy
+// The Stripe Privy configuration.
 type PaymentProviderConfigurationInputMemberStripePrivyConfiguration struct {
 	Value StripePrivyConfigurationInput
 
@@ -5006,7 +5017,8 @@ type PaymentProviderConfigurationInputMemberStripePrivyConfiguration struct {
 func (*PaymentProviderConfigurationInputMemberStripePrivyConfiguration) isPaymentProviderConfigurationInput() {
 }
 
-// PROVIDER CONFIGURATION OUTPUT - No raw secrets, only ARNs
+// Provider configuration output — no raw secrets, only ARNs. Varies by vendor
+// type.
 //
 // The following types satisfy this interface:
 //
@@ -5016,7 +5028,7 @@ type PaymentProviderConfigurationOutput interface {
 	isPaymentProviderConfigurationOutput()
 }
 
-// Coinbase CDP configuration output with secret ARNs
+// The Coinbase CDP configuration.
 type PaymentProviderConfigurationOutputMemberCoinbaseCdpConfiguration struct {
 	Value CoinbaseCdpConfigurationOutput
 
@@ -5026,7 +5038,7 @@ type PaymentProviderConfigurationOutputMemberCoinbaseCdpConfiguration struct {
 func (*PaymentProviderConfigurationOutputMemberCoinbaseCdpConfiguration) isPaymentProviderConfigurationOutput() {
 }
 
-// StripePrivy configuration output with secret ARNs
+// The Stripe Privy configuration.
 type PaymentProviderConfigurationOutputMemberStripePrivyConfiguration struct {
 	Value StripePrivyConfigurationOutput
 
@@ -5220,6 +5232,49 @@ type PolicyEngine struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a metadata-only summary of a policy engine resource. This structure
+// contains resource identifiers, status, and timestamps without customer-encrypted
+// fields such as description or status reasons. Policy engine summaries are
+// returned by operations that do not require access to the customer's KMS key.
+type PolicyEngineSummary struct {
+
+	// The timestamp when the policy engine was originally created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The customer-assigned name of the policy engine.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the policy engine.
+	//
+	// This member is required.
+	PolicyEngineArn *string
+
+	// The unique identifier for the policy engine.
+	//
+	// This member is required.
+	PolicyEngineId *string
+
+	// The current status of the policy engine.
+	//
+	// This member is required.
+	Status PolicyEngineStatus
+
+	// The timestamp when the policy engine was last modified.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine
+	// data.
+	EncryptionKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a policy generation request within the AgentCore Policy system.
 // Tracks the AI-powered conversion of natural language descriptions into Cedar
 // policy statements, enabling users to author policies by describing authorization
@@ -5343,6 +5398,103 @@ type PolicyGenerationDetails struct {
 	//
 	// This member is required.
 	PolicyGenerationId *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a metadata-only summary of a policy generation resource. This
+// structure contains resource identifiers, status, timestamps, and findings
+// without customer-encrypted fields such as status reasons. Policy generation
+// summaries are returned by operations that do not require access to the
+// customer's KMS key.
+type PolicyGenerationSummary struct {
+
+	// The timestamp when this policy generation request was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The customer-assigned name for this policy generation request.
+	//
+	// This member is required.
+	Name *string
+
+	// The identifier of the policy engine associated with this generation request.
+	//
+	// This member is required.
+	PolicyEngineId *string
+
+	// The ARN of this policy generation request.
+	//
+	// This member is required.
+	PolicyGenerationArn *string
+
+	// The unique identifier for this policy generation request.
+	//
+	// This member is required.
+	PolicyGenerationId *string
+
+	// The resource information associated with this policy generation.
+	//
+	// This member is required.
+	Resource Resource
+
+	// The current status of this policy generation request.
+	//
+	// This member is required.
+	Status PolicyGenerationStatus
+
+	// The timestamp when this policy generation was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// Findings and insights from this policy generation process.
+	Findings *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a metadata-only summary of a policy resource. This structure
+// contains resource identifiers, status, and timestamps without customer-encrypted
+// fields such as definition, description, or status reasons. Policy summaries are
+// returned by operations that do not require access to the customer's KMS key.
+type PolicySummary struct {
+
+	// The timestamp when the policy was originally created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The customer-assigned name of the policy.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the policy.
+	//
+	// This member is required.
+	PolicyArn *string
+
+	// The identifier of the policy engine that manages this policy.
+	//
+	// This member is required.
+	PolicyEngineId *string
+
+	// The unique identifier for the policy.
+	//
+	// This member is required.
+	PolicyId *string
+
+	// The current status of the policy.
+	//
+	// This member is required.
+	Status PolicyStatus
+
+	// The timestamp when the policy was last modified.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -6090,7 +6242,8 @@ type SemanticMemoryStrategyInput struct {
 	// The namespaceTemplates associated with the semantic memory strategy.
 	NamespaceTemplates []string
 
-	// The namespaces associated with the semantic memory strategy.
+	// This is a legacy parameter, use namespaceTemplates . The namespaces associated
+	// with the semantic memory strategy.
 	//
 	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
@@ -6361,7 +6514,7 @@ type StringValidation struct {
 	noSmithyDocumentSerde
 }
 
-// StripePrivy configuration - credentials provided by Stripe + Privy
+// Stripe Privy configuration — credentials provided by Stripe and Privy.
 type StripePrivyConfigurationInput struct {
 
 	// The app ID provided by Privy.
@@ -6387,7 +6540,7 @@ type StripePrivyConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-// StripePrivy configuration output with secret ARNs
+// Stripe Privy configuration output with secret ARNs.
 type StripePrivyConfigurationOutput struct {
 
 	// The app ID provided by Privy.
@@ -6446,7 +6599,8 @@ type SummaryMemoryStrategyInput struct {
 	// The namespaceTemplates associated with the summary memory strategy.
 	NamespaceTemplates []string
 
-	// The namespaces associated with the summary memory strategy.
+	// This is a legacy parameter, use namespaceTemplates . The namespaces associated
+	// with the summary memory strategy.
 	//
 	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
@@ -7103,7 +7257,8 @@ type UserPreferenceMemoryStrategyInput struct {
 	// The namespaceTemplates associated with the user preference memory strategy.
 	NamespaceTemplates []string
 
-	// The namespaces associated with the user preference memory strategy.
+	// This is a legacy parameter, use namespaceTemplates . The namespaces associated
+	// with the user preference memory strategy.
 	//
 	// Deprecated: Use namespaceTemplates instead
 	Namespaces []string
@@ -7279,6 +7434,35 @@ type VpcConfig struct {
 	//
 	// This member is required.
 	Subnets []string
+
+	// This field applies only to Agent Runtimes. It is not applicable to Browsers or
+	// Code Interpreters.
+	//
+	// Controls whether a service-managed Amazon S3 gateway endpoint is provisioned in
+	// the VPC network topology for the agent runtime. This gateway is used by Amazon
+	// Bedrock AgentCore Runtime to download code and container images during agent
+	// startup.
+	//
+	// Starting May 5, 2026, Amazon Bedrock AgentCore Runtime is gradually rolling out
+	// a change to how network isolation is configured for VPC mode agents. Agent
+	// runtimes created on or after this rollout will no longer include the
+	// service-managed Amazon S3 gateway. Instead, all network access, including to
+	// Amazon S3, is governed exclusively by your VPC configuration. This field cannot
+	// be set on agent runtimes created after the rollout. Passing this field in an
+	// UpdateAgentRuntime request for these agent runtimes returns a
+	// ValidationException .
+	//
+	// Agent runtimes created before the rollout are not affected and continue to
+	// operate with the service-managed Amazon S3 gateway. To enforce full VPC network
+	// isolation on these existing agent runtimes, set this field to false via the
+	// UpdateAgentRuntime API. Before opting out, ensure your VPC provides the Amazon
+	// S3 access required for agent startup. If this field is not specified or is set
+	// to true , the service-managed Amazon S3 gateway remains provisioned.
+	//
+	// This field is only supported in the UpdateAgentRuntime API for pre-rollout
+	// agent runtimes. Passing this field in a CreateAgentRuntime request returns a
+	// ValidationException .
+	RequireServiceS3Endpoint *bool
 
 	noSmithyDocumentSerde
 }

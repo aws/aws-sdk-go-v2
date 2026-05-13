@@ -31,7 +31,8 @@ func (c *Client) UpdatePaymentCredentialProvider(ctx context.Context, params *Up
 
 type UpdatePaymentCredentialProviderInput struct {
 
-	// Supported vendor types for payment providers using non-standard auth protocols
+	// The vendor type for the payment credential provider (e.g., CoinbaseCDP,
+	// StripePrivy).
 	//
 	// This member is required.
 	CredentialProviderVendor types.PaymentCredentialProviderVendorType
@@ -41,7 +42,7 @@ type UpdatePaymentCredentialProviderInput struct {
 	// This member is required.
 	Name *string
 
-	// Configuration specific to the vendor, including API credentials
+	// Configuration specific to the vendor, including API credentials.
 	//
 	// This member is required.
 	ProviderConfigurationInput types.PaymentProviderConfigurationInput
@@ -61,7 +62,7 @@ type UpdatePaymentCredentialProviderOutput struct {
 	// This member is required.
 	CredentialProviderArn *string
 
-	// Supported vendor types for payment providers using non-standard auth protocols
+	// The vendor type for the updated payment credential provider.
 	//
 	// This member is required.
 	CredentialProviderVendor types.PaymentCredentialProviderVendorType
@@ -76,7 +77,7 @@ type UpdatePaymentCredentialProviderOutput struct {
 	// This member is required.
 	Name *string
 
-	// Output configuration (contains secret ARNs, excludes actual secret values)
+	// Output configuration (contains secret ARNs, excludes actual secret values).
 	//
 	// This member is required.
 	ProviderConfigurationOutput types.PaymentProviderConfigurationOutput

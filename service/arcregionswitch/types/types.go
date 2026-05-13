@@ -295,7 +295,8 @@ type Ec2AsgCapacityIncreaseConfiguration struct {
 	// configuration.
 	CapacityMonitoringApproach Ec2AsgCapacityMonitoringApproach
 
-	// The target percentage that you specify for EC2 Auto Scaling groups.
+	// The target percentage that you specify for EC2 Auto Scaling groups. The default
+	// is 100.
 	TargetPercent *int32
 
 	// The timeout value specified for the configuration.
@@ -330,7 +331,7 @@ type EcsCapacityIncreaseConfiguration struct {
 	// Most_Recent .
 	CapacityMonitoringApproach EcsCapacityMonitoringApproach
 
-	// The target percentage specified for the configuration.
+	// The target percentage specified for the configuration. The default is 100.
 	TargetPercent *int32
 
 	// The timeout value specified for the configuration.
@@ -388,7 +389,7 @@ type EksResourceScalingConfiguration struct {
 	// The scaling resources for the configuration.
 	ScalingResources []map[string]map[string]KubernetesScalingResource
 
-	// The target percentage for the configuration.
+	// The target percentage for the configuration. The default is 100.
 	TargetPercent *int32
 
 	// The timeout value specified for the configuration.
@@ -407,6 +408,24 @@ type EksResourceScalingUngraceful struct {
 	//
 	// This member is required.
 	MinimumSuccessPercentage *int32
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon Web Services Lambda event source mapping configuration, containing
+// the resource ARN and optional cross-account configuration.
+type EventSourceMapping struct {
+
+	// The Amazon Resource Name (ARN) of the Lambda event source mapping.
+	//
+	// This member is required.
+	Arn *string
+
+	// The cross account role for the configuration.
+	CrossAccountRole *string
+
+	// The external ID (secret key) for the configuration.
+	ExternalId *string
 
 	noSmithyDocumentSerde
 }
@@ -440,6 +459,7 @@ type ExecutionApprovalConfiguration struct {
 //	ExecutionBlockConfigurationMemberEksResourceScalingConfig
 //	ExecutionBlockConfigurationMemberExecutionApprovalConfig
 //	ExecutionBlockConfigurationMemberGlobalAuroraConfig
+//	ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig
 //	ExecutionBlockConfigurationMemberParallelConfig
 //	ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig
 //	ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig
@@ -522,6 +542,16 @@ type ExecutionBlockConfigurationMemberGlobalAuroraConfig struct {
 }
 
 func (*ExecutionBlockConfigurationMemberGlobalAuroraConfig) isExecutionBlockConfiguration() {}
+
+// A Lambda event source mapping execution block.
+type ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig struct {
+	Value LambdaEventSourceMappingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig) isExecutionBlockConfiguration() {
+}
 
 // A parallel configuration execution block.
 type ExecutionBlockConfigurationMemberParallelConfig struct {
@@ -705,6 +735,41 @@ type KubernetesScalingResource struct {
 
 	// The hpaname for the Kubernetes resource.
 	HpaName *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for Amazon Web Services Lambda event source mappings used in a
+// Region switch plan.
+type LambdaEventSourceMappingConfiguration struct {
+
+	// The action to take - whether to enable or disable an event source mapping.
+	//
+	// This member is required.
+	Action EventSourceMappingAction
+
+	// Per-region configuration for which Lambda event source mapping to enable or
+	// disable when activating or deactivating a region.
+	//
+	// This member is required.
+	RegionEventSourceMappings map[string]EventSourceMapping
+
+	// The timeout value specified for the configuration.
+	TimeoutMinutes *int32
+
+	// The settings for ungraceful execution.
+	Ungraceful *LambdaEventSourceMappingUngraceful
+
+	noSmithyDocumentSerde
+}
+
+// Specifies whether to skip enabling or disabling an event source mapping during
+// an ungraceful execution.
+type LambdaEventSourceMappingUngraceful struct {
+
+	// Set to skip to skip executing this event source mapping step during an
+	// ungraceful execution.
+	Behavior LambdaEventSourceMappingUngracefulBehavior
 
 	noSmithyDocumentSerde
 }

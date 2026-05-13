@@ -31,22 +31,23 @@ func (c *Client) CreatePaymentCredentialProvider(ctx context.Context, params *Cr
 
 type CreatePaymentCredentialProviderInput struct {
 
-	// The vendor type (e.g., CoinbaseCDP)
+	// The vendor type for the payment credential provider (e.g., CoinbaseCDP,
+	// StripePrivy).
 	//
 	// This member is required.
 	CredentialProviderVendor types.PaymentCredentialProviderVendorType
 
-	// Unique name for the payment credential provider
+	// Unique name for the payment credential provider.
 	//
 	// This member is required.
 	Name *string
 
-	// Configuration specific to the vendor, including API credentials
+	// Configuration specific to the vendor, including API credentials.
 	//
 	// This member is required.
 	ProviderConfigurationInput types.PaymentProviderConfigurationInput
 
-	// Optional tags for resource organization
+	// Optional tags for resource organization.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -59,7 +60,7 @@ type CreatePaymentCredentialProviderOutput struct {
 	// This member is required.
 	CredentialProviderArn *string
 
-	// Supported vendor types for payment providers using non-standard auth protocols
+	// The vendor type for the created payment credential provider.
 	//
 	// This member is required.
 	CredentialProviderVendor types.PaymentCredentialProviderVendorType
@@ -69,7 +70,7 @@ type CreatePaymentCredentialProviderOutput struct {
 	// This member is required.
 	Name *string
 
-	// Output configuration (contains secret ARNs, excludes actual secret values)
+	// Output configuration (contains secret ARNs, excludes actual secret values).
 	//
 	// This member is required.
 	ProviderConfigurationOutput types.PaymentProviderConfigurationOutput

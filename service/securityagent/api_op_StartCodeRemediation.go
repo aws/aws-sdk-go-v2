@@ -40,9 +40,12 @@ type StartCodeRemediationInput struct {
 	// This member is required.
 	FindingIds []string
 
-	// The unique identifier of the pentest job that produced the findings.
-	//
-	// This member is required.
+	// The unique identifier of the code review job that produced the findings.
+	// Mutually exclusive with pentestJobId .
+	CodeReviewJobId *string
+
+	// The unique identifier of the pentest job that produced the findings. Mutually
+	// exclusive with codeReviewJobId .
 	PentestJobId *string
 
 	noSmithyDocumentSerde

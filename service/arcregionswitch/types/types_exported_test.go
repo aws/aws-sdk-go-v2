@@ -35,6 +35,9 @@ func ExampleExecutionBlockConfiguration_outputUsage() {
 	case *types.ExecutionBlockConfigurationMemberGlobalAuroraConfig:
 		_ = v.Value // Value is types.GlobalAuroraConfiguration
 
+	case *types.ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig:
+		_ = v.Value // Value is types.LambdaEventSourceMappingConfiguration
+
 	case *types.ExecutionBlockConfigurationMemberParallelConfig:
 		_ = v.Value // Value is types.ParallelExecutionBlockConfiguration
 
@@ -62,6 +65,7 @@ func ExampleExecutionBlockConfiguration_outputUsage() {
 var _ *types.RdsCreateCrossRegionReplicaConfiguration
 var _ *types.DocumentDbConfiguration
 var _ *types.ExecutionApprovalConfiguration
+var _ *types.LambdaEventSourceMappingConfiguration
 var _ *types.EksResourceScalingConfiguration
 var _ *types.RegionSwitchPlanConfiguration
 var _ *types.CustomActionLambdaConfiguration

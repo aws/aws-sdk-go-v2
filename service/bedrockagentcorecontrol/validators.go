@@ -1350,6 +1350,26 @@ func (m *validateOpGetPolicyEngine) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPolicyEngineSummary struct {
+}
+
+func (*validateOpGetPolicyEngineSummary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPolicyEngineSummary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPolicyEngineSummaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPolicyEngineSummaryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetPolicyGeneration struct {
 }
 
@@ -1370,6 +1390,26 @@ func (m *validateOpGetPolicyGeneration) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPolicyGenerationSummary struct {
+}
+
+func (*validateOpGetPolicyGenerationSummary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPolicyGenerationSummary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPolicyGenerationSummaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPolicyGenerationSummaryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetPolicy struct {
 }
 
@@ -1385,6 +1425,26 @@ func (m *validateOpGetPolicy) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPolicySummary struct {
+}
+
+func (*validateOpGetPolicySummary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPolicySummary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPolicySummaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPolicySummaryInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1645,6 +1705,46 @@ func (m *validateOpListPolicyGenerations) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListPolicyGenerationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPolicyGenerationSummaries struct {
+}
+
+func (*validateOpListPolicyGenerationSummaries) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPolicyGenerationSummaries) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPolicyGenerationSummariesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPolicyGenerationSummariesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPolicySummaries struct {
+}
+
+func (*validateOpListPolicySummaries) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPolicySummaries) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPolicySummariesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPolicySummariesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2518,12 +2618,24 @@ func addOpGetPolicyEngineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPolicyEngine{}, middleware.After)
 }
 
+func addOpGetPolicyEngineSummaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPolicyEngineSummary{}, middleware.After)
+}
+
 func addOpGetPolicyGenerationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPolicyGeneration{}, middleware.After)
 }
 
+func addOpGetPolicyGenerationSummaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPolicyGenerationSummary{}, middleware.After)
+}
+
 func addOpGetPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPolicy{}, middleware.After)
+}
+
+func addOpGetPolicySummaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPolicySummary{}, middleware.After)
 }
 
 func addOpGetRegistryValidationMiddleware(stack *middleware.Stack) error {
@@ -2576,6 +2688,14 @@ func addOpListPolicyGenerationAssetsValidationMiddleware(stack *middleware.Stack
 
 func addOpListPolicyGenerationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPolicyGenerations{}, middleware.After)
+}
+
+func addOpListPolicyGenerationSummariesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPolicyGenerationSummaries{}, middleware.After)
+}
+
+func addOpListPolicySummariesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPolicySummaries{}, middleware.After)
 }
 
 func addOpListRegistryRecordsValidationMiddleware(stack *middleware.Stack) error {
@@ -8105,6 +8225,21 @@ func validateOpGetPolicyEngineInput(v *GetPolicyEngineInput) error {
 	}
 }
 
+func validateOpGetPolicyEngineSummaryInput(v *GetPolicyEngineSummaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPolicyEngineSummaryInput"}
+	if v.PolicyEngineId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyEngineId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetPolicyGenerationInput(v *GetPolicyGenerationInput) error {
 	if v == nil {
 		return nil
@@ -8123,11 +8258,47 @@ func validateOpGetPolicyGenerationInput(v *GetPolicyGenerationInput) error {
 	}
 }
 
+func validateOpGetPolicyGenerationSummaryInput(v *GetPolicyGenerationSummaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPolicyGenerationSummaryInput"}
+	if v.PolicyGenerationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyGenerationId"))
+	}
+	if v.PolicyEngineId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyEngineId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetPolicyInput(v *GetPolicyInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetPolicyInput"}
+	if v.PolicyEngineId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyEngineId"))
+	}
+	if v.PolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPolicySummaryInput(v *GetPolicySummaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPolicySummaryInput"}
 	if v.PolicyEngineId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyEngineId"))
 	}
@@ -8332,6 +8503,36 @@ func validateOpListPolicyGenerationsInput(v *ListPolicyGenerationsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListPolicyGenerationsInput"}
+	if v.PolicyEngineId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyEngineId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPolicyGenerationSummariesInput(v *ListPolicyGenerationSummariesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPolicyGenerationSummariesInput"}
+	if v.PolicyEngineId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyEngineId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPolicySummariesInput(v *ListPolicySummariesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPolicySummariesInput"}
 	if v.PolicyEngineId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyEngineId"))
 	}

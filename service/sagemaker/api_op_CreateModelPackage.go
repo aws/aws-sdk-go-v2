@@ -88,6 +88,9 @@ type CreateModelPackageInput struct {
 	//   inference.
 	InferenceSpecification *types.InferenceSpecification
 
+	// The storage type of the model package.
+	ManagedStorageType types.ManagedStorageType
+
 	// Metadata properties of the tracking entity, trial, or trial component.
 	MetadataProperties *types.MetadataProperties
 

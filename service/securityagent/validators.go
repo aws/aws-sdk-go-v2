@@ -30,6 +30,26 @@ func (m *validateOpAddArtifact) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchDeleteCodeReviews struct {
+}
+
+func (*validateOpBatchDeleteCodeReviews) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteCodeReviews) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteCodeReviewsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteCodeReviewsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchDeletePentests struct {
 }
 
@@ -85,6 +105,66 @@ func (m *validateOpBatchGetArtifactMetadata) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpBatchGetArtifactMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetCodeReviewJobs struct {
+}
+
+func (*validateOpBatchGetCodeReviewJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetCodeReviewJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetCodeReviewJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetCodeReviewJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetCodeReviewJobTasks struct {
+}
+
+func (*validateOpBatchGetCodeReviewJobTasks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetCodeReviewJobTasks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetCodeReviewJobTasksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetCodeReviewJobTasksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetCodeReviews struct {
+}
+
+func (*validateOpBatchGetCodeReviews) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetCodeReviews) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetCodeReviewsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetCodeReviewsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -205,6 +285,26 @@ func (m *validateOpCreateAgentSpace) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateAgentSpaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateCodeReview struct {
+}
+
+func (*validateOpCreateCodeReview) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCodeReview) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCodeReviewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCodeReviewInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -510,6 +610,66 @@ func (m *validateOpListArtifacts) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListCodeReviewJobsForCodeReview struct {
+}
+
+func (*validateOpListCodeReviewJobsForCodeReview) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCodeReviewJobsForCodeReview) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCodeReviewJobsForCodeReviewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCodeReviewJobsForCodeReviewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCodeReviewJobTasks struct {
+}
+
+func (*validateOpListCodeReviewJobTasks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCodeReviewJobTasks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCodeReviewJobTasksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCodeReviewJobTasksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCodeReviews struct {
+}
+
+func (*validateOpListCodeReviews) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCodeReviews) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCodeReviewsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCodeReviewsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListDiscoveredEndpoints struct {
 }
 
@@ -690,6 +850,26 @@ func (m *validateOpStartCodeRemediation) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartCodeReviewJob struct {
+}
+
+func (*validateOpStartCodeReviewJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartCodeReviewJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartCodeReviewJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartCodeReviewJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartPentestJob struct {
 }
 
@@ -705,6 +885,26 @@ func (m *validateOpStartPentestJob) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartPentestJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopCodeReviewJob struct {
+}
+
+func (*validateOpStopCodeReviewJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopCodeReviewJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopCodeReviewJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopCodeReviewJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -805,6 +1005,26 @@ func (m *validateOpUpdateApplication) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateCodeReview struct {
+}
+
+func (*validateOpUpdateCodeReview) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCodeReview) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCodeReviewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCodeReviewInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -914,6 +1134,10 @@ func addOpAddArtifactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddArtifact{}, middleware.After)
 }
 
+func addOpBatchDeleteCodeReviewsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteCodeReviews{}, middleware.After)
+}
+
 func addOpBatchDeletePentestsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDeletePentests{}, middleware.After)
 }
@@ -924,6 +1148,18 @@ func addOpBatchGetAgentSpacesValidationMiddleware(stack *middleware.Stack) error
 
 func addOpBatchGetArtifactMetadataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetArtifactMetadata{}, middleware.After)
+}
+
+func addOpBatchGetCodeReviewJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetCodeReviewJobs{}, middleware.After)
+}
+
+func addOpBatchGetCodeReviewJobTasksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetCodeReviewJobTasks{}, middleware.After)
+}
+
+func addOpBatchGetCodeReviewsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetCodeReviews{}, middleware.After)
 }
 
 func addOpBatchGetFindingsValidationMiddleware(stack *middleware.Stack) error {
@@ -948,6 +1184,10 @@ func addOpBatchGetTargetDomainsValidationMiddleware(stack *middleware.Stack) err
 
 func addOpCreateAgentSpaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAgentSpace{}, middleware.After)
+}
+
+func addOpCreateCodeReviewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCodeReview{}, middleware.After)
 }
 
 func addOpCreateIntegrationValidationMiddleware(stack *middleware.Stack) error {
@@ -1010,6 +1250,18 @@ func addOpListArtifactsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListArtifacts{}, middleware.After)
 }
 
+func addOpListCodeReviewJobsForCodeReviewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCodeReviewJobsForCodeReview{}, middleware.After)
+}
+
+func addOpListCodeReviewJobTasksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCodeReviewJobTasks{}, middleware.After)
+}
+
+func addOpListCodeReviewsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCodeReviews{}, middleware.After)
+}
+
 func addOpListDiscoveredEndpointsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDiscoveredEndpoints{}, middleware.After)
 }
@@ -1046,8 +1298,16 @@ func addOpStartCodeRemediationValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpStartCodeRemediation{}, middleware.After)
 }
 
+func addOpStartCodeReviewJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartCodeReviewJob{}, middleware.After)
+}
+
 func addOpStartPentestJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartPentestJob{}, middleware.After)
+}
+
+func addOpStopCodeReviewJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopCodeReviewJob{}, middleware.After)
 }
 
 func addOpStopPentestJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1068,6 +1328,10 @@ func addOpUpdateAgentSpaceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateApplication{}, middleware.After)
+}
+
+func addOpUpdateCodeReviewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCodeReview{}, middleware.After)
 }
 
 func addOpUpdateFindingValidationMiddleware(stack *middleware.Stack) error {
@@ -1294,6 +1558,24 @@ func validateOpAddArtifactInput(v *AddArtifactInput) error {
 	}
 }
 
+func validateOpBatchDeleteCodeReviewsInput(v *BatchDeleteCodeReviewsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteCodeReviewsInput"}
+	if v.CodeReviewIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CodeReviewIds"))
+	}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchDeletePentestsInput(v *BatchDeletePentestsInput) error {
 	if v == nil {
 		return nil
@@ -1337,6 +1619,60 @@ func validateOpBatchGetArtifactMetadataInput(v *BatchGetArtifactMetadataInput) e
 	}
 	if v.ArtifactIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ArtifactIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetCodeReviewJobsInput(v *BatchGetCodeReviewJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetCodeReviewJobsInput"}
+	if v.CodeReviewJobIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CodeReviewJobIds"))
+	}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetCodeReviewJobTasksInput(v *BatchGetCodeReviewJobTasksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetCodeReviewJobTasksInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.CodeReviewJobTaskIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CodeReviewJobTaskIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetCodeReviewsInput(v *BatchGetCodeReviewsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetCodeReviewsInput"}
+	if v.CodeReviewIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CodeReviewIds"))
+	}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1443,6 +1779,31 @@ func validateOpCreateAgentSpaceInput(v *CreateAgentSpaceInput) error {
 	if v.CodeReviewSettings != nil {
 		if err := validateCodeReviewSettings(v.CodeReviewSettings); err != nil {
 			invalidParams.AddNested("CodeReviewSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCodeReviewInput(v *CreateCodeReviewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCodeReviewInput"}
+	if v.Title == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Title"))
+	}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.Assets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Assets"))
+	} else if v.Assets != nil {
+		if err := validateAssets(v.Assets); err != nil {
+			invalidParams.AddNested("Assets", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1719,6 +2080,54 @@ func validateOpListArtifactsInput(v *ListArtifactsInput) error {
 	}
 }
 
+func validateOpListCodeReviewJobsForCodeReviewInput(v *ListCodeReviewJobsForCodeReviewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCodeReviewJobsForCodeReviewInput"}
+	if v.CodeReviewId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CodeReviewId"))
+	}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCodeReviewJobTasksInput(v *ListCodeReviewJobTasksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCodeReviewJobTasksInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCodeReviewsInput(v *ListCodeReviewsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCodeReviewsInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListDiscoveredEndpointsInput(v *ListDiscoveredEndpointsInput) error {
 	if v == nil {
 		return nil
@@ -1742,9 +2151,6 @@ func validateOpListFindingsInput(v *ListFindingsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListFindingsInput"}
-	if v.PentestJobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PentestJobId"))
-	}
 	if v.AgentSpaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
 	}
@@ -1859,11 +2265,26 @@ func validateOpStartCodeRemediationInput(v *StartCodeRemediationInput) error {
 	if v.AgentSpaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
 	}
-	if v.PentestJobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PentestJobId"))
-	}
 	if v.FindingIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FindingIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartCodeReviewJobInput(v *StartCodeReviewJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartCodeReviewJobInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.CodeReviewId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CodeReviewId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1882,6 +2303,24 @@ func validateOpStartPentestJobInput(v *StartPentestJobInput) error {
 	}
 	if v.PentestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PentestId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopCodeReviewJobInput(v *StopCodeReviewJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopCodeReviewJobInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.CodeReviewJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CodeReviewJobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1971,6 +2410,29 @@ func validateOpUpdateApplicationInput(v *UpdateApplicationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateApplicationInput"}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCodeReviewInput(v *UpdateCodeReviewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCodeReviewInput"}
+	if v.CodeReviewId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CodeReviewId"))
+	}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.Assets != nil {
+		if err := validateAssets(v.Assets); err != nil {
+			invalidParams.AddNested("Assets", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

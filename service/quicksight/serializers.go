@@ -26860,6 +26860,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AccessAppsNativeDataStore) > 0 {
+		ok := object.Key("AccessAppsNativeDataStore")
+		ok.String(string(v.AccessAppsNativeDataStore))
+	}
+
 	if len(v.Action) > 0 {
 		ok := object.Key("Action")
 		ok.String(string(v.Action))
@@ -26898,6 +26903,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 	if len(v.ApproveFlowShareRequests) > 0 {
 		ok := object.Key("ApproveFlowShareRequests")
 		ok.String(string(v.ApproveFlowShareRequests))
+	}
+
+	if len(v.Apps) > 0 {
+		ok := object.Key("Apps")
+		ok.String(string(v.Apps))
 	}
 
 	if len(v.AsanaAction) > 0 {
@@ -26968,6 +26978,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 	if len(v.CreateAndUpdateAmazonSThreeAction) > 0 {
 		ok := object.Key("CreateAndUpdateAmazonSThreeAction")
 		ok.String(string(v.CreateAndUpdateAmazonSThreeAction))
+	}
+
+	if len(v.CreateAndUpdateApps) > 0 {
+		ok := object.Key("CreateAndUpdateApps")
+		ok.String(string(v.CreateAndUpdateApps))
 	}
 
 	if len(v.CreateAndUpdateAsanaAction) > 0 {
@@ -27310,6 +27325,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 		ok.String(string(v.IntercomAction))
 	}
 
+	if len(v.InvokeAppsAIInference) > 0 {
+		ok := object.Key("InvokeAppsAIInference")
+		ok.String(string(v.InvokeAppsAIInference))
+	}
+
 	if len(v.JiraAction) > 0 {
 		ok := object.Key("JiraAction")
 		ok.String(string(v.JiraAction))
@@ -27478,6 +27498,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 	if len(v.ShareAnalyses) > 0 {
 		ok := object.Key("ShareAnalyses")
 		ok.String(string(v.ShareAnalyses))
+	}
+
+	if len(v.ShareApps) > 0 {
+		ok := object.Key("ShareApps")
+		ok.String(string(v.ShareApps))
 	}
 
 	if len(v.ShareAsanaAction) > 0 {

@@ -1094,6 +1094,13 @@ func awsRestjson1_serializeOpDocumentCreateDomainInput(v *CreateDomainInput, val
 		}
 	}
 
+	if v.AutomatedSnapshotPauseOptions != nil {
+		ok := object.Key("AutomatedSnapshotPauseOptions")
+		if err := awsRestjson1_serializeDocumentAutomatedSnapshotPauseRequestOptions(v.AutomatedSnapshotPauseOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AutoTuneOptions != nil {
 		ok := object.Key("AutoTuneOptions")
 		if err := awsRestjson1_serializeDocumentAutoTuneOptionsInput(v.AutoTuneOptions, ok); err != nil {
@@ -7052,6 +7059,13 @@ func awsRestjson1_serializeOpDocumentUpdateDomainConfigInput(v *UpdateDomainConf
 		}
 	}
 
+	if v.AutomatedSnapshotPauseOptions != nil {
+		ok := object.Key("AutomatedSnapshotPauseOptions")
+		if err := awsRestjson1_serializeDocumentAutomatedSnapshotPauseRequestOptions(v.AutomatedSnapshotPauseOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AutoTuneOptions != nil {
 		ok := object.Key("AutoTuneOptions")
 		if err := awsRestjson1_serializeDocumentAutoTuneOptions(v.AutoTuneOptions, ok); err != nil {
@@ -7896,6 +7910,28 @@ func awsRestjson1_serializeDocumentAppConfigs(v []types.AppConfig, value smithyj
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAutomatedSnapshotPauseRequestOptions(v *types.AutomatedSnapshotPauseRequestOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if v.EndTime != nil {
+		ok := object.Key("EndTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EndTime))
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("StartTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartTime))
+	}
+
 	return nil
 }
 

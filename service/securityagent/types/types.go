@@ -267,6 +267,26 @@ type CloudWatchLog struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a location in source code associated with a security finding.
+type CodeLocation struct {
+
+	// The absolute path to the file containing the code location.
+	//
+	// This member is required.
+	FilePath *string
+
+	// The role of this location in the vulnerability, such as source or sink.
+	Label *string
+
+	// The ending line number of the code location.
+	LineEnd *int32
+
+	// The starting line number of the code location.
+	LineStart *int32
+
+	noSmithyDocumentSerde
+}
+
 // Represents a code remediation task that was initiated to fix a security finding.
 type CodeRemediationTask struct {
 
@@ -301,6 +321,213 @@ type CodeRemediationTaskDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a code review configuration that defines the parameters for
+// automated security-focused code analysis, including target assets and logging
+// configuration.
+type CodeReview struct {
+
+	// The unique identifier of the agent space that contains the code review.
+	//
+	// This member is required.
+	AgentSpaceId *string
+
+	// The assets included in the code review.
+	//
+	// This member is required.
+	Assets *Assets
+
+	// The unique identifier of the code review.
+	//
+	// This member is required.
+	CodeReviewId *string
+
+	// The title of the code review.
+	//
+	// This member is required.
+	Title *string
+
+	// The code remediation strategy for the code review.
+	CodeRemediationStrategy CodeRemediationStrategy
+
+	// The date and time the code review was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The CloudWatch Logs configuration for the code review.
+	LogConfig *CloudWatchLog
+
+	// The IAM service role used for the code review.
+	ServiceRole *string
+
+	// The date and time the code review was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents a code review job, which is an execution instance of a code review.
+// A code review job progresses through preflight, static analysis, and finalizing
+// steps.
+type CodeReviewJob struct {
+
+	// The code remediation strategy for the code review job.
+	CodeRemediationStrategy CodeRemediationStrategy
+
+	// The unique identifier of the code review associated with the job.
+	CodeReviewId *string
+
+	// The unique identifier of the code review job.
+	CodeReviewJobId *string
+
+	// The date and time the code review job was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The list of documents providing context for the code review job.
+	Documents []DocumentInfo
+
+	// Error information if the code review job encountered an error.
+	ErrorInformation *ErrorInformation
+
+	// The execution context messages for the code review job.
+	ExecutionContext []ExecutionContext
+
+	// The list of integrated repositories associated with the code review job.
+	IntegratedRepositories []IntegratedRepository
+
+	// The CloudWatch Logs configuration for the code review job.
+	LogConfig *CloudWatchLog
+
+	// An overview of the code review job results.
+	Overview *string
+
+	// The IAM service role used for the code review job.
+	ServiceRole *string
+
+	// The list of source code repositories analyzed during the code review job.
+	SourceCode []SourceCodeRepository
+
+	// The current status of the code review job.
+	Status JobStatus
+
+	// The list of steps in the code review job execution.
+	Steps []Step
+
+	// The title of the code review job.
+	Title *string
+
+	// The date and time the code review job was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a code review job.
+type CodeReviewJobSummary struct {
+
+	// The unique identifier of the code review associated with the job.
+	//
+	// This member is required.
+	CodeReviewId *string
+
+	// The unique identifier of the code review job.
+	//
+	// This member is required.
+	CodeReviewJobId *string
+
+	// The date and time the code review job was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The current status of the code review job.
+	Status JobStatus
+
+	// The title of the code review job.
+	Title *string
+
+	// The date and time the code review job was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents an individual security test task within a code review job. Each task
+// targets a specific risk type and executes independently.
+type CodeReviewJobTask struct {
+
+	// The unique identifier of the task.
+	//
+	// This member is required.
+	TaskId *string
+
+	// The unique identifier of the agent space.
+	AgentSpaceId *string
+
+	// The list of categories assigned to the task.
+	Categories []Category
+
+	// The unique identifier of the code review associated with the task.
+	CodeReviewId *string
+
+	// The unique identifier of the code review job that contains the task.
+	CodeReviewJobId *string
+
+	// The date and time the task was created, in UTC format.
+	CreatedAt *time.Time
+
+	// A description of the task.
+	Description *string
+
+	// The current execution status of the task.
+	ExecutionStatus TaskExecutionStatus
+
+	// The location of the task execution logs.
+	LogsLocation *LogLocation
+
+	// The type of security risk the task is testing for.
+	RiskType RiskType
+
+	// The title of the task.
+	Title *string
+
+	// The date and time the task was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a code review job task.
+type CodeReviewJobTaskSummary struct {
+
+	// The unique identifier of the task.
+	//
+	// This member is required.
+	TaskId *string
+
+	// The unique identifier of the agent space.
+	AgentSpaceId *string
+
+	// The unique identifier of the code review associated with the task.
+	CodeReviewId *string
+
+	// The unique identifier of the code review job that contains the task.
+	CodeReviewJobId *string
+
+	// The date and time the task was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The current execution status of the task.
+	ExecutionStatus TaskExecutionStatus
+
+	// The type of security risk the task is testing for.
+	RiskType RiskType
+
+	// The title of the task.
+	Title *string
+
+	// The date and time the task was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The code review settings for an agent space, controlling which types of
 // scanning are enabled.
 type CodeReviewSettings struct {
@@ -318,6 +545,33 @@ type CodeReviewSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Contains summary information about a code review.
+type CodeReviewSummary struct {
+
+	// The unique identifier of the agent space that contains the code review.
+	//
+	// This member is required.
+	AgentSpaceId *string
+
+	// The unique identifier of the code review.
+	//
+	// This member is required.
+	CodeReviewId *string
+
+	// The title of the code review.
+	//
+	// This member is required.
+	Title *string
+
+	// The date and time the code review was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The date and time the code review was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // A custom HTTP header to include in network traffic during penetration testing.
 type CustomHeader struct {
 
@@ -326,6 +580,18 @@ type CustomHeader struct {
 
 	// The value of the custom header.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a code review that failed to delete.
+type DeleteCodeReviewFailure struct {
+
+	// The unique identifier of the code review that failed to delete.
+	CodeReviewId *string
+
+	// The reason the code review failed to delete.
+	Reason *string
 
 	noSmithyDocumentSerde
 }
@@ -463,9 +729,19 @@ type Finding struct {
 	// The attack script used to reproduce the finding.
 	AttackScript *string
 
+	// The file locations involved in the vulnerability, as reported by the code
+	// scanner.
+	CodeLocations []CodeLocation
+
 	// The code remediation task associated with the finding, if code remediation was
 	// initiated.
 	CodeRemediationTask *CodeRemediationTask
+
+	// The unique identifier of the code review associated with the finding.
+	CodeReviewId *string
+
+	// The unique identifier of the code review job that produced the finding.
+	CodeReviewJobId *string
 
 	// The confidence level of the finding. Valid values include FALSE_POSITIVE,
 	// UNCONFIRMED, LOW, MEDIUM, and HIGH.
@@ -528,6 +804,12 @@ type FindingSummary struct {
 	//
 	// This member is required.
 	FindingId *string
+
+	// The unique identifier of the code review associated with the finding.
+	CodeReviewId *string
+
+	// The unique identifier of the code review job that produced the finding.
+	CodeReviewJobId *string
 
 	// The confidence level of the finding.
 	Confidence ConfidenceLevel
