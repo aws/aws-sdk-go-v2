@@ -328,6 +328,12 @@
                     "traits": {
                         "smithy.api#enumValue": "INCOMPATIBLE_DOMAIN"
                     }
+                },
+                "INELIGIBLE_ACCOUNT_TIER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INELIGIBLE_ACCOUNT_TIER"
+                    }
                 }
             }
         },
@@ -4540,6 +4546,9 @@
                     "target": "com.amazonaws.partnercentralaccount#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.partnercentralaccount#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.partnercentralaccount#ThrottlingException"
                 },
                 {
@@ -5082,6 +5091,18 @@
                     "traits": {
                         "smithy.api#enumValue": "LIMIT_EXCEEDED_NUMBER_OF_OPEN_CONNECTION_INVITATION"
                     }
+                },
+                "LIMIT_EXCEEDED_NUMBER_OF_PROFILE_UPDATE_PER_DAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIMIT_EXCEEDED_NUMBER_OF_PROFILE_UPDATE_PER_DAY"
+                    }
+                },
+                "LIMIT_EXCEEDED_NUMBER_OF_PROFILE_VISIBILITY_UPDATE_PER_DAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIMIT_EXCEEDED_NUMBER_OF_PROFILE_VISIBILITY_UPDATE_PER_DAY"
+                    }
                 }
             }
         },
@@ -5105,6 +5126,9 @@
                 },
                 {
                     "target": "com.amazonaws.partnercentralaccount#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralaccount#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.partnercentralaccount#ThrottlingException"

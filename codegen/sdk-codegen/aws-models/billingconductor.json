@@ -5931,6 +5931,9 @@
                     "target": "com.amazonaws.billingconductor#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.billingconductor#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.billingconductor#InternalServerException"
                 },
                 {

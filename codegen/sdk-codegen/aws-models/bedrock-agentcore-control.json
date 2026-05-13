@@ -1965,7 +1965,10 @@
                     }
                 },
                 "vpcConfig": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#VpcConfig"
+                    "target": "com.amazonaws.bedrockagentcorecontrol#VpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC configuration for the browser. This configuration is required when the network mode is set to <code>VPC</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2617,7 +2620,10 @@
                     }
                 },
                 "vpcConfig": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#VpcConfig"
+                    "target": "com.amazonaws.bedrockagentcorecontrol#VpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC configuration for the code interpreter. This configuration is required when the network mode is set to <code>VPC</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2815,7 +2821,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Coinbase CDP configuration - credentials provided by Coinbase Developer Platform"
+                "smithy.api#documentation": "<p>Coinbase CDP configuration — credentials provided by Coinbase Developer Platform.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#CoinbaseCdpConfigurationOutput": {
@@ -2842,7 +2848,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Coinbase CDP configuration output with secret ARNs"
+                "smithy.api#documentation": "<p>Coinbase CDP configuration output with secret ARNs.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#CoinbaseCdpWalletSecretType": {
@@ -5816,21 +5822,21 @@
                 "name": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#CredentialProviderName",
                     "traits": {
-                        "smithy.api#documentation": "Unique name for the payment credential provider",
+                        "smithy.api#documentation": "<p>Unique name for the payment credential provider.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "credentialProviderVendor": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PaymentCredentialProviderVendorType",
                     "traits": {
-                        "smithy.api#documentation": "The vendor type (e.g., CoinbaseCDP)",
+                        "smithy.api#documentation": "<p>The vendor type for the payment credential provider (e.g., CoinbaseCDP, StripePrivy).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "providerConfigurationInput": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PaymentProviderConfigurationInput",
                     "traits": {
-                        "smithy.api#documentation": "Configuration specific to the vendor, including API credentials",
+                        "smithy.api#documentation": "<p>Configuration specific to the vendor, including API credentials.</p>",
                         "smithy.api#notProperty": {},
                         "smithy.api#required": {}
                     }
@@ -5838,7 +5844,7 @@
                 "tags": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#TagsMap",
                     "traits": {
-                        "smithy.api#documentation": "Optional tags for resource organization",
+                        "smithy.api#documentation": "<p>Optional tags for resource organization.</p>",
                         "smithy.api#notProperty": {}
                     }
                 }
@@ -5860,6 +5866,7 @@
                 "credentialProviderVendor": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PaymentCredentialProviderVendorType",
                     "traits": {
+                        "smithy.api#documentation": "<p>The vendor type for the created payment credential provider.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5873,7 +5880,7 @@
                 "providerConfigurationOutput": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PaymentProviderConfigurationOutput",
                     "traits": {
-                        "smithy.api#documentation": "Output configuration (contains secret ARNs, excludes actual secret values)",
+                        "smithy.api#documentation": "<p>Output configuration (contains secret ARNs, excludes actual secret values).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6177,12 +6184,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "description": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A human-readable description of the policy engine's purpose.</p>"
-                    }
-                },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
                     "traits": {
@@ -6211,17 +6212,23 @@
                         "smithy.api#required": {}
                     }
                 },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine data.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the policy engine's purpose.</p>"
+                    }
+                },
                 "statusReasons": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PolicyStatusReasons",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional information about the policy engine status. This provides details about any failures or the current state of the policy engine creation process.</p>",
                         "smithy.api#required": {}
-                    }
-                },
-                "encryptionKeyArn": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine data.</p>"
                     }
                 }
             },
@@ -6308,19 +6315,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "definition": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyDefinition",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The Cedar policy statement that was created. This is the validated policy definition that will be used for agent behavior control and access decisions.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "description": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The human-readable description of the policy's purpose and functionality. This helps administrators understand and manage the policy.</p>"
-                    }
-                },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
                     "traits": {
@@ -6347,6 +6341,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the policy. A status of <code>ACTIVE</code> indicates the policy is ready for use.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "definition": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Cedar policy statement that was created. This is the validated policy definition that will be used for agent behavior control and access decisions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The human-readable description of the policy's purpose and functionality. This helps administrators understand and manage the policy.</p>"
                     }
                 },
                 "statusReasons": {
@@ -7294,7 +7301,7 @@
                             "message": "Use namespaceTemplates instead",
                             "since": "2026-03-02"
                         },
-                        "smithy.api#documentation": "<p>The namespaces associated with the custom memory strategy.</p>"
+                        "smithy.api#documentation": "<p>This is a legacy parameter, use <code>namespaceTemplates</code>. The namespaces associated with the custom memory strategy.</p>"
                     }
                 },
                 "namespaceTemplates": {
@@ -9137,12 +9144,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "description": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The human-readable description of the deleted policy engine.</p>"
-                    }
-                },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
                     "traits": {
@@ -9171,17 +9172,23 @@
                         "smithy.api#required": {}
                     }
                 },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine data.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The human-readable description of the deleted policy engine.</p>"
+                    }
+                },
                 "statusReasons": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PolicyStatusReasons",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional information about the deletion status. This provides details about the deletion process or any issues that may have occurred.</p>",
                         "smithy.api#required": {}
-                    }
-                },
-                "encryptionKeyArn": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine data.</p>"
                     }
                 }
             },
@@ -9242,18 +9249,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "definition": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyDefinition",
-                    "traits": {
-                        "smithy.api#required": {}
-                    }
-                },
-                "description": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The human-readable description of the deleted policy.</p>"
-                    }
-                },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
                     "traits": {
@@ -9280,6 +9275,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the policy deletion operation. This provides information about any issues that occurred during the deletion process.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "definition": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyDefinition",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The human-readable description of the deleted policy.</p>"
                     }
                 },
                 "statusReasons": {
@@ -9820,7 +9827,7 @@
                             "message": "Use namespaceTemplates instead",
                             "since": "2026-03-02"
                         },
-                        "smithy.api#documentation": "<p>The namespaces for which to create episodes.</p>"
+                        "smithy.api#documentation": "<p>This is a legacy parameter, use <code>namespaceTemplates</code>. The namespaces for which to create episodes.</p>"
                     }
                 },
                 "namespaceTemplates": {
@@ -9940,7 +9947,7 @@
                             "message": "Use namespaceTemplates instead",
                             "since": "2026-03-02"
                         },
-                        "smithy.api#documentation": "<p>The namespaces to use for episodic reflection. Can be less nested than the episodic namespaces.</p>"
+                        "smithy.api#documentation": "<p>This is a legacy parameter, use <code>namespaceTemplates</code>. The namespaces to use for episodic reflection. Can be less nested than the episodic namespaces.</p>"
                     }
                 },
                 "namespaceTemplates": {
@@ -9970,7 +9977,7 @@
                             "message": "Use namespaceTemplates instead",
                             "since": "2026-03-02"
                         },
-                        "smithy.api#documentation": "<p>The namespaces for which to create reflections. Can be less nested than the episodic namespaces.</p>"
+                        "smithy.api#documentation": "<p>This is a legacy parameter, use <code>namespaceTemplates</code>. The namespaces for which to create reflections. Can be less nested than the episodic namespaces.</p>"
                     }
                 },
                 "namespaceTemplates": {
@@ -10000,7 +10007,7 @@
                             "message": "Use namespaceTemplates instead",
                             "since": "2026-03-02"
                         },
-                        "smithy.api#documentation": "<p>The namespaces over which to create reflections. Can be less nested than episode namespaces.</p>"
+                        "smithy.api#documentation": "<p>This is a legacy parameter, use <code>namespaceTemplates</code>. The namespaces over which to create reflections. Can be less nested than episode namespaces.</p>"
                     }
                 },
                 "namespaceTemplates": {
@@ -10044,7 +10051,7 @@
                             "message": "Use namespaceTemplates instead",
                             "since": "2026-03-02"
                         },
-                        "smithy.api#documentation": "<p>The namespaces over which reflections were created. Can be less nested than the episodic namespaces.</p>"
+                        "smithy.api#documentation": "<p>This is a legacy parameter. The namespaces over which reflections were created. Can be less nested than the episodic namespaces.</p>"
                     }
                 },
                 "namespaceTemplates": {
@@ -13738,13 +13745,14 @@
                 "credentialProviderVendor": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PaymentCredentialProviderVendorType",
                     "traits": {
+                        "smithy.api#documentation": "<p>The vendor type for the payment credential provider.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "providerConfigurationOutput": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PaymentProviderConfigurationOutput",
                     "traits": {
-                        "smithy.api#documentation": "Output configuration (contains secret ARNs, excludes actual secret values)",
+                        "smithy.api#documentation": "<p>Output configuration (contains secret ARNs, excludes actual secret values).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14174,12 +14182,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "description": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The human-readable description of the policy engine's purpose and scope. This helps administrators understand the policy engine's role in governance.</p>"
-                    }
-                },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
                     "traits": {
@@ -14208,10 +14210,123 @@
                         "smithy.api#required": {}
                     }
                 },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine data.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The human-readable description of the policy engine's purpose and scope. This helps administrators understand the policy engine's role in governance.</p>"
+                    }
+                },
                 "statusReasons": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PolicyStatusReasons",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional information about the policy engine status. This provides details about any failures or the current state of the policy engine.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetPolicyEngineSummary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GetPolicyEngineSummaryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GetPolicyEngineSummaryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a metadata-only summary of a specific policy engine without decrypting customer content. This lightweight read operation returns resource identifiers, status, timestamps, and the encryption key ARN, but does not include the description or status reasons. Because this operation does not require access to the customer's KMS key, it is suitable for resource discovery, inventory, and integration scenarios where only metadata is needed.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/policy-engine-summaries/{policyEngineId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetPolicyEngineSummaryRequest": {
+            "type": "structure",
+            "members": {
+                "policyEngineId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the policy engine to retrieve the summary for. This must be a valid policy engine ID that exists within the account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetPolicyEngineSummaryResponse": {
+            "type": "structure",
+            "members": {
+                "policyEngineId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the policy engine.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyEngineName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-assigned name of the policy engine.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the policy engine was originally created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the policy engine was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyEngineArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyEngineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the policy engine.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyEngineStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the policy engine.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14397,17 +14512,156 @@
                         "smithy.api#required": {}
                     }
                 },
+                "findings": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The findings and results from the policy generation process. This includes any issues, recommendations, validation results, or insights from the generated policies.</p>"
+                    }
+                },
                 "statusReasons": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PolicyStatusReasons",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional information about the generation status. This provides details about any failures, warnings, or the current state of the generation process.</p>",
                         "smithy.api#required": {}
                     }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.bedrockagentcorecontrol#PolicyEngineResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetPolicyGenerationSummary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GetPolicyGenerationSummaryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GetPolicyGenerationSummaryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a metadata-only summary of a specific policy generation request without decrypting customer content. This lightweight read operation returns resource identifiers, status, timestamps, and findings, but does not include status reasons. Because this operation does not require access to the customer's KMS key, it is suitable for resource discovery, inventory, and integration scenarios where only metadata is needed.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/policy-engines/{policyEngineId}/policy-generation-summaries/{policyGenerationId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetPolicyGenerationSummaryRequest": {
+            "type": "structure",
+            "members": {
+                "policyGenerationId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the policy generation request to retrieve the summary for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyEngineId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the policy engine associated with the policy generation request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.bedrockagentcorecontrol#PolicyEngineResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetPolicyGenerationSummaryResponse": {
+            "type": "structure",
+            "members": {
+                "policyEngineId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the policy engine associated with this policy generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyGenerationId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the policy generation request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyGenerationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-assigned name for the policy generation request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyGenerationArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyGenerationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the policy generation request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resource": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Resource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource information associated with the policy generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the policy generation request was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the policy generation was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyGenerationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the policy generation request.</p>",
+                        "smithy.api#required": {}
+                    }
                 },
                 "findings": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The findings and results from the policy generation process. This includes any issues, recommendations, validation results, or insights from the generated policies.</p>"
+                        "smithy.api#documentation": "<p>The findings from the policy generation process, if available.</p>"
                     }
                 }
             },
@@ -14473,19 +14727,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "definition": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyDefinition",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The Cedar policy statement that defines the access control rules. This contains the actual policy logic used for agent behavior control and access decisions.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "description": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The human-readable description of the policy's purpose and functionality. This helps administrators understand and manage the policy.</p>"
-                    }
-                },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
                     "traits": {
@@ -14514,10 +14755,149 @@
                         "smithy.api#required": {}
                     }
                 },
+                "definition": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Cedar policy statement that defines the access control rules. This contains the actual policy logic used for agent behavior control and access decisions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The human-readable description of the policy's purpose and functionality. This helps administrators understand and manage the policy.</p>"
+                    }
+                },
                 "statusReasons": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PolicyStatusReasons",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional information about the policy status. This provides details about any failures or the current state of the policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.bedrockagentcorecontrol#PolicyEngineResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetPolicySummary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GetPolicySummaryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GetPolicySummaryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a metadata-only summary of a specific policy without decrypting customer content. This lightweight read operation returns resource identifiers, status, and timestamps, but does not include the policy definition, description, or status reasons. Because this operation does not require access to the customer's KMS key, it is suitable for resource discovery, inventory, and integration scenarios where only metadata is needed.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/policy-engines/{policyEngineId}/policy-summaries/{policyId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetPolicySummaryRequest": {
+            "type": "structure",
+            "members": {
+                "policyEngineId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the policy engine that manages the policy to retrieve the summary for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the policy to retrieve the summary for. This must be a valid policy ID that exists within the specified policy engine.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.bedrockagentcorecontrol#PolicyEngineResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetPolicySummaryResponse": {
+            "type": "structure",
+            "members": {
+                "policyId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-assigned name of the policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyEngineId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the policy engine that manages this policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the policy was originally created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the policy was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the policy.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -18701,6 +19081,87 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ListPolicyEngineSummaries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListPolicyEngineSummariesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListPolicyEngineSummariesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a paginated list of metadata-only policy engine summaries without decrypting customer content. This lightweight read operation returns resource identifiers, status, and timestamps for each policy engine, but does not include descriptions or status reasons. Because this operation does not require access to the customer's KMS key, it is suitable for resource discovery, inventory, and integration scenarios where only metadata is needed.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/policy-engine-summaries",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "policyEngines",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListPolicyEngineSummariesRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token returned from a previous <a href=\"https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyEngineSummaries.html\">ListPolicyEngineSummaries</a> call. Use this token to retrieve the next page of results when the response is paginated.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of policy engine summaries to return in a single response.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListPolicyEngineSummariesResponse": {
+            "type": "structure",
+            "members": {
+                "policyEngines": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyEngineSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of policy engine summary objects that exist in the account. Each summary contains resource identifiers, status, and timestamps without customer-encrypted content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token that can be used in subsequent <a href=\"https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyEngineSummaries.html\">ListPolicyEngineSummaries</a> calls to retrieve additional results. This token is only present when there are more results available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#ListPolicyEngines": {
             "type": "operation",
             "input": {
@@ -18885,6 +19346,103 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ListPolicyGenerationSummaries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListPolicyGenerationSummariesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListPolicyGenerationSummariesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a paginated list of metadata-only policy generation summaries within a policy engine without decrypting customer content. This lightweight read operation returns resource identifiers, status, timestamps, and findings for each policy generation, but does not include status reasons. Because this operation does not require access to the customer's KMS key, it is suitable for resource discovery, inventory, and integration scenarios where only metadata is needed.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/policy-engines/{policyEngineId}/policy-generation-summaries",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "policyGenerations",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListPolicyGenerationSummariesRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token returned from a previous <a href=\"https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyGenerationSummaries.html\">ListPolicyGenerationSummaries</a> call. Use this token to retrieve the next page of results when the response is paginated.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of policy generation summaries to return in a single response.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "policyEngineId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the policy engine whose policy generation summaries to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.bedrockagentcorecontrol#PolicyEngineResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListPolicyGenerationSummariesResponse": {
+            "type": "structure",
+            "members": {
+                "policyGenerations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyGenerationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of policy generation summary objects that match the specified criteria. Each summary contains resource identifiers, status, timestamps, and findings without customer-encrypted content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token that can be used in subsequent <a href=\"https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyGenerationSummaries.html\">ListPolicyGenerationSummaries</a> calls to retrieve additional results. This token is only present when there are more results available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#ListPolicyGenerations": {
             "type": "operation",
             "input": {
@@ -18981,6 +19539,113 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ListPolicySummaries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListPolicySummariesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListPolicySummariesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a paginated list of metadata-only policy summaries within a policy engine without decrypting customer content. This lightweight read operation returns resource identifiers, status, and timestamps for each policy, but does not include policy definitions, descriptions, or status reasons. Because this operation does not require access to the customer's KMS key, it is suitable for resource discovery, inventory, and integration scenarios where only metadata is needed.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/policy-engines/{policyEngineId}/policy-summaries",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "policies",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListPolicySummariesRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token returned from a previous <a href=\"https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicySummaries.html\">ListPolicySummaries</a> call. Use this token to retrieve the next page of results when the response is paginated.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of policy summaries to return in a single response.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "policyEngineId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the policy engine whose policy summaries to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetResourceScope": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#BedrockAgentcoreResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional filter to list policy summaries that apply to a specific resource scope or resource type. This helps narrow down results to those relevant for particular Amazon Web Services resources, agent tools, or operational contexts within the policy engine ecosystem.</p>",
+                        "smithy.api#httpQuery": "targetResourceScope"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.bedrockagentcorecontrol#PolicyEngineResource",
+                        "ids": {
+                            "policyEngineId": "policyEngineId"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListPolicySummariesResponse": {
+            "type": "structure",
+            "members": {
+                "policies": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicySummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of policy summary objects that match the specified criteria. Each summary contains resource identifiers, status, and timestamps without customer-encrypted content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token that can be used in subsequent <a href=\"https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicySummaries.html\">ListPolicySummaries</a> calls to retrieve additional results. This token is only present when there are more results available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#ListRegistries": {
             "type": "operation",
             "input": {
@@ -19004,7 +19669,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all registries in the account. You can optionally filter results by status using the <code>status</code> parameter.</p>",
+                "smithy.api#documentation": "<p>Lists all registries in the account. You can optionally filter results by status using the <code>status</code> parameter, or by authorizer type using the <code>authorizerType</code> parameter.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -19041,6 +19706,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Filter registries by their current status. Possible values include <code>CREATING</code>, <code>READY</code>, <code>UPDATING</code>, <code>CREATE_FAILED</code>, <code>UPDATE_FAILED</code>, <code>DELETING</code>, and <code>DELETE_FAILED</code>.</p>",
                         "smithy.api#httpQuery": "status"
+                    }
+                },
+                "authorizerType": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RegistryAuthorizerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter registries by their authorizer type. Possible values are <code>CUSTOM_JWT</code> and <code>AWS_IAM</code>. For more information about authorizer types, see the <code>RegistryAuthorizerType</code> enum.</p>",
+                        "smithy.api#httpQuery": "authorizerType"
                     }
                 }
             },
@@ -19601,7 +20273,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Union for principal matching. Currently supports IAM principal ARN glob matching.\nExtensible for future principal types (e.g., OAuth client ID)."
+                "smithy.api#documentation": "<p>Union for principal matching. Currently supports IAM principal ARN glob matching.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#MatchPrincipals": {
@@ -20056,7 +20728,7 @@
                             "message": "Use namespaceTemplates instead",
                             "since": "2026-03-02"
                         },
-                        "smithy.api#documentation": "<p>The namespaces associated with the memory strategy.</p>",
+                        "smithy.api#documentation": "<p>This is a legacy parameter. The namespaces associated with the memory strategy.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -20569,7 +21241,7 @@
                             "message": "Use namespaceTemplates instead",
                             "since": "2026-03-02"
                         },
-                        "smithy.api#documentation": "<p>The updated namespaces for the memory strategy.</p>"
+                        "smithy.api#documentation": "<p>This is a legacy parameter, use <code>namespaceTemplates</code>. The updated namespaces for the memory strategy.</p>"
                     }
                 },
                 "namespaceTemplates": {
@@ -20909,7 +21581,7 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#OAuthGrantType",
                     "traits": {
                         "smithy.api#default": "CLIENT_CREDENTIALS",
-                        "smithy.api#documentation": "<p>Specifies the kind of credentials to use for authorization:</p> <ul> <li> <p> <code>CLIENT_CREDENTIALS</code> - Authorization with a client ID and secret.</p> </li> <li> <p> <code>AUTHORIZATION_CODE</code> - Authorization with a token that is specific to an individual end user.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>Specifies the kind of credentials to use for authorization:</p> <ul> <li> <p> <code>CLIENT_CREDENTIALS</code> - Authorization with a client ID and secret.</p> </li> <li> <p> <code>AUTHORIZATION_CODE</code> - Authorization with a token that is specific to an individual end user.</p> </li> <li> <p> <code>TOKEN_EXCHANGE</code> - Authorization using on-behalf-of token exchange. An inbound user token is exchanged for a downstream access token scoped to the target audience.</p> </li> </ul>"
                     }
                 },
                 "defaultReturnUrl": {
@@ -21819,6 +22491,7 @@
                 "credentialProviderVendor": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PaymentCredentialProviderVendorType",
                     "traits": {
+                        "smithy.api#documentation": "<p>The vendor type for the payment credential provider.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -21854,20 +22527,20 @@
                 "CoinbaseCDP": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "Coinbase Developer Platform - https://docs.cdp.coinbase.com/",
+                        "smithy.api#documentation": "<p>Coinbase Developer Platform.</p>",
                         "smithy.api#enumValue": "CoinbaseCDP"
                     }
                 },
                 "StripePrivy": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "Stripe + Privy - https://docs.privy.io/",
+                        "smithy.api#documentation": "<p>Stripe and Privy.</p>",
                         "smithy.api#enumValue": "StripePrivy"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Supported vendor types for payment providers using non-standard auth protocols"
+                "smithy.api#documentation": "<p>Supported vendor types for payment providers using non-standard auth protocols.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#PaymentCredentialProviders": {
@@ -22063,28 +22736,40 @@
             "type": "union",
             "members": {
                 "coinbaseCdpConfiguration": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#CoinbaseCdpConfigurationInput"
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CoinbaseCdpConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Coinbase CDP configuration.</p>"
+                    }
                 },
                 "stripePrivyConfiguration": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#StripePrivyConfigurationInput"
+                    "target": "com.amazonaws.bedrockagentcorecontrol#StripePrivyConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Stripe Privy configuration.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "PROVIDER CONFIGURATION INPUT - Contains secrets for creation/update"
+                "smithy.api#documentation": "<p>Provider configuration input — contains secrets for creation and update. Varies by vendor type.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#PaymentProviderConfigurationOutput": {
             "type": "union",
             "members": {
                 "coinbaseCdpConfiguration": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#CoinbaseCdpConfigurationOutput"
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CoinbaseCdpConfigurationOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Coinbase CDP configuration.</p>"
+                    }
                 },
                 "stripePrivyConfiguration": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#StripePrivyConfigurationOutput"
+                    "target": "com.amazonaws.bedrockagentcorecontrol#StripePrivyConfigurationOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Stripe Privy configuration.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "PROVIDER CONFIGURATION OUTPUT - No raw secrets, only ARNs"
+                "smithy.api#documentation": "<p>Provider configuration output — no raw secrets, only ARNs. Varies by vendor type.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#PaymentsAuthorizerType": {
@@ -22150,19 +22835,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "definition": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyDefinition",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The Cedar policy statement that defines the access control rules. This contains the actual policy logic used for agent behavior control and access decisions.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "description": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A human-readable description of the policy's purpose and functionality. Limited to 4,096 characters, this helps administrators understand and manage the policy.</p>"
-                    }
-                },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
                     "traits": {
@@ -22189,6 +22861,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the policy.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "definition": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Cedar policy statement that defines the access control rules. This contains the actual policy logic used for agent behavior control and access decisions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the policy's purpose and functionality. Limited to 4,096 characters, this helps administrators understand and manage the policy.</p>"
                     }
                 },
                 "statusReasons": {
@@ -22258,12 +22943,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "description": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A human-readable description of the policy engine's purpose and scope. Limited to 4,096 characters, this helps administrators understand the policy engine's role in the overall governance strategy.</p>"
-                    }
-                },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
                     "traits": {
@@ -22292,17 +22971,23 @@
                         "smithy.api#required": {}
                     }
                 },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine data.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the policy engine's purpose and scope. Limited to 4,096 characters, this helps administrators understand the policy engine's role in the overall governance strategy.</p>"
+                    }
+                },
                 "statusReasons": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PolicyStatusReasons",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional information about the policy engine status. This provides details about any failures or the current state of the policy engine lifecycle.</p>",
                         "smithy.api#required": {}
-                    }
-                },
-                "encryptionKeyArn": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine data.</p>"
                     }
                 }
             },
@@ -22354,7 +23039,17 @@
             },
             "list": {
                 "target": "com.amazonaws.bedrockagentcorecontrol#ListPolicyEngines"
-            }
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GetPolicyEngineSummary"
+                }
+            ],
+            "collectionOperations": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ListPolicyEngineSummaries"
+                }
+            ]
         },
         "com.amazonaws.bedrockagentcorecontrol#PolicyEngineStatus": {
             "type": "enum",
@@ -22400,6 +23095,74 @@
                     "traits": {
                         "smithy.api#enumValue": "DELETE_FAILED"
                     }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#PolicyEngineSummary": {
+            "type": "structure",
+            "members": {
+                "policyEngineId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the policy engine.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyEngineName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-assigned name of the policy engine.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the policy engine was originally created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the policy engine was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyEngineArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyEngineArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the policy engine.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyEngineStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the policy engine.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a metadata-only summary of a policy engine resource. This structure contains resource identifiers, status, and timestamps without customer-encrypted fields such as description or status reasons. Policy engine summaries are returned by operations that do not require access to the customer's KMS key.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#PolicyEngineSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#PolicyEngineSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
                 }
             }
         },
@@ -22474,17 +23237,17 @@
                         "smithy.api#required": {}
                     }
                 },
+                "findings": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Findings and insights from this policy generation process.</p>"
+                    }
+                },
                 "statusReasons": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PolicyStatusReasons",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional information about the generation status.</p>",
                         "smithy.api#required": {}
-                    }
-                },
-                "findings": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Findings and insights from this policy generation process.</p>"
                     }
                 }
             },
@@ -22598,7 +23361,15 @@
             },
             "operations": [
                 {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GetPolicyGenerationSummary"
+                },
+                {
                     "target": "com.amazonaws.bedrockagentcorecontrol#ListPolicyGenerationAssets"
+                }
+            ],
+            "collectionOperations": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ListPolicyGenerationSummaries"
                 }
             ]
         },
@@ -22628,6 +23399,93 @@
                     "traits": {
                         "smithy.api#enumValue": "DELETE_FAILED"
                     }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#PolicyGenerationSummary": {
+            "type": "structure",
+            "members": {
+                "policyEngineId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the policy engine associated with this generation request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyGenerationId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for this policy generation request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyGenerationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-assigned name for this policy generation request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyGenerationArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyGenerationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of this policy generation request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resource": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Resource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource information associated with this policy generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when this policy generation request was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when this policy generation was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyGenerationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of this policy generation request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "findings": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Findings and insights from this policy generation process.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a metadata-only summary of a policy generation resource. This structure contains resource identifiers, status, timestamps, and findings without customer-encrypted fields such as status reasons. Policy generation summaries are returned by operations that do not require access to the customer's KMS key.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.bedrockagentcorecontrol#PolicyEngineResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#PolicyGenerationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#PolicyGenerationSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
                 }
             }
         },
@@ -22674,7 +23532,17 @@
             },
             "list": {
                 "target": "com.amazonaws.bedrockagentcorecontrol#ListPolicies"
-            }
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#GetPolicySummary"
+                }
+            ],
+            "collectionOperations": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ListPolicySummaries"
+                }
+            ]
         },
         "com.amazonaws.bedrockagentcorecontrol#PolicyStatus": {
             "type": "enum",
@@ -22727,6 +23595,80 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.bedrockagentcorecontrol#String"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#PolicySummary": {
+            "type": "structure",
+            "members": {
+                "policyId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-assigned name of the policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyEngineId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the policy engine that manages this policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the policy was originally created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the policy was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a metadata-only summary of a policy resource. This structure contains resource identifiers, status, and timestamps without customer-encrypted fields such as definition, description, or status reasons. Policy summaries are returned by operations that do not require access to the customer's KMS key.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.bedrockagentcorecontrol#PolicyEngineResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#PolicySummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#PolicySummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#PolicyValidationMode": {
@@ -24425,7 +25367,7 @@
                             "message": "Use namespaceTemplates instead",
                             "since": "2026-03-02"
                         },
-                        "smithy.api#documentation": "<p>The namespaces associated with the semantic memory strategy.</p>"
+                        "smithy.api#documentation": "<p>This is a legacy parameter, use <code>namespaceTemplates</code>. The namespaces associated with the semantic memory strategy.</p>"
                     }
                 },
                 "namespaceTemplates": {
@@ -24980,17 +25922,17 @@
                         "smithy.api#required": {}
                     }
                 },
+                "findings": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Initial findings from the policy generation process.</p>"
+                    }
+                },
                 "statusReasons": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PolicyStatusReasons",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional information about the generation status.</p>",
                         "smithy.api#required": {}
-                    }
-                },
-                "findings": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Initial findings from the policy generation process.</p>"
                     }
                 }
             },
@@ -25325,7 +26267,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "StripePrivy configuration - credentials provided by Stripe + Privy"
+                "smithy.api#documentation": "<p>Stripe Privy configuration — credentials provided by Stripe and Privy.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#StripePrivyConfigurationOutput": {
@@ -25359,7 +26301,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "StripePrivy configuration output with secret ARNs"
+                "smithy.api#documentation": "<p>Stripe Privy configuration output with secret ARNs.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#SubmitRegistryRecordForApproval": {
@@ -25535,7 +26477,7 @@
                             "message": "Use namespaceTemplates instead",
                             "since": "2026-03-02"
                         },
-                        "smithy.api#documentation": "<p>The namespaces associated with the summary memory strategy.</p>"
+                        "smithy.api#documentation": "<p>This is a legacy parameter, use <code>namespaceTemplates</code>. The namespaces associated with the summary memory strategy.</p>"
                     }
                 },
                 "namespaceTemplates": {
@@ -28774,13 +29716,14 @@
                 "credentialProviderVendor": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PaymentCredentialProviderVendorType",
                     "traits": {
+                        "smithy.api#documentation": "<p>The vendor type for the payment credential provider (e.g., CoinbaseCDP, StripePrivy).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "providerConfigurationInput": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PaymentProviderConfigurationInput",
                     "traits": {
-                        "smithy.api#documentation": "Configuration specific to the vendor, including API credentials",
+                        "smithy.api#documentation": "<p>Configuration specific to the vendor, including API credentials.</p>",
                         "smithy.api#notProperty": {},
                         "smithy.api#required": {}
                     }
@@ -28803,6 +29746,7 @@
                 "credentialProviderVendor": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PaymentCredentialProviderVendorType",
                     "traits": {
+                        "smithy.api#documentation": "<p>The vendor type for the updated payment credential provider.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -28816,7 +29760,7 @@
                 "providerConfigurationOutput": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PaymentProviderConfigurationOutput",
                     "traits": {
-                        "smithy.api#documentation": "Output configuration (contains secret ARNs, excludes actual secret values)",
+                        "smithy.api#documentation": "<p>Output configuration (contains secret ARNs, excludes actual secret values).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -29102,12 +30046,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "description": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The updated description of the policy engine.</p>"
-                    }
-                },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
                     "traits": {
@@ -29136,17 +30074,23 @@
                         "smithy.api#required": {}
                     }
                 },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine data.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated description of the policy engine.</p>"
+                    }
+                },
                 "statusReasons": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PolicyStatusReasons",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional information about the update status.</p>",
                         "smithy.api#required": {}
-                    }
-                },
-                "encryptionKeyArn": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy engine data.</p>"
                     }
                 }
             },
@@ -29226,19 +30170,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "definition": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyDefinition",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The updated Cedar policy statement.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "description": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The updated description of the policy.</p>"
-                    }
-                },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
                     "traits": {
@@ -29265,6 +30196,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the updated policy.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "definition": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PolicyDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated Cedar policy statement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated description of the policy.</p>"
                     }
                 },
                 "statusReasons": {
@@ -30247,7 +31191,7 @@
                             "message": "Use namespaceTemplates instead",
                             "since": "2026-03-02"
                         },
-                        "smithy.api#documentation": "<p>The namespaces associated with the user preference memory strategy.</p>"
+                        "smithy.api#documentation": "<p>This is a legacy parameter, use <code>namespaceTemplates</code>. The namespaces associated with the user preference memory strategy.</p>"
                     }
                 },
                 "namespaceTemplates": {
@@ -30534,6 +31478,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The subnets associated with the VPC configuration.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "requireServiceS3Endpoint": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<note> <p>This field applies only to Agent Runtimes. It is not applicable to Browsers or Code Interpreters.</p> </note> <p>Controls whether a service-managed Amazon S3 gateway endpoint is provisioned in the VPC network topology for the agent runtime. This gateway is used by Amazon Bedrock AgentCore Runtime to download code and container images during agent startup.</p> <p>Starting May 5, 2026, Amazon Bedrock AgentCore Runtime is gradually rolling out a change to how network isolation is configured for VPC mode agents. Agent runtimes created on or after this rollout will no longer include the service-managed Amazon S3 gateway. Instead, all network access, including to Amazon S3, is governed exclusively by your VPC configuration. This field cannot be set on agent runtimes created after the rollout. Passing this field in an <code>UpdateAgentRuntime</code> request for these agent runtimes returns a <code>ValidationException</code>.</p> <p>Agent runtimes created before the rollout are not affected and continue to operate with the service-managed Amazon S3 gateway. To enforce full VPC network isolation on these existing agent runtimes, set this field to <code>false</code> via the <code>UpdateAgentRuntime</code> API. Before opting out, ensure your VPC provides the Amazon S3 access required for agent startup. If this field is not specified or is set to <code>true</code>, the service-managed Amazon S3 gateway remains provisioned.</p> <p>This field is only supported in the <code>UpdateAgentRuntime</code> API for pre-rollout agent runtimes. Passing this field in a <code>CreateAgentRuntime</code> request returns a <code>ValidationException</code>.</p>"
                     }
                 }
             },

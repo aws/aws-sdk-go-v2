@@ -1753,7 +1753,7 @@
                 "conditions": {
                     "target": "com.amazonaws.connectcases#BooleanConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of conditions to combine using the logical operator.</p>",
+                        "smithy.api#documentation": "<p>The list of conditions to combine using the logical operator.</p> <note> <p>For API users: A case rule can have a maximum of 5 conditions, spread across a maximum of 2 levels of nesting.</p> </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7174,7 +7174,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 1,
-                    "max": 129600
+                    "max": 1051200
                 }
             }
         },

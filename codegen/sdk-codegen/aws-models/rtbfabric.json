@@ -231,6 +231,16 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.rtbfabric#AcmCertificateArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 75,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov):acm:[a-z0-9-]+:[0-9]{12}:certificate/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            }
+        },
         "com.amazonaws.rtbfabric#Action": {
             "type": "union",
             "members": {
@@ -249,6 +259,133 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes a bid action.</p>"
+            }
+        },
+        "com.amazonaws.rtbfabric#AssociateCertificate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rtbfabric#AssociateCertificateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rtbfabric#AssociateCertificateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rtbfabric#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates an ACM certificate with a responder gateway.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Associate a certificate with a responder gateway",
+                        "documentation": "Associate an ACM certificate with a responder gateway",
+                        "input": {
+                            "gatewayId": "rtb-gw-12345678",
+                            "acmCertificateArn": "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012",
+                            "clientToken": "550e8400-e29b-41d4-a716-446655440000"
+                        },
+                        "output": {
+                            "gatewayId": "rtb-gw-12345678",
+                            "acmCertificateArn": "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012",
+                            "status": "PENDING_ASSOCIATION"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/responder-gateway/{gatewayId}/certificate"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.rtbfabric#AssociateCertificateRequest": {
+            "type": "structure",
+            "members": {
+                "gatewayId": {
+                    "target": "com.amazonaws.rtbfabric#GatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "acmCertificateArn": {
+                    "target": "com.amazonaws.rtbfabric#AcmCertificateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ACM certificate to associate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of value</a>.</p> <p>If you don't provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.rtbfabric#ResponderGateway"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.rtbfabric#AssociateCertificateResponse": {
+            "type": "structure",
+            "members": {
+                "gatewayId": {
+                    "target": "com.amazonaws.rtbfabric#GatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "acmCertificateArn": {
+                    "target": "com.amazonaws.rtbfabric#AcmCertificateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ACM certificate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.rtbfabric#CertificateAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the certificate association.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.rtbfabric#ResponderGateway"
+                    }
+                ]
             }
         },
         "com.amazonaws.rtbfabric#AutoScalingGroupName": {
@@ -303,6 +440,84 @@
                     "max": 2097152
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.rtbfabric#CertificateAssociationStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING_ASSOCIATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_ASSOCIATION"
+                    }
+                },
+                "ASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATED"
+                    }
+                },
+                "PENDING_DISASSOCIATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_DISASSOCIATION"
+                    }
+                },
+                "DISASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISASSOCIATED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a certificate association with a gateway.</p>"
+            }
+        },
+        "com.amazonaws.rtbfabric#CertificateAssociationSummary": {
+            "type": "structure",
+            "members": {
+                "acmCertificateArn": {
+                    "target": "com.amazonaws.rtbfabric#AcmCertificateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ACM certificate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.rtbfabric#CertificateAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the certificate association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "associatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the certificate was associated.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the certificate association was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a summary of a certificate association.</p>"
+            }
+        },
+        "com.amazonaws.rtbfabric#CertificateAssociationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rtbfabric#CertificateAssociationSummary"
             }
         },
         "com.amazonaws.rtbfabric#CertificateAuthorityCertificates": {
@@ -768,6 +983,157 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.rtbfabric#CreateLinkRoutingRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rtbfabric#CreateLinkRoutingRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rtbfabric#CreateLinkRoutingRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rtbfabric#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a routing rule for a link.</p> <p>Routing rules use priority-based evaluation where lower priority numbers are evaluated first. Each rule specifies conditions that must all match for the rule to apply.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Create a link routing rule",
+                        "documentation": "Create a routing rule with host header and path prefix conditions",
+                        "input": {
+                            "gatewayId": "rtb-gw-12345678",
+                            "linkId": "link-87654321",
+                            "priority": 10,
+                            "conditions": {
+                                "hostHeader": "api.customer.com",
+                                "pathPrefix": "/openrtb/"
+                            },
+                            "clientToken": "550e8400-e29b-41d4-a716-446655440000"
+                        },
+                        "output": {
+                            "ruleId": "rule-abc123def456",
+                            "status": "CREATION_IN_PROGRESS",
+                            "createdAt": "2024-01-01T12:00:00Z"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/responder-gateway/{gatewayId}/link/{linkId}/routing-rule"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.rtbfabric#CreateLinkRoutingRuleRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of value</a>.</p> <p>If you don't provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "gatewayId": {
+                    "target": "com.amazonaws.rtbfabric#GatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "linkId": {
+                    "target": "com.amazonaws.rtbfabric#LinkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the link.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "priority": {
+                    "target": "com.amazonaws.rtbfabric#RulePriority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The priority of the routing rule. Lower numbers are evaluated first. Valid values are 1 to 1000. Priority must be unique among non-deleted rules within a link.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "conditions": {
+                    "target": "com.amazonaws.rtbfabric#RuleCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditions for the routing rule. All specified fields must match for the rule to apply. At least one condition field must be set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.rtbfabric#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of the key-value pairs of the tag or tags to assign to the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.rtbfabric#Gateway"
+                    },
+                    {
+                        "resource": "com.amazonaws.rtbfabric#Link"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.rtbfabric#CreateLinkRoutingRuleResponse": {
+            "type": "structure",
+            "members": {
+                "ruleId": {
+                    "target": "com.amazonaws.rtbfabric#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the routing rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.rtbfabric#RuleStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the routing rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the routing rule was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.rtbfabric#CreateOutboundExternalLink": {
             "type": "operation",
             "input": {
@@ -779,6 +1145,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.rtbfabric#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.rtbfabric#InternalServerException"
@@ -1571,6 +1940,121 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.rtbfabric#DeleteLinkRoutingRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rtbfabric#DeleteLinkRoutingRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rtbfabric#DeleteLinkRoutingRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rtbfabric#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a routing rule from a link.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Delete a link routing rule",
+                        "documentation": "Delete a link routing rule",
+                        "input": {
+                            "gatewayId": "rtb-gw-12345678",
+                            "linkId": "link-87654321",
+                            "ruleId": "rule-abc123def456"
+                        },
+                        "output": {
+                            "ruleId": "rule-abc123def456",
+                            "status": "DELETION_IN_PROGRESS"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/responder-gateway/{gatewayId}/link/{linkId}/routing-rule/{ruleId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.rtbfabric#DeleteLinkRoutingRuleRequest": {
+            "type": "structure",
+            "members": {
+                "gatewayId": {
+                    "target": "com.amazonaws.rtbfabric#GatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "linkId": {
+                    "target": "com.amazonaws.rtbfabric#LinkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the link.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ruleId": {
+                    "target": "com.amazonaws.rtbfabric#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the routing rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.rtbfabric#Gateway"
+                    },
+                    {
+                        "resource": "com.amazonaws.rtbfabric#Link"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.rtbfabric#DeleteLinkRoutingRuleResponse": {
+            "type": "structure",
+            "members": {
+                "ruleId": {
+                    "target": "com.amazonaws.rtbfabric#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the routing rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.rtbfabric#RuleStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the routing rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.rtbfabric#DeleteOutboundExternalLink": {
             "type": "operation",
             "input": {
@@ -1698,6 +2182,9 @@
                     "target": "com.amazonaws.rtbfabric#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.rtbfabric#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.rtbfabric#InternalServerException"
                 },
                 {
@@ -1799,6 +2286,9 @@
                     "target": "com.amazonaws.rtbfabric#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.rtbfabric#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.rtbfabric#InternalServerException"
                 },
                 {
@@ -1885,6 +2375,125 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.rtbfabric#DisassociateCertificate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rtbfabric#DisassociateCertificateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rtbfabric#DisassociateCertificateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rtbfabric#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a certificate association from a responder gateway.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Disassociate a certificate from a responder gateway",
+                        "documentation": "Remove an ACM certificate association from a responder gateway",
+                        "input": {
+                            "gatewayId": "rtb-gw-12345678",
+                            "acmCertificateArn": "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012"
+                        },
+                        "output": {
+                            "gatewayId": "rtb-gw-12345678",
+                            "acmCertificateArn": "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012",
+                            "status": "PENDING_DISASSOCIATION"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/responder-gateway/{gatewayId}/certificate"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.rtbfabric#DisassociateCertificateRequest": {
+            "type": "structure",
+            "members": {
+                "gatewayId": {
+                    "target": "com.amazonaws.rtbfabric#GatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "acmCertificateArn": {
+                    "target": "com.amazonaws.rtbfabric#AcmCertificateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ACM certificate to disassociate.</p>",
+                        "smithy.api#httpQuery": "acmCertificateArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.rtbfabric#ResponderGateway"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.rtbfabric#DisassociateCertificateResponse": {
+            "type": "structure",
+            "members": {
+                "gatewayId": {
+                    "target": "com.amazonaws.rtbfabric#GatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "acmCertificateArn": {
+                    "target": "com.amazonaws.rtbfabric#AcmCertificateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ACM certificate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.rtbfabric#CertificateAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the certificate association.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.rtbfabric#ResponderGateway"
+                    }
+                ]
             }
         },
         "com.amazonaws.rtbfabric#DomainName": {
@@ -2085,6 +2694,227 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The type of gateway.</p>"
+            }
+        },
+        "com.amazonaws.rtbfabric#GetCertificateAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rtbfabric#GetCertificateAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rtbfabric#GetCertificateAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rtbfabric#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the details of a certificate association with a responder gateway.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get certificate association details from a responder gateway",
+                        "documentation": "Retrieve details of an ACM certificate association with a responder gateway",
+                        "input": {
+                            "gatewayId": "rtb-gw-12345678",
+                            "acmCertificateArn": "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012"
+                        },
+                        "output": {
+                            "gatewayId": "rtb-gw-12345678",
+                            "acmCertificateArn": "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012",
+                            "status": "ASSOCIATED",
+                            "associatedAt": 1704067200,
+                            "updatedAt": 1704067200
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/responder-gateway/{gatewayId}/certificate"
+                },
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "CertificateAssociated": {
+                        "minDelay": 15,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "ASSOCIATED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "DISASSOCIATED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "PENDING_DISASSOCIATION",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "CertificateDisassociated": {
+                        "minDelay": 15,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "DISASSOCIATED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "PENDING_ASSOCIATION",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rtbfabric#GetCertificateAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "gatewayId": {
+                    "target": "com.amazonaws.rtbfabric#GatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "acmCertificateArn": {
+                    "target": "com.amazonaws.rtbfabric#AcmCertificateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ACM certificate.</p>",
+                        "smithy.api#httpQuery": "acmCertificateArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.rtbfabric#ResponderGateway"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.rtbfabric#GetCertificateAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "gatewayId": {
+                    "target": "com.amazonaws.rtbfabric#GatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "acmCertificateArn": {
+                    "target": "com.amazonaws.rtbfabric#AcmCertificateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ACM certificate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.rtbfabric#CertificateAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the certificate association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "associatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the certificate was associated.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the certificate association was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.rtbfabric#ResponderGateway"
+                    }
+                ]
             }
         },
         "com.amazonaws.rtbfabric#GetInboundExternalLink": {
@@ -2682,6 +3512,251 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.rtbfabric#GetLinkRoutingRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rtbfabric#GetLinkRoutingRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rtbfabric#GetLinkRoutingRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rtbfabric#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the details of a routing rule for a link.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get link routing rule details",
+                        "documentation": "Get details of a link routing rule",
+                        "input": {
+                            "gatewayId": "rtb-gw-12345678",
+                            "linkId": "link-87654321",
+                            "ruleId": "rule-abc123def456"
+                        },
+                        "output": {
+                            "gatewayId": "rtb-gw-12345678",
+                            "linkId": "link-87654321",
+                            "ruleId": "rule-abc123def456",
+                            "priority": 10,
+                            "conditions": {
+                                "hostHeader": "api.customer.com",
+                                "pathPrefix": "/openrtb/"
+                            },
+                            "status": "ACTIVE",
+                            "createdAt": "2024-01-01T12:00:00Z",
+                            "updatedAt": "2024-01-01T12:00:00Z"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/responder-gateway/{gatewayId}/link/{linkId}/routing-rule/{ruleId}"
+                },
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "LinkRoutingRuleActive": {
+                        "minDelay": 5,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "ACTIVE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "DELETED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "LinkRoutingRuleDeleted": {
+                        "minDelay": 5,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "DELETED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rtbfabric#GetLinkRoutingRuleRequest": {
+            "type": "structure",
+            "members": {
+                "gatewayId": {
+                    "target": "com.amazonaws.rtbfabric#GatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "linkId": {
+                    "target": "com.amazonaws.rtbfabric#LinkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the link.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ruleId": {
+                    "target": "com.amazonaws.rtbfabric#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the routing rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.rtbfabric#Gateway"
+                    },
+                    {
+                        "resource": "com.amazonaws.rtbfabric#Link"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.rtbfabric#GetLinkRoutingRuleResponse": {
+            "type": "structure",
+            "members": {
+                "gatewayId": {
+                    "target": "com.amazonaws.rtbfabric#GatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "linkId": {
+                    "target": "com.amazonaws.rtbfabric#LinkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the link.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ruleId": {
+                    "target": "com.amazonaws.rtbfabric#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the routing rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "priority": {
+                    "target": "com.amazonaws.rtbfabric#RulePriority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The priority of the routing rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "conditions": {
+                    "target": "com.amazonaws.rtbfabric#RuleCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditions for the routing rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.rtbfabric#RuleStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the routing rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the routing rule was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the routing rule was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.rtbfabric#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of the key-value pairs for the tag or tags assigned to the specified resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.rtbfabric#Gateway"
+                    },
+                    {
+                        "resource": "com.amazonaws.rtbfabric#Link"
+                    }
+                ]
             }
         },
         "com.amazonaws.rtbfabric#GetOutboundExternalLink": {
@@ -3733,6 +4808,11 @@
                     "target": "com.amazonaws.rtbfabric#UpdateLinkModuleFlow"
                 }
             ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.rtbfabric#LinkRoutingRule"
+                }
+            ],
             "traits": {
                 "aws.api#arn": {
                     "template": "gateway/{gatewayId}/link/{linkId}"
@@ -3852,6 +4932,96 @@
                 "smithy.api#documentation": "<p>Describes the settings for a link log.</p>"
             }
         },
+        "com.amazonaws.rtbfabric#LinkRoutingRule": {
+            "type": "resource",
+            "identifiers": {
+                "gatewayId": {
+                    "target": "com.amazonaws.rtbfabric#GatewayId"
+                },
+                "linkId": {
+                    "target": "com.amazonaws.rtbfabric#LinkId"
+                },
+                "ruleId": {
+                    "target": "com.amazonaws.rtbfabric#RuleId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.rtbfabric#CreateLinkRoutingRule"
+            },
+            "read": {
+                "target": "com.amazonaws.rtbfabric#GetLinkRoutingRule"
+            },
+            "update": {
+                "target": "com.amazonaws.rtbfabric#UpdateLinkRoutingRule"
+            },
+            "delete": {
+                "target": "com.amazonaws.rtbfabric#DeleteLinkRoutingRule"
+            },
+            "list": {
+                "target": "com.amazonaws.rtbfabric#ListLinkRoutingRules"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "gateway/{gatewayId}/link/{linkId}/routing-rule/{ruleId}"
+                }
+            }
+        },
+        "com.amazonaws.rtbfabric#LinkRoutingRuleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rtbfabric#LinkRoutingRuleSummary"
+            }
+        },
+        "com.amazonaws.rtbfabric#LinkRoutingRuleSummary": {
+            "type": "structure",
+            "members": {
+                "ruleId": {
+                    "target": "com.amazonaws.rtbfabric#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the routing rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "priority": {
+                    "target": "com.amazonaws.rtbfabric#RulePriority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The priority of the routing rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "conditions": {
+                    "target": "com.amazonaws.rtbfabric#RuleCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditions for the routing rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.rtbfabric#RuleStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the routing rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the routing rule was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the routing rule was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Summary of a routing rule for list responses"
+            }
+        },
         "com.amazonaws.rtbfabric#LinkStatus": {
             "type": "enum",
             "members": {
@@ -3942,6 +5112,267 @@
                     "min": 100,
                     "max": 5000
                 }
+            }
+        },
+        "com.amazonaws.rtbfabric#ListCertificateAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rtbfabric#ListCertificateAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rtbfabric#ListCertificateAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rtbfabric#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the certificate associations for a responder gateway.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List certificate associations for a responder gateway",
+                        "documentation": "Retrieve all certificate associations for a responder gateway",
+                        "input": {
+                            "gatewayId": "rtb-gw-12345678",
+                            "maxResults": 5
+                        },
+                        "output": {
+                            "certificateAssociations": [
+                                {
+                                    "acmCertificateArn": "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012",
+                                    "status": "ASSOCIATED",
+                                    "associatedAt": 1704067200,
+                                    "updatedAt": 1704067200
+                                }
+                            ],
+                            "nextToken": "token123"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/responder-gateway/{gatewayId}/certificates"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "certificateAssociations"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.rtbfabric#ListCertificateAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "gatewayId": {
+                    "target": "com.amazonaws.rtbfabric#GatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken error</i>.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 5,
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 10
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.rtbfabric#ResponderGateway"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.rtbfabric#ListCertificateAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "certificateAssociations": {
+                    "target": "com.amazonaws.rtbfabric#CertificateAssociationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of certificate associations for the gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken error</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.rtbfabric#ListLinkRoutingRules": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rtbfabric#ListLinkRoutingRulesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rtbfabric#ListLinkRoutingRulesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rtbfabric#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the routing rules for a link.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List link routing rules",
+                        "documentation": "List all routing rules for a link",
+                        "input": {
+                            "gatewayId": "rtb-gw-12345678",
+                            "linkId": "link-87654321",
+                            "maxResults": 10
+                        },
+                        "output": {
+                            "rules": [
+                                {
+                                    "ruleId": "rule-abc123def456",
+                                    "priority": 10,
+                                    "conditions": {
+                                        "hostHeader": "api.customer.com"
+                                    },
+                                    "status": "ACTIVE",
+                                    "createdAt": "2024-01-01T12:00:00Z",
+                                    "updatedAt": "2024-01-01T12:00:00Z"
+                                }
+                            ],
+                            "nextToken": "token123"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/responder-gateway/{gatewayId}/link/{linkId}/routing-rules"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "rules"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.rtbfabric#ListLinkRoutingRulesRequest": {
+            "type": "structure",
+            "members": {
+                "gatewayId": {
+                    "target": "com.amazonaws.rtbfabric#GatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "linkId": {
+                    "target": "com.amazonaws.rtbfabric#LinkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the link.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken error</i>.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 10,
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 10
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.rtbfabric#Gateway"
+                    },
+                    {
+                        "resource": "com.amazonaws.rtbfabric#Link"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.rtbfabric#ListLinkRoutingRulesResponse": {
+            "type": "structure",
+            "members": {
+                "rules": {
+                    "target": "com.amazonaws.rtbfabric#LinkRoutingRuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of routing rules for the link.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken error</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rtbfabric#ListLinks": {
@@ -4743,6 +6174,38 @@
                     "min": 1,
                     "max": 2
                 }
+            }
+        },
+        "com.amazonaws.rtbfabric#QueryStringKeyValuePair": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "RFC 3986 unreserved characters",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9._~-]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "RFC 3986 unreserved characters",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9._~-]+$",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Key-value pair for query string matching"
             }
         },
         "com.amazonaws.rtbfabric#RTBFabric": {
@@ -5907,6 +7370,18 @@
             },
             "operations": [
                 {
+                    "target": "com.amazonaws.rtbfabric#AssociateCertificate"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#DisassociateCertificate"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#GetCertificateAssociation"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ListCertificateAssociations"
+                },
+                {
                     "target": "com.amazonaws.rtbfabric#UpdateResponderGateway"
                 }
             ],
@@ -5990,6 +7465,140 @@
                 "smithy.api#pattern": "^arn:aws:rtbfabric:[a-zA-Z0-9_-]+:[0-9]{12}:gateway/[a-zA-Z0-9-]+(/link/[a-zA-Z0-9-]+(/routing-rule/[a-zA-Z0-9-]+)?)?$"
             }
         },
+        "com.amazonaws.rtbfabric#RuleCondition": {
+            "type": "structure",
+            "members": {
+                "hostHeader": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Exact host match — RFC 3986 unreserved characters",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9._~-]+$"
+                    }
+                },
+                "hostHeaderWildcard": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Wildcard host pattern (e.g., *.example.com) — RFC 3986 unreserved plus *",
+                        "smithy.api#length": {
+                            "min": 3,
+                            "max": 255
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9._~*-]+$"
+                    }
+                },
+                "pathPrefix": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Path prefix matching — strict starts-with, no wildcard (preferred for new rules).\nMust start with /; RFC 3986 unreserved plus /",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        },
+                        "smithy.api#pattern": "^/[A-Za-z0-9._~/-]*$"
+                    }
+                },
+                "pathExact": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Exact path match — must start with /; RFC 3986 unreserved plus /",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        },
+                        "smithy.api#pattern": "^/[A-Za-z0-9._~/-]*$"
+                    }
+                },
+                "queryStringEquals": {
+                    "target": "com.amazonaws.rtbfabric#QueryStringKeyValuePair",
+                    "traits": {
+                        "smithy.api#documentation": "Query string key=value pair match (single pair)"
+                    }
+                },
+                "queryStringExists": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Query string key presence check (any value accepted) — RFC 3986 unreserved characters",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9._~-]+$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Conditions bag for a routing rule.\nAll non-null fields must match (AND logic). At least one field must be set (enforced by CP)."
+            }
+        },
+        "com.amazonaws.rtbfabric#RuleId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Identifier for a routing rule",
+                "smithy.api#length": {
+                    "min": 6,
+                    "max": 30
+                },
+                "smithy.api#pattern": "^rule-[a-z0-9-]{1,25}$"
+            }
+        },
+        "com.amazonaws.rtbfabric#RulePriority": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "WAF-style evaluation priority. Lower number = evaluated first (priority 1 before 10).\nGaps are allowed (1, 10, 20 is valid). Must be between 1 and 1000 inclusive.\nUniqueness per link among non-deleted rules is enforced at the API layer (HTTP 409 on conflict).",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.rtbfabric#RuleStatus": {
+            "type": "enum",
+            "members": {
+                "CREATION_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATION_IN_PROGRESS"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "UPDATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_IN_PROGRESS"
+                    }
+                },
+                "DELETION_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETION_IN_PROGRESS"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Status of a routing rule"
+            }
+        },
         "com.amazonaws.rtbfabric#SecurityGroupId": {
             "type": "string",
             "traits": {
@@ -6054,7 +7663,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^(resourceArn|internalId|(?!aws:)[a-zA-Z0-9+\\-=._:/@]+)$"
+                "smithy.api#pattern": "^(resourceArn|internalId|[a-zA-Z0-9+\\-=._:/@]+)$"
             }
         },
         "com.amazonaws.rtbfabric#TagKeyList": {
@@ -6656,6 +8265,148 @@
                     "target": "com.amazonaws.rtbfabric#LinkStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.rtbfabric#UpdateLinkRoutingRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rtbfabric#UpdateLinkRoutingRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rtbfabric#UpdateLinkRoutingRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rtbfabric#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.rtbfabric#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a routing rule for a link.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Update a link routing rule",
+                        "documentation": "Update the conditions of a routing rule",
+                        "input": {
+                            "gatewayId": "rtb-gw-12345678",
+                            "linkId": "link-87654321",
+                            "ruleId": "rule-abc123def456",
+                            "priority": 20,
+                            "conditions": {
+                                "hostHeader": "api.customer.com",
+                                "pathPrefix": "/openrtb/"
+                            }
+                        },
+                        "output": {
+                            "ruleId": "rule-abc123def456",
+                            "status": "UPDATE_IN_PROGRESS",
+                            "updatedAt": "2024-01-01T12:30:00Z"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/responder-gateway/{gatewayId}/link/{linkId}/routing-rule/{ruleId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.rtbfabric#UpdateLinkRoutingRuleRequest": {
+            "type": "structure",
+            "members": {
+                "gatewayId": {
+                    "target": "com.amazonaws.rtbfabric#GatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the gateway.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "linkId": {
+                    "target": "com.amazonaws.rtbfabric#LinkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the link.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ruleId": {
+                    "target": "com.amazonaws.rtbfabric#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the routing rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "priority": {
+                    "target": "com.amazonaws.rtbfabric#RulePriority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated priority of the routing rule. Lower numbers are evaluated first. Valid values are 1 to 1000. Priority must be unique among non-deleted rules within a link.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "conditions": {
+                    "target": "com.amazonaws.rtbfabric#RuleCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated conditions for the routing rule. All specified fields must match for the rule to apply. At least one condition field must be set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.rtbfabric#Gateway"
+                    },
+                    {
+                        "resource": "com.amazonaws.rtbfabric#Link"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.rtbfabric#UpdateLinkRoutingRuleResponse": {
+            "type": "structure",
+            "members": {
+                "ruleId": {
+                    "target": "com.amazonaws.rtbfabric#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the routing rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.rtbfabric#RuleStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the routing rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the routing rule was last updated.</p>",
                         "smithy.api#required": {}
                     }
                 }

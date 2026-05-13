@@ -2863,6 +2863,88 @@
                 "smithy.api#documentation": "<p>Specifies the Auto-Tune type. Valid value is SCHEDULED_ACTION.</p>"
             }
         },
+        "com.amazonaws.opensearch#AutomatedSnapshotPauseOptions": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether automated snapshot pause is enabled for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.opensearch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the automated snapshot pause begins.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.opensearch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the automated snapshot pause ends.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.opensearch#PauseState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the automated snapshot pause. Valid values are <code>Active</code>, <code>Completed</code>, <code>Scheduled</code>, and <code>Disabled</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the automated snapshot pause options for the domain. These options allow you to temporarily pause automated snapshots for a specified time period.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#AutomatedSnapshotPauseOptionsStatus": {
+            "type": "structure",
+            "members": {
+                "Options": {
+                    "target": "com.amazonaws.opensearch#AutomatedSnapshotPauseOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Automated snapshot pause options for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.opensearch#OptionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the automated snapshot pause options for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of automated snapshot pause options for the domain.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#AutomatedSnapshotPauseRequestOptions": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to enable or disable automated snapshot pause for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.opensearch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the automated snapshot pause should begin.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.opensearch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the automated snapshot pause should end. The maximum allowed\n            duration between <code>StartTime</code> and <code>EndTime</code> is 3 days.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the automated snapshot pause request options for the domain.</p>\n         <important>\n            <p>Suspending snapshots reduces data protection. You cannot restore your domain to\n                points in time when snapshots are suspended. Use this feature only for short-term\n                operational needs such as migrations or maintenance windows.</p>\n         </important>\n         <p>Maximum suspension duration: 3 days.</p>"
+            }
+        },
         "com.amazonaws.opensearch#AvailabilityZone": {
             "type": "string",
             "traits": {
@@ -4143,6 +4225,12 @@
                     "target": "com.amazonaws.opensearch#DeploymentStrategyOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the deployment strategy options for the domain.</p>"
+                    }
+                },
+                "AutomatedSnapshotPauseOptions": {
+                    "target": "com.amazonaws.opensearch#AutomatedSnapshotPauseRequestOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the automated snapshot pause options for the domain.</p>\n         <important>\n            <p>Suspending snapshots reduces data protection. You cannot restore your domain to\n                points in time when snapshots are suspended. Use this feature only for short-term\n                operational needs such as migrations or maintenance windows.</p>\n         </important>\n         <p>Maximum suspension duration: 3 days.</p>"
                     }
                 }
             },
@@ -7293,6 +7381,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies <code>DeploymentStrategyOptions</code> for the domain.</p>"
                     }
+                },
+                "AutomatedSnapshotPauseOptions": {
+                    "target": "com.amazonaws.opensearch#AutomatedSnapshotPauseOptionsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies <code>AutomatedSnapshotPauseOptions</code> for the domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7998,6 +8092,12 @@
                     "target": "com.amazonaws.opensearch#DeploymentStrategyOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the domain's deployment strategy options.</p>"
+                    }
+                },
+                "AutomatedSnapshotPauseOptions": {
+                    "target": "com.amazonaws.opensearch#AutomatedSnapshotPauseOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the domain's automated snapshot pause options.</p>"
                     }
                 }
             },
@@ -13724,6 +13824,38 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.opensearch#PauseState": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Completed"
+                    }
+                },
+                "SCHEDULED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Scheduled"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Disabled"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The state of the automated snapshot pause. Valid values are <code>Active</code>, <code>Completed</code>, <code>Scheduled</code>, and <code>Disabled</code>.</p>"
+            }
+        },
         "com.amazonaws.opensearch#PluginClassName": {
             "type": "string",
             "traits": {
@@ -16284,6 +16416,12 @@
                     "target": "com.amazonaws.opensearch#DeploymentStrategyOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the deployment strategy options for the domain.</p>"
+                    }
+                },
+                "AutomatedSnapshotPauseOptions": {
+                    "target": "com.amazonaws.opensearch#AutomatedSnapshotPauseRequestOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the automated snapshot pause options for the domain.</p>\n         <important>\n            <p>Suspending snapshots reduces data protection. You cannot restore your domain to\n                points in time when snapshots are suspended. Use this feature only for short-term\n                operational needs such as migrations or maintenance windows.</p>\n         </important>\n         <p>Maximum suspension duration: 3 days.</p>"
                     }
                 }
             },

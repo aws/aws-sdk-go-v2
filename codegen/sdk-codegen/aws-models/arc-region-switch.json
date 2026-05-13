@@ -1813,7 +1813,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": 100,
-                        "smithy.api#documentation": "<p>The target percentage that you specify for EC2 Auto Scaling groups.</p>"
+                        "smithy.api#documentation": "<p>The target percentage that you specify for EC2 Auto Scaling groups. The default is 100.</p>"
                     }
                 },
                 "capacityMonitoringApproach": {
@@ -1894,7 +1894,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": 100,
-                        "smithy.api#documentation": "<p>The target percentage specified for the configuration.</p>"
+                        "smithy.api#documentation": "<p>The target percentage specified for the configuration. The default is 100.</p>"
                     }
                 },
                 "capacityMonitoringApproach": {
@@ -2054,7 +2054,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": 100,
-                        "smithy.api#documentation": "<p>The target percentage for the configuration.</p>",
+                        "smithy.api#documentation": "<p>The target percentage for the configuration. The default is 100.</p>",
                         "smithy.api#range": {
                             "min": 1
                         }
@@ -2118,6 +2118,56 @@
                         "smithy.api#enumValue": "unknown"
                     }
                 }
+            }
+        },
+        "com.amazonaws.arcregionswitch#EventSourceMapping": {
+            "type": "structure",
+            "members": {
+                "crossAccountRole": {
+                    "target": "com.amazonaws.arcregionswitch#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cross account role for the configuration.</p>"
+                    }
+                },
+                "externalId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external ID (secret key) for the configuration.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.arcregionswitch#EventSourceMappingArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda event source mapping.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Web Services Lambda event source mapping configuration, containing the resource ARN and optional cross-account configuration.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#EventSourceMappingAction": {
+            "type": "enum",
+            "members": {
+                "ENABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enable"
+                    }
+                },
+                "DISABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disable"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.arcregionswitch#EventSourceMappingArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:lambda:[a-z0-9-]+:\\d{12}:event-source-mapping:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
             }
         },
         "com.amazonaws.arcregionswitch#ExecutionAction": {
@@ -2245,6 +2295,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An Amazon RDS create cross-Region replica execution block.</p>"
                     }
+                },
+                "lambdaEventSourceMappingConfig": {
+                    "target": "com.amazonaws.arcregionswitch#LambdaEventSourceMappingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Lambda event source mapping execution block.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2330,6 +2386,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RdsCreateCrossRegionReplica"
+                    }
+                },
+                "LAMBDA_EVENT_SOURCE_MAPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LambdaEventSourceMapping"
                     }
                 }
             }
@@ -3485,6 +3547,70 @@
         "com.amazonaws.arcregionswitch#LambdaArn": {
             "type": "string"
         },
+        "com.amazonaws.arcregionswitch#LambdaEventSourceMappingConfiguration": {
+            "type": "structure",
+            "members": {
+                "timeoutMinutes": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 60,
+                        "smithy.api#documentation": "<p>The timeout value specified for the configuration.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.arcregionswitch#EventSourceMappingAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take - whether to <code>enable</code> or <code>disable</code> an event source mapping.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "regionEventSourceMappings": {
+                    "target": "com.amazonaws.arcregionswitch#RegionEventSourceMappingMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Per-region configuration for which Lambda event source mapping to enable or disable when activating or deactivating a region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ungraceful": {
+                    "target": "com.amazonaws.arcregionswitch#LambdaEventSourceMappingUngraceful",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for ungraceful execution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for Amazon Web Services Lambda event source mappings used in a Region switch plan.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#LambdaEventSourceMappingUngraceful": {
+            "type": "structure",
+            "members": {
+                "behavior": {
+                    "target": "com.amazonaws.arcregionswitch#LambdaEventSourceMappingUngracefulBehavior",
+                    "traits": {
+                        "smithy.api#default": "skip",
+                        "smithy.api#documentation": "<p>Set to <code>skip</code> to skip executing this event source mapping step during an ungraceful execution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether to skip enabling or disabling an event source mapping during an ungraceful execution.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#LambdaEventSourceMappingUngracefulBehavior": {
+            "type": "enum",
+            "members": {
+                "SKIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "skip"
+                    }
+                }
+            }
+        },
         "com.amazonaws.arcregionswitch#LambdaList": {
             "type": "list",
             "member": {
@@ -4509,6 +4635,21 @@
             },
             "value": {
                 "target": "com.amazonaws.arcregionswitch#ArcRoutingControlStates"
+            }
+        },
+        "com.amazonaws.arcregionswitch#RegionEventSourceMappingMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.arcregionswitch#Region"
+            },
+            "value": {
+                "target": "com.amazonaws.arcregionswitch#EventSourceMapping"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.arcregionswitch#RegionList": {

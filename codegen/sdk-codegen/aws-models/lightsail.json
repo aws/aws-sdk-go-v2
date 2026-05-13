@@ -14490,6 +14490,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of time, in seconds, that the distribution waits for a response after\n      forwarding a request to the origin. The minimum timeout is 1 second, the maximum is 60\n      seconds, and the default (if you don't specify otherwise) is 30 seconds.</p>"
                     }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.lightsail#OriginIpAddressTypeEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type that the distribution uses when connecting to the origin.</p>\n         <p>The possible values are <code>ipv4</code> for IPv4 only, <code>ipv6</code> for IPv6 only,\n      and <code>dualstack</code> for IPv4 and IPv6.</p>"
+                    }
                 }
             },
             "traits": {
@@ -19258,10 +19264,39 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of time, in seconds, that the distribution waits for a response after\n      forwarding a request to the origin. The minimum timeout is 1 second, the maximum is 60\n      seconds, and the default (if you don't specify otherwise) is 30 seconds.</p>"
                     }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.lightsail#OriginIpAddressTypeEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type that the distribution uses when connecting to the origin.</p>\n         <p>The possible values are <code>ipv4</code> for IPv4 only, <code>ipv6</code> for IPv6 only,\n      and <code>dualstack</code> for IPv4 and IPv6.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the origin resource of an Amazon Lightsail content delivery network (CDN)\n      distribution.</p>\n         <p>An origin can be a Lightsail instance, bucket, or load balancer. A distribution pulls\n      content from an origin, caches it, and serves it to viewers via a worldwide network of edge\n      servers.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#OriginIpAddressTypeEnum": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv4"
+                    }
+                },
+                "IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv6"
+                    }
+                },
+                "DUALSTACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dualstack"
+                    }
+                }
             }
         },
         "com.amazonaws.lightsail#OriginProtocolPolicyEnum": {

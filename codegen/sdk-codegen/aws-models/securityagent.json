@@ -772,6 +772,66 @@
                 "smithy.api#documentation": "<p>Type of authentication provider.</p>"
             }
         },
+        "com.amazonaws.securityagent#BatchDeleteCodeReviews": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityagent#BatchDeleteCodeReviewsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.securityagent#BatchDeleteCodeReviewsOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes one or more code reviews from an agent space.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/BatchDeleteCodeReviews"
+                }
+            }
+        },
+        "com.amazonaws.securityagent#BatchDeleteCodeReviewsInput": {
+            "type": "structure",
+            "members": {
+                "codeReviewIds": {
+                    "target": "com.amazonaws.securityagent#CodeReviewIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of code review identifiers to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space that contains the code reviews to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for deleting multiple code reviews.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityagent#BatchDeleteCodeReviewsOutput": {
+            "type": "structure",
+            "members": {
+                "deleted": {
+                    "target": "com.amazonaws.securityagent#CodeReviewIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of identifiers of the code reviews that were successfully deleted.</p>"
+                    }
+                },
+                "failed": {
+                    "target": "com.amazonaws.securityagent#DeleteCodeReviewFailureList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of code reviews that failed to delete, including the reason for each failure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output for the BatchDeleteCodeReviews operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.securityagent#BatchDeletePentests": {
             "type": "operation",
             "input": {
@@ -957,6 +1017,186 @@
                 }
             },
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityagent#BatchGetCodeReviewJobTasks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityagent#BatchGetCodeReviewJobTasksInput"
+            },
+            "output": {
+                "target": "com.amazonaws.securityagent#BatchGetCodeReviewJobTasksOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about one or more tasks within a code review job.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/BatchGetCodeReviewJobTasks"
+                }
+            }
+        },
+        "com.amazonaws.securityagent#BatchGetCodeReviewJobTasksInput": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space that contains the tasks.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "codeReviewJobTaskIds": {
+                    "target": "com.amazonaws.securityagent#TaskIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of task identifiers to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for retrieving multiple tasks associated with a code review job.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityagent#BatchGetCodeReviewJobTasksOutput": {
+            "type": "structure",
+            "members": {
+                "codeReviewJobTasks": {
+                    "target": "com.amazonaws.securityagent#CodeReviewJobTaskList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of code review job tasks that were found.</p>"
+                    }
+                },
+                "notFound": {
+                    "target": "com.amazonaws.securityagent#TaskIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of task identifiers that were not found.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output for the BatchGetCodeReviewJobTasks operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityagent#BatchGetCodeReviewJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityagent#BatchGetCodeReviewJobsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.securityagent#BatchGetCodeReviewJobsOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about one or more code review jobs in an agent space.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/BatchGetCodeReviewJobs"
+                }
+            }
+        },
+        "com.amazonaws.securityagent#BatchGetCodeReviewJobsInput": {
+            "type": "structure",
+            "members": {
+                "codeReviewJobIds": {
+                    "target": "com.amazonaws.securityagent#CodeReviewJobIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of code review job identifiers to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space that contains the code review jobs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for BatchGetCodeReviewJobs operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityagent#BatchGetCodeReviewJobsOutput": {
+            "type": "structure",
+            "members": {
+                "codeReviewJobs": {
+                    "target": "com.amazonaws.securityagent#CodeReviewJobList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of code review jobs that were found.</p>"
+                    }
+                },
+                "notFound": {
+                    "target": "com.amazonaws.securityagent#CodeReviewJobIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of code review job identifiers that were not found.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output for the BatchGetCodeReviewJobs operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityagent#BatchGetCodeReviews": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityagent#BatchGetCodeReviewsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.securityagent#BatchGetCodeReviewsOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about one or more code reviews in an agent space.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/BatchGetCodeReviews"
+                }
+            }
+        },
+        "com.amazonaws.securityagent#BatchGetCodeReviewsInput": {
+            "type": "structure",
+            "members": {
+                "codeReviewIds": {
+                    "target": "com.amazonaws.securityagent#CodeReviewIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of code review identifiers to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space that contains the code reviews.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for retrieving multiple code reviews by their IDs.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityagent#BatchGetCodeReviewsOutput": {
+            "type": "structure",
+            "members": {
+                "codeReviews": {
+                    "target": "com.amazonaws.securityagent#CodeReviewList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of code reviews that were found.</p>"
+                    }
+                },
+                "notFound": {
+                    "target": "com.amazonaws.securityagent#CodeReviewIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of code review identifiers that were not found.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output for the BatchGetCodeReviews operation.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -1303,6 +1543,48 @@
                 "smithy.api#documentation": "<p>The Amazon CloudWatch Logs configuration for pentest job logging.</p>"
             }
         },
+        "com.amazonaws.securityagent#CodeLocation": {
+            "type": "structure",
+            "members": {
+                "filePath": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The absolute path to the file containing the code location.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lineStart": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The starting line number of the code location.</p>"
+                    }
+                },
+                "lineEnd": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ending line number of the code location.</p>"
+                    }
+                },
+                "label": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role of this location in the vulnerability, such as source or sink.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a location in source code associated with a security finding.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#CodeLocationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#CodeLocation"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of code locations.</p>"
+            }
+        },
         "com.amazonaws.securityagent#CodeRemediationStrategy": {
             "type": "enum",
             "members": {
@@ -1410,6 +1692,439 @@
                 "smithy.api#documentation": "<p>Code remediation task status.</p>"
             }
         },
+        "com.amazonaws.securityagent#CodeReview": {
+            "type": "structure",
+            "members": {
+                "codeReviewId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space that contains the code review.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the code review.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assets": {
+                    "target": "com.amazonaws.securityagent#Assets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The assets included in the code review.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceRole": {
+                    "target": "com.amazonaws.securityagent#ServiceRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM service role used for the code review.</p>"
+                    }
+                },
+                "logConfig": {
+                    "target": "com.amazonaws.securityagent#CloudWatchLog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch Logs configuration for the code review.</p>"
+                    }
+                },
+                "codeRemediationStrategy": {
+                    "target": "com.amazonaws.securityagent#CodeRemediationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code remediation strategy for the code review.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the code review was created, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the code review was last updated, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a code review configuration that defines the parameters for automated security-focused code analysis, including target assets and logging configuration.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#CodeReviewIdList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of code review IDs.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#CodeReviewJob": {
+            "type": "structure",
+            "members": {
+                "codeReviewJobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review job.</p>"
+                    }
+                },
+                "codeReviewId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review associated with the job.</p>"
+                    }
+                },
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the code review job.</p>"
+                    }
+                },
+                "overview": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An overview of the code review job results.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.securityagent#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the code review job.</p>"
+                    }
+                },
+                "documents": {
+                    "target": "com.amazonaws.securityagent#DocumentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of documents providing context for the code review job.</p>"
+                    }
+                },
+                "sourceCode": {
+                    "target": "com.amazonaws.securityagent#SourceCodeRepositoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of source code repositories analyzed during the code review job.</p>"
+                    }
+                },
+                "steps": {
+                    "target": "com.amazonaws.securityagent#StepList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of steps in the code review job execution.</p>"
+                    }
+                },
+                "executionContext": {
+                    "target": "com.amazonaws.securityagent#ExecutionContextList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution context messages for the code review job.</p>"
+                    }
+                },
+                "serviceRole": {
+                    "target": "com.amazonaws.securityagent#ServiceRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM service role used for the code review job.</p>"
+                    }
+                },
+                "logConfig": {
+                    "target": "com.amazonaws.securityagent#CloudWatchLog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch Logs configuration for the code review job.</p>"
+                    }
+                },
+                "errorInformation": {
+                    "target": "com.amazonaws.securityagent#ErrorInformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error information if the code review job encountered an error.</p>"
+                    }
+                },
+                "integratedRepositories": {
+                    "target": "com.amazonaws.securityagent#IntegratedRepositoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of integrated repositories associated with the code review job.</p>"
+                    }
+                },
+                "codeRemediationStrategy": {
+                    "target": "com.amazonaws.securityagent#CodeRemediationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code remediation strategy for the code review job.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the code review job was created, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the code review job was last updated, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a code review job, which is an execution instance of a code review. A code review job progresses through preflight, static analysis, and finalizing steps.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#CodeReviewJobIdList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of code review job IDs.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#CodeReviewJobList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#CodeReviewJob"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of code review jobs.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#CodeReviewJobSummary": {
+            "type": "structure",
+            "members": {
+                "codeReviewJobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "codeReviewId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review associated with the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the code review job.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.securityagent#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the code review job.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the code review job was created, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the code review job was last updated, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a code review job.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#CodeReviewJobSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#CodeReviewJobSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of code review job summaries.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#CodeReviewJobTask": {
+            "type": "structure",
+            "members": {
+                "taskId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "codeReviewId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review associated with the task.</p>"
+                    }
+                },
+                "codeReviewJobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review job that contains the task.</p>"
+                    }
+                },
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space.</p>"
+                    }
+                },
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the task.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the task.</p>"
+                    }
+                },
+                "categories": {
+                    "target": "com.amazonaws.securityagent#CategoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of categories assigned to the task.</p>"
+                    }
+                },
+                "riskType": {
+                    "target": "com.amazonaws.securityagent#RiskType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of security risk the task is testing for.</p>"
+                    }
+                },
+                "executionStatus": {
+                    "target": "com.amazonaws.securityagent#TaskExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current execution status of the task.</p>"
+                    }
+                },
+                "logsLocation": {
+                    "target": "com.amazonaws.securityagent#LogLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the task execution logs.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the task was created, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the task was last updated, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an individual security test task within a code review job. Each task targets a specific risk type and executes independently.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#CodeReviewJobTaskList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#CodeReviewJobTask"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of code review job tasks.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#CodeReviewJobTaskSummary": {
+            "type": "structure",
+            "members": {
+                "taskId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "codeReviewId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review associated with the task.</p>"
+                    }
+                },
+                "codeReviewJobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review job that contains the task.</p>"
+                    }
+                },
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space.</p>"
+                    }
+                },
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the task.</p>"
+                    }
+                },
+                "riskType": {
+                    "target": "com.amazonaws.securityagent#RiskType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of security risk the task is testing for.</p>"
+                    }
+                },
+                "executionStatus": {
+                    "target": "com.amazonaws.securityagent#TaskExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current execution status of the task.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the task was created, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the task was last updated, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a code review job task.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#CodeReviewJobTaskSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#CodeReviewJobTaskSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of code review job task summaries.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#CodeReviewList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#CodeReview"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of code reviews.</p>"
+            }
+        },
         "com.amazonaws.securityagent#CodeReviewSettings": {
             "type": "structure",
             "members": {
@@ -1430,6 +2145,58 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The code review settings for an agent space, controlling which types of scanning are enabled.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#CodeReviewSummary": {
+            "type": "structure",
+            "members": {
+                "codeReviewId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space that contains the code review.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the code review.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the code review was created, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the code review was last updated, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a code review.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#CodeReviewSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#CodeReviewSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of code review summaries.</p>"
             }
         },
         "com.amazonaws.securityagent#ConfidenceLevel": {
@@ -1722,6 +2489,136 @@
                 }
             },
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityagent#CreateCodeReview": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityagent#CreateCodeReviewInput"
+            },
+            "output": {
+                "target": "com.amazonaws.securityagent#CreateCodeReviewOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new code review configuration in an agent space. A code review defines the parameters for automated security-focused code analysis.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CreateCodeReview"
+                }
+            }
+        },
+        "com.amazonaws.securityagent#CreateCodeReviewInput": {
+            "type": "structure",
+            "members": {
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the code review.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space to create the code review in.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assets": {
+                    "target": "com.amazonaws.securityagent#Assets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The assets to include in the code review, such as documents and source code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceRole": {
+                    "target": "com.amazonaws.securityagent#ServiceRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM service role to use for the code review.</p>"
+                    }
+                },
+                "logConfig": {
+                    "target": "com.amazonaws.securityagent#CloudWatchLog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch Logs configuration for the code review.</p>"
+                    }
+                },
+                "codeRemediationStrategy": {
+                    "target": "com.amazonaws.securityagent#CodeRemediationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code remediation strategy for the code review. Valid values are AUTOMATIC and DISABLED.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for creating a new code review.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityagent#CreateCodeReviewOutput": {
+            "type": "structure",
+            "members": {
+                "codeReviewId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the created code review.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the code review.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the code review was created, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the code review was last updated, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "assets": {
+                    "target": "com.amazonaws.securityagent#Assets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The assets included in the code review.</p>"
+                    }
+                },
+                "serviceRole": {
+                    "target": "com.amazonaws.securityagent#ServiceRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM service role used for the code review.</p>"
+                    }
+                },
+                "logConfig": {
+                    "target": "com.amazonaws.securityagent#CloudWatchLog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch Logs configuration for the code review.</p>"
+                    }
+                },
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space that contains the code review.</p>"
+                    }
+                },
+                "codeRemediationStrategy": {
+                    "target": "com.amazonaws.securityagent#CodeRemediationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code remediation strategy for the code review.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output for the CreateCodeReview operation.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -2341,6 +3238,35 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.securityagent#DeleteCodeReviewFailure": {
+            "type": "structure",
+            "members": {
+                "codeReviewId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review that failed to delete.</p>"
+                    }
+                },
+                "reason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the code review failed to delete.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a code review that failed to delete.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#DeleteCodeReviewFailureList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#DeleteCodeReviewFailure"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of code review deletion failures.</p>"
+            }
+        },
         "com.amazonaws.securityagent#DeleteIntegration": {
             "type": "operation",
             "input": {
@@ -2809,6 +3735,18 @@
                         "smithy.api#documentation": "<p>The unique identifier of the pentest job that produced the finding.</p>"
                     }
                 },
+                "codeReviewId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review associated with the finding.</p>"
+                    }
+                },
+                "codeReviewJobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review job that produced the finding.</p>"
+                    }
+                },
                 "taskId": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -2879,6 +3817,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the entity that last updated the finding.</p>"
+                    }
+                },
+                "codeLocations": {
+                    "target": "com.amazonaws.securityagent#CodeLocationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file locations involved in the vulnerability, as reported by the code scanner.</p>"
                     }
                 },
                 "createdAt": {
@@ -2974,6 +3918,18 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the pentest job that produced the finding.</p>"
+                    }
+                },
+                "codeReviewId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review associated with the finding.</p>"
+                    }
+                },
+                "codeReviewJobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review job that produced the finding.</p>"
                     }
                 },
                 "name": {
@@ -4103,6 +5059,244 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.securityagent#ListCodeReviewJobTasks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityagent#ListCodeReviewJobTasksInput"
+            },
+            "output": {
+                "target": "com.amazonaws.securityagent#ListCodeReviewJobTasksOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a paginated list of task summaries for the specified code review job, optionally filtered by step name or category.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListCodeReviewJobTasks"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "codeReviewJobTaskSummaries"
+                }
+            }
+        },
+        "com.amazonaws.securityagent#ListCodeReviewJobTasksInput": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.securityagent#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "codeReviewJobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review job to list tasks for.</p>"
+                    }
+                },
+                "stepName": {
+                    "target": "com.amazonaws.securityagent#StepName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter tasks by step name.</p>"
+                    }
+                },
+                "categoryName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter tasks by category name.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.securityagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the nextToken value returned from the previous request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for listing tasks associated with a code review job.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityagent#ListCodeReviewJobTasksOutput": {
+            "type": "structure",
+            "members": {
+                "codeReviewJobTaskSummaries": {
+                    "target": "com.amazonaws.securityagent#CodeReviewJobTaskSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of code review job task summaries.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.securityagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the nextToken value returned from the previous request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output for the ListCodeReviewJobTasks operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityagent#ListCodeReviewJobsForCodeReview": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityagent#ListCodeReviewJobsForCodeReviewInput"
+            },
+            "output": {
+                "target": "com.amazonaws.securityagent#ListCodeReviewJobsForCodeReviewOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a paginated list of code review job summaries for the specified code review configuration.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListCodeReviewJobsForCodeReview"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "codeReviewJobSummaries"
+                }
+            }
+        },
+        "com.amazonaws.securityagent#ListCodeReviewJobsForCodeReviewInput": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.securityagent#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "codeReviewId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review to list jobs for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.securityagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the nextToken value returned from the previous request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for ListCodeReviewJobsForCodeReview operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityagent#ListCodeReviewJobsForCodeReviewOutput": {
+            "type": "structure",
+            "members": {
+                "codeReviewJobSummaries": {
+                    "target": "com.amazonaws.securityagent#CodeReviewJobSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of code review job summaries.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.securityagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the nextToken value returned from the previous request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output for the ListCodeReviewJobsForCodeReview operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityagent#ListCodeReviews": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityagent#ListCodeReviewsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.securityagent#ListCodeReviewsOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a paginated list of code review summaries for the specified agent space.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListCodeReviews"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "codeReviewSummaries"
+                }
+            }
+        },
+        "com.amazonaws.securityagent#ListCodeReviewsInput": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.securityagent#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.securityagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the nextToken value returned from the previous request.</p>"
+                    }
+                },
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space to list code reviews for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for listing code reviews with optional filtering.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityagent#ListCodeReviewsOutput": {
+            "type": "structure",
+            "members": {
+                "codeReviewSummaries": {
+                    "target": "com.amazonaws.securityagent#CodeReviewSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of code review summaries.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.securityagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the nextToken value returned from the previous request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output for the ListCodeReviews operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.securityagent#ListDiscoveredEndpoints": {
             "type": "operation",
             "input": {
@@ -4221,8 +5415,13 @@
                 "pentestJobId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the pentest job to list findings for.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The unique identifier of the pentest job to list findings for.</p>"
+                    }
+                },
+                "codeReviewJobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review job to list findings for. Mutually exclusive with pentestJobId.</p>"
                     }
                 },
                 "agentSpaceId": {
@@ -6000,10 +7199,22 @@
                     "target": "com.amazonaws.securityagent#AddArtifact"
                 },
                 {
+                    "target": "com.amazonaws.securityagent#BatchDeleteCodeReviews"
+                },
+                {
                     "target": "com.amazonaws.securityagent#BatchDeletePentests"
                 },
                 {
                     "target": "com.amazonaws.securityagent#BatchGetArtifactMetadata"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#BatchGetCodeReviewJobs"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#BatchGetCodeReviewJobTasks"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#BatchGetCodeReviews"
                 },
                 {
                     "target": "com.amazonaws.securityagent#BatchGetFindings"
@@ -6016,6 +7227,9 @@
                 },
                 {
                     "target": "com.amazonaws.securityagent#BatchGetPentests"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#CreateCodeReview"
                 },
                 {
                     "target": "com.amazonaws.securityagent#CreateMembership"
@@ -6037,6 +7251,15 @@
                 },
                 {
                     "target": "com.amazonaws.securityagent#ListArtifacts"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#ListCodeReviewJobsForCodeReview"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#ListCodeReviewJobTasks"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#ListCodeReviews"
                 },
                 {
                     "target": "com.amazonaws.securityagent#ListDiscoveredEndpoints"
@@ -6066,7 +7289,13 @@
                     "target": "com.amazonaws.securityagent#StartCodeRemediation"
                 },
                 {
+                    "target": "com.amazonaws.securityagent#StartCodeReviewJob"
+                },
+                {
                     "target": "com.amazonaws.securityagent#StartPentestJob"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#StopCodeReviewJob"
                 },
                 {
                     "target": "com.amazonaws.securityagent#StopPentestJob"
@@ -6076,6 +7305,9 @@
                 },
                 {
                     "target": "com.amazonaws.securityagent#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#UpdateCodeReview"
                 },
                 {
                     "target": "com.amazonaws.securityagent#UpdateFinding"
@@ -6454,8 +7686,13 @@
                 "pentestJobId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the pentest job that produced the findings.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The unique identifier of the pentest job that produced the findings. Mutually exclusive with <code>codeReviewJobId</code>.</p>"
+                    }
+                },
+                "codeReviewJobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review job that produced the findings. Mutually exclusive with <code>pentestJobId</code>.</p>"
                     }
                 },
                 "findingIds": {
@@ -6476,6 +7713,100 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>Output for the StartCodeRemediation operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityagent#StartCodeReviewJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityagent#StartCodeReviewJobInput"
+            },
+            "output": {
+                "target": "com.amazonaws.securityagent#StartCodeReviewJobOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a new code review job for a code review configuration. The job executes the security-focused code analysis defined in the code review.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/StartCodeReviewJob"
+                }
+            }
+        },
+        "com.amazonaws.securityagent#StartCodeReviewJobInput": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "codeReviewId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review to start a job for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for starting the execution of a code review.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityagent#StartCodeReviewJobOutput": {
+            "type": "structure",
+            "members": {
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the code review job.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.securityagent#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the code review job.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the code review job was created, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the code review job was last updated, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "codeReviewId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "codeReviewJobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the started code review job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output for the StartCodeReviewJob operation.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -6691,6 +8022,53 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Pentest job step status.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#StopCodeReviewJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityagent#StopCodeReviewJobInput"
+            },
+            "output": {
+                "target": "com.amazonaws.securityagent#StopCodeReviewJobOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a running code review job. The job transitions to a stopping state and then to stopped after cleanup completes.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/StopCodeReviewJob"
+                }
+            }
+        },
+        "com.amazonaws.securityagent#StopCodeReviewJobInput": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "codeReviewJobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review job to stop.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for stopping the execution of a code review job.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityagent#StopCodeReviewJobOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Output for the StopCodeReviewJob operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.securityagent#StopPentestJob": {
@@ -7514,6 +8892,141 @@
                 }
             },
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityagent#UpdateCodeReview": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityagent#UpdateCodeReviewInput"
+            },
+            "output": {
+                "target": "com.amazonaws.securityagent#UpdateCodeReviewOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing code review configuration.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/UpdateCodeReview"
+                }
+            }
+        },
+        "com.amazonaws.securityagent#UpdateCodeReviewInput": {
+            "type": "structure",
+            "members": {
+                "codeReviewId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space that contains the code review.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated title of the code review.</p>"
+                    }
+                },
+                "assets": {
+                    "target": "com.amazonaws.securityagent#Assets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated assets for the code review.</p>"
+                    }
+                },
+                "serviceRole": {
+                    "target": "com.amazonaws.securityagent#ServiceRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated IAM service role for the code review.</p>"
+                    }
+                },
+                "logConfig": {
+                    "target": "com.amazonaws.securityagent#CloudWatchLog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated CloudWatch Logs configuration for the code review.</p>"
+                    }
+                },
+                "codeRemediationStrategy": {
+                    "target": "com.amazonaws.securityagent#CodeRemediationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated code remediation strategy for the code review.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for updating an existing code review.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityagent#UpdateCodeReviewOutput": {
+            "type": "structure",
+            "members": {
+                "codeReviewId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the code review.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the code review.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the code review was created, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the code review was last updated, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "assets": {
+                    "target": "com.amazonaws.securityagent#Assets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The assets included in the code review.</p>"
+                    }
+                },
+                "serviceRole": {
+                    "target": "com.amazonaws.securityagent#ServiceRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM service role used for the code review.</p>"
+                    }
+                },
+                "logConfig": {
+                    "target": "com.amazonaws.securityagent#CloudWatchLog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch Logs configuration for the code review.</p>"
+                    }
+                },
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space that contains the code review.</p>"
+                    }
+                },
+                "codeRemediationStrategy": {
+                    "target": "com.amazonaws.securityagent#CodeRemediationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code remediation strategy for the code review.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output for the UpdateCodeReview operation.</p>",
                 "smithy.api#output": {}
             }
         },

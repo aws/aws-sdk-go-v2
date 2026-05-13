@@ -26345,6 +26345,30 @@
                     "traits": {
                         "smithy.api#enumValue": "OnSlaBreach"
                     }
+                },
+                "OnAlertUpdate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OnAlertUpdate"
+                    }
+                },
+                "OnSchedulePublish": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OnSchedulePublish"
+                    }
+                },
+                "OnScheduleUpdate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OnScheduleUpdate"
+                    }
+                },
+                "OnScheduleTimeOffRequestActivity": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OnScheduleTimeOffRequestActivity"
+                    }
                 }
             }
         },

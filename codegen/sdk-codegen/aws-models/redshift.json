@@ -2902,7 +2902,7 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The node type to be provisioned for the cluster. For information about node types,\n            go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes\"> Working with\n                Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>\n         <p>Valid Values: \n            <code>dc2.large</code> | <code>dc2.8xlarge</code> | \n            <code>ra3.large</code> |  <code>ra3.xlplus</code> |  <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The node type to be provisioned for the cluster. For information about node types,\n            go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes\"> Working with\n                Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>\n         <p>Valid Values: \n            <code>dc2.large</code> | <code>dc2.8xlarge</code>| <code>rg.xlarge</code> | <code>rg.4xlarge</code> | \n            <code>ra3.large</code> | <code>ra3.xlplus</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2959,7 +2959,7 @@
                 "AutomatedSnapshotRetentionPeriod": {
                     "target": "com.amazonaws.redshift#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of days that automated snapshots are retained. If the value is 0,\n            automated snapshots are disabled. Even if automated snapshots are disabled, you can\n            still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p>\n         <p>You can't disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days.</p>\n         <p>Default: <code>1</code>\n         </p>\n         <p>Constraints: Must be a value from 0 to 35.</p>"
+                        "smithy.api#documentation": "<p>The number of days that automated snapshots are retained. If the value is 0,\n            automated snapshots are disabled. Even if automated snapshots are disabled, you can\n            still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p>\n         <p>You can't disable automated snapshots for RG or RA3 node types. Set the automated retention period from 1-35 days.</p>\n         <p>Default: <code>1</code>\n         </p>\n         <p>Constraints: Must be a value from 0 to 35.</p>"
                     }
                 },
                 "ManualSnapshotRetentionPeriod": {
@@ -2971,7 +2971,7 @@
                 "Port": {
                     "target": "com.amazonaws.redshift#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port number on which the cluster accepts incoming connections.</p>\n         <p>The cluster is accessible only via the JDBC and ODBC connection strings. Part of\n            the connection string requires the port on which the cluster will listen for incoming\n            connections.</p>\n         <p>Default: <code>5439</code>\n         </p>\n         <p>Valid Values:\n        </p>\n         <ul>\n            <li>\n               <p>For clusters with ra3 nodes - Select a port within the ranges <code>5431-5455</code> or <code>8191-8215</code>. (If you have an existing cluster \n                with ra3 nodes, it isn't required that you change the port to these ranges.)</p>\n            </li>\n            <li>\n               <p>For clusters with dc2 nodes - Select a port within the range <code>1150-65535</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The port number on which the cluster accepts incoming connections.</p>\n         <p>The cluster is accessible only via the JDBC and ODBC connection strings. Part of\n            the connection string requires the port on which the cluster will listen for incoming\n            connections.</p>\n         <p>Default: <code>5439</code>\n         </p>\n         <p>Valid Values:\n        </p>\n         <ul>\n            <li>\n               <p>For clusters with RG or RA3 nodes - Select a port within the ranges <code>5431-5455</code> or <code>8191-8215</code>. (If you have an existing cluster \n                with RG or RA3 nodes, it isn't required that you change the port to these ranges.)</p>\n            </li>\n            <li>\n               <p>For clusters with dc2 nodes - Select a port within the range <code>1150-65535</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ClusterVersion": {
@@ -12314,7 +12314,7 @@
                 "NodeType": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new node type of the cluster. If you specify a new node type, you must also\n            specify the number of nodes parameter.</p>\n         <p>\nFor more information about resizing clusters, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html\">Resizing Clusters in Amazon Redshift</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>\n         <p>Valid Values: \n            <code>dc2.large</code> | <code>dc2.8xlarge</code> | \n            <code>ra3.large</code> |  <code>ra3.xlplus</code> |  <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The new node type of the cluster. If you specify a new node type, you must also\n            specify the number of nodes parameter.</p>\n         <p>\nFor more information about resizing clusters, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html\">Resizing Clusters in Amazon Redshift</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>\n         <p>Valid Values: \n            <code>dc2.large</code> | <code>dc2.8xlarge</code>| <code>rg.xlarge</code> | <code>rg.4xlarge</code> | \n            <code>ra3.large</code> | <code>ra3.xlplus</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>\n         </p>"
                     }
                 },
                 "NumberOfNodes": {
@@ -12350,7 +12350,7 @@
                 "AutomatedSnapshotRetentionPeriod": {
                     "target": "com.amazonaws.redshift#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of days that automated snapshots are retained. If the value is 0,\n            automated snapshots are disabled. Even if automated snapshots are disabled, you can\n            still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p>\n         <p>If you decrease the automated snapshot retention period from its current value,\n            existing automated snapshots that fall outside of the new retention period will be\n            immediately deleted.</p>\n         <p>You can't disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days.</p>\n         <p>Default: Uses existing setting.</p>\n         <p>Constraints: Must be a value from 0 to 35.</p>"
+                        "smithy.api#documentation": "<p>The number of days that automated snapshots are retained. If the value is 0,\n            automated snapshots are disabled. Even if automated snapshots are disabled, you can\n            still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p>\n         <p>If you decrease the automated snapshot retention period from its current value,\n            existing automated snapshots that fall outside of the new retention period will be\n            immediately deleted.</p>\n         <p>You can't disable automated snapshots for RG or RA3 node types. Set the automated retention period from 1-35 days.</p>\n         <p>Default: Uses existing setting.</p>\n         <p>Constraints: Must be a value from 0 to 35.</p>"
                     }
                 },
                 "ManualSnapshotRetentionPeriod": {
@@ -12446,7 +12446,7 @@
                 "Port": {
                     "target": "com.amazonaws.redshift#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The option to change the port of an Amazon Redshift cluster.</p>\n         <p>Valid Values:\n        </p>\n         <ul>\n            <li>\n               <p>For clusters with ra3 nodes - Select a port within the ranges <code>5431-5455</code> or <code>8191-8215</code>. (If you have an existing cluster \n                with ra3 nodes, it isn't required that you change the port to these ranges.)</p>\n            </li>\n            <li>\n               <p>For clusters with dc2 nodes - Select a port within the range <code>1150-65535</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The option to change the port of an Amazon Redshift cluster.</p>\n         <p>Valid Values:\n        </p>\n         <ul>\n            <li>\n               <p>For clusters with RG or RA3 nodes - Select a port within the ranges <code>5431-5455</code> or <code>8191-8215</code>. (If you have an existing cluster \n                with RG or RA3 nodes, it isn't required that you change the port to these ranges.)</p>\n            </li>\n            <li>\n               <p>For clusters with dc2 nodes - Select a port within the range <code>1150-65535</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ManageMasterPassword": {
@@ -16959,7 +16959,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Changes the size of the cluster. You can change the cluster's type, or change the\n            number or type of nodes. The default behavior is to use the elastic resize method. With\n            an elastic resize, your cluster is available for read and write operations more quickly\n            than with the classic resize method. </p>\n         <p>Elastic resize operations have the following restrictions:</p>\n         <ul>\n            <li>\n               <p>You can only resize clusters of the following types:</p>\n               <ul>\n                  <li>\n                     <p>dc2.large</p>\n                  </li>\n                  <li>\n                     <p>dc2.8xlarge</p>\n                  </li>\n                  <li>\n                     <p>ra3.large</p>\n                  </li>\n                  <li>\n                     <p>ra3.xlplus</p>\n                  </li>\n                  <li>\n                     <p>ra3.4xlarge</p>\n                  </li>\n                  <li>\n                     <p>ra3.16xlarge</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The type of nodes that you add must match the node type for the\n                    cluster.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Changes the size of the cluster. You can change the cluster's type, or change the\n            number or type of nodes. The default behavior is to use the elastic resize method. With\n            an elastic resize, your cluster is available for read and write operations more quickly\n            than with the classic resize method. </p>\n         <p>Elastic resize operations have the following restrictions:</p>\n         <ul>\n            <li>\n               <p>You can only resize clusters of the following types:</p>\n               <ul>\n                  <li>\n                     <p>dc2.large</p>\n                  </li>\n                  <li>\n                     <p>dc2.8xlarge</p>\n                  </li>\n                  <li>\n                     <p>rg.xlarge</p>\n                  </li>\n                  <li>\n                     <p>rg.4xlarge</p>\n                  </li>\n                  <li>\n                     <p>ra3.large</p>\n                  </li>\n                  <li>\n                     <p>ra3.xlplus</p>\n                  </li>\n                  <li>\n                     <p>ra3.4xlarge</p>\n                  </li>\n                  <li>\n                     <p>ra3.16xlarge</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The type of nodes that you add must match the node type for the\n                    cluster.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.redshift#ResizeClusterMessage": {
@@ -17363,7 +17363,7 @@
                 "Port": {
                     "target": "com.amazonaws.redshift#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port number on which the cluster accepts connections.</p>\n         <p>Default: The same port as the original cluster.</p>\n         <p>Valid values: For clusters with DC2 nodes, must be within the range <code>1150</code>-<code>65535</code>. For clusters with ra3 nodes, must be \n            within the ranges <code>5431</code>-<code>5455</code> or <code>8191</code>-<code>8215</code>.</p>"
+                        "smithy.api#documentation": "<p>The port number on which the cluster accepts connections.</p>\n         <p>Default: The same port as the original cluster.</p>\n         <p>Valid values: For clusters with DC2 nodes, must be within the range <code>1150</code>-<code>65535</code>. For clusters with RG or RA3 nodes, must be \n            within the ranges <code>5431</code>-<code>5455</code> or <code>8191</code>-<code>8215</code>.</p>"
                     }
                 },
                 "AvailabilityZone": {
@@ -17441,7 +17441,7 @@
                 "AutomatedSnapshotRetentionPeriod": {
                     "target": "com.amazonaws.redshift#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of days that automated snapshots are retained. If the value is 0,\n            automated snapshots are disabled. Even if automated snapshots are disabled, you can\n            still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p>\n         <p>You can't disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days.</p>\n         <p>Default: The value selected for the cluster from which the snapshot was\n            taken.</p>\n         <p>Constraints: Must be a value from 0 to 35.</p>"
+                        "smithy.api#documentation": "<p>The number of days that automated snapshots are retained. If the value is 0,\n            automated snapshots are disabled. Even if automated snapshots are disabled, you can\n            still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p>\n         <p>You can't disable automated snapshots for RG or RA3 node types. Set the automated retention period from 1-35 days.</p>\n         <p>Default: The value selected for the cluster from which the snapshot was\n            taken.</p>\n         <p>Constraints: Must be a value from 0 to 35.</p>"
                     }
                 },
                 "ManualSnapshotRetentionPeriod": {

@@ -7171,6 +7171,36 @@
                         "smithy.api#documentation": "<p>The ability to perform flow-related actions.</p>"
                     }
                 },
+                "Apps": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform apps-related actions.</p>"
+                    }
+                },
+                "CreateAndUpdateApps": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create or update apps.</p>"
+                    }
+                },
+                "ShareApps": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share apps with other users.</p>"
+                    }
+                },
+                "InvokeAppsAIInference": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to add and invoke AI inference in new and existing apps.</p>"
+                    }
+                },
+                "AccessAppsNativeDataStore": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to access the native data store for new and existing apps.</p>"
+                    }
+                },
                 "PublishWithoutApproval": {
                     "target": "com.amazonaws.quicksight#CapabilityState",
                     "traits": {
