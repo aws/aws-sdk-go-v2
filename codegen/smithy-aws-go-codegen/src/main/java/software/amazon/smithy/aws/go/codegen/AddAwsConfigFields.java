@@ -387,21 +387,6 @@ public class AddAwsConfigFields implements GoIntegration {
 
         String serviceSpecificRetryOptions;
         if (isDynamoDB) {
-            writer.putContext("newBackoffWithOptions",
-                    SymbolUtils.createValueSymbolBuilder("NewExponentialJitterBackoffWithOptions",
-                            AwsGoDependency.AWS_RETRY).build());
-            writer.putContext("withBaseDelay",
-                    SymbolUtils.createValueSymbolBuilder("WithBaseDelay",
-                            AwsGoDependency.AWS_RETRY).build());
-            writer.putContext("withThrottleCheck",
-                    SymbolUtils.createValueSymbolBuilder("WithThrottleCheck",
-                            AwsGoDependency.AWS_RETRY).build());
-            writer.putContext("defaultThrottles",
-                    SymbolUtils.createValueSymbolBuilder("IsErrorThrottles",
-                            AwsGoDependency.AWS_RETRY).build());
-            writer.putContext("defaultThrottlesList",
-                    SymbolUtils.createValueSymbolBuilder("DefaultThrottles",
-                            AwsGoDependency.AWS_RETRY).build());
             writer.addUseImports(SmithyGoDependency.TIME);
             writer.addUseImports(SmithyGoDependency.OS);
 
@@ -413,10 +398,7 @@ public class AddAwsConfigFields implements GoIntegration {
                             if o.$retryMaxAttemptsOption:L == 0 {
                                 so.MaxAttempts = 4
                             }
-                            so.Backoff = $newBackoffWithOptions:T(so.MaxBackoff,
-                                $withBaseDelay:T(25 * time.Millisecond),
-                                $withThrottleCheck:T($defaultThrottles:T($defaultThrottlesList:T)),
-                            )
+                            so.BaseDelay = 25 * time.Millisecond
                         })
                     }
                     """;

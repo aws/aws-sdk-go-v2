@@ -280,13 +280,7 @@ func (r *Attempt) handleAttempt(
 	if retryTokenErr != nil {
 		// Long-polling operations must still back off when quota is exceeded.
 		if newRetries2026() {
-			longPolling := false
-			if std, ok := r.retryer.(*Standard); ok {
-				longPolling = std.IsLongPolling()
-			} else if _, ok := r.retryer.(*withLongPolling); ok {
-				longPolling = true
-			}
-			if longPolling {
+			if _, ok := r.retryer.(*withLongPolling); ok {
 				// Pass nil error to RetryDelay so backoff uses non-throttle
 				// base delay, but pass the real error to adjustForRetryAfterHeader
 				// so the response header is still honored.
@@ -305,7 +299,11 @@ func (r *Attempt) handleAttempt(
 	// Get the retry delay before another attempt can be made, and sleep for
 	// that time. Potentially early exist if the sleep is canceled via the
 	// context.
-	retryDelay, reqErr := r.retryer.RetryDelay(attemptNum-1, err)
+	attempt := attemptNum
+	if newRetries2026() {
+		attempt = attemptNum - 1
+	}
+	retryDelay, reqErr := r.retryer.RetryDelay(attempt, err)
 	if reqErr != nil {
 		return out, attemptResult, releaseRetryToken, reqErr
 	}

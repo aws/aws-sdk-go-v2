@@ -526,10 +526,7 @@ func resolveRetryer(o *Options) {
 			if o.RetryMaxAttempts == 0 {
 				so.MaxAttempts = 4
 			}
-			so.Backoff = retry.NewExponentialJitterBackoffWithOptions(so.MaxBackoff,
-				retry.WithBaseDelay(25*time.Millisecond),
-				retry.WithThrottleCheck(retry.IsErrorThrottles(retry.DefaultThrottles)),
-			)
+			so.BaseDelay = 25 * time.Millisecond
 		})
 	}
 

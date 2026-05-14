@@ -42,28 +42,28 @@ func NewExponentialJitterBackoff(maxBackoff time.Duration) *ExponentialJitterBac
 	}
 }
 
-// ExponentialJitterBackoffOption is a functional option for ExponentialJitterBackoff.
-type ExponentialJitterBackoffOption func(*ExponentialJitterBackoff)
+// exponentialJitterBackoffOption is a functional option for ExponentialJitterBackoff.
+type exponentialJitterBackoffOption func(*ExponentialJitterBackoff)
 
-// WithBaseDelay sets the base delay for non-throttle errors.
-func WithBaseDelay(d time.Duration) ExponentialJitterBackoffOption {
+// withBaseDelay sets the base delay for non-throttle errors.
+func withBaseDelay(d time.Duration) exponentialJitterBackoffOption {
 	return func(j *ExponentialJitterBackoff) {
 		j.baseDelay = d
 	}
 }
 
-// WithThrottleCheck sets the throttle error checker used to determine if the
+// withThrottleCheck sets the throttle error checker used to determine if the
 // backoff should use the throttle base delay (1s) instead of the configured
 // base delay.
-func WithThrottleCheck(t IsErrorThrottle) ExponentialJitterBackoffOption {
+func withThrottleCheck(t IsErrorThrottle) exponentialJitterBackoffOption {
 	return func(j *ExponentialJitterBackoff) {
 		j.throttle = t
 	}
 }
 
-// NewExponentialJitterBackoffWithOptions returns an ExponentialJitterBackoff
+// newExponentialJitterBackoffWithOptions returns an ExponentialJitterBackoff
 // with the given options applied.
-func NewExponentialJitterBackoffWithOptions(maxBackoff time.Duration, optFns ...ExponentialJitterBackoffOption) *ExponentialJitterBackoff {
+func newExponentialJitterBackoffWithOptions(maxBackoff time.Duration, optFns ...exponentialJitterBackoffOption) *ExponentialJitterBackoff {
 	j := NewExponentialJitterBackoff(maxBackoff)
 	j.retries2026 = true
 	for _, fn := range optFns {

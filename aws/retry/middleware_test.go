@@ -564,6 +564,58 @@ func TestClockSkew(t *testing.T) {
 	}
 }
 
+// TestLegacyRetryDelayAttemptValue verifies that when the new retries flag is
+// NOT set, the attempt value passed to RetryDelay is unchanged from legacy
+// behavior (1-based: first retry passes 1, second passes 2, etc.).
+func TestLegacyRetryDelayAttemptValue(t *testing.T) {
+	restoreSleep := sdk.TestingUseNopSleep()
+	defer restoreSleep()
+
+	var recordedAttempts []int
+	retryer := NewStandard(func(o *StandardOptions) {
+		o.MaxAttempts = 4
+		o.Backoff = BackoffDelayerFunc(func(attempt int, err error) (time.Duration, error) {
+			recordedAttempts = append(recordedAttempts, attempt)
+			return 0, nil
+		})
+	})
+
+	am := NewAttemptMiddleware(retryer, func(i interface{}) interface{} {
+		return i
+	})
+
+	num := 0
+	handler := middleware.FinalizeHandlerFunc(
+		func(ctx context.Context, in middleware.FinalizeInput) (
+			out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+		) {
+			num++
+			if num < 4 {
+				return out, metadata, mockRetryableError{b: true}
+			}
+			return out, metadata, nil
+		})
+
+	_, _, err := am.HandleFinalize(context.Background(), middleware.FinalizeInput{}, handler)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	// Legacy behavior: attemptNum is passed directly (1-based).
+	// After attempt 1 fails, RetryDelay is called with attemptNum=1.
+	// After attempt 2 fails, RetryDelay is called with attemptNum=2.
+	// After attempt 3 fails, RetryDelay is called with attemptNum=3.
+	expected := []int{1, 2, 3}
+	if len(recordedAttempts) != len(expected) {
+		t.Fatalf("expected %d RetryDelay calls, got %d", len(expected), len(recordedAttempts))
+	}
+	for i, exp := range expected {
+		if recordedAttempts[i] != exp {
+			t.Errorf("RetryDelay call %d: expected attempt=%d, got attempt=%d", i, exp, recordedAttempts[i])
+		}
+	}
+}
+
 // mockRawResponseKey is used to test the behavior when response metadata is
 // nested within the attempt request.
 type mockRawResponseKey struct{}

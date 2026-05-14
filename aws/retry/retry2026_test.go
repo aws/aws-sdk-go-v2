@@ -9,6 +9,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,7 +54,7 @@ type retryTestCase struct {
 
 func uintPtr(v uint) *uint { return &v }
 
-func newRetry2026Retryer(tc retryTestCase) (*Standard, *ratelimit.TokenRateLimit) {
+func newRetry2026Retryer(tc retryTestCase) (aws.RetryerV2, *ratelimit.TokenRateLimit) {
 	tokens := uint(500)
 	if tc.initialTokens != nil {
 		tokens = *tc.initialTokens
@@ -79,9 +80,9 @@ func newRetry2026Retryer(tc retryTestCase) (*Standard, *ratelimit.TokenRateLimit
 		}
 	}
 
-	backoff := NewExponentialJitterBackoffWithOptions(maxBackoff,
-		WithBaseDelay(baseDelay),
-		WithThrottleCheck(IsErrorThrottles(DefaultThrottles)),
+	backoff := newExponentialJitterBackoffWithOptions(maxBackoff,
+		withBaseDelay(baseDelay),
+		withThrottleCheck(IsErrorThrottles(DefaultThrottles)),
 	)
 	if tc.exponentialBase != 0 {
 		backoff.randFloat64 = func() (float64, error) {
@@ -94,9 +95,11 @@ func newRetry2026Retryer(tc retryTestCase) (*Standard, *ratelimit.TokenRateLimit
 		o.MaxBackoff = maxBackoff
 		o.RateLimiter = rl
 		o.Backoff = backoff
-		o.LongPolling = tc.longPolling
 	})
 
+	if tc.longPolling {
+		return AddWithLongPolling(r).(aws.RetryerV2), rl
+	}
 	return r, rl
 }
 
@@ -557,7 +560,7 @@ func TestRetry2026StandardMode(t *testing.T) {
 						t.Fatalf("step %d: expected retry quota exceeded error", i)
 					}
 
-					if step.expected.delay != 0 && retryer.IsLongPolling() {
+					if step.expected.delay != 0 && tc.longPolling {
 						// Mirrors the middleware quota-exceeded path:
 						// - attemptNum-1: backoff exponent is 0-based (first failure = 2^0).
 						// - nil error: forces non-throttle base delay (50ms), even if the

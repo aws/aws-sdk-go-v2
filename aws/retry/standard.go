@@ -173,10 +173,10 @@ type StandardOptions struct {
 	// attempts.
 	NoRetryIncrement uint
 
-	// LongPolling indicates the operation is a long-polling operation. When
-	// true, the retryer will still back off when the retry quota is exhausted
-	// rather than immediately returning.
-	LongPolling bool
+	// BaseDelay is the base backoff delay for non-throttle retryable errors.
+	// Throttling errors always use 1s. Defaults to 50ms if zero.
+	// Only used when AWS_NEW_RETRIES_2026 is "true"; ignored in legacy mode.
+	BaseDelay time.Duration
 }
 
 // RateLimiter provides the interface for limiting the rate of attempt retries
@@ -212,9 +212,13 @@ func NewStandard(fnOpts ...func(*StandardOptions)) *Standard {
 	backoff := o.Backoff
 	if backoff == nil {
 		if newRetries2026() {
-			backoff = NewExponentialJitterBackoffWithOptions(o.MaxBackoff,
-				WithBaseDelay(50*time.Millisecond),
-				WithThrottleCheck(IsErrorThrottles(o.Throttles)),
+			baseDelay := o.BaseDelay
+			if baseDelay == 0 {
+				baseDelay = 50 * time.Millisecond
+			}
+			backoff = newExponentialJitterBackoffWithOptions(o.MaxBackoff,
+				withBaseDelay(baseDelay),
+				withThrottleCheck(IsErrorThrottles(o.Throttles)),
 			)
 		} else {
 			backoff = NewExponentialJitterBackoff(o.MaxBackoff)
@@ -234,12 +238,6 @@ func NewStandard(fnOpts ...func(*StandardOptions)) *Standard {
 // request before failing.
 func (s *Standard) MaxAttempts() int {
 	return s.options.MaxAttempts
-}
-
-// IsLongPolling returns whether this retryer is configured for a long-polling
-// operation.
-func (s *Standard) IsLongPolling() bool {
-	return s.options.LongPolling
 }
 
 // IsErrorRetryable returns if the error is can be retried or not. Should not
