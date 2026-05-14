@@ -1405,6 +1405,12 @@
                         "smithy.api#documentation": "<p>Specifies the version of Grafana to support in the new workspace. If not specified, defaults to the latest version (for example, 10.4).</p> <p>To get a list of supported versions, use the <code>ListVersions</code> operation.</p>"
                     }
                 },
+                "ipAddressType": {
+                    "target": "com.amazonaws.grafana#IPAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the workspace supports IPv4 only, or IPv4 and IPv6. Valid values are <code>IPv4</code> and <code>DualStack</code>. For more information about IP address types, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-nac.html\">Network access control</a>.</p>"
+                    }
+                },
                 "kmsKeyId": {
                     "target": "com.amazonaws.grafana#KmsKeyId",
                     "traits": {
@@ -2314,6 +2320,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.grafana#GrafanaVersion"
+            }
+        },
+        "com.amazonaws.grafana#IPAddressType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "IPV4",
+                        "value": "IPv4",
+                        "documentation": "Indicates that connections to this workspace can only be made over IPv4."
+                    },
+                    {
+                        "name": "DUAL_STACK",
+                        "value": "DualStack",
+                        "documentation": "Indicates that connections to this workspace can be made over IPv4 or IPv6."
+                    }
+                ]
             }
         },
         "com.amazonaws.grafana#IamRoleArn": {
@@ -4267,6 +4290,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether to remove the network access configuration from the workspace.</p> <p>Setting this to <code>true</code> and providing a <code>networkAccessControl</code> to set will return an error.</p> <p>If you remove this configuration by setting this to <code>true</code>, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.</p>"
                     }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.grafana#IPAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the workspace supports IPv4 only, or IPv4 and IPv6. Valid values are <code>IPv4</code> and <code>DualStack</code>. For more information about IP address types, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-nac.html\">Network access control</a>.</p>"
+                    }
                 }
             }
         },
@@ -4633,6 +4662,12 @@
                     "target": "com.amazonaws.grafana#GrafanaToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token that ties this workspace to a Grafana Labs account. For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise\">Link your account with Grafana Labs</a>.</p>"
+                    }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.grafana#IPAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of IP addresses supported for connection to the workspace. Valid values are <code>IPv4</code> and <code>DualStack</code>.</p>"
                     }
                 },
                 "kmsKeyId": {

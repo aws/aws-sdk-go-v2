@@ -1244,6 +1244,12 @@
                 ]
             }
         },
+        "com.amazonaws.qconnect#AIPromptTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#AIPromptType"
+            }
+        },
         "com.amazonaws.qconnect#AIPromptVersionSummariesList": {
             "type": "list",
             "member": {
@@ -1552,6 +1558,9 @@
             "operations": [
                 {
                     "target": "com.amazonaws.qconnect#GetRecommendations"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ListModels"
                 },
                 {
                     "target": "com.amazonaws.qconnect#NotifyRecommendationsReceived"
@@ -4957,6 +4966,25 @@
                         "smithy.api#documentation": "<p>The session.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.qconnect#CrossRegionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "REGIONAL",
+                        "name": "REGIONAL"
+                    },
+                    {
+                        "value": "GLOBAL",
+                        "name": "GLOBAL"
+                    }
+                ]
             }
         },
         "com.amazonaws.qconnect#CustomAttributes": {
@@ -11175,6 +11203,115 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.qconnect#ListModels": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#ListModelsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#ListModelsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the models available to an Amazon Q in Connect assistant in the assistant's Amazon Web Services Region. The available models are determined by the region of the specified assistant.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/models",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "modelSummaries"
+                },
+                "smithy.api#private": {},
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListModelsRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN. The assistant's region determines which models are available.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiPromptType": {
+                    "target": "com.amazonaws.qconnect#AIPromptType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the AI Prompt to filter models by. When specified, only models that support the given AI Prompt type are returned.</p>",
+                        "smithy.api#httpQuery": "aiPromptType"
+                    }
+                },
+                "modelLifecycle": {
+                    "target": "com.amazonaws.qconnect#ModelLifecycle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle status of models to filter by. When specified, only models with the given lifecycle status are returned.</p>",
+                        "smithy.api#httpQuery": "modelLifecycle"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.qconnect#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListModelsResponse": {
+            "type": "structure",
+            "members": {
+                "modelSummaries": {
+                    "target": "com.amazonaws.qconnect#ModelSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summaries of the models available to the assistant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qconnect#ListQuickResponses": {
             "type": "operation",
             "input": {
@@ -12581,6 +12718,103 @@
                         "name": "TOOL_USE_RESULT"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.qconnect#ModelDisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.qconnect#ModelId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.qconnect#ModelLifecycle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "LEGACY",
+                        "name": "LEGACY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#ModelSummary": {
+            "type": "structure",
+            "members": {
+                "modelId": {
+                    "target": "com.amazonaws.qconnect#ModelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.qconnect#ModelDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "crossRegionStatus": {
+                    "target": "com.amazonaws.qconnect#CrossRegionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cross-region availability status of the model. <code>NONE</code> indicates the model is only available in a single region, <code>REGIONAL</code> indicates the model is available through regional inference, and <code>GLOBAL</code> indicates the model is available through global cross-region inference.</p>"
+                    }
+                },
+                "supportsPromptCaching": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the model supports prompt caching.</p>"
+                    }
+                },
+                "supportedAIPromptTypes": {
+                    "target": "com.amazonaws.qconnect#AIPromptTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of AI Prompt types that the model supports.</p>"
+                    }
+                },
+                "modelLifecycle": {
+                    "target": "com.amazonaws.qconnect#ModelLifecycle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current lifecycle of the model. <code>ACTIVE</code> indicates the model is recommended for use and <code>LEGACY</code> indicates the model is still usable but is deprecated.</p>"
+                    }
+                },
+                "legacyTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the model lifecycle will transition from <code>ACTIVE</code> to <code>LEGACY</code>.</p>"
+                    }
+                },
+                "endOfLifeTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the model will reach end of life and no longer be available for use.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of a model available to an Amazon Q in Connect assistant.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#ModelSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#ModelSummary"
             }
         },
         "com.amazonaws.qconnect#Name": {

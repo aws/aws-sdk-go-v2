@@ -192,6 +192,211 @@
         "com.amazonaws.bedrock#AdditionalModelRequestFieldsValue": {
             "type": "document"
         },
+        "com.amazonaws.bedrock#AdvancedPromptOptimizationInputConfig": {
+            "type": "structure",
+            "members": {
+                "s3Uri": {
+                    "target": "com.amazonaws.bedrock#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "S3 URI of the input JSONL file.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Input data configuration for the advanced prompt optimization job."
+            }
+        },
+        "com.amazonaws.bedrock#AdvancedPromptOptimizationJobArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ARN of the advanced prompt optimization job.",
+                "smithy.api#length": {
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:advanced-prompt-optimization-job/[a-z0-9]{12}$"
+            }
+        },
+        "com.amazonaws.bedrock#AdvancedPromptOptimizationJobDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Description of the advanced prompt optimization job.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.bedrock#AdvancedPromptOptimizationJobIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ARN or ID of the advanced prompt optimization job.",
+                "smithy.api#length": {
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^((arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:advanced-prompt-optimization-job/)?[a-z0-9]{12})$"
+            }
+        },
+        "com.amazonaws.bedrock#AdvancedPromptOptimizationJobIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobIdentifier"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of advanced prompt optimization job identifiers.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.bedrock#AdvancedPromptOptimizationJobName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Name of the advanced prompt optimization job.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9.+-]*$"
+            }
+        },
+        "com.amazonaws.bedrock#AdvancedPromptOptimizationJobResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJob"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#CreateAdvancedPromptOptimizationJob"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#GetAdvancedPromptOptimizationJob"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ListAdvancedPromptOptimizationJobs"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#StopAdvancedPromptOptimizationJob"
+                }
+            ]
+        },
+        "com.amazonaws.bedrock#AdvancedPromptOptimizationJobStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Completed"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "PARTIALLY_COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PartiallyCompleted"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopping"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopped"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Status of the advanced prompt optimization job."
+            }
+        },
+        "com.amazonaws.bedrock#AdvancedPromptOptimizationJobSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of advanced prompt optimization job summaries."
+            }
+        },
+        "com.amazonaws.bedrock#AdvancedPromptOptimizationJobSummary": {
+            "type": "structure",
+            "members": {
+                "jobArn": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobArn",
+                    "traits": {
+                        "smithy.api#documentation": "ARN of the advanced prompt optimization job.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobName": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobName",
+                    "traits": {
+                        "smithy.api#documentation": "Name of the advanced prompt optimization job.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobStatus": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Status of the advanced prompt optimization job.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "Creation time of the advanced prompt optimization job.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "Last modified time of the advanced prompt optimization job."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Summary of an advanced prompt optimization job."
+            }
+        },
+        "com.amazonaws.bedrock#AdvancedPromptOptimizationOutputConfig": {
+            "type": "structure",
+            "members": {
+                "s3Uri": {
+                    "target": "com.amazonaws.bedrock#S3UriFolder",
+                    "traits": {
+                        "smithy.api#documentation": "S3 URI prefix for the output location.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Output data configuration for the advanced prompt optimization job."
+            }
+        },
         "com.amazonaws.bedrock#AgreementAvailability": {
             "type": "structure",
             "members": {
@@ -257,6 +462,9 @@
             "type": "service",
             "version": "2023-04-20",
             "resources": [
+                {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobResource"
+                },
                 {
                     "target": "com.amazonaws.bedrock#AllowlistResource"
                 },
@@ -4538,6 +4746,152 @@
                 "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})|(([0-9a-zA-Z][_-]?)+)$"
             }
         },
+        "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Batch delete the specified advanced prompt optimization jobs.",
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "POST",
+                    "uri": "/advanced-prompt-optimization-job/batch-delete"
+                }
+            }
+        },
+        "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobError": {
+            "type": "structure",
+            "members": {
+                "jobIdentifier": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "Identifier of the job that failed to delete.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "code": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Error code for the deletion failure.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Error message describing the deletion failure."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Batch deletion error for an advanced prompt optimization job."
+            }
+        },
+        "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobError"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of batch deletion errors for advanced prompt optimization jobs.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobItem": {
+            "type": "structure",
+            "members": {
+                "jobIdentifier": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "Identifier of the deleted job.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobStatus": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Status of the deleted job.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Successfully deleted advanced prompt optimization job."
+            }
+        },
+        "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobItems": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobItem"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of successfully deleted advanced prompt optimization jobs.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobRequest": {
+            "type": "structure",
+            "members": {
+                "jobIdentifiers": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "List of advanced prompt optimization job identifiers to delete.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Batch Delete Advanced Prompt Optimization Jobs Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobResponse": {
+            "type": "structure",
+            "members": {
+                "errors": {
+                    "target": "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobErrors",
+                    "traits": {
+                        "smithy.api#documentation": "List of errors encountered during batch deletion.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "advancedPromptOptimizationJobs": {
+                    "target": "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobItems",
+                    "traits": {
+                        "smithy.api#documentation": "List of successfully deleted advanced prompt optimization jobs.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Batch Delete Advanced Prompt Optimization Jobs Response",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrock#BatchDeleteEvaluationJob": {
             "type": "operation",
             "input": {
@@ -4992,6 +5346,128 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "[a-z]{1,20}/.{1,20}"
+            }
+        },
+        "com.amazonaws.bedrock#CreateAdvancedPromptOptimizationJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#CreateAdvancedPromptOptimizationJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#CreateAdvancedPromptOptimizationJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#TooManyTagsException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Creates an asynchronous batch job for advanced prompt optimization.",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/advanced-prompt-optimization-jobs"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#CreateAdvancedPromptOptimizationJobRequest": {
+            "type": "structure",
+            "members": {
+                "jobName": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobName",
+                    "traits": {
+                        "smithy.api#documentation": "Name of the advanced prompt optimization job.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobDescription": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobDescription",
+                    "traits": {
+                        "smithy.api#documentation": "Description of the advanced prompt optimization job."
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrock#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "Idempotency token for the request.",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "inputConfig": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationInputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "Input data configuration for the advanced prompt optimization job.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "outputConfig": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationOutputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "Output data configuration for the advanced prompt optimization job.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.bedrock#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "KMS key ARN for encrypting output data."
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.bedrock#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "Tags to associate with the job."
+                    }
+                },
+                "modelConfigurations": {
+                    "target": "com.amazonaws.bedrock#ModelConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "Model configurations for advanced prompt optimization.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Create Advanced Prompt Optimization Job Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#CreateAdvancedPromptOptimizationJobResponse": {
+            "type": "structure",
+            "members": {
+                "jobArn": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobArn",
+                    "traits": {
+                        "smithy.api#documentation": "ARN of the created advanced prompt optimization job.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Create Advanced Prompt Optimization Job Response",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrock#CreateAutomatedReasoningPolicy": {
@@ -9952,6 +10428,140 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration details for response generation based on retrieved text chunks.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#GetAdvancedPromptOptimizationJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#GetAdvancedPromptOptimizationJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#GetAdvancedPromptOptimizationJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Retrieves the details and status of an advanced prompt optimization job.",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/advanced-prompt-optimization-jobs/{jobIdentifier}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetAdvancedPromptOptimizationJobRequest": {
+            "type": "structure",
+            "members": {
+                "jobIdentifier": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "ARN or ID of the advanced prompt optimization job.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Get Advanced Prompt Optimization Job Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetAdvancedPromptOptimizationJobResponse": {
+            "type": "structure",
+            "members": {
+                "jobArn": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobArn",
+                    "traits": {
+                        "smithy.api#documentation": "ARN of the advanced prompt optimization job.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobName": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobName",
+                    "traits": {
+                        "smithy.api#documentation": "Name of the advanced prompt optimization job.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobDescription": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobDescription",
+                    "traits": {
+                        "smithy.api#documentation": "Description of the advanced prompt optimization job."
+                    }
+                },
+                "jobStatus": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Status of the advanced prompt optimization job.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "inputConfig": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationInputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "Input data configuration for the advanced prompt optimization job.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "outputConfig": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationOutputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "Output data configuration for the advanced prompt optimization job.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "encryptionKeyArn": {
+                    "target": "com.amazonaws.bedrock#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "KMS key ARN used for encrypting output data."
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "Creation time of the advanced prompt optimization job.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "Last modified time of the advanced prompt optimization job."
+                    }
+                },
+                "failureMessage": {
+                    "target": "com.amazonaws.bedrock#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "Failure message if the advanced prompt optimization job failed."
+                    }
+                },
+                "modelConfigurations": {
+                    "target": "com.amazonaws.bedrock#ModelConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "Model configurations for advanced prompt optimization.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Get Advanced Prompt Optimization Job Response",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrock#GetAutomatedReasoningPolicy": {
@@ -15208,6 +15818,52 @@
                 }
             }
         },
+        "com.amazonaws.bedrock#InferenceConfiguration": {
+            "type": "structure",
+            "members": {
+                "maxTokens": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "The maximum number of tokens to generate.",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                },
+                "temperature": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "The temperature for sampling.",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1
+                        }
+                    }
+                },
+                "topP": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "The top-p value for nucleus sampling.",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1
+                        }
+                    }
+                },
+                "stopSequences": {
+                    "target": "com.amazonaws.bedrock#NonEmptyStringList",
+                    "traits": {
+                        "smithy.api#documentation": "Stop sequences that end generation.",
+                        "smithy.api#length": {
+                            "max": 2500
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Inference configuration for a model."
+            }
+        },
         "com.amazonaws.bedrock#InferenceProfileArn": {
             "type": "string",
             "traits": {
@@ -15807,6 +16463,102 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The legal term of the agreement.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#ListAdvancedPromptOptimizationJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#ListAdvancedPromptOptimizationJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#ListAdvancedPromptOptimizationJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Lists all advanced prompt optimization jobs for the account.",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/advanced-prompt-optimization-jobs"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "jobSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#ListAdvancedPromptOptimizationJobsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.bedrock#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum number of results to return.",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrock#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "Pagination token for the next page of results.",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.bedrock#SortJobsBy",
+                    "traits": {
+                        "smithy.api#documentation": "Field to sort by in the returned list of jobs.",
+                        "smithy.api#httpQuery": "sortBy"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.bedrock#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "Sort order for the results.",
+                        "smithy.api#httpQuery": "sortOrder"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "List Advanced Prompt Optimization Jobs Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#ListAdvancedPromptOptimizationJobsResponse": {
+            "type": "structure",
+            "members": {
+                "jobSummaries": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "List of advanced prompt optimization job summaries."
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrock#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "Pagination token for the next page of results."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "List Advanced Prompt Optimization Jobs Response",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrock#ListAutomatedReasoningPolicies": {
@@ -18332,6 +19084,46 @@
                 "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/((imported)|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}))(([:][a-z0-9-]{1,63}){0,2})?/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}))$"
             }
         },
+        "com.amazonaws.bedrock#ModelConfiguration": {
+            "type": "structure",
+            "members": {
+                "modelId": {
+                    "target": "com.amazonaws.bedrock#BedrockModelId",
+                    "traits": {
+                        "smithy.api#documentation": "The model ID.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "inferenceConfig": {
+                    "target": "com.amazonaws.bedrock#InferenceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Inference configuration for the model."
+                    }
+                },
+                "additionalModelRequestFields": {
+                    "target": "com.amazonaws.bedrock#AdditionalModelRequestFields",
+                    "traits": {
+                        "smithy.api#documentation": "Additional model request fields."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configuration for a model used in advanced prompt optimization."
+            }
+        },
+        "com.amazonaws.bedrock#ModelConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#ModelConfiguration"
+            },
+            "traits": {
+                "smithy.api#documentation": "Model configurations for advanced prompt optimization.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.bedrock#ModelCopyJobArn": {
             "type": "string",
             "traits": {
@@ -19291,6 +20083,20 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.bedrock#NonEmptyStringList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of non-empty strings."
             }
         },
         "com.amazonaws.bedrock#NonNegativeLong": {
@@ -20935,6 +21741,16 @@
                 "smithy.api#pattern": "^s3://[a-z0-9][-.a-z0-9]{1,61}[a-z0-9](?:/[-!_*'().a-z0-9A-Z]+(?:/[-!_*'().a-z0-9A-Z]+)*)?/?$"
             }
         },
+        "com.amazonaws.bedrock#S3UriFolder": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^s3://[a-z0-9][-.a-z0-9]{1,61}[a-z0-9](?:/[-!_*'().a-z0-9A-Z]+(?:/[-!_*'().a-z0-9A-Z]+)*)?/$"
+            }
+        },
         "com.amazonaws.bedrock#SageMakerEndpoint": {
             "type": "structure",
             "members": {
@@ -21381,6 +22197,68 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>For a Distillation job, the status details for sub-tasks of the job. Possible statuses for each sub-task include the following:</p> <ul> <li> <p>NotStarted</p> </li> <li> <p>InProgress</p> </li> <li> <p>Completed</p> </li> <li> <p>Stopping</p> </li> <li> <p>Stopped</p> </li> <li> <p>Failed</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.bedrock#StopAdvancedPromptOptimizationJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#StopAdvancedPromptOptimizationJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#StopAdvancedPromptOptimizationJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Stops an in-progress advanced prompt optimization job.",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/advanced-prompt-optimization-jobs/{jobIdentifier}/stop"
+                }
+            }
+        },
+        "com.amazonaws.bedrock#StopAdvancedPromptOptimizationJobRequest": {
+            "type": "structure",
+            "members": {
+                "jobIdentifier": {
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "ARN or ID of the advanced prompt optimization job to stop.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Stop Advanced Prompt Optimization Job Request",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#StopAdvancedPromptOptimizationJobResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Stop Advanced Prompt Optimization Job Response",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrock#StopEvaluationJob": {

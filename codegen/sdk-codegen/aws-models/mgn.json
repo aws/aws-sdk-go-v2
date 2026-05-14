@@ -10065,6 +10065,12 @@
                         "smithy.api#documentation": "<p>A list of artifacts generated for this segment.</p>"
                     }
                 },
+                "referencedSegments": {
+                    "target": "com.amazonaws.mgn#referencedSegmentsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of other segments that this segment depends on or references.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -12431,6 +12437,10 @@
                     {
                         "value": "SKIP",
                         "name": "SKIP"
+                    },
+                    {
+                        "value": "MAP_DHCP",
+                        "name": "MAP_DHCP"
                     }
                 ]
             }
