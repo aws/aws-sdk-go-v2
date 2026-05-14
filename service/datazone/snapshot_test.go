@@ -422,6 +422,18 @@ func TestCheckSnapshot_CreateListingChangeSet(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateNotebook(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateNotebook(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateNotebook")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateProject(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateProject(context.Background(), nil, func(o *Options) {
@@ -739,6 +751,18 @@ func TestCheckSnapshot_DeleteListing(t *testing.T) {
 	_, err := svc.DeleteListing(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteListing")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteNotebook(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNotebook(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteNotebook")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1190,6 +1214,30 @@ func TestCheckSnapshot_GetMetadataGenerationRun(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetNotebook(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetNotebook(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetNotebook")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetNotebookExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetNotebookExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetNotebookExport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetNotebookRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetNotebookRun(context.Background(), nil, func(o *Options) {
@@ -1574,6 +1622,18 @@ func TestCheckSnapshot_ListNotebookRuns(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListNotebooks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNotebooks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNotebooks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListNotifications(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListNotifications(context.Background(), nil, func(o *Options) {
@@ -1922,6 +1982,30 @@ func TestCheckSnapshot_StartMetadataGenerationRun(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartNotebookExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartNotebookExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartNotebookExport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartNotebookImport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartNotebookImport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartNotebookImport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartNotebookRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartNotebookRun(context.Background(), nil, func(o *Options) {
@@ -2119,6 +2203,18 @@ func TestCheckSnapshot_UpdateGroupProfile(t *testing.T) {
 	_, err := svc.UpdateGroupProfile(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateGroupProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateNotebook(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateNotebook(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateNotebook")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2581,6 +2677,18 @@ func TestUpdateSnapshot_CreateListingChangeSet(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateNotebook(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateNotebook(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateNotebook")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateProject(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateProject(context.Background(), nil, func(o *Options) {
@@ -2898,6 +3006,18 @@ func TestUpdateSnapshot_DeleteListing(t *testing.T) {
 	_, err := svc.DeleteListing(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteListing")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteNotebook(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNotebook(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteNotebook")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3349,6 +3469,30 @@ func TestUpdateSnapshot_GetMetadataGenerationRun(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetNotebook(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetNotebook(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetNotebook")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetNotebookExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetNotebookExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetNotebookExport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetNotebookRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetNotebookRun(context.Background(), nil, func(o *Options) {
@@ -3733,6 +3877,18 @@ func TestUpdateSnapshot_ListNotebookRuns(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListNotebooks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNotebooks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNotebooks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListNotifications(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListNotifications(context.Background(), nil, func(o *Options) {
@@ -4081,6 +4237,30 @@ func TestUpdateSnapshot_StartMetadataGenerationRun(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartNotebookExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartNotebookExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartNotebookExport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartNotebookImport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartNotebookImport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartNotebookImport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartNotebookRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartNotebookRun(context.Background(), nil, func(o *Options) {
@@ -4278,6 +4458,18 @@ func TestUpdateSnapshot_UpdateGroupProfile(t *testing.T) {
 	_, err := svc.UpdateGroupProfile(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateGroupProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateNotebook(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateNotebook(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateNotebook")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

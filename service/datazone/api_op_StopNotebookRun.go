@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a running notebook run in an Amazon DataZone domain.
+// Stops a running [notebook run] in Amazon SageMaker Unified Studio.
+//
+// [notebook run]: https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html
 func (c *Client) StopNotebookRun(ctx context.Context, params *StopNotebookRunInput, optFns ...func(*Options)) (*StopNotebookRunOutput, error) {
 	if params == nil {
 		params = &StopNotebookRunInput{}
@@ -29,8 +31,8 @@ func (c *Client) StopNotebookRun(ctx context.Context, params *StopNotebookRunInp
 
 type StopNotebookRunInput struct {
 
-	// The identifier of the Amazon DataZone domain in which the notebook run is
-	// stopped.
+	// The identifier of the Amazon SageMaker Unified Studio domain in which the
+	// notebook run is stopped.
 	//
 	// This member is required.
 	DomainIdentifier *string
@@ -49,7 +51,7 @@ type StopNotebookRunInput struct {
 
 type StopNotebookRunOutput struct {
 
-	// The identifier of the Amazon DataZone domain.
+	// The identifier of the Amazon SageMaker Unified Studio domain.
 	//
 	// This member is required.
 	DomainId *string

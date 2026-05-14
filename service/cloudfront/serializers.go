@@ -2969,6 +2969,17 @@ func awsRestxml_serializeOpDocumentCreateTrustStoreInput(v *CreateTrustStoreInpu
 			return err
 		}
 	}
+	if v.UseClientCertificateOCSPEndpoint != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "UseClientCertificateOCSPEndpoint",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(*v.UseClientCertificateOCSPEndpoint)
+	}
 	return nil
 }
 
@@ -14374,6 +14385,11 @@ func awsRestxml_serializeOpHttpBindingsUpdateTrustStoreInput(v *UpdateTrustStore
 	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
+	}
+
+	if v.UseClientCertificateOCSPEndpoint != nil {
+		locationName := "Useclientcertificateocspendpoint"
+		encoder.SetHeader(locationName).Boolean(*v.UseClientCertificateOCSPEndpoint)
 	}
 
 	return nil

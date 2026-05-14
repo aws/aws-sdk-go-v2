@@ -682,6 +682,27 @@ func (EnvironmentStatus) Values() []EnvironmentStatus {
 	}
 }
 
+type FileFormat string
+
+// Enum values for FileFormat
+const (
+	// Export the notebook as a PDF file.
+	FileFormatPdf FileFormat = "PDF"
+	// Export the notebook as a Jupyter notebook (.ipynb) file.
+	FileFormatIpynb FileFormat = "IPYNB"
+)
+
+// Values returns all known values for FileFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FileFormat) Values() []FileFormat {
+	return []FileFormat{
+		"PDF",
+		"IPYNB",
+	}
+}
+
 type FilterExpressionType string
 
 // Enum values for FilterExpressionType
@@ -1262,6 +1283,30 @@ func (NetworkAccessType) Values() []NetworkAccessType {
 	}
 }
 
+type NotebookExportStatus string
+
+// Enum values for NotebookExportStatus
+const (
+	// The notebook export is in progress.
+	NotebookExportStatusInProgress NotebookExportStatus = "IN_PROGRESS"
+	// The notebook export succeeded.
+	NotebookExportStatusSucceeded NotebookExportStatus = "SUCCEEDED"
+	// The notebook export failed.
+	NotebookExportStatusFailed NotebookExportStatus = "FAILED"
+)
+
+// Values returns all known values for NotebookExportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotebookExportStatus) Values() []NotebookExportStatus {
+	return []NotebookExportStatus{
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type NotebookRunStatus string
 
 // Enum values for NotebookRunStatus
@@ -1295,6 +1340,27 @@ func (NotebookRunStatus) Values() []NotebookRunStatus {
 		"STOPPED",
 		"SUCCEEDED",
 		"FAILED",
+	}
+}
+
+type NotebookStatus string
+
+// Enum values for NotebookStatus
+const (
+	// The notebook is active.
+	NotebookStatusActive NotebookStatus = "ACTIVE"
+	// The notebook is archived.
+	NotebookStatusArchived NotebookStatus = "ARCHIVED"
+)
+
+// Values returns all known values for NotebookStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotebookStatus) Values() []NotebookStatus {
+	return []NotebookStatus{
+		"ACTIVE",
+		"ARCHIVED",
 	}
 }
 

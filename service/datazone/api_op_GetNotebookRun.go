@@ -12,7 +12,9 @@ import (
 	"time"
 )
 
-// Gets the details of a notebook run in an Amazon DataZone domain.
+// Gets the details of a [notebook run] in Amazon SageMaker Unified Studio.
+//
+// [notebook run]: https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html
 func (c *Client) GetNotebookRun(ctx context.Context, params *GetNotebookRunInput, optFns ...func(*Options)) (*GetNotebookRunOutput, error) {
 	if params == nil {
 		params = &GetNotebookRunInput{}
@@ -30,7 +32,8 @@ func (c *Client) GetNotebookRun(ctx context.Context, params *GetNotebookRunInput
 
 type GetNotebookRunInput struct {
 
-	// The identifier of the Amazon DataZone domain in which the notebook run exists.
+	// The identifier of the Amazon SageMaker Unified Studio domain in which the
+	// notebook run exists.
 	//
 	// This member is required.
 	DomainIdentifier *string
@@ -45,7 +48,7 @@ type GetNotebookRunInput struct {
 
 type GetNotebookRunOutput struct {
 
-	// The identifier of the Amazon DataZone domain.
+	// The identifier of the Amazon SageMaker Unified Studio domain.
 	//
 	// This member is required.
 	DomainId *string

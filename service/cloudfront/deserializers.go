@@ -60890,6 +60890,22 @@ func awsRestxml_deserializeDocumentTrustStore(v **types.TrustStore, decoder smit
 				sv.Status = types.TrustStoreStatus(xtv)
 			}
 
+		case strings.EqualFold("UseClientCertificateOCSPEndpoint", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
+				}
+				sv.UseClientCertificateOCSPEndpoint = ptr.Bool(xtv)
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()

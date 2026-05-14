@@ -1113,8 +1113,9 @@ type SecurityGroupMappingStrategy string
 
 // Enum values for SecurityGroupMappingStrategy
 const (
-	SecurityGroupMappingStrategyMap  SecurityGroupMappingStrategy = "MAP"
-	SecurityGroupMappingStrategySkip SecurityGroupMappingStrategy = "SKIP"
+	SecurityGroupMappingStrategyMap     SecurityGroupMappingStrategy = "MAP"
+	SecurityGroupMappingStrategySkip    SecurityGroupMappingStrategy = "SKIP"
+	SecurityGroupMappingStrategyMapDhcp SecurityGroupMappingStrategy = "MAP_DHCP"
 )
 
 // Values returns all known values for SecurityGroupMappingStrategy. Note that
@@ -1126,6 +1127,7 @@ func (SecurityGroupMappingStrategy) Values() []SecurityGroupMappingStrategy {
 	return []SecurityGroupMappingStrategy{
 		"MAP",
 		"SKIP",
+		"MAP_DHCP",
 	}
 }
 

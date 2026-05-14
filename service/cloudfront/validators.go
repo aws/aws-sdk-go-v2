@@ -8925,9 +8925,7 @@ func validateOpUpdateTrustStoreInput(v *UpdateTrustStoreInput) error {
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
-	if v.CaCertificatesBundleSource == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CaCertificatesBundleSource"))
-	} else if v.CaCertificatesBundleSource != nil {
+	if v.CaCertificatesBundleSource != nil {
 		if err := validateCaCertificatesBundleSource(v.CaCertificatesBundleSource); err != nil {
 			invalidParams.AddNested("CaCertificatesBundleSource", err.(smithy.InvalidParamsError))
 		}

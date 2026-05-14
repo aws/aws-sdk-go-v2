@@ -30724,6 +30724,11 @@ func awsAwsjson11_serializeOpDocumentGetCatalogsInput(v *GetCatalogsInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.HasDatabases != nil {
+		ok := object.Key("HasDatabases")
+		ok.Boolean(*v.HasDatabases)
+	}
+
 	if v.IncludeRoot != nil {
 		ok := object.Key("IncludeRoot")
 		ok.Boolean(*v.IncludeRoot)

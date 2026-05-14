@@ -42,6 +42,10 @@ type CreateTrustStoreInput struct {
 	// A complex type that contains zero or more Tag elements.
 	Tags *types.Tags
 
+	// A Boolean that determines whether to use the CA certificate's OCSP endpoint to
+	// check certificate revocation status.
+	UseClientCertificateOCSPEndpoint *bool
+
 	noSmithyDocumentSerde
 }
 

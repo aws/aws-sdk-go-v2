@@ -818,6 +818,18 @@ func TestCheckSnapshot_ListMessageTemplateVersions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListModels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListModels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListModels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListQuickResponses(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListQuickResponses(context.Background(), nil, func(o *Options) {
@@ -1926,6 +1938,18 @@ func TestUpdateSnapshot_ListMessageTemplateVersions(t *testing.T) {
 	_, err := svc.ListMessageTemplateVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListMessageTemplateVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListModels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListModels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListModels")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

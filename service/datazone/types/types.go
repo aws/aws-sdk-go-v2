@@ -938,7 +938,8 @@ type BusinessNameGenerationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The information about a cell in a notebook run in Amazon DataZone.
+// The information about a cell in a notebook run in Amazon SageMaker Unified
+// Studio.
 type CellInformation struct {
 	noSmithyDocumentSerde
 }
@@ -964,7 +965,7 @@ type ColumnFilterConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The compute configuration for a notebook run in Amazon DataZone.
+// The compute configuration for a notebook run in Amazon SageMaker Unified Studio.
 type ComputeConfig struct {
 
 	// The environment version for the notebook run compute.
@@ -2418,7 +2419,8 @@ type EnvironmentBlueprintSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The environment configuration for a notebook run in Amazon DataZone.
+// The environment configuration for a notebook run in Amazon SageMaker Unified
+// Studio.
 type EnvironmentConfig struct {
 
 	// The image version for the notebook run environment.
@@ -4367,7 +4369,7 @@ type NameIdentifier struct {
 	noSmithyDocumentSerde
 }
 
-// The network configuration for a notebook run in Amazon DataZone.
+// The network configuration for a notebook run in Amazon SageMaker Unified Studio.
 type NetworkConfig struct {
 
 	// The network access type for the notebook run. Valid values are
@@ -4391,7 +4393,30 @@ type NetworkConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The error details of a failed notebook run in Amazon DataZone.
+// The error details of a notebook in Amazon SageMaker Unified Studio.
+type NotebookError struct {
+
+	// The error message. The maximum length is 256 characters.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The error details of a failed notebook export in Amazon SageMaker Unified
+// Studio.
+type NotebookExportError struct {
+
+	// The error message. The maximum length is 256 characters.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The error details of a failed notebook run in Amazon SageMaker Unified Studio.
 type NotebookRunError struct {
 
 	// The error message. The maximum length is 1024 characters.
@@ -4402,10 +4427,10 @@ type NotebookRunError struct {
 	noSmithyDocumentSerde
 }
 
-// The summary of a notebook run in Amazon DataZone.
+// The summary of a notebook run in Amazon SageMaker Unified Studio.
 type NotebookRunSummary struct {
 
-	// The identifier of the Amazon DataZone domain.
+	// The identifier of the Amazon SageMaker Unified Studio domain.
 	//
 	// This member is required.
 	DomainId *string
@@ -4452,6 +4477,52 @@ type NotebookRunSummary struct {
 	UpdatedAt *time.Time
 
 	// The identifier of the user who last updated the notebook run.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of a notebook in Amazon SageMaker Unified Studio.
+type NotebookSummary struct {
+
+	// The identifier of the Amazon SageMaker Unified Studio domain.
+	//
+	// This member is required.
+	DomainId *string
+
+	// The identifier of the notebook.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the notebook.
+	//
+	// This member is required.
+	Name *string
+
+	// The identifier of the project that owns the notebook.
+	//
+	// This member is required.
+	OwningProjectId *string
+
+	// The status of the notebook.
+	//
+	// This member is required.
+	Status NotebookStatus
+
+	// The timestamp of when the notebook was created.
+	CreatedAt *time.Time
+
+	// The identifier of the user who created the notebook.
+	CreatedBy *string
+
+	// The description of the notebook.
+	Description *string
+
+	// The timestamp of when the notebook was last updated.
+	UpdatedAt *time.Time
+
+	// The identifier of the user who last updated the notebook.
 	UpdatedBy *string
 
 	noSmithyDocumentSerde
@@ -4639,6 +4710,24 @@ type OpenLineageRunEventSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The output location for a notebook export in Amazon SageMaker Unified Studio.
+//
+// The following types satisfy this interface:
+//
+//	OutputLocationMemberS3
+type OutputLocation interface {
+	isOutputLocation()
+}
+
+// The Amazon Simple Storage Service destination for the notebook export.
+type OutputLocationMemberS3 struct {
+	Value S3Destination
+
+	noSmithyDocumentSerde
+}
+
+func (*OutputLocationMemberS3) isOutputLocation() {}
+
 // The grant details of the override domain unit owners policy.
 type OverrideDomainUnitOwnersPolicyGrantDetail struct {
 
@@ -4753,7 +4842,8 @@ type OwnerUserPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
-// The package configuration for a notebook run environment in Amazon DataZone.
+// The package configuration for a notebook run environment in Amazon SageMaker
+// Unified Studio.
 type PackageConfig struct {
 
 	// The package manager for the notebook run environment. The default value is UV .
@@ -6066,6 +6156,16 @@ type RunStatisticsForAssets struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon Simple Storage Service destination for a notebook export in Amazon
+// SageMaker Unified Studio.
+type S3Destination struct {
+
+	// The Amazon Simple Storage Service URI of the exported notebook.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon S3 properties of a connection.
 type S3PropertiesInput struct {
 
@@ -6370,6 +6470,24 @@ type SingleSignOn struct {
 	noSmithyDocumentSerde
 }
 
+// The source location for a notebook import in Amazon SageMaker Unified Studio.
+//
+// The following types satisfy this interface:
+//
+//	SourceLocationMemberS3
+type SourceLocation interface {
+	isSourceLocation()
+}
+
+// The Amazon Simple Storage Service URI of the notebook source file.
+type SourceLocationMemberS3 struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceLocationMemberS3) isSourceLocation() {}
+
 // The Spark EMR properties.
 type SparkEmrPropertiesInput struct {
 
@@ -6576,7 +6694,7 @@ type SsoUserProfileDetails struct {
 	noSmithyDocumentSerde
 }
 
-// The storage configuration for a notebook run in Amazon DataZone.
+// The storage configuration for a notebook run in Amazon SageMaker Unified Studio.
 type StorageConfig struct {
 
 	// The ARN of the KMS key used for encryption.
@@ -7247,7 +7365,7 @@ type TextMatchItem struct {
 	noSmithyDocumentSerde
 }
 
-// The timeout configuration for a notebook run in Amazon DataZone.
+// The timeout configuration for a notebook run in Amazon SageMaker Unified Studio.
 type TimeoutConfig struct {
 
 	// The timeout for the notebook run, in minutes. The minimum value is 60 minutes
@@ -7366,7 +7484,7 @@ type Topic struct {
 	noSmithyDocumentSerde
 }
 
-// The source that triggered a notebook run in Amazon DataZone.
+// The source that triggered a notebook run in Amazon SageMaker Unified Studio.
 type TriggerSource struct {
 
 	// The name of the trigger source.
@@ -7560,6 +7678,7 @@ func (*UnknownUnionMember) isMatchRationaleItem()            {}
 func (*UnknownUnionMember) isMember()                        {}
 func (*UnknownUnionMember) isMemberDetails()                 {}
 func (*UnknownUnionMember) isModel()                         {}
+func (*UnknownUnionMember) isOutputLocation()                {}
 func (*UnknownUnionMember) isOwnerProperties()               {}
 func (*UnknownUnionMember) isOwnerPropertiesOutput()         {}
 func (*UnknownUnionMember) isPermissions()                   {}
@@ -7581,6 +7700,7 @@ func (*UnknownUnionMember) isSearchInventoryResultItem()     {}
 func (*UnknownUnionMember) isSearchResultItem()              {}
 func (*UnknownUnionMember) isSearchTypesResultItem()         {}
 func (*UnknownUnionMember) isSelfGrantStatusOutput()         {}
+func (*UnknownUnionMember) isSourceLocation()                {}
 func (*UnknownUnionMember) isSubscribedListingItem()         {}
 func (*UnknownUnionMember) isSubscribedPrincipal()           {}
 func (*UnknownUnionMember) isSubscribedPrincipalInput()      {}

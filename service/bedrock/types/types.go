@@ -76,6 +76,57 @@ type AccountEnforcedGuardrailOutputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Input data configuration for the advanced prompt optimization job.
+type AdvancedPromptOptimizationInputConfig struct {
+
+	// S3 URI of the input JSONL file.
+	//
+	// This member is required.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary of an advanced prompt optimization job.
+type AdvancedPromptOptimizationJobSummary struct {
+
+	// Creation time of the advanced prompt optimization job.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// ARN of the advanced prompt optimization job.
+	//
+	// This member is required.
+	JobArn *string
+
+	// Name of the advanced prompt optimization job.
+	//
+	// This member is required.
+	JobName *string
+
+	// Status of the advanced prompt optimization job.
+	//
+	// This member is required.
+	JobStatus AdvancedPromptOptimizationJobStatus
+
+	// Last modified time of the advanced prompt optimization job.
+	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Output data configuration for the advanced prompt optimization job.
+type AdvancedPromptOptimizationOutputConfig struct {
+
+	// S3 URI prefix for the output location.
+	//
+	// This member is required.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the agreement availability
 type AgreementAvailability struct {
 
@@ -2289,6 +2340,41 @@ type AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets struct 
 }
 
 func (*AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets) isAutomatedReasoningPolicyWorkflowTypeContent() {
+}
+
+// Batch deletion error for an advanced prompt optimization job.
+type BatchDeleteAdvancedPromptOptimizationJobError struct {
+
+	// Error code for the deletion failure.
+	//
+	// This member is required.
+	Code *string
+
+	// Identifier of the job that failed to delete.
+	//
+	// This member is required.
+	JobIdentifier *string
+
+	// Error message describing the deletion failure.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Successfully deleted advanced prompt optimization job.
+type BatchDeleteAdvancedPromptOptimizationJobItem struct {
+
+	// Identifier of the deleted job.
+	//
+	// This member is required.
+	JobIdentifier *string
+
+	// Status of the deleted job.
+	//
+	// This member is required.
+	JobStatus AdvancedPromptOptimizationJobStatus
+
+	noSmithyDocumentSerde
 }
 
 // A JSON array that provides the status of the evaluation jobs being deleted.
@@ -4728,6 +4814,24 @@ type ImportedModelSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Inference configuration for a model.
+type InferenceConfiguration struct {
+
+	// The maximum number of tokens to generate.
+	MaxTokens *int32
+
+	// Stop sequences that end generation.
+	StopSequences []string
+
+	// The temperature for sampling.
+	Temperature *float32
+
+	// The top-p value for nucleus sampling.
+	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a model.
 type InferenceProfileModel struct {
 
@@ -5135,6 +5239,23 @@ type MetadataConfigurationForReranking struct {
 	// exclude specific metadata fields during reranking. This is only used when
 	// selectionMode is set to SELECTIVE.
 	SelectiveModeConfiguration RerankingMetadataSelectiveModeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for a model used in advanced prompt optimization.
+type ModelConfiguration struct {
+
+	// The model ID.
+	//
+	// This member is required.
+	ModelId *string
+
+	// Additional model request fields.
+	AdditionalModelRequestFields map[string]document.Interface
+
+	// Inference configuration for the model.
+	InferenceConfig *InferenceConfiguration
 
 	noSmithyDocumentSerde
 }

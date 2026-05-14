@@ -1,0 +1,8 @@
+{
+    "id": "be41774d-f562-4b12-81b1-dec304ef5a79",
+    "type": "feature",
+    "description": "Release --has-databases parameter for AWS Glue get-catalogs API, which filters catalog responses to include only those capable of containing databases, excluding parent catalogs that hold only other catalogs. Remove model-level validation on partition index list size for AWS Glue tables.",
+    "modules": [
+        "service/glue"
+    ]
+}

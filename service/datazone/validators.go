@@ -610,6 +610,26 @@ func (m *validateOpCreateListingChangeSet) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateNotebook struct {
+}
+
+func (*validateOpCreateNotebook) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateNotebook) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateNotebookInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateNotebookInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateProject struct {
 }
 
@@ -1145,6 +1165,26 @@ func (m *validateOpDeleteListing) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteListingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteNotebook struct {
+}
+
+func (*validateOpDeleteNotebook) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteNotebook) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteNotebookInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteNotebookInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1890,6 +1930,46 @@ func (m *validateOpGetMetadataGenerationRun) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetNotebookExport struct {
+}
+
+func (*validateOpGetNotebookExport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetNotebookExport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetNotebookExportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetNotebookExportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetNotebook struct {
+}
+
+func (*validateOpGetNotebook) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetNotebook) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetNotebookInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetNotebookInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetNotebookRun struct {
 }
 
@@ -2510,6 +2590,26 @@ func (m *validateOpListNotebookRuns) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListNotebooks struct {
+}
+
+func (*validateOpListNotebooks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListNotebooks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListNotebooksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListNotebooksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListNotifications struct {
 }
 
@@ -3090,6 +3190,46 @@ func (m *validateOpStartMetadataGenerationRun) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartNotebookExport struct {
+}
+
+func (*validateOpStartNotebookExport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartNotebookExport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartNotebookExportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartNotebookExportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartNotebookImport struct {
+}
+
+func (*validateOpStartNotebookImport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartNotebookImport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartNotebookImportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartNotebookImportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartNotebookRun struct {
 }
 
@@ -3430,6 +3570,26 @@ func (m *validateOpUpdateGroupProfile) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateNotebook struct {
+}
+
+func (*validateOpUpdateNotebook) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateNotebook) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateNotebookInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateNotebookInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateProject struct {
 }
 
@@ -3710,6 +3870,10 @@ func addOpCreateListingChangeSetValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateListingChangeSet{}, middleware.After)
 }
 
+func addOpCreateNotebookValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateNotebook{}, middleware.After)
+}
+
 func addOpCreateProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProject{}, middleware.After)
 }
@@ -3816,6 +3980,10 @@ func addOpDeleteGlossaryTermValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpDeleteListingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteListing{}, middleware.After)
+}
+
+func addOpDeleteNotebookValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteNotebook{}, middleware.After)
 }
 
 func addOpDeleteProjectValidationMiddleware(stack *middleware.Stack) error {
@@ -3966,6 +4134,14 @@ func addOpGetMetadataGenerationRunValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpGetMetadataGenerationRun{}, middleware.After)
 }
 
+func addOpGetNotebookExportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetNotebookExport{}, middleware.After)
+}
+
+func addOpGetNotebookValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetNotebook{}, middleware.After)
+}
+
 func addOpGetNotebookRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetNotebookRun{}, middleware.After)
 }
@@ -4090,6 +4266,10 @@ func addOpListNotebookRunsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListNotebookRuns{}, middleware.After)
 }
 
+func addOpListNotebooksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListNotebooks{}, middleware.After)
+}
+
 func addOpListNotificationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListNotifications{}, middleware.After)
 }
@@ -4206,6 +4386,14 @@ func addOpStartMetadataGenerationRunValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpStartMetadataGenerationRun{}, middleware.After)
 }
 
+func addOpStartNotebookExportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartNotebookExport{}, middleware.After)
+}
+
+func addOpStartNotebookImportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartNotebookImport{}, middleware.After)
+}
+
 func addOpStartNotebookRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartNotebookRun{}, middleware.After)
 }
@@ -4272,6 +4460,10 @@ func addOpUpdateGlossaryTermValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpUpdateGroupProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateGroupProfile{}, middleware.After)
+}
+
+func addOpUpdateNotebookValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateNotebook{}, middleware.After)
 }
 
 func addOpUpdateProjectValidationMiddleware(stack *middleware.Stack) error {
@@ -4888,6 +5080,23 @@ func validateEntityPattern(v *types.EntityPattern) error {
 	if v.Filters != nil {
 		if err := validateFilterClause(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEnvironmentConfig(v *types.EnvironmentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnvironmentConfig"}
+	if v.PackageConfig != nil {
+		if err := validatePackageConfig(v.PackageConfig); err != nil {
+			invalidParams.AddNested("PackageConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5667,6 +5876,21 @@ func validateOwnerUserProperties(v *types.OwnerUserProperties) error {
 	invalidParams := smithy.InvalidParamsError{Context: "OwnerUserProperties"}
 	if v.UserIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePackageConfig(v *types.PackageConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PackageConfig"}
+	if len(v.PackageManager) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageManager"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7258,6 +7482,27 @@ func validateOpCreateListingChangeSetInput(v *CreateListingChangeSetInput) error
 	}
 }
 
+func validateOpCreateNotebookInput(v *CreateNotebookInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateNotebookInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.OwningProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OwningProjectIdentifier"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateProjectInput(v *CreateProjectInput) error {
 	if v == nil {
 		return nil
@@ -7840,6 +8085,24 @@ func validateOpDeleteListingInput(v *DeleteListingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteListingInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteNotebookInput(v *DeleteNotebookInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteNotebookInput"}
 	if v.DomainIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
 	}
@@ -8537,6 +8800,42 @@ func validateOpGetMetadataGenerationRunInput(v *GetMetadataGenerationRunInput) e
 	}
 }
 
+func validateOpGetNotebookExportInput(v *GetNotebookExportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetNotebookExportInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetNotebookInput(v *GetNotebookInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetNotebookInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetNotebookRunInput(v *GetNotebookRunInput) error {
 	if v == nil {
 		return nil
@@ -9076,6 +9375,24 @@ func validateOpListNotebookRunsInput(v *ListNotebookRunsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListNotebookRunsInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.OwningProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OwningProjectIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListNotebooksInput(v *ListNotebooksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListNotebooksInput"}
 	if v.DomainIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
 	}
@@ -9710,6 +10027,54 @@ func validateOpStartMetadataGenerationRunInput(v *StartMetadataGenerationRunInpu
 	}
 }
 
+func validateOpStartNotebookExportInput(v *StartNotebookExportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartNotebookExportInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.NotebookIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotebookIdentifier"))
+	}
+	if v.OwningProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OwningProjectIdentifier"))
+	}
+	if len(v.FileFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FileFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartNotebookImportInput(v *StartNotebookImportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartNotebookImportInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.OwningProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OwningProjectIdentifier"))
+	}
+	if v.SourceLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLocation"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartNotebookRunInput(v *StartNotebookRunInput) error {
 	if v == nil {
 		return nil
@@ -10057,6 +10422,29 @@ func validateOpUpdateGroupProfileInput(v *UpdateGroupProfileInput) error {
 	}
 	if len(v.Status) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateNotebookInput(v *UpdateNotebookInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateNotebookInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.EnvironmentConfiguration != nil {
+		if err := validateEnvironmentConfig(v.EnvironmentConfiguration); err != nil {
+			invalidParams.AddNested("EnvironmentConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

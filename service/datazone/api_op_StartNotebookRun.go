@@ -12,9 +12,11 @@ import (
 	"time"
 )
 
-// Starts a notebook run in an Amazon DataZone domain. A notebook run represents
-// the execution of a Amazon DataZone notebook within a project. You can configure
-// compute, network, timeout, and environment settings for the run.
+// Starts a notebook run in Amazon SageMaker Unified Studio. A notebook run
+// represents the execution of an [Amazon SageMaker notebook]within a project. You can configure compute,
+// network, timeout, and environment settings for the run.
+//
+// [Amazon SageMaker notebook]: https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html
 func (c *Client) StartNotebookRun(ctx context.Context, params *StartNotebookRunInput, optFns ...func(*Options)) (*StartNotebookRunOutput, error) {
 	if params == nil {
 		params = &StartNotebookRunInput{}
@@ -32,8 +34,8 @@ func (c *Client) StartNotebookRun(ctx context.Context, params *StartNotebookRunI
 
 type StartNotebookRunInput struct {
 
-	// The identifier of the Amazon DataZone domain in which the notebook run is
-	// started.
+	// The identifier of the Amazon SageMaker Unified Studio domain in which the
+	// notebook run is started.
 	//
 	// This member is required.
 	DomainIdentifier *string
@@ -85,7 +87,7 @@ type StartNotebookRunInput struct {
 
 type StartNotebookRunOutput struct {
 
-	// The identifier of the Amazon DataZone domain.
+	// The identifier of the Amazon SageMaker Unified Studio domain.
 	//
 	// This member is required.
 	DomainId *string

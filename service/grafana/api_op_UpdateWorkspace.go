@@ -52,6 +52,13 @@ type UpdateWorkspaceInput struct {
 	// access in the workspaceOrganizationalUnits parameter.
 	AccountAccessType types.AccountAccessType
 
+	// Specifies whether the workspace supports IPv4 only, or IPv4 and IPv6. Valid
+	// values are IPv4 and DualStack . For more information about IP address types, see [Network access control]
+	// .
+	//
+	// [Network access control]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-nac.html
+	IpAddressType types.IPAddressType
+
 	// The configuration settings for network access to your workspace.
 	//
 	// When this is configured, only listed IP addresses and VPC endpoints will be

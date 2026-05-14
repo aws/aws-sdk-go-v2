@@ -93,6 +93,13 @@ type CreateWorkspaceInput struct {
 	// To get a list of supported versions, use the ListVersions operation.
 	GrafanaVersion *string
 
+	// Specifies whether the workspace supports IPv4 only, or IPv4 and IPv6. Valid
+	// values are IPv4 and DualStack . For more information about IP address types, see [Network access control]
+	// .
+	//
+	// [Network access control]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-nac.html
+	IpAddressType types.IPAddressType
+
 	// The ID or ARN of the Key Management Service key to use for encrypting workspace
 	// data.
 	KmsKeyId *string

@@ -1298,6 +1298,9 @@ type NetworkMigrationCodeGenerationSegment struct {
 	// The unique identifier of the network migration execution.
 	NetworkMigrationExecutionID *string
 
+	// A list of other segments that this segment depends on or references.
+	ReferencedSegments []string
+
 	// The unique identifier of the segment.
 	SegmentID *string
 

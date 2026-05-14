@@ -3916,6 +3916,45 @@ type MessageTemplateVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The summary of a model available to an Amazon Q in Connect assistant.
+type ModelSummary struct {
+
+	// The display name of the model.
+	//
+	// This member is required.
+	DisplayName *string
+
+	// The identifier of the model.
+	//
+	// This member is required.
+	ModelId *string
+
+	// The cross-region availability status of the model. NONE indicates the model is
+	// only available in a single region, REGIONAL indicates the model is available
+	// through regional inference, and GLOBAL indicates the model is available through
+	// global cross-region inference.
+	CrossRegionStatus CrossRegionStatus
+
+	// The timestamp when the model will reach end of life and no longer be available
+	// for use.
+	EndOfLifeTimestamp *time.Time
+
+	// The timestamp when the model lifecycle will transition from ACTIVE to LEGACY .
+	LegacyTimestamp *time.Time
+
+	// The current lifecycle of the model. ACTIVE indicates the model is recommended
+	// for use and LEGACY indicates the model is still usable but is deprecated.
+	ModelLifecycle ModelLifecycle
+
+	// The list of AI Prompt types that the model supports.
+	SupportedAIPromptTypes []AIPromptType
+
+	// Whether the model supports prompt caching.
+	SupportsPromptCaching *bool
+
+	noSmithyDocumentSerde
+}
+
 // Details about notes chunk data.
 type NotesChunkDataDetails struct {
 

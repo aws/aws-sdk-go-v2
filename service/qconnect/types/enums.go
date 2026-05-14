@@ -365,6 +365,27 @@ func (ConversationStatusReason) Values() []ConversationStatusReason {
 	}
 }
 
+type CrossRegionStatus string
+
+// Enum values for CrossRegionStatus
+const (
+	CrossRegionStatusNone     CrossRegionStatus = "NONE"
+	CrossRegionStatusRegional CrossRegionStatus = "REGIONAL"
+	CrossRegionStatusGlobal   CrossRegionStatus = "GLOBAL"
+)
+
+// Values returns all known values for CrossRegionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CrossRegionStatus) Values() []CrossRegionStatus {
+	return []CrossRegionStatus{
+		"NONE",
+		"REGIONAL",
+		"GLOBAL",
+	}
+}
+
 type ExternalSource string
 
 // Enum values for ExternalSource
@@ -831,6 +852,25 @@ func (MessageType) Values() []MessageType {
 	return []MessageType{
 		"TEXT",
 		"TOOL_USE_RESULT",
+	}
+}
+
+type ModelLifecycle string
+
+// Enum values for ModelLifecycle
+const (
+	ModelLifecycleActive ModelLifecycle = "ACTIVE"
+	ModelLifecycleLegacy ModelLifecycle = "LEGACY"
+)
+
+// Values returns all known values for ModelLifecycle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ModelLifecycle) Values() []ModelLifecycle {
+	return []ModelLifecycle{
+		"ACTIVE",
+		"LEGACY",
 	}
 }
 

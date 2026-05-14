@@ -1,0 +1,8 @@
+{
+    "id": "2aeca41f-f11e-4536-bf6b-7e138485b6eb",
+    "type": "feature",
+    "description": "Adds support for dual-stack (IPv4 and IPv6) connectivity to Amazon Managed Grafana workspaces. Customers can configure the ipAddressType parameter when creating or updating a workspace to choose between IPv4-only or dual-stack (IPv4 and IPv6) access.",
+    "modules": [
+        "service/grafana"
+    ]
+}

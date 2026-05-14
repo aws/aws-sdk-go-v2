@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists notebook runs in an Amazon DataZone domain.
+// Lists [notebook runs] in Amazon SageMaker Unified Studio.
+//
+// [notebook runs]: https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html
 func (c *Client) ListNotebookRuns(ctx context.Context, params *ListNotebookRunsInput, optFns ...func(*Options)) (*ListNotebookRunsOutput, error) {
 	if params == nil {
 		params = &ListNotebookRunsInput{}
@@ -29,7 +31,8 @@ func (c *Client) ListNotebookRuns(ctx context.Context, params *ListNotebookRunsI
 
 type ListNotebookRunsInput struct {
 
-	// The identifier of the Amazon DataZone domain in which to list notebook runs.
+	// The identifier of the Amazon SageMaker Unified Studio domain in which to list
+	// notebook runs.
 	//
 	// This member is required.
 	DomainIdentifier *string

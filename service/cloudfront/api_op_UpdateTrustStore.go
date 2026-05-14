@@ -29,11 +29,6 @@ func (c *Client) UpdateTrustStore(ctx context.Context, params *UpdateTrustStoreI
 
 type UpdateTrustStoreInput struct {
 
-	// The CA certificates bundle source.
-	//
-	// This member is required.
-	CaCertificatesBundleSource types.CaCertificatesBundleSource
-
 	// The trust store ID.
 	//
 	// This member is required.
@@ -43,6 +38,13 @@ type UpdateTrustStoreInput struct {
 	//
 	// This member is required.
 	IfMatch *string
+
+	// The CA certificates bundle source.
+	CaCertificatesBundleSource types.CaCertificatesBundleSource
+
+	// A Boolean that determines whether to use the CA certificate's OCSP endpoint to
+	// check certificate revocation status.
+	UseClientCertificateOCSPEndpoint *bool
 
 	noSmithyDocumentSerde
 }

@@ -1230,6 +1230,26 @@ func (m *validateOpListMessageTemplateVersions) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListModels struct {
+}
+
+func (*validateOpListModels) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListModels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListModelsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListModelsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListQuickResponses struct {
 }
 
@@ -2072,6 +2092,10 @@ func addOpListMessageTemplatesValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpListMessageTemplateVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListMessageTemplateVersions{}, middleware.After)
+}
+
+func addOpListModelsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListModels{}, middleware.After)
 }
 
 func addOpListQuickResponsesValidationMiddleware(stack *middleware.Stack) error {
@@ -5461,6 +5485,21 @@ func validateOpListMessageTemplateVersionsInput(v *ListMessageTemplateVersionsIn
 	}
 	if v.MessageTemplateId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MessageTemplateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListModelsInput(v *ListModelsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListModelsInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

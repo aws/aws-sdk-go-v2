@@ -22776,6 +22776,11 @@ func awsRestjson1_deserializeDocumentNetworkMigrationCodeGenerationSegment(v **t
 				sv.NetworkMigrationExecutionID = ptr.String(jtv)
 			}
 
+		case "referencedSegments":
+			if err := awsRestjson1_deserializeDocumentReferencedSegmentsList(&sv.ReferencedSegments, value); err != nil {
+				return err
+			}
+
 		case "segmentID":
 			if value != nil {
 				jtv, ok := value.(string)
