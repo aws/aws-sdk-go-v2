@@ -7,6 +7,8 @@
 /private/model/cli/gen-api/gen-api
 build/
 bin/
+codegen/sdk-codegen/smithy-build.json
+codegen/protocol-test-codegen/smithy-build.json
 
 # Mac
 .DS_Store/
