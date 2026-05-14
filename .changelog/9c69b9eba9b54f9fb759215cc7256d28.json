@@ -1,8 +1,0 @@
-{
-    "id": "9c69b9eb-a9b5-4f9f-b759-215cc7256d28",
-    "type": "feature",
-    "description": "Add 9 SDK waiters for DMS Schema Conversion async operations. Eliminates manual polling for import, assessment, conversion, export, and creation jobs.",
-    "modules": [
-        "service/databasemigrationservice"
-    ]
-}

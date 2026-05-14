@@ -1,3 +1,7 @@
+# v1.43.0 (2026-05-14)
+
+* **Feature**: Introducing new option for security groups mapping - with MAP-DHCP the service translates security rules from your source environment with DHCP compatibility.
+
 # v1.42.1 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

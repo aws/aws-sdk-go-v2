@@ -1,8 +1,0 @@
-{
-    "id": "6a45505d-93ea-4d6e-9da6-0176f5b2779c",
-    "type": "feature",
-    "description": "Adds support for SageMaker Unified Studio notebook operations, including notebook import and export",
-    "modules": [
-        "service/datazone"
-    ]
-}

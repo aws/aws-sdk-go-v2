@@ -1,8 +1,0 @@
-{
-    "id": "d1277d43-47b1-44b1-b7a7-9eefb972e972",
-    "type": "feature",
-    "description": "Advanced Prompt Optimization (AdvPO) allows you to optimize and migrate your prompts for any model on Bedrock by automatically evaluating responses and rewriting prompts to improve performance. This release provides a programmatic way to create, get, list, stop, and delete AdvPO jobs.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

@@ -1,3 +1,23 @@
+# Release (2026-05-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.60.0](service/bedrock/CHANGELOG.md#v1600-2026-05-14)
+  * **Feature**: Advanced Prompt Optimization (AdvPO) allows you to optimize and migrate your prompts for any model on Bedrock by automatically evaluating responses and rewriting prompts to improve performance. This release provides a programmatic way to create, get, list, stop, and delete AdvPO jobs.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.64.0](service/cloudfront/CHANGELOG.md#v1640-2026-05-14)
+  * **Feature**: Adding a new boolean for OCSP Revocations in Viewer mTLS Create and Update APIs, and adding a new 'Passthrough' option for TrustStore modes
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.63.0](service/databasemigrationservice/CHANGELOG.md#v1630-2026-05-14)
+  * **Feature**: Add 9 SDK waiters for DMS Schema Conversion async operations. Eliminates manual polling for import, assessment, conversion, export, and creation jobs.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.60.0](service/datazone/CHANGELOG.md#v1600-2026-05-14)
+  * **Feature**: Adds support for SageMaker Unified Studio notebook operations, including notebook import and export
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.142.0](service/glue/CHANGELOG.md#v11420-2026-05-14)
+  * **Feature**: Release --has-databases parameter for AWS Glue get-catalogs API, which filters catalog responses to include only those capable of containing databases, excluding parent catalogs that hold only other catalogs. Remove model-level validation on partition index list size for AWS Glue tables.
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.34.0](service/grafana/CHANGELOG.md#v1340-2026-05-14)
+  * **Feature**: Adds support for dual-stack (IPv4 and IPv6) connectivity to Amazon Managed Grafana workspaces. Customers can configure the ipAddressType parameter when creating or updating a workspace to choose between IPv4-only or dual-stack (IPv4 and IPv6) access.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.43.0](service/mgn/CHANGELOG.md#v1430-2026-05-14)
+  * **Feature**: Introducing new option for security groups mapping - with MAP-DHCP the service translates security rules from your source environment with DHCP compatibility.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.31.0](service/qconnect/CHANGELOG.md#v1310-2026-05-14)
+  * **Feature**: ListModels is an API that returns the available AI models for a Connect Assistant based on its region and AI prompt type.
+
 # Release (2026-05-13)
 
 ## Module Highlights

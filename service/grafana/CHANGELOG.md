@@ -1,3 +1,7 @@
+# v1.34.0 (2026-05-14)
+
+* **Feature**: Adds support for dual-stack (IPv4 and IPv6) connectivity to Amazon Managed Grafana workspaces. Customers can configure the ipAddressType parameter when creating or updating a workspace to choose between IPv4-only or dual-stack (IPv4 and IPv6) access.
+
 # v1.33.6 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

@@ -1,3 +1,7 @@
+# v1.60.0 (2026-05-14)
+
+* **Feature**: Advanced Prompt Optimization (AdvPO) allows you to optimize and migrate your prompts for any model on Bedrock by automatically evaluating responses and rewriting prompts to improve performance. This release provides a programmatic way to create, get, list, stop, and delete AdvPO jobs.
+
 # v1.59.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

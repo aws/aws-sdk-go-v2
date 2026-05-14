@@ -1,3 +1,7 @@
+# v1.63.0 (2026-05-14)
+
+* **Feature**: Add 9 SDK waiters for DMS Schema Conversion async operations. Eliminates manual polling for import, assessment, conversion, export, and creation jobs.
+
 # v1.62.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

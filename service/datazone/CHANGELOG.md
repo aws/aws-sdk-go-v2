@@ -1,3 +1,7 @@
+# v1.60.0 (2026-05-14)
+
+* **Feature**: Adds support for SageMaker Unified Studio notebook operations, including notebook import and export
+
 # v1.59.0 (2026-04-30)
 
 * **Feature**: Adds support for asynchronous notebook runs

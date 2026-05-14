@@ -1,3 +1,7 @@
+# v1.31.0 (2026-05-14)
+
+* **Feature**: ListModels is an API that returns the available AI models for a Connect Assistant based on its region and AI prompt type.
+
 # v1.30.0 (2026-05-01)
 
 * **Feature**: Added reasoning details, statusDescription, and timeToFirstTokenMs fields to the ListSpans response in Amazon Q in Connect to provide visibility into model thinking, error diagnostics, and inference latency metrics.
