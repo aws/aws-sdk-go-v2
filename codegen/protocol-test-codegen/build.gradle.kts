@@ -141,6 +141,7 @@ tasks.register("generate-smithy-build") {
 
 // Run the `buildSdk` automatically.
 tasks["build"]
+    .dependsOn("generate-smithy-build")
     .finalizedBy(tasks["buildSdk"])
 
 val protocolTestDir = file("$rootDir/../internal/protocoltest")
