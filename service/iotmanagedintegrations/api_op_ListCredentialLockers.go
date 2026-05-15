@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,21 @@ type ListCredentialLockersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCredentialLockersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCredentialLockersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCredentialLockersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCredentialLockersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCredentialLockersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCredentialLockersOutput struct {
 
 	// The list of credential lockers.
@@ -52,16 +69,26 @@ type ListCredentialLockersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCredentialLockersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCredentialLockersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCredentialLockersResponse_Items:
+			return deserializeCredentialLockerListDefinition(d, schemas.ListCredentialLockersResponse_Items, &v.Items)
+		case schemas.ListCredentialLockersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCredentialLockersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCredentialLockersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCredentialLockers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCredentialLockers, schemas.ListCredentialLockersRequest, schemas.ListCredentialLockersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCredentialLockers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCredentialLockers, schemas.ListCredentialLockersRequest, schemas.ListCredentialLockersResponse), output: &ListCredentialLockersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCredentialLockers"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -82,6 +84,49 @@ type GetTileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTileInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetTileInput_Arn, *v.Arn)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.GetTileInput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	serializeStringListInput(s, schemas.GetTileInput_ImageAssets, v.ImageAssets)
+	if v.ImageMask != nil {
+		s.WriteBool(schemas.GetTileInput_ImageMask, *v.ImageMask)
+	}
+	if v.OutputDataType != "" {
+		s.WriteString(schemas.GetTileInput_OutputDataType, string(v.OutputDataType))
+	}
+	if v.OutputFormat != nil {
+		s.WriteString(schemas.GetTileInput_OutputFormat, *v.OutputFormat)
+	}
+	if v.PropertyFilters != nil {
+		s.WriteString(schemas.GetTileInput_PropertyFilters, *v.PropertyFilters)
+	}
+	if v.Target != "" {
+		s.WriteString(schemas.GetTileInput_Target, string(v.Target))
+	}
+	if v.TimeRangeFilter != nil {
+		s.WriteString(schemas.GetTileInput_TimeRangeFilter, *v.TimeRangeFilter)
+	}
+	if v.X != nil {
+		s.WriteInt32(schemas.GetTileInput_x, *v.X)
+	}
+	if v.Y != nil {
+		s.WriteInt32(schemas.GetTileInput_y, *v.Y)
+	}
+	if v.Z != nil {
+		s.WriteInt32(schemas.GetTileInput_z, *v.Z)
+	}
+}
+
 type GetTileOutput struct {
 
 	// The output binary file.
@@ -95,16 +140,29 @@ type GetTileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTileOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+func (v *GetTileOutput) GetPayloadStream() io.Reader { return v.BinaryFile }
+
+var _ smithy.StreamingInput = (*GetTileOutput)(nil)
+
+func (v *GetTileOutput) SetPayloadStream(r io.ReadCloser) { v.BinaryFile = r }
+
+var _ smithy.StreamingOutput = (*GetTileOutput)(nil)
+
 func (c *Client) addOperationGetTileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTile, schemas.GetTileInput, schemas.GetTileOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTile, schemas.GetTileInput, schemas.GetTileOutput), output: &GetTileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTile"); err != nil {

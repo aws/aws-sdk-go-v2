@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -227,6 +229,46 @@ type PostContentInput struct {
 
 	noSmithyDocumentSerde
 }
+
+func (v *PostContentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostContentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostContentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accept != nil {
+		s.WriteString(schemas.PostContentRequest_accept, *v.Accept)
+	}
+	if v.ActiveContexts != nil {
+		s.WriteString(schemas.PostContentRequest_activeContexts, *v.ActiveContexts)
+	}
+	if v.BotAlias != nil {
+		s.WriteString(schemas.PostContentRequest_botAlias, *v.BotAlias)
+	}
+	if v.BotName != nil {
+		s.WriteString(schemas.PostContentRequest_botName, *v.BotName)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.PostContentRequest_contentType, *v.ContentType)
+	}
+	if v.RequestAttributes != nil {
+		s.WriteString(schemas.PostContentRequest_requestAttributes, *v.RequestAttributes)
+	}
+	if v.SessionAttributes != nil {
+		s.WriteString(schemas.PostContentRequest_sessionAttributes, *v.SessionAttributes)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.PostContentRequest_userId, *v.UserId)
+	}
+}
+func (v *PostContentInput) GetPayloadStream() io.Reader { return v.InputStream }
+
+var _ smithy.StreamingInput = (*PostContentInput)(nil)
+
+func (v *PostContentInput) SetPayloadStream(r io.ReadCloser) { v.InputStream = r }
+
+var _ smithy.StreamingOutput = (*PostContentInput)(nil)
 
 type PostContentOutput struct {
 
@@ -450,16 +492,88 @@ type PostContentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PostContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PostContentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PostContentResponse_activeContexts:
+			v.ActiveContexts = new(string)
+			return d.ReadString(schemas.PostContentResponse_activeContexts, v.ActiveContexts)
+		case schemas.PostContentResponse_alternativeIntents:
+			v.AlternativeIntents = new(string)
+			return d.ReadString(schemas.PostContentResponse_alternativeIntents, v.AlternativeIntents)
+		case schemas.PostContentResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.PostContentResponse_botVersion, v.BotVersion)
+		case schemas.PostContentResponse_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.PostContentResponse_contentType, v.ContentType)
+		case schemas.PostContentResponse_dialogState:
+			var ev string
+			if err := d.ReadString(schemas.PostContentResponse_dialogState, &ev); err != nil {
+				return err
+			}
+			v.DialogState = types.DialogState(ev)
+			return nil
+		case schemas.PostContentResponse_encodedInputTranscript:
+			v.EncodedInputTranscript = new(string)
+			return d.ReadString(schemas.PostContentResponse_encodedInputTranscript, v.EncodedInputTranscript)
+		case schemas.PostContentResponse_encodedMessage:
+			v.EncodedMessage = new(string)
+			return d.ReadString(schemas.PostContentResponse_encodedMessage, v.EncodedMessage)
+		case schemas.PostContentResponse_inputTranscript:
+			v.InputTranscript = new(string)
+			return d.ReadString(schemas.PostContentResponse_inputTranscript, v.InputTranscript)
+		case schemas.PostContentResponse_intentName:
+			v.IntentName = new(string)
+			return d.ReadString(schemas.PostContentResponse_intentName, v.IntentName)
+		case schemas.PostContentResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PostContentResponse_message, v.Message)
+		case schemas.PostContentResponse_messageFormat:
+			var ev string
+			if err := d.ReadString(schemas.PostContentResponse_messageFormat, &ev); err != nil {
+				return err
+			}
+			v.MessageFormat = types.MessageFormatType(ev)
+			return nil
+		case schemas.PostContentResponse_nluIntentConfidence:
+			v.NluIntentConfidence = new(string)
+			return d.ReadString(schemas.PostContentResponse_nluIntentConfidence, v.NluIntentConfidence)
+		case schemas.PostContentResponse_sentimentResponse:
+			v.SentimentResponse = new(string)
+			return d.ReadString(schemas.PostContentResponse_sentimentResponse, v.SentimentResponse)
+		case schemas.PostContentResponse_sessionAttributes:
+			v.SessionAttributes = new(string)
+			return d.ReadString(schemas.PostContentResponse_sessionAttributes, v.SessionAttributes)
+		case schemas.PostContentResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.PostContentResponse_sessionId, v.SessionId)
+		case schemas.PostContentResponse_slotToElicit:
+			v.SlotToElicit = new(string)
+			return d.ReadString(schemas.PostContentResponse_slotToElicit, v.SlotToElicit)
+		case schemas.PostContentResponse_slots:
+			v.Slots = new(string)
+			return d.ReadString(schemas.PostContentResponse_slots, v.Slots)
+		}
+		return nil
+	})
+}
+func (v *PostContentOutput) GetPayloadStream() io.Reader { return v.AudioStream }
+
+var _ smithy.StreamingInput = (*PostContentOutput)(nil)
+
+func (v *PostContentOutput) SetPayloadStream(r io.ReadCloser) { v.AudioStream = r }
+
+var _ smithy.StreamingOutput = (*PostContentOutput)(nil)
+
 func (c *Client) addOperationPostContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPostContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PostContent, schemas.PostContentRequest, schemas.PostContentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPostContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PostContent, schemas.PostContentRequest, schemas.PostContentResponse), output: &PostContentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PostContent"); err != nil {

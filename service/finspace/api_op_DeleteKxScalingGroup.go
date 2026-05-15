@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,24 @@ type DeleteKxScalingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteKxScalingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteKxScalingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteKxScalingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteKxScalingGroupRequest_clientToken, *v.ClientToken)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DeleteKxScalingGroupRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.ScalingGroupName != nil {
+		s.WriteString(schemas.DeleteKxScalingGroupRequest_scalingGroupName, *v.ScalingGroupName)
+	}
+}
+
 type DeleteKxScalingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,16 +74,21 @@ type DeleteKxScalingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteKxScalingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteKxScalingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteKxScalingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteKxScalingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKxScalingGroup, schemas.DeleteKxScalingGroupRequest, schemas.DeleteKxScalingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteKxScalingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKxScalingGroup, schemas.DeleteKxScalingGroupRequest, schemas.DeleteKxScalingGroupResponse), output: &DeleteKxScalingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteKxScalingGroup"); err != nil {

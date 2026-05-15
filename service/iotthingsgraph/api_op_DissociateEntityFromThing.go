@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,21 @@ type DissociateEntityFromThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DissociateEntityFromThingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DissociateEntityFromThingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DissociateEntityFromThingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityType != "" {
+		s.WriteString(schemas.DissociateEntityFromThingRequest_entityType, string(v.EntityType))
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.DissociateEntityFromThingRequest_thingName, *v.ThingName)
+	}
+}
+
 type DissociateEntityFromThingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,16 +70,21 @@ type DissociateEntityFromThingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DissociateEntityFromThingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DissociateEntityFromThingResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDissociateEntityFromThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDissociateEntityFromThing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DissociateEntityFromThing, schemas.DissociateEntityFromThingRequest, schemas.DissociateEntityFromThingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDissociateEntityFromThing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DissociateEntityFromThing, schemas.DissociateEntityFromThingRequest, schemas.DissociateEntityFromThingResponse), output: &DissociateEntityFromThingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DissociateEntityFromThing"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,6 +34,15 @@ type GetRevealConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRevealConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRevealConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRevealConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetRevealConfigurationOutput struct {
 
 	// The KMS key that's used to encrypt the sensitive data, and the status of the
@@ -47,16 +58,27 @@ type GetRevealConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRevealConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRevealConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRevealConfigurationResponse_configuration:
+			v.Configuration = &types.RevealConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.GetRevealConfigurationResponse_retrievalConfiguration:
+			v.RetrievalConfiguration = &types.RetrievalConfiguration{}
+			return v.RetrievalConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRevealConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRevealConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRevealConfiguration, schemas.GetRevealConfigurationRequest, schemas.GetRevealConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRevealConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRevealConfiguration, schemas.GetRevealConfigurationRequest, schemas.GetRevealConfigurationResponse), output: &GetRevealConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRevealConfiguration"); err != nil {

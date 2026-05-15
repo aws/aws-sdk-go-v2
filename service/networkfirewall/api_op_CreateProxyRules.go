@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,26 @@ type CreateProxyRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProxyRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProxyRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProxyRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProxyRuleGroupArn != nil {
+		s.WriteString(schemas.CreateProxyRulesRequest_ProxyRuleGroupArn, *v.ProxyRuleGroupArn)
+	}
+	if v.ProxyRuleGroupName != nil {
+		s.WriteString(schemas.CreateProxyRulesRequest_ProxyRuleGroupName, *v.ProxyRuleGroupName)
+	}
+	if v.Rules != nil {
+		s.WriteStruct(schemas.CreateProxyRulesRequest_Rules)
+		v.Rules.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateProxyRulesOutput struct {
 
 	// The properties that define the proxy rule group with the newly created proxy
@@ -78,16 +100,27 @@ type CreateProxyRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProxyRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProxyRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProxyRulesResponse_ProxyRuleGroup:
+			v.ProxyRuleGroup = &types.ProxyRuleGroup{}
+			return v.ProxyRuleGroup.Deserialize(d)
+		case schemas.CreateProxyRulesResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.CreateProxyRulesResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProxyRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateProxyRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProxyRules, schemas.CreateProxyRulesRequest, schemas.CreateProxyRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateProxyRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProxyRules, schemas.CreateProxyRulesRequest, schemas.CreateProxyRulesResponse), output: &CreateProxyRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProxyRules"); err != nil {

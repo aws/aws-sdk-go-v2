@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,18 @@ type ListOfferingTransactionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOfferingTransactionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOfferingTransactionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOfferingTransactionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOfferingTransactionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Returns the transaction log of the specified offerings.
 type ListOfferingTransactionsOutput struct {
 
@@ -58,16 +72,26 @@ type ListOfferingTransactionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOfferingTransactionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOfferingTransactionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOfferingTransactionsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOfferingTransactionsResult_nextToken, v.NextToken)
+		case schemas.ListOfferingTransactionsResult_offeringTransactions:
+			return deserializeOfferingTransactions(d, schemas.ListOfferingTransactionsResult_offeringTransactions, &v.OfferingTransactions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOfferingTransactionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListOfferingTransactions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOfferingTransactions, schemas.ListOfferingTransactionsRequest, schemas.ListOfferingTransactionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListOfferingTransactions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOfferingTransactions, schemas.ListOfferingTransactionsRequest, schemas.ListOfferingTransactionsResult), output: &ListOfferingTransactionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListOfferingTransactions"); err != nil {

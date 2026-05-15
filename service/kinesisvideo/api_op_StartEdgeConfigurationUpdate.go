@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -64,6 +66,26 @@ type StartEdgeConfigurationUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEdgeConfigurationUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEdgeConfigurationUpdateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEdgeConfigurationUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EdgeConfig != nil {
+		s.WriteStruct(schemas.StartEdgeConfigurationUpdateInput_EdgeConfig)
+		v.EdgeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.StartEdgeConfigurationUpdateInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.StartEdgeConfigurationUpdateInput_StreamName, *v.StreamName)
+	}
+}
+
 type StartEdgeConfigurationUpdateOutput struct {
 
 	// The timestamp at which a stream’s edge configuration was first created.
@@ -97,16 +119,46 @@ type StartEdgeConfigurationUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEdgeConfigurationUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartEdgeConfigurationUpdateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartEdgeConfigurationUpdateOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.StartEdgeConfigurationUpdateOutput_CreationTime, v.CreationTime)
+		case schemas.StartEdgeConfigurationUpdateOutput_EdgeConfig:
+			v.EdgeConfig = &types.EdgeConfig{}
+			return v.EdgeConfig.Deserialize(d)
+		case schemas.StartEdgeConfigurationUpdateOutput_FailedStatusDetails:
+			v.FailedStatusDetails = new(string)
+			return d.ReadString(schemas.StartEdgeConfigurationUpdateOutput_FailedStatusDetails, v.FailedStatusDetails)
+		case schemas.StartEdgeConfigurationUpdateOutput_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.StartEdgeConfigurationUpdateOutput_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.StartEdgeConfigurationUpdateOutput_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.StartEdgeConfigurationUpdateOutput_StreamARN, v.StreamARN)
+		case schemas.StartEdgeConfigurationUpdateOutput_StreamName:
+			v.StreamName = new(string)
+			return d.ReadString(schemas.StartEdgeConfigurationUpdateOutput_StreamName, v.StreamName)
+		case schemas.StartEdgeConfigurationUpdateOutput_SyncStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartEdgeConfigurationUpdateOutput_SyncStatus, &ev); err != nil {
+				return err
+			}
+			v.SyncStatus = types.SyncStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartEdgeConfigurationUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartEdgeConfigurationUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEdgeConfigurationUpdate, schemas.StartEdgeConfigurationUpdateInput, schemas.StartEdgeConfigurationUpdateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartEdgeConfigurationUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEdgeConfigurationUpdate, schemas.StartEdgeConfigurationUpdateInput, schemas.StartEdgeConfigurationUpdateOutput), output: &StartEdgeConfigurationUpdateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartEdgeConfigurationUpdate"); err != nil {

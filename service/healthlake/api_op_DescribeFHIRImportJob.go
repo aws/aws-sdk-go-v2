@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -45,6 +47,21 @@ type DescribeFHIRImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFHIRImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFHIRImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFHIRImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatastoreId != nil {
+		s.WriteString(schemas.DescribeFHIRImportJobRequest_DatastoreId, *v.DatastoreId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeFHIRImportJobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeFHIRImportJobOutput struct {
 
 	// The import job properties.
@@ -58,16 +75,24 @@ type DescribeFHIRImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFHIRImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFHIRImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFHIRImportJobResponse_ImportJobProperties:
+			v.ImportJobProperties = &types.ImportJobProperties{}
+			return v.ImportJobProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFHIRImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeFHIRImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFHIRImportJob, schemas.DescribeFHIRImportJobRequest, schemas.DescribeFHIRImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeFHIRImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFHIRImportJob, schemas.DescribeFHIRImportJobRequest, schemas.DescribeFHIRImportJobResponse), output: &DescribeFHIRImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFHIRImportJob"); err != nil {

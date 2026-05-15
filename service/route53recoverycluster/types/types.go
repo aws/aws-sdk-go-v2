@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/route53recoverycluster/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -36,6 +38,62 @@ type RoutingControl struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RoutingControl) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoutingControl)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoutingControl) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlPanelArn != nil {
+		s.WriteString(schemas.RoutingControl_ControlPanelArn, *v.ControlPanelArn)
+	}
+	if v.ControlPanelName != nil {
+		s.WriteString(schemas.RoutingControl_ControlPanelName, *v.ControlPanelName)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.RoutingControl_Owner, *v.Owner)
+	}
+	if v.RoutingControlArn != nil {
+		s.WriteString(schemas.RoutingControl_RoutingControlArn, *v.RoutingControlArn)
+	}
+	if v.RoutingControlName != nil {
+		s.WriteString(schemas.RoutingControl_RoutingControlName, *v.RoutingControlName)
+	}
+	if v.RoutingControlState != "" {
+		s.WriteString(schemas.RoutingControl_RoutingControlState, string(v.RoutingControlState))
+	}
+}
+func (v *RoutingControl) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoutingControl, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoutingControl_ControlPanelArn:
+			v.ControlPanelArn = new(string)
+			return d.ReadString(schemas.RoutingControl_ControlPanelArn, v.ControlPanelArn)
+		case schemas.RoutingControl_ControlPanelName:
+			v.ControlPanelName = new(string)
+			return d.ReadString(schemas.RoutingControl_ControlPanelName, v.ControlPanelName)
+		case schemas.RoutingControl_Owner:
+			v.Owner = new(string)
+			return d.ReadString(schemas.RoutingControl_Owner, v.Owner)
+		case schemas.RoutingControl_RoutingControlArn:
+			v.RoutingControlArn = new(string)
+			return d.ReadString(schemas.RoutingControl_RoutingControlArn, v.RoutingControlArn)
+		case schemas.RoutingControl_RoutingControlName:
+			v.RoutingControlName = new(string)
+			return d.ReadString(schemas.RoutingControl_RoutingControlName, v.RoutingControlName)
+		case schemas.RoutingControl_RoutingControlState:
+			var ev string
+			if err := d.ReadString(schemas.RoutingControl_RoutingControlState, &ev); err != nil {
+				return err
+			}
+			v.RoutingControlState = RoutingControlState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A routing control state entry.
 type UpdateRoutingControlStateEntry struct {
 
@@ -52,6 +110,38 @@ type UpdateRoutingControlStateEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRoutingControlStateEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRoutingControlStateEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRoutingControlStateEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoutingControlArn != nil {
+		s.WriteString(schemas.UpdateRoutingControlStateEntry_RoutingControlArn, *v.RoutingControlArn)
+	}
+	if v.RoutingControlState != "" {
+		s.WriteString(schemas.UpdateRoutingControlStateEntry_RoutingControlState, string(v.RoutingControlState))
+	}
+}
+func (v *UpdateRoutingControlStateEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRoutingControlStateEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRoutingControlStateEntry_RoutingControlArn:
+			v.RoutingControlArn = new(string)
+			return d.ReadString(schemas.UpdateRoutingControlStateEntry_RoutingControlArn, v.RoutingControlArn)
+		case schemas.UpdateRoutingControlStateEntry_RoutingControlState:
+			var ev string
+			if err := d.ReadString(schemas.UpdateRoutingControlStateEntry_RoutingControlState, &ev); err != nil {
+				return err
+			}
+			v.RoutingControlState = RoutingControlState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // There was a validation error on the request.
 type ValidationExceptionField struct {
 
@@ -66,6 +156,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

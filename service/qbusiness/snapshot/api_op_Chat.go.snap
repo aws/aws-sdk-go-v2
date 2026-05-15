@@ -32,7 +32,6 @@ Chat
 	Deserialize stack step
 		AddRawResponseToMetadata
 		OperationEventStreamDeserializer
-		RequireMinimumProtocol
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer

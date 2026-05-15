@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -219,6 +221,113 @@ type CalculateRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CalculateRouteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CalculateRouteRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CalculateRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArrivalTime != nil {
+		s.WriteTime(schemas.CalculateRouteRequest_ArrivalTime, *v.ArrivalTime)
+	}
+	if v.CalculatorName != nil {
+		s.WriteString(schemas.CalculateRouteRequest_CalculatorName, *v.CalculatorName)
+	}
+	if v.CarModeOptions != nil {
+		s.WriteStruct(schemas.CalculateRouteRequest_CarModeOptions)
+		v.CarModeOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DepartNow != nil {
+		s.WriteBool(schemas.CalculateRouteRequest_DepartNow, *v.DepartNow)
+	}
+	serializePosition(s, schemas.CalculateRouteRequest_DeparturePosition, v.DeparturePosition)
+	if v.DepartureTime != nil {
+		s.WriteTime(schemas.CalculateRouteRequest_DepartureTime, *v.DepartureTime)
+	}
+	serializePosition(s, schemas.CalculateRouteRequest_DestinationPosition, v.DestinationPosition)
+	if v.DistanceUnit != "" {
+		s.WriteString(schemas.CalculateRouteRequest_DistanceUnit, string(v.DistanceUnit))
+	}
+	if v.IncludeLegGeometry != nil {
+		s.WriteBool(schemas.CalculateRouteRequest_IncludeLegGeometry, *v.IncludeLegGeometry)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.CalculateRouteRequest_Key, *v.Key)
+	}
+	if v.OptimizeFor != "" {
+		s.WriteString(schemas.CalculateRouteRequest_OptimizeFor, string(v.OptimizeFor))
+	}
+	if v.TravelMode != "" {
+		s.WriteString(schemas.CalculateRouteRequest_TravelMode, string(v.TravelMode))
+	}
+	if v.TruckModeOptions != nil {
+		s.WriteStruct(schemas.CalculateRouteRequest_TruckModeOptions)
+		v.TruckModeOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeWaypointPositionList(s, schemas.CalculateRouteRequest_WaypointPositions, v.WaypointPositions)
+}
+func (v *CalculateRouteInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CalculateRouteRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CalculateRouteRequest_ArrivalTime:
+			v.ArrivalTime = new(time.Time)
+			return d.ReadTime(schemas.CalculateRouteRequest_ArrivalTime, v.ArrivalTime)
+		case schemas.CalculateRouteRequest_CalculatorName:
+			v.CalculatorName = new(string)
+			return d.ReadString(schemas.CalculateRouteRequest_CalculatorName, v.CalculatorName)
+		case schemas.CalculateRouteRequest_CarModeOptions:
+			v.CarModeOptions = &types.CalculateRouteCarModeOptions{}
+			return v.CarModeOptions.Deserialize(d)
+		case schemas.CalculateRouteRequest_DepartNow:
+			v.DepartNow = new(bool)
+			return d.ReadBool(schemas.CalculateRouteRequest_DepartNow, v.DepartNow)
+		case schemas.CalculateRouteRequest_DeparturePosition:
+			return deserializePosition(d, schemas.CalculateRouteRequest_DeparturePosition, &v.DeparturePosition)
+		case schemas.CalculateRouteRequest_DepartureTime:
+			v.DepartureTime = new(time.Time)
+			return d.ReadTime(schemas.CalculateRouteRequest_DepartureTime, v.DepartureTime)
+		case schemas.CalculateRouteRequest_DestinationPosition:
+			return deserializePosition(d, schemas.CalculateRouteRequest_DestinationPosition, &v.DestinationPosition)
+		case schemas.CalculateRouteRequest_DistanceUnit:
+			var ev string
+			if err := d.ReadString(schemas.CalculateRouteRequest_DistanceUnit, &ev); err != nil {
+				return err
+			}
+			v.DistanceUnit = types.DistanceUnit(ev)
+			return nil
+		case schemas.CalculateRouteRequest_IncludeLegGeometry:
+			v.IncludeLegGeometry = new(bool)
+			return d.ReadBool(schemas.CalculateRouteRequest_IncludeLegGeometry, v.IncludeLegGeometry)
+		case schemas.CalculateRouteRequest_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.CalculateRouteRequest_Key, v.Key)
+		case schemas.CalculateRouteRequest_OptimizeFor:
+			var ev string
+			if err := d.ReadString(schemas.CalculateRouteRequest_OptimizeFor, &ev); err != nil {
+				return err
+			}
+			v.OptimizeFor = types.OptimizationMode(ev)
+			return nil
+		case schemas.CalculateRouteRequest_TravelMode:
+			var ev string
+			if err := d.ReadString(schemas.CalculateRouteRequest_TravelMode, &ev); err != nil {
+				return err
+			}
+			v.TravelMode = types.TravelMode(ev)
+			return nil
+		case schemas.CalculateRouteRequest_TruckModeOptions:
+			v.TruckModeOptions = &types.CalculateRouteTruckModeOptions{}
+			return v.TruckModeOptions.Deserialize(d)
+		case schemas.CalculateRouteRequest_WaypointPositions:
+			return deserializeWaypointPositionList(d, schemas.CalculateRouteRequest_WaypointPositions, &v.WaypointPositions)
+		}
+		return nil
+	})
+}
+
 // Returns the result of the route calculation. Metadata includes legs and route
 // summary.
 type CalculateRouteOutput struct {
@@ -261,16 +370,40 @@ type CalculateRouteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CalculateRouteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CalculateRouteResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CalculateRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLegList(s, schemas.CalculateRouteResponse_Legs, v.Legs)
+	if v.Summary != nil {
+		s.WriteStruct(schemas.CalculateRouteResponse_Summary)
+		v.Summary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CalculateRouteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CalculateRouteResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CalculateRouteResponse_Legs:
+			return deserializeLegList(d, schemas.CalculateRouteResponse_Legs, &v.Legs)
+		case schemas.CalculateRouteResponse_Summary:
+			v.Summary = &types.CalculateRouteSummary{}
+			return v.Summary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCalculateRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCalculateRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CalculateRoute, schemas.CalculateRouteRequest, schemas.CalculateRouteResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCalculateRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CalculateRoute, schemas.CalculateRouteRequest, schemas.CalculateRouteResponse), output: &CalculateRouteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CalculateRoute"); err != nil {

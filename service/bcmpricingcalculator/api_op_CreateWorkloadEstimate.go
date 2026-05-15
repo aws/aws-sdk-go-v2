@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -45,6 +47,25 @@ type CreateWorkloadEstimateInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateWorkloadEstimateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkloadEstimateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkloadEstimateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateWorkloadEstimateRequest_clientToken, *v.ClientToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWorkloadEstimateRequest_name, *v.Name)
+	}
+	if v.RateType != "" {
+		s.WriteString(schemas.CreateWorkloadEstimateRequest_rateType, string(v.RateType))
+	}
+	serializeTags(s, schemas.CreateWorkloadEstimateRequest_tags, v.Tags)
 }
 
 // Mixin for common fields returned by CRUD APIs
@@ -88,16 +109,63 @@ type CreateWorkloadEstimateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkloadEstimateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkloadEstimateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkloadEstimateResponse_costCurrency:
+			var ev string
+			if err := d.ReadString(schemas.CreateWorkloadEstimateResponse_costCurrency, &ev); err != nil {
+				return err
+			}
+			v.CostCurrency = types.CurrencyCode(ev)
+			return nil
+		case schemas.CreateWorkloadEstimateResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateWorkloadEstimateResponse_createdAt, v.CreatedAt)
+		case schemas.CreateWorkloadEstimateResponse_expiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.CreateWorkloadEstimateResponse_expiresAt, v.ExpiresAt)
+		case schemas.CreateWorkloadEstimateResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.CreateWorkloadEstimateResponse_failureMessage, v.FailureMessage)
+		case schemas.CreateWorkloadEstimateResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateWorkloadEstimateResponse_id, v.Id)
+		case schemas.CreateWorkloadEstimateResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateWorkloadEstimateResponse_name, v.Name)
+		case schemas.CreateWorkloadEstimateResponse_rateTimestamp:
+			v.RateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CreateWorkloadEstimateResponse_rateTimestamp, v.RateTimestamp)
+		case schemas.CreateWorkloadEstimateResponse_rateType:
+			var ev string
+			if err := d.ReadString(schemas.CreateWorkloadEstimateResponse_rateType, &ev); err != nil {
+				return err
+			}
+			v.RateType = types.WorkloadEstimateRateType(ev)
+			return nil
+		case schemas.CreateWorkloadEstimateResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateWorkloadEstimateResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.WorkloadEstimateStatus(ev)
+			return nil
+		case schemas.CreateWorkloadEstimateResponse_totalCost:
+			v.TotalCost = new(float64)
+			return d.ReadFloat64(schemas.CreateWorkloadEstimateResponse_totalCost, v.TotalCost)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkloadEstimateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateWorkloadEstimate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkloadEstimate, schemas.CreateWorkloadEstimateRequest, schemas.CreateWorkloadEstimateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateWorkloadEstimate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkloadEstimate, schemas.CreateWorkloadEstimateRequest, schemas.CreateWorkloadEstimateResponse), output: &CreateWorkloadEstimateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWorkloadEstimate"); err != nil {

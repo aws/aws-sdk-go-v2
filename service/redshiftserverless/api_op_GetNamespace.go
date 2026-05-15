@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type GetNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.GetNamespaceRequest_namespaceName, *v.NamespaceName)
+	}
+}
+
 type GetNamespaceOutput struct {
 
 	// The returned namespace object.
@@ -50,16 +64,24 @@ type GetNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNamespaceResponse_namespace:
+			v.Namespace = &types.Namespace{}
+			return v.Namespace.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNamespace, schemas.GetNamespaceRequest, schemas.GetNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNamespace, schemas.GetNamespaceRequest, schemas.GetNamespaceResponse), output: &GetNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetNamespace"); err != nil {

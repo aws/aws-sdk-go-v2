@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,23 @@ type UpdateTrustStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTrustStoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTrustStoreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTrustStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificateList(s, schemas.UpdateTrustStoreRequest_certificatesToAdd, v.CertificatesToAdd)
+	serializeCertificateThumbprintList(s, schemas.UpdateTrustStoreRequest_certificatesToDelete, v.CertificatesToDelete)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateTrustStoreRequest_clientToken, *v.ClientToken)
+	}
+	if v.TrustStoreArn != nil {
+		s.WriteString(schemas.UpdateTrustStoreRequest_trustStoreArn, *v.TrustStoreArn)
+	}
+}
+
 type UpdateTrustStoreOutput struct {
 
 	// The ARN of the trust store.
@@ -65,16 +84,24 @@ type UpdateTrustStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTrustStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTrustStoreResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTrustStoreResponse_trustStoreArn:
+			v.TrustStoreArn = new(string)
+			return d.ReadString(schemas.UpdateTrustStoreResponse_trustStoreArn, v.TrustStoreArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTrustStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTrustStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrustStore, schemas.UpdateTrustStoreRequest, schemas.UpdateTrustStoreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTrustStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrustStore, schemas.UpdateTrustStoreRequest, schemas.UpdateTrustStoreResponse), output: &UpdateTrustStoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateTrustStore"); err != nil {

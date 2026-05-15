@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,21 @@ type DescribeFeaturedResultsSetInput struct {
 	IndexId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeFeaturedResultsSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFeaturedResultsSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFeaturedResultsSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeaturedResultsSetId != nil {
+		s.WriteString(schemas.DescribeFeaturedResultsSetRequest_FeaturedResultsSetId, *v.FeaturedResultsSetId)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.DescribeFeaturedResultsSetRequest_IndexId, *v.IndexId)
+	}
 }
 
 type DescribeFeaturedResultsSetOutput struct {
@@ -98,16 +115,49 @@ type DescribeFeaturedResultsSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFeaturedResultsSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFeaturedResultsSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFeaturedResultsSetResponse_CreationTimestamp:
+			v.CreationTimestamp = new(int64)
+			return d.ReadInt64(schemas.DescribeFeaturedResultsSetResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.DescribeFeaturedResultsSetResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeFeaturedResultsSetResponse_Description, v.Description)
+		case schemas.DescribeFeaturedResultsSetResponse_FeaturedDocumentsMissing:
+			return deserializeFeaturedDocumentMissingList(d, schemas.DescribeFeaturedResultsSetResponse_FeaturedDocumentsMissing, &v.FeaturedDocumentsMissing)
+		case schemas.DescribeFeaturedResultsSetResponse_FeaturedDocumentsWithMetadata:
+			return deserializeFeaturedDocumentWithMetadataList(d, schemas.DescribeFeaturedResultsSetResponse_FeaturedDocumentsWithMetadata, &v.FeaturedDocumentsWithMetadata)
+		case schemas.DescribeFeaturedResultsSetResponse_FeaturedResultsSetId:
+			v.FeaturedResultsSetId = new(string)
+			return d.ReadString(schemas.DescribeFeaturedResultsSetResponse_FeaturedResultsSetId, v.FeaturedResultsSetId)
+		case schemas.DescribeFeaturedResultsSetResponse_FeaturedResultsSetName:
+			v.FeaturedResultsSetName = new(string)
+			return d.ReadString(schemas.DescribeFeaturedResultsSetResponse_FeaturedResultsSetName, v.FeaturedResultsSetName)
+		case schemas.DescribeFeaturedResultsSetResponse_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(int64)
+			return d.ReadInt64(schemas.DescribeFeaturedResultsSetResponse_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.DescribeFeaturedResultsSetResponse_QueryTexts:
+			return deserializeQueryTextList(d, schemas.DescribeFeaturedResultsSetResponse_QueryTexts, &v.QueryTexts)
+		case schemas.DescribeFeaturedResultsSetResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeFeaturedResultsSetResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.FeaturedResultsSetStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFeaturedResultsSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFeaturedResultsSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFeaturedResultsSet, schemas.DescribeFeaturedResultsSetRequest, schemas.DescribeFeaturedResultsSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFeaturedResultsSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFeaturedResultsSet, schemas.DescribeFeaturedResultsSetRequest, schemas.DescribeFeaturedResultsSetResponse), output: &DescribeFeaturedResultsSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFeaturedResultsSet"); err != nil {

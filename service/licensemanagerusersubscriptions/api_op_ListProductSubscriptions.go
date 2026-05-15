@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +61,26 @@ type ListProductSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProductSubscriptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProductSubscriptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProductSubscriptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListProductSubscriptionsRequest_Filters, v.Filters)
+	serializeIdentityProvider(s, schemas.ListProductSubscriptionsRequest_IdentityProvider, v.IdentityProvider)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProductSubscriptionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProductSubscriptionsRequest_NextToken, *v.NextToken)
+	}
+	if v.Product != nil {
+		s.WriteString(schemas.ListProductSubscriptionsRequest_Product, *v.Product)
+	}
+}
+
 type ListProductSubscriptionsOutput struct {
 
 	// The next token used for paginated responses. When this field isn't empty, there
@@ -75,16 +97,26 @@ type ListProductSubscriptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProductSubscriptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProductSubscriptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProductSubscriptionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProductSubscriptionsResponse_NextToken, v.NextToken)
+		case schemas.ListProductSubscriptionsResponse_ProductUserSummaries:
+			return deserializeProductUserSummaryList(d, schemas.ListProductSubscriptionsResponse_ProductUserSummaries, &v.ProductUserSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProductSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProductSubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProductSubscriptions, schemas.ListProductSubscriptionsRequest, schemas.ListProductSubscriptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProductSubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProductSubscriptions, schemas.ListProductSubscriptionsRequest, schemas.ListProductSubscriptionsResponse), output: &ListProductSubscriptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProductSubscriptions"); err != nil {

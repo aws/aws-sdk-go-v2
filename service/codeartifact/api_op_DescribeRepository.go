@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,24 @@ type DescribeRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRepositoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRepositoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.DescribeRepositoryRequest_domain, *v.Domain)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.DescribeRepositoryRequest_domainOwner, *v.DomainOwner)
+	}
+	if v.Repository != nil {
+		s.WriteString(schemas.DescribeRepositoryRequest_repository, *v.Repository)
+	}
+}
+
 type DescribeRepositoryOutput struct {
 
 	//  A RepositoryDescription object that contains the requested repository
@@ -60,16 +80,24 @@ type DescribeRepositoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRepositoryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRepositoryResult_repository:
+			v.Repository = &types.RepositoryDescription{}
+			return v.Repository.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRepository, schemas.DescribeRepositoryRequest, schemas.DescribeRepositoryResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRepository, schemas.DescribeRepositoryRequest, schemas.DescribeRepositoryResult), output: &DescribeRepositoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRepository"); err != nil {

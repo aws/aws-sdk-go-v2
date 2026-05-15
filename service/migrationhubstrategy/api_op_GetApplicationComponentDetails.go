@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,28 @@ type GetApplicationComponentDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationComponentDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationComponentDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationComponentDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationComponentId != nil {
+		s.WriteString(schemas.GetApplicationComponentDetailsRequest_applicationComponentId, *v.ApplicationComponentId)
+	}
+}
+func (v *GetApplicationComponentDetailsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApplicationComponentDetailsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApplicationComponentDetailsRequest_applicationComponentId:
+			v.ApplicationComponentId = new(string)
+			return d.ReadString(schemas.GetApplicationComponentDetailsRequest_applicationComponentId, v.ApplicationComponentId)
+		}
+		return nil
+	})
+}
+
 type GetApplicationComponentDetailsOutput struct {
 
 	//  Detailed information about an application component.
@@ -60,16 +84,49 @@ type GetApplicationComponentDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationComponentDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationComponentDetailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationComponentDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationComponentDetail != nil {
+		s.WriteStruct(schemas.GetApplicationComponentDetailsResponse_applicationComponentDetail)
+		v.ApplicationComponentDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAssociatedApplications(s, schemas.GetApplicationComponentDetailsResponse_associatedApplications, v.AssociatedApplications)
+	serializeAssociatedServerIDs(s, schemas.GetApplicationComponentDetailsResponse_associatedServerIds, v.AssociatedServerIds)
+	if v.MoreApplicationResource != nil {
+		s.WriteBool(schemas.GetApplicationComponentDetailsResponse_moreApplicationResource, *v.MoreApplicationResource)
+	}
+}
+func (v *GetApplicationComponentDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApplicationComponentDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApplicationComponentDetailsResponse_applicationComponentDetail:
+			v.ApplicationComponentDetail = &types.ApplicationComponentDetail{}
+			return v.ApplicationComponentDetail.Deserialize(d)
+		case schemas.GetApplicationComponentDetailsResponse_associatedApplications:
+			return deserializeAssociatedApplications(d, schemas.GetApplicationComponentDetailsResponse_associatedApplications, &v.AssociatedApplications)
+		case schemas.GetApplicationComponentDetailsResponse_associatedServerIds:
+			return deserializeAssociatedServerIDs(d, schemas.GetApplicationComponentDetailsResponse_associatedServerIds, &v.AssociatedServerIds)
+		case schemas.GetApplicationComponentDetailsResponse_moreApplicationResource:
+			v.MoreApplicationResource = new(bool)
+			return d.ReadBool(schemas.GetApplicationComponentDetailsResponse_moreApplicationResource, v.MoreApplicationResource)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApplicationComponentDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApplicationComponentDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationComponentDetails, schemas.GetApplicationComponentDetailsRequest, schemas.GetApplicationComponentDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApplicationComponentDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationComponentDetails, schemas.GetApplicationComponentDetailsRequest, schemas.GetApplicationComponentDetailsResponse), output: &GetApplicationComponentDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetApplicationComponentDetails"); err != nil {

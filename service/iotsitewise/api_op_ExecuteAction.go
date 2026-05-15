@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,36 @@ type ExecuteActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionDefinitionId != nil {
+		s.WriteString(schemas.ExecuteActionRequest_actionDefinitionId, *v.ActionDefinitionId)
+	}
+	if v.ActionPayload != nil {
+		s.WriteStruct(schemas.ExecuteActionRequest_actionPayload)
+		v.ActionPayload.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ExecuteActionRequest_clientToken, *v.ClientToken)
+	}
+	if v.ResolveTo != nil {
+		s.WriteStruct(schemas.ExecuteActionRequest_resolveTo)
+		v.ResolveTo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetResource != nil {
+		s.WriteStruct(schemas.ExecuteActionRequest_targetResource)
+		v.TargetResource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ExecuteActionOutput struct {
 
 	// The ID of the action.
@@ -68,16 +100,24 @@ type ExecuteActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecuteActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecuteActionResponse_actionId:
+			v.ActionId = new(string)
+			return d.ReadString(schemas.ExecuteActionResponse_actionId, v.ActionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExecuteActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExecuteAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteAction, schemas.ExecuteActionRequest, schemas.ExecuteActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExecuteAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteAction, schemas.ExecuteActionRequest, schemas.ExecuteActionResponse), output: &ExecuteActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ExecuteAction"); err != nil {

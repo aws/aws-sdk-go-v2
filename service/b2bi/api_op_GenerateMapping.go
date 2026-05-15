@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,6 +68,24 @@ type GenerateMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateMappingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateMappingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputFileContent != nil {
+		s.WriteString(schemas.GenerateMappingRequest_inputFileContent, *v.InputFileContent)
+	}
+	if v.MappingType != "" {
+		s.WriteString(schemas.GenerateMappingRequest_mappingType, string(v.MappingType))
+	}
+	if v.OutputFileContent != nil {
+		s.WriteString(schemas.GenerateMappingRequest_outputFileContent, *v.OutputFileContent)
+	}
+}
+
 type GenerateMappingOutput struct {
 
 	// Returns a mapping template based on your inputs.
@@ -82,16 +102,27 @@ type GenerateMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerateMappingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerateMappingResponse_mappingAccuracy:
+			v.MappingAccuracy = new(float32)
+			return d.ReadFloat32(schemas.GenerateMappingResponse_mappingAccuracy, v.MappingAccuracy)
+		case schemas.GenerateMappingResponse_mappingTemplate:
+			v.MappingTemplate = new(string)
+			return d.ReadString(schemas.GenerateMappingResponse_mappingTemplate, v.MappingTemplate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGenerateMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGenerateMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateMapping, schemas.GenerateMappingRequest, schemas.GenerateMappingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGenerateMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateMapping, schemas.GenerateMappingRequest, schemas.GenerateMappingResponse), output: &GenerateMappingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GenerateMapping"); err != nil {

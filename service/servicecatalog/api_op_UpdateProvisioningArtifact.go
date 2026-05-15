@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -76,6 +78,36 @@ type UpdateProvisioningArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProvisioningArtifactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProvisioningArtifactInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProvisioningArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.UpdateProvisioningArtifactInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.Active != nil {
+		s.WriteBool(schemas.UpdateProvisioningArtifactInput_Active, *v.Active)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateProvisioningArtifactInput_Description, *v.Description)
+	}
+	if v.Guidance != "" {
+		s.WriteString(schemas.UpdateProvisioningArtifactInput_Guidance, string(v.Guidance))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateProvisioningArtifactInput_Name, *v.Name)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.UpdateProvisioningArtifactInput_ProductId, *v.ProductId)
+	}
+	if v.ProvisioningArtifactId != nil {
+		s.WriteString(schemas.UpdateProvisioningArtifactInput_ProvisioningArtifactId, *v.ProvisioningArtifactId)
+	}
+}
+
 type UpdateProvisioningArtifactOutput struct {
 
 	// The URL of the CloudFormation template in Amazon S3 or GitHub in JSON format.
@@ -93,16 +125,33 @@ type UpdateProvisioningArtifactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProvisioningArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProvisioningArtifactOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProvisioningArtifactOutput_Info:
+			return deserializeProvisioningArtifactInfo(d, schemas.UpdateProvisioningArtifactOutput_Info, &v.Info)
+		case schemas.UpdateProvisioningArtifactOutput_ProvisioningArtifactDetail:
+			v.ProvisioningArtifactDetail = &types.ProvisioningArtifactDetail{}
+			return v.ProvisioningArtifactDetail.Deserialize(d)
+		case schemas.UpdateProvisioningArtifactOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateProvisioningArtifactOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateProvisioningArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProvisioningArtifact, schemas.UpdateProvisioningArtifactInput, schemas.UpdateProvisioningArtifactOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateProvisioningArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProvisioningArtifact, schemas.UpdateProvisioningArtifactInput, schemas.UpdateProvisioningArtifactOutput), output: &UpdateProvisioningArtifactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProvisioningArtifact"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,24 @@ type ListEffectiveDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEffectiveDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEffectiveDeploymentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEffectiveDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreDeviceThingName != nil {
+		s.WriteString(schemas.ListEffectiveDeploymentsRequest_coreDeviceThingName, *v.CoreDeviceThingName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEffectiveDeploymentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEffectiveDeploymentsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListEffectiveDeploymentsOutput struct {
 
 	// A list that summarizes each deployment on the core device.
@@ -59,16 +79,26 @@ type ListEffectiveDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEffectiveDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEffectiveDeploymentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEffectiveDeploymentsResponse_effectiveDeployments:
+			return deserializeEffectiveDeploymentsList(d, schemas.ListEffectiveDeploymentsResponse_effectiveDeployments, &v.EffectiveDeployments)
+		case schemas.ListEffectiveDeploymentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEffectiveDeploymentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEffectiveDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEffectiveDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEffectiveDeployments, schemas.ListEffectiveDeploymentsRequest, schemas.ListEffectiveDeploymentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEffectiveDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEffectiveDeployments, schemas.ListEffectiveDeploymentsRequest, schemas.ListEffectiveDeploymentsResponse), output: &ListEffectiveDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEffectiveDeployments"); err != nil {

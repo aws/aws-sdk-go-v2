@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,22 @@ type ListPurchaseOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPurchaseOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPurchaseOptionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPurchaseOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePurchaseOptionFilterList(s, schemas.ListPurchaseOptionsInput_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPurchaseOptionsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPurchaseOptionsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListPurchaseOptionsOutput struct {
 
 	// If nextToken is returned, there are more results available. Make the call again
@@ -66,16 +84,26 @@ type ListPurchaseOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPurchaseOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPurchaseOptionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPurchaseOptionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPurchaseOptionsOutput_nextToken, v.NextToken)
+		case schemas.ListPurchaseOptionsOutput_purchaseOptions:
+			return deserializePurchaseOptionSummaryList(d, schemas.ListPurchaseOptionsOutput_purchaseOptions, &v.PurchaseOptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPurchaseOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPurchaseOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPurchaseOptions, schemas.ListPurchaseOptionsInput, schemas.ListPurchaseOptionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPurchaseOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPurchaseOptions, schemas.ListPurchaseOptionsInput, schemas.ListPurchaseOptionsOutput), output: &ListPurchaseOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPurchaseOptions"); err != nil {

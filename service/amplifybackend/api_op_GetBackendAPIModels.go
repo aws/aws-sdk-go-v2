@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,24 @@ type GetBackendAPIModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackendAPIModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackendAPIModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackendAPIModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.GetBackendAPIModelsRequest_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.GetBackendAPIModelsRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.GetBackendAPIModelsRequest_ResourceName, *v.ResourceName)
+	}
+}
+
 type GetBackendAPIModelsOutput struct {
 
 	// Stringified JSON of the model introspection schema for an existing backend API
@@ -66,16 +86,34 @@ type GetBackendAPIModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackendAPIModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBackendAPIModelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBackendAPIModelsResponse_ModelIntrospectionSchema:
+			v.ModelIntrospectionSchema = new(string)
+			return d.ReadString(schemas.GetBackendAPIModelsResponse_ModelIntrospectionSchema, v.ModelIntrospectionSchema)
+		case schemas.GetBackendAPIModelsResponse_Models:
+			v.Models = new(string)
+			return d.ReadString(schemas.GetBackendAPIModelsResponse_Models, v.Models)
+		case schemas.GetBackendAPIModelsResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetBackendAPIModelsResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBackendAPIModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBackendAPIModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackendAPIModels, schemas.GetBackendAPIModelsRequest, schemas.GetBackendAPIModelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBackendAPIModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackendAPIModels, schemas.GetBackendAPIModelsRequest, schemas.GetBackendAPIModelsResponse), output: &GetBackendAPIModelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBackendAPIModels"); err != nil {

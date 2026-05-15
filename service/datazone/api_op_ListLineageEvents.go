@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -64,6 +66,36 @@ type ListLineageEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLineageEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLineageEventsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLineageEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.ListLineageEventsInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLineageEventsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLineageEventsInput_nextToken, *v.NextToken)
+	}
+	if v.ProcessingStatus != "" {
+		s.WriteString(schemas.ListLineageEventsInput_processingStatus, string(v.ProcessingStatus))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListLineageEventsInput_sortOrder, string(v.SortOrder))
+	}
+	if v.TimestampAfter != nil {
+		s.WriteTime(schemas.ListLineageEventsInput_timestampAfter, *v.TimestampAfter)
+	}
+	if v.TimestampBefore != nil {
+		s.WriteTime(schemas.ListLineageEventsInput_timestampBefore, *v.TimestampBefore)
+	}
+}
+
 type ListLineageEventsOutput struct {
 
 	// The results of the ListLineageEvents action.
@@ -82,16 +114,26 @@ type ListLineageEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLineageEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLineageEventsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLineageEventsOutput_items:
+			return deserializeLineageEventSummaries(d, schemas.ListLineageEventsOutput_items, &v.Items)
+		case schemas.ListLineageEventsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLineageEventsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLineageEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLineageEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLineageEvents, schemas.ListLineageEventsInput, schemas.ListLineageEventsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLineageEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLineageEvents, schemas.ListLineageEventsInput, schemas.ListLineageEventsOutput), output: &ListLineageEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLineageEvents"); err != nil {

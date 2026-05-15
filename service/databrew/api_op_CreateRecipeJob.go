@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -95,6 +97,54 @@ type CreateRecipeJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRecipeJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRecipeJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRecipeJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataCatalogOutputList(s, schemas.CreateRecipeJobRequest_DataCatalogOutputs, v.DataCatalogOutputs)
+	serializeDatabaseOutputList(s, schemas.CreateRecipeJobRequest_DatabaseOutputs, v.DatabaseOutputs)
+	if v.DatasetName != nil {
+		s.WriteString(schemas.CreateRecipeJobRequest_DatasetName, *v.DatasetName)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.CreateRecipeJobRequest_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.EncryptionMode != "" {
+		s.WriteString(schemas.CreateRecipeJobRequest_EncryptionMode, string(v.EncryptionMode))
+	}
+	if v.LogSubscription != "" {
+		s.WriteString(schemas.CreateRecipeJobRequest_LogSubscription, string(v.LogSubscription))
+	}
+	if v.MaxCapacity != 0 {
+		s.WriteInt32(schemas.CreateRecipeJobRequest_MaxCapacity, v.MaxCapacity)
+	}
+	if v.MaxRetries != 0 {
+		s.WriteInt32(schemas.CreateRecipeJobRequest_MaxRetries, v.MaxRetries)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRecipeJobRequest_Name, *v.Name)
+	}
+	serializeOutputList(s, schemas.CreateRecipeJobRequest_Outputs, v.Outputs)
+	if v.ProjectName != nil {
+		s.WriteString(schemas.CreateRecipeJobRequest_ProjectName, *v.ProjectName)
+	}
+	if v.RecipeReference != nil {
+		s.WriteStruct(schemas.CreateRecipeJobRequest_RecipeReference)
+		v.RecipeReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateRecipeJobRequest_RoleArn, *v.RoleArn)
+	}
+	serializeTagMap(s, schemas.CreateRecipeJobRequest_Tags, v.Tags)
+	if v.Timeout != 0 {
+		s.WriteInt32(schemas.CreateRecipeJobRequest_Timeout, v.Timeout)
+	}
+}
+
 type CreateRecipeJobOutput struct {
 
 	// The name of the job that you created.
@@ -108,16 +158,24 @@ type CreateRecipeJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRecipeJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRecipeJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRecipeJobResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateRecipeJobResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRecipeJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRecipeJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRecipeJob, schemas.CreateRecipeJobRequest, schemas.CreateRecipeJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRecipeJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRecipeJob, schemas.CreateRecipeJobRequest, schemas.CreateRecipeJobResponse), output: &CreateRecipeJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRecipeJob"); err != nil {

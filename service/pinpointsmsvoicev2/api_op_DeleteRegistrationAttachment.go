@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type DeleteRegistrationAttachmentInput struct {
 	RegistrationAttachmentId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteRegistrationAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRegistrationAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRegistrationAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistrationAttachmentId != nil {
+		s.WriteString(schemas.DeleteRegistrationAttachmentRequest_RegistrationAttachmentId, *v.RegistrationAttachmentId)
+	}
 }
 
 type DeleteRegistrationAttachmentOutput struct {
@@ -79,16 +93,44 @@ type DeleteRegistrationAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRegistrationAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRegistrationAttachmentResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRegistrationAttachmentResult_AttachmentStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteRegistrationAttachmentResult_AttachmentStatus, &ev); err != nil {
+				return err
+			}
+			v.AttachmentStatus = types.AttachmentStatus(ev)
+			return nil
+		case schemas.DeleteRegistrationAttachmentResult_AttachmentUploadErrorReason:
+			var ev string
+			if err := d.ReadString(schemas.DeleteRegistrationAttachmentResult_AttachmentUploadErrorReason, &ev); err != nil {
+				return err
+			}
+			v.AttachmentUploadErrorReason = types.AttachmentUploadErrorReason(ev)
+			return nil
+		case schemas.DeleteRegistrationAttachmentResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeleteRegistrationAttachmentResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.DeleteRegistrationAttachmentResult_RegistrationAttachmentArn:
+			v.RegistrationAttachmentArn = new(string)
+			return d.ReadString(schemas.DeleteRegistrationAttachmentResult_RegistrationAttachmentArn, v.RegistrationAttachmentArn)
+		case schemas.DeleteRegistrationAttachmentResult_RegistrationAttachmentId:
+			v.RegistrationAttachmentId = new(string)
+			return d.ReadString(schemas.DeleteRegistrationAttachmentResult_RegistrationAttachmentId, v.RegistrationAttachmentId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRegistrationAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteRegistrationAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRegistrationAttachment, schemas.DeleteRegistrationAttachmentRequest, schemas.DeleteRegistrationAttachmentResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteRegistrationAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRegistrationAttachment, schemas.DeleteRegistrationAttachmentRequest, schemas.DeleteRegistrationAttachmentResult), output: &DeleteRegistrationAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteRegistrationAttachment"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +70,27 @@ type AssociateFirewallPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFirewallPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFirewallPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFirewallPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.AssociateFirewallPolicyRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.AssociateFirewallPolicyRequest_FirewallName, *v.FirewallName)
+	}
+	if v.FirewallPolicyArn != nil {
+		s.WriteString(schemas.AssociateFirewallPolicyRequest_FirewallPolicyArn, *v.FirewallPolicyArn)
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.AssociateFirewallPolicyRequest_UpdateToken, *v.UpdateToken)
+	}
+}
+
 type AssociateFirewallPolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the firewall.
@@ -102,16 +125,33 @@ type AssociateFirewallPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFirewallPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateFirewallPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateFirewallPolicyResponse_FirewallArn:
+			v.FirewallArn = new(string)
+			return d.ReadString(schemas.AssociateFirewallPolicyResponse_FirewallArn, v.FirewallArn)
+		case schemas.AssociateFirewallPolicyResponse_FirewallName:
+			v.FirewallName = new(string)
+			return d.ReadString(schemas.AssociateFirewallPolicyResponse_FirewallName, v.FirewallName)
+		case schemas.AssociateFirewallPolicyResponse_FirewallPolicyArn:
+			v.FirewallPolicyArn = new(string)
+			return d.ReadString(schemas.AssociateFirewallPolicyResponse_FirewallPolicyArn, v.FirewallPolicyArn)
+		case schemas.AssociateFirewallPolicyResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.AssociateFirewallPolicyResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateFirewallPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAssociateFirewallPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFirewallPolicy, schemas.AssociateFirewallPolicyRequest, schemas.AssociateFirewallPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAssociateFirewallPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFirewallPolicy, schemas.AssociateFirewallPolicyRequest, schemas.AssociateFirewallPolicyResponse), output: &AssociateFirewallPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateFirewallPolicy"); err != nil {

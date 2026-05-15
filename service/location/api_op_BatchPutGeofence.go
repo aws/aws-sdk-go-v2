@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,31 @@ type BatchPutGeofenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutGeofenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutGeofenceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutGeofenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionName != nil {
+		s.WriteString(schemas.BatchPutGeofenceRequest_CollectionName, *v.CollectionName)
+	}
+	serializeBatchPutGeofenceRequestEntryList(s, schemas.BatchPutGeofenceRequest_Entries, v.Entries)
+}
+func (v *BatchPutGeofenceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutGeofenceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutGeofenceRequest_CollectionName:
+			v.CollectionName = new(string)
+			return d.ReadString(schemas.BatchPutGeofenceRequest_CollectionName, v.CollectionName)
+		case schemas.BatchPutGeofenceRequest_Entries:
+			return deserializeBatchPutGeofenceRequestEntryList(d, schemas.BatchPutGeofenceRequest_Entries, &v.Entries)
+		}
+		return nil
+	})
+}
+
 type BatchPutGeofenceOutput struct {
 
 	// Contains additional error details for each geofence that failed to be stored in
@@ -63,16 +90,35 @@ type BatchPutGeofenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutGeofenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutGeofenceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutGeofenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchPutGeofenceErrorList(s, schemas.BatchPutGeofenceResponse_Errors, v.Errors)
+	serializeBatchPutGeofenceSuccessList(s, schemas.BatchPutGeofenceResponse_Successes, v.Successes)
+}
+func (v *BatchPutGeofenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutGeofenceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutGeofenceResponse_Errors:
+			return deserializeBatchPutGeofenceErrorList(d, schemas.BatchPutGeofenceResponse_Errors, &v.Errors)
+		case schemas.BatchPutGeofenceResponse_Successes:
+			return deserializeBatchPutGeofenceSuccessList(d, schemas.BatchPutGeofenceResponse_Successes, &v.Successes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchPutGeofenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutGeofence{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutGeofence, schemas.BatchPutGeofenceRequest, schemas.BatchPutGeofenceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchPutGeofence{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutGeofence, schemas.BatchPutGeofenceRequest, schemas.BatchPutGeofenceResponse), output: &BatchPutGeofenceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchPutGeofence"); err != nil {

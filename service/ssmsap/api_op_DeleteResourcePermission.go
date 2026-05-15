@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,44 @@ type DeleteResourcePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourcePermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourcePermissionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourcePermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionType != "" {
+		s.WriteString(schemas.DeleteResourcePermissionInput_ActionType, string(v.ActionType))
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DeleteResourcePermissionInput_ResourceArn, *v.ResourceArn)
+	}
+	if v.SourceResourceArn != nil {
+		s.WriteString(schemas.DeleteResourcePermissionInput_SourceResourceArn, *v.SourceResourceArn)
+	}
+}
+func (v *DeleteResourcePermissionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourcePermissionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResourcePermissionInput_ActionType:
+			var ev string
+			if err := d.ReadString(schemas.DeleteResourcePermissionInput_ActionType, &ev); err != nil {
+				return err
+			}
+			v.ActionType = types.PermissionActionType(ev)
+			return nil
+		case schemas.DeleteResourcePermissionInput_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DeleteResourcePermissionInput_ResourceArn, v.ResourceArn)
+		case schemas.DeleteResourcePermissionInput_SourceResourceArn:
+			v.SourceResourceArn = new(string)
+			return d.ReadString(schemas.DeleteResourcePermissionInput_SourceResourceArn, v.SourceResourceArn)
+		}
+		return nil
+	})
+}
+
 type DeleteResourcePermissionOutput struct {
 
 	// The policy that removes permissions on the target database.
@@ -54,16 +94,35 @@ type DeleteResourcePermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourcePermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourcePermissionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourcePermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.DeleteResourcePermissionOutput_Policy, *v.Policy)
+	}
+}
+func (v *DeleteResourcePermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourcePermissionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResourcePermissionOutput_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.DeleteResourcePermissionOutput_Policy, v.Policy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResourcePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteResourcePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourcePermission, schemas.DeleteResourcePermissionInput, schemas.DeleteResourcePermissionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteResourcePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourcePermission, schemas.DeleteResourcePermissionInput, schemas.DeleteResourcePermissionOutput), output: &DeleteResourcePermissionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteResourcePermission"); err != nil {

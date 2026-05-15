@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/evs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +35,15 @@ type GetVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetVersionsOutput struct {
 
 	// A list of EC2 instance types and their available ESX versions.
@@ -52,16 +63,25 @@ type GetVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVersionsResponse_instanceTypeEsxVersions:
+			return deserializeInstanceTypeEsxVersionsList(d, schemas.GetVersionsResponse_instanceTypeEsxVersions, &v.InstanceTypeEsxVersions)
+		case schemas.GetVersionsResponse_vcfVersions:
+			return deserializeVcfVersionList(d, schemas.GetVersionsResponse_vcfVersions, &v.VcfVersions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVersions, schemas.GetVersionsRequest, schemas.GetVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVersions, schemas.GetVersionsRequest, schemas.GetVersionsResponse), output: &GetVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetVersions"); err != nil {

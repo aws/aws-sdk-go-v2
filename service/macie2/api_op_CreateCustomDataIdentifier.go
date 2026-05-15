@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -106,6 +108,34 @@ type CreateCustomDataIdentifierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomDataIdentifierInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomDataIdentifierRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomDataIdentifierInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateCustomDataIdentifierRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCustomDataIdentifierRequest_description, *v.Description)
+	}
+	serialize__listOf__string(s, schemas.CreateCustomDataIdentifierRequest_ignoreWords, v.IgnoreWords)
+	serialize__listOf__string(s, schemas.CreateCustomDataIdentifierRequest_keywords, v.Keywords)
+	if v.MaximumMatchDistance != nil {
+		s.WriteInt32(schemas.CreateCustomDataIdentifierRequest_maximumMatchDistance, *v.MaximumMatchDistance)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCustomDataIdentifierRequest_name, *v.Name)
+	}
+	if v.Regex != nil {
+		s.WriteString(schemas.CreateCustomDataIdentifierRequest_regex, *v.Regex)
+	}
+	serializeSeverityLevelList(s, schemas.CreateCustomDataIdentifierRequest_severityLevels, v.SeverityLevels)
+	serializeTagMap(s, schemas.CreateCustomDataIdentifierRequest_tags, v.Tags)
+}
+
 type CreateCustomDataIdentifierOutput struct {
 
 	// The unique identifier for the custom data identifier that was created.
@@ -117,16 +147,24 @@ type CreateCustomDataIdentifierOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomDataIdentifierOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomDataIdentifierResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCustomDataIdentifierResponse_customDataIdentifierId:
+			v.CustomDataIdentifierId = new(string)
+			return d.ReadString(schemas.CreateCustomDataIdentifierResponse_customDataIdentifierId, v.CustomDataIdentifierId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomDataIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCustomDataIdentifier{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomDataIdentifier, schemas.CreateCustomDataIdentifierRequest, schemas.CreateCustomDataIdentifierResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCustomDataIdentifier{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomDataIdentifier, schemas.CreateCustomDataIdentifierRequest, schemas.CreateCustomDataIdentifierResponse), output: &CreateCustomDataIdentifierOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCustomDataIdentifier"); err != nil {

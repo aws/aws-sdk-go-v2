@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,16 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessDeniedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A resource to be created or added already exists.
 type AlreadyExistsException struct {
@@ -58,6 +69,16 @@ func (e *AlreadyExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AlreadyExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AlreadyExistsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AlreadyExistsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Two processes are trying to modify a resource simultaneously.
 type ConcurrentModificationException struct {
@@ -84,6 +105,16 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConcurrentModificationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConcurrentModificationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConcurrentModificationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConcurrentModificationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Multiple resources exist with the same Amazon S3 location
 type ConflictException struct {
@@ -110,6 +141,16 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A specified entity does not exist.
 type EntityNotFoundException struct {
@@ -136,6 +177,16 @@ func (e *EntityNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EntityNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EntityNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EntityNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Contains details about an error where the query request expired.
 type ExpiredException struct {
@@ -162,6 +213,16 @@ func (e *ExpiredException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ExpiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ExpiredException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExpiredException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExpiredException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ExpiredException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An encryption operation failed.
 type GlueEncryptionException struct {
@@ -188,6 +249,16 @@ func (e *GlueEncryptionException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *GlueEncryptionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *GlueEncryptionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlueEncryptionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlueEncryptionException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GlueEncryptionException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An internal service error occurred.
 type InternalServiceException struct {
@@ -214,6 +285,16 @@ func (e *InternalServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServiceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServiceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServiceException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServiceException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The input provided was not valid.
 type InvalidInputException struct {
@@ -240,6 +321,16 @@ func (e *InvalidInputException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidInputException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidInputException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidInputException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidInputException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation timed out.
 type OperationTimeoutException struct {
@@ -266,6 +357,16 @@ func (e *OperationTimeoutException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *OperationTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *OperationTimeoutException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OperationTimeoutException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OperationTimeoutException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OperationTimeoutException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The engine does not support filtering data based on the enforced permissions.
 // For example, if you call the GetTemporaryGlueTableCredentials operation with
@@ -295,6 +396,16 @@ func (e *PermissionTypeMismatchException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PermissionTypeMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PermissionTypeMismatchException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PermissionTypeMismatchException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PermissionTypeMismatchException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PermissionTypeMismatchException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Contains details about an error related to a resource which is not ready for a
 // transaction.
@@ -322,6 +433,16 @@ func (e *ResourceNotReadyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotReadyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotReadyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotReadyException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotReadyException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A resource numerical limit was exceeded.
 type ResourceNumberLimitExceededException struct {
@@ -350,6 +471,16 @@ func (e *ResourceNumberLimitExceededException) ErrorCode() string {
 func (e *ResourceNumberLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *ResourceNumberLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNumberLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNumberLimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNumberLimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Contains details about an error related to statistics not being ready.
 type StatisticsNotReadyYetException struct {
@@ -376,6 +507,16 @@ func (e *StatisticsNotReadyYetException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *StatisticsNotReadyYetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *StatisticsNotReadyYetException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StatisticsNotReadyYetException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StatisticsNotReadyYetException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.StatisticsNotReadyYetException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Contains details about an error where the query request was throttled.
 type ThrottledException struct {
@@ -402,6 +543,16 @@ func (e *ThrottledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ThrottledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThrottledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThrottledException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ThrottledException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Contains details about an error related to a transaction that was cancelled.
 type TransactionCanceledException struct {
@@ -428,6 +579,16 @@ func (e *TransactionCanceledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TransactionCanceledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TransactionCanceledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransactionCanceledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransactionCanceledException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TransactionCanceledException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Contains details about an error related to a transaction commit that was in
 // progress.
@@ -457,6 +618,16 @@ func (e *TransactionCommitInProgressException) ErrorCode() string {
 func (e *TransactionCommitInProgressException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *TransactionCommitInProgressException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransactionCommitInProgressException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransactionCommitInProgressException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TransactionCommitInProgressException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Contains details about an error where the specified transaction has already
 // been committed and cannot be used for UpdateTableObjects .
@@ -484,6 +655,16 @@ func (e *TransactionCommittedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TransactionCommittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TransactionCommittedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransactionCommittedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransactionCommittedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TransactionCommittedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Contains details about an error related to work units not being ready.
 type WorkUnitsNotReadyYetException struct {
@@ -510,3 +691,13 @@ func (e *WorkUnitsNotReadyYetException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WorkUnitsNotReadyYetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WorkUnitsNotReadyYetException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkUnitsNotReadyYetException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkUnitsNotReadyYetException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WorkUnitsNotReadyYetException_Message, v.Message)
+		}
+		return nil
+	})
+}

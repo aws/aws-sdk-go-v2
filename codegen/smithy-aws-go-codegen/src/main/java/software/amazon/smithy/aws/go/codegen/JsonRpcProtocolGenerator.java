@@ -45,7 +45,6 @@ import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.ErrorTrait;
 import software.amazon.smithy.model.traits.EventHeaderTrait;
 import software.amazon.smithy.model.traits.EventPayloadTrait;
-import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionGenerator;
 import software.amazon.smithy.go.codegen.endpoints.FnGenerator;
 import software.amazon.smithy.utils.MapUtils;
 
@@ -391,12 +390,6 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
                     .deserializerNameProvider((shape, serviceShape, proto) -> functionName)
                     .build());
         }
-    }
-
-    @Override
-    public void generateEndpointResolution(GenerationContext context) {
-        var generator = new EndpointResolutionGenerator(new AwsFnProvider());
-        generator.generate(context);
     }
 
     @Override

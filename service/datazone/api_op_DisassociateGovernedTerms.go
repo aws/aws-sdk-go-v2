@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,25 @@ type DisassociateGovernedTermsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateGovernedTermsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateGovernedTermsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateGovernedTermsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.DisassociateGovernedTermsInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.EntityIdentifier != nil {
+		s.WriteString(schemas.DisassociateGovernedTermsInput_entityIdentifier, *v.EntityIdentifier)
+	}
+	if v.EntityType != "" {
+		s.WriteString(schemas.DisassociateGovernedTermsInput_entityType, string(v.EntityType))
+	}
+	serializeGovernedGlossaryTerms(s, schemas.DisassociateGovernedTermsInput_governedGlossaryTerms, v.GovernedGlossaryTerms)
+}
+
 type DisassociateGovernedTermsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,16 +81,21 @@ type DisassociateGovernedTermsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateGovernedTermsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateGovernedTermsOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateGovernedTermsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateGovernedTerms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateGovernedTerms, schemas.DisassociateGovernedTermsInput, schemas.DisassociateGovernedTermsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateGovernedTerms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateGovernedTerms, schemas.DisassociateGovernedTermsInput, schemas.DisassociateGovernedTermsOutput), output: &DisassociateGovernedTermsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateGovernedTerms"); err != nil {

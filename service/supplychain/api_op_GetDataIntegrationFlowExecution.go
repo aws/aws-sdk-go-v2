@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supplychain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,24 @@ type GetDataIntegrationFlowExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataIntegrationFlowExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataIntegrationFlowExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataIntegrationFlowExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.GetDataIntegrationFlowExecutionRequest_executionId, *v.ExecutionId)
+	}
+	if v.FlowName != nil {
+		s.WriteString(schemas.GetDataIntegrationFlowExecutionRequest_flowName, *v.FlowName)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetDataIntegrationFlowExecutionRequest_instanceId, *v.InstanceId)
+	}
+}
+
 // The response parameters of GetFlowExecution.
 type GetDataIntegrationFlowExecutionOutput struct {
 
@@ -62,16 +82,24 @@ type GetDataIntegrationFlowExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataIntegrationFlowExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataIntegrationFlowExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataIntegrationFlowExecutionResponse_flowExecution:
+			v.FlowExecution = &types.DataIntegrationFlowExecution{}
+			return v.FlowExecution.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataIntegrationFlowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataIntegrationFlowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataIntegrationFlowExecution, schemas.GetDataIntegrationFlowExecutionRequest, schemas.GetDataIntegrationFlowExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataIntegrationFlowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataIntegrationFlowExecution, schemas.GetDataIntegrationFlowExecutionRequest, schemas.GetDataIntegrationFlowExecutionResponse), output: &GetDataIntegrationFlowExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDataIntegrationFlowExecution"); err != nil {

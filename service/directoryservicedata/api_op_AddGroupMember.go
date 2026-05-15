@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -70,6 +72,30 @@ type AddGroupMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddGroupMemberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddGroupMemberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddGroupMemberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AddGroupMemberRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.AddGroupMemberRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.AddGroupMemberRequest_GroupName, *v.GroupName)
+	}
+	if v.MemberName != nil {
+		s.WriteString(schemas.AddGroupMemberRequest_MemberName, *v.MemberName)
+	}
+	if v.MemberRealm != nil {
+		s.WriteString(schemas.AddGroupMemberRequest_MemberRealm, *v.MemberRealm)
+	}
+}
+
 type AddGroupMemberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -77,16 +103,21 @@ type AddGroupMemberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddGroupMemberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddGroupMemberResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddGroupMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddGroupMember{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddGroupMember, schemas.AddGroupMemberRequest, schemas.AddGroupMemberResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddGroupMember{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddGroupMember, schemas.AddGroupMemberRequest, schemas.AddGroupMemberResult), output: &AddGroupMemberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AddGroupMember"); err != nil {

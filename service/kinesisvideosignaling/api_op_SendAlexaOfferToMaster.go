@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,24 @@ type SendAlexaOfferToMasterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendAlexaOfferToMasterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendAlexaOfferToMasterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendAlexaOfferToMasterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelARN != nil {
+		s.WriteString(schemas.SendAlexaOfferToMasterRequest_ChannelARN, *v.ChannelARN)
+	}
+	if v.MessagePayload != nil {
+		s.WriteString(schemas.SendAlexaOfferToMasterRequest_MessagePayload, *v.MessagePayload)
+	}
+	if v.SenderClientId != nil {
+		s.WriteString(schemas.SendAlexaOfferToMasterRequest_SenderClientId, *v.SenderClientId)
+	}
+}
+
 type SendAlexaOfferToMasterOutput struct {
 
 	// The base64-encoded SDP answer content.
@@ -62,16 +82,24 @@ type SendAlexaOfferToMasterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendAlexaOfferToMasterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendAlexaOfferToMasterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendAlexaOfferToMasterResponse_Answer:
+			v.Answer = new(string)
+			return d.ReadString(schemas.SendAlexaOfferToMasterResponse_Answer, v.Answer)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendAlexaOfferToMasterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendAlexaOfferToMaster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendAlexaOfferToMaster, schemas.SendAlexaOfferToMasterRequest, schemas.SendAlexaOfferToMasterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendAlexaOfferToMaster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendAlexaOfferToMaster, schemas.SendAlexaOfferToMasterRequest, schemas.SendAlexaOfferToMasterResponse), output: &SendAlexaOfferToMasterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SendAlexaOfferToMaster"); err != nil {

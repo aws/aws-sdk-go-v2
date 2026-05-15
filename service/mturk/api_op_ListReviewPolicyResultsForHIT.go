@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,6 +63,31 @@ type ListReviewPolicyResultsForHITInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReviewPolicyResultsForHITInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReviewPolicyResultsForHITRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReviewPolicyResultsForHITInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HITId != nil {
+		s.WriteString(schemas.ListReviewPolicyResultsForHITRequest_HITId, *v.HITId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReviewPolicyResultsForHITRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReviewPolicyResultsForHITRequest_NextToken, *v.NextToken)
+	}
+	serializeReviewPolicyLevelList(s, schemas.ListReviewPolicyResultsForHITRequest_PolicyLevels, v.PolicyLevels)
+	if v.RetrieveActions != nil {
+		s.WriteBool(schemas.ListReviewPolicyResultsForHITRequest_RetrieveActions, *v.RetrieveActions)
+	}
+	if v.RetrieveResults != nil {
+		s.WriteBool(schemas.ListReviewPolicyResultsForHITRequest_RetrieveResults, *v.RetrieveResults)
+	}
+}
+
 type ListReviewPolicyResultsForHITOutput struct {
 
 	//  The name of the Assignment-level Review Policy. This contains only the
@@ -91,16 +118,39 @@ type ListReviewPolicyResultsForHITOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReviewPolicyResultsForHITOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReviewPolicyResultsForHITResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReviewPolicyResultsForHITResponse_AssignmentReviewPolicy:
+			v.AssignmentReviewPolicy = &types.ReviewPolicy{}
+			return v.AssignmentReviewPolicy.Deserialize(d)
+		case schemas.ListReviewPolicyResultsForHITResponse_AssignmentReviewReport:
+			v.AssignmentReviewReport = &types.ReviewReport{}
+			return v.AssignmentReviewReport.Deserialize(d)
+		case schemas.ListReviewPolicyResultsForHITResponse_HITId:
+			v.HITId = new(string)
+			return d.ReadString(schemas.ListReviewPolicyResultsForHITResponse_HITId, v.HITId)
+		case schemas.ListReviewPolicyResultsForHITResponse_HITReviewPolicy:
+			v.HITReviewPolicy = &types.ReviewPolicy{}
+			return v.HITReviewPolicy.Deserialize(d)
+		case schemas.ListReviewPolicyResultsForHITResponse_HITReviewReport:
+			v.HITReviewReport = &types.ReviewReport{}
+			return v.HITReviewReport.Deserialize(d)
+		case schemas.ListReviewPolicyResultsForHITResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReviewPolicyResultsForHITResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReviewPolicyResultsForHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListReviewPolicyResultsForHIT{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReviewPolicyResultsForHIT, schemas.ListReviewPolicyResultsForHITRequest, schemas.ListReviewPolicyResultsForHITResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListReviewPolicyResultsForHIT{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReviewPolicyResultsForHIT, schemas.ListReviewPolicyResultsForHITRequest, schemas.ListReviewPolicyResultsForHITResponse), output: &ListReviewPolicyResultsForHITOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListReviewPolicyResultsForHIT"); err != nil {

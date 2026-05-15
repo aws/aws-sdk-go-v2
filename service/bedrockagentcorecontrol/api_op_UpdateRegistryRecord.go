@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -78,6 +80,53 @@ type UpdateRegistryRecordInput struct {
 	TriggerSynchronization *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateRegistryRecordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRegistryRecordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRegistryRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteStruct(schemas.UpdateRegistryRecordRequest_description)
+		v.Description.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DescriptorType != "" {
+		s.WriteString(schemas.UpdateRegistryRecordRequest_descriptorType, string(v.DescriptorType))
+	}
+	if v.Descriptors != nil {
+		s.WriteStruct(schemas.UpdateRegistryRecordRequest_descriptors)
+		v.Descriptors.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRegistryRecordRequest_name, *v.Name)
+	}
+	if v.RecordId != nil {
+		s.WriteString(schemas.UpdateRegistryRecordRequest_recordId, *v.RecordId)
+	}
+	if v.RecordVersion != nil {
+		s.WriteString(schemas.UpdateRegistryRecordRequest_recordVersion, *v.RecordVersion)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.UpdateRegistryRecordRequest_registryId, *v.RegistryId)
+	}
+	if v.SynchronizationConfiguration != nil {
+		s.WriteStruct(schemas.UpdateRegistryRecordRequest_synchronizationConfiguration)
+		v.SynchronizationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SynchronizationType != nil {
+		s.WriteStruct(schemas.UpdateRegistryRecordRequest_synchronizationType)
+		v.SynchronizationType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TriggerSynchronization != nil {
+		s.WriteBool(schemas.UpdateRegistryRecordRequest_triggerSynchronization, *v.TriggerSynchronization)
+	}
 }
 
 type UpdateRegistryRecordOutput struct {
@@ -152,16 +201,75 @@ type UpdateRegistryRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRegistryRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRegistryRecordResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRegistryRecordResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateRegistryRecordResponse_createdAt, v.CreatedAt)
+		case schemas.UpdateRegistryRecordResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateRegistryRecordResponse_description, v.Description)
+		case schemas.UpdateRegistryRecordResponse_descriptorType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateRegistryRecordResponse_descriptorType, &ev); err != nil {
+				return err
+			}
+			v.DescriptorType = types.DescriptorType(ev)
+			return nil
+		case schemas.UpdateRegistryRecordResponse_descriptors:
+			v.Descriptors = &types.Descriptors{}
+			return v.Descriptors.Deserialize(d)
+		case schemas.UpdateRegistryRecordResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateRegistryRecordResponse_name, v.Name)
+		case schemas.UpdateRegistryRecordResponse_recordArn:
+			v.RecordArn = new(string)
+			return d.ReadString(schemas.UpdateRegistryRecordResponse_recordArn, v.RecordArn)
+		case schemas.UpdateRegistryRecordResponse_recordId:
+			v.RecordId = new(string)
+			return d.ReadString(schemas.UpdateRegistryRecordResponse_recordId, v.RecordId)
+		case schemas.UpdateRegistryRecordResponse_recordVersion:
+			v.RecordVersion = new(string)
+			return d.ReadString(schemas.UpdateRegistryRecordResponse_recordVersion, v.RecordVersion)
+		case schemas.UpdateRegistryRecordResponse_registryArn:
+			v.RegistryArn = new(string)
+			return d.ReadString(schemas.UpdateRegistryRecordResponse_registryArn, v.RegistryArn)
+		case schemas.UpdateRegistryRecordResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateRegistryRecordResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RegistryRecordStatus(ev)
+			return nil
+		case schemas.UpdateRegistryRecordResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.UpdateRegistryRecordResponse_statusReason, v.StatusReason)
+		case schemas.UpdateRegistryRecordResponse_synchronizationConfiguration:
+			v.SynchronizationConfiguration = &types.SynchronizationConfiguration{}
+			return v.SynchronizationConfiguration.Deserialize(d)
+		case schemas.UpdateRegistryRecordResponse_synchronizationType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateRegistryRecordResponse_synchronizationType, &ev); err != nil {
+				return err
+			}
+			v.SynchronizationType = types.SynchronizationType(ev)
+			return nil
+		case schemas.UpdateRegistryRecordResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateRegistryRecordResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRegistryRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRegistryRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRegistryRecord, schemas.UpdateRegistryRecordRequest, schemas.UpdateRegistryRecordResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRegistryRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRegistryRecord, schemas.UpdateRegistryRecordRequest, schemas.UpdateRegistryRecordResponse), output: &UpdateRegistryRecordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRegistryRecord"); err != nil {

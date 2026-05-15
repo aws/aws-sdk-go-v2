@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,56 @@ type ListVectorEnrichmentJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVectorEnrichmentJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVectorEnrichmentJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVectorEnrichmentJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVectorEnrichmentJobInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVectorEnrichmentJobInput_NextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteString(schemas.ListVectorEnrichmentJobInput_SortBy, *v.SortBy)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListVectorEnrichmentJobInput_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != nil {
+		s.WriteString(schemas.ListVectorEnrichmentJobInput_StatusEquals, *v.StatusEquals)
+	}
+}
+func (v *ListVectorEnrichmentJobsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVectorEnrichmentJobInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVectorEnrichmentJobInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListVectorEnrichmentJobInput_MaxResults, v.MaxResults)
+		case schemas.ListVectorEnrichmentJobInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVectorEnrichmentJobInput_NextToken, v.NextToken)
+		case schemas.ListVectorEnrichmentJobInput_SortBy:
+			v.SortBy = new(string)
+			return d.ReadString(schemas.ListVectorEnrichmentJobInput_SortBy, v.SortBy)
+		case schemas.ListVectorEnrichmentJobInput_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.ListVectorEnrichmentJobInput_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = types.SortOrder(ev)
+			return nil
+		case schemas.ListVectorEnrichmentJobInput_StatusEquals:
+			v.StatusEquals = new(string)
+			return d.ReadString(schemas.ListVectorEnrichmentJobInput_StatusEquals, v.StatusEquals)
+		}
+		return nil
+	})
+}
+
 type ListVectorEnrichmentJobsOutput struct {
 
 	// Contains summary information about the Vector Enrichment jobs.
@@ -66,16 +118,38 @@ type ListVectorEnrichmentJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVectorEnrichmentJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVectorEnrichmentJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVectorEnrichmentJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVectorEnrichmentJobOutput_NextToken, *v.NextToken)
+	}
+	serializeVectorEnrichmentJobList(s, schemas.ListVectorEnrichmentJobOutput_VectorEnrichmentJobSummaries, v.VectorEnrichmentJobSummaries)
+}
+func (v *ListVectorEnrichmentJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVectorEnrichmentJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVectorEnrichmentJobOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVectorEnrichmentJobOutput_NextToken, v.NextToken)
+		case schemas.ListVectorEnrichmentJobOutput_VectorEnrichmentJobSummaries:
+			return deserializeVectorEnrichmentJobList(d, schemas.ListVectorEnrichmentJobOutput_VectorEnrichmentJobSummaries, &v.VectorEnrichmentJobSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVectorEnrichmentJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVectorEnrichmentJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVectorEnrichmentJobs, schemas.ListVectorEnrichmentJobInput, schemas.ListVectorEnrichmentJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVectorEnrichmentJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVectorEnrichmentJobs, schemas.ListVectorEnrichmentJobInput, schemas.ListVectorEnrichmentJobOutput), output: &ListVectorEnrichmentJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListVectorEnrichmentJobs"); err != nil {

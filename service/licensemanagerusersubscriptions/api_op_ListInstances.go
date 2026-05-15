@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,22 @@ type ListInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListInstancesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInstancesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInstancesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListInstancesOutput struct {
 
 	// An array of InstanceSummary resources that contain details about the instances
@@ -63,16 +81,26 @@ type ListInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInstancesResponse_InstanceSummaries:
+			return deserializeInstanceSummaryList(d, schemas.ListInstancesResponse_InstanceSummaries, &v.InstanceSummaries)
+		case schemas.ListInstancesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInstancesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstances, schemas.ListInstancesRequest, schemas.ListInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstances, schemas.ListInstancesRequest, schemas.ListInstancesResponse), output: &ListInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListInstances"); err != nil {

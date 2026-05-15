@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type StopEarthObservationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEarthObservationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopEarthObservationJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEarthObservationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StopEarthObservationJobInput_Arn, *v.Arn)
+	}
+}
+
 type StopEarthObservationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,16 +57,21 @@ type StopEarthObservationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEarthObservationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopEarthObservationJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopEarthObservationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopEarthObservationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEarthObservationJob, schemas.StopEarthObservationJobInput, schemas.StopEarthObservationJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopEarthObservationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEarthObservationJob, schemas.StopEarthObservationJobInput, schemas.StopEarthObservationJobOutput), output: &StopEarthObservationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StopEarthObservationJob"); err != nil {

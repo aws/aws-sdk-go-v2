@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mwaa/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,34 @@ type ListEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnvironmentsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnvironmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEnvironmentsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnvironmentsInput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEnvironmentsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnvironmentsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnvironmentsInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListEnvironmentsInput_MaxResults, v.MaxResults)
+		case schemas.ListEnvironmentsInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnvironmentsInput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListEnvironmentsOutput struct {
 
 	// Returns a list of Amazon MWAA environments.
@@ -54,16 +84,38 @@ type ListEnvironmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnvironmentsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnvironmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnvironmentList(s, schemas.ListEnvironmentsOutput_Environments, v.Environments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnvironmentsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEnvironmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnvironmentsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnvironmentsOutput_Environments:
+			return deserializeEnvironmentList(d, schemas.ListEnvironmentsOutput_Environments, &v.Environments)
+		case schemas.ListEnvironmentsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnvironmentsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironments, schemas.ListEnvironmentsInput, schemas.ListEnvironmentsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironments, schemas.ListEnvironmentsInput, schemas.ListEnvironmentsOutput), output: &ListEnvironmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEnvironments"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,24 @@ type DeleteMLEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMLEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMLEndpointInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMLEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Clean != nil {
+		s.WriteBool(schemas.DeleteMLEndpointInput_clean, *v.Clean)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteMLEndpointInput_id, *v.Id)
+	}
+	if v.NeptuneIamRoleArn != nil {
+		s.WriteString(schemas.DeleteMLEndpointInput_neptuneIamRoleArn, *v.NeptuneIamRoleArn)
+	}
+}
+
 type DeleteMLEndpointOutput struct {
 
 	// The status of the cancellation.
@@ -63,16 +83,24 @@ type DeleteMLEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMLEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMLEndpointOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMLEndpointOutput_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DeleteMLEndpointOutput_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMLEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMLEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMLEndpoint, schemas.DeleteMLEndpointInput, schemas.DeleteMLEndpointOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMLEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMLEndpoint, schemas.DeleteMLEndpointInput, schemas.DeleteMLEndpointOutput), output: &DeleteMLEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteMLEndpoint"); err != nil {

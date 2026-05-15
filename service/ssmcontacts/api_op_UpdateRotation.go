@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -67,6 +69,30 @@ type UpdateRotationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRotationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRotationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRotationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRotationContactsArnList(s, schemas.UpdateRotationRequest_ContactIds, v.ContactIds)
+	if v.Recurrence != nil {
+		s.WriteStruct(schemas.UpdateRotationRequest_Recurrence)
+		v.Recurrence.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RotationId != nil {
+		s.WriteString(schemas.UpdateRotationRequest_RotationId, *v.RotationId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.UpdateRotationRequest_StartTime, *v.StartTime)
+	}
+	if v.TimeZoneId != nil {
+		s.WriteString(schemas.UpdateRotationRequest_TimeZoneId, *v.TimeZoneId)
+	}
+}
+
 type UpdateRotationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -74,16 +100,21 @@ type UpdateRotationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRotationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRotationResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRotationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRotation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRotation, schemas.UpdateRotationRequest, schemas.UpdateRotationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateRotation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRotation, schemas.UpdateRotationRequest, schemas.UpdateRotationResult), output: &UpdateRotationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRotation"); err != nil {

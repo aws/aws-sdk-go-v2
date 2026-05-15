@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -74,6 +76,28 @@ type StartCompositionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCompositionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCompositionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCompositionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDestinationConfigurationList(s, schemas.StartCompositionRequest_destinations, v.Destinations)
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.StartCompositionRequest_idempotencyToken, *v.IdempotencyToken)
+	}
+	if v.Layout != nil {
+		s.WriteStruct(schemas.StartCompositionRequest_layout)
+		v.Layout.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StageArn != nil {
+		s.WriteString(schemas.StartCompositionRequest_stageArn, *v.StageArn)
+	}
+	serializeTags(s, schemas.StartCompositionRequest_tags, v.Tags)
+}
+
 type StartCompositionOutput struct {
 
 	// The Composition that was created.
@@ -85,16 +109,24 @@ type StartCompositionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCompositionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartCompositionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartCompositionResponse_composition:
+			v.Composition = &types.Composition{}
+			return v.Composition.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartCompositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartComposition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartComposition, schemas.StartCompositionRequest, schemas.StartCompositionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartComposition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartComposition, schemas.StartCompositionRequest, schemas.StartCompositionResponse), output: &StartCompositionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartComposition"); err != nil {

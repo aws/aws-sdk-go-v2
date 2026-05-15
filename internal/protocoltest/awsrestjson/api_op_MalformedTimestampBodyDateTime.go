@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -34,6 +36,28 @@ type MalformedTimestampBodyDateTimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedTimestampBodyDateTimeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MalformedTimestampBodyDateTimeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedTimestampBodyDateTimeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.MalformedTimestampBodyDateTimeInput_timestamp, *v.Timestamp)
+	}
+}
+func (v *MalformedTimestampBodyDateTimeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MalformedTimestampBodyDateTimeInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MalformedTimestampBodyDateTimeInput_timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.MalformedTimestampBodyDateTimeInput_timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
+
 type MalformedTimestampBodyDateTimeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,16 +65,29 @@ type MalformedTimestampBodyDateTimeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedTimestampBodyDateTimeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedTimestampBodyDateTimeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *MalformedTimestampBodyDateTimeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMalformedTimestampBodyDateTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpMalformedTimestampBodyDateTime{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedTimestampBodyDateTime, schemas.MalformedTimestampBodyDateTimeInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMalformedTimestampBodyDateTime{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedTimestampBodyDateTime, schemas.MalformedTimestampBodyDateTimeInput, nil), output: &MalformedTimestampBodyDateTimeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "MalformedTimestampBodyDateTime"); err != nil {

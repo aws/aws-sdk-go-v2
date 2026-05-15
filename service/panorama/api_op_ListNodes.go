@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,67 @@ type ListNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNodesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNodesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != "" {
+		s.WriteString(schemas.ListNodesRequest_Category, string(v.Category))
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListNodesRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNodesRequest_NextToken, *v.NextToken)
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.ListNodesRequest_OwnerAccount, *v.OwnerAccount)
+	}
+	if v.PackageName != nil {
+		s.WriteString(schemas.ListNodesRequest_PackageName, *v.PackageName)
+	}
+	if v.PackageVersion != nil {
+		s.WriteString(schemas.ListNodesRequest_PackageVersion, *v.PackageVersion)
+	}
+	if v.PatchVersion != nil {
+		s.WriteString(schemas.ListNodesRequest_PatchVersion, *v.PatchVersion)
+	}
+}
+func (v *ListNodesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNodesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNodesRequest_Category:
+			var ev string
+			if err := d.ReadString(schemas.ListNodesRequest_Category, &ev); err != nil {
+				return err
+			}
+			v.Category = types.NodeCategory(ev)
+			return nil
+		case schemas.ListNodesRequest_MaxResults:
+			return d.ReadInt32(schemas.ListNodesRequest_MaxResults, &v.MaxResults)
+		case schemas.ListNodesRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNodesRequest_NextToken, v.NextToken)
+		case schemas.ListNodesRequest_OwnerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.ListNodesRequest_OwnerAccount, v.OwnerAccount)
+		case schemas.ListNodesRequest_PackageName:
+			v.PackageName = new(string)
+			return d.ReadString(schemas.ListNodesRequest_PackageName, v.PackageName)
+		case schemas.ListNodesRequest_PackageVersion:
+			v.PackageVersion = new(string)
+			return d.ReadString(schemas.ListNodesRequest_PackageVersion, v.PackageVersion)
+		case schemas.ListNodesRequest_PatchVersion:
+			v.PatchVersion = new(string)
+			return d.ReadString(schemas.ListNodesRequest_PatchVersion, v.PatchVersion)
+		}
+		return nil
+	})
+}
+
 type ListNodesOutput struct {
 
 	// A pagination token that's included if more results are available.
@@ -68,16 +131,38 @@ type ListNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNodesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNodesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNodesResponse_NextToken, *v.NextToken)
+	}
+	serializeNodesList(s, schemas.ListNodesResponse_Nodes, v.Nodes)
+}
+func (v *ListNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNodesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNodesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNodesResponse_NextToken, v.NextToken)
+		case schemas.ListNodesResponse_Nodes:
+			return deserializeNodesList(d, schemas.ListNodesResponse_Nodes, &v.Nodes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNodes, schemas.ListNodesRequest, schemas.ListNodesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNodes, schemas.ListNodesRequest, schemas.ListNodesResponse), output: &ListNodesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListNodes"); err != nil {

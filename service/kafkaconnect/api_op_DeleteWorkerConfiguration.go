@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type DeleteWorkerConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkerConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkerConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkerConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkerConfigurationArn != nil {
+		s.WriteString(schemas.DeleteWorkerConfigurationRequest_workerConfigurationArn, *v.WorkerConfigurationArn)
+	}
+}
+
 type DeleteWorkerConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the worker configuration that you requested
@@ -53,16 +67,45 @@ type DeleteWorkerConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkerConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkerConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkerConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkerConfigurationArn != nil {
+		s.WriteString(schemas.DeleteWorkerConfigurationResponse_workerConfigurationArn, *v.WorkerConfigurationArn)
+	}
+	if v.WorkerConfigurationState != "" {
+		s.WriteString(schemas.DeleteWorkerConfigurationResponse_workerConfigurationState, string(v.WorkerConfigurationState))
+	}
+}
+func (v *DeleteWorkerConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkerConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteWorkerConfigurationResponse_workerConfigurationArn:
+			v.WorkerConfigurationArn = new(string)
+			return d.ReadString(schemas.DeleteWorkerConfigurationResponse_workerConfigurationArn, v.WorkerConfigurationArn)
+		case schemas.DeleteWorkerConfigurationResponse_workerConfigurationState:
+			var ev string
+			if err := d.ReadString(schemas.DeleteWorkerConfigurationResponse_workerConfigurationState, &ev); err != nil {
+				return err
+			}
+			v.WorkerConfigurationState = types.WorkerConfigurationState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWorkerConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkerConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkerConfiguration, schemas.DeleteWorkerConfigurationRequest, schemas.DeleteWorkerConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWorkerConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkerConfiguration, schemas.DeleteWorkerConfigurationRequest, schemas.DeleteWorkerConfigurationResponse), output: &DeleteWorkerConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteWorkerConfiguration"); err != nil {

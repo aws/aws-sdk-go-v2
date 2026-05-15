@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,6 +67,23 @@ type StartMeetingTranscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMeetingTranscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMeetingTranscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMeetingTranscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeetingId != nil {
+		s.WriteString(schemas.StartMeetingTranscriptionRequest_MeetingId, *v.MeetingId)
+	}
+	if v.TranscriptionConfiguration != nil {
+		s.WriteStruct(schemas.StartMeetingTranscriptionRequest_TranscriptionConfiguration)
+		v.TranscriptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartMeetingTranscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -72,16 +91,29 @@ type StartMeetingTranscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMeetingTranscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMeetingTranscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartMeetingTranscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMeetingTranscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartMeetingTranscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMeetingTranscription, schemas.StartMeetingTranscriptionRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartMeetingTranscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMeetingTranscription, schemas.StartMeetingTranscriptionRequest, nil), output: &StartMeetingTranscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMeetingTranscription"); err != nil {

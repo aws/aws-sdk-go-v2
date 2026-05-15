@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediastoredata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediastoredata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,24 @@ type ListItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListItemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListItemsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListItemsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListItemsRequest_NextToken, *v.NextToken)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.ListItemsRequest_Path, *v.Path)
+	}
+}
+
 type ListItemsOutput struct {
 
 	// The metadata entries for the folders and objects at the requested path.
@@ -72,16 +92,26 @@ type ListItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListItemsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListItemsResponse_Items:
+			return deserializeItemList(d, schemas.ListItemsResponse_Items, &v.Items)
+		case schemas.ListItemsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListItemsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListItems, schemas.ListItemsRequest, schemas.ListItemsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListItems, schemas.ListItemsRequest, schemas.ListItemsResponse), output: &ListItemsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListItems"); err != nil {

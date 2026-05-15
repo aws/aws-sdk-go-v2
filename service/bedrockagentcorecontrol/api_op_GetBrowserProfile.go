@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type GetBrowserProfileInput struct {
 	ProfileId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBrowserProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBrowserProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBrowserProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileId != nil {
+		s.WriteString(schemas.GetBrowserProfileRequest_profileId, *v.ProfileId)
+	}
 }
 
 type GetBrowserProfileOutput struct {
@@ -89,16 +103,55 @@ type GetBrowserProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBrowserProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBrowserProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBrowserProfileResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBrowserProfileResponse_createdAt, v.CreatedAt)
+		case schemas.GetBrowserProfileResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetBrowserProfileResponse_description, v.Description)
+		case schemas.GetBrowserProfileResponse_lastSavedAt:
+			v.LastSavedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBrowserProfileResponse_lastSavedAt, v.LastSavedAt)
+		case schemas.GetBrowserProfileResponse_lastSavedBrowserId:
+			v.LastSavedBrowserId = new(string)
+			return d.ReadString(schemas.GetBrowserProfileResponse_lastSavedBrowserId, v.LastSavedBrowserId)
+		case schemas.GetBrowserProfileResponse_lastSavedBrowserSessionId:
+			v.LastSavedBrowserSessionId = new(string)
+			return d.ReadString(schemas.GetBrowserProfileResponse_lastSavedBrowserSessionId, v.LastSavedBrowserSessionId)
+		case schemas.GetBrowserProfileResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBrowserProfileResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetBrowserProfileResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetBrowserProfileResponse_name, v.Name)
+		case schemas.GetBrowserProfileResponse_profileArn:
+			v.ProfileArn = new(string)
+			return d.ReadString(schemas.GetBrowserProfileResponse_profileArn, v.ProfileArn)
+		case schemas.GetBrowserProfileResponse_profileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.GetBrowserProfileResponse_profileId, v.ProfileId)
+		case schemas.GetBrowserProfileResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetBrowserProfileResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BrowserProfileStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBrowserProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBrowserProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBrowserProfile, schemas.GetBrowserProfileRequest, schemas.GetBrowserProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBrowserProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBrowserProfile, schemas.GetBrowserProfileRequest, schemas.GetBrowserProfileResponse), output: &GetBrowserProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBrowserProfile"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type DescribeDomainConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDomainConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDomainConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDomainConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DescribeDomainConfigRequest_DomainName, *v.DomainName)
+	}
+}
+
 // Contains the configuration information of the requested domain.
 type DescribeDomainConfigOutput struct {
 
@@ -52,16 +66,24 @@ type DescribeDomainConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDomainConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDomainConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDomainConfigResponse_DomainConfig:
+			v.DomainConfig = &types.DomainConfig{}
+			return v.DomainConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDomainConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDomainConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomainConfig, schemas.DescribeDomainConfigRequest, schemas.DescribeDomainConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDomainConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomainConfig, schemas.DescribeDomainConfigRequest, schemas.DescribeDomainConfigResponse), output: &DescribeDomainConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDomainConfig"); err != nil {

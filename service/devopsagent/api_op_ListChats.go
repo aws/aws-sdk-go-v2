@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,27 @@ type ListChatsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChatsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChatsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChatsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.ListChatsRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListChatsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChatsRequest_nextToken, *v.NextToken)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.ListChatsRequest_userId, *v.UserId)
+	}
+}
+
 // Response structure for listing chats
 type ListChatsOutput struct {
 
@@ -69,16 +92,26 @@ type ListChatsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChatsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListChatsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListChatsResponse_executions:
+			return deserializeChatExecutionList(d, schemas.ListChatsResponse_executions, &v.Executions)
+		case schemas.ListChatsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListChatsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListChatsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChats{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChats, schemas.ListChatsRequest, schemas.ListChatsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListChats{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChats, schemas.ListChatsRequest, schemas.ListChatsResponse), output: &ListChatsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListChats"); err != nil {

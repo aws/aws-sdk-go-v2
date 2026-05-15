@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/waf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,21 @@ type ListByteMatchSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListByteMatchSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListByteMatchSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListByteMatchSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.ListByteMatchSetsRequest_Limit, v.Limit)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListByteMatchSetsRequest_NextMarker, *v.NextMarker)
+	}
+}
+
 type ListByteMatchSetsOutput struct {
 
 	// An array of ByteMatchSetSummary objects.
@@ -72,16 +89,26 @@ type ListByteMatchSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListByteMatchSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListByteMatchSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListByteMatchSetsResponse_ByteMatchSets:
+			return deserializeByteMatchSetSummaries(d, schemas.ListByteMatchSetsResponse_ByteMatchSets, &v.ByteMatchSets)
+		case schemas.ListByteMatchSetsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListByteMatchSetsResponse_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListByteMatchSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListByteMatchSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListByteMatchSets, schemas.ListByteMatchSetsRequest, schemas.ListByteMatchSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListByteMatchSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListByteMatchSets, schemas.ListByteMatchSetsRequest, schemas.ListByteMatchSetsResponse), output: &ListByteMatchSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListByteMatchSets"); err != nil {

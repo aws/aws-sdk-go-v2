@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/health/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -75,6 +77,19 @@ type DescribeEventDetailsForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventDetailsForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventDetailsForOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventDetailsForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Locale != nil {
+		s.WriteString(schemas.DescribeEventDetailsForOrganizationRequest_locale, *v.Locale)
+	}
+	serializeOrganizationEventDetailFiltersList(s, schemas.DescribeEventDetailsForOrganizationRequest_organizationEventDetailFilters, v.OrganizationEventDetailFilters)
+}
+
 type DescribeEventDetailsForOrganizationOutput struct {
 
 	// Error messages for any events that could not be retrieved.
@@ -89,16 +104,25 @@ type DescribeEventDetailsForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventDetailsForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEventDetailsForOrganizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEventDetailsForOrganizationResponse_failedSet:
+			return deserializeDescribeEventDetailsForOrganizationFailedSet(d, schemas.DescribeEventDetailsForOrganizationResponse_failedSet, &v.FailedSet)
+		case schemas.DescribeEventDetailsForOrganizationResponse_successfulSet:
+			return deserializeDescribeEventDetailsForOrganizationSuccessfulSet(d, schemas.DescribeEventDetailsForOrganizationResponse_successfulSet, &v.SuccessfulSet)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEventDetailsForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEventDetailsForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventDetailsForOrganization, schemas.DescribeEventDetailsForOrganizationRequest, schemas.DescribeEventDetailsForOrganizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEventDetailsForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventDetailsForOrganization, schemas.DescribeEventDetailsForOrganizationRequest, schemas.DescribeEventDetailsForOrganizationResponse), output: &DescribeEventDetailsForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeEventDetailsForOrganization"); err != nil {

@@ -46,7 +46,6 @@ import software.amazon.smithy.model.traits.StreamingTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.XmlAttributeTrait;
 import software.amazon.smithy.model.traits.XmlNamespaceTrait;
-import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionGenerator;
 import software.amazon.smithy.go.codegen.endpoints.FnGenerator;
 
 abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
@@ -651,11 +650,5 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
         eventDocumentShapes.addAll(ProtocolUtils.resolveRequiredDocumentShapeSerde(model, eventDocumentShapes));
         generateDocumentBodyShapeDeserializers(context, eventDocumentShapes);
-    }
-
-    @Override
-    public void generateEndpointResolution(GenerationContext context) {
-        var generator = new EndpointResolutionGenerator(new AwsFnProvider());
-        generator.generate(context);
     }
 }

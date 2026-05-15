@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -79,6 +81,26 @@ type StartPolicyGenerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPolicyGenerationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPolicyGenerationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPolicyGenerationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartPolicyGenerationRequest_clientToken, *v.ClientToken)
+	}
+	serializeContent(s, schemas.StartPolicyGenerationRequest_content, v.Content)
+	if v.Name != nil {
+		s.WriteString(schemas.StartPolicyGenerationRequest_name, *v.Name)
+	}
+	if v.PolicyEngineId != nil {
+		s.WriteString(schemas.StartPolicyGenerationRequest_policyEngineId, *v.PolicyEngineId)
+	}
+	serializeResource(s, schemas.StartPolicyGenerationRequest_resource, v.Resource)
+}
+
 type StartPolicyGenerationOutput struct {
 
 	// The timestamp when the policy generation request was created.
@@ -137,16 +159,53 @@ type StartPolicyGenerationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPolicyGenerationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartPolicyGenerationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartPolicyGenerationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartPolicyGenerationResponse_createdAt, v.CreatedAt)
+		case schemas.StartPolicyGenerationResponse_findings:
+			v.Findings = new(string)
+			return d.ReadString(schemas.StartPolicyGenerationResponse_findings, v.Findings)
+		case schemas.StartPolicyGenerationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StartPolicyGenerationResponse_name, v.Name)
+		case schemas.StartPolicyGenerationResponse_policyEngineId:
+			v.PolicyEngineId = new(string)
+			return d.ReadString(schemas.StartPolicyGenerationResponse_policyEngineId, v.PolicyEngineId)
+		case schemas.StartPolicyGenerationResponse_policyGenerationArn:
+			v.PolicyGenerationArn = new(string)
+			return d.ReadString(schemas.StartPolicyGenerationResponse_policyGenerationArn, v.PolicyGenerationArn)
+		case schemas.StartPolicyGenerationResponse_policyGenerationId:
+			v.PolicyGenerationId = new(string)
+			return d.ReadString(schemas.StartPolicyGenerationResponse_policyGenerationId, v.PolicyGenerationId)
+		case schemas.StartPolicyGenerationResponse_resource:
+			return deserializeResource(d, schemas.StartPolicyGenerationResponse_resource, &v.Resource)
+		case schemas.StartPolicyGenerationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StartPolicyGenerationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PolicyGenerationStatus(ev)
+			return nil
+		case schemas.StartPolicyGenerationResponse_statusReasons:
+			return deserializePolicyStatusReasons(d, schemas.StartPolicyGenerationResponse_statusReasons, &v.StatusReasons)
+		case schemas.StartPolicyGenerationResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartPolicyGenerationResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartPolicyGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartPolicyGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPolicyGeneration, schemas.StartPolicyGenerationRequest, schemas.StartPolicyGenerationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartPolicyGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPolicyGeneration, schemas.StartPolicyGenerationRequest, schemas.StartPolicyGenerationResponse), output: &StartPolicyGenerationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartPolicyGeneration"); err != nil {

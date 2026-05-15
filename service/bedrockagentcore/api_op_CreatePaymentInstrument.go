@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,6 +65,34 @@ type CreatePaymentInstrumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePaymentInstrumentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePaymentInstrumentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePaymentInstrumentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentName != nil {
+		s.WriteString(schemas.CreatePaymentInstrumentRequest_agentName, *v.AgentName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePaymentInstrumentRequest_clientToken, *v.ClientToken)
+	}
+	if v.PaymentConnectorId != nil {
+		s.WriteString(schemas.CreatePaymentInstrumentRequest_paymentConnectorId, *v.PaymentConnectorId)
+	}
+	serializePaymentInstrumentDetails(s, schemas.CreatePaymentInstrumentRequest_paymentInstrumentDetails, v.PaymentInstrumentDetails)
+	if v.PaymentInstrumentType != "" {
+		s.WriteString(schemas.CreatePaymentInstrumentRequest_paymentInstrumentType, string(v.PaymentInstrumentType))
+	}
+	if v.PaymentManagerArn != nil {
+		s.WriteString(schemas.CreatePaymentInstrumentRequest_paymentManagerArn, *v.PaymentManagerArn)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.CreatePaymentInstrumentRequest_userId, *v.UserId)
+	}
+}
+
 // Response structure for creating a payment instrument.
 type CreatePaymentInstrumentOutput struct {
 
@@ -77,16 +107,24 @@ type CreatePaymentInstrumentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePaymentInstrumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePaymentInstrumentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePaymentInstrumentResponse_paymentInstrument:
+			v.PaymentInstrument = &types.PaymentInstrument{}
+			return v.PaymentInstrument.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePaymentInstrumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePaymentInstrument{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePaymentInstrument, schemas.CreatePaymentInstrumentRequest, schemas.CreatePaymentInstrumentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePaymentInstrument{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePaymentInstrument, schemas.CreatePaymentInstrumentRequest, schemas.CreatePaymentInstrumentResponse), output: &CreatePaymentInstrumentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePaymentInstrument"); err != nil {

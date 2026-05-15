@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,25 @@ type RegisterIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterIdentityProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterIdentityProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterIdentityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentityProvider(s, schemas.RegisterIdentityProviderRequest_IdentityProvider, v.IdentityProvider)
+	if v.Product != nil {
+		s.WriteString(schemas.RegisterIdentityProviderRequest_Product, *v.Product)
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.RegisterIdentityProviderRequest_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.RegisterIdentityProviderRequest_Tags, v.Tags)
+}
+
 type RegisterIdentityProviderOutput struct {
 
 	// Metadata that describes the results of an identity provider operation.
@@ -65,16 +86,24 @@ type RegisterIdentityProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterIdentityProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterIdentityProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterIdentityProviderResponse_IdentityProviderSummary:
+			v.IdentityProviderSummary = &types.IdentityProviderSummary{}
+			return v.IdentityProviderSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterIdentityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterIdentityProvider, schemas.RegisterIdentityProviderRequest, schemas.RegisterIdentityProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterIdentityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterIdentityProvider, schemas.RegisterIdentityProviderRequest, schemas.RegisterIdentityProviderResponse), output: &RegisterIdentityProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterIdentityProvider"); err != nil {

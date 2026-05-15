@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,6 +44,21 @@ type UpdatePrivateConnectionCertificateInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdatePrivateConnectionCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePrivateConnectionCertificateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePrivateConnectionCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Certificate != nil {
+		s.WriteString(schemas.UpdatePrivateConnectionCertificateInput_certificate, *v.Certificate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdatePrivateConnectionCertificateInput_name, *v.Name)
+	}
 }
 
 // Output containing the updated Private Connection summary.
@@ -88,16 +105,53 @@ type UpdatePrivateConnectionCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePrivateConnectionCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePrivateConnectionCertificateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePrivateConnectionCertificateOutput_certificateExpiryTime:
+			v.CertificateExpiryTime = new(time.Time)
+			return d.ReadTime(schemas.UpdatePrivateConnectionCertificateOutput_certificateExpiryTime, v.CertificateExpiryTime)
+		case schemas.UpdatePrivateConnectionCertificateOutput_hostAddress:
+			v.HostAddress = new(string)
+			return d.ReadString(schemas.UpdatePrivateConnectionCertificateOutput_hostAddress, v.HostAddress)
+		case schemas.UpdatePrivateConnectionCertificateOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdatePrivateConnectionCertificateOutput_name, v.Name)
+		case schemas.UpdatePrivateConnectionCertificateOutput_resourceConfigurationId:
+			v.ResourceConfigurationId = new(string)
+			return d.ReadString(schemas.UpdatePrivateConnectionCertificateOutput_resourceConfigurationId, v.ResourceConfigurationId)
+		case schemas.UpdatePrivateConnectionCertificateOutput_resourceGatewayId:
+			v.ResourceGatewayId = new(string)
+			return d.ReadString(schemas.UpdatePrivateConnectionCertificateOutput_resourceGatewayId, v.ResourceGatewayId)
+		case schemas.UpdatePrivateConnectionCertificateOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePrivateConnectionCertificateOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PrivateConnectionStatus(ev)
+			return nil
+		case schemas.UpdatePrivateConnectionCertificateOutput_type:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePrivateConnectionCertificateOutput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.PrivateConnectionType(ev)
+			return nil
+		case schemas.UpdatePrivateConnectionCertificateOutput_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.UpdatePrivateConnectionCertificateOutput_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePrivateConnectionCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePrivateConnectionCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePrivateConnectionCertificate, schemas.UpdatePrivateConnectionCertificateInput, schemas.UpdatePrivateConnectionCertificateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePrivateConnectionCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePrivateConnectionCertificate, schemas.UpdatePrivateConnectionCertificateInput, schemas.UpdatePrivateConnectionCertificateOutput), output: &UpdatePrivateConnectionCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePrivateConnectionCertificate"); err != nil {

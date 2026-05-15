@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,6 +63,59 @@ type StartImportFileTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportFileTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportFileTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportFileTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.StartImportFileTaskRequest_S3Bucket, *v.S3Bucket)
+	}
+	if v.DataSourceType != "" {
+		s.WriteString(schemas.StartImportFileTaskRequest_dataSourceType, string(v.DataSourceType))
+	}
+	serializeGroupIds(s, schemas.StartImportFileTaskRequest_groupId, v.GroupId)
+	if v.Name != nil {
+		s.WriteString(schemas.StartImportFileTaskRequest_name, *v.Name)
+	}
+	if v.S3bucketForReportData != nil {
+		s.WriteString(schemas.StartImportFileTaskRequest_s3bucketForReportData, *v.S3bucketForReportData)
+	}
+	if v.S3key != nil {
+		s.WriteString(schemas.StartImportFileTaskRequest_s3key, *v.S3key)
+	}
+}
+func (v *StartImportFileTaskInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartImportFileTaskRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartImportFileTaskRequest_S3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.StartImportFileTaskRequest_S3Bucket, v.S3Bucket)
+		case schemas.StartImportFileTaskRequest_dataSourceType:
+			var ev string
+			if err := d.ReadString(schemas.StartImportFileTaskRequest_dataSourceType, &ev); err != nil {
+				return err
+			}
+			v.DataSourceType = types.DataSourceType(ev)
+			return nil
+		case schemas.StartImportFileTaskRequest_groupId:
+			return deserializeGroupIds(d, schemas.StartImportFileTaskRequest_groupId, &v.GroupId)
+		case schemas.StartImportFileTaskRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StartImportFileTaskRequest_name, v.Name)
+		case schemas.StartImportFileTaskRequest_s3bucketForReportData:
+			v.S3bucketForReportData = new(string)
+			return d.ReadString(schemas.StartImportFileTaskRequest_s3bucketForReportData, v.S3bucketForReportData)
+		case schemas.StartImportFileTaskRequest_s3key:
+			v.S3key = new(string)
+			return d.ReadString(schemas.StartImportFileTaskRequest_s3key, v.S3key)
+		}
+		return nil
+	})
+}
+
 type StartImportFileTaskOutput struct {
 
 	//  The ID for a specific import task. The ID is unique within an AWS account.
@@ -72,16 +127,35 @@ type StartImportFileTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportFileTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportFileTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportFileTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StartImportFileTaskResponse_id, *v.Id)
+	}
+}
+func (v *StartImportFileTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartImportFileTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartImportFileTaskResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartImportFileTaskResponse_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartImportFileTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartImportFileTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImportFileTask, schemas.StartImportFileTaskRequest, schemas.StartImportFileTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartImportFileTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImportFileTask, schemas.StartImportFileTaskRequest, schemas.StartImportFileTaskResponse), output: &StartImportFileTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartImportFileTask"); err != nil {

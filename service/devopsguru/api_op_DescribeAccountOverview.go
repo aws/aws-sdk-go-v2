@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -47,6 +49,21 @@ type DescribeAccountOverviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountOverviewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountOverviewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountOverviewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FromTime != nil {
+		s.WriteTime(schemas.DescribeAccountOverviewRequest_FromTime, *v.FromTime)
+	}
+	if v.ToTime != nil {
+		s.WriteTime(schemas.DescribeAccountOverviewRequest_ToTime, *v.ToTime)
+	}
+}
+
 type DescribeAccountOverviewOutput struct {
 
 	//  The Mean Time to Recover (MTTR) for all closed insights that were created
@@ -73,16 +90,28 @@ type DescribeAccountOverviewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountOverviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountOverviewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountOverviewResponse_MeanTimeToRecoverInMilliseconds:
+			v.MeanTimeToRecoverInMilliseconds = new(int64)
+			return d.ReadInt64(schemas.DescribeAccountOverviewResponse_MeanTimeToRecoverInMilliseconds, v.MeanTimeToRecoverInMilliseconds)
+		case schemas.DescribeAccountOverviewResponse_ProactiveInsights:
+			return d.ReadInt32(schemas.DescribeAccountOverviewResponse_ProactiveInsights, &v.ProactiveInsights)
+		case schemas.DescribeAccountOverviewResponse_ReactiveInsights:
+			return d.ReadInt32(schemas.DescribeAccountOverviewResponse_ReactiveInsights, &v.ReactiveInsights)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountOverviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAccountOverview{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountOverview, schemas.DescribeAccountOverviewRequest, schemas.DescribeAccountOverviewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAccountOverview{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountOverview, schemas.DescribeAccountOverviewRequest, schemas.DescribeAccountOverviewResponse), output: &DescribeAccountOverviewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAccountOverview"); err != nil {

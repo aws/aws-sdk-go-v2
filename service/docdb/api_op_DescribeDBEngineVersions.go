@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -79,6 +81,40 @@ type DescribeDBEngineVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBEngineVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBEngineVersionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBEngineVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBParameterGroupFamily != nil {
+		s.WriteString(schemas.DescribeDBEngineVersionsMessage_DBParameterGroupFamily, *v.DBParameterGroupFamily)
+	}
+	if v.DefaultOnly != nil {
+		s.WriteBool(schemas.DescribeDBEngineVersionsMessage_DefaultOnly, *v.DefaultOnly)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.DescribeDBEngineVersionsMessage_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.DescribeDBEngineVersionsMessage_EngineVersion, *v.EngineVersion)
+	}
+	serializeFilterList(s, schemas.DescribeDBEngineVersionsMessage_Filters, v.Filters)
+	if v.ListSupportedCharacterSets != nil {
+		s.WriteBool(schemas.DescribeDBEngineVersionsMessage_ListSupportedCharacterSets, *v.ListSupportedCharacterSets)
+	}
+	if v.ListSupportedTimezones != nil {
+		s.WriteBool(schemas.DescribeDBEngineVersionsMessage_ListSupportedTimezones, *v.ListSupportedTimezones)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBEngineVersionsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBEngineVersionsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 // Represents the output of DescribeDBEngineVersions.
 type DescribeDBEngineVersionsOutput struct {
 
@@ -96,16 +132,26 @@ type DescribeDBEngineVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBEngineVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBEngineVersionMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBEngineVersionMessage_DBEngineVersions:
+			return deserializeDBEngineVersionList(d, schemas.DBEngineVersionMessage_DBEngineVersions, &v.DBEngineVersions)
+		case schemas.DBEngineVersionMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DBEngineVersionMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBEngineVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBEngineVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBEngineVersions, schemas.DescribeDBEngineVersionsMessage, schemas.DBEngineVersionMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBEngineVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBEngineVersions, schemas.DescribeDBEngineVersionsMessage, schemas.DBEngineVersionMessage), output: &DescribeDBEngineVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDBEngineVersions"); err != nil {

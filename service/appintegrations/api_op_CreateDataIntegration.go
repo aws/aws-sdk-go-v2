@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -72,6 +74,42 @@ type CreateDataIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDataIntegrationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDataIntegrationRequest_Description, *v.Description)
+	}
+	if v.FileConfiguration != nil {
+		s.WriteStruct(schemas.CreateDataIntegrationRequest_FileConfiguration)
+		v.FileConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKey != nil {
+		s.WriteString(schemas.CreateDataIntegrationRequest_KmsKey, *v.KmsKey)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDataIntegrationRequest_Name, *v.Name)
+	}
+	serializeObjectConfiguration(s, schemas.CreateDataIntegrationRequest_ObjectConfiguration, v.ObjectConfiguration)
+	if v.ScheduleConfig != nil {
+		s.WriteStruct(schemas.CreateDataIntegrationRequest_ScheduleConfig)
+		v.ScheduleConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceURI != nil {
+		s.WriteString(schemas.CreateDataIntegrationRequest_SourceURI, *v.SourceURI)
+	}
+	serializeTagMap(s, schemas.CreateDataIntegrationRequest_Tags, v.Tags)
+}
+
 type CreateDataIntegrationOutput struct {
 
 	// The Amazon Resource Name (ARN)
@@ -118,16 +156,52 @@ type CreateDataIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataIntegrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataIntegrationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateDataIntegrationResponse_Arn, v.Arn)
+		case schemas.CreateDataIntegrationResponse_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateDataIntegrationResponse_ClientToken, v.ClientToken)
+		case schemas.CreateDataIntegrationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateDataIntegrationResponse_Description, v.Description)
+		case schemas.CreateDataIntegrationResponse_FileConfiguration:
+			v.FileConfiguration = &types.FileConfiguration{}
+			return v.FileConfiguration.Deserialize(d)
+		case schemas.CreateDataIntegrationResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateDataIntegrationResponse_Id, v.Id)
+		case schemas.CreateDataIntegrationResponse_KmsKey:
+			v.KmsKey = new(string)
+			return d.ReadString(schemas.CreateDataIntegrationResponse_KmsKey, v.KmsKey)
+		case schemas.CreateDataIntegrationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateDataIntegrationResponse_Name, v.Name)
+		case schemas.CreateDataIntegrationResponse_ObjectConfiguration:
+			return deserializeObjectConfiguration(d, schemas.CreateDataIntegrationResponse_ObjectConfiguration, &v.ObjectConfiguration)
+		case schemas.CreateDataIntegrationResponse_ScheduleConfiguration:
+			v.ScheduleConfiguration = &types.ScheduleConfiguration{}
+			return v.ScheduleConfiguration.Deserialize(d)
+		case schemas.CreateDataIntegrationResponse_SourceURI:
+			v.SourceURI = new(string)
+			return d.ReadString(schemas.CreateDataIntegrationResponse_SourceURI, v.SourceURI)
+		case schemas.CreateDataIntegrationResponse_Tags:
+			return deserializeTagMap(d, schemas.CreateDataIntegrationResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataIntegration, schemas.CreateDataIntegrationRequest, schemas.CreateDataIntegrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataIntegration, schemas.CreateDataIntegrationRequest, schemas.CreateDataIntegrationResponse), output: &CreateDataIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataIntegration"); err != nil {

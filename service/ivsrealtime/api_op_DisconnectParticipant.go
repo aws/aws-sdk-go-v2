@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,40 @@ type DisconnectParticipantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisconnectParticipantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisconnectParticipantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisconnectParticipantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParticipantId != nil {
+		s.WriteString(schemas.DisconnectParticipantRequest_participantId, *v.ParticipantId)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.DisconnectParticipantRequest_reason, *v.Reason)
+	}
+	if v.StageArn != nil {
+		s.WriteString(schemas.DisconnectParticipantRequest_stageArn, *v.StageArn)
+	}
+}
+func (v *DisconnectParticipantInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisconnectParticipantRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisconnectParticipantRequest_participantId:
+			v.ParticipantId = new(string)
+			return d.ReadString(schemas.DisconnectParticipantRequest_participantId, v.ParticipantId)
+		case schemas.DisconnectParticipantRequest_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.DisconnectParticipantRequest_reason, v.Reason)
+		case schemas.DisconnectParticipantRequest_stageArn:
+			v.StageArn = new(string)
+			return d.ReadString(schemas.DisconnectParticipantRequest_stageArn, v.StageArn)
+		}
+		return nil
+	})
+}
+
 type DisconnectParticipantOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,16 +91,29 @@ type DisconnectParticipantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisconnectParticipantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisconnectParticipantResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisconnectParticipantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisconnectParticipantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisconnectParticipantResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisconnectParticipantMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisconnectParticipant{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisconnectParticipant, schemas.DisconnectParticipantRequest, schemas.DisconnectParticipantResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisconnectParticipant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisconnectParticipant, schemas.DisconnectParticipantRequest, schemas.DisconnectParticipantResponse), output: &DisconnectParticipantOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisconnectParticipant"); err != nil {

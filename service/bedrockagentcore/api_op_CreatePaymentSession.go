@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,35 @@ type CreatePaymentSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePaymentSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePaymentSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePaymentSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentName != nil {
+		s.WriteString(schemas.CreatePaymentSessionRequest_agentName, *v.AgentName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePaymentSessionRequest_clientToken, *v.ClientToken)
+	}
+	if v.ExpiryTimeInMinutes != nil {
+		s.WriteInt32(schemas.CreatePaymentSessionRequest_expiryTimeInMinutes, *v.ExpiryTimeInMinutes)
+	}
+	if v.Limits != nil {
+		s.WriteStruct(schemas.CreatePaymentSessionRequest_limits)
+		v.Limits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PaymentManagerArn != nil {
+		s.WriteString(schemas.CreatePaymentSessionRequest_paymentManagerArn, *v.PaymentManagerArn)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.CreatePaymentSessionRequest_userId, *v.UserId)
+	}
+}
+
 // Response structure for creating a payment session.
 type CreatePaymentSessionOutput struct {
 
@@ -70,16 +101,24 @@ type CreatePaymentSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePaymentSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePaymentSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePaymentSessionResponse_paymentSession:
+			v.PaymentSession = &types.PaymentSession{}
+			return v.PaymentSession.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePaymentSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePaymentSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePaymentSession, schemas.CreatePaymentSessionRequest, schemas.CreatePaymentSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePaymentSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePaymentSession, schemas.CreatePaymentSessionRequest, schemas.CreatePaymentSessionResponse), output: &CreatePaymentSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePaymentSession"); err != nil {

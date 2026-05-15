@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,33 @@ type ListRelationshipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRelationshipsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRelationshipsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRelationshipsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.ListRelationshipsRequest_associatedAccountIds, v.AssociatedAccountIds)
+	serializeAssociationTypeList(s, schemas.ListRelationshipsRequest_associationTypes, v.AssociationTypes)
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListRelationshipsRequest_catalog, *v.Catalog)
+	}
+	serializeRelationshipDisplayNameList(s, schemas.ListRelationshipsRequest_displayNames, v.DisplayNames)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRelationshipsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRelationshipsRequest_nextToken, *v.NextToken)
+	}
+	serializeProgramManagementAccountIdentifierList(s, schemas.ListRelationshipsRequest_programManagementAccountIdentifiers, v.ProgramManagementAccountIdentifiers)
+	if v.Sort != nil {
+		s.WriteStruct(schemas.ListRelationshipsRequest_sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListRelationshipsOutput struct {
 
 	// List of relationships matching the criteria.
@@ -72,16 +101,26 @@ type ListRelationshipsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRelationshipsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRelationshipsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRelationshipsResponse_items:
+			return deserializeRelationshipSummaries(d, schemas.ListRelationshipsResponse_items, &v.Items)
+		case schemas.ListRelationshipsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRelationshipsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRelationshipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListRelationships{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRelationships, schemas.ListRelationshipsRequest, schemas.ListRelationshipsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListRelationships{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRelationships, schemas.ListRelationshipsRequest, schemas.ListRelationshipsResponse), output: &ListRelationshipsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRelationships"); err != nil {

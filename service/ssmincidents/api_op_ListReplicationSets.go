@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,34 @@ type ListReplicationSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReplicationSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReplicationSetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReplicationSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReplicationSetsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReplicationSetsInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListReplicationSetsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReplicationSetsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReplicationSetsInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListReplicationSetsInput_maxResults, v.MaxResults)
+		case schemas.ListReplicationSetsInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReplicationSetsInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListReplicationSetsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the list replication set.
@@ -55,16 +85,38 @@ type ListReplicationSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReplicationSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReplicationSetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReplicationSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReplicationSetsOutput_nextToken, *v.NextToken)
+	}
+	serializeReplicationSetArnList(s, schemas.ListReplicationSetsOutput_replicationSetArns, v.ReplicationSetArns)
+}
+func (v *ListReplicationSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReplicationSetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReplicationSetsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReplicationSetsOutput_nextToken, v.NextToken)
+		case schemas.ListReplicationSetsOutput_replicationSetArns:
+			return deserializeReplicationSetArnList(d, schemas.ListReplicationSetsOutput_replicationSetArns, &v.ReplicationSetArns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReplicationSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReplicationSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReplicationSets, schemas.ListReplicationSetsInput, schemas.ListReplicationSetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReplicationSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReplicationSets, schemas.ListReplicationSetsInput, schemas.ListReplicationSetsOutput), output: &ListReplicationSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListReplicationSets"); err != nil {

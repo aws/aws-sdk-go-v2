@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -120,6 +122,35 @@ type PutSlotTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSlotTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSlotTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSlotTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Checksum != nil {
+		s.WriteString(schemas.PutSlotTypeRequest_checksum, *v.Checksum)
+	}
+	if v.CreateVersion != nil {
+		s.WriteBool(schemas.PutSlotTypeRequest_createVersion, *v.CreateVersion)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PutSlotTypeRequest_description, *v.Description)
+	}
+	serializeEnumerationValues(s, schemas.PutSlotTypeRequest_enumerationValues, v.EnumerationValues)
+	if v.Name != nil {
+		s.WriteString(schemas.PutSlotTypeRequest_name, *v.Name)
+	}
+	if v.ParentSlotTypeSignature != nil {
+		s.WriteString(schemas.PutSlotTypeRequest_parentSlotTypeSignature, *v.ParentSlotTypeSignature)
+	}
+	serializeSlotTypeConfigurations(s, schemas.PutSlotTypeRequest_slotTypeConfigurations, v.SlotTypeConfigurations)
+	if v.ValueSelectionStrategy != "" {
+		s.WriteString(schemas.PutSlotTypeRequest_valueSelectionStrategy, string(v.ValueSelectionStrategy))
+	}
+}
+
 type PutSlotTypeOutput struct {
 
 	// Checksum of the $LATEST version of the slot type.
@@ -167,16 +198,56 @@ type PutSlotTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSlotTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutSlotTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutSlotTypeResponse_checksum:
+			v.Checksum = new(string)
+			return d.ReadString(schemas.PutSlotTypeResponse_checksum, v.Checksum)
+		case schemas.PutSlotTypeResponse_createVersion:
+			v.CreateVersion = new(bool)
+			return d.ReadBool(schemas.PutSlotTypeResponse_createVersion, v.CreateVersion)
+		case schemas.PutSlotTypeResponse_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.PutSlotTypeResponse_createdDate, v.CreatedDate)
+		case schemas.PutSlotTypeResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PutSlotTypeResponse_description, v.Description)
+		case schemas.PutSlotTypeResponse_enumerationValues:
+			return deserializeEnumerationValues(d, schemas.PutSlotTypeResponse_enumerationValues, &v.EnumerationValues)
+		case schemas.PutSlotTypeResponse_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.PutSlotTypeResponse_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.PutSlotTypeResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PutSlotTypeResponse_name, v.Name)
+		case schemas.PutSlotTypeResponse_parentSlotTypeSignature:
+			v.ParentSlotTypeSignature = new(string)
+			return d.ReadString(schemas.PutSlotTypeResponse_parentSlotTypeSignature, v.ParentSlotTypeSignature)
+		case schemas.PutSlotTypeResponse_slotTypeConfigurations:
+			return deserializeSlotTypeConfigurations(d, schemas.PutSlotTypeResponse_slotTypeConfigurations, &v.SlotTypeConfigurations)
+		case schemas.PutSlotTypeResponse_valueSelectionStrategy:
+			var ev string
+			if err := d.ReadString(schemas.PutSlotTypeResponse_valueSelectionStrategy, &ev); err != nil {
+				return err
+			}
+			v.ValueSelectionStrategy = types.SlotValueSelectionStrategy(ev)
+			return nil
+		case schemas.PutSlotTypeResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.PutSlotTypeResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutSlotTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutSlotType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSlotType, schemas.PutSlotTypeRequest, schemas.PutSlotTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutSlotType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSlotType, schemas.PutSlotTypeRequest, schemas.PutSlotTypeResponse), output: &PutSlotTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutSlotType"); err != nil {

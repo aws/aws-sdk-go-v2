@@ -7,7 +7,9 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/document"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -71,6 +73,22 @@ type UpdateDatasetExamplesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDatasetExamplesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDatasetExamplesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDatasetExamplesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateDatasetExamplesRequest_clientToken, *v.ClientToken)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.UpdateDatasetExamplesRequest_datasetId, *v.DatasetId)
+	}
+	serializeDatasetExampleList(s, schemas.UpdateDatasetExamplesRequest_examples, v.Examples)
+}
+
 type UpdateDatasetExamplesOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the dataset.
@@ -104,16 +122,40 @@ type UpdateDatasetExamplesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDatasetExamplesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDatasetExamplesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDatasetExamplesResponse_datasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.UpdateDatasetExamplesResponse_datasetArn, v.DatasetArn)
+		case schemas.UpdateDatasetExamplesResponse_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.UpdateDatasetExamplesResponse_datasetId, v.DatasetId)
+		case schemas.UpdateDatasetExamplesResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDatasetExamplesResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DatasetStatus(ev)
+			return nil
+		case schemas.UpdateDatasetExamplesResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateDatasetExamplesResponse_updatedAt, v.UpdatedAt)
+		case schemas.UpdateDatasetExamplesResponse_updatedCount:
+			v.UpdatedCount = new(int64)
+			return d.ReadInt64(schemas.UpdateDatasetExamplesResponse_updatedCount, v.UpdatedCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDatasetExamplesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDatasetExamples{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDatasetExamples, schemas.UpdateDatasetExamplesRequest, schemas.UpdateDatasetExamplesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDatasetExamples{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDatasetExamples, schemas.UpdateDatasetExamplesRequest, schemas.UpdateDatasetExamplesResponse), output: &UpdateDatasetExamplesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDatasetExamples"); err != nil {

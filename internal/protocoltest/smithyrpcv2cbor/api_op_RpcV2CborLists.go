@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -59,6 +61,52 @@ type RpcV2CborListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RpcV2CborListsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RpcV2CborListInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RpcV2CborListsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlobList(s, schemas.RpcV2CborListInputOutput_blobList, v.BlobList)
+	serializeBooleanList(s, schemas.RpcV2CborListInputOutput_booleanList, v.BooleanList)
+	serializeFooEnumList(s, schemas.RpcV2CborListInputOutput_enumList, v.EnumList)
+	serializeIntegerEnumList(s, schemas.RpcV2CborListInputOutput_intEnumList, v.IntEnumList)
+	serializeIntegerList(s, schemas.RpcV2CborListInputOutput_integerList, v.IntegerList)
+	serializeNestedStringList(s, schemas.RpcV2CborListInputOutput_nestedStringList, v.NestedStringList)
+	serializeStringList(s, schemas.RpcV2CborListInputOutput_stringList, v.StringList)
+	serializeStringSet(s, schemas.RpcV2CborListInputOutput_stringSet, v.StringSet)
+	serializeStructureList(s, schemas.RpcV2CborListInputOutput_structureList, v.StructureList)
+	serializeTimestampList(s, schemas.RpcV2CborListInputOutput_timestampList, v.TimestampList)
+}
+func (v *RpcV2CborListsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RpcV2CborListInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RpcV2CborListInputOutput_blobList:
+			return deserializeBlobList(d, schemas.RpcV2CborListInputOutput_blobList, &v.BlobList)
+		case schemas.RpcV2CborListInputOutput_booleanList:
+			return deserializeBooleanList(d, schemas.RpcV2CborListInputOutput_booleanList, &v.BooleanList)
+		case schemas.RpcV2CborListInputOutput_enumList:
+			return deserializeFooEnumList(d, schemas.RpcV2CborListInputOutput_enumList, &v.EnumList)
+		case schemas.RpcV2CborListInputOutput_intEnumList:
+			return deserializeIntegerEnumList(d, schemas.RpcV2CborListInputOutput_intEnumList, &v.IntEnumList)
+		case schemas.RpcV2CborListInputOutput_integerList:
+			return deserializeIntegerList(d, schemas.RpcV2CborListInputOutput_integerList, &v.IntegerList)
+		case schemas.RpcV2CborListInputOutput_nestedStringList:
+			return deserializeNestedStringList(d, schemas.RpcV2CborListInputOutput_nestedStringList, &v.NestedStringList)
+		case schemas.RpcV2CborListInputOutput_stringList:
+			return deserializeStringList(d, schemas.RpcV2CborListInputOutput_stringList, &v.StringList)
+		case schemas.RpcV2CborListInputOutput_stringSet:
+			return deserializeStringSet(d, schemas.RpcV2CborListInputOutput_stringSet, &v.StringSet)
+		case schemas.RpcV2CborListInputOutput_structureList:
+			return deserializeStructureList(d, schemas.RpcV2CborListInputOutput_structureList, &v.StructureList)
+		case schemas.RpcV2CborListInputOutput_timestampList:
+			return deserializeTimestampList(d, schemas.RpcV2CborListInputOutput_timestampList, &v.TimestampList)
+		}
+		return nil
+	})
+}
+
 type RpcV2CborListsOutput struct {
 	BlobList [][]byte
 
@@ -87,16 +135,59 @@ type RpcV2CborListsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RpcV2CborListsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RpcV2CborListInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RpcV2CborListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlobList(s, schemas.RpcV2CborListInputOutput_blobList, v.BlobList)
+	serializeBooleanList(s, schemas.RpcV2CborListInputOutput_booleanList, v.BooleanList)
+	serializeFooEnumList(s, schemas.RpcV2CborListInputOutput_enumList, v.EnumList)
+	serializeIntegerEnumList(s, schemas.RpcV2CborListInputOutput_intEnumList, v.IntEnumList)
+	serializeIntegerList(s, schemas.RpcV2CborListInputOutput_integerList, v.IntegerList)
+	serializeNestedStringList(s, schemas.RpcV2CborListInputOutput_nestedStringList, v.NestedStringList)
+	serializeStringList(s, schemas.RpcV2CborListInputOutput_stringList, v.StringList)
+	serializeStringSet(s, schemas.RpcV2CborListInputOutput_stringSet, v.StringSet)
+	serializeStructureList(s, schemas.RpcV2CborListInputOutput_structureList, v.StructureList)
+	serializeTimestampList(s, schemas.RpcV2CborListInputOutput_timestampList, v.TimestampList)
+}
+func (v *RpcV2CborListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RpcV2CborListInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RpcV2CborListInputOutput_blobList:
+			return deserializeBlobList(d, schemas.RpcV2CborListInputOutput_blobList, &v.BlobList)
+		case schemas.RpcV2CborListInputOutput_booleanList:
+			return deserializeBooleanList(d, schemas.RpcV2CborListInputOutput_booleanList, &v.BooleanList)
+		case schemas.RpcV2CborListInputOutput_enumList:
+			return deserializeFooEnumList(d, schemas.RpcV2CborListInputOutput_enumList, &v.EnumList)
+		case schemas.RpcV2CborListInputOutput_intEnumList:
+			return deserializeIntegerEnumList(d, schemas.RpcV2CborListInputOutput_intEnumList, &v.IntEnumList)
+		case schemas.RpcV2CborListInputOutput_integerList:
+			return deserializeIntegerList(d, schemas.RpcV2CborListInputOutput_integerList, &v.IntegerList)
+		case schemas.RpcV2CborListInputOutput_nestedStringList:
+			return deserializeNestedStringList(d, schemas.RpcV2CborListInputOutput_nestedStringList, &v.NestedStringList)
+		case schemas.RpcV2CborListInputOutput_stringList:
+			return deserializeStringList(d, schemas.RpcV2CborListInputOutput_stringList, &v.StringList)
+		case schemas.RpcV2CborListInputOutput_stringSet:
+			return deserializeStringSet(d, schemas.RpcV2CborListInputOutput_stringSet, &v.StringSet)
+		case schemas.RpcV2CborListInputOutput_structureList:
+			return deserializeStructureList(d, schemas.RpcV2CborListInputOutput_structureList, &v.StructureList)
+		case schemas.RpcV2CborListInputOutput_timestampList:
+			return deserializeTimestampList(d, schemas.RpcV2CborListInputOutput_timestampList, &v.TimestampList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRpcV2CborListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpRpcV2CborLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RpcV2CborLists, schemas.RpcV2CborListInputOutput, schemas.RpcV2CborListInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpRpcV2CborLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RpcV2CborLists, schemas.RpcV2CborListInputOutput, schemas.RpcV2CborListInputOutput), output: &RpcV2CborListsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RpcV2CborLists"); err != nil {

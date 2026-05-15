@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +61,39 @@ type UpdatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePackageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitMessage != nil {
+		s.WriteString(schemas.UpdatePackageRequest_CommitMessage, *v.CommitMessage)
+	}
+	if v.PackageConfiguration != nil {
+		s.WriteStruct(schemas.UpdatePackageRequest_PackageConfiguration)
+		v.PackageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PackageDescription != nil {
+		s.WriteString(schemas.UpdatePackageRequest_PackageDescription, *v.PackageDescription)
+	}
+	if v.PackageEncryptionOptions != nil {
+		s.WriteStruct(schemas.UpdatePackageRequest_PackageEncryptionOptions)
+		v.PackageEncryptionOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PackageID != nil {
+		s.WriteString(schemas.UpdatePackageRequest_PackageID, *v.PackageID)
+	}
+	if v.PackageSource != nil {
+		s.WriteStruct(schemas.UpdatePackageRequest_PackageSource)
+		v.PackageSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Container for the response returned by the UpdatePackage operation.
 type UpdatePackageOutput struct {
 
@@ -71,16 +106,24 @@ type UpdatePackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePackageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePackageResponse_PackageDetails:
+			v.PackageDetails = &types.PackageDetails{}
+			return v.PackageDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePackage, schemas.UpdatePackageRequest, schemas.UpdatePackageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePackage, schemas.UpdatePackageRequest, schemas.UpdatePackageResponse), output: &UpdatePackageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePackage"); err != nil {

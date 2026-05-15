@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/pcs/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -33,6 +35,38 @@ type Accounting struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Accounting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Accounting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Accounting) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultPurgeTimeInDays != nil {
+		s.WriteInt32(schemas.Accounting_defaultPurgeTimeInDays, *v.DefaultPurgeTimeInDays)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.Accounting_mode, string(v.Mode))
+	}
+}
+func (v *Accounting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Accounting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Accounting_defaultPurgeTimeInDays:
+			v.DefaultPurgeTimeInDays = new(int32)
+			return d.ReadInt32(schemas.Accounting_defaultPurgeTimeInDays, v.DefaultPurgeTimeInDays)
+		case schemas.Accounting_mode:
+			var ev string
+			if err := d.ReadString(schemas.Accounting_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = AccountingMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The accounting configuration includes configurable settings for Slurm
 // accounting. It's a property of the ClusterSlurmConfiguration object.
 type AccountingRequest struct {
@@ -59,6 +93,38 @@ type AccountingRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccountingRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountingRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultPurgeTimeInDays != nil {
+		s.WriteInt32(schemas.AccountingRequest_defaultPurgeTimeInDays, *v.DefaultPurgeTimeInDays)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.AccountingRequest_mode, string(v.Mode))
+	}
+}
+func (v *AccountingRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountingRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountingRequest_defaultPurgeTimeInDays:
+			v.DefaultPurgeTimeInDays = new(int32)
+			return d.ReadInt32(schemas.AccountingRequest_defaultPurgeTimeInDays, v.DefaultPurgeTimeInDays)
+		case schemas.AccountingRequest_mode:
+			var ev string
+			if err := d.ReadString(schemas.AccountingRequest_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = AccountingMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Additional settings that directly map to Cgroup settings.
 //
 // PCS supports a subset of Cgroup settings. For more information, see [Configuring custom Cgroup settings in PCS] in the PCS
@@ -81,6 +147,34 @@ type CgroupCustomSetting struct {
 	ParameterValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CgroupCustomSetting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CgroupCustomSetting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CgroupCustomSetting) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParameterName != nil {
+		s.WriteString(schemas.CgroupCustomSetting_parameterName, *v.ParameterName)
+	}
+	if v.ParameterValue != nil {
+		s.WriteString(schemas.CgroupCustomSetting_parameterValue, *v.ParameterValue)
+	}
+}
+func (v *CgroupCustomSetting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CgroupCustomSetting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CgroupCustomSetting_parameterName:
+			v.ParameterName = new(string)
+			return d.ReadString(schemas.CgroupCustomSetting_parameterName, v.ParameterName)
+		case schemas.CgroupCustomSetting_parameterValue:
+			v.ParameterValue = new(string)
+			return d.ReadString(schemas.CgroupCustomSetting_parameterValue, v.ParameterValue)
+		}
+		return nil
+	})
 }
 
 // The cluster resource and configuration.
@@ -160,6 +254,102 @@ type Cluster struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Cluster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Cluster)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Cluster) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Cluster_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Cluster_createdAt, *v.CreatedAt)
+	}
+	serializeEndpoints(s, schemas.Cluster_endpoints, v.Endpoints)
+	serializeErrorInfoList(s, schemas.Cluster_errorInfo, v.ErrorInfo)
+	if v.Id != nil {
+		s.WriteString(schemas.Cluster_id, *v.Id)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.Cluster_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Cluster_name, *v.Name)
+	}
+	if v.Networking != nil {
+		s.WriteStruct(schemas.Cluster_networking)
+		v.Networking.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Scheduler != nil {
+		s.WriteStruct(schemas.Cluster_scheduler)
+		v.Scheduler.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Size != "" {
+		s.WriteString(schemas.Cluster_size, string(v.Size))
+	}
+	if v.SlurmConfiguration != nil {
+		s.WriteStruct(schemas.Cluster_slurmConfiguration)
+		v.SlurmConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Cluster_status, string(v.Status))
+	}
+}
+func (v *Cluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Cluster, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Cluster_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Cluster_arn, v.Arn)
+		case schemas.Cluster_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Cluster_createdAt, v.CreatedAt)
+		case schemas.Cluster_endpoints:
+			return deserializeEndpoints(d, schemas.Cluster_endpoints, &v.Endpoints)
+		case schemas.Cluster_errorInfo:
+			return deserializeErrorInfoList(d, schemas.Cluster_errorInfo, &v.ErrorInfo)
+		case schemas.Cluster_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Cluster_id, v.Id)
+		case schemas.Cluster_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.Cluster_modifiedAt, v.ModifiedAt)
+		case schemas.Cluster_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Cluster_name, v.Name)
+		case schemas.Cluster_networking:
+			v.Networking = &Networking{}
+			return v.Networking.Deserialize(d)
+		case schemas.Cluster_scheduler:
+			v.Scheduler = &Scheduler{}
+			return v.Scheduler.Deserialize(d)
+		case schemas.Cluster_size:
+			var ev string
+			if err := d.ReadString(schemas.Cluster_size, &ev); err != nil {
+				return err
+			}
+			v.Size = Size(ev)
+			return nil
+		case schemas.Cluster_slurmConfiguration:
+			v.SlurmConfiguration = &ClusterSlurmConfiguration{}
+			return v.SlurmConfiguration.Deserialize(d)
+		case schemas.Cluster_status:
+			var ev string
+			if err := d.ReadString(schemas.Cluster_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ClusterStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Additional options related to the Slurm scheduler.
 type ClusterSlurmConfiguration struct {
 
@@ -194,6 +384,69 @@ type ClusterSlurmConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClusterSlurmConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterSlurmConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterSlurmConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accounting != nil {
+		s.WriteStruct(schemas.ClusterSlurmConfiguration_accounting)
+		v.Accounting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AuthKey != nil {
+		s.WriteStruct(schemas.ClusterSlurmConfiguration_authKey)
+		v.AuthKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCgroupCustomSettings(s, schemas.ClusterSlurmConfiguration_cgroupCustomSettings, v.CgroupCustomSettings)
+	if v.JwtAuth != nil {
+		s.WriteStruct(schemas.ClusterSlurmConfiguration_jwtAuth)
+		v.JwtAuth.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScaleDownIdleTimeInSeconds != nil {
+		s.WriteInt32(schemas.ClusterSlurmConfiguration_scaleDownIdleTimeInSeconds, *v.ScaleDownIdleTimeInSeconds)
+	}
+	serializeSlurmCustomSettings(s, schemas.ClusterSlurmConfiguration_slurmCustomSettings, v.SlurmCustomSettings)
+	if v.SlurmRest != nil {
+		s.WriteStruct(schemas.ClusterSlurmConfiguration_slurmRest)
+		v.SlurmRest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSlurmdbdCustomSettings(s, schemas.ClusterSlurmConfiguration_slurmdbdCustomSettings, v.SlurmdbdCustomSettings)
+}
+func (v *ClusterSlurmConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterSlurmConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterSlurmConfiguration_accounting:
+			v.Accounting = &Accounting{}
+			return v.Accounting.Deserialize(d)
+		case schemas.ClusterSlurmConfiguration_authKey:
+			v.AuthKey = &SlurmAuthKey{}
+			return v.AuthKey.Deserialize(d)
+		case schemas.ClusterSlurmConfiguration_cgroupCustomSettings:
+			return deserializeCgroupCustomSettings(d, schemas.ClusterSlurmConfiguration_cgroupCustomSettings, &v.CgroupCustomSettings)
+		case schemas.ClusterSlurmConfiguration_jwtAuth:
+			v.JwtAuth = &JwtAuth{}
+			return v.JwtAuth.Deserialize(d)
+		case schemas.ClusterSlurmConfiguration_scaleDownIdleTimeInSeconds:
+			v.ScaleDownIdleTimeInSeconds = new(int32)
+			return d.ReadInt32(schemas.ClusterSlurmConfiguration_scaleDownIdleTimeInSeconds, v.ScaleDownIdleTimeInSeconds)
+		case schemas.ClusterSlurmConfiguration_slurmCustomSettings:
+			return deserializeSlurmCustomSettings(d, schemas.ClusterSlurmConfiguration_slurmCustomSettings, &v.SlurmCustomSettings)
+		case schemas.ClusterSlurmConfiguration_slurmRest:
+			v.SlurmRest = &SlurmRest{}
+			return v.SlurmRest.Deserialize(d)
+		case schemas.ClusterSlurmConfiguration_slurmdbdCustomSettings:
+			return deserializeSlurmdbdCustomSettings(d, schemas.ClusterSlurmConfiguration_slurmdbdCustomSettings, &v.SlurmdbdCustomSettings)
+		}
+		return nil
+	})
+}
+
 // Additional options related to the Slurm scheduler.
 type ClusterSlurmConfigurationRequest struct {
 
@@ -220,6 +473,53 @@ type ClusterSlurmConfigurationRequest struct {
 	SlurmdbdCustomSettings []SlurmdbdCustomSetting
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClusterSlurmConfigurationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterSlurmConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterSlurmConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accounting != nil {
+		s.WriteStruct(schemas.ClusterSlurmConfigurationRequest_accounting)
+		v.Accounting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCgroupCustomSettings(s, schemas.ClusterSlurmConfigurationRequest_cgroupCustomSettings, v.CgroupCustomSettings)
+	if v.ScaleDownIdleTimeInSeconds != nil {
+		s.WriteInt32(schemas.ClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, *v.ScaleDownIdleTimeInSeconds)
+	}
+	serializeSlurmCustomSettings(s, schemas.ClusterSlurmConfigurationRequest_slurmCustomSettings, v.SlurmCustomSettings)
+	if v.SlurmRest != nil {
+		s.WriteStruct(schemas.ClusterSlurmConfigurationRequest_slurmRest)
+		v.SlurmRest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSlurmdbdCustomSettings(s, schemas.ClusterSlurmConfigurationRequest_slurmdbdCustomSettings, v.SlurmdbdCustomSettings)
+}
+func (v *ClusterSlurmConfigurationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterSlurmConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterSlurmConfigurationRequest_accounting:
+			v.Accounting = &AccountingRequest{}
+			return v.Accounting.Deserialize(d)
+		case schemas.ClusterSlurmConfigurationRequest_cgroupCustomSettings:
+			return deserializeCgroupCustomSettings(d, schemas.ClusterSlurmConfigurationRequest_cgroupCustomSettings, &v.CgroupCustomSettings)
+		case schemas.ClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds:
+			v.ScaleDownIdleTimeInSeconds = new(int32)
+			return d.ReadInt32(schemas.ClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, v.ScaleDownIdleTimeInSeconds)
+		case schemas.ClusterSlurmConfigurationRequest_slurmCustomSettings:
+			return deserializeSlurmCustomSettings(d, schemas.ClusterSlurmConfigurationRequest_slurmCustomSettings, &v.SlurmCustomSettings)
+		case schemas.ClusterSlurmConfigurationRequest_slurmRest:
+			v.SlurmRest = &SlurmRestRequest{}
+			return v.SlurmRest.Deserialize(d)
+		case schemas.ClusterSlurmConfigurationRequest_slurmdbdCustomSettings:
+			return deserializeSlurmdbdCustomSettings(d, schemas.ClusterSlurmConfigurationRequest_slurmdbdCustomSettings, &v.SlurmdbdCustomSettings)
+		}
+		return nil
+	})
 }
 
 // The object returned by the ListClusters API action.
@@ -267,6 +567,62 @@ type ClusterSummary struct {
 	Status ClusterStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClusterSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ClusterSummary_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ClusterSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ClusterSummary_id, *v.Id)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.ClusterSummary_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ClusterSummary_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ClusterSummary_status, string(v.Status))
+	}
+}
+func (v *ClusterSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ClusterSummary_arn, v.Arn)
+		case schemas.ClusterSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ClusterSummary_createdAt, v.CreatedAt)
+		case schemas.ClusterSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ClusterSummary_id, v.Id)
+		case schemas.ClusterSummary_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.ClusterSummary_modifiedAt, v.ModifiedAt)
+		case schemas.ClusterSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ClusterSummary_name, v.Name)
+		case schemas.ClusterSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ClusterSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ClusterStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A compute node group associated with a cluster.
@@ -385,6 +741,131 @@ type ComputeNodeGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ComputeNodeGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComputeNodeGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComputeNodeGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmiId != nil {
+		s.WriteString(schemas.ComputeNodeGroup_amiId, *v.AmiId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.ComputeNodeGroup_arn, *v.Arn)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.ComputeNodeGroup_clusterId, *v.ClusterId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ComputeNodeGroup_createdAt, *v.CreatedAt)
+	}
+	if v.CustomLaunchTemplate != nil {
+		s.WriteStruct(schemas.ComputeNodeGroup_customLaunchTemplate)
+		v.CustomLaunchTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeErrorInfoList(s, schemas.ComputeNodeGroup_errorInfo, v.ErrorInfo)
+	if v.IamInstanceProfileArn != nil {
+		s.WriteString(schemas.ComputeNodeGroup_iamInstanceProfileArn, *v.IamInstanceProfileArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ComputeNodeGroup_id, *v.Id)
+	}
+	serializeInstanceList(s, schemas.ComputeNodeGroup_instanceConfigs, v.InstanceConfigs)
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.ComputeNodeGroup_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ComputeNodeGroup_name, *v.Name)
+	}
+	if v.PurchaseOption != "" {
+		s.WriteString(schemas.ComputeNodeGroup_purchaseOption, string(v.PurchaseOption))
+	}
+	if v.ScalingConfiguration != nil {
+		s.WriteStruct(schemas.ComputeNodeGroup_scalingConfiguration)
+		v.ScalingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SlurmConfiguration != nil {
+		s.WriteStruct(schemas.ComputeNodeGroup_slurmConfiguration)
+		v.SlurmConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SpotOptions != nil {
+		s.WriteStruct(schemas.ComputeNodeGroup_spotOptions)
+		v.SpotOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ComputeNodeGroup_status, string(v.Status))
+	}
+	serializeSubnetIdList(s, schemas.ComputeNodeGroup_subnetIds, v.SubnetIds)
+}
+func (v *ComputeNodeGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComputeNodeGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComputeNodeGroup_amiId:
+			v.AmiId = new(string)
+			return d.ReadString(schemas.ComputeNodeGroup_amiId, v.AmiId)
+		case schemas.ComputeNodeGroup_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ComputeNodeGroup_arn, v.Arn)
+		case schemas.ComputeNodeGroup_clusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.ComputeNodeGroup_clusterId, v.ClusterId)
+		case schemas.ComputeNodeGroup_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ComputeNodeGroup_createdAt, v.CreatedAt)
+		case schemas.ComputeNodeGroup_customLaunchTemplate:
+			v.CustomLaunchTemplate = &CustomLaunchTemplate{}
+			return v.CustomLaunchTemplate.Deserialize(d)
+		case schemas.ComputeNodeGroup_errorInfo:
+			return deserializeErrorInfoList(d, schemas.ComputeNodeGroup_errorInfo, &v.ErrorInfo)
+		case schemas.ComputeNodeGroup_iamInstanceProfileArn:
+			v.IamInstanceProfileArn = new(string)
+			return d.ReadString(schemas.ComputeNodeGroup_iamInstanceProfileArn, v.IamInstanceProfileArn)
+		case schemas.ComputeNodeGroup_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ComputeNodeGroup_id, v.Id)
+		case schemas.ComputeNodeGroup_instanceConfigs:
+			return deserializeInstanceList(d, schemas.ComputeNodeGroup_instanceConfigs, &v.InstanceConfigs)
+		case schemas.ComputeNodeGroup_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.ComputeNodeGroup_modifiedAt, v.ModifiedAt)
+		case schemas.ComputeNodeGroup_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ComputeNodeGroup_name, v.Name)
+		case schemas.ComputeNodeGroup_purchaseOption:
+			var ev string
+			if err := d.ReadString(schemas.ComputeNodeGroup_purchaseOption, &ev); err != nil {
+				return err
+			}
+			v.PurchaseOption = PurchaseOption(ev)
+			return nil
+		case schemas.ComputeNodeGroup_scalingConfiguration:
+			v.ScalingConfiguration = &ScalingConfiguration{}
+			return v.ScalingConfiguration.Deserialize(d)
+		case schemas.ComputeNodeGroup_slurmConfiguration:
+			v.SlurmConfiguration = &ComputeNodeGroupSlurmConfiguration{}
+			return v.SlurmConfiguration.Deserialize(d)
+		case schemas.ComputeNodeGroup_spotOptions:
+			v.SpotOptions = &SpotOptions{}
+			return v.SpotOptions.Deserialize(d)
+		case schemas.ComputeNodeGroup_status:
+			var ev string
+			if err := d.ReadString(schemas.ComputeNodeGroup_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ComputeNodeGroupStatus(ev)
+			return nil
+		case schemas.ComputeNodeGroup_subnetIds:
+			return deserializeSubnetIdList(d, schemas.ComputeNodeGroup_subnetIds, &v.SubnetIds)
+		}
+		return nil
+	})
+}
+
 // The compute node group configuration for a queue.
 type ComputeNodeGroupConfiguration struct {
 
@@ -392,6 +873,28 @@ type ComputeNodeGroupConfiguration struct {
 	ComputeNodeGroupId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ComputeNodeGroupConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComputeNodeGroupConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComputeNodeGroupConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeNodeGroupId != nil {
+		s.WriteString(schemas.ComputeNodeGroupConfiguration_computeNodeGroupId, *v.ComputeNodeGroupId)
+	}
+}
+func (v *ComputeNodeGroupConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComputeNodeGroupConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComputeNodeGroupConfiguration_computeNodeGroupId:
+			v.ComputeNodeGroupId = new(string)
+			return d.ReadString(schemas.ComputeNodeGroupConfiguration_computeNodeGroupId, v.ComputeNodeGroupId)
+		}
+		return nil
+	})
 }
 
 // Additional options related to the Slurm scheduler.
@@ -410,6 +913,31 @@ type ComputeNodeGroupSlurmConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ComputeNodeGroupSlurmConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComputeNodeGroupSlurmConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComputeNodeGroupSlurmConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScaleDownIdleTimeInSeconds != nil {
+		s.WriteInt32(schemas.ComputeNodeGroupSlurmConfiguration_scaleDownIdleTimeInSeconds, *v.ScaleDownIdleTimeInSeconds)
+	}
+	serializeSlurmCustomSettings(s, schemas.ComputeNodeGroupSlurmConfiguration_slurmCustomSettings, v.SlurmCustomSettings)
+}
+func (v *ComputeNodeGroupSlurmConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComputeNodeGroupSlurmConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComputeNodeGroupSlurmConfiguration_scaleDownIdleTimeInSeconds:
+			v.ScaleDownIdleTimeInSeconds = new(int32)
+			return d.ReadInt32(schemas.ComputeNodeGroupSlurmConfiguration_scaleDownIdleTimeInSeconds, v.ScaleDownIdleTimeInSeconds)
+		case schemas.ComputeNodeGroupSlurmConfiguration_slurmCustomSettings:
+			return deserializeSlurmCustomSettings(d, schemas.ComputeNodeGroupSlurmConfiguration_slurmCustomSettings, &v.SlurmCustomSettings)
+		}
+		return nil
+	})
+}
+
 // Additional options related to the Slurm scheduler.
 type ComputeNodeGroupSlurmConfigurationRequest struct {
 
@@ -424,6 +952,31 @@ type ComputeNodeGroupSlurmConfigurationRequest struct {
 	SlurmCustomSettings []SlurmCustomSetting
 
 	noSmithyDocumentSerde
+}
+
+func (v *ComputeNodeGroupSlurmConfigurationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComputeNodeGroupSlurmConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComputeNodeGroupSlurmConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScaleDownIdleTimeInSeconds != nil {
+		s.WriteInt32(schemas.ComputeNodeGroupSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, *v.ScaleDownIdleTimeInSeconds)
+	}
+	serializeSlurmCustomSettings(s, schemas.ComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings, v.SlurmCustomSettings)
+}
+func (v *ComputeNodeGroupSlurmConfigurationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComputeNodeGroupSlurmConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComputeNodeGroupSlurmConfigurationRequest_scaleDownIdleTimeInSeconds:
+			v.ScaleDownIdleTimeInSeconds = new(int32)
+			return d.ReadInt32(schemas.ComputeNodeGroupSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, v.ScaleDownIdleTimeInSeconds)
+		case schemas.ComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings:
+			return deserializeSlurmCustomSettings(d, schemas.ComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings, &v.SlurmCustomSettings)
+		}
+		return nil
+	})
 }
 
 // The object returned by the ListComputeNodeGroups API action.
@@ -479,6 +1032,68 @@ type ComputeNodeGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ComputeNodeGroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComputeNodeGroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComputeNodeGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ComputeNodeGroupSummary_arn, *v.Arn)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.ComputeNodeGroupSummary_clusterId, *v.ClusterId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ComputeNodeGroupSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ComputeNodeGroupSummary_id, *v.Id)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.ComputeNodeGroupSummary_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ComputeNodeGroupSummary_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ComputeNodeGroupSummary_status, string(v.Status))
+	}
+}
+func (v *ComputeNodeGroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComputeNodeGroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComputeNodeGroupSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ComputeNodeGroupSummary_arn, v.Arn)
+		case schemas.ComputeNodeGroupSummary_clusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.ComputeNodeGroupSummary_clusterId, v.ClusterId)
+		case schemas.ComputeNodeGroupSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ComputeNodeGroupSummary_createdAt, v.CreatedAt)
+		case schemas.ComputeNodeGroupSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ComputeNodeGroupSummary_id, v.Id)
+		case schemas.ComputeNodeGroupSummary_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.ComputeNodeGroupSummary_modifiedAt, v.ModifiedAt)
+		case schemas.ComputeNodeGroupSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ComputeNodeGroupSummary_name, v.Name)
+		case schemas.ComputeNodeGroupSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ComputeNodeGroupSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ComputeNodeGroupStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An Amazon EC2 launch template PCS uses to launch compute nodes.
 type CustomLaunchTemplate struct {
 
@@ -495,6 +1110,34 @@ type CustomLaunchTemplate struct {
 	Version *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomLaunchTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomLaunchTemplate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomLaunchTemplate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CustomLaunchTemplate_id, *v.Id)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CustomLaunchTemplate_version, *v.Version)
+	}
+}
+func (v *CustomLaunchTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomLaunchTemplate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomLaunchTemplate_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CustomLaunchTemplate_id, v.Id)
+		case schemas.CustomLaunchTemplate_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CustomLaunchTemplate_version, v.Version)
+		}
+		return nil
+	})
 }
 
 // An endpoint available for interaction with the scheduler.
@@ -534,6 +1177,56 @@ type Endpoint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Endpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Endpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Endpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ipv6Address != nil {
+		s.WriteString(schemas.Endpoint_ipv6Address, *v.Ipv6Address)
+	}
+	if v.Port != nil {
+		s.WriteString(schemas.Endpoint_port, *v.Port)
+	}
+	if v.PrivateIpAddress != nil {
+		s.WriteString(schemas.Endpoint_privateIpAddress, *v.PrivateIpAddress)
+	}
+	if v.PublicIpAddress != nil {
+		s.WriteString(schemas.Endpoint_publicIpAddress, *v.PublicIpAddress)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Endpoint_type, string(v.Type))
+	}
+}
+func (v *Endpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Endpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Endpoint_ipv6Address:
+			v.Ipv6Address = new(string)
+			return d.ReadString(schemas.Endpoint_ipv6Address, v.Ipv6Address)
+		case schemas.Endpoint_port:
+			v.Port = new(string)
+			return d.ReadString(schemas.Endpoint_port, v.Port)
+		case schemas.Endpoint_privateIpAddress:
+			v.PrivateIpAddress = new(string)
+			return d.ReadString(schemas.Endpoint_privateIpAddress, v.PrivateIpAddress)
+		case schemas.Endpoint_publicIpAddress:
+			v.PublicIpAddress = new(string)
+			return d.ReadString(schemas.Endpoint_publicIpAddress, v.PublicIpAddress)
+		case schemas.Endpoint_type:
+			var ev string
+			if err := d.ReadString(schemas.Endpoint_type, &ev); err != nil {
+				return err
+			}
+			v.Type = EndpointType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An error that occurred during resource creation.
 type ErrorInfo struct {
 
@@ -544,6 +1237,34 @@ type ErrorInfo struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ErrorInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ErrorInfo_code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ErrorInfo_message, *v.Message)
+	}
+}
+func (v *ErrorInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorInfo_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ErrorInfo_code, v.Code)
+		case schemas.ErrorInfo_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ErrorInfo_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // An EC2 instance configuration PCS uses to launch compute nodes.
@@ -557,6 +1278,28 @@ type InstanceConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceType != nil {
+		s.WriteString(schemas.InstanceConfig_instanceType, *v.InstanceType)
+	}
+}
+func (v *InstanceConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceConfig_instanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.InstanceConfig_instanceType, v.InstanceType)
+		}
+		return nil
+	})
+}
+
 // The JWT authentication configuration for Slurm REST API access.
 type JwtAuth struct {
 
@@ -564,6 +1307,30 @@ type JwtAuth struct {
 	JwtKey *JwtKey
 
 	noSmithyDocumentSerde
+}
+
+func (v *JwtAuth) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JwtAuth)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JwtAuth) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JwtKey != nil {
+		s.WriteStruct(schemas.JwtAuth_jwtKey)
+		v.JwtKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *JwtAuth) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JwtAuth, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JwtAuth_jwtKey:
+			v.JwtKey = &JwtKey{}
+			return v.JwtKey.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The JWT key stored in Amazon Web Services Secrets Manager for Slurm REST API
@@ -583,6 +1350,34 @@ type JwtKey struct {
 	SecretVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *JwtKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JwtKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JwtKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretArn != nil {
+		s.WriteString(schemas.JwtKey_secretArn, *v.SecretArn)
+	}
+	if v.SecretVersion != nil {
+		s.WriteString(schemas.JwtKey_secretVersion, *v.SecretVersion)
+	}
+}
+func (v *JwtKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JwtKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JwtKey_secretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.JwtKey_secretArn, v.SecretArn)
+		case schemas.JwtKey_secretVersion:
+			v.SecretVersion = new(string)
+			return d.ReadString(schemas.JwtKey_secretVersion, v.SecretVersion)
+		}
+		return nil
+	})
 }
 
 // The networking configuration for the cluster's control plane.
@@ -632,6 +1427,38 @@ type Networking struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Networking) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Networking)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Networking) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkType != "" {
+		s.WriteString(schemas.Networking_networkType, string(v.NetworkType))
+	}
+	serializeSecurityGroupIdList(s, schemas.Networking_securityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIdList(s, schemas.Networking_subnetIds, v.SubnetIds)
+}
+func (v *Networking) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Networking, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Networking_networkType:
+			var ev string
+			if err := d.ReadString(schemas.Networking_networkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = NetworkType(ev)
+			return nil
+		case schemas.Networking_securityGroupIds:
+			return deserializeSecurityGroupIdList(d, schemas.Networking_securityGroupIds, &v.SecurityGroupIds)
+		case schemas.Networking_subnetIds:
+			return deserializeSubnetIdList(d, schemas.Networking_subnetIds, &v.SubnetIds)
+		}
+		return nil
+	})
+}
+
 // The networking configuration for the cluster's control plane.
 type NetworkingRequest struct {
 
@@ -652,6 +1479,38 @@ type NetworkingRequest struct {
 	SubnetIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkingRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkingRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkType != "" {
+		s.WriteString(schemas.NetworkingRequest_networkType, string(v.NetworkType))
+	}
+	serializeSecurityGroupIdList(s, schemas.NetworkingRequest_securityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIdList(s, schemas.NetworkingRequest_subnetIds, v.SubnetIds)
+}
+func (v *NetworkingRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkingRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkingRequest_networkType:
+			var ev string
+			if err := d.ReadString(schemas.NetworkingRequest_networkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = NetworkType(ev)
+			return nil
+		case schemas.NetworkingRequest_securityGroupIds:
+			return deserializeSecurityGroupIdList(d, schemas.NetworkingRequest_securityGroupIds, &v.SecurityGroupIds)
+		case schemas.NetworkingRequest_subnetIds:
+			return deserializeSubnetIdList(d, schemas.NetworkingRequest_subnetIds, &v.SubnetIds)
+		}
+		return nil
+	})
 }
 
 // A queue resource.
@@ -718,6 +1577,82 @@ type Queue struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Queue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Queue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Queue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Queue_arn, *v.Arn)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.Queue_clusterId, *v.ClusterId)
+	}
+	serializeComputeNodeGroupConfigurationList(s, schemas.Queue_computeNodeGroupConfigurations, v.ComputeNodeGroupConfigurations)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Queue_createdAt, *v.CreatedAt)
+	}
+	serializeErrorInfoList(s, schemas.Queue_errorInfo, v.ErrorInfo)
+	if v.Id != nil {
+		s.WriteString(schemas.Queue_id, *v.Id)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.Queue_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Queue_name, *v.Name)
+	}
+	if v.SlurmConfiguration != nil {
+		s.WriteStruct(schemas.Queue_slurmConfiguration)
+		v.SlurmConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Queue_status, string(v.Status))
+	}
+}
+func (v *Queue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Queue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Queue_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Queue_arn, v.Arn)
+		case schemas.Queue_clusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.Queue_clusterId, v.ClusterId)
+		case schemas.Queue_computeNodeGroupConfigurations:
+			return deserializeComputeNodeGroupConfigurationList(d, schemas.Queue_computeNodeGroupConfigurations, &v.ComputeNodeGroupConfigurations)
+		case schemas.Queue_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Queue_createdAt, v.CreatedAt)
+		case schemas.Queue_errorInfo:
+			return deserializeErrorInfoList(d, schemas.Queue_errorInfo, &v.ErrorInfo)
+		case schemas.Queue_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Queue_id, v.Id)
+		case schemas.Queue_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.Queue_modifiedAt, v.ModifiedAt)
+		case schemas.Queue_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Queue_name, v.Name)
+		case schemas.Queue_slurmConfiguration:
+			v.SlurmConfiguration = &QueueSlurmConfiguration{}
+			return v.SlurmConfiguration.Deserialize(d)
+		case schemas.Queue_status:
+			var ev string
+			if err := d.ReadString(schemas.Queue_status, &ev); err != nil {
+				return err
+			}
+			v.Status = QueueStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Additional options related to the Slurm scheduler.
 type QueueSlurmConfiguration struct {
 
@@ -727,6 +1662,25 @@ type QueueSlurmConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueueSlurmConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueueSlurmConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueueSlurmConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSlurmCustomSettings(s, schemas.QueueSlurmConfiguration_slurmCustomSettings, v.SlurmCustomSettings)
+}
+func (v *QueueSlurmConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueueSlurmConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueueSlurmConfiguration_slurmCustomSettings:
+			return deserializeSlurmCustomSettings(d, schemas.QueueSlurmConfiguration_slurmCustomSettings, &v.SlurmCustomSettings)
+		}
+		return nil
+	})
+}
+
 // Additional options related to the Slurm scheduler.
 type QueueSlurmConfigurationRequest struct {
 
@@ -734,6 +1688,25 @@ type QueueSlurmConfigurationRequest struct {
 	SlurmCustomSettings []SlurmCustomSetting
 
 	noSmithyDocumentSerde
+}
+
+func (v *QueueSlurmConfigurationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueueSlurmConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueueSlurmConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSlurmCustomSettings(s, schemas.QueueSlurmConfigurationRequest_slurmCustomSettings, v.SlurmCustomSettings)
+}
+func (v *QueueSlurmConfigurationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueueSlurmConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueueSlurmConfigurationRequest_slurmCustomSettings:
+			return deserializeSlurmCustomSettings(d, schemas.QueueSlurmConfigurationRequest_slurmCustomSettings, &v.SlurmCustomSettings)
+		}
+		return nil
+	})
 }
 
 // The object returned by the ListQueues API action.
@@ -788,6 +1761,68 @@ type QueueSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueueSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueueSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueueSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.QueueSummary_arn, *v.Arn)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.QueueSummary_clusterId, *v.ClusterId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.QueueSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.QueueSummary_id, *v.Id)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.QueueSummary_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.QueueSummary_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.QueueSummary_status, string(v.Status))
+	}
+}
+func (v *QueueSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueueSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueueSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.QueueSummary_arn, v.Arn)
+		case schemas.QueueSummary_clusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.QueueSummary_clusterId, v.ClusterId)
+		case schemas.QueueSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.QueueSummary_createdAt, v.CreatedAt)
+		case schemas.QueueSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.QueueSummary_id, v.Id)
+		case schemas.QueueSummary_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.QueueSummary_modifiedAt, v.ModifiedAt)
+		case schemas.QueueSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.QueueSummary_name, v.Name)
+		case schemas.QueueSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.QueueSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = QueueStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies the boundaries of the compute node group auto scaling.
 type ScalingConfiguration struct {
 
@@ -804,6 +1839,32 @@ type ScalingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScalingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScalingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScalingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxInstanceCount != 0 {
+		s.WriteInt32(schemas.ScalingConfiguration_maxInstanceCount, v.MaxInstanceCount)
+	}
+	if v.MinInstanceCount != 0 {
+		s.WriteInt32(schemas.ScalingConfiguration_minInstanceCount, v.MinInstanceCount)
+	}
+}
+func (v *ScalingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScalingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScalingConfiguration_maxInstanceCount:
+			return d.ReadInt32(schemas.ScalingConfiguration_maxInstanceCount, &v.MaxInstanceCount)
+		case schemas.ScalingConfiguration_minInstanceCount:
+			return d.ReadInt32(schemas.ScalingConfiguration_minInstanceCount, &v.MinInstanceCount)
+		}
+		return nil
+	})
+}
+
 // Specifies the boundaries of the compute node group auto scaling.
 type ScalingConfigurationRequest struct {
 
@@ -818,6 +1879,32 @@ type ScalingConfigurationRequest struct {
 	MinInstanceCount int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScalingConfigurationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScalingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScalingConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxInstanceCount != 0 {
+		s.WriteInt32(schemas.ScalingConfigurationRequest_maxInstanceCount, v.MaxInstanceCount)
+	}
+	if v.MinInstanceCount != 0 {
+		s.WriteInt32(schemas.ScalingConfigurationRequest_minInstanceCount, v.MinInstanceCount)
+	}
+}
+func (v *ScalingConfigurationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScalingConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScalingConfigurationRequest_maxInstanceCount:
+			return d.ReadInt32(schemas.ScalingConfigurationRequest_maxInstanceCount, &v.MaxInstanceCount)
+		case schemas.ScalingConfigurationRequest_minInstanceCount:
+			return d.ReadInt32(schemas.ScalingConfigurationRequest_minInstanceCount, &v.MinInstanceCount)
+		}
+		return nil
+	})
 }
 
 // The cluster management and job scheduling software associated with the cluster.
@@ -842,6 +1929,38 @@ type Scheduler struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Scheduler) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Scheduler)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Scheduler) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.Scheduler_type, string(v.Type))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.Scheduler_version, *v.Version)
+	}
+}
+func (v *Scheduler) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Scheduler, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Scheduler_type:
+			var ev string
+			if err := d.ReadString(schemas.Scheduler_type, &ev); err != nil {
+				return err
+			}
+			v.Type = SchedulerType(ev)
+			return nil
+		case schemas.Scheduler_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.Scheduler_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // The cluster management and job scheduling software associated with the cluster.
 type SchedulerRequest struct {
 
@@ -864,6 +1983,38 @@ type SchedulerRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SchedulerRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SchedulerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SchedulerRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.SchedulerRequest_type, string(v.Type))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.SchedulerRequest_version, *v.Version)
+	}
+}
+func (v *SchedulerRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchedulerRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchedulerRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.SchedulerRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = SchedulerType(ev)
+			return nil
+		case schemas.SchedulerRequest_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.SchedulerRequest_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // The shared Slurm key for authentication, also known as the cluster secret.
 type SlurmAuthKey struct {
 
@@ -878,6 +2029,34 @@ type SlurmAuthKey struct {
 	SecretVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SlurmAuthKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SlurmAuthKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SlurmAuthKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretArn != nil {
+		s.WriteString(schemas.SlurmAuthKey_secretArn, *v.SecretArn)
+	}
+	if v.SecretVersion != nil {
+		s.WriteString(schemas.SlurmAuthKey_secretVersion, *v.SecretVersion)
+	}
+}
+func (v *SlurmAuthKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SlurmAuthKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SlurmAuthKey_secretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.SlurmAuthKey_secretArn, v.SecretArn)
+		case schemas.SlurmAuthKey_secretVersion:
+			v.SecretVersion = new(string)
+			return d.ReadString(schemas.SlurmAuthKey_secretVersion, v.SecretVersion)
+		}
+		return nil
+	})
 }
 
 // Additional settings that directly map to Slurm settings.
@@ -904,6 +2083,34 @@ type SlurmCustomSetting struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SlurmCustomSetting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SlurmCustomSetting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SlurmCustomSetting) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParameterName != nil {
+		s.WriteString(schemas.SlurmCustomSetting_parameterName, *v.ParameterName)
+	}
+	if v.ParameterValue != nil {
+		s.WriteString(schemas.SlurmCustomSetting_parameterValue, *v.ParameterValue)
+	}
+}
+func (v *SlurmCustomSetting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SlurmCustomSetting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SlurmCustomSetting_parameterName:
+			v.ParameterName = new(string)
+			return d.ReadString(schemas.SlurmCustomSetting_parameterName, v.ParameterName)
+		case schemas.SlurmCustomSetting_parameterValue:
+			v.ParameterValue = new(string)
+			return d.ReadString(schemas.SlurmCustomSetting_parameterValue, v.ParameterValue)
+		}
+		return nil
+	})
+}
+
 // Additional settings that directly map to SlurmDBD settings.
 //
 // PCS supports a subset of SlurmDBD settings. For more information, see [Configuring custom SlurmDBD settings in PCS] in the
@@ -928,6 +2135,34 @@ type SlurmdbdCustomSetting struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SlurmdbdCustomSetting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SlurmdbdCustomSetting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SlurmdbdCustomSetting) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParameterName != nil {
+		s.WriteString(schemas.SlurmdbdCustomSetting_parameterName, *v.ParameterName)
+	}
+	if v.ParameterValue != nil {
+		s.WriteString(schemas.SlurmdbdCustomSetting_parameterValue, *v.ParameterValue)
+	}
+}
+func (v *SlurmdbdCustomSetting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SlurmdbdCustomSetting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SlurmdbdCustomSetting_parameterName:
+			v.ParameterName = new(string)
+			return d.ReadString(schemas.SlurmdbdCustomSetting_parameterName, v.ParameterName)
+		case schemas.SlurmdbdCustomSetting_parameterValue:
+			v.ParameterValue = new(string)
+			return d.ReadString(schemas.SlurmdbdCustomSetting_parameterValue, v.ParameterValue)
+		}
+		return nil
+	})
+}
+
 // The Slurm REST API configuration includes settings for enabling and configuring
 // the Slurm REST API. It's a property of the ClusterSlurmConfiguration object.
 type SlurmRest struct {
@@ -939,6 +2174,32 @@ type SlurmRest struct {
 	Mode SlurmRestMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *SlurmRest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SlurmRest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SlurmRest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.SlurmRest_mode, string(v.Mode))
+	}
+}
+func (v *SlurmRest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SlurmRest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SlurmRest_mode:
+			var ev string
+			if err := d.ReadString(schemas.SlurmRest_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = SlurmRestMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The Slurm REST API configuration includes settings for enabling and configuring
@@ -954,6 +2215,32 @@ type SlurmRestRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SlurmRestRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SlurmRestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SlurmRestRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.SlurmRestRequest_mode, string(v.Mode))
+	}
+}
+func (v *SlurmRestRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SlurmRestRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SlurmRestRequest_mode:
+			var ev string
+			if err := d.ReadString(schemas.SlurmRestRequest_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = SlurmRestMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Additional configuration when you specify SPOT as the purchaseOption for the
 // CreateComputeNodeGroup API action.
 type SpotOptions struct {
@@ -967,6 +2254,32 @@ type SpotOptions struct {
 	AllocationStrategy SpotAllocationStrategy
 
 	noSmithyDocumentSerde
+}
+
+func (v *SpotOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SpotOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SpotOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocationStrategy != "" {
+		s.WriteString(schemas.SpotOptions_allocationStrategy, string(v.AllocationStrategy))
+	}
+}
+func (v *SpotOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SpotOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SpotOptions_allocationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.SpotOptions_allocationStrategy, &ev); err != nil {
+				return err
+			}
+			v.AllocationStrategy = SpotAllocationStrategy(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The accounting configuration includes configurable settings for Slurm
@@ -991,6 +2304,38 @@ type UpdateAccountingRequest struct {
 	Mode AccountingMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateAccountingRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountingRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultPurgeTimeInDays != nil {
+		s.WriteInt32(schemas.UpdateAccountingRequest_defaultPurgeTimeInDays, *v.DefaultPurgeTimeInDays)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.UpdateAccountingRequest_mode, string(v.Mode))
+	}
+}
+func (v *UpdateAccountingRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccountingRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccountingRequest_defaultPurgeTimeInDays:
+			v.DefaultPurgeTimeInDays = new(int32)
+			return d.ReadInt32(schemas.UpdateAccountingRequest_defaultPurgeTimeInDays, v.DefaultPurgeTimeInDays)
+		case schemas.UpdateAccountingRequest_mode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateAccountingRequest_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = AccountingMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Additional options related to the Slurm scheduler.
@@ -1021,6 +2366,53 @@ type UpdateClusterSlurmConfigurationRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterSlurmConfigurationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterSlurmConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterSlurmConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accounting != nil {
+		s.WriteStruct(schemas.UpdateClusterSlurmConfigurationRequest_accounting)
+		v.Accounting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCgroupCustomSettings(s, schemas.UpdateClusterSlurmConfigurationRequest_cgroupCustomSettings, v.CgroupCustomSettings)
+	if v.ScaleDownIdleTimeInSeconds != nil {
+		s.WriteInt32(schemas.UpdateClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, *v.ScaleDownIdleTimeInSeconds)
+	}
+	serializeSlurmCustomSettings(s, schemas.UpdateClusterSlurmConfigurationRequest_slurmCustomSettings, v.SlurmCustomSettings)
+	if v.SlurmRest != nil {
+		s.WriteStruct(schemas.UpdateClusterSlurmConfigurationRequest_slurmRest)
+		v.SlurmRest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSlurmdbdCustomSettings(s, schemas.UpdateClusterSlurmConfigurationRequest_slurmdbdCustomSettings, v.SlurmdbdCustomSettings)
+}
+func (v *UpdateClusterSlurmConfigurationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateClusterSlurmConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateClusterSlurmConfigurationRequest_accounting:
+			v.Accounting = &UpdateAccountingRequest{}
+			return v.Accounting.Deserialize(d)
+		case schemas.UpdateClusterSlurmConfigurationRequest_cgroupCustomSettings:
+			return deserializeCgroupCustomSettings(d, schemas.UpdateClusterSlurmConfigurationRequest_cgroupCustomSettings, &v.CgroupCustomSettings)
+		case schemas.UpdateClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds:
+			v.ScaleDownIdleTimeInSeconds = new(int32)
+			return d.ReadInt32(schemas.UpdateClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, v.ScaleDownIdleTimeInSeconds)
+		case schemas.UpdateClusterSlurmConfigurationRequest_slurmCustomSettings:
+			return deserializeSlurmCustomSettings(d, schemas.UpdateClusterSlurmConfigurationRequest_slurmCustomSettings, &v.SlurmCustomSettings)
+		case schemas.UpdateClusterSlurmConfigurationRequest_slurmRest:
+			v.SlurmRest = &UpdateSlurmRestRequest{}
+			return v.SlurmRest.Deserialize(d)
+		case schemas.UpdateClusterSlurmConfigurationRequest_slurmdbdCustomSettings:
+			return deserializeSlurmdbdCustomSettings(d, schemas.UpdateClusterSlurmConfigurationRequest_slurmdbdCustomSettings, &v.SlurmdbdCustomSettings)
+		}
+		return nil
+	})
+}
+
 // Additional options related to the Slurm scheduler.
 type UpdateComputeNodeGroupSlurmConfigurationRequest struct {
 
@@ -1037,6 +2429,31 @@ type UpdateComputeNodeGroupSlurmConfigurationRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateComputeNodeGroupSlurmConfigurationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateComputeNodeGroupSlurmConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateComputeNodeGroupSlurmConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScaleDownIdleTimeInSeconds != nil {
+		s.WriteInt32(schemas.UpdateComputeNodeGroupSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, *v.ScaleDownIdleTimeInSeconds)
+	}
+	serializeSlurmCustomSettings(s, schemas.UpdateComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings, v.SlurmCustomSettings)
+}
+func (v *UpdateComputeNodeGroupSlurmConfigurationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateComputeNodeGroupSlurmConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateComputeNodeGroupSlurmConfigurationRequest_scaleDownIdleTimeInSeconds:
+			v.ScaleDownIdleTimeInSeconds = new(int32)
+			return d.ReadInt32(schemas.UpdateComputeNodeGroupSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, v.ScaleDownIdleTimeInSeconds)
+		case schemas.UpdateComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings:
+			return deserializeSlurmCustomSettings(d, schemas.UpdateComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings, &v.SlurmCustomSettings)
+		}
+		return nil
+	})
+}
+
 // Additional options related to the Slurm scheduler.
 type UpdateQueueSlurmConfigurationRequest struct {
 
@@ -1044,6 +2461,25 @@ type UpdateQueueSlurmConfigurationRequest struct {
 	SlurmCustomSettings []SlurmCustomSetting
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateQueueSlurmConfigurationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQueueSlurmConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQueueSlurmConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSlurmCustomSettings(s, schemas.UpdateQueueSlurmConfigurationRequest_slurmCustomSettings, v.SlurmCustomSettings)
+}
+func (v *UpdateQueueSlurmConfigurationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateQueueSlurmConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateQueueSlurmConfigurationRequest_slurmCustomSettings:
+			return deserializeSlurmCustomSettings(d, schemas.UpdateQueueSlurmConfigurationRequest_slurmCustomSettings, &v.SlurmCustomSettings)
+		}
+		return nil
+	})
 }
 
 // The Slurm REST API configuration includes settings for enabling and configuring
@@ -1055,6 +2491,32 @@ type UpdateSlurmRestRequest struct {
 	Mode SlurmRestMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateSlurmRestRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSlurmRestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSlurmRestRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.UpdateSlurmRestRequest_mode, string(v.Mode))
+	}
+}
+func (v *UpdateSlurmRestRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSlurmRestRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSlurmRestRequest_mode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateSlurmRestRequest_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = SlurmRestMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Stores information about a field in a request that caused an exception.
@@ -1071,6 +2533,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

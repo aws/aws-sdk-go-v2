@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,31 @@ type UpdateConnectionInput struct {
 	Props types.ConnectionPropertiesPatch
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsLocation != nil {
+		s.WriteStruct(schemas.UpdateConnectionInput_awsLocation)
+		v.AwsLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeConfigurations(s, schemas.UpdateConnectionInput_configurations, v.Configurations)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateConnectionInput_description, *v.Description)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.UpdateConnectionInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateConnectionInput_identifier, *v.Identifier)
+	}
+	serializeConnectionPropertiesPatch(s, schemas.UpdateConnectionInput_props, v.Props)
 }
 
 type UpdateConnectionOutput struct {
@@ -112,16 +139,62 @@ type UpdateConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConnectionOutput_configurations:
+			return deserializeConfigurations(d, schemas.UpdateConnectionOutput_configurations, &v.Configurations)
+		case schemas.UpdateConnectionOutput_connectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.UpdateConnectionOutput_connectionId, v.ConnectionId)
+		case schemas.UpdateConnectionOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateConnectionOutput_description, v.Description)
+		case schemas.UpdateConnectionOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.UpdateConnectionOutput_domainId, v.DomainId)
+		case schemas.UpdateConnectionOutput_domainUnitId:
+			v.DomainUnitId = new(string)
+			return d.ReadString(schemas.UpdateConnectionOutput_domainUnitId, v.DomainUnitId)
+		case schemas.UpdateConnectionOutput_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.UpdateConnectionOutput_environmentId, v.EnvironmentId)
+		case schemas.UpdateConnectionOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateConnectionOutput_name, v.Name)
+		case schemas.UpdateConnectionOutput_physicalEndpoints:
+			return deserializePhysicalEndpoints(d, schemas.UpdateConnectionOutput_physicalEndpoints, &v.PhysicalEndpoints)
+		case schemas.UpdateConnectionOutput_projectId:
+			v.ProjectId = new(string)
+			return d.ReadString(schemas.UpdateConnectionOutput_projectId, v.ProjectId)
+		case schemas.UpdateConnectionOutput_props:
+			return deserializeConnectionPropertiesOutput(d, schemas.UpdateConnectionOutput_props, &v.Props)
+		case schemas.UpdateConnectionOutput_scope:
+			var ev string
+			if err := d.ReadString(schemas.UpdateConnectionOutput_scope, &ev); err != nil {
+				return err
+			}
+			v.Scope = types.ConnectionScope(ev)
+			return nil
+		case schemas.UpdateConnectionOutput_type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateConnectionOutput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.ConnectionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnection, schemas.UpdateConnectionInput, schemas.UpdateConnectionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnection, schemas.UpdateConnectionInput, schemas.UpdateConnectionOutput), output: &UpdateConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateConnection"); err != nil {

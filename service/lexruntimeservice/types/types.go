@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -31,6 +33,39 @@ type ActiveContext struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActiveContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActiveContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActiveContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ActiveContext_name, *v.Name)
+	}
+	serializeActiveContextParametersMap(s, schemas.ActiveContext_parameters, v.Parameters)
+	if v.TimeToLive != nil {
+		s.WriteStruct(schemas.ActiveContext_timeToLive)
+		v.TimeToLive.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ActiveContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActiveContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActiveContext_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ActiveContext_name, v.Name)
+		case schemas.ActiveContext_parameters:
+			return deserializeActiveContextParametersMap(d, schemas.ActiveContext_parameters, &v.Parameters)
+		case schemas.ActiveContext_timeToLive:
+			v.TimeToLive = &ActiveContextTimeToLive{}
+			return v.TimeToLive.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The length of time or number of turns that a context remains active.
 type ActiveContextTimeToLive struct {
 
@@ -45,6 +80,34 @@ type ActiveContextTimeToLive struct {
 	TurnsToLive *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActiveContextTimeToLive) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActiveContextTimeToLive)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActiveContextTimeToLive) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TimeToLiveInSeconds != nil {
+		s.WriteInt32(schemas.ActiveContextTimeToLive_timeToLiveInSeconds, *v.TimeToLiveInSeconds)
+	}
+	if v.TurnsToLive != nil {
+		s.WriteInt32(schemas.ActiveContextTimeToLive_turnsToLive, *v.TurnsToLive)
+	}
+}
+func (v *ActiveContextTimeToLive) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActiveContextTimeToLive, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActiveContextTimeToLive_timeToLiveInSeconds:
+			v.TimeToLiveInSeconds = new(int32)
+			return d.ReadInt32(schemas.ActiveContextTimeToLive_timeToLiveInSeconds, v.TimeToLiveInSeconds)
+		case schemas.ActiveContextTimeToLive_turnsToLive:
+			v.TurnsToLive = new(int32)
+			return d.ReadInt32(schemas.ActiveContextTimeToLive_turnsToLive, v.TurnsToLive)
+		}
+		return nil
+	})
 }
 
 // Represents an option to be shown on the client platform (Facebook, Slack, etc.)
@@ -63,6 +126,34 @@ type Button struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Button) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Button)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Button) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Text != nil {
+		s.WriteString(schemas.Button_text, *v.Text)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Button_value, *v.Value)
+	}
+}
+func (v *Button) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Button, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Button_text:
+			v.Text = new(string)
+			return d.ReadString(schemas.Button_text, v.Text)
+		case schemas.Button_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Button_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes the next action that the bot should take in its interaction with the
@@ -130,6 +221,73 @@ type DialogAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DialogAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DialogAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DialogAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FulfillmentState != "" {
+		s.WriteString(schemas.DialogAction_fulfillmentState, string(v.FulfillmentState))
+	}
+	if v.IntentName != nil {
+		s.WriteString(schemas.DialogAction_intentName, *v.IntentName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DialogAction_message, *v.Message)
+	}
+	if v.MessageFormat != "" {
+		s.WriteString(schemas.DialogAction_messageFormat, string(v.MessageFormat))
+	}
+	if v.SlotToElicit != nil {
+		s.WriteString(schemas.DialogAction_slotToElicit, *v.SlotToElicit)
+	}
+	serializeStringMap(s, schemas.DialogAction_slots, v.Slots)
+	if v.Type != "" {
+		s.WriteString(schemas.DialogAction_type, string(v.Type))
+	}
+}
+func (v *DialogAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DialogAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DialogAction_fulfillmentState:
+			var ev string
+			if err := d.ReadString(schemas.DialogAction_fulfillmentState, &ev); err != nil {
+				return err
+			}
+			v.FulfillmentState = FulfillmentState(ev)
+			return nil
+		case schemas.DialogAction_intentName:
+			v.IntentName = new(string)
+			return d.ReadString(schemas.DialogAction_intentName, v.IntentName)
+		case schemas.DialogAction_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DialogAction_message, v.Message)
+		case schemas.DialogAction_messageFormat:
+			var ev string
+			if err := d.ReadString(schemas.DialogAction_messageFormat, &ev); err != nil {
+				return err
+			}
+			v.MessageFormat = MessageFormatType(ev)
+			return nil
+		case schemas.DialogAction_slotToElicit:
+			v.SlotToElicit = new(string)
+			return d.ReadString(schemas.DialogAction_slotToElicit, v.SlotToElicit)
+		case schemas.DialogAction_slots:
+			return deserializeStringMap(d, schemas.DialogAction_slots, &v.Slots)
+		case schemas.DialogAction_type:
+			var ev string
+			if err := d.ReadString(schemas.DialogAction_type, &ev); err != nil {
+				return err
+			}
+			v.Type = DialogActionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents an option rendered to the user when a prompt is shown. It could be
 // an image, a button, a link, or text.
 type GenericAttachment struct {
@@ -152,6 +310,49 @@ type GenericAttachment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenericAttachment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenericAttachment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenericAttachment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentLinkUrl != nil {
+		s.WriteString(schemas.GenericAttachment_attachmentLinkUrl, *v.AttachmentLinkUrl)
+	}
+	serializelistOfButtons(s, schemas.GenericAttachment_buttons, v.Buttons)
+	if v.ImageUrl != nil {
+		s.WriteString(schemas.GenericAttachment_imageUrl, *v.ImageUrl)
+	}
+	if v.SubTitle != nil {
+		s.WriteString(schemas.GenericAttachment_subTitle, *v.SubTitle)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.GenericAttachment_title, *v.Title)
+	}
+}
+func (v *GenericAttachment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenericAttachment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenericAttachment_attachmentLinkUrl:
+			v.AttachmentLinkUrl = new(string)
+			return d.ReadString(schemas.GenericAttachment_attachmentLinkUrl, v.AttachmentLinkUrl)
+		case schemas.GenericAttachment_buttons:
+			return deserializelistOfButtons(d, schemas.GenericAttachment_buttons, &v.Buttons)
+		case schemas.GenericAttachment_imageUrl:
+			v.ImageUrl = new(string)
+			return d.ReadString(schemas.GenericAttachment_imageUrl, v.ImageUrl)
+		case schemas.GenericAttachment_subTitle:
+			v.SubTitle = new(string)
+			return d.ReadString(schemas.GenericAttachment_subTitle, v.SubTitle)
+		case schemas.GenericAttachment_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.GenericAttachment_title, v.Title)
+		}
+		return nil
+	})
+}
+
 // Provides a score that indicates the confidence that Amazon Lex has that an
 // intent is the one that satisfies the user's intent.
 type IntentConfidence struct {
@@ -162,6 +363,27 @@ type IntentConfidence struct {
 	Score float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *IntentConfidence) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IntentConfidence)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IntentConfidence) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Score != 0 {
+		s.WriteFloat64(schemas.IntentConfidence_score, v.Score)
+	}
+}
+func (v *IntentConfidence) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IntentConfidence, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IntentConfidence_score:
+			return d.ReadFloat64(schemas.IntentConfidence_score, &v.Score)
+		}
+		return nil
+	})
 }
 
 // Provides information about the state of an intent. You can use this information
@@ -233,6 +455,73 @@ type IntentSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IntentSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IntentSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IntentSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CheckpointLabel != nil {
+		s.WriteString(schemas.IntentSummary_checkpointLabel, *v.CheckpointLabel)
+	}
+	if v.ConfirmationStatus != "" {
+		s.WriteString(schemas.IntentSummary_confirmationStatus, string(v.ConfirmationStatus))
+	}
+	if v.DialogActionType != "" {
+		s.WriteString(schemas.IntentSummary_dialogActionType, string(v.DialogActionType))
+	}
+	if v.FulfillmentState != "" {
+		s.WriteString(schemas.IntentSummary_fulfillmentState, string(v.FulfillmentState))
+	}
+	if v.IntentName != nil {
+		s.WriteString(schemas.IntentSummary_intentName, *v.IntentName)
+	}
+	if v.SlotToElicit != nil {
+		s.WriteString(schemas.IntentSummary_slotToElicit, *v.SlotToElicit)
+	}
+	serializeStringMap(s, schemas.IntentSummary_slots, v.Slots)
+}
+func (v *IntentSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IntentSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IntentSummary_checkpointLabel:
+			v.CheckpointLabel = new(string)
+			return d.ReadString(schemas.IntentSummary_checkpointLabel, v.CheckpointLabel)
+		case schemas.IntentSummary_confirmationStatus:
+			var ev string
+			if err := d.ReadString(schemas.IntentSummary_confirmationStatus, &ev); err != nil {
+				return err
+			}
+			v.ConfirmationStatus = ConfirmationStatus(ev)
+			return nil
+		case schemas.IntentSummary_dialogActionType:
+			var ev string
+			if err := d.ReadString(schemas.IntentSummary_dialogActionType, &ev); err != nil {
+				return err
+			}
+			v.DialogActionType = DialogActionType(ev)
+			return nil
+		case schemas.IntentSummary_fulfillmentState:
+			var ev string
+			if err := d.ReadString(schemas.IntentSummary_fulfillmentState, &ev); err != nil {
+				return err
+			}
+			v.FulfillmentState = FulfillmentState(ev)
+			return nil
+		case schemas.IntentSummary_intentName:
+			v.IntentName = new(string)
+			return d.ReadString(schemas.IntentSummary_intentName, v.IntentName)
+		case schemas.IntentSummary_slotToElicit:
+			v.SlotToElicit = new(string)
+			return d.ReadString(schemas.IntentSummary_slotToElicit, v.SlotToElicit)
+		case schemas.IntentSummary_slots:
+			return deserializeStringMap(d, schemas.IntentSummary_slots, &v.Slots)
+		}
+		return nil
+	})
+}
+
 // An intent that Amazon Lex suggests satisfies the user's intent. Includes the
 // name of the intent, the confidence that Amazon Lex has that the user's intent is
 // satisfied, and the slots defined for the intent.
@@ -249,6 +538,39 @@ type PredictedIntent struct {
 	Slots map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PredictedIntent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictedIntent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictedIntent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntentName != nil {
+		s.WriteString(schemas.PredictedIntent_intentName, *v.IntentName)
+	}
+	if v.NluIntentConfidence != nil {
+		s.WriteStruct(schemas.PredictedIntent_nluIntentConfidence)
+		v.NluIntentConfidence.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringMap(s, schemas.PredictedIntent_slots, v.Slots)
+}
+func (v *PredictedIntent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictedIntent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictedIntent_intentName:
+			v.IntentName = new(string)
+			return d.ReadString(schemas.PredictedIntent_intentName, v.IntentName)
+		case schemas.PredictedIntent_nluIntentConfidence:
+			v.NluIntentConfidence = &IntentConfidence{}
+			return v.NluIntentConfidence.Deserialize(d)
+		case schemas.PredictedIntent_slots:
+			return deserializeStringMap(d, schemas.PredictedIntent_slots, &v.Slots)
+		}
+		return nil
+	})
 }
 
 // If you configure a response card when creating your bots, Amazon Lex
@@ -269,6 +591,41 @@ type ResponseCard struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResponseCard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseCard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseCard) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != "" {
+		s.WriteString(schemas.ResponseCard_contentType, string(v.ContentType))
+	}
+	serializegenericAttachmentList(s, schemas.ResponseCard_genericAttachments, v.GenericAttachments)
+	if v.Version != nil {
+		s.WriteString(schemas.ResponseCard_version, *v.Version)
+	}
+}
+func (v *ResponseCard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseCard, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponseCard_contentType:
+			var ev string
+			if err := d.ReadString(schemas.ResponseCard_contentType, &ev); err != nil {
+				return err
+			}
+			v.ContentType = ContentType(ev)
+			return nil
+		case schemas.ResponseCard_genericAttachments:
+			return deserializegenericAttachmentList(d, schemas.ResponseCard_genericAttachments, &v.GenericAttachments)
+		case schemas.ResponseCard_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.ResponseCard_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // The sentiment expressed in an utterance.
 //
 // When the bot is configured to send utterances to Amazon Comprehend for
@@ -282,6 +639,34 @@ type SentimentResponse struct {
 	SentimentScore *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SentimentResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SentimentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SentimentResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SentimentLabel != nil {
+		s.WriteString(schemas.SentimentResponse_sentimentLabel, *v.SentimentLabel)
+	}
+	if v.SentimentScore != nil {
+		s.WriteString(schemas.SentimentResponse_sentimentScore, *v.SentimentScore)
+	}
+}
+func (v *SentimentResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SentimentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SentimentResponse_sentimentLabel:
+			v.SentimentLabel = new(string)
+			return d.ReadString(schemas.SentimentResponse_sentimentLabel, v.SentimentLabel)
+		case schemas.SentimentResponse_sentimentScore:
+			v.SentimentScore = new(string)
+			return d.ReadString(schemas.SentimentResponse_sentimentScore, v.SentimentScore)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -40,6 +42,18 @@ type DeauthorizeConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeauthorizeConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeauthorizeConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeauthorizeConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeauthorizeConnectionRequest_Name, *v.Name)
+	}
+}
+
 type DeauthorizeConnectionOutput struct {
 
 	// The ARN of the connection that authorization was removed from.
@@ -63,16 +77,40 @@ type DeauthorizeConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeauthorizeConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeauthorizeConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeauthorizeConnectionResponse_ConnectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.DeauthorizeConnectionResponse_ConnectionArn, v.ConnectionArn)
+		case schemas.DeauthorizeConnectionResponse_ConnectionState:
+			var ev string
+			if err := d.ReadString(schemas.DeauthorizeConnectionResponse_ConnectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = types.ConnectionState(ev)
+			return nil
+		case schemas.DeauthorizeConnectionResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DeauthorizeConnectionResponse_CreationTime, v.CreationTime)
+		case schemas.DeauthorizeConnectionResponse_LastAuthorizedTime:
+			v.LastAuthorizedTime = new(time.Time)
+			return d.ReadTime(schemas.DeauthorizeConnectionResponse_LastAuthorizedTime, v.LastAuthorizedTime)
+		case schemas.DeauthorizeConnectionResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DeauthorizeConnectionResponse_LastModifiedTime, v.LastModifiedTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeauthorizeConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeauthorizeConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeauthorizeConnection, schemas.DeauthorizeConnectionRequest, schemas.DeauthorizeConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeauthorizeConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeauthorizeConnection, schemas.DeauthorizeConnectionRequest, schemas.DeauthorizeConnectionResponse), output: &DeauthorizeConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeauthorizeConnection"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,6 +44,21 @@ type GetConfigurationBundleInput struct {
 	BranchName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetConfigurationBundleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigurationBundleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationBundleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BranchName != nil {
+		s.WriteString(schemas.GetConfigurationBundleRequest_branchName, *v.BranchName)
+	}
+	if v.BundleId != nil {
+		s.WriteString(schemas.GetConfigurationBundleRequest_bundleId, *v.BundleId)
+	}
 }
 
 type GetConfigurationBundleOutput struct {
@@ -94,16 +111,47 @@ type GetConfigurationBundleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigurationBundleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfigurationBundleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfigurationBundleResponse_bundleArn:
+			v.BundleArn = new(string)
+			return d.ReadString(schemas.GetConfigurationBundleResponse_bundleArn, v.BundleArn)
+		case schemas.GetConfigurationBundleResponse_bundleId:
+			v.BundleId = new(string)
+			return d.ReadString(schemas.GetConfigurationBundleResponse_bundleId, v.BundleId)
+		case schemas.GetConfigurationBundleResponse_bundleName:
+			v.BundleName = new(string)
+			return d.ReadString(schemas.GetConfigurationBundleResponse_bundleName, v.BundleName)
+		case schemas.GetConfigurationBundleResponse_components:
+			return deserializeComponentConfigurationMap(d, schemas.GetConfigurationBundleResponse_components, &v.Components)
+		case schemas.GetConfigurationBundleResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetConfigurationBundleResponse_createdAt, v.CreatedAt)
+		case schemas.GetConfigurationBundleResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetConfigurationBundleResponse_description, v.Description)
+		case schemas.GetConfigurationBundleResponse_lineageMetadata:
+			v.LineageMetadata = &types.VersionLineageMetadata{}
+			return v.LineageMetadata.Deserialize(d)
+		case schemas.GetConfigurationBundleResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetConfigurationBundleResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetConfigurationBundleResponse_versionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.GetConfigurationBundleResponse_versionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfigurationBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfigurationBundle{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfigurationBundle, schemas.GetConfigurationBundleRequest, schemas.GetConfigurationBundleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfigurationBundle{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfigurationBundle, schemas.GetConfigurationBundleRequest, schemas.GetConfigurationBundleResponse), output: &GetConfigurationBundleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetConfigurationBundle"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,33 @@ type HttpPayloadTraitsWithMediaTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpPayloadTraitsWithMediaTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpPayloadTraitsWithMediaTypeInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpPayloadTraitsWithMediaTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blob != nil {
+		s.WriteBlob(schemas.HttpPayloadTraitsWithMediaTypeInputOutput_blob, v.Blob)
+	}
+	if v.Foo != nil {
+		s.WriteString(schemas.HttpPayloadTraitsWithMediaTypeInputOutput_foo, *v.Foo)
+	}
+}
+func (v *HttpPayloadTraitsWithMediaTypeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpPayloadTraitsWithMediaTypeInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpPayloadTraitsWithMediaTypeInputOutput_blob:
+			return d.ReadBlob(schemas.HttpPayloadTraitsWithMediaTypeInputOutput_blob, &v.Blob)
+		case schemas.HttpPayloadTraitsWithMediaTypeInputOutput_foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.HttpPayloadTraitsWithMediaTypeInputOutput_foo, v.Foo)
+		}
+		return nil
+	})
+}
+
 type HttpPayloadTraitsWithMediaTypeOutput struct {
 
 	// This value conforms to the media type: text/plain
@@ -50,16 +79,40 @@ type HttpPayloadTraitsWithMediaTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpPayloadTraitsWithMediaTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpPayloadTraitsWithMediaTypeInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpPayloadTraitsWithMediaTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blob != nil {
+		s.WriteBlob(schemas.HttpPayloadTraitsWithMediaTypeInputOutput_blob, v.Blob)
+	}
+	if v.Foo != nil {
+		s.WriteString(schemas.HttpPayloadTraitsWithMediaTypeInputOutput_foo, *v.Foo)
+	}
+}
+func (v *HttpPayloadTraitsWithMediaTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpPayloadTraitsWithMediaTypeInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpPayloadTraitsWithMediaTypeInputOutput_blob:
+			return d.ReadBlob(schemas.HttpPayloadTraitsWithMediaTypeInputOutput_blob, &v.Blob)
+		case schemas.HttpPayloadTraitsWithMediaTypeInputOutput_foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.HttpPayloadTraitsWithMediaTypeInputOutput_foo, v.Foo)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationHttpPayloadTraitsWithMediaTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpPayloadTraitsWithMediaType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpPayloadTraitsWithMediaType, schemas.HttpPayloadTraitsWithMediaTypeInputOutput, schemas.HttpPayloadTraitsWithMediaTypeInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpHttpPayloadTraitsWithMediaType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpPayloadTraitsWithMediaType, schemas.HttpPayloadTraitsWithMediaTypeInputOutput, schemas.HttpPayloadTraitsWithMediaTypeInputOutput), output: &HttpPayloadTraitsWithMediaTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "HttpPayloadTraitsWithMediaType"); err != nil {

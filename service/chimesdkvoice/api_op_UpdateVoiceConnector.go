@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,24 @@ type UpdateVoiceConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVoiceConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVoiceConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVoiceConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateVoiceConnectorRequest_Name, *v.Name)
+	}
+	if v.RequireEncryption != nil {
+		s.WriteBool(schemas.UpdateVoiceConnectorRequest_RequireEncryption, *v.RequireEncryption)
+	}
+	if v.VoiceConnectorId != nil {
+		s.WriteString(schemas.UpdateVoiceConnectorRequest_VoiceConnectorId, *v.VoiceConnectorId)
+	}
+}
+
 type UpdateVoiceConnectorOutput struct {
 
 	// The updated Voice Connector details.
@@ -58,16 +78,24 @@ type UpdateVoiceConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVoiceConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVoiceConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVoiceConnectorResponse_VoiceConnector:
+			v.VoiceConnector = &types.VoiceConnector{}
+			return v.VoiceConnector.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVoiceConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateVoiceConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVoiceConnector, schemas.UpdateVoiceConnectorRequest, schemas.UpdateVoiceConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateVoiceConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVoiceConnector, schemas.UpdateVoiceConnectorRequest, schemas.UpdateVoiceConnectorResponse), output: &UpdateVoiceConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateVoiceConnector"); err != nil {

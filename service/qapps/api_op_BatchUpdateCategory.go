@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,19 @@ type BatchUpdateCategoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateCategoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateCategoryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateCategoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCategoryListInput(s, schemas.BatchUpdateCategoryInput_categories, v.Categories)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.BatchUpdateCategoryInput_instanceId, *v.InstanceId)
+	}
+}
+
 type BatchUpdateCategoryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,16 +68,29 @@ type BatchUpdateCategoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateCategoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateCategoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *BatchUpdateCategoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateCategoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateCategory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateCategory, schemas.BatchUpdateCategoryInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateCategory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateCategory, schemas.BatchUpdateCategoryInput, nil), output: &BatchUpdateCategoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUpdateCategory"); err != nil {

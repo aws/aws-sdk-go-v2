@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,24 @@ type UpdateTagOptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTagOptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTagOptionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTagOptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Active != nil {
+		s.WriteBool(schemas.UpdateTagOptionInput_Active, *v.Active)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateTagOptionInput_Id, *v.Id)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.UpdateTagOptionInput_Value, *v.Value)
+	}
+}
+
 type UpdateTagOptionOutput struct {
 
 	// Information about the TagOption.
@@ -54,16 +74,24 @@ type UpdateTagOptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTagOptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTagOptionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTagOptionOutput_TagOptionDetail:
+			v.TagOptionDetail = &types.TagOptionDetail{}
+			return v.TagOptionDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTagOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateTagOption{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTagOption, schemas.UpdateTagOptionInput, schemas.UpdateTagOptionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateTagOption{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTagOption, schemas.UpdateTagOptionInput, schemas.UpdateTagOptionOutput), output: &UpdateTagOptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateTagOption"); err != nil {

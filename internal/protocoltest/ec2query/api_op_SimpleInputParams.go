@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +61,109 @@ type SimpleInputParamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SimpleInputParamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SimpleInputParamsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimpleInputParamsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bam != nil {
+		s.WriteInt32(schemas.SimpleInputParamsInput_Bam, *v.Bam)
+	}
+	if v.Bar != nil {
+		s.WriteString(schemas.SimpleInputParamsInput_Bar, *v.Bar)
+	}
+	if v.Baz != nil {
+		s.WriteBool(schemas.SimpleInputParamsInput_Baz, *v.Baz)
+	}
+	if v.Boo != nil {
+		s.WriteFloat64(schemas.SimpleInputParamsInput_Boo, *v.Boo)
+	}
+	if v.DistinctQueryAndXmlName != nil {
+		s.WriteString(schemas.SimpleInputParamsInput_DistinctQueryAndXmlName, *v.DistinctQueryAndXmlName)
+	}
+	if v.DistinctQueryName != nil {
+		s.WriteString(schemas.SimpleInputParamsInput_DistinctQueryName, *v.DistinctQueryName)
+	}
+	if v.DistinctXmlName != nil {
+		s.WriteString(schemas.SimpleInputParamsInput_DistinctXmlName, *v.DistinctXmlName)
+	}
+	if v.FloatValue != nil {
+		s.WriteFloat32(schemas.SimpleInputParamsInput_FloatValue, *v.FloatValue)
+	}
+	if v.Foo != nil {
+		s.WriteString(schemas.SimpleInputParamsInput_Foo, *v.Foo)
+	}
+	if v.FooEnum != "" {
+		s.WriteString(schemas.SimpleInputParamsInput_FooEnum, string(v.FooEnum))
+	}
+	if v.HasQueryAndXmlName != nil {
+		s.WriteString(schemas.SimpleInputParamsInput_HasQueryAndXmlName, *v.HasQueryAndXmlName)
+	}
+	if v.HasQueryName != nil {
+		s.WriteString(schemas.SimpleInputParamsInput_HasQueryName, *v.HasQueryName)
+	}
+	if v.Qux != nil {
+		s.WriteBlob(schemas.SimpleInputParamsInput_Qux, v.Qux)
+	}
+	if v.UsesXmlName != nil {
+		s.WriteString(schemas.SimpleInputParamsInput_UsesXmlName, *v.UsesXmlName)
+	}
+}
+func (v *SimpleInputParamsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SimpleInputParamsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SimpleInputParamsInput_Bam:
+			v.Bam = new(int32)
+			return d.ReadInt32(schemas.SimpleInputParamsInput_Bam, v.Bam)
+		case schemas.SimpleInputParamsInput_Bar:
+			v.Bar = new(string)
+			return d.ReadString(schemas.SimpleInputParamsInput_Bar, v.Bar)
+		case schemas.SimpleInputParamsInput_Baz:
+			v.Baz = new(bool)
+			return d.ReadBool(schemas.SimpleInputParamsInput_Baz, v.Baz)
+		case schemas.SimpleInputParamsInput_Boo:
+			v.Boo = new(float64)
+			return d.ReadFloat64(schemas.SimpleInputParamsInput_Boo, v.Boo)
+		case schemas.SimpleInputParamsInput_DistinctQueryAndXmlName:
+			v.DistinctQueryAndXmlName = new(string)
+			return d.ReadString(schemas.SimpleInputParamsInput_DistinctQueryAndXmlName, v.DistinctQueryAndXmlName)
+		case schemas.SimpleInputParamsInput_DistinctQueryName:
+			v.DistinctQueryName = new(string)
+			return d.ReadString(schemas.SimpleInputParamsInput_DistinctQueryName, v.DistinctQueryName)
+		case schemas.SimpleInputParamsInput_DistinctXmlName:
+			v.DistinctXmlName = new(string)
+			return d.ReadString(schemas.SimpleInputParamsInput_DistinctXmlName, v.DistinctXmlName)
+		case schemas.SimpleInputParamsInput_FloatValue:
+			v.FloatValue = new(float32)
+			return d.ReadFloat32(schemas.SimpleInputParamsInput_FloatValue, v.FloatValue)
+		case schemas.SimpleInputParamsInput_Foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.SimpleInputParamsInput_Foo, v.Foo)
+		case schemas.SimpleInputParamsInput_FooEnum:
+			var ev string
+			if err := d.ReadString(schemas.SimpleInputParamsInput_FooEnum, &ev); err != nil {
+				return err
+			}
+			v.FooEnum = types.FooEnum(ev)
+			return nil
+		case schemas.SimpleInputParamsInput_HasQueryAndXmlName:
+			v.HasQueryAndXmlName = new(string)
+			return d.ReadString(schemas.SimpleInputParamsInput_HasQueryAndXmlName, v.HasQueryAndXmlName)
+		case schemas.SimpleInputParamsInput_HasQueryName:
+			v.HasQueryName = new(string)
+			return d.ReadString(schemas.SimpleInputParamsInput_HasQueryName, v.HasQueryName)
+		case schemas.SimpleInputParamsInput_Qux:
+			return d.ReadBlob(schemas.SimpleInputParamsInput_Qux, &v.Qux)
+		case schemas.SimpleInputParamsInput_UsesXmlName:
+			v.UsesXmlName = new(string)
+			return d.ReadString(schemas.SimpleInputParamsInput_UsesXmlName, v.UsesXmlName)
+		}
+		return nil
+	})
+}
+
 type SimpleInputParamsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,16 +171,29 @@ type SimpleInputParamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SimpleInputParamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimpleInputParamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SimpleInputParamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSimpleInputParamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsEc2query_serializeOpSimpleInputParams{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SimpleInputParams, schemas.SimpleInputParamsInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsEc2query_deserializeOpSimpleInputParams{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SimpleInputParams, schemas.SimpleInputParamsInput, nil), output: &SimpleInputParamsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SimpleInputParams"); err != nil {

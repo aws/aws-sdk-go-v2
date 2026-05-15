@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type DisassociateFromConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateFromConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateFromConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateFromConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChatConfiguration != nil {
+		s.WriteString(schemas.DisassociateFromConfigurationRequest_ChatConfiguration, *v.ChatConfiguration)
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.DisassociateFromConfigurationRequest_Resource, *v.Resource)
+	}
+}
+
 type DisassociateFromConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,16 +66,21 @@ type DisassociateFromConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateFromConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateFromConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateFromConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateFromConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateFromConfiguration, schemas.DisassociateFromConfigurationRequest, schemas.DisassociateFromConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateFromConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateFromConfiguration, schemas.DisassociateFromConfigurationRequest, schemas.DisassociateFromConfigurationResult), output: &DisassociateFromConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateFromConfiguration"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,19 @@ type AssociateSourceViewsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSourceViewsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSourceViewsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSourceViewsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AssociateSourceViewsRequest_arn, *v.Arn)
+	}
+	serializeBillingViewSourceViewsList(s, schemas.AssociateSourceViewsRequest_sourceViews, v.SourceViews)
+}
+
 type AssociateSourceViewsOutput struct {
 
 	//  The ARN of the billing view that the source views were associated with.
@@ -58,16 +73,24 @@ type AssociateSourceViewsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSourceViewsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateSourceViewsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateSourceViewsResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssociateSourceViewsResponse_arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateSourceViewsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAssociateSourceViews{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSourceViews, schemas.AssociateSourceViewsRequest, schemas.AssociateSourceViewsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAssociateSourceViews{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSourceViews, schemas.AssociateSourceViewsRequest, schemas.AssociateSourceViewsResponse), output: &AssociateSourceViewsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateSourceViews"); err != nil {

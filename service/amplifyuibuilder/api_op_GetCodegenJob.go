@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,24 @@ type GetCodegenJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCodegenJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCodegenJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCodegenJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.GetCodegenJobRequest_appId, *v.AppId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.GetCodegenJobRequest_environmentName, *v.EnvironmentName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetCodegenJobRequest_id, *v.Id)
+	}
+}
+
 type GetCodegenJobOutput struct {
 
 	// The configuration settings for the code generation job.
@@ -59,16 +79,24 @@ type GetCodegenJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCodegenJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCodegenJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCodegenJobResponse_job:
+			v.Job = &types.CodegenJob{}
+			return v.Job.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCodegenJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCodegenJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCodegenJob, schemas.GetCodegenJobRequest, schemas.GetCodegenJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCodegenJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCodegenJob, schemas.GetCodegenJobRequest, schemas.GetCodegenJobResponse), output: &GetCodegenJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCodegenJob"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,18 @@ type ListCategoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCategoriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCategoriesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCategoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListCategoriesInput_instanceId, *v.InstanceId)
+	}
+}
+
 type ListCategoriesOutput struct {
 
 	// The categories of a Amazon Q Business application environment instance.
@@ -51,16 +65,23 @@ type ListCategoriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCategoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCategoriesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCategoriesOutput_categories:
+			return deserializeCategoriesList(d, schemas.ListCategoriesOutput_categories, &v.Categories)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCategoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCategories{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCategories, schemas.ListCategoriesInput, schemas.ListCategoriesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCategories{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCategories, schemas.ListCategoriesInput, schemas.ListCategoriesOutput), output: &ListCategoriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCategories"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -43,6 +45,21 @@ type GetEnvironmentCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnvironmentCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnvironmentCredentialsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnvironmentCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetEnvironmentCredentialsInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.EnvironmentIdentifier != nil {
+		s.WriteString(schemas.GetEnvironmentCredentialsInput_environmentIdentifier, *v.EnvironmentIdentifier)
+	}
+}
+
 type GetEnvironmentCredentialsOutput struct {
 
 	// The access key ID of the environment.
@@ -63,16 +80,33 @@ type GetEnvironmentCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnvironmentCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEnvironmentCredentialsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEnvironmentCredentialsOutput_accessKeyId:
+			v.AccessKeyId = new(string)
+			return d.ReadString(schemas.GetEnvironmentCredentialsOutput_accessKeyId, v.AccessKeyId)
+		case schemas.GetEnvironmentCredentialsOutput_expiration:
+			v.Expiration = new(time.Time)
+			return d.ReadTime(schemas.GetEnvironmentCredentialsOutput_expiration, v.Expiration)
+		case schemas.GetEnvironmentCredentialsOutput_secretAccessKey:
+			v.SecretAccessKey = new(string)
+			return d.ReadString(schemas.GetEnvironmentCredentialsOutput_secretAccessKey, v.SecretAccessKey)
+		case schemas.GetEnvironmentCredentialsOutput_sessionToken:
+			v.SessionToken = new(string)
+			return d.ReadString(schemas.GetEnvironmentCredentialsOutput_sessionToken, v.SessionToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEnvironmentCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEnvironmentCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironmentCredentials, schemas.GetEnvironmentCredentialsInput, schemas.GetEnvironmentCredentialsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEnvironmentCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironmentCredentials, schemas.GetEnvironmentCredentialsInput, schemas.GetEnvironmentCredentialsOutput), output: &GetEnvironmentCredentialsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEnvironmentCredentials"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,25 @@ type ListBillScenarioUsageModificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBillScenarioUsageModificationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBillScenarioUsageModificationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBillScenarioUsageModificationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillScenarioId != nil {
+		s.WriteString(schemas.ListBillScenarioUsageModificationsRequest_billScenarioId, *v.BillScenarioId)
+	}
+	serializeListUsageFilters(s, schemas.ListBillScenarioUsageModificationsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBillScenarioUsageModificationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBillScenarioUsageModificationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListBillScenarioUsageModificationsOutput struct {
 
 	//  The list of usage modifications associated with the bill scenario.
@@ -60,16 +81,26 @@ type ListBillScenarioUsageModificationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBillScenarioUsageModificationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBillScenarioUsageModificationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBillScenarioUsageModificationsResponse_items:
+			return deserializeBillScenarioUsageModificationItems(d, schemas.ListBillScenarioUsageModificationsResponse_items, &v.Items)
+		case schemas.ListBillScenarioUsageModificationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBillScenarioUsageModificationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBillScenarioUsageModificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListBillScenarioUsageModifications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBillScenarioUsageModifications, schemas.ListBillScenarioUsageModificationsRequest, schemas.ListBillScenarioUsageModificationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListBillScenarioUsageModifications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBillScenarioUsageModifications, schemas.ListBillScenarioUsageModificationsRequest, schemas.ListBillScenarioUsageModificationsResponse), output: &ListBillScenarioUsageModificationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBillScenarioUsageModifications"); err != nil {

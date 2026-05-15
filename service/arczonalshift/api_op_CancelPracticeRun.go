@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,6 +40,18 @@ type CancelPracticeRunInput struct {
 	ZonalShiftId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CancelPracticeRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelPracticeRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelPracticeRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ZonalShiftId != nil {
+		s.WriteString(schemas.CancelPracticeRunRequest_zonalShiftId, *v.ZonalShiftId)
+	}
 }
 
 type CancelPracticeRunOutput struct {
@@ -96,16 +110,46 @@ type CancelPracticeRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelPracticeRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelPracticeRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelPracticeRunResponse_awayFrom:
+			v.AwayFrom = new(string)
+			return d.ReadString(schemas.CancelPracticeRunResponse_awayFrom, v.AwayFrom)
+		case schemas.CancelPracticeRunResponse_comment:
+			v.Comment = new(string)
+			return d.ReadString(schemas.CancelPracticeRunResponse_comment, v.Comment)
+		case schemas.CancelPracticeRunResponse_expiryTime:
+			v.ExpiryTime = new(time.Time)
+			return d.ReadTime(schemas.CancelPracticeRunResponse_expiryTime, v.ExpiryTime)
+		case schemas.CancelPracticeRunResponse_resourceIdentifier:
+			v.ResourceIdentifier = new(string)
+			return d.ReadString(schemas.CancelPracticeRunResponse_resourceIdentifier, v.ResourceIdentifier)
+		case schemas.CancelPracticeRunResponse_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.CancelPracticeRunResponse_startTime, v.StartTime)
+		case schemas.CancelPracticeRunResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CancelPracticeRunResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ZonalShiftStatus(ev)
+			return nil
+		case schemas.CancelPracticeRunResponse_zonalShiftId:
+			v.ZonalShiftId = new(string)
+			return d.ReadString(schemas.CancelPracticeRunResponse_zonalShiftId, v.ZonalShiftId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelPracticeRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelPracticeRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelPracticeRun, schemas.CancelPracticeRunRequest, schemas.CancelPracticeRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelPracticeRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelPracticeRun, schemas.CancelPracticeRunRequest, schemas.CancelPracticeRunResponse), output: &CancelPracticeRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelPracticeRun"); err != nil {

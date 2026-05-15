@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -48,6 +50,40 @@ type DeleteRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRouteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRouteRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationIdentifier != nil {
+		s.WriteString(schemas.DeleteRouteRequest_ApplicationIdentifier, *v.ApplicationIdentifier)
+	}
+	if v.EnvironmentIdentifier != nil {
+		s.WriteString(schemas.DeleteRouteRequest_EnvironmentIdentifier, *v.EnvironmentIdentifier)
+	}
+	if v.RouteIdentifier != nil {
+		s.WriteString(schemas.DeleteRouteRequest_RouteIdentifier, *v.RouteIdentifier)
+	}
+}
+func (v *DeleteRouteInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRouteRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRouteRequest_ApplicationIdentifier:
+			v.ApplicationIdentifier = new(string)
+			return d.ReadString(schemas.DeleteRouteRequest_ApplicationIdentifier, v.ApplicationIdentifier)
+		case schemas.DeleteRouteRequest_EnvironmentIdentifier:
+			v.EnvironmentIdentifier = new(string)
+			return d.ReadString(schemas.DeleteRouteRequest_EnvironmentIdentifier, v.EnvironmentIdentifier)
+		case schemas.DeleteRouteRequest_RouteIdentifier:
+			v.RouteIdentifier = new(string)
+			return d.ReadString(schemas.DeleteRouteRequest_RouteIdentifier, v.RouteIdentifier)
+		}
+		return nil
+	})
+}
+
 type DeleteRouteOutput struct {
 
 	// The ID of the application that the route belongs to.
@@ -74,16 +110,69 @@ type DeleteRouteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRouteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRouteResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DeleteRouteResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteRouteResponse_Arn, *v.Arn)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.DeleteRouteResponse_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.RouteId != nil {
+		s.WriteString(schemas.DeleteRouteResponse_RouteId, *v.RouteId)
+	}
+	if v.ServiceId != nil {
+		s.WriteString(schemas.DeleteRouteResponse_ServiceId, *v.ServiceId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DeleteRouteResponse_State, string(v.State))
+	}
+}
+func (v *DeleteRouteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRouteResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRouteResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.DeleteRouteResponse_ApplicationId, v.ApplicationId)
+		case schemas.DeleteRouteResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteRouteResponse_Arn, v.Arn)
+		case schemas.DeleteRouteResponse_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.DeleteRouteResponse_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.DeleteRouteResponse_RouteId:
+			v.RouteId = new(string)
+			return d.ReadString(schemas.DeleteRouteResponse_RouteId, v.RouteId)
+		case schemas.DeleteRouteResponse_ServiceId:
+			v.ServiceId = new(string)
+			return d.ReadString(schemas.DeleteRouteResponse_ServiceId, v.ServiceId)
+		case schemas.DeleteRouteResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DeleteRouteResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.RouteState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRoute, schemas.DeleteRouteRequest, schemas.DeleteRouteResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRoute, schemas.DeleteRouteRequest, schemas.DeleteRouteResponse), output: &DeleteRouteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteRoute"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -50,6 +52,21 @@ type GetTransformerJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTransformerJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTransformerJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTransformerJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransformerId != nil {
+		s.WriteString(schemas.GetTransformerJobRequest_transformerId, *v.TransformerId)
+	}
+	if v.TransformerJobId != nil {
+		s.WriteString(schemas.GetTransformerJobRequest_transformerJobId, *v.TransformerJobId)
+	}
+}
+
 type GetTransformerJobOutput struct {
 
 	// Returns the current state of the transformer job, either running , succeeded ,
@@ -73,16 +90,33 @@ type GetTransformerJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTransformerJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTransformerJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTransformerJobResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GetTransformerJobResponse_message, v.Message)
+		case schemas.GetTransformerJobResponse_outputFiles:
+			return deserializeS3LocationList(d, schemas.GetTransformerJobResponse_outputFiles, &v.OutputFiles)
+		case schemas.GetTransformerJobResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetTransformerJobResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TransformerJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTransformerJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetTransformerJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTransformerJob, schemas.GetTransformerJobRequest, schemas.GetTransformerJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetTransformerJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTransformerJob, schemas.GetTransformerJobRequest, schemas.GetTransformerJobResponse), output: &GetTransformerJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTransformerJob"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -48,6 +50,27 @@ type UpdatePartnershipInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdatePartnershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePartnershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePartnershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePartnershipCapabilities(s, schemas.UpdatePartnershipRequest_capabilities, v.Capabilities)
+	if v.CapabilityOptions != nil {
+		s.WriteStruct(schemas.UpdatePartnershipRequest_capabilityOptions)
+		v.CapabilityOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdatePartnershipRequest_name, *v.Name)
+	}
+	if v.PartnershipId != nil {
+		s.WriteString(schemas.UpdatePartnershipRequest_partnershipId, *v.PartnershipId)
+	}
 }
 
 type UpdatePartnershipOutput struct {
@@ -103,16 +126,53 @@ type UpdatePartnershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePartnershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePartnershipResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePartnershipResponse_capabilities:
+			return deserializePartnershipCapabilities(d, schemas.UpdatePartnershipResponse_capabilities, &v.Capabilities)
+		case schemas.UpdatePartnershipResponse_capabilityOptions:
+			v.CapabilityOptions = &types.CapabilityOptions{}
+			return v.CapabilityOptions.Deserialize(d)
+		case schemas.UpdatePartnershipResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdatePartnershipResponse_createdAt, v.CreatedAt)
+		case schemas.UpdatePartnershipResponse_email:
+			v.Email = new(string)
+			return d.ReadString(schemas.UpdatePartnershipResponse_email, v.Email)
+		case schemas.UpdatePartnershipResponse_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdatePartnershipResponse_modifiedAt, v.ModifiedAt)
+		case schemas.UpdatePartnershipResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdatePartnershipResponse_name, v.Name)
+		case schemas.UpdatePartnershipResponse_partnershipArn:
+			v.PartnershipArn = new(string)
+			return d.ReadString(schemas.UpdatePartnershipResponse_partnershipArn, v.PartnershipArn)
+		case schemas.UpdatePartnershipResponse_partnershipId:
+			v.PartnershipId = new(string)
+			return d.ReadString(schemas.UpdatePartnershipResponse_partnershipId, v.PartnershipId)
+		case schemas.UpdatePartnershipResponse_phone:
+			v.Phone = new(string)
+			return d.ReadString(schemas.UpdatePartnershipResponse_phone, v.Phone)
+		case schemas.UpdatePartnershipResponse_profileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.UpdatePartnershipResponse_profileId, v.ProfileId)
+		case schemas.UpdatePartnershipResponse_tradingPartnerId:
+			v.TradingPartnerId = new(string)
+			return d.ReadString(schemas.UpdatePartnershipResponse_tradingPartnerId, v.TradingPartnerId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePartnershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdatePartnership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePartnership, schemas.UpdatePartnershipRequest, schemas.UpdatePartnershipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdatePartnership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePartnership, schemas.UpdatePartnershipRequest, schemas.UpdatePartnershipResponse), output: &UpdatePartnershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePartnership"); err != nil {

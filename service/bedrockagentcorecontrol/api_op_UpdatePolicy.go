@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -67,6 +69,30 @@ type UpdatePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePolicyDefinition(s, schemas.UpdatePolicyRequest_definition, v.Definition)
+	if v.Description != nil {
+		s.WriteStruct(schemas.UpdatePolicyRequest_description)
+		v.Description.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PolicyEngineId != nil {
+		s.WriteString(schemas.UpdatePolicyRequest_policyEngineId, *v.PolicyEngineId)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.UpdatePolicyRequest_policyId, *v.PolicyId)
+	}
+	if v.ValidationMode != "" {
+		s.WriteString(schemas.UpdatePolicyRequest_validationMode, string(v.ValidationMode))
+	}
+}
+
 type UpdatePolicyOutput struct {
 
 	// The original creation timestamp of the policy.
@@ -123,16 +149,53 @@ type UpdatePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePolicyResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdatePolicyResponse_createdAt, v.CreatedAt)
+		case schemas.UpdatePolicyResponse_definition:
+			return deserializePolicyDefinition(d, schemas.UpdatePolicyResponse_definition, &v.Definition)
+		case schemas.UpdatePolicyResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdatePolicyResponse_description, v.Description)
+		case schemas.UpdatePolicyResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdatePolicyResponse_name, v.Name)
+		case schemas.UpdatePolicyResponse_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.UpdatePolicyResponse_policyArn, v.PolicyArn)
+		case schemas.UpdatePolicyResponse_policyEngineId:
+			v.PolicyEngineId = new(string)
+			return d.ReadString(schemas.UpdatePolicyResponse_policyEngineId, v.PolicyEngineId)
+		case schemas.UpdatePolicyResponse_policyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.UpdatePolicyResponse_policyId, v.PolicyId)
+		case schemas.UpdatePolicyResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePolicyResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PolicyStatus(ev)
+			return nil
+		case schemas.UpdatePolicyResponse_statusReasons:
+			return deserializePolicyStatusReasons(d, schemas.UpdatePolicyResponse_statusReasons, &v.StatusReasons)
+		case schemas.UpdatePolicyResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdatePolicyResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePolicy, schemas.UpdatePolicyRequest, schemas.UpdatePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePolicy, schemas.UpdatePolicyRequest, schemas.UpdatePolicyResponse), output: &UpdatePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePolicy"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,24 @@ type DescribeInterconnectLoaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInterconnectLoaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInterconnectLoaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInterconnectLoaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InterconnectId != nil {
+		s.WriteString(schemas.DescribeInterconnectLoaRequest_interconnectId, *v.InterconnectId)
+	}
+	if v.LoaContentType != "" {
+		s.WriteString(schemas.DescribeInterconnectLoaRequest_loaContentType, string(v.LoaContentType))
+	}
+	if v.ProviderName != nil {
+		s.WriteString(schemas.DescribeInterconnectLoaRequest_providerName, *v.ProviderName)
+	}
+}
+
 type DescribeInterconnectLoaOutput struct {
 
 	// The Letter of Authorization - Connecting Facility Assignment (LOA-CFA).
@@ -68,16 +88,24 @@ type DescribeInterconnectLoaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInterconnectLoaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInterconnectLoaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInterconnectLoaResponse_loa:
+			v.Loa = &types.Loa{}
+			return v.Loa.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInterconnectLoaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeInterconnectLoa{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInterconnectLoa, schemas.DescribeInterconnectLoaRequest, schemas.DescribeInterconnectLoaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeInterconnectLoa{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInterconnectLoa, schemas.DescribeInterconnectLoaRequest, schemas.DescribeInterconnectLoaResponse), output: &DescribeInterconnectLoaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeInterconnectLoa"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,32 @@ type DescribeSubscribersForNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSubscribersForNotificationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSubscribersForNotificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSubscribersForNotificationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeSubscribersForNotificationRequest_AccountId, *v.AccountId)
+	}
+	if v.BudgetName != nil {
+		s.WriteString(schemas.DescribeSubscribersForNotificationRequest_BudgetName, *v.BudgetName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeSubscribersForNotificationRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSubscribersForNotificationRequest_NextToken, *v.NextToken)
+	}
+	if v.Notification != nil {
+		s.WriteStruct(schemas.DescribeSubscribersForNotificationRequest_Notification)
+		v.Notification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Response of DescribeSubscribersForNotification
 type DescribeSubscribersForNotificationOutput struct {
 
@@ -73,16 +101,26 @@ type DescribeSubscribersForNotificationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSubscribersForNotificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSubscribersForNotificationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSubscribersForNotificationResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSubscribersForNotificationResponse_NextToken, v.NextToken)
+		case schemas.DescribeSubscribersForNotificationResponse_Subscribers:
+			return deserializeSubscribers(d, schemas.DescribeSubscribersForNotificationResponse_Subscribers, &v.Subscribers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSubscribersForNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSubscribersForNotification{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSubscribersForNotification, schemas.DescribeSubscribersForNotificationRequest, schemas.DescribeSubscribersForNotificationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSubscribersForNotification{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSubscribersForNotification, schemas.DescribeSubscribersForNotificationRequest, schemas.DescribeSubscribersForNotificationResponse), output: &DescribeSubscribersForNotificationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeSubscribersForNotification"); err != nil {

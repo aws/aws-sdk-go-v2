@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -54,6 +56,55 @@ type BandwidthRateLimitInterval struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BandwidthRateLimitInterval) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BandwidthRateLimitInterval)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BandwidthRateLimitInterval) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AverageUploadRateLimitInBitsPerSec != nil {
+		s.WriteInt64(schemas.BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec, *v.AverageUploadRateLimitInBitsPerSec)
+	}
+	serializeDaysOfWeek(s, schemas.BandwidthRateLimitInterval_DaysOfWeek, v.DaysOfWeek)
+	if v.EndHourOfDay != nil {
+		s.WriteInt32(schemas.BandwidthRateLimitInterval_EndHourOfDay, *v.EndHourOfDay)
+	}
+	if v.EndMinuteOfHour != nil {
+		s.WriteInt32(schemas.BandwidthRateLimitInterval_EndMinuteOfHour, *v.EndMinuteOfHour)
+	}
+	if v.StartHourOfDay != nil {
+		s.WriteInt32(schemas.BandwidthRateLimitInterval_StartHourOfDay, *v.StartHourOfDay)
+	}
+	if v.StartMinuteOfHour != nil {
+		s.WriteInt32(schemas.BandwidthRateLimitInterval_StartMinuteOfHour, *v.StartMinuteOfHour)
+	}
+}
+func (v *BandwidthRateLimitInterval) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BandwidthRateLimitInterval, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec:
+			v.AverageUploadRateLimitInBitsPerSec = new(int64)
+			return d.ReadInt64(schemas.BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec, v.AverageUploadRateLimitInBitsPerSec)
+		case schemas.BandwidthRateLimitInterval_DaysOfWeek:
+			return deserializeDaysOfWeek(d, schemas.BandwidthRateLimitInterval_DaysOfWeek, &v.DaysOfWeek)
+		case schemas.BandwidthRateLimitInterval_EndHourOfDay:
+			v.EndHourOfDay = new(int32)
+			return d.ReadInt32(schemas.BandwidthRateLimitInterval_EndHourOfDay, v.EndHourOfDay)
+		case schemas.BandwidthRateLimitInterval_EndMinuteOfHour:
+			v.EndMinuteOfHour = new(int32)
+			return d.ReadInt32(schemas.BandwidthRateLimitInterval_EndMinuteOfHour, v.EndMinuteOfHour)
+		case schemas.BandwidthRateLimitInterval_StartHourOfDay:
+			v.StartHourOfDay = new(int32)
+			return d.ReadInt32(schemas.BandwidthRateLimitInterval_StartHourOfDay, v.StartHourOfDay)
+		case schemas.BandwidthRateLimitInterval_StartMinuteOfHour:
+			v.StartMinuteOfHour = new(int32)
+			return d.ReadInt32(schemas.BandwidthRateLimitInterval_StartMinuteOfHour, v.StartMinuteOfHour)
+		}
+		return nil
+	})
+}
+
 // A gateway is an Backup Gateway appliance that runs on the customer's network to
 // provide seamless connectivity to backup storage in the Amazon Web Services
 // Cloud.
@@ -77,6 +128,56 @@ type Gateway struct {
 	LastSeenTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *Gateway) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Gateway)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Gateway) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayArn != nil {
+		s.WriteString(schemas.Gateway_GatewayArn, *v.GatewayArn)
+	}
+	if v.GatewayDisplayName != nil {
+		s.WriteString(schemas.Gateway_GatewayDisplayName, *v.GatewayDisplayName)
+	}
+	if v.GatewayType != "" {
+		s.WriteString(schemas.Gateway_GatewayType, string(v.GatewayType))
+	}
+	if v.HypervisorId != nil {
+		s.WriteString(schemas.Gateway_HypervisorId, *v.HypervisorId)
+	}
+	if v.LastSeenTime != nil {
+		s.WriteTime(schemas.Gateway_LastSeenTime, *v.LastSeenTime)
+	}
+}
+func (v *Gateway) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Gateway, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Gateway_GatewayArn:
+			v.GatewayArn = new(string)
+			return d.ReadString(schemas.Gateway_GatewayArn, v.GatewayArn)
+		case schemas.Gateway_GatewayDisplayName:
+			v.GatewayDisplayName = new(string)
+			return d.ReadString(schemas.Gateway_GatewayDisplayName, v.GatewayDisplayName)
+		case schemas.Gateway_GatewayType:
+			var ev string
+			if err := d.ReadString(schemas.Gateway_GatewayType, &ev); err != nil {
+				return err
+			}
+			v.GatewayType = GatewayType(ev)
+			return nil
+		case schemas.Gateway_HypervisorId:
+			v.HypervisorId = new(string)
+			return d.ReadString(schemas.Gateway_HypervisorId, v.HypervisorId)
+		case schemas.Gateway_LastSeenTime:
+			v.LastSeenTime = new(time.Time)
+			return d.ReadTime(schemas.Gateway_LastSeenTime, v.LastSeenTime)
+		}
+		return nil
+	})
 }
 
 // The details of gateway.
@@ -121,6 +222,88 @@ type GatewayDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GatewayDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GatewayDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GatewayDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeprecationDate != nil {
+		s.WriteTime(schemas.GatewayDetails_DeprecationDate, *v.DeprecationDate)
+	}
+	if v.GatewayArn != nil {
+		s.WriteString(schemas.GatewayDetails_GatewayArn, *v.GatewayArn)
+	}
+	if v.GatewayDisplayName != nil {
+		s.WriteString(schemas.GatewayDetails_GatewayDisplayName, *v.GatewayDisplayName)
+	}
+	if v.GatewayType != "" {
+		s.WriteString(schemas.GatewayDetails_GatewayType, string(v.GatewayType))
+	}
+	if v.HypervisorId != nil {
+		s.WriteString(schemas.GatewayDetails_HypervisorId, *v.HypervisorId)
+	}
+	if v.LastSeenTime != nil {
+		s.WriteTime(schemas.GatewayDetails_LastSeenTime, *v.LastSeenTime)
+	}
+	if v.MaintenanceStartTime != nil {
+		s.WriteStruct(schemas.GatewayDetails_MaintenanceStartTime)
+		v.MaintenanceStartTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextUpdateAvailabilityTime != nil {
+		s.WriteTime(schemas.GatewayDetails_NextUpdateAvailabilityTime, *v.NextUpdateAvailabilityTime)
+	}
+	if v.SoftwareVersion != nil {
+		s.WriteString(schemas.GatewayDetails_SoftwareVersion, *v.SoftwareVersion)
+	}
+	if v.VpcEndpoint != nil {
+		s.WriteString(schemas.GatewayDetails_VpcEndpoint, *v.VpcEndpoint)
+	}
+}
+func (v *GatewayDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GatewayDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GatewayDetails_DeprecationDate:
+			v.DeprecationDate = new(time.Time)
+			return d.ReadTime(schemas.GatewayDetails_DeprecationDate, v.DeprecationDate)
+		case schemas.GatewayDetails_GatewayArn:
+			v.GatewayArn = new(string)
+			return d.ReadString(schemas.GatewayDetails_GatewayArn, v.GatewayArn)
+		case schemas.GatewayDetails_GatewayDisplayName:
+			v.GatewayDisplayName = new(string)
+			return d.ReadString(schemas.GatewayDetails_GatewayDisplayName, v.GatewayDisplayName)
+		case schemas.GatewayDetails_GatewayType:
+			var ev string
+			if err := d.ReadString(schemas.GatewayDetails_GatewayType, &ev); err != nil {
+				return err
+			}
+			v.GatewayType = GatewayType(ev)
+			return nil
+		case schemas.GatewayDetails_HypervisorId:
+			v.HypervisorId = new(string)
+			return d.ReadString(schemas.GatewayDetails_HypervisorId, v.HypervisorId)
+		case schemas.GatewayDetails_LastSeenTime:
+			v.LastSeenTime = new(time.Time)
+			return d.ReadTime(schemas.GatewayDetails_LastSeenTime, v.LastSeenTime)
+		case schemas.GatewayDetails_MaintenanceStartTime:
+			v.MaintenanceStartTime = &MaintenanceStartTime{}
+			return v.MaintenanceStartTime.Deserialize(d)
+		case schemas.GatewayDetails_NextUpdateAvailabilityTime:
+			v.NextUpdateAvailabilityTime = new(time.Time)
+			return d.ReadTime(schemas.GatewayDetails_NextUpdateAvailabilityTime, v.NextUpdateAvailabilityTime)
+		case schemas.GatewayDetails_SoftwareVersion:
+			v.SoftwareVersion = new(string)
+			return d.ReadString(schemas.GatewayDetails_SoftwareVersion, v.SoftwareVersion)
+		case schemas.GatewayDetails_VpcEndpoint:
+			v.VpcEndpoint = new(string)
+			return d.ReadString(schemas.GatewayDetails_VpcEndpoint, v.VpcEndpoint)
+		}
+		return nil
+	})
+}
+
 // Represents the hypervisor's permissions to which the gateway will connect.
 //
 // A hypervisor is hardware, software, or firmware that creates and manages
@@ -145,6 +328,56 @@ type Hypervisor struct {
 	State HypervisorState
 
 	noSmithyDocumentSerde
+}
+
+func (v *Hypervisor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Hypervisor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Hypervisor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Host != nil {
+		s.WriteString(schemas.Hypervisor_Host, *v.Host)
+	}
+	if v.HypervisorArn != nil {
+		s.WriteString(schemas.Hypervisor_HypervisorArn, *v.HypervisorArn)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.Hypervisor_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Hypervisor_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Hypervisor_State, string(v.State))
+	}
+}
+func (v *Hypervisor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Hypervisor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Hypervisor_Host:
+			v.Host = new(string)
+			return d.ReadString(schemas.Hypervisor_Host, v.Host)
+		case schemas.Hypervisor_HypervisorArn:
+			v.HypervisorArn = new(string)
+			return d.ReadString(schemas.Hypervisor_HypervisorArn, v.HypervisorArn)
+		case schemas.Hypervisor_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.Hypervisor_KmsKeyArn, v.KmsKeyArn)
+		case schemas.Hypervisor_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Hypervisor_Name, v.Name)
+		case schemas.Hypervisor_State:
+			var ev string
+			if err := d.ReadString(schemas.Hypervisor_State, &ev); err != nil {
+				return err
+			}
+			v.State = HypervisorState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // These are the details of the specified hypervisor. A hypervisor is hardware,
@@ -186,6 +419,84 @@ type HypervisorDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HypervisorDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HypervisorDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HypervisorDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Host != nil {
+		s.WriteString(schemas.HypervisorDetails_Host, *v.Host)
+	}
+	if v.HypervisorArn != nil {
+		s.WriteString(schemas.HypervisorDetails_HypervisorArn, *v.HypervisorArn)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.HypervisorDetails_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.LastSuccessfulMetadataSyncTime != nil {
+		s.WriteTime(schemas.HypervisorDetails_LastSuccessfulMetadataSyncTime, *v.LastSuccessfulMetadataSyncTime)
+	}
+	if v.LatestMetadataSyncStatus != "" {
+		s.WriteString(schemas.HypervisorDetails_LatestMetadataSyncStatus, string(v.LatestMetadataSyncStatus))
+	}
+	if v.LatestMetadataSyncStatusMessage != nil {
+		s.WriteString(schemas.HypervisorDetails_LatestMetadataSyncStatusMessage, *v.LatestMetadataSyncStatusMessage)
+	}
+	if v.LogGroupArn != nil {
+		s.WriteString(schemas.HypervisorDetails_LogGroupArn, *v.LogGroupArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.HypervisorDetails_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.HypervisorDetails_State, string(v.State))
+	}
+}
+func (v *HypervisorDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HypervisorDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HypervisorDetails_Host:
+			v.Host = new(string)
+			return d.ReadString(schemas.HypervisorDetails_Host, v.Host)
+		case schemas.HypervisorDetails_HypervisorArn:
+			v.HypervisorArn = new(string)
+			return d.ReadString(schemas.HypervisorDetails_HypervisorArn, v.HypervisorArn)
+		case schemas.HypervisorDetails_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.HypervisorDetails_KmsKeyArn, v.KmsKeyArn)
+		case schemas.HypervisorDetails_LastSuccessfulMetadataSyncTime:
+			v.LastSuccessfulMetadataSyncTime = new(time.Time)
+			return d.ReadTime(schemas.HypervisorDetails_LastSuccessfulMetadataSyncTime, v.LastSuccessfulMetadataSyncTime)
+		case schemas.HypervisorDetails_LatestMetadataSyncStatus:
+			var ev string
+			if err := d.ReadString(schemas.HypervisorDetails_LatestMetadataSyncStatus, &ev); err != nil {
+				return err
+			}
+			v.LatestMetadataSyncStatus = SyncMetadataStatus(ev)
+			return nil
+		case schemas.HypervisorDetails_LatestMetadataSyncStatusMessage:
+			v.LatestMetadataSyncStatusMessage = new(string)
+			return d.ReadString(schemas.HypervisorDetails_LatestMetadataSyncStatusMessage, v.LatestMetadataSyncStatusMessage)
+		case schemas.HypervisorDetails_LogGroupArn:
+			v.LogGroupArn = new(string)
+			return d.ReadString(schemas.HypervisorDetails_LogGroupArn, v.LogGroupArn)
+		case schemas.HypervisorDetails_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.HypervisorDetails_Name, v.Name)
+		case schemas.HypervisorDetails_State:
+			var ev string
+			if err := d.ReadString(schemas.HypervisorDetails_State, &ev); err != nil {
+				return err
+			}
+			v.State = HypervisorState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This is your gateway's weekly maintenance start time including the day and time
 // of the week. Note that values are in terms of the gateway's time zone. Can be
 // weekly or monthly.
@@ -217,6 +528,46 @@ type MaintenanceStartTime struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MaintenanceStartTime) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MaintenanceStartTime)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MaintenanceStartTime) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DayOfMonth != nil {
+		s.WriteInt32(schemas.MaintenanceStartTime_DayOfMonth, *v.DayOfMonth)
+	}
+	if v.DayOfWeek != nil {
+		s.WriteInt32(schemas.MaintenanceStartTime_DayOfWeek, *v.DayOfWeek)
+	}
+	if v.HourOfDay != nil {
+		s.WriteInt32(schemas.MaintenanceStartTime_HourOfDay, *v.HourOfDay)
+	}
+	if v.MinuteOfHour != nil {
+		s.WriteInt32(schemas.MaintenanceStartTime_MinuteOfHour, *v.MinuteOfHour)
+	}
+}
+func (v *MaintenanceStartTime) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MaintenanceStartTime, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MaintenanceStartTime_DayOfMonth:
+			v.DayOfMonth = new(int32)
+			return d.ReadInt32(schemas.MaintenanceStartTime_DayOfMonth, v.DayOfMonth)
+		case schemas.MaintenanceStartTime_DayOfWeek:
+			v.DayOfWeek = new(int32)
+			return d.ReadInt32(schemas.MaintenanceStartTime_DayOfWeek, v.DayOfWeek)
+		case schemas.MaintenanceStartTime_HourOfDay:
+			v.HourOfDay = new(int32)
+			return d.ReadInt32(schemas.MaintenanceStartTime_HourOfDay, v.HourOfDay)
+		case schemas.MaintenanceStartTime_MinuteOfHour:
+			v.MinuteOfHour = new(int32)
+			return d.ReadInt32(schemas.MaintenanceStartTime_MinuteOfHour, v.MinuteOfHour)
+		}
+		return nil
+	})
+}
+
 // A key-value pair you can use to manage, filter, and search for your resources.
 // Allowed characters include UTF-8 letters, numbers, and the following characters:
 // + - = . _ : /. Spaces are not allowed in tag values.
@@ -233,6 +584,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // A virtual machine that is on a hypervisor.
@@ -259,6 +638,58 @@ type VirtualMachine struct {
 	ResourceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualMachine) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualMachine)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualMachine) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HostName != nil {
+		s.WriteString(schemas.VirtualMachine_HostName, *v.HostName)
+	}
+	if v.HypervisorId != nil {
+		s.WriteString(schemas.VirtualMachine_HypervisorId, *v.HypervisorId)
+	}
+	if v.LastBackupDate != nil {
+		s.WriteTime(schemas.VirtualMachine_LastBackupDate, *v.LastBackupDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.VirtualMachine_Name, *v.Name)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.VirtualMachine_Path, *v.Path)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.VirtualMachine_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *VirtualMachine) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualMachine, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualMachine_HostName:
+			v.HostName = new(string)
+			return d.ReadString(schemas.VirtualMachine_HostName, v.HostName)
+		case schemas.VirtualMachine_HypervisorId:
+			v.HypervisorId = new(string)
+			return d.ReadString(schemas.VirtualMachine_HypervisorId, v.HypervisorId)
+		case schemas.VirtualMachine_LastBackupDate:
+			v.LastBackupDate = new(time.Time)
+			return d.ReadTime(schemas.VirtualMachine_LastBackupDate, v.LastBackupDate)
+		case schemas.VirtualMachine_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.VirtualMachine_Name, v.Name)
+		case schemas.VirtualMachine_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.VirtualMachine_Path, v.Path)
+		case schemas.VirtualMachine_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.VirtualMachine_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
 }
 
 // Your VirtualMachine objects, ordered by their Amazon Resource Names (ARNs).
@@ -291,6 +722,61 @@ type VirtualMachineDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualMachineDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualMachineDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualMachineDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HostName != nil {
+		s.WriteString(schemas.VirtualMachineDetails_HostName, *v.HostName)
+	}
+	if v.HypervisorId != nil {
+		s.WriteString(schemas.VirtualMachineDetails_HypervisorId, *v.HypervisorId)
+	}
+	if v.LastBackupDate != nil {
+		s.WriteTime(schemas.VirtualMachineDetails_LastBackupDate, *v.LastBackupDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.VirtualMachineDetails_Name, *v.Name)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.VirtualMachineDetails_Path, *v.Path)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.VirtualMachineDetails_ResourceArn, *v.ResourceArn)
+	}
+	serializeVmwareTags(s, schemas.VirtualMachineDetails_VmwareTags, v.VmwareTags)
+}
+func (v *VirtualMachineDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualMachineDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualMachineDetails_HostName:
+			v.HostName = new(string)
+			return d.ReadString(schemas.VirtualMachineDetails_HostName, v.HostName)
+		case schemas.VirtualMachineDetails_HypervisorId:
+			v.HypervisorId = new(string)
+			return d.ReadString(schemas.VirtualMachineDetails_HypervisorId, v.HypervisorId)
+		case schemas.VirtualMachineDetails_LastBackupDate:
+			v.LastBackupDate = new(time.Time)
+			return d.ReadTime(schemas.VirtualMachineDetails_LastBackupDate, v.LastBackupDate)
+		case schemas.VirtualMachineDetails_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.VirtualMachineDetails_Name, v.Name)
+		case schemas.VirtualMachineDetails_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.VirtualMachineDetails_Path, v.Path)
+		case schemas.VirtualMachineDetails_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.VirtualMachineDetails_ResourceArn, v.ResourceArn)
+		case schemas.VirtualMachineDetails_VmwareTags:
+			return deserializeVmwareTags(d, schemas.VirtualMachineDetails_VmwareTags, &v.VmwareTags)
+		}
+		return nil
+	})
+}
+
 // A VMware tag is a tag attached to a specific virtual machine. A [tag] is a key-value
 // pair you can use to manage, filter, and search for your resources.
 //
@@ -309,6 +795,40 @@ type VmwareTag struct {
 	VmwareTagName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VmwareTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VmwareTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VmwareTag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VmwareCategory != nil {
+		s.WriteString(schemas.VmwareTag_VmwareCategory, *v.VmwareCategory)
+	}
+	if v.VmwareTagDescription != nil {
+		s.WriteString(schemas.VmwareTag_VmwareTagDescription, *v.VmwareTagDescription)
+	}
+	if v.VmwareTagName != nil {
+		s.WriteString(schemas.VmwareTag_VmwareTagName, *v.VmwareTagName)
+	}
+}
+func (v *VmwareTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VmwareTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VmwareTag_VmwareCategory:
+			v.VmwareCategory = new(string)
+			return d.ReadString(schemas.VmwareTag_VmwareCategory, v.VmwareCategory)
+		case schemas.VmwareTag_VmwareTagDescription:
+			v.VmwareTagDescription = new(string)
+			return d.ReadString(schemas.VmwareTag_VmwareTagDescription, v.VmwareTagDescription)
+		case schemas.VmwareTag_VmwareTagName:
+			v.VmwareTagName = new(string)
+			return d.ReadString(schemas.VmwareTag_VmwareTagName, v.VmwareTagName)
+		}
+		return nil
+	})
 }
 
 // This displays the mapping of VMware tags to the corresponding Amazon Web
@@ -336,6 +856,46 @@ type VmwareToAwsTagMapping struct {
 	VmwareTagName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VmwareToAwsTagMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VmwareToAwsTagMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VmwareToAwsTagMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsTagKey != nil {
+		s.WriteString(schemas.VmwareToAwsTagMapping_AwsTagKey, *v.AwsTagKey)
+	}
+	if v.AwsTagValue != nil {
+		s.WriteString(schemas.VmwareToAwsTagMapping_AwsTagValue, *v.AwsTagValue)
+	}
+	if v.VmwareCategory != nil {
+		s.WriteString(schemas.VmwareToAwsTagMapping_VmwareCategory, *v.VmwareCategory)
+	}
+	if v.VmwareTagName != nil {
+		s.WriteString(schemas.VmwareToAwsTagMapping_VmwareTagName, *v.VmwareTagName)
+	}
+}
+func (v *VmwareToAwsTagMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VmwareToAwsTagMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VmwareToAwsTagMapping_AwsTagKey:
+			v.AwsTagKey = new(string)
+			return d.ReadString(schemas.VmwareToAwsTagMapping_AwsTagKey, v.AwsTagKey)
+		case schemas.VmwareToAwsTagMapping_AwsTagValue:
+			v.AwsTagValue = new(string)
+			return d.ReadString(schemas.VmwareToAwsTagMapping_AwsTagValue, v.AwsTagValue)
+		case schemas.VmwareToAwsTagMapping_VmwareCategory:
+			v.VmwareCategory = new(string)
+			return d.ReadString(schemas.VmwareToAwsTagMapping_VmwareCategory, v.VmwareCategory)
+		case schemas.VmwareToAwsTagMapping_VmwareTagName:
+			v.VmwareTagName = new(string)
+			return d.ReadString(schemas.VmwareToAwsTagMapping_VmwareTagName, v.VmwareTagName)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

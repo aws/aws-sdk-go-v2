@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,18 @@ type RollbackServiceSoftwareUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RollbackServiceSoftwareUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RollbackServiceSoftwareUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RollbackServiceSoftwareUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.RollbackServiceSoftwareUpdateRequest_DomainName, *v.DomainName)
+	}
+}
+
 // Contains details about the rolled-back service software update.
 type RollbackServiceSoftwareUpdateOutput struct {
 
@@ -54,16 +68,24 @@ type RollbackServiceSoftwareUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RollbackServiceSoftwareUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RollbackServiceSoftwareUpdateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RollbackServiceSoftwareUpdateResponse_RollbackServiceSoftwareOptions:
+			v.RollbackServiceSoftwareOptions = &types.RollbackServiceSoftwareOptions{}
+			return v.RollbackServiceSoftwareOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRollbackServiceSoftwareUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRollbackServiceSoftwareUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RollbackServiceSoftwareUpdate, schemas.RollbackServiceSoftwareUpdateRequest, schemas.RollbackServiceSoftwareUpdateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRollbackServiceSoftwareUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RollbackServiceSoftwareUpdate, schemas.RollbackServiceSoftwareUpdateRequest, schemas.RollbackServiceSoftwareUpdateResponse), output: &RollbackServiceSoftwareUpdateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RollbackServiceSoftwareUpdate"); err != nil {

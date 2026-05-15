@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,6 +34,16 @@ type XmlMapWithXmlNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlMapWithXmlNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlMapWithXmlNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlMapWithXmlNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeXmlMapWithXmlNamespaceInputOutputMap(s, schemas.XmlMapWithXmlNamespaceRequest_myMap, v.MyMap)
+}
+
 type XmlMapWithXmlNamespaceOutput struct {
 	MyMap map[string]string
 
@@ -41,16 +53,23 @@ type XmlMapWithXmlNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlMapWithXmlNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XmlMapWithXmlNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XmlMapWithXmlNamespaceResponse_myMap:
+			return deserializeXmlMapWithXmlNamespaceInputOutputMap(d, schemas.XmlMapWithXmlNamespaceResponse_myMap, &v.MyMap)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationXmlMapWithXmlNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlMapWithXmlNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlMapWithXmlNamespace, schemas.XmlMapWithXmlNamespaceRequest, schemas.XmlMapWithXmlNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpXmlMapWithXmlNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlMapWithXmlNamespace, schemas.XmlMapWithXmlNamespaceRequest, schemas.XmlMapWithXmlNamespaceResponse), output: &XmlMapWithXmlNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlMapWithXmlNamespace"); err != nil {

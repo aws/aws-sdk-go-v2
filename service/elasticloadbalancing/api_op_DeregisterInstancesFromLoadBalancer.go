@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,19 @@ type DeregisterInstancesFromLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterInstancesFromLoadBalancerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterEndPointsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterInstancesFromLoadBalancerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstances(s, schemas.DeregisterEndPointsInput_Instances, v.Instances)
+	if v.LoadBalancerName != nil {
+		s.WriteString(schemas.DeregisterEndPointsInput_LoadBalancerName, *v.LoadBalancerName)
+	}
+}
+
 // Contains the output of DeregisterInstancesFromLoadBalancer.
 type DeregisterInstancesFromLoadBalancerOutput struct {
 
@@ -62,16 +77,23 @@ type DeregisterInstancesFromLoadBalancerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterInstancesFromLoadBalancerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterEndPointsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterEndPointsOutput_Instances:
+			return deserializeInstances(d, schemas.DeregisterEndPointsOutput_Instances, &v.Instances)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterInstancesFromLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeregisterInstancesFromLoadBalancer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterInstancesFromLoadBalancer, schemas.DeregisterEndPointsInput, schemas.DeregisterEndPointsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeregisterInstancesFromLoadBalancer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterInstancesFromLoadBalancer, schemas.DeregisterEndPointsInput, schemas.DeregisterEndPointsOutput), output: &DeregisterInstancesFromLoadBalancerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeregisterInstancesFromLoadBalancer"); err != nil {

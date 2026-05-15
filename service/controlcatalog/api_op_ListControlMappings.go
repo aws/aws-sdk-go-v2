@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/controlcatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controlcatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,26 @@ type ListControlMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListControlMappingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListControlMappingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListControlMappingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListControlMappingsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListControlMappingsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListControlMappingsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListControlMappingsOutput struct {
 
 	// The list of control mappings that the ListControlMappings API returns.
@@ -60,16 +82,26 @@ type ListControlMappingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListControlMappingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListControlMappingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListControlMappingsResponse_ControlMappings:
+			return deserializeControlMappings(d, schemas.ListControlMappingsResponse_ControlMappings, &v.ControlMappings)
+		case schemas.ListControlMappingsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListControlMappingsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListControlMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListControlMappings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListControlMappings, schemas.ListControlMappingsRequest, schemas.ListControlMappingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListControlMappings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListControlMappings, schemas.ListControlMappingsRequest, schemas.ListControlMappingsResponse), output: &ListControlMappingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListControlMappings"); err != nil {

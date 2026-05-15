@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -29,6 +31,52 @@ type ActiveDirectoryIdentityProvider struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActiveDirectoryIdentityProvider) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActiveDirectoryIdentityProvider)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActiveDirectoryIdentityProvider) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveDirectorySettings != nil {
+		s.WriteStruct(schemas.ActiveDirectoryIdentityProvider_ActiveDirectorySettings)
+		v.ActiveDirectorySettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ActiveDirectoryType != "" {
+		s.WriteString(schemas.ActiveDirectoryIdentityProvider_ActiveDirectoryType, string(v.ActiveDirectoryType))
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.ActiveDirectoryIdentityProvider_DirectoryId, *v.DirectoryId)
+	}
+	if v.IsSharedActiveDirectory != nil {
+		s.WriteBool(schemas.ActiveDirectoryIdentityProvider_IsSharedActiveDirectory, *v.IsSharedActiveDirectory)
+	}
+}
+func (v *ActiveDirectoryIdentityProvider) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActiveDirectoryIdentityProvider, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActiveDirectoryIdentityProvider_ActiveDirectorySettings:
+			v.ActiveDirectorySettings = &ActiveDirectorySettings{}
+			return v.ActiveDirectorySettings.Deserialize(d)
+		case schemas.ActiveDirectoryIdentityProvider_ActiveDirectoryType:
+			var ev string
+			if err := d.ReadString(schemas.ActiveDirectoryIdentityProvider_ActiveDirectoryType, &ev); err != nil {
+				return err
+			}
+			v.ActiveDirectoryType = ActiveDirectoryType(ev)
+			return nil
+		case schemas.ActiveDirectoryIdentityProvider_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.ActiveDirectoryIdentityProvider_DirectoryId, v.DirectoryId)
+		case schemas.ActiveDirectoryIdentityProvider_IsSharedActiveDirectory:
+			v.IsSharedActiveDirectory = new(bool)
+			return d.ReadBool(schemas.ActiveDirectoryIdentityProvider_IsSharedActiveDirectory, v.IsSharedActiveDirectory)
+		}
+		return nil
+	})
+}
+
 // Contains network access and credential details that are needed for user
 // administration in the Active Directory.
 type ActiveDirectorySettings struct {
@@ -53,6 +101,45 @@ type ActiveDirectorySettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActiveDirectorySettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActiveDirectorySettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActiveDirectorySettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCredentialsProvider(s, schemas.ActiveDirectorySettings_DomainCredentialsProvider, v.DomainCredentialsProvider)
+	serializeIpV4List(s, schemas.ActiveDirectorySettings_DomainIpv4List, v.DomainIpv4List)
+	serializeIpV6List(s, schemas.ActiveDirectorySettings_DomainIpv6List, v.DomainIpv6List)
+	if v.DomainName != nil {
+		s.WriteString(schemas.ActiveDirectorySettings_DomainName, *v.DomainName)
+	}
+	if v.DomainNetworkSettings != nil {
+		s.WriteStruct(schemas.ActiveDirectorySettings_DomainNetworkSettings)
+		v.DomainNetworkSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ActiveDirectorySettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActiveDirectorySettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActiveDirectorySettings_DomainCredentialsProvider:
+			return deserializeCredentialsProvider(d, schemas.ActiveDirectorySettings_DomainCredentialsProvider, &v.DomainCredentialsProvider)
+		case schemas.ActiveDirectorySettings_DomainIpv4List:
+			return deserializeIpV4List(d, schemas.ActiveDirectorySettings_DomainIpv4List, &v.DomainIpv4List)
+		case schemas.ActiveDirectorySettings_DomainIpv6List:
+			return deserializeIpV6List(d, schemas.ActiveDirectorySettings_DomainIpv6List, &v.DomainIpv6List)
+		case schemas.ActiveDirectorySettings_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.ActiveDirectorySettings_DomainName, v.DomainName)
+		case schemas.ActiveDirectorySettings_DomainNetworkSettings:
+			v.DomainNetworkSettings = &DomainNetworkSettings{}
+			return v.DomainNetworkSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains information about the credential provider for user administration.
 //
 // The following types satisfy this interface:
@@ -71,6 +158,14 @@ type CredentialsProviderMemberSecretsManagerCredentialsProvider struct {
 }
 
 func (*CredentialsProviderMemberSecretsManagerCredentialsProvider) isCredentialsProvider() {}
+func (v *CredentialsProviderMemberSecretsManagerCredentialsProvider) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CredentialsProvider_SecretsManagerCredentialsProvider)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CredentialsProviderMemberSecretsManagerCredentialsProvider) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains network settings for the Active Directory domain.
 type DomainNetworkSettings struct {
@@ -81,6 +176,25 @@ type DomainNetworkSettings struct {
 	Subnets []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DomainNetworkSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainNetworkSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainNetworkSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSubnets(s, schemas.DomainNetworkSettings_Subnets, v.Subnets)
+}
+func (v *DomainNetworkSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainNetworkSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainNetworkSettings_Subnets:
+			return deserializeSubnets(d, schemas.DomainNetworkSettings_Subnets, &v.Subnets)
+		}
+		return nil
+	})
 }
 
 // A filter name and value pair that is used to return more specific results from
@@ -98,6 +212,40 @@ type Filter struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Filter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Filter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attribute != nil {
+		s.WriteString(schemas.Filter_Attribute, *v.Attribute)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.Filter_Operation, *v.Operation)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Filter_Value, *v.Value)
+	}
+}
+func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Filter_Attribute:
+			v.Attribute = new(string)
+			return d.ReadString(schemas.Filter_Attribute, v.Attribute)
+		case schemas.Filter_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.Filter_Operation, v.Operation)
+		case schemas.Filter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Filter_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Refers to an identity provider.
@@ -118,6 +266,14 @@ type IdentityProviderMemberActiveDirectoryIdentityProvider struct {
 }
 
 func (*IdentityProviderMemberActiveDirectoryIdentityProvider) isIdentityProvider() {}
+func (v *IdentityProviderMemberActiveDirectoryIdentityProvider) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentityProvider_ActiveDirectoryIdentityProvider)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *IdentityProviderMemberActiveDirectoryIdentityProvider) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Describes an identity provider.
 type IdentityProviderSummary struct {
@@ -156,6 +312,63 @@ type IdentityProviderSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IdentityProviderSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentityProviderSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdentityProviderSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.IdentityProviderSummary_FailureMessage, *v.FailureMessage)
+	}
+	serializeIdentityProvider(s, schemas.IdentityProviderSummary_IdentityProvider, v.IdentityProvider)
+	if v.IdentityProviderArn != nil {
+		s.WriteString(schemas.IdentityProviderSummary_IdentityProviderArn, *v.IdentityProviderArn)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.IdentityProviderSummary_OwnerAccountId, *v.OwnerAccountId)
+	}
+	if v.Product != nil {
+		s.WriteString(schemas.IdentityProviderSummary_Product, *v.Product)
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.IdentityProviderSummary_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.IdentityProviderSummary_Status, *v.Status)
+	}
+}
+func (v *IdentityProviderSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentityProviderSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentityProviderSummary_FailureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.IdentityProviderSummary_FailureMessage, v.FailureMessage)
+		case schemas.IdentityProviderSummary_IdentityProvider:
+			return deserializeIdentityProvider(d, schemas.IdentityProviderSummary_IdentityProvider, &v.IdentityProvider)
+		case schemas.IdentityProviderSummary_IdentityProviderArn:
+			v.IdentityProviderArn = new(string)
+			return d.ReadString(schemas.IdentityProviderSummary_IdentityProviderArn, v.IdentityProviderArn)
+		case schemas.IdentityProviderSummary_OwnerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.IdentityProviderSummary_OwnerAccountId, v.OwnerAccountId)
+		case schemas.IdentityProviderSummary_Product:
+			v.Product = new(string)
+			return d.ReadString(schemas.IdentityProviderSummary_Product, v.Product)
+		case schemas.IdentityProviderSummary_Settings:
+			v.Settings = &Settings{}
+			return v.Settings.Deserialize(d)
+		case schemas.IdentityProviderSummary_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.IdentityProviderSummary_Status, v.Status)
+		}
+		return nil
+	})
+}
+
 // Describes an EC2 instance providing user-based subscriptions.
 type InstanceSummary struct {
 
@@ -187,6 +400,58 @@ type InstanceSummary struct {
 	StatusMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentityProvider(s, schemas.InstanceSummary_IdentityProvider, v.IdentityProvider)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.InstanceSummary_InstanceId, *v.InstanceId)
+	}
+	if v.LastStatusCheckDate != nil {
+		s.WriteString(schemas.InstanceSummary_LastStatusCheckDate, *v.LastStatusCheckDate)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.InstanceSummary_OwnerAccountId, *v.OwnerAccountId)
+	}
+	serializeStringList(s, schemas.InstanceSummary_Products, v.Products)
+	if v.Status != nil {
+		s.WriteString(schemas.InstanceSummary_Status, *v.Status)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.InstanceSummary_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *InstanceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceSummary_IdentityProvider:
+			return deserializeIdentityProvider(d, schemas.InstanceSummary_IdentityProvider, &v.IdentityProvider)
+		case schemas.InstanceSummary_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.InstanceSummary_InstanceId, v.InstanceId)
+		case schemas.InstanceSummary_LastStatusCheckDate:
+			v.LastStatusCheckDate = new(string)
+			return d.ReadString(schemas.InstanceSummary_LastStatusCheckDate, v.LastStatusCheckDate)
+		case schemas.InstanceSummary_OwnerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.InstanceSummary_OwnerAccountId, v.OwnerAccountId)
+		case schemas.InstanceSummary_Products:
+			return deserializeStringList(d, schemas.InstanceSummary_Products, &v.Products)
+		case schemas.InstanceSummary_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.InstanceSummary_Status, v.Status)
+		case schemas.InstanceSummary_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.InstanceSummary_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
 }
 
 // Describes users of an EC2 instance providing user-based subscriptions.
@@ -231,6 +496,73 @@ type InstanceUserSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceUserSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceUserSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceUserSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationDate != nil {
+		s.WriteString(schemas.InstanceUserSummary_AssociationDate, *v.AssociationDate)
+	}
+	if v.DisassociationDate != nil {
+		s.WriteString(schemas.InstanceUserSummary_DisassociationDate, *v.DisassociationDate)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.InstanceUserSummary_Domain, *v.Domain)
+	}
+	serializeIdentityProvider(s, schemas.InstanceUserSummary_IdentityProvider, v.IdentityProvider)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.InstanceUserSummary_InstanceId, *v.InstanceId)
+	}
+	if v.InstanceUserArn != nil {
+		s.WriteString(schemas.InstanceUserSummary_InstanceUserArn, *v.InstanceUserArn)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.InstanceUserSummary_Status, *v.Status)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.InstanceUserSummary_StatusMessage, *v.StatusMessage)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.InstanceUserSummary_Username, *v.Username)
+	}
+}
+func (v *InstanceUserSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceUserSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceUserSummary_AssociationDate:
+			v.AssociationDate = new(string)
+			return d.ReadString(schemas.InstanceUserSummary_AssociationDate, v.AssociationDate)
+		case schemas.InstanceUserSummary_DisassociationDate:
+			v.DisassociationDate = new(string)
+			return d.ReadString(schemas.InstanceUserSummary_DisassociationDate, v.DisassociationDate)
+		case schemas.InstanceUserSummary_Domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.InstanceUserSummary_Domain, v.Domain)
+		case schemas.InstanceUserSummary_IdentityProvider:
+			return deserializeIdentityProvider(d, schemas.InstanceUserSummary_IdentityProvider, &v.IdentityProvider)
+		case schemas.InstanceUserSummary_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.InstanceUserSummary_InstanceId, v.InstanceId)
+		case schemas.InstanceUserSummary_InstanceUserArn:
+			v.InstanceUserArn = new(string)
+			return d.ReadString(schemas.InstanceUserSummary_InstanceUserArn, v.InstanceUserArn)
+		case schemas.InstanceUserSummary_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.InstanceUserSummary_Status, v.Status)
+		case schemas.InstanceUserSummary_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.InstanceUserSummary_StatusMessage, v.StatusMessage)
+		case schemas.InstanceUserSummary_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.InstanceUserSummary_Username, v.Username)
+		}
+		return nil
+	})
+}
+
 // Information about a Remote Desktop Services (RDS) license server.
 type LicenseServer struct {
 
@@ -247,6 +579,54 @@ type LicenseServer struct {
 	ProvisioningStatus LicenseServerEndpointProvisioningStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *LicenseServer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LicenseServer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LicenseServer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HealthStatus != "" {
+		s.WriteString(schemas.LicenseServer_HealthStatus, string(v.HealthStatus))
+	}
+	if v.Ipv4Address != nil {
+		s.WriteString(schemas.LicenseServer_Ipv4Address, *v.Ipv4Address)
+	}
+	if v.Ipv6Address != nil {
+		s.WriteString(schemas.LicenseServer_Ipv6Address, *v.Ipv6Address)
+	}
+	if v.ProvisioningStatus != "" {
+		s.WriteString(schemas.LicenseServer_ProvisioningStatus, string(v.ProvisioningStatus))
+	}
+}
+func (v *LicenseServer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LicenseServer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LicenseServer_HealthStatus:
+			var ev string
+			if err := d.ReadString(schemas.LicenseServer_HealthStatus, &ev); err != nil {
+				return err
+			}
+			v.HealthStatus = LicenseServerHealthStatus(ev)
+			return nil
+		case schemas.LicenseServer_Ipv4Address:
+			v.Ipv4Address = new(string)
+			return d.ReadString(schemas.LicenseServer_Ipv4Address, v.Ipv4Address)
+		case schemas.LicenseServer_Ipv6Address:
+			v.Ipv6Address = new(string)
+			return d.ReadString(schemas.LicenseServer_Ipv6Address, v.Ipv6Address)
+		case schemas.LicenseServer_ProvisioningStatus:
+			var ev string
+			if err := d.ReadString(schemas.LicenseServer_ProvisioningStatus, &ev); err != nil {
+				return err
+			}
+			v.ProvisioningStatus = LicenseServerEndpointProvisioningStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains details about a network endpoint for a Remote Desktop Services (RDS)
@@ -287,6 +667,83 @@ type LicenseServerEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LicenseServerEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LicenseServerEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LicenseServerEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.LicenseServerEndpoint_CreationTime, *v.CreationTime)
+	}
+	if v.IdentityProviderArn != nil {
+		s.WriteString(schemas.LicenseServerEndpoint_IdentityProviderArn, *v.IdentityProviderArn)
+	}
+	if v.LicenseServerEndpointArn != nil {
+		s.WriteString(schemas.LicenseServerEndpoint_LicenseServerEndpointArn, *v.LicenseServerEndpointArn)
+	}
+	if v.LicenseServerEndpointId != nil {
+		s.WriteString(schemas.LicenseServerEndpoint_LicenseServerEndpointId, *v.LicenseServerEndpointId)
+	}
+	if v.LicenseServerEndpointProvisioningStatus != "" {
+		s.WriteString(schemas.LicenseServerEndpoint_LicenseServerEndpointProvisioningStatus, string(v.LicenseServerEndpointProvisioningStatus))
+	}
+	serializeLicenseServerList(s, schemas.LicenseServerEndpoint_LicenseServers, v.LicenseServers)
+	if v.ServerEndpoint != nil {
+		s.WriteStruct(schemas.LicenseServerEndpoint_ServerEndpoint)
+		v.ServerEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServerType != "" {
+		s.WriteString(schemas.LicenseServerEndpoint_ServerType, string(v.ServerType))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.LicenseServerEndpoint_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *LicenseServerEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LicenseServerEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LicenseServerEndpoint_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.LicenseServerEndpoint_CreationTime, v.CreationTime)
+		case schemas.LicenseServerEndpoint_IdentityProviderArn:
+			v.IdentityProviderArn = new(string)
+			return d.ReadString(schemas.LicenseServerEndpoint_IdentityProviderArn, v.IdentityProviderArn)
+		case schemas.LicenseServerEndpoint_LicenseServerEndpointArn:
+			v.LicenseServerEndpointArn = new(string)
+			return d.ReadString(schemas.LicenseServerEndpoint_LicenseServerEndpointArn, v.LicenseServerEndpointArn)
+		case schemas.LicenseServerEndpoint_LicenseServerEndpointId:
+			v.LicenseServerEndpointId = new(string)
+			return d.ReadString(schemas.LicenseServerEndpoint_LicenseServerEndpointId, v.LicenseServerEndpointId)
+		case schemas.LicenseServerEndpoint_LicenseServerEndpointProvisioningStatus:
+			var ev string
+			if err := d.ReadString(schemas.LicenseServerEndpoint_LicenseServerEndpointProvisioningStatus, &ev); err != nil {
+				return err
+			}
+			v.LicenseServerEndpointProvisioningStatus = LicenseServerEndpointProvisioningStatus(ev)
+			return nil
+		case schemas.LicenseServerEndpoint_LicenseServers:
+			return deserializeLicenseServerList(d, schemas.LicenseServerEndpoint_LicenseServers, &v.LicenseServers)
+		case schemas.LicenseServerEndpoint_ServerEndpoint:
+			v.ServerEndpoint = &ServerEndpoint{}
+			return v.ServerEndpoint.Deserialize(d)
+		case schemas.LicenseServerEndpoint_ServerType:
+			var ev string
+			if err := d.ReadString(schemas.LicenseServerEndpoint_ServerType, &ev); err != nil {
+				return err
+			}
+			v.ServerType = ServerType(ev)
+			return nil
+		case schemas.LicenseServerEndpoint_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.LicenseServerEndpoint_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // The settings to configure your license server.
 type LicenseServerSettings struct {
 
@@ -301,6 +758,35 @@ type LicenseServerSettings struct {
 	ServerType ServerType
 
 	noSmithyDocumentSerde
+}
+
+func (v *LicenseServerSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LicenseServerSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LicenseServerSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServerSettings(s, schemas.LicenseServerSettings_ServerSettings, v.ServerSettings)
+	if v.ServerType != "" {
+		s.WriteString(schemas.LicenseServerSettings_ServerType, string(v.ServerType))
+	}
+}
+func (v *LicenseServerSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LicenseServerSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LicenseServerSettings_ServerSettings:
+			return deserializeServerSettings(d, schemas.LicenseServerSettings_ServerSettings, &v.ServerSettings)
+		case schemas.LicenseServerSettings_ServerType:
+			var ev string
+			if err := d.ReadString(schemas.LicenseServerSettings_ServerType, &ev); err != nil {
+				return err
+			}
+			v.ServerType = ServerType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A summary of the user-based subscription products for a specific user.
@@ -345,6 +831,73 @@ type ProductUserSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProductUserSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProductUserSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProductUserSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.ProductUserSummary_Domain, *v.Domain)
+	}
+	serializeIdentityProvider(s, schemas.ProductUserSummary_IdentityProvider, v.IdentityProvider)
+	if v.Product != nil {
+		s.WriteString(schemas.ProductUserSummary_Product, *v.Product)
+	}
+	if v.ProductUserArn != nil {
+		s.WriteString(schemas.ProductUserSummary_ProductUserArn, *v.ProductUserArn)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ProductUserSummary_Status, *v.Status)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ProductUserSummary_StatusMessage, *v.StatusMessage)
+	}
+	if v.SubscriptionEndDate != nil {
+		s.WriteString(schemas.ProductUserSummary_SubscriptionEndDate, *v.SubscriptionEndDate)
+	}
+	if v.SubscriptionStartDate != nil {
+		s.WriteString(schemas.ProductUserSummary_SubscriptionStartDate, *v.SubscriptionStartDate)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.ProductUserSummary_Username, *v.Username)
+	}
+}
+func (v *ProductUserSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProductUserSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProductUserSummary_Domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.ProductUserSummary_Domain, v.Domain)
+		case schemas.ProductUserSummary_IdentityProvider:
+			return deserializeIdentityProvider(d, schemas.ProductUserSummary_IdentityProvider, &v.IdentityProvider)
+		case schemas.ProductUserSummary_Product:
+			v.Product = new(string)
+			return d.ReadString(schemas.ProductUserSummary_Product, v.Product)
+		case schemas.ProductUserSummary_ProductUserArn:
+			v.ProductUserArn = new(string)
+			return d.ReadString(schemas.ProductUserSummary_ProductUserArn, v.ProductUserArn)
+		case schemas.ProductUserSummary_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ProductUserSummary_Status, v.Status)
+		case schemas.ProductUserSummary_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ProductUserSummary_StatusMessage, v.StatusMessage)
+		case schemas.ProductUserSummary_SubscriptionEndDate:
+			v.SubscriptionEndDate = new(string)
+			return d.ReadString(schemas.ProductUserSummary_SubscriptionEndDate, v.SubscriptionEndDate)
+		case schemas.ProductUserSummary_SubscriptionStartDate:
+			v.SubscriptionStartDate = new(string)
+			return d.ReadString(schemas.ProductUserSummary_SubscriptionStartDate, v.SubscriptionStartDate)
+		case schemas.ProductUserSummary_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.ProductUserSummary_Username, v.Username)
+		}
+		return nil
+	})
+}
+
 // Server settings that are specific to a Remote Desktop Services (RDS) license
 // server.
 type RdsSalSettings struct {
@@ -358,6 +911,25 @@ type RdsSalSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RdsSalSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RdsSalSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RdsSalSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCredentialsProvider(s, schemas.RdsSalSettings_RdsSalCredentialsProvider, v.RdsSalCredentialsProvider)
+}
+func (v *RdsSalSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RdsSalSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RdsSalSettings_RdsSalCredentialsProvider:
+			return deserializeCredentialsProvider(d, schemas.RdsSalSettings_RdsSalCredentialsProvider, &v.RdsSalCredentialsProvider)
+		}
+		return nil
+	})
+}
+
 // Contains a credentials secret that's stored in Secrets Manager.
 type SecretsManagerCredentialsProvider struct {
 
@@ -367,6 +939,28 @@ type SecretsManagerCredentialsProvider struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SecretsManagerCredentialsProvider) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecretsManagerCredentialsProvider)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecretsManagerCredentialsProvider) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretId != nil {
+		s.WriteString(schemas.SecretsManagerCredentialsProvider_SecretId, *v.SecretId)
+	}
+}
+func (v *SecretsManagerCredentialsProvider) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecretsManagerCredentialsProvider, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecretsManagerCredentialsProvider_SecretId:
+			v.SecretId = new(string)
+			return d.ReadString(schemas.SecretsManagerCredentialsProvider_SecretId, v.SecretId)
+		}
+		return nil
+	})
+}
+
 // A network endpoint through which you can access one or more servers.
 type ServerEndpoint struct {
 
@@ -374,6 +968,28 @@ type ServerEndpoint struct {
 	Endpoint *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServerEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServerEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServerEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Endpoint != nil {
+		s.WriteString(schemas.ServerEndpoint_Endpoint, *v.Endpoint)
+	}
+}
+func (v *ServerEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServerEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServerEndpoint_Endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.ServerEndpoint_Endpoint, v.Endpoint)
+		}
+		return nil
+	})
 }
 
 // Contains settings for a specific server.
@@ -394,6 +1010,14 @@ type ServerSettingsMemberRdsSalSettings struct {
 }
 
 func (*ServerSettingsMemberRdsSalSettings) isServerSettings() {}
+func (v *ServerSettingsMemberRdsSalSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServerSettings_RdsSalSettings)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ServerSettingsMemberRdsSalSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The registered identity provider’s product related configuration settings such
 // as the subnets to provision VPC endpoints, and the security group ID that is
@@ -413,6 +1037,31 @@ type Settings struct {
 	Subnets []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Settings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Settings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Settings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityGroupId != nil {
+		s.WriteString(schemas.Settings_SecurityGroupId, *v.SecurityGroupId)
+	}
+	serializeSubnets(s, schemas.Settings_Subnets, v.Subnets)
+}
+func (v *Settings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Settings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Settings_SecurityGroupId:
+			v.SecurityGroupId = new(string)
+			return d.ReadString(schemas.Settings_SecurityGroupId, v.SecurityGroupId)
+		case schemas.Settings_Subnets:
+			return deserializeSubnets(d, schemas.Settings_Subnets, &v.Subnets)
+		}
+		return nil
+	})
 }
 
 // Updates the registered identity provider’s product related configuration
@@ -435,6 +1084,34 @@ type UpdateSettings struct {
 	SecurityGroupId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSubnets(s, schemas.UpdateSettings_AddSubnets, v.AddSubnets)
+	serializeSubnets(s, schemas.UpdateSettings_RemoveSubnets, v.RemoveSubnets)
+	if v.SecurityGroupId != nil {
+		s.WriteString(schemas.UpdateSettings_SecurityGroupId, *v.SecurityGroupId)
+	}
+}
+func (v *UpdateSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSettings_AddSubnets:
+			return deserializeSubnets(d, schemas.UpdateSettings_AddSubnets, &v.AddSubnets)
+		case schemas.UpdateSettings_RemoveSubnets:
+			return deserializeSubnets(d, schemas.UpdateSettings_RemoveSubnets, &v.RemoveSubnets)
+		case schemas.UpdateSettings_SecurityGroupId:
+			v.SecurityGroupId = new(string)
+			return d.ReadString(schemas.UpdateSettings_SecurityGroupId, v.SecurityGroupId)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

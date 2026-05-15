@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,19 @@ type SynchronizeGatewayTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SynchronizeGatewayTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SynchronizeGatewayTargetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SynchronizeGatewayTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayIdentifier != nil {
+		s.WriteString(schemas.SynchronizeGatewayTargetsRequest_gatewayIdentifier, *v.GatewayIdentifier)
+	}
+	serializeTargetIdList(s, schemas.SynchronizeGatewayTargetsRequest_targetIdList, v.TargetIdList)
+}
+
 type SynchronizeGatewayTargetsOutput struct {
 
 	// The gateway targets for synchronization.
@@ -62,16 +77,23 @@ type SynchronizeGatewayTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SynchronizeGatewayTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SynchronizeGatewayTargetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SynchronizeGatewayTargetsResponse_targets:
+			return deserializeGatewayTargetList(d, schemas.SynchronizeGatewayTargetsResponse_targets, &v.Targets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSynchronizeGatewayTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSynchronizeGatewayTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SynchronizeGatewayTargets, schemas.SynchronizeGatewayTargetsRequest, schemas.SynchronizeGatewayTargetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSynchronizeGatewayTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SynchronizeGatewayTargets, schemas.SynchronizeGatewayTargetsRequest, schemas.SynchronizeGatewayTargetsResponse), output: &SynchronizeGatewayTargetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SynchronizeGatewayTargets"); err != nil {

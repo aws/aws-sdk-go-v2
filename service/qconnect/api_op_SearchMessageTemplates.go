@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,29 @@ type SearchMessageTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchMessageTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchMessageTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchMessageTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.SearchMessageTemplatesRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchMessageTemplatesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchMessageTemplatesRequest_nextToken, *v.NextToken)
+	}
+	if v.SearchExpression != nil {
+		s.WriteStruct(schemas.SearchMessageTemplatesRequest_searchExpression)
+		v.SearchExpression.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchMessageTemplatesOutput struct {
 
 	// The results of the message template search.
@@ -67,16 +92,26 @@ type SearchMessageTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchMessageTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchMessageTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchMessageTemplatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchMessageTemplatesResponse_nextToken, v.NextToken)
+		case schemas.SearchMessageTemplatesResponse_results:
+			return deserializeMessageTemplateSearchResultsList(d, schemas.SearchMessageTemplatesResponse_results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchMessageTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchMessageTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchMessageTemplates, schemas.SearchMessageTemplatesRequest, schemas.SearchMessageTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchMessageTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchMessageTemplates, schemas.SearchMessageTemplatesRequest, schemas.SearchMessageTemplatesResponse), output: &SearchMessageTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchMessageTemplates"); err != nil {

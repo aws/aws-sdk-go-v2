@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/evs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,24 @@ type ListEnvironmentHostsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentHostsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnvironmentHostsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnvironmentHostsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.ListEnvironmentHostsRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEnvironmentHostsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnvironmentHostsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListEnvironmentHostsOutput struct {
 
 	// A list of hosts in the environment.
@@ -63,16 +83,26 @@ type ListEnvironmentHostsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentHostsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnvironmentHostsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnvironmentHostsResponse_environmentHosts:
+			return deserializeHostList(d, schemas.ListEnvironmentHostsResponse_environmentHosts, &v.EnvironmentHosts)
+		case schemas.ListEnvironmentHostsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnvironmentHostsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnvironmentHostsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListEnvironmentHosts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentHosts, schemas.ListEnvironmentHostsRequest, schemas.ListEnvironmentHostsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListEnvironmentHosts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentHosts, schemas.ListEnvironmentHostsRequest, schemas.ListEnvironmentHostsResponse), output: &ListEnvironmentHostsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEnvironmentHosts"); err != nil {

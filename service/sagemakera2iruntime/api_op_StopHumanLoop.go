@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type StopHumanLoopInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopHumanLoopInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopHumanLoopRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopHumanLoopInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HumanLoopName != nil {
+		s.WriteString(schemas.StopHumanLoopRequest_HumanLoopName, *v.HumanLoopName)
+	}
+}
+
 type StopHumanLoopOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,16 +57,21 @@ type StopHumanLoopOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopHumanLoopOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopHumanLoopResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopHumanLoopMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopHumanLoop{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopHumanLoop, schemas.StopHumanLoopRequest, schemas.StopHumanLoopResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopHumanLoop{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopHumanLoop, schemas.StopHumanLoopRequest, schemas.StopHumanLoopResponse), output: &StopHumanLoopOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StopHumanLoop"); err != nil {

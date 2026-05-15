@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,26 @@ type ListTagOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagOptionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListTagOptionsInput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.ListTagOptionsInput_PageSize, v.PageSize)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.ListTagOptionsInput_PageToken, *v.PageToken)
+	}
+}
+
 type ListTagOptionsOutput struct {
 
 	// The page token for the next set of results. To retrieve the first set of
@@ -58,16 +80,26 @@ type ListTagOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTagOptionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTagOptionsOutput_PageToken:
+			v.PageToken = new(string)
+			return d.ReadString(schemas.ListTagOptionsOutput_PageToken, v.PageToken)
+		case schemas.ListTagOptionsOutput_TagOptionDetails:
+			return deserializeTagOptionDetails(d, schemas.ListTagOptionsOutput_TagOptionDetails, &v.TagOptionDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTagOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTagOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagOptions, schemas.ListTagOptionsInput, schemas.ListTagOptionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTagOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagOptions, schemas.ListTagOptionsInput, schemas.ListTagOptionsOutput), output: &ListTagOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTagOptions"); err != nil {

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/bcmdataexports/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -23,6 +25,40 @@ type Column struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Column) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Column)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Column) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.Column_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Column_Name, *v.Name)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.Column_Type, *v.Type)
+	}
+}
+func (v *Column) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Column, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Column_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Column_Description, v.Description)
+		case schemas.Column_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Column_Name, v.Name)
+		case schemas.Column_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Column_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // The SQL query of column selections and row filters from the data table you want.
 type DataQuery struct {
 
@@ -37,6 +73,31 @@ type DataQuery struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryStatement != nil {
+		s.WriteString(schemas.DataQuery_QueryStatement, *v.QueryStatement)
+	}
+	serializeTableConfigurations(s, schemas.DataQuery_TableConfigurations, v.TableConfigurations)
+}
+func (v *DataQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataQuery_QueryStatement:
+			v.QueryStatement = new(string)
+			return d.ReadString(schemas.DataQuery_QueryStatement, v.QueryStatement)
+		case schemas.DataQuery_TableConfigurations:
+			return deserializeTableConfigurations(d, schemas.DataQuery_TableConfigurations, &v.TableConfigurations)
+		}
+		return nil
+	})
+}
+
 // The destinations used for data exports.
 type DestinationConfigurations struct {
 
@@ -46,6 +107,30 @@ type DestinationConfigurations struct {
 	S3Destination *S3Destination
 
 	noSmithyDocumentSerde
+}
+
+func (v *DestinationConfigurations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationConfigurations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationConfigurations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Destination != nil {
+		s.WriteStruct(schemas.DestinationConfigurations_S3Destination)
+		v.S3Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DestinationConfigurations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationConfigurations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationConfigurations_S3Destination:
+			v.S3Destination = &S3Destination{}
+			return v.S3Destination.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The reference for the data export update.
@@ -62,6 +147,36 @@ type ExecutionReference struct {
 	ExecutionStatus *ExecutionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExecutionReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.ExecutionReference_ExecutionId, *v.ExecutionId)
+	}
+	if v.ExecutionStatus != nil {
+		s.WriteStruct(schemas.ExecutionReference_ExecutionStatus)
+		v.ExecutionStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExecutionReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionReference_ExecutionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.ExecutionReference_ExecutionId, v.ExecutionId)
+		case schemas.ExecutionReference_ExecutionStatus:
+			v.ExecutionStatus = &ExecutionStatus{}
+			return v.ExecutionStatus.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The status of the execution.
@@ -83,6 +198,60 @@ type ExecutionStatus struct {
 	StatusReason ExecutionStatusReason
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExecutionStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedAt != nil {
+		s.WriteTime(schemas.ExecutionStatus_CompletedAt, *v.CompletedAt)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ExecutionStatus_CreatedAt, *v.CreatedAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.ExecutionStatus_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.StatusCode != "" {
+		s.WriteString(schemas.ExecutionStatus_StatusCode, string(v.StatusCode))
+	}
+	if v.StatusReason != "" {
+		s.WriteString(schemas.ExecutionStatus_StatusReason, string(v.StatusReason))
+	}
+}
+func (v *ExecutionStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionStatus_CompletedAt:
+			v.CompletedAt = new(time.Time)
+			return d.ReadTime(schemas.ExecutionStatus_CompletedAt, v.CompletedAt)
+		case schemas.ExecutionStatus_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ExecutionStatus_CreatedAt, v.CreatedAt)
+		case schemas.ExecutionStatus_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ExecutionStatus_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.ExecutionStatus_StatusCode:
+			var ev string
+			if err := d.ReadString(schemas.ExecutionStatus_StatusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = ExecutionStatusCode(ev)
+			return nil
+		case schemas.ExecutionStatus_StatusReason:
+			var ev string
+			if err := d.ReadString(schemas.ExecutionStatus_StatusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = ExecutionStatusReason(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The details that are available for an export.
@@ -117,6 +286,64 @@ type Export struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Export) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Export)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Export) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataQuery != nil {
+		s.WriteStruct(schemas.Export_DataQuery)
+		v.DataQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Export_Description, *v.Description)
+	}
+	if v.DestinationConfigurations != nil {
+		s.WriteStruct(schemas.Export_DestinationConfigurations)
+		v.DestinationConfigurations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportArn != nil {
+		s.WriteString(schemas.Export_ExportArn, *v.ExportArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Export_Name, *v.Name)
+	}
+	if v.RefreshCadence != nil {
+		s.WriteStruct(schemas.Export_RefreshCadence)
+		v.RefreshCadence.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Export) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Export, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Export_DataQuery:
+			v.DataQuery = &DataQuery{}
+			return v.DataQuery.Deserialize(d)
+		case schemas.Export_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Export_Description, v.Description)
+		case schemas.Export_DestinationConfigurations:
+			v.DestinationConfigurations = &DestinationConfigurations{}
+			return v.DestinationConfigurations.Deserialize(d)
+		case schemas.Export_ExportArn:
+			v.ExportArn = new(string)
+			return d.ReadString(schemas.Export_ExportArn, v.ExportArn)
+		case schemas.Export_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Export_Name, v.Name)
+		case schemas.Export_RefreshCadence:
+			v.RefreshCadence = &RefreshCadence{}
+			return v.RefreshCadence.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The reference details for a given export.
 type ExportReference struct {
 
@@ -136,6 +363,42 @@ type ExportReference struct {
 	ExportStatus *ExportStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportArn != nil {
+		s.WriteString(schemas.ExportReference_ExportArn, *v.ExportArn)
+	}
+	if v.ExportName != nil {
+		s.WriteString(schemas.ExportReference_ExportName, *v.ExportName)
+	}
+	if v.ExportStatus != nil {
+		s.WriteStruct(schemas.ExportReference_ExportStatus)
+		v.ExportStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExportReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportReference_ExportArn:
+			v.ExportArn = new(string)
+			return d.ReadString(schemas.ExportReference_ExportArn, v.ExportArn)
+		case schemas.ExportReference_ExportName:
+			v.ExportName = new(string)
+			return d.ReadString(schemas.ExportReference_ExportName, v.ExportName)
+		case schemas.ExportReference_ExportStatus:
+			v.ExportStatus = &ExportStatus{}
+			return v.ExportStatus.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The status of the data export.
@@ -159,6 +422,60 @@ type ExportStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ExportStatus_CreatedAt, *v.CreatedAt)
+	}
+	if v.LastRefreshedAt != nil {
+		s.WriteTime(schemas.ExportStatus_LastRefreshedAt, *v.LastRefreshedAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.ExportStatus_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.StatusCode != "" {
+		s.WriteString(schemas.ExportStatus_StatusCode, string(v.StatusCode))
+	}
+	if v.StatusReason != "" {
+		s.WriteString(schemas.ExportStatus_StatusReason, string(v.StatusReason))
+	}
+}
+func (v *ExportStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportStatus_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ExportStatus_CreatedAt, v.CreatedAt)
+		case schemas.ExportStatus_LastRefreshedAt:
+			v.LastRefreshedAt = new(time.Time)
+			return d.ReadTime(schemas.ExportStatus_LastRefreshedAt, v.LastRefreshedAt)
+		case schemas.ExportStatus_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ExportStatus_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.ExportStatus_StatusCode:
+			var ev string
+			if err := d.ReadString(schemas.ExportStatus_StatusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = ExportStatusCode(ev)
+			return nil
+		case schemas.ExportStatus_StatusReason:
+			var ev string
+			if err := d.ReadString(schemas.ExportStatus_StatusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = ExecutionStatusReason(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The cadence for Amazon Web Services to update the data export in your S3 bucket.
 type RefreshCadence struct {
 
@@ -169,6 +486,32 @@ type RefreshCadence struct {
 	Frequency FrequencyOption
 
 	noSmithyDocumentSerde
+}
+
+func (v *RefreshCadence) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RefreshCadence)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RefreshCadence) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Frequency != "" {
+		s.WriteString(schemas.RefreshCadence_Frequency, string(v.Frequency))
+	}
+}
+func (v *RefreshCadence) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RefreshCadence, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RefreshCadence_Frequency:
+			var ev string
+			if err := d.ReadString(schemas.RefreshCadence_Frequency, &ev); err != nil {
+				return err
+			}
+			v.Frequency = FrequencyOption(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The tag structure that contains a tag key and value.
@@ -185,6 +528,34 @@ type ResourceTag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceTag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.ResourceTag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ResourceTag_Value, *v.Value)
+	}
+}
+func (v *ResourceTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceTag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ResourceTag_Key, v.Key)
+		case schemas.ResourceTag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ResourceTag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name
@@ -218,6 +589,54 @@ type S3Destination struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3Destination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Destination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Destination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.S3Destination_S3Bucket, *v.S3Bucket)
+	}
+	if v.S3BucketOwner != nil {
+		s.WriteString(schemas.S3Destination_S3BucketOwner, *v.S3BucketOwner)
+	}
+	if v.S3OutputConfigurations != nil {
+		s.WriteStruct(schemas.S3Destination_S3OutputConfigurations)
+		v.S3OutputConfigurations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3Prefix != nil {
+		s.WriteString(schemas.S3Destination_S3Prefix, *v.S3Prefix)
+	}
+	if v.S3Region != nil {
+		s.WriteString(schemas.S3Destination_S3Region, *v.S3Region)
+	}
+}
+func (v *S3Destination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Destination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Destination_S3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.S3Destination_S3Bucket, v.S3Bucket)
+		case schemas.S3Destination_S3BucketOwner:
+			v.S3BucketOwner = new(string)
+			return d.ReadString(schemas.S3Destination_S3BucketOwner, v.S3BucketOwner)
+		case schemas.S3Destination_S3OutputConfigurations:
+			v.S3OutputConfigurations = &S3OutputConfigurations{}
+			return v.S3OutputConfigurations.Deserialize(d)
+		case schemas.S3Destination_S3Prefix:
+			v.S3Prefix = new(string)
+			return d.ReadString(schemas.S3Destination_S3Prefix, v.S3Prefix)
+		case schemas.S3Destination_S3Region:
+			v.S3Region = new(string)
+			return d.ReadString(schemas.S3Destination_S3Region, v.S3Region)
+		}
+		return nil
+	})
+}
+
 // The compression type, file format, and overwrite preference for the data export.
 type S3OutputConfigurations struct {
 
@@ -248,6 +667,62 @@ type S3OutputConfigurations struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3OutputConfigurations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3OutputConfigurations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3OutputConfigurations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Compression != "" {
+		s.WriteString(schemas.S3OutputConfigurations_Compression, string(v.Compression))
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.S3OutputConfigurations_Format, string(v.Format))
+	}
+	if v.OutputType != "" {
+		s.WriteString(schemas.S3OutputConfigurations_OutputType, string(v.OutputType))
+	}
+	if v.Overwrite != "" {
+		s.WriteString(schemas.S3OutputConfigurations_Overwrite, string(v.Overwrite))
+	}
+}
+func (v *S3OutputConfigurations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3OutputConfigurations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3OutputConfigurations_Compression:
+			var ev string
+			if err := d.ReadString(schemas.S3OutputConfigurations_Compression, &ev); err != nil {
+				return err
+			}
+			v.Compression = CompressionOption(ev)
+			return nil
+		case schemas.S3OutputConfigurations_Format:
+			var ev string
+			if err := d.ReadString(schemas.S3OutputConfigurations_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = FormatOption(ev)
+			return nil
+		case schemas.S3OutputConfigurations_OutputType:
+			var ev string
+			if err := d.ReadString(schemas.S3OutputConfigurations_OutputType, &ev); err != nil {
+				return err
+			}
+			v.OutputType = S3OutputType(ev)
+			return nil
+		case schemas.S3OutputConfigurations_Overwrite:
+			var ev string
+			if err := d.ReadString(schemas.S3OutputConfigurations_Overwrite, &ev); err != nil {
+				return err
+			}
+			v.Overwrite = OverwriteOption(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The details for the data export table.
 type Table struct {
 
@@ -261,6 +736,37 @@ type Table struct {
 	TableProperties []TablePropertyDescription
 
 	noSmithyDocumentSerde
+}
+
+func (v *Table) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Table)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Table) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.Table_Description, *v.Description)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.Table_TableName, *v.TableName)
+	}
+	serializeTablePropertyDescriptionList(s, schemas.Table_TableProperties, v.TableProperties)
+}
+func (v *Table) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Table, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Table_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Table_Description, v.Description)
+		case schemas.Table_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.Table_TableName, v.TableName)
+		case schemas.Table_TableProperties:
+			return deserializeTablePropertyDescriptionList(d, schemas.Table_TableProperties, &v.TableProperties)
+		}
+		return nil
+	})
 }
 
 // The properties for the data export table.
@@ -281,6 +787,43 @@ type TablePropertyDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TablePropertyDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TablePropertyDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TablePropertyDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.TablePropertyDescription_DefaultValue, *v.DefaultValue)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.TablePropertyDescription_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.TablePropertyDescription_Name, *v.Name)
+	}
+	serializeGenericStringList(s, schemas.TablePropertyDescription_ValidValues, v.ValidValues)
+}
+func (v *TablePropertyDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TablePropertyDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TablePropertyDescription_DefaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.TablePropertyDescription_DefaultValue, v.DefaultValue)
+		case schemas.TablePropertyDescription_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.TablePropertyDescription_Description, v.Description)
+		case schemas.TablePropertyDescription_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TablePropertyDescription_Name, v.Name)
+		case schemas.TablePropertyDescription_ValidValues:
+			return deserializeGenericStringList(d, schemas.TablePropertyDescription_ValidValues, &v.ValidValues)
+		}
+		return nil
+	})
+}
+
 // The input failed to meet the constraints specified by the Amazon Web Services
 // service in a specified field.
 type ValidationExceptionField struct {
@@ -296,6 +839,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_Name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Message, v.Message)
+		case schemas.ValidationExceptionField_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

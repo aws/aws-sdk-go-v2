@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -80,6 +82,33 @@ type CreateLinkRoutingRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLinkRoutingRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLinkRoutingRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLinkRoutingRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateLinkRoutingRuleRequest_clientToken, *v.ClientToken)
+	}
+	if v.Conditions != nil {
+		s.WriteStruct(schemas.CreateLinkRoutingRuleRequest_conditions)
+		v.Conditions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.CreateLinkRoutingRuleRequest_gatewayId, *v.GatewayId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.CreateLinkRoutingRuleRequest_linkId, *v.LinkId)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.CreateLinkRoutingRuleRequest_priority, *v.Priority)
+	}
+	serializeTagsMap(s, schemas.CreateLinkRoutingRuleRequest_tags, v.Tags)
+}
+
 type CreateLinkRoutingRuleOutput struct {
 
 	// The timestamp of when the routing rule was created.
@@ -103,16 +132,34 @@ type CreateLinkRoutingRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLinkRoutingRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLinkRoutingRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLinkRoutingRuleResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateLinkRoutingRuleResponse_createdAt, v.CreatedAt)
+		case schemas.CreateLinkRoutingRuleResponse_ruleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.CreateLinkRoutingRuleResponse_ruleId, v.RuleId)
+		case schemas.CreateLinkRoutingRuleResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateLinkRoutingRuleResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RuleStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLinkRoutingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLinkRoutingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLinkRoutingRule, schemas.CreateLinkRoutingRuleRequest, schemas.CreateLinkRoutingRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLinkRoutingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLinkRoutingRule, schemas.CreateLinkRoutingRuleRequest, schemas.CreateLinkRoutingRuleResponse), output: &CreateLinkRoutingRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLinkRoutingRule"); err != nil {

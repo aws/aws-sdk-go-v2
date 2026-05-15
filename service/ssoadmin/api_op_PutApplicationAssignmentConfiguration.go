@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,21 @@ type PutApplicationAssignmentConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutApplicationAssignmentConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutApplicationAssignmentConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutApplicationAssignmentConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.PutApplicationAssignmentConfigurationRequest_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.AssignmentRequired != nil {
+		s.WriteBool(schemas.PutApplicationAssignmentConfigurationRequest_AssignmentRequired, *v.AssignmentRequired)
+	}
+}
+
 type PutApplicationAssignmentConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,16 +77,21 @@ type PutApplicationAssignmentConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutApplicationAssignmentConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutApplicationAssignmentConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutApplicationAssignmentConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutApplicationAssignmentConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutApplicationAssignmentConfiguration, schemas.PutApplicationAssignmentConfigurationRequest, schemas.PutApplicationAssignmentConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutApplicationAssignmentConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutApplicationAssignmentConfiguration, schemas.PutApplicationAssignmentConfigurationRequest, schemas.PutApplicationAssignmentConfigurationResponse), output: &PutApplicationAssignmentConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutApplicationAssignmentConfiguration"); err != nil {

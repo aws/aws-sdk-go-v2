@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,6 +62,35 @@ type ListAutomationRulePreviewSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomationRulePreviewSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomationRulePreviewSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomationRulePreviewSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Criteria != nil {
+		s.WriteStruct(schemas.ListAutomationRulePreviewSummariesRequest_criteria)
+		v.Criteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutomationRulePreviewSummariesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomationRulePreviewSummariesRequest_nextToken, *v.NextToken)
+	}
+	if v.OrganizationScope != nil {
+		s.WriteStruct(schemas.ListAutomationRulePreviewSummariesRequest_organizationScope)
+		v.OrganizationScope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRecommendedActionTypeList(s, schemas.ListAutomationRulePreviewSummariesRequest_recommendedActionTypes, v.RecommendedActionTypes)
+	if v.RuleType != "" {
+		s.WriteString(schemas.ListAutomationRulePreviewSummariesRequest_ruleType, string(v.RuleType))
+	}
+}
+
 type ListAutomationRulePreviewSummariesOutput struct {
 
 	// A token used for pagination. If present, indicates there are more results
@@ -75,16 +106,26 @@ type ListAutomationRulePreviewSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomationRulePreviewSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutomationRulePreviewSummariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutomationRulePreviewSummariesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutomationRulePreviewSummariesResponse_nextToken, v.NextToken)
+		case schemas.ListAutomationRulePreviewSummariesResponse_previewResultSummaries:
+			return deserializePreviewResultSummaries(d, schemas.ListAutomationRulePreviewSummariesResponse_previewResultSummaries, &v.PreviewResultSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutomationRulePreviewSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListAutomationRulePreviewSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomationRulePreviewSummaries, schemas.ListAutomationRulePreviewSummariesRequest, schemas.ListAutomationRulePreviewSummariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListAutomationRulePreviewSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomationRulePreviewSummaries, schemas.ListAutomationRulePreviewSummariesRequest, schemas.ListAutomationRulePreviewSummariesResponse), output: &ListAutomationRulePreviewSummariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAutomationRulePreviewSummaries"); err != nil {

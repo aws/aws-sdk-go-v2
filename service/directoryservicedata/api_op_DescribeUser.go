@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,25 @@ type DescribeUserInput struct {
 	Realm *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DescribeUserRequest_DirectoryId, *v.DirectoryId)
+	}
+	serializeLdapDisplayNameList(s, schemas.DescribeUserRequest_OtherAttributes, v.OtherAttributes)
+	if v.Realm != nil {
+		s.WriteString(schemas.DescribeUserRequest_Realm, *v.Realm)
+	}
+	if v.SAMAccountName != nil {
+		s.WriteString(schemas.DescribeUserRequest_SAMAccountName, *v.SAMAccountName)
+	}
 }
 
 type DescribeUserOutput struct {
@@ -108,16 +129,53 @@ type DescribeUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeUserResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeUserResult_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.DescribeUserResult_DirectoryId, v.DirectoryId)
+		case schemas.DescribeUserResult_DistinguishedName:
+			v.DistinguishedName = new(string)
+			return d.ReadString(schemas.DescribeUserResult_DistinguishedName, v.DistinguishedName)
+		case schemas.DescribeUserResult_EmailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.DescribeUserResult_EmailAddress, v.EmailAddress)
+		case schemas.DescribeUserResult_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.DescribeUserResult_Enabled, v.Enabled)
+		case schemas.DescribeUserResult_GivenName:
+			v.GivenName = new(string)
+			return d.ReadString(schemas.DescribeUserResult_GivenName, v.GivenName)
+		case schemas.DescribeUserResult_OtherAttributes:
+			return deserializeAttributes(d, schemas.DescribeUserResult_OtherAttributes, &v.OtherAttributes)
+		case schemas.DescribeUserResult_Realm:
+			v.Realm = new(string)
+			return d.ReadString(schemas.DescribeUserResult_Realm, v.Realm)
+		case schemas.DescribeUserResult_SAMAccountName:
+			v.SAMAccountName = new(string)
+			return d.ReadString(schemas.DescribeUserResult_SAMAccountName, v.SAMAccountName)
+		case schemas.DescribeUserResult_SID:
+			v.SID = new(string)
+			return d.ReadString(schemas.DescribeUserResult_SID, v.SID)
+		case schemas.DescribeUserResult_Surname:
+			v.Surname = new(string)
+			return d.ReadString(schemas.DescribeUserResult_Surname, v.Surname)
+		case schemas.DescribeUserResult_UserPrincipalName:
+			v.UserPrincipalName = new(string)
+			return d.ReadString(schemas.DescribeUserResult_UserPrincipalName, v.UserPrincipalName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUser, schemas.DescribeUserRequest, schemas.DescribeUserResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUser, schemas.DescribeUserRequest, schemas.DescribeUserResult), output: &DescribeUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeUser"); err != nil {

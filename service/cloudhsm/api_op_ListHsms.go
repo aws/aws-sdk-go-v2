@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,18 @@ type ListHsmsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHsmsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHsmsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHsmsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHsmsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Contains the output of the ListHsms operation.
 type ListHsmsOutput struct {
 
@@ -71,16 +85,26 @@ type ListHsmsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHsmsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHsmsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHsmsResponse_HsmList:
+			return deserializeHsmList(d, schemas.ListHsmsResponse_HsmList, &v.HsmList)
+		case schemas.ListHsmsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHsmsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHsmsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListHsms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHsms, schemas.ListHsmsRequest, schemas.ListHsmsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListHsms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHsms, schemas.ListHsmsRequest, schemas.ListHsmsResponse), output: &ListHsmsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListHsms"); err != nil {

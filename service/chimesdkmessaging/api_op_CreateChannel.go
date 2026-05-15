@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -92,6 +94,52 @@ type CreateChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceArn != nil {
+		s.WriteString(schemas.CreateChannelRequest_AppInstanceArn, *v.AppInstanceArn)
+	}
+	if v.ChannelId != nil {
+		s.WriteString(schemas.CreateChannelRequest_ChannelId, *v.ChannelId)
+	}
+	if v.ChimeBearer != nil {
+		s.WriteString(schemas.CreateChannelRequest_ChimeBearer, *v.ChimeBearer)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateChannelRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ElasticChannelConfiguration != nil {
+		s.WriteStruct(schemas.CreateChannelRequest_ElasticChannelConfiguration)
+		v.ElasticChannelConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExpirationSettings != nil {
+		s.WriteStruct(schemas.CreateChannelRequest_ExpirationSettings)
+		v.ExpirationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeChannelMemberArns(s, schemas.CreateChannelRequest_MemberArns, v.MemberArns)
+	if v.Metadata != nil {
+		s.WriteString(schemas.CreateChannelRequest_Metadata, *v.Metadata)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.CreateChannelRequest_Mode, string(v.Mode))
+	}
+	serializeChannelModeratorArns(s, schemas.CreateChannelRequest_ModeratorArns, v.ModeratorArns)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateChannelRequest_Name, *v.Name)
+	}
+	if v.Privacy != "" {
+		s.WriteString(schemas.CreateChannelRequest_Privacy, string(v.Privacy))
+	}
+	serializeTagList(s, schemas.CreateChannelRequest_Tags, v.Tags)
+}
+
 type CreateChannelOutput struct {
 
 	// The ARN of the channel.
@@ -103,16 +151,24 @@ type CreateChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChannelResponse_ChannelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.CreateChannelResponse_ChannelArn, v.ChannelArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannel, schemas.CreateChannelRequest, schemas.CreateChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannel, schemas.CreateChannelRequest, schemas.CreateChannelResponse), output: &CreateChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateChannel"); err != nil {

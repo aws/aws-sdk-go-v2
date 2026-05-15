@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,6 +67,21 @@ type DeleteSizeConstraintSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSizeConstraintSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSizeConstraintSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSizeConstraintSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeToken != nil {
+		s.WriteString(schemas.DeleteSizeConstraintSetRequest_ChangeToken, *v.ChangeToken)
+	}
+	if v.SizeConstraintSetId != nil {
+		s.WriteString(schemas.DeleteSizeConstraintSetRequest_SizeConstraintSetId, *v.SizeConstraintSetId)
+	}
+}
+
 type DeleteSizeConstraintSetOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteSizeConstraintSet request.
@@ -78,16 +95,24 @@ type DeleteSizeConstraintSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSizeConstraintSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSizeConstraintSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSizeConstraintSetResponse_ChangeToken:
+			v.ChangeToken = new(string)
+			return d.ReadString(schemas.DeleteSizeConstraintSetResponse_ChangeToken, v.ChangeToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSizeConstraintSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSizeConstraintSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSizeConstraintSet, schemas.DeleteSizeConstraintSetRequest, schemas.DeleteSizeConstraintSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteSizeConstraintSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSizeConstraintSet, schemas.DeleteSizeConstraintSetRequest, schemas.DeleteSizeConstraintSetResponse), output: &DeleteSizeConstraintSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSizeConstraintSet"); err != nil {

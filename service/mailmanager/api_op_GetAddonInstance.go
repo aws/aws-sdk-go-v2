@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -37,6 +39,18 @@ type GetAddonInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAddonInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAddonInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAddonInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonInstanceId != nil {
+		s.WriteString(schemas.GetAddonInstanceRequest_AddonInstanceId, *v.AddonInstanceId)
+	}
+}
+
 type GetAddonInstanceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Add On instance.
@@ -57,16 +71,33 @@ type GetAddonInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAddonInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAddonInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAddonInstanceResponse_AddonInstanceArn:
+			v.AddonInstanceArn = new(string)
+			return d.ReadString(schemas.GetAddonInstanceResponse_AddonInstanceArn, v.AddonInstanceArn)
+		case schemas.GetAddonInstanceResponse_AddonName:
+			v.AddonName = new(string)
+			return d.ReadString(schemas.GetAddonInstanceResponse_AddonName, v.AddonName)
+		case schemas.GetAddonInstanceResponse_AddonSubscriptionId:
+			v.AddonSubscriptionId = new(string)
+			return d.ReadString(schemas.GetAddonInstanceResponse_AddonSubscriptionId, v.AddonSubscriptionId)
+		case schemas.GetAddonInstanceResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetAddonInstanceResponse_CreatedTimestamp, v.CreatedTimestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAddonInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetAddonInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAddonInstance, schemas.GetAddonInstanceRequest, schemas.GetAddonInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetAddonInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAddonInstance, schemas.GetAddonInstanceRequest, schemas.GetAddonInstanceResponse), output: &GetAddonInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAddonInstance"); err != nil {

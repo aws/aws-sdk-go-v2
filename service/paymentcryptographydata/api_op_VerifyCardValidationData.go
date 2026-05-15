@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -87,6 +89,25 @@ type VerifyCardValidationDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyCardValidationDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyCardValidationDataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyCardValidationDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyIdentifier != nil {
+		s.WriteString(schemas.VerifyCardValidationDataInput_KeyIdentifier, *v.KeyIdentifier)
+	}
+	if v.PrimaryAccountNumber != nil {
+		s.WriteString(schemas.VerifyCardValidationDataInput_PrimaryAccountNumber, *v.PrimaryAccountNumber)
+	}
+	if v.ValidationData != nil {
+		s.WriteString(schemas.VerifyCardValidationDataInput_ValidationData, *v.ValidationData)
+	}
+	serializeCardVerificationAttributes(s, schemas.VerifyCardValidationDataInput_VerificationAttributes, v.VerificationAttributes)
+}
+
 type VerifyCardValidationDataOutput struct {
 
 	// The keyARN of the CVK encryption key that Amazon Web Services Payment
@@ -111,16 +132,27 @@ type VerifyCardValidationDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyCardValidationDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifyCardValidationDataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerifyCardValidationDataOutput_KeyArn:
+			v.KeyArn = new(string)
+			return d.ReadString(schemas.VerifyCardValidationDataOutput_KeyArn, v.KeyArn)
+		case schemas.VerifyCardValidationDataOutput_KeyCheckValue:
+			v.KeyCheckValue = new(string)
+			return d.ReadString(schemas.VerifyCardValidationDataOutput_KeyCheckValue, v.KeyCheckValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVerifyCardValidationDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpVerifyCardValidationData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyCardValidationData, schemas.VerifyCardValidationDataInput, schemas.VerifyCardValidationDataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpVerifyCardValidationData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyCardValidationData, schemas.VerifyCardValidationDataInput, schemas.VerifyCardValidationDataOutput), output: &VerifyCardValidationDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "VerifyCardValidationData"); err != nil {

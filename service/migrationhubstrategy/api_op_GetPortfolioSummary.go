@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +35,22 @@ type GetPortfolioSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPortfolioSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPortfolioSummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPortfolioSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetPortfolioSummaryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPortfolioSummaryRequest, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetPortfolioSummaryOutput struct {
 
 	//  An assessment summary for the portfolio including the number of servers to
@@ -45,16 +63,37 @@ type GetPortfolioSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPortfolioSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPortfolioSummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPortfolioSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentSummary != nil {
+		s.WriteStruct(schemas.GetPortfolioSummaryResponse_assessmentSummary)
+		v.AssessmentSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPortfolioSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPortfolioSummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPortfolioSummaryResponse_assessmentSummary:
+			v.AssessmentSummary = &types.AssessmentSummary{}
+			return v.AssessmentSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPortfolioSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPortfolioSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPortfolioSummary, schemas.GetPortfolioSummaryRequest, schemas.GetPortfolioSummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPortfolioSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPortfolioSummary, schemas.GetPortfolioSummaryRequest, schemas.GetPortfolioSummaryResponse), output: &GetPortfolioSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPortfolioSummary"); err != nil {

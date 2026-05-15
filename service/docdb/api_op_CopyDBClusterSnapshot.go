@@ -7,8 +7,10 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -147,6 +149,37 @@ type CopyDBClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyDBClusterSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyDBClusterSnapshotMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyDBClusterSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyTags != nil {
+		s.WriteBool(schemas.CopyDBClusterSnapshotMessage_CopyTags, *v.CopyTags)
+	}
+	if v.destinationRegion != nil {
+		s.WriteString(schemas.CopyDBClusterSnapshotMessage_DestinationRegion, *v.destinationRegion)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CopyDBClusterSnapshotMessage_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.PreSignedUrl != nil {
+		s.WriteString(schemas.CopyDBClusterSnapshotMessage_PreSignedUrl, *v.PreSignedUrl)
+	}
+	if v.SourceDBClusterSnapshotIdentifier != nil {
+		s.WriteString(schemas.CopyDBClusterSnapshotMessage_SourceDBClusterSnapshotIdentifier, *v.SourceDBClusterSnapshotIdentifier)
+	}
+	if v.SourceRegion != nil {
+		s.WriteString(schemas.CopyDBClusterSnapshotMessage_SourceRegion, *v.SourceRegion)
+	}
+	serializeTagList(s, schemas.CopyDBClusterSnapshotMessage_Tags, v.Tags)
+	if v.TargetDBClusterSnapshotIdentifier != nil {
+		s.WriteString(schemas.CopyDBClusterSnapshotMessage_TargetDBClusterSnapshotIdentifier, *v.TargetDBClusterSnapshotIdentifier)
+	}
+}
+
 type CopyDBClusterSnapshotOutput struct {
 
 	// Detailed information about a cluster snapshot.
@@ -158,16 +191,24 @@ type CopyDBClusterSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyDBClusterSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyDBClusterSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyDBClusterSnapshotResult_DBClusterSnapshot:
+			v.DBClusterSnapshot = &types.DBClusterSnapshot{}
+			return v.DBClusterSnapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopyDBClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCopyDBClusterSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyDBClusterSnapshot, schemas.CopyDBClusterSnapshotMessage, schemas.CopyDBClusterSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCopyDBClusterSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyDBClusterSnapshot, schemas.CopyDBClusterSnapshotMessage, schemas.CopyDBClusterSnapshotResult), output: &CopyDBClusterSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CopyDBClusterSnapshot"); err != nil {

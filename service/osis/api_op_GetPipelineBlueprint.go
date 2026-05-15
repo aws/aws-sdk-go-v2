@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/osis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/osis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,21 @@ type GetPipelineBlueprintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPipelineBlueprintInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPipelineBlueprintRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPipelineBlueprintInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlueprintName != nil {
+		s.WriteString(schemas.GetPipelineBlueprintRequest_BlueprintName, *v.BlueprintName)
+	}
+	if v.Format != nil {
+		s.WriteString(schemas.GetPipelineBlueprintRequest_Format, *v.Format)
+	}
+}
+
 type GetPipelineBlueprintOutput struct {
 
 	// The requested blueprint in YAML format.
@@ -58,16 +75,27 @@ type GetPipelineBlueprintOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPipelineBlueprintOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPipelineBlueprintResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPipelineBlueprintResponse_Blueprint:
+			v.Blueprint = &types.PipelineBlueprint{}
+			return v.Blueprint.Deserialize(d)
+		case schemas.GetPipelineBlueprintResponse_Format:
+			v.Format = new(string)
+			return d.ReadString(schemas.GetPipelineBlueprintResponse_Format, v.Format)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPipelineBlueprintMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPipelineBlueprint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPipelineBlueprint, schemas.GetPipelineBlueprintRequest, schemas.GetPipelineBlueprintResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPipelineBlueprint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPipelineBlueprint, schemas.GetPipelineBlueprintRequest, schemas.GetPipelineBlueprintResponse), output: &GetPipelineBlueprintOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPipelineBlueprint"); err != nil {

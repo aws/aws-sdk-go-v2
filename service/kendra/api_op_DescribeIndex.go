@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type DescribeIndexInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIndexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeIndexRequest_Id, *v.Id)
+	}
 }
 
 type DescribeIndexOutput struct {
@@ -111,16 +125,79 @@ type DescribeIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeIndexResponse_CapacityUnits:
+			v.CapacityUnits = &types.CapacityUnitsConfiguration{}
+			return v.CapacityUnits.Deserialize(d)
+		case schemas.DescribeIndexResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeIndexResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeIndexResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeIndexResponse_Description, v.Description)
+		case schemas.DescribeIndexResponse_DocumentMetadataConfigurations:
+			return deserializeDocumentMetadataConfigurationList(d, schemas.DescribeIndexResponse_DocumentMetadataConfigurations, &v.DocumentMetadataConfigurations)
+		case schemas.DescribeIndexResponse_Edition:
+			var ev string
+			if err := d.ReadString(schemas.DescribeIndexResponse_Edition, &ev); err != nil {
+				return err
+			}
+			v.Edition = types.IndexEdition(ev)
+			return nil
+		case schemas.DescribeIndexResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DescribeIndexResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.DescribeIndexResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeIndexResponse_Id, v.Id)
+		case schemas.DescribeIndexResponse_IndexStatistics:
+			v.IndexStatistics = &types.IndexStatistics{}
+			return v.IndexStatistics.Deserialize(d)
+		case schemas.DescribeIndexResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeIndexResponse_Name, v.Name)
+		case schemas.DescribeIndexResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeIndexResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeIndexResponse_ServerSideEncryptionConfiguration:
+			v.ServerSideEncryptionConfiguration = &types.ServerSideEncryptionConfiguration{}
+			return v.ServerSideEncryptionConfiguration.Deserialize(d)
+		case schemas.DescribeIndexResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeIndexResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.IndexStatus(ev)
+			return nil
+		case schemas.DescribeIndexResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeIndexResponse_UpdatedAt, v.UpdatedAt)
+		case schemas.DescribeIndexResponse_UserContextPolicy:
+			var ev string
+			if err := d.ReadString(schemas.DescribeIndexResponse_UserContextPolicy, &ev); err != nil {
+				return err
+			}
+			v.UserContextPolicy = types.UserContextPolicy(ev)
+			return nil
+		case schemas.DescribeIndexResponse_UserGroupResolutionConfiguration:
+			v.UserGroupResolutionConfiguration = &types.UserGroupResolutionConfiguration{}
+			return v.UserGroupResolutionConfiguration.Deserialize(d)
+		case schemas.DescribeIndexResponse_UserTokenConfigurations:
+			return deserializeUserTokenConfigurationList(d, schemas.DescribeIndexResponse_UserTokenConfigurations, &v.UserTokenConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIndex, schemas.DescribeIndexRequest, schemas.DescribeIndexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIndex, schemas.DescribeIndexRequest, schemas.DescribeIndexResponse), output: &DescribeIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeIndex"); err != nil {

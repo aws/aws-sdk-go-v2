@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -84,6 +86,41 @@ type CreateGlossaryTermInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGlossaryTermInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGlossaryTermInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGlossaryTermInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateGlossaryTermInput_clientToken, *v.ClientToken)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.CreateGlossaryTermInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.GlossaryIdentifier != nil {
+		s.WriteString(schemas.CreateGlossaryTermInput_glossaryIdentifier, *v.GlossaryIdentifier)
+	}
+	if v.LongDescription != nil {
+		s.WriteString(schemas.CreateGlossaryTermInput_longDescription, *v.LongDescription)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateGlossaryTermInput_name, *v.Name)
+	}
+	if v.ShortDescription != nil {
+		s.WriteString(schemas.CreateGlossaryTermInput_shortDescription, *v.ShortDescription)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateGlossaryTermInput_status, string(v.Status))
+	}
+	if v.TermRelations != nil {
+		s.WriteStruct(schemas.CreateGlossaryTermInput_termRelations)
+		v.TermRelations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateGlossaryTermOutput struct {
 
 	// The ID of the Amazon DataZone domain in which this business glossary term is
@@ -130,16 +167,51 @@ type CreateGlossaryTermOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGlossaryTermOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGlossaryTermOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGlossaryTermOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CreateGlossaryTermOutput_domainId, v.DomainId)
+		case schemas.CreateGlossaryTermOutput_glossaryId:
+			v.GlossaryId = new(string)
+			return d.ReadString(schemas.CreateGlossaryTermOutput_glossaryId, v.GlossaryId)
+		case schemas.CreateGlossaryTermOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateGlossaryTermOutput_id, v.Id)
+		case schemas.CreateGlossaryTermOutput_longDescription:
+			v.LongDescription = new(string)
+			return d.ReadString(schemas.CreateGlossaryTermOutput_longDescription, v.LongDescription)
+		case schemas.CreateGlossaryTermOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateGlossaryTermOutput_name, v.Name)
+		case schemas.CreateGlossaryTermOutput_shortDescription:
+			v.ShortDescription = new(string)
+			return d.ReadString(schemas.CreateGlossaryTermOutput_shortDescription, v.ShortDescription)
+		case schemas.CreateGlossaryTermOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateGlossaryTermOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GlossaryTermStatus(ev)
+			return nil
+		case schemas.CreateGlossaryTermOutput_termRelations:
+			v.TermRelations = &types.TermRelations{}
+			return v.TermRelations.Deserialize(d)
+		case schemas.CreateGlossaryTermOutput_usageRestrictions:
+			return deserializeGlossaryUsageRestrictions(d, schemas.CreateGlossaryTermOutput_usageRestrictions, &v.UsageRestrictions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGlossaryTermMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGlossaryTerm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGlossaryTerm, schemas.CreateGlossaryTermInput, schemas.CreateGlossaryTermOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGlossaryTerm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGlossaryTerm, schemas.CreateGlossaryTermInput, schemas.CreateGlossaryTermOutput), output: &CreateGlossaryTermOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateGlossaryTerm"); err != nil {

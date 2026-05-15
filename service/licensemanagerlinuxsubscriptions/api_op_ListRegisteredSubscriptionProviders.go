@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,22 @@ type ListRegisteredSubscriptionProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRegisteredSubscriptionProvidersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRegisteredSubscriptionProvidersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRegisteredSubscriptionProvidersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRegisteredSubscriptionProvidersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRegisteredSubscriptionProvidersRequest_NextToken, *v.NextToken)
+	}
+	serializeSubscriptionProviderSourceList(s, schemas.ListRegisteredSubscriptionProvidersRequest_SubscriptionProviderSources, v.SubscriptionProviderSources)
+}
+
 type ListRegisteredSubscriptionProvidersOutput struct {
 
 	// The next token used for paginated responses. When this field isn't empty, there
@@ -61,16 +79,26 @@ type ListRegisteredSubscriptionProvidersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRegisteredSubscriptionProvidersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRegisteredSubscriptionProvidersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRegisteredSubscriptionProvidersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRegisteredSubscriptionProvidersResponse_NextToken, v.NextToken)
+		case schemas.ListRegisteredSubscriptionProvidersResponse_RegisteredSubscriptionProviders:
+			return deserializeRegisteredSubscriptionProviderList(d, schemas.ListRegisteredSubscriptionProvidersResponse_RegisteredSubscriptionProviders, &v.RegisteredSubscriptionProviders)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRegisteredSubscriptionProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRegisteredSubscriptionProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRegisteredSubscriptionProviders, schemas.ListRegisteredSubscriptionProvidersRequest, schemas.ListRegisteredSubscriptionProvidersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRegisteredSubscriptionProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRegisteredSubscriptionProviders, schemas.ListRegisteredSubscriptionProvidersRequest, schemas.ListRegisteredSubscriptionProvidersResponse), output: &ListRegisteredSubscriptionProvidersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRegisteredSubscriptionProviders"); err != nil {

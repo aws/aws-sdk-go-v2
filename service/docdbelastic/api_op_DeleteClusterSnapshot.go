@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,28 @@ type DeleteClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClusterSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteClusterSnapshotInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClusterSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotArn != nil {
+		s.WriteString(schemas.DeleteClusterSnapshotInput_snapshotArn, *v.SnapshotArn)
+	}
+}
+func (v *DeleteClusterSnapshotInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteClusterSnapshotInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteClusterSnapshotInput_snapshotArn:
+			v.SnapshotArn = new(string)
+			return d.ReadString(schemas.DeleteClusterSnapshotInput_snapshotArn, v.SnapshotArn)
+		}
+		return nil
+	})
+}
+
 type DeleteClusterSnapshotOutput struct {
 
 	// Returns information about the newly deleted elastic cluster snapshot.
@@ -50,16 +74,37 @@ type DeleteClusterSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClusterSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteClusterSnapshotOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClusterSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Snapshot != nil {
+		s.WriteStruct(schemas.DeleteClusterSnapshotOutput_snapshot)
+		v.Snapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteClusterSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteClusterSnapshotOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteClusterSnapshotOutput_snapshot:
+			v.Snapshot = &types.ClusterSnapshot{}
+			return v.Snapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteClusterSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteClusterSnapshot, schemas.DeleteClusterSnapshotInput, schemas.DeleteClusterSnapshotOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteClusterSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteClusterSnapshot, schemas.DeleteClusterSnapshotInput, schemas.DeleteClusterSnapshotOutput), output: &DeleteClusterSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteClusterSnapshot"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type ListProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProjectsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProjectsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListProjectsRequest_arn, *v.Arn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProjectsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Represents the result of a list projects request.
 type ListProjectsOutput struct {
 
@@ -59,16 +76,26 @@ type ListProjectsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProjectsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProjectsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProjectsResult_nextToken, v.NextToken)
+		case schemas.ListProjectsResult_projects:
+			return deserializeProjects(d, schemas.ListProjectsResult_projects, &v.Projects)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListProjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProjects, schemas.ListProjectsRequest, schemas.ListProjectsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListProjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProjects, schemas.ListProjectsRequest, schemas.ListProjectsResult), output: &ListProjectsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProjects"); err != nil {

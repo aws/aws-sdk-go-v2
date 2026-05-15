@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,21 @@ type DescribeAnomalyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAnomalyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAnomalyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAnomalyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeAnomalyRequest_AccountId, *v.AccountId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeAnomalyRequest_Id, *v.Id)
+	}
+}
+
 type DescribeAnomalyOutput struct {
 
 	//  A ProactiveAnomaly object that represents the requested anomaly.
@@ -54,16 +71,27 @@ type DescribeAnomalyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAnomalyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAnomalyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAnomalyResponse_ProactiveAnomaly:
+			v.ProactiveAnomaly = &types.ProactiveAnomaly{}
+			return v.ProactiveAnomaly.Deserialize(d)
+		case schemas.DescribeAnomalyResponse_ReactiveAnomaly:
+			v.ReactiveAnomaly = &types.ReactiveAnomaly{}
+			return v.ReactiveAnomaly.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAnomalyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAnomaly{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAnomaly, schemas.DescribeAnomalyRequest, schemas.DescribeAnomalyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAnomaly{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAnomaly, schemas.DescribeAnomalyRequest, schemas.DescribeAnomalyResponse), output: &DescribeAnomalyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAnomaly"); err != nil {

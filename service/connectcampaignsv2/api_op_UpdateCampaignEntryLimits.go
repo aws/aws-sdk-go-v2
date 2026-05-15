@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,23 @@ type UpdateCampaignEntryLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCampaignEntryLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCampaignEntryLimitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCampaignEntryLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntryLimitsConfig != nil {
+		s.WriteStruct(schemas.UpdateCampaignEntryLimitsRequest_entryLimitsConfig)
+		v.EntryLimitsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateCampaignEntryLimitsRequest_id, *v.Id)
+	}
+}
+
 type UpdateCampaignEntryLimitsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,16 +69,29 @@ type UpdateCampaignEntryLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCampaignEntryLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCampaignEntryLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateCampaignEntryLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCampaignEntryLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCampaignEntryLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCampaignEntryLimits, schemas.UpdateCampaignEntryLimitsRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCampaignEntryLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCampaignEntryLimits, schemas.UpdateCampaignEntryLimitsRequest, nil), output: &UpdateCampaignEntryLimitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCampaignEntryLimits"); err != nil {

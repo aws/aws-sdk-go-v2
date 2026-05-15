@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,24 @@ type CreateAnonymousWebExperienceUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAnonymousWebExperienceUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAnonymousWebExperienceUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAnonymousWebExperienceUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateAnonymousWebExperienceUrlRequest_applicationId, *v.ApplicationId)
+	}
+	if v.SessionDurationInMinutes != nil {
+		s.WriteInt32(schemas.CreateAnonymousWebExperienceUrlRequest_sessionDurationInMinutes, *v.SessionDurationInMinutes)
+	}
+	if v.WebExperienceId != nil {
+		s.WriteString(schemas.CreateAnonymousWebExperienceUrlRequest_webExperienceId, *v.WebExperienceId)
+	}
+}
+
 type CreateAnonymousWebExperienceUrlOutput struct {
 
 	// The unique URL for accessing the web experience.
@@ -61,16 +81,24 @@ type CreateAnonymousWebExperienceUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAnonymousWebExperienceUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAnonymousWebExperienceUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAnonymousWebExperienceUrlResponse_anonymousUrl:
+			v.AnonymousUrl = new(string)
+			return d.ReadString(schemas.CreateAnonymousWebExperienceUrlResponse_anonymousUrl, v.AnonymousUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAnonymousWebExperienceUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAnonymousWebExperienceUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAnonymousWebExperienceUrl, schemas.CreateAnonymousWebExperienceUrlRequest, schemas.CreateAnonymousWebExperienceUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAnonymousWebExperienceUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAnonymousWebExperienceUrl, schemas.CreateAnonymousWebExperienceUrlRequest, schemas.CreateAnonymousWebExperienceUrlResponse), output: &CreateAnonymousWebExperienceUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAnonymousWebExperienceUrl"); err != nil {

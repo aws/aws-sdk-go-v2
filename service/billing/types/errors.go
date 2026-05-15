@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,16 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessDeniedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 //	Exception thrown when a billing view's health status prevents an operation
 //
@@ -61,6 +72,16 @@ func (e *BillingViewHealthStatusException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BillingViewHealthStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BillingViewHealthStatusException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingViewHealthStatusException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingViewHealthStatusException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BillingViewHealthStatusException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 //	The requested operation would cause a conflict with the current state of a
 //
@@ -93,6 +114,22 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_message, v.Message)
+		case schemas.ConflictException_resourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.ConflictException_resourceId, v.ResourceId)
+		case schemas.ConflictException_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ConflictException_resourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
 
 // The request processing failed because of an unknown error, exception, or
 // failure.
@@ -120,6 +157,16 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified ARN in the request doesn't exist.
 type ResourceNotFoundException struct {
@@ -149,6 +196,22 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
+		case schemas.ResourceNotFoundException_resourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_resourceId, v.ResourceId)
+		case schemas.ResourceNotFoundException_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_resourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
 
 //	You've reached the limit of resources you can create, or exceeded the size of
 //
@@ -182,6 +245,28 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceQuotaExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_message, v.Message)
+		case schemas.ServiceQuotaExceededException_quotaCode:
+			v.QuotaCode = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_quotaCode, v.QuotaCode)
+		case schemas.ServiceQuotaExceededException_resourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_resourceId, v.ResourceId)
+		case schemas.ServiceQuotaExceededException_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_resourceType, v.ResourceType)
+		case schemas.ServiceQuotaExceededException_serviceCode:
+			v.ServiceCode = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_serviceCode, v.ServiceCode)
+		}
+		return nil
+	})
+}
 
 // The request was denied due to request throttling.
 type ThrottlingException struct {
@@ -208,6 +293,16 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThrottlingException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ThrottlingException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The input fails to satisfy the constraints specified by an Amazon Web Services
 // service.
@@ -238,3 +333,22 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationException_fieldList:
+			return deserializeValidationExceptionFieldList(d, schemas.ValidationException_fieldList, &v.FieldList)
+		case schemas.ValidationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationException_message, v.Message)
+		case schemas.ValidationException_reason:
+			var ev string
+			if err := d.ReadString(schemas.ValidationException_reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = ValidationExceptionReason(ev)
+			return nil
+		}
+		return nil
+	})
+}

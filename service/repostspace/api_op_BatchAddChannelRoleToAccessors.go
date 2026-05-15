@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/repostspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/repostspace/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,25 @@ type BatchAddChannelRoleToAccessorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAddChannelRoleToAccessorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAddChannelRoleToAccessorsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAddChannelRoleToAccessorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessorIdList(s, schemas.BatchAddChannelRoleToAccessorsInput_accessorIds, v.AccessorIds)
+	if v.ChannelId != nil {
+		s.WriteString(schemas.BatchAddChannelRoleToAccessorsInput_channelId, *v.ChannelId)
+	}
+	if v.ChannelRole != "" {
+		s.WriteString(schemas.BatchAddChannelRoleToAccessorsInput_channelRole, string(v.ChannelRole))
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.BatchAddChannelRoleToAccessorsInput_spaceId, *v.SpaceId)
+	}
+}
+
 type BatchAddChannelRoleToAccessorsOutput struct {
 
 	// An array of successfully updated identifiers.
@@ -70,16 +91,25 @@ type BatchAddChannelRoleToAccessorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAddChannelRoleToAccessorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAddChannelRoleToAccessorsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAddChannelRoleToAccessorsOutput_addedAccessorIds:
+			return deserializeAccessorIdList(d, schemas.BatchAddChannelRoleToAccessorsOutput_addedAccessorIds, &v.AddedAccessorIds)
+		case schemas.BatchAddChannelRoleToAccessorsOutput_errors:
+			return deserializeBatchErrorList(d, schemas.BatchAddChannelRoleToAccessorsOutput_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchAddChannelRoleToAccessorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchAddChannelRoleToAccessors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAddChannelRoleToAccessors, schemas.BatchAddChannelRoleToAccessorsInput, schemas.BatchAddChannelRoleToAccessorsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchAddChannelRoleToAccessors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAddChannelRoleToAccessors, schemas.BatchAddChannelRoleToAccessorsInput, schemas.BatchAddChannelRoleToAccessorsOutput), output: &BatchAddChannelRoleToAccessorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchAddChannelRoleToAccessors"); err != nil {

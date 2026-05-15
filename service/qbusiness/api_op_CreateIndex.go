@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -76,6 +78,36 @@ type CreateIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIndexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateIndexRequest_applicationId, *v.ApplicationId)
+	}
+	if v.CapacityConfiguration != nil {
+		s.WriteStruct(schemas.CreateIndexRequest_capacityConfiguration)
+		v.CapacityConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateIndexRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateIndexRequest_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateIndexRequest_displayName, *v.DisplayName)
+	}
+	serializeTags(s, schemas.CreateIndexRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateIndexRequest_type, string(v.Type))
+	}
+}
+
 type CreateIndexOutput struct {
 
 	//  The Amazon Resource Name (ARN) of an Amazon Q Business index.
@@ -90,16 +122,27 @@ type CreateIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIndexResponse_indexArn:
+			v.IndexArn = new(string)
+			return d.ReadString(schemas.CreateIndexResponse_indexArn, v.IndexArn)
+		case schemas.CreateIndexResponse_indexId:
+			v.IndexId = new(string)
+			return d.ReadString(schemas.CreateIndexResponse_indexId, v.IndexId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIndex, schemas.CreateIndexRequest, schemas.CreateIndexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIndex, schemas.CreateIndexRequest, schemas.CreateIndexResponse), output: &CreateIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateIndex"); err != nil {

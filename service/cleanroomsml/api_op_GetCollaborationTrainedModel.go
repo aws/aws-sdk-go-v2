@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -47,6 +49,24 @@ type GetCollaborationTrainedModelInput struct {
 	VersionIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCollaborationTrainedModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCollaborationTrainedModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCollaborationTrainedModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.GetCollaborationTrainedModelRequest_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	if v.TrainedModelArn != nil {
+		s.WriteString(schemas.GetCollaborationTrainedModelRequest_trainedModelArn, *v.TrainedModelArn)
+	}
+	if v.VersionIdentifier != nil {
+		s.WriteString(schemas.GetCollaborationTrainedModelRequest_versionIdentifier, *v.VersionIdentifier)
+	}
 }
 
 type GetCollaborationTrainedModelOutput struct {
@@ -148,16 +168,102 @@ type GetCollaborationTrainedModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCollaborationTrainedModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCollaborationTrainedModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCollaborationTrainedModelResponse_collaborationIdentifier:
+			v.CollaborationIdentifier = new(string)
+			return d.ReadString(schemas.GetCollaborationTrainedModelResponse_collaborationIdentifier, v.CollaborationIdentifier)
+		case schemas.GetCollaborationTrainedModelResponse_configuredModelAlgorithmAssociationArn:
+			v.ConfiguredModelAlgorithmAssociationArn = new(string)
+			return d.ReadString(schemas.GetCollaborationTrainedModelResponse_configuredModelAlgorithmAssociationArn, v.ConfiguredModelAlgorithmAssociationArn)
+		case schemas.GetCollaborationTrainedModelResponse_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.GetCollaborationTrainedModelResponse_createTime, v.CreateTime)
+		case schemas.GetCollaborationTrainedModelResponse_creatorAccountId:
+			v.CreatorAccountId = new(string)
+			return d.ReadString(schemas.GetCollaborationTrainedModelResponse_creatorAccountId, v.CreatorAccountId)
+		case schemas.GetCollaborationTrainedModelResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetCollaborationTrainedModelResponse_description, v.Description)
+		case schemas.GetCollaborationTrainedModelResponse_incrementalTrainingDataChannels:
+			return deserializeIncrementalTrainingDataChannelsOutput(d, schemas.GetCollaborationTrainedModelResponse_incrementalTrainingDataChannels, &v.IncrementalTrainingDataChannels)
+		case schemas.GetCollaborationTrainedModelResponse_logsStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetCollaborationTrainedModelResponse_logsStatus, &ev); err != nil {
+				return err
+			}
+			v.LogsStatus = types.LogsStatus(ev)
+			return nil
+		case schemas.GetCollaborationTrainedModelResponse_logsStatusDetails:
+			v.LogsStatusDetails = new(string)
+			return d.ReadString(schemas.GetCollaborationTrainedModelResponse_logsStatusDetails, v.LogsStatusDetails)
+		case schemas.GetCollaborationTrainedModelResponse_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.GetCollaborationTrainedModelResponse_membershipIdentifier, v.MembershipIdentifier)
+		case schemas.GetCollaborationTrainedModelResponse_metricsStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetCollaborationTrainedModelResponse_metricsStatus, &ev); err != nil {
+				return err
+			}
+			v.MetricsStatus = types.MetricsStatus(ev)
+			return nil
+		case schemas.GetCollaborationTrainedModelResponse_metricsStatusDetails:
+			v.MetricsStatusDetails = new(string)
+			return d.ReadString(schemas.GetCollaborationTrainedModelResponse_metricsStatusDetails, v.MetricsStatusDetails)
+		case schemas.GetCollaborationTrainedModelResponse_mlModelTrainingPayerAccountId:
+			v.MlModelTrainingPayerAccountId = new(string)
+			return d.ReadString(schemas.GetCollaborationTrainedModelResponse_mlModelTrainingPayerAccountId, v.MlModelTrainingPayerAccountId)
+		case schemas.GetCollaborationTrainedModelResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetCollaborationTrainedModelResponse_name, v.Name)
+		case schemas.GetCollaborationTrainedModelResponse_resourceConfig:
+			v.ResourceConfig = &types.ResourceConfig{}
+			return v.ResourceConfig.Deserialize(d)
+		case schemas.GetCollaborationTrainedModelResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetCollaborationTrainedModelResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TrainedModelStatus(ev)
+			return nil
+		case schemas.GetCollaborationTrainedModelResponse_statusDetails:
+			v.StatusDetails = &types.StatusDetails{}
+			return v.StatusDetails.Deserialize(d)
+		case schemas.GetCollaborationTrainedModelResponse_stoppingCondition:
+			v.StoppingCondition = &types.StoppingCondition{}
+			return v.StoppingCondition.Deserialize(d)
+		case schemas.GetCollaborationTrainedModelResponse_trainedModelArn:
+			v.TrainedModelArn = new(string)
+			return d.ReadString(schemas.GetCollaborationTrainedModelResponse_trainedModelArn, v.TrainedModelArn)
+		case schemas.GetCollaborationTrainedModelResponse_trainingContainerImageDigest:
+			v.TrainingContainerImageDigest = new(string)
+			return d.ReadString(schemas.GetCollaborationTrainedModelResponse_trainingContainerImageDigest, v.TrainingContainerImageDigest)
+		case schemas.GetCollaborationTrainedModelResponse_trainingInputMode:
+			var ev string
+			if err := d.ReadString(schemas.GetCollaborationTrainedModelResponse_trainingInputMode, &ev); err != nil {
+				return err
+			}
+			v.TrainingInputMode = types.TrainingInputMode(ev)
+			return nil
+		case schemas.GetCollaborationTrainedModelResponse_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.GetCollaborationTrainedModelResponse_updateTime, v.UpdateTime)
+		case schemas.GetCollaborationTrainedModelResponse_versionIdentifier:
+			v.VersionIdentifier = new(string)
+			return d.ReadString(schemas.GetCollaborationTrainedModelResponse_versionIdentifier, v.VersionIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCollaborationTrainedModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCollaborationTrainedModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCollaborationTrainedModel, schemas.GetCollaborationTrainedModelRequest, schemas.GetCollaborationTrainedModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCollaborationTrainedModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCollaborationTrainedModel, schemas.GetCollaborationTrainedModelRequest, schemas.GetCollaborationTrainedModelResponse), output: &GetCollaborationTrainedModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCollaborationTrainedModel"); err != nil {

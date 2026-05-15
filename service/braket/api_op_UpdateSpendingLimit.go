@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/braket/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/braket/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,29 @@ type UpdateSpendingLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSpendingLimitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSpendingLimitRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSpendingLimitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateSpendingLimitRequest_clientToken, *v.ClientToken)
+	}
+	if v.SpendingLimit != nil {
+		s.WriteString(schemas.UpdateSpendingLimitRequest_spendingLimit, *v.SpendingLimit)
+	}
+	if v.SpendingLimitArn != nil {
+		s.WriteString(schemas.UpdateSpendingLimitRequest_spendingLimitArn, *v.SpendingLimitArn)
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.UpdateSpendingLimitRequest_timePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateSpendingLimitOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,16 +84,21 @@ type UpdateSpendingLimitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSpendingLimitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSpendingLimitResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSpendingLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSpendingLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSpendingLimit, schemas.UpdateSpendingLimitRequest, schemas.UpdateSpendingLimitResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSpendingLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSpendingLimit, schemas.UpdateSpendingLimitRequest, schemas.UpdateSpendingLimitResponse), output: &UpdateSpendingLimitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSpendingLimit"); err != nil {

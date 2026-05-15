@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backupgateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,34 @@ type ListHypervisorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHypervisorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHypervisorsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHypervisorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHypervisorsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHypervisorsInput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListHypervisorsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHypervisorsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHypervisorsInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListHypervisorsInput_MaxResults, v.MaxResults)
+		case schemas.ListHypervisorsInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHypervisorsInput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListHypervisorsOutput struct {
 
 	// A list of your Hypervisor objects, ordered by their Amazon Resource Names
@@ -59,16 +89,38 @@ type ListHypervisorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHypervisorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHypervisorsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHypervisorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHypervisors(s, schemas.ListHypervisorsOutput_Hypervisors, v.Hypervisors)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHypervisorsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListHypervisorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHypervisorsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHypervisorsOutput_Hypervisors:
+			return deserializeHypervisors(d, schemas.ListHypervisorsOutput_Hypervisors, &v.Hypervisors)
+		case schemas.ListHypervisorsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHypervisorsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHypervisorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListHypervisors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHypervisors, schemas.ListHypervisorsInput, schemas.ListHypervisorsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListHypervisors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHypervisors, schemas.ListHypervisorsInput, schemas.ListHypervisorsOutput), output: &ListHypervisorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListHypervisors"); err != nil {

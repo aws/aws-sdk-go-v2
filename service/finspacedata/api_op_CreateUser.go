@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/finspacedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspacedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -76,6 +78,36 @@ type CreateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiAccess != "" {
+		s.WriteString(schemas.CreateUserRequest_apiAccess, string(v.ApiAccess))
+	}
+	if v.ApiAccessPrincipalArn != nil {
+		s.WriteString(schemas.CreateUserRequest_apiAccessPrincipalArn, *v.ApiAccessPrincipalArn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateUserRequest_clientToken, *v.ClientToken)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.CreateUserRequest_emailAddress, *v.EmailAddress)
+	}
+	if v.FirstName != nil {
+		s.WriteString(schemas.CreateUserRequest_firstName, *v.FirstName)
+	}
+	if v.LastName != nil {
+		s.WriteString(schemas.CreateUserRequest_lastName, *v.LastName)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateUserRequest_type, string(v.Type))
+	}
+}
+
 type CreateUserOutput struct {
 
 	// The unique identifier for the user.
@@ -87,16 +119,24 @@ type CreateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUserResponse_userId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.CreateUserResponse_userId, v.UserId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUser, schemas.CreateUserRequest, schemas.CreateUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUser, schemas.CreateUserRequest, schemas.CreateUserResponse), output: &CreateUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateUser"); err != nil {

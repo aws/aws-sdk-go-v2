@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -83,6 +85,52 @@ type StartNotebookRunInput struct {
 	TriggerSource *types.TriggerSource
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartNotebookRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNotebookRunInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNotebookRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartNotebookRunInput_clientToken, *v.ClientToken)
+	}
+	if v.ComputeConfiguration != nil {
+		s.WriteStruct(schemas.StartNotebookRunInput_computeConfiguration)
+		v.ComputeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.StartNotebookRunInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	serializeMetadata(s, schemas.StartNotebookRunInput_metadata, v.Metadata)
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.StartNotebookRunInput_networkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotebookIdentifier != nil {
+		s.WriteString(schemas.StartNotebookRunInput_notebookIdentifier, *v.NotebookIdentifier)
+	}
+	if v.OwningProjectIdentifier != nil {
+		s.WriteString(schemas.StartNotebookRunInput_owningProjectIdentifier, *v.OwningProjectIdentifier)
+	}
+	serializeParameters(s, schemas.StartNotebookRunInput_parameters, v.Parameters)
+	if v.ScheduleIdentifier != nil {
+		s.WriteString(schemas.StartNotebookRunInput_scheduleIdentifier, *v.ScheduleIdentifier)
+	}
+	if v.TimeoutConfiguration != nil {
+		s.WriteStruct(schemas.StartNotebookRunInput_timeoutConfiguration)
+		v.TimeoutConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TriggerSource != nil {
+		s.WriteStruct(schemas.StartNotebookRunInput_triggerSource)
+		v.TriggerSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type StartNotebookRunOutput struct {
@@ -171,16 +219,88 @@ type StartNotebookRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNotebookRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartNotebookRunOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartNotebookRunOutput_cellOrder:
+			return deserializeCellOrder(d, schemas.StartNotebookRunOutput_cellOrder, &v.CellOrder)
+		case schemas.StartNotebookRunOutput_completedAt:
+			v.CompletedAt = new(time.Time)
+			return d.ReadTime(schemas.StartNotebookRunOutput_completedAt, v.CompletedAt)
+		case schemas.StartNotebookRunOutput_computeConfiguration:
+			v.ComputeConfiguration = &types.ComputeConfig{}
+			return v.ComputeConfiguration.Deserialize(d)
+		case schemas.StartNotebookRunOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartNotebookRunOutput_createdAt, v.CreatedAt)
+		case schemas.StartNotebookRunOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.StartNotebookRunOutput_createdBy, v.CreatedBy)
+		case schemas.StartNotebookRunOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.StartNotebookRunOutput_domainId, v.DomainId)
+		case schemas.StartNotebookRunOutput_environmentConfiguration:
+			v.EnvironmentConfiguration = &types.EnvironmentConfig{}
+			return v.EnvironmentConfiguration.Deserialize(d)
+		case schemas.StartNotebookRunOutput_error:
+			v.Error = &types.NotebookRunError{}
+			return v.Error.Deserialize(d)
+		case schemas.StartNotebookRunOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartNotebookRunOutput_id, v.Id)
+		case schemas.StartNotebookRunOutput_metadata:
+			return deserializeMetadata(d, schemas.StartNotebookRunOutput_metadata, &v.Metadata)
+		case schemas.StartNotebookRunOutput_networkConfiguration:
+			v.NetworkConfiguration = &types.NetworkConfig{}
+			return v.NetworkConfiguration.Deserialize(d)
+		case schemas.StartNotebookRunOutput_notebookId:
+			v.NotebookId = new(string)
+			return d.ReadString(schemas.StartNotebookRunOutput_notebookId, v.NotebookId)
+		case schemas.StartNotebookRunOutput_owningProjectId:
+			v.OwningProjectId = new(string)
+			return d.ReadString(schemas.StartNotebookRunOutput_owningProjectId, v.OwningProjectId)
+		case schemas.StartNotebookRunOutput_parameters:
+			return deserializeParameters(d, schemas.StartNotebookRunOutput_parameters, &v.Parameters)
+		case schemas.StartNotebookRunOutput_scheduleId:
+			v.ScheduleId = new(string)
+			return d.ReadString(schemas.StartNotebookRunOutput_scheduleId, v.ScheduleId)
+		case schemas.StartNotebookRunOutput_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.StartNotebookRunOutput_startedAt, v.StartedAt)
+		case schemas.StartNotebookRunOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.StartNotebookRunOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.NotebookRunStatus(ev)
+			return nil
+		case schemas.StartNotebookRunOutput_storageConfiguration:
+			v.StorageConfiguration = &types.StorageConfig{}
+			return v.StorageConfiguration.Deserialize(d)
+		case schemas.StartNotebookRunOutput_timeoutConfiguration:
+			v.TimeoutConfiguration = &types.TimeoutConfig{}
+			return v.TimeoutConfiguration.Deserialize(d)
+		case schemas.StartNotebookRunOutput_triggerSource:
+			v.TriggerSource = &types.TriggerSource{}
+			return v.TriggerSource.Deserialize(d)
+		case schemas.StartNotebookRunOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartNotebookRunOutput_updatedAt, v.UpdatedAt)
+		case schemas.StartNotebookRunOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.StartNotebookRunOutput_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartNotebookRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartNotebookRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNotebookRun, schemas.StartNotebookRunInput, schemas.StartNotebookRunOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartNotebookRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNotebookRun, schemas.StartNotebookRunInput, schemas.StartNotebookRunOutput), output: &StartNotebookRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartNotebookRun"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/invoicing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -50,6 +52,29 @@ type ListInvoiceUnitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInvoiceUnitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInvoiceUnitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInvoiceUnitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AsOf != nil {
+		s.WriteTime(schemas.ListInvoiceUnitsRequest_AsOf, *v.AsOf)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListInvoiceUnitsRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInvoiceUnitsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInvoiceUnitsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListInvoiceUnitsOutput struct {
 
 	//  An invoice unit is a set of mutually exclusive accounts that correspond to
@@ -65,16 +90,26 @@ type ListInvoiceUnitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInvoiceUnitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInvoiceUnitsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInvoiceUnitsResponse_InvoiceUnits:
+			return deserializeInvoiceUnits(d, schemas.ListInvoiceUnitsResponse_InvoiceUnits, &v.InvoiceUnits)
+		case schemas.ListInvoiceUnitsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInvoiceUnitsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInvoiceUnitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListInvoiceUnits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInvoiceUnits, schemas.ListInvoiceUnitsRequest, schemas.ListInvoiceUnitsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListInvoiceUnits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInvoiceUnits, schemas.ListInvoiceUnitsRequest, schemas.ListInvoiceUnitsResponse), output: &ListInvoiceUnitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListInvoiceUnits"); err != nil {

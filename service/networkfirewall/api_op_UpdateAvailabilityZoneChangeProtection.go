@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -72,6 +74,27 @@ type UpdateAvailabilityZoneChangeProtectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAvailabilityZoneChangeProtectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAvailabilityZoneChangeProtectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAvailabilityZoneChangeProtectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZoneChangeProtection != false {
+		s.WriteBool(schemas.UpdateAvailabilityZoneChangeProtectionRequest_AvailabilityZoneChangeProtection, v.AvailabilityZoneChangeProtection)
+	}
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.UpdateAvailabilityZoneChangeProtectionRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.UpdateAvailabilityZoneChangeProtectionRequest_FirewallName, *v.FirewallName)
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateAvailabilityZoneChangeProtectionRequest_UpdateToken, *v.UpdateToken)
+	}
+}
+
 type UpdateAvailabilityZoneChangeProtectionOutput struct {
 
 	// A setting indicating whether the firewall is protected against changes to the
@@ -109,16 +132,32 @@ type UpdateAvailabilityZoneChangeProtectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAvailabilityZoneChangeProtectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAvailabilityZoneChangeProtectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAvailabilityZoneChangeProtectionResponse_AvailabilityZoneChangeProtection:
+			return d.ReadBool(schemas.UpdateAvailabilityZoneChangeProtectionResponse_AvailabilityZoneChangeProtection, &v.AvailabilityZoneChangeProtection)
+		case schemas.UpdateAvailabilityZoneChangeProtectionResponse_FirewallArn:
+			v.FirewallArn = new(string)
+			return d.ReadString(schemas.UpdateAvailabilityZoneChangeProtectionResponse_FirewallArn, v.FirewallArn)
+		case schemas.UpdateAvailabilityZoneChangeProtectionResponse_FirewallName:
+			v.FirewallName = new(string)
+			return d.ReadString(schemas.UpdateAvailabilityZoneChangeProtectionResponse_FirewallName, v.FirewallName)
+		case schemas.UpdateAvailabilityZoneChangeProtectionResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.UpdateAvailabilityZoneChangeProtectionResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAvailabilityZoneChangeProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateAvailabilityZoneChangeProtection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAvailabilityZoneChangeProtection, schemas.UpdateAvailabilityZoneChangeProtectionRequest, schemas.UpdateAvailabilityZoneChangeProtectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateAvailabilityZoneChangeProtection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAvailabilityZoneChangeProtection, schemas.UpdateAvailabilityZoneChangeProtectionRequest, schemas.UpdateAvailabilityZoneChangeProtectionResponse), output: &UpdateAvailabilityZoneChangeProtectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAvailabilityZoneChangeProtection"); err != nil {

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -23,6 +25,40 @@ type DeviceUnderTest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeviceUnderTest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeviceUnderTest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeviceUnderTest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.DeviceUnderTest_certificateArn, *v.CertificateArn)
+	}
+	if v.DeviceRoleArn != nil {
+		s.WriteString(schemas.DeviceUnderTest_deviceRoleArn, *v.DeviceRoleArn)
+	}
+	if v.ThingArn != nil {
+		s.WriteString(schemas.DeviceUnderTest_thingArn, *v.ThingArn)
+	}
+}
+func (v *DeviceUnderTest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeviceUnderTest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeviceUnderTest_certificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.DeviceUnderTest_certificateArn, v.CertificateArn)
+		case schemas.DeviceUnderTest_deviceRoleArn:
+			v.DeviceRoleArn = new(string)
+			return d.ReadString(schemas.DeviceUnderTest_deviceRoleArn, v.DeviceRoleArn)
+		case schemas.DeviceUnderTest_thingArn:
+			v.ThingArn = new(string)
+			return d.ReadString(schemas.DeviceUnderTest_thingArn, v.ThingArn)
+		}
+		return nil
+	})
+}
+
 // Show Group Result.
 type GroupResult struct {
 
@@ -36,6 +72,37 @@ type GroupResult struct {
 	Tests []TestCaseRun
 
 	noSmithyDocumentSerde
+}
+
+func (v *GroupResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.GroupResult_groupId, *v.GroupId)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.GroupResult_groupName, *v.GroupName)
+	}
+	serializeTestCaseRuns(s, schemas.GroupResult_tests, v.Tests)
+}
+func (v *GroupResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupResult_groupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.GroupResult_groupId, v.GroupId)
+		case schemas.GroupResult_groupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.GroupResult_groupName, v.GroupName)
+		case schemas.GroupResult_tests:
+			return deserializeTestCaseRuns(d, schemas.GroupResult_tests, &v.Tests)
+		}
+		return nil
+	})
 }
 
 // Gets the suite definition configuration.
@@ -79,6 +146,65 @@ type SuiteDefinitionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SuiteDefinitionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuiteDefinitionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuiteDefinitionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DevicePermissionRoleArn != nil {
+		s.WriteString(schemas.SuiteDefinitionConfiguration_devicePermissionRoleArn, *v.DevicePermissionRoleArn)
+	}
+	serializeDeviceUnderTestList(s, schemas.SuiteDefinitionConfiguration_devices, v.Devices)
+	if v.IntendedForQualification != nil {
+		s.WriteBool(schemas.SuiteDefinitionConfiguration_intendedForQualification, *v.IntendedForQualification)
+	}
+	if v.IsLongDurationTest != nil {
+		s.WriteBool(schemas.SuiteDefinitionConfiguration_isLongDurationTest, *v.IsLongDurationTest)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.SuiteDefinitionConfiguration_protocol, string(v.Protocol))
+	}
+	if v.RootGroup != nil {
+		s.WriteString(schemas.SuiteDefinitionConfiguration_rootGroup, *v.RootGroup)
+	}
+	if v.SuiteDefinitionName != nil {
+		s.WriteString(schemas.SuiteDefinitionConfiguration_suiteDefinitionName, *v.SuiteDefinitionName)
+	}
+}
+func (v *SuiteDefinitionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuiteDefinitionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuiteDefinitionConfiguration_devicePermissionRoleArn:
+			v.DevicePermissionRoleArn = new(string)
+			return d.ReadString(schemas.SuiteDefinitionConfiguration_devicePermissionRoleArn, v.DevicePermissionRoleArn)
+		case schemas.SuiteDefinitionConfiguration_devices:
+			return deserializeDeviceUnderTestList(d, schemas.SuiteDefinitionConfiguration_devices, &v.Devices)
+		case schemas.SuiteDefinitionConfiguration_intendedForQualification:
+			v.IntendedForQualification = new(bool)
+			return d.ReadBool(schemas.SuiteDefinitionConfiguration_intendedForQualification, v.IntendedForQualification)
+		case schemas.SuiteDefinitionConfiguration_isLongDurationTest:
+			v.IsLongDurationTest = new(bool)
+			return d.ReadBool(schemas.SuiteDefinitionConfiguration_isLongDurationTest, v.IsLongDurationTest)
+		case schemas.SuiteDefinitionConfiguration_protocol:
+			var ev string
+			if err := d.ReadString(schemas.SuiteDefinitionConfiguration_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = Protocol(ev)
+			return nil
+		case schemas.SuiteDefinitionConfiguration_rootGroup:
+			v.RootGroup = new(string)
+			return d.ReadString(schemas.SuiteDefinitionConfiguration_rootGroup, v.RootGroup)
+		case schemas.SuiteDefinitionConfiguration_suiteDefinitionName:
+			v.SuiteDefinitionName = new(string)
+			return d.ReadString(schemas.SuiteDefinitionConfiguration_suiteDefinitionName, v.SuiteDefinitionName)
+		}
+		return nil
+	})
+}
+
 // Information about the suite definition.
 type SuiteDefinitionInformation struct {
 
@@ -106,6 +232,65 @@ type SuiteDefinitionInformation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SuiteDefinitionInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuiteDefinitionInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuiteDefinitionInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.SuiteDefinitionInformation_createdAt, *v.CreatedAt)
+	}
+	serializeDeviceUnderTestList(s, schemas.SuiteDefinitionInformation_defaultDevices, v.DefaultDevices)
+	if v.IntendedForQualification != nil {
+		s.WriteBool(schemas.SuiteDefinitionInformation_intendedForQualification, *v.IntendedForQualification)
+	}
+	if v.IsLongDurationTest != nil {
+		s.WriteBool(schemas.SuiteDefinitionInformation_isLongDurationTest, *v.IsLongDurationTest)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.SuiteDefinitionInformation_protocol, string(v.Protocol))
+	}
+	if v.SuiteDefinitionId != nil {
+		s.WriteString(schemas.SuiteDefinitionInformation_suiteDefinitionId, *v.SuiteDefinitionId)
+	}
+	if v.SuiteDefinitionName != nil {
+		s.WriteString(schemas.SuiteDefinitionInformation_suiteDefinitionName, *v.SuiteDefinitionName)
+	}
+}
+func (v *SuiteDefinitionInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuiteDefinitionInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuiteDefinitionInformation_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.SuiteDefinitionInformation_createdAt, v.CreatedAt)
+		case schemas.SuiteDefinitionInformation_defaultDevices:
+			return deserializeDeviceUnderTestList(d, schemas.SuiteDefinitionInformation_defaultDevices, &v.DefaultDevices)
+		case schemas.SuiteDefinitionInformation_intendedForQualification:
+			v.IntendedForQualification = new(bool)
+			return d.ReadBool(schemas.SuiteDefinitionInformation_intendedForQualification, v.IntendedForQualification)
+		case schemas.SuiteDefinitionInformation_isLongDurationTest:
+			v.IsLongDurationTest = new(bool)
+			return d.ReadBool(schemas.SuiteDefinitionInformation_isLongDurationTest, v.IsLongDurationTest)
+		case schemas.SuiteDefinitionInformation_protocol:
+			var ev string
+			if err := d.ReadString(schemas.SuiteDefinitionInformation_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = Protocol(ev)
+			return nil
+		case schemas.SuiteDefinitionInformation_suiteDefinitionId:
+			v.SuiteDefinitionId = new(string)
+			return d.ReadString(schemas.SuiteDefinitionInformation_suiteDefinitionId, v.SuiteDefinitionId)
+		case schemas.SuiteDefinitionInformation_suiteDefinitionName:
+			v.SuiteDefinitionName = new(string)
+			return d.ReadString(schemas.SuiteDefinitionInformation_suiteDefinitionName, v.SuiteDefinitionName)
+		}
+		return nil
+	})
+}
+
 // Gets suite run configuration.
 type SuiteRunConfiguration struct {
 
@@ -122,6 +307,39 @@ type SuiteRunConfiguration struct {
 	SelectedTestList []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SuiteRunConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuiteRunConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuiteRunConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParallelRun != nil {
+		s.WriteBool(schemas.SuiteRunConfiguration_parallelRun, *v.ParallelRun)
+	}
+	if v.PrimaryDevice != nil {
+		s.WriteStruct(schemas.SuiteRunConfiguration_primaryDevice)
+		v.PrimaryDevice.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSelectedTestList(s, schemas.SuiteRunConfiguration_selectedTestList, v.SelectedTestList)
+}
+func (v *SuiteRunConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuiteRunConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuiteRunConfiguration_parallelRun:
+			v.ParallelRun = new(bool)
+			return d.ReadBool(schemas.SuiteRunConfiguration_parallelRun, v.ParallelRun)
+		case schemas.SuiteRunConfiguration_primaryDevice:
+			v.PrimaryDevice = &DeviceUnderTest{}
+			return v.PrimaryDevice.Deserialize(d)
+		case schemas.SuiteRunConfiguration_selectedTestList:
+			return deserializeSelectedTestList(d, schemas.SuiteRunConfiguration_selectedTestList, &v.SelectedTestList)
+		}
+		return nil
+	})
 }
 
 // Information about the suite run.
@@ -162,6 +380,86 @@ type SuiteRunInformation struct {
 	SuiteRunId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SuiteRunInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuiteRunInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuiteRunInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.SuiteRunInformation_createdAt, *v.CreatedAt)
+	}
+	if v.EndAt != nil {
+		s.WriteTime(schemas.SuiteRunInformation_endAt, *v.EndAt)
+	}
+	if v.Failed != nil {
+		s.WriteInt32(schemas.SuiteRunInformation_failed, *v.Failed)
+	}
+	if v.Passed != nil {
+		s.WriteInt32(schemas.SuiteRunInformation_passed, *v.Passed)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.SuiteRunInformation_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SuiteRunInformation_status, string(v.Status))
+	}
+	if v.SuiteDefinitionId != nil {
+		s.WriteString(schemas.SuiteRunInformation_suiteDefinitionId, *v.SuiteDefinitionId)
+	}
+	if v.SuiteDefinitionName != nil {
+		s.WriteString(schemas.SuiteRunInformation_suiteDefinitionName, *v.SuiteDefinitionName)
+	}
+	if v.SuiteDefinitionVersion != nil {
+		s.WriteString(schemas.SuiteRunInformation_suiteDefinitionVersion, *v.SuiteDefinitionVersion)
+	}
+	if v.SuiteRunId != nil {
+		s.WriteString(schemas.SuiteRunInformation_suiteRunId, *v.SuiteRunId)
+	}
+}
+func (v *SuiteRunInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuiteRunInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuiteRunInformation_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.SuiteRunInformation_createdAt, v.CreatedAt)
+		case schemas.SuiteRunInformation_endAt:
+			v.EndAt = new(time.Time)
+			return d.ReadTime(schemas.SuiteRunInformation_endAt, v.EndAt)
+		case schemas.SuiteRunInformation_failed:
+			v.Failed = new(int32)
+			return d.ReadInt32(schemas.SuiteRunInformation_failed, v.Failed)
+		case schemas.SuiteRunInformation_passed:
+			v.Passed = new(int32)
+			return d.ReadInt32(schemas.SuiteRunInformation_passed, v.Passed)
+		case schemas.SuiteRunInformation_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.SuiteRunInformation_startedAt, v.StartedAt)
+		case schemas.SuiteRunInformation_status:
+			var ev string
+			if err := d.ReadString(schemas.SuiteRunInformation_status, &ev); err != nil {
+				return err
+			}
+			v.Status = SuiteRunStatus(ev)
+			return nil
+		case schemas.SuiteRunInformation_suiteDefinitionId:
+			v.SuiteDefinitionId = new(string)
+			return d.ReadString(schemas.SuiteRunInformation_suiteDefinitionId, v.SuiteDefinitionId)
+		case schemas.SuiteRunInformation_suiteDefinitionName:
+			v.SuiteDefinitionName = new(string)
+			return d.ReadString(schemas.SuiteRunInformation_suiteDefinitionName, v.SuiteDefinitionName)
+		case schemas.SuiteRunInformation_suiteDefinitionVersion:
+			v.SuiteDefinitionVersion = new(string)
+			return d.ReadString(schemas.SuiteRunInformation_suiteDefinitionVersion, v.SuiteDefinitionVersion)
+		case schemas.SuiteRunInformation_suiteRunId:
+			v.SuiteRunId = new(string)
+			return d.ReadString(schemas.SuiteRunInformation_suiteRunId, v.SuiteRunId)
+		}
+		return nil
+	})
 }
 
 // Provides the test case run.
@@ -218,6 +516,83 @@ type TestCaseRun struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestCaseRun) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestCaseRun)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestCaseRun) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.TestCaseRun_endTime, *v.EndTime)
+	}
+	if v.Failure != nil {
+		s.WriteString(schemas.TestCaseRun_failure, *v.Failure)
+	}
+	if v.LogUrl != nil {
+		s.WriteString(schemas.TestCaseRun_logUrl, *v.LogUrl)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.TestCaseRun_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TestCaseRun_status, string(v.Status))
+	}
+	if v.TestCaseDefinitionId != nil {
+		s.WriteString(schemas.TestCaseRun_testCaseDefinitionId, *v.TestCaseDefinitionId)
+	}
+	if v.TestCaseDefinitionName != nil {
+		s.WriteString(schemas.TestCaseRun_testCaseDefinitionName, *v.TestCaseDefinitionName)
+	}
+	if v.TestCaseRunId != nil {
+		s.WriteString(schemas.TestCaseRun_testCaseRunId, *v.TestCaseRunId)
+	}
+	serializeTestCaseScenariosList(s, schemas.TestCaseRun_testScenarios, v.TestScenarios)
+	if v.Warnings != nil {
+		s.WriteString(schemas.TestCaseRun_warnings, *v.Warnings)
+	}
+}
+func (v *TestCaseRun) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestCaseRun, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestCaseRun_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.TestCaseRun_endTime, v.EndTime)
+		case schemas.TestCaseRun_failure:
+			v.Failure = new(string)
+			return d.ReadString(schemas.TestCaseRun_failure, v.Failure)
+		case schemas.TestCaseRun_logUrl:
+			v.LogUrl = new(string)
+			return d.ReadString(schemas.TestCaseRun_logUrl, v.LogUrl)
+		case schemas.TestCaseRun_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.TestCaseRun_startTime, v.StartTime)
+		case schemas.TestCaseRun_status:
+			var ev string
+			if err := d.ReadString(schemas.TestCaseRun_status, &ev); err != nil {
+				return err
+			}
+			v.Status = Status(ev)
+			return nil
+		case schemas.TestCaseRun_testCaseDefinitionId:
+			v.TestCaseDefinitionId = new(string)
+			return d.ReadString(schemas.TestCaseRun_testCaseDefinitionId, v.TestCaseDefinitionId)
+		case schemas.TestCaseRun_testCaseDefinitionName:
+			v.TestCaseDefinitionName = new(string)
+			return d.ReadString(schemas.TestCaseRun_testCaseDefinitionName, v.TestCaseDefinitionName)
+		case schemas.TestCaseRun_testCaseRunId:
+			v.TestCaseRunId = new(string)
+			return d.ReadString(schemas.TestCaseRun_testCaseRunId, v.TestCaseRunId)
+		case schemas.TestCaseRun_testScenarios:
+			return deserializeTestCaseScenariosList(d, schemas.TestCaseRun_testScenarios, &v.TestScenarios)
+		case schemas.TestCaseRun_warnings:
+			v.Warnings = new(string)
+			return d.ReadString(schemas.TestCaseRun_warnings, v.Warnings)
+		}
+		return nil
+	})
+}
+
 // Provides test case scenario.
 type TestCaseScenario struct {
 
@@ -261,6 +636,60 @@ type TestCaseScenario struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestCaseScenario) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestCaseScenario)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestCaseScenario) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Failure != nil {
+		s.WriteString(schemas.TestCaseScenario_failure, *v.Failure)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TestCaseScenario_status, string(v.Status))
+	}
+	if v.SystemMessage != nil {
+		s.WriteString(schemas.TestCaseScenario_systemMessage, *v.SystemMessage)
+	}
+	if v.TestCaseScenarioId != nil {
+		s.WriteString(schemas.TestCaseScenario_testCaseScenarioId, *v.TestCaseScenarioId)
+	}
+	if v.TestCaseScenarioType != "" {
+		s.WriteString(schemas.TestCaseScenario_testCaseScenarioType, string(v.TestCaseScenarioType))
+	}
+}
+func (v *TestCaseScenario) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestCaseScenario, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestCaseScenario_failure:
+			v.Failure = new(string)
+			return d.ReadString(schemas.TestCaseScenario_failure, v.Failure)
+		case schemas.TestCaseScenario_status:
+			var ev string
+			if err := d.ReadString(schemas.TestCaseScenario_status, &ev); err != nil {
+				return err
+			}
+			v.Status = TestCaseScenarioStatus(ev)
+			return nil
+		case schemas.TestCaseScenario_systemMessage:
+			v.SystemMessage = new(string)
+			return d.ReadString(schemas.TestCaseScenario_systemMessage, v.SystemMessage)
+		case schemas.TestCaseScenario_testCaseScenarioId:
+			v.TestCaseScenarioId = new(string)
+			return d.ReadString(schemas.TestCaseScenario_testCaseScenarioId, v.TestCaseScenarioId)
+		case schemas.TestCaseScenario_testCaseScenarioType:
+			var ev string
+			if err := d.ReadString(schemas.TestCaseScenario_testCaseScenarioType, &ev); err != nil {
+				return err
+			}
+			v.TestCaseScenarioType = TestCaseScenarioType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Show each group result.
 type TestResult struct {
 
@@ -268,6 +697,25 @@ type TestResult struct {
 	Groups []GroupResult
 
 	noSmithyDocumentSerde
+}
+
+func (v *TestResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestResult) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupResultList(s, schemas.TestResult_groups, v.Groups)
+}
+func (v *TestResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestResult_groups:
+			return deserializeGroupResultList(d, schemas.TestResult_groups, &v.Groups)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

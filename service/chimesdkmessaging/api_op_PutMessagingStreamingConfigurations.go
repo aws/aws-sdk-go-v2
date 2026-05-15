@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,19 @@ type PutMessagingStreamingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMessagingStreamingConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutMessagingStreamingConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMessagingStreamingConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceArn != nil {
+		s.WriteString(schemas.PutMessagingStreamingConfigurationsRequest_AppInstanceArn, *v.AppInstanceArn)
+	}
+	serializeStreamingConfigurationList(s, schemas.PutMessagingStreamingConfigurationsRequest_StreamingConfigurations, v.StreamingConfigurations)
+}
+
 type PutMessagingStreamingConfigurationsOutput struct {
 
 	// The requested streaming configurations.
@@ -56,16 +71,23 @@ type PutMessagingStreamingConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMessagingStreamingConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutMessagingStreamingConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutMessagingStreamingConfigurationsResponse_StreamingConfigurations:
+			return deserializeStreamingConfigurationList(d, schemas.PutMessagingStreamingConfigurationsResponse_StreamingConfigurations, &v.StreamingConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutMessagingStreamingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutMessagingStreamingConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMessagingStreamingConfigurations, schemas.PutMessagingStreamingConfigurationsRequest, schemas.PutMessagingStreamingConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutMessagingStreamingConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMessagingStreamingConfigurations, schemas.PutMessagingStreamingConfigurationsRequest, schemas.PutMessagingStreamingConfigurationsResponse), output: &PutMessagingStreamingConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutMessagingStreamingConfigurations"); err != nil {

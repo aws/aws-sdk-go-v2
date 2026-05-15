@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,40 @@ type DeleteThemeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThemeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteThemeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThemeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.DeleteThemeRequest_appId, *v.AppId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.DeleteThemeRequest_environmentName, *v.EnvironmentName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteThemeRequest_id, *v.Id)
+	}
+}
+func (v *DeleteThemeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteThemeRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteThemeRequest_appId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.DeleteThemeRequest_appId, v.AppId)
+		case schemas.DeleteThemeRequest_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.DeleteThemeRequest_environmentName, v.EnvironmentName)
+		case schemas.DeleteThemeRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteThemeRequest_id, v.Id)
+		}
+		return nil
+	})
+}
+
 type DeleteThemeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,16 +89,29 @@ type DeleteThemeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThemeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThemeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteThemeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteThemeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTheme{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTheme, schemas.DeleteThemeRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTheme{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTheme, schemas.DeleteThemeRequest, nil), output: &DeleteThemeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteTheme"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -55,6 +57,30 @@ type DescribeFlowOperationInput struct {
 	VpcEndpointId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeFlowOperationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlowOperationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlowOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.DescribeFlowOperationRequest_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.DescribeFlowOperationRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FlowOperationId != nil {
+		s.WriteString(schemas.DescribeFlowOperationRequest_FlowOperationId, *v.FlowOperationId)
+	}
+	if v.VpcEndpointAssociationArn != nil {
+		s.WriteString(schemas.DescribeFlowOperationRequest_VpcEndpointAssociationArn, *v.VpcEndpointAssociationArn)
+	}
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.DescribeFlowOperationRequest_VpcEndpointId, *v.VpcEndpointId)
+	}
 }
 
 type DescribeFlowOperationOutput struct {
@@ -109,16 +135,59 @@ type DescribeFlowOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFlowOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFlowOperationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFlowOperationResponse_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.DescribeFlowOperationResponse_AvailabilityZone, v.AvailabilityZone)
+		case schemas.DescribeFlowOperationResponse_FirewallArn:
+			v.FirewallArn = new(string)
+			return d.ReadString(schemas.DescribeFlowOperationResponse_FirewallArn, v.FirewallArn)
+		case schemas.DescribeFlowOperationResponse_FlowOperation:
+			v.FlowOperation = &types.FlowOperation{}
+			return v.FlowOperation.Deserialize(d)
+		case schemas.DescribeFlowOperationResponse_FlowOperationId:
+			v.FlowOperationId = new(string)
+			return d.ReadString(schemas.DescribeFlowOperationResponse_FlowOperationId, v.FlowOperationId)
+		case schemas.DescribeFlowOperationResponse_FlowOperationStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeFlowOperationResponse_FlowOperationStatus, &ev); err != nil {
+				return err
+			}
+			v.FlowOperationStatus = types.FlowOperationStatus(ev)
+			return nil
+		case schemas.DescribeFlowOperationResponse_FlowOperationType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeFlowOperationResponse_FlowOperationType, &ev); err != nil {
+				return err
+			}
+			v.FlowOperationType = types.FlowOperationType(ev)
+			return nil
+		case schemas.DescribeFlowOperationResponse_FlowRequestTimestamp:
+			v.FlowRequestTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DescribeFlowOperationResponse_FlowRequestTimestamp, v.FlowRequestTimestamp)
+		case schemas.DescribeFlowOperationResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.DescribeFlowOperationResponse_StatusMessage, v.StatusMessage)
+		case schemas.DescribeFlowOperationResponse_VpcEndpointAssociationArn:
+			v.VpcEndpointAssociationArn = new(string)
+			return d.ReadString(schemas.DescribeFlowOperationResponse_VpcEndpointAssociationArn, v.VpcEndpointAssociationArn)
+		case schemas.DescribeFlowOperationResponse_VpcEndpointId:
+			v.VpcEndpointId = new(string)
+			return d.ReadString(schemas.DescribeFlowOperationResponse_VpcEndpointId, v.VpcEndpointId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFlowOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeFlowOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlowOperation, schemas.DescribeFlowOperationRequest, schemas.DescribeFlowOperationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeFlowOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlowOperation, schemas.DescribeFlowOperationRequest, schemas.DescribeFlowOperationResponse), output: &DescribeFlowOperationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFlowOperation"); err != nil {

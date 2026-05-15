@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,6 +66,31 @@ type StartTransformerJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTransformerJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTransformerJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTransformerJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartTransformerJobRequest_clientToken, *v.ClientToken)
+	}
+	if v.InputFile != nil {
+		s.WriteStruct(schemas.StartTransformerJobRequest_inputFile)
+		v.InputFile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputLocation != nil {
+		s.WriteStruct(schemas.StartTransformerJobRequest_outputLocation)
+		v.OutputLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TransformerId != nil {
+		s.WriteString(schemas.StartTransformerJobRequest_transformerId, *v.TransformerId)
+	}
+}
+
 type StartTransformerJobOutput struct {
 
 	// Returns the unique, system-generated identifier for a transformer run.
@@ -77,16 +104,24 @@ type StartTransformerJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTransformerJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTransformerJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTransformerJobResponse_transformerJobId:
+			v.TransformerJobId = new(string)
+			return d.ReadString(schemas.StartTransformerJobResponse_transformerJobId, v.TransformerJobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTransformerJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartTransformerJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTransformerJob, schemas.StartTransformerJobRequest, schemas.StartTransformerJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartTransformerJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTransformerJob, schemas.StartTransformerJobRequest, schemas.StartTransformerJobResponse), output: &StartTransformerJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartTransformerJob"); err != nil {

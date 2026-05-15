@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,21 @@ type GetFileUploadURLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFileUploadURLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFileUploadURLRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFileUploadURLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignmentId != nil {
+		s.WriteString(schemas.GetFileUploadURLRequest_AssignmentId, *v.AssignmentId)
+	}
+	if v.QuestionIdentifier != nil {
+		s.WriteString(schemas.GetFileUploadURLRequest_QuestionIdentifier, *v.QuestionIdentifier)
+	}
+}
+
 type GetFileUploadURLOutput struct {
 
 	//  A temporary URL for the file that the Worker uploaded for the answer.
@@ -65,16 +82,24 @@ type GetFileUploadURLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFileUploadURLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFileUploadURLResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFileUploadURLResponse_FileUploadURL:
+			v.FileUploadURL = new(string)
+			return d.ReadString(schemas.GetFileUploadURLResponse_FileUploadURL, v.FileUploadURL)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFileUploadURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetFileUploadURL{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFileUploadURL, schemas.GetFileUploadURLRequest, schemas.GetFileUploadURLResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetFileUploadURL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFileUploadURL, schemas.GetFileUploadURLRequest, schemas.GetFileUploadURLResponse), output: &GetFileUploadURLOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFileUploadURL"); err != nil {

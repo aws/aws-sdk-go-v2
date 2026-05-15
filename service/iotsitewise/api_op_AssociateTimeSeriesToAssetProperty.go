@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +61,27 @@ type AssociateTimeSeriesToAssetPropertyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateTimeSeriesToAssetPropertyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateTimeSeriesToAssetPropertyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateTimeSeriesToAssetPropertyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.AssociateTimeSeriesToAssetPropertyRequest_alias, *v.Alias)
+	}
+	if v.AssetId != nil {
+		s.WriteString(schemas.AssociateTimeSeriesToAssetPropertyRequest_assetId, *v.AssetId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateTimeSeriesToAssetPropertyRequest_clientToken, *v.ClientToken)
+	}
+	if v.PropertyId != nil {
+		s.WriteString(schemas.AssociateTimeSeriesToAssetPropertyRequest_propertyId, *v.PropertyId)
+	}
+}
+
 type AssociateTimeSeriesToAssetPropertyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,16 +89,29 @@ type AssociateTimeSeriesToAssetPropertyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateTimeSeriesToAssetPropertyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateTimeSeriesToAssetPropertyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateTimeSeriesToAssetPropertyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateTimeSeriesToAssetPropertyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateTimeSeriesToAssetProperty{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateTimeSeriesToAssetProperty, schemas.AssociateTimeSeriesToAssetPropertyRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateTimeSeriesToAssetProperty{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateTimeSeriesToAssetProperty, schemas.AssociateTimeSeriesToAssetPropertyRequest, nil), output: &AssociateTimeSeriesToAssetPropertyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateTimeSeriesToAssetProperty"); err != nil {

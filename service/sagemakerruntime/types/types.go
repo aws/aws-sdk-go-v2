@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntime/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -15,6 +17,27 @@ type PayloadPart struct {
 	Bytes []byte
 
 	noSmithyDocumentSerde
+}
+
+func (v *PayloadPart) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PayloadPart)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PayloadPart) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bytes != nil {
+		s.WriteBlob(schemas.PayloadPart_Bytes, v.Bytes)
+	}
+}
+func (v *PayloadPart) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PayloadPart, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PayloadPart_Bytes:
+			return d.ReadBlob(schemas.PayloadPart_Bytes, &v.Bytes)
+		}
+		return nil
+	})
 }
 
 // A stream of payload parts. Each part contains a portion of the response for a
@@ -37,6 +60,14 @@ type ResponseStreamMemberPayloadPart struct {
 }
 
 func (*ResponseStreamMemberPayloadPart) isResponseStream() {}
+func (v *ResponseStreamMemberPayloadPart) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseStream_PayloadPart)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ResponseStreamMemberPayloadPart) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
 

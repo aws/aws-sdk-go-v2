@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivschat/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivschat/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -53,6 +55,34 @@ type CreateLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLoggingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLoggingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLoggingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDestinationConfiguration(s, schemas.CreateLoggingConfigurationRequest_destinationConfiguration, v.DestinationConfiguration)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateLoggingConfigurationRequest_name, *v.Name)
+	}
+	serializeTags(s, schemas.CreateLoggingConfigurationRequest_tags, v.Tags)
+}
+func (v *CreateLoggingConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLoggingConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLoggingConfigurationRequest_destinationConfiguration:
+			return deserializeDestinationConfiguration(d, schemas.CreateLoggingConfigurationRequest_destinationConfiguration, &v.DestinationConfiguration)
+		case schemas.CreateLoggingConfigurationRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateLoggingConfigurationRequest_name, v.Name)
+		case schemas.CreateLoggingConfigurationRequest_tags:
+			return deserializeTags(d, schemas.CreateLoggingConfigurationRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateLoggingConfigurationOutput struct {
 
 	// Logging-configuration ARN, assigned by the system.
@@ -93,16 +123,75 @@ type CreateLoggingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLoggingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLoggingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLoggingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateLoggingConfigurationResponse_arn, *v.Arn)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.CreateLoggingConfigurationResponse_createTime, *v.CreateTime)
+	}
+	serializeDestinationConfiguration(s, schemas.CreateLoggingConfigurationResponse_destinationConfiguration, v.DestinationConfiguration)
+	if v.Id != nil {
+		s.WriteString(schemas.CreateLoggingConfigurationResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateLoggingConfigurationResponse_name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateLoggingConfigurationResponse_state, string(v.State))
+	}
+	serializeTags(s, schemas.CreateLoggingConfigurationResponse_tags, v.Tags)
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.CreateLoggingConfigurationResponse_updateTime, *v.UpdateTime)
+	}
+}
+func (v *CreateLoggingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLoggingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLoggingConfigurationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateLoggingConfigurationResponse_arn, v.Arn)
+		case schemas.CreateLoggingConfigurationResponse_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.CreateLoggingConfigurationResponse_createTime, v.CreateTime)
+		case schemas.CreateLoggingConfigurationResponse_destinationConfiguration:
+			return deserializeDestinationConfiguration(d, schemas.CreateLoggingConfigurationResponse_destinationConfiguration, &v.DestinationConfiguration)
+		case schemas.CreateLoggingConfigurationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateLoggingConfigurationResponse_id, v.Id)
+		case schemas.CreateLoggingConfigurationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateLoggingConfigurationResponse_name, v.Name)
+		case schemas.CreateLoggingConfigurationResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.CreateLoggingConfigurationResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.CreateLoggingConfigurationState(ev)
+			return nil
+		case schemas.CreateLoggingConfigurationResponse_tags:
+			return deserializeTags(d, schemas.CreateLoggingConfigurationResponse_tags, &v.Tags)
+		case schemas.CreateLoggingConfigurationResponse_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.CreateLoggingConfigurationResponse_updateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLoggingConfiguration, schemas.CreateLoggingConfigurationRequest, schemas.CreateLoggingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLoggingConfiguration, schemas.CreateLoggingConfigurationRequest, schemas.CreateLoggingConfigurationResponse), output: &CreateLoggingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLoggingConfiguration"); err != nil {

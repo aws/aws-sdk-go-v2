@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/simspaceweaver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/simspaceweaver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,40 @@ type DescribeAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.App != nil {
+		s.WriteString(schemas.DescribeAppInput_App, *v.App)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.DescribeAppInput_Domain, *v.Domain)
+	}
+	if v.Simulation != nil {
+		s.WriteString(schemas.DescribeAppInput_Simulation, *v.Simulation)
+	}
+}
+func (v *DescribeAppInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAppInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAppInput_App:
+			v.App = new(string)
+			return d.ReadString(schemas.DescribeAppInput_App, v.App)
+		case schemas.DescribeAppInput_Domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.DescribeAppInput_Domain, v.Domain)
+		case schemas.DescribeAppInput_Simulation:
+			v.Simulation = new(string)
+			return d.ReadString(schemas.DescribeAppInput_Simulation, v.Simulation)
+		}
+		return nil
+	})
+}
+
 type DescribeAppOutput struct {
 
 	// The description of the app.
@@ -80,16 +116,89 @@ type DescribeAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeAppOutput_Description, *v.Description)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.DescribeAppOutput_Domain, *v.Domain)
+	}
+	if v.EndpointInfo != nil {
+		s.WriteStruct(schemas.DescribeAppOutput_EndpointInfo)
+		v.EndpointInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LaunchOverrides != nil {
+		s.WriteStruct(schemas.DescribeAppOutput_LaunchOverrides)
+		v.LaunchOverrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeAppOutput_Name, *v.Name)
+	}
+	if v.Simulation != nil {
+		s.WriteString(schemas.DescribeAppOutput_Simulation, *v.Simulation)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeAppOutput_Status, string(v.Status))
+	}
+	if v.TargetStatus != "" {
+		s.WriteString(schemas.DescribeAppOutput_TargetStatus, string(v.TargetStatus))
+	}
+}
+func (v *DescribeAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAppOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAppOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeAppOutput_Description, v.Description)
+		case schemas.DescribeAppOutput_Domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.DescribeAppOutput_Domain, v.Domain)
+		case schemas.DescribeAppOutput_EndpointInfo:
+			v.EndpointInfo = &types.SimulationAppEndpointInfo{}
+			return v.EndpointInfo.Deserialize(d)
+		case schemas.DescribeAppOutput_LaunchOverrides:
+			v.LaunchOverrides = &types.LaunchOverrides{}
+			return v.LaunchOverrides.Deserialize(d)
+		case schemas.DescribeAppOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeAppOutput_Name, v.Name)
+		case schemas.DescribeAppOutput_Simulation:
+			v.Simulation = new(string)
+			return d.ReadString(schemas.DescribeAppOutput_Simulation, v.Simulation)
+		case schemas.DescribeAppOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAppOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SimulationAppStatus(ev)
+			return nil
+		case schemas.DescribeAppOutput_TargetStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAppOutput_TargetStatus, &ev); err != nil {
+				return err
+			}
+			v.TargetStatus = types.SimulationAppTargetStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApp, schemas.DescribeAppInput, schemas.DescribeAppOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApp, schemas.DescribeAppInput, schemas.DescribeAppOutput), output: &DescribeAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeApp"); err != nil {

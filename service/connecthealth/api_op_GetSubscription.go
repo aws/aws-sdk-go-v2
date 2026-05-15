@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connecthealth/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connecthealth/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type GetSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSubscriptionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.GetSubscriptionInput_domainId, *v.DomainId)
+	}
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.GetSubscriptionInput_subscriptionId, *v.SubscriptionId)
+	}
+}
+
 type GetSubscriptionOutput struct {
 
 	//
@@ -53,16 +70,24 @@ type GetSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSubscriptionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSubscriptionOutput_subscription:
+			v.Subscription = &types.SubscriptionDescription{}
+			return v.Subscription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubscription, schemas.GetSubscriptionInput, schemas.GetSubscriptionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubscription, schemas.GetSubscriptionInput, schemas.GetSubscriptionOutput), output: &GetSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSubscription"); err != nil {

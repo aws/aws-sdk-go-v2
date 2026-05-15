@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,24 @@ type ListAppInstanceAdminsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppInstanceAdminsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppInstanceAdminsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppInstanceAdminsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceArn != nil {
+		s.WriteString(schemas.ListAppInstanceAdminsRequest_AppInstanceArn, *v.AppInstanceArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppInstanceAdminsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppInstanceAdminsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAppInstanceAdminsOutput struct {
 
 	// The information for each administrator.
@@ -62,16 +82,29 @@ type ListAppInstanceAdminsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppInstanceAdminsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppInstanceAdminsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppInstanceAdminsResponse_AppInstanceAdmins:
+			return deserializeAppInstanceAdminList(d, schemas.ListAppInstanceAdminsResponse_AppInstanceAdmins, &v.AppInstanceAdmins)
+		case schemas.ListAppInstanceAdminsResponse_AppInstanceArn:
+			v.AppInstanceArn = new(string)
+			return d.ReadString(schemas.ListAppInstanceAdminsResponse_AppInstanceArn, v.AppInstanceArn)
+		case schemas.ListAppInstanceAdminsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppInstanceAdminsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppInstanceAdminsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppInstanceAdmins{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppInstanceAdmins, schemas.ListAppInstanceAdminsRequest, schemas.ListAppInstanceAdminsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppInstanceAdmins{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppInstanceAdmins, schemas.ListAppInstanceAdminsRequest, schemas.ListAppInstanceAdminsResponse), output: &ListAppInstanceAdminsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAppInstanceAdmins"); err != nil {

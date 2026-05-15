@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,24 @@ type AssociateAwsAccountWithPartnerAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateAwsAccountWithPartnerAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateAwsAccountWithPartnerAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateAwsAccountWithPartnerAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.AssociateAwsAccountWithPartnerAccountRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Sidewalk != nil {
+		s.WriteStruct(schemas.AssociateAwsAccountWithPartnerAccountRequest_Sidewalk)
+		v.Sidewalk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.AssociateAwsAccountWithPartnerAccountRequest_Tags, v.Tags)
+}
+
 type AssociateAwsAccountWithPartnerAccountOutput struct {
 
 	// The Amazon Resource Name of the resource.
@@ -66,16 +86,27 @@ type AssociateAwsAccountWithPartnerAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateAwsAccountWithPartnerAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateAwsAccountWithPartnerAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateAwsAccountWithPartnerAccountResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssociateAwsAccountWithPartnerAccountResponse_Arn, v.Arn)
+		case schemas.AssociateAwsAccountWithPartnerAccountResponse_Sidewalk:
+			v.Sidewalk = &types.SidewalkAccountInfo{}
+			return v.Sidewalk.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateAwsAccountWithPartnerAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateAwsAccountWithPartnerAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAwsAccountWithPartnerAccount, schemas.AssociateAwsAccountWithPartnerAccountRequest, schemas.AssociateAwsAccountWithPartnerAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateAwsAccountWithPartnerAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAwsAccountWithPartnerAccount, schemas.AssociateAwsAccountWithPartnerAccountRequest, schemas.AssociateAwsAccountWithPartnerAccountResponse), output: &AssociateAwsAccountWithPartnerAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateAwsAccountWithPartnerAccount"); err != nil {

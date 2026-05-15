@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mpa/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mpa/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -39,6 +41,18 @@ type GetSessionInput struct {
 	SessionArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionArn != nil {
+		s.WriteString(schemas.GetSessionRequest_SessionArn, *v.SessionArn)
+	}
 }
 
 type GetSessionOutput struct {
@@ -130,16 +144,105 @@ type GetSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSessionResponse_ActionCompletionStrategy:
+			var ev string
+			if err := d.ReadString(schemas.GetSessionResponse_ActionCompletionStrategy, &ev); err != nil {
+				return err
+			}
+			v.ActionCompletionStrategy = types.ActionCompletionStrategy(ev)
+			return nil
+		case schemas.GetSessionResponse_ActionName:
+			v.ActionName = new(string)
+			return d.ReadString(schemas.GetSessionResponse_ActionName, v.ActionName)
+		case schemas.GetSessionResponse_AdditionalSecurityRequirements:
+			return deserializeAdditionalSecurityRequirements(d, schemas.GetSessionResponse_AdditionalSecurityRequirements, &v.AdditionalSecurityRequirements)
+		case schemas.GetSessionResponse_ApprovalStrategy:
+			return deserializeApprovalStrategyResponse(d, schemas.GetSessionResponse_ApprovalStrategy, &v.ApprovalStrategy)
+		case schemas.GetSessionResponse_ApprovalTeamArn:
+			v.ApprovalTeamArn = new(string)
+			return d.ReadString(schemas.GetSessionResponse_ApprovalTeamArn, v.ApprovalTeamArn)
+		case schemas.GetSessionResponse_ApprovalTeamName:
+			v.ApprovalTeamName = new(string)
+			return d.ReadString(schemas.GetSessionResponse_ApprovalTeamName, v.ApprovalTeamName)
+		case schemas.GetSessionResponse_ApproverResponses:
+			return deserializeGetSessionResponseApproverResponses(d, schemas.GetSessionResponse_ApproverResponses, &v.ApproverResponses)
+		case schemas.GetSessionResponse_CompletionTime:
+			v.CompletionTime = new(time.Time)
+			return d.ReadTime(schemas.GetSessionResponse_CompletionTime, v.CompletionTime)
+		case schemas.GetSessionResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetSessionResponse_Description, v.Description)
+		case schemas.GetSessionResponse_ExecutionStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetSessionResponse_ExecutionStatus, &ev); err != nil {
+				return err
+			}
+			v.ExecutionStatus = types.SessionExecutionStatus(ev)
+			return nil
+		case schemas.GetSessionResponse_ExpirationTime:
+			v.ExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.GetSessionResponse_ExpirationTime, v.ExpirationTime)
+		case schemas.GetSessionResponse_InitiationTime:
+			v.InitiationTime = new(time.Time)
+			return d.ReadTime(schemas.GetSessionResponse_InitiationTime, v.InitiationTime)
+		case schemas.GetSessionResponse_Metadata:
+			return deserializeSessionMetadata(d, schemas.GetSessionResponse_Metadata, &v.Metadata)
+		case schemas.GetSessionResponse_NumberOfApprovers:
+			v.NumberOfApprovers = new(int32)
+			return d.ReadInt32(schemas.GetSessionResponse_NumberOfApprovers, v.NumberOfApprovers)
+		case schemas.GetSessionResponse_ProtectedResourceArn:
+			v.ProtectedResourceArn = new(string)
+			return d.ReadString(schemas.GetSessionResponse_ProtectedResourceArn, v.ProtectedResourceArn)
+		case schemas.GetSessionResponse_RequesterAccountId:
+			v.RequesterAccountId = new(string)
+			return d.ReadString(schemas.GetSessionResponse_RequesterAccountId, v.RequesterAccountId)
+		case schemas.GetSessionResponse_RequesterComment:
+			v.RequesterComment = new(string)
+			return d.ReadString(schemas.GetSessionResponse_RequesterComment, v.RequesterComment)
+		case schemas.GetSessionResponse_RequesterPrincipalArn:
+			v.RequesterPrincipalArn = new(string)
+			return d.ReadString(schemas.GetSessionResponse_RequesterPrincipalArn, v.RequesterPrincipalArn)
+		case schemas.GetSessionResponse_RequesterRegion:
+			v.RequesterRegion = new(string)
+			return d.ReadString(schemas.GetSessionResponse_RequesterRegion, v.RequesterRegion)
+		case schemas.GetSessionResponse_RequesterServicePrincipal:
+			v.RequesterServicePrincipal = new(string)
+			return d.ReadString(schemas.GetSessionResponse_RequesterServicePrincipal, v.RequesterServicePrincipal)
+		case schemas.GetSessionResponse_SessionArn:
+			v.SessionArn = new(string)
+			return d.ReadString(schemas.GetSessionResponse_SessionArn, v.SessionArn)
+		case schemas.GetSessionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetSessionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SessionStatus(ev)
+			return nil
+		case schemas.GetSessionResponse_StatusCode:
+			var ev string
+			if err := d.ReadString(schemas.GetSessionResponse_StatusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = types.SessionStatusCode(ev)
+			return nil
+		case schemas.GetSessionResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetSessionResponse_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSession, schemas.GetSessionRequest, schemas.GetSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSession, schemas.GetSessionRequest, schemas.GetSessionResponse), output: &GetSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSession"); err != nil {

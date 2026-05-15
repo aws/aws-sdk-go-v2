@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,21 @@ type ActivateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivateUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivateUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationToken != nil {
+		s.WriteString(schemas.ActivateUserRequest_AuthenticationToken, *v.AuthenticationToken)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.ActivateUserRequest_UserId, *v.UserId)
+	}
+}
+
 type ActivateUserOutput struct {
 
 	// The user information.
@@ -52,16 +69,24 @@ type ActivateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivateUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivateUserResponse_User:
+			v.User = &types.User{}
+			return v.User.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationActivateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpActivateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ActivateUser, schemas.ActivateUserRequest, schemas.ActivateUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpActivateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ActivateUser, schemas.ActivateUserRequest, schemas.ActivateUserResponse), output: &ActivateUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ActivateUser"); err != nil {

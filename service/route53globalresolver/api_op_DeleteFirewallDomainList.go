@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,18 @@ type DeleteFirewallDomainListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFirewallDomainListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFirewallDomainListInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFirewallDomainListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallDomainListId != nil {
+		s.WriteString(schemas.DeleteFirewallDomainListInput_firewallDomainListId, *v.FirewallDomainListId)
+	}
+}
+
 type DeleteFirewallDomainListOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted firewall domain list.
@@ -71,16 +85,37 @@ type DeleteFirewallDomainListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFirewallDomainListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFirewallDomainListOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFirewallDomainListOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteFirewallDomainListOutput_arn, v.Arn)
+		case schemas.DeleteFirewallDomainListOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteFirewallDomainListOutput_id, v.Id)
+		case schemas.DeleteFirewallDomainListOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteFirewallDomainListOutput_name, v.Name)
+		case schemas.DeleteFirewallDomainListOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteFirewallDomainListOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CRResourceStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFirewallDomainListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFirewallDomainList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFirewallDomainList, schemas.DeleteFirewallDomainListInput, schemas.DeleteFirewallDomainListOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteFirewallDomainList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFirewallDomainList, schemas.DeleteFirewallDomainListInput, schemas.DeleteFirewallDomainListOutput), output: &DeleteFirewallDomainListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteFirewallDomainList"); err != nil {

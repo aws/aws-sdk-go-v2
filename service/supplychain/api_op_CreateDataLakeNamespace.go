@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supplychain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,25 @@ type CreateDataLakeNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataLakeNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataLakeNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataLakeNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDataLakeNamespaceRequest_description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateDataLakeNamespaceRequest_instanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDataLakeNamespaceRequest_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateDataLakeNamespaceRequest_tags, v.Tags)
+}
+
 // The response parameters of CreateDataLakeNamespace.
 type CreateDataLakeNamespaceOutput struct {
 
@@ -65,16 +86,24 @@ type CreateDataLakeNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataLakeNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataLakeNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataLakeNamespaceResponse_namespace:
+			v.Namespace = &types.DataLakeNamespace{}
+			return v.Namespace.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataLakeNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataLakeNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataLakeNamespace, schemas.CreateDataLakeNamespaceRequest, schemas.CreateDataLakeNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataLakeNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataLakeNamespace, schemas.CreateDataLakeNamespaceRequest, schemas.CreateDataLakeNamespaceResponse), output: &CreateDataLakeNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataLakeNamespace"); err != nil {

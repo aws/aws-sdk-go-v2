@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -131,6 +133,39 @@ type RetrieveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeFilter != nil {
+		s.WriteStruct(schemas.RetrieveRequest_AttributeFilter)
+		v.AttributeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDocumentRelevanceOverrideConfigurationList(s, schemas.RetrieveRequest_DocumentRelevanceOverrideConfigurations, v.DocumentRelevanceOverrideConfigurations)
+	if v.IndexId != nil {
+		s.WriteString(schemas.RetrieveRequest_IndexId, *v.IndexId)
+	}
+	if v.PageNumber != nil {
+		s.WriteInt32(schemas.RetrieveRequest_PageNumber, *v.PageNumber)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.RetrieveRequest_PageSize, *v.PageSize)
+	}
+	if v.QueryText != nil {
+		s.WriteString(schemas.RetrieveRequest_QueryText, *v.QueryText)
+	}
+	serializeDocumentAttributeKeyList(s, schemas.RetrieveRequest_RequestedDocumentAttributes, v.RequestedDocumentAttributes)
+	if v.UserContext != nil {
+		s.WriteStruct(schemas.RetrieveRequest_UserContext)
+		v.UserContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type RetrieveOutput struct {
 
 	// The identifier of query used for the search. You also use QueryId to identify
@@ -148,16 +183,26 @@ type RetrieveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrieveResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrieveResult_QueryId:
+			v.QueryId = new(string)
+			return d.ReadString(schemas.RetrieveResult_QueryId, v.QueryId)
+		case schemas.RetrieveResult_ResultItems:
+			return deserializeRetrieveResultItemList(d, schemas.RetrieveResult_ResultItems, &v.ResultItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRetrieveMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRetrieve{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Retrieve, schemas.RetrieveRequest, schemas.RetrieveResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRetrieve{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Retrieve, schemas.RetrieveRequest, schemas.RetrieveResult), output: &RetrieveOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "Retrieve"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,26 @@ type ListJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListJobsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListJobsOutput struct {
 
 	// List of jobs in your Amazon Web Services account.
@@ -63,16 +85,26 @@ type ListJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListJobsResponse_Entries:
+			return deserializeListJobsResponseEntryList(d, schemas.ListJobsResponse_Entries, &v.Entries)
+		case schemas.ListJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobs, schemas.ListJobsRequest, schemas.ListJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobs, schemas.ListJobsRequest, schemas.ListJobsResponse), output: &ListJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListJobs"); err != nil {

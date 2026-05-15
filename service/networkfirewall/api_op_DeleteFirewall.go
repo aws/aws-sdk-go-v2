@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,21 @@ type DeleteFirewallInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFirewallInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFirewallRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFirewallInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.DeleteFirewallRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.DeleteFirewallRequest_FirewallName, *v.FirewallName)
+	}
+}
+
 type DeleteFirewallOutput struct {
 
 	// A firewall defines the behavior of a firewall, the main VPC where the firewall
@@ -86,16 +103,27 @@ type DeleteFirewallOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFirewallOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFirewallResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFirewallResponse_Firewall:
+			v.Firewall = &types.Firewall{}
+			return v.Firewall.Deserialize(d)
+		case schemas.DeleteFirewallResponse_FirewallStatus:
+			v.FirewallStatus = &types.FirewallStatus{}
+			return v.FirewallStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFirewallMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteFirewall{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFirewall, schemas.DeleteFirewallRequest, schemas.DeleteFirewallResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteFirewall{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFirewall, schemas.DeleteFirewallRequest, schemas.DeleteFirewallResponse), output: &DeleteFirewallOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteFirewall"); err != nil {

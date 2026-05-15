@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -103,6 +105,30 @@ type GetPropertygraphStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPropertygraphStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPropertygraphStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPropertygraphStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitNum != nil {
+		s.WriteInt64(schemas.GetPropertygraphStreamInput_commitNum, *v.CommitNum)
+	}
+	if v.Encoding != "" {
+		s.WriteString(schemas.GetPropertygraphStreamInput_encoding, string(v.Encoding))
+	}
+	if v.IteratorType != "" {
+		s.WriteString(schemas.GetPropertygraphStreamInput_iteratorType, string(v.IteratorType))
+	}
+	if v.Limit != nil {
+		s.WriteInt64(schemas.GetPropertygraphStreamInput_limit, *v.Limit)
+	}
+	if v.OpNum != nil {
+		s.WriteInt64(schemas.GetPropertygraphStreamInput_opNum, *v.OpNum)
+	}
+}
+
 type GetPropertygraphStreamOutput struct {
 
 	// Serialization format for the change records being returned. Currently, the only
@@ -142,16 +168,34 @@ type GetPropertygraphStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPropertygraphStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPropertygraphStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPropertygraphStreamOutput_format:
+			v.Format = new(string)
+			return d.ReadString(schemas.GetPropertygraphStreamOutput_format, v.Format)
+		case schemas.GetPropertygraphStreamOutput_lastEventId:
+			return deserializeStringValuedMap(d, schemas.GetPropertygraphStreamOutput_lastEventId, &v.LastEventId)
+		case schemas.GetPropertygraphStreamOutput_lastTrxTimestampInMillis:
+			v.LastTrxTimestampInMillis = new(int64)
+			return d.ReadInt64(schemas.GetPropertygraphStreamOutput_lastTrxTimestampInMillis, v.LastTrxTimestampInMillis)
+		case schemas.GetPropertygraphStreamOutput_records:
+			return deserializePropertygraphRecordsList(d, schemas.GetPropertygraphStreamOutput_records, &v.Records)
+		case schemas.GetPropertygraphStreamOutput_totalRecords:
+			v.TotalRecords = new(int32)
+			return d.ReadInt32(schemas.GetPropertygraphStreamOutput_totalRecords, v.TotalRecords)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPropertygraphStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPropertygraphStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPropertygraphStream, schemas.GetPropertygraphStreamInput, schemas.GetPropertygraphStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPropertygraphStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPropertygraphStream, schemas.GetPropertygraphStreamInput, schemas.GetPropertygraphStreamOutput), output: &GetPropertygraphStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPropertygraphStream"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type StopBatchEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopBatchEvaluationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopBatchEvaluationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopBatchEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchEvaluationId != nil {
+		s.WriteString(schemas.StopBatchEvaluationRequest_batchEvaluationId, *v.BatchEvaluationId)
+	}
+}
+
 type StopBatchEvaluationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the stopped batch evaluation.
@@ -64,16 +78,37 @@ type StopBatchEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopBatchEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopBatchEvaluationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopBatchEvaluationResponse_batchEvaluationArn:
+			v.BatchEvaluationArn = new(string)
+			return d.ReadString(schemas.StopBatchEvaluationResponse_batchEvaluationArn, v.BatchEvaluationArn)
+		case schemas.StopBatchEvaluationResponse_batchEvaluationId:
+			v.BatchEvaluationId = new(string)
+			return d.ReadString(schemas.StopBatchEvaluationResponse_batchEvaluationId, v.BatchEvaluationId)
+		case schemas.StopBatchEvaluationResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.StopBatchEvaluationResponse_description, v.Description)
+		case schemas.StopBatchEvaluationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StopBatchEvaluationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BatchEvaluationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopBatchEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopBatchEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBatchEvaluation, schemas.StopBatchEvaluationRequest, schemas.StopBatchEvaluationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopBatchEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBatchEvaluation, schemas.StopBatchEvaluationRequest, schemas.StopBatchEvaluationResponse), output: &StopBatchEvaluationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StopBatchEvaluation"); err != nil {

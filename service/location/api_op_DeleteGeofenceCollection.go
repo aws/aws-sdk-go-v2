@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,28 @@ type DeleteGeofenceCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGeofenceCollectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGeofenceCollectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGeofenceCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionName != nil {
+		s.WriteString(schemas.DeleteGeofenceCollectionRequest_CollectionName, *v.CollectionName)
+	}
+}
+func (v *DeleteGeofenceCollectionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGeofenceCollectionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteGeofenceCollectionRequest_CollectionName:
+			v.CollectionName = new(string)
+			return d.ReadString(schemas.DeleteGeofenceCollectionRequest_CollectionName, v.CollectionName)
+		}
+		return nil
+	})
+}
+
 type DeleteGeofenceCollectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,16 +70,29 @@ type DeleteGeofenceCollectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGeofenceCollectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGeofenceCollectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGeofenceCollectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteGeofenceCollectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGeofenceCollectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGeofenceCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGeofenceCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGeofenceCollection, schemas.DeleteGeofenceCollectionRequest, schemas.DeleteGeofenceCollectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteGeofenceCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGeofenceCollection, schemas.DeleteGeofenceCollectionRequest, schemas.DeleteGeofenceCollectionResponse), output: &DeleteGeofenceCollectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteGeofenceCollection"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,27 @@ type ListKxVolumesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKxVolumesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKxVolumesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKxVolumesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.ListKxVolumesRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListKxVolumesRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListKxVolumesRequest_nextToken, *v.NextToken)
+	}
+	if v.VolumeType != "" {
+		s.WriteString(schemas.ListKxVolumesRequest_volumeType, string(v.VolumeType))
+	}
+}
+
 type ListKxVolumesOutput struct {
 
 	//  A summary of volumes.
@@ -62,16 +85,26 @@ type ListKxVolumesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKxVolumesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListKxVolumesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListKxVolumesResponse_kxVolumeSummaries:
+			return deserializeKxVolumes(d, schemas.ListKxVolumesResponse_kxVolumeSummaries, &v.KxVolumeSummaries)
+		case schemas.ListKxVolumesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListKxVolumesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListKxVolumesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListKxVolumes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKxVolumes, schemas.ListKxVolumesRequest, schemas.ListKxVolumesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListKxVolumes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKxVolumes, schemas.ListKxVolumesRequest, schemas.ListKxVolumesResponse), output: &ListKxVolumesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListKxVolumes"); err != nil {

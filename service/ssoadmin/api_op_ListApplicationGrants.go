@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,21 @@ type ListApplicationGrantsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationGrantsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationGrantsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationGrantsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.ListApplicationGrantsRequest_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationGrantsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListApplicationGrantsOutput struct {
 
 	// An array list of structures that describe the requested grants.
@@ -63,16 +80,26 @@ type ListApplicationGrantsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationGrantsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApplicationGrantsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApplicationGrantsResponse_Grants:
+			return deserializeGrants(d, schemas.ListApplicationGrantsResponse_Grants, &v.Grants)
+		case schemas.ListApplicationGrantsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApplicationGrantsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApplicationGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListApplicationGrants{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationGrants, schemas.ListApplicationGrantsRequest, schemas.ListApplicationGrantsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListApplicationGrants{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationGrants, schemas.ListApplicationGrantsRequest, schemas.ListApplicationGrantsResponse), output: &ListApplicationGrantsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListApplicationGrants"); err != nil {

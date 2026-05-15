@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,26 @@ type DetachObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachObjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachObjectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.DetachObjectRequest_DirectoryArn, *v.DirectoryArn)
+	}
+	if v.LinkName != nil {
+		s.WriteString(schemas.DetachObjectRequest_LinkName, *v.LinkName)
+	}
+	if v.ParentReference != nil {
+		s.WriteStruct(schemas.DetachObjectRequest_ParentReference)
+		v.ParentReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DetachObjectOutput struct {
 
 	// The ObjectIdentifier that was detached from the object.
@@ -61,16 +83,24 @@ type DetachObjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachObjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetachObjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetachObjectResponse_DetachedObjectIdentifier:
+			v.DetachedObjectIdentifier = new(string)
+			return d.ReadString(schemas.DetachObjectResponse_DetachedObjectIdentifier, v.DetachedObjectIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetachObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDetachObject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachObject, schemas.DetachObjectRequest, schemas.DetachObjectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDetachObject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachObject, schemas.DetachObjectRequest, schemas.DetachObjectResponse), output: &DetachObjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DetachObject"); err != nil {

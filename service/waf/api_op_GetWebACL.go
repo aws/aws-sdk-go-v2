@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/waf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,18 @@ type GetWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWebACLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWebACLRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWebACLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WebACLId != nil {
+		s.WriteString(schemas.GetWebACLRequest_WebACLId, *v.WebACLId)
+	}
+}
+
 type GetWebACLOutput struct {
 
 	// Information about the WebACL that you specified in the GetWebACL request. For more
@@ -70,16 +84,24 @@ type GetWebACLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWebACLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWebACLResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWebACLResponse_WebACL:
+			v.WebACL = &types.WebACL{}
+			return v.WebACL.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetWebACL{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWebACL, schemas.GetWebACLRequest, schemas.GetWebACLResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetWebACL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWebACL, schemas.GetWebACLRequest, schemas.GetWebACLResponse), output: &GetWebACLOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWebACL"); err != nil {

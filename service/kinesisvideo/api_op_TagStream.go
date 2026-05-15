@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,22 @@ type TagStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamARN != nil {
+		s.WriteString(schemas.TagStreamInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.TagStreamInput_StreamName, *v.StreamName)
+	}
+	serializeResourceTags(s, schemas.TagStreamInput_Tags, v.Tags)
+}
+
 type TagStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -63,16 +81,21 @@ type TagStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTagStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTagStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TagStream, schemas.TagStreamInput, schemas.TagStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTagStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TagStream, schemas.TagStreamInput, schemas.TagStreamOutput), output: &TagStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "TagStream"); err != nil {

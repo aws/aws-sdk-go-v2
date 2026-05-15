@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,24 @@ type ListPermissionSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPermissionSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPermissionSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPermissionSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.ListPermissionSetsRequest_InstanceArn, *v.InstanceArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPermissionSetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPermissionSetsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPermissionSetsOutput struct {
 
 	// The pagination token for the list API. Initially the value is null. Use the
@@ -60,16 +80,26 @@ type ListPermissionSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPermissionSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPermissionSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPermissionSetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPermissionSetsResponse_NextToken, v.NextToken)
+		case schemas.ListPermissionSetsResponse_PermissionSets:
+			return deserializePermissionSetList(d, schemas.ListPermissionSetsResponse_PermissionSets, &v.PermissionSets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPermissionSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPermissionSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPermissionSets, schemas.ListPermissionSetsRequest, schemas.ListPermissionSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPermissionSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPermissionSets, schemas.ListPermissionSetsRequest, schemas.ListPermissionSetsResponse), output: &ListPermissionSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPermissionSets"); err != nil {

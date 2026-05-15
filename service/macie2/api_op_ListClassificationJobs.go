@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,31 @@ type ListClassificationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClassificationJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClassificationJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClassificationJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.ListClassificationJobsRequest_filterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListClassificationJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClassificationJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortCriteria != nil {
+		s.WriteStruct(schemas.ListClassificationJobsRequest_sortCriteria)
+		v.SortCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListClassificationJobsOutput struct {
 
 	// An array of objects, one for each job that matches the filter criteria
@@ -61,16 +88,26 @@ type ListClassificationJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClassificationJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListClassificationJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListClassificationJobsResponse_items:
+			return deserialize__listOfJobSummary(d, schemas.ListClassificationJobsResponse_items, &v.Items)
+		case schemas.ListClassificationJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListClassificationJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListClassificationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListClassificationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClassificationJobs, schemas.ListClassificationJobsRequest, schemas.ListClassificationJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListClassificationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClassificationJobs, schemas.ListClassificationJobsRequest, schemas.ListClassificationJobsResponse), output: &ListClassificationJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListClassificationJobs"); err != nil {

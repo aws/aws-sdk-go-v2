@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -76,6 +78,25 @@ type PutRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRecordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRecordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeatureGroupName != nil {
+		s.WriteString(schemas.PutRecordRequest_FeatureGroupName, *v.FeatureGroupName)
+	}
+	serializeRecord(s, schemas.PutRecordRequest_Record, v.Record)
+	serializeTargetStores(s, schemas.PutRecordRequest_TargetStores, v.TargetStores)
+	if v.TtlDuration != nil {
+		s.WriteStruct(schemas.PutRecordRequest_TtlDuration)
+		v.TtlDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutRecordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -83,16 +104,29 @@ type PutRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRecordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRecord, schemas.PutRecordRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRecord, schemas.PutRecordRequest, nil), output: &PutRecordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutRecord"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,21 @@ type CreateDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDirectoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDirectoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDirectoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDirectoryRequest_Name, *v.Name)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.CreateDirectoryRequest_SchemaArn, *v.SchemaArn)
+	}
+}
+
 type CreateDirectoryOutput struct {
 
 	// The ARN of the published schema in the Directory. Once a published schema is copied into
@@ -79,16 +96,33 @@ type CreateDirectoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDirectoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDirectoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDirectoryResponse_AppliedSchemaArn:
+			v.AppliedSchemaArn = new(string)
+			return d.ReadString(schemas.CreateDirectoryResponse_AppliedSchemaArn, v.AppliedSchemaArn)
+		case schemas.CreateDirectoryResponse_DirectoryArn:
+			v.DirectoryArn = new(string)
+			return d.ReadString(schemas.CreateDirectoryResponse_DirectoryArn, v.DirectoryArn)
+		case schemas.CreateDirectoryResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateDirectoryResponse_Name, v.Name)
+		case schemas.CreateDirectoryResponse_ObjectIdentifier:
+			v.ObjectIdentifier = new(string)
+			return d.ReadString(schemas.CreateDirectoryResponse_ObjectIdentifier, v.ObjectIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDirectory, schemas.CreateDirectoryRequest, schemas.CreateDirectoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDirectory, schemas.CreateDirectoryRequest, schemas.CreateDirectoryResponse), output: &CreateDirectoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDirectory"); err != nil {

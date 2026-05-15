@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/synthetics/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -22,6 +24,30 @@ type ArtifactConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ArtifactConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ArtifactConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ArtifactConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Encryption != nil {
+		s.WriteStruct(schemas.ArtifactConfigInput_S3Encryption)
+		v.S3Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ArtifactConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ArtifactConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ArtifactConfigInput_S3Encryption:
+			v.S3Encryption = &S3EncryptionConfig{}
+			return v.S3Encryption.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A structure that contains the configuration for canary artifacts, including the
 // encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
 type ArtifactConfigOutput struct {
@@ -31,6 +57,30 @@ type ArtifactConfigOutput struct {
 	S3Encryption *S3EncryptionConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *ArtifactConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ArtifactConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ArtifactConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Encryption != nil {
+		s.WriteStruct(schemas.ArtifactConfigOutput_S3Encryption)
+		v.S3Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ArtifactConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ArtifactConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ArtifactConfigOutput_S3Encryption:
+			v.S3Encryption = &S3EncryptionConfig{}
+			return v.S3Encryption.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A structure representing a screenshot that is used as a baseline during visual
@@ -54,6 +104,31 @@ type BaseScreenshot struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BaseScreenshot) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BaseScreenshot)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BaseScreenshot) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBaseScreenshotIgnoreCoordinates(s, schemas.BaseScreenshot_IgnoreCoordinates, v.IgnoreCoordinates)
+	if v.ScreenshotName != nil {
+		s.WriteString(schemas.BaseScreenshot_ScreenshotName, *v.ScreenshotName)
+	}
+}
+func (v *BaseScreenshot) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BaseScreenshot, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BaseScreenshot_IgnoreCoordinates:
+			return deserializeBaseScreenshotIgnoreCoordinates(d, schemas.BaseScreenshot_IgnoreCoordinates, &v.IgnoreCoordinates)
+		case schemas.BaseScreenshot_ScreenshotName:
+			v.ScreenshotName = new(string)
+			return d.ReadString(schemas.BaseScreenshot_ScreenshotName, v.ScreenshotName)
+		}
+		return nil
+	})
+}
+
 // A structure that specifies the browser type to use for a canary run.
 type BrowserConfig struct {
 
@@ -61,6 +136,32 @@ type BrowserConfig struct {
 	BrowserType BrowserType
 
 	noSmithyDocumentSerde
+}
+
+func (v *BrowserConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BrowserConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BrowserConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrowserType != "" {
+		s.WriteString(schemas.BrowserConfig_BrowserType, string(v.BrowserType))
+	}
+}
+func (v *BrowserConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BrowserConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BrowserConfig_BrowserType:
+			var ev string
+			if err := d.ReadString(schemas.BrowserConfig_BrowserType, &ev); err != nil {
+				return err
+			}
+			v.BrowserType = BrowserType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // This structure contains all information about one canary in your account.
@@ -193,6 +294,164 @@ type Canary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Canary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Canary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Canary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactConfig != nil {
+		s.WriteStruct(schemas.Canary_ArtifactConfig)
+		v.ArtifactConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ArtifactS3Location != nil {
+		s.WriteString(schemas.Canary_ArtifactS3Location, *v.ArtifactS3Location)
+	}
+	serializeBrowserConfigs(s, schemas.Canary_BrowserConfigs, v.BrowserConfigs)
+	if v.Code != nil {
+		s.WriteStruct(schemas.Canary_Code)
+		v.Code.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DryRunConfig != nil {
+		s.WriteStruct(schemas.Canary_DryRunConfig)
+		v.DryRunConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EngineArn != nil {
+		s.WriteString(schemas.Canary_EngineArn, *v.EngineArn)
+	}
+	serializeEngineConfigs(s, schemas.Canary_EngineConfigs, v.EngineConfigs)
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.Canary_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.FailureRetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.Canary_FailureRetentionPeriodInDays, *v.FailureRetentionPeriodInDays)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Canary_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Canary_Name, *v.Name)
+	}
+	if v.ProvisionedResourceCleanup != "" {
+		s.WriteString(schemas.Canary_ProvisionedResourceCleanup, string(v.ProvisionedResourceCleanup))
+	}
+	if v.RunConfig != nil {
+		s.WriteStruct(schemas.Canary_RunConfig)
+		v.RunConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuntimeVersion != nil {
+		s.WriteString(schemas.Canary_RuntimeVersion, *v.RuntimeVersion)
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.Canary_Schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.Canary_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SuccessRetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.Canary_SuccessRetentionPeriodInDays, *v.SuccessRetentionPeriodInDays)
+	}
+	serializeTagMap(s, schemas.Canary_Tags, v.Tags)
+	if v.Timeline != nil {
+		s.WriteStruct(schemas.Canary_Timeline)
+		v.Timeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VisualReference != nil {
+		s.WriteStruct(schemas.Canary_VisualReference)
+		v.VisualReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeVisualReferencesOutput(s, schemas.Canary_VisualReferences, v.VisualReferences)
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.Canary_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Canary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Canary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Canary_ArtifactConfig:
+			v.ArtifactConfig = &ArtifactConfigOutput{}
+			return v.ArtifactConfig.Deserialize(d)
+		case schemas.Canary_ArtifactS3Location:
+			v.ArtifactS3Location = new(string)
+			return d.ReadString(schemas.Canary_ArtifactS3Location, v.ArtifactS3Location)
+		case schemas.Canary_BrowserConfigs:
+			return deserializeBrowserConfigs(d, schemas.Canary_BrowserConfigs, &v.BrowserConfigs)
+		case schemas.Canary_Code:
+			v.Code = &CanaryCodeOutput{}
+			return v.Code.Deserialize(d)
+		case schemas.Canary_DryRunConfig:
+			v.DryRunConfig = &DryRunConfigOutput{}
+			return v.DryRunConfig.Deserialize(d)
+		case schemas.Canary_EngineArn:
+			v.EngineArn = new(string)
+			return d.ReadString(schemas.Canary_EngineArn, v.EngineArn)
+		case schemas.Canary_EngineConfigs:
+			return deserializeEngineConfigs(d, schemas.Canary_EngineConfigs, &v.EngineConfigs)
+		case schemas.Canary_ExecutionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.Canary_ExecutionRoleArn, v.ExecutionRoleArn)
+		case schemas.Canary_FailureRetentionPeriodInDays:
+			v.FailureRetentionPeriodInDays = new(int32)
+			return d.ReadInt32(schemas.Canary_FailureRetentionPeriodInDays, v.FailureRetentionPeriodInDays)
+		case schemas.Canary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Canary_Id, v.Id)
+		case schemas.Canary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Canary_Name, v.Name)
+		case schemas.Canary_ProvisionedResourceCleanup:
+			var ev string
+			if err := d.ReadString(schemas.Canary_ProvisionedResourceCleanup, &ev); err != nil {
+				return err
+			}
+			v.ProvisionedResourceCleanup = ProvisionedResourceCleanupSetting(ev)
+			return nil
+		case schemas.Canary_RunConfig:
+			v.RunConfig = &CanaryRunConfigOutput{}
+			return v.RunConfig.Deserialize(d)
+		case schemas.Canary_RuntimeVersion:
+			v.RuntimeVersion = new(string)
+			return d.ReadString(schemas.Canary_RuntimeVersion, v.RuntimeVersion)
+		case schemas.Canary_Schedule:
+			v.Schedule = &CanaryScheduleOutput{}
+			return v.Schedule.Deserialize(d)
+		case schemas.Canary_Status:
+			v.Status = &CanaryStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.Canary_SuccessRetentionPeriodInDays:
+			v.SuccessRetentionPeriodInDays = new(int32)
+			return d.ReadInt32(schemas.Canary_SuccessRetentionPeriodInDays, v.SuccessRetentionPeriodInDays)
+		case schemas.Canary_Tags:
+			return deserializeTagMap(d, schemas.Canary_Tags, &v.Tags)
+		case schemas.Canary_Timeline:
+			v.Timeline = &CanaryTimeline{}
+			return v.Timeline.Deserialize(d)
+		case schemas.Canary_VisualReference:
+			v.VisualReference = &VisualReferenceOutput{}
+			return v.VisualReference.Deserialize(d)
+		case schemas.Canary_VisualReferences:
+			return deserializeVisualReferencesOutput(d, schemas.Canary_VisualReferences, &v.VisualReferences)
+		case schemas.Canary_VpcConfig:
+			v.VpcConfig = &VpcConfigOutput{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Use this structure to input your script code for the canary. This structure
 // contains the Lambda handler with the location where the canary should start
 // running the script. If the script is stored in an Amazon S3 bucket, the bucket
@@ -268,6 +527,57 @@ type CanaryCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CanaryCodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CanaryCodeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CanaryCodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlueprintTypes(s, schemas.CanaryCodeInput_BlueprintTypes, v.BlueprintTypes)
+	serializeDependencies(s, schemas.CanaryCodeInput_Dependencies, v.Dependencies)
+	if v.Handler != nil {
+		s.WriteString(schemas.CanaryCodeInput_Handler, *v.Handler)
+	}
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.CanaryCodeInput_S3Bucket, *v.S3Bucket)
+	}
+	if v.S3Key != nil {
+		s.WriteString(schemas.CanaryCodeInput_S3Key, *v.S3Key)
+	}
+	if v.S3Version != nil {
+		s.WriteString(schemas.CanaryCodeInput_S3Version, *v.S3Version)
+	}
+	if v.ZipFile != nil {
+		s.WriteBlob(schemas.CanaryCodeInput_ZipFile, v.ZipFile)
+	}
+}
+func (v *CanaryCodeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CanaryCodeInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CanaryCodeInput_BlueprintTypes:
+			return deserializeBlueprintTypes(d, schemas.CanaryCodeInput_BlueprintTypes, &v.BlueprintTypes)
+		case schemas.CanaryCodeInput_Dependencies:
+			return deserializeDependencies(d, schemas.CanaryCodeInput_Dependencies, &v.Dependencies)
+		case schemas.CanaryCodeInput_Handler:
+			v.Handler = new(string)
+			return d.ReadString(schemas.CanaryCodeInput_Handler, v.Handler)
+		case schemas.CanaryCodeInput_S3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.CanaryCodeInput_S3Bucket, v.S3Bucket)
+		case schemas.CanaryCodeInput_S3Key:
+			v.S3Key = new(string)
+			return d.ReadString(schemas.CanaryCodeInput_S3Key, v.S3Key)
+		case schemas.CanaryCodeInput_S3Version:
+			v.S3Version = new(string)
+			return d.ReadString(schemas.CanaryCodeInput_S3Version, v.S3Version)
+		case schemas.CanaryCodeInput_ZipFile:
+			return d.ReadBlob(schemas.CanaryCodeInput_ZipFile, &v.ZipFile)
+		}
+		return nil
+	})
+}
+
 // This structure contains information about the canary's Lambda handler and where
 // its code is stored by CloudWatch Synthetics.
 type CanaryCodeOutput struct {
@@ -303,6 +613,40 @@ type CanaryCodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CanaryCodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CanaryCodeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CanaryCodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlueprintTypes(s, schemas.CanaryCodeOutput_BlueprintTypes, v.BlueprintTypes)
+	serializeDependencies(s, schemas.CanaryCodeOutput_Dependencies, v.Dependencies)
+	if v.Handler != nil {
+		s.WriteString(schemas.CanaryCodeOutput_Handler, *v.Handler)
+	}
+	if v.SourceLocationArn != nil {
+		s.WriteString(schemas.CanaryCodeOutput_SourceLocationArn, *v.SourceLocationArn)
+	}
+}
+func (v *CanaryCodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CanaryCodeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CanaryCodeOutput_BlueprintTypes:
+			return deserializeBlueprintTypes(d, schemas.CanaryCodeOutput_BlueprintTypes, &v.BlueprintTypes)
+		case schemas.CanaryCodeOutput_Dependencies:
+			return deserializeDependencies(d, schemas.CanaryCodeOutput_Dependencies, &v.Dependencies)
+		case schemas.CanaryCodeOutput_Handler:
+			v.Handler = new(string)
+			return d.ReadString(schemas.CanaryCodeOutput_Handler, v.Handler)
+		case schemas.CanaryCodeOutput_SourceLocationArn:
+			v.SourceLocationArn = new(string)
+			return d.ReadString(schemas.CanaryCodeOutput_SourceLocationArn, v.SourceLocationArn)
+		}
+		return nil
+	})
+}
+
 // Returns the dry run configurations set for a canary.
 type CanaryDryRunConfigOutput struct {
 
@@ -311,6 +655,28 @@ type CanaryDryRunConfigOutput struct {
 	DryRunId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CanaryDryRunConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CanaryDryRunConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CanaryDryRunConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRunId != nil {
+		s.WriteString(schemas.CanaryDryRunConfigOutput_DryRunId, *v.DryRunId)
+	}
+}
+func (v *CanaryDryRunConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CanaryDryRunConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CanaryDryRunConfigOutput_DryRunId:
+			v.DryRunId = new(string)
+			return d.ReadString(schemas.CanaryDryRunConfigOutput_DryRunId, v.DryRunId)
+		}
+		return nil
+	})
 }
 
 // This structure contains information about the most recent run of a single
@@ -324,6 +690,36 @@ type CanaryLastRun struct {
 	LastRun *CanaryRun
 
 	noSmithyDocumentSerde
+}
+
+func (v *CanaryLastRun) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CanaryLastRun)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CanaryLastRun) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CanaryName != nil {
+		s.WriteString(schemas.CanaryLastRun_CanaryName, *v.CanaryName)
+	}
+	if v.LastRun != nil {
+		s.WriteStruct(schemas.CanaryLastRun_LastRun)
+		v.LastRun.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CanaryLastRun) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CanaryLastRun, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CanaryLastRun_CanaryName:
+			v.CanaryName = new(string)
+			return d.ReadString(schemas.CanaryLastRun_CanaryName, v.CanaryName)
+		case schemas.CanaryLastRun_LastRun:
+			v.LastRun = &CanaryRun{}
+			return v.LastRun.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // This structure contains the details about one run of one canary.
@@ -358,6 +754,86 @@ type CanaryRun struct {
 	Timeline *CanaryRunTimeline
 
 	noSmithyDocumentSerde
+}
+
+func (v *CanaryRun) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CanaryRun)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CanaryRun) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactS3Location != nil {
+		s.WriteString(schemas.CanaryRun_ArtifactS3Location, *v.ArtifactS3Location)
+	}
+	if v.BrowserType != "" {
+		s.WriteString(schemas.CanaryRun_BrowserType, string(v.BrowserType))
+	}
+	if v.DryRunConfig != nil {
+		s.WriteStruct(schemas.CanaryRun_DryRunConfig)
+		v.DryRunConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CanaryRun_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CanaryRun_Name, *v.Name)
+	}
+	if v.RetryAttempt != nil {
+		s.WriteInt32(schemas.CanaryRun_RetryAttempt, *v.RetryAttempt)
+	}
+	if v.ScheduledRunId != nil {
+		s.WriteString(schemas.CanaryRun_ScheduledRunId, *v.ScheduledRunId)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.CanaryRun_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timeline != nil {
+		s.WriteStruct(schemas.CanaryRun_Timeline)
+		v.Timeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CanaryRun) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CanaryRun, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CanaryRun_ArtifactS3Location:
+			v.ArtifactS3Location = new(string)
+			return d.ReadString(schemas.CanaryRun_ArtifactS3Location, v.ArtifactS3Location)
+		case schemas.CanaryRun_BrowserType:
+			var ev string
+			if err := d.ReadString(schemas.CanaryRun_BrowserType, &ev); err != nil {
+				return err
+			}
+			v.BrowserType = BrowserType(ev)
+			return nil
+		case schemas.CanaryRun_DryRunConfig:
+			v.DryRunConfig = &CanaryDryRunConfigOutput{}
+			return v.DryRunConfig.Deserialize(d)
+		case schemas.CanaryRun_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CanaryRun_Id, v.Id)
+		case schemas.CanaryRun_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CanaryRun_Name, v.Name)
+		case schemas.CanaryRun_RetryAttempt:
+			v.RetryAttempt = new(int32)
+			return d.ReadInt32(schemas.CanaryRun_RetryAttempt, v.RetryAttempt)
+		case schemas.CanaryRun_ScheduledRunId:
+			v.ScheduledRunId = new(string)
+			return d.ReadString(schemas.CanaryRun_ScheduledRunId, v.ScheduledRunId)
+		case schemas.CanaryRun_Status:
+			v.Status = &CanaryRunStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.CanaryRun_Timeline:
+			v.Timeline = &CanaryRunTimeline{}
+			return v.Timeline.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A structure that contains input information for a canary run.
@@ -412,6 +888,49 @@ type CanaryRunConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CanaryRunConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CanaryRunConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CanaryRunConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveTracing != nil {
+		s.WriteBool(schemas.CanaryRunConfigInput_ActiveTracing, *v.ActiveTracing)
+	}
+	serializeEnvironmentVariablesMap(s, schemas.CanaryRunConfigInput_EnvironmentVariables, v.EnvironmentVariables)
+	if v.EphemeralStorage != nil {
+		s.WriteInt32(schemas.CanaryRunConfigInput_EphemeralStorage, *v.EphemeralStorage)
+	}
+	if v.MemoryInMB != nil {
+		s.WriteInt32(schemas.CanaryRunConfigInput_MemoryInMB, *v.MemoryInMB)
+	}
+	if v.TimeoutInSeconds != nil {
+		s.WriteInt32(schemas.CanaryRunConfigInput_TimeoutInSeconds, *v.TimeoutInSeconds)
+	}
+}
+func (v *CanaryRunConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CanaryRunConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CanaryRunConfigInput_ActiveTracing:
+			v.ActiveTracing = new(bool)
+			return d.ReadBool(schemas.CanaryRunConfigInput_ActiveTracing, v.ActiveTracing)
+		case schemas.CanaryRunConfigInput_EnvironmentVariables:
+			return deserializeEnvironmentVariablesMap(d, schemas.CanaryRunConfigInput_EnvironmentVariables, &v.EnvironmentVariables)
+		case schemas.CanaryRunConfigInput_EphemeralStorage:
+			v.EphemeralStorage = new(int32)
+			return d.ReadInt32(schemas.CanaryRunConfigInput_EphemeralStorage, v.EphemeralStorage)
+		case schemas.CanaryRunConfigInput_MemoryInMB:
+			v.MemoryInMB = new(int32)
+			return d.ReadInt32(schemas.CanaryRunConfigInput_MemoryInMB, v.MemoryInMB)
+		case schemas.CanaryRunConfigInput_TimeoutInSeconds:
+			v.TimeoutInSeconds = new(int32)
+			return d.ReadInt32(schemas.CanaryRunConfigInput_TimeoutInSeconds, v.TimeoutInSeconds)
+		}
+		return nil
+	})
+}
+
 // A structure that contains information about a canary run.
 type CanaryRunConfigOutput struct {
 
@@ -433,6 +952,46 @@ type CanaryRunConfigOutput struct {
 	TimeoutInSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CanaryRunConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CanaryRunConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CanaryRunConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveTracing != nil {
+		s.WriteBool(schemas.CanaryRunConfigOutput_ActiveTracing, *v.ActiveTracing)
+	}
+	if v.EphemeralStorage != nil {
+		s.WriteInt32(schemas.CanaryRunConfigOutput_EphemeralStorage, *v.EphemeralStorage)
+	}
+	if v.MemoryInMB != nil {
+		s.WriteInt32(schemas.CanaryRunConfigOutput_MemoryInMB, *v.MemoryInMB)
+	}
+	if v.TimeoutInSeconds != nil {
+		s.WriteInt32(schemas.CanaryRunConfigOutput_TimeoutInSeconds, *v.TimeoutInSeconds)
+	}
+}
+func (v *CanaryRunConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CanaryRunConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CanaryRunConfigOutput_ActiveTracing:
+			v.ActiveTracing = new(bool)
+			return d.ReadBool(schemas.CanaryRunConfigOutput_ActiveTracing, v.ActiveTracing)
+		case schemas.CanaryRunConfigOutput_EphemeralStorage:
+			v.EphemeralStorage = new(int32)
+			return d.ReadInt32(schemas.CanaryRunConfigOutput_EphemeralStorage, v.EphemeralStorage)
+		case schemas.CanaryRunConfigOutput_MemoryInMB:
+			v.MemoryInMB = new(int32)
+			return d.ReadInt32(schemas.CanaryRunConfigOutput_MemoryInMB, v.MemoryInMB)
+		case schemas.CanaryRunConfigOutput_TimeoutInSeconds:
+			v.TimeoutInSeconds = new(int32)
+			return d.ReadInt32(schemas.CanaryRunConfigOutput_TimeoutInSeconds, v.TimeoutInSeconds)
+		}
+		return nil
+	})
 }
 
 // This structure contains the status information about a canary run.
@@ -469,6 +1028,58 @@ type CanaryRunStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CanaryRunStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CanaryRunStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CanaryRunStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.CanaryRunStatus_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.CanaryRunStatus_StateReason, *v.StateReason)
+	}
+	if v.StateReasonCode != "" {
+		s.WriteString(schemas.CanaryRunStatus_StateReasonCode, string(v.StateReasonCode))
+	}
+	if v.TestResult != "" {
+		s.WriteString(schemas.CanaryRunStatus_TestResult, string(v.TestResult))
+	}
+}
+func (v *CanaryRunStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CanaryRunStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CanaryRunStatus_State:
+			var ev string
+			if err := d.ReadString(schemas.CanaryRunStatus_State, &ev); err != nil {
+				return err
+			}
+			v.State = CanaryRunState(ev)
+			return nil
+		case schemas.CanaryRunStatus_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.CanaryRunStatus_StateReason, v.StateReason)
+		case schemas.CanaryRunStatus_StateReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.CanaryRunStatus_StateReasonCode, &ev); err != nil {
+				return err
+			}
+			v.StateReasonCode = CanaryRunStateReasonCode(ev)
+			return nil
+		case schemas.CanaryRunStatus_TestResult:
+			var ev string
+			if err := d.ReadString(schemas.CanaryRunStatus_TestResult, &ev); err != nil {
+				return err
+			}
+			v.TestResult = CanaryRunTestResult(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This structure contains the start and end times of a single canary run.
 type CanaryRunTimeline struct {
 
@@ -482,6 +1093,40 @@ type CanaryRunTimeline struct {
 	Started *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *CanaryRunTimeline) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CanaryRunTimeline)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CanaryRunTimeline) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Completed != nil {
+		s.WriteTime(schemas.CanaryRunTimeline_Completed, *v.Completed)
+	}
+	if v.MetricTimestampForRunAndRetries != nil {
+		s.WriteTime(schemas.CanaryRunTimeline_MetricTimestampForRunAndRetries, *v.MetricTimestampForRunAndRetries)
+	}
+	if v.Started != nil {
+		s.WriteTime(schemas.CanaryRunTimeline_Started, *v.Started)
+	}
+}
+func (v *CanaryRunTimeline) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CanaryRunTimeline, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CanaryRunTimeline_Completed:
+			v.Completed = new(time.Time)
+			return d.ReadTime(schemas.CanaryRunTimeline_Completed, v.Completed)
+		case schemas.CanaryRunTimeline_MetricTimestampForRunAndRetries:
+			v.MetricTimestampForRunAndRetries = new(time.Time)
+			return d.ReadTime(schemas.CanaryRunTimeline_MetricTimestampForRunAndRetries, v.MetricTimestampForRunAndRetries)
+		case schemas.CanaryRunTimeline_Started:
+			v.Started = new(time.Time)
+			return d.ReadTime(schemas.CanaryRunTimeline_Started, v.Started)
+		}
+		return nil
+	})
 }
 
 // This structure specifies how often a canary is to make runs and the date and
@@ -521,6 +1166,42 @@ type CanaryScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CanaryScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CanaryScheduleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CanaryScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationInSeconds != nil {
+		s.WriteInt64(schemas.CanaryScheduleInput_DurationInSeconds, *v.DurationInSeconds)
+	}
+	if v.Expression != nil {
+		s.WriteString(schemas.CanaryScheduleInput_Expression, *v.Expression)
+	}
+	if v.RetryConfig != nil {
+		s.WriteStruct(schemas.CanaryScheduleInput_RetryConfig)
+		v.RetryConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CanaryScheduleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CanaryScheduleInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CanaryScheduleInput_DurationInSeconds:
+			v.DurationInSeconds = new(int64)
+			return d.ReadInt64(schemas.CanaryScheduleInput_DurationInSeconds, v.DurationInSeconds)
+		case schemas.CanaryScheduleInput_Expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.CanaryScheduleInput_Expression, v.Expression)
+		case schemas.CanaryScheduleInput_RetryConfig:
+			v.RetryConfig = &RetryConfigInput{}
+			return v.RetryConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // How long, in seconds, for the canary to continue making regular runs according
 // to the schedule in the Expression value.
 type CanaryScheduleOutput struct {
@@ -555,6 +1236,42 @@ type CanaryScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CanaryScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CanaryScheduleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CanaryScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationInSeconds != nil {
+		s.WriteInt64(schemas.CanaryScheduleOutput_DurationInSeconds, *v.DurationInSeconds)
+	}
+	if v.Expression != nil {
+		s.WriteString(schemas.CanaryScheduleOutput_Expression, *v.Expression)
+	}
+	if v.RetryConfig != nil {
+		s.WriteStruct(schemas.CanaryScheduleOutput_RetryConfig)
+		v.RetryConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CanaryScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CanaryScheduleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CanaryScheduleOutput_DurationInSeconds:
+			v.DurationInSeconds = new(int64)
+			return d.ReadInt64(schemas.CanaryScheduleOutput_DurationInSeconds, v.DurationInSeconds)
+		case schemas.CanaryScheduleOutput_Expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.CanaryScheduleOutput_Expression, v.Expression)
+		case schemas.CanaryScheduleOutput_RetryConfig:
+			v.RetryConfig = &RetryConfigOutput{}
+			return v.RetryConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A structure that contains the current state of the canary.
 type CanaryStatus struct {
 
@@ -569,6 +1286,48 @@ type CanaryStatus struct {
 	StateReasonCode CanaryStateReasonCode
 
 	noSmithyDocumentSerde
+}
+
+func (v *CanaryStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CanaryStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CanaryStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.CanaryStatus_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.CanaryStatus_StateReason, *v.StateReason)
+	}
+	if v.StateReasonCode != "" {
+		s.WriteString(schemas.CanaryStatus_StateReasonCode, string(v.StateReasonCode))
+	}
+}
+func (v *CanaryStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CanaryStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CanaryStatus_State:
+			var ev string
+			if err := d.ReadString(schemas.CanaryStatus_State, &ev); err != nil {
+				return err
+			}
+			v.State = CanaryState(ev)
+			return nil
+		case schemas.CanaryStatus_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.CanaryStatus_StateReason, v.StateReason)
+		case schemas.CanaryStatus_StateReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.CanaryStatus_StateReasonCode, &ev); err != nil {
+				return err
+			}
+			v.StateReasonCode = CanaryStateReasonCode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // This structure contains information about when the canary was created and
@@ -590,6 +1349,46 @@ type CanaryTimeline struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CanaryTimeline) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CanaryTimeline)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CanaryTimeline) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Created != nil {
+		s.WriteTime(schemas.CanaryTimeline_Created, *v.Created)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.CanaryTimeline_LastModified, *v.LastModified)
+	}
+	if v.LastStarted != nil {
+		s.WriteTime(schemas.CanaryTimeline_LastStarted, *v.LastStarted)
+	}
+	if v.LastStopped != nil {
+		s.WriteTime(schemas.CanaryTimeline_LastStopped, *v.LastStopped)
+	}
+}
+func (v *CanaryTimeline) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CanaryTimeline, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CanaryTimeline_Created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.CanaryTimeline_Created, v.Created)
+		case schemas.CanaryTimeline_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.CanaryTimeline_LastModified, v.LastModified)
+		case schemas.CanaryTimeline_LastStarted:
+			v.LastStarted = new(time.Time)
+			return d.ReadTime(schemas.CanaryTimeline_LastStarted, v.LastStarted)
+		case schemas.CanaryTimeline_LastStopped:
+			v.LastStopped = new(time.Time)
+			return d.ReadTime(schemas.CanaryTimeline_LastStopped, v.LastStopped)
+		}
+		return nil
+	})
+}
+
 // A structure that contains information about a dependency for a canary.
 type Dependency struct {
 
@@ -607,6 +1406,38 @@ type Dependency struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Dependency) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Dependency)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Dependency) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reference != nil {
+		s.WriteString(schemas.Dependency_Reference, *v.Reference)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Dependency_Type, string(v.Type))
+	}
+}
+func (v *Dependency) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Dependency, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Dependency_Reference:
+			v.Reference = new(string)
+			return d.ReadString(schemas.Dependency_Reference, v.Reference)
+		case schemas.Dependency_Type:
+			var ev string
+			if err := d.ReadString(schemas.Dependency_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = DependencyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Returns the dry run configurations set for a canary.
 type DryRunConfigOutput struct {
 
@@ -618,6 +1449,34 @@ type DryRunConfigOutput struct {
 	LastDryRunExecutionStatus *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DryRunConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DryRunConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DryRunConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRunId != nil {
+		s.WriteString(schemas.DryRunConfigOutput_DryRunId, *v.DryRunId)
+	}
+	if v.LastDryRunExecutionStatus != nil {
+		s.WriteString(schemas.DryRunConfigOutput_LastDryRunExecutionStatus, *v.LastDryRunExecutionStatus)
+	}
+}
+func (v *DryRunConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DryRunConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DryRunConfigOutput_DryRunId:
+			v.DryRunId = new(string)
+			return d.ReadString(schemas.DryRunConfigOutput_DryRunId, v.DryRunId)
+		case schemas.DryRunConfigOutput_LastDryRunExecutionStatus:
+			v.LastDryRunExecutionStatus = new(string)
+			return d.ReadString(schemas.DryRunConfigOutput_LastDryRunExecutionStatus, v.LastDryRunExecutionStatus)
+		}
+		return nil
+	})
 }
 
 // A structure of engine configurations for the canary, one for each browser type
@@ -632,6 +1491,38 @@ type EngineConfig struct {
 	EngineArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EngineConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngineConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EngineConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrowserType != "" {
+		s.WriteString(schemas.EngineConfig_BrowserType, string(v.BrowserType))
+	}
+	if v.EngineArn != nil {
+		s.WriteString(schemas.EngineConfig_EngineArn, *v.EngineArn)
+	}
+}
+func (v *EngineConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EngineConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EngineConfig_BrowserType:
+			var ev string
+			if err := d.ReadString(schemas.EngineConfig_BrowserType, &ev); err != nil {
+				return err
+			}
+			v.BrowserType = BrowserType(ev)
+			return nil
+		case schemas.EngineConfig_EngineArn:
+			v.EngineArn = new(string)
+			return d.ReadString(schemas.EngineConfig_EngineArn, v.EngineArn)
+		}
+		return nil
+	})
 }
 
 // This structure contains information about one group.
@@ -658,6 +1549,55 @@ type Group struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Group) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Group)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Group) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Group_Arn, *v.Arn)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.Group_CreatedTime, *v.CreatedTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Group_Id, *v.Id)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.Group_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Group_Name, *v.Name)
+	}
+	serializeTagMap(s, schemas.Group_Tags, v.Tags)
+}
+func (v *Group) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Group, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Group_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Group_Arn, v.Arn)
+		case schemas.Group_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.Group_CreatedTime, v.CreatedTime)
+		case schemas.Group_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Group_Id, v.Id)
+		case schemas.Group_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.Group_LastModifiedTime, v.LastModifiedTime)
+		case schemas.Group_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Group_Name, v.Name)
+		case schemas.Group_Tags:
+			return deserializeTagMap(d, schemas.Group_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // A structure containing some information about a group.
 type GroupSummary struct {
 
@@ -671,6 +1611,40 @@ type GroupSummary struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GroupSummary_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GroupSummary_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GroupSummary_Name, *v.Name)
+	}
+}
+func (v *GroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GroupSummary_Arn, v.Arn)
+		case schemas.GroupSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GroupSummary_Id, v.Id)
+		case schemas.GroupSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GroupSummary_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // This structure contains information about the canary's retry configuration.
@@ -695,6 +1669,28 @@ type RetryConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetryConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetryConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxRetries != nil {
+		s.WriteInt32(schemas.RetryConfigInput_MaxRetries, *v.MaxRetries)
+	}
+}
+func (v *RetryConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetryConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetryConfigInput_MaxRetries:
+			v.MaxRetries = new(int32)
+			return d.ReadInt32(schemas.RetryConfigInput_MaxRetries, v.MaxRetries)
+		}
+		return nil
+	})
+}
+
 // This structure contains information about the canary's retry configuration.
 type RetryConfigOutput struct {
 
@@ -702,6 +1698,28 @@ type RetryConfigOutput struct {
 	MaxRetries *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *RetryConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetryConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxRetries != nil {
+		s.WriteInt32(schemas.RetryConfigOutput_MaxRetries, *v.MaxRetries)
+	}
+}
+func (v *RetryConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetryConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetryConfigOutput_MaxRetries:
+			v.MaxRetries = new(int32)
+			return d.ReadInt32(schemas.RetryConfigOutput_MaxRetries, v.MaxRetries)
+		}
+		return nil
+	})
 }
 
 // This structure contains information about one canary runtime version. For more
@@ -727,6 +1745,46 @@ type RuntimeVersion struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RuntimeVersion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuntimeVersion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuntimeVersion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeprecationDate != nil {
+		s.WriteTime(schemas.RuntimeVersion_DeprecationDate, *v.DeprecationDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RuntimeVersion_Description, *v.Description)
+	}
+	if v.ReleaseDate != nil {
+		s.WriteTime(schemas.RuntimeVersion_ReleaseDate, *v.ReleaseDate)
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.RuntimeVersion_VersionName, *v.VersionName)
+	}
+}
+func (v *RuntimeVersion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuntimeVersion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuntimeVersion_DeprecationDate:
+			v.DeprecationDate = new(time.Time)
+			return d.ReadTime(schemas.RuntimeVersion_DeprecationDate, v.DeprecationDate)
+		case schemas.RuntimeVersion_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RuntimeVersion_Description, v.Description)
+		case schemas.RuntimeVersion_ReleaseDate:
+			v.ReleaseDate = new(time.Time)
+			return d.ReadTime(schemas.RuntimeVersion_ReleaseDate, v.ReleaseDate)
+		case schemas.RuntimeVersion_VersionName:
+			v.VersionName = new(string)
+			return d.ReadString(schemas.RuntimeVersion_VersionName, v.VersionName)
+		}
+		return nil
+	})
+}
+
 // A structure that contains the configuration of encryption-at-rest settings for
 // canary artifacts that the canary uploads to Amazon S3.
 //
@@ -747,6 +1805,38 @@ type S3EncryptionConfig struct {
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3EncryptionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3EncryptionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3EncryptionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionMode != "" {
+		s.WriteString(schemas.S3EncryptionConfig_EncryptionMode, string(v.EncryptionMode))
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.S3EncryptionConfig_KmsKeyArn, *v.KmsKeyArn)
+	}
+}
+func (v *S3EncryptionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3EncryptionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3EncryptionConfig_EncryptionMode:
+			var ev string
+			if err := d.ReadString(schemas.S3EncryptionConfig_EncryptionMode, &ev); err != nil {
+				return err
+			}
+			v.EncryptionMode = EncryptionMode(ev)
+			return nil
+		case schemas.S3EncryptionConfig_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.S3EncryptionConfig_KmsKeyArn, v.KmsKeyArn)
+		}
+		return nil
+	})
 }
 
 // An object that specifies what screenshots to use as a baseline for visual
@@ -784,6 +1874,41 @@ type VisualReferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VisualReferenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VisualReferenceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VisualReferenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseCanaryRunId != nil {
+		s.WriteString(schemas.VisualReferenceInput_BaseCanaryRunId, *v.BaseCanaryRunId)
+	}
+	serializeBaseScreenshots(s, schemas.VisualReferenceInput_BaseScreenshots, v.BaseScreenshots)
+	if v.BrowserType != "" {
+		s.WriteString(schemas.VisualReferenceInput_BrowserType, string(v.BrowserType))
+	}
+}
+func (v *VisualReferenceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VisualReferenceInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VisualReferenceInput_BaseCanaryRunId:
+			v.BaseCanaryRunId = new(string)
+			return d.ReadString(schemas.VisualReferenceInput_BaseCanaryRunId, v.BaseCanaryRunId)
+		case schemas.VisualReferenceInput_BaseScreenshots:
+			return deserializeBaseScreenshots(d, schemas.VisualReferenceInput_BaseScreenshots, &v.BaseScreenshots)
+		case schemas.VisualReferenceInput_BrowserType:
+			var ev string
+			if err := d.ReadString(schemas.VisualReferenceInput_BrowserType, &ev); err != nil {
+				return err
+			}
+			v.BrowserType = BrowserType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // If this canary performs visual monitoring by comparing screenshots, this
 // structure contains the ID of the canary run that is used as the baseline for
 // screenshots, and the coordinates of any parts of those screenshots that are
@@ -807,6 +1932,41 @@ type VisualReferenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VisualReferenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VisualReferenceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VisualReferenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseCanaryRunId != nil {
+		s.WriteString(schemas.VisualReferenceOutput_BaseCanaryRunId, *v.BaseCanaryRunId)
+	}
+	serializeBaseScreenshots(s, schemas.VisualReferenceOutput_BaseScreenshots, v.BaseScreenshots)
+	if v.BrowserType != "" {
+		s.WriteString(schemas.VisualReferenceOutput_BrowserType, string(v.BrowserType))
+	}
+}
+func (v *VisualReferenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VisualReferenceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VisualReferenceOutput_BaseCanaryRunId:
+			v.BaseCanaryRunId = new(string)
+			return d.ReadString(schemas.VisualReferenceOutput_BaseCanaryRunId, v.BaseCanaryRunId)
+		case schemas.VisualReferenceOutput_BaseScreenshots:
+			return deserializeBaseScreenshots(d, schemas.VisualReferenceOutput_BaseScreenshots, &v.BaseScreenshots)
+		case schemas.VisualReferenceOutput_BrowserType:
+			var ev string
+			if err := d.ReadString(schemas.VisualReferenceOutput_BrowserType, &ev); err != nil {
+				return err
+			}
+			v.BrowserType = BrowserType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // If this canary is to test an endpoint in a VPC, this structure contains
 // information about the subnets and security groups of the VPC endpoint. For more
 // information, see [Running a Canary in a VPC].
@@ -825,6 +1985,34 @@ type VpcConfigInput struct {
 	SubnetIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VpcConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ipv6AllowedForDualStack != nil {
+		s.WriteBool(schemas.VpcConfigInput_Ipv6AllowedForDualStack, *v.Ipv6AllowedForDualStack)
+	}
+	serializeSecurityGroupIds(s, schemas.VpcConfigInput_SecurityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIds(s, schemas.VpcConfigInput_SubnetIds, v.SubnetIds)
+}
+func (v *VpcConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcConfigInput_Ipv6AllowedForDualStack:
+			v.Ipv6AllowedForDualStack = new(bool)
+			return d.ReadBool(schemas.VpcConfigInput_Ipv6AllowedForDualStack, v.Ipv6AllowedForDualStack)
+		case schemas.VpcConfigInput_SecurityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.VpcConfigInput_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.VpcConfigInput_SubnetIds:
+			return deserializeSubnetIds(d, schemas.VpcConfigInput_SubnetIds, &v.SubnetIds)
+		}
+		return nil
+	})
 }
 
 // If this canary is to test an endpoint in a VPC, this structure contains
@@ -848,6 +2036,40 @@ type VpcConfigOutput struct {
 	VpcId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VpcConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ipv6AllowedForDualStack != nil {
+		s.WriteBool(schemas.VpcConfigOutput_Ipv6AllowedForDualStack, *v.Ipv6AllowedForDualStack)
+	}
+	serializeSecurityGroupIds(s, schemas.VpcConfigOutput_SecurityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIds(s, schemas.VpcConfigOutput_SubnetIds, v.SubnetIds)
+	if v.VpcId != nil {
+		s.WriteString(schemas.VpcConfigOutput_VpcId, *v.VpcId)
+	}
+}
+func (v *VpcConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcConfigOutput_Ipv6AllowedForDualStack:
+			v.Ipv6AllowedForDualStack = new(bool)
+			return d.ReadBool(schemas.VpcConfigOutput_Ipv6AllowedForDualStack, v.Ipv6AllowedForDualStack)
+		case schemas.VpcConfigOutput_SecurityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.VpcConfigOutput_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.VpcConfigOutput_SubnetIds:
+			return deserializeSubnetIds(d, schemas.VpcConfigOutput_SubnetIds, &v.SubnetIds)
+		case schemas.VpcConfigOutput_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.VpcConfigOutput_VpcId, v.VpcId)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

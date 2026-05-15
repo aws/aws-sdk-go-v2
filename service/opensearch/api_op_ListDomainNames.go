@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type ListDomainNamesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainNamesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDomainNamesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainNamesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngineType != "" {
+		s.WriteString(schemas.ListDomainNamesRequest_EngineType, string(v.EngineType))
+	}
+}
+
 // The results of a ListDomainNames operation. Contains the names of all domains
 // owned by this account and their respective engine types.
 type ListDomainNamesOutput struct {
@@ -51,16 +65,23 @@ type ListDomainNamesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainNamesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDomainNamesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDomainNamesResponse_DomainNames:
+			return deserializeDomainInfoList(d, schemas.ListDomainNamesResponse_DomainNames, &v.DomainNames)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDomainNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDomainNames{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainNames, schemas.ListDomainNamesRequest, schemas.ListDomainNamesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDomainNames{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainNames, schemas.ListDomainNamesRequest, schemas.ListDomainNamesResponse), output: &ListDomainNamesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDomainNames"); err != nil {

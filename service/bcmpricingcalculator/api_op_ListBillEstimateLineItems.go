@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,25 @@ type ListBillEstimateLineItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBillEstimateLineItemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBillEstimateLineItemsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBillEstimateLineItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillEstimateId != nil {
+		s.WriteString(schemas.ListBillEstimateLineItemsRequest_billEstimateId, *v.BillEstimateId)
+	}
+	serializeListBillEstimateLineItemsFilters(s, schemas.ListBillEstimateLineItemsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBillEstimateLineItemsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBillEstimateLineItemsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListBillEstimateLineItemsOutput struct {
 
 	//  The list of line items associated with the bill estimate.
@@ -60,16 +81,26 @@ type ListBillEstimateLineItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBillEstimateLineItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBillEstimateLineItemsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBillEstimateLineItemsResponse_items:
+			return deserializeBillEstimateLineItemSummaries(d, schemas.ListBillEstimateLineItemsResponse_items, &v.Items)
+		case schemas.ListBillEstimateLineItemsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBillEstimateLineItemsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBillEstimateLineItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListBillEstimateLineItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBillEstimateLineItems, schemas.ListBillEstimateLineItemsRequest, schemas.ListBillEstimateLineItemsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListBillEstimateLineItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBillEstimateLineItems, schemas.ListBillEstimateLineItemsRequest, schemas.ListBillEstimateLineItemsResponse), output: &ListBillEstimateLineItemsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBillEstimateLineItems"); err != nil {

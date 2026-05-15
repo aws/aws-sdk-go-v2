@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -116,6 +118,57 @@ type InvokeAgentRuntimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeAgentRuntimeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeAgentRuntimeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeAgentRuntimeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accept != nil {
+		s.WriteString(schemas.InvokeAgentRuntimeRequest_accept, *v.Accept)
+	}
+	if v.AccountId != nil {
+		s.WriteString(schemas.InvokeAgentRuntimeRequest_accountId, *v.AccountId)
+	}
+	if v.AgentRuntimeArn != nil {
+		s.WriteString(schemas.InvokeAgentRuntimeRequest_agentRuntimeArn, *v.AgentRuntimeArn)
+	}
+	if v.Baggage != nil {
+		s.WriteString(schemas.InvokeAgentRuntimeRequest_baggage, *v.Baggage)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.InvokeAgentRuntimeRequest_contentType, *v.ContentType)
+	}
+	if v.McpProtocolVersion != nil {
+		s.WriteString(schemas.InvokeAgentRuntimeRequest_mcpProtocolVersion, *v.McpProtocolVersion)
+	}
+	if v.McpSessionId != nil {
+		s.WriteString(schemas.InvokeAgentRuntimeRequest_mcpSessionId, *v.McpSessionId)
+	}
+	if v.Payload != nil {
+		s.WriteBlob(schemas.InvokeAgentRuntimeRequest_payload, v.Payload)
+	}
+	if v.Qualifier != nil {
+		s.WriteString(schemas.InvokeAgentRuntimeRequest_qualifier, *v.Qualifier)
+	}
+	if v.RuntimeSessionId != nil {
+		s.WriteString(schemas.InvokeAgentRuntimeRequest_runtimeSessionId, *v.RuntimeSessionId)
+	}
+	if v.RuntimeUserId != nil {
+		s.WriteString(schemas.InvokeAgentRuntimeRequest_runtimeUserId, *v.RuntimeUserId)
+	}
+	if v.TraceId != nil {
+		s.WriteString(schemas.InvokeAgentRuntimeRequest_traceId, *v.TraceId)
+	}
+	if v.TraceParent != nil {
+		s.WriteString(schemas.InvokeAgentRuntimeRequest_traceParent, *v.TraceParent)
+	}
+	if v.TraceState != nil {
+		s.WriteString(schemas.InvokeAgentRuntimeRequest_traceState, *v.TraceState)
+	}
+}
+
 type InvokeAgentRuntimeOutput struct {
 
 	// The MIME type of the response data. This indicates how to interpret the
@@ -160,16 +213,56 @@ type InvokeAgentRuntimeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeAgentRuntimeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeAgentRuntimeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeAgentRuntimeResponse_baggage:
+			v.Baggage = new(string)
+			return d.ReadString(schemas.InvokeAgentRuntimeResponse_baggage, v.Baggage)
+		case schemas.InvokeAgentRuntimeResponse_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.InvokeAgentRuntimeResponse_contentType, v.ContentType)
+		case schemas.InvokeAgentRuntimeResponse_mcpProtocolVersion:
+			v.McpProtocolVersion = new(string)
+			return d.ReadString(schemas.InvokeAgentRuntimeResponse_mcpProtocolVersion, v.McpProtocolVersion)
+		case schemas.InvokeAgentRuntimeResponse_mcpSessionId:
+			v.McpSessionId = new(string)
+			return d.ReadString(schemas.InvokeAgentRuntimeResponse_mcpSessionId, v.McpSessionId)
+		case schemas.InvokeAgentRuntimeResponse_runtimeSessionId:
+			v.RuntimeSessionId = new(string)
+			return d.ReadString(schemas.InvokeAgentRuntimeResponse_runtimeSessionId, v.RuntimeSessionId)
+		case schemas.InvokeAgentRuntimeResponse_statusCode:
+			v.StatusCode = new(int32)
+			return d.ReadInt32(schemas.InvokeAgentRuntimeResponse_statusCode, v.StatusCode)
+		case schemas.InvokeAgentRuntimeResponse_traceId:
+			v.TraceId = new(string)
+			return d.ReadString(schemas.InvokeAgentRuntimeResponse_traceId, v.TraceId)
+		case schemas.InvokeAgentRuntimeResponse_traceParent:
+			v.TraceParent = new(string)
+			return d.ReadString(schemas.InvokeAgentRuntimeResponse_traceParent, v.TraceParent)
+		case schemas.InvokeAgentRuntimeResponse_traceState:
+			v.TraceState = new(string)
+			return d.ReadString(schemas.InvokeAgentRuntimeResponse_traceState, v.TraceState)
+		}
+		return nil
+	})
+}
+func (v *InvokeAgentRuntimeOutput) GetPayloadStream() io.Reader { return v.Response }
+
+var _ smithy.StreamingInput = (*InvokeAgentRuntimeOutput)(nil)
+
+func (v *InvokeAgentRuntimeOutput) SetPayloadStream(r io.ReadCloser) { v.Response = r }
+
+var _ smithy.StreamingOutput = (*InvokeAgentRuntimeOutput)(nil)
+
 func (c *Client) addOperationInvokeAgentRuntimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeAgentRuntime{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAgentRuntime, schemas.InvokeAgentRuntimeRequest, schemas.InvokeAgentRuntimeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeAgentRuntime{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAgentRuntime, schemas.InvokeAgentRuntimeRequest, schemas.InvokeAgentRuntimeResponse), output: &InvokeAgentRuntimeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeAgentRuntime"); err != nil {

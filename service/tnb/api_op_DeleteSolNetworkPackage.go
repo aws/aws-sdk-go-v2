@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,18 @@ type DeleteSolNetworkPackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSolNetworkPackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSolNetworkPackageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSolNetworkPackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NsdInfoId != nil {
+		s.WriteString(schemas.DeleteSolNetworkPackageInput_nsdInfoId, *v.NsdInfoId)
+	}
+}
+
 type DeleteSolNetworkPackageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,16 +66,29 @@ type DeleteSolNetworkPackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSolNetworkPackageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSolNetworkPackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSolNetworkPackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSolNetworkPackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSolNetworkPackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSolNetworkPackage, schemas.DeleteSolNetworkPackageInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSolNetworkPackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSolNetworkPackage, schemas.DeleteSolNetworkPackageInput, nil), output: &DeleteSolNetworkPackageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSolNetworkPackage"); err != nil {

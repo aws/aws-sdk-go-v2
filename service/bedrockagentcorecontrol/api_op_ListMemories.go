@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,21 @@ type ListMemoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMemoriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMemoriesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMemoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMemoriesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMemoriesInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListMemoriesOutput struct {
 
 	// The list of AgentCore Memory resource summaries.
@@ -57,16 +74,26 @@ type ListMemoriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMemoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMemoriesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMemoriesOutput_memories:
+			return deserializeMemorySummaryList(d, schemas.ListMemoriesOutput_memories, &v.Memories)
+		case schemas.ListMemoriesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMemoriesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMemoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMemories{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMemories, schemas.ListMemoriesInput, schemas.ListMemoriesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMemories{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMemories, schemas.ListMemoriesInput, schemas.ListMemoriesOutput), output: &ListMemoriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMemories"); err != nil {

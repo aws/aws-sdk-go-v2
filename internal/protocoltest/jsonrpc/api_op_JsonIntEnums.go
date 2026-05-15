@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,61 @@ type JsonIntEnumsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonIntEnumsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JsonIntEnumsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonIntEnumsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntEnum1 != 0 {
+		s.WriteInt32(schemas.JsonIntEnumsInputOutput_intEnum1, int32(v.IntEnum1))
+	}
+	if v.IntEnum2 != 0 {
+		s.WriteInt32(schemas.JsonIntEnumsInputOutput_intEnum2, int32(v.IntEnum2))
+	}
+	if v.IntEnum3 != 0 {
+		s.WriteInt32(schemas.JsonIntEnumsInputOutput_intEnum3, int32(v.IntEnum3))
+	}
+	serializeIntegerEnumList(s, schemas.JsonIntEnumsInputOutput_intEnumList, v.IntEnumList)
+	serializeIntegerEnumMap(s, schemas.JsonIntEnumsInputOutput_intEnumMap, v.IntEnumMap)
+	serializeIntegerEnumSet(s, schemas.JsonIntEnumsInputOutput_intEnumSet, v.IntEnumSet)
+}
+func (v *JsonIntEnumsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JsonIntEnumsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JsonIntEnumsInputOutput_intEnum1:
+			var ev int32
+			if err := d.ReadInt32(schemas.JsonIntEnumsInputOutput_intEnum1, &ev); err != nil {
+				return err
+			}
+			v.IntEnum1 = types.IntegerEnum(ev)
+			return nil
+		case schemas.JsonIntEnumsInputOutput_intEnum2:
+			var ev int32
+			if err := d.ReadInt32(schemas.JsonIntEnumsInputOutput_intEnum2, &ev); err != nil {
+				return err
+			}
+			v.IntEnum2 = types.IntegerEnum(ev)
+			return nil
+		case schemas.JsonIntEnumsInputOutput_intEnum3:
+			var ev int32
+			if err := d.ReadInt32(schemas.JsonIntEnumsInputOutput_intEnum3, &ev); err != nil {
+				return err
+			}
+			v.IntEnum3 = types.IntegerEnum(ev)
+			return nil
+		case schemas.JsonIntEnumsInputOutput_intEnumList:
+			return deserializeIntegerEnumList(d, schemas.JsonIntEnumsInputOutput_intEnumList, &v.IntEnumList)
+		case schemas.JsonIntEnumsInputOutput_intEnumMap:
+			return deserializeIntegerEnumMap(d, schemas.JsonIntEnumsInputOutput_intEnumMap, &v.IntEnumMap)
+		case schemas.JsonIntEnumsInputOutput_intEnumSet:
+			return deserializeIntegerEnumSet(d, schemas.JsonIntEnumsInputOutput_intEnumSet, &v.IntEnumSet)
+		}
+		return nil
+	})
+}
+
 type JsonIntEnumsOutput struct {
 	IntEnum1 types.IntegerEnum
 
@@ -63,16 +120,68 @@ type JsonIntEnumsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonIntEnumsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JsonIntEnumsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonIntEnumsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntEnum1 != 0 {
+		s.WriteInt32(schemas.JsonIntEnumsInputOutput_intEnum1, int32(v.IntEnum1))
+	}
+	if v.IntEnum2 != 0 {
+		s.WriteInt32(schemas.JsonIntEnumsInputOutput_intEnum2, int32(v.IntEnum2))
+	}
+	if v.IntEnum3 != 0 {
+		s.WriteInt32(schemas.JsonIntEnumsInputOutput_intEnum3, int32(v.IntEnum3))
+	}
+	serializeIntegerEnumList(s, schemas.JsonIntEnumsInputOutput_intEnumList, v.IntEnumList)
+	serializeIntegerEnumMap(s, schemas.JsonIntEnumsInputOutput_intEnumMap, v.IntEnumMap)
+	serializeIntegerEnumSet(s, schemas.JsonIntEnumsInputOutput_intEnumSet, v.IntEnumSet)
+}
+func (v *JsonIntEnumsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JsonIntEnumsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JsonIntEnumsInputOutput_intEnum1:
+			var ev int32
+			if err := d.ReadInt32(schemas.JsonIntEnumsInputOutput_intEnum1, &ev); err != nil {
+				return err
+			}
+			v.IntEnum1 = types.IntegerEnum(ev)
+			return nil
+		case schemas.JsonIntEnumsInputOutput_intEnum2:
+			var ev int32
+			if err := d.ReadInt32(schemas.JsonIntEnumsInputOutput_intEnum2, &ev); err != nil {
+				return err
+			}
+			v.IntEnum2 = types.IntegerEnum(ev)
+			return nil
+		case schemas.JsonIntEnumsInputOutput_intEnum3:
+			var ev int32
+			if err := d.ReadInt32(schemas.JsonIntEnumsInputOutput_intEnum3, &ev); err != nil {
+				return err
+			}
+			v.IntEnum3 = types.IntegerEnum(ev)
+			return nil
+		case schemas.JsonIntEnumsInputOutput_intEnumList:
+			return deserializeIntegerEnumList(d, schemas.JsonIntEnumsInputOutput_intEnumList, &v.IntEnumList)
+		case schemas.JsonIntEnumsInputOutput_intEnumMap:
+			return deserializeIntegerEnumMap(d, schemas.JsonIntEnumsInputOutput_intEnumMap, &v.IntEnumMap)
+		case schemas.JsonIntEnumsInputOutput_intEnumSet:
+			return deserializeIntegerEnumSet(d, schemas.JsonIntEnumsInputOutput_intEnumSet, &v.IntEnumSet)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationJsonIntEnumsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpJsonIntEnums{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JsonIntEnums, schemas.JsonIntEnumsInputOutput, schemas.JsonIntEnumsInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpJsonIntEnums{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JsonIntEnums, schemas.JsonIntEnumsInputOutput, schemas.JsonIntEnumsInputOutput), output: &JsonIntEnumsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "JsonIntEnums"); err != nil {

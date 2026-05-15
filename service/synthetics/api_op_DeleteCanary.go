@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/synthetics/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -73,6 +75,21 @@ type DeleteCanaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCanaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCanaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCanaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteLambda != false {
+		s.WriteBool(schemas.DeleteCanaryRequest_DeleteLambda, v.DeleteLambda)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteCanaryRequest_Name, *v.Name)
+	}
+}
+
 type DeleteCanaryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -80,16 +97,21 @@ type DeleteCanaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCanaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCanaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCanaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCanary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCanary, schemas.DeleteCanaryRequest, schemas.DeleteCanaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCanary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCanary, schemas.DeleteCanaryRequest, schemas.DeleteCanaryResponse), output: &DeleteCanaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteCanary"); err != nil {

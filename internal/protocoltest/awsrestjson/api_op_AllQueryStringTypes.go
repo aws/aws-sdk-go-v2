@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -74,6 +76,126 @@ type AllQueryStringTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AllQueryStringTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AllQueryStringTypesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AllQueryStringTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryBoolean != nil {
+		s.WriteBool(schemas.AllQueryStringTypesInput_queryBoolean, *v.QueryBoolean)
+	}
+	serializeBooleanList(s, schemas.AllQueryStringTypesInput_queryBooleanList, v.QueryBooleanList)
+	if v.QueryByte != nil {
+		s.WriteInt8(schemas.AllQueryStringTypesInput_queryByte, *v.QueryByte)
+	}
+	if v.QueryDouble != nil {
+		s.WriteFloat64(schemas.AllQueryStringTypesInput_queryDouble, *v.QueryDouble)
+	}
+	serializeDoubleList(s, schemas.AllQueryStringTypesInput_queryDoubleList, v.QueryDoubleList)
+	if v.QueryEnum != "" {
+		s.WriteString(schemas.AllQueryStringTypesInput_queryEnum, string(v.QueryEnum))
+	}
+	serializeFooEnumList(s, schemas.AllQueryStringTypesInput_queryEnumList, v.QueryEnumList)
+	if v.QueryFloat != nil {
+		s.WriteFloat32(schemas.AllQueryStringTypesInput_queryFloat, *v.QueryFloat)
+	}
+	if v.QueryInteger != nil {
+		s.WriteInt32(schemas.AllQueryStringTypesInput_queryInteger, *v.QueryInteger)
+	}
+	if v.QueryIntegerEnum != 0 {
+		s.WriteInt32(schemas.AllQueryStringTypesInput_queryIntegerEnum, int32(v.QueryIntegerEnum))
+	}
+	serializeIntegerEnumList(s, schemas.AllQueryStringTypesInput_queryIntegerEnumList, v.QueryIntegerEnumList)
+	serializeIntegerList(s, schemas.AllQueryStringTypesInput_queryIntegerList, v.QueryIntegerList)
+	serializeIntegerSet(s, schemas.AllQueryStringTypesInput_queryIntegerSet, v.QueryIntegerSet)
+	if v.QueryLong != nil {
+		s.WriteInt64(schemas.AllQueryStringTypesInput_queryLong, *v.QueryLong)
+	}
+	serializeStringListMap(s, schemas.AllQueryStringTypesInput_queryParamsMapOfStringList, v.QueryParamsMapOfStringList)
+	if v.QueryShort != nil {
+		s.WriteInt16(schemas.AllQueryStringTypesInput_queryShort, *v.QueryShort)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.AllQueryStringTypesInput_queryString, *v.QueryString)
+	}
+	serializeStringList(s, schemas.AllQueryStringTypesInput_queryStringList, v.QueryStringList)
+	serializeStringSet(s, schemas.AllQueryStringTypesInput_queryStringSet, v.QueryStringSet)
+	if v.QueryTimestamp != nil {
+		s.WriteTime(schemas.AllQueryStringTypesInput_queryTimestamp, *v.QueryTimestamp)
+	}
+	serializeTimestampList(s, schemas.AllQueryStringTypesInput_queryTimestampList, v.QueryTimestampList)
+}
+func (v *AllQueryStringTypesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AllQueryStringTypesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AllQueryStringTypesInput_queryBoolean:
+			v.QueryBoolean = new(bool)
+			return d.ReadBool(schemas.AllQueryStringTypesInput_queryBoolean, v.QueryBoolean)
+		case schemas.AllQueryStringTypesInput_queryBooleanList:
+			return deserializeBooleanList(d, schemas.AllQueryStringTypesInput_queryBooleanList, &v.QueryBooleanList)
+		case schemas.AllQueryStringTypesInput_queryByte:
+			v.QueryByte = new(int8)
+			return d.ReadInt8(schemas.AllQueryStringTypesInput_queryByte, v.QueryByte)
+		case schemas.AllQueryStringTypesInput_queryDouble:
+			v.QueryDouble = new(float64)
+			return d.ReadFloat64(schemas.AllQueryStringTypesInput_queryDouble, v.QueryDouble)
+		case schemas.AllQueryStringTypesInput_queryDoubleList:
+			return deserializeDoubleList(d, schemas.AllQueryStringTypesInput_queryDoubleList, &v.QueryDoubleList)
+		case schemas.AllQueryStringTypesInput_queryEnum:
+			var ev string
+			if err := d.ReadString(schemas.AllQueryStringTypesInput_queryEnum, &ev); err != nil {
+				return err
+			}
+			v.QueryEnum = types.FooEnum(ev)
+			return nil
+		case schemas.AllQueryStringTypesInput_queryEnumList:
+			return deserializeFooEnumList(d, schemas.AllQueryStringTypesInput_queryEnumList, &v.QueryEnumList)
+		case schemas.AllQueryStringTypesInput_queryFloat:
+			v.QueryFloat = new(float32)
+			return d.ReadFloat32(schemas.AllQueryStringTypesInput_queryFloat, v.QueryFloat)
+		case schemas.AllQueryStringTypesInput_queryInteger:
+			v.QueryInteger = new(int32)
+			return d.ReadInt32(schemas.AllQueryStringTypesInput_queryInteger, v.QueryInteger)
+		case schemas.AllQueryStringTypesInput_queryIntegerEnum:
+			var ev int32
+			if err := d.ReadInt32(schemas.AllQueryStringTypesInput_queryIntegerEnum, &ev); err != nil {
+				return err
+			}
+			v.QueryIntegerEnum = types.IntegerEnum(ev)
+			return nil
+		case schemas.AllQueryStringTypesInput_queryIntegerEnumList:
+			return deserializeIntegerEnumList(d, schemas.AllQueryStringTypesInput_queryIntegerEnumList, &v.QueryIntegerEnumList)
+		case schemas.AllQueryStringTypesInput_queryIntegerList:
+			return deserializeIntegerList(d, schemas.AllQueryStringTypesInput_queryIntegerList, &v.QueryIntegerList)
+		case schemas.AllQueryStringTypesInput_queryIntegerSet:
+			return deserializeIntegerSet(d, schemas.AllQueryStringTypesInput_queryIntegerSet, &v.QueryIntegerSet)
+		case schemas.AllQueryStringTypesInput_queryLong:
+			v.QueryLong = new(int64)
+			return d.ReadInt64(schemas.AllQueryStringTypesInput_queryLong, v.QueryLong)
+		case schemas.AllQueryStringTypesInput_queryParamsMapOfStringList:
+			return deserializeStringListMap(d, schemas.AllQueryStringTypesInput_queryParamsMapOfStringList, &v.QueryParamsMapOfStringList)
+		case schemas.AllQueryStringTypesInput_queryShort:
+			v.QueryShort = new(int16)
+			return d.ReadInt16(schemas.AllQueryStringTypesInput_queryShort, v.QueryShort)
+		case schemas.AllQueryStringTypesInput_queryString:
+			v.QueryString = new(string)
+			return d.ReadString(schemas.AllQueryStringTypesInput_queryString, v.QueryString)
+		case schemas.AllQueryStringTypesInput_queryStringList:
+			return deserializeStringList(d, schemas.AllQueryStringTypesInput_queryStringList, &v.QueryStringList)
+		case schemas.AllQueryStringTypesInput_queryStringSet:
+			return deserializeStringSet(d, schemas.AllQueryStringTypesInput_queryStringSet, &v.QueryStringSet)
+		case schemas.AllQueryStringTypesInput_queryTimestamp:
+			v.QueryTimestamp = new(time.Time)
+			return d.ReadTime(schemas.AllQueryStringTypesInput_queryTimestamp, v.QueryTimestamp)
+		case schemas.AllQueryStringTypesInput_queryTimestampList:
+			return deserializeTimestampList(d, schemas.AllQueryStringTypesInput_queryTimestampList, &v.QueryTimestampList)
+		}
+		return nil
+	})
+}
+
 type AllQueryStringTypesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -81,16 +203,29 @@ type AllQueryStringTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AllQueryStringTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AllQueryStringTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AllQueryStringTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAllQueryStringTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAllQueryStringTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AllQueryStringTypes, schemas.AllQueryStringTypesInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAllQueryStringTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AllQueryStringTypes, schemas.AllQueryStringTypesInput, nil), output: &AllQueryStringTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AllQueryStringTypes"); err != nil {

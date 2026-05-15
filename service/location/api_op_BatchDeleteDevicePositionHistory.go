@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,31 @@ type BatchDeleteDevicePositionHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteDevicePositionHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteDevicePositionHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteDevicePositionHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeviceIdsList(s, schemas.BatchDeleteDevicePositionHistoryRequest_DeviceIds, v.DeviceIds)
+	if v.TrackerName != nil {
+		s.WriteString(schemas.BatchDeleteDevicePositionHistoryRequest_TrackerName, *v.TrackerName)
+	}
+}
+func (v *BatchDeleteDevicePositionHistoryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteDevicePositionHistoryRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteDevicePositionHistoryRequest_DeviceIds:
+			return deserializeDeviceIdsList(d, schemas.BatchDeleteDevicePositionHistoryRequest_DeviceIds, &v.DeviceIds)
+		case schemas.BatchDeleteDevicePositionHistoryRequest_TrackerName:
+			v.TrackerName = new(string)
+			return d.ReadString(schemas.BatchDeleteDevicePositionHistoryRequest_TrackerName, v.TrackerName)
+		}
+		return nil
+	})
+}
+
 type BatchDeleteDevicePositionHistoryOutput struct {
 
 	// Contains error details for each device history that failed to delete.
@@ -57,16 +84,32 @@ type BatchDeleteDevicePositionHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteDevicePositionHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteDevicePositionHistoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteDevicePositionHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDeleteDevicePositionHistoryErrorList(s, schemas.BatchDeleteDevicePositionHistoryResponse_Errors, v.Errors)
+}
+func (v *BatchDeleteDevicePositionHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteDevicePositionHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteDevicePositionHistoryResponse_Errors:
+			return deserializeBatchDeleteDevicePositionHistoryErrorList(d, schemas.BatchDeleteDevicePositionHistoryResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteDevicePositionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteDevicePositionHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteDevicePositionHistory, schemas.BatchDeleteDevicePositionHistoryRequest, schemas.BatchDeleteDevicePositionHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteDevicePositionHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteDevicePositionHistory, schemas.BatchDeleteDevicePositionHistoryRequest, schemas.BatchDeleteDevicePositionHistoryResponse), output: &BatchDeleteDevicePositionHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDeleteDevicePositionHistory"); err != nil {

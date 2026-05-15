@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type InitiateProviderRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InitiateProviderRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitiateProviderRegistrationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitiateProviderRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Provider != "" {
+		s.WriteString(schemas.InitiateProviderRegistrationInput_provider, string(v.Provider))
+	}
+}
+
 type InitiateProviderRegistrationOutput struct {
 
 	// The CSRF state token to use when completing the OAuth flow.
@@ -56,16 +70,27 @@ type InitiateProviderRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InitiateProviderRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InitiateProviderRegistrationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InitiateProviderRegistrationOutput_csrfState:
+			v.CsrfState = new(string)
+			return d.ReadString(schemas.InitiateProviderRegistrationOutput_csrfState, v.CsrfState)
+		case schemas.InitiateProviderRegistrationOutput_redirectTo:
+			v.RedirectTo = new(string)
+			return d.ReadString(schemas.InitiateProviderRegistrationOutput_redirectTo, v.RedirectTo)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInitiateProviderRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInitiateProviderRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitiateProviderRegistration, schemas.InitiateProviderRegistrationInput, schemas.InitiateProviderRegistrationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInitiateProviderRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitiateProviderRegistration, schemas.InitiateProviderRegistrationInput, schemas.InitiateProviderRegistrationOutput), output: &InitiateProviderRegistrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "InitiateProviderRegistration"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,24 @@ type DeleteAgentRuntimeEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAgentRuntimeEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAgentRuntimeEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAgentRuntimeEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentRuntimeId != nil {
+		s.WriteString(schemas.DeleteAgentRuntimeEndpointRequest_agentRuntimeId, *v.AgentRuntimeId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteAgentRuntimeEndpointRequest_clientToken, *v.ClientToken)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.DeleteAgentRuntimeEndpointRequest_endpointName, *v.EndpointName)
+	}
+}
+
 type DeleteAgentRuntimeEndpointOutput struct {
 
 	// The current status of the AgentCore Runtime endpoint deletion.
@@ -64,16 +84,34 @@ type DeleteAgentRuntimeEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAgentRuntimeEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAgentRuntimeEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAgentRuntimeEndpointResponse_agentRuntimeId:
+			v.AgentRuntimeId = new(string)
+			return d.ReadString(schemas.DeleteAgentRuntimeEndpointResponse_agentRuntimeId, v.AgentRuntimeId)
+		case schemas.DeleteAgentRuntimeEndpointResponse_endpointName:
+			v.EndpointName = new(string)
+			return d.ReadString(schemas.DeleteAgentRuntimeEndpointResponse_endpointName, v.EndpointName)
+		case schemas.DeleteAgentRuntimeEndpointResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteAgentRuntimeEndpointResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AgentRuntimeEndpointStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAgentRuntimeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAgentRuntimeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAgentRuntimeEndpoint, schemas.DeleteAgentRuntimeEndpointRequest, schemas.DeleteAgentRuntimeEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAgentRuntimeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAgentRuntimeEndpoint, schemas.DeleteAgentRuntimeEndpointRequest, schemas.DeleteAgentRuntimeEndpointResponse), output: &DeleteAgentRuntimeEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAgentRuntimeEndpoint"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -50,6 +52,21 @@ type GetGlossaryTermInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetGlossaryTermInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGlossaryTermInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGlossaryTermInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetGlossaryTermInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetGlossaryTermInput_identifier, *v.Identifier)
+	}
 }
 
 type GetGlossaryTermOutput struct {
@@ -110,16 +127,63 @@ type GetGlossaryTermOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGlossaryTermOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGlossaryTermOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGlossaryTermOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetGlossaryTermOutput_createdAt, v.CreatedAt)
+		case schemas.GetGlossaryTermOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetGlossaryTermOutput_createdBy, v.CreatedBy)
+		case schemas.GetGlossaryTermOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetGlossaryTermOutput_domainId, v.DomainId)
+		case schemas.GetGlossaryTermOutput_glossaryId:
+			v.GlossaryId = new(string)
+			return d.ReadString(schemas.GetGlossaryTermOutput_glossaryId, v.GlossaryId)
+		case schemas.GetGlossaryTermOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetGlossaryTermOutput_id, v.Id)
+		case schemas.GetGlossaryTermOutput_longDescription:
+			v.LongDescription = new(string)
+			return d.ReadString(schemas.GetGlossaryTermOutput_longDescription, v.LongDescription)
+		case schemas.GetGlossaryTermOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetGlossaryTermOutput_name, v.Name)
+		case schemas.GetGlossaryTermOutput_shortDescription:
+			v.ShortDescription = new(string)
+			return d.ReadString(schemas.GetGlossaryTermOutput_shortDescription, v.ShortDescription)
+		case schemas.GetGlossaryTermOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetGlossaryTermOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GlossaryTermStatus(ev)
+			return nil
+		case schemas.GetGlossaryTermOutput_termRelations:
+			v.TermRelations = &types.TermRelations{}
+			return v.TermRelations.Deserialize(d)
+		case schemas.GetGlossaryTermOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetGlossaryTermOutput_updatedAt, v.UpdatedAt)
+		case schemas.GetGlossaryTermOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetGlossaryTermOutput_updatedBy, v.UpdatedBy)
+		case schemas.GetGlossaryTermOutput_usageRestrictions:
+			return deserializeGlossaryUsageRestrictions(d, schemas.GetGlossaryTermOutput_usageRestrictions, &v.UsageRestrictions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGlossaryTermMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGlossaryTerm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlossaryTerm, schemas.GetGlossaryTermInput, schemas.GetGlossaryTermOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGlossaryTerm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlossaryTerm, schemas.GetGlossaryTermInput, schemas.GetGlossaryTermOutput), output: &GetGlossaryTermOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetGlossaryTerm"); err != nil {

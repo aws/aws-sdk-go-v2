@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,21 @@ type ListFuotaTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFuotaTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFuotaTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFuotaTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListFuotaTasksRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFuotaTasksRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListFuotaTasksOutput struct {
 
 	// Lists the FUOTA tasks registered to your AWS account.
@@ -54,16 +71,26 @@ type ListFuotaTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFuotaTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFuotaTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFuotaTasksResponse_FuotaTaskList:
+			return deserializeFuotaTaskList(d, schemas.ListFuotaTasksResponse_FuotaTaskList, &v.FuotaTaskList)
+		case schemas.ListFuotaTasksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFuotaTasksResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFuotaTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFuotaTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFuotaTasks, schemas.ListFuotaTasksRequest, schemas.ListFuotaTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFuotaTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFuotaTasks, schemas.ListFuotaTasksRequest, schemas.ListFuotaTasksResponse), output: &ListFuotaTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFuotaTasks"); err != nil {

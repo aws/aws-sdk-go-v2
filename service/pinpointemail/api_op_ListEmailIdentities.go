@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,21 @@ type ListEmailIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEmailIdentitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEmailIdentitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEmailIdentitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEmailIdentitiesRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListEmailIdentitiesRequest_PageSize, *v.PageSize)
+	}
+}
+
 // A list of all of the identities that you've attempted to verify for use with
 // Amazon Pinpoint, regardless of whether or not those identities were successfully
 // verified.
@@ -71,16 +88,26 @@ type ListEmailIdentitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEmailIdentitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEmailIdentitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEmailIdentitiesResponse_EmailIdentities:
+			return deserializeIdentityInfoList(d, schemas.ListEmailIdentitiesResponse_EmailIdentities, &v.EmailIdentities)
+		case schemas.ListEmailIdentitiesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEmailIdentitiesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEmailIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEmailIdentities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEmailIdentities, schemas.ListEmailIdentitiesRequest, schemas.ListEmailIdentitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEmailIdentities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEmailIdentities, schemas.ListEmailIdentitiesRequest, schemas.ListEmailIdentitiesResponse), output: &ListEmailIdentitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEmailIdentities"); err != nil {

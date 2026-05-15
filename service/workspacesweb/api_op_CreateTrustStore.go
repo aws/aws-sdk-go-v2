@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,20 @@ type CreateTrustStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrustStoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrustStoreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrustStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificateList(s, schemas.CreateTrustStoreRequest_certificateList, v.CertificateList)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateTrustStoreRequest_clientToken, *v.ClientToken)
+	}
+	serializeTagList(s, schemas.CreateTrustStoreRequest_tags, v.Tags)
+}
+
 type CreateTrustStoreOutput struct {
 
 	// The ARN of the trust store.
@@ -68,16 +84,24 @@ type CreateTrustStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrustStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTrustStoreResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTrustStoreResponse_trustStoreArn:
+			v.TrustStoreArn = new(string)
+			return d.ReadString(schemas.CreateTrustStoreResponse_trustStoreArn, v.TrustStoreArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTrustStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTrustStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrustStore, schemas.CreateTrustStoreRequest, schemas.CreateTrustStoreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTrustStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrustStore, schemas.CreateTrustStoreRequest, schemas.CreateTrustStoreResponse), output: &CreateTrustStoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTrustStore"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,28 @@ type UpdateRetrieverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRetrieverInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRetrieverRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRetrieverInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.UpdateRetrieverRequest_applicationId, *v.ApplicationId)
+	}
+	serializeRetrieverConfiguration(s, schemas.UpdateRetrieverRequest_configuration, v.Configuration)
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateRetrieverRequest_displayName, *v.DisplayName)
+	}
+	if v.RetrieverId != nil {
+		s.WriteString(schemas.UpdateRetrieverRequest_retrieverId, *v.RetrieverId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateRetrieverRequest_roleArn, *v.RoleArn)
+	}
+}
+
 type UpdateRetrieverOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,16 +84,21 @@ type UpdateRetrieverOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRetrieverOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRetrieverResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRetrieverMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRetriever{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRetriever, schemas.UpdateRetrieverRequest, schemas.UpdateRetrieverResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRetriever{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRetriever, schemas.UpdateRetrieverRequest, schemas.UpdateRetrieverResponse), output: &UpdateRetrieverOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRetriever"); err != nil {

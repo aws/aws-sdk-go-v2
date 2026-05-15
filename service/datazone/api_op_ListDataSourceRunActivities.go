@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,6 +62,30 @@ type ListDataSourceRunActivitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataSourceRunActivitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataSourceRunActivitiesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataSourceRunActivitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.ListDataSourceRunActivitiesInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.ListDataSourceRunActivitiesInput_identifier, *v.Identifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataSourceRunActivitiesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataSourceRunActivitiesInput_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListDataSourceRunActivitiesInput_status, string(v.Status))
+	}
+}
+
 type ListDataSourceRunActivitiesOutput struct {
 
 	// The results of the ListDataSourceRunActivities action.
@@ -80,16 +106,26 @@ type ListDataSourceRunActivitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataSourceRunActivitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataSourceRunActivitiesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataSourceRunActivitiesOutput_items:
+			return deserializeDataSourceRunActivities(d, schemas.ListDataSourceRunActivitiesOutput_items, &v.Items)
+		case schemas.ListDataSourceRunActivitiesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataSourceRunActivitiesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataSourceRunActivitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataSourceRunActivities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSourceRunActivities, schemas.ListDataSourceRunActivitiesInput, schemas.ListDataSourceRunActivitiesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataSourceRunActivities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSourceRunActivities, schemas.ListDataSourceRunActivitiesInput, schemas.ListDataSourceRunActivitiesOutput), output: &ListDataSourceRunActivitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataSourceRunActivities"); err != nil {

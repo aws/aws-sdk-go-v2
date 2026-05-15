@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/geoplaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -14,6 +16,25 @@ type AccessPoint struct {
 	Position []float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccessPoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessPoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessPoint) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePosition(s, schemas.AccessPoint_Position, v.Position)
+}
+func (v *AccessPoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessPoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessPoint_Position:
+			return deserializePosition(d, schemas.AccessPoint_Position, &v.Position)
+		}
+		return nil
+	})
 }
 
 // Indicates if the access location is restricted. Index correlates to that of an
@@ -28,6 +49,31 @@ type AccessRestriction struct {
 	Restricted *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccessRestriction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessRestriction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessRestriction) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCategoryList(s, schemas.AccessRestriction_Categories, v.Categories)
+	if v.Restricted != nil {
+		s.WriteBool(schemas.AccessRestriction_Restricted, *v.Restricted)
+	}
+}
+func (v *AccessRestriction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessRestriction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessRestriction_Categories:
+			return deserializeCategoryList(d, schemas.AccessRestriction_Categories, &v.Categories)
+		case schemas.AccessRestriction_Restricted:
+			v.Restricted = new(bool)
+			return d.ReadBool(schemas.AccessRestriction_Restricted, v.Restricted)
+		}
+		return nil
+	})
 }
 
 // The place address.
@@ -125,6 +171,115 @@ type Address struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Address) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Address)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Address) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressNumber != nil {
+		s.WriteString(schemas.Address_AddressNumber, *v.AddressNumber)
+	}
+	if v.Block != nil {
+		s.WriteString(schemas.Address_Block, *v.Block)
+	}
+	if v.Building != nil {
+		s.WriteString(schemas.Address_Building, *v.Building)
+	}
+	if v.Country != nil {
+		s.WriteStruct(schemas.Address_Country)
+		v.Country.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.District != nil {
+		s.WriteString(schemas.Address_District, *v.District)
+	}
+	serializeIntersectionStreetList(s, schemas.Address_Intersection, v.Intersection)
+	if v.Label != nil {
+		s.WriteString(schemas.Address_Label, *v.Label)
+	}
+	if v.Locality != nil {
+		s.WriteString(schemas.Address_Locality, *v.Locality)
+	}
+	if v.PostalCode != nil {
+		s.WriteString(schemas.Address_PostalCode, *v.PostalCode)
+	}
+	if v.Region != nil {
+		s.WriteStruct(schemas.Address_Region)
+		v.Region.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSecondaryAddressComponentList(s, schemas.Address_SecondaryAddressComponents, v.SecondaryAddressComponents)
+	if v.Street != nil {
+		s.WriteString(schemas.Address_Street, *v.Street)
+	}
+	serializeStreetComponentsList(s, schemas.Address_StreetComponents, v.StreetComponents)
+	if v.SubBlock != nil {
+		s.WriteString(schemas.Address_SubBlock, *v.SubBlock)
+	}
+	if v.SubDistrict != nil {
+		s.WriteString(schemas.Address_SubDistrict, *v.SubDistrict)
+	}
+	if v.SubRegion != nil {
+		s.WriteStruct(schemas.Address_SubRegion)
+		v.SubRegion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Address) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Address, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Address_AddressNumber:
+			v.AddressNumber = new(string)
+			return d.ReadString(schemas.Address_AddressNumber, v.AddressNumber)
+		case schemas.Address_Block:
+			v.Block = new(string)
+			return d.ReadString(schemas.Address_Block, v.Block)
+		case schemas.Address_Building:
+			v.Building = new(string)
+			return d.ReadString(schemas.Address_Building, v.Building)
+		case schemas.Address_Country:
+			v.Country = &Country{}
+			return v.Country.Deserialize(d)
+		case schemas.Address_District:
+			v.District = new(string)
+			return d.ReadString(schemas.Address_District, v.District)
+		case schemas.Address_Intersection:
+			return deserializeIntersectionStreetList(d, schemas.Address_Intersection, &v.Intersection)
+		case schemas.Address_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.Address_Label, v.Label)
+		case schemas.Address_Locality:
+			v.Locality = new(string)
+			return d.ReadString(schemas.Address_Locality, v.Locality)
+		case schemas.Address_PostalCode:
+			v.PostalCode = new(string)
+			return d.ReadString(schemas.Address_PostalCode, v.PostalCode)
+		case schemas.Address_Region:
+			v.Region = &Region{}
+			return v.Region.Deserialize(d)
+		case schemas.Address_SecondaryAddressComponents:
+			return deserializeSecondaryAddressComponentList(d, schemas.Address_SecondaryAddressComponents, &v.SecondaryAddressComponents)
+		case schemas.Address_Street:
+			v.Street = new(string)
+			return d.ReadString(schemas.Address_Street, v.Street)
+		case schemas.Address_StreetComponents:
+			return deserializeStreetComponentsList(d, schemas.Address_StreetComponents, &v.StreetComponents)
+		case schemas.Address_SubBlock:
+			v.SubBlock = new(string)
+			return d.ReadString(schemas.Address_SubBlock, v.SubBlock)
+		case schemas.Address_SubDistrict:
+			v.SubDistrict = new(string)
+			return d.ReadString(schemas.Address_SubDistrict, v.SubDistrict)
+		case schemas.Address_SubRegion:
+			v.SubRegion = &SubRegion{}
+			return v.SubRegion.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Indicates how well the entire input matches the returned. It is equal to 1 if
 // all input tokens are recognized and matched.
 type AddressComponentMatchScores struct {
@@ -188,6 +343,83 @@ type AddressComponentMatchScores struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddressComponentMatchScores) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddressComponentMatchScores)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddressComponentMatchScores) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressNumber != 0 {
+		s.WriteFloat64(schemas.AddressComponentMatchScores_AddressNumber, v.AddressNumber)
+	}
+	if v.Block != 0 {
+		s.WriteFloat64(schemas.AddressComponentMatchScores_Block, v.Block)
+	}
+	if v.Building != 0 {
+		s.WriteFloat64(schemas.AddressComponentMatchScores_Building, v.Building)
+	}
+	if v.Country != 0 {
+		s.WriteFloat64(schemas.AddressComponentMatchScores_Country, v.Country)
+	}
+	if v.District != 0 {
+		s.WriteFloat64(schemas.AddressComponentMatchScores_District, v.District)
+	}
+	serializeMatchScoreList(s, schemas.AddressComponentMatchScores_Intersection, v.Intersection)
+	if v.Locality != 0 {
+		s.WriteFloat64(schemas.AddressComponentMatchScores_Locality, v.Locality)
+	}
+	if v.PostalCode != 0 {
+		s.WriteFloat64(schemas.AddressComponentMatchScores_PostalCode, v.PostalCode)
+	}
+	if v.Region != 0 {
+		s.WriteFloat64(schemas.AddressComponentMatchScores_Region, v.Region)
+	}
+	serializeSecondaryAddressComponentMatchScoreList(s, schemas.AddressComponentMatchScores_SecondaryAddressComponents, v.SecondaryAddressComponents)
+	if v.SubBlock != 0 {
+		s.WriteFloat64(schemas.AddressComponentMatchScores_SubBlock, v.SubBlock)
+	}
+	if v.SubDistrict != 0 {
+		s.WriteFloat64(schemas.AddressComponentMatchScores_SubDistrict, v.SubDistrict)
+	}
+	if v.SubRegion != 0 {
+		s.WriteFloat64(schemas.AddressComponentMatchScores_SubRegion, v.SubRegion)
+	}
+}
+func (v *AddressComponentMatchScores) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddressComponentMatchScores, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddressComponentMatchScores_AddressNumber:
+			return d.ReadFloat64(schemas.AddressComponentMatchScores_AddressNumber, &v.AddressNumber)
+		case schemas.AddressComponentMatchScores_Block:
+			return d.ReadFloat64(schemas.AddressComponentMatchScores_Block, &v.Block)
+		case schemas.AddressComponentMatchScores_Building:
+			return d.ReadFloat64(schemas.AddressComponentMatchScores_Building, &v.Building)
+		case schemas.AddressComponentMatchScores_Country:
+			return d.ReadFloat64(schemas.AddressComponentMatchScores_Country, &v.Country)
+		case schemas.AddressComponentMatchScores_District:
+			return d.ReadFloat64(schemas.AddressComponentMatchScores_District, &v.District)
+		case schemas.AddressComponentMatchScores_Intersection:
+			return deserializeMatchScoreList(d, schemas.AddressComponentMatchScores_Intersection, &v.Intersection)
+		case schemas.AddressComponentMatchScores_Locality:
+			return d.ReadFloat64(schemas.AddressComponentMatchScores_Locality, &v.Locality)
+		case schemas.AddressComponentMatchScores_PostalCode:
+			return d.ReadFloat64(schemas.AddressComponentMatchScores_PostalCode, &v.PostalCode)
+		case schemas.AddressComponentMatchScores_Region:
+			return d.ReadFloat64(schemas.AddressComponentMatchScores_Region, &v.Region)
+		case schemas.AddressComponentMatchScores_SecondaryAddressComponents:
+			return deserializeSecondaryAddressComponentMatchScoreList(d, schemas.AddressComponentMatchScores_SecondaryAddressComponents, &v.SecondaryAddressComponents)
+		case schemas.AddressComponentMatchScores_SubBlock:
+			return d.ReadFloat64(schemas.AddressComponentMatchScores_SubBlock, &v.SubBlock)
+		case schemas.AddressComponentMatchScores_SubDistrict:
+			return d.ReadFloat64(schemas.AddressComponentMatchScores_SubDistrict, &v.SubDistrict)
+		case schemas.AddressComponentMatchScores_SubRegion:
+			return d.ReadFloat64(schemas.AddressComponentMatchScores_SubRegion, &v.SubRegion)
+		}
+		return nil
+	})
+}
+
 // How to pronounce the various components of the address or place.
 type AddressComponentPhonemes struct {
 
@@ -225,6 +457,49 @@ type AddressComponentPhonemes struct {
 	SubRegion []PhonemeTranscription
 
 	noSmithyDocumentSerde
+}
+
+func (v *AddressComponentPhonemes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddressComponentPhonemes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddressComponentPhonemes) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_Block, v.Block)
+	serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_Country, v.Country)
+	serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_District, v.District)
+	serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_Locality, v.Locality)
+	serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_Region, v.Region)
+	serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_Street, v.Street)
+	serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_SubBlock, v.SubBlock)
+	serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_SubDistrict, v.SubDistrict)
+	serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_SubRegion, v.SubRegion)
+}
+func (v *AddressComponentPhonemes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddressComponentPhonemes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddressComponentPhonemes_Block:
+			return deserializePhonemeTranscriptionList(d, schemas.AddressComponentPhonemes_Block, &v.Block)
+		case schemas.AddressComponentPhonemes_Country:
+			return deserializePhonemeTranscriptionList(d, schemas.AddressComponentPhonemes_Country, &v.Country)
+		case schemas.AddressComponentPhonemes_District:
+			return deserializePhonemeTranscriptionList(d, schemas.AddressComponentPhonemes_District, &v.District)
+		case schemas.AddressComponentPhonemes_Locality:
+			return deserializePhonemeTranscriptionList(d, schemas.AddressComponentPhonemes_Locality, &v.Locality)
+		case schemas.AddressComponentPhonemes_Region:
+			return deserializePhonemeTranscriptionList(d, schemas.AddressComponentPhonemes_Region, &v.Region)
+		case schemas.AddressComponentPhonemes_Street:
+			return deserializePhonemeTranscriptionList(d, schemas.AddressComponentPhonemes_Street, &v.Street)
+		case schemas.AddressComponentPhonemes_SubBlock:
+			return deserializePhonemeTranscriptionList(d, schemas.AddressComponentPhonemes_SubBlock, &v.SubBlock)
+		case schemas.AddressComponentPhonemes_SubDistrict:
+			return deserializePhonemeTranscriptionList(d, schemas.AddressComponentPhonemes_SubDistrict, &v.SubDistrict)
+		case schemas.AddressComponentPhonemes_SubRegion:
+			return deserializePhonemeTranscriptionList(d, schemas.AddressComponentPhonemes_SubRegion, &v.SubRegion)
+		}
+		return nil
+	})
 }
 
 // Describes how the parts of the response element matched the input query by
@@ -291,6 +566,79 @@ type AutocompleteAddressHighlights struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutocompleteAddressHighlights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutocompleteAddressHighlights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutocompleteAddressHighlights) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_AddressNumber, v.AddressNumber)
+	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_Block, v.Block)
+	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_Building, v.Building)
+	if v.Country != nil {
+		s.WriteStruct(schemas.AutocompleteAddressHighlights_Country)
+		v.Country.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_District, v.District)
+	serializeIntersectionHighlightsList(s, schemas.AutocompleteAddressHighlights_Intersection, v.Intersection)
+	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_Label, v.Label)
+	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_Locality, v.Locality)
+	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_PostalCode, v.PostalCode)
+	if v.Region != nil {
+		s.WriteStruct(schemas.AutocompleteAddressHighlights_Region)
+		v.Region.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_Street, v.Street)
+	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_SubBlock, v.SubBlock)
+	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_SubDistrict, v.SubDistrict)
+	if v.SubRegion != nil {
+		s.WriteStruct(schemas.AutocompleteAddressHighlights_SubRegion)
+		v.SubRegion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutocompleteAddressHighlights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutocompleteAddressHighlights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutocompleteAddressHighlights_AddressNumber:
+			return deserializeHighlightList(d, schemas.AutocompleteAddressHighlights_AddressNumber, &v.AddressNumber)
+		case schemas.AutocompleteAddressHighlights_Block:
+			return deserializeHighlightList(d, schemas.AutocompleteAddressHighlights_Block, &v.Block)
+		case schemas.AutocompleteAddressHighlights_Building:
+			return deserializeHighlightList(d, schemas.AutocompleteAddressHighlights_Building, &v.Building)
+		case schemas.AutocompleteAddressHighlights_Country:
+			v.Country = &CountryHighlights{}
+			return v.Country.Deserialize(d)
+		case schemas.AutocompleteAddressHighlights_District:
+			return deserializeHighlightList(d, schemas.AutocompleteAddressHighlights_District, &v.District)
+		case schemas.AutocompleteAddressHighlights_Intersection:
+			return deserializeIntersectionHighlightsList(d, schemas.AutocompleteAddressHighlights_Intersection, &v.Intersection)
+		case schemas.AutocompleteAddressHighlights_Label:
+			return deserializeHighlightList(d, schemas.AutocompleteAddressHighlights_Label, &v.Label)
+		case schemas.AutocompleteAddressHighlights_Locality:
+			return deserializeHighlightList(d, schemas.AutocompleteAddressHighlights_Locality, &v.Locality)
+		case schemas.AutocompleteAddressHighlights_PostalCode:
+			return deserializeHighlightList(d, schemas.AutocompleteAddressHighlights_PostalCode, &v.PostalCode)
+		case schemas.AutocompleteAddressHighlights_Region:
+			v.Region = &RegionHighlights{}
+			return v.Region.Deserialize(d)
+		case schemas.AutocompleteAddressHighlights_Street:
+			return deserializeHighlightList(d, schemas.AutocompleteAddressHighlights_Street, &v.Street)
+		case schemas.AutocompleteAddressHighlights_SubBlock:
+			return deserializeHighlightList(d, schemas.AutocompleteAddressHighlights_SubBlock, &v.SubBlock)
+		case schemas.AutocompleteAddressHighlights_SubDistrict:
+			return deserializeHighlightList(d, schemas.AutocompleteAddressHighlights_SubDistrict, &v.SubDistrict)
+		case schemas.AutocompleteAddressHighlights_SubRegion:
+			v.SubRegion = &SubRegionHighlights{}
+			return v.SubRegion.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Autocomplete structure which contains a set of inclusion/exclusion properties
 // that results must possess in order to be returned as a result.
 type AutocompleteFilter struct {
@@ -315,6 +663,39 @@ type AutocompleteFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutocompleteFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutocompleteFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutocompleteFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBoundingBox(s, schemas.AutocompleteFilter_BoundingBox, v.BoundingBox)
+	if v.Circle != nil {
+		s.WriteStruct(schemas.AutocompleteFilter_Circle)
+		v.Circle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCountryCodeList(s, schemas.AutocompleteFilter_IncludeCountries, v.IncludeCountries)
+	serializeAutocompleteFilterPlaceTypeList(s, schemas.AutocompleteFilter_IncludePlaceTypes, v.IncludePlaceTypes)
+}
+func (v *AutocompleteFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutocompleteFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutocompleteFilter_BoundingBox:
+			return deserializeBoundingBox(d, schemas.AutocompleteFilter_BoundingBox, &v.BoundingBox)
+		case schemas.AutocompleteFilter_Circle:
+			v.Circle = &FilterCircle{}
+			return v.Circle.Deserialize(d)
+		case schemas.AutocompleteFilter_IncludeCountries:
+			return deserializeCountryCodeList(d, schemas.AutocompleteFilter_IncludeCountries, &v.IncludeCountries)
+		case schemas.AutocompleteFilter_IncludePlaceTypes:
+			return deserializeAutocompleteFilterPlaceTypeList(d, schemas.AutocompleteFilter_IncludePlaceTypes, &v.IncludePlaceTypes)
+		}
+		return nil
+	})
+}
+
 // Describes how the parts of the response element matched the input query by
 // returning the sections of the response which matched to input query terms.
 type AutocompleteHighlights struct {
@@ -326,6 +707,33 @@ type AutocompleteHighlights struct {
 	Title []Highlight
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutocompleteHighlights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutocompleteHighlights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutocompleteHighlights) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteStruct(schemas.AutocompleteHighlights_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeHighlightList(s, schemas.AutocompleteHighlights_Title, v.Title)
+}
+func (v *AutocompleteHighlights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutocompleteHighlights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutocompleteHighlights_Address:
+			v.Address = &AutocompleteAddressHighlights{}
+			return v.Address.Deserialize(d)
+		case schemas.AutocompleteHighlights_Title:
+			return deserializeHighlightList(d, schemas.AutocompleteHighlights_Title, &v.Title)
+		}
+		return nil
+	})
 }
 
 // A result matching the input query text.
@@ -373,6 +781,77 @@ type AutocompleteResultItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutocompleteResultItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutocompleteResultItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutocompleteResultItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteStruct(schemas.AutocompleteResultItem_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Distance != 0 {
+		s.WriteInt64(schemas.AutocompleteResultItem_Distance, v.Distance)
+	}
+	if v.Highlights != nil {
+		s.WriteStruct(schemas.AutocompleteResultItem_Highlights)
+		v.Highlights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Language != nil {
+		s.WriteString(schemas.AutocompleteResultItem_Language, *v.Language)
+	}
+	if v.PlaceId != nil {
+		s.WriteString(schemas.AutocompleteResultItem_PlaceId, *v.PlaceId)
+	}
+	if v.PlaceType != "" {
+		s.WriteString(schemas.AutocompleteResultItem_PlaceType, string(v.PlaceType))
+	}
+	if v.PoliticalView != nil {
+		s.WriteString(schemas.AutocompleteResultItem_PoliticalView, *v.PoliticalView)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.AutocompleteResultItem_Title, *v.Title)
+	}
+}
+func (v *AutocompleteResultItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutocompleteResultItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutocompleteResultItem_Address:
+			v.Address = &Address{}
+			return v.Address.Deserialize(d)
+		case schemas.AutocompleteResultItem_Distance:
+			return d.ReadInt64(schemas.AutocompleteResultItem_Distance, &v.Distance)
+		case schemas.AutocompleteResultItem_Highlights:
+			v.Highlights = &AutocompleteHighlights{}
+			return v.Highlights.Deserialize(d)
+		case schemas.AutocompleteResultItem_Language:
+			v.Language = new(string)
+			return d.ReadString(schemas.AutocompleteResultItem_Language, v.Language)
+		case schemas.AutocompleteResultItem_PlaceId:
+			v.PlaceId = new(string)
+			return d.ReadString(schemas.AutocompleteResultItem_PlaceId, v.PlaceId)
+		case schemas.AutocompleteResultItem_PlaceType:
+			var ev string
+			if err := d.ReadString(schemas.AutocompleteResultItem_PlaceType, &ev); err != nil {
+				return err
+			}
+			v.PlaceType = PlaceType(ev)
+			return nil
+		case schemas.AutocompleteResultItem_PoliticalView:
+			v.PoliticalView = new(string)
+			return d.ReadString(schemas.AutocompleteResultItem_PoliticalView, v.PoliticalView)
+		case schemas.AutocompleteResultItem_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.AutocompleteResultItem_Title, v.Title)
+		}
+		return nil
+	})
+}
+
 // A businesschain is a chain of businesses that belong to the same brand. For
 // example 7-11 .
 type BusinessChain struct {
@@ -384,6 +863,34 @@ type BusinessChain struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BusinessChain) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BusinessChain)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BusinessChain) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.BusinessChain_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.BusinessChain_Name, *v.Name)
+	}
+}
+func (v *BusinessChain) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BusinessChain, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BusinessChain_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.BusinessChain_Id, v.Id)
+		case schemas.BusinessChain_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.BusinessChain_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Category of the Place returned.
@@ -408,6 +915,46 @@ type Category struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Category) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Category)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Category) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.Category_Id, *v.Id)
+	}
+	if v.LocalizedName != nil {
+		s.WriteString(schemas.Category_LocalizedName, *v.LocalizedName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Category_Name, *v.Name)
+	}
+	if v.Primary != nil {
+		s.WriteBool(schemas.Category_Primary, *v.Primary)
+	}
+}
+func (v *Category) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Category, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Category_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Category_Id, v.Id)
+		case schemas.Category_LocalizedName:
+			v.LocalizedName = new(string)
+			return d.ReadString(schemas.Category_LocalizedName, v.LocalizedName)
+		case schemas.Category_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Category_Name, v.Name)
+		case schemas.Category_Primary:
+			v.Primary = new(bool)
+			return d.ReadBool(schemas.Category_Primary, v.Primary)
+		}
+		return nil
+	})
+}
+
 // Indicates how well the returned title and address components matches the input
 // TextQuery. For each component a score is provied with 1 indicating all tokens
 // were matched and 0 indicating no tokens were matched.
@@ -423,6 +970,35 @@ type ComponentMatchScores struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ComponentMatchScores) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComponentMatchScores)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComponentMatchScores) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteStruct(schemas.ComponentMatchScores_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Title != 0 {
+		s.WriteFloat64(schemas.ComponentMatchScores_Title, v.Title)
+	}
+}
+func (v *ComponentMatchScores) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComponentMatchScores, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComponentMatchScores_Address:
+			v.Address = &AddressComponentMatchScores{}
+			return v.Address.Deserialize(d)
+		case schemas.ComponentMatchScores_Title:
+			return d.ReadFloat64(schemas.ComponentMatchScores_Title, &v.Title)
+		}
+		return nil
+	})
+}
+
 // Details related to contacts.
 type ContactDetails struct {
 
@@ -436,6 +1012,37 @@ type ContactDetails struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContactDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContactDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContactDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCategoryList(s, schemas.ContactDetails_Categories, v.Categories)
+	if v.Label != nil {
+		s.WriteString(schemas.ContactDetails_Label, *v.Label)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ContactDetails_Value, *v.Value)
+	}
+}
+func (v *ContactDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContactDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContactDetails_Categories:
+			return deserializeCategoryList(d, schemas.ContactDetails_Categories, &v.Categories)
+		case schemas.ContactDetails_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.ContactDetails_Label, v.Label)
+		case schemas.ContactDetails_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ContactDetails_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // A list of potential contact methods for the result/place.
@@ -456,6 +1063,34 @@ type Contacts struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Contacts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Contacts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Contacts) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContactDetailsList(s, schemas.Contacts_Emails, v.Emails)
+	serializeContactDetailsList(s, schemas.Contacts_Faxes, v.Faxes)
+	serializeContactDetailsList(s, schemas.Contacts_Phones, v.Phones)
+	serializeContactDetailsList(s, schemas.Contacts_Websites, v.Websites)
+}
+func (v *Contacts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Contacts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Contacts_Emails:
+			return deserializeContactDetailsList(d, schemas.Contacts_Emails, &v.Emails)
+		case schemas.Contacts_Faxes:
+			return deserializeContactDetailsList(d, schemas.Contacts_Faxes, &v.Faxes)
+		case schemas.Contacts_Phones:
+			return deserializeContactDetailsList(d, schemas.Contacts_Phones, &v.Phones)
+		case schemas.Contacts_Websites:
+			return deserializeContactDetailsList(d, schemas.Contacts_Websites, &v.Websites)
+		}
+		return nil
+	})
+}
+
 // The alpha-2 or alpha-3 character code for the country that the results will be
 // present in.
 type Country struct {
@@ -472,6 +1107,40 @@ type Country struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Country) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Country)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Country) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code2 != nil {
+		s.WriteString(schemas.Country_Code2, *v.Code2)
+	}
+	if v.Code3 != nil {
+		s.WriteString(schemas.Country_Code3, *v.Code3)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Country_Name, *v.Name)
+	}
+}
+func (v *Country) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Country, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Country_Code2:
+			v.Code2 = new(string)
+			return d.ReadString(schemas.Country_Code2, v.Code2)
+		case schemas.Country_Code3:
+			v.Code3 = new(string)
+			return d.ReadString(schemas.Country_Code3, v.Code3)
+		case schemas.Country_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Country_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Indicates the starting and ending index of the country in the text query that
 // match the found title.
 type CountryHighlights struct {
@@ -485,6 +1154,28 @@ type CountryHighlights struct {
 	Name []Highlight
 
 	noSmithyDocumentSerde
+}
+
+func (v *CountryHighlights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CountryHighlights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CountryHighlights) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHighlightList(s, schemas.CountryHighlights_Code, v.Code)
+	serializeHighlightList(s, schemas.CountryHighlights_Name, v.Name)
+}
+func (v *CountryHighlights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CountryHighlights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CountryHighlights_Code:
+			return deserializeHighlightList(d, schemas.CountryHighlights_Code, &v.Code)
+		case schemas.CountryHighlights_Name:
+			return deserializeHighlightList(d, schemas.CountryHighlights_Name, &v.Name)
+		}
+		return nil
+	})
 }
 
 // The Circle that all results must be in.
@@ -507,6 +1198,31 @@ type FilterCircle struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FilterCircle) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FilterCircle)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FilterCircle) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePosition(s, schemas.FilterCircle_Center, v.Center)
+	if v.Radius != nil {
+		s.WriteInt64(schemas.FilterCircle_Radius, *v.Radius)
+	}
+}
+func (v *FilterCircle) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FilterCircle, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FilterCircle_Center:
+			return deserializePosition(d, schemas.FilterCircle_Center, &v.Center)
+		case schemas.FilterCircle_Radius:
+			v.Radius = new(int64)
+			return d.ReadInt64(schemas.FilterCircle_Radius, v.Radius)
+		}
+		return nil
+	})
+}
+
 // List of Food types offered by this result.
 type FoodType struct {
 
@@ -526,6 +1242,40 @@ type FoodType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FoodType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FoodType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FoodType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.FoodType_Id, *v.Id)
+	}
+	if v.LocalizedName != nil {
+		s.WriteString(schemas.FoodType_LocalizedName, *v.LocalizedName)
+	}
+	if v.Primary != nil {
+		s.WriteBool(schemas.FoodType_Primary, *v.Primary)
+	}
+}
+func (v *FoodType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FoodType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FoodType_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FoodType_Id, v.Id)
+		case schemas.FoodType_LocalizedName:
+			v.LocalizedName = new(string)
+			return d.ReadString(schemas.FoodType_LocalizedName, v.LocalizedName)
+		case schemas.FoodType_Primary:
+			v.Primary = new(bool)
+			return d.ReadBool(schemas.FoodType_Primary, v.Primary)
+		}
+		return nil
+	})
+}
+
 // Geocode structure which contains a set of inclusion/exclusion properties that
 // results must possess in order to be returned as a result.
 type GeocodeFilter struct {
@@ -540,6 +1290,28 @@ type GeocodeFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GeocodeFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeocodeFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeocodeFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCountryCodeList(s, schemas.GeocodeFilter_IncludeCountries, v.IncludeCountries)
+	serializeGeocodeFilterPlaceTypeList(s, schemas.GeocodeFilter_IncludePlaceTypes, v.IncludePlaceTypes)
+}
+func (v *GeocodeFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeocodeFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeocodeFilter_IncludeCountries:
+			return deserializeCountryCodeList(d, schemas.GeocodeFilter_IncludeCountries, &v.IncludeCountries)
+		case schemas.GeocodeFilter_IncludePlaceTypes:
+			return deserializeGeocodeFilterPlaceTypeList(d, schemas.GeocodeFilter_IncludePlaceTypes, &v.IncludePlaceTypes)
+		}
+		return nil
+	})
+}
+
 // Parsed components in the provided QueryText.
 type GeocodeParsedQuery struct {
 
@@ -551,6 +1323,33 @@ type GeocodeParsedQuery struct {
 	Title []ParsedQueryComponent
 
 	noSmithyDocumentSerde
+}
+
+func (v *GeocodeParsedQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeocodeParsedQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeocodeParsedQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteStruct(schemas.GeocodeParsedQuery_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQuery_Title, v.Title)
+}
+func (v *GeocodeParsedQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeocodeParsedQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeocodeParsedQuery_Address:
+			v.Address = &GeocodeParsedQueryAddressComponents{}
+			return v.Address.Deserialize(d)
+		case schemas.GeocodeParsedQuery_Title:
+			return deserializeParsedQueryComponentList(d, schemas.GeocodeParsedQuery_Title, &v.Title)
+		}
+		return nil
+	})
 }
 
 // Parsed address components in the provided QueryText.
@@ -615,6 +1414,61 @@ type GeocodeParsedQueryAddressComponents struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GeocodeParsedQueryAddressComponents) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeocodeParsedQueryAddressComponents)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeocodeParsedQueryAddressComponents) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_AddressNumber, v.AddressNumber)
+	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_Block, v.Block)
+	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_Building, v.Building)
+	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_Country, v.Country)
+	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_District, v.District)
+	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_Locality, v.Locality)
+	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_PostalCode, v.PostalCode)
+	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_Region, v.Region)
+	serializeParsedQuerySecondaryAddressComponentList(s, schemas.GeocodeParsedQueryAddressComponents_SecondaryAddressComponents, v.SecondaryAddressComponents)
+	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_Street, v.Street)
+	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_SubBlock, v.SubBlock)
+	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_SubDistrict, v.SubDistrict)
+	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_SubRegion, v.SubRegion)
+}
+func (v *GeocodeParsedQueryAddressComponents) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeocodeParsedQueryAddressComponents, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeocodeParsedQueryAddressComponents_AddressNumber:
+			return deserializeParsedQueryComponentList(d, schemas.GeocodeParsedQueryAddressComponents_AddressNumber, &v.AddressNumber)
+		case schemas.GeocodeParsedQueryAddressComponents_Block:
+			return deserializeParsedQueryComponentList(d, schemas.GeocodeParsedQueryAddressComponents_Block, &v.Block)
+		case schemas.GeocodeParsedQueryAddressComponents_Building:
+			return deserializeParsedQueryComponentList(d, schemas.GeocodeParsedQueryAddressComponents_Building, &v.Building)
+		case schemas.GeocodeParsedQueryAddressComponents_Country:
+			return deserializeParsedQueryComponentList(d, schemas.GeocodeParsedQueryAddressComponents_Country, &v.Country)
+		case schemas.GeocodeParsedQueryAddressComponents_District:
+			return deserializeParsedQueryComponentList(d, schemas.GeocodeParsedQueryAddressComponents_District, &v.District)
+		case schemas.GeocodeParsedQueryAddressComponents_Locality:
+			return deserializeParsedQueryComponentList(d, schemas.GeocodeParsedQueryAddressComponents_Locality, &v.Locality)
+		case schemas.GeocodeParsedQueryAddressComponents_PostalCode:
+			return deserializeParsedQueryComponentList(d, schemas.GeocodeParsedQueryAddressComponents_PostalCode, &v.PostalCode)
+		case schemas.GeocodeParsedQueryAddressComponents_Region:
+			return deserializeParsedQueryComponentList(d, schemas.GeocodeParsedQueryAddressComponents_Region, &v.Region)
+		case schemas.GeocodeParsedQueryAddressComponents_SecondaryAddressComponents:
+			return deserializeParsedQuerySecondaryAddressComponentList(d, schemas.GeocodeParsedQueryAddressComponents_SecondaryAddressComponents, &v.SecondaryAddressComponents)
+		case schemas.GeocodeParsedQueryAddressComponents_Street:
+			return deserializeParsedQueryComponentList(d, schemas.GeocodeParsedQueryAddressComponents_Street, &v.Street)
+		case schemas.GeocodeParsedQueryAddressComponents_SubBlock:
+			return deserializeParsedQueryComponentList(d, schemas.GeocodeParsedQueryAddressComponents_SubBlock, &v.SubBlock)
+		case schemas.GeocodeParsedQueryAddressComponents_SubDistrict:
+			return deserializeParsedQueryComponentList(d, schemas.GeocodeParsedQueryAddressComponents_SubDistrict, &v.SubDistrict)
+		case schemas.GeocodeParsedQueryAddressComponents_SubRegion:
+			return deserializeParsedQueryComponentList(d, schemas.GeocodeParsedQueryAddressComponents_SubRegion, &v.SubRegion)
+		}
+		return nil
+	})
+}
+
 // A structured free text query allows you to search for places by the name or
 // text representation of specific properties of the place.
 type GeocodeQueryComponents struct {
@@ -650,6 +1504,70 @@ type GeocodeQueryComponents struct {
 	SubRegion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GeocodeQueryComponents) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeocodeQueryComponents)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeocodeQueryComponents) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressNumber != nil {
+		s.WriteString(schemas.GeocodeQueryComponents_AddressNumber, *v.AddressNumber)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.GeocodeQueryComponents_Country, *v.Country)
+	}
+	if v.District != nil {
+		s.WriteString(schemas.GeocodeQueryComponents_District, *v.District)
+	}
+	if v.Locality != nil {
+		s.WriteString(schemas.GeocodeQueryComponents_Locality, *v.Locality)
+	}
+	if v.PostalCode != nil {
+		s.WriteString(schemas.GeocodeQueryComponents_PostalCode, *v.PostalCode)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.GeocodeQueryComponents_Region, *v.Region)
+	}
+	if v.Street != nil {
+		s.WriteString(schemas.GeocodeQueryComponents_Street, *v.Street)
+	}
+	if v.SubRegion != nil {
+		s.WriteString(schemas.GeocodeQueryComponents_SubRegion, *v.SubRegion)
+	}
+}
+func (v *GeocodeQueryComponents) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeocodeQueryComponents, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeocodeQueryComponents_AddressNumber:
+			v.AddressNumber = new(string)
+			return d.ReadString(schemas.GeocodeQueryComponents_AddressNumber, v.AddressNumber)
+		case schemas.GeocodeQueryComponents_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.GeocodeQueryComponents_Country, v.Country)
+		case schemas.GeocodeQueryComponents_District:
+			v.District = new(string)
+			return d.ReadString(schemas.GeocodeQueryComponents_District, v.District)
+		case schemas.GeocodeQueryComponents_Locality:
+			v.Locality = new(string)
+			return d.ReadString(schemas.GeocodeQueryComponents_Locality, v.Locality)
+		case schemas.GeocodeQueryComponents_PostalCode:
+			v.PostalCode = new(string)
+			return d.ReadString(schemas.GeocodeQueryComponents_PostalCode, v.PostalCode)
+		case schemas.GeocodeQueryComponents_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.GeocodeQueryComponents_Region, v.Region)
+		case schemas.GeocodeQueryComponents_Street:
+			v.Street = new(string)
+			return d.ReadString(schemas.GeocodeQueryComponents_Street, v.Street)
+		case schemas.GeocodeQueryComponents_SubRegion:
+			v.SubRegion = new(string)
+			return d.ReadString(schemas.GeocodeQueryComponents_SubRegion, v.SubRegion)
+		}
+		return nil
+	})
 }
 
 // The Geocoded result.
@@ -735,6 +1653,125 @@ type GeocodeResultItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GeocodeResultItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeocodeResultItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeocodeResultItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessPointList(s, schemas.GeocodeResultItem_AccessPoints, v.AccessPoints)
+	if v.Address != nil {
+		s.WriteStruct(schemas.GeocodeResultItem_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AddressNumberCorrected != nil {
+		s.WriteBool(schemas.GeocodeResultItem_AddressNumberCorrected, *v.AddressNumberCorrected)
+	}
+	serializeCategoryList(s, schemas.GeocodeResultItem_Categories, v.Categories)
+	if v.Distance != 0 {
+		s.WriteInt64(schemas.GeocodeResultItem_Distance, v.Distance)
+	}
+	serializeFoodTypeList(s, schemas.GeocodeResultItem_FoodTypes, v.FoodTypes)
+	serializeIntersectionList(s, schemas.GeocodeResultItem_Intersections, v.Intersections)
+	if v.MainAddress != nil {
+		s.WriteStruct(schemas.GeocodeResultItem_MainAddress)
+		v.MainAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeBoundingBox(s, schemas.GeocodeResultItem_MapView, v.MapView)
+	if v.MatchScores != nil {
+		s.WriteStruct(schemas.GeocodeResultItem_MatchScores)
+		v.MatchScores.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParsedQuery != nil {
+		s.WriteStruct(schemas.GeocodeResultItem_ParsedQuery)
+		v.ParsedQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlaceId != nil {
+		s.WriteString(schemas.GeocodeResultItem_PlaceId, *v.PlaceId)
+	}
+	if v.PlaceType != "" {
+		s.WriteString(schemas.GeocodeResultItem_PlaceType, string(v.PlaceType))
+	}
+	if v.PoliticalView != nil {
+		s.WriteString(schemas.GeocodeResultItem_PoliticalView, *v.PoliticalView)
+	}
+	serializePosition(s, schemas.GeocodeResultItem_Position, v.Position)
+	serializePostalCodeDetailsList(s, schemas.GeocodeResultItem_PostalCodeDetails, v.PostalCodeDetails)
+	serializeRelatedPlaceList(s, schemas.GeocodeResultItem_SecondaryAddresses, v.SecondaryAddresses)
+	if v.TimeZone != nil {
+		s.WriteStruct(schemas.GeocodeResultItem_TimeZone)
+		v.TimeZone.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.GeocodeResultItem_Title, *v.Title)
+	}
+}
+func (v *GeocodeResultItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeocodeResultItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeocodeResultItem_AccessPoints:
+			return deserializeAccessPointList(d, schemas.GeocodeResultItem_AccessPoints, &v.AccessPoints)
+		case schemas.GeocodeResultItem_Address:
+			v.Address = &Address{}
+			return v.Address.Deserialize(d)
+		case schemas.GeocodeResultItem_AddressNumberCorrected:
+			v.AddressNumberCorrected = new(bool)
+			return d.ReadBool(schemas.GeocodeResultItem_AddressNumberCorrected, v.AddressNumberCorrected)
+		case schemas.GeocodeResultItem_Categories:
+			return deserializeCategoryList(d, schemas.GeocodeResultItem_Categories, &v.Categories)
+		case schemas.GeocodeResultItem_Distance:
+			return d.ReadInt64(schemas.GeocodeResultItem_Distance, &v.Distance)
+		case schemas.GeocodeResultItem_FoodTypes:
+			return deserializeFoodTypeList(d, schemas.GeocodeResultItem_FoodTypes, &v.FoodTypes)
+		case schemas.GeocodeResultItem_Intersections:
+			return deserializeIntersectionList(d, schemas.GeocodeResultItem_Intersections, &v.Intersections)
+		case schemas.GeocodeResultItem_MainAddress:
+			v.MainAddress = &RelatedPlace{}
+			return v.MainAddress.Deserialize(d)
+		case schemas.GeocodeResultItem_MapView:
+			return deserializeBoundingBox(d, schemas.GeocodeResultItem_MapView, &v.MapView)
+		case schemas.GeocodeResultItem_MatchScores:
+			v.MatchScores = &MatchScoreDetails{}
+			return v.MatchScores.Deserialize(d)
+		case schemas.GeocodeResultItem_ParsedQuery:
+			v.ParsedQuery = &GeocodeParsedQuery{}
+			return v.ParsedQuery.Deserialize(d)
+		case schemas.GeocodeResultItem_PlaceId:
+			v.PlaceId = new(string)
+			return d.ReadString(schemas.GeocodeResultItem_PlaceId, v.PlaceId)
+		case schemas.GeocodeResultItem_PlaceType:
+			var ev string
+			if err := d.ReadString(schemas.GeocodeResultItem_PlaceType, &ev); err != nil {
+				return err
+			}
+			v.PlaceType = PlaceType(ev)
+			return nil
+		case schemas.GeocodeResultItem_PoliticalView:
+			v.PoliticalView = new(string)
+			return d.ReadString(schemas.GeocodeResultItem_PoliticalView, v.PoliticalView)
+		case schemas.GeocodeResultItem_Position:
+			return deserializePosition(d, schemas.GeocodeResultItem_Position, &v.Position)
+		case schemas.GeocodeResultItem_PostalCodeDetails:
+			return deserializePostalCodeDetailsList(d, schemas.GeocodeResultItem_PostalCodeDetails, &v.PostalCodeDetails)
+		case schemas.GeocodeResultItem_SecondaryAddresses:
+			return deserializeRelatedPlaceList(d, schemas.GeocodeResultItem_SecondaryAddresses, &v.SecondaryAddresses)
+		case schemas.GeocodeResultItem_TimeZone:
+			v.TimeZone = &TimeZone{}
+			return v.TimeZone.Deserialize(d)
+		case schemas.GeocodeResultItem_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.GeocodeResultItem_Title, v.Title)
+		}
+		return nil
+	})
+}
+
 // Indicates the starting and ending index of the text query that match the found
 // title.
 type Highlight struct {
@@ -749,6 +1786,40 @@ type Highlight struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Highlight) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Highlight)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Highlight) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndIndex != nil {
+		s.WriteInt32(schemas.Highlight_EndIndex, *v.EndIndex)
+	}
+	if v.StartIndex != nil {
+		s.WriteInt32(schemas.Highlight_StartIndex, *v.StartIndex)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Highlight_Value, *v.Value)
+	}
+}
+func (v *Highlight) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Highlight, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Highlight_EndIndex:
+			v.EndIndex = new(int32)
+			return d.ReadInt32(schemas.Highlight_EndIndex, v.EndIndex)
+		case schemas.Highlight_StartIndex:
+			v.StartIndex = new(int32)
+			return d.ReadInt32(schemas.Highlight_StartIndex, v.StartIndex)
+		case schemas.Highlight_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Highlight_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // All Intersections that are near the provided address.
@@ -792,6 +1863,63 @@ type Intersection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Intersection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Intersection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Intersection) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessPointList(s, schemas.Intersection_AccessPoints, v.AccessPoints)
+	if v.Address != nil {
+		s.WriteStruct(schemas.Intersection_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Distance != nil {
+		s.WriteInt64(schemas.Intersection_Distance, *v.Distance)
+	}
+	serializeBoundingBox(s, schemas.Intersection_MapView, v.MapView)
+	if v.PlaceId != nil {
+		s.WriteString(schemas.Intersection_PlaceId, *v.PlaceId)
+	}
+	serializePosition(s, schemas.Intersection_Position, v.Position)
+	if v.RouteDistance != nil {
+		s.WriteInt64(schemas.Intersection_RouteDistance, *v.RouteDistance)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.Intersection_Title, *v.Title)
+	}
+}
+func (v *Intersection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Intersection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Intersection_AccessPoints:
+			return deserializeAccessPointList(d, schemas.Intersection_AccessPoints, &v.AccessPoints)
+		case schemas.Intersection_Address:
+			v.Address = &Address{}
+			return v.Address.Deserialize(d)
+		case schemas.Intersection_Distance:
+			v.Distance = new(int64)
+			return d.ReadInt64(schemas.Intersection_Distance, v.Distance)
+		case schemas.Intersection_MapView:
+			return deserializeBoundingBox(d, schemas.Intersection_MapView, &v.MapView)
+		case schemas.Intersection_PlaceId:
+			v.PlaceId = new(string)
+			return d.ReadString(schemas.Intersection_PlaceId, v.PlaceId)
+		case schemas.Intersection_Position:
+			return deserializePosition(d, schemas.Intersection_Position, &v.Position)
+		case schemas.Intersection_RouteDistance:
+			v.RouteDistance = new(int64)
+			return d.ReadInt64(schemas.Intersection_RouteDistance, v.RouteDistance)
+		case schemas.Intersection_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.Intersection_Title, v.Title)
+		}
+		return nil
+	})
+}
+
 // Details related to the match score.
 type MatchScoreDetails struct {
 
@@ -804,6 +1932,35 @@ type MatchScoreDetails struct {
 	Overall float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *MatchScoreDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MatchScoreDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MatchScoreDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Components != nil {
+		s.WriteStruct(schemas.MatchScoreDetails_Components)
+		v.Components.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Overall != 0 {
+		s.WriteFloat64(schemas.MatchScoreDetails_Overall, v.Overall)
+	}
+}
+func (v *MatchScoreDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MatchScoreDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MatchScoreDetails_Components:
+			v.Components = &ComponentMatchScores{}
+			return v.Components.Deserialize(d)
+		case schemas.MatchScoreDetails_Overall:
+			return d.ReadFloat64(schemas.MatchScoreDetails_Overall, &v.Overall)
+		}
+		return nil
+	})
 }
 
 // List of opening hours objects.
@@ -826,6 +1983,37 @@ type OpeningHours struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpeningHours) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpeningHours)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpeningHours) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCategoryList(s, schemas.OpeningHours_Categories, v.Categories)
+	serializeOpeningHoursComponentsList(s, schemas.OpeningHours_Components, v.Components)
+	serializeOpeningHoursDisplayList(s, schemas.OpeningHours_Display, v.Display)
+	if v.OpenNow != nil {
+		s.WriteBool(schemas.OpeningHours_OpenNow, *v.OpenNow)
+	}
+}
+func (v *OpeningHours) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpeningHours, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpeningHours_Categories:
+			return deserializeCategoryList(d, schemas.OpeningHours_Categories, &v.Categories)
+		case schemas.OpeningHours_Components:
+			return deserializeOpeningHoursComponentsList(d, schemas.OpeningHours_Components, &v.Components)
+		case schemas.OpeningHours_Display:
+			return deserializeOpeningHoursDisplayList(d, schemas.OpeningHours_Display, &v.Display)
+		case schemas.OpeningHours_OpenNow:
+			v.OpenNow = new(bool)
+			return d.ReadBool(schemas.OpeningHours_OpenNow, v.OpenNow)
+		}
+		return nil
+	})
+}
+
 // Components of the opening hours object.
 type OpeningHoursComponents struct {
 
@@ -841,6 +2029,40 @@ type OpeningHoursComponents struct {
 	Recurrence *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OpeningHoursComponents) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpeningHoursComponents)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpeningHoursComponents) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OpenDuration != nil {
+		s.WriteString(schemas.OpeningHoursComponents_OpenDuration, *v.OpenDuration)
+	}
+	if v.OpenTime != nil {
+		s.WriteString(schemas.OpeningHoursComponents_OpenTime, *v.OpenTime)
+	}
+	if v.Recurrence != nil {
+		s.WriteString(schemas.OpeningHoursComponents_Recurrence, *v.Recurrence)
+	}
+}
+func (v *OpeningHoursComponents) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpeningHoursComponents, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpeningHoursComponents_OpenDuration:
+			v.OpenDuration = new(string)
+			return d.ReadString(schemas.OpeningHoursComponents_OpenDuration, v.OpenDuration)
+		case schemas.OpeningHoursComponents_OpenTime:
+			v.OpenTime = new(string)
+			return d.ReadString(schemas.OpeningHoursComponents_OpenTime, v.OpenTime)
+		case schemas.OpeningHoursComponents_Recurrence:
+			v.Recurrence = new(string)
+			return d.ReadString(schemas.OpeningHoursComponents_Recurrence, v.Recurrence)
+		}
+		return nil
+	})
 }
 
 // Parsed components in the provided QueryText.
@@ -859,6 +2081,46 @@ type ParsedQueryComponent struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ParsedQueryComponent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParsedQueryComponent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParsedQueryComponent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndIndex != nil {
+		s.WriteInt32(schemas.ParsedQueryComponent_EndIndex, *v.EndIndex)
+	}
+	if v.QueryComponent != nil {
+		s.WriteString(schemas.ParsedQueryComponent_QueryComponent, *v.QueryComponent)
+	}
+	if v.StartIndex != nil {
+		s.WriteInt32(schemas.ParsedQueryComponent_StartIndex, *v.StartIndex)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ParsedQueryComponent_Value, *v.Value)
+	}
+}
+func (v *ParsedQueryComponent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParsedQueryComponent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParsedQueryComponent_EndIndex:
+			v.EndIndex = new(int32)
+			return d.ReadInt32(schemas.ParsedQueryComponent_EndIndex, v.EndIndex)
+		case schemas.ParsedQueryComponent_QueryComponent:
+			v.QueryComponent = new(string)
+			return d.ReadString(schemas.ParsedQueryComponent_QueryComponent, v.QueryComponent)
+		case schemas.ParsedQueryComponent_StartIndex:
+			v.StartIndex = new(int32)
+			return d.ReadInt32(schemas.ParsedQueryComponent_StartIndex, v.StartIndex)
+		case schemas.ParsedQueryComponent_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ParsedQueryComponent_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Information about a secondary address component parsed from the query text.
@@ -892,6 +2154,52 @@ type ParsedQuerySecondaryAddressComponent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ParsedQuerySecondaryAddressComponent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParsedQuerySecondaryAddressComponent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParsedQuerySecondaryAddressComponent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Designator != nil {
+		s.WriteString(schemas.ParsedQuerySecondaryAddressComponent_Designator, *v.Designator)
+	}
+	if v.EndIndex != nil {
+		s.WriteInt32(schemas.ParsedQuerySecondaryAddressComponent_EndIndex, *v.EndIndex)
+	}
+	if v.Number != nil {
+		s.WriteString(schemas.ParsedQuerySecondaryAddressComponent_Number, *v.Number)
+	}
+	if v.StartIndex != nil {
+		s.WriteInt32(schemas.ParsedQuerySecondaryAddressComponent_StartIndex, *v.StartIndex)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ParsedQuerySecondaryAddressComponent_Value, *v.Value)
+	}
+}
+func (v *ParsedQuerySecondaryAddressComponent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParsedQuerySecondaryAddressComponent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParsedQuerySecondaryAddressComponent_Designator:
+			v.Designator = new(string)
+			return d.ReadString(schemas.ParsedQuerySecondaryAddressComponent_Designator, v.Designator)
+		case schemas.ParsedQuerySecondaryAddressComponent_EndIndex:
+			v.EndIndex = new(int32)
+			return d.ReadInt32(schemas.ParsedQuerySecondaryAddressComponent_EndIndex, v.EndIndex)
+		case schemas.ParsedQuerySecondaryAddressComponent_Number:
+			v.Number = new(string)
+			return d.ReadString(schemas.ParsedQuerySecondaryAddressComponent_Number, v.Number)
+		case schemas.ParsedQuerySecondaryAddressComponent_StartIndex:
+			v.StartIndex = new(int32)
+			return d.ReadInt32(schemas.ParsedQuerySecondaryAddressComponent_StartIndex, v.StartIndex)
+		case schemas.ParsedQuerySecondaryAddressComponent_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ParsedQuerySecondaryAddressComponent_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The phoneme details.
 type PhonemeDetails struct {
 
@@ -902,6 +2210,33 @@ type PhonemeDetails struct {
 	Title []PhonemeTranscription
 
 	noSmithyDocumentSerde
+}
+
+func (v *PhonemeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PhonemeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PhonemeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteStruct(schemas.PhonemeDetails_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePhonemeTranscriptionList(s, schemas.PhonemeDetails_Title, v.Title)
+}
+func (v *PhonemeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PhonemeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PhonemeDetails_Address:
+			v.Address = &AddressComponentPhonemes{}
+			return v.Address.Deserialize(d)
+		case schemas.PhonemeDetails_Title:
+			return deserializePhonemeTranscriptionList(d, schemas.PhonemeDetails_Title, &v.Title)
+		}
+		return nil
+	})
 }
 
 // How to pronounce the various components of the address or place.
@@ -921,6 +2256,40 @@ type PhonemeTranscription struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PhonemeTranscription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PhonemeTranscription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PhonemeTranscription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Language != nil {
+		s.WriteString(schemas.PhonemeTranscription_Language, *v.Language)
+	}
+	if v.Preferred != nil {
+		s.WriteBool(schemas.PhonemeTranscription_Preferred, *v.Preferred)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.PhonemeTranscription_Value, *v.Value)
+	}
+}
+func (v *PhonemeTranscription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PhonemeTranscription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PhonemeTranscription_Language:
+			v.Language = new(string)
+			return d.ReadString(schemas.PhonemeTranscription_Language, v.Language)
+		case schemas.PhonemeTranscription_Preferred:
+			v.Preferred = new(bool)
+			return d.ReadBool(schemas.PhonemeTranscription_Preferred, v.Preferred)
+		case schemas.PhonemeTranscription_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.PhonemeTranscription_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Contains details about the postal code of the place or result.
@@ -944,6 +2313,64 @@ type PostalCodeDetails struct {
 	UspsZipPlus4 *UspsZipPlus4
 
 	noSmithyDocumentSerde
+}
+
+func (v *PostalCodeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostalCodeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostalCodeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PostalAuthority != "" {
+		s.WriteString(schemas.PostalCodeDetails_PostalAuthority, string(v.PostalAuthority))
+	}
+	if v.PostalCode != nil {
+		s.WriteString(schemas.PostalCodeDetails_PostalCode, *v.PostalCode)
+	}
+	if v.PostalCodeType != "" {
+		s.WriteString(schemas.PostalCodeDetails_PostalCodeType, string(v.PostalCodeType))
+	}
+	if v.UspsZip != nil {
+		s.WriteStruct(schemas.PostalCodeDetails_UspsZip)
+		v.UspsZip.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UspsZipPlus4 != nil {
+		s.WriteStruct(schemas.PostalCodeDetails_UspsZipPlus4)
+		v.UspsZipPlus4.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PostalCodeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PostalCodeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PostalCodeDetails_PostalAuthority:
+			var ev string
+			if err := d.ReadString(schemas.PostalCodeDetails_PostalAuthority, &ev); err != nil {
+				return err
+			}
+			v.PostalAuthority = PostalAuthority(ev)
+			return nil
+		case schemas.PostalCodeDetails_PostalCode:
+			v.PostalCode = new(string)
+			return d.ReadString(schemas.PostalCodeDetails_PostalCode, v.PostalCode)
+		case schemas.PostalCodeDetails_PostalCodeType:
+			var ev string
+			if err := d.ReadString(schemas.PostalCodeDetails_PostalCodeType, &ev); err != nil {
+				return err
+			}
+			v.PostalCodeType = PostalCodeType(ev)
+			return nil
+		case schemas.PostalCodeDetails_UspsZip:
+			v.UspsZip = &UspsZip{}
+			return v.UspsZip.Deserialize(d)
+		case schemas.PostalCodeDetails_UspsZipPlus4:
+			v.UspsZipPlus4 = &UspsZipPlus4{}
+			return v.UspsZipPlus4.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Suggestions for refining individual query terms. Suggestions are returned as
@@ -973,6 +2400,46 @@ type QueryRefinement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryRefinement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryRefinement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryRefinement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndIndex != nil {
+		s.WriteInt32(schemas.QueryRefinement_EndIndex, *v.EndIndex)
+	}
+	if v.OriginalTerm != nil {
+		s.WriteString(schemas.QueryRefinement_OriginalTerm, *v.OriginalTerm)
+	}
+	if v.RefinedTerm != nil {
+		s.WriteString(schemas.QueryRefinement_RefinedTerm, *v.RefinedTerm)
+	}
+	if v.StartIndex != nil {
+		s.WriteInt32(schemas.QueryRefinement_StartIndex, *v.StartIndex)
+	}
+}
+func (v *QueryRefinement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryRefinement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryRefinement_EndIndex:
+			v.EndIndex = new(int32)
+			return d.ReadInt32(schemas.QueryRefinement_EndIndex, v.EndIndex)
+		case schemas.QueryRefinement_OriginalTerm:
+			v.OriginalTerm = new(string)
+			return d.ReadString(schemas.QueryRefinement_OriginalTerm, v.OriginalTerm)
+		case schemas.QueryRefinement_RefinedTerm:
+			v.RefinedTerm = new(string)
+			return d.ReadString(schemas.QueryRefinement_RefinedTerm, v.RefinedTerm)
+		case schemas.QueryRefinement_StartIndex:
+			v.StartIndex = new(int32)
+			return d.ReadInt32(schemas.QueryRefinement_StartIndex, v.StartIndex)
+		}
+		return nil
+	})
+}
+
 // The region or state results should be to be present in.
 //
 // Example: North Rhine-Westphalia .
@@ -994,6 +2461,34 @@ type Region struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Region) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Region)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Region) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.Region_Code, *v.Code)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Region_Name, *v.Name)
+	}
+}
+func (v *Region) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Region, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Region_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.Region_Code, v.Code)
+		case schemas.Region_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Region_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Indicates the starting and ending index of the region in the text query that
 // match the found title.
 type RegionHighlights struct {
@@ -1007,6 +2502,28 @@ type RegionHighlights struct {
 	Name []Highlight
 
 	noSmithyDocumentSerde
+}
+
+func (v *RegionHighlights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegionHighlights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegionHighlights) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHighlightList(s, schemas.RegionHighlights_Code, v.Code)
+	serializeHighlightList(s, schemas.RegionHighlights_Name, v.Name)
+}
+func (v *RegionHighlights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegionHighlights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegionHighlights_Code:
+			return deserializeHighlightList(d, schemas.RegionHighlights_Code, &v.Code)
+		case schemas.RegionHighlights_Name:
+			return deserializeHighlightList(d, schemas.RegionHighlights_Name, &v.Name)
+		}
+		return nil
+	})
 }
 
 // Place that is related to the result item.
@@ -1041,6 +2558,58 @@ type RelatedPlace struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RelatedPlace) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RelatedPlace)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RelatedPlace) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessPointList(s, schemas.RelatedPlace_AccessPoints, v.AccessPoints)
+	if v.Address != nil {
+		s.WriteStruct(schemas.RelatedPlace_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlaceId != nil {
+		s.WriteString(schemas.RelatedPlace_PlaceId, *v.PlaceId)
+	}
+	if v.PlaceType != "" {
+		s.WriteString(schemas.RelatedPlace_PlaceType, string(v.PlaceType))
+	}
+	serializePosition(s, schemas.RelatedPlace_Position, v.Position)
+	if v.Title != nil {
+		s.WriteString(schemas.RelatedPlace_Title, *v.Title)
+	}
+}
+func (v *RelatedPlace) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RelatedPlace, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RelatedPlace_AccessPoints:
+			return deserializeAccessPointList(d, schemas.RelatedPlace_AccessPoints, &v.AccessPoints)
+		case schemas.RelatedPlace_Address:
+			v.Address = &Address{}
+			return v.Address.Deserialize(d)
+		case schemas.RelatedPlace_PlaceId:
+			v.PlaceId = new(string)
+			return d.ReadString(schemas.RelatedPlace_PlaceId, v.PlaceId)
+		case schemas.RelatedPlace_PlaceType:
+			var ev string
+			if err := d.ReadString(schemas.RelatedPlace_PlaceType, &ev); err != nil {
+				return err
+			}
+			v.PlaceType = PlaceType(ev)
+			return nil
+		case schemas.RelatedPlace_Position:
+			return deserializePosition(d, schemas.RelatedPlace_Position, &v.Position)
+		case schemas.RelatedPlace_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.RelatedPlace_Title, v.Title)
+		}
+		return nil
+	})
+}
+
 // The included place types.
 type ReverseGeocodeFilter struct {
 
@@ -1051,6 +2620,25 @@ type ReverseGeocodeFilter struct {
 	IncludePlaceTypes []ReverseGeocodeFilterPlaceType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReverseGeocodeFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReverseGeocodeFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReverseGeocodeFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReverseGeocodeFilterPlaceTypeList(s, schemas.ReverseGeocodeFilter_IncludePlaceTypes, v.IncludePlaceTypes)
+}
+func (v *ReverseGeocodeFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReverseGeocodeFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReverseGeocodeFilter_IncludePlaceTypes:
+			return deserializeReverseGeocodeFilterPlaceTypeList(d, schemas.ReverseGeocodeFilter_IncludePlaceTypes, &v.IncludePlaceTypes)
+		}
+		return nil
+	})
 }
 
 // The returned location from the Reverse Geocode action.
@@ -1136,6 +2724,98 @@ type ReverseGeocodeResultItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReverseGeocodeResultItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReverseGeocodeResultItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReverseGeocodeResultItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessPointList(s, schemas.ReverseGeocodeResultItem_AccessPoints, v.AccessPoints)
+	if v.Address != nil {
+		s.WriteStruct(schemas.ReverseGeocodeResultItem_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AddressNumberCorrected != nil {
+		s.WriteBool(schemas.ReverseGeocodeResultItem_AddressNumberCorrected, *v.AddressNumberCorrected)
+	}
+	serializeCategoryList(s, schemas.ReverseGeocodeResultItem_Categories, v.Categories)
+	if v.Distance != 0 {
+		s.WriteInt64(schemas.ReverseGeocodeResultItem_Distance, v.Distance)
+	}
+	serializeFoodTypeList(s, schemas.ReverseGeocodeResultItem_FoodTypes, v.FoodTypes)
+	serializeIntersectionList(s, schemas.ReverseGeocodeResultItem_Intersections, v.Intersections)
+	serializeBoundingBox(s, schemas.ReverseGeocodeResultItem_MapView, v.MapView)
+	if v.PlaceId != nil {
+		s.WriteString(schemas.ReverseGeocodeResultItem_PlaceId, *v.PlaceId)
+	}
+	if v.PlaceType != "" {
+		s.WriteString(schemas.ReverseGeocodeResultItem_PlaceType, string(v.PlaceType))
+	}
+	if v.PoliticalView != nil {
+		s.WriteString(schemas.ReverseGeocodeResultItem_PoliticalView, *v.PoliticalView)
+	}
+	serializePosition(s, schemas.ReverseGeocodeResultItem_Position, v.Position)
+	serializePostalCodeDetailsList(s, schemas.ReverseGeocodeResultItem_PostalCodeDetails, v.PostalCodeDetails)
+	if v.TimeZone != nil {
+		s.WriteStruct(schemas.ReverseGeocodeResultItem_TimeZone)
+		v.TimeZone.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.ReverseGeocodeResultItem_Title, *v.Title)
+	}
+}
+func (v *ReverseGeocodeResultItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReverseGeocodeResultItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReverseGeocodeResultItem_AccessPoints:
+			return deserializeAccessPointList(d, schemas.ReverseGeocodeResultItem_AccessPoints, &v.AccessPoints)
+		case schemas.ReverseGeocodeResultItem_Address:
+			v.Address = &Address{}
+			return v.Address.Deserialize(d)
+		case schemas.ReverseGeocodeResultItem_AddressNumberCorrected:
+			v.AddressNumberCorrected = new(bool)
+			return d.ReadBool(schemas.ReverseGeocodeResultItem_AddressNumberCorrected, v.AddressNumberCorrected)
+		case schemas.ReverseGeocodeResultItem_Categories:
+			return deserializeCategoryList(d, schemas.ReverseGeocodeResultItem_Categories, &v.Categories)
+		case schemas.ReverseGeocodeResultItem_Distance:
+			return d.ReadInt64(schemas.ReverseGeocodeResultItem_Distance, &v.Distance)
+		case schemas.ReverseGeocodeResultItem_FoodTypes:
+			return deserializeFoodTypeList(d, schemas.ReverseGeocodeResultItem_FoodTypes, &v.FoodTypes)
+		case schemas.ReverseGeocodeResultItem_Intersections:
+			return deserializeIntersectionList(d, schemas.ReverseGeocodeResultItem_Intersections, &v.Intersections)
+		case schemas.ReverseGeocodeResultItem_MapView:
+			return deserializeBoundingBox(d, schemas.ReverseGeocodeResultItem_MapView, &v.MapView)
+		case schemas.ReverseGeocodeResultItem_PlaceId:
+			v.PlaceId = new(string)
+			return d.ReadString(schemas.ReverseGeocodeResultItem_PlaceId, v.PlaceId)
+		case schemas.ReverseGeocodeResultItem_PlaceType:
+			var ev string
+			if err := d.ReadString(schemas.ReverseGeocodeResultItem_PlaceType, &ev); err != nil {
+				return err
+			}
+			v.PlaceType = PlaceType(ev)
+			return nil
+		case schemas.ReverseGeocodeResultItem_PoliticalView:
+			v.PoliticalView = new(string)
+			return d.ReadString(schemas.ReverseGeocodeResultItem_PoliticalView, v.PoliticalView)
+		case schemas.ReverseGeocodeResultItem_Position:
+			return deserializePosition(d, schemas.ReverseGeocodeResultItem_Position, &v.Position)
+		case schemas.ReverseGeocodeResultItem_PostalCodeDetails:
+			return deserializePostalCodeDetailsList(d, schemas.ReverseGeocodeResultItem_PostalCodeDetails, &v.PostalCodeDetails)
+		case schemas.ReverseGeocodeResultItem_TimeZone:
+			v.TimeZone = &TimeZone{}
+			return v.TimeZone.Deserialize(d)
+		case schemas.ReverseGeocodeResultItem_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.ReverseGeocodeResultItem_Title, v.Title)
+		}
+		return nil
+	})
+}
+
 // SearchNearby structure which contains a set of inclusion/exclusion properties
 // that results must possess in order to be returned as a result.
 type SearchNearbyFilter struct {
@@ -1170,6 +2850,46 @@ type SearchNearbyFilter struct {
 	IncludeFoodTypes []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SearchNearbyFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchNearbyFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchNearbyFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBoundingBox(s, schemas.SearchNearbyFilter_BoundingBox, v.BoundingBox)
+	serializeFilterBusinessChainList(s, schemas.SearchNearbyFilter_ExcludeBusinessChains, v.ExcludeBusinessChains)
+	serializeFilterCategoryList(s, schemas.SearchNearbyFilter_ExcludeCategories, v.ExcludeCategories)
+	serializeFilterFoodTypeList(s, schemas.SearchNearbyFilter_ExcludeFoodTypes, v.ExcludeFoodTypes)
+	serializeFilterBusinessChainList(s, schemas.SearchNearbyFilter_IncludeBusinessChains, v.IncludeBusinessChains)
+	serializeFilterCategoryList(s, schemas.SearchNearbyFilter_IncludeCategories, v.IncludeCategories)
+	serializeCountryCodeList(s, schemas.SearchNearbyFilter_IncludeCountries, v.IncludeCountries)
+	serializeFilterFoodTypeList(s, schemas.SearchNearbyFilter_IncludeFoodTypes, v.IncludeFoodTypes)
+}
+func (v *SearchNearbyFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchNearbyFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchNearbyFilter_BoundingBox:
+			return deserializeBoundingBox(d, schemas.SearchNearbyFilter_BoundingBox, &v.BoundingBox)
+		case schemas.SearchNearbyFilter_ExcludeBusinessChains:
+			return deserializeFilterBusinessChainList(d, schemas.SearchNearbyFilter_ExcludeBusinessChains, &v.ExcludeBusinessChains)
+		case schemas.SearchNearbyFilter_ExcludeCategories:
+			return deserializeFilterCategoryList(d, schemas.SearchNearbyFilter_ExcludeCategories, &v.ExcludeCategories)
+		case schemas.SearchNearbyFilter_ExcludeFoodTypes:
+			return deserializeFilterFoodTypeList(d, schemas.SearchNearbyFilter_ExcludeFoodTypes, &v.ExcludeFoodTypes)
+		case schemas.SearchNearbyFilter_IncludeBusinessChains:
+			return deserializeFilterBusinessChainList(d, schemas.SearchNearbyFilter_IncludeBusinessChains, &v.IncludeBusinessChains)
+		case schemas.SearchNearbyFilter_IncludeCategories:
+			return deserializeFilterCategoryList(d, schemas.SearchNearbyFilter_IncludeCategories, &v.IncludeCategories)
+		case schemas.SearchNearbyFilter_IncludeCountries:
+			return deserializeCountryCodeList(d, schemas.SearchNearbyFilter_IncludeCountries, &v.IncludeCountries)
+		case schemas.SearchNearbyFilter_IncludeFoodTypes:
+			return deserializeFilterFoodTypeList(d, schemas.SearchNearbyFilter_IncludeFoodTypes, &v.IncludeFoodTypes)
+		}
+		return nil
+	})
 }
 
 // The search results of nearby places.
@@ -1248,6 +2968,117 @@ type SearchNearbyResultItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchNearbyResultItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchNearbyResultItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchNearbyResultItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessPointList(s, schemas.SearchNearbyResultItem_AccessPoints, v.AccessPoints)
+	serializeAccessRestrictionList(s, schemas.SearchNearbyResultItem_AccessRestrictions, v.AccessRestrictions)
+	if v.Address != nil {
+		s.WriteStruct(schemas.SearchNearbyResultItem_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AddressNumberCorrected != nil {
+		s.WriteBool(schemas.SearchNearbyResultItem_AddressNumberCorrected, *v.AddressNumberCorrected)
+	}
+	serializeBusinessChainList(s, schemas.SearchNearbyResultItem_BusinessChains, v.BusinessChains)
+	serializeCategoryList(s, schemas.SearchNearbyResultItem_Categories, v.Categories)
+	if v.Contacts != nil {
+		s.WriteStruct(schemas.SearchNearbyResultItem_Contacts)
+		v.Contacts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Distance != 0 {
+		s.WriteInt64(schemas.SearchNearbyResultItem_Distance, v.Distance)
+	}
+	serializeFoodTypeList(s, schemas.SearchNearbyResultItem_FoodTypes, v.FoodTypes)
+	serializeBoundingBox(s, schemas.SearchNearbyResultItem_MapView, v.MapView)
+	serializeOpeningHoursList(s, schemas.SearchNearbyResultItem_OpeningHours, v.OpeningHours)
+	if v.Phonemes != nil {
+		s.WriteStruct(schemas.SearchNearbyResultItem_Phonemes)
+		v.Phonemes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlaceId != nil {
+		s.WriteString(schemas.SearchNearbyResultItem_PlaceId, *v.PlaceId)
+	}
+	if v.PlaceType != "" {
+		s.WriteString(schemas.SearchNearbyResultItem_PlaceType, string(v.PlaceType))
+	}
+	if v.PoliticalView != nil {
+		s.WriteString(schemas.SearchNearbyResultItem_PoliticalView, *v.PoliticalView)
+	}
+	serializePosition(s, schemas.SearchNearbyResultItem_Position, v.Position)
+	if v.TimeZone != nil {
+		s.WriteStruct(schemas.SearchNearbyResultItem_TimeZone)
+		v.TimeZone.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.SearchNearbyResultItem_Title, *v.Title)
+	}
+}
+func (v *SearchNearbyResultItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchNearbyResultItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchNearbyResultItem_AccessPoints:
+			return deserializeAccessPointList(d, schemas.SearchNearbyResultItem_AccessPoints, &v.AccessPoints)
+		case schemas.SearchNearbyResultItem_AccessRestrictions:
+			return deserializeAccessRestrictionList(d, schemas.SearchNearbyResultItem_AccessRestrictions, &v.AccessRestrictions)
+		case schemas.SearchNearbyResultItem_Address:
+			v.Address = &Address{}
+			return v.Address.Deserialize(d)
+		case schemas.SearchNearbyResultItem_AddressNumberCorrected:
+			v.AddressNumberCorrected = new(bool)
+			return d.ReadBool(schemas.SearchNearbyResultItem_AddressNumberCorrected, v.AddressNumberCorrected)
+		case schemas.SearchNearbyResultItem_BusinessChains:
+			return deserializeBusinessChainList(d, schemas.SearchNearbyResultItem_BusinessChains, &v.BusinessChains)
+		case schemas.SearchNearbyResultItem_Categories:
+			return deserializeCategoryList(d, schemas.SearchNearbyResultItem_Categories, &v.Categories)
+		case schemas.SearchNearbyResultItem_Contacts:
+			v.Contacts = &Contacts{}
+			return v.Contacts.Deserialize(d)
+		case schemas.SearchNearbyResultItem_Distance:
+			return d.ReadInt64(schemas.SearchNearbyResultItem_Distance, &v.Distance)
+		case schemas.SearchNearbyResultItem_FoodTypes:
+			return deserializeFoodTypeList(d, schemas.SearchNearbyResultItem_FoodTypes, &v.FoodTypes)
+		case schemas.SearchNearbyResultItem_MapView:
+			return deserializeBoundingBox(d, schemas.SearchNearbyResultItem_MapView, &v.MapView)
+		case schemas.SearchNearbyResultItem_OpeningHours:
+			return deserializeOpeningHoursList(d, schemas.SearchNearbyResultItem_OpeningHours, &v.OpeningHours)
+		case schemas.SearchNearbyResultItem_Phonemes:
+			v.Phonemes = &PhonemeDetails{}
+			return v.Phonemes.Deserialize(d)
+		case schemas.SearchNearbyResultItem_PlaceId:
+			v.PlaceId = new(string)
+			return d.ReadString(schemas.SearchNearbyResultItem_PlaceId, v.PlaceId)
+		case schemas.SearchNearbyResultItem_PlaceType:
+			var ev string
+			if err := d.ReadString(schemas.SearchNearbyResultItem_PlaceType, &ev); err != nil {
+				return err
+			}
+			v.PlaceType = PlaceType(ev)
+			return nil
+		case schemas.SearchNearbyResultItem_PoliticalView:
+			v.PoliticalView = new(string)
+			return d.ReadString(schemas.SearchNearbyResultItem_PoliticalView, v.PoliticalView)
+		case schemas.SearchNearbyResultItem_Position:
+			return deserializePosition(d, schemas.SearchNearbyResultItem_Position, &v.Position)
+		case schemas.SearchNearbyResultItem_TimeZone:
+			v.TimeZone = &TimeZone{}
+			return v.TimeZone.Deserialize(d)
+		case schemas.SearchNearbyResultItem_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.SearchNearbyResultItem_Title, v.Title)
+		}
+		return nil
+	})
+}
+
 // SearchText structure which contains a set of inclusion/exclusion properties
 // that results must possess in order to be returned as a result.
 type SearchTextFilter struct {
@@ -1267,6 +3098,36 @@ type SearchTextFilter struct {
 	IncludeCountries []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SearchTextFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchTextFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchTextFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBoundingBox(s, schemas.SearchTextFilter_BoundingBox, v.BoundingBox)
+	if v.Circle != nil {
+		s.WriteStruct(schemas.SearchTextFilter_Circle)
+		v.Circle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCountryCodeList(s, schemas.SearchTextFilter_IncludeCountries, v.IncludeCountries)
+}
+func (v *SearchTextFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchTextFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchTextFilter_BoundingBox:
+			return deserializeBoundingBox(d, schemas.SearchTextFilter_BoundingBox, &v.BoundingBox)
+		case schemas.SearchTextFilter_Circle:
+			v.Circle = &FilterCircle{}
+			return v.Circle.Deserialize(d)
+		case schemas.SearchTextFilter_IncludeCountries:
+			return deserializeCountryCodeList(d, schemas.SearchTextFilter_IncludeCountries, &v.IncludeCountries)
+		}
+		return nil
+	})
 }
 
 // The text search result.
@@ -1345,6 +3206,117 @@ type SearchTextResultItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchTextResultItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchTextResultItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchTextResultItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessPointList(s, schemas.SearchTextResultItem_AccessPoints, v.AccessPoints)
+	serializeAccessRestrictionList(s, schemas.SearchTextResultItem_AccessRestrictions, v.AccessRestrictions)
+	if v.Address != nil {
+		s.WriteStruct(schemas.SearchTextResultItem_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AddressNumberCorrected != nil {
+		s.WriteBool(schemas.SearchTextResultItem_AddressNumberCorrected, *v.AddressNumberCorrected)
+	}
+	serializeBusinessChainList(s, schemas.SearchTextResultItem_BusinessChains, v.BusinessChains)
+	serializeCategoryList(s, schemas.SearchTextResultItem_Categories, v.Categories)
+	if v.Contacts != nil {
+		s.WriteStruct(schemas.SearchTextResultItem_Contacts)
+		v.Contacts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Distance != 0 {
+		s.WriteInt64(schemas.SearchTextResultItem_Distance, v.Distance)
+	}
+	serializeFoodTypeList(s, schemas.SearchTextResultItem_FoodTypes, v.FoodTypes)
+	serializeBoundingBox(s, schemas.SearchTextResultItem_MapView, v.MapView)
+	serializeOpeningHoursList(s, schemas.SearchTextResultItem_OpeningHours, v.OpeningHours)
+	if v.Phonemes != nil {
+		s.WriteStruct(schemas.SearchTextResultItem_Phonemes)
+		v.Phonemes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlaceId != nil {
+		s.WriteString(schemas.SearchTextResultItem_PlaceId, *v.PlaceId)
+	}
+	if v.PlaceType != "" {
+		s.WriteString(schemas.SearchTextResultItem_PlaceType, string(v.PlaceType))
+	}
+	if v.PoliticalView != nil {
+		s.WriteString(schemas.SearchTextResultItem_PoliticalView, *v.PoliticalView)
+	}
+	serializePosition(s, schemas.SearchTextResultItem_Position, v.Position)
+	if v.TimeZone != nil {
+		s.WriteStruct(schemas.SearchTextResultItem_TimeZone)
+		v.TimeZone.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.SearchTextResultItem_Title, *v.Title)
+	}
+}
+func (v *SearchTextResultItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchTextResultItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchTextResultItem_AccessPoints:
+			return deserializeAccessPointList(d, schemas.SearchTextResultItem_AccessPoints, &v.AccessPoints)
+		case schemas.SearchTextResultItem_AccessRestrictions:
+			return deserializeAccessRestrictionList(d, schemas.SearchTextResultItem_AccessRestrictions, &v.AccessRestrictions)
+		case schemas.SearchTextResultItem_Address:
+			v.Address = &Address{}
+			return v.Address.Deserialize(d)
+		case schemas.SearchTextResultItem_AddressNumberCorrected:
+			v.AddressNumberCorrected = new(bool)
+			return d.ReadBool(schemas.SearchTextResultItem_AddressNumberCorrected, v.AddressNumberCorrected)
+		case schemas.SearchTextResultItem_BusinessChains:
+			return deserializeBusinessChainList(d, schemas.SearchTextResultItem_BusinessChains, &v.BusinessChains)
+		case schemas.SearchTextResultItem_Categories:
+			return deserializeCategoryList(d, schemas.SearchTextResultItem_Categories, &v.Categories)
+		case schemas.SearchTextResultItem_Contacts:
+			v.Contacts = &Contacts{}
+			return v.Contacts.Deserialize(d)
+		case schemas.SearchTextResultItem_Distance:
+			return d.ReadInt64(schemas.SearchTextResultItem_Distance, &v.Distance)
+		case schemas.SearchTextResultItem_FoodTypes:
+			return deserializeFoodTypeList(d, schemas.SearchTextResultItem_FoodTypes, &v.FoodTypes)
+		case schemas.SearchTextResultItem_MapView:
+			return deserializeBoundingBox(d, schemas.SearchTextResultItem_MapView, &v.MapView)
+		case schemas.SearchTextResultItem_OpeningHours:
+			return deserializeOpeningHoursList(d, schemas.SearchTextResultItem_OpeningHours, &v.OpeningHours)
+		case schemas.SearchTextResultItem_Phonemes:
+			v.Phonemes = &PhonemeDetails{}
+			return v.Phonemes.Deserialize(d)
+		case schemas.SearchTextResultItem_PlaceId:
+			v.PlaceId = new(string)
+			return d.ReadString(schemas.SearchTextResultItem_PlaceId, v.PlaceId)
+		case schemas.SearchTextResultItem_PlaceType:
+			var ev string
+			if err := d.ReadString(schemas.SearchTextResultItem_PlaceType, &ev); err != nil {
+				return err
+			}
+			v.PlaceType = PlaceType(ev)
+			return nil
+		case schemas.SearchTextResultItem_PoliticalView:
+			v.PoliticalView = new(string)
+			return d.ReadString(schemas.SearchTextResultItem_PoliticalView, v.PoliticalView)
+		case schemas.SearchTextResultItem_Position:
+			return deserializePosition(d, schemas.SearchTextResultItem_Position, &v.Position)
+		case schemas.SearchTextResultItem_TimeZone:
+			v.TimeZone = &TimeZone{}
+			return v.TimeZone.Deserialize(d)
+		case schemas.SearchTextResultItem_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.SearchTextResultItem_Title, v.Title)
+		}
+		return nil
+	})
+}
+
 // Components that correspond to secondary identifiers on an address. The only
 // component type supported currently is Unit.
 type SecondaryAddressComponent struct {
@@ -1362,6 +3334,34 @@ type SecondaryAddressComponent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SecondaryAddressComponent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecondaryAddressComponent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecondaryAddressComponent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Designator != nil {
+		s.WriteString(schemas.SecondaryAddressComponent_Designator, *v.Designator)
+	}
+	if v.Number != nil {
+		s.WriteString(schemas.SecondaryAddressComponent_Number, *v.Number)
+	}
+}
+func (v *SecondaryAddressComponent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecondaryAddressComponent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecondaryAddressComponent_Designator:
+			v.Designator = new(string)
+			return d.ReadString(schemas.SecondaryAddressComponent_Designator, v.Designator)
+		case schemas.SecondaryAddressComponent_Number:
+			v.Number = new(string)
+			return d.ReadString(schemas.SecondaryAddressComponent_Number, v.Number)
+		}
+		return nil
+	})
+}
+
 // Match score for a secondary address component in the result.
 type SecondaryAddressComponentMatchScore struct {
 
@@ -1369,6 +3369,27 @@ type SecondaryAddressComponentMatchScore struct {
 	Number float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *SecondaryAddressComponentMatchScore) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecondaryAddressComponentMatchScore)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecondaryAddressComponentMatchScore) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Number != 0 {
+		s.WriteFloat64(schemas.SecondaryAddressComponentMatchScore_Number, v.Number)
+	}
+}
+func (v *SecondaryAddressComponentMatchScore) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecondaryAddressComponentMatchScore, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecondaryAddressComponentMatchScore_Number:
+			return d.ReadFloat64(schemas.SecondaryAddressComponentMatchScore_Number, &v.Number)
+		}
+		return nil
+	})
 }
 
 // Components of a street.
@@ -1415,6 +3436,74 @@ type StreetComponents struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StreetComponents) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreetComponents)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreetComponents) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseName != nil {
+		s.WriteString(schemas.StreetComponents_BaseName, *v.BaseName)
+	}
+	if v.Direction != nil {
+		s.WriteString(schemas.StreetComponents_Direction, *v.Direction)
+	}
+	if v.Language != nil {
+		s.WriteString(schemas.StreetComponents_Language, *v.Language)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.StreetComponents_Prefix, *v.Prefix)
+	}
+	if v.Suffix != nil {
+		s.WriteString(schemas.StreetComponents_Suffix, *v.Suffix)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.StreetComponents_Type, *v.Type)
+	}
+	if v.TypePlacement != "" {
+		s.WriteString(schemas.StreetComponents_TypePlacement, string(v.TypePlacement))
+	}
+	if v.TypeSeparator != nil {
+		s.WriteString(schemas.StreetComponents_TypeSeparator, *v.TypeSeparator)
+	}
+}
+func (v *StreetComponents) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreetComponents, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreetComponents_BaseName:
+			v.BaseName = new(string)
+			return d.ReadString(schemas.StreetComponents_BaseName, v.BaseName)
+		case schemas.StreetComponents_Direction:
+			v.Direction = new(string)
+			return d.ReadString(schemas.StreetComponents_Direction, v.Direction)
+		case schemas.StreetComponents_Language:
+			v.Language = new(string)
+			return d.ReadString(schemas.StreetComponents_Language, v.Language)
+		case schemas.StreetComponents_Prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.StreetComponents_Prefix, v.Prefix)
+		case schemas.StreetComponents_Suffix:
+			v.Suffix = new(string)
+			return d.ReadString(schemas.StreetComponents_Suffix, v.Suffix)
+		case schemas.StreetComponents_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.StreetComponents_Type, v.Type)
+		case schemas.StreetComponents_TypePlacement:
+			var ev string
+			if err := d.ReadString(schemas.StreetComponents_TypePlacement, &ev); err != nil {
+				return err
+			}
+			v.TypePlacement = TypePlacement(ev)
+			return nil
+		case schemas.StreetComponents_TypeSeparator:
+			v.TypeSeparator = new(string)
+			return d.ReadString(schemas.StreetComponents_TypeSeparator, v.TypeSeparator)
+		}
+		return nil
+	})
+}
+
 // The sub-region.
 type SubRegion struct {
 
@@ -1428,6 +3517,34 @@ type SubRegion struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SubRegion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubRegion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubRegion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.SubRegion_Code, *v.Code)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SubRegion_Name, *v.Name)
+	}
+}
+func (v *SubRegion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubRegion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubRegion_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.SubRegion_Code, v.Code)
+		case schemas.SubRegion_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SubRegion_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Indicates the starting and ending index of the sub-region in the text query
@@ -1445,6 +3562,28 @@ type SubRegionHighlights struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubRegionHighlights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubRegionHighlights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubRegionHighlights) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHighlightList(s, schemas.SubRegionHighlights_Code, v.Code)
+	serializeHighlightList(s, schemas.SubRegionHighlights_Name, v.Name)
+}
+func (v *SubRegionHighlights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubRegionHighlights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubRegionHighlights_Code:
+			return deserializeHighlightList(d, schemas.SubRegionHighlights_Code, &v.Code)
+		case schemas.SubRegionHighlights_Name:
+			return deserializeHighlightList(d, schemas.SubRegionHighlights_Name, &v.Name)
+		}
+		return nil
+	})
+}
+
 // Describes how the parts of the textQuery matched the input query by returning
 // the sections of the response which matched to textQuery terms.
 type SuggestAddressHighlights struct {
@@ -1456,6 +3595,25 @@ type SuggestAddressHighlights struct {
 	Label []Highlight
 
 	noSmithyDocumentSerde
+}
+
+func (v *SuggestAddressHighlights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuggestAddressHighlights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuggestAddressHighlights) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHighlightList(s, schemas.SuggestAddressHighlights_Label, v.Label)
+}
+func (v *SuggestAddressHighlights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuggestAddressHighlights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuggestAddressHighlights_Label:
+			return deserializeHighlightList(d, schemas.SuggestAddressHighlights_Label, &v.Label)
+		}
+		return nil
+	})
 }
 
 // SuggestFilter structure which contains a set of inclusion/exclusion properties
@@ -1479,6 +3637,36 @@ type SuggestFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SuggestFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuggestFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuggestFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBoundingBox(s, schemas.SuggestFilter_BoundingBox, v.BoundingBox)
+	if v.Circle != nil {
+		s.WriteStruct(schemas.SuggestFilter_Circle)
+		v.Circle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCountryCodeList(s, schemas.SuggestFilter_IncludeCountries, v.IncludeCountries)
+}
+func (v *SuggestFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuggestFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuggestFilter_BoundingBox:
+			return deserializeBoundingBox(d, schemas.SuggestFilter_BoundingBox, &v.BoundingBox)
+		case schemas.SuggestFilter_Circle:
+			v.Circle = &FilterCircle{}
+			return v.Circle.Deserialize(d)
+		case schemas.SuggestFilter_IncludeCountries:
+			return deserializeCountryCodeList(d, schemas.SuggestFilter_IncludeCountries, &v.IncludeCountries)
+		}
+		return nil
+	})
+}
+
 // Describes how the parts of the textQuery matched the input query by returning
 // the sections of the response which matched to textQuery terms.
 type SuggestHighlights struct {
@@ -1491,6 +3679,33 @@ type SuggestHighlights struct {
 	Title []Highlight
 
 	noSmithyDocumentSerde
+}
+
+func (v *SuggestHighlights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuggestHighlights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuggestHighlights) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteStruct(schemas.SuggestHighlights_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeHighlightList(s, schemas.SuggestHighlights_Title, v.Title)
+}
+func (v *SuggestHighlights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuggestHighlights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuggestHighlights_Address:
+			v.Address = &SuggestAddressHighlights{}
+			return v.Address.Deserialize(d)
+		case schemas.SuggestHighlights_Title:
+			return deserializeHighlightList(d, schemas.SuggestHighlights_Title, &v.Title)
+		}
+		return nil
+	})
 }
 
 // The suggested place results.
@@ -1569,6 +3784,94 @@ type SuggestPlaceResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SuggestPlaceResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuggestPlaceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuggestPlaceResult) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessPointList(s, schemas.SuggestPlaceResult_AccessPoints, v.AccessPoints)
+	serializeAccessRestrictionList(s, schemas.SuggestPlaceResult_AccessRestrictions, v.AccessRestrictions)
+	if v.Address != nil {
+		s.WriteStruct(schemas.SuggestPlaceResult_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeBusinessChainList(s, schemas.SuggestPlaceResult_BusinessChains, v.BusinessChains)
+	serializeCategoryList(s, schemas.SuggestPlaceResult_Categories, v.Categories)
+	if v.Distance != 0 {
+		s.WriteInt64(schemas.SuggestPlaceResult_Distance, v.Distance)
+	}
+	serializeFoodTypeList(s, schemas.SuggestPlaceResult_FoodTypes, v.FoodTypes)
+	serializeBoundingBox(s, schemas.SuggestPlaceResult_MapView, v.MapView)
+	if v.Phonemes != nil {
+		s.WriteStruct(schemas.SuggestPlaceResult_Phonemes)
+		v.Phonemes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlaceId != nil {
+		s.WriteString(schemas.SuggestPlaceResult_PlaceId, *v.PlaceId)
+	}
+	if v.PlaceType != "" {
+		s.WriteString(schemas.SuggestPlaceResult_PlaceType, string(v.PlaceType))
+	}
+	if v.PoliticalView != nil {
+		s.WriteString(schemas.SuggestPlaceResult_PoliticalView, *v.PoliticalView)
+	}
+	serializePosition(s, schemas.SuggestPlaceResult_Position, v.Position)
+	if v.TimeZone != nil {
+		s.WriteStruct(schemas.SuggestPlaceResult_TimeZone)
+		v.TimeZone.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SuggestPlaceResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuggestPlaceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuggestPlaceResult_AccessPoints:
+			return deserializeAccessPointList(d, schemas.SuggestPlaceResult_AccessPoints, &v.AccessPoints)
+		case schemas.SuggestPlaceResult_AccessRestrictions:
+			return deserializeAccessRestrictionList(d, schemas.SuggestPlaceResult_AccessRestrictions, &v.AccessRestrictions)
+		case schemas.SuggestPlaceResult_Address:
+			v.Address = &Address{}
+			return v.Address.Deserialize(d)
+		case schemas.SuggestPlaceResult_BusinessChains:
+			return deserializeBusinessChainList(d, schemas.SuggestPlaceResult_BusinessChains, &v.BusinessChains)
+		case schemas.SuggestPlaceResult_Categories:
+			return deserializeCategoryList(d, schemas.SuggestPlaceResult_Categories, &v.Categories)
+		case schemas.SuggestPlaceResult_Distance:
+			return d.ReadInt64(schemas.SuggestPlaceResult_Distance, &v.Distance)
+		case schemas.SuggestPlaceResult_FoodTypes:
+			return deserializeFoodTypeList(d, schemas.SuggestPlaceResult_FoodTypes, &v.FoodTypes)
+		case schemas.SuggestPlaceResult_MapView:
+			return deserializeBoundingBox(d, schemas.SuggestPlaceResult_MapView, &v.MapView)
+		case schemas.SuggestPlaceResult_Phonemes:
+			v.Phonemes = &PhonemeDetails{}
+			return v.Phonemes.Deserialize(d)
+		case schemas.SuggestPlaceResult_PlaceId:
+			v.PlaceId = new(string)
+			return d.ReadString(schemas.SuggestPlaceResult_PlaceId, v.PlaceId)
+		case schemas.SuggestPlaceResult_PlaceType:
+			var ev string
+			if err := d.ReadString(schemas.SuggestPlaceResult_PlaceType, &ev); err != nil {
+				return err
+			}
+			v.PlaceType = PlaceType(ev)
+			return nil
+		case schemas.SuggestPlaceResult_PoliticalView:
+			v.PoliticalView = new(string)
+			return d.ReadString(schemas.SuggestPlaceResult_PoliticalView, v.PoliticalView)
+		case schemas.SuggestPlaceResult_Position:
+			return deserializePosition(d, schemas.SuggestPlaceResult_Position, &v.Position)
+		case schemas.SuggestPlaceResult_TimeZone:
+			v.TimeZone = &TimeZone{}
+			return v.TimeZone.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The suggested query results.
 type SuggestQueryResult struct {
 
@@ -1593,6 +3896,38 @@ type SuggestQueryResult struct {
 	QueryType QueryType
 
 	noSmithyDocumentSerde
+}
+
+func (v *SuggestQueryResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuggestQueryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuggestQueryResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryId != nil {
+		s.WriteString(schemas.SuggestQueryResult_QueryId, *v.QueryId)
+	}
+	if v.QueryType != "" {
+		s.WriteString(schemas.SuggestQueryResult_QueryType, string(v.QueryType))
+	}
+}
+func (v *SuggestQueryResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuggestQueryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuggestQueryResult_QueryId:
+			v.QueryId = new(string)
+			return d.ReadString(schemas.SuggestQueryResult_QueryId, v.QueryId)
+		case schemas.SuggestQueryResult_QueryType:
+			var ev string
+			if err := d.ReadString(schemas.SuggestQueryResult_QueryType, &ev); err != nil {
+				return err
+			}
+			v.QueryType = QueryType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The resulting item from the suggested query.
@@ -1624,6 +3959,62 @@ type SuggestResultItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SuggestResultItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuggestResultItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuggestResultItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Highlights != nil {
+		s.WriteStruct(schemas.SuggestResultItem_Highlights)
+		v.Highlights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Place != nil {
+		s.WriteStruct(schemas.SuggestResultItem_Place)
+		v.Place.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Query != nil {
+		s.WriteStruct(schemas.SuggestResultItem_Query)
+		v.Query.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SuggestResultItemType != "" {
+		s.WriteString(schemas.SuggestResultItem_SuggestResultItemType, string(v.SuggestResultItemType))
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.SuggestResultItem_Title, *v.Title)
+	}
+}
+func (v *SuggestResultItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuggestResultItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuggestResultItem_Highlights:
+			v.Highlights = &SuggestHighlights{}
+			return v.Highlights.Deserialize(d)
+		case schemas.SuggestResultItem_Place:
+			v.Place = &SuggestPlaceResult{}
+			return v.Place.Deserialize(d)
+		case schemas.SuggestResultItem_Query:
+			v.Query = &SuggestQueryResult{}
+			return v.Query.Deserialize(d)
+		case schemas.SuggestResultItem_SuggestResultItemType:
+			var ev string
+			if err := d.ReadString(schemas.SuggestResultItem_SuggestResultItemType, &ev); err != nil {
+				return err
+			}
+			v.SuggestResultItemType = SuggestResultItemType(ev)
+			return nil
+		case schemas.SuggestResultItem_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.SuggestResultItem_Title, v.Title)
+		}
+		return nil
+	})
+}
+
 // The time zone in which the place is located.
 type TimeZone struct {
 
@@ -1641,6 +4032,39 @@ type TimeZone struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TimeZone) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeZone)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeZone) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.TimeZone_Name, *v.Name)
+	}
+	if v.Offset != nil {
+		s.WriteString(schemas.TimeZone_Offset, *v.Offset)
+	}
+	if v.OffsetSeconds != 0 {
+		s.WriteInt64(schemas.TimeZone_OffsetSeconds, v.OffsetSeconds)
+	}
+}
+func (v *TimeZone) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeZone, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeZone_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TimeZone_Name, v.Name)
+		case schemas.TimeZone_Offset:
+			v.Offset = new(string)
+			return d.ReadString(schemas.TimeZone_Offset, v.Offset)
+		case schemas.TimeZone_OffsetSeconds:
+			return d.ReadInt64(schemas.TimeZone_OffsetSeconds, &v.OffsetSeconds)
+		}
+		return nil
+	})
+}
+
 // The USPS zip code.
 type UspsZip struct {
 
@@ -1650,6 +4074,32 @@ type UspsZip struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UspsZip) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UspsZip)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UspsZip) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ZipClassificationCode != "" {
+		s.WriteString(schemas.UspsZip_ZipClassificationCode, string(v.ZipClassificationCode))
+	}
+}
+func (v *UspsZip) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UspsZip, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UspsZip_ZipClassificationCode:
+			var ev string
+			if err := d.ReadString(schemas.UspsZip_ZipClassificationCode, &ev); err != nil {
+				return err
+			}
+			v.ZipClassificationCode = ZipClassificationCode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The USPS zip+4 code.
 type UspsZipPlus4 struct {
 
@@ -1657,6 +4107,32 @@ type UspsZipPlus4 struct {
 	RecordTypeCode RecordTypeCode
 
 	noSmithyDocumentSerde
+}
+
+func (v *UspsZipPlus4) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UspsZipPlus4)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UspsZipPlus4) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecordTypeCode != "" {
+		s.WriteString(schemas.UspsZipPlus4_RecordTypeCode, string(v.RecordTypeCode))
+	}
+}
+func (v *UspsZipPlus4) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UspsZipPlus4, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UspsZipPlus4_RecordTypeCode:
+			var ev string
+			if err := d.ReadString(schemas.UspsZipPlus4_RecordTypeCode, &ev); err != nil {
+				return err
+			}
+			v.RecordTypeCode = RecordTypeCode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The input fails to satisfy the constraints specified by the Amazon Location
@@ -1674,6 +4150,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_Name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Message, v.Message)
+		case schemas.ValidationExceptionField_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

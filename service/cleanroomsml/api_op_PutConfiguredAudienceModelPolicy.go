@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,27 @@ type PutConfiguredAudienceModelPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutConfiguredAudienceModelPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutConfiguredAudienceModelPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutConfiguredAudienceModelPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredAudienceModelArn != nil {
+		s.WriteString(schemas.PutConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn, *v.ConfiguredAudienceModelArn)
+	}
+	if v.ConfiguredAudienceModelPolicy != nil {
+		s.WriteString(schemas.PutConfiguredAudienceModelPolicyRequest_configuredAudienceModelPolicy, *v.ConfiguredAudienceModelPolicy)
+	}
+	if v.PolicyExistenceCondition != "" {
+		s.WriteString(schemas.PutConfiguredAudienceModelPolicyRequest_policyExistenceCondition, string(v.PolicyExistenceCondition))
+	}
+	if v.PreviousPolicyHash != nil {
+		s.WriteString(schemas.PutConfiguredAudienceModelPolicyRequest_previousPolicyHash, *v.PreviousPolicyHash)
+	}
+}
+
 type PutConfiguredAudienceModelPolicyOutput struct {
 
 	// The IAM resource policy.
@@ -69,16 +92,27 @@ type PutConfiguredAudienceModelPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutConfiguredAudienceModelPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutConfiguredAudienceModelPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutConfiguredAudienceModelPolicyResponse_configuredAudienceModelPolicy:
+			v.ConfiguredAudienceModelPolicy = new(string)
+			return d.ReadString(schemas.PutConfiguredAudienceModelPolicyResponse_configuredAudienceModelPolicy, v.ConfiguredAudienceModelPolicy)
+		case schemas.PutConfiguredAudienceModelPolicyResponse_policyHash:
+			v.PolicyHash = new(string)
+			return d.ReadString(schemas.PutConfiguredAudienceModelPolicyResponse_policyHash, v.PolicyHash)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutConfiguredAudienceModelPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutConfiguredAudienceModelPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConfiguredAudienceModelPolicy, schemas.PutConfiguredAudienceModelPolicyRequest, schemas.PutConfiguredAudienceModelPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutConfiguredAudienceModelPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConfiguredAudienceModelPolicy, schemas.PutConfiguredAudienceModelPolicyRequest, schemas.PutConfiguredAudienceModelPolicyResponse), output: &PutConfiguredAudienceModelPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutConfiguredAudienceModelPolicy"); err != nil {

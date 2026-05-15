@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -47,6 +49,24 @@ type ListFailureModeAssessmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFailureModeAssessmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFailureModeAssessmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFailureModeAssessmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFailureModeAssessmentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFailureModeAssessmentsRequest_nextToken, *v.NextToken)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.ListFailureModeAssessmentsRequest_serviceArn, *v.ServiceArn)
+	}
+}
+
 type ListFailureModeAssessmentsOutput struct {
 
 	// The list of assessment summaries.
@@ -63,16 +83,26 @@ type ListFailureModeAssessmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFailureModeAssessmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFailureModeAssessmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFailureModeAssessmentsResponse_assessmentSummaries:
+			return deserializeAssessmentSummaryList(d, schemas.ListFailureModeAssessmentsResponse_assessmentSummaries, &v.AssessmentSummaries)
+		case schemas.ListFailureModeAssessmentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFailureModeAssessmentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFailureModeAssessmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFailureModeAssessments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFailureModeAssessments, schemas.ListFailureModeAssessmentsRequest, schemas.ListFailureModeAssessmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFailureModeAssessments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFailureModeAssessments, schemas.ListFailureModeAssessmentsRequest, schemas.ListFailureModeAssessmentsResponse), output: &ListFailureModeAssessmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFailureModeAssessments"); err != nil {

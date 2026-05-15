@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,27 @@ type ListDataSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataSourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListDataSourcesRequest_applicationId, *v.ApplicationId)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.ListDataSourcesRequest_indexId, *v.IndexId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataSourcesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataSourcesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDataSourcesOutput struct {
 
 	// An array of summary information for one or more data source connector.
@@ -68,16 +91,26 @@ type ListDataSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataSourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataSourcesResponse_dataSources:
+			return deserializeDataSources(d, schemas.ListDataSourcesResponse_dataSources, &v.DataSources)
+		case schemas.ListDataSourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataSourcesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSources, schemas.ListDataSourcesRequest, schemas.ListDataSourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSources, schemas.ListDataSourcesRequest, schemas.ListDataSourcesResponse), output: &ListDataSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataSources"); err != nil {

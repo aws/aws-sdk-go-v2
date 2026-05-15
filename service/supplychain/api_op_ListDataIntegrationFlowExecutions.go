@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supplychain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,27 @@ type ListDataIntegrationFlowExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataIntegrationFlowExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataIntegrationFlowExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataIntegrationFlowExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowName != nil {
+		s.WriteString(schemas.ListDataIntegrationFlowExecutionsRequest_flowName, *v.FlowName)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListDataIntegrationFlowExecutionsRequest_instanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataIntegrationFlowExecutionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataIntegrationFlowExecutionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // The response parameters of ListFlowExecutions.
 type ListDataIntegrationFlowExecutionsOutput struct {
 
@@ -67,16 +90,26 @@ type ListDataIntegrationFlowExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataIntegrationFlowExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataIntegrationFlowExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataIntegrationFlowExecutionsResponse_flowExecutions:
+			return deserializeDataIntegrationFlowExecutionList(d, schemas.ListDataIntegrationFlowExecutionsResponse_flowExecutions, &v.FlowExecutions)
+		case schemas.ListDataIntegrationFlowExecutionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataIntegrationFlowExecutionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataIntegrationFlowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataIntegrationFlowExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataIntegrationFlowExecutions, schemas.ListDataIntegrationFlowExecutionsRequest, schemas.ListDataIntegrationFlowExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataIntegrationFlowExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataIntegrationFlowExecutions, schemas.ListDataIntegrationFlowExecutionsRequest, schemas.ListDataIntegrationFlowExecutionsResponse), output: &ListDataIntegrationFlowExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataIntegrationFlowExecutions"); err != nil {

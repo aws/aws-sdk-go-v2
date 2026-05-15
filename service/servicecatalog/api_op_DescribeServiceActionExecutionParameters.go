@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,24 @@ type DescribeServiceActionExecutionParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeServiceActionExecutionParametersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeServiceActionExecutionParametersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeServiceActionExecutionParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.DescribeServiceActionExecutionParametersInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.ProvisionedProductId != nil {
+		s.WriteString(schemas.DescribeServiceActionExecutionParametersInput_ProvisionedProductId, *v.ProvisionedProductId)
+	}
+	if v.ServiceActionId != nil {
+		s.WriteString(schemas.DescribeServiceActionExecutionParametersInput_ServiceActionId, *v.ServiceActionId)
+	}
+}
+
 type DescribeServiceActionExecutionParametersOutput struct {
 
 	// The parameters of the self-service action.
@@ -61,16 +81,23 @@ type DescribeServiceActionExecutionParametersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeServiceActionExecutionParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeServiceActionExecutionParametersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeServiceActionExecutionParametersOutput_ServiceActionParameters:
+			return deserializeExecutionParameters(d, schemas.DescribeServiceActionExecutionParametersOutput_ServiceActionParameters, &v.ServiceActionParameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeServiceActionExecutionParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeServiceActionExecutionParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServiceActionExecutionParameters, schemas.DescribeServiceActionExecutionParametersInput, schemas.DescribeServiceActionExecutionParametersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeServiceActionExecutionParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServiceActionExecutionParameters, schemas.DescribeServiceActionExecutionParametersInput, schemas.DescribeServiceActionExecutionParametersOutput), output: &DescribeServiceActionExecutionParametersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeServiceActionExecutionParameters"); err != nil {

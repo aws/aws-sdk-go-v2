@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pcs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,24 @@ type ListQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.ListQueuesRequest_clusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQueuesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueuesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListQueuesOutput struct {
 
 	// The list of queues associated with the cluster.
@@ -69,16 +89,26 @@ type ListQueuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQueuesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQueuesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQueuesResponse_nextToken, v.NextToken)
+		case schemas.ListQueuesResponse_queues:
+			return deserializeQueueList(d, schemas.ListQueuesResponse_queues, &v.Queues)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueues, schemas.ListQueuesRequest, schemas.ListQueuesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueues, schemas.ListQueuesRequest, schemas.ListQueuesResponse), output: &ListQueuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListQueues"); err != nil {

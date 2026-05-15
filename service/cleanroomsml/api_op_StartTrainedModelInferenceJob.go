@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -121,6 +123,61 @@ type StartTrainedModelInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTrainedModelInferenceJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTrainedModelInferenceJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTrainedModelInferenceJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredModelAlgorithmAssociationArn != nil {
+		s.WriteString(schemas.StartTrainedModelInferenceJobRequest_configuredModelAlgorithmAssociationArn, *v.ConfiguredModelAlgorithmAssociationArn)
+	}
+	if v.ContainerExecutionParameters != nil {
+		s.WriteStruct(schemas.StartTrainedModelInferenceJobRequest_containerExecutionParameters)
+		v.ContainerExecutionParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.StartTrainedModelInferenceJobRequest_dataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartTrainedModelInferenceJobRequest_description, *v.Description)
+	}
+	serializeInferenceEnvironmentMap(s, schemas.StartTrainedModelInferenceJobRequest_environment, v.Environment)
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.StartTrainedModelInferenceJobRequest_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.StartTrainedModelInferenceJobRequest_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.MlModelInferencePayerAccountId != nil {
+		s.WriteString(schemas.StartTrainedModelInferenceJobRequest_mlModelInferencePayerAccountId, *v.MlModelInferencePayerAccountId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartTrainedModelInferenceJobRequest_name, *v.Name)
+	}
+	if v.OutputConfiguration != nil {
+		s.WriteStruct(schemas.StartTrainedModelInferenceJobRequest_outputConfiguration)
+		v.OutputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceConfig != nil {
+		s.WriteStruct(schemas.StartTrainedModelInferenceJobRequest_resourceConfig)
+		v.ResourceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.StartTrainedModelInferenceJobRequest_tags, v.Tags)
+	if v.TrainedModelArn != nil {
+		s.WriteString(schemas.StartTrainedModelInferenceJobRequest_trainedModelArn, *v.TrainedModelArn)
+	}
+	if v.TrainedModelVersionIdentifier != nil {
+		s.WriteString(schemas.StartTrainedModelInferenceJobRequest_trainedModelVersionIdentifier, *v.TrainedModelVersionIdentifier)
+	}
+}
+
 type StartTrainedModelInferenceJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the trained model inference job.
@@ -134,16 +191,24 @@ type StartTrainedModelInferenceJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTrainedModelInferenceJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTrainedModelInferenceJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTrainedModelInferenceJobResponse_trainedModelInferenceJobArn:
+			v.TrainedModelInferenceJobArn = new(string)
+			return d.ReadString(schemas.StartTrainedModelInferenceJobResponse_trainedModelInferenceJobArn, v.TrainedModelInferenceJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTrainedModelInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartTrainedModelInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTrainedModelInferenceJob, schemas.StartTrainedModelInferenceJobRequest, schemas.StartTrainedModelInferenceJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartTrainedModelInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTrainedModelInferenceJob, schemas.StartTrainedModelInferenceJobRequest, schemas.StartTrainedModelInferenceJobResponse), output: &StartTrainedModelInferenceJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartTrainedModelInferenceJob"); err != nil {

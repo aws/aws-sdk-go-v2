@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,24 @@ type DescribeConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.DescribeConnectionsRequest_connectionId, *v.ConnectionId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeConnectionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConnectionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeConnectionsOutput struct {
 
 	// The connections.
@@ -59,16 +79,38 @@ type DescribeConnectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Connections)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectionList(s, schemas.Connections_connections, v.Connections)
+	if v.NextToken != nil {
+		s.WriteString(schemas.Connections_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Connections, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Connections_connections:
+			return deserializeConnectionList(d, schemas.Connections_connections, &v.Connections)
+		case schemas.Connections_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.Connections_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnections, schemas.DescribeConnectionsRequest, schemas.Connections)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnections, schemas.DescribeConnectionsRequest, schemas.Connections), output: &DescribeConnectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeConnections"); err != nil {

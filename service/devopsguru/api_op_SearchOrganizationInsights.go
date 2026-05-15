@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,6 +69,35 @@ type SearchOrganizationInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchOrganizationInsightsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchOrganizationInsightsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchOrganizationInsightsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSearchInsightsAccountIdList(s, schemas.SearchOrganizationInsightsRequest_AccountIds, v.AccountIds)
+	if v.Filters != nil {
+		s.WriteStruct(schemas.SearchOrganizationInsightsRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchOrganizationInsightsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchOrganizationInsightsRequest_NextToken, *v.NextToken)
+	}
+	if v.StartTimeRange != nil {
+		s.WriteStruct(schemas.SearchOrganizationInsightsRequest_StartTimeRange)
+		v.StartTimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SearchOrganizationInsightsRequest_Type, string(v.Type))
+	}
+}
+
 type SearchOrganizationInsightsOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -87,16 +118,28 @@ type SearchOrganizationInsightsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchOrganizationInsightsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchOrganizationInsightsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchOrganizationInsightsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchOrganizationInsightsResponse_NextToken, v.NextToken)
+		case schemas.SearchOrganizationInsightsResponse_ProactiveInsights:
+			return deserializeProactiveInsights(d, schemas.SearchOrganizationInsightsResponse_ProactiveInsights, &v.ProactiveInsights)
+		case schemas.SearchOrganizationInsightsResponse_ReactiveInsights:
+			return deserializeReactiveInsights(d, schemas.SearchOrganizationInsightsResponse_ReactiveInsights, &v.ReactiveInsights)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchOrganizationInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchOrganizationInsights{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchOrganizationInsights, schemas.SearchOrganizationInsightsRequest, schemas.SearchOrganizationInsightsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchOrganizationInsights{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchOrganizationInsights, schemas.SearchOrganizationInsightsRequest, schemas.SearchOrganizationInsightsResponse), output: &SearchOrganizationInsightsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchOrganizationInsights"); err != nil {

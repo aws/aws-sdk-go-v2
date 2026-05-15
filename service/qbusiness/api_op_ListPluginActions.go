@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,27 @@ type ListPluginActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPluginActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPluginActionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPluginActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListPluginActionsRequest_applicationId, *v.ApplicationId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPluginActionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPluginActionsRequest_nextToken, *v.NextToken)
+	}
+	if v.PluginId != nil {
+		s.WriteString(schemas.ListPluginActionsRequest_pluginId, *v.PluginId)
+	}
+}
+
 type ListPluginActionsOutput struct {
 
 	// An array of information on one or more plugin actions.
@@ -66,16 +89,26 @@ type ListPluginActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPluginActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPluginActionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPluginActionsResponse_items:
+			return deserializeActions(d, schemas.ListPluginActionsResponse_items, &v.Items)
+		case schemas.ListPluginActionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPluginActionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPluginActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPluginActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPluginActions, schemas.ListPluginActionsRequest, schemas.ListPluginActionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPluginActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPluginActions, schemas.ListPluginActionsRequest, schemas.ListPluginActionsResponse), output: &ListPluginActionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPluginActions"); err != nil {

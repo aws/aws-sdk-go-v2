@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,6 +63,49 @@ type UpdateDataAutomationProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataAutomationProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataAutomationProjectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataAutomationProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomOutputConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDataAutomationProjectRequest_customOutputConfiguration)
+		v.CustomOutputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataAutomationLibraryConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDataAutomationProjectRequest_dataAutomationLibraryConfiguration)
+		v.DataAutomationLibraryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDataAutomationProjectRequest_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OverrideConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDataAutomationProjectRequest_overrideConfiguration)
+		v.OverrideConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.UpdateDataAutomationProjectRequest_projectArn, *v.ProjectArn)
+	}
+	if v.ProjectDescription != nil {
+		s.WriteString(schemas.UpdateDataAutomationProjectRequest_projectDescription, *v.ProjectDescription)
+	}
+	if v.ProjectStage != "" {
+		s.WriteString(schemas.UpdateDataAutomationProjectRequest_projectStage, string(v.ProjectStage))
+	}
+	if v.StandardOutputConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDataAutomationProjectRequest_standardOutputConfiguration)
+		v.StandardOutputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Update DataAutomationProject Response
 type UpdateDataAutomationProjectOutput struct {
 
@@ -81,16 +126,38 @@ type UpdateDataAutomationProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataAutomationProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataAutomationProjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataAutomationProjectResponse_projectArn:
+			v.ProjectArn = new(string)
+			return d.ReadString(schemas.UpdateDataAutomationProjectResponse_projectArn, v.ProjectArn)
+		case schemas.UpdateDataAutomationProjectResponse_projectStage:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDataAutomationProjectResponse_projectStage, &ev); err != nil {
+				return err
+			}
+			v.ProjectStage = types.DataAutomationProjectStage(ev)
+			return nil
+		case schemas.UpdateDataAutomationProjectResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDataAutomationProjectResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DataAutomationProjectStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataAutomationProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataAutomationProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataAutomationProject, schemas.UpdateDataAutomationProjectRequest, schemas.UpdateDataAutomationProjectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataAutomationProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataAutomationProject, schemas.UpdateDataAutomationProjectRequest, schemas.UpdateDataAutomationProjectResponse), output: &UpdateDataAutomationProjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDataAutomationProject"); err != nil {

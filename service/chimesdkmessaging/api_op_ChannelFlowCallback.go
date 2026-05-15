@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,6 +63,29 @@ type ChannelFlowCallbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChannelFlowCallbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelFlowCallbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelFlowCallbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallbackId != nil {
+		s.WriteString(schemas.ChannelFlowCallbackRequest_CallbackId, *v.CallbackId)
+	}
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.ChannelFlowCallbackRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ChannelMessage != nil {
+		s.WriteStruct(schemas.ChannelFlowCallbackRequest_ChannelMessage)
+		v.ChannelMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeleteResource != false {
+		s.WriteBool(schemas.ChannelFlowCallbackRequest_DeleteResource, v.DeleteResource)
+	}
+}
+
 type ChannelFlowCallbackOutput struct {
 
 	// The call back ID passed in the request.
@@ -75,16 +100,27 @@ type ChannelFlowCallbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChannelFlowCallbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelFlowCallbackResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelFlowCallbackResponse_CallbackId:
+			v.CallbackId = new(string)
+			return d.ReadString(schemas.ChannelFlowCallbackResponse_CallbackId, v.CallbackId)
+		case schemas.ChannelFlowCallbackResponse_ChannelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.ChannelFlowCallbackResponse_ChannelArn, v.ChannelArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationChannelFlowCallbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpChannelFlowCallback{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ChannelFlowCallback, schemas.ChannelFlowCallbackRequest, schemas.ChannelFlowCallbackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpChannelFlowCallback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ChannelFlowCallback, schemas.ChannelFlowCallbackRequest, schemas.ChannelFlowCallbackResponse), output: &ChannelFlowCallbackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ChannelFlowCallback"); err != nil {

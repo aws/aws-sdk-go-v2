@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,16 @@ type BatchDeletePhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeletePhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeletePhoneNumberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeletePhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNonEmptyStringList(s, schemas.BatchDeletePhoneNumberRequest_PhoneNumberIds, v.PhoneNumberIds)
+}
+
 type BatchDeletePhoneNumberOutput struct {
 
 	// If the action fails for one or more of the phone numbers in the request, a list
@@ -55,16 +67,23 @@ type BatchDeletePhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeletePhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeletePhoneNumberResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeletePhoneNumberResponse_PhoneNumberErrors:
+			return deserializePhoneNumberErrorList(d, schemas.BatchDeletePhoneNumberResponse_PhoneNumberErrors, &v.PhoneNumberErrors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeletePhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeletePhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeletePhoneNumber, schemas.BatchDeletePhoneNumberRequest, schemas.BatchDeletePhoneNumberResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeletePhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeletePhoneNumber, schemas.BatchDeletePhoneNumberRequest, schemas.BatchDeletePhoneNumberResponse), output: &BatchDeletePhoneNumberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDeletePhoneNumber"); err != nil {

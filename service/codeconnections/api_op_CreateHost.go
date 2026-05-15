@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeconnections/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,6 +66,30 @@ type CreateHostInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHostInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHostInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHostInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateHostInput_Name, *v.Name)
+	}
+	if v.ProviderEndpoint != nil {
+		s.WriteString(schemas.CreateHostInput_ProviderEndpoint, *v.ProviderEndpoint)
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.CreateHostInput_ProviderType, string(v.ProviderType))
+	}
+	serializeTagList(s, schemas.CreateHostInput_Tags, v.Tags)
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.CreateHostInput_VpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateHostOutput struct {
 
 	// The Amazon Resource Name (ARN) of the host to be created.
@@ -78,16 +104,26 @@ type CreateHostOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHostOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateHostOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateHostOutput_HostArn:
+			v.HostArn = new(string)
+			return d.ReadString(schemas.CreateHostOutput_HostArn, v.HostArn)
+		case schemas.CreateHostOutput_Tags:
+			return deserializeTagList(d, schemas.CreateHostOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHostMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateHost{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHost, schemas.CreateHostInput, schemas.CreateHostOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateHost{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHost, schemas.CreateHostInput, schemas.CreateHostOutput), output: &CreateHostOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateHost"); err != nil {

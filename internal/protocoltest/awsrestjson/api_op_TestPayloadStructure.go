@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,36 @@ type TestPayloadStructureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestPayloadStructureInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestPayloadStructureInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestPayloadStructureInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PayloadConfig != nil {
+		s.WriteStruct(schemas.TestPayloadStructureInputOutput_payloadConfig)
+		v.PayloadConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestId != nil {
+		s.WriteString(schemas.TestPayloadStructureInputOutput_testId, *v.TestId)
+	}
+}
+func (v *TestPayloadStructureInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestPayloadStructureInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestPayloadStructureInputOutput_payloadConfig:
+			v.PayloadConfig = &types.PayloadConfig{}
+			return v.PayloadConfig.Deserialize(d)
+		case schemas.TestPayloadStructureInputOutput_testId:
+			v.TestId = new(string)
+			return d.ReadString(schemas.TestPayloadStructureInputOutput_testId, v.TestId)
+		}
+		return nil
+	})
+}
+
 type TestPayloadStructureOutput struct {
 	PayloadConfig *types.PayloadConfig
 
@@ -49,16 +81,43 @@ type TestPayloadStructureOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestPayloadStructureOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestPayloadStructureInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestPayloadStructureOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PayloadConfig != nil {
+		s.WriteStruct(schemas.TestPayloadStructureInputOutput_payloadConfig)
+		v.PayloadConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestId != nil {
+		s.WriteString(schemas.TestPayloadStructureInputOutput_testId, *v.TestId)
+	}
+}
+func (v *TestPayloadStructureOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestPayloadStructureInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestPayloadStructureInputOutput_payloadConfig:
+			v.PayloadConfig = &types.PayloadConfig{}
+			return v.PayloadConfig.Deserialize(d)
+		case schemas.TestPayloadStructureInputOutput_testId:
+			v.TestId = new(string)
+			return d.ReadString(schemas.TestPayloadStructureInputOutput_testId, v.TestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestPayloadStructureMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestPayloadStructure{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestPayloadStructure, schemas.TestPayloadStructureInputOutput, schemas.TestPayloadStructureInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTestPayloadStructure{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestPayloadStructure, schemas.TestPayloadStructureInputOutput, schemas.TestPayloadStructureInputOutput), output: &TestPayloadStructureOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "TestPayloadStructure"); err != nil {

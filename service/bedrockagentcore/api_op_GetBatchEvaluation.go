@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -37,6 +39,18 @@ type GetBatchEvaluationInput struct {
 	BatchEvaluationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBatchEvaluationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBatchEvaluationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBatchEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchEvaluationId != nil {
+		s.WriteString(schemas.GetBatchEvaluationRequest_batchEvaluationId, *v.BatchEvaluationId)
+	}
 }
 
 type GetBatchEvaluationOutput struct {
@@ -94,16 +108,57 @@ type GetBatchEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBatchEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBatchEvaluationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBatchEvaluationResponse_batchEvaluationArn:
+			v.BatchEvaluationArn = new(string)
+			return d.ReadString(schemas.GetBatchEvaluationResponse_batchEvaluationArn, v.BatchEvaluationArn)
+		case schemas.GetBatchEvaluationResponse_batchEvaluationId:
+			v.BatchEvaluationId = new(string)
+			return d.ReadString(schemas.GetBatchEvaluationResponse_batchEvaluationId, v.BatchEvaluationId)
+		case schemas.GetBatchEvaluationResponse_batchEvaluationName:
+			v.BatchEvaluationName = new(string)
+			return d.ReadString(schemas.GetBatchEvaluationResponse_batchEvaluationName, v.BatchEvaluationName)
+		case schemas.GetBatchEvaluationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBatchEvaluationResponse_createdAt, v.CreatedAt)
+		case schemas.GetBatchEvaluationResponse_dataSourceConfig:
+			return deserializeDataSourceConfig(d, schemas.GetBatchEvaluationResponse_dataSourceConfig, &v.DataSourceConfig)
+		case schemas.GetBatchEvaluationResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetBatchEvaluationResponse_description, v.Description)
+		case schemas.GetBatchEvaluationResponse_errorDetails:
+			return deserializeErrorDetailsList(d, schemas.GetBatchEvaluationResponse_errorDetails, &v.ErrorDetails)
+		case schemas.GetBatchEvaluationResponse_evaluationResults:
+			v.EvaluationResults = &types.EvaluationJobResults{}
+			return v.EvaluationResults.Deserialize(d)
+		case schemas.GetBatchEvaluationResponse_evaluators:
+			return deserializeEvaluatorList(d, schemas.GetBatchEvaluationResponse_evaluators, &v.Evaluators)
+		case schemas.GetBatchEvaluationResponse_outputConfig:
+			return deserializeOutputConfig(d, schemas.GetBatchEvaluationResponse_outputConfig, &v.OutputConfig)
+		case schemas.GetBatchEvaluationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetBatchEvaluationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BatchEvaluationStatus(ev)
+			return nil
+		case schemas.GetBatchEvaluationResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBatchEvaluationResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBatchEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBatchEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBatchEvaluation, schemas.GetBatchEvaluationRequest, schemas.GetBatchEvaluationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBatchEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBatchEvaluation, schemas.GetBatchEvaluationRequest, schemas.GetBatchEvaluationResponse), output: &GetBatchEvaluationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBatchEvaluation"); err != nil {

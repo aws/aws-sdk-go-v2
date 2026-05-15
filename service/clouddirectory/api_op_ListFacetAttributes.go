@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,27 @@ type ListFacetAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFacetAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFacetAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFacetAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFacetAttributesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListFacetAttributesRequest_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFacetAttributesRequest_NextToken, *v.NextToken)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.ListFacetAttributesRequest_SchemaArn, *v.SchemaArn)
+	}
+}
+
 type ListFacetAttributesOutput struct {
 
 	// The attributes attached to the facet.
@@ -62,16 +85,26 @@ type ListFacetAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFacetAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFacetAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFacetAttributesResponse_Attributes:
+			return deserializeFacetAttributeList(d, schemas.ListFacetAttributesResponse_Attributes, &v.Attributes)
+		case schemas.ListFacetAttributesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFacetAttributesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFacetAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFacetAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFacetAttributes, schemas.ListFacetAttributesRequest, schemas.ListFacetAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFacetAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFacetAttributes, schemas.ListFacetAttributesRequest, schemas.ListFacetAttributesResponse), output: &ListFacetAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFacetAttributes"); err != nil {

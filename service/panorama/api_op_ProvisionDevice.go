@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,45 @@ type ProvisionDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProvisionDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProvisionDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProvisionDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.ProvisionDeviceRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ProvisionDeviceRequest_Name, *v.Name)
+	}
+	if v.NetworkingConfiguration != nil {
+		s.WriteStruct(schemas.ProvisionDeviceRequest_NetworkingConfiguration)
+		v.NetworkingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.ProvisionDeviceRequest_Tags, v.Tags)
+}
+func (v *ProvisionDeviceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProvisionDeviceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProvisionDeviceRequest_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ProvisionDeviceRequest_Description, v.Description)
+		case schemas.ProvisionDeviceRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ProvisionDeviceRequest_Name, v.Name)
+		case schemas.ProvisionDeviceRequest_NetworkingConfiguration:
+			v.NetworkingConfiguration = &types.NetworkPayload{}
+			return v.NetworkingConfiguration.Deserialize(d)
+		case schemas.ProvisionDeviceRequest_Tags:
+			return deserializeTagMap(d, schemas.ProvisionDeviceRequest_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type ProvisionDeviceOutput struct {
 
 	// The device's ARN.
@@ -77,16 +118,62 @@ type ProvisionDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProvisionDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProvisionDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProvisionDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ProvisionDeviceResponse_Arn, *v.Arn)
+	}
+	if v.Certificates != nil {
+		s.WriteBlob(schemas.ProvisionDeviceResponse_Certificates, v.Certificates)
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.ProvisionDeviceResponse_DeviceId, *v.DeviceId)
+	}
+	if v.IotThingName != nil {
+		s.WriteString(schemas.ProvisionDeviceResponse_IotThingName, *v.IotThingName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ProvisionDeviceResponse_Status, string(v.Status))
+	}
+}
+func (v *ProvisionDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProvisionDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProvisionDeviceResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ProvisionDeviceResponse_Arn, v.Arn)
+		case schemas.ProvisionDeviceResponse_Certificates:
+			return d.ReadBlob(schemas.ProvisionDeviceResponse_Certificates, &v.Certificates)
+		case schemas.ProvisionDeviceResponse_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.ProvisionDeviceResponse_DeviceId, v.DeviceId)
+		case schemas.ProvisionDeviceResponse_IotThingName:
+			v.IotThingName = new(string)
+			return d.ReadString(schemas.ProvisionDeviceResponse_IotThingName, v.IotThingName)
+		case schemas.ProvisionDeviceResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.ProvisionDeviceResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DeviceStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationProvisionDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpProvisionDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ProvisionDevice, schemas.ProvisionDeviceRequest, schemas.ProvisionDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpProvisionDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ProvisionDevice, schemas.ProvisionDeviceRequest, schemas.ProvisionDeviceResponse), output: &ProvisionDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ProvisionDevice"); err != nil {

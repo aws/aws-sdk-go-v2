@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type DescribeLakeFormationIdentityCenterConfigurationInput struct {
 	CatalogId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeLakeFormationIdentityCenterConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLakeFormationIdentityCenterConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLakeFormationIdentityCenterConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.DescribeLakeFormationIdentityCenterConfigurationRequest_CatalogId, *v.CatalogId)
+	}
 }
 
 type DescribeLakeFormationIdentityCenterConfigurationOutput struct {
@@ -81,16 +95,40 @@ type DescribeLakeFormationIdentityCenterConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLakeFormationIdentityCenterConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLakeFormationIdentityCenterConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLakeFormationIdentityCenterConfigurationResponse_ApplicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.DescribeLakeFormationIdentityCenterConfigurationResponse_ApplicationArn, v.ApplicationArn)
+		case schemas.DescribeLakeFormationIdentityCenterConfigurationResponse_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.DescribeLakeFormationIdentityCenterConfigurationResponse_CatalogId, v.CatalogId)
+		case schemas.DescribeLakeFormationIdentityCenterConfigurationResponse_ExternalFiltering:
+			v.ExternalFiltering = &types.ExternalFilteringConfiguration{}
+			return v.ExternalFiltering.Deserialize(d)
+		case schemas.DescribeLakeFormationIdentityCenterConfigurationResponse_InstanceArn:
+			v.InstanceArn = new(string)
+			return d.ReadString(schemas.DescribeLakeFormationIdentityCenterConfigurationResponse_InstanceArn, v.InstanceArn)
+		case schemas.DescribeLakeFormationIdentityCenterConfigurationResponse_ResourceShare:
+			v.ResourceShare = new(string)
+			return d.ReadString(schemas.DescribeLakeFormationIdentityCenterConfigurationResponse_ResourceShare, v.ResourceShare)
+		case schemas.DescribeLakeFormationIdentityCenterConfigurationResponse_ServiceIntegrations:
+			return deserializeServiceIntegrationList(d, schemas.DescribeLakeFormationIdentityCenterConfigurationResponse_ServiceIntegrations, &v.ServiceIntegrations)
+		case schemas.DescribeLakeFormationIdentityCenterConfigurationResponse_ShareRecipients:
+			return deserializeDataLakePrincipalList(d, schemas.DescribeLakeFormationIdentityCenterConfigurationResponse_ShareRecipients, &v.ShareRecipients)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLakeFormationIdentityCenterConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeLakeFormationIdentityCenterConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLakeFormationIdentityCenterConfiguration, schemas.DescribeLakeFormationIdentityCenterConfigurationRequest, schemas.DescribeLakeFormationIdentityCenterConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeLakeFormationIdentityCenterConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLakeFormationIdentityCenterConfiguration, schemas.DescribeLakeFormationIdentityCenterConfigurationRequest, schemas.DescribeLakeFormationIdentityCenterConfigurationResponse), output: &DescribeLakeFormationIdentityCenterConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeLakeFormationIdentityCenterConfiguration"); err != nil {

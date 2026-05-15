@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,25 @@ type CreateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateClusterRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.CreateClusterRequest_ClusterName, *v.ClusterName)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.CreateClusterRequest_NetworkType, string(v.NetworkType))
+	}
+	serialize__mapOf__stringMin0Max256PatternS(s, schemas.CreateClusterRequest_Tags, v.Tags)
+}
+
 type CreateClusterOutput struct {
 
 	// The cluster that was created.
@@ -64,16 +85,24 @@ type CreateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateClusterResponse_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterRequest, schemas.CreateClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterRequest, schemas.CreateClusterResponse), output: &CreateClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCluster"); err != nil {

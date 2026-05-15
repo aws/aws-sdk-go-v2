@@ -10,12 +10,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
+	"github.com/aws/aws-sdk-go-v2/service/connecthealth/schemas"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
@@ -24,6 +26,7 @@ import (
 	smithyrand "github.com/aws/smithy-go/rand"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/aws/smithy-go/transport/http/protocol/restjson1"
 	"io"
 	"net"
 	"net/http"
@@ -214,6 +217,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveAuthSchemeResolver(&options)
 
+	options.Protocol = restjson1.New(schemas.ConnectHealth)
+
 	for _, fn := range optFns {
 		fn(&options)
 	}
@@ -259,8 +264,6 @@ func (c *Client) invokeOperation(
 	for _, fn := range optFns {
 		fn(&options)
 	}
-
-	setSafeEventStreamClientLogMode(&options, opID)
 
 	finalizeOperationRetryMaxAttempts(&options, *c)
 
@@ -346,8 +349,6 @@ func (c *Client) invokeEventStreamOperation(
 	for _, fn := range optFns {
 		fn(&options)
 	}
-
-	setSafeEventStreamClientLogMode(&options, opID)
 
 	finalizeOperationRetryMaxAttempts(&options, *c)
 
@@ -526,6 +527,82 @@ func resolveAuthSchemes(options *Options) {
 			}),
 		}
 	}
+}
+
+type serializeRequestMiddleware struct {
+	options         *Options
+	operationSchema *smithy.OperationSchema
+}
+
+func (*serializeRequestMiddleware) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *serializeRequestMiddleware) HandleSerialize(
+	ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler,
+) (
+	middleware.SerializeOutput, middleware.Metadata, error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return middleware.SerializeOutput{}, middleware.Metadata{}, fmt.Errorf("unexpected transport type %T", in.Request)
+	}
+
+	input, ok := in.Parameters.(smithy.Serializable)
+	if !ok {
+		return middleware.SerializeOutput{}, middleware.Metadata{}, fmt.Errorf("input %T is not Serializable", in.Request)
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+
+	err := m.options.Protocol.SerializeRequest(ctx, m.operationSchema, input, req)
+
+	endTimer()
+	span.End()
+
+	if err != nil {
+		return middleware.SerializeOutput{}, middleware.Metadata{}, err
+	}
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type deserializeResponseMiddleware struct {
+	options         *Options
+	operationSchema *smithy.OperationSchema
+	output          smithy.Deserializable
+}
+
+func (*deserializeResponseMiddleware) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *deserializeResponseMiddleware) HandleDeserialize(
+	ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler,
+) (
+	middleware.DeserializeOutput, middleware.Metadata, error,
+) {
+	out, md, err := next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, md, err
+	}
+
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, md, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+
+	err = m.options.Protocol.DeserializeResponse(ctx, m.operationSchema, TypeRegistry, resp, m.output)
+	out.Result = m.output
+
+	endTimer()
+	span.End()
+
+	return out, md, err
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
@@ -956,6 +1033,18 @@ func addCredentialSource(stack *middleware.Stack, options Options) error {
 
 	mw := setCredentialSourceMiddleware{ua: ua, options: options}
 	return stack.Build.Insert(&mw, "UserAgent", middleware.Before)
+}
+
+// UnknownEventMessageError provides an error when a message is received from the stream,
+// but the reader is unable to determine what kind of message it is.
+type UnknownEventMessageError struct {
+	Type    string
+	Message eventstream.Message
+}
+
+// Error retruns the error message string.
+func (e *UnknownEventMessageError) Error() string {
+	return "unknown event stream message type, " + e.Type
 }
 
 func resolveTracerProvider(options *Options) {

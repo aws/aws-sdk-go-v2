@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,18 @@ type DeleteDefaultSenderIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDefaultSenderIdInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDefaultSenderIdRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDefaultSenderIdInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.DeleteDefaultSenderIdRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+}
+
 type DeleteDefaultSenderIdOutput struct {
 
 	// The Amazon Resource Name (ARN) of the configuration set.
@@ -59,16 +73,30 @@ type DeleteDefaultSenderIdOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDefaultSenderIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDefaultSenderIdResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDefaultSenderIdResult_ConfigurationSetArn:
+			v.ConfigurationSetArn = new(string)
+			return d.ReadString(schemas.DeleteDefaultSenderIdResult_ConfigurationSetArn, v.ConfigurationSetArn)
+		case schemas.DeleteDefaultSenderIdResult_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.DeleteDefaultSenderIdResult_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.DeleteDefaultSenderIdResult_SenderId:
+			v.SenderId = new(string)
+			return d.ReadString(schemas.DeleteDefaultSenderIdResult_SenderId, v.SenderId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDefaultSenderIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteDefaultSenderId{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDefaultSenderId, schemas.DeleteDefaultSenderIdRequest, schemas.DeleteDefaultSenderIdResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteDefaultSenderId{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDefaultSenderId, schemas.DeleteDefaultSenderIdRequest, schemas.DeleteDefaultSenderIdResult), output: &DeleteDefaultSenderIdOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDefaultSenderId"); err != nil {

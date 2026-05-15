@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +35,28 @@ type SparseNullsOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SparseNullsOperationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SparseNullsOperationInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SparseNullsOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSparseStringList(s, schemas.SparseNullsOperationInputOutput_sparseStringList, v.SparseStringList)
+	serializeSparseStringMap(s, schemas.SparseNullsOperationInputOutput_sparseStringMap, v.SparseStringMap)
+}
+func (v *SparseNullsOperationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SparseNullsOperationInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SparseNullsOperationInputOutput_sparseStringList:
+			return deserializeSparseStringList(d, schemas.SparseNullsOperationInputOutput_sparseStringList, &v.SparseStringList)
+		case schemas.SparseNullsOperationInputOutput_sparseStringMap:
+			return deserializeSparseStringMap(d, schemas.SparseNullsOperationInputOutput_sparseStringMap, &v.SparseStringMap)
+		}
+		return nil
+	})
+}
+
 type SparseNullsOperationOutput struct {
 	SparseStringList []*string
 
@@ -44,16 +68,35 @@ type SparseNullsOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SparseNullsOperationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SparseNullsOperationInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SparseNullsOperationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSparseStringList(s, schemas.SparseNullsOperationInputOutput_sparseStringList, v.SparseStringList)
+	serializeSparseStringMap(s, schemas.SparseNullsOperationInputOutput_sparseStringMap, v.SparseStringMap)
+}
+func (v *SparseNullsOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SparseNullsOperationInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SparseNullsOperationInputOutput_sparseStringList:
+			return deserializeSparseStringList(d, schemas.SparseNullsOperationInputOutput_sparseStringList, &v.SparseStringList)
+		case schemas.SparseNullsOperationInputOutput_sparseStringMap:
+			return deserializeSparseStringMap(d, schemas.SparseNullsOperationInputOutput_sparseStringMap, &v.SparseStringMap)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSparseNullsOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSparseNullsOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SparseNullsOperation, schemas.SparseNullsOperationInputOutput, schemas.SparseNullsOperationInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSparseNullsOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SparseNullsOperation, schemas.SparseNullsOperationInputOutput, schemas.SparseNullsOperationInputOutput), output: &SparseNullsOperationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SparseNullsOperation"); err != nil {

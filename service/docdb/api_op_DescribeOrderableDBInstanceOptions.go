@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -71,6 +73,37 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrderableDBInstanceOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrderableDBInstanceOptionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrderableDBInstanceOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceClass != nil {
+		s.WriteString(schemas.DescribeOrderableDBInstanceOptionsMessage_DBInstanceClass, *v.DBInstanceClass)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.DescribeOrderableDBInstanceOptionsMessage_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.DescribeOrderableDBInstanceOptionsMessage_EngineVersion, *v.EngineVersion)
+	}
+	serializeFilterList(s, schemas.DescribeOrderableDBInstanceOptionsMessage_Filters, v.Filters)
+	if v.LicenseModel != nil {
+		s.WriteString(schemas.DescribeOrderableDBInstanceOptionsMessage_LicenseModel, *v.LicenseModel)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeOrderableDBInstanceOptionsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeOrderableDBInstanceOptionsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.Vpc != nil {
+		s.WriteBool(schemas.DescribeOrderableDBInstanceOptionsMessage_Vpc, *v.Vpc)
+	}
+}
+
 // Represents the output of DescribeOrderableDBInstanceOptions.
 type DescribeOrderableDBInstanceOptionsOutput struct {
 
@@ -88,16 +121,26 @@ type DescribeOrderableDBInstanceOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrderableDBInstanceOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrderableDBInstanceOptionsMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrderableDBInstanceOptionsMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.OrderableDBInstanceOptionsMessage_Marker, v.Marker)
+		case schemas.OrderableDBInstanceOptionsMessage_OrderableDBInstanceOptions:
+			return deserializeOrderableDBInstanceOptionsList(d, schemas.OrderableDBInstanceOptionsMessage_OrderableDBInstanceOptions, &v.OrderableDBInstanceOptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOrderableDBInstanceOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeOrderableDBInstanceOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrderableDBInstanceOptions, schemas.DescribeOrderableDBInstanceOptionsMessage, schemas.OrderableDBInstanceOptionsMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeOrderableDBInstanceOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrderableDBInstanceOptions, schemas.DescribeOrderableDBInstanceOptionsMessage, schemas.OrderableDBInstanceOptionsMessage), output: &DescribeOrderableDBInstanceOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeOrderableDBInstanceOptions"); err != nil {

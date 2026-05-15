@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,30 @@ type CreateUserProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserProfileInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateUserProfileInput_clientToken, *v.ClientToken)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.CreateUserProfileInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.SessionName != nil {
+		s.WriteString(schemas.CreateUserProfileInput_sessionName, *v.SessionName)
+	}
+	if v.UserIdentifier != nil {
+		s.WriteString(schemas.CreateUserProfileInput_userIdentifier, *v.UserIdentifier)
+	}
+	if v.UserType != "" {
+		s.WriteString(schemas.CreateUserProfileInput_userType, string(v.UserType))
+	}
+}
+
 type CreateUserProfileOutput struct {
 
 	// The user profile details.
@@ -75,16 +101,43 @@ type CreateUserProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserProfileOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUserProfileOutput_details:
+			return deserializeUserProfileDetails(d, schemas.CreateUserProfileOutput_details, &v.Details)
+		case schemas.CreateUserProfileOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CreateUserProfileOutput_domainId, v.DomainId)
+		case schemas.CreateUserProfileOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateUserProfileOutput_id, v.Id)
+		case schemas.CreateUserProfileOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateUserProfileOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.UserProfileStatus(ev)
+			return nil
+		case schemas.CreateUserProfileOutput_type:
+			var ev string
+			if err := d.ReadString(schemas.CreateUserProfileOutput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.UserProfileType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUserProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserProfile, schemas.CreateUserProfileInput, schemas.CreateUserProfileOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateUserProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserProfile, schemas.CreateUserProfileInput, schemas.CreateUserProfileOutput), output: &CreateUserProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateUserProfile"); err != nil {

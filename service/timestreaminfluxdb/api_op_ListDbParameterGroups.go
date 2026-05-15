@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type ListDbParameterGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDbParameterGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDbParameterGroupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDbParameterGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDbParameterGroupsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDbParameterGroupsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListDbParameterGroupsOutput struct {
 
 	// A list of Timestream for InfluxDB DB parameter group summaries.
@@ -59,16 +76,26 @@ type ListDbParameterGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDbParameterGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDbParameterGroupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDbParameterGroupsOutput_items:
+			return deserializeDbParameterGroupSummaryList(d, schemas.ListDbParameterGroupsOutput_items, &v.Items)
+		case schemas.ListDbParameterGroupsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDbParameterGroupsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDbParameterGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDbParameterGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbParameterGroups, schemas.ListDbParameterGroupsInput, schemas.ListDbParameterGroupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDbParameterGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbParameterGroups, schemas.ListDbParameterGroupsInput, schemas.ListDbParameterGroupsOutput), output: &ListDbParameterGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDbParameterGroups"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,24 @@ type TestMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestMappingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestMappingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileFormat != "" {
+		s.WriteString(schemas.TestMappingRequest_fileFormat, string(v.FileFormat))
+	}
+	if v.InputFileContent != nil {
+		s.WriteString(schemas.TestMappingRequest_inputFileContent, *v.InputFileContent)
+	}
+	if v.MappingTemplate != nil {
+		s.WriteString(schemas.TestMappingRequest_mappingTemplate, *v.MappingTemplate)
+	}
+}
+
 type TestMappingOutput struct {
 
 	// Returns a string for the mapping that can be used to identify the mapping.
@@ -71,16 +91,24 @@ type TestMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestMappingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestMappingResponse_mappedFileContent:
+			v.MappedFileContent = new(string)
+			return d.ReadString(schemas.TestMappingResponse_mappedFileContent, v.MappedFileContent)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpTestMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestMapping, schemas.TestMappingRequest, schemas.TestMappingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpTestMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestMapping, schemas.TestMappingRequest, schemas.TestMappingResponse), output: &TestMappingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "TestMapping"); err != nil {

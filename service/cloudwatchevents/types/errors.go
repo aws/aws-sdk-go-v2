@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,16 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConcurrentModificationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConcurrentModificationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConcurrentModificationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConcurrentModificationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An error occurred because a replay can be canceled only when the state is
 // Running or Starting.
@@ -59,6 +70,16 @@ func (e *IllegalStatusException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IllegalStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *IllegalStatusException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IllegalStatusException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IllegalStatusException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.IllegalStatusException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // This exception occurs due to unexpected causes.
 type InternalException struct {
@@ -85,6 +106,16 @@ func (e *InternalException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The event pattern is not valid.
 type InvalidEventPatternException struct {
@@ -111,6 +142,16 @@ func (e *InvalidEventPatternException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidEventPatternException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidEventPatternException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidEventPatternException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidEventPatternException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidEventPatternException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified state is not a valid state for an event source.
 type InvalidStateException struct {
@@ -137,6 +178,16 @@ func (e *InvalidStateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidStateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidStateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidStateException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidStateException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request failed because it attempted to create resource beyond the allowed
 // service quota.
@@ -164,6 +215,16 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // This rule was created by an Amazon Web Services service on behalf of your
 // account. It is managed by that service. If you see this error in response to
@@ -195,6 +256,16 @@ func (e *ManagedRuleException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ManagedRuleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ManagedRuleException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedRuleException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedRuleException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ManagedRuleException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation you are attempting is not available in this region.
 type OperationDisabledException struct {
@@ -221,6 +292,16 @@ func (e *OperationDisabledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *OperationDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *OperationDisabledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OperationDisabledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OperationDisabledException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OperationDisabledException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The event bus policy is too long. For more information, see the limits.
 type PolicyLengthExceededException struct {
@@ -247,6 +328,16 @@ func (e *PolicyLengthExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PolicyLengthExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PolicyLengthExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyLengthExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyLengthExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PolicyLengthExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The resource you are trying to create already exists.
 type ResourceAlreadyExistsException struct {
@@ -273,6 +364,16 @@ func (e *ResourceAlreadyExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceAlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceAlreadyExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceAlreadyExistsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceAlreadyExistsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An entity that you specified does not exist.
 type ResourceNotFoundException struct {
@@ -299,3 +400,13 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -55,6 +57,35 @@ type UpdateAgentSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentSpaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentSpaceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.UpdateAgentSpaceInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.AwsResources != nil {
+		s.WriteStruct(schemas.UpdateAgentSpaceInput_awsResources)
+		v.AwsResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CodeReviewSettings != nil {
+		s.WriteStruct(schemas.UpdateAgentSpaceInput_codeReviewSettings)
+		v.CodeReviewSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAgentSpaceInput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAgentSpaceInput_name, *v.Name)
+	}
+	serializeTargetDomainIdList(s, schemas.UpdateAgentSpaceInput_targetDomainIds, v.TargetDomainIds)
+}
+
 // Output for the UpdateAgentSpace operation.
 type UpdateAgentSpaceOutput struct {
 
@@ -92,16 +123,44 @@ type UpdateAgentSpaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAgentSpaceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAgentSpaceOutput_agentSpaceId:
+			v.AgentSpaceId = new(string)
+			return d.ReadString(schemas.UpdateAgentSpaceOutput_agentSpaceId, v.AgentSpaceId)
+		case schemas.UpdateAgentSpaceOutput_awsResources:
+			v.AwsResources = &types.AWSResources{}
+			return v.AwsResources.Deserialize(d)
+		case schemas.UpdateAgentSpaceOutput_codeReviewSettings:
+			v.CodeReviewSettings = &types.CodeReviewSettings{}
+			return v.CodeReviewSettings.Deserialize(d)
+		case schemas.UpdateAgentSpaceOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateAgentSpaceOutput_createdAt, v.CreatedAt)
+		case schemas.UpdateAgentSpaceOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateAgentSpaceOutput_description, v.Description)
+		case schemas.UpdateAgentSpaceOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateAgentSpaceOutput_name, v.Name)
+		case schemas.UpdateAgentSpaceOutput_targetDomainIds:
+			return deserializeTargetDomainIdList(d, schemas.UpdateAgentSpaceOutput_targetDomainIds, &v.TargetDomainIds)
+		case schemas.UpdateAgentSpaceOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateAgentSpaceOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAgentSpaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAgentSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentSpace, schemas.UpdateAgentSpaceInput, schemas.UpdateAgentSpaceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAgentSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentSpace, schemas.UpdateAgentSpaceInput, schemas.UpdateAgentSpaceOutput), output: &UpdateAgentSpaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAgentSpace"); err != nil {

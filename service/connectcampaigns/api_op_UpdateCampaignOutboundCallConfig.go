@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaigns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaigns/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,48 @@ type UpdateCampaignOutboundCallConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCampaignOutboundCallConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCampaignOutboundCallConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCampaignOutboundCallConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnswerMachineDetectionConfig != nil {
+		s.WriteStruct(schemas.UpdateCampaignOutboundCallConfigRequest_answerMachineDetectionConfig)
+		v.AnswerMachineDetectionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectContactFlowId != nil {
+		s.WriteString(schemas.UpdateCampaignOutboundCallConfigRequest_connectContactFlowId, *v.ConnectContactFlowId)
+	}
+	if v.ConnectSourcePhoneNumber != nil {
+		s.WriteString(schemas.UpdateCampaignOutboundCallConfigRequest_connectSourcePhoneNumber, *v.ConnectSourcePhoneNumber)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateCampaignOutboundCallConfigRequest_id, *v.Id)
+	}
+}
+func (v *UpdateCampaignOutboundCallConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCampaignOutboundCallConfigRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCampaignOutboundCallConfigRequest_answerMachineDetectionConfig:
+			v.AnswerMachineDetectionConfig = &types.AnswerMachineDetectionConfig{}
+			return v.AnswerMachineDetectionConfig.Deserialize(d)
+		case schemas.UpdateCampaignOutboundCallConfigRequest_connectContactFlowId:
+			v.ConnectContactFlowId = new(string)
+			return d.ReadString(schemas.UpdateCampaignOutboundCallConfigRequest_connectContactFlowId, v.ConnectContactFlowId)
+		case schemas.UpdateCampaignOutboundCallConfigRequest_connectSourcePhoneNumber:
+			v.ConnectSourcePhoneNumber = new(string)
+			return d.ReadString(schemas.UpdateCampaignOutboundCallConfigRequest_connectSourcePhoneNumber, v.ConnectSourcePhoneNumber)
+		case schemas.UpdateCampaignOutboundCallConfigRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateCampaignOutboundCallConfigRequest_id, v.Id)
+		}
+		return nil
+	})
+}
+
 type UpdateCampaignOutboundCallConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,16 +99,29 @@ type UpdateCampaignOutboundCallConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCampaignOutboundCallConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCampaignOutboundCallConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateCampaignOutboundCallConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCampaignOutboundCallConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCampaignOutboundCallConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCampaignOutboundCallConfig, schemas.UpdateCampaignOutboundCallConfigRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCampaignOutboundCallConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCampaignOutboundCallConfig, schemas.UpdateCampaignOutboundCallConfigRequest, nil), output: &UpdateCampaignOutboundCallConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCampaignOutboundCallConfig"); err != nil {

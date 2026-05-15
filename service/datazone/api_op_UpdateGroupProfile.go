@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,24 @@ type UpdateGroupProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGroupProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGroupProfileInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGroupProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.UpdateGroupProfileInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.GroupIdentifier != nil {
+		s.WriteString(schemas.UpdateGroupProfileInput_groupIdentifier, *v.GroupIdentifier)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateGroupProfileInput_status, string(v.Status))
+	}
+}
+
 type UpdateGroupProfileOutput struct {
 
 	// The identifier of the Amazon DataZone domain in which a group profile is
@@ -77,16 +97,43 @@ type UpdateGroupProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGroupProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGroupProfileOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGroupProfileOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.UpdateGroupProfileOutput_domainId, v.DomainId)
+		case schemas.UpdateGroupProfileOutput_groupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.UpdateGroupProfileOutput_groupName, v.GroupName)
+		case schemas.UpdateGroupProfileOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateGroupProfileOutput_id, v.Id)
+		case schemas.UpdateGroupProfileOutput_rolePrincipalArn:
+			v.RolePrincipalArn = new(string)
+			return d.ReadString(schemas.UpdateGroupProfileOutput_rolePrincipalArn, v.RolePrincipalArn)
+		case schemas.UpdateGroupProfileOutput_rolePrincipalId:
+			v.RolePrincipalId = new(string)
+			return d.ReadString(schemas.UpdateGroupProfileOutput_rolePrincipalId, v.RolePrincipalId)
+		case schemas.UpdateGroupProfileOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateGroupProfileOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GroupProfileStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGroupProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGroupProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGroupProfile, schemas.UpdateGroupProfileInput, schemas.UpdateGroupProfileOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateGroupProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGroupProfile, schemas.UpdateGroupProfileInput, schemas.UpdateGroupProfileOutput), output: &UpdateGroupProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateGroupProfile"); err != nil {

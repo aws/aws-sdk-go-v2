@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,6 +66,24 @@ type CreateAppCookieStickinessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAppCookieStickinessPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAppCookieStickinessPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAppCookieStickinessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CookieName != nil {
+		s.WriteString(schemas.CreateAppCookieStickinessPolicyInput_CookieName, *v.CookieName)
+	}
+	if v.LoadBalancerName != nil {
+		s.WriteString(schemas.CreateAppCookieStickinessPolicyInput_LoadBalancerName, *v.LoadBalancerName)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.CreateAppCookieStickinessPolicyInput_PolicyName, *v.PolicyName)
+	}
+}
+
 // Contains the output for CreateAppCookieStickinessPolicy.
 type CreateAppCookieStickinessPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -72,16 +92,21 @@ type CreateAppCookieStickinessPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAppCookieStickinessPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAppCookieStickinessPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAppCookieStickinessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateAppCookieStickinessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAppCookieStickinessPolicy, schemas.CreateAppCookieStickinessPolicyInput, schemas.CreateAppCookieStickinessPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateAppCookieStickinessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAppCookieStickinessPolicy, schemas.CreateAppCookieStickinessPolicyInput, schemas.CreateAppCookieStickinessPolicyOutput), output: &CreateAppCookieStickinessPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAppCookieStickinessPolicy"); err != nil {

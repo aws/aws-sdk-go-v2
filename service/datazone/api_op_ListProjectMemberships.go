@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,6 +65,33 @@ type ListProjectMembershipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProjectMembershipsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProjectMembershipsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProjectMembershipsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.ListProjectMembershipsInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProjectMembershipsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProjectMembershipsInput_nextToken, *v.NextToken)
+	}
+	if v.ProjectIdentifier != nil {
+		s.WriteString(schemas.ListProjectMembershipsInput_projectIdentifier, *v.ProjectIdentifier)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListProjectMembershipsInput_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListProjectMembershipsInput_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListProjectMembershipsOutput struct {
 
 	// The members of the project.
@@ -83,16 +112,26 @@ type ListProjectMembershipsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProjectMembershipsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProjectMembershipsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProjectMembershipsOutput_members:
+			return deserializeProjectMembers(d, schemas.ListProjectMembershipsOutput_members, &v.Members)
+		case schemas.ListProjectMembershipsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProjectMembershipsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProjectMembershipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProjectMemberships{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProjectMemberships, schemas.ListProjectMembershipsInput, schemas.ListProjectMembershipsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProjectMemberships{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProjectMemberships, schemas.ListProjectMembershipsInput, schemas.ListProjectMembershipsOutput), output: &ListProjectMembershipsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProjectMemberships"); err != nil {

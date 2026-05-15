@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/route53profiles/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -45,6 +47,90 @@ type Profile struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Profile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Profile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Profile) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Profile_Arn, *v.Arn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.Profile_ClientToken, *v.ClientToken)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Profile_CreationTime, *v.CreationTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Profile_Id, *v.Id)
+	}
+	if v.ModificationTime != nil {
+		s.WriteTime(schemas.Profile_ModificationTime, *v.ModificationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Profile_Name, *v.Name)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.Profile_OwnerId, *v.OwnerId)
+	}
+	if v.ShareStatus != "" {
+		s.WriteString(schemas.Profile_ShareStatus, string(v.ShareStatus))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Profile_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.Profile_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *Profile) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Profile, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Profile_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Profile_Arn, v.Arn)
+		case schemas.Profile_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.Profile_ClientToken, v.ClientToken)
+		case schemas.Profile_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Profile_CreationTime, v.CreationTime)
+		case schemas.Profile_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Profile_Id, v.Id)
+		case schemas.Profile_ModificationTime:
+			v.ModificationTime = new(time.Time)
+			return d.ReadTime(schemas.Profile_ModificationTime, v.ModificationTime)
+		case schemas.Profile_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Profile_Name, v.Name)
+		case schemas.Profile_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.Profile_OwnerId, v.OwnerId)
+		case schemas.Profile_ShareStatus:
+			var ev string
+			if err := d.ReadString(schemas.Profile_ShareStatus, &ev); err != nil {
+				return err
+			}
+			v.ShareStatus = ShareStatus(ev)
+			return nil
+		case schemas.Profile_Status:
+			var ev string
+			if err := d.ReadString(schemas.Profile_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ProfileStatus(ev)
+			return nil
+		case schemas.Profile_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.Profile_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // An association between a Route 53 Profile and a VPC.
 type ProfileAssociation struct {
 
@@ -78,6 +164,80 @@ type ProfileAssociation struct {
 	StatusMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProfileAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfileAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProfileAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ProfileAssociation_CreationTime, *v.CreationTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ProfileAssociation_Id, *v.Id)
+	}
+	if v.ModificationTime != nil {
+		s.WriteTime(schemas.ProfileAssociation_ModificationTime, *v.ModificationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ProfileAssociation_Name, *v.Name)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.ProfileAssociation_OwnerId, *v.OwnerId)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.ProfileAssociation_ProfileId, *v.ProfileId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ProfileAssociation_ResourceId, *v.ResourceId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ProfileAssociation_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ProfileAssociation_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *ProfileAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProfileAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProfileAssociation_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ProfileAssociation_CreationTime, v.CreationTime)
+		case schemas.ProfileAssociation_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ProfileAssociation_Id, v.Id)
+		case schemas.ProfileAssociation_ModificationTime:
+			v.ModificationTime = new(time.Time)
+			return d.ReadTime(schemas.ProfileAssociation_ModificationTime, v.ModificationTime)
+		case schemas.ProfileAssociation_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ProfileAssociation_Name, v.Name)
+		case schemas.ProfileAssociation_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.ProfileAssociation_OwnerId, v.OwnerId)
+		case schemas.ProfileAssociation_ProfileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.ProfileAssociation_ProfileId, v.ProfileId)
+		case schemas.ProfileAssociation_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.ProfileAssociation_ResourceId, v.ResourceId)
+		case schemas.ProfileAssociation_Status:
+			var ev string
+			if err := d.ReadString(schemas.ProfileAssociation_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ProfileStatus(ev)
+			return nil
+		case schemas.ProfileAssociation_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ProfileAssociation_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
 }
 
 // The association between a Route 53 Profile and resources.
@@ -121,6 +281,92 @@ type ProfileResourceAssociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProfileResourceAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfileResourceAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProfileResourceAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ProfileResourceAssociation_CreationTime, *v.CreationTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ProfileResourceAssociation_Id, *v.Id)
+	}
+	if v.ModificationTime != nil {
+		s.WriteTime(schemas.ProfileResourceAssociation_ModificationTime, *v.ModificationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ProfileResourceAssociation_Name, *v.Name)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.ProfileResourceAssociation_OwnerId, *v.OwnerId)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.ProfileResourceAssociation_ProfileId, *v.ProfileId)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ProfileResourceAssociation_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceProperties != nil {
+		s.WriteString(schemas.ProfileResourceAssociation_ResourceProperties, *v.ResourceProperties)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ProfileResourceAssociation_ResourceType, *v.ResourceType)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ProfileResourceAssociation_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ProfileResourceAssociation_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *ProfileResourceAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProfileResourceAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProfileResourceAssociation_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ProfileResourceAssociation_CreationTime, v.CreationTime)
+		case schemas.ProfileResourceAssociation_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ProfileResourceAssociation_Id, v.Id)
+		case schemas.ProfileResourceAssociation_ModificationTime:
+			v.ModificationTime = new(time.Time)
+			return d.ReadTime(schemas.ProfileResourceAssociation_ModificationTime, v.ModificationTime)
+		case schemas.ProfileResourceAssociation_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ProfileResourceAssociation_Name, v.Name)
+		case schemas.ProfileResourceAssociation_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.ProfileResourceAssociation_OwnerId, v.OwnerId)
+		case schemas.ProfileResourceAssociation_ProfileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.ProfileResourceAssociation_ProfileId, v.ProfileId)
+		case schemas.ProfileResourceAssociation_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ProfileResourceAssociation_ResourceArn, v.ResourceArn)
+		case schemas.ProfileResourceAssociation_ResourceProperties:
+			v.ResourceProperties = new(string)
+			return d.ReadString(schemas.ProfileResourceAssociation_ResourceProperties, v.ResourceProperties)
+		case schemas.ProfileResourceAssociation_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ProfileResourceAssociation_ResourceType, v.ResourceType)
+		case schemas.ProfileResourceAssociation_Status:
+			var ev string
+			if err := d.ReadString(schemas.ProfileResourceAssociation_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ProfileStatus(ev)
+			return nil
+		case schemas.ProfileResourceAssociation_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ProfileResourceAssociation_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // Summary information about a Route 53 Profile.
 type ProfileSummary struct {
 
@@ -139,6 +385,50 @@ type ProfileSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProfileSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfileSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProfileSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ProfileSummary_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ProfileSummary_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ProfileSummary_Name, *v.Name)
+	}
+	if v.ShareStatus != "" {
+		s.WriteString(schemas.ProfileSummary_ShareStatus, string(v.ShareStatus))
+	}
+}
+func (v *ProfileSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProfileSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProfileSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ProfileSummary_Arn, v.Arn)
+		case schemas.ProfileSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ProfileSummary_Id, v.Id)
+		case schemas.ProfileSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ProfileSummary_Name, v.Name)
+		case schemas.ProfileSummary_ShareStatus:
+			var ev string
+			if err := d.ReadString(schemas.ProfileSummary_ShareStatus, &ev); err != nil {
+				return err
+			}
+			v.ShareStatus = ShareStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Tag for the Profile.
 type Tag struct {
 
@@ -153,6 +443,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

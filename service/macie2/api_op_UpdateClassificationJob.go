@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +70,21 @@ type UpdateClassificationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClassificationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClassificationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClassificationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.UpdateClassificationJobRequest_jobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.UpdateClassificationJobRequest_jobStatus, string(v.JobStatus))
+	}
+}
+
 type UpdateClassificationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -75,16 +92,21 @@ type UpdateClassificationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClassificationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateClassificationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateClassificationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateClassificationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateClassificationJob, schemas.UpdateClassificationJobRequest, schemas.UpdateClassificationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateClassificationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateClassificationJob, schemas.UpdateClassificationJobRequest, schemas.UpdateClassificationJobResponse), output: &UpdateClassificationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateClassificationJob"); err != nil {

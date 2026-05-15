@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,19 @@ type UntagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UntagResourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.UntagResourceInput_resourceArn, *v.ResourceArn)
+	}
+	serializeStringList(s, schemas.UntagResourceInput_tagKeys, v.TagKeys)
+}
+
 type UntagResourceOutput struct {
 
 	// The status code of the untag resource operation.
@@ -52,16 +67,24 @@ type UntagResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UntagResourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UntagResourceOutput_statusCode:
+			v.StatusCode = new(int32)
+			return d.ReadInt32(schemas.UntagResourceOutput_statusCode, v.StatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUntagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUntagResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceInput, schemas.UntagResourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUntagResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceInput, schemas.UntagResourceOutput), output: &UntagResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UntagResource"); err != nil {

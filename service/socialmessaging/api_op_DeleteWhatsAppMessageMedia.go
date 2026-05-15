@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,21 @@ type DeleteWhatsAppMessageMediaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWhatsAppMessageMediaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWhatsAppMessageMediaInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWhatsAppMessageMediaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MediaId != nil {
+		s.WriteString(schemas.DeleteWhatsAppMessageMediaInput_mediaId, *v.MediaId)
+	}
+	if v.OriginationPhoneNumberId != nil {
+		s.WriteString(schemas.DeleteWhatsAppMessageMediaInput_originationPhoneNumberId, *v.OriginationPhoneNumberId)
+	}
+}
+
 type DeleteWhatsAppMessageMediaOutput struct {
 
 	// Success indicator for deleting the media file.
@@ -61,16 +78,24 @@ type DeleteWhatsAppMessageMediaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWhatsAppMessageMediaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWhatsAppMessageMediaOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteWhatsAppMessageMediaOutput_success:
+			v.Success = new(bool)
+			return d.ReadBool(schemas.DeleteWhatsAppMessageMediaOutput_success, v.Success)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWhatsAppMessageMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWhatsAppMessageMedia{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWhatsAppMessageMedia, schemas.DeleteWhatsAppMessageMediaInput, schemas.DeleteWhatsAppMessageMediaOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWhatsAppMessageMedia{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWhatsAppMessageMedia, schemas.DeleteWhatsAppMessageMediaInput, schemas.DeleteWhatsAppMessageMediaOutput), output: &DeleteWhatsAppMessageMediaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteWhatsAppMessageMedia"); err != nil {

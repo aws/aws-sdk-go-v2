@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesthinclient/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesthinclient/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,21 @@ type ListSoftwareSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSoftwareSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSoftwareSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSoftwareSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSoftwareSetsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSoftwareSetsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListSoftwareSetsOutput struct {
 
 	// If nextToken is returned, there are more results available. The value of
@@ -64,16 +81,26 @@ type ListSoftwareSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSoftwareSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSoftwareSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSoftwareSetsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSoftwareSetsResponse_nextToken, v.NextToken)
+		case schemas.ListSoftwareSetsResponse_softwareSets:
+			return deserializeSoftwareSetList(d, schemas.ListSoftwareSetsResponse_softwareSets, &v.SoftwareSets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSoftwareSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSoftwareSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSoftwareSets, schemas.ListSoftwareSetsRequest, schemas.ListSoftwareSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSoftwareSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSoftwareSets, schemas.ListSoftwareSetsRequest, schemas.ListSoftwareSetsResponse), output: &ListSoftwareSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSoftwareSets"); err != nil {

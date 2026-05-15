@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -43,6 +45,19 @@ type StartVerificationInput struct {
 	VerificationDetails types.VerificationDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartVerificationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartVerificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartVerificationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartVerificationRequest_ClientToken, *v.ClientToken)
+	}
+	serializeVerificationDetails(s, schemas.StartVerificationRequest_VerificationDetails, v.VerificationDetails)
 }
 
 type StartVerificationOutput struct {
@@ -84,16 +99,46 @@ type StartVerificationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartVerificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartVerificationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartVerificationResponse_CompletedAt:
+			v.CompletedAt = new(time.Time)
+			return d.ReadTime(schemas.StartVerificationResponse_CompletedAt, v.CompletedAt)
+		case schemas.StartVerificationResponse_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.StartVerificationResponse_StartedAt, v.StartedAt)
+		case schemas.StartVerificationResponse_VerificationResponseDetails:
+			return deserializeVerificationResponseDetails(d, schemas.StartVerificationResponse_VerificationResponseDetails, &v.VerificationResponseDetails)
+		case schemas.StartVerificationResponse_VerificationStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartVerificationResponse_VerificationStatus, &ev); err != nil {
+				return err
+			}
+			v.VerificationStatus = types.VerificationStatus(ev)
+			return nil
+		case schemas.StartVerificationResponse_VerificationStatusReason:
+			v.VerificationStatusReason = new(string)
+			return d.ReadString(schemas.StartVerificationResponse_VerificationStatusReason, v.VerificationStatusReason)
+		case schemas.StartVerificationResponse_VerificationType:
+			var ev string
+			if err := d.ReadString(schemas.StartVerificationResponse_VerificationType, &ev); err != nil {
+				return err
+			}
+			v.VerificationType = types.VerificationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartVerificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartVerification{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartVerification, schemas.StartVerificationRequest, schemas.StartVerificationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartVerification{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartVerification, schemas.StartVerificationRequest, schemas.StartVerificationResponse), output: &StartVerificationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartVerification"); err != nil {

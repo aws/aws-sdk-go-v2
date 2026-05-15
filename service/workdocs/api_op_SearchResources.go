@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,6 +69,38 @@ type SearchResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalResponseFieldsList(s, schemas.SearchResourcesRequest_AdditionalResponseFields, v.AdditionalResponseFields)
+	if v.AuthenticationToken != nil {
+		s.WriteString(schemas.SearchResourcesRequest_AuthenticationToken, *v.AuthenticationToken)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.SearchResourcesRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.SearchResourcesRequest_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.SearchResourcesRequest_Marker, *v.Marker)
+	}
+	serializeSearchResultSortList(s, schemas.SearchResourcesRequest_OrderBy, v.OrderBy)
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.SearchResourcesRequest_OrganizationId, *v.OrganizationId)
+	}
+	serializeSearchQueryScopeTypeList(s, schemas.SearchResourcesRequest_QueryScopes, v.QueryScopes)
+	if v.QueryText != nil {
+		s.WriteString(schemas.SearchResourcesRequest_QueryText, *v.QueryText)
+	}
+}
+
 type SearchResourcesOutput struct {
 
 	// List of Documents, Folders, Comments, and Document Versions matching the query.
@@ -82,16 +116,26 @@ type SearchResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchResourcesResponse_Items:
+			return deserializeResponseItemsList(d, schemas.SearchResourcesResponse_Items, &v.Items)
+		case schemas.SearchResourcesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.SearchResourcesResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchResources, schemas.SearchResourcesRequest, schemas.SearchResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchResources, schemas.SearchResourcesRequest, schemas.SearchResourcesResponse), output: &SearchResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchResources"); err != nil {

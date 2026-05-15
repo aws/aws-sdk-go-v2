@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backupsearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backupsearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type GetSearchJobInput struct {
 	SearchJobIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSearchJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSearchJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSearchJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SearchJobIdentifier != nil {
+		s.WriteString(schemas.GetSearchJobInput_SearchJobIdentifier, *v.SearchJobIdentifier)
+	}
 }
 
 type GetSearchJobOutput struct {
@@ -118,16 +132,61 @@ type GetSearchJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSearchJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSearchJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSearchJobOutput_CompletionTime:
+			v.CompletionTime = new(time.Time)
+			return d.ReadTime(schemas.GetSearchJobOutput_CompletionTime, v.CompletionTime)
+		case schemas.GetSearchJobOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetSearchJobOutput_CreationTime, v.CreationTime)
+		case schemas.GetSearchJobOutput_CurrentSearchProgress:
+			v.CurrentSearchProgress = &types.CurrentSearchProgress{}
+			return v.CurrentSearchProgress.Deserialize(d)
+		case schemas.GetSearchJobOutput_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.GetSearchJobOutput_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.GetSearchJobOutput_ItemFilters:
+			v.ItemFilters = &types.ItemFilters{}
+			return v.ItemFilters.Deserialize(d)
+		case schemas.GetSearchJobOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetSearchJobOutput_Name, v.Name)
+		case schemas.GetSearchJobOutput_SearchJobArn:
+			v.SearchJobArn = new(string)
+			return d.ReadString(schemas.GetSearchJobOutput_SearchJobArn, v.SearchJobArn)
+		case schemas.GetSearchJobOutput_SearchJobIdentifier:
+			v.SearchJobIdentifier = new(string)
+			return d.ReadString(schemas.GetSearchJobOutput_SearchJobIdentifier, v.SearchJobIdentifier)
+		case schemas.GetSearchJobOutput_SearchScope:
+			v.SearchScope = &types.SearchScope{}
+			return v.SearchScope.Deserialize(d)
+		case schemas.GetSearchJobOutput_SearchScopeSummary:
+			v.SearchScopeSummary = &types.SearchScopeSummary{}
+			return v.SearchScopeSummary.Deserialize(d)
+		case schemas.GetSearchJobOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetSearchJobOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SearchJobState(ev)
+			return nil
+		case schemas.GetSearchJobOutput_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetSearchJobOutput_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSearchJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSearchJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSearchJob, schemas.GetSearchJobInput, schemas.GetSearchJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSearchJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSearchJob, schemas.GetSearchJobInput, schemas.GetSearchJobOutput), output: &GetSearchJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSearchJob"); err != nil {

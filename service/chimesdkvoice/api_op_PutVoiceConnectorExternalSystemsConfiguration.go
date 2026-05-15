@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,20 @@ type PutVoiceConnectorExternalSystemsConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutVoiceConnectorExternalSystemsConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutVoiceConnectorExternalSystemsConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutVoiceConnectorExternalSystemsConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContactCenterSystemTypeList(s, schemas.PutVoiceConnectorExternalSystemsConfigurationRequest_ContactCenterSystemTypes, v.ContactCenterSystemTypes)
+	serializeSessionBorderControllerTypeList(s, schemas.PutVoiceConnectorExternalSystemsConfigurationRequest_SessionBorderControllerTypes, v.SessionBorderControllerTypes)
+	if v.VoiceConnectorId != nil {
+		s.WriteString(schemas.PutVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId, *v.VoiceConnectorId)
+	}
+}
+
 type PutVoiceConnectorExternalSystemsConfigurationOutput struct {
 
 	// An object that contains information about an external systems configuration for
@@ -56,16 +72,24 @@ type PutVoiceConnectorExternalSystemsConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutVoiceConnectorExternalSystemsConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutVoiceConnectorExternalSystemsConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration:
+			v.ExternalSystemsConfiguration = &types.ExternalSystemsConfiguration{}
+			return v.ExternalSystemsConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutVoiceConnectorExternalSystemsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutVoiceConnectorExternalSystemsConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVoiceConnectorExternalSystemsConfiguration, schemas.PutVoiceConnectorExternalSystemsConfigurationRequest, schemas.PutVoiceConnectorExternalSystemsConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutVoiceConnectorExternalSystemsConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVoiceConnectorExternalSystemsConfiguration, schemas.PutVoiceConnectorExternalSystemsConfigurationRequest, schemas.PutVoiceConnectorExternalSystemsConfigurationResponse), output: &PutVoiceConnectorExternalSystemsConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutVoiceConnectorExternalSystemsConfiguration"); err != nil {

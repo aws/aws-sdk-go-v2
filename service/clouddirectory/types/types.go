@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -29,6 +31,40 @@ type AttributeKey struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttributeKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttributeKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttributeKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FacetName != nil {
+		s.WriteString(schemas.AttributeKey_FacetName, *v.FacetName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AttributeKey_Name, *v.Name)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.AttributeKey_SchemaArn, *v.SchemaArn)
+	}
+}
+func (v *AttributeKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttributeKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttributeKey_FacetName:
+			v.FacetName = new(string)
+			return d.ReadString(schemas.AttributeKey_FacetName, v.FacetName)
+		case schemas.AttributeKey_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AttributeKey_Name, v.Name)
+		case schemas.AttributeKey_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.AttributeKey_SchemaArn, v.SchemaArn)
+		}
+		return nil
+	})
+}
+
 // The combination of an attribute key and an attribute value.
 type AttributeKeyAndValue struct {
 
@@ -45,6 +81,33 @@ type AttributeKeyAndValue struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttributeKeyAndValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttributeKeyAndValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttributeKeyAndValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteStruct(schemas.AttributeKeyAndValue_Key)
+		v.Key.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTypedAttributeValue(s, schemas.AttributeKeyAndValue_Value, v.Value)
+}
+func (v *AttributeKeyAndValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttributeKeyAndValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttributeKeyAndValue_Key:
+			v.Key = &AttributeKey{}
+			return v.Key.Deserialize(d)
+		case schemas.AttributeKeyAndValue_Value:
+			return deserializeTypedAttributeValue(d, schemas.AttributeKeyAndValue_Value, &v.Value)
+		}
+		return nil
+	})
+}
+
 // Identifies the attribute name and value for a typed link.
 type AttributeNameAndValue struct {
 
@@ -59,6 +122,31 @@ type AttributeNameAndValue struct {
 	Value TypedAttributeValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *AttributeNameAndValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttributeNameAndValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttributeNameAndValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.AttributeNameAndValue_AttributeName, *v.AttributeName)
+	}
+	serializeTypedAttributeValue(s, schemas.AttributeNameAndValue_Value, v.Value)
+}
+func (v *AttributeNameAndValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttributeNameAndValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttributeNameAndValue_AttributeName:
+			v.AttributeName = new(string)
+			return d.ReadString(schemas.AttributeNameAndValue_AttributeName, v.AttributeName)
+		case schemas.AttributeNameAndValue_Value:
+			return deserializeTypedAttributeValue(d, schemas.AttributeNameAndValue_Value, &v.Value)
+		}
+		return nil
+	})
 }
 
 // Represents the output of a batch add facet to object operation.
@@ -82,9 +170,60 @@ type BatchAddFacetToObject struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAddFacetToObject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAddFacetToObject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAddFacetToObject) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeKeyAndValueList(s, schemas.BatchAddFacetToObject_ObjectAttributeList, v.ObjectAttributeList)
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.BatchAddFacetToObject_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaFacet != nil {
+		s.WriteStruct(schemas.BatchAddFacetToObject_SchemaFacet)
+		v.SchemaFacet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchAddFacetToObject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAddFacetToObject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAddFacetToObject_ObjectAttributeList:
+			return deserializeAttributeKeyAndValueList(d, schemas.BatchAddFacetToObject_ObjectAttributeList, &v.ObjectAttributeList)
+		case schemas.BatchAddFacetToObject_ObjectReference:
+			v.ObjectReference = &ObjectReference{}
+			return v.ObjectReference.Deserialize(d)
+		case schemas.BatchAddFacetToObject_SchemaFacet:
+			v.SchemaFacet = &SchemaFacet{}
+			return v.SchemaFacet.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The result of a batch add facet to object operation.
 type BatchAddFacetToObjectResponse struct {
 	noSmithyDocumentSerde
+}
+
+func (v *BatchAddFacetToObjectResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAddFacetToObjectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAddFacetToObjectResponse) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *BatchAddFacetToObjectResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAddFacetToObjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Represents the output of an AttachObject operation.
@@ -108,6 +247,44 @@ type BatchAttachObject struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAttachObject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAttachObject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAttachObject) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChildReference != nil {
+		s.WriteStruct(schemas.BatchAttachObject_ChildReference)
+		v.ChildReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LinkName != nil {
+		s.WriteString(schemas.BatchAttachObject_LinkName, *v.LinkName)
+	}
+	if v.ParentReference != nil {
+		s.WriteStruct(schemas.BatchAttachObject_ParentReference)
+		v.ParentReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchAttachObject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAttachObject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAttachObject_ChildReference:
+			v.ChildReference = &ObjectReference{}
+			return v.ChildReference.Deserialize(d)
+		case schemas.BatchAttachObject_LinkName:
+			v.LinkName = new(string)
+			return d.ReadString(schemas.BatchAttachObject_LinkName, v.LinkName)
+		case schemas.BatchAttachObject_ParentReference:
+			v.ParentReference = &ObjectReference{}
+			return v.ParentReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output batch AttachObject response operation.
 type BatchAttachObjectResponse struct {
 
@@ -115,6 +292,28 @@ type BatchAttachObjectResponse struct {
 	AttachedObjectIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchAttachObjectResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAttachObjectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAttachObjectResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachedObjectIdentifier != nil {
+		s.WriteString(schemas.BatchAttachObjectResponse_attachedObjectIdentifier, *v.AttachedObjectIdentifier)
+	}
+}
+func (v *BatchAttachObjectResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAttachObjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAttachObjectResponse_attachedObjectIdentifier:
+			v.AttachedObjectIdentifier = new(string)
+			return d.ReadString(schemas.BatchAttachObjectResponse_attachedObjectIdentifier, v.AttachedObjectIdentifier)
+		}
+		return nil
+	})
 }
 
 // Attaches a policy object to a regular object inside a BatchRead operation. For more
@@ -134,9 +333,57 @@ type BatchAttachPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAttachPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAttachPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAttachPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.BatchAttachPolicy_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PolicyReference != nil {
+		s.WriteStruct(schemas.BatchAttachPolicy_PolicyReference)
+		v.PolicyReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchAttachPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAttachPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAttachPolicy_ObjectReference:
+			v.ObjectReference = &ObjectReference{}
+			return v.ObjectReference.Deserialize(d)
+		case schemas.BatchAttachPolicy_PolicyReference:
+			v.PolicyReference = &ObjectReference{}
+			return v.PolicyReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of an AttachPolicy response operation.
 type BatchAttachPolicyResponse struct {
 	noSmithyDocumentSerde
+}
+
+func (v *BatchAttachPolicyResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAttachPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAttachPolicyResponse) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *BatchAttachPolicyResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAttachPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Attaches the specified object to the specified index inside a BatchRead operation. For
@@ -156,6 +403,38 @@ type BatchAttachToIndex struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAttachToIndex) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAttachToIndex)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAttachToIndex) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexReference != nil {
+		s.WriteStruct(schemas.BatchAttachToIndex_IndexReference)
+		v.IndexReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetReference != nil {
+		s.WriteStruct(schemas.BatchAttachToIndex_TargetReference)
+		v.TargetReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchAttachToIndex) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAttachToIndex, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAttachToIndex_IndexReference:
+			v.IndexReference = &ObjectReference{}
+			return v.IndexReference.Deserialize(d)
+		case schemas.BatchAttachToIndex_TargetReference:
+			v.TargetReference = &ObjectReference{}
+			return v.TargetReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a AttachToIndex response operation.
 type BatchAttachToIndexResponse struct {
 
@@ -163,6 +442,28 @@ type BatchAttachToIndexResponse struct {
 	AttachedObjectIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchAttachToIndexResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAttachToIndexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAttachToIndexResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachedObjectIdentifier != nil {
+		s.WriteString(schemas.BatchAttachToIndexResponse_AttachedObjectIdentifier, *v.AttachedObjectIdentifier)
+	}
+}
+func (v *BatchAttachToIndexResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAttachToIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAttachToIndexResponse_AttachedObjectIdentifier:
+			v.AttachedObjectIdentifier = new(string)
+			return d.ReadString(schemas.BatchAttachToIndexResponse_AttachedObjectIdentifier, v.AttachedObjectIdentifier)
+		}
+		return nil
+	})
 }
 
 // Attaches a typed link to a specified source and target object inside a BatchRead
@@ -192,6 +493,49 @@ type BatchAttachTypedLink struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAttachTypedLink) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAttachTypedLink)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAttachTypedLink) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeNameAndValueList(s, schemas.BatchAttachTypedLink_Attributes, v.Attributes)
+	if v.SourceObjectReference != nil {
+		s.WriteStruct(schemas.BatchAttachTypedLink_SourceObjectReference)
+		v.SourceObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetObjectReference != nil {
+		s.WriteStruct(schemas.BatchAttachTypedLink_TargetObjectReference)
+		v.TargetObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TypedLinkFacet != nil {
+		s.WriteStruct(schemas.BatchAttachTypedLink_TypedLinkFacet)
+		v.TypedLinkFacet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchAttachTypedLink) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAttachTypedLink, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAttachTypedLink_Attributes:
+			return deserializeAttributeNameAndValueList(d, schemas.BatchAttachTypedLink_Attributes, &v.Attributes)
+		case schemas.BatchAttachTypedLink_SourceObjectReference:
+			v.SourceObjectReference = &ObjectReference{}
+			return v.SourceObjectReference.Deserialize(d)
+		case schemas.BatchAttachTypedLink_TargetObjectReference:
+			v.TargetObjectReference = &ObjectReference{}
+			return v.TargetObjectReference.Deserialize(d)
+		case schemas.BatchAttachTypedLink_TypedLinkFacet:
+			v.TypedLinkFacet = &TypedLinkSchemaAndFacetName{}
+			return v.TypedLinkFacet.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a AttachTypedLink response operation.
 type BatchAttachTypedLinkResponse struct {
 
@@ -199,6 +543,30 @@ type BatchAttachTypedLinkResponse struct {
 	TypedLinkSpecifier *TypedLinkSpecifier
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchAttachTypedLinkResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAttachTypedLinkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAttachTypedLinkResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TypedLinkSpecifier != nil {
+		s.WriteStruct(schemas.BatchAttachTypedLinkResponse_TypedLinkSpecifier)
+		v.TypedLinkSpecifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchAttachTypedLinkResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAttachTypedLinkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAttachTypedLinkResponse_TypedLinkSpecifier:
+			v.TypedLinkSpecifier = &TypedLinkSpecifier{}
+			return v.TypedLinkSpecifier.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Creates an index object inside of a BatchRead operation. For more information, see CreateIndex and BatchReadRequest$Operations.
@@ -229,6 +597,50 @@ type BatchCreateIndex struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateIndex) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateIndex)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateIndex) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchReferenceName != nil {
+		s.WriteString(schemas.BatchCreateIndex_BatchReferenceName, *v.BatchReferenceName)
+	}
+	if v.IsUnique != false {
+		s.WriteBool(schemas.BatchCreateIndex_IsUnique, v.IsUnique)
+	}
+	if v.LinkName != nil {
+		s.WriteString(schemas.BatchCreateIndex_LinkName, *v.LinkName)
+	}
+	serializeAttributeKeyList(s, schemas.BatchCreateIndex_OrderedIndexedAttributeList, v.OrderedIndexedAttributeList)
+	if v.ParentReference != nil {
+		s.WriteStruct(schemas.BatchCreateIndex_ParentReference)
+		v.ParentReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchCreateIndex) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateIndex, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateIndex_BatchReferenceName:
+			v.BatchReferenceName = new(string)
+			return d.ReadString(schemas.BatchCreateIndex_BatchReferenceName, v.BatchReferenceName)
+		case schemas.BatchCreateIndex_IsUnique:
+			return d.ReadBool(schemas.BatchCreateIndex_IsUnique, &v.IsUnique)
+		case schemas.BatchCreateIndex_LinkName:
+			v.LinkName = new(string)
+			return d.ReadString(schemas.BatchCreateIndex_LinkName, v.LinkName)
+		case schemas.BatchCreateIndex_OrderedIndexedAttributeList:
+			return deserializeAttributeKeyList(d, schemas.BatchCreateIndex_OrderedIndexedAttributeList, &v.OrderedIndexedAttributeList)
+		case schemas.BatchCreateIndex_ParentReference:
+			v.ParentReference = &ObjectReference{}
+			return v.ParentReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a CreateIndex response operation.
 type BatchCreateIndexResponse struct {
 
@@ -236,6 +648,28 @@ type BatchCreateIndexResponse struct {
 	ObjectIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchCreateIndexResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateIndexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateIndexResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectIdentifier != nil {
+		s.WriteString(schemas.BatchCreateIndexResponse_ObjectIdentifier, *v.ObjectIdentifier)
+	}
+}
+func (v *BatchCreateIndexResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateIndexResponse_ObjectIdentifier:
+			v.ObjectIdentifier = new(string)
+			return d.ReadString(schemas.BatchCreateIndexResponse_ObjectIdentifier, v.ObjectIdentifier)
+		}
+		return nil
+	})
 }
 
 // Represents the output of a CreateObject operation.
@@ -267,6 +701,48 @@ type BatchCreateObject struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateObject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateObject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateObject) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchReferenceName != nil {
+		s.WriteString(schemas.BatchCreateObject_BatchReferenceName, *v.BatchReferenceName)
+	}
+	if v.LinkName != nil {
+		s.WriteString(schemas.BatchCreateObject_LinkName, *v.LinkName)
+	}
+	serializeAttributeKeyAndValueList(s, schemas.BatchCreateObject_ObjectAttributeList, v.ObjectAttributeList)
+	if v.ParentReference != nil {
+		s.WriteStruct(schemas.BatchCreateObject_ParentReference)
+		v.ParentReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSchemaFacetList(s, schemas.BatchCreateObject_SchemaFacet, v.SchemaFacet)
+}
+func (v *BatchCreateObject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateObject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateObject_BatchReferenceName:
+			v.BatchReferenceName = new(string)
+			return d.ReadString(schemas.BatchCreateObject_BatchReferenceName, v.BatchReferenceName)
+		case schemas.BatchCreateObject_LinkName:
+			v.LinkName = new(string)
+			return d.ReadString(schemas.BatchCreateObject_LinkName, v.LinkName)
+		case schemas.BatchCreateObject_ObjectAttributeList:
+			return deserializeAttributeKeyAndValueList(d, schemas.BatchCreateObject_ObjectAttributeList, &v.ObjectAttributeList)
+		case schemas.BatchCreateObject_ParentReference:
+			v.ParentReference = &ObjectReference{}
+			return v.ParentReference.Deserialize(d)
+		case schemas.BatchCreateObject_SchemaFacet:
+			return deserializeSchemaFacetList(d, schemas.BatchCreateObject_SchemaFacet, &v.SchemaFacet)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a CreateObject response operation.
 type BatchCreateObjectResponse struct {
 
@@ -274,6 +750,28 @@ type BatchCreateObjectResponse struct {
 	ObjectIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchCreateObjectResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateObjectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateObjectResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectIdentifier != nil {
+		s.WriteString(schemas.BatchCreateObjectResponse_ObjectIdentifier, *v.ObjectIdentifier)
+	}
+}
+func (v *BatchCreateObjectResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateObjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateObjectResponse_ObjectIdentifier:
+			v.ObjectIdentifier = new(string)
+			return d.ReadString(schemas.BatchCreateObjectResponse_ObjectIdentifier, v.ObjectIdentifier)
+		}
+		return nil
+	})
 }
 
 // Represents the output of a DeleteObject operation.
@@ -287,9 +785,49 @@ type BatchDeleteObject struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteObject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteObject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteObject) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.BatchDeleteObject_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchDeleteObject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteObject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteObject_ObjectReference:
+			v.ObjectReference = &ObjectReference{}
+			return v.ObjectReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a DeleteObject response operation.
 type BatchDeleteObjectResponse struct {
 	noSmithyDocumentSerde
+}
+
+func (v *BatchDeleteObjectResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteObjectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteObjectResponse) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *BatchDeleteObjectResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteObjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Detaches the specified object from the specified index inside a BatchRead operation. For
@@ -309,6 +847,38 @@ type BatchDetachFromIndex struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetachFromIndex) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetachFromIndex)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetachFromIndex) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexReference != nil {
+		s.WriteStruct(schemas.BatchDetachFromIndex_IndexReference)
+		v.IndexReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetReference != nil {
+		s.WriteStruct(schemas.BatchDetachFromIndex_TargetReference)
+		v.TargetReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchDetachFromIndex) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetachFromIndex, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDetachFromIndex_IndexReference:
+			v.IndexReference = &ObjectReference{}
+			return v.IndexReference.Deserialize(d)
+		case schemas.BatchDetachFromIndex_TargetReference:
+			v.TargetReference = &ObjectReference{}
+			return v.TargetReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a DetachFromIndex response operation.
 type BatchDetachFromIndexResponse struct {
 
@@ -316,6 +886,28 @@ type BatchDetachFromIndexResponse struct {
 	DetachedObjectIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchDetachFromIndexResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetachFromIndexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetachFromIndexResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetachedObjectIdentifier != nil {
+		s.WriteString(schemas.BatchDetachFromIndexResponse_DetachedObjectIdentifier, *v.DetachedObjectIdentifier)
+	}
+}
+func (v *BatchDetachFromIndexResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetachFromIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDetachFromIndexResponse_DetachedObjectIdentifier:
+			v.DetachedObjectIdentifier = new(string)
+			return d.ReadString(schemas.BatchDetachFromIndexResponse_DetachedObjectIdentifier, v.DetachedObjectIdentifier)
+		}
+		return nil
+	})
 }
 
 // Represents the output of a DetachObject operation.
@@ -339,6 +931,42 @@ type BatchDetachObject struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetachObject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetachObject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetachObject) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchReferenceName != nil {
+		s.WriteString(schemas.BatchDetachObject_BatchReferenceName, *v.BatchReferenceName)
+	}
+	if v.LinkName != nil {
+		s.WriteString(schemas.BatchDetachObject_LinkName, *v.LinkName)
+	}
+	if v.ParentReference != nil {
+		s.WriteStruct(schemas.BatchDetachObject_ParentReference)
+		v.ParentReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchDetachObject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetachObject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDetachObject_BatchReferenceName:
+			v.BatchReferenceName = new(string)
+			return d.ReadString(schemas.BatchDetachObject_BatchReferenceName, v.BatchReferenceName)
+		case schemas.BatchDetachObject_LinkName:
+			v.LinkName = new(string)
+			return d.ReadString(schemas.BatchDetachObject_LinkName, v.LinkName)
+		case schemas.BatchDetachObject_ParentReference:
+			v.ParentReference = &ObjectReference{}
+			return v.ParentReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a DetachObject response operation.
 type BatchDetachObjectResponse struct {
 
@@ -346,6 +974,28 @@ type BatchDetachObjectResponse struct {
 	DetachedObjectIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchDetachObjectResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetachObjectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetachObjectResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetachedObjectIdentifier != nil {
+		s.WriteString(schemas.BatchDetachObjectResponse_detachedObjectIdentifier, *v.DetachedObjectIdentifier)
+	}
+}
+func (v *BatchDetachObjectResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetachObjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDetachObjectResponse_detachedObjectIdentifier:
+			v.DetachedObjectIdentifier = new(string)
+			return d.ReadString(schemas.BatchDetachObjectResponse_detachedObjectIdentifier, v.DetachedObjectIdentifier)
+		}
+		return nil
+	})
 }
 
 // Detaches the specified policy from the specified directory inside a BatchWrite operation.
@@ -365,9 +1015,57 @@ type BatchDetachPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetachPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetachPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetachPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.BatchDetachPolicy_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PolicyReference != nil {
+		s.WriteStruct(schemas.BatchDetachPolicy_PolicyReference)
+		v.PolicyReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchDetachPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetachPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDetachPolicy_ObjectReference:
+			v.ObjectReference = &ObjectReference{}
+			return v.ObjectReference.Deserialize(d)
+		case schemas.BatchDetachPolicy_PolicyReference:
+			v.PolicyReference = &ObjectReference{}
+			return v.PolicyReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a DetachPolicy response operation.
 type BatchDetachPolicyResponse struct {
 	noSmithyDocumentSerde
+}
+
+func (v *BatchDetachPolicyResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetachPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetachPolicyResponse) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *BatchDetachPolicyResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetachPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Detaches a typed link from a specified source and target object inside a BatchRead
@@ -382,9 +1080,49 @@ type BatchDetachTypedLink struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetachTypedLink) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetachTypedLink)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetachTypedLink) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TypedLinkSpecifier != nil {
+		s.WriteStruct(schemas.BatchDetachTypedLink_TypedLinkSpecifier)
+		v.TypedLinkSpecifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchDetachTypedLink) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetachTypedLink, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDetachTypedLink_TypedLinkSpecifier:
+			v.TypedLinkSpecifier = &TypedLinkSpecifier{}
+			return v.TypedLinkSpecifier.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a DetachTypedLink response operation.
 type BatchDetachTypedLinkResponse struct {
 	noSmithyDocumentSerde
+}
+
+func (v *BatchDetachTypedLinkResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetachTypedLinkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetachTypedLinkResponse) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *BatchDetachTypedLinkResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetachTypedLinkResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Retrieves attributes that are associated with a typed link inside a BatchRead operation.
@@ -404,6 +1142,33 @@ type BatchGetLinkAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetLinkAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetLinkAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetLinkAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeNameList(s, schemas.BatchGetLinkAttributes_AttributeNames, v.AttributeNames)
+	if v.TypedLinkSpecifier != nil {
+		s.WriteStruct(schemas.BatchGetLinkAttributes_TypedLinkSpecifier)
+		v.TypedLinkSpecifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchGetLinkAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetLinkAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetLinkAttributes_AttributeNames:
+			return deserializeAttributeNameList(d, schemas.BatchGetLinkAttributes_AttributeNames, &v.AttributeNames)
+		case schemas.BatchGetLinkAttributes_TypedLinkSpecifier:
+			v.TypedLinkSpecifier = &TypedLinkSpecifier{}
+			return v.TypedLinkSpecifier.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a GetLinkAttributes response operation.
 type BatchGetLinkAttributesResponse struct {
 
@@ -411,6 +1176,25 @@ type BatchGetLinkAttributesResponse struct {
 	Attributes []AttributeKeyAndValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchGetLinkAttributesResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetLinkAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetLinkAttributesResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeKeyAndValueList(s, schemas.BatchGetLinkAttributesResponse_Attributes, v.Attributes)
+}
+func (v *BatchGetLinkAttributesResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetLinkAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetLinkAttributesResponse_Attributes:
+			return deserializeAttributeKeyAndValueList(d, schemas.BatchGetLinkAttributesResponse_Attributes, &v.Attributes)
+		}
+		return nil
+	})
 }
 
 // Retrieves attributes within a facet that are associated with an object inside
@@ -435,6 +1219,41 @@ type BatchGetObjectAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetObjectAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetObjectAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetObjectAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeNameList(s, schemas.BatchGetObjectAttributes_AttributeNames, v.AttributeNames)
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.BatchGetObjectAttributes_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaFacet != nil {
+		s.WriteStruct(schemas.BatchGetObjectAttributes_SchemaFacet)
+		v.SchemaFacet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchGetObjectAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetObjectAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetObjectAttributes_AttributeNames:
+			return deserializeAttributeNameList(d, schemas.BatchGetObjectAttributes_AttributeNames, &v.AttributeNames)
+		case schemas.BatchGetObjectAttributes_ObjectReference:
+			v.ObjectReference = &ObjectReference{}
+			return v.ObjectReference.Deserialize(d)
+		case schemas.BatchGetObjectAttributes_SchemaFacet:
+			v.SchemaFacet = &SchemaFacet{}
+			return v.SchemaFacet.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a GetObjectAttributes response operation.
 type BatchGetObjectAttributesResponse struct {
 
@@ -442,6 +1261,25 @@ type BatchGetObjectAttributesResponse struct {
 	Attributes []AttributeKeyAndValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchGetObjectAttributesResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetObjectAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetObjectAttributesResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeKeyAndValueList(s, schemas.BatchGetObjectAttributesResponse_Attributes, v.Attributes)
+}
+func (v *BatchGetObjectAttributesResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetObjectAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetObjectAttributesResponse_Attributes:
+			return deserializeAttributeKeyAndValueList(d, schemas.BatchGetObjectAttributesResponse_Attributes, &v.Attributes)
+		}
+		return nil
+	})
 }
 
 // Retrieves metadata about an object inside a BatchRead operation. For more information,
@@ -456,6 +1294,30 @@ type BatchGetObjectInformation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetObjectInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetObjectInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetObjectInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.BatchGetObjectInformation_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchGetObjectInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetObjectInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetObjectInformation_ObjectReference:
+			v.ObjectReference = &ObjectReference{}
+			return v.ObjectReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a GetObjectInformation response operation.
 type BatchGetObjectInformationResponse struct {
 
@@ -466,6 +1328,31 @@ type BatchGetObjectInformationResponse struct {
 	SchemaFacets []SchemaFacet
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchGetObjectInformationResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetObjectInformationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetObjectInformationResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectIdentifier != nil {
+		s.WriteString(schemas.BatchGetObjectInformationResponse_ObjectIdentifier, *v.ObjectIdentifier)
+	}
+	serializeSchemaFacetList(s, schemas.BatchGetObjectInformationResponse_SchemaFacets, v.SchemaFacets)
+}
+func (v *BatchGetObjectInformationResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetObjectInformationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetObjectInformationResponse_ObjectIdentifier:
+			v.ObjectIdentifier = new(string)
+			return d.ReadString(schemas.BatchGetObjectInformationResponse_ObjectIdentifier, v.ObjectIdentifier)
+		case schemas.BatchGetObjectInformationResponse_SchemaFacets:
+			return deserializeSchemaFacetList(d, schemas.BatchGetObjectInformationResponse_SchemaFacets, &v.SchemaFacets)
+		}
+		return nil
+	})
 }
 
 // Lists indices attached to an object inside a BatchRead operation. For more information,
@@ -486,6 +1373,42 @@ type BatchListAttachedIndices struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchListAttachedIndices) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListAttachedIndices)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListAttachedIndices) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.BatchListAttachedIndices_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListAttachedIndices_NextToken, *v.NextToken)
+	}
+	if v.TargetReference != nil {
+		s.WriteStruct(schemas.BatchListAttachedIndices_TargetReference)
+		v.TargetReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchListAttachedIndices) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListAttachedIndices, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListAttachedIndices_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.BatchListAttachedIndices_MaxResults, v.MaxResults)
+		case schemas.BatchListAttachedIndices_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListAttachedIndices_NextToken, v.NextToken)
+		case schemas.BatchListAttachedIndices_TargetReference:
+			v.TargetReference = &ObjectReference{}
+			return v.TargetReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a ListAttachedIndices response operation.
 type BatchListAttachedIndicesResponse struct {
 
@@ -496,6 +1419,31 @@ type BatchListAttachedIndicesResponse struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchListAttachedIndicesResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListAttachedIndicesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListAttachedIndicesResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIndexAttachmentList(s, schemas.BatchListAttachedIndicesResponse_IndexAttachments, v.IndexAttachments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListAttachedIndicesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *BatchListAttachedIndicesResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListAttachedIndicesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListAttachedIndicesResponse_IndexAttachments:
+			return deserializeIndexAttachmentList(d, schemas.BatchListAttachedIndicesResponse_IndexAttachments, &v.IndexAttachments)
+		case schemas.BatchListAttachedIndicesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListAttachedIndicesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 // Returns a paginated list of all the incoming TypedLinkSpecifier information for an object inside
@@ -525,6 +1473,53 @@ type BatchListIncomingTypedLinks struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchListIncomingTypedLinks) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListIncomingTypedLinks)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListIncomingTypedLinks) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTypedLinkAttributeRangeList(s, schemas.BatchListIncomingTypedLinks_FilterAttributeRanges, v.FilterAttributeRanges)
+	if v.FilterTypedLink != nil {
+		s.WriteStruct(schemas.BatchListIncomingTypedLinks_FilterTypedLink)
+		v.FilterTypedLink.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.BatchListIncomingTypedLinks_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListIncomingTypedLinks_NextToken, *v.NextToken)
+	}
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.BatchListIncomingTypedLinks_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchListIncomingTypedLinks) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListIncomingTypedLinks, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListIncomingTypedLinks_FilterAttributeRanges:
+			return deserializeTypedLinkAttributeRangeList(d, schemas.BatchListIncomingTypedLinks_FilterAttributeRanges, &v.FilterAttributeRanges)
+		case schemas.BatchListIncomingTypedLinks_FilterTypedLink:
+			v.FilterTypedLink = &TypedLinkSchemaAndFacetName{}
+			return v.FilterTypedLink.Deserialize(d)
+		case schemas.BatchListIncomingTypedLinks_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.BatchListIncomingTypedLinks_MaxResults, v.MaxResults)
+		case schemas.BatchListIncomingTypedLinks_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListIncomingTypedLinks_NextToken, v.NextToken)
+		case schemas.BatchListIncomingTypedLinks_ObjectReference:
+			v.ObjectReference = &ObjectReference{}
+			return v.ObjectReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a ListIncomingTypedLinks response operation.
 type BatchListIncomingTypedLinksResponse struct {
 
@@ -535,6 +1530,31 @@ type BatchListIncomingTypedLinksResponse struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchListIncomingTypedLinksResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListIncomingTypedLinksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListIncomingTypedLinksResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTypedLinkSpecifierList(s, schemas.BatchListIncomingTypedLinksResponse_LinkSpecifiers, v.LinkSpecifiers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListIncomingTypedLinksResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *BatchListIncomingTypedLinksResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListIncomingTypedLinksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListIncomingTypedLinksResponse_LinkSpecifiers:
+			return deserializeTypedLinkSpecifierList(d, schemas.BatchListIncomingTypedLinksResponse_LinkSpecifiers, &v.LinkSpecifiers)
+		case schemas.BatchListIncomingTypedLinksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListIncomingTypedLinksResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 // Lists objects attached to the specified index inside a BatchRead operation. For more
@@ -558,6 +1578,45 @@ type BatchListIndex struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchListIndex) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListIndex)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListIndex) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexReference != nil {
+		s.WriteStruct(schemas.BatchListIndex_IndexReference)
+		v.IndexReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.BatchListIndex_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListIndex_NextToken, *v.NextToken)
+	}
+	serializeObjectAttributeRangeList(s, schemas.BatchListIndex_RangesOnIndexedValues, v.RangesOnIndexedValues)
+}
+func (v *BatchListIndex) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListIndex, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListIndex_IndexReference:
+			v.IndexReference = &ObjectReference{}
+			return v.IndexReference.Deserialize(d)
+		case schemas.BatchListIndex_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.BatchListIndex_MaxResults, v.MaxResults)
+		case schemas.BatchListIndex_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListIndex_NextToken, v.NextToken)
+		case schemas.BatchListIndex_RangesOnIndexedValues:
+			return deserializeObjectAttributeRangeList(d, schemas.BatchListIndex_RangesOnIndexedValues, &v.RangesOnIndexedValues)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a ListIndex response operation.
 type BatchListIndexResponse struct {
 
@@ -568,6 +1627,31 @@ type BatchListIndexResponse struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchListIndexResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListIndexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListIndexResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIndexAttachmentList(s, schemas.BatchListIndexResponse_IndexAttachments, v.IndexAttachments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListIndexResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *BatchListIndexResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListIndexResponse_IndexAttachments:
+			return deserializeIndexAttachmentList(d, schemas.BatchListIndexResponse_IndexAttachments, &v.IndexAttachments)
+		case schemas.BatchListIndexResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListIndexResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 // Represents the output of a ListObjectAttributes operation.
@@ -592,6 +1676,50 @@ type BatchListObjectAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchListObjectAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListObjectAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListObjectAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FacetFilter != nil {
+		s.WriteStruct(schemas.BatchListObjectAttributes_FacetFilter)
+		v.FacetFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.BatchListObjectAttributes_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListObjectAttributes_NextToken, *v.NextToken)
+	}
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.BatchListObjectAttributes_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchListObjectAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListObjectAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListObjectAttributes_FacetFilter:
+			v.FacetFilter = &SchemaFacet{}
+			return v.FacetFilter.Deserialize(d)
+		case schemas.BatchListObjectAttributes_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.BatchListObjectAttributes_MaxResults, v.MaxResults)
+		case schemas.BatchListObjectAttributes_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListObjectAttributes_NextToken, v.NextToken)
+		case schemas.BatchListObjectAttributes_ObjectReference:
+			v.ObjectReference = &ObjectReference{}
+			return v.ObjectReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a ListObjectAttributes response operation.
 type BatchListObjectAttributesResponse struct {
 
@@ -603,6 +1731,31 @@ type BatchListObjectAttributesResponse struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchListObjectAttributesResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListObjectAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListObjectAttributesResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeKeyAndValueList(s, schemas.BatchListObjectAttributesResponse_Attributes, v.Attributes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListObjectAttributesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *BatchListObjectAttributesResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListObjectAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListObjectAttributesResponse_Attributes:
+			return deserializeAttributeKeyAndValueList(d, schemas.BatchListObjectAttributesResponse_Attributes, &v.Attributes)
+		case schemas.BatchListObjectAttributesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListObjectAttributesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 // Represents the output of a ListObjectChildren operation.
@@ -623,6 +1776,42 @@ type BatchListObjectChildren struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchListObjectChildren) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListObjectChildren)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListObjectChildren) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.BatchListObjectChildren_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListObjectChildren_NextToken, *v.NextToken)
+	}
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.BatchListObjectChildren_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchListObjectChildren) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListObjectChildren, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListObjectChildren_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.BatchListObjectChildren_MaxResults, v.MaxResults)
+		case schemas.BatchListObjectChildren_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListObjectChildren_NextToken, v.NextToken)
+		case schemas.BatchListObjectChildren_ObjectReference:
+			v.ObjectReference = &ObjectReference{}
+			return v.ObjectReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a ListObjectChildren response operation.
 type BatchListObjectChildrenResponse struct {
 
@@ -634,6 +1823,31 @@ type BatchListObjectChildrenResponse struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchListObjectChildrenResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListObjectChildrenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListObjectChildrenResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLinkNameToObjectIdentifierMap(s, schemas.BatchListObjectChildrenResponse_Children, v.Children)
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListObjectChildrenResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *BatchListObjectChildrenResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListObjectChildrenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListObjectChildrenResponse_Children:
+			return deserializeLinkNameToObjectIdentifierMap(d, schemas.BatchListObjectChildrenResponse_Children, &v.Children)
+		case schemas.BatchListObjectChildrenResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListObjectChildrenResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 // Retrieves all available parent paths for any object type such as node, leaf
@@ -655,6 +1869,42 @@ type BatchListObjectParentPaths struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchListObjectParentPaths) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListObjectParentPaths)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListObjectParentPaths) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.BatchListObjectParentPaths_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListObjectParentPaths_NextToken, *v.NextToken)
+	}
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.BatchListObjectParentPaths_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchListObjectParentPaths) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListObjectParentPaths, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListObjectParentPaths_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.BatchListObjectParentPaths_MaxResults, v.MaxResults)
+		case schemas.BatchListObjectParentPaths_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListObjectParentPaths_NextToken, v.NextToken)
+		case schemas.BatchListObjectParentPaths_ObjectReference:
+			v.ObjectReference = &ObjectReference{}
+			return v.ObjectReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a ListObjectParentPaths response operation.
 type BatchListObjectParentPathsResponse struct {
 
@@ -666,6 +1916,31 @@ type BatchListObjectParentPathsResponse struct {
 	PathToObjectIdentifiersList []PathToObjectIdentifiers
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchListObjectParentPathsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListObjectParentPathsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListObjectParentPathsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListObjectParentPathsResponse_NextToken, *v.NextToken)
+	}
+	serializePathToObjectIdentifiersList(s, schemas.BatchListObjectParentPathsResponse_PathToObjectIdentifiersList, v.PathToObjectIdentifiersList)
+}
+func (v *BatchListObjectParentPathsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListObjectParentPathsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListObjectParentPathsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListObjectParentPathsResponse_NextToken, v.NextToken)
+		case schemas.BatchListObjectParentPathsResponse_PathToObjectIdentifiersList:
+			return deserializePathToObjectIdentifiersList(d, schemas.BatchListObjectParentPathsResponse_PathToObjectIdentifiersList, &v.PathToObjectIdentifiersList)
+		}
+		return nil
+	})
 }
 
 // Lists parent objects that are associated with a given object in pagination
@@ -687,6 +1962,42 @@ type BatchListObjectParents struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchListObjectParents) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListObjectParents)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListObjectParents) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.BatchListObjectParents_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListObjectParents_NextToken, *v.NextToken)
+	}
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.BatchListObjectParents_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchListObjectParents) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListObjectParents, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListObjectParents_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.BatchListObjectParents_MaxResults, v.MaxResults)
+		case schemas.BatchListObjectParents_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListObjectParents_NextToken, v.NextToken)
+		case schemas.BatchListObjectParents_ObjectReference:
+			v.ObjectReference = &ObjectReference{}
+			return v.ObjectReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a ListObjectParents response operation.
 type BatchListObjectParentsResponse struct {
 
@@ -697,6 +2008,31 @@ type BatchListObjectParentsResponse struct {
 	ParentLinks []ObjectIdentifierAndLinkNameTuple
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchListObjectParentsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListObjectParentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListObjectParentsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListObjectParentsResponse_NextToken, *v.NextToken)
+	}
+	serializeObjectIdentifierAndLinkNameList(s, schemas.BatchListObjectParentsResponse_ParentLinks, v.ParentLinks)
+}
+func (v *BatchListObjectParentsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListObjectParentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListObjectParentsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListObjectParentsResponse_NextToken, v.NextToken)
+		case schemas.BatchListObjectParentsResponse_ParentLinks:
+			return deserializeObjectIdentifierAndLinkNameList(d, schemas.BatchListObjectParentsResponse_ParentLinks, &v.ParentLinks)
+		}
+		return nil
+	})
 }
 
 // Returns policies attached to an object in pagination fashion inside a BatchRead
@@ -717,6 +2053,42 @@ type BatchListObjectPolicies struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchListObjectPolicies) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListObjectPolicies)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListObjectPolicies) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.BatchListObjectPolicies_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListObjectPolicies_NextToken, *v.NextToken)
+	}
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.BatchListObjectPolicies_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchListObjectPolicies) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListObjectPolicies, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListObjectPolicies_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.BatchListObjectPolicies_MaxResults, v.MaxResults)
+		case schemas.BatchListObjectPolicies_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListObjectPolicies_NextToken, v.NextToken)
+		case schemas.BatchListObjectPolicies_ObjectReference:
+			v.ObjectReference = &ObjectReference{}
+			return v.ObjectReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a ListObjectPolicies response operation.
 type BatchListObjectPoliciesResponse struct {
 
@@ -727,6 +2099,31 @@ type BatchListObjectPoliciesResponse struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchListObjectPoliciesResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListObjectPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListObjectPoliciesResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeObjectIdentifierList(s, schemas.BatchListObjectPoliciesResponse_AttachedPolicyIds, v.AttachedPolicyIds)
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListObjectPoliciesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *BatchListObjectPoliciesResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListObjectPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListObjectPoliciesResponse_AttachedPolicyIds:
+			return deserializeObjectIdentifierList(d, schemas.BatchListObjectPoliciesResponse_AttachedPolicyIds, &v.AttachedPolicyIds)
+		case schemas.BatchListObjectPoliciesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListObjectPoliciesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 // Returns a paginated list of all the outgoing TypedLinkSpecifier information for an object inside
@@ -756,6 +2153,53 @@ type BatchListOutgoingTypedLinks struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchListOutgoingTypedLinks) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListOutgoingTypedLinks)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListOutgoingTypedLinks) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTypedLinkAttributeRangeList(s, schemas.BatchListOutgoingTypedLinks_FilterAttributeRanges, v.FilterAttributeRanges)
+	if v.FilterTypedLink != nil {
+		s.WriteStruct(schemas.BatchListOutgoingTypedLinks_FilterTypedLink)
+		v.FilterTypedLink.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.BatchListOutgoingTypedLinks_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListOutgoingTypedLinks_NextToken, *v.NextToken)
+	}
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.BatchListOutgoingTypedLinks_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchListOutgoingTypedLinks) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListOutgoingTypedLinks, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListOutgoingTypedLinks_FilterAttributeRanges:
+			return deserializeTypedLinkAttributeRangeList(d, schemas.BatchListOutgoingTypedLinks_FilterAttributeRanges, &v.FilterAttributeRanges)
+		case schemas.BatchListOutgoingTypedLinks_FilterTypedLink:
+			v.FilterTypedLink = &TypedLinkSchemaAndFacetName{}
+			return v.FilterTypedLink.Deserialize(d)
+		case schemas.BatchListOutgoingTypedLinks_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.BatchListOutgoingTypedLinks_MaxResults, v.MaxResults)
+		case schemas.BatchListOutgoingTypedLinks_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListOutgoingTypedLinks_NextToken, v.NextToken)
+		case schemas.BatchListOutgoingTypedLinks_ObjectReference:
+			v.ObjectReference = &ObjectReference{}
+			return v.ObjectReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a ListOutgoingTypedLinks response operation.
 type BatchListOutgoingTypedLinksResponse struct {
 
@@ -766,6 +2210,31 @@ type BatchListOutgoingTypedLinksResponse struct {
 	TypedLinkSpecifiers []TypedLinkSpecifier
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchListOutgoingTypedLinksResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListOutgoingTypedLinksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListOutgoingTypedLinksResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListOutgoingTypedLinksResponse_NextToken, *v.NextToken)
+	}
+	serializeTypedLinkSpecifierList(s, schemas.BatchListOutgoingTypedLinksResponse_TypedLinkSpecifiers, v.TypedLinkSpecifiers)
+}
+func (v *BatchListOutgoingTypedLinksResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListOutgoingTypedLinksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListOutgoingTypedLinksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListOutgoingTypedLinksResponse_NextToken, v.NextToken)
+		case schemas.BatchListOutgoingTypedLinksResponse_TypedLinkSpecifiers:
+			return deserializeTypedLinkSpecifierList(d, schemas.BatchListOutgoingTypedLinksResponse_TypedLinkSpecifiers, &v.TypedLinkSpecifiers)
+		}
+		return nil
+	})
 }
 
 // Returns all of the ObjectIdentifiers to which a given policy is attached inside
@@ -786,6 +2255,42 @@ type BatchListPolicyAttachments struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchListPolicyAttachments) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListPolicyAttachments)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListPolicyAttachments) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.BatchListPolicyAttachments_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListPolicyAttachments_NextToken, *v.NextToken)
+	}
+	if v.PolicyReference != nil {
+		s.WriteStruct(schemas.BatchListPolicyAttachments_PolicyReference)
+		v.PolicyReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchListPolicyAttachments) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListPolicyAttachments, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListPolicyAttachments_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.BatchListPolicyAttachments_MaxResults, v.MaxResults)
+		case schemas.BatchListPolicyAttachments_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListPolicyAttachments_NextToken, v.NextToken)
+		case schemas.BatchListPolicyAttachments_PolicyReference:
+			v.PolicyReference = &ObjectReference{}
+			return v.PolicyReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a ListPolicyAttachments response operation.
 type BatchListPolicyAttachmentsResponse struct {
 
@@ -796,6 +2301,31 @@ type BatchListPolicyAttachmentsResponse struct {
 	ObjectIdentifiers []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchListPolicyAttachmentsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchListPolicyAttachmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchListPolicyAttachmentsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchListPolicyAttachmentsResponse_NextToken, *v.NextToken)
+	}
+	serializeObjectIdentifierList(s, schemas.BatchListPolicyAttachmentsResponse_ObjectIdentifiers, v.ObjectIdentifiers)
+}
+func (v *BatchListPolicyAttachmentsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchListPolicyAttachmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchListPolicyAttachmentsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchListPolicyAttachmentsResponse_NextToken, v.NextToken)
+		case schemas.BatchListPolicyAttachmentsResponse_ObjectIdentifiers:
+			return deserializeObjectIdentifierList(d, schemas.BatchListPolicyAttachmentsResponse_ObjectIdentifiers, &v.ObjectIdentifiers)
+		}
+		return nil
+	})
 }
 
 // Lists all policies from the root of the Directory to the object specified
@@ -816,6 +2346,42 @@ type BatchLookupPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchLookupPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchLookupPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchLookupPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.BatchLookupPolicy_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchLookupPolicy_NextToken, *v.NextToken)
+	}
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.BatchLookupPolicy_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchLookupPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchLookupPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchLookupPolicy_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.BatchLookupPolicy_MaxResults, v.MaxResults)
+		case schemas.BatchLookupPolicy_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchLookupPolicy_NextToken, v.NextToken)
+		case schemas.BatchLookupPolicy_ObjectReference:
+			v.ObjectReference = &ObjectReference{}
+			return v.ObjectReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a LookupPolicy response operation.
 type BatchLookupPolicyResponse struct {
 
@@ -831,6 +2397,31 @@ type BatchLookupPolicyResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchLookupPolicyResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchLookupPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchLookupPolicyResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchLookupPolicyResponse_NextToken, *v.NextToken)
+	}
+	serializePolicyToPathList(s, schemas.BatchLookupPolicyResponse_PolicyToPathList, v.PolicyToPathList)
+}
+func (v *BatchLookupPolicyResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchLookupPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchLookupPolicyResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchLookupPolicyResponse_NextToken, v.NextToken)
+		case schemas.BatchLookupPolicyResponse_PolicyToPathList:
+			return deserializePolicyToPathList(d, schemas.BatchLookupPolicyResponse_PolicyToPathList, &v.PolicyToPathList)
+		}
+		return nil
+	})
+}
+
 // The batch read exception structure, which contains the exception type and
 // message.
 type BatchReadException struct {
@@ -842,6 +2433,38 @@ type BatchReadException struct {
 	Type BatchReadExceptionType
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchReadException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchReadException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchReadException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.BatchReadException_Message, *v.Message)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.BatchReadException_Type, string(v.Type))
+	}
+}
+func (v *BatchReadException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchReadException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchReadException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchReadException_Message, v.Message)
+		case schemas.BatchReadException_Type:
+			var ev string
+			if err := d.ReadString(schemas.BatchReadException_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = BatchReadExceptionType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Represents the output of a BatchRead operation.
@@ -913,6 +2536,134 @@ type BatchReadOperation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchReadOperation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchReadOperation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchReadOperation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GetLinkAttributes != nil {
+		s.WriteStruct(schemas.BatchReadOperation_GetLinkAttributes)
+		v.GetLinkAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GetObjectAttributes != nil {
+		s.WriteStruct(schemas.BatchReadOperation_GetObjectAttributes)
+		v.GetObjectAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GetObjectInformation != nil {
+		s.WriteStruct(schemas.BatchReadOperation_GetObjectInformation)
+		v.GetObjectInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListAttachedIndices != nil {
+		s.WriteStruct(schemas.BatchReadOperation_ListAttachedIndices)
+		v.ListAttachedIndices.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListIncomingTypedLinks != nil {
+		s.WriteStruct(schemas.BatchReadOperation_ListIncomingTypedLinks)
+		v.ListIncomingTypedLinks.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListIndex != nil {
+		s.WriteStruct(schemas.BatchReadOperation_ListIndex)
+		v.ListIndex.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListObjectAttributes != nil {
+		s.WriteStruct(schemas.BatchReadOperation_ListObjectAttributes)
+		v.ListObjectAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListObjectChildren != nil {
+		s.WriteStruct(schemas.BatchReadOperation_ListObjectChildren)
+		v.ListObjectChildren.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListObjectParentPaths != nil {
+		s.WriteStruct(schemas.BatchReadOperation_ListObjectParentPaths)
+		v.ListObjectParentPaths.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListObjectParents != nil {
+		s.WriteStruct(schemas.BatchReadOperation_ListObjectParents)
+		v.ListObjectParents.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListObjectPolicies != nil {
+		s.WriteStruct(schemas.BatchReadOperation_ListObjectPolicies)
+		v.ListObjectPolicies.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListOutgoingTypedLinks != nil {
+		s.WriteStruct(schemas.BatchReadOperation_ListOutgoingTypedLinks)
+		v.ListOutgoingTypedLinks.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListPolicyAttachments != nil {
+		s.WriteStruct(schemas.BatchReadOperation_ListPolicyAttachments)
+		v.ListPolicyAttachments.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LookupPolicy != nil {
+		s.WriteStruct(schemas.BatchReadOperation_LookupPolicy)
+		v.LookupPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchReadOperation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchReadOperation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchReadOperation_GetLinkAttributes:
+			v.GetLinkAttributes = &BatchGetLinkAttributes{}
+			return v.GetLinkAttributes.Deserialize(d)
+		case schemas.BatchReadOperation_GetObjectAttributes:
+			v.GetObjectAttributes = &BatchGetObjectAttributes{}
+			return v.GetObjectAttributes.Deserialize(d)
+		case schemas.BatchReadOperation_GetObjectInformation:
+			v.GetObjectInformation = &BatchGetObjectInformation{}
+			return v.GetObjectInformation.Deserialize(d)
+		case schemas.BatchReadOperation_ListAttachedIndices:
+			v.ListAttachedIndices = &BatchListAttachedIndices{}
+			return v.ListAttachedIndices.Deserialize(d)
+		case schemas.BatchReadOperation_ListIncomingTypedLinks:
+			v.ListIncomingTypedLinks = &BatchListIncomingTypedLinks{}
+			return v.ListIncomingTypedLinks.Deserialize(d)
+		case schemas.BatchReadOperation_ListIndex:
+			v.ListIndex = &BatchListIndex{}
+			return v.ListIndex.Deserialize(d)
+		case schemas.BatchReadOperation_ListObjectAttributes:
+			v.ListObjectAttributes = &BatchListObjectAttributes{}
+			return v.ListObjectAttributes.Deserialize(d)
+		case schemas.BatchReadOperation_ListObjectChildren:
+			v.ListObjectChildren = &BatchListObjectChildren{}
+			return v.ListObjectChildren.Deserialize(d)
+		case schemas.BatchReadOperation_ListObjectParentPaths:
+			v.ListObjectParentPaths = &BatchListObjectParentPaths{}
+			return v.ListObjectParentPaths.Deserialize(d)
+		case schemas.BatchReadOperation_ListObjectParents:
+			v.ListObjectParents = &BatchListObjectParents{}
+			return v.ListObjectParents.Deserialize(d)
+		case schemas.BatchReadOperation_ListObjectPolicies:
+			v.ListObjectPolicies = &BatchListObjectPolicies{}
+			return v.ListObjectPolicies.Deserialize(d)
+		case schemas.BatchReadOperation_ListOutgoingTypedLinks:
+			v.ListOutgoingTypedLinks = &BatchListOutgoingTypedLinks{}
+			return v.ListOutgoingTypedLinks.Deserialize(d)
+		case schemas.BatchReadOperation_ListPolicyAttachments:
+			v.ListPolicyAttachments = &BatchListPolicyAttachments{}
+			return v.ListPolicyAttachments.Deserialize(d)
+		case schemas.BatchReadOperation_LookupPolicy:
+			v.LookupPolicy = &BatchLookupPolicy{}
+			return v.LookupPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a BatchRead response operation.
 type BatchReadOperationResponse struct {
 
@@ -923,6 +2674,38 @@ type BatchReadOperationResponse struct {
 	SuccessfulResponse *BatchReadSuccessfulResponse
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchReadOperationResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchReadOperationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchReadOperationResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExceptionResponse != nil {
+		s.WriteStruct(schemas.BatchReadOperationResponse_ExceptionResponse)
+		v.ExceptionResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SuccessfulResponse != nil {
+		s.WriteStruct(schemas.BatchReadOperationResponse_SuccessfulResponse)
+		v.SuccessfulResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchReadOperationResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchReadOperationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchReadOperationResponse_ExceptionResponse:
+			v.ExceptionResponse = &BatchReadException{}
+			return v.ExceptionResponse.Deserialize(d)
+		case schemas.BatchReadOperationResponse_SuccessfulResponse:
+			v.SuccessfulResponse = &BatchReadSuccessfulResponse{}
+			return v.SuccessfulResponse.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Represents the output of a BatchRead success response operation.
@@ -993,6 +2776,134 @@ type BatchReadSuccessfulResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchReadSuccessfulResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchReadSuccessfulResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchReadSuccessfulResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GetLinkAttributes != nil {
+		s.WriteStruct(schemas.BatchReadSuccessfulResponse_GetLinkAttributes)
+		v.GetLinkAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GetObjectAttributes != nil {
+		s.WriteStruct(schemas.BatchReadSuccessfulResponse_GetObjectAttributes)
+		v.GetObjectAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GetObjectInformation != nil {
+		s.WriteStruct(schemas.BatchReadSuccessfulResponse_GetObjectInformation)
+		v.GetObjectInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListAttachedIndices != nil {
+		s.WriteStruct(schemas.BatchReadSuccessfulResponse_ListAttachedIndices)
+		v.ListAttachedIndices.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListIncomingTypedLinks != nil {
+		s.WriteStruct(schemas.BatchReadSuccessfulResponse_ListIncomingTypedLinks)
+		v.ListIncomingTypedLinks.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListIndex != nil {
+		s.WriteStruct(schemas.BatchReadSuccessfulResponse_ListIndex)
+		v.ListIndex.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListObjectAttributes != nil {
+		s.WriteStruct(schemas.BatchReadSuccessfulResponse_ListObjectAttributes)
+		v.ListObjectAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListObjectChildren != nil {
+		s.WriteStruct(schemas.BatchReadSuccessfulResponse_ListObjectChildren)
+		v.ListObjectChildren.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListObjectParentPaths != nil {
+		s.WriteStruct(schemas.BatchReadSuccessfulResponse_ListObjectParentPaths)
+		v.ListObjectParentPaths.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListObjectParents != nil {
+		s.WriteStruct(schemas.BatchReadSuccessfulResponse_ListObjectParents)
+		v.ListObjectParents.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListObjectPolicies != nil {
+		s.WriteStruct(schemas.BatchReadSuccessfulResponse_ListObjectPolicies)
+		v.ListObjectPolicies.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListOutgoingTypedLinks != nil {
+		s.WriteStruct(schemas.BatchReadSuccessfulResponse_ListOutgoingTypedLinks)
+		v.ListOutgoingTypedLinks.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ListPolicyAttachments != nil {
+		s.WriteStruct(schemas.BatchReadSuccessfulResponse_ListPolicyAttachments)
+		v.ListPolicyAttachments.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LookupPolicy != nil {
+		s.WriteStruct(schemas.BatchReadSuccessfulResponse_LookupPolicy)
+		v.LookupPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchReadSuccessfulResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchReadSuccessfulResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchReadSuccessfulResponse_GetLinkAttributes:
+			v.GetLinkAttributes = &BatchGetLinkAttributesResponse{}
+			return v.GetLinkAttributes.Deserialize(d)
+		case schemas.BatchReadSuccessfulResponse_GetObjectAttributes:
+			v.GetObjectAttributes = &BatchGetObjectAttributesResponse{}
+			return v.GetObjectAttributes.Deserialize(d)
+		case schemas.BatchReadSuccessfulResponse_GetObjectInformation:
+			v.GetObjectInformation = &BatchGetObjectInformationResponse{}
+			return v.GetObjectInformation.Deserialize(d)
+		case schemas.BatchReadSuccessfulResponse_ListAttachedIndices:
+			v.ListAttachedIndices = &BatchListAttachedIndicesResponse{}
+			return v.ListAttachedIndices.Deserialize(d)
+		case schemas.BatchReadSuccessfulResponse_ListIncomingTypedLinks:
+			v.ListIncomingTypedLinks = &BatchListIncomingTypedLinksResponse{}
+			return v.ListIncomingTypedLinks.Deserialize(d)
+		case schemas.BatchReadSuccessfulResponse_ListIndex:
+			v.ListIndex = &BatchListIndexResponse{}
+			return v.ListIndex.Deserialize(d)
+		case schemas.BatchReadSuccessfulResponse_ListObjectAttributes:
+			v.ListObjectAttributes = &BatchListObjectAttributesResponse{}
+			return v.ListObjectAttributes.Deserialize(d)
+		case schemas.BatchReadSuccessfulResponse_ListObjectChildren:
+			v.ListObjectChildren = &BatchListObjectChildrenResponse{}
+			return v.ListObjectChildren.Deserialize(d)
+		case schemas.BatchReadSuccessfulResponse_ListObjectParentPaths:
+			v.ListObjectParentPaths = &BatchListObjectParentPathsResponse{}
+			return v.ListObjectParentPaths.Deserialize(d)
+		case schemas.BatchReadSuccessfulResponse_ListObjectParents:
+			v.ListObjectParents = &BatchListObjectParentsResponse{}
+			return v.ListObjectParents.Deserialize(d)
+		case schemas.BatchReadSuccessfulResponse_ListObjectPolicies:
+			v.ListObjectPolicies = &BatchListObjectPoliciesResponse{}
+			return v.ListObjectPolicies.Deserialize(d)
+		case schemas.BatchReadSuccessfulResponse_ListOutgoingTypedLinks:
+			v.ListOutgoingTypedLinks = &BatchListOutgoingTypedLinksResponse{}
+			return v.ListOutgoingTypedLinks.Deserialize(d)
+		case schemas.BatchReadSuccessfulResponse_ListPolicyAttachments:
+			v.ListPolicyAttachments = &BatchListPolicyAttachmentsResponse{}
+			return v.ListPolicyAttachments.Deserialize(d)
+		case schemas.BatchReadSuccessfulResponse_LookupPolicy:
+			v.LookupPolicy = &BatchLookupPolicyResponse{}
+			return v.LookupPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A batch operation to remove a facet from an object.
 type BatchRemoveFacetFromObject struct {
 
@@ -1009,9 +2920,57 @@ type BatchRemoveFacetFromObject struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchRemoveFacetFromObject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchRemoveFacetFromObject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchRemoveFacetFromObject) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.BatchRemoveFacetFromObject_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaFacet != nil {
+		s.WriteStruct(schemas.BatchRemoveFacetFromObject_SchemaFacet)
+		v.SchemaFacet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchRemoveFacetFromObject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchRemoveFacetFromObject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchRemoveFacetFromObject_ObjectReference:
+			v.ObjectReference = &ObjectReference{}
+			return v.ObjectReference.Deserialize(d)
+		case schemas.BatchRemoveFacetFromObject_SchemaFacet:
+			v.SchemaFacet = &SchemaFacet{}
+			return v.SchemaFacet.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An empty result that represents success.
 type BatchRemoveFacetFromObjectResponse struct {
 	noSmithyDocumentSerde
+}
+
+func (v *BatchRemoveFacetFromObjectResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchRemoveFacetFromObjectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchRemoveFacetFromObjectResponse) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *BatchRemoveFacetFromObjectResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchRemoveFacetFromObjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Updates a given typed link’s attributes inside a BatchRead operation. Attributes to be
@@ -1032,9 +2991,52 @@ type BatchUpdateLinkAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateLinkAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateLinkAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateLinkAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLinkAttributeUpdateList(s, schemas.BatchUpdateLinkAttributes_AttributeUpdates, v.AttributeUpdates)
+	if v.TypedLinkSpecifier != nil {
+		s.WriteStruct(schemas.BatchUpdateLinkAttributes_TypedLinkSpecifier)
+		v.TypedLinkSpecifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchUpdateLinkAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateLinkAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateLinkAttributes_AttributeUpdates:
+			return deserializeLinkAttributeUpdateList(d, schemas.BatchUpdateLinkAttributes_AttributeUpdates, &v.AttributeUpdates)
+		case schemas.BatchUpdateLinkAttributes_TypedLinkSpecifier:
+			v.TypedLinkSpecifier = &TypedLinkSpecifier{}
+			return v.TypedLinkSpecifier.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a UpdateLinkAttributes response operation.
 type BatchUpdateLinkAttributesResponse struct {
 	noSmithyDocumentSerde
+}
+
+func (v *BatchUpdateLinkAttributesResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateLinkAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateLinkAttributesResponse) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *BatchUpdateLinkAttributesResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateLinkAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Represents the output of a BatchUpdate operation.
@@ -1053,6 +3055,33 @@ type BatchUpdateObjectAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateObjectAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateObjectAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateObjectAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeObjectAttributeUpdateList(s, schemas.BatchUpdateObjectAttributes_AttributeUpdates, v.AttributeUpdates)
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.BatchUpdateObjectAttributes_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchUpdateObjectAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateObjectAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateObjectAttributes_AttributeUpdates:
+			return deserializeObjectAttributeUpdateList(d, schemas.BatchUpdateObjectAttributes_AttributeUpdates, &v.AttributeUpdates)
+		case schemas.BatchUpdateObjectAttributes_ObjectReference:
+			v.ObjectReference = &ObjectReference{}
+			return v.ObjectReference.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a BatchUpdate response operation.
 type BatchUpdateObjectAttributesResponse struct {
 
@@ -1060,6 +3089,28 @@ type BatchUpdateObjectAttributesResponse struct {
 	ObjectIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchUpdateObjectAttributesResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateObjectAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateObjectAttributesResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectIdentifier != nil {
+		s.WriteString(schemas.BatchUpdateObjectAttributesResponse_ObjectIdentifier, *v.ObjectIdentifier)
+	}
+}
+func (v *BatchUpdateObjectAttributesResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateObjectAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateObjectAttributesResponse_ObjectIdentifier:
+			v.ObjectIdentifier = new(string)
+			return d.ReadString(schemas.BatchUpdateObjectAttributesResponse_ObjectIdentifier, v.ObjectIdentifier)
+		}
+		return nil
+	})
 }
 
 // Represents the output of a BatchWrite operation.
@@ -1122,6 +3173,142 @@ type BatchWriteOperation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchWriteOperation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchWriteOperation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchWriteOperation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddFacetToObject != nil {
+		s.WriteStruct(schemas.BatchWriteOperation_AddFacetToObject)
+		v.AddFacetToObject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AttachObject != nil {
+		s.WriteStruct(schemas.BatchWriteOperation_AttachObject)
+		v.AttachObject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AttachPolicy != nil {
+		s.WriteStruct(schemas.BatchWriteOperation_AttachPolicy)
+		v.AttachPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AttachToIndex != nil {
+		s.WriteStruct(schemas.BatchWriteOperation_AttachToIndex)
+		v.AttachToIndex.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AttachTypedLink != nil {
+		s.WriteStruct(schemas.BatchWriteOperation_AttachTypedLink)
+		v.AttachTypedLink.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreateIndex != nil {
+		s.WriteStruct(schemas.BatchWriteOperation_CreateIndex)
+		v.CreateIndex.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreateObject != nil {
+		s.WriteStruct(schemas.BatchWriteOperation_CreateObject)
+		v.CreateObject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeleteObject != nil {
+		s.WriteStruct(schemas.BatchWriteOperation_DeleteObject)
+		v.DeleteObject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DetachFromIndex != nil {
+		s.WriteStruct(schemas.BatchWriteOperation_DetachFromIndex)
+		v.DetachFromIndex.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DetachObject != nil {
+		s.WriteStruct(schemas.BatchWriteOperation_DetachObject)
+		v.DetachObject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DetachPolicy != nil {
+		s.WriteStruct(schemas.BatchWriteOperation_DetachPolicy)
+		v.DetachPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DetachTypedLink != nil {
+		s.WriteStruct(schemas.BatchWriteOperation_DetachTypedLink)
+		v.DetachTypedLink.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RemoveFacetFromObject != nil {
+		s.WriteStruct(schemas.BatchWriteOperation_RemoveFacetFromObject)
+		v.RemoveFacetFromObject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateLinkAttributes != nil {
+		s.WriteStruct(schemas.BatchWriteOperation_UpdateLinkAttributes)
+		v.UpdateLinkAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateObjectAttributes != nil {
+		s.WriteStruct(schemas.BatchWriteOperation_UpdateObjectAttributes)
+		v.UpdateObjectAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchWriteOperation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchWriteOperation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchWriteOperation_AddFacetToObject:
+			v.AddFacetToObject = &BatchAddFacetToObject{}
+			return v.AddFacetToObject.Deserialize(d)
+		case schemas.BatchWriteOperation_AttachObject:
+			v.AttachObject = &BatchAttachObject{}
+			return v.AttachObject.Deserialize(d)
+		case schemas.BatchWriteOperation_AttachPolicy:
+			v.AttachPolicy = &BatchAttachPolicy{}
+			return v.AttachPolicy.Deserialize(d)
+		case schemas.BatchWriteOperation_AttachToIndex:
+			v.AttachToIndex = &BatchAttachToIndex{}
+			return v.AttachToIndex.Deserialize(d)
+		case schemas.BatchWriteOperation_AttachTypedLink:
+			v.AttachTypedLink = &BatchAttachTypedLink{}
+			return v.AttachTypedLink.Deserialize(d)
+		case schemas.BatchWriteOperation_CreateIndex:
+			v.CreateIndex = &BatchCreateIndex{}
+			return v.CreateIndex.Deserialize(d)
+		case schemas.BatchWriteOperation_CreateObject:
+			v.CreateObject = &BatchCreateObject{}
+			return v.CreateObject.Deserialize(d)
+		case schemas.BatchWriteOperation_DeleteObject:
+			v.DeleteObject = &BatchDeleteObject{}
+			return v.DeleteObject.Deserialize(d)
+		case schemas.BatchWriteOperation_DetachFromIndex:
+			v.DetachFromIndex = &BatchDetachFromIndex{}
+			return v.DetachFromIndex.Deserialize(d)
+		case schemas.BatchWriteOperation_DetachObject:
+			v.DetachObject = &BatchDetachObject{}
+			return v.DetachObject.Deserialize(d)
+		case schemas.BatchWriteOperation_DetachPolicy:
+			v.DetachPolicy = &BatchDetachPolicy{}
+			return v.DetachPolicy.Deserialize(d)
+		case schemas.BatchWriteOperation_DetachTypedLink:
+			v.DetachTypedLink = &BatchDetachTypedLink{}
+			return v.DetachTypedLink.Deserialize(d)
+		case schemas.BatchWriteOperation_RemoveFacetFromObject:
+			v.RemoveFacetFromObject = &BatchRemoveFacetFromObject{}
+			return v.RemoveFacetFromObject.Deserialize(d)
+		case schemas.BatchWriteOperation_UpdateLinkAttributes:
+			v.UpdateLinkAttributes = &BatchUpdateLinkAttributes{}
+			return v.UpdateLinkAttributes.Deserialize(d)
+		case schemas.BatchWriteOperation_UpdateObjectAttributes:
+			v.UpdateObjectAttributes = &BatchUpdateObjectAttributes{}
+			return v.UpdateObjectAttributes.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a BatchWrite response operation.
 type BatchWriteOperationResponse struct {
 
@@ -1182,6 +3369,142 @@ type BatchWriteOperationResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchWriteOperationResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchWriteOperationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchWriteOperationResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddFacetToObject != nil {
+		s.WriteStruct(schemas.BatchWriteOperationResponse_AddFacetToObject)
+		v.AddFacetToObject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AttachObject != nil {
+		s.WriteStruct(schemas.BatchWriteOperationResponse_AttachObject)
+		v.AttachObject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AttachPolicy != nil {
+		s.WriteStruct(schemas.BatchWriteOperationResponse_AttachPolicy)
+		v.AttachPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AttachToIndex != nil {
+		s.WriteStruct(schemas.BatchWriteOperationResponse_AttachToIndex)
+		v.AttachToIndex.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AttachTypedLink != nil {
+		s.WriteStruct(schemas.BatchWriteOperationResponse_AttachTypedLink)
+		v.AttachTypedLink.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreateIndex != nil {
+		s.WriteStruct(schemas.BatchWriteOperationResponse_CreateIndex)
+		v.CreateIndex.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreateObject != nil {
+		s.WriteStruct(schemas.BatchWriteOperationResponse_CreateObject)
+		v.CreateObject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeleteObject != nil {
+		s.WriteStruct(schemas.BatchWriteOperationResponse_DeleteObject)
+		v.DeleteObject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DetachFromIndex != nil {
+		s.WriteStruct(schemas.BatchWriteOperationResponse_DetachFromIndex)
+		v.DetachFromIndex.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DetachObject != nil {
+		s.WriteStruct(schemas.BatchWriteOperationResponse_DetachObject)
+		v.DetachObject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DetachPolicy != nil {
+		s.WriteStruct(schemas.BatchWriteOperationResponse_DetachPolicy)
+		v.DetachPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DetachTypedLink != nil {
+		s.WriteStruct(schemas.BatchWriteOperationResponse_DetachTypedLink)
+		v.DetachTypedLink.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RemoveFacetFromObject != nil {
+		s.WriteStruct(schemas.BatchWriteOperationResponse_RemoveFacetFromObject)
+		v.RemoveFacetFromObject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateLinkAttributes != nil {
+		s.WriteStruct(schemas.BatchWriteOperationResponse_UpdateLinkAttributes)
+		v.UpdateLinkAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateObjectAttributes != nil {
+		s.WriteStruct(schemas.BatchWriteOperationResponse_UpdateObjectAttributes)
+		v.UpdateObjectAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchWriteOperationResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchWriteOperationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchWriteOperationResponse_AddFacetToObject:
+			v.AddFacetToObject = &BatchAddFacetToObjectResponse{}
+			return v.AddFacetToObject.Deserialize(d)
+		case schemas.BatchWriteOperationResponse_AttachObject:
+			v.AttachObject = &BatchAttachObjectResponse{}
+			return v.AttachObject.Deserialize(d)
+		case schemas.BatchWriteOperationResponse_AttachPolicy:
+			v.AttachPolicy = &BatchAttachPolicyResponse{}
+			return v.AttachPolicy.Deserialize(d)
+		case schemas.BatchWriteOperationResponse_AttachToIndex:
+			v.AttachToIndex = &BatchAttachToIndexResponse{}
+			return v.AttachToIndex.Deserialize(d)
+		case schemas.BatchWriteOperationResponse_AttachTypedLink:
+			v.AttachTypedLink = &BatchAttachTypedLinkResponse{}
+			return v.AttachTypedLink.Deserialize(d)
+		case schemas.BatchWriteOperationResponse_CreateIndex:
+			v.CreateIndex = &BatchCreateIndexResponse{}
+			return v.CreateIndex.Deserialize(d)
+		case schemas.BatchWriteOperationResponse_CreateObject:
+			v.CreateObject = &BatchCreateObjectResponse{}
+			return v.CreateObject.Deserialize(d)
+		case schemas.BatchWriteOperationResponse_DeleteObject:
+			v.DeleteObject = &BatchDeleteObjectResponse{}
+			return v.DeleteObject.Deserialize(d)
+		case schemas.BatchWriteOperationResponse_DetachFromIndex:
+			v.DetachFromIndex = &BatchDetachFromIndexResponse{}
+			return v.DetachFromIndex.Deserialize(d)
+		case schemas.BatchWriteOperationResponse_DetachObject:
+			v.DetachObject = &BatchDetachObjectResponse{}
+			return v.DetachObject.Deserialize(d)
+		case schemas.BatchWriteOperationResponse_DetachPolicy:
+			v.DetachPolicy = &BatchDetachPolicyResponse{}
+			return v.DetachPolicy.Deserialize(d)
+		case schemas.BatchWriteOperationResponse_DetachTypedLink:
+			v.DetachTypedLink = &BatchDetachTypedLinkResponse{}
+			return v.DetachTypedLink.Deserialize(d)
+		case schemas.BatchWriteOperationResponse_RemoveFacetFromObject:
+			v.RemoveFacetFromObject = &BatchRemoveFacetFromObjectResponse{}
+			return v.RemoveFacetFromObject.Deserialize(d)
+		case schemas.BatchWriteOperationResponse_UpdateLinkAttributes:
+			v.UpdateLinkAttributes = &BatchUpdateLinkAttributesResponse{}
+			return v.UpdateLinkAttributes.Deserialize(d)
+		case schemas.BatchWriteOperationResponse_UpdateObjectAttributes:
+			v.UpdateObjectAttributes = &BatchUpdateObjectAttributesResponse{}
+			return v.UpdateObjectAttributes.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Directory structure that includes the directory name and directory ARN.
 type Directory struct {
 
@@ -1199,6 +3522,50 @@ type Directory struct {
 	State DirectoryState
 
 	noSmithyDocumentSerde
+}
+
+func (v *Directory) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Directory)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Directory) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.Directory_CreationDateTime, *v.CreationDateTime)
+	}
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.Directory_DirectoryArn, *v.DirectoryArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Directory_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Directory_State, string(v.State))
+	}
+}
+func (v *Directory) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Directory, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Directory_CreationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.Directory_CreationDateTime, v.CreationDateTime)
+		case schemas.Directory_DirectoryArn:
+			v.DirectoryArn = new(string)
+			return d.ReadString(schemas.Directory_DirectoryArn, v.DirectoryArn)
+		case schemas.Directory_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Directory_Name, v.Name)
+		case schemas.Directory_State:
+			var ev string
+			if err := d.ReadString(schemas.Directory_State, &ev); err != nil {
+				return err
+			}
+			v.State = DirectoryState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A structure that contains Name , ARN , Attributes , Rules , and ObjectTypes . See [Facets]
@@ -1219,6 +3586,48 @@ type Facet struct {
 	ObjectType ObjectType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Facet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Facet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Facet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FacetStyle != "" {
+		s.WriteString(schemas.Facet_FacetStyle, string(v.FacetStyle))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Facet_Name, *v.Name)
+	}
+	if v.ObjectType != "" {
+		s.WriteString(schemas.Facet_ObjectType, string(v.ObjectType))
+	}
+}
+func (v *Facet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Facet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Facet_FacetStyle:
+			var ev string
+			if err := d.ReadString(schemas.Facet_FacetStyle, &ev); err != nil {
+				return err
+			}
+			v.FacetStyle = FacetStyle(ev)
+			return nil
+		case schemas.Facet_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Facet_Name, v.Name)
+		case schemas.Facet_ObjectType:
+			var ev string
+			if err := d.ReadString(schemas.Facet_ObjectType, &ev); err != nil {
+				return err
+			}
+			v.ObjectType = ObjectType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An attribute that is associated with the Facet.
@@ -1247,6 +3656,54 @@ type FacetAttribute struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FacetAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FacetAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FacetAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeDefinition != nil {
+		s.WriteStruct(schemas.FacetAttribute_AttributeDefinition)
+		v.AttributeDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AttributeReference != nil {
+		s.WriteStruct(schemas.FacetAttribute_AttributeReference)
+		v.AttributeReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FacetAttribute_Name, *v.Name)
+	}
+	if v.RequiredBehavior != "" {
+		s.WriteString(schemas.FacetAttribute_RequiredBehavior, string(v.RequiredBehavior))
+	}
+}
+func (v *FacetAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FacetAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FacetAttribute_AttributeDefinition:
+			v.AttributeDefinition = &FacetAttributeDefinition{}
+			return v.AttributeDefinition.Deserialize(d)
+		case schemas.FacetAttribute_AttributeReference:
+			v.AttributeReference = &FacetAttributeReference{}
+			return v.AttributeReference.Deserialize(d)
+		case schemas.FacetAttribute_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FacetAttribute_Name, v.Name)
+		case schemas.FacetAttribute_RequiredBehavior:
+			var ev string
+			if err := d.ReadString(schemas.FacetAttribute_RequiredBehavior, &ev); err != nil {
+				return err
+			}
+			v.RequiredBehavior = RequiredAttributeBehavior(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A facet attribute definition. See [Attribute References] for more information.
 //
 // [Attribute References]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html
@@ -1267,6 +3724,43 @@ type FacetAttributeDefinition struct {
 	Rules map[string]Rule
 
 	noSmithyDocumentSerde
+}
+
+func (v *FacetAttributeDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FacetAttributeDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FacetAttributeDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTypedAttributeValue(s, schemas.FacetAttributeDefinition_DefaultValue, v.DefaultValue)
+	if v.IsImmutable != false {
+		s.WriteBool(schemas.FacetAttributeDefinition_IsImmutable, v.IsImmutable)
+	}
+	serializeRuleMap(s, schemas.FacetAttributeDefinition_Rules, v.Rules)
+	if v.Type != "" {
+		s.WriteString(schemas.FacetAttributeDefinition_Type, string(v.Type))
+	}
+}
+func (v *FacetAttributeDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FacetAttributeDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FacetAttributeDefinition_DefaultValue:
+			return deserializeTypedAttributeValue(d, schemas.FacetAttributeDefinition_DefaultValue, &v.DefaultValue)
+		case schemas.FacetAttributeDefinition_IsImmutable:
+			return d.ReadBool(schemas.FacetAttributeDefinition_IsImmutable, &v.IsImmutable)
+		case schemas.FacetAttributeDefinition_Rules:
+			return deserializeRuleMap(d, schemas.FacetAttributeDefinition_Rules, &v.Rules)
+		case schemas.FacetAttributeDefinition_Type:
+			var ev string
+			if err := d.ReadString(schemas.FacetAttributeDefinition_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = FacetAttributeType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The facet attribute reference that specifies the attribute definition that
@@ -1292,6 +3786,34 @@ type FacetAttributeReference struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FacetAttributeReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FacetAttributeReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FacetAttributeReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetAttributeName != nil {
+		s.WriteString(schemas.FacetAttributeReference_TargetAttributeName, *v.TargetAttributeName)
+	}
+	if v.TargetFacetName != nil {
+		s.WriteString(schemas.FacetAttributeReference_TargetFacetName, *v.TargetFacetName)
+	}
+}
+func (v *FacetAttributeReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FacetAttributeReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FacetAttributeReference_TargetAttributeName:
+			v.TargetAttributeName = new(string)
+			return d.ReadString(schemas.FacetAttributeReference_TargetAttributeName, v.TargetAttributeName)
+		case schemas.FacetAttributeReference_TargetFacetName:
+			v.TargetFacetName = new(string)
+			return d.ReadString(schemas.FacetAttributeReference_TargetFacetName, v.TargetFacetName)
+		}
+		return nil
+	})
+}
+
 // A structure that contains information used to update an attribute.
 type FacetAttributeUpdate struct {
 
@@ -1302,6 +3824,40 @@ type FacetAttributeUpdate struct {
 	Attribute *FacetAttribute
 
 	noSmithyDocumentSerde
+}
+
+func (v *FacetAttributeUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FacetAttributeUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FacetAttributeUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.FacetAttributeUpdate_Action, string(v.Action))
+	}
+	if v.Attribute != nil {
+		s.WriteStruct(schemas.FacetAttributeUpdate_Attribute)
+		v.Attribute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FacetAttributeUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FacetAttributeUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FacetAttributeUpdate_Action:
+			var ev string
+			if err := d.ReadString(schemas.FacetAttributeUpdate_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = UpdateActionType(ev)
+			return nil
+		case schemas.FacetAttributeUpdate_Attribute:
+			v.Attribute = &FacetAttribute{}
+			return v.Attribute.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Represents an index and an attached object.
@@ -1319,6 +3875,31 @@ type IndexAttachment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IndexAttachment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IndexAttachment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IndexAttachment) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeKeyAndValueList(s, schemas.IndexAttachment_IndexedAttributes, v.IndexedAttributes)
+	if v.ObjectIdentifier != nil {
+		s.WriteString(schemas.IndexAttachment_ObjectIdentifier, *v.ObjectIdentifier)
+	}
+}
+func (v *IndexAttachment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IndexAttachment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IndexAttachment_IndexedAttributes:
+			return deserializeAttributeKeyAndValueList(d, schemas.IndexAttachment_IndexedAttributes, &v.IndexedAttributes)
+		case schemas.IndexAttachment_ObjectIdentifier:
+			v.ObjectIdentifier = new(string)
+			return d.ReadString(schemas.IndexAttachment_ObjectIdentifier, v.ObjectIdentifier)
+		}
+		return nil
+	})
+}
+
 // The action to take on a typed link attribute value. Updates are only supported
 // for attributes which don’t contribute to link identity.
 type LinkAttributeAction struct {
@@ -1330,6 +3911,35 @@ type LinkAttributeAction struct {
 	AttributeUpdateValue TypedAttributeValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *LinkAttributeAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LinkAttributeAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LinkAttributeAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeActionType != "" {
+		s.WriteString(schemas.LinkAttributeAction_AttributeActionType, string(v.AttributeActionType))
+	}
+	serializeTypedAttributeValue(s, schemas.LinkAttributeAction_AttributeUpdateValue, v.AttributeUpdateValue)
+}
+func (v *LinkAttributeAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LinkAttributeAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LinkAttributeAction_AttributeActionType:
+			var ev string
+			if err := d.ReadString(schemas.LinkAttributeAction_AttributeActionType, &ev); err != nil {
+				return err
+			}
+			v.AttributeActionType = UpdateActionType(ev)
+			return nil
+		case schemas.LinkAttributeAction_AttributeUpdateValue:
+			return deserializeTypedAttributeValue(d, schemas.LinkAttributeAction_AttributeUpdateValue, &v.AttributeUpdateValue)
+		}
+		return nil
+	})
 }
 
 // Structure that contains attribute update information.
@@ -1344,6 +3954,38 @@ type LinkAttributeUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LinkAttributeUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LinkAttributeUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LinkAttributeUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeAction != nil {
+		s.WriteStruct(schemas.LinkAttributeUpdate_AttributeAction)
+		v.AttributeAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AttributeKey != nil {
+		s.WriteStruct(schemas.LinkAttributeUpdate_AttributeKey)
+		v.AttributeKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LinkAttributeUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LinkAttributeUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LinkAttributeUpdate_AttributeAction:
+			v.AttributeAction = &LinkAttributeAction{}
+			return v.AttributeAction.Deserialize(d)
+		case schemas.LinkAttributeUpdate_AttributeKey:
+			v.AttributeKey = &AttributeKey{}
+			return v.AttributeKey.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The action to take on the object attribute.
 type ObjectAttributeAction struct {
 
@@ -1354,6 +3996,35 @@ type ObjectAttributeAction struct {
 	ObjectAttributeUpdateValue TypedAttributeValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *ObjectAttributeAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ObjectAttributeAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ObjectAttributeAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectAttributeActionType != "" {
+		s.WriteString(schemas.ObjectAttributeAction_ObjectAttributeActionType, string(v.ObjectAttributeActionType))
+	}
+	serializeTypedAttributeValue(s, schemas.ObjectAttributeAction_ObjectAttributeUpdateValue, v.ObjectAttributeUpdateValue)
+}
+func (v *ObjectAttributeAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ObjectAttributeAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ObjectAttributeAction_ObjectAttributeActionType:
+			var ev string
+			if err := d.ReadString(schemas.ObjectAttributeAction_ObjectAttributeActionType, &ev); err != nil {
+				return err
+			}
+			v.ObjectAttributeActionType = UpdateActionType(ev)
+			return nil
+		case schemas.ObjectAttributeAction_ObjectAttributeUpdateValue:
+			return deserializeTypedAttributeValue(d, schemas.ObjectAttributeAction_ObjectAttributeUpdateValue, &v.ObjectAttributeUpdateValue)
+		}
+		return nil
+	})
 }
 
 // A range of attributes.
@@ -1368,6 +4039,38 @@ type ObjectAttributeRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ObjectAttributeRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ObjectAttributeRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ObjectAttributeRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeKey != nil {
+		s.WriteStruct(schemas.ObjectAttributeRange_AttributeKey)
+		v.AttributeKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Range != nil {
+		s.WriteStruct(schemas.ObjectAttributeRange_Range)
+		v.Range.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ObjectAttributeRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ObjectAttributeRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ObjectAttributeRange_AttributeKey:
+			v.AttributeKey = &AttributeKey{}
+			return v.AttributeKey.Deserialize(d)
+		case schemas.ObjectAttributeRange_Range:
+			v.Range = &TypedAttributeValueRange{}
+			return v.Range.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Structure that contains attribute update information.
 type ObjectAttributeUpdate struct {
 
@@ -1380,6 +4083,38 @@ type ObjectAttributeUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ObjectAttributeUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ObjectAttributeUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ObjectAttributeUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectAttributeAction != nil {
+		s.WriteStruct(schemas.ObjectAttributeUpdate_ObjectAttributeAction)
+		v.ObjectAttributeAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ObjectAttributeKey != nil {
+		s.WriteStruct(schemas.ObjectAttributeUpdate_ObjectAttributeKey)
+		v.ObjectAttributeKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ObjectAttributeUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ObjectAttributeUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ObjectAttributeUpdate_ObjectAttributeAction:
+			v.ObjectAttributeAction = &ObjectAttributeAction{}
+			return v.ObjectAttributeAction.Deserialize(d)
+		case schemas.ObjectAttributeUpdate_ObjectAttributeKey:
+			v.ObjectAttributeKey = &AttributeKey{}
+			return v.ObjectAttributeKey.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A pair of ObjectIdentifier and LinkName.
 type ObjectIdentifierAndLinkNameTuple struct {
 
@@ -1390,6 +4125,34 @@ type ObjectIdentifierAndLinkNameTuple struct {
 	ObjectIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ObjectIdentifierAndLinkNameTuple) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ObjectIdentifierAndLinkNameTuple)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ObjectIdentifierAndLinkNameTuple) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LinkName != nil {
+		s.WriteString(schemas.ObjectIdentifierAndLinkNameTuple_LinkName, *v.LinkName)
+	}
+	if v.ObjectIdentifier != nil {
+		s.WriteString(schemas.ObjectIdentifierAndLinkNameTuple_ObjectIdentifier, *v.ObjectIdentifier)
+	}
+}
+func (v *ObjectIdentifierAndLinkNameTuple) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ObjectIdentifierAndLinkNameTuple, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ObjectIdentifierAndLinkNameTuple_LinkName:
+			v.LinkName = new(string)
+			return d.ReadString(schemas.ObjectIdentifierAndLinkNameTuple_LinkName, v.LinkName)
+		case schemas.ObjectIdentifierAndLinkNameTuple_ObjectIdentifier:
+			v.ObjectIdentifier = new(string)
+			return d.ReadString(schemas.ObjectIdentifierAndLinkNameTuple_ObjectIdentifier, v.ObjectIdentifier)
+		}
+		return nil
+	})
 }
 
 // The reference that identifies an object.
@@ -1417,6 +4180,28 @@ type ObjectReference struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ObjectReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ObjectReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ObjectReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Selector != nil {
+		s.WriteString(schemas.ObjectReference_Selector, *v.Selector)
+	}
+}
+func (v *ObjectReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ObjectReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ObjectReference_Selector:
+			v.Selector = new(string)
+			return d.ReadString(schemas.ObjectReference_Selector, v.Selector)
+		}
+		return nil
+	})
+}
+
 // Returns the path to the ObjectIdentifiers that is associated with the directory.
 type PathToObjectIdentifiers struct {
 
@@ -1428,6 +4213,31 @@ type PathToObjectIdentifiers struct {
 	Path *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PathToObjectIdentifiers) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PathToObjectIdentifiers)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PathToObjectIdentifiers) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeObjectIdentifierList(s, schemas.PathToObjectIdentifiers_ObjectIdentifiers, v.ObjectIdentifiers)
+	if v.Path != nil {
+		s.WriteString(schemas.PathToObjectIdentifiers_Path, *v.Path)
+	}
+}
+func (v *PathToObjectIdentifiers) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PathToObjectIdentifiers, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PathToObjectIdentifiers_ObjectIdentifiers:
+			return deserializeObjectIdentifierList(d, schemas.PathToObjectIdentifiers_ObjectIdentifiers, &v.ObjectIdentifiers)
+		case schemas.PathToObjectIdentifiers_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.PathToObjectIdentifiers_Path, v.Path)
+		}
+		return nil
+	})
 }
 
 // Contains the PolicyType , PolicyId , and the ObjectIdentifier to which it is
@@ -1448,6 +4258,40 @@ type PolicyAttachment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PolicyAttachment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyAttachment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyAttachment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectIdentifier != nil {
+		s.WriteString(schemas.PolicyAttachment_ObjectIdentifier, *v.ObjectIdentifier)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.PolicyAttachment_PolicyId, *v.PolicyId)
+	}
+	if v.PolicyType != nil {
+		s.WriteString(schemas.PolicyAttachment_PolicyType, *v.PolicyType)
+	}
+}
+func (v *PolicyAttachment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyAttachment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyAttachment_ObjectIdentifier:
+			v.ObjectIdentifier = new(string)
+			return d.ReadString(schemas.PolicyAttachment_ObjectIdentifier, v.ObjectIdentifier)
+		case schemas.PolicyAttachment_PolicyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.PolicyAttachment_PolicyId, v.PolicyId)
+		case schemas.PolicyAttachment_PolicyType:
+			v.PolicyType = new(string)
+			return d.ReadString(schemas.PolicyAttachment_PolicyType, v.PolicyType)
+		}
+		return nil
+	})
+}
+
 // Used when a regular object exists in a Directory and you want to find all of the
 // policies that are associated with that object and the parent to that object.
 type PolicyToPath struct {
@@ -1461,6 +4305,31 @@ type PolicyToPath struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PolicyToPath) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyToPath)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyToPath) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Path != nil {
+		s.WriteString(schemas.PolicyToPath_Path, *v.Path)
+	}
+	serializePolicyAttachmentList(s, schemas.PolicyToPath_Policies, v.Policies)
+}
+func (v *PolicyToPath) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyToPath, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyToPath_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.PolicyToPath_Path, v.Path)
+		case schemas.PolicyToPath_Policies:
+			return deserializePolicyAttachmentList(d, schemas.PolicyToPath_Policies, &v.Policies)
+		}
+		return nil
+	})
+}
+
 // Contains an Amazon Resource Name (ARN) and parameters that are associated with
 // the rule.
 type Rule struct {
@@ -1472,6 +4341,35 @@ type Rule struct {
 	Type RuleType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Rule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Rule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Rule) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRuleParameterMap(s, schemas.Rule_Parameters, v.Parameters)
+	if v.Type != "" {
+		s.WriteString(schemas.Rule_Type, string(v.Type))
+	}
+}
+func (v *Rule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Rule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Rule_Parameters:
+			return deserializeRuleParameterMap(d, schemas.Rule_Parameters, &v.Parameters)
+		case schemas.Rule_Type:
+			var ev string
+			if err := d.ReadString(schemas.Rule_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = RuleType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A facet.
@@ -1490,6 +4388,34 @@ type SchemaFacet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SchemaFacet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SchemaFacet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SchemaFacet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FacetName != nil {
+		s.WriteString(schemas.SchemaFacet_FacetName, *v.FacetName)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.SchemaFacet_SchemaArn, *v.SchemaArn)
+	}
+}
+func (v *SchemaFacet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchemaFacet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchemaFacet_FacetName:
+			v.FacetName = new(string)
+			return d.ReadString(schemas.SchemaFacet_FacetName, v.FacetName)
+		case schemas.SchemaFacet_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.SchemaFacet_SchemaArn, v.SchemaArn)
+		}
+		return nil
+	})
+}
+
 // The tag structure that contains a tag key and value.
 type Tag struct {
 
@@ -1500,6 +4426,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Represents the data for a typed attribute. You can set one, and only one, of
@@ -1525,6 +4479,12 @@ type TypedAttributeValueMemberBinaryValue struct {
 }
 
 func (*TypedAttributeValueMemberBinaryValue) isTypedAttributeValue() {}
+func (v *TypedAttributeValueMemberBinaryValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBlob(schemas.TypedAttributeValue_BinaryValue, v.Value)
+}
+func (v *TypedAttributeValueMemberBinaryValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBlob(schemas.TypedAttributeValue_BinaryValue, &v.Value)
+}
 
 // A Boolean data value.
 type TypedAttributeValueMemberBooleanValue struct {
@@ -1534,6 +4494,12 @@ type TypedAttributeValueMemberBooleanValue struct {
 }
 
 func (*TypedAttributeValueMemberBooleanValue) isTypedAttributeValue() {}
+func (v *TypedAttributeValueMemberBooleanValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.TypedAttributeValue_BooleanValue, v.Value)
+}
+func (v *TypedAttributeValueMemberBooleanValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.TypedAttributeValue_BooleanValue, &v.Value)
+}
 
 // A date and time value.
 type TypedAttributeValueMemberDatetimeValue struct {
@@ -1543,6 +4509,12 @@ type TypedAttributeValueMemberDatetimeValue struct {
 }
 
 func (*TypedAttributeValueMemberDatetimeValue) isTypedAttributeValue() {}
+func (v *TypedAttributeValueMemberDatetimeValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteTime(schemas.TypedAttributeValue_DatetimeValue, v.Value)
+}
+func (v *TypedAttributeValueMemberDatetimeValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadTime(schemas.TypedAttributeValue_DatetimeValue, &v.Value)
+}
 
 // A number data value.
 type TypedAttributeValueMemberNumberValue struct {
@@ -1552,6 +4524,12 @@ type TypedAttributeValueMemberNumberValue struct {
 }
 
 func (*TypedAttributeValueMemberNumberValue) isTypedAttributeValue() {}
+func (v *TypedAttributeValueMemberNumberValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.TypedAttributeValue_NumberValue, v.Value)
+}
+func (v *TypedAttributeValueMemberNumberValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.TypedAttributeValue_NumberValue, &v.Value)
+}
 
 // A string data value.
 type TypedAttributeValueMemberStringValue struct {
@@ -1561,6 +4539,12 @@ type TypedAttributeValueMemberStringValue struct {
 }
 
 func (*TypedAttributeValueMemberStringValue) isTypedAttributeValue() {}
+func (v *TypedAttributeValueMemberStringValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.TypedAttributeValue_StringValue, v.Value)
+}
+func (v *TypedAttributeValueMemberStringValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.TypedAttributeValue_StringValue, &v.Value)
+}
 
 // A range of attribute values. For more information, see [Range Filters].
 //
@@ -1584,6 +4568,48 @@ type TypedAttributeValueRange struct {
 	StartValue TypedAttributeValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *TypedAttributeValueRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TypedAttributeValueRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TypedAttributeValueRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndMode != "" {
+		s.WriteString(schemas.TypedAttributeValueRange_EndMode, string(v.EndMode))
+	}
+	serializeTypedAttributeValue(s, schemas.TypedAttributeValueRange_EndValue, v.EndValue)
+	if v.StartMode != "" {
+		s.WriteString(schemas.TypedAttributeValueRange_StartMode, string(v.StartMode))
+	}
+	serializeTypedAttributeValue(s, schemas.TypedAttributeValueRange_StartValue, v.StartValue)
+}
+func (v *TypedAttributeValueRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TypedAttributeValueRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TypedAttributeValueRange_EndMode:
+			var ev string
+			if err := d.ReadString(schemas.TypedAttributeValueRange_EndMode, &ev); err != nil {
+				return err
+			}
+			v.EndMode = RangeMode(ev)
+			return nil
+		case schemas.TypedAttributeValueRange_EndValue:
+			return deserializeTypedAttributeValue(d, schemas.TypedAttributeValueRange_EndValue, &v.EndValue)
+		case schemas.TypedAttributeValueRange_StartMode:
+			var ev string
+			if err := d.ReadString(schemas.TypedAttributeValueRange_StartMode, &ev); err != nil {
+				return err
+			}
+			v.StartMode = RangeMode(ev)
+			return nil
+		case schemas.TypedAttributeValueRange_StartValue:
+			return deserializeTypedAttributeValue(d, schemas.TypedAttributeValueRange_StartValue, &v.StartValue)
+		}
+		return nil
+	})
 }
 
 // A typed link attribute definition.
@@ -1616,6 +4642,59 @@ type TypedLinkAttributeDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TypedLinkAttributeDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TypedLinkAttributeDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TypedLinkAttributeDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTypedAttributeValue(s, schemas.TypedLinkAttributeDefinition_DefaultValue, v.DefaultValue)
+	if v.IsImmutable != false {
+		s.WriteBool(schemas.TypedLinkAttributeDefinition_IsImmutable, v.IsImmutable)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.TypedLinkAttributeDefinition_Name, *v.Name)
+	}
+	if v.RequiredBehavior != "" {
+		s.WriteString(schemas.TypedLinkAttributeDefinition_RequiredBehavior, string(v.RequiredBehavior))
+	}
+	serializeRuleMap(s, schemas.TypedLinkAttributeDefinition_Rules, v.Rules)
+	if v.Type != "" {
+		s.WriteString(schemas.TypedLinkAttributeDefinition_Type, string(v.Type))
+	}
+}
+func (v *TypedLinkAttributeDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TypedLinkAttributeDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TypedLinkAttributeDefinition_DefaultValue:
+			return deserializeTypedAttributeValue(d, schemas.TypedLinkAttributeDefinition_DefaultValue, &v.DefaultValue)
+		case schemas.TypedLinkAttributeDefinition_IsImmutable:
+			return d.ReadBool(schemas.TypedLinkAttributeDefinition_IsImmutable, &v.IsImmutable)
+		case schemas.TypedLinkAttributeDefinition_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TypedLinkAttributeDefinition_Name, v.Name)
+		case schemas.TypedLinkAttributeDefinition_RequiredBehavior:
+			var ev string
+			if err := d.ReadString(schemas.TypedLinkAttributeDefinition_RequiredBehavior, &ev); err != nil {
+				return err
+			}
+			v.RequiredBehavior = RequiredAttributeBehavior(ev)
+			return nil
+		case schemas.TypedLinkAttributeDefinition_Rules:
+			return deserializeRuleMap(d, schemas.TypedLinkAttributeDefinition_Rules, &v.Rules)
+		case schemas.TypedLinkAttributeDefinition_Type:
+			var ev string
+			if err := d.ReadString(schemas.TypedLinkAttributeDefinition_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = FacetAttributeType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Identifies the range of attributes that are used by a specified filter.
 type TypedLinkAttributeRange struct {
 
@@ -1628,6 +4707,36 @@ type TypedLinkAttributeRange struct {
 	AttributeName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TypedLinkAttributeRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TypedLinkAttributeRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TypedLinkAttributeRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.TypedLinkAttributeRange_AttributeName, *v.AttributeName)
+	}
+	if v.Range != nil {
+		s.WriteStruct(schemas.TypedLinkAttributeRange_Range)
+		v.Range.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TypedLinkAttributeRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TypedLinkAttributeRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TypedLinkAttributeRange_AttributeName:
+			v.AttributeName = new(string)
+			return d.ReadString(schemas.TypedLinkAttributeRange_AttributeName, v.AttributeName)
+		case schemas.TypedLinkAttributeRange_Range:
+			v.Range = &TypedAttributeValueRange{}
+			return v.Range.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Defines the typed links structure and its attributes. To create a typed link
@@ -1657,6 +4766,34 @@ type TypedLinkFacet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TypedLinkFacet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TypedLinkFacet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TypedLinkFacet) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTypedLinkAttributeDefinitionList(s, schemas.TypedLinkFacet_Attributes, v.Attributes)
+	serializeAttributeNameList(s, schemas.TypedLinkFacet_IdentityAttributeOrder, v.IdentityAttributeOrder)
+	if v.Name != nil {
+		s.WriteString(schemas.TypedLinkFacet_Name, *v.Name)
+	}
+}
+func (v *TypedLinkFacet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TypedLinkFacet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TypedLinkFacet_Attributes:
+			return deserializeTypedLinkAttributeDefinitionList(d, schemas.TypedLinkFacet_Attributes, &v.Attributes)
+		case schemas.TypedLinkFacet_IdentityAttributeOrder:
+			return deserializeAttributeNameList(d, schemas.TypedLinkFacet_IdentityAttributeOrder, &v.IdentityAttributeOrder)
+		case schemas.TypedLinkFacet_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TypedLinkFacet_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // A typed link facet attribute update.
 type TypedLinkFacetAttributeUpdate struct {
 
@@ -1671,6 +4808,40 @@ type TypedLinkFacetAttributeUpdate struct {
 	Attribute *TypedLinkAttributeDefinition
 
 	noSmithyDocumentSerde
+}
+
+func (v *TypedLinkFacetAttributeUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TypedLinkFacetAttributeUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TypedLinkFacetAttributeUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.TypedLinkFacetAttributeUpdate_Action, string(v.Action))
+	}
+	if v.Attribute != nil {
+		s.WriteStruct(schemas.TypedLinkFacetAttributeUpdate_Attribute)
+		v.Attribute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TypedLinkFacetAttributeUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TypedLinkFacetAttributeUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TypedLinkFacetAttributeUpdate_Action:
+			var ev string
+			if err := d.ReadString(schemas.TypedLinkFacetAttributeUpdate_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = UpdateActionType(ev)
+			return nil
+		case schemas.TypedLinkFacetAttributeUpdate_Attribute:
+			v.Attribute = &TypedLinkAttributeDefinition{}
+			return v.Attribute.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Identifies the schema Amazon Resource Name (ARN) and facet name for the typed
@@ -1689,6 +4860,34 @@ type TypedLinkSchemaAndFacetName struct {
 	TypedLinkName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TypedLinkSchemaAndFacetName) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TypedLinkSchemaAndFacetName)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TypedLinkSchemaAndFacetName) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.TypedLinkSchemaAndFacetName_SchemaArn, *v.SchemaArn)
+	}
+	if v.TypedLinkName != nil {
+		s.WriteString(schemas.TypedLinkSchemaAndFacetName_TypedLinkName, *v.TypedLinkName)
+	}
+}
+func (v *TypedLinkSchemaAndFacetName) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TypedLinkSchemaAndFacetName, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TypedLinkSchemaAndFacetName_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.TypedLinkSchemaAndFacetName_SchemaArn, v.SchemaArn)
+		case schemas.TypedLinkSchemaAndFacetName_TypedLinkName:
+			v.TypedLinkName = new(string)
+			return d.ReadString(schemas.TypedLinkSchemaAndFacetName_TypedLinkName, v.TypedLinkName)
+		}
+		return nil
+	})
 }
 
 // Contains all the information that is used to uniquely identify a typed link.
@@ -1720,6 +4919,49 @@ type TypedLinkSpecifier struct {
 	TypedLinkFacet *TypedLinkSchemaAndFacetName
 
 	noSmithyDocumentSerde
+}
+
+func (v *TypedLinkSpecifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TypedLinkSpecifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TypedLinkSpecifier) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeNameAndValueList(s, schemas.TypedLinkSpecifier_IdentityAttributeValues, v.IdentityAttributeValues)
+	if v.SourceObjectReference != nil {
+		s.WriteStruct(schemas.TypedLinkSpecifier_SourceObjectReference)
+		v.SourceObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetObjectReference != nil {
+		s.WriteStruct(schemas.TypedLinkSpecifier_TargetObjectReference)
+		v.TargetObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TypedLinkFacet != nil {
+		s.WriteStruct(schemas.TypedLinkSpecifier_TypedLinkFacet)
+		v.TypedLinkFacet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TypedLinkSpecifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TypedLinkSpecifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TypedLinkSpecifier_IdentityAttributeValues:
+			return deserializeAttributeNameAndValueList(d, schemas.TypedLinkSpecifier_IdentityAttributeValues, &v.IdentityAttributeValues)
+		case schemas.TypedLinkSpecifier_SourceObjectReference:
+			v.SourceObjectReference = &ObjectReference{}
+			return v.SourceObjectReference.Deserialize(d)
+		case schemas.TypedLinkSpecifier_TargetObjectReference:
+			v.TargetObjectReference = &ObjectReference{}
+			return v.TargetObjectReference.Deserialize(d)
+		case schemas.TypedLinkSpecifier_TypedLinkFacet:
+			v.TypedLinkFacet = &TypedLinkSchemaAndFacetName{}
+			return v.TypedLinkFacet.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

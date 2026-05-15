@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,21 @@ type DeleteUserJourneyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserJourneyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserJourneyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserJourneyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SystemArn != nil {
+		s.WriteString(schemas.DeleteUserJourneyRequest_systemArn, *v.SystemArn)
+	}
+	if v.UserJourneyId != nil {
+		s.WriteString(schemas.DeleteUserJourneyRequest_userJourneyId, *v.UserJourneyId)
+	}
+}
+
 type DeleteUserJourneyOutput struct {
 
 	// The identifier of the deleted user journey.
@@ -54,16 +71,24 @@ type DeleteUserJourneyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserJourneyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteUserJourneyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteUserJourneyResponse_userJourneyId:
+			v.UserJourneyId = new(string)
+			return d.ReadString(schemas.DeleteUserJourneyResponse_userJourneyId, v.UserJourneyId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteUserJourneyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteUserJourney{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserJourney, schemas.DeleteUserJourneyRequest, schemas.DeleteUserJourneyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteUserJourney{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserJourney, schemas.DeleteUserJourneyRequest, schemas.DeleteUserJourneyResponse), output: &DeleteUserJourneyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteUserJourney"); err != nil {

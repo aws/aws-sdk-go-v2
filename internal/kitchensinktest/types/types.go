@@ -3,11 +3,29 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/internal/kitchensinktest/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
 type Item struct {
 	noSmithyDocumentSerde
+}
+
+func (v *Item) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Item)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Item) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *Item) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Item, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

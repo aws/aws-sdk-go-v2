@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bcmdataexports/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmdataexports/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type GetExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportArn != nil {
+		s.WriteString(schemas.GetExportRequest_ExportArn, *v.ExportArn)
+	}
+}
+
 type GetExportOutput struct {
 
 	// The data for this specific export.
@@ -51,16 +65,27 @@ type GetExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetExportResponse_Export:
+			v.Export = &types.Export{}
+			return v.Export.Deserialize(d)
+		case schemas.GetExportResponse_ExportStatus:
+			v.ExportStatus = &types.ExportStatus{}
+			return v.ExportStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExport, schemas.GetExportRequest, schemas.GetExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExport, schemas.GetExportRequest, schemas.GetExportResponse), output: &GetExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetExport"); err != nil {

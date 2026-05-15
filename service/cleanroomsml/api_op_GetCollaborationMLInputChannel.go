@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,6 +44,21 @@ type GetCollaborationMLInputChannelInput struct {
 	MlInputChannelArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCollaborationMLInputChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCollaborationMLInputChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCollaborationMLInputChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.GetCollaborationMLInputChannelRequest_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	if v.MlInputChannelArn != nil {
+		s.WriteString(schemas.GetCollaborationMLInputChannelRequest_mlInputChannelArn, *v.MlInputChannelArn)
+	}
 }
 
 type GetCollaborationMLInputChannelOutput struct {
@@ -125,16 +142,71 @@ type GetCollaborationMLInputChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCollaborationMLInputChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCollaborationMLInputChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCollaborationMLInputChannelResponse_collaborationIdentifier:
+			v.CollaborationIdentifier = new(string)
+			return d.ReadString(schemas.GetCollaborationMLInputChannelResponse_collaborationIdentifier, v.CollaborationIdentifier)
+		case schemas.GetCollaborationMLInputChannelResponse_configuredModelAlgorithmAssociations:
+			return deserializeConfiguredModelAlgorithmAssociationArnList(d, schemas.GetCollaborationMLInputChannelResponse_configuredModelAlgorithmAssociations, &v.ConfiguredModelAlgorithmAssociations)
+		case schemas.GetCollaborationMLInputChannelResponse_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.GetCollaborationMLInputChannelResponse_createTime, v.CreateTime)
+		case schemas.GetCollaborationMLInputChannelResponse_creatorAccountId:
+			v.CreatorAccountId = new(string)
+			return d.ReadString(schemas.GetCollaborationMLInputChannelResponse_creatorAccountId, v.CreatorAccountId)
+		case schemas.GetCollaborationMLInputChannelResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetCollaborationMLInputChannelResponse_description, v.Description)
+		case schemas.GetCollaborationMLInputChannelResponse_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.GetCollaborationMLInputChannelResponse_membershipIdentifier, v.MembershipIdentifier)
+		case schemas.GetCollaborationMLInputChannelResponse_mlInputChannelArn:
+			v.MlInputChannelArn = new(string)
+			return d.ReadString(schemas.GetCollaborationMLInputChannelResponse_mlInputChannelArn, v.MlInputChannelArn)
+		case schemas.GetCollaborationMLInputChannelResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetCollaborationMLInputChannelResponse_name, v.Name)
+		case schemas.GetCollaborationMLInputChannelResponse_numberOfRecords:
+			v.NumberOfRecords = new(int64)
+			return d.ReadInt64(schemas.GetCollaborationMLInputChannelResponse_numberOfRecords, v.NumberOfRecords)
+		case schemas.GetCollaborationMLInputChannelResponse_payerConfiguration:
+			v.PayerConfiguration = &types.PayerConfiguration{}
+			return v.PayerConfiguration.Deserialize(d)
+		case schemas.GetCollaborationMLInputChannelResponse_privacyBudgets:
+			return deserializePrivacyBudgets(d, schemas.GetCollaborationMLInputChannelResponse_privacyBudgets, &v.PrivacyBudgets)
+		case schemas.GetCollaborationMLInputChannelResponse_retentionInDays:
+			v.RetentionInDays = new(int32)
+			return d.ReadInt32(schemas.GetCollaborationMLInputChannelResponse_retentionInDays, v.RetentionInDays)
+		case schemas.GetCollaborationMLInputChannelResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetCollaborationMLInputChannelResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MLInputChannelStatus(ev)
+			return nil
+		case schemas.GetCollaborationMLInputChannelResponse_statusDetails:
+			v.StatusDetails = &types.StatusDetails{}
+			return v.StatusDetails.Deserialize(d)
+		case schemas.GetCollaborationMLInputChannelResponse_syntheticDataConfiguration:
+			v.SyntheticDataConfiguration = &types.SyntheticDataConfiguration{}
+			return v.SyntheticDataConfiguration.Deserialize(d)
+		case schemas.GetCollaborationMLInputChannelResponse_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.GetCollaborationMLInputChannelResponse_updateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCollaborationMLInputChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCollaborationMLInputChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCollaborationMLInputChannel, schemas.GetCollaborationMLInputChannelRequest, schemas.GetCollaborationMLInputChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCollaborationMLInputChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCollaborationMLInputChannel, schemas.GetCollaborationMLInputChannelRequest, schemas.GetCollaborationMLInputChannelResponse), output: &GetCollaborationMLInputChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCollaborationMLInputChannel"); err != nil {

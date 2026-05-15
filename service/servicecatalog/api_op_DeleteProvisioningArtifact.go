@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,24 @@ type DeleteProvisioningArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProvisioningArtifactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProvisioningArtifactInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProvisioningArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.DeleteProvisioningArtifactInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.DeleteProvisioningArtifactInput_ProductId, *v.ProductId)
+	}
+	if v.ProvisioningArtifactId != nil {
+		s.WriteString(schemas.DeleteProvisioningArtifactInput_ProvisioningArtifactId, *v.ProvisioningArtifactId)
+	}
+}
+
 type DeleteProvisioningArtifactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,16 +80,21 @@ type DeleteProvisioningArtifactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProvisioningArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProvisioningArtifactOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteProvisioningArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProvisioningArtifact, schemas.DeleteProvisioningArtifactInput, schemas.DeleteProvisioningArtifactOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteProvisioningArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProvisioningArtifact, schemas.DeleteProvisioningArtifactInput, schemas.DeleteProvisioningArtifactOutput), output: &DeleteProvisioningArtifactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteProvisioningArtifact"); err != nil {

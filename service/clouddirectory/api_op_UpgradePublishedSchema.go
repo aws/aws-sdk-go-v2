@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,27 @@ type UpgradePublishedSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpgradePublishedSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpgradePublishedSchemaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpgradePublishedSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DevelopmentSchemaArn != nil {
+		s.WriteString(schemas.UpgradePublishedSchemaRequest_DevelopmentSchemaArn, *v.DevelopmentSchemaArn)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.UpgradePublishedSchemaRequest_DryRun, v.DryRun)
+	}
+	if v.MinorVersion != nil {
+		s.WriteString(schemas.UpgradePublishedSchemaRequest_MinorVersion, *v.MinorVersion)
+	}
+	if v.PublishedSchemaArn != nil {
+		s.WriteString(schemas.UpgradePublishedSchemaRequest_PublishedSchemaArn, *v.PublishedSchemaArn)
+	}
+}
+
 type UpgradePublishedSchemaOutput struct {
 
 	// The ARN of the upgraded schema that is returned as part of the response.
@@ -65,16 +88,24 @@ type UpgradePublishedSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpgradePublishedSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpgradePublishedSchemaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpgradePublishedSchemaResponse_UpgradedSchemaArn:
+			v.UpgradedSchemaArn = new(string)
+			return d.ReadString(schemas.UpgradePublishedSchemaResponse_UpgradedSchemaArn, v.UpgradedSchemaArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpgradePublishedSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpgradePublishedSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpgradePublishedSchema, schemas.UpgradePublishedSchemaRequest, schemas.UpgradePublishedSchemaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpgradePublishedSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpgradePublishedSchema, schemas.UpgradePublishedSchemaRequest, schemas.UpgradePublishedSchemaResponse), output: &UpgradePublishedSchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpgradePublishedSchema"); err != nil {

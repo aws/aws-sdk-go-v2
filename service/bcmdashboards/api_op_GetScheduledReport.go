@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bcmdashboards/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmdashboards/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type GetScheduledReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetScheduledReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetScheduledReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetScheduledReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetScheduledReportRequest_arn, *v.Arn)
+	}
+}
+
 type GetScheduledReportOutput struct {
 
 	// The scheduled report configuration and metadata.
@@ -50,16 +64,24 @@ type GetScheduledReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetScheduledReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetScheduledReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetScheduledReportResponse_scheduledReport:
+			v.ScheduledReport = &types.ScheduledReport{}
+			return v.ScheduledReport.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetScheduledReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetScheduledReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetScheduledReport, schemas.GetScheduledReportRequest, schemas.GetScheduledReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetScheduledReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetScheduledReport, schemas.GetScheduledReportRequest, schemas.GetScheduledReportResponse), output: &GetScheduledReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetScheduledReport"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +61,27 @@ type DisassociateTimeSeriesFromAssetPropertyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateTimeSeriesFromAssetPropertyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateTimeSeriesFromAssetPropertyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateTimeSeriesFromAssetPropertyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.DisassociateTimeSeriesFromAssetPropertyRequest_alias, *v.Alias)
+	}
+	if v.AssetId != nil {
+		s.WriteString(schemas.DisassociateTimeSeriesFromAssetPropertyRequest_assetId, *v.AssetId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DisassociateTimeSeriesFromAssetPropertyRequest_clientToken, *v.ClientToken)
+	}
+	if v.PropertyId != nil {
+		s.WriteString(schemas.DisassociateTimeSeriesFromAssetPropertyRequest_propertyId, *v.PropertyId)
+	}
+}
+
 type DisassociateTimeSeriesFromAssetPropertyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,16 +89,29 @@ type DisassociateTimeSeriesFromAssetPropertyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateTimeSeriesFromAssetPropertyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateTimeSeriesFromAssetPropertyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateTimeSeriesFromAssetPropertyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateTimeSeriesFromAssetPropertyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateTimeSeriesFromAssetProperty{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateTimeSeriesFromAssetProperty, schemas.DisassociateTimeSeriesFromAssetPropertyRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateTimeSeriesFromAssetProperty{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateTimeSeriesFromAssetProperty, schemas.DisassociateTimeSeriesFromAssetPropertyRequest, nil), output: &DisassociateTimeSeriesFromAssetPropertyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateTimeSeriesFromAssetProperty"); err != nil {

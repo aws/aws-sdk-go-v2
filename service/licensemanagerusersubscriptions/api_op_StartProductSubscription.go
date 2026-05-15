@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,6 +66,26 @@ type StartProductSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartProductSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartProductSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartProductSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.StartProductSubscriptionRequest_Domain, *v.Domain)
+	}
+	serializeIdentityProvider(s, schemas.StartProductSubscriptionRequest_IdentityProvider, v.IdentityProvider)
+	if v.Product != nil {
+		s.WriteString(schemas.StartProductSubscriptionRequest_Product, *v.Product)
+	}
+	serializeTags(s, schemas.StartProductSubscriptionRequest_Tags, v.Tags)
+	if v.Username != nil {
+		s.WriteString(schemas.StartProductSubscriptionRequest_Username, *v.Username)
+	}
+}
+
 type StartProductSubscriptionOutput struct {
 
 	// Metadata that describes the start product subscription operation.
@@ -77,16 +99,24 @@ type StartProductSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartProductSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartProductSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartProductSubscriptionResponse_ProductUserSummary:
+			v.ProductUserSummary = &types.ProductUserSummary{}
+			return v.ProductUserSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartProductSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartProductSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartProductSubscription, schemas.StartProductSubscriptionRequest, schemas.StartProductSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartProductSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartProductSubscription, schemas.StartProductSubscriptionRequest, schemas.StartProductSubscriptionResponse), output: &StartProductSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartProductSubscription"); err != nil {

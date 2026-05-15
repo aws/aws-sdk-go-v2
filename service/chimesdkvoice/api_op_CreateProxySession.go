@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,6 +67,37 @@ type CreateProxySessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProxySessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProxySessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProxySessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapabilityList(s, schemas.CreateProxySessionRequest_Capabilities, v.Capabilities)
+	if v.ExpiryMinutes != nil {
+		s.WriteInt32(schemas.CreateProxySessionRequest_ExpiryMinutes, *v.ExpiryMinutes)
+	}
+	if v.GeoMatchLevel != "" {
+		s.WriteString(schemas.CreateProxySessionRequest_GeoMatchLevel, string(v.GeoMatchLevel))
+	}
+	if v.GeoMatchParams != nil {
+		s.WriteStruct(schemas.CreateProxySessionRequest_GeoMatchParams)
+		v.GeoMatchParams.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateProxySessionRequest_Name, *v.Name)
+	}
+	if v.NumberSelectionBehavior != "" {
+		s.WriteString(schemas.CreateProxySessionRequest_NumberSelectionBehavior, string(v.NumberSelectionBehavior))
+	}
+	serializeParticipantPhoneNumberList(s, schemas.CreateProxySessionRequest_ParticipantPhoneNumbers, v.ParticipantPhoneNumbers)
+	if v.VoiceConnectorId != nil {
+		s.WriteString(schemas.CreateProxySessionRequest_VoiceConnectorId, *v.VoiceConnectorId)
+	}
+}
+
 type CreateProxySessionOutput struct {
 
 	// The proxy session details.
@@ -76,16 +109,24 @@ type CreateProxySessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProxySessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProxySessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProxySessionResponse_ProxySession:
+			v.ProxySession = &types.ProxySession{}
+			return v.ProxySession.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProxySessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProxySession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProxySession, schemas.CreateProxySessionRequest, schemas.CreateProxySessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProxySession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProxySession, schemas.CreateProxySessionRequest, schemas.CreateProxySessionResponse), output: &CreateProxySessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProxySession"); err != nil {

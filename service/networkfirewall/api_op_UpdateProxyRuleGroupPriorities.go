@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,6 +64,25 @@ type UpdateProxyRuleGroupPrioritiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProxyRuleGroupPrioritiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProxyRuleGroupPrioritiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProxyRuleGroupPrioritiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProxyConfigurationArn != nil {
+		s.WriteString(schemas.UpdateProxyRuleGroupPrioritiesRequest_ProxyConfigurationArn, *v.ProxyConfigurationArn)
+	}
+	if v.ProxyConfigurationName != nil {
+		s.WriteString(schemas.UpdateProxyRuleGroupPrioritiesRequest_ProxyConfigurationName, *v.ProxyConfigurationName)
+	}
+	serializeProxyRuleGroupPriorityList(s, schemas.UpdateProxyRuleGroupPrioritiesRequest_RuleGroups, v.RuleGroups)
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateProxyRuleGroupPrioritiesRequest_UpdateToken, *v.UpdateToken)
+	}
+}
+
 type UpdateProxyRuleGroupPrioritiesOutput struct {
 
 	// The updated proxy rule group hierarchy that reflects the updates from the
@@ -86,16 +107,26 @@ type UpdateProxyRuleGroupPrioritiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProxyRuleGroupPrioritiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProxyRuleGroupPrioritiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProxyRuleGroupPrioritiesResponse_ProxyRuleGroups:
+			return deserializeProxyRuleGroupPriorityResultList(d, schemas.UpdateProxyRuleGroupPrioritiesResponse_ProxyRuleGroups, &v.ProxyRuleGroups)
+		case schemas.UpdateProxyRuleGroupPrioritiesResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.UpdateProxyRuleGroupPrioritiesResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProxyRuleGroupPrioritiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateProxyRuleGroupPriorities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProxyRuleGroupPriorities, schemas.UpdateProxyRuleGroupPrioritiesRequest, schemas.UpdateProxyRuleGroupPrioritiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateProxyRuleGroupPriorities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProxyRuleGroupPriorities, schemas.UpdateProxyRuleGroupPrioritiesRequest, schemas.UpdateProxyRuleGroupPrioritiesResponse), output: &UpdateProxyRuleGroupPrioritiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProxyRuleGroupPriorities"); err != nil {

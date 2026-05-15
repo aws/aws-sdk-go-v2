@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -40,6 +42,18 @@ type VerifyTargetDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyTargetDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyTargetDomainInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyTargetDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetDomainId != nil {
+		s.WriteString(schemas.VerifyTargetDomainInput_targetDomainId, *v.TargetDomainId)
+	}
+}
+
 // Output for verifying ownership for a registered target domain in an agent space.
 type VerifyTargetDomainOutput struct {
 
@@ -70,16 +84,46 @@ type VerifyTargetDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyTargetDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifyTargetDomainOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerifyTargetDomainOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.VerifyTargetDomainOutput_createdAt, v.CreatedAt)
+		case schemas.VerifyTargetDomainOutput_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.VerifyTargetDomainOutput_domainName, v.DomainName)
+		case schemas.VerifyTargetDomainOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.VerifyTargetDomainOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TargetDomainStatus(ev)
+			return nil
+		case schemas.VerifyTargetDomainOutput_targetDomainId:
+			v.TargetDomainId = new(string)
+			return d.ReadString(schemas.VerifyTargetDomainOutput_targetDomainId, v.TargetDomainId)
+		case schemas.VerifyTargetDomainOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.VerifyTargetDomainOutput_updatedAt, v.UpdatedAt)
+		case schemas.VerifyTargetDomainOutput_verificationStatusReason:
+			v.VerificationStatusReason = new(string)
+			return d.ReadString(schemas.VerifyTargetDomainOutput_verificationStatusReason, v.VerificationStatusReason)
+		case schemas.VerifyTargetDomainOutput_verifiedAt:
+			v.VerifiedAt = new(time.Time)
+			return d.ReadTime(schemas.VerifyTargetDomainOutput_verifiedAt, v.VerifiedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVerifyTargetDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpVerifyTargetDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyTargetDomain, schemas.VerifyTargetDomainInput, schemas.VerifyTargetDomainOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpVerifyTargetDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyTargetDomain, schemas.VerifyTargetDomainInput, schemas.VerifyTargetDomainOutput), output: &VerifyTargetDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "VerifyTargetDomain"); err != nil {

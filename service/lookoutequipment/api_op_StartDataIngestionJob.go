@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,29 @@ type StartDataIngestionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataIngestionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataIngestionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataIngestionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartDataIngestionJobRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.StartDataIngestionJobRequest_DatasetName, *v.DatasetName)
+	}
+	if v.IngestionInputConfiguration != nil {
+		s.WriteStruct(schemas.StartDataIngestionJobRequest_IngestionInputConfiguration)
+		v.IngestionInputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartDataIngestionJobRequest_RoleArn, *v.RoleArn)
+	}
+}
+
 type StartDataIngestionJobOutput struct {
 
 	// Indicates the job ID of the data ingestion job.
@@ -70,16 +95,31 @@ type StartDataIngestionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataIngestionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDataIngestionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDataIngestionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartDataIngestionJobResponse_JobId, v.JobId)
+		case schemas.StartDataIngestionJobResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StartDataIngestionJobResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.IngestionJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDataIngestionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartDataIngestionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataIngestionJob, schemas.StartDataIngestionJobRequest, schemas.StartDataIngestionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartDataIngestionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataIngestionJob, schemas.StartDataIngestionJobRequest, schemas.StartDataIngestionJobResponse), output: &StartDataIngestionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartDataIngestionJob"); err != nil {

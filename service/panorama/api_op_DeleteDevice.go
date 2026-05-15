@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,28 @@ type DeleteDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceId != nil {
+		s.WriteString(schemas.DeleteDeviceRequest_DeviceId, *v.DeviceId)
+	}
+}
+func (v *DeleteDeviceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDeviceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDeviceRequest_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.DeleteDeviceRequest_DeviceId, v.DeviceId)
+		}
+		return nil
+	})
+}
+
 type DeleteDeviceOutput struct {
 
 	// The device's ID.
@@ -47,16 +71,35 @@ type DeleteDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceId != nil {
+		s.WriteString(schemas.DeleteDeviceResponse_DeviceId, *v.DeviceId)
+	}
+}
+func (v *DeleteDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDeviceResponse_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.DeleteDeviceResponse_DeviceId, v.DeviceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDevice, schemas.DeleteDeviceRequest, schemas.DeleteDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDevice, schemas.DeleteDeviceRequest, schemas.DeleteDeviceResponse), output: &DeleteDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDevice"); err != nil {

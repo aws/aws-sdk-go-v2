@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -81,6 +83,33 @@ type DeletePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePackageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.DeletePackageRequest_domain, *v.Domain)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.DeletePackageRequest_domainOwner, *v.DomainOwner)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.DeletePackageRequest_format, string(v.Format))
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DeletePackageRequest_namespace, *v.Namespace)
+	}
+	if v.Package != nil {
+		s.WriteString(schemas.DeletePackageRequest_package, *v.Package)
+	}
+	if v.Repository != nil {
+		s.WriteString(schemas.DeletePackageRequest_repository, *v.Repository)
+	}
+}
+
 type DeletePackageOutput struct {
 
 	//  Details about a package, including its format, namespace, and name.
@@ -92,16 +121,24 @@ type DeletePackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePackageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePackageResult_deletedPackage:
+			v.DeletedPackage = &types.PackageSummary{}
+			return v.DeletedPackage.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePackage, schemas.DeletePackageRequest, schemas.DeletePackageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePackage, schemas.DeletePackageRequest, schemas.DeletePackageResult), output: &DeletePackageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePackage"); err != nil {

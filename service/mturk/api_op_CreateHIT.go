@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -168,6 +170,63 @@ type CreateHITInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHITInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHITRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHITInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignmentDurationInSeconds != nil {
+		s.WriteInt64(schemas.CreateHITRequest_AssignmentDurationInSeconds, *v.AssignmentDurationInSeconds)
+	}
+	if v.AssignmentReviewPolicy != nil {
+		s.WriteStruct(schemas.CreateHITRequest_AssignmentReviewPolicy)
+		v.AssignmentReviewPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutoApprovalDelayInSeconds != nil {
+		s.WriteInt64(schemas.CreateHITRequest_AutoApprovalDelayInSeconds, *v.AutoApprovalDelayInSeconds)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateHITRequest_Description, *v.Description)
+	}
+	if v.HITLayoutId != nil {
+		s.WriteString(schemas.CreateHITRequest_HITLayoutId, *v.HITLayoutId)
+	}
+	serializeHITLayoutParameterList(s, schemas.CreateHITRequest_HITLayoutParameters, v.HITLayoutParameters)
+	if v.HITReviewPolicy != nil {
+		s.WriteStruct(schemas.CreateHITRequest_HITReviewPolicy)
+		v.HITReviewPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Keywords != nil {
+		s.WriteString(schemas.CreateHITRequest_Keywords, *v.Keywords)
+	}
+	if v.LifetimeInSeconds != nil {
+		s.WriteInt64(schemas.CreateHITRequest_LifetimeInSeconds, *v.LifetimeInSeconds)
+	}
+	if v.MaxAssignments != nil {
+		s.WriteInt32(schemas.CreateHITRequest_MaxAssignments, *v.MaxAssignments)
+	}
+	serializeQualificationRequirementList(s, schemas.CreateHITRequest_QualificationRequirements, v.QualificationRequirements)
+	if v.Question != nil {
+		s.WriteString(schemas.CreateHITRequest_Question, *v.Question)
+	}
+	if v.RequesterAnnotation != nil {
+		s.WriteString(schemas.CreateHITRequest_RequesterAnnotation, *v.RequesterAnnotation)
+	}
+	if v.Reward != nil {
+		s.WriteString(schemas.CreateHITRequest_Reward, *v.Reward)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.CreateHITRequest_Title, *v.Title)
+	}
+	if v.UniqueRequestToken != nil {
+		s.WriteString(schemas.CreateHITRequest_UniqueRequestToken, *v.UniqueRequestToken)
+	}
+}
+
 type CreateHITOutput struct {
 
 	//  Contains the newly created HIT data. For a description of the HIT data
@@ -180,16 +239,24 @@ type CreateHITOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHITOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateHITResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateHITResponse_HIT:
+			v.HIT = &types.HIT{}
+			return v.HIT.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHIT{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHIT, schemas.CreateHITRequest, schemas.CreateHITResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateHIT{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHIT, schemas.CreateHITRequest, schemas.CreateHITResponse), output: &CreateHITOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateHIT"); err != nil {

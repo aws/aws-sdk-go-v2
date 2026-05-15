@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,30 @@ type UpdateDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryDestinationArn != nil {
+		s.WriteString(schemas.UpdateDestinationRequest_DeliveryDestinationArn, *v.DeliveryDestinationArn)
+	}
+	if v.DeliveryDestinationType != "" {
+		s.WriteString(schemas.UpdateDestinationRequest_DeliveryDestinationType, string(v.DeliveryDestinationType))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDestinationRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDestinationRequest_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateDestinationRequest_RoleArn, *v.RoleArn)
+	}
+}
+
 type UpdateDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,16 +82,29 @@ type UpdateDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDestination, schemas.UpdateDestinationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDestination, schemas.UpdateDestinationRequest, nil), output: &UpdateDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDestination"); err != nil {

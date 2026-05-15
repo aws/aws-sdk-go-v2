@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/interconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/interconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,24 @@ type ListAttachPointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttachPointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttachPointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttachPointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.ListAttachPointsRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAttachPointsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAttachPointsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAttachPointsOutput struct {
 
 	// The valid AttachPoint
@@ -61,16 +81,26 @@ type ListAttachPointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttachPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAttachPointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAttachPointsResponse_attachPoints:
+			return deserializeAttachPointDescriptorList(d, schemas.ListAttachPointsResponse_attachPoints, &v.AttachPoints)
+		case schemas.ListAttachPointsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAttachPointsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAttachPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListAttachPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttachPoints, schemas.ListAttachPointsRequest, schemas.ListAttachPointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListAttachPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttachPoints, schemas.ListAttachPointsRequest, schemas.ListAttachPointsResponse), output: &ListAttachPointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAttachPoints"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,6 +40,18 @@ type DescribeInferenceSchedulerInput struct {
 	InferenceSchedulerName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeInferenceSchedulerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInferenceSchedulerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInferenceSchedulerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InferenceSchedulerName != nil {
+		s.WriteString(schemas.DescribeInferenceSchedulerRequest_InferenceSchedulerName, *v.InferenceSchedulerName)
+	}
 }
 
 type DescribeInferenceSchedulerOutput struct {
@@ -110,16 +124,75 @@ type DescribeInferenceSchedulerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInferenceSchedulerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInferenceSchedulerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInferenceSchedulerResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeInferenceSchedulerResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeInferenceSchedulerResponse_DataDelayOffsetInMinutes:
+			v.DataDelayOffsetInMinutes = new(int64)
+			return d.ReadInt64(schemas.DescribeInferenceSchedulerResponse_DataDelayOffsetInMinutes, v.DataDelayOffsetInMinutes)
+		case schemas.DescribeInferenceSchedulerResponse_DataInputConfiguration:
+			v.DataInputConfiguration = &types.InferenceInputConfiguration{}
+			return v.DataInputConfiguration.Deserialize(d)
+		case schemas.DescribeInferenceSchedulerResponse_DataOutputConfiguration:
+			v.DataOutputConfiguration = &types.InferenceOutputConfiguration{}
+			return v.DataOutputConfiguration.Deserialize(d)
+		case schemas.DescribeInferenceSchedulerResponse_DataUploadFrequency:
+			var ev string
+			if err := d.ReadString(schemas.DescribeInferenceSchedulerResponse_DataUploadFrequency, &ev); err != nil {
+				return err
+			}
+			v.DataUploadFrequency = types.DataUploadFrequency(ev)
+			return nil
+		case schemas.DescribeInferenceSchedulerResponse_InferenceSchedulerArn:
+			v.InferenceSchedulerArn = new(string)
+			return d.ReadString(schemas.DescribeInferenceSchedulerResponse_InferenceSchedulerArn, v.InferenceSchedulerArn)
+		case schemas.DescribeInferenceSchedulerResponse_InferenceSchedulerName:
+			v.InferenceSchedulerName = new(string)
+			return d.ReadString(schemas.DescribeInferenceSchedulerResponse_InferenceSchedulerName, v.InferenceSchedulerName)
+		case schemas.DescribeInferenceSchedulerResponse_LatestInferenceResult:
+			var ev string
+			if err := d.ReadString(schemas.DescribeInferenceSchedulerResponse_LatestInferenceResult, &ev); err != nil {
+				return err
+			}
+			v.LatestInferenceResult = types.LatestInferenceResult(ev)
+			return nil
+		case schemas.DescribeInferenceSchedulerResponse_ModelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.DescribeInferenceSchedulerResponse_ModelArn, v.ModelArn)
+		case schemas.DescribeInferenceSchedulerResponse_ModelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.DescribeInferenceSchedulerResponse_ModelName, v.ModelName)
+		case schemas.DescribeInferenceSchedulerResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeInferenceSchedulerResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeInferenceSchedulerResponse_ServerSideKmsKeyId:
+			v.ServerSideKmsKeyId = new(string)
+			return d.ReadString(schemas.DescribeInferenceSchedulerResponse_ServerSideKmsKeyId, v.ServerSideKmsKeyId)
+		case schemas.DescribeInferenceSchedulerResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeInferenceSchedulerResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.InferenceSchedulerStatus(ev)
+			return nil
+		case schemas.DescribeInferenceSchedulerResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeInferenceSchedulerResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeInferenceScheduler{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInferenceScheduler, schemas.DescribeInferenceSchedulerRequest, schemas.DescribeInferenceSchedulerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeInferenceScheduler{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInferenceScheduler, schemas.DescribeInferenceSchedulerRequest, schemas.DescribeInferenceSchedulerResponse), output: &DescribeInferenceSchedulerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeInferenceScheduler"); err != nil {

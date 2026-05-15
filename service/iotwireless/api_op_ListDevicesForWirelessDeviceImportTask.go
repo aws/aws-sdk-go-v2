@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,27 @@ type ListDevicesForWirelessDeviceImportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevicesForWirelessDeviceImportTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevicesForWirelessDeviceImportTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevicesForWirelessDeviceImportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ListDevicesForWirelessDeviceImportTaskRequest_Id, *v.Id)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListDevicesForWirelessDeviceImportTaskRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevicesForWirelessDeviceImportTaskRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListDevicesForWirelessDeviceImportTaskRequest_Status, string(v.Status))
+	}
+}
+
 type ListDevicesForWirelessDeviceImportTaskOutput struct {
 
 	// The name of the Sidewalk destination that describes the IoT rule to route
@@ -73,16 +96,39 @@ type ListDevicesForWirelessDeviceImportTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevicesForWirelessDeviceImportTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDevicesForWirelessDeviceImportTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDevicesForWirelessDeviceImportTaskResponse_DestinationName:
+			v.DestinationName = new(string)
+			return d.ReadString(schemas.ListDevicesForWirelessDeviceImportTaskResponse_DestinationName, v.DestinationName)
+		case schemas.ListDevicesForWirelessDeviceImportTaskResponse_ImportedWirelessDeviceList:
+			return deserializeImportedWirelessDeviceList(d, schemas.ListDevicesForWirelessDeviceImportTaskResponse_ImportedWirelessDeviceList, &v.ImportedWirelessDeviceList)
+		case schemas.ListDevicesForWirelessDeviceImportTaskResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDevicesForWirelessDeviceImportTaskResponse_NextToken, v.NextToken)
+		case schemas.ListDevicesForWirelessDeviceImportTaskResponse_Positioning:
+			var ev string
+			if err := d.ReadString(schemas.ListDevicesForWirelessDeviceImportTaskResponse_Positioning, &ev); err != nil {
+				return err
+			}
+			v.Positioning = types.PositioningConfigStatus(ev)
+			return nil
+		case schemas.ListDevicesForWirelessDeviceImportTaskResponse_Sidewalk:
+			v.Sidewalk = &types.SidewalkListDevicesForImportInfo{}
+			return v.Sidewalk.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDevicesForWirelessDeviceImportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDevicesForWirelessDeviceImportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevicesForWirelessDeviceImportTask, schemas.ListDevicesForWirelessDeviceImportTaskRequest, schemas.ListDevicesForWirelessDeviceImportTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDevicesForWirelessDeviceImportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevicesForWirelessDeviceImportTask, schemas.ListDevicesForWirelessDeviceImportTaskRequest, schemas.ListDevicesForWirelessDeviceImportTaskResponse), output: &ListDevicesForWirelessDeviceImportTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDevicesForWirelessDeviceImportTask"); err != nil {

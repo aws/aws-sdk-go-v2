@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -84,6 +86,43 @@ type StartJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.StartJobRequest_Action, string(v.Action))
+	}
+	if v.ActionOptions != nil {
+		s.WriteStruct(schemas.StartJobRequest_ActionOptions)
+		v.ActionOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartJobRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.StartJobRequest_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.InputOptions != nil {
+		s.WriteStruct(schemas.StartJobRequest_InputOptions)
+		v.InputOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartJobRequest_Name, *v.Name)
+	}
+	if v.OutputOptions != nil {
+		s.WriteStruct(schemas.StartJobRequest_OutputOptions)
+		v.OutputOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.StartJobRequest_Tags, v.Tags)
+}
+
 type StartJobOutput struct {
 
 	// Job creation time in [ISO 8601] format: YYYY-MM-DDThh:mm:ss.sss .
@@ -117,16 +156,37 @@ type StartJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartJobResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartJobResponse_CreatedAt, v.CreatedAt)
+		case schemas.StartJobResponse_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.StartJobResponse_JobArn, v.JobArn)
+		case schemas.StartJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartJobResponse_JobId, v.JobId)
+		case schemas.StartJobResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StartJobResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartJob, schemas.StartJobRequest, schemas.StartJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartJob, schemas.StartJobRequest, schemas.StartJobResponse), output: &StartJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartJob"); err != nil {

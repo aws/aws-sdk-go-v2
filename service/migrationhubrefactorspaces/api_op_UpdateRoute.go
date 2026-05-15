@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -54,6 +56,50 @@ type UpdateRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRouteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRouteRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivationState != "" {
+		s.WriteString(schemas.UpdateRouteRequest_ActivationState, string(v.ActivationState))
+	}
+	if v.ApplicationIdentifier != nil {
+		s.WriteString(schemas.UpdateRouteRequest_ApplicationIdentifier, *v.ApplicationIdentifier)
+	}
+	if v.EnvironmentIdentifier != nil {
+		s.WriteString(schemas.UpdateRouteRequest_EnvironmentIdentifier, *v.EnvironmentIdentifier)
+	}
+	if v.RouteIdentifier != nil {
+		s.WriteString(schemas.UpdateRouteRequest_RouteIdentifier, *v.RouteIdentifier)
+	}
+}
+func (v *UpdateRouteInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRouteRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRouteRequest_ActivationState:
+			var ev string
+			if err := d.ReadString(schemas.UpdateRouteRequest_ActivationState, &ev); err != nil {
+				return err
+			}
+			v.ActivationState = types.RouteActivationState(ev)
+			return nil
+		case schemas.UpdateRouteRequest_ApplicationIdentifier:
+			v.ApplicationIdentifier = new(string)
+			return d.ReadString(schemas.UpdateRouteRequest_ApplicationIdentifier, v.ApplicationIdentifier)
+		case schemas.UpdateRouteRequest_EnvironmentIdentifier:
+			v.EnvironmentIdentifier = new(string)
+			return d.ReadString(schemas.UpdateRouteRequest_EnvironmentIdentifier, v.EnvironmentIdentifier)
+		case schemas.UpdateRouteRequest_RouteIdentifier:
+			v.RouteIdentifier = new(string)
+			return d.ReadString(schemas.UpdateRouteRequest_RouteIdentifier, v.RouteIdentifier)
+		}
+		return nil
+	})
+}
+
 type UpdateRouteOutput struct {
 
 	//  The ID of the application in which the route is being updated.
@@ -85,16 +131,69 @@ type UpdateRouteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRouteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRouteResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.UpdateRouteResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateRouteResponse_Arn, *v.Arn)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.UpdateRouteResponse_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.RouteId != nil {
+		s.WriteString(schemas.UpdateRouteResponse_RouteId, *v.RouteId)
+	}
+	if v.ServiceId != nil {
+		s.WriteString(schemas.UpdateRouteResponse_ServiceId, *v.ServiceId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateRouteResponse_State, string(v.State))
+	}
+}
+func (v *UpdateRouteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRouteResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRouteResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.UpdateRouteResponse_ApplicationId, v.ApplicationId)
+		case schemas.UpdateRouteResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateRouteResponse_Arn, v.Arn)
+		case schemas.UpdateRouteResponse_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateRouteResponse_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.UpdateRouteResponse_RouteId:
+			v.RouteId = new(string)
+			return d.ReadString(schemas.UpdateRouteResponse_RouteId, v.RouteId)
+		case schemas.UpdateRouteResponse_ServiceId:
+			v.ServiceId = new(string)
+			return d.ReadString(schemas.UpdateRouteResponse_ServiceId, v.ServiceId)
+		case schemas.UpdateRouteResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.UpdateRouteResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.RouteState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRoute, schemas.UpdateRouteRequest, schemas.UpdateRouteResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRoute, schemas.UpdateRouteRequest, schemas.UpdateRouteResponse), output: &UpdateRouteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRoute"); err != nil {

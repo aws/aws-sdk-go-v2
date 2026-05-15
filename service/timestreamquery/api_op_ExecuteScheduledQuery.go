@@ -7,7 +7,9 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -61,6 +63,29 @@ type ExecuteScheduledQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteScheduledQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteScheduledQueryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteScheduledQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ExecuteScheduledQueryRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InvocationTime != nil {
+		s.WriteTime(schemas.ExecuteScheduledQueryRequest_InvocationTime, *v.InvocationTime)
+	}
+	if v.QueryInsights != nil {
+		s.WriteStruct(schemas.ExecuteScheduledQueryRequest_QueryInsights)
+		v.QueryInsights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScheduledQueryArn != nil {
+		s.WriteString(schemas.ExecuteScheduledQueryRequest_ScheduledQueryArn, *v.ScheduledQueryArn)
+	}
+}
+
 type ExecuteScheduledQueryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,16 +93,29 @@ type ExecuteScheduledQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteScheduledQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteScheduledQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ExecuteScheduledQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExecuteScheduledQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpExecuteScheduledQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteScheduledQuery, schemas.ExecuteScheduledQueryRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpExecuteScheduledQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteScheduledQuery, schemas.ExecuteScheduledQueryRequest, nil), output: &ExecuteScheduledQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ExecuteScheduledQuery"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -80,6 +82,25 @@ type CreateBillEstimateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBillEstimateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBillEstimateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBillEstimateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillScenarioId != nil {
+		s.WriteString(schemas.CreateBillEstimateRequest_billScenarioId, *v.BillScenarioId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateBillEstimateRequest_clientToken, *v.ClientToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateBillEstimateRequest_name, *v.Name)
+	}
+	serializeTags(s, schemas.CreateBillEstimateRequest_tags, v.Tags)
+}
+
 type CreateBillEstimateOutput struct {
 
 	//  The unique identifier of your newly created Bill estimate.
@@ -136,16 +157,62 @@ type CreateBillEstimateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBillEstimateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBillEstimateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBillEstimateResponse_billInterval:
+			v.BillInterval = &types.BillInterval{}
+			return v.BillInterval.Deserialize(d)
+		case schemas.CreateBillEstimateResponse_costCategoryGroupSharingPreferenceArn:
+			v.CostCategoryGroupSharingPreferenceArn = new(string)
+			return d.ReadString(schemas.CreateBillEstimateResponse_costCategoryGroupSharingPreferenceArn, v.CostCategoryGroupSharingPreferenceArn)
+		case schemas.CreateBillEstimateResponse_costCategoryGroupSharingPreferenceEffectiveDate:
+			v.CostCategoryGroupSharingPreferenceEffectiveDate = new(time.Time)
+			return d.ReadTime(schemas.CreateBillEstimateResponse_costCategoryGroupSharingPreferenceEffectiveDate, v.CostCategoryGroupSharingPreferenceEffectiveDate)
+		case schemas.CreateBillEstimateResponse_costSummary:
+			v.CostSummary = &types.BillEstimateCostSummary{}
+			return v.CostSummary.Deserialize(d)
+		case schemas.CreateBillEstimateResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateBillEstimateResponse_createdAt, v.CreatedAt)
+		case schemas.CreateBillEstimateResponse_expiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.CreateBillEstimateResponse_expiresAt, v.ExpiresAt)
+		case schemas.CreateBillEstimateResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.CreateBillEstimateResponse_failureMessage, v.FailureMessage)
+		case schemas.CreateBillEstimateResponse_groupSharingPreference:
+			var ev string
+			if err := d.ReadString(schemas.CreateBillEstimateResponse_groupSharingPreference, &ev); err != nil {
+				return err
+			}
+			v.GroupSharingPreference = types.GroupSharingPreferenceEnum(ev)
+			return nil
+		case schemas.CreateBillEstimateResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateBillEstimateResponse_id, v.Id)
+		case schemas.CreateBillEstimateResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateBillEstimateResponse_name, v.Name)
+		case schemas.CreateBillEstimateResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateBillEstimateResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BillEstimateStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBillEstimateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateBillEstimate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBillEstimate, schemas.CreateBillEstimateRequest, schemas.CreateBillEstimateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateBillEstimate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBillEstimate, schemas.CreateBillEstimateRequest, schemas.CreateBillEstimateResponse), output: &CreateBillEstimateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBillEstimate"); err != nil {

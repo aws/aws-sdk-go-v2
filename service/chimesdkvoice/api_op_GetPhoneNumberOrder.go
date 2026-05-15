@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,18 @@ type GetPhoneNumberOrderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPhoneNumberOrderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPhoneNumberOrderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPhoneNumberOrderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PhoneNumberOrderId != nil {
+		s.WriteString(schemas.GetPhoneNumberOrderRequest_PhoneNumberOrderId, *v.PhoneNumberOrderId)
+	}
+}
+
 type GetPhoneNumberOrderOutput struct {
 
 	// The phone number order details.
@@ -50,16 +64,24 @@ type GetPhoneNumberOrderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPhoneNumberOrderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPhoneNumberOrderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPhoneNumberOrderResponse_PhoneNumberOrder:
+			v.PhoneNumberOrder = &types.PhoneNumberOrder{}
+			return v.PhoneNumberOrder.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPhoneNumberOrderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPhoneNumberOrder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPhoneNumberOrder, schemas.GetPhoneNumberOrderRequest, schemas.GetPhoneNumberOrderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPhoneNumberOrder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPhoneNumberOrder, schemas.GetPhoneNumberOrderRequest, schemas.GetPhoneNumberOrderResponse), output: &GetPhoneNumberOrderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPhoneNumberOrder"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -49,6 +51,28 @@ type ListAutomationEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomationEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomationEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomationEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTimeExclusive != nil {
+		s.WriteTime(schemas.ListAutomationEventsRequest_endTimeExclusive, *v.EndTimeExclusive)
+	}
+	serializeAutomationEventFilterList(s, schemas.ListAutomationEventsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutomationEventsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomationEventsRequest_nextToken, *v.NextToken)
+	}
+	if v.StartTimeInclusive != nil {
+		s.WriteTime(schemas.ListAutomationEventsRequest_startTimeInclusive, *v.StartTimeInclusive)
+	}
+}
+
 type ListAutomationEventsOutput struct {
 
 	//  The list of automation events that match the specified criteria.
@@ -63,16 +87,26 @@ type ListAutomationEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomationEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutomationEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutomationEventsResponse_automationEvents:
+			return deserializeAutomationEvents(d, schemas.ListAutomationEventsResponse_automationEvents, &v.AutomationEvents)
+		case schemas.ListAutomationEventsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutomationEventsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutomationEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListAutomationEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomationEvents, schemas.ListAutomationEventsRequest, schemas.ListAutomationEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListAutomationEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomationEvents, schemas.ListAutomationEventsRequest, schemas.ListAutomationEventsResponse), output: &ListAutomationEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAutomationEvents"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,24 @@ type CancelTrainedModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelTrainedModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelTrainedModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelTrainedModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.CancelTrainedModelRequest_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.TrainedModelArn != nil {
+		s.WriteString(schemas.CancelTrainedModelRequest_trainedModelArn, *v.TrainedModelArn)
+	}
+	if v.VersionIdentifier != nil {
+		s.WriteString(schemas.CancelTrainedModelRequest_versionIdentifier, *v.VersionIdentifier)
+	}
+}
+
 type CancelTrainedModelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,16 +75,29 @@ type CancelTrainedModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelTrainedModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelTrainedModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelTrainedModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelTrainedModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelTrainedModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelTrainedModel, schemas.CancelTrainedModelRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelTrainedModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelTrainedModel, schemas.CancelTrainedModelRequest, nil), output: &CancelTrainedModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelTrainedModel"); err != nil {

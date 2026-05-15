@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,6 +44,21 @@ type GetSubscriptionRequestDetailsInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSubscriptionRequestDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSubscriptionRequestDetailsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSubscriptionRequestDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetSubscriptionRequestDetailsInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetSubscriptionRequestDetailsInput_identifier, *v.Identifier)
+	}
 }
 
 type GetSubscriptionRequestDetailsOutput struct {
@@ -113,16 +130,64 @@ type GetSubscriptionRequestDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSubscriptionRequestDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSubscriptionRequestDetailsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSubscriptionRequestDetailsOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSubscriptionRequestDetailsOutput_createdAt, v.CreatedAt)
+		case schemas.GetSubscriptionRequestDetailsOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetSubscriptionRequestDetailsOutput_createdBy, v.CreatedBy)
+		case schemas.GetSubscriptionRequestDetailsOutput_decisionComment:
+			v.DecisionComment = new(string)
+			return d.ReadString(schemas.GetSubscriptionRequestDetailsOutput_decisionComment, v.DecisionComment)
+		case schemas.GetSubscriptionRequestDetailsOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetSubscriptionRequestDetailsOutput_domainId, v.DomainId)
+		case schemas.GetSubscriptionRequestDetailsOutput_existingSubscriptionId:
+			v.ExistingSubscriptionId = new(string)
+			return d.ReadString(schemas.GetSubscriptionRequestDetailsOutput_existingSubscriptionId, v.ExistingSubscriptionId)
+		case schemas.GetSubscriptionRequestDetailsOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetSubscriptionRequestDetailsOutput_id, v.Id)
+		case schemas.GetSubscriptionRequestDetailsOutput_metadataForms:
+			return deserializeMetadataForms(d, schemas.GetSubscriptionRequestDetailsOutput_metadataForms, &v.MetadataForms)
+		case schemas.GetSubscriptionRequestDetailsOutput_requestReason:
+			v.RequestReason = new(string)
+			return d.ReadString(schemas.GetSubscriptionRequestDetailsOutput_requestReason, v.RequestReason)
+		case schemas.GetSubscriptionRequestDetailsOutput_reviewerId:
+			v.ReviewerId = new(string)
+			return d.ReadString(schemas.GetSubscriptionRequestDetailsOutput_reviewerId, v.ReviewerId)
+		case schemas.GetSubscriptionRequestDetailsOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetSubscriptionRequestDetailsOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SubscriptionRequestStatus(ev)
+			return nil
+		case schemas.GetSubscriptionRequestDetailsOutput_subscribedListings:
+			return deserializeSubscribedListings(d, schemas.GetSubscriptionRequestDetailsOutput_subscribedListings, &v.SubscribedListings)
+		case schemas.GetSubscriptionRequestDetailsOutput_subscribedPrincipals:
+			return deserializeSubscribedPrincipals(d, schemas.GetSubscriptionRequestDetailsOutput_subscribedPrincipals, &v.SubscribedPrincipals)
+		case schemas.GetSubscriptionRequestDetailsOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSubscriptionRequestDetailsOutput_updatedAt, v.UpdatedAt)
+		case schemas.GetSubscriptionRequestDetailsOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetSubscriptionRequestDetailsOutput_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSubscriptionRequestDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSubscriptionRequestDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubscriptionRequestDetails, schemas.GetSubscriptionRequestDetailsInput, schemas.GetSubscriptionRequestDetailsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSubscriptionRequestDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubscriptionRequestDetails, schemas.GetSubscriptionRequestDetailsInput, schemas.GetSubscriptionRequestDetailsOutput), output: &GetSubscriptionRequestDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSubscriptionRequestDetails"); err != nil {

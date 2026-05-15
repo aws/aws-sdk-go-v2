@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -76,6 +78,33 @@ type ModifyHsmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyHsmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyHsmRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyHsmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EniIp != nil {
+		s.WriteString(schemas.ModifyHsmRequest_EniIp, *v.EniIp)
+	}
+	if v.ExternalId != nil {
+		s.WriteString(schemas.ModifyHsmRequest_ExternalId, *v.ExternalId)
+	}
+	if v.HsmArn != nil {
+		s.WriteString(schemas.ModifyHsmRequest_HsmArn, *v.HsmArn)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.ModifyHsmRequest_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.ModifyHsmRequest_SubnetId, *v.SubnetId)
+	}
+	if v.SyslogIp != nil {
+		s.WriteString(schemas.ModifyHsmRequest_SyslogIp, *v.SyslogIp)
+	}
+}
+
 // Contains the output of the ModifyHsm operation.
 type ModifyHsmOutput struct {
 
@@ -88,16 +117,24 @@ type ModifyHsmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyHsmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyHsmResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyHsmResponse_HsmArn:
+			v.HsmArn = new(string)
+			return d.ReadString(schemas.ModifyHsmResponse_HsmArn, v.HsmArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyHsmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyHsm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyHsm, schemas.ModifyHsmRequest, schemas.ModifyHsmResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyHsm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyHsm, schemas.ModifyHsmRequest, schemas.ModifyHsmResponse), output: &ModifyHsmOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyHsm"); err != nil {

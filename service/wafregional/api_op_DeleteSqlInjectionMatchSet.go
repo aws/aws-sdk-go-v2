@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,6 +69,21 @@ type DeleteSqlInjectionMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSqlInjectionMatchSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSqlInjectionMatchSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSqlInjectionMatchSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeToken != nil {
+		s.WriteString(schemas.DeleteSqlInjectionMatchSetRequest_ChangeToken, *v.ChangeToken)
+	}
+	if v.SqlInjectionMatchSetId != nil {
+		s.WriteString(schemas.DeleteSqlInjectionMatchSetRequest_SqlInjectionMatchSetId, *v.SqlInjectionMatchSetId)
+	}
+}
+
 // The response to a request to delete a SqlInjectionMatchSet from AWS WAF.
 type DeleteSqlInjectionMatchSetOutput struct {
 
@@ -81,16 +98,24 @@ type DeleteSqlInjectionMatchSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSqlInjectionMatchSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSqlInjectionMatchSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSqlInjectionMatchSetResponse_ChangeToken:
+			v.ChangeToken = new(string)
+			return d.ReadString(schemas.DeleteSqlInjectionMatchSetResponse_ChangeToken, v.ChangeToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSqlInjectionMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSqlInjectionMatchSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSqlInjectionMatchSet, schemas.DeleteSqlInjectionMatchSetRequest, schemas.DeleteSqlInjectionMatchSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteSqlInjectionMatchSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSqlInjectionMatchSet, schemas.DeleteSqlInjectionMatchSetRequest, schemas.DeleteSqlInjectionMatchSetResponse), output: &DeleteSqlInjectionMatchSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSqlInjectionMatchSet"); err != nil {

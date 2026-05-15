@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,6 +66,33 @@ type CreateEventIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateEventIntegrationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateEventIntegrationRequest_Description, *v.Description)
+	}
+	if v.EventBridgeBus != nil {
+		s.WriteString(schemas.CreateEventIntegrationRequest_EventBridgeBus, *v.EventBridgeBus)
+	}
+	if v.EventFilter != nil {
+		s.WriteStruct(schemas.CreateEventIntegrationRequest_EventFilter)
+		v.EventFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEventIntegrationRequest_Name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateEventIntegrationRequest_Tags, v.Tags)
+}
+
 type CreateEventIntegrationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the event integration.
@@ -75,16 +104,24 @@ type CreateEventIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEventIntegrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEventIntegrationResponse_EventIntegrationArn:
+			v.EventIntegrationArn = new(string)
+			return d.ReadString(schemas.CreateEventIntegrationResponse_EventIntegrationArn, v.EventIntegrationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEventIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEventIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventIntegration, schemas.CreateEventIntegrationRequest, schemas.CreateEventIntegrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEventIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventIntegration, schemas.CreateEventIntegrationRequest, schemas.CreateEventIntegrationResponse), output: &CreateEventIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEventIntegration"); err != nil {

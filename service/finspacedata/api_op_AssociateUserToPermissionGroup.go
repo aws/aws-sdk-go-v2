@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/finspacedata/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,24 @@ type AssociateUserToPermissionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateUserToPermissionGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateUserToPermissionGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateUserToPermissionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateUserToPermissionGroupRequest_clientToken, *v.ClientToken)
+	}
+	if v.PermissionGroupId != nil {
+		s.WriteString(schemas.AssociateUserToPermissionGroupRequest_permissionGroupId, *v.PermissionGroupId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.AssociateUserToPermissionGroupRequest_userId, *v.UserId)
+	}
+}
+
 type AssociateUserToPermissionGroupOutput struct {
 
 	// The returned status code of the response.
@@ -58,16 +78,23 @@ type AssociateUserToPermissionGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateUserToPermissionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateUserToPermissionGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateUserToPermissionGroupResponse_statusCode:
+			return d.ReadInt32(schemas.AssociateUserToPermissionGroupResponse_statusCode, &v.StatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateUserToPermissionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateUserToPermissionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateUserToPermissionGroup, schemas.AssociateUserToPermissionGroupRequest, schemas.AssociateUserToPermissionGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateUserToPermissionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateUserToPermissionGroup, schemas.AssociateUserToPermissionGroupRequest, schemas.AssociateUserToPermissionGroupResponse), output: &AssociateUserToPermissionGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateUserToPermissionGroup"); err != nil {

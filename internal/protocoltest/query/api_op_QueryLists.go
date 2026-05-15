@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,45 @@ type QueryListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryListsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryListsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryListsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGreetingList(s, schemas.QueryListsInput_ComplexListArg, v.ComplexListArg)
+	serializeStringList(s, schemas.QueryListsInput_FlattenedListArg, v.FlattenedListArg)
+	serializeListWithXmlName(s, schemas.QueryListsInput_FlattenedListArgWithXmlName, v.FlattenedListArgWithXmlName)
+	serializeStringList(s, schemas.QueryListsInput_ListArg, v.ListArg)
+	serializeListWithXmlName(s, schemas.QueryListsInput_ListArgWithXmlNameMember, v.ListArgWithXmlNameMember)
+	if v.NestedWithList != nil {
+		s.WriteStruct(schemas.QueryListsInput_NestedWithList)
+		v.NestedWithList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *QueryListsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryListsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryListsInput_ComplexListArg:
+			return deserializeGreetingList(d, schemas.QueryListsInput_ComplexListArg, &v.ComplexListArg)
+		case schemas.QueryListsInput_FlattenedListArg:
+			return deserializeStringList(d, schemas.QueryListsInput_FlattenedListArg, &v.FlattenedListArg)
+		case schemas.QueryListsInput_FlattenedListArgWithXmlName:
+			return deserializeListWithXmlName(d, schemas.QueryListsInput_FlattenedListArgWithXmlName, &v.FlattenedListArgWithXmlName)
+		case schemas.QueryListsInput_ListArg:
+			return deserializeStringList(d, schemas.QueryListsInput_ListArg, &v.ListArg)
+		case schemas.QueryListsInput_ListArgWithXmlNameMember:
+			return deserializeListWithXmlName(d, schemas.QueryListsInput_ListArgWithXmlNameMember, &v.ListArgWithXmlNameMember)
+		case schemas.QueryListsInput_NestedWithList:
+			v.NestedWithList = &types.NestedStructWithList{}
+			return v.NestedWithList.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type QueryListsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,16 +91,29 @@ type QueryListsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryListsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *QueryListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationQueryListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpQueryLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryLists, schemas.QueryListsInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpQueryLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryLists, schemas.QueryListsInput, nil), output: &QueryListsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "QueryLists"); err != nil {

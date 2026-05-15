@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -84,6 +86,27 @@ type DeletePrincipalMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePrincipalMappingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePrincipalMappingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePrincipalMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.DeletePrincipalMappingRequest_DataSourceId, *v.DataSourceId)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.DeletePrincipalMappingRequest_GroupId, *v.GroupId)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.DeletePrincipalMappingRequest_IndexId, *v.IndexId)
+	}
+	if v.OrderingId != nil {
+		s.WriteInt64(schemas.DeletePrincipalMappingRequest_OrderingId, *v.OrderingId)
+	}
+}
+
 type DeletePrincipalMappingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -91,16 +114,29 @@ type DeletePrincipalMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePrincipalMappingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePrincipalMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePrincipalMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePrincipalMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePrincipalMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePrincipalMapping, schemas.DeletePrincipalMappingRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeletePrincipalMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePrincipalMapping, schemas.DeletePrincipalMappingRequest, nil), output: &DeletePrincipalMappingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePrincipalMapping"); err != nil {

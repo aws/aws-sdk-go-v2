@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,6 +68,32 @@ type CreateAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPolicyIdentity != nil {
+		s.WriteStruct(schemas.CreateAccessPolicyRequest_accessPolicyIdentity)
+		v.AccessPolicyIdentity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AccessPolicyPermission != "" {
+		s.WriteString(schemas.CreateAccessPolicyRequest_accessPolicyPermission, string(v.AccessPolicyPermission))
+	}
+	if v.AccessPolicyResource != nil {
+		s.WriteStruct(schemas.CreateAccessPolicyRequest_accessPolicyResource)
+		v.AccessPolicyResource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAccessPolicyRequest_clientToken, *v.ClientToken)
+	}
+	serializeTagMap(s, schemas.CreateAccessPolicyRequest_tags, v.Tags)
+}
+
 type CreateAccessPolicyOutput struct {
 
 	// The [ARN] of the access policy, which has the following format.
@@ -88,16 +116,27 @@ type CreateAccessPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccessPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccessPolicyResponse_accessPolicyArn:
+			v.AccessPolicyArn = new(string)
+			return d.ReadString(schemas.CreateAccessPolicyResponse_accessPolicyArn, v.AccessPolicyArn)
+		case schemas.CreateAccessPolicyResponse_accessPolicyId:
+			v.AccessPolicyId = new(string)
+			return d.ReadString(schemas.CreateAccessPolicyResponse_accessPolicyId, v.AccessPolicyId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessPolicy, schemas.CreateAccessPolicyRequest, schemas.CreateAccessPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessPolicy, schemas.CreateAccessPolicyRequest, schemas.CreateAccessPolicyResponse), output: &CreateAccessPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAccessPolicy"); err != nil {

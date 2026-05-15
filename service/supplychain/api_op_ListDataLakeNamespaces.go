@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supplychain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,24 @@ type ListDataLakeNamespacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataLakeNamespacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataLakeNamespacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataLakeNamespacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListDataLakeNamespacesRequest_instanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataLakeNamespacesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataLakeNamespacesRequest_nextToken, *v.NextToken)
+	}
+}
+
 // The response parameters of ListDataLakeNamespaces.
 type ListDataLakeNamespacesOutput struct {
 
@@ -66,16 +86,26 @@ type ListDataLakeNamespacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataLakeNamespacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataLakeNamespacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataLakeNamespacesResponse_namespaces:
+			return deserializeDataLakeNamespaceList(d, schemas.ListDataLakeNamespacesResponse_namespaces, &v.Namespaces)
+		case schemas.ListDataLakeNamespacesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataLakeNamespacesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataLakeNamespacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataLakeNamespaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataLakeNamespaces, schemas.ListDataLakeNamespacesRequest, schemas.ListDataLakeNamespacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataLakeNamespaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataLakeNamespaces, schemas.ListDataLakeNamespacesRequest, schemas.ListDataLakeNamespacesResponse), output: &ListDataLakeNamespacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataLakeNamespaces"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -51,6 +53,24 @@ type GetRuleInput struct {
 	Revision *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetRuleInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetRuleInput_identifier, *v.Identifier)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.GetRuleInput_revision, *v.Revision)
+	}
 }
 
 type GetRuleOutput struct {
@@ -127,16 +147,73 @@ type GetRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRuleOutput_action:
+			var ev string
+			if err := d.ReadString(schemas.GetRuleOutput_action, &ev); err != nil {
+				return err
+			}
+			v.Action = types.RuleAction(ev)
+			return nil
+		case schemas.GetRuleOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetRuleOutput_createdAt, v.CreatedAt)
+		case schemas.GetRuleOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetRuleOutput_createdBy, v.CreatedBy)
+		case schemas.GetRuleOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetRuleOutput_description, v.Description)
+		case schemas.GetRuleOutput_detail:
+			return deserializeRuleDetail(d, schemas.GetRuleOutput_detail, &v.Detail)
+		case schemas.GetRuleOutput_identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.GetRuleOutput_identifier, v.Identifier)
+		case schemas.GetRuleOutput_lastUpdatedBy:
+			v.LastUpdatedBy = new(string)
+			return d.ReadString(schemas.GetRuleOutput_lastUpdatedBy, v.LastUpdatedBy)
+		case schemas.GetRuleOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetRuleOutput_name, v.Name)
+		case schemas.GetRuleOutput_revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.GetRuleOutput_revision, v.Revision)
+		case schemas.GetRuleOutput_ruleType:
+			var ev string
+			if err := d.ReadString(schemas.GetRuleOutput_ruleType, &ev); err != nil {
+				return err
+			}
+			v.RuleType = types.RuleType(ev)
+			return nil
+		case schemas.GetRuleOutput_scope:
+			v.Scope = &types.RuleScope{}
+			return v.Scope.Deserialize(d)
+		case schemas.GetRuleOutput_target:
+			return deserializeRuleTarget(d, schemas.GetRuleOutput_target, &v.Target)
+		case schemas.GetRuleOutput_targetType:
+			var ev string
+			if err := d.ReadString(schemas.GetRuleOutput_targetType, &ev); err != nil {
+				return err
+			}
+			v.TargetType = types.RuleTargetType(ev)
+			return nil
+		case schemas.GetRuleOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetRuleOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRule, schemas.GetRuleInput, schemas.GetRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRule, schemas.GetRuleInput, schemas.GetRuleOutput), output: &GetRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRule"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -70,6 +72,22 @@ type InvokeBrowserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeBrowserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeBrowserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeBrowserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBrowserAction(s, schemas.InvokeBrowserRequest_action, v.Action)
+	if v.BrowserIdentifier != nil {
+		s.WriteString(schemas.InvokeBrowserRequest_browserIdentifier, *v.BrowserIdentifier)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.InvokeBrowserRequest_sessionId, *v.SessionId)
+	}
+}
+
 // Response for the InvokeBrowser operation.
 type InvokeBrowserOutput struct {
 
@@ -90,16 +108,26 @@ type InvokeBrowserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeBrowserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeBrowserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeBrowserResponse_result:
+			return deserializeBrowserActionResult(d, schemas.InvokeBrowserResponse_result, &v.Result)
+		case schemas.InvokeBrowserResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.InvokeBrowserResponse_sessionId, v.SessionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInvokeBrowserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeBrowser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeBrowser, schemas.InvokeBrowserRequest, schemas.InvokeBrowserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeBrowser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeBrowser, schemas.InvokeBrowserRequest, schemas.InvokeBrowserResponse), output: &InvokeBrowserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeBrowser"); err != nil {

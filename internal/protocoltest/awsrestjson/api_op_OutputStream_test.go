@@ -836,7 +836,62 @@ func TestEventStream_OutputStream_HeadersAndExplicitPayloadOutput(t *testing.T) 
 }
 
 func TestEventStream_OutputStream_HeadersAndImplicitPayloadOutput(t *testing.T) {
-	t.Skip("skipped, see SKIP_TESTS in EventStreamProtocolTestGenerator")
+	mock := newEventstreamMockHTTPClient()
+	defer mock.CloseResponse()
+	mock.KeepResponseOpen = true
+	mock.ResponseEvents = []eventstream.Message{
+		func() eventstream.Message {
+			raw, _ := base64.StdEncoding.DecodeString("AAAAjQAAAGxoUIY5DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAGWhlYWRlcnNBbmRJbXBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJwYXlsb2FkIjoiYmFyIn15lZtT")
+			msg, err := eventstream.NewDecoder().Decode(bytes.NewReader(raw), make([]byte, 1024))
+			if err != nil {
+				panic(err)
+			}
+			return msg
+		}(),
+	}
+
+	client := New(Options{
+		HTTPClient:         mock,
+		Credentials:        credentials.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
+		EndpointResolverV2: &protocolTestEndpointResolver{URL: "http://localhost"},
+		APIOptions: []func(*middleware.Stack) error{
+			func(s *middleware.Stack) error {
+				s.Finalize.Remove("Retry")
+				s.Initialize.Remove("OperationInputValidation")
+				return nil
+			},
+		},
+	})
+
+	resp, err := client.OutputStream(context.Background(), &OutputStreamInput{})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	defer resp.GetStream().Close()
+	mock.CloseResponse()
+
+	var receivedEvents int
+	for event := range resp.GetStream().Events() {
+		receivedEvents++
+		switch receivedEvents {
+		case 1:
+			expect := &types.EventStreamMemberHeadersAndImplicitPayload{Value: types.HeadersAndImplicitPayloadEvent{
+				Header:  ptr.String("foo"),
+				Payload: ptr.String("bar"),
+			}}
+			if err := smithytesting.CompareValues(expect, event); err != nil {
+				t.Errorf("event %d mismatch: %v", receivedEvents, err)
+			}
+
+		}
+	}
+
+	if err := resp.GetStream().Err(); err != nil {
+		t.Fatalf("expect no stream error, got %v", err)
+	}
+	if receivedEvents != 1 {
+		t.Fatalf("expected 1 events, got %d", receivedEvents)
+	}
 }
 
 func TestEventStream_OutputStream_ClientErrorOutput(t *testing.T) {

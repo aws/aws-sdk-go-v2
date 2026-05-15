@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,6 +65,27 @@ type GetIceServerConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIceServerConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIceServerConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIceServerConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelARN != nil {
+		s.WriteString(schemas.GetIceServerConfigRequest_ChannelARN, *v.ChannelARN)
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.GetIceServerConfigRequest_ClientId, *v.ClientId)
+	}
+	if v.Service != "" {
+		s.WriteString(schemas.GetIceServerConfigRequest_Service, string(v.Service))
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.GetIceServerConfigRequest_Username, *v.Username)
+	}
+}
+
 type GetIceServerConfigOutput struct {
 
 	// The list of ICE server information objects.
@@ -74,16 +97,23 @@ type GetIceServerConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIceServerConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIceServerConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIceServerConfigResponse_IceServerList:
+			return deserializeIceServerList(d, schemas.GetIceServerConfigResponse_IceServerList, &v.IceServerList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIceServerConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIceServerConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIceServerConfig, schemas.GetIceServerConfigRequest, schemas.GetIceServerConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIceServerConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIceServerConfig, schemas.GetIceServerConfigRequest, schemas.GetIceServerConfigResponse), output: &GetIceServerConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIceServerConfig"); err != nil {

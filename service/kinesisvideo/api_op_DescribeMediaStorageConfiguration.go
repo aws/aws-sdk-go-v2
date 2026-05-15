@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,21 @@ type DescribeMediaStorageConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMediaStorageConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMediaStorageConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMediaStorageConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelARN != nil {
+		s.WriteString(schemas.DescribeMediaStorageConfigurationInput_ChannelARN, *v.ChannelARN)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.DescribeMediaStorageConfigurationInput_ChannelName, *v.ChannelName)
+	}
+}
+
 type DescribeMediaStorageConfigurationOutput struct {
 
 	// A structure that encapsulates, or contains, the media storage configuration
@@ -51,16 +68,24 @@ type DescribeMediaStorageConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMediaStorageConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMediaStorageConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMediaStorageConfigurationOutput_MediaStorageConfiguration:
+			v.MediaStorageConfiguration = &types.MediaStorageConfiguration{}
+			return v.MediaStorageConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMediaStorageConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeMediaStorageConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMediaStorageConfiguration, schemas.DescribeMediaStorageConfigurationInput, schemas.DescribeMediaStorageConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeMediaStorageConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMediaStorageConfiguration, schemas.DescribeMediaStorageConfigurationInput, schemas.DescribeMediaStorageConfigurationOutput), output: &DescribeMediaStorageConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeMediaStorageConfiguration"); err != nil {

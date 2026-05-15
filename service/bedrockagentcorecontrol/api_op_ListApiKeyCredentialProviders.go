@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,21 @@ type ListApiKeyCredentialProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApiKeyCredentialProvidersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApiKeyCredentialProvidersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApiKeyCredentialProvidersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListApiKeyCredentialProvidersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApiKeyCredentialProvidersRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListApiKeyCredentialProvidersOutput struct {
 
 	// The list of API key credential providers.
@@ -54,16 +71,26 @@ type ListApiKeyCredentialProvidersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApiKeyCredentialProvidersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApiKeyCredentialProvidersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApiKeyCredentialProvidersResponse_credentialProviders:
+			return deserializeApiKeyCredentialProviders(d, schemas.ListApiKeyCredentialProvidersResponse_credentialProviders, &v.CredentialProviders)
+		case schemas.ListApiKeyCredentialProvidersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApiKeyCredentialProvidersResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApiKeyCredentialProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApiKeyCredentialProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApiKeyCredentialProviders, schemas.ListApiKeyCredentialProvidersRequest, schemas.ListApiKeyCredentialProvidersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApiKeyCredentialProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApiKeyCredentialProviders, schemas.ListApiKeyCredentialProvidersRequest, schemas.ListApiKeyCredentialProvidersResponse), output: &ListApiKeyCredentialProvidersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListApiKeyCredentialProviders"); err != nil {

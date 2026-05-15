@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emrserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -113,6 +115,147 @@ type UpdateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.UpdateApplicationRequest_applicationId, *v.ApplicationId)
+	}
+	if v.Architecture != "" {
+		s.WriteString(schemas.UpdateApplicationRequest_architecture, string(v.Architecture))
+	}
+	if v.AutoStartConfiguration != nil {
+		s.WriteStruct(schemas.UpdateApplicationRequest_autoStartConfiguration)
+		v.AutoStartConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutoStopConfiguration != nil {
+		s.WriteStruct(schemas.UpdateApplicationRequest_autoStopConfiguration)
+		v.AutoStopConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateApplicationRequest_clientToken, *v.ClientToken)
+	}
+	if v.DiskEncryptionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateApplicationRequest_diskEncryptionConfiguration)
+		v.DiskEncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdentityCenterConfiguration != nil {
+		s.WriteStruct(schemas.UpdateApplicationRequest_identityCenterConfiguration)
+		v.IdentityCenterConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageConfiguration != nil {
+		s.WriteStruct(schemas.UpdateApplicationRequest_imageConfiguration)
+		v.ImageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeInitialCapacityConfigMap(s, schemas.UpdateApplicationRequest_initialCapacity, v.InitialCapacity)
+	if v.InteractiveConfiguration != nil {
+		s.WriteStruct(schemas.UpdateApplicationRequest_interactiveConfiguration)
+		v.InteractiveConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobLevelCostAllocationConfiguration != nil {
+		s.WriteStruct(schemas.UpdateApplicationRequest_jobLevelCostAllocationConfiguration)
+		v.JobLevelCostAllocationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaximumCapacity != nil {
+		s.WriteStruct(schemas.UpdateApplicationRequest_maximumCapacity)
+		v.MaximumCapacity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MonitoringConfiguration != nil {
+		s.WriteStruct(schemas.UpdateApplicationRequest_monitoringConfiguration)
+		v.MonitoringConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.UpdateApplicationRequest_networkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReleaseLabel != nil {
+		s.WriteString(schemas.UpdateApplicationRequest_releaseLabel, *v.ReleaseLabel)
+	}
+	serializeConfigurationList(s, schemas.UpdateApplicationRequest_runtimeConfiguration, v.RuntimeConfiguration)
+	if v.SchedulerConfiguration != nil {
+		s.WriteStruct(schemas.UpdateApplicationRequest_schedulerConfiguration)
+		v.SchedulerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeWorkerTypeSpecificationInputMap(s, schemas.UpdateApplicationRequest_workerTypeSpecifications, v.WorkerTypeSpecifications)
+}
+func (v *UpdateApplicationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApplicationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApplicationRequest_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.UpdateApplicationRequest_applicationId, v.ApplicationId)
+		case schemas.UpdateApplicationRequest_architecture:
+			var ev string
+			if err := d.ReadString(schemas.UpdateApplicationRequest_architecture, &ev); err != nil {
+				return err
+			}
+			v.Architecture = types.Architecture(ev)
+			return nil
+		case schemas.UpdateApplicationRequest_autoStartConfiguration:
+			v.AutoStartConfiguration = &types.AutoStartConfig{}
+			return v.AutoStartConfiguration.Deserialize(d)
+		case schemas.UpdateApplicationRequest_autoStopConfiguration:
+			v.AutoStopConfiguration = &types.AutoStopConfig{}
+			return v.AutoStopConfiguration.Deserialize(d)
+		case schemas.UpdateApplicationRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateApplicationRequest_clientToken, v.ClientToken)
+		case schemas.UpdateApplicationRequest_diskEncryptionConfiguration:
+			v.DiskEncryptionConfiguration = &types.DiskEncryptionConfiguration{}
+			return v.DiskEncryptionConfiguration.Deserialize(d)
+		case schemas.UpdateApplicationRequest_identityCenterConfiguration:
+			v.IdentityCenterConfiguration = &types.IdentityCenterConfigurationInput{}
+			return v.IdentityCenterConfiguration.Deserialize(d)
+		case schemas.UpdateApplicationRequest_imageConfiguration:
+			v.ImageConfiguration = &types.ImageConfigurationInput{}
+			return v.ImageConfiguration.Deserialize(d)
+		case schemas.UpdateApplicationRequest_initialCapacity:
+			return deserializeInitialCapacityConfigMap(d, schemas.UpdateApplicationRequest_initialCapacity, &v.InitialCapacity)
+		case schemas.UpdateApplicationRequest_interactiveConfiguration:
+			v.InteractiveConfiguration = &types.InteractiveConfiguration{}
+			return v.InteractiveConfiguration.Deserialize(d)
+		case schemas.UpdateApplicationRequest_jobLevelCostAllocationConfiguration:
+			v.JobLevelCostAllocationConfiguration = &types.JobLevelCostAllocationConfiguration{}
+			return v.JobLevelCostAllocationConfiguration.Deserialize(d)
+		case schemas.UpdateApplicationRequest_maximumCapacity:
+			v.MaximumCapacity = &types.MaximumAllowedResources{}
+			return v.MaximumCapacity.Deserialize(d)
+		case schemas.UpdateApplicationRequest_monitoringConfiguration:
+			v.MonitoringConfiguration = &types.MonitoringConfiguration{}
+			return v.MonitoringConfiguration.Deserialize(d)
+		case schemas.UpdateApplicationRequest_networkConfiguration:
+			v.NetworkConfiguration = &types.NetworkConfiguration{}
+			return v.NetworkConfiguration.Deserialize(d)
+		case schemas.UpdateApplicationRequest_releaseLabel:
+			v.ReleaseLabel = new(string)
+			return d.ReadString(schemas.UpdateApplicationRequest_releaseLabel, v.ReleaseLabel)
+		case schemas.UpdateApplicationRequest_runtimeConfiguration:
+			return deserializeConfigurationList(d, schemas.UpdateApplicationRequest_runtimeConfiguration, &v.RuntimeConfiguration)
+		case schemas.UpdateApplicationRequest_schedulerConfiguration:
+			v.SchedulerConfiguration = &types.SchedulerConfiguration{}
+			return v.SchedulerConfiguration.Deserialize(d)
+		case schemas.UpdateApplicationRequest_workerTypeSpecifications:
+			return deserializeWorkerTypeSpecificationInputMap(d, schemas.UpdateApplicationRequest_workerTypeSpecifications, &v.WorkerTypeSpecifications)
+		}
+		return nil
+	})
+}
+
 type UpdateApplicationOutput struct {
 
 	// Information about the updated application.
@@ -126,16 +269,37 @@ type UpdateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Application != nil {
+		s.WriteStruct(schemas.UpdateApplicationResponse_application)
+		v.Application.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApplicationResponse_application:
+			v.Application = &types.Application{}
+			return v.Application.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplication, schemas.UpdateApplicationRequest, schemas.UpdateApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplication, schemas.UpdateApplicationRequest, schemas.UpdateApplicationResponse), output: &UpdateApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateApplication"); err != nil {

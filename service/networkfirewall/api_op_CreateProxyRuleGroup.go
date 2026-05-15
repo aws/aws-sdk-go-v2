@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +61,27 @@ type CreateProxyRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProxyRuleGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProxyRuleGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProxyRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateProxyRuleGroupRequest_Description, *v.Description)
+	}
+	if v.ProxyRuleGroupName != nil {
+		s.WriteString(schemas.CreateProxyRuleGroupRequest_ProxyRuleGroupName, *v.ProxyRuleGroupName)
+	}
+	if v.Rules != nil {
+		s.WriteStruct(schemas.CreateProxyRuleGroupRequest_Rules)
+		v.Rules.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateProxyRuleGroupRequest_Tags, v.Tags)
+}
+
 type CreateProxyRuleGroupOutput struct {
 
 	// The properties that define the proxy rule group.
@@ -82,16 +105,27 @@ type CreateProxyRuleGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProxyRuleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProxyRuleGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProxyRuleGroupResponse_ProxyRuleGroup:
+			v.ProxyRuleGroup = &types.ProxyRuleGroup{}
+			return v.ProxyRuleGroup.Deserialize(d)
+		case schemas.CreateProxyRuleGroupResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.CreateProxyRuleGroupResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProxyRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateProxyRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProxyRuleGroup, schemas.CreateProxyRuleGroupRequest, schemas.CreateProxyRuleGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateProxyRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProxyRuleGroup, schemas.CreateProxyRuleGroupRequest, schemas.CreateProxyRuleGroupResponse), output: &CreateProxyRuleGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProxyRuleGroup"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,6 +43,21 @@ type GetEnvironmentBlueprintInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEnvironmentBlueprintInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnvironmentBlueprintInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnvironmentBlueprintInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetEnvironmentBlueprintInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetEnvironmentBlueprintInput_identifier, *v.Identifier)
+	}
 }
 
 type GetEnvironmentBlueprintOutput struct {
@@ -89,16 +106,48 @@ type GetEnvironmentBlueprintOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnvironmentBlueprintOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEnvironmentBlueprintOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEnvironmentBlueprintOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetEnvironmentBlueprintOutput_createdAt, v.CreatedAt)
+		case schemas.GetEnvironmentBlueprintOutput_deploymentProperties:
+			v.DeploymentProperties = &types.DeploymentProperties{}
+			return v.DeploymentProperties.Deserialize(d)
+		case schemas.GetEnvironmentBlueprintOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetEnvironmentBlueprintOutput_description, v.Description)
+		case schemas.GetEnvironmentBlueprintOutput_glossaryTerms:
+			return deserializeGlossaryTerms(d, schemas.GetEnvironmentBlueprintOutput_glossaryTerms, &v.GlossaryTerms)
+		case schemas.GetEnvironmentBlueprintOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetEnvironmentBlueprintOutput_id, v.Id)
+		case schemas.GetEnvironmentBlueprintOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetEnvironmentBlueprintOutput_name, v.Name)
+		case schemas.GetEnvironmentBlueprintOutput_provider:
+			v.Provider = new(string)
+			return d.ReadString(schemas.GetEnvironmentBlueprintOutput_provider, v.Provider)
+		case schemas.GetEnvironmentBlueprintOutput_provisioningProperties:
+			return deserializeProvisioningProperties(d, schemas.GetEnvironmentBlueprintOutput_provisioningProperties, &v.ProvisioningProperties)
+		case schemas.GetEnvironmentBlueprintOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetEnvironmentBlueprintOutput_updatedAt, v.UpdatedAt)
+		case schemas.GetEnvironmentBlueprintOutput_userParameters:
+			return deserializeCustomParameterList(d, schemas.GetEnvironmentBlueprintOutput_userParameters, &v.UserParameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEnvironmentBlueprintMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEnvironmentBlueprint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironmentBlueprint, schemas.GetEnvironmentBlueprintInput, schemas.GetEnvironmentBlueprintOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEnvironmentBlueprint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironmentBlueprint, schemas.GetEnvironmentBlueprintInput, schemas.GetEnvironmentBlueprintOutput), output: &GetEnvironmentBlueprintOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEnvironmentBlueprint"); err != nil {

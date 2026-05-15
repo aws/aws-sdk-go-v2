@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,30 @@ type UpdateVPCEConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVPCEConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVPCEConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVPCEConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateVPCEConfigurationRequest_arn, *v.Arn)
+	}
+	if v.ServiceDnsName != nil {
+		s.WriteString(schemas.UpdateVPCEConfigurationRequest_serviceDnsName, *v.ServiceDnsName)
+	}
+	if v.VpceConfigurationDescription != nil {
+		s.WriteString(schemas.UpdateVPCEConfigurationRequest_vpceConfigurationDescription, *v.VpceConfigurationDescription)
+	}
+	if v.VpceConfigurationName != nil {
+		s.WriteString(schemas.UpdateVPCEConfigurationRequest_vpceConfigurationName, *v.VpceConfigurationName)
+	}
+	if v.VpceServiceName != nil {
+		s.WriteString(schemas.UpdateVPCEConfigurationRequest_vpceServiceName, *v.VpceServiceName)
+	}
+}
+
 type UpdateVPCEConfigurationOutput struct {
 
 	// An object that contains information about your VPC endpoint configuration.
@@ -66,16 +92,24 @@ type UpdateVPCEConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVPCEConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVPCEConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVPCEConfigurationResult_vpceConfiguration:
+			v.VpceConfiguration = &types.VPCEConfiguration{}
+			return v.VpceConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVPCEConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateVPCEConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVPCEConfiguration, schemas.UpdateVPCEConfigurationRequest, schemas.UpdateVPCEConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateVPCEConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVPCEConfiguration, schemas.UpdateVPCEConfigurationRequest, schemas.UpdateVPCEConfigurationResult), output: &UpdateVPCEConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateVPCEConfiguration"); err != nil {

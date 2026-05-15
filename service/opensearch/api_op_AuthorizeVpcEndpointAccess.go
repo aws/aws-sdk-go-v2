@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,29 @@ type AuthorizeVpcEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuthorizeVpcEndpointAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthorizeVpcEndpointAccessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthorizeVpcEndpointAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Account != nil {
+		s.WriteString(schemas.AuthorizeVpcEndpointAccessRequest_Account, *v.Account)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.AuthorizeVpcEndpointAccessRequest_DomainName, *v.DomainName)
+	}
+	if v.Service != "" {
+		s.WriteString(schemas.AuthorizeVpcEndpointAccessRequest_Service, string(v.Service))
+	}
+	if v.ServiceOptions != nil {
+		s.WriteStruct(schemas.AuthorizeVpcEndpointAccessRequest_ServiceOptions)
+		v.ServiceOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AuthorizeVpcEndpointAccessOutput struct {
 
 	// Information about the Amazon Web Services account or service that was provided
@@ -62,16 +87,24 @@ type AuthorizeVpcEndpointAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuthorizeVpcEndpointAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuthorizeVpcEndpointAccessResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuthorizeVpcEndpointAccessResponse_AuthorizedPrincipal:
+			v.AuthorizedPrincipal = &types.AuthorizedPrincipal{}
+			return v.AuthorizedPrincipal.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAuthorizeVpcEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAuthorizeVpcEndpointAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AuthorizeVpcEndpointAccess, schemas.AuthorizeVpcEndpointAccessRequest, schemas.AuthorizeVpcEndpointAccessResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAuthorizeVpcEndpointAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AuthorizeVpcEndpointAccess, schemas.AuthorizeVpcEndpointAccessRequest, schemas.AuthorizeVpcEndpointAccessResponse), output: &AuthorizeVpcEndpointAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AuthorizeVpcEndpointAccess"); err != nil {

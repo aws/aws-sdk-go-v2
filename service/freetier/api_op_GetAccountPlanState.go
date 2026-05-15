@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/freetier/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/freetier/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -32,6 +34,15 @@ func (c *Client) GetAccountPlanState(ctx context.Context, params *GetAccountPlan
 
 type GetAccountPlanStateInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetAccountPlanStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountPlanStateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountPlanStateInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type GetAccountPlanStateOutput struct {
@@ -63,16 +74,44 @@ type GetAccountPlanStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountPlanStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountPlanStateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountPlanStateResponse_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.GetAccountPlanStateResponse_accountId, v.AccountId)
+		case schemas.GetAccountPlanStateResponse_accountPlanExpirationDate:
+			v.AccountPlanExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.GetAccountPlanStateResponse_accountPlanExpirationDate, v.AccountPlanExpirationDate)
+		case schemas.GetAccountPlanStateResponse_accountPlanRemainingCredits:
+			v.AccountPlanRemainingCredits = &types.MonetaryAmount{}
+			return v.AccountPlanRemainingCredits.Deserialize(d)
+		case schemas.GetAccountPlanStateResponse_accountPlanStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetAccountPlanStateResponse_accountPlanStatus, &ev); err != nil {
+				return err
+			}
+			v.AccountPlanStatus = types.AccountPlanStatus(ev)
+			return nil
+		case schemas.GetAccountPlanStateResponse_accountPlanType:
+			var ev string
+			if err := d.ReadString(schemas.GetAccountPlanStateResponse_accountPlanType, &ev); err != nil {
+				return err
+			}
+			v.AccountPlanType = types.AccountPlanType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountPlanStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetAccountPlanState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountPlanState, schemas.GetAccountPlanStateRequest, schemas.GetAccountPlanStateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetAccountPlanState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountPlanState, schemas.GetAccountPlanStateRequest, schemas.GetAccountPlanStateResponse), output: &GetAccountPlanStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAccountPlanState"); err != nil {

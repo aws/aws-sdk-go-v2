@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/repostspace/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,21 @@ type RegisterAdminInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterAdminInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterAdminInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterAdminInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminId != nil {
+		s.WriteString(schemas.RegisterAdminInput_adminId, *v.AdminId)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.RegisterAdminInput_spaceId, *v.SpaceId)
+	}
+}
+
 type RegisterAdminOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,16 +65,29 @@ type RegisterAdminOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterAdminOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterAdminOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RegisterAdminOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterAdmin{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterAdmin, schemas.RegisterAdminInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterAdmin{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterAdmin, schemas.RegisterAdminInput, nil), output: &RegisterAdminOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterAdmin"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,27 @@ type StopRuntimeSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopRuntimeSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopRuntimeSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopRuntimeSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentRuntimeArn != nil {
+		s.WriteString(schemas.StopRuntimeSessionRequest_agentRuntimeArn, *v.AgentRuntimeArn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StopRuntimeSessionRequest_clientToken, *v.ClientToken)
+	}
+	if v.Qualifier != nil {
+		s.WriteString(schemas.StopRuntimeSessionRequest_qualifier, *v.Qualifier)
+	}
+	if v.RuntimeSessionId != nil {
+		s.WriteString(schemas.StopRuntimeSessionRequest_runtimeSessionId, *v.RuntimeSessionId)
+	}
+}
+
 type StopRuntimeSessionOutput struct {
 
 	// The ID of the session that you requested to stop.
@@ -64,16 +87,27 @@ type StopRuntimeSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopRuntimeSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopRuntimeSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopRuntimeSessionResponse_runtimeSessionId:
+			v.RuntimeSessionId = new(string)
+			return d.ReadString(schemas.StopRuntimeSessionResponse_runtimeSessionId, v.RuntimeSessionId)
+		case schemas.StopRuntimeSessionResponse_statusCode:
+			v.StatusCode = new(int32)
+			return d.ReadInt32(schemas.StopRuntimeSessionResponse_statusCode, v.StatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopRuntimeSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopRuntimeSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopRuntimeSession, schemas.StopRuntimeSessionRequest, schemas.StopRuntimeSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopRuntimeSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopRuntimeSession, schemas.StopRuntimeSessionRequest, schemas.StopRuntimeSessionResponse), output: &StopRuntimeSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StopRuntimeSession"); err != nil {

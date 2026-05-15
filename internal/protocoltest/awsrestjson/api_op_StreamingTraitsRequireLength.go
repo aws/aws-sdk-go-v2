@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -39,6 +41,25 @@ type StreamingTraitsRequireLengthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StreamingTraitsRequireLengthInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamingTraitsRequireLengthInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamingTraitsRequireLengthInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Foo != nil {
+		s.WriteString(schemas.StreamingTraitsRequireLengthInput_foo, *v.Foo)
+	}
+}
+func (v *StreamingTraitsRequireLengthInput) GetPayloadStream() io.Reader { return v.Blob }
+
+var _ smithy.StreamingInput = (*StreamingTraitsRequireLengthInput)(nil)
+
+func (v *StreamingTraitsRequireLengthInput) SetPayloadStream(r io.ReadCloser) { v.Blob = r }
+
+var _ smithy.StreamingOutput = (*StreamingTraitsRequireLengthInput)(nil)
+
 type StreamingTraitsRequireLengthOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,16 +67,29 @@ type StreamingTraitsRequireLengthOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StreamingTraitsRequireLengthOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamingTraitsRequireLengthOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StreamingTraitsRequireLengthOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStreamingTraitsRequireLengthMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStreamingTraitsRequireLength{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StreamingTraitsRequireLength, schemas.StreamingTraitsRequireLengthInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStreamingTraitsRequireLength{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StreamingTraitsRequireLength, schemas.StreamingTraitsRequireLengthInput, nil), output: &StreamingTraitsRequireLengthOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StreamingTraitsRequireLength"); err != nil {

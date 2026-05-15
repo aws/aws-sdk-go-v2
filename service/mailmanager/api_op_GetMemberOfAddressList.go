@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,6 +44,21 @@ type GetMemberOfAddressListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMemberOfAddressListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMemberOfAddressListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMemberOfAddressListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteString(schemas.GetMemberOfAddressListRequest_Address, *v.Address)
+	}
+	if v.AddressListId != nil {
+		s.WriteString(schemas.GetMemberOfAddressListRequest_AddressListId, *v.AddressListId)
+	}
+}
+
 type GetMemberOfAddressListOutput struct {
 
 	// The address retrieved from the address list.
@@ -60,16 +77,27 @@ type GetMemberOfAddressListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMemberOfAddressListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMemberOfAddressListResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMemberOfAddressListResponse_Address:
+			v.Address = new(string)
+			return d.ReadString(schemas.GetMemberOfAddressListResponse_Address, v.Address)
+		case schemas.GetMemberOfAddressListResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetMemberOfAddressListResponse_CreatedTimestamp, v.CreatedTimestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMemberOfAddressListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetMemberOfAddressList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMemberOfAddressList, schemas.GetMemberOfAddressListRequest, schemas.GetMemberOfAddressListResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetMemberOfAddressList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMemberOfAddressList, schemas.GetMemberOfAddressListRequest, schemas.GetMemberOfAddressListResponse), output: &GetMemberOfAddressListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMemberOfAddressList"); err != nil {

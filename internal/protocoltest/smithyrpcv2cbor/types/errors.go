@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -36,6 +37,18 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationException_fieldList:
+			return deserializeValidationExceptionFieldList(d, schemas.ValidationException_fieldList, &v.FieldList)
+		case schemas.ValidationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // This error is thrown when a request is invalid.
 type ComplexError struct {
@@ -65,6 +78,19 @@ func (e *ComplexError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ComplexError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ComplexError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComplexError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComplexError_Nested:
+			v.Nested = &ComplexNestedErrorData{}
+			return v.Nested.Deserialize(d)
+		case schemas.ComplexError_TopLevel:
+			v.TopLevel = new(string)
+			return d.ReadString(schemas.ComplexError_TopLevel, v.TopLevel)
+		}
+		return nil
+	})
+}
 
 // This error is thrown when an invalid greeting value is provided.
 type InvalidGreeting struct {
@@ -91,3 +117,13 @@ func (e *InvalidGreeting) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidGreeting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidGreeting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidGreeting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidGreeting_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidGreeting_Message, v.Message)
+		}
+		return nil
+	})
+}

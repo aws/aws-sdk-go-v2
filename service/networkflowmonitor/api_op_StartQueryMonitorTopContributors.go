@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -95,6 +97,33 @@ type StartQueryMonitorTopContributorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQueryMonitorTopContributorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQueryMonitorTopContributorsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQueryMonitorTopContributorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationCategory != "" {
+		s.WriteString(schemas.StartQueryMonitorTopContributorsInput_destinationCategory, string(v.DestinationCategory))
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.StartQueryMonitorTopContributorsInput_endTime, *v.EndTime)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.StartQueryMonitorTopContributorsInput_limit, *v.Limit)
+	}
+	if v.MetricName != "" {
+		s.WriteString(schemas.StartQueryMonitorTopContributorsInput_metricName, string(v.MetricName))
+	}
+	if v.MonitorName != nil {
+		s.WriteString(schemas.StartQueryMonitorTopContributorsInput_monitorName, *v.MonitorName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.StartQueryMonitorTopContributorsInput_startTime, *v.StartTime)
+	}
+}
+
 type StartQueryMonitorTopContributorsOutput struct {
 
 	// The identifier for the query. A query ID is an internally-generated identifier
@@ -109,16 +138,24 @@ type StartQueryMonitorTopContributorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQueryMonitorTopContributorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartQueryMonitorTopContributorsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartQueryMonitorTopContributorsOutput_queryId:
+			v.QueryId = new(string)
+			return d.ReadString(schemas.StartQueryMonitorTopContributorsOutput_queryId, v.QueryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartQueryMonitorTopContributorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartQueryMonitorTopContributors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQueryMonitorTopContributors, schemas.StartQueryMonitorTopContributorsInput, schemas.StartQueryMonitorTopContributorsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartQueryMonitorTopContributors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQueryMonitorTopContributors, schemas.StartQueryMonitorTopContributorsInput, schemas.StartQueryMonitorTopContributorsOutput), output: &StartQueryMonitorTopContributorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartQueryMonitorTopContributors"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeconnections/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,21 @@ type ListHostsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHostsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHostsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHostsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListHostsInput_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHostsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListHostsOutput struct {
 
 	// A list of hosts and the details for each host, such as status, endpoint, and
@@ -57,16 +74,26 @@ type ListHostsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHostsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHostsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHostsOutput_Hosts:
+			return deserializeHostList(d, schemas.ListHostsOutput_Hosts, &v.Hosts)
+		case schemas.ListHostsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHostsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHostsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListHosts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHosts, schemas.ListHostsInput, schemas.ListHostsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListHosts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHosts, schemas.ListHostsInput, schemas.ListHostsOutput), output: &ListHostsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListHosts"); err != nil {

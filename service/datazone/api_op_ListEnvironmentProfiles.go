@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,6 +71,39 @@ type ListEnvironmentProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnvironmentProfilesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnvironmentProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListEnvironmentProfilesInput_awsAccountId, *v.AwsAccountId)
+	}
+	if v.AwsAccountRegion != nil {
+		s.WriteString(schemas.ListEnvironmentProfilesInput_awsAccountRegion, *v.AwsAccountRegion)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.ListEnvironmentProfilesInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.EnvironmentBlueprintIdentifier != nil {
+		s.WriteString(schemas.ListEnvironmentProfilesInput_environmentBlueprintIdentifier, *v.EnvironmentBlueprintIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEnvironmentProfilesInput_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListEnvironmentProfilesInput_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnvironmentProfilesInput_nextToken, *v.NextToken)
+	}
+	if v.ProjectIdentifier != nil {
+		s.WriteString(schemas.ListEnvironmentProfilesInput_projectIdentifier, *v.ProjectIdentifier)
+	}
+}
+
 type ListEnvironmentProfilesOutput struct {
 
 	// The results of the ListEnvironmentProfiles action.
@@ -90,16 +125,26 @@ type ListEnvironmentProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnvironmentProfilesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnvironmentProfilesOutput_items:
+			return deserializeEnvironmentProfileSummaries(d, schemas.ListEnvironmentProfilesOutput_items, &v.Items)
+		case schemas.ListEnvironmentProfilesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnvironmentProfilesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnvironmentProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEnvironmentProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentProfiles, schemas.ListEnvironmentProfilesInput, schemas.ListEnvironmentProfilesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEnvironmentProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentProfiles, schemas.ListEnvironmentProfilesInput, schemas.ListEnvironmentProfilesOutput), output: &ListEnvironmentProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEnvironmentProfiles"); err != nil {

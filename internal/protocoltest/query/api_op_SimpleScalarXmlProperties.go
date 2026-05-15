@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -27,6 +29,22 @@ func (c *Client) SimpleScalarXmlProperties(ctx context.Context, params *SimpleSc
 
 type SimpleScalarXmlPropertiesInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *SimpleScalarXmlPropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimpleScalarXmlPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SimpleScalarXmlPropertiesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 type SimpleScalarXmlPropertiesOutput struct {
@@ -56,16 +74,89 @@ type SimpleScalarXmlPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SimpleScalarXmlPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SimpleScalarXmlPropertiesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimpleScalarXmlPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByteValue != nil {
+		s.WriteInt8(schemas.SimpleScalarXmlPropertiesOutput_byteValue, *v.ByteValue)
+	}
+	if v.DoubleValue != nil {
+		s.WriteFloat64(schemas.SimpleScalarXmlPropertiesOutput_doubleValue, *v.DoubleValue)
+	}
+	if v.EmptyStringValue != nil {
+		s.WriteString(schemas.SimpleScalarXmlPropertiesOutput_emptyStringValue, *v.EmptyStringValue)
+	}
+	if v.FalseBooleanValue != nil {
+		s.WriteBool(schemas.SimpleScalarXmlPropertiesOutput_falseBooleanValue, *v.FalseBooleanValue)
+	}
+	if v.FloatValue != nil {
+		s.WriteFloat32(schemas.SimpleScalarXmlPropertiesOutput_floatValue, *v.FloatValue)
+	}
+	if v.IntegerValue != nil {
+		s.WriteInt32(schemas.SimpleScalarXmlPropertiesOutput_integerValue, *v.IntegerValue)
+	}
+	if v.LongValue != nil {
+		s.WriteInt64(schemas.SimpleScalarXmlPropertiesOutput_longValue, *v.LongValue)
+	}
+	if v.ShortValue != nil {
+		s.WriteInt16(schemas.SimpleScalarXmlPropertiesOutput_shortValue, *v.ShortValue)
+	}
+	if v.StringValue != nil {
+		s.WriteString(schemas.SimpleScalarXmlPropertiesOutput_stringValue, *v.StringValue)
+	}
+	if v.TrueBooleanValue != nil {
+		s.WriteBool(schemas.SimpleScalarXmlPropertiesOutput_trueBooleanValue, *v.TrueBooleanValue)
+	}
+}
+func (v *SimpleScalarXmlPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SimpleScalarXmlPropertiesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SimpleScalarXmlPropertiesOutput_byteValue:
+			v.ByteValue = new(int8)
+			return d.ReadInt8(schemas.SimpleScalarXmlPropertiesOutput_byteValue, v.ByteValue)
+		case schemas.SimpleScalarXmlPropertiesOutput_doubleValue:
+			v.DoubleValue = new(float64)
+			return d.ReadFloat64(schemas.SimpleScalarXmlPropertiesOutput_doubleValue, v.DoubleValue)
+		case schemas.SimpleScalarXmlPropertiesOutput_emptyStringValue:
+			v.EmptyStringValue = new(string)
+			return d.ReadString(schemas.SimpleScalarXmlPropertiesOutput_emptyStringValue, v.EmptyStringValue)
+		case schemas.SimpleScalarXmlPropertiesOutput_falseBooleanValue:
+			v.FalseBooleanValue = new(bool)
+			return d.ReadBool(schemas.SimpleScalarXmlPropertiesOutput_falseBooleanValue, v.FalseBooleanValue)
+		case schemas.SimpleScalarXmlPropertiesOutput_floatValue:
+			v.FloatValue = new(float32)
+			return d.ReadFloat32(schemas.SimpleScalarXmlPropertiesOutput_floatValue, v.FloatValue)
+		case schemas.SimpleScalarXmlPropertiesOutput_integerValue:
+			v.IntegerValue = new(int32)
+			return d.ReadInt32(schemas.SimpleScalarXmlPropertiesOutput_integerValue, v.IntegerValue)
+		case schemas.SimpleScalarXmlPropertiesOutput_longValue:
+			v.LongValue = new(int64)
+			return d.ReadInt64(schemas.SimpleScalarXmlPropertiesOutput_longValue, v.LongValue)
+		case schemas.SimpleScalarXmlPropertiesOutput_shortValue:
+			v.ShortValue = new(int16)
+			return d.ReadInt16(schemas.SimpleScalarXmlPropertiesOutput_shortValue, v.ShortValue)
+		case schemas.SimpleScalarXmlPropertiesOutput_stringValue:
+			v.StringValue = new(string)
+			return d.ReadString(schemas.SimpleScalarXmlPropertiesOutput_stringValue, v.StringValue)
+		case schemas.SimpleScalarXmlPropertiesOutput_trueBooleanValue:
+			v.TrueBooleanValue = new(bool)
+			return d.ReadBool(schemas.SimpleScalarXmlPropertiesOutput_trueBooleanValue, v.TrueBooleanValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSimpleScalarXmlPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSimpleScalarXmlProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SimpleScalarXmlProperties, nil, schemas.SimpleScalarXmlPropertiesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSimpleScalarXmlProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SimpleScalarXmlProperties, nil, schemas.SimpleScalarXmlPropertiesOutput), output: &SimpleScalarXmlPropertiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SimpleScalarXmlProperties"); err != nil {

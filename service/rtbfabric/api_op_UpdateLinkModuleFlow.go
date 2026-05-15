@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,25 @@ type UpdateLinkModuleFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLinkModuleFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLinkModuleFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLinkModuleFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateLinkModuleFlowRequest_clientToken, *v.ClientToken)
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.UpdateLinkModuleFlowRequest_gatewayId, *v.GatewayId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.UpdateLinkModuleFlowRequest_linkId, *v.LinkId)
+	}
+	serializeModuleConfigurationList(s, schemas.UpdateLinkModuleFlowRequest_modules, v.Modules)
+}
+
 type UpdateLinkModuleFlowOutput struct {
 
 	// The unique identifier of the gateway.
@@ -75,16 +96,34 @@ type UpdateLinkModuleFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLinkModuleFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLinkModuleFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateLinkModuleFlowResponse_gatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.UpdateLinkModuleFlowResponse_gatewayId, v.GatewayId)
+		case schemas.UpdateLinkModuleFlowResponse_linkId:
+			v.LinkId = new(string)
+			return d.ReadString(schemas.UpdateLinkModuleFlowResponse_linkId, v.LinkId)
+		case schemas.UpdateLinkModuleFlowResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateLinkModuleFlowResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LinkStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLinkModuleFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLinkModuleFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLinkModuleFlow, schemas.UpdateLinkModuleFlowRequest, schemas.UpdateLinkModuleFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLinkModuleFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLinkModuleFlow, schemas.UpdateLinkModuleFlowRequest, schemas.UpdateLinkModuleFlowResponse), output: &UpdateLinkModuleFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateLinkModuleFlow"); err != nil {

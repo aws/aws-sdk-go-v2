@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -69,6 +71,52 @@ type UpdatePlaceIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePlaceIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePlaceIndexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePlaceIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceConfiguration != nil {
+		s.WriteStruct(schemas.UpdatePlaceIndexRequest_DataSourceConfiguration)
+		v.DataSourceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePlaceIndexRequest_Description, *v.Description)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.UpdatePlaceIndexRequest_IndexName, *v.IndexName)
+	}
+	if v.PricingPlan != "" {
+		s.WriteString(schemas.UpdatePlaceIndexRequest_PricingPlan, string(v.PricingPlan))
+	}
+}
+func (v *UpdatePlaceIndexInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePlaceIndexRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePlaceIndexRequest_DataSourceConfiguration:
+			v.DataSourceConfiguration = &types.DataSourceConfiguration{}
+			return v.DataSourceConfiguration.Deserialize(d)
+		case schemas.UpdatePlaceIndexRequest_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdatePlaceIndexRequest_Description, v.Description)
+		case schemas.UpdatePlaceIndexRequest_IndexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.UpdatePlaceIndexRequest_IndexName, v.IndexName)
+		case schemas.UpdatePlaceIndexRequest_PricingPlan:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePlaceIndexRequest_PricingPlan, &ev); err != nil {
+				return err
+			}
+			v.PricingPlan = types.PricingPlan(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type UpdatePlaceIndexOutput struct {
 
 	// The Amazon Resource Name (ARN) of the upated place index resource. Used to
@@ -98,16 +146,47 @@ type UpdatePlaceIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePlaceIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePlaceIndexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePlaceIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexArn != nil {
+		s.WriteString(schemas.UpdatePlaceIndexResponse_IndexArn, *v.IndexArn)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.UpdatePlaceIndexResponse_IndexName, *v.IndexName)
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.UpdatePlaceIndexResponse_UpdateTime, *v.UpdateTime)
+	}
+}
+func (v *UpdatePlaceIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePlaceIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePlaceIndexResponse_IndexArn:
+			v.IndexArn = new(string)
+			return d.ReadString(schemas.UpdatePlaceIndexResponse_IndexArn, v.IndexArn)
+		case schemas.UpdatePlaceIndexResponse_IndexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.UpdatePlaceIndexResponse_IndexName, v.IndexName)
+		case schemas.UpdatePlaceIndexResponse_UpdateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdatePlaceIndexResponse_UpdateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePlaceIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePlaceIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePlaceIndex, schemas.UpdatePlaceIndexRequest, schemas.UpdatePlaceIndexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePlaceIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePlaceIndex, schemas.UpdatePlaceIndexRequest, schemas.UpdatePlaceIndexResponse), output: &UpdatePlaceIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePlaceIndex"); err != nil {

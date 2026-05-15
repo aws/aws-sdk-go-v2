@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type DescribeJobInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeJobRequest_Name, *v.Name)
+	}
 }
 
 type DescribeJobOutput struct {
@@ -138,16 +152,97 @@ type DescribeJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeJobResponse_CreateDate:
+			v.CreateDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeJobResponse_CreateDate, v.CreateDate)
+		case schemas.DescribeJobResponse_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.DescribeJobResponse_CreatedBy, v.CreatedBy)
+		case schemas.DescribeJobResponse_DataCatalogOutputs:
+			return deserializeDataCatalogOutputList(d, schemas.DescribeJobResponse_DataCatalogOutputs, &v.DataCatalogOutputs)
+		case schemas.DescribeJobResponse_DatabaseOutputs:
+			return deserializeDatabaseOutputList(d, schemas.DescribeJobResponse_DatabaseOutputs, &v.DatabaseOutputs)
+		case schemas.DescribeJobResponse_DatasetName:
+			v.DatasetName = new(string)
+			return d.ReadString(schemas.DescribeJobResponse_DatasetName, v.DatasetName)
+		case schemas.DescribeJobResponse_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.DescribeJobResponse_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.DescribeJobResponse_EncryptionMode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeJobResponse_EncryptionMode, &ev); err != nil {
+				return err
+			}
+			v.EncryptionMode = types.EncryptionMode(ev)
+			return nil
+		case schemas.DescribeJobResponse_JobSample:
+			v.JobSample = &types.JobSample{}
+			return v.JobSample.Deserialize(d)
+		case schemas.DescribeJobResponse_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.DescribeJobResponse_LastModifiedBy, v.LastModifiedBy)
+		case schemas.DescribeJobResponse_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeJobResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.DescribeJobResponse_LogSubscription:
+			var ev string
+			if err := d.ReadString(schemas.DescribeJobResponse_LogSubscription, &ev); err != nil {
+				return err
+			}
+			v.LogSubscription = types.LogSubscription(ev)
+			return nil
+		case schemas.DescribeJobResponse_MaxCapacity:
+			return d.ReadInt32(schemas.DescribeJobResponse_MaxCapacity, &v.MaxCapacity)
+		case schemas.DescribeJobResponse_MaxRetries:
+			return d.ReadInt32(schemas.DescribeJobResponse_MaxRetries, &v.MaxRetries)
+		case schemas.DescribeJobResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeJobResponse_Name, v.Name)
+		case schemas.DescribeJobResponse_Outputs:
+			return deserializeOutputList(d, schemas.DescribeJobResponse_Outputs, &v.Outputs)
+		case schemas.DescribeJobResponse_ProfileConfiguration:
+			v.ProfileConfiguration = &types.ProfileConfiguration{}
+			return v.ProfileConfiguration.Deserialize(d)
+		case schemas.DescribeJobResponse_ProjectName:
+			v.ProjectName = new(string)
+			return d.ReadString(schemas.DescribeJobResponse_ProjectName, v.ProjectName)
+		case schemas.DescribeJobResponse_RecipeReference:
+			v.RecipeReference = &types.RecipeReference{}
+			return v.RecipeReference.Deserialize(d)
+		case schemas.DescribeJobResponse_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DescribeJobResponse_ResourceArn, v.ResourceArn)
+		case schemas.DescribeJobResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeJobResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeJobResponse_Tags:
+			return deserializeTagMap(d, schemas.DescribeJobResponse_Tags, &v.Tags)
+		case schemas.DescribeJobResponse_Timeout:
+			return d.ReadInt32(schemas.DescribeJobResponse_Timeout, &v.Timeout)
+		case schemas.DescribeJobResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.DescribeJobResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.JobType(ev)
+			return nil
+		case schemas.DescribeJobResponse_ValidationConfigurations:
+			return deserializeValidationConfigurationList(d, schemas.DescribeJobResponse_ValidationConfigurations, &v.ValidationConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJob, schemas.DescribeJobRequest, schemas.DescribeJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJob, schemas.DescribeJobRequest, schemas.DescribeJobResponse), output: &DescribeJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeJob"); err != nil {

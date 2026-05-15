@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -91,6 +93,52 @@ type UpdateProvisionedProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProvisionedProductInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProvisionedProductInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProvisionedProductInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.UpdateProvisionedProductInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.PathId != nil {
+		s.WriteString(schemas.UpdateProvisionedProductInput_PathId, *v.PathId)
+	}
+	if v.PathName != nil {
+		s.WriteString(schemas.UpdateProvisionedProductInput_PathName, *v.PathName)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.UpdateProvisionedProductInput_ProductId, *v.ProductId)
+	}
+	if v.ProductName != nil {
+		s.WriteString(schemas.UpdateProvisionedProductInput_ProductName, *v.ProductName)
+	}
+	if v.ProvisionedProductId != nil {
+		s.WriteString(schemas.UpdateProvisionedProductInput_ProvisionedProductId, *v.ProvisionedProductId)
+	}
+	if v.ProvisionedProductName != nil {
+		s.WriteString(schemas.UpdateProvisionedProductInput_ProvisionedProductName, *v.ProvisionedProductName)
+	}
+	if v.ProvisioningArtifactId != nil {
+		s.WriteString(schemas.UpdateProvisionedProductInput_ProvisioningArtifactId, *v.ProvisioningArtifactId)
+	}
+	if v.ProvisioningArtifactName != nil {
+		s.WriteString(schemas.UpdateProvisionedProductInput_ProvisioningArtifactName, *v.ProvisioningArtifactName)
+	}
+	serializeUpdateProvisioningParameters(s, schemas.UpdateProvisionedProductInput_ProvisioningParameters, v.ProvisioningParameters)
+	if v.ProvisioningPreferences != nil {
+		s.WriteStruct(schemas.UpdateProvisionedProductInput_ProvisioningPreferences)
+		v.ProvisioningPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.UpdateProvisionedProductInput_Tags, v.Tags)
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateProvisionedProductInput_UpdateToken, *v.UpdateToken)
+	}
+}
+
 type UpdateProvisionedProductOutput struct {
 
 	// Information about the result of the request.
@@ -102,16 +150,24 @@ type UpdateProvisionedProductOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProvisionedProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProvisionedProductOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProvisionedProductOutput_RecordDetail:
+			v.RecordDetail = &types.RecordDetail{}
+			return v.RecordDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProvisionedProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateProvisionedProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProvisionedProduct, schemas.UpdateProvisionedProductInput, schemas.UpdateProvisionedProductOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateProvisionedProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProvisionedProduct, schemas.UpdateProvisionedProductInput, schemas.UpdateProvisionedProductOutput), output: &UpdateProvisionedProductOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProvisionedProduct"); err != nil {

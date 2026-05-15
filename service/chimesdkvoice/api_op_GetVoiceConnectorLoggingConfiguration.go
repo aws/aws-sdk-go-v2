@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,18 @@ type GetVoiceConnectorLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVoiceConnectorLoggingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVoiceConnectorLoggingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVoiceConnectorLoggingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VoiceConnectorId != nil {
+		s.WriteString(schemas.GetVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId, *v.VoiceConnectorId)
+	}
+}
+
 type GetVoiceConnectorLoggingConfigurationOutput struct {
 
 	// The logging configuration details .
@@ -50,16 +64,24 @@ type GetVoiceConnectorLoggingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVoiceConnectorLoggingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVoiceConnectorLoggingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration:
+			v.LoggingConfiguration = &types.LoggingConfiguration{}
+			return v.LoggingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVoiceConnectorLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVoiceConnectorLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVoiceConnectorLoggingConfiguration, schemas.GetVoiceConnectorLoggingConfigurationRequest, schemas.GetVoiceConnectorLoggingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetVoiceConnectorLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVoiceConnectorLoggingConfiguration, schemas.GetVoiceConnectorLoggingConfigurationRequest, schemas.GetVoiceConnectorLoggingConfigurationResponse), output: &GetVoiceConnectorLoggingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetVoiceConnectorLoggingConfiguration"); err != nil {

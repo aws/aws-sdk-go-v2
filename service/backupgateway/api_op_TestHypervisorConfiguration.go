@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,46 @@ type TestHypervisorConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestHypervisorConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestHypervisorConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestHypervisorConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayArn != nil {
+		s.WriteString(schemas.TestHypervisorConfigurationInput_GatewayArn, *v.GatewayArn)
+	}
+	if v.Host != nil {
+		s.WriteString(schemas.TestHypervisorConfigurationInput_Host, *v.Host)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.TestHypervisorConfigurationInput_Password, *v.Password)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.TestHypervisorConfigurationInput_Username, *v.Username)
+	}
+}
+func (v *TestHypervisorConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestHypervisorConfigurationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestHypervisorConfigurationInput_GatewayArn:
+			v.GatewayArn = new(string)
+			return d.ReadString(schemas.TestHypervisorConfigurationInput_GatewayArn, v.GatewayArn)
+		case schemas.TestHypervisorConfigurationInput_Host:
+			v.Host = new(string)
+			return d.ReadString(schemas.TestHypervisorConfigurationInput_Host, v.Host)
+		case schemas.TestHypervisorConfigurationInput_Password:
+			v.Password = new(string)
+			return d.ReadString(schemas.TestHypervisorConfigurationInput_Password, v.Password)
+		case schemas.TestHypervisorConfigurationInput_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.TestHypervisorConfigurationInput_Username, v.Username)
+		}
+		return nil
+	})
+}
+
 type TestHypervisorConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,16 +98,29 @@ type TestHypervisorConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestHypervisorConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestHypervisorConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestHypervisorConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *TestHypervisorConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestHypervisorConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestHypervisorConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpTestHypervisorConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestHypervisorConfiguration, schemas.TestHypervisorConfigurationInput, schemas.TestHypervisorConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpTestHypervisorConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestHypervisorConfiguration, schemas.TestHypervisorConfigurationInput, schemas.TestHypervisorConfigurationOutput), output: &TestHypervisorConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "TestHypervisorConfiguration"); err != nil {

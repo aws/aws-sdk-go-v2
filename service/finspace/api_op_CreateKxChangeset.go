@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -96,6 +98,25 @@ type CreateKxChangesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKxChangesetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKxChangesetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKxChangesetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChangeRequests(s, schemas.CreateKxChangesetRequest_changeRequests, v.ChangeRequests)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateKxChangesetRequest_clientToken, *v.ClientToken)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.CreateKxChangesetRequest_databaseName, *v.DatabaseName)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.CreateKxChangesetRequest_environmentId, *v.EnvironmentId)
+	}
+}
+
 type CreateKxChangesetOutput struct {
 
 	// A list of change requests.
@@ -141,16 +162,48 @@ type CreateKxChangesetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKxChangesetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateKxChangesetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateKxChangesetResponse_changeRequests:
+			return deserializeChangeRequests(d, schemas.CreateKxChangesetResponse_changeRequests, &v.ChangeRequests)
+		case schemas.CreateKxChangesetResponse_changesetId:
+			v.ChangesetId = new(string)
+			return d.ReadString(schemas.CreateKxChangesetResponse_changesetId, v.ChangesetId)
+		case schemas.CreateKxChangesetResponse_createdTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CreateKxChangesetResponse_createdTimestamp, v.CreatedTimestamp)
+		case schemas.CreateKxChangesetResponse_databaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.CreateKxChangesetResponse_databaseName, v.DatabaseName)
+		case schemas.CreateKxChangesetResponse_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.CreateKxChangesetResponse_environmentId, v.EnvironmentId)
+		case schemas.CreateKxChangesetResponse_errorInfo:
+			v.ErrorInfo = &types.ErrorInfo{}
+			return v.ErrorInfo.Deserialize(d)
+		case schemas.CreateKxChangesetResponse_lastModifiedTimestamp:
+			v.LastModifiedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CreateKxChangesetResponse_lastModifiedTimestamp, v.LastModifiedTimestamp)
+		case schemas.CreateKxChangesetResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateKxChangesetResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ChangesetStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateKxChangesetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateKxChangeset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKxChangeset, schemas.CreateKxChangesetRequest, schemas.CreateKxChangesetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateKxChangeset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKxChangeset, schemas.CreateKxChangesetRequest, schemas.CreateKxChangesetResponse), output: &CreateKxChangesetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateKxChangeset"); err != nil {

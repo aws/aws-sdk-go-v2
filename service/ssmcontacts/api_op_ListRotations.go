@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,24 @@ type ListRotationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRotationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRotationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRotationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRotationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRotationsRequest_NextToken, *v.NextToken)
+	}
+	if v.RotationNamePrefix != nil {
+		s.WriteString(schemas.ListRotationsRequest_RotationNamePrefix, *v.RotationNamePrefix)
+	}
+}
+
 type ListRotationsOutput struct {
 
 	// Information about rotations that meet the filter criteria.
@@ -61,16 +81,26 @@ type ListRotationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRotationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRotationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRotationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRotationsResult_NextToken, v.NextToken)
+		case schemas.ListRotationsResult_Rotations:
+			return deserializeRotations(d, schemas.ListRotationsResult_Rotations, &v.Rotations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRotationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRotations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRotations, schemas.ListRotationsRequest, schemas.ListRotationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRotations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRotations, schemas.ListRotationsRequest, schemas.ListRotationsResult), output: &ListRotationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRotations"); err != nil {

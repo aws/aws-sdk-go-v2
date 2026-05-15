@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,21 @@ type AssociateWirelessDeviceWithMulticastGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateWirelessDeviceWithMulticastGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateWirelessDeviceWithMulticastGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateWirelessDeviceWithMulticastGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.AssociateWirelessDeviceWithMulticastGroupRequest_Id, *v.Id)
+	}
+	if v.WirelessDeviceId != nil {
+		s.WriteString(schemas.AssociateWirelessDeviceWithMulticastGroupRequest_WirelessDeviceId, *v.WirelessDeviceId)
+	}
+}
+
 type AssociateWirelessDeviceWithMulticastGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,16 +65,21 @@ type AssociateWirelessDeviceWithMulticastGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateWirelessDeviceWithMulticastGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateWirelessDeviceWithMulticastGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateWirelessDeviceWithMulticastGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateWirelessDeviceWithMulticastGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateWirelessDeviceWithMulticastGroup, schemas.AssociateWirelessDeviceWithMulticastGroupRequest, schemas.AssociateWirelessDeviceWithMulticastGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateWirelessDeviceWithMulticastGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateWirelessDeviceWithMulticastGroup, schemas.AssociateWirelessDeviceWithMulticastGroupRequest, schemas.AssociateWirelessDeviceWithMulticastGroupResponse), output: &AssociateWirelessDeviceWithMulticastGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateWirelessDeviceWithMulticastGroup"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type DeleteOdbNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOdbNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOdbNetworkInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOdbNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteAssociatedResources != nil {
+		s.WriteBool(schemas.DeleteOdbNetworkInput_deleteAssociatedResources, *v.DeleteAssociatedResources)
+	}
+	if v.OdbNetworkId != nil {
+		s.WriteString(schemas.DeleteOdbNetworkInput_odbNetworkId, *v.OdbNetworkId)
+	}
+}
+
 type DeleteOdbNetworkOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,16 +66,21 @@ type DeleteOdbNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOdbNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteOdbNetworkOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteOdbNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteOdbNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOdbNetwork, schemas.DeleteOdbNetworkInput, schemas.DeleteOdbNetworkOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteOdbNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOdbNetwork, schemas.DeleteOdbNetworkInput, schemas.DeleteOdbNetworkOutput), output: &DeleteOdbNetworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteOdbNetwork"); err != nil {

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -25,6 +27,52 @@ type AmountBreakdown struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AmountBreakdown) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmountBreakdown)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmountBreakdown) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Discounts != nil {
+		s.WriteStruct(schemas.AmountBreakdown_Discounts)
+		v.Discounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Fees != nil {
+		s.WriteStruct(schemas.AmountBreakdown_Fees)
+		v.Fees.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubTotalAmount != nil {
+		s.WriteString(schemas.AmountBreakdown_SubTotalAmount, *v.SubTotalAmount)
+	}
+	if v.Taxes != nil {
+		s.WriteStruct(schemas.AmountBreakdown_Taxes)
+		v.Taxes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AmountBreakdown) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmountBreakdown, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmountBreakdown_Discounts:
+			v.Discounts = &DiscountsBreakdown{}
+			return v.Discounts.Deserialize(d)
+		case schemas.AmountBreakdown_Fees:
+			v.Fees = &FeesBreakdown{}
+			return v.Fees.Deserialize(d)
+		case schemas.AmountBreakdown_SubTotalAmount:
+			v.SubTotalAmount = new(string)
+			return d.ReadString(schemas.AmountBreakdown_SubTotalAmount, v.SubTotalAmount)
+		case schemas.AmountBreakdown_Taxes:
+			v.Taxes = &TaxesBreakdown{}
+			return v.Taxes.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The billing period for which you want to retrieve invoice-related documents.
 type BillingPeriod struct {
 
@@ -41,6 +89,34 @@ type BillingPeriod struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BillingPeriod) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingPeriod)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingPeriod) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Month != nil {
+		s.WriteInt32(schemas.BillingPeriod_Month, *v.Month)
+	}
+	if v.Year != nil {
+		s.WriteInt32(schemas.BillingPeriod_Year, *v.Year)
+	}
+}
+func (v *BillingPeriod) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingPeriod, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingPeriod_Month:
+			v.Month = new(int32)
+			return d.ReadInt32(schemas.BillingPeriod_Month, v.Month)
+		case schemas.BillingPeriod_Year:
+			v.Year = new(int32)
+			return d.ReadInt32(schemas.BillingPeriod_Year, v.Year)
+		}
+		return nil
+	})
+}
+
 // Represents contact information for a person or role associated with the
 // procurement portal preference.
 type Contact struct {
@@ -52,6 +128,34 @@ type Contact struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Contact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Contact)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Contact) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Email != nil {
+		s.WriteString(schemas.Contact_Email, *v.Email)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Contact_Name, *v.Name)
+	}
+}
+func (v *Contact) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Contact, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Contact_Email:
+			v.Email = new(string)
+			return d.ReadString(schemas.Contact_Email, v.Email)
+		case schemas.Contact_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Contact_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // The details of currency exchange.
@@ -67,6 +171,40 @@ type CurrencyExchangeDetails struct {
 	TargetCurrencyCode *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CurrencyExchangeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CurrencyExchangeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CurrencyExchangeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rate != nil {
+		s.WriteString(schemas.CurrencyExchangeDetails_Rate, *v.Rate)
+	}
+	if v.SourceCurrencyCode != nil {
+		s.WriteString(schemas.CurrencyExchangeDetails_SourceCurrencyCode, *v.SourceCurrencyCode)
+	}
+	if v.TargetCurrencyCode != nil {
+		s.WriteString(schemas.CurrencyExchangeDetails_TargetCurrencyCode, *v.TargetCurrencyCode)
+	}
+}
+func (v *CurrencyExchangeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CurrencyExchangeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CurrencyExchangeDetails_Rate:
+			v.Rate = new(string)
+			return d.ReadString(schemas.CurrencyExchangeDetails_Rate, v.Rate)
+		case schemas.CurrencyExchangeDetails_SourceCurrencyCode:
+			v.SourceCurrencyCode = new(string)
+			return d.ReadString(schemas.CurrencyExchangeDetails_SourceCurrencyCode, v.SourceCurrencyCode)
+		case schemas.CurrencyExchangeDetails_TargetCurrencyCode:
+			v.TargetCurrencyCode = new(string)
+			return d.ReadString(schemas.CurrencyExchangeDetails_TargetCurrencyCode, v.TargetCurrencyCode)
+		}
+		return nil
+	})
 }
 
 // The time period that you want invoice-related documents for.
@@ -90,6 +228,34 @@ type DateInterval struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DateInterval) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DateInterval)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DateInterval) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDate != nil {
+		s.WriteTime(schemas.DateInterval_EndDate, *v.EndDate)
+	}
+	if v.StartDate != nil {
+		s.WriteTime(schemas.DateInterval_StartDate, *v.StartDate)
+	}
+}
+func (v *DateInterval) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DateInterval, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DateInterval_EndDate:
+			v.EndDate = new(time.Time)
+			return d.ReadTime(schemas.DateInterval_EndDate, v.EndDate)
+		case schemas.DateInterval_StartDate:
+			v.StartDate = new(time.Time)
+			return d.ReadTime(schemas.DateInterval_StartDate, v.StartDate)
+		}
+		return nil
+	})
+}
+
 // The discounts details.
 type DiscountsBreakdown struct {
 
@@ -100,6 +266,31 @@ type DiscountsBreakdown struct {
 	TotalAmount *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DiscountsBreakdown) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiscountsBreakdown)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiscountsBreakdown) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDiscountsBreakdownAmountList(s, schemas.DiscountsBreakdown_Breakdown, v.Breakdown)
+	if v.TotalAmount != nil {
+		s.WriteString(schemas.DiscountsBreakdown_TotalAmount, *v.TotalAmount)
+	}
+}
+func (v *DiscountsBreakdown) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DiscountsBreakdown, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DiscountsBreakdown_Breakdown:
+			return deserializeDiscountsBreakdownAmountList(d, schemas.DiscountsBreakdown_Breakdown, &v.Breakdown)
+		case schemas.DiscountsBreakdown_TotalAmount:
+			v.TotalAmount = new(string)
+			return d.ReadString(schemas.DiscountsBreakdown_TotalAmount, v.TotalAmount)
+		}
+		return nil
+	})
 }
 
 // The discounted amount.
@@ -115,6 +306,40 @@ type DiscountsBreakdownAmount struct {
 	Rate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DiscountsBreakdownAmount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiscountsBreakdownAmount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiscountsBreakdownAmount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.DiscountsBreakdownAmount_Amount, *v.Amount)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DiscountsBreakdownAmount_Description, *v.Description)
+	}
+	if v.Rate != nil {
+		s.WriteString(schemas.DiscountsBreakdownAmount_Rate, *v.Rate)
+	}
+}
+func (v *DiscountsBreakdownAmount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DiscountsBreakdownAmount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DiscountsBreakdownAmount_Amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.DiscountsBreakdownAmount_Amount, v.Amount)
+		case schemas.DiscountsBreakdownAmount_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DiscountsBreakdownAmount_Description, v.Description)
+		case schemas.DiscountsBreakdownAmount_Rate:
+			v.Rate = new(string)
+			return d.ReadString(schemas.DiscountsBreakdownAmount_Rate, v.Rate)
+		}
+		return nil
+	})
 }
 
 // Specifies the preferences for e-invoice delivery, including document types,
@@ -152,6 +377,57 @@ type EinvoiceDeliveryPreference struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EinvoiceDeliveryPreference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EinvoiceDeliveryPreference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EinvoiceDeliveryPreference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionTestingMethod != "" {
+		s.WriteString(schemas.EinvoiceDeliveryPreference_ConnectionTestingMethod, string(v.ConnectionTestingMethod))
+	}
+	if v.EinvoiceDeliveryActivationDate != nil {
+		s.WriteTime(schemas.EinvoiceDeliveryPreference_EinvoiceDeliveryActivationDate, *v.EinvoiceDeliveryActivationDate)
+	}
+	serializeEinvoiceDeliveryAttachmentTypes(s, schemas.EinvoiceDeliveryPreference_EinvoiceDeliveryAttachmentTypes, v.EinvoiceDeliveryAttachmentTypes)
+	serializeEinvoiceDeliveryDocumentTypes(s, schemas.EinvoiceDeliveryPreference_EinvoiceDeliveryDocumentTypes, v.EinvoiceDeliveryDocumentTypes)
+	if v.Protocol != "" {
+		s.WriteString(schemas.EinvoiceDeliveryPreference_Protocol, string(v.Protocol))
+	}
+	serializePurchaseOrderDataSources(s, schemas.EinvoiceDeliveryPreference_PurchaseOrderDataSources, v.PurchaseOrderDataSources)
+}
+func (v *EinvoiceDeliveryPreference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EinvoiceDeliveryPreference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EinvoiceDeliveryPreference_ConnectionTestingMethod:
+			var ev string
+			if err := d.ReadString(schemas.EinvoiceDeliveryPreference_ConnectionTestingMethod, &ev); err != nil {
+				return err
+			}
+			v.ConnectionTestingMethod = ConnectionTestingMethod(ev)
+			return nil
+		case schemas.EinvoiceDeliveryPreference_EinvoiceDeliveryActivationDate:
+			v.EinvoiceDeliveryActivationDate = new(time.Time)
+			return d.ReadTime(schemas.EinvoiceDeliveryPreference_EinvoiceDeliveryActivationDate, v.EinvoiceDeliveryActivationDate)
+		case schemas.EinvoiceDeliveryPreference_EinvoiceDeliveryAttachmentTypes:
+			return deserializeEinvoiceDeliveryAttachmentTypes(d, schemas.EinvoiceDeliveryPreference_EinvoiceDeliveryAttachmentTypes, &v.EinvoiceDeliveryAttachmentTypes)
+		case schemas.EinvoiceDeliveryPreference_EinvoiceDeliveryDocumentTypes:
+			return deserializeEinvoiceDeliveryDocumentTypes(d, schemas.EinvoiceDeliveryPreference_EinvoiceDeliveryDocumentTypes, &v.EinvoiceDeliveryDocumentTypes)
+		case schemas.EinvoiceDeliveryPreference_Protocol:
+			var ev string
+			if err := d.ReadString(schemas.EinvoiceDeliveryPreference_Protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = Protocol(ev)
+			return nil
+		case schemas.EinvoiceDeliveryPreference_PurchaseOrderDataSources:
+			return deserializePurchaseOrderDataSources(d, schemas.EinvoiceDeliveryPreference_PurchaseOrderDataSources, &v.PurchaseOrderDataSources)
+		}
+		return nil
+	})
+}
+
 // The organization name providing Amazon Web Services services.
 type Entity struct {
 
@@ -165,6 +441,38 @@ type Entity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Entity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Entity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Entity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingEntity != "" {
+		s.WriteString(schemas.Entity_BillingEntity, string(v.BillingEntity))
+	}
+	if v.InvoicingEntity != nil {
+		s.WriteString(schemas.Entity_InvoicingEntity, *v.InvoicingEntity)
+	}
+}
+func (v *Entity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Entity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Entity_BillingEntity:
+			var ev string
+			if err := d.ReadString(schemas.Entity_BillingEntity, &ev); err != nil {
+				return err
+			}
+			v.BillingEntity = BillingEntity(ev)
+			return nil
+		case schemas.Entity_InvoicingEntity:
+			v.InvoicingEntity = new(string)
+			return d.ReadString(schemas.Entity_InvoicingEntity, v.InvoicingEntity)
+		}
+		return nil
+	})
+}
+
 // The details of fees.
 type FeesBreakdown struct {
 
@@ -175,6 +483,31 @@ type FeesBreakdown struct {
 	TotalAmount *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FeesBreakdown) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FeesBreakdown)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FeesBreakdown) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFeesBreakdownAmountList(s, schemas.FeesBreakdown_Breakdown, v.Breakdown)
+	if v.TotalAmount != nil {
+		s.WriteString(schemas.FeesBreakdown_TotalAmount, *v.TotalAmount)
+	}
+}
+func (v *FeesBreakdown) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FeesBreakdown, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FeesBreakdown_Breakdown:
+			return deserializeFeesBreakdownAmountList(d, schemas.FeesBreakdown_Breakdown, &v.Breakdown)
+		case schemas.FeesBreakdown_TotalAmount:
+			v.TotalAmount = new(string)
+			return d.ReadString(schemas.FeesBreakdown_TotalAmount, v.TotalAmount)
+		}
+		return nil
+	})
 }
 
 // The fee amount.
@@ -190,6 +523,40 @@ type FeesBreakdownAmount struct {
 	Rate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FeesBreakdownAmount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FeesBreakdownAmount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FeesBreakdownAmount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.FeesBreakdownAmount_Amount, *v.Amount)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.FeesBreakdownAmount_Description, *v.Description)
+	}
+	if v.Rate != nil {
+		s.WriteString(schemas.FeesBreakdownAmount_Rate, *v.Rate)
+	}
+}
+func (v *FeesBreakdownAmount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FeesBreakdownAmount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FeesBreakdownAmount_Amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.FeesBreakdownAmount_Amount, v.Amount)
+		case schemas.FeesBreakdownAmount_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.FeesBreakdownAmount_Description, v.Description)
+		case schemas.FeesBreakdownAmount_Rate:
+			v.Rate = new(string)
+			return d.ReadString(schemas.FeesBreakdownAmount_Rate, v.Rate)
+		}
+		return nil
+	})
 }
 
 // An optional input to the list API. If multiple filters are specified, the
@@ -225,6 +592,34 @@ type Filters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Filters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Filters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Filters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.Filters_Accounts, v.Accounts)
+	serializeAccountIdList(s, schemas.Filters_BillSourceAccounts, v.BillSourceAccounts)
+	serializeAccountIdList(s, schemas.Filters_InvoiceReceivers, v.InvoiceReceivers)
+	serializeInvoiceUnitNames(s, schemas.Filters_Names, v.Names)
+}
+func (v *Filters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Filters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Filters_Accounts:
+			return deserializeAccountIdList(d, schemas.Filters_Accounts, &v.Accounts)
+		case schemas.Filters_BillSourceAccounts:
+			return deserializeAccountIdList(d, schemas.Filters_BillSourceAccounts, &v.BillSourceAccounts)
+		case schemas.Filters_InvoiceReceivers:
+			return deserializeAccountIdList(d, schemas.Filters_InvoiceReceivers, &v.InvoiceReceivers)
+		case schemas.Filters_Names:
+			return deserializeInvoiceUnitNames(d, schemas.Filters_Names, &v.Names)
+		}
+		return nil
+	})
+}
+
 // The amount charged after taxes, in the preferred currency.
 type InvoiceCurrencyAmount struct {
 
@@ -246,6 +641,56 @@ type InvoiceCurrencyAmount struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvoiceCurrencyAmount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvoiceCurrencyAmount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvoiceCurrencyAmount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmountBreakdown != nil {
+		s.WriteStruct(schemas.InvoiceCurrencyAmount_AmountBreakdown)
+		v.AmountBreakdown.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.InvoiceCurrencyAmount_CurrencyCode, *v.CurrencyCode)
+	}
+	if v.CurrencyExchangeDetails != nil {
+		s.WriteStruct(schemas.InvoiceCurrencyAmount_CurrencyExchangeDetails)
+		v.CurrencyExchangeDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TotalAmount != nil {
+		s.WriteString(schemas.InvoiceCurrencyAmount_TotalAmount, *v.TotalAmount)
+	}
+	if v.TotalAmountBeforeTax != nil {
+		s.WriteString(schemas.InvoiceCurrencyAmount_TotalAmountBeforeTax, *v.TotalAmountBeforeTax)
+	}
+}
+func (v *InvoiceCurrencyAmount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvoiceCurrencyAmount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvoiceCurrencyAmount_AmountBreakdown:
+			v.AmountBreakdown = &AmountBreakdown{}
+			return v.AmountBreakdown.Deserialize(d)
+		case schemas.InvoiceCurrencyAmount_CurrencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.InvoiceCurrencyAmount_CurrencyCode, v.CurrencyCode)
+		case schemas.InvoiceCurrencyAmount_CurrencyExchangeDetails:
+			v.CurrencyExchangeDetails = &CurrencyExchangeDetails{}
+			return v.CurrencyExchangeDetails.Deserialize(d)
+		case schemas.InvoiceCurrencyAmount_TotalAmount:
+			v.TotalAmount = new(string)
+			return d.ReadString(schemas.InvoiceCurrencyAmount_TotalAmount, v.TotalAmount)
+		case schemas.InvoiceCurrencyAmount_TotalAmountBeforeTax:
+			v.TotalAmountBeforeTax = new(string)
+			return d.ReadString(schemas.InvoiceCurrencyAmount_TotalAmountBeforeTax, v.TotalAmountBeforeTax)
+		}
+		return nil
+	})
+}
+
 // Invoice document data.
 type InvoicePDF struct {
 
@@ -262,6 +707,43 @@ type InvoicePDF struct {
 	SupplementalDocuments []SupplementalDocument
 
 	noSmithyDocumentSerde
+}
+
+func (v *InvoicePDF) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvoicePDF)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvoicePDF) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentUrl != nil {
+		s.WriteString(schemas.InvoicePDF_DocumentUrl, *v.DocumentUrl)
+	}
+	if v.DocumentUrlExpirationDate != nil {
+		s.WriteTime(schemas.InvoicePDF_DocumentUrlExpirationDate, *v.DocumentUrlExpirationDate)
+	}
+	if v.InvoiceId != nil {
+		s.WriteString(schemas.InvoicePDF_InvoiceId, *v.InvoiceId)
+	}
+	serializeSupplementalDocuments(s, schemas.InvoicePDF_SupplementalDocuments, v.SupplementalDocuments)
+}
+func (v *InvoicePDF) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvoicePDF, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvoicePDF_DocumentUrl:
+			v.DocumentUrl = new(string)
+			return d.ReadString(schemas.InvoicePDF_DocumentUrl, v.DocumentUrl)
+		case schemas.InvoicePDF_DocumentUrlExpirationDate:
+			v.DocumentUrlExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.InvoicePDF_DocumentUrlExpirationDate, v.DocumentUrlExpirationDate)
+		case schemas.InvoicePDF_InvoiceId:
+			v.InvoiceId = new(string)
+			return d.ReadString(schemas.InvoicePDF_InvoiceId, v.InvoiceId)
+		case schemas.InvoicePDF_SupplementalDocuments:
+			return deserializeSupplementalDocuments(d, schemas.InvoicePDF_SupplementalDocuments, &v.SupplementalDocuments)
+		}
+		return nil
+	})
 }
 
 // Contains high-level information about the invoice receiver.
@@ -286,6 +768,60 @@ type InvoiceProfile struct {
 	TaxRegistrationNumber *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InvoiceProfile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvoiceProfile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvoiceProfile) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.InvoiceProfile_AccountId, *v.AccountId)
+	}
+	if v.Issuer != nil {
+		s.WriteString(schemas.InvoiceProfile_Issuer, *v.Issuer)
+	}
+	if v.ReceiverAddress != nil {
+		s.WriteStruct(schemas.InvoiceProfile_ReceiverAddress)
+		v.ReceiverAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReceiverEmail != nil {
+		s.WriteString(schemas.InvoiceProfile_ReceiverEmail, *v.ReceiverEmail)
+	}
+	if v.ReceiverName != nil {
+		s.WriteString(schemas.InvoiceProfile_ReceiverName, *v.ReceiverName)
+	}
+	if v.TaxRegistrationNumber != nil {
+		s.WriteString(schemas.InvoiceProfile_TaxRegistrationNumber, *v.TaxRegistrationNumber)
+	}
+}
+func (v *InvoiceProfile) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvoiceProfile, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvoiceProfile_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.InvoiceProfile_AccountId, v.AccountId)
+		case schemas.InvoiceProfile_Issuer:
+			v.Issuer = new(string)
+			return d.ReadString(schemas.InvoiceProfile_Issuer, v.Issuer)
+		case schemas.InvoiceProfile_ReceiverAddress:
+			v.ReceiverAddress = &ReceiverAddress{}
+			return v.ReceiverAddress.Deserialize(d)
+		case schemas.InvoiceProfile_ReceiverEmail:
+			v.ReceiverEmail = new(string)
+			return d.ReadString(schemas.InvoiceProfile_ReceiverEmail, v.ReceiverEmail)
+		case schemas.InvoiceProfile_ReceiverName:
+			v.ReceiverName = new(string)
+			return d.ReadString(schemas.InvoiceProfile_ReceiverName, v.ReceiverName)
+		case schemas.InvoiceProfile_TaxRegistrationNumber:
+			v.TaxRegistrationNumber = new(string)
+			return d.ReadString(schemas.InvoiceProfile_TaxRegistrationNumber, v.TaxRegistrationNumber)
+		}
+		return nil
+	})
 }
 
 // Filters for your invoice summaries.
@@ -314,6 +850,54 @@ type InvoiceSummariesFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvoiceSummariesFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvoiceSummariesFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvoiceSummariesFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriod != nil {
+		s.WriteStruct(schemas.InvoiceSummariesFilter_BillingPeriod)
+		v.BillingPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InvoicingEntity != nil {
+		s.WriteString(schemas.InvoiceSummariesFilter_InvoicingEntity, *v.InvoicingEntity)
+	}
+	if v.ReceiverRole != "" {
+		s.WriteString(schemas.InvoiceSummariesFilter_ReceiverRole, string(v.ReceiverRole))
+	}
+	if v.TimeInterval != nil {
+		s.WriteStruct(schemas.InvoiceSummariesFilter_TimeInterval)
+		v.TimeInterval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InvoiceSummariesFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvoiceSummariesFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvoiceSummariesFilter_BillingPeriod:
+			v.BillingPeriod = &BillingPeriod{}
+			return v.BillingPeriod.Deserialize(d)
+		case schemas.InvoiceSummariesFilter_InvoicingEntity:
+			v.InvoicingEntity = new(string)
+			return d.ReadString(schemas.InvoiceSummariesFilter_InvoicingEntity, v.InvoicingEntity)
+		case schemas.InvoiceSummariesFilter_ReceiverRole:
+			var ev string
+			if err := d.ReadString(schemas.InvoiceSummariesFilter_ReceiverRole, &ev); err != nil {
+				return err
+			}
+			v.ReceiverRole = ReceiverRole(ev)
+			return nil
+		case schemas.InvoiceSummariesFilter_TimeInterval:
+			v.TimeInterval = &DateInterval{}
+			return v.TimeInterval.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies the invoice summary.
 type InvoiceSummariesSelector struct {
 
@@ -328,6 +912,38 @@ type InvoiceSummariesSelector struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InvoiceSummariesSelector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvoiceSummariesSelector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvoiceSummariesSelector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceType != "" {
+		s.WriteString(schemas.InvoiceSummariesSelector_ResourceType, string(v.ResourceType))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.InvoiceSummariesSelector_Value, *v.Value)
+	}
+}
+func (v *InvoiceSummariesSelector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvoiceSummariesSelector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvoiceSummariesSelector_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.InvoiceSummariesSelector_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ListInvoiceSummariesResourceType(ev)
+			return nil
+		case schemas.InvoiceSummariesSelector_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.InvoiceSummariesSelector_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The invoice that the API retrieved.
@@ -399,6 +1015,173 @@ type InvoiceSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvoiceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvoiceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvoiceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.InvoiceSummary_AccountId, *v.AccountId)
+	}
+	if v.BaseCurrencyAmount != nil {
+		s.WriteStruct(schemas.InvoiceSummary_BaseCurrencyAmount)
+		v.BaseCurrencyAmount.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeBillSourceAccountList(s, schemas.InvoiceSummary_BillSourceAccounts, v.BillSourceAccounts)
+	if v.BillSourceAccountsTotalCount != nil {
+		s.WriteInt32(schemas.InvoiceSummary_BillSourceAccountsTotalCount, *v.BillSourceAccountsTotalCount)
+	}
+	if v.BillType != "" {
+		s.WriteString(schemas.InvoiceSummary_BillType, string(v.BillType))
+	}
+	if v.BillingPeriod != nil {
+		s.WriteStruct(schemas.InvoiceSummary_BillingPeriod)
+		v.BillingPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CommercialInvoiceId != nil {
+		s.WriteString(schemas.InvoiceSummary_CommercialInvoiceId, *v.CommercialInvoiceId)
+	}
+	if v.DueDate != nil {
+		s.WriteTime(schemas.InvoiceSummary_DueDate, *v.DueDate)
+	}
+	if v.EinvoiceDeliveryStatus != "" {
+		s.WriteString(schemas.InvoiceSummary_EinvoiceDeliveryStatus, string(v.EinvoiceDeliveryStatus))
+	}
+	if v.Entity != nil {
+		s.WriteStruct(schemas.InvoiceSummary_Entity)
+		v.Entity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InvoiceFrequency != "" {
+		s.WriteString(schemas.InvoiceSummary_InvoiceFrequency, string(v.InvoiceFrequency))
+	}
+	if v.InvoiceId != nil {
+		s.WriteString(schemas.InvoiceSummary_InvoiceId, *v.InvoiceId)
+	}
+	if v.InvoiceType != "" {
+		s.WriteString(schemas.InvoiceSummary_InvoiceType, string(v.InvoiceType))
+	}
+	if v.IssuedDate != nil {
+		s.WriteTime(schemas.InvoiceSummary_IssuedDate, *v.IssuedDate)
+	}
+	if v.OriginalInvoiceId != nil {
+		s.WriteString(schemas.InvoiceSummary_OriginalInvoiceId, *v.OriginalInvoiceId)
+	}
+	if v.PaymentCurrencyAmount != nil {
+		s.WriteStruct(schemas.InvoiceSummary_PaymentCurrencyAmount)
+		v.PaymentCurrencyAmount.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PurchaseOrderNumber != nil {
+		s.WriteString(schemas.InvoiceSummary_PurchaseOrderNumber, *v.PurchaseOrderNumber)
+	}
+	if v.ReceiverRole != "" {
+		s.WriteString(schemas.InvoiceSummary_ReceiverRole, string(v.ReceiverRole))
+	}
+	if v.TaxAuthorityStatus != "" {
+		s.WriteString(schemas.InvoiceSummary_TaxAuthorityStatus, string(v.TaxAuthorityStatus))
+	}
+	if v.TaxCurrencyAmount != nil {
+		s.WriteStruct(schemas.InvoiceSummary_TaxCurrencyAmount)
+		v.TaxCurrencyAmount.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InvoiceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvoiceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvoiceSummary_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.InvoiceSummary_AccountId, v.AccountId)
+		case schemas.InvoiceSummary_BaseCurrencyAmount:
+			v.BaseCurrencyAmount = &InvoiceCurrencyAmount{}
+			return v.BaseCurrencyAmount.Deserialize(d)
+		case schemas.InvoiceSummary_BillSourceAccounts:
+			return deserializeBillSourceAccountList(d, schemas.InvoiceSummary_BillSourceAccounts, &v.BillSourceAccounts)
+		case schemas.InvoiceSummary_BillSourceAccountsTotalCount:
+			v.BillSourceAccountsTotalCount = new(int32)
+			return d.ReadInt32(schemas.InvoiceSummary_BillSourceAccountsTotalCount, v.BillSourceAccountsTotalCount)
+		case schemas.InvoiceSummary_BillType:
+			var ev string
+			if err := d.ReadString(schemas.InvoiceSummary_BillType, &ev); err != nil {
+				return err
+			}
+			v.BillType = BillType(ev)
+			return nil
+		case schemas.InvoiceSummary_BillingPeriod:
+			v.BillingPeriod = &BillingPeriod{}
+			return v.BillingPeriod.Deserialize(d)
+		case schemas.InvoiceSummary_CommercialInvoiceId:
+			v.CommercialInvoiceId = new(string)
+			return d.ReadString(schemas.InvoiceSummary_CommercialInvoiceId, v.CommercialInvoiceId)
+		case schemas.InvoiceSummary_DueDate:
+			v.DueDate = new(time.Time)
+			return d.ReadTime(schemas.InvoiceSummary_DueDate, v.DueDate)
+		case schemas.InvoiceSummary_EinvoiceDeliveryStatus:
+			var ev string
+			if err := d.ReadString(schemas.InvoiceSummary_EinvoiceDeliveryStatus, &ev); err != nil {
+				return err
+			}
+			v.EinvoiceDeliveryStatus = EinvoiceDeliveryStatus(ev)
+			return nil
+		case schemas.InvoiceSummary_Entity:
+			v.Entity = &Entity{}
+			return v.Entity.Deserialize(d)
+		case schemas.InvoiceSummary_InvoiceFrequency:
+			var ev string
+			if err := d.ReadString(schemas.InvoiceSummary_InvoiceFrequency, &ev); err != nil {
+				return err
+			}
+			v.InvoiceFrequency = InvoiceFrequency(ev)
+			return nil
+		case schemas.InvoiceSummary_InvoiceId:
+			v.InvoiceId = new(string)
+			return d.ReadString(schemas.InvoiceSummary_InvoiceId, v.InvoiceId)
+		case schemas.InvoiceSummary_InvoiceType:
+			var ev string
+			if err := d.ReadString(schemas.InvoiceSummary_InvoiceType, &ev); err != nil {
+				return err
+			}
+			v.InvoiceType = InvoiceType(ev)
+			return nil
+		case schemas.InvoiceSummary_IssuedDate:
+			v.IssuedDate = new(time.Time)
+			return d.ReadTime(schemas.InvoiceSummary_IssuedDate, v.IssuedDate)
+		case schemas.InvoiceSummary_OriginalInvoiceId:
+			v.OriginalInvoiceId = new(string)
+			return d.ReadString(schemas.InvoiceSummary_OriginalInvoiceId, v.OriginalInvoiceId)
+		case schemas.InvoiceSummary_PaymentCurrencyAmount:
+			v.PaymentCurrencyAmount = &InvoiceCurrencyAmount{}
+			return v.PaymentCurrencyAmount.Deserialize(d)
+		case schemas.InvoiceSummary_PurchaseOrderNumber:
+			v.PurchaseOrderNumber = new(string)
+			return d.ReadString(schemas.InvoiceSummary_PurchaseOrderNumber, v.PurchaseOrderNumber)
+		case schemas.InvoiceSummary_ReceiverRole:
+			var ev string
+			if err := d.ReadString(schemas.InvoiceSummary_ReceiverRole, &ev); err != nil {
+				return err
+			}
+			v.ReceiverRole = ReceiverRole(ev)
+			return nil
+		case schemas.InvoiceSummary_TaxAuthorityStatus:
+			var ev string
+			if err := d.ReadString(schemas.InvoiceSummary_TaxAuthorityStatus, &ev); err != nil {
+				return err
+			}
+			v.TaxAuthorityStatus = TaxAuthorityStatus(ev)
+			return nil
+		case schemas.InvoiceSummary_TaxCurrencyAmount:
+			v.TaxCurrencyAmount = &InvoiceCurrencyAmount{}
+			return v.TaxCurrencyAmount.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An invoice unit is a set of mutually exclusive accounts that correspond to your
 // business entity. Invoice units allow you separate Amazon Web Services account
 // costs and configures your invoice for each business entity going forward.
@@ -432,6 +1215,66 @@ type InvoiceUnit struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvoiceUnit) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvoiceUnit)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvoiceUnit) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.InvoiceUnit_Description, *v.Description)
+	}
+	if v.InvoiceReceiver != nil {
+		s.WriteString(schemas.InvoiceUnit_InvoiceReceiver, *v.InvoiceReceiver)
+	}
+	if v.InvoiceUnitArn != nil {
+		s.WriteString(schemas.InvoiceUnit_InvoiceUnitArn, *v.InvoiceUnitArn)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.InvoiceUnit_LastModified, *v.LastModified)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.InvoiceUnit_Name, *v.Name)
+	}
+	if v.Rule != nil {
+		s.WriteStruct(schemas.InvoiceUnit_Rule)
+		v.Rule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaxInheritanceDisabled != nil {
+		s.WriteBool(schemas.InvoiceUnit_TaxInheritanceDisabled, *v.TaxInheritanceDisabled)
+	}
+}
+func (v *InvoiceUnit) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvoiceUnit, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvoiceUnit_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.InvoiceUnit_Description, v.Description)
+		case schemas.InvoiceUnit_InvoiceReceiver:
+			v.InvoiceReceiver = new(string)
+			return d.ReadString(schemas.InvoiceUnit_InvoiceReceiver, v.InvoiceReceiver)
+		case schemas.InvoiceUnit_InvoiceUnitArn:
+			v.InvoiceUnitArn = new(string)
+			return d.ReadString(schemas.InvoiceUnit_InvoiceUnitArn, v.InvoiceUnitArn)
+		case schemas.InvoiceUnit_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.InvoiceUnit_LastModified, v.LastModified)
+		case schemas.InvoiceUnit_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.InvoiceUnit_Name, v.Name)
+		case schemas.InvoiceUnit_Rule:
+			v.Rule = &InvoiceUnitRule{}
+			return v.Rule.Deserialize(d)
+		case schemas.InvoiceUnit_TaxInheritanceDisabled:
+			v.TaxInheritanceDisabled = new(bool)
+			return d.ReadBool(schemas.InvoiceUnit_TaxInheritanceDisabled, v.TaxInheritanceDisabled)
+		}
+		return nil
+	})
+}
+
 //	This is used to categorize the invoice unit. Values are Amazon Web Services
 //
 // account IDs. Currently, the only supported rule is LINKED_ACCOUNT .
@@ -448,6 +1291,28 @@ type InvoiceUnitRule struct {
 	LinkedAccounts []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InvoiceUnitRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvoiceUnitRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvoiceUnitRule) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRuleAccountIdList(s, schemas.InvoiceUnitRule_BillSourceAccounts, v.BillSourceAccounts)
+	serializeRuleAccountIdList(s, schemas.InvoiceUnitRule_LinkedAccounts, v.LinkedAccounts)
+}
+func (v *InvoiceUnitRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvoiceUnitRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvoiceUnitRule_BillSourceAccounts:
+			return deserializeRuleAccountIdList(d, schemas.InvoiceUnitRule_BillSourceAccounts, &v.BillSourceAccounts)
+		case schemas.InvoiceUnitRule_LinkedAccounts:
+			return deserializeRuleAccountIdList(d, schemas.InvoiceUnitRule_LinkedAccounts, &v.LinkedAccounts)
+		}
+		return nil
+	})
 }
 
 // Represents the full configuration of a procurement portal preference, including
@@ -557,6 +1422,183 @@ type ProcurementPortalPreference struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProcurementPortalPreference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProcurementPortalPreference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProcurementPortalPreference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ProcurementPortalPreference_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.BuyerDomain != "" {
+		s.WriteString(schemas.ProcurementPortalPreference_BuyerDomain, string(v.BuyerDomain))
+	}
+	if v.BuyerIdentifier != nil {
+		s.WriteString(schemas.ProcurementPortalPreference_BuyerIdentifier, *v.BuyerIdentifier)
+	}
+	serializeContacts(s, schemas.ProcurementPortalPreference_Contacts, v.Contacts)
+	if v.CreateDate != nil {
+		s.WriteTime(schemas.ProcurementPortalPreference_CreateDate, *v.CreateDate)
+	}
+	if v.EinvoiceDeliveryEnabled != nil {
+		s.WriteBool(schemas.ProcurementPortalPreference_EinvoiceDeliveryEnabled, *v.EinvoiceDeliveryEnabled)
+	}
+	if v.EinvoiceDeliveryPreference != nil {
+		s.WriteStruct(schemas.ProcurementPortalPreference_EinvoiceDeliveryPreference)
+		v.EinvoiceDeliveryPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EinvoiceDeliveryPreferenceStatus != "" {
+		s.WriteString(schemas.ProcurementPortalPreference_EinvoiceDeliveryPreferenceStatus, string(v.EinvoiceDeliveryPreferenceStatus))
+	}
+	if v.EinvoiceDeliveryPreferenceStatusReason != nil {
+		s.WriteString(schemas.ProcurementPortalPreference_EinvoiceDeliveryPreferenceStatusReason, *v.EinvoiceDeliveryPreferenceStatusReason)
+	}
+	if v.LastUpdateDate != nil {
+		s.WriteTime(schemas.ProcurementPortalPreference_LastUpdateDate, *v.LastUpdateDate)
+	}
+	if v.ProcurementPortalInstanceEndpoint != nil {
+		s.WriteString(schemas.ProcurementPortalPreference_ProcurementPortalInstanceEndpoint, *v.ProcurementPortalInstanceEndpoint)
+	}
+	if v.ProcurementPortalName != "" {
+		s.WriteString(schemas.ProcurementPortalPreference_ProcurementPortalName, string(v.ProcurementPortalName))
+	}
+	if v.ProcurementPortalPreferenceArn != nil {
+		s.WriteString(schemas.ProcurementPortalPreference_ProcurementPortalPreferenceArn, *v.ProcurementPortalPreferenceArn)
+	}
+	if v.ProcurementPortalSharedSecret != nil {
+		s.WriteString(schemas.ProcurementPortalPreference_ProcurementPortalSharedSecret, *v.ProcurementPortalSharedSecret)
+	}
+	if v.PurchaseOrderRetrievalEnabled != nil {
+		s.WriteBool(schemas.ProcurementPortalPreference_PurchaseOrderRetrievalEnabled, *v.PurchaseOrderRetrievalEnabled)
+	}
+	if v.PurchaseOrderRetrievalEndpoint != nil {
+		s.WriteString(schemas.ProcurementPortalPreference_PurchaseOrderRetrievalEndpoint, *v.PurchaseOrderRetrievalEndpoint)
+	}
+	if v.PurchaseOrderRetrievalPreferenceStatus != "" {
+		s.WriteString(schemas.ProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatus, string(v.PurchaseOrderRetrievalPreferenceStatus))
+	}
+	if v.PurchaseOrderRetrievalPreferenceStatusReason != nil {
+		s.WriteString(schemas.ProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatusReason, *v.PurchaseOrderRetrievalPreferenceStatusReason)
+	}
+	if v.Selector != nil {
+		s.WriteStruct(schemas.ProcurementPortalPreference_Selector)
+		v.Selector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SupplierDomain != "" {
+		s.WriteString(schemas.ProcurementPortalPreference_SupplierDomain, string(v.SupplierDomain))
+	}
+	if v.SupplierIdentifier != nil {
+		s.WriteString(schemas.ProcurementPortalPreference_SupplierIdentifier, *v.SupplierIdentifier)
+	}
+	if v.TestEnvPreference != nil {
+		s.WriteStruct(schemas.ProcurementPortalPreference_TestEnvPreference)
+		v.TestEnvPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.ProcurementPortalPreference_Version, *v.Version)
+	}
+}
+func (v *ProcurementPortalPreference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProcurementPortalPreference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProcurementPortalPreference_AwsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.ProcurementPortalPreference_AwsAccountId, v.AwsAccountId)
+		case schemas.ProcurementPortalPreference_BuyerDomain:
+			var ev string
+			if err := d.ReadString(schemas.ProcurementPortalPreference_BuyerDomain, &ev); err != nil {
+				return err
+			}
+			v.BuyerDomain = BuyerDomain(ev)
+			return nil
+		case schemas.ProcurementPortalPreference_BuyerIdentifier:
+			v.BuyerIdentifier = new(string)
+			return d.ReadString(schemas.ProcurementPortalPreference_BuyerIdentifier, v.BuyerIdentifier)
+		case schemas.ProcurementPortalPreference_Contacts:
+			return deserializeContacts(d, schemas.ProcurementPortalPreference_Contacts, &v.Contacts)
+		case schemas.ProcurementPortalPreference_CreateDate:
+			v.CreateDate = new(time.Time)
+			return d.ReadTime(schemas.ProcurementPortalPreference_CreateDate, v.CreateDate)
+		case schemas.ProcurementPortalPreference_EinvoiceDeliveryEnabled:
+			v.EinvoiceDeliveryEnabled = new(bool)
+			return d.ReadBool(schemas.ProcurementPortalPreference_EinvoiceDeliveryEnabled, v.EinvoiceDeliveryEnabled)
+		case schemas.ProcurementPortalPreference_EinvoiceDeliveryPreference:
+			v.EinvoiceDeliveryPreference = &EinvoiceDeliveryPreference{}
+			return v.EinvoiceDeliveryPreference.Deserialize(d)
+		case schemas.ProcurementPortalPreference_EinvoiceDeliveryPreferenceStatus:
+			var ev string
+			if err := d.ReadString(schemas.ProcurementPortalPreference_EinvoiceDeliveryPreferenceStatus, &ev); err != nil {
+				return err
+			}
+			v.EinvoiceDeliveryPreferenceStatus = ProcurementPortalPreferenceStatus(ev)
+			return nil
+		case schemas.ProcurementPortalPreference_EinvoiceDeliveryPreferenceStatusReason:
+			v.EinvoiceDeliveryPreferenceStatusReason = new(string)
+			return d.ReadString(schemas.ProcurementPortalPreference_EinvoiceDeliveryPreferenceStatusReason, v.EinvoiceDeliveryPreferenceStatusReason)
+		case schemas.ProcurementPortalPreference_LastUpdateDate:
+			v.LastUpdateDate = new(time.Time)
+			return d.ReadTime(schemas.ProcurementPortalPreference_LastUpdateDate, v.LastUpdateDate)
+		case schemas.ProcurementPortalPreference_ProcurementPortalInstanceEndpoint:
+			v.ProcurementPortalInstanceEndpoint = new(string)
+			return d.ReadString(schemas.ProcurementPortalPreference_ProcurementPortalInstanceEndpoint, v.ProcurementPortalInstanceEndpoint)
+		case schemas.ProcurementPortalPreference_ProcurementPortalName:
+			var ev string
+			if err := d.ReadString(schemas.ProcurementPortalPreference_ProcurementPortalName, &ev); err != nil {
+				return err
+			}
+			v.ProcurementPortalName = ProcurementPortalName(ev)
+			return nil
+		case schemas.ProcurementPortalPreference_ProcurementPortalPreferenceArn:
+			v.ProcurementPortalPreferenceArn = new(string)
+			return d.ReadString(schemas.ProcurementPortalPreference_ProcurementPortalPreferenceArn, v.ProcurementPortalPreferenceArn)
+		case schemas.ProcurementPortalPreference_ProcurementPortalSharedSecret:
+			v.ProcurementPortalSharedSecret = new(string)
+			return d.ReadString(schemas.ProcurementPortalPreference_ProcurementPortalSharedSecret, v.ProcurementPortalSharedSecret)
+		case schemas.ProcurementPortalPreference_PurchaseOrderRetrievalEnabled:
+			v.PurchaseOrderRetrievalEnabled = new(bool)
+			return d.ReadBool(schemas.ProcurementPortalPreference_PurchaseOrderRetrievalEnabled, v.PurchaseOrderRetrievalEnabled)
+		case schemas.ProcurementPortalPreference_PurchaseOrderRetrievalEndpoint:
+			v.PurchaseOrderRetrievalEndpoint = new(string)
+			return d.ReadString(schemas.ProcurementPortalPreference_PurchaseOrderRetrievalEndpoint, v.PurchaseOrderRetrievalEndpoint)
+		case schemas.ProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatus:
+			var ev string
+			if err := d.ReadString(schemas.ProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatus, &ev); err != nil {
+				return err
+			}
+			v.PurchaseOrderRetrievalPreferenceStatus = ProcurementPortalPreferenceStatus(ev)
+			return nil
+		case schemas.ProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatusReason:
+			v.PurchaseOrderRetrievalPreferenceStatusReason = new(string)
+			return d.ReadString(schemas.ProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatusReason, v.PurchaseOrderRetrievalPreferenceStatusReason)
+		case schemas.ProcurementPortalPreference_Selector:
+			v.Selector = &ProcurementPortalPreferenceSelector{}
+			return v.Selector.Deserialize(d)
+		case schemas.ProcurementPortalPreference_SupplierDomain:
+			var ev string
+			if err := d.ReadString(schemas.ProcurementPortalPreference_SupplierDomain, &ev); err != nil {
+				return err
+			}
+			v.SupplierDomain = SupplierDomain(ev)
+			return nil
+		case schemas.ProcurementPortalPreference_SupplierIdentifier:
+			v.SupplierIdentifier = new(string)
+			return d.ReadString(schemas.ProcurementPortalPreference_SupplierIdentifier, v.SupplierIdentifier)
+		case schemas.ProcurementPortalPreference_TestEnvPreference:
+			v.TestEnvPreference = &TestEnvPreference{}
+			return v.TestEnvPreference.Deserialize(d)
+		case schemas.ProcurementPortalPreference_Version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.ProcurementPortalPreference_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Specifies criteria for selecting which invoices should be processed using a
 // particular procurement portal preference.
 type ProcurementPortalPreferenceSelector struct {
@@ -569,6 +1611,28 @@ type ProcurementPortalPreferenceSelector struct {
 	SellerOfRecords []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProcurementPortalPreferenceSelector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProcurementPortalPreferenceSelector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProcurementPortalPreferenceSelector) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInvoiceUnitArns(s, schemas.ProcurementPortalPreferenceSelector_InvoiceUnitArns, v.InvoiceUnitArns)
+	serializeSellerOfRecords(s, schemas.ProcurementPortalPreferenceSelector_SellerOfRecords, v.SellerOfRecords)
+}
+func (v *ProcurementPortalPreferenceSelector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProcurementPortalPreferenceSelector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProcurementPortalPreferenceSelector_InvoiceUnitArns:
+			return deserializeInvoiceUnitArns(d, schemas.ProcurementPortalPreferenceSelector_InvoiceUnitArns, &v.InvoiceUnitArns)
+		case schemas.ProcurementPortalPreferenceSelector_SellerOfRecords:
+			return deserializeSellerOfRecords(d, schemas.ProcurementPortalPreferenceSelector_SellerOfRecords, &v.SellerOfRecords)
+		}
+		return nil
+	})
 }
 
 // Provides a summary of a procurement portal preference, including key
@@ -659,6 +1723,146 @@ type ProcurementPortalPreferenceSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProcurementPortalPreferenceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProcurementPortalPreferenceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProcurementPortalPreferenceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ProcurementPortalPreferenceSummary_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.BuyerDomain != "" {
+		s.WriteString(schemas.ProcurementPortalPreferenceSummary_BuyerDomain, string(v.BuyerDomain))
+	}
+	if v.BuyerIdentifier != nil {
+		s.WriteString(schemas.ProcurementPortalPreferenceSummary_BuyerIdentifier, *v.BuyerIdentifier)
+	}
+	if v.CreateDate != nil {
+		s.WriteTime(schemas.ProcurementPortalPreferenceSummary_CreateDate, *v.CreateDate)
+	}
+	if v.EinvoiceDeliveryEnabled != nil {
+		s.WriteBool(schemas.ProcurementPortalPreferenceSummary_EinvoiceDeliveryEnabled, *v.EinvoiceDeliveryEnabled)
+	}
+	if v.EinvoiceDeliveryPreferenceStatus != "" {
+		s.WriteString(schemas.ProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatus, string(v.EinvoiceDeliveryPreferenceStatus))
+	}
+	if v.EinvoiceDeliveryPreferenceStatusReason != nil {
+		s.WriteString(schemas.ProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatusReason, *v.EinvoiceDeliveryPreferenceStatusReason)
+	}
+	if v.LastUpdateDate != nil {
+		s.WriteTime(schemas.ProcurementPortalPreferenceSummary_LastUpdateDate, *v.LastUpdateDate)
+	}
+	if v.ProcurementPortalName != "" {
+		s.WriteString(schemas.ProcurementPortalPreferenceSummary_ProcurementPortalName, string(v.ProcurementPortalName))
+	}
+	if v.ProcurementPortalPreferenceArn != nil {
+		s.WriteString(schemas.ProcurementPortalPreferenceSummary_ProcurementPortalPreferenceArn, *v.ProcurementPortalPreferenceArn)
+	}
+	if v.PurchaseOrderRetrievalEnabled != nil {
+		s.WriteBool(schemas.ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalEnabled, *v.PurchaseOrderRetrievalEnabled)
+	}
+	if v.PurchaseOrderRetrievalPreferenceStatus != "" {
+		s.WriteString(schemas.ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatus, string(v.PurchaseOrderRetrievalPreferenceStatus))
+	}
+	if v.PurchaseOrderRetrievalPreferenceStatusReason != nil {
+		s.WriteString(schemas.ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatusReason, *v.PurchaseOrderRetrievalPreferenceStatusReason)
+	}
+	if v.Selector != nil {
+		s.WriteStruct(schemas.ProcurementPortalPreferenceSummary_Selector)
+		v.Selector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SupplierDomain != "" {
+		s.WriteString(schemas.ProcurementPortalPreferenceSummary_SupplierDomain, string(v.SupplierDomain))
+	}
+	if v.SupplierIdentifier != nil {
+		s.WriteString(schemas.ProcurementPortalPreferenceSummary_SupplierIdentifier, *v.SupplierIdentifier)
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.ProcurementPortalPreferenceSummary_Version, *v.Version)
+	}
+}
+func (v *ProcurementPortalPreferenceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProcurementPortalPreferenceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProcurementPortalPreferenceSummary_AwsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.ProcurementPortalPreferenceSummary_AwsAccountId, v.AwsAccountId)
+		case schemas.ProcurementPortalPreferenceSummary_BuyerDomain:
+			var ev string
+			if err := d.ReadString(schemas.ProcurementPortalPreferenceSummary_BuyerDomain, &ev); err != nil {
+				return err
+			}
+			v.BuyerDomain = BuyerDomain(ev)
+			return nil
+		case schemas.ProcurementPortalPreferenceSummary_BuyerIdentifier:
+			v.BuyerIdentifier = new(string)
+			return d.ReadString(schemas.ProcurementPortalPreferenceSummary_BuyerIdentifier, v.BuyerIdentifier)
+		case schemas.ProcurementPortalPreferenceSummary_CreateDate:
+			v.CreateDate = new(time.Time)
+			return d.ReadTime(schemas.ProcurementPortalPreferenceSummary_CreateDate, v.CreateDate)
+		case schemas.ProcurementPortalPreferenceSummary_EinvoiceDeliveryEnabled:
+			v.EinvoiceDeliveryEnabled = new(bool)
+			return d.ReadBool(schemas.ProcurementPortalPreferenceSummary_EinvoiceDeliveryEnabled, v.EinvoiceDeliveryEnabled)
+		case schemas.ProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatus:
+			var ev string
+			if err := d.ReadString(schemas.ProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatus, &ev); err != nil {
+				return err
+			}
+			v.EinvoiceDeliveryPreferenceStatus = ProcurementPortalPreferenceStatus(ev)
+			return nil
+		case schemas.ProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatusReason:
+			v.EinvoiceDeliveryPreferenceStatusReason = new(string)
+			return d.ReadString(schemas.ProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatusReason, v.EinvoiceDeliveryPreferenceStatusReason)
+		case schemas.ProcurementPortalPreferenceSummary_LastUpdateDate:
+			v.LastUpdateDate = new(time.Time)
+			return d.ReadTime(schemas.ProcurementPortalPreferenceSummary_LastUpdateDate, v.LastUpdateDate)
+		case schemas.ProcurementPortalPreferenceSummary_ProcurementPortalName:
+			var ev string
+			if err := d.ReadString(schemas.ProcurementPortalPreferenceSummary_ProcurementPortalName, &ev); err != nil {
+				return err
+			}
+			v.ProcurementPortalName = ProcurementPortalName(ev)
+			return nil
+		case schemas.ProcurementPortalPreferenceSummary_ProcurementPortalPreferenceArn:
+			v.ProcurementPortalPreferenceArn = new(string)
+			return d.ReadString(schemas.ProcurementPortalPreferenceSummary_ProcurementPortalPreferenceArn, v.ProcurementPortalPreferenceArn)
+		case schemas.ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalEnabled:
+			v.PurchaseOrderRetrievalEnabled = new(bool)
+			return d.ReadBool(schemas.ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalEnabled, v.PurchaseOrderRetrievalEnabled)
+		case schemas.ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatus:
+			var ev string
+			if err := d.ReadString(schemas.ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatus, &ev); err != nil {
+				return err
+			}
+			v.PurchaseOrderRetrievalPreferenceStatus = ProcurementPortalPreferenceStatus(ev)
+			return nil
+		case schemas.ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatusReason:
+			v.PurchaseOrderRetrievalPreferenceStatusReason = new(string)
+			return d.ReadString(schemas.ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatusReason, v.PurchaseOrderRetrievalPreferenceStatusReason)
+		case schemas.ProcurementPortalPreferenceSummary_Selector:
+			v.Selector = &ProcurementPortalPreferenceSelector{}
+			return v.Selector.Deserialize(d)
+		case schemas.ProcurementPortalPreferenceSummary_SupplierDomain:
+			var ev string
+			if err := d.ReadString(schemas.ProcurementPortalPreferenceSummary_SupplierDomain, &ev); err != nil {
+				return err
+			}
+			v.SupplierDomain = SupplierDomain(ev)
+			return nil
+		case schemas.ProcurementPortalPreferenceSummary_SupplierIdentifier:
+			v.SupplierIdentifier = new(string)
+			return d.ReadString(schemas.ProcurementPortalPreferenceSummary_SupplierIdentifier, v.SupplierIdentifier)
+		case schemas.ProcurementPortalPreferenceSummary_Version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.ProcurementPortalPreferenceSummary_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Specifies the source configuration for retrieving purchase order data.
 type PurchaseOrderDataSource struct {
 
@@ -669,6 +1873,42 @@ type PurchaseOrderDataSource struct {
 	PurchaseOrderDataSourceType PurchaseOrderDataSourceType
 
 	noSmithyDocumentSerde
+}
+
+func (v *PurchaseOrderDataSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseOrderDataSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseOrderDataSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EinvoiceDeliveryDocumentType != "" {
+		s.WriteString(schemas.PurchaseOrderDataSource_EinvoiceDeliveryDocumentType, string(v.EinvoiceDeliveryDocumentType))
+	}
+	if v.PurchaseOrderDataSourceType != "" {
+		s.WriteString(schemas.PurchaseOrderDataSource_PurchaseOrderDataSourceType, string(v.PurchaseOrderDataSourceType))
+	}
+}
+func (v *PurchaseOrderDataSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PurchaseOrderDataSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PurchaseOrderDataSource_EinvoiceDeliveryDocumentType:
+			var ev string
+			if err := d.ReadString(schemas.PurchaseOrderDataSource_EinvoiceDeliveryDocumentType, &ev); err != nil {
+				return err
+			}
+			v.EinvoiceDeliveryDocumentType = EinvoiceDeliveryDocumentType(ev)
+			return nil
+		case schemas.PurchaseOrderDataSource_PurchaseOrderDataSourceType:
+			var ev string
+			if err := d.ReadString(schemas.PurchaseOrderDataSource_PurchaseOrderDataSourceType, &ev); err != nil {
+				return err
+			}
+			v.PurchaseOrderDataSourceType = PurchaseOrderDataSourceType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The details of the address associated with the receiver.
@@ -704,6 +1944,76 @@ type ReceiverAddress struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReceiverAddress) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReceiverAddress)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReceiverAddress) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressLine1 != nil {
+		s.WriteString(schemas.ReceiverAddress_AddressLine1, *v.AddressLine1)
+	}
+	if v.AddressLine2 != nil {
+		s.WriteString(schemas.ReceiverAddress_AddressLine2, *v.AddressLine2)
+	}
+	if v.AddressLine3 != nil {
+		s.WriteString(schemas.ReceiverAddress_AddressLine3, *v.AddressLine3)
+	}
+	if v.City != nil {
+		s.WriteString(schemas.ReceiverAddress_City, *v.City)
+	}
+	if v.CompanyName != nil {
+		s.WriteString(schemas.ReceiverAddress_CompanyName, *v.CompanyName)
+	}
+	if v.CountryCode != nil {
+		s.WriteString(schemas.ReceiverAddress_CountryCode, *v.CountryCode)
+	}
+	if v.DistrictOrCounty != nil {
+		s.WriteString(schemas.ReceiverAddress_DistrictOrCounty, *v.DistrictOrCounty)
+	}
+	if v.PostalCode != nil {
+		s.WriteString(schemas.ReceiverAddress_PostalCode, *v.PostalCode)
+	}
+	if v.StateOrRegion != nil {
+		s.WriteString(schemas.ReceiverAddress_StateOrRegion, *v.StateOrRegion)
+	}
+}
+func (v *ReceiverAddress) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReceiverAddress, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReceiverAddress_AddressLine1:
+			v.AddressLine1 = new(string)
+			return d.ReadString(schemas.ReceiverAddress_AddressLine1, v.AddressLine1)
+		case schemas.ReceiverAddress_AddressLine2:
+			v.AddressLine2 = new(string)
+			return d.ReadString(schemas.ReceiverAddress_AddressLine2, v.AddressLine2)
+		case schemas.ReceiverAddress_AddressLine3:
+			v.AddressLine3 = new(string)
+			return d.ReadString(schemas.ReceiverAddress_AddressLine3, v.AddressLine3)
+		case schemas.ReceiverAddress_City:
+			v.City = new(string)
+			return d.ReadString(schemas.ReceiverAddress_City, v.City)
+		case schemas.ReceiverAddress_CompanyName:
+			v.CompanyName = new(string)
+			return d.ReadString(schemas.ReceiverAddress_CompanyName, v.CompanyName)
+		case schemas.ReceiverAddress_CountryCode:
+			v.CountryCode = new(string)
+			return d.ReadString(schemas.ReceiverAddress_CountryCode, v.CountryCode)
+		case schemas.ReceiverAddress_DistrictOrCounty:
+			v.DistrictOrCounty = new(string)
+			return d.ReadString(schemas.ReceiverAddress_DistrictOrCounty, v.DistrictOrCounty)
+		case schemas.ReceiverAddress_PostalCode:
+			v.PostalCode = new(string)
+			return d.ReadString(schemas.ReceiverAddress_PostalCode, v.PostalCode)
+		case schemas.ReceiverAddress_StateOrRegion:
+			v.StateOrRegion = new(string)
+			return d.ReadString(schemas.ReceiverAddress_StateOrRegion, v.StateOrRegion)
+		}
+		return nil
+	})
+}
+
 // The tag structure that contains a tag key and value.
 type ResourceTag struct {
 
@@ -718,6 +2028,34 @@ type ResourceTag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceTag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.ResourceTag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ResourceTag_Value, *v.Value)
+	}
+}
+func (v *ResourceTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceTag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ResourceTag_Key, v.Key)
+		case schemas.ResourceTag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ResourceTag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Supplemental document associated with the invoice.
@@ -738,6 +2076,50 @@ type SupplementalDocument struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SupplementalDocument) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupplementalDocument)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SupplementalDocument) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentId != nil {
+		s.WriteString(schemas.SupplementalDocument_DocumentId, *v.DocumentId)
+	}
+	if v.DocumentType != "" {
+		s.WriteString(schemas.SupplementalDocument_DocumentType, string(v.DocumentType))
+	}
+	if v.DocumentUrl != nil {
+		s.WriteString(schemas.SupplementalDocument_DocumentUrl, *v.DocumentUrl)
+	}
+	if v.DocumentUrlExpirationDate != nil {
+		s.WriteTime(schemas.SupplementalDocument_DocumentUrlExpirationDate, *v.DocumentUrlExpirationDate)
+	}
+}
+func (v *SupplementalDocument) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SupplementalDocument, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SupplementalDocument_DocumentId:
+			v.DocumentId = new(string)
+			return d.ReadString(schemas.SupplementalDocument_DocumentId, v.DocumentId)
+		case schemas.SupplementalDocument_DocumentType:
+			var ev string
+			if err := d.ReadString(schemas.SupplementalDocument_DocumentType, &ev); err != nil {
+				return err
+			}
+			v.DocumentType = SupplementalDocumentType(ev)
+			return nil
+		case schemas.SupplementalDocument_DocumentUrl:
+			v.DocumentUrl = new(string)
+			return d.ReadString(schemas.SupplementalDocument_DocumentUrl, v.DocumentUrl)
+		case schemas.SupplementalDocument_DocumentUrlExpirationDate:
+			v.DocumentUrlExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.SupplementalDocument_DocumentUrlExpirationDate, v.DocumentUrlExpirationDate)
+		}
+		return nil
+	})
+}
+
 // The details of the taxes.
 type TaxesBreakdown struct {
 
@@ -748,6 +2130,31 @@ type TaxesBreakdown struct {
 	TotalAmount *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaxesBreakdown) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaxesBreakdown)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaxesBreakdown) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTaxesBreakdownAmountList(s, schemas.TaxesBreakdown_Breakdown, v.Breakdown)
+	if v.TotalAmount != nil {
+		s.WriteString(schemas.TaxesBreakdown_TotalAmount, *v.TotalAmount)
+	}
+}
+func (v *TaxesBreakdown) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaxesBreakdown, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaxesBreakdown_Breakdown:
+			return deserializeTaxesBreakdownAmountList(d, schemas.TaxesBreakdown_Breakdown, &v.Breakdown)
+		case schemas.TaxesBreakdown_TotalAmount:
+			v.TotalAmount = new(string)
+			return d.ReadString(schemas.TaxesBreakdown_TotalAmount, v.TotalAmount)
+		}
+		return nil
+	})
 }
 
 // The tax amount.
@@ -763,6 +2170,40 @@ type TaxesBreakdownAmount struct {
 	Rate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaxesBreakdownAmount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaxesBreakdownAmount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaxesBreakdownAmount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.TaxesBreakdownAmount_Amount, *v.Amount)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.TaxesBreakdownAmount_Description, *v.Description)
+	}
+	if v.Rate != nil {
+		s.WriteString(schemas.TaxesBreakdownAmount_Rate, *v.Rate)
+	}
+}
+func (v *TaxesBreakdownAmount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaxesBreakdownAmount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaxesBreakdownAmount_Amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.TaxesBreakdownAmount_Amount, v.Amount)
+		case schemas.TaxesBreakdownAmount_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.TaxesBreakdownAmount_Description, v.Description)
+		case schemas.TaxesBreakdownAmount_Rate:
+			v.Rate = new(string)
+			return d.ReadString(schemas.TaxesBreakdownAmount_Rate, v.Rate)
+		}
+		return nil
+	})
 }
 
 // Contains configuration settings for testing the procurement portal integration
@@ -806,6 +2247,72 @@ type TestEnvPreference struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestEnvPreference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestEnvPreference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestEnvPreference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuyerDomain != "" {
+		s.WriteString(schemas.TestEnvPreference_BuyerDomain, string(v.BuyerDomain))
+	}
+	if v.BuyerIdentifier != nil {
+		s.WriteString(schemas.TestEnvPreference_BuyerIdentifier, *v.BuyerIdentifier)
+	}
+	if v.ProcurementPortalInstanceEndpoint != nil {
+		s.WriteString(schemas.TestEnvPreference_ProcurementPortalInstanceEndpoint, *v.ProcurementPortalInstanceEndpoint)
+	}
+	if v.ProcurementPortalSharedSecret != nil {
+		s.WriteString(schemas.TestEnvPreference_ProcurementPortalSharedSecret, *v.ProcurementPortalSharedSecret)
+	}
+	if v.PurchaseOrderRetrievalEndpoint != nil {
+		s.WriteString(schemas.TestEnvPreference_PurchaseOrderRetrievalEndpoint, *v.PurchaseOrderRetrievalEndpoint)
+	}
+	if v.SupplierDomain != "" {
+		s.WriteString(schemas.TestEnvPreference_SupplierDomain, string(v.SupplierDomain))
+	}
+	if v.SupplierIdentifier != nil {
+		s.WriteString(schemas.TestEnvPreference_SupplierIdentifier, *v.SupplierIdentifier)
+	}
+}
+func (v *TestEnvPreference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestEnvPreference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestEnvPreference_BuyerDomain:
+			var ev string
+			if err := d.ReadString(schemas.TestEnvPreference_BuyerDomain, &ev); err != nil {
+				return err
+			}
+			v.BuyerDomain = BuyerDomain(ev)
+			return nil
+		case schemas.TestEnvPreference_BuyerIdentifier:
+			v.BuyerIdentifier = new(string)
+			return d.ReadString(schemas.TestEnvPreference_BuyerIdentifier, v.BuyerIdentifier)
+		case schemas.TestEnvPreference_ProcurementPortalInstanceEndpoint:
+			v.ProcurementPortalInstanceEndpoint = new(string)
+			return d.ReadString(schemas.TestEnvPreference_ProcurementPortalInstanceEndpoint, v.ProcurementPortalInstanceEndpoint)
+		case schemas.TestEnvPreference_ProcurementPortalSharedSecret:
+			v.ProcurementPortalSharedSecret = new(string)
+			return d.ReadString(schemas.TestEnvPreference_ProcurementPortalSharedSecret, v.ProcurementPortalSharedSecret)
+		case schemas.TestEnvPreference_PurchaseOrderRetrievalEndpoint:
+			v.PurchaseOrderRetrievalEndpoint = new(string)
+			return d.ReadString(schemas.TestEnvPreference_PurchaseOrderRetrievalEndpoint, v.PurchaseOrderRetrievalEndpoint)
+		case schemas.TestEnvPreference_SupplierDomain:
+			var ev string
+			if err := d.ReadString(schemas.TestEnvPreference_SupplierDomain, &ev); err != nil {
+				return err
+			}
+			v.SupplierDomain = SupplierDomain(ev)
+			return nil
+		case schemas.TestEnvPreference_SupplierIdentifier:
+			v.SupplierIdentifier = new(string)
+			return d.ReadString(schemas.TestEnvPreference_SupplierIdentifier, v.SupplierIdentifier)
+		}
+		return nil
+	})
+}
+
 // Input parameters for configuring test environment preferences for a procurement
 // portal.
 type TestEnvPreferenceInput struct {
@@ -840,6 +2347,66 @@ type TestEnvPreferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestEnvPreferenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestEnvPreferenceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestEnvPreferenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuyerDomain != "" {
+		s.WriteString(schemas.TestEnvPreferenceInput_BuyerDomain, string(v.BuyerDomain))
+	}
+	if v.BuyerIdentifier != nil {
+		s.WriteString(schemas.TestEnvPreferenceInput_BuyerIdentifier, *v.BuyerIdentifier)
+	}
+	if v.ProcurementPortalInstanceEndpoint != nil {
+		s.WriteString(schemas.TestEnvPreferenceInput_ProcurementPortalInstanceEndpoint, *v.ProcurementPortalInstanceEndpoint)
+	}
+	if v.ProcurementPortalSharedSecret != nil {
+		s.WriteString(schemas.TestEnvPreferenceInput_ProcurementPortalSharedSecret, *v.ProcurementPortalSharedSecret)
+	}
+	if v.SupplierDomain != "" {
+		s.WriteString(schemas.TestEnvPreferenceInput_SupplierDomain, string(v.SupplierDomain))
+	}
+	if v.SupplierIdentifier != nil {
+		s.WriteString(schemas.TestEnvPreferenceInput_SupplierIdentifier, *v.SupplierIdentifier)
+	}
+}
+func (v *TestEnvPreferenceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestEnvPreferenceInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestEnvPreferenceInput_BuyerDomain:
+			var ev string
+			if err := d.ReadString(schemas.TestEnvPreferenceInput_BuyerDomain, &ev); err != nil {
+				return err
+			}
+			v.BuyerDomain = BuyerDomain(ev)
+			return nil
+		case schemas.TestEnvPreferenceInput_BuyerIdentifier:
+			v.BuyerIdentifier = new(string)
+			return d.ReadString(schemas.TestEnvPreferenceInput_BuyerIdentifier, v.BuyerIdentifier)
+		case schemas.TestEnvPreferenceInput_ProcurementPortalInstanceEndpoint:
+			v.ProcurementPortalInstanceEndpoint = new(string)
+			return d.ReadString(schemas.TestEnvPreferenceInput_ProcurementPortalInstanceEndpoint, v.ProcurementPortalInstanceEndpoint)
+		case schemas.TestEnvPreferenceInput_ProcurementPortalSharedSecret:
+			v.ProcurementPortalSharedSecret = new(string)
+			return d.ReadString(schemas.TestEnvPreferenceInput_ProcurementPortalSharedSecret, v.ProcurementPortalSharedSecret)
+		case schemas.TestEnvPreferenceInput_SupplierDomain:
+			var ev string
+			if err := d.ReadString(schemas.TestEnvPreferenceInput_SupplierDomain, &ev); err != nil {
+				return err
+			}
+			v.SupplierDomain = SupplierDomain(ev)
+			return nil
+		case schemas.TestEnvPreferenceInput_SupplierIdentifier:
+			v.SupplierIdentifier = new(string)
+			return d.ReadString(schemas.TestEnvPreferenceInput_SupplierIdentifier, v.SupplierIdentifier)
+		}
+		return nil
+	})
+}
+
 //	The input fails to satisfy the constraints specified by an Amazon Web Services
 //
 // service.
@@ -858,6 +2425,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

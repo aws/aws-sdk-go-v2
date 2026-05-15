@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/georoutes/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/georoutes/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -210,6 +212,81 @@ type CalculateIsolinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CalculateIsolinesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CalculateIsolinesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CalculateIsolinesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Allow != nil {
+		s.WriteStruct(schemas.CalculateIsolinesRequest_Allow)
+		v.Allow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ArrivalTime != nil {
+		s.WriteString(schemas.CalculateIsolinesRequest_ArrivalTime, *v.ArrivalTime)
+	}
+	if v.Avoid != nil {
+		s.WriteStruct(schemas.CalculateIsolinesRequest_Avoid)
+		v.Avoid.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DepartNow != nil {
+		s.WriteBool(schemas.CalculateIsolinesRequest_DepartNow, *v.DepartNow)
+	}
+	if v.DepartureTime != nil {
+		s.WriteString(schemas.CalculateIsolinesRequest_DepartureTime, *v.DepartureTime)
+	}
+	serializePosition(s, schemas.CalculateIsolinesRequest_Destination, v.Destination)
+	if v.DestinationOptions != nil {
+		s.WriteStruct(schemas.CalculateIsolinesRequest_DestinationOptions)
+		v.DestinationOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IsolineGeometryFormat != "" {
+		s.WriteString(schemas.CalculateIsolinesRequest_IsolineGeometryFormat, string(v.IsolineGeometryFormat))
+	}
+	if v.IsolineGranularity != nil {
+		s.WriteStruct(schemas.CalculateIsolinesRequest_IsolineGranularity)
+		v.IsolineGranularity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.CalculateIsolinesRequest_Key, *v.Key)
+	}
+	if v.OptimizeIsolineFor != "" {
+		s.WriteString(schemas.CalculateIsolinesRequest_OptimizeIsolineFor, string(v.OptimizeIsolineFor))
+	}
+	if v.OptimizeRoutingFor != "" {
+		s.WriteString(schemas.CalculateIsolinesRequest_OptimizeRoutingFor, string(v.OptimizeRoutingFor))
+	}
+	serializePosition(s, schemas.CalculateIsolinesRequest_Origin, v.Origin)
+	if v.OriginOptions != nil {
+		s.WriteStruct(schemas.CalculateIsolinesRequest_OriginOptions)
+		v.OriginOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Thresholds != nil {
+		s.WriteStruct(schemas.CalculateIsolinesRequest_Thresholds)
+		v.Thresholds.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Traffic != nil {
+		s.WriteStruct(schemas.CalculateIsolinesRequest_Traffic)
+		v.Traffic.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TravelMode != "" {
+		s.WriteString(schemas.CalculateIsolinesRequest_TravelMode, string(v.TravelMode))
+	}
+	if v.TravelModeOptions != nil {
+		s.WriteStruct(schemas.CalculateIsolinesRequest_TravelModeOptions)
+		v.TravelModeOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CalculateIsolinesOutput struct {
 
 	// The format of the returned geometries, matching the format specified in the
@@ -273,16 +350,43 @@ type CalculateIsolinesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CalculateIsolinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CalculateIsolinesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CalculateIsolinesResponse_ArrivalTime:
+			v.ArrivalTime = new(string)
+			return d.ReadString(schemas.CalculateIsolinesResponse_ArrivalTime, v.ArrivalTime)
+		case schemas.CalculateIsolinesResponse_DepartureTime:
+			v.DepartureTime = new(string)
+			return d.ReadString(schemas.CalculateIsolinesResponse_DepartureTime, v.DepartureTime)
+		case schemas.CalculateIsolinesResponse_IsolineGeometryFormat:
+			var ev string
+			if err := d.ReadString(schemas.CalculateIsolinesResponse_IsolineGeometryFormat, &ev); err != nil {
+				return err
+			}
+			v.IsolineGeometryFormat = types.GeometryFormat(ev)
+			return nil
+		case schemas.CalculateIsolinesResponse_Isolines:
+			return deserializeIsolineList(d, schemas.CalculateIsolinesResponse_Isolines, &v.Isolines)
+		case schemas.CalculateIsolinesResponse_PricingBucket:
+			v.PricingBucket = new(string)
+			return d.ReadString(schemas.CalculateIsolinesResponse_PricingBucket, v.PricingBucket)
+		case schemas.CalculateIsolinesResponse_SnappedDestination:
+			return deserializePosition(d, schemas.CalculateIsolinesResponse_SnappedDestination, &v.SnappedDestination)
+		case schemas.CalculateIsolinesResponse_SnappedOrigin:
+			return deserializePosition(d, schemas.CalculateIsolinesResponse_SnappedOrigin, &v.SnappedOrigin)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCalculateIsolinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCalculateIsolines{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CalculateIsolines, schemas.CalculateIsolinesRequest, schemas.CalculateIsolinesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCalculateIsolines{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CalculateIsolines, schemas.CalculateIsolinesRequest, schemas.CalculateIsolinesResponse), output: &CalculateIsolinesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CalculateIsolines"); err != nil {

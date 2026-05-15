@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -48,6 +50,21 @@ type GetBotAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBotAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBotAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBotAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotName != nil {
+		s.WriteString(schemas.GetBotAliasRequest_botName, *v.BotName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetBotAliasRequest_name, *v.Name)
+	}
+}
+
 type GetBotAliasOutput struct {
 
 	// The name of the bot that the alias points to.
@@ -81,16 +98,45 @@ type GetBotAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBotAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBotAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBotAliasResponse_botName:
+			v.BotName = new(string)
+			return d.ReadString(schemas.GetBotAliasResponse_botName, v.BotName)
+		case schemas.GetBotAliasResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.GetBotAliasResponse_botVersion, v.BotVersion)
+		case schemas.GetBotAliasResponse_checksum:
+			v.Checksum = new(string)
+			return d.ReadString(schemas.GetBotAliasResponse_checksum, v.Checksum)
+		case schemas.GetBotAliasResponse_conversationLogs:
+			v.ConversationLogs = &types.ConversationLogsResponse{}
+			return v.ConversationLogs.Deserialize(d)
+		case schemas.GetBotAliasResponse_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetBotAliasResponse_createdDate, v.CreatedDate)
+		case schemas.GetBotAliasResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetBotAliasResponse_description, v.Description)
+		case schemas.GetBotAliasResponse_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetBotAliasResponse_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.GetBotAliasResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetBotAliasResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBotAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBotAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBotAlias, schemas.GetBotAliasRequest, schemas.GetBotAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBotAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBotAlias, schemas.GetBotAliasRequest, schemas.GetBotAliasResponse), output: &GetBotAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBotAlias"); err != nil {

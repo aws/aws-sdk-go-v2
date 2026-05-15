@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,6 +69,36 @@ type UpdateChannelMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChannelMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.UpdateChannelMessageRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ChimeBearer != nil {
+		s.WriteString(schemas.UpdateChannelMessageRequest_ChimeBearer, *v.ChimeBearer)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.UpdateChannelMessageRequest_Content, *v.Content)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.UpdateChannelMessageRequest_ContentType, *v.ContentType)
+	}
+	if v.MessageId != nil {
+		s.WriteString(schemas.UpdateChannelMessageRequest_MessageId, *v.MessageId)
+	}
+	if v.Metadata != nil {
+		s.WriteString(schemas.UpdateChannelMessageRequest_Metadata, *v.Metadata)
+	}
+	if v.SubChannelId != nil {
+		s.WriteString(schemas.UpdateChannelMessageRequest_SubChannelId, *v.SubChannelId)
+	}
+}
+
 type UpdateChannelMessageOutput struct {
 
 	// The ARN of the channel.
@@ -87,16 +119,33 @@ type UpdateChannelMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChannelMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateChannelMessageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateChannelMessageResponse_ChannelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.UpdateChannelMessageResponse_ChannelArn, v.ChannelArn)
+		case schemas.UpdateChannelMessageResponse_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.UpdateChannelMessageResponse_MessageId, v.MessageId)
+		case schemas.UpdateChannelMessageResponse_Status:
+			v.Status = &types.ChannelMessageStatusStructure{}
+			return v.Status.Deserialize(d)
+		case schemas.UpdateChannelMessageResponse_SubChannelId:
+			v.SubChannelId = new(string)
+			return d.ReadString(schemas.UpdateChannelMessageResponse_SubChannelId, v.SubChannelId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateChannelMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateChannelMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannelMessage, schemas.UpdateChannelMessageRequest, schemas.UpdateChannelMessageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateChannelMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannelMessage, schemas.UpdateChannelMessageRequest, schemas.UpdateChannelMessageResponse), output: &UpdateChannelMessageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateChannelMessage"); err != nil {

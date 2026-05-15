@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type DeleteIngressPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIngressPointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIngressPointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIngressPointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IngressPointId != nil {
+		s.WriteString(schemas.DeleteIngressPointRequest_IngressPointId, *v.IngressPointId)
+	}
+}
+
 type DeleteIngressPointOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,16 +57,21 @@ type DeleteIngressPointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIngressPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIngressPointResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIngressPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteIngressPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIngressPoint, schemas.DeleteIngressPointRequest, schemas.DeleteIngressPointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteIngressPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIngressPoint, schemas.DeleteIngressPointRequest, schemas.DeleteIngressPointResponse), output: &DeleteIngressPointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteIngressPoint"); err != nil {

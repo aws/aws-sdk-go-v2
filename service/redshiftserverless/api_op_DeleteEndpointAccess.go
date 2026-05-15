@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type DeleteEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEndpointAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEndpointAccessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEndpointAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointName != nil {
+		s.WriteString(schemas.DeleteEndpointAccessRequest_endpointName, *v.EndpointName)
+	}
+}
+
 type DeleteEndpointAccessOutput struct {
 
 	// The deleted VPC endpoint.
@@ -48,16 +62,24 @@ type DeleteEndpointAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEndpointAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEndpointAccessResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEndpointAccessResponse_endpoint:
+			v.Endpoint = &types.EndpointAccess{}
+			return v.Endpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteEndpointAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEndpointAccess, schemas.DeleteEndpointAccessRequest, schemas.DeleteEndpointAccessResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteEndpointAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEndpointAccess, schemas.DeleteEndpointAccessRequest, schemas.DeleteEndpointAccessResponse), output: &DeleteEndpointAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteEndpointAccess"); err != nil {

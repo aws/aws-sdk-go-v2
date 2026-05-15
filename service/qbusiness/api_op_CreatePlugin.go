@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +70,37 @@ type CreatePluginInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePluginInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePluginRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePluginInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreatePluginRequest_applicationId, *v.ApplicationId)
+	}
+	serializePluginAuthConfiguration(s, schemas.CreatePluginRequest_authConfiguration, v.AuthConfiguration)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePluginRequest_clientToken, *v.ClientToken)
+	}
+	if v.CustomPluginConfiguration != nil {
+		s.WriteStruct(schemas.CreatePluginRequest_customPluginConfiguration)
+		v.CustomPluginConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreatePluginRequest_displayName, *v.DisplayName)
+	}
+	if v.ServerUrl != nil {
+		s.WriteString(schemas.CreatePluginRequest_serverUrl, *v.ServerUrl)
+	}
+	serializeTags(s, schemas.CreatePluginRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreatePluginRequest_type, string(v.Type))
+	}
+}
+
 type CreatePluginOutput struct {
 
 	// The current status of a plugin. A plugin is modified asynchronously.
@@ -85,16 +118,34 @@ type CreatePluginOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePluginOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePluginResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePluginResponse_buildStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreatePluginResponse_buildStatus, &ev); err != nil {
+				return err
+			}
+			v.BuildStatus = types.PluginBuildStatus(ev)
+			return nil
+		case schemas.CreatePluginResponse_pluginArn:
+			v.PluginArn = new(string)
+			return d.ReadString(schemas.CreatePluginResponse_pluginArn, v.PluginArn)
+		case schemas.CreatePluginResponse_pluginId:
+			v.PluginId = new(string)
+			return d.ReadString(schemas.CreatePluginResponse_pluginId, v.PluginId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePluginMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePlugin{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePlugin, schemas.CreatePluginRequest, schemas.CreatePluginResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePlugin{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePlugin, schemas.CreatePluginRequest, schemas.CreatePluginResponse), output: &CreatePluginOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePlugin"); err != nil {

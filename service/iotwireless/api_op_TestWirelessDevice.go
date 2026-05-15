@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type TestWirelessDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestWirelessDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestWirelessDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestWirelessDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.TestWirelessDeviceRequest_Id, *v.Id)
+	}
+}
+
 type TestWirelessDeviceOutput struct {
 
 	// The result returned by the test.
@@ -47,16 +61,24 @@ type TestWirelessDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestWirelessDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestWirelessDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestWirelessDeviceResponse_Result:
+			v.Result = new(string)
+			return d.ReadString(schemas.TestWirelessDeviceResponse_Result, v.Result)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestWirelessDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestWirelessDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestWirelessDevice, schemas.TestWirelessDeviceRequest, schemas.TestWirelessDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTestWirelessDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestWirelessDevice, schemas.TestWirelessDeviceRequest, schemas.TestWirelessDeviceResponse), output: &TestWirelessDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "TestWirelessDevice"); err != nil {

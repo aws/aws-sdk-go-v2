@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,24 @@ type ListRecipesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecipesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecipesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecipesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecipesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecipesRequest_NextToken, *v.NextToken)
+	}
+	if v.RecipeVersion != nil {
+		s.WriteString(schemas.ListRecipesRequest_RecipeVersion, *v.RecipeVersion)
+	}
+}
+
 type ListRecipesOutput struct {
 
 	// A list of recipes that are defined.
@@ -62,16 +82,26 @@ type ListRecipesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecipesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecipesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecipesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecipesResponse_NextToken, v.NextToken)
+		case schemas.ListRecipesResponse_Recipes:
+			return deserializeRecipeList(d, schemas.ListRecipesResponse_Recipes, &v.Recipes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecipesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecipes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecipes, schemas.ListRecipesRequest, schemas.ListRecipesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRecipes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecipes, schemas.ListRecipesRequest, schemas.ListRecipesResponse), output: &ListRecipesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRecipes"); err != nil {

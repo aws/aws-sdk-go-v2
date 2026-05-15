@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,24 @@ type DescribeChannelModeratedByAppInstanceUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChannelModeratedByAppInstanceUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChannelModeratedByAppInstanceUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChannelModeratedByAppInstanceUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceUserArn != nil {
+		s.WriteString(schemas.DescribeChannelModeratedByAppInstanceUserRequest_AppInstanceUserArn, *v.AppInstanceUserArn)
+	}
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.DescribeChannelModeratedByAppInstanceUserRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ChimeBearer != nil {
+		s.WriteString(schemas.DescribeChannelModeratedByAppInstanceUserRequest_ChimeBearer, *v.ChimeBearer)
+	}
+}
+
 type DescribeChannelModeratedByAppInstanceUserOutput struct {
 
 	// The moderated channel.
@@ -63,16 +83,24 @@ type DescribeChannelModeratedByAppInstanceUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChannelModeratedByAppInstanceUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeChannelModeratedByAppInstanceUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeChannelModeratedByAppInstanceUserResponse_Channel:
+			v.Channel = &types.ChannelModeratedByAppInstanceUserSummary{}
+			return v.Channel.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeChannelModeratedByAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeChannelModeratedByAppInstanceUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChannelModeratedByAppInstanceUser, schemas.DescribeChannelModeratedByAppInstanceUserRequest, schemas.DescribeChannelModeratedByAppInstanceUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeChannelModeratedByAppInstanceUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChannelModeratedByAppInstanceUser, schemas.DescribeChannelModeratedByAppInstanceUserRequest, schemas.DescribeChannelModeratedByAppInstanceUserResponse), output: &DescribeChannelModeratedByAppInstanceUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeChannelModeratedByAppInstanceUser"); err != nil {

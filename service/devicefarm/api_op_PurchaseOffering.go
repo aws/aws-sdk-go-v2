@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,24 @@ type PurchaseOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseOfferingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseOfferingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseOfferingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OfferingId != nil {
+		s.WriteString(schemas.PurchaseOfferingRequest_offeringId, *v.OfferingId)
+	}
+	if v.OfferingPromotionId != nil {
+		s.WriteString(schemas.PurchaseOfferingRequest_offeringPromotionId, *v.OfferingPromotionId)
+	}
+	if v.Quantity != nil {
+		s.WriteInt32(schemas.PurchaseOfferingRequest_quantity, *v.Quantity)
+	}
+}
+
 // The result of the purchase offering (for example, success or failure).
 type PurchaseOfferingOutput struct {
 
@@ -61,16 +81,24 @@ type PurchaseOfferingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseOfferingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PurchaseOfferingResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PurchaseOfferingResult_offeringTransaction:
+			v.OfferingTransaction = &types.OfferingTransaction{}
+			return v.OfferingTransaction.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPurchaseOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPurchaseOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurchaseOffering, schemas.PurchaseOfferingRequest, schemas.PurchaseOfferingResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPurchaseOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurchaseOffering, schemas.PurchaseOfferingRequest, schemas.PurchaseOfferingResult), output: &PurchaseOfferingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PurchaseOffering"); err != nil {

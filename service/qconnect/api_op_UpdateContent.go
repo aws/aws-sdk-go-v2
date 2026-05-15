@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -74,6 +76,67 @@ type UpdateContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentId != nil {
+		s.WriteString(schemas.UpdateContentRequest_contentId, *v.ContentId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.UpdateContentRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	serializeContentMetadata(s, schemas.UpdateContentRequest_metadata, v.Metadata)
+	if v.OverrideLinkOutUri != nil {
+		s.WriteString(schemas.UpdateContentRequest_overrideLinkOutUri, *v.OverrideLinkOutUri)
+	}
+	if v.RemoveOverrideLinkOutUri != nil {
+		s.WriteBool(schemas.UpdateContentRequest_removeOverrideLinkOutUri, *v.RemoveOverrideLinkOutUri)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.UpdateContentRequest_revisionId, *v.RevisionId)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.UpdateContentRequest_title, *v.Title)
+	}
+	if v.UploadId != nil {
+		s.WriteString(schemas.UpdateContentRequest_uploadId, *v.UploadId)
+	}
+}
+func (v *UpdateContentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateContentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateContentRequest_contentId:
+			v.ContentId = new(string)
+			return d.ReadString(schemas.UpdateContentRequest_contentId, v.ContentId)
+		case schemas.UpdateContentRequest_knowledgeBaseId:
+			v.KnowledgeBaseId = new(string)
+			return d.ReadString(schemas.UpdateContentRequest_knowledgeBaseId, v.KnowledgeBaseId)
+		case schemas.UpdateContentRequest_metadata:
+			return deserializeContentMetadata(d, schemas.UpdateContentRequest_metadata, &v.Metadata)
+		case schemas.UpdateContentRequest_overrideLinkOutUri:
+			v.OverrideLinkOutUri = new(string)
+			return d.ReadString(schemas.UpdateContentRequest_overrideLinkOutUri, v.OverrideLinkOutUri)
+		case schemas.UpdateContentRequest_removeOverrideLinkOutUri:
+			v.RemoveOverrideLinkOutUri = new(bool)
+			return d.ReadBool(schemas.UpdateContentRequest_removeOverrideLinkOutUri, v.RemoveOverrideLinkOutUri)
+		case schemas.UpdateContentRequest_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.UpdateContentRequest_revisionId, v.RevisionId)
+		case schemas.UpdateContentRequest_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.UpdateContentRequest_title, v.Title)
+		case schemas.UpdateContentRequest_uploadId:
+			v.UploadId = new(string)
+			return d.ReadString(schemas.UpdateContentRequest_uploadId, v.UploadId)
+		}
+		return nil
+	})
+}
+
 type UpdateContentOutput struct {
 
 	// The content.
@@ -85,16 +148,37 @@ type UpdateContentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteStruct(schemas.UpdateContentResponse_content)
+		v.Content.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateContentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateContentResponse_content:
+			v.Content = &types.ContentData{}
+			return v.Content.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContent, schemas.UpdateContentRequest, schemas.UpdateContentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContent, schemas.UpdateContentRequest, schemas.UpdateContentResponse), output: &UpdateContentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateContent"); err != nil {

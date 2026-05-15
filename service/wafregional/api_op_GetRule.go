@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,18 @@ type GetRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleId != nil {
+		s.WriteString(schemas.GetRuleRequest_RuleId, *v.RuleId)
+	}
+}
+
 type GetRuleOutput struct {
 
 	// Information about the Rule that you specified in the GetRule request. For more
@@ -66,16 +80,24 @@ type GetRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRuleResponse_Rule:
+			v.Rule = &types.Rule{}
+			return v.Rule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRule, schemas.GetRuleRequest, schemas.GetRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRule, schemas.GetRuleRequest, schemas.GetRuleResponse), output: &GetRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRule"); err != nil {

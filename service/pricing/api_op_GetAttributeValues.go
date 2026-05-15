@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pricing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pricing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,27 @@ type GetAttributeValuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAttributeValuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAttributeValuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAttributeValuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.GetAttributeValuesRequest_AttributeName, *v.AttributeName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetAttributeValuesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAttributeValuesRequest_NextToken, *v.NextToken)
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.GetAttributeValuesRequest_ServiceCode, *v.ServiceCode)
+	}
+}
+
 type GetAttributeValuesOutput struct {
 
 	// The list of values for an attribute. For example, Throughput Optimized HDD and
@@ -70,16 +93,26 @@ type GetAttributeValuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAttributeValuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAttributeValuesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAttributeValuesResponse_AttributeValues:
+			return deserializeAttributeValueList(d, schemas.GetAttributeValuesResponse_AttributeValues, &v.AttributeValues)
+		case schemas.GetAttributeValuesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetAttributeValuesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAttributeValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAttributeValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAttributeValues, schemas.GetAttributeValuesRequest, schemas.GetAttributeValuesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAttributeValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAttributeValues, schemas.GetAttributeValuesRequest, schemas.GetAttributeValuesResponse), output: &GetAttributeValuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAttributeValues"); err != nil {

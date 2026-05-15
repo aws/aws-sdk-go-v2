@@ -7,7 +7,9 @@ import (
 	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -41,6 +43,18 @@ type DescribeControlPanelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeControlPanelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeControlPanelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeControlPanelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlPanelArn != nil {
+		s.WriteString(schemas.DescribeControlPanelRequest_ControlPanelArn, *v.ControlPanelArn)
+	}
+}
+
 type DescribeControlPanelOutput struct {
 
 	// Information about the control panel.
@@ -52,16 +66,24 @@ type DescribeControlPanelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeControlPanelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeControlPanelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeControlPanelResponse_ControlPanel:
+			v.ControlPanel = &types.ControlPanel{}
+			return v.ControlPanel.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeControlPanelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeControlPanel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeControlPanel, schemas.DescribeControlPanelRequest, schemas.DescribeControlPanelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeControlPanel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeControlPanel, schemas.DescribeControlPanelRequest, schemas.DescribeControlPanelResponse), output: &DescribeControlPanelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeControlPanel"); err != nil {

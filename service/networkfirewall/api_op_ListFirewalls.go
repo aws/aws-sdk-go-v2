@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,22 @@ type ListFirewallsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFirewallsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFirewallsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFirewallsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFirewallsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFirewallsRequest_NextToken, *v.NextToken)
+	}
+	serializeVpcIds(s, schemas.ListFirewallsRequest_VpcIds, v.VpcIds)
+}
+
 type ListFirewallsOutput struct {
 
 	// The firewall metadata objects for the VPCs that you specified. Depending on
@@ -74,16 +92,26 @@ type ListFirewallsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFirewallsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFirewallsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFirewallsResponse_Firewalls:
+			return deserializeFirewalls(d, schemas.ListFirewallsResponse_Firewalls, &v.Firewalls)
+		case schemas.ListFirewallsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFirewallsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFirewallsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListFirewalls{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFirewalls, schemas.ListFirewallsRequest, schemas.ListFirewallsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListFirewalls{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFirewalls, schemas.ListFirewallsRequest, schemas.ListFirewallsResponse), output: &ListFirewallsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFirewalls"); err != nil {

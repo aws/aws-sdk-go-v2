@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/keyspacesstreams/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -40,6 +42,33 @@ type KeyspacesCell struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KeyspacesCell) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyspacesCell)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyspacesCell) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.KeyspacesCell_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeKeyspacesCellValue(s, schemas.KeyspacesCell_value, v.Value)
+}
+func (v *KeyspacesCell) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyspacesCell, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyspacesCell_metadata:
+			v.Metadata = &KeyspacesMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.KeyspacesCell_value:
+			return deserializeKeyspacesCellValue(d, schemas.KeyspacesCell_value, &v.Value)
+		}
+		return nil
+	})
+}
+
 // Represents a key-value pair within a map data type in Amazon Keyspaces,
 // including the associated metadata.
 type KeyspacesCellMapDefinition struct {
@@ -55,6 +84,36 @@ type KeyspacesCellMapDefinition struct {
 	Value KeyspacesCellValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *KeyspacesCellMapDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyspacesCellMapDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyspacesCellMapDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKeyspacesCellValue(s, schemas.KeyspacesCellMapDefinition_key, v.Key)
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.KeyspacesCellMapDefinition_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeKeyspacesCellValue(s, schemas.KeyspacesCellMapDefinition_value, v.Value)
+}
+func (v *KeyspacesCellMapDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyspacesCellMapDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyspacesCellMapDefinition_key:
+			return deserializeKeyspacesCellValue(d, schemas.KeyspacesCellMapDefinition_key, &v.Key)
+		case schemas.KeyspacesCellMapDefinition_metadata:
+			v.Metadata = &KeyspacesMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.KeyspacesCellMapDefinition_value:
+			return deserializeKeyspacesCellValue(d, schemas.KeyspacesCellMapDefinition_value, &v.Value)
+		}
+		return nil
+	})
 }
 
 // Represents the value of a cell in an Amazon Keyspaces table, supporting various
@@ -100,6 +159,12 @@ type KeyspacesCellValueMemberAsciiT struct {
 }
 
 func (*KeyspacesCellValueMemberAsciiT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberAsciiT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_asciiT, v.Value)
+}
+func (v *KeyspacesCellValueMemberAsciiT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_asciiT, &v.Value)
+}
 
 // A 64-bit signed integer value.
 type KeyspacesCellValueMemberBigintT struct {
@@ -109,6 +174,12 @@ type KeyspacesCellValueMemberBigintT struct {
 }
 
 func (*KeyspacesCellValueMemberBigintT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberBigintT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_bigintT, v.Value)
+}
+func (v *KeyspacesCellValueMemberBigintT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_bigintT, &v.Value)
+}
 
 // A binary large object (BLOB) value stored as a Base64-encoded string.
 type KeyspacesCellValueMemberBlobT struct {
@@ -118,6 +189,12 @@ type KeyspacesCellValueMemberBlobT struct {
 }
 
 func (*KeyspacesCellValueMemberBlobT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberBlobT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBlob(schemas.KeyspacesCellValue_blobT, v.Value)
+}
+func (v *KeyspacesCellValueMemberBlobT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBlob(schemas.KeyspacesCellValue_blobT, &v.Value)
+}
 
 // A Boolean value, either true or false .
 type KeyspacesCellValueMemberBoolT struct {
@@ -127,6 +204,12 @@ type KeyspacesCellValueMemberBoolT struct {
 }
 
 func (*KeyspacesCellValueMemberBoolT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberBoolT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.KeyspacesCellValue_boolT, v.Value)
+}
+func (v *KeyspacesCellValueMemberBoolT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.KeyspacesCellValue_boolT, &v.Value)
+}
 
 // A distributed counter value that can be incremented and decremented.
 type KeyspacesCellValueMemberCounterT struct {
@@ -136,6 +219,12 @@ type KeyspacesCellValueMemberCounterT struct {
 }
 
 func (*KeyspacesCellValueMemberCounterT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberCounterT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_counterT, v.Value)
+}
+func (v *KeyspacesCellValueMemberCounterT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_counterT, &v.Value)
+}
 
 // A date value without a time component, represented as days since epoch (January
 // 1, 1970).
@@ -146,6 +235,12 @@ type KeyspacesCellValueMemberDateT struct {
 }
 
 func (*KeyspacesCellValueMemberDateT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberDateT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_dateT, v.Value)
+}
+func (v *KeyspacesCellValueMemberDateT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_dateT, &v.Value)
+}
 
 // A variable-precision decimal number value.
 type KeyspacesCellValueMemberDecimalT struct {
@@ -155,6 +250,12 @@ type KeyspacesCellValueMemberDecimalT struct {
 }
 
 func (*KeyspacesCellValueMemberDecimalT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberDecimalT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_decimalT, v.Value)
+}
+func (v *KeyspacesCellValueMemberDecimalT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_decimalT, &v.Value)
+}
 
 // A 64-bit double-precision floating point value.
 type KeyspacesCellValueMemberDoubleT struct {
@@ -164,6 +265,12 @@ type KeyspacesCellValueMemberDoubleT struct {
 }
 
 func (*KeyspacesCellValueMemberDoubleT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberDoubleT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_doubleT, v.Value)
+}
+func (v *KeyspacesCellValueMemberDoubleT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_doubleT, &v.Value)
+}
 
 // A duration value with nanosecond precision, representing a period of time
 // encoded as 32-bit months, 32-bit days, and 64-bit nanoseconds.
@@ -174,6 +281,12 @@ type KeyspacesCellValueMemberDurationT struct {
 }
 
 func (*KeyspacesCellValueMemberDurationT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberDurationT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_durationT, v.Value)
+}
+func (v *KeyspacesCellValueMemberDurationT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_durationT, &v.Value)
+}
 
 // A 32-bit single-precision floating point value.
 type KeyspacesCellValueMemberFloatT struct {
@@ -183,6 +296,12 @@ type KeyspacesCellValueMemberFloatT struct {
 }
 
 func (*KeyspacesCellValueMemberFloatT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberFloatT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_floatT, v.Value)
+}
+func (v *KeyspacesCellValueMemberFloatT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_floatT, &v.Value)
+}
 
 // An IP address value, either IPv4 or IPv6 format.
 type KeyspacesCellValueMemberInetT struct {
@@ -192,6 +311,12 @@ type KeyspacesCellValueMemberInetT struct {
 }
 
 func (*KeyspacesCellValueMemberInetT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberInetT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_inetT, v.Value)
+}
+func (v *KeyspacesCellValueMemberInetT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_inetT, &v.Value)
+}
 
 // A 32-bit signed integer value.
 type KeyspacesCellValueMemberIntT struct {
@@ -201,6 +326,12 @@ type KeyspacesCellValueMemberIntT struct {
 }
 
 func (*KeyspacesCellValueMemberIntT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberIntT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_intT, v.Value)
+}
+func (v *KeyspacesCellValueMemberIntT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_intT, &v.Value)
+}
 
 // An ordered collection of elements that can contain duplicate values.
 type KeyspacesCellValueMemberListT struct {
@@ -210,6 +341,12 @@ type KeyspacesCellValueMemberListT struct {
 }
 
 func (*KeyspacesCellValueMemberListT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberListT) Serialize(s smithy.ShapeSerializer) {
+	serializeKeyspacesCellList(s, schemas.KeyspacesCellValue_listT, v.Value)
+}
+func (v *KeyspacesCellValueMemberListT) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeKeyspacesCellList(d, schemas.KeyspacesCellValue_listT, &v.Value)
+}
 
 // A collection of key-value pairs where each key is unique.
 type KeyspacesCellValueMemberMapT struct {
@@ -219,6 +356,12 @@ type KeyspacesCellValueMemberMapT struct {
 }
 
 func (*KeyspacesCellValueMemberMapT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberMapT) Serialize(s smithy.ShapeSerializer) {
+	serializeKeyspacesCellMap(s, schemas.KeyspacesCellValue_mapT, v.Value)
+}
+func (v *KeyspacesCellValueMemberMapT) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeKeyspacesCellMap(d, schemas.KeyspacesCellValue_mapT, &v.Value)
+}
 
 // An unordered collection of unique elements.
 type KeyspacesCellValueMemberSetT struct {
@@ -228,6 +371,12 @@ type KeyspacesCellValueMemberSetT struct {
 }
 
 func (*KeyspacesCellValueMemberSetT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberSetT) Serialize(s smithy.ShapeSerializer) {
+	serializeKeyspacesCellList(s, schemas.KeyspacesCellValue_setT, v.Value)
+}
+func (v *KeyspacesCellValueMemberSetT) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeKeyspacesCellList(d, schemas.KeyspacesCellValue_setT, &v.Value)
+}
 
 // A 16-bit signed integer value.
 type KeyspacesCellValueMemberSmallintT struct {
@@ -237,6 +386,12 @@ type KeyspacesCellValueMemberSmallintT struct {
 }
 
 func (*KeyspacesCellValueMemberSmallintT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberSmallintT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_smallintT, v.Value)
+}
+func (v *KeyspacesCellValueMemberSmallintT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_smallintT, &v.Value)
+}
 
 // A UTF-8 encoded string value.
 type KeyspacesCellValueMemberTextT struct {
@@ -246,6 +401,12 @@ type KeyspacesCellValueMemberTextT struct {
 }
 
 func (*KeyspacesCellValueMemberTextT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberTextT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_textT, v.Value)
+}
+func (v *KeyspacesCellValueMemberTextT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_textT, &v.Value)
+}
 
 // A timestamp value representing date and time with millisecond precision.
 type KeyspacesCellValueMemberTimestampT struct {
@@ -255,6 +416,12 @@ type KeyspacesCellValueMemberTimestampT struct {
 }
 
 func (*KeyspacesCellValueMemberTimestampT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberTimestampT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_timestampT, v.Value)
+}
+func (v *KeyspacesCellValueMemberTimestampT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_timestampT, &v.Value)
+}
 
 // A time value without a date component, with nanosecond precision.
 type KeyspacesCellValueMemberTimeT struct {
@@ -264,6 +431,12 @@ type KeyspacesCellValueMemberTimeT struct {
 }
 
 func (*KeyspacesCellValueMemberTimeT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberTimeT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_timeT, v.Value)
+}
+func (v *KeyspacesCellValueMemberTimeT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_timeT, &v.Value)
+}
 
 // A universally unique identifier (UUID) that includes a timestamp component,
 // ensuring both uniqueness and time ordering.
@@ -274,6 +447,12 @@ type KeyspacesCellValueMemberTimeuuidT struct {
 }
 
 func (*KeyspacesCellValueMemberTimeuuidT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberTimeuuidT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_timeuuidT, v.Value)
+}
+func (v *KeyspacesCellValueMemberTimeuuidT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_timeuuidT, &v.Value)
+}
 
 // An 8-bit signed integer value.
 type KeyspacesCellValueMemberTinyintT struct {
@@ -283,6 +462,12 @@ type KeyspacesCellValueMemberTinyintT struct {
 }
 
 func (*KeyspacesCellValueMemberTinyintT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberTinyintT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_tinyintT, v.Value)
+}
+func (v *KeyspacesCellValueMemberTinyintT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_tinyintT, &v.Value)
+}
 
 // A fixed-length ordered list of elements, where each element can be of a
 // different data type.
@@ -293,6 +478,12 @@ type KeyspacesCellValueMemberTupleT struct {
 }
 
 func (*KeyspacesCellValueMemberTupleT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberTupleT) Serialize(s smithy.ShapeSerializer) {
+	serializeKeyspacesCellList(s, schemas.KeyspacesCellValue_tupleT, v.Value)
+}
+func (v *KeyspacesCellValueMemberTupleT) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeKeyspacesCellList(d, schemas.KeyspacesCellValue_tupleT, &v.Value)
+}
 
 // A user-defined type (UDT) value consisting of named fields, each with its own
 // data type.
@@ -303,6 +494,12 @@ type KeyspacesCellValueMemberUdtT struct {
 }
 
 func (*KeyspacesCellValueMemberUdtT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberUdtT) Serialize(s smithy.ShapeSerializer) {
+	serializeKeyspacesUdtMap(s, schemas.KeyspacesCellValue_udtT, v.Value)
+}
+func (v *KeyspacesCellValueMemberUdtT) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeKeyspacesUdtMap(d, schemas.KeyspacesCellValue_udtT, &v.Value)
+}
 
 // A universally unique identifier (UUID) value.
 type KeyspacesCellValueMemberUuidT struct {
@@ -312,6 +509,12 @@ type KeyspacesCellValueMemberUuidT struct {
 }
 
 func (*KeyspacesCellValueMemberUuidT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberUuidT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_uuidT, v.Value)
+}
+func (v *KeyspacesCellValueMemberUuidT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_uuidT, &v.Value)
+}
 
 // A UTF-8 encoded string value, functionally equivalent to text type.
 type KeyspacesCellValueMemberVarcharT struct {
@@ -321,6 +524,12 @@ type KeyspacesCellValueMemberVarcharT struct {
 }
 
 func (*KeyspacesCellValueMemberVarcharT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberVarcharT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_varcharT, v.Value)
+}
+func (v *KeyspacesCellValueMemberVarcharT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_varcharT, &v.Value)
+}
 
 // An integer value within the +/-10^38 range.
 type KeyspacesCellValueMemberVarintT struct {
@@ -330,6 +539,12 @@ type KeyspacesCellValueMemberVarintT struct {
 }
 
 func (*KeyspacesCellValueMemberVarintT) isKeyspacesCellValue() {}
+func (v *KeyspacesCellValueMemberVarintT) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyspacesCellValue_varintT, v.Value)
+}
+func (v *KeyspacesCellValueMemberVarintT) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.KeyspacesCellValue_varintT, &v.Value)
+}
 
 // Contains metadata information associated with Amazon Keyspaces cells and rows.
 type KeyspacesMetadata struct {
@@ -342,6 +557,34 @@ type KeyspacesMetadata struct {
 	WriteTime *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KeyspacesMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyspacesMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyspacesMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpirationTime != nil {
+		s.WriteString(schemas.KeyspacesMetadata_expirationTime, *v.ExpirationTime)
+	}
+	if v.WriteTime != nil {
+		s.WriteString(schemas.KeyspacesMetadata_writeTime, *v.WriteTime)
+	}
+}
+func (v *KeyspacesMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyspacesMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyspacesMetadata_expirationTime:
+			v.ExpirationTime = new(string)
+			return d.ReadString(schemas.KeyspacesMetadata_expirationTime, v.ExpirationTime)
+		case schemas.KeyspacesMetadata_writeTime:
+			v.WriteTime = new(string)
+			return d.ReadString(schemas.KeyspacesMetadata_writeTime, v.WriteTime)
+		}
+		return nil
+	})
 }
 
 // Represents a row in an Amazon Keyspaces table, containing regular column
@@ -360,6 +603,36 @@ type KeyspacesRow struct {
 	ValueCells map[string]KeyspacesCell
 
 	noSmithyDocumentSerde
+}
+
+func (v *KeyspacesRow) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyspacesRow)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyspacesRow) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RowMetadata != nil {
+		s.WriteStruct(schemas.KeyspacesRow_rowMetadata)
+		v.RowMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeKeyspacesCells(s, schemas.KeyspacesRow_staticCells, v.StaticCells)
+	serializeKeyspacesCells(s, schemas.KeyspacesRow_valueCells, v.ValueCells)
+}
+func (v *KeyspacesRow) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyspacesRow, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyspacesRow_rowMetadata:
+			v.RowMetadata = &KeyspacesMetadata{}
+			return v.RowMetadata.Deserialize(d)
+		case schemas.KeyspacesRow_staticCells:
+			return deserializeKeyspacesCells(d, schemas.KeyspacesRow_staticCells, &v.StaticCells)
+		case schemas.KeyspacesRow_valueCells:
+			return deserializeKeyspacesCells(d, schemas.KeyspacesRow_valueCells, &v.ValueCells)
+		}
+		return nil
+	})
 }
 
 // Represents a change data capture record for a row in an Amazon Keyspaces table,
@@ -396,6 +669,72 @@ type Record struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Record) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Record)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Record) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKeyspacesKeysMap(s, schemas.Record_clusteringKeys, v.ClusteringKeys)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Record_createdAt, *v.CreatedAt)
+	}
+	if v.EventVersion != nil {
+		s.WriteString(schemas.Record_eventVersion, *v.EventVersion)
+	}
+	if v.NewImage != nil {
+		s.WriteStruct(schemas.Record_newImage)
+		v.NewImage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OldImage != nil {
+		s.WriteStruct(schemas.Record_oldImage)
+		v.OldImage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Origin != "" {
+		s.WriteString(schemas.Record_origin, string(v.Origin))
+	}
+	serializeKeyspacesKeysMap(s, schemas.Record_partitionKeys, v.PartitionKeys)
+	if v.SequenceNumber != nil {
+		s.WriteString(schemas.Record_sequenceNumber, *v.SequenceNumber)
+	}
+}
+func (v *Record) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Record, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Record_clusteringKeys:
+			return deserializeKeyspacesKeysMap(d, schemas.Record_clusteringKeys, &v.ClusteringKeys)
+		case schemas.Record_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Record_createdAt, v.CreatedAt)
+		case schemas.Record_eventVersion:
+			v.EventVersion = new(string)
+			return d.ReadString(schemas.Record_eventVersion, v.EventVersion)
+		case schemas.Record_newImage:
+			v.NewImage = &KeyspacesRow{}
+			return v.NewImage.Deserialize(d)
+		case schemas.Record_oldImage:
+			v.OldImage = &KeyspacesRow{}
+			return v.OldImage.Deserialize(d)
+		case schemas.Record_origin:
+			var ev string
+			if err := d.ReadString(schemas.Record_origin, &ev); err != nil {
+				return err
+			}
+			v.Origin = OriginType(ev)
+			return nil
+		case schemas.Record_partitionKeys:
+			return deserializeKeyspacesKeysMap(d, schemas.Record_partitionKeys, &v.PartitionKeys)
+		case schemas.Record_sequenceNumber:
+			v.SequenceNumber = new(string)
+			return d.ReadString(schemas.Record_sequenceNumber, v.SequenceNumber)
+		}
+		return nil
+	})
+}
+
 // Defines a range of sequence numbers within a change data capture stream's shard
 // for Amazon Keyspaces.
 type SequenceNumberRange struct {
@@ -408,6 +747,34 @@ type SequenceNumberRange struct {
 	StartingSequenceNumber *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SequenceNumberRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SequenceNumberRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SequenceNumberRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndingSequenceNumber != nil {
+		s.WriteString(schemas.SequenceNumberRange_endingSequenceNumber, *v.EndingSequenceNumber)
+	}
+	if v.StartingSequenceNumber != nil {
+		s.WriteString(schemas.SequenceNumberRange_startingSequenceNumber, *v.StartingSequenceNumber)
+	}
+}
+func (v *SequenceNumberRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SequenceNumberRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SequenceNumberRange_endingSequenceNumber:
+			v.EndingSequenceNumber = new(string)
+			return d.ReadString(schemas.SequenceNumberRange_endingSequenceNumber, v.EndingSequenceNumber)
+		case schemas.SequenceNumberRange_startingSequenceNumber:
+			v.StartingSequenceNumber = new(string)
+			return d.ReadString(schemas.SequenceNumberRange_startingSequenceNumber, v.StartingSequenceNumber)
+		}
+		return nil
+	})
 }
 
 // Represents a uniquely identified group of change records within a change data
@@ -427,6 +794,39 @@ type Shard struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Shard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Shard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Shard) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeShardIdList(s, schemas.Shard_parentShardIds, v.ParentShardIds)
+	if v.SequenceNumberRange != nil {
+		s.WriteStruct(schemas.Shard_sequenceNumberRange)
+		v.SequenceNumberRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ShardId != nil {
+		s.WriteString(schemas.Shard_shardId, *v.ShardId)
+	}
+}
+func (v *Shard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Shard, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Shard_parentShardIds:
+			return deserializeShardIdList(d, schemas.Shard_parentShardIds, &v.ParentShardIds)
+		case schemas.Shard_sequenceNumberRange:
+			v.SequenceNumberRange = &SequenceNumberRange{}
+			return v.SequenceNumberRange.Deserialize(d)
+		case schemas.Shard_shardId:
+			v.ShardId = new(string)
+			return d.ReadString(schemas.Shard_shardId, v.ShardId)
+		}
+		return nil
+	})
+}
+
 // A filter used to limit the shards returned by a GetStream operation.
 type ShardFilter struct {
 
@@ -439,6 +839,38 @@ type ShardFilter struct {
 	Type ShardFilterType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ShardFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShardFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShardFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShardId != nil {
+		s.WriteString(schemas.ShardFilter_shardId, *v.ShardId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ShardFilter_type, string(v.Type))
+	}
+}
+func (v *ShardFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ShardFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ShardFilter_shardId:
+			v.ShardId = new(string)
+			return d.ReadString(schemas.ShardFilter_shardId, v.ShardId)
+		case schemas.ShardFilter_type:
+			var ev string
+			if err := d.ReadString(schemas.ShardFilter_type, &ev); err != nil {
+				return err
+			}
+			v.Type = ShardFilterType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Represents a change data capture stream for an Amazon Keyspaces table, which
@@ -466,6 +898,46 @@ type Stream struct {
 	TableName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Stream) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Stream)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Stream) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.Stream_keyspaceName, *v.KeyspaceName)
+	}
+	if v.StreamArn != nil {
+		s.WriteString(schemas.Stream_streamArn, *v.StreamArn)
+	}
+	if v.StreamLabel != nil {
+		s.WriteString(schemas.Stream_streamLabel, *v.StreamLabel)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.Stream_tableName, *v.TableName)
+	}
+}
+func (v *Stream) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Stream, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Stream_keyspaceName:
+			v.KeyspaceName = new(string)
+			return d.ReadString(schemas.Stream_keyspaceName, v.KeyspaceName)
+		case schemas.Stream_streamArn:
+			v.StreamArn = new(string)
+			return d.ReadString(schemas.Stream_streamArn, v.StreamArn)
+		case schemas.Stream_streamLabel:
+			v.StreamLabel = new(string)
+			return d.ReadString(schemas.Stream_streamLabel, v.StreamLabel)
+		case schemas.Stream_tableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.Stream_tableName, v.TableName)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -14,6 +16,32 @@ type ActiveSpeakerOnlyConfiguration struct {
 	ActiveSpeakerPosition ActiveSpeakerPosition
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActiveSpeakerOnlyConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActiveSpeakerOnlyConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActiveSpeakerOnlyConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveSpeakerPosition != "" {
+		s.WriteString(schemas.ActiveSpeakerOnlyConfiguration_ActiveSpeakerPosition, string(v.ActiveSpeakerPosition))
+	}
+}
+func (v *ActiveSpeakerOnlyConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActiveSpeakerOnlyConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActiveSpeakerOnlyConfiguration_ActiveSpeakerPosition:
+			var ev string
+			if err := d.ReadString(schemas.ActiveSpeakerOnlyConfiguration_ActiveSpeakerPosition, &ev); err != nil {
+				return err
+			}
+			v.ActiveSpeakerPosition = ActiveSpeakerPosition(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A structure that contains the configuration settings for an Amazon Transcribe
@@ -148,6 +176,117 @@ type AmazonTranscribeCallAnalyticsProcessorConfiguration struct {
 	VocabularyName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AmazonTranscribeCallAnalyticsProcessorConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmazonTranscribeCallAnalyticsProcessorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCategoryNameList(s, schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_CallAnalyticsStreamCategories, v.CallAnalyticsStreamCategories)
+	if v.ContentIdentificationType != "" {
+		s.WriteString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_ContentIdentificationType, string(v.ContentIdentificationType))
+	}
+	if v.ContentRedactionType != "" {
+		s.WriteString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_ContentRedactionType, string(v.ContentRedactionType))
+	}
+	if v.EnablePartialResultsStabilization != false {
+		s.WriteBool(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_EnablePartialResultsStabilization, v.EnablePartialResultsStabilization)
+	}
+	if v.FilterPartialResults != false {
+		s.WriteBool(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_FilterPartialResults, v.FilterPartialResults)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LanguageModelName != nil {
+		s.WriteString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_LanguageModelName, *v.LanguageModelName)
+	}
+	if v.PartialResultsStability != "" {
+		s.WriteString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_PartialResultsStability, string(v.PartialResultsStability))
+	}
+	if v.PiiEntityTypes != nil {
+		s.WriteString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_PiiEntityTypes, *v.PiiEntityTypes)
+	}
+	if v.PostCallAnalyticsSettings != nil {
+		s.WriteStruct(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_PostCallAnalyticsSettings)
+		v.PostCallAnalyticsSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VocabularyFilterMethod != "" {
+		s.WriteString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyFilterMethod, string(v.VocabularyFilterMethod))
+	}
+	if v.VocabularyFilterName != nil {
+		s.WriteString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyFilterName, *v.VocabularyFilterName)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyName, *v.VocabularyName)
+	}
+}
+func (v *AmazonTranscribeCallAnalyticsProcessorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_CallAnalyticsStreamCategories:
+			return deserializeCategoryNameList(d, schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_CallAnalyticsStreamCategories, &v.CallAnalyticsStreamCategories)
+		case schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_ContentIdentificationType:
+			var ev string
+			if err := d.ReadString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_ContentIdentificationType, &ev); err != nil {
+				return err
+			}
+			v.ContentIdentificationType = ContentType(ev)
+			return nil
+		case schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_ContentRedactionType:
+			var ev string
+			if err := d.ReadString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_ContentRedactionType, &ev); err != nil {
+				return err
+			}
+			v.ContentRedactionType = ContentType(ev)
+			return nil
+		case schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_EnablePartialResultsStabilization:
+			return d.ReadBool(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_EnablePartialResultsStabilization, &v.EnablePartialResultsStabilization)
+		case schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_FilterPartialResults:
+			return d.ReadBool(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_FilterPartialResults, &v.FilterPartialResults)
+		case schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = CallAnalyticsLanguageCode(ev)
+			return nil
+		case schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_LanguageModelName:
+			v.LanguageModelName = new(string)
+			return d.ReadString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_LanguageModelName, v.LanguageModelName)
+		case schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_PartialResultsStability:
+			var ev string
+			if err := d.ReadString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_PartialResultsStability, &ev); err != nil {
+				return err
+			}
+			v.PartialResultsStability = PartialResultsStability(ev)
+			return nil
+		case schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_PiiEntityTypes:
+			v.PiiEntityTypes = new(string)
+			return d.ReadString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_PiiEntityTypes, v.PiiEntityTypes)
+		case schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_PostCallAnalyticsSettings:
+			v.PostCallAnalyticsSettings = &PostCallAnalyticsSettings{}
+			return v.PostCallAnalyticsSettings.Deserialize(d)
+		case schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyFilterMethod:
+			var ev string
+			if err := d.ReadString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyFilterMethod, &ev); err != nil {
+				return err
+			}
+			v.VocabularyFilterMethod = VocabularyFilterMethod(ev)
+			return nil
+		case schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyFilterName:
+			v.VocabularyFilterName = new(string)
+			return d.ReadString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyFilterName, v.VocabularyFilterName)
+		case schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyName, v.VocabularyName)
+		}
+		return nil
+	})
 }
 
 // A structure that contains the configuration settings for an Amazon Transcribe
@@ -296,6 +435,149 @@ type AmazonTranscribeProcessorConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AmazonTranscribeProcessorConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmazonTranscribeProcessorConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmazonTranscribeProcessorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentIdentificationType != "" {
+		s.WriteString(schemas.AmazonTranscribeProcessorConfiguration_ContentIdentificationType, string(v.ContentIdentificationType))
+	}
+	if v.ContentRedactionType != "" {
+		s.WriteString(schemas.AmazonTranscribeProcessorConfiguration_ContentRedactionType, string(v.ContentRedactionType))
+	}
+	if v.EnablePartialResultsStabilization != false {
+		s.WriteBool(schemas.AmazonTranscribeProcessorConfiguration_EnablePartialResultsStabilization, v.EnablePartialResultsStabilization)
+	}
+	if v.FilterPartialResults != false {
+		s.WriteBool(schemas.AmazonTranscribeProcessorConfiguration_FilterPartialResults, v.FilterPartialResults)
+	}
+	if v.IdentifyLanguage != false {
+		s.WriteBool(schemas.AmazonTranscribeProcessorConfiguration_IdentifyLanguage, v.IdentifyLanguage)
+	}
+	if v.IdentifyMultipleLanguages != false {
+		s.WriteBool(schemas.AmazonTranscribeProcessorConfiguration_IdentifyMultipleLanguages, v.IdentifyMultipleLanguages)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.AmazonTranscribeProcessorConfiguration_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LanguageModelName != nil {
+		s.WriteString(schemas.AmazonTranscribeProcessorConfiguration_LanguageModelName, *v.LanguageModelName)
+	}
+	if v.LanguageOptions != nil {
+		s.WriteString(schemas.AmazonTranscribeProcessorConfiguration_LanguageOptions, *v.LanguageOptions)
+	}
+	if v.PartialResultsStability != "" {
+		s.WriteString(schemas.AmazonTranscribeProcessorConfiguration_PartialResultsStability, string(v.PartialResultsStability))
+	}
+	if v.PiiEntityTypes != nil {
+		s.WriteString(schemas.AmazonTranscribeProcessorConfiguration_PiiEntityTypes, *v.PiiEntityTypes)
+	}
+	if v.PreferredLanguage != "" {
+		s.WriteString(schemas.AmazonTranscribeProcessorConfiguration_PreferredLanguage, string(v.PreferredLanguage))
+	}
+	if v.ShowSpeakerLabel != false {
+		s.WriteBool(schemas.AmazonTranscribeProcessorConfiguration_ShowSpeakerLabel, v.ShowSpeakerLabel)
+	}
+	if v.VocabularyFilterMethod != "" {
+		s.WriteString(schemas.AmazonTranscribeProcessorConfiguration_VocabularyFilterMethod, string(v.VocabularyFilterMethod))
+	}
+	if v.VocabularyFilterName != nil {
+		s.WriteString(schemas.AmazonTranscribeProcessorConfiguration_VocabularyFilterName, *v.VocabularyFilterName)
+	}
+	if v.VocabularyFilterNames != nil {
+		s.WriteString(schemas.AmazonTranscribeProcessorConfiguration_VocabularyFilterNames, *v.VocabularyFilterNames)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.AmazonTranscribeProcessorConfiguration_VocabularyName, *v.VocabularyName)
+	}
+	if v.VocabularyNames != nil {
+		s.WriteString(schemas.AmazonTranscribeProcessorConfiguration_VocabularyNames, *v.VocabularyNames)
+	}
+}
+func (v *AmazonTranscribeProcessorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmazonTranscribeProcessorConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmazonTranscribeProcessorConfiguration_ContentIdentificationType:
+			var ev string
+			if err := d.ReadString(schemas.AmazonTranscribeProcessorConfiguration_ContentIdentificationType, &ev); err != nil {
+				return err
+			}
+			v.ContentIdentificationType = ContentType(ev)
+			return nil
+		case schemas.AmazonTranscribeProcessorConfiguration_ContentRedactionType:
+			var ev string
+			if err := d.ReadString(schemas.AmazonTranscribeProcessorConfiguration_ContentRedactionType, &ev); err != nil {
+				return err
+			}
+			v.ContentRedactionType = ContentType(ev)
+			return nil
+		case schemas.AmazonTranscribeProcessorConfiguration_EnablePartialResultsStabilization:
+			return d.ReadBool(schemas.AmazonTranscribeProcessorConfiguration_EnablePartialResultsStabilization, &v.EnablePartialResultsStabilization)
+		case schemas.AmazonTranscribeProcessorConfiguration_FilterPartialResults:
+			return d.ReadBool(schemas.AmazonTranscribeProcessorConfiguration_FilterPartialResults, &v.FilterPartialResults)
+		case schemas.AmazonTranscribeProcessorConfiguration_IdentifyLanguage:
+			return d.ReadBool(schemas.AmazonTranscribeProcessorConfiguration_IdentifyLanguage, &v.IdentifyLanguage)
+		case schemas.AmazonTranscribeProcessorConfiguration_IdentifyMultipleLanguages:
+			return d.ReadBool(schemas.AmazonTranscribeProcessorConfiguration_IdentifyMultipleLanguages, &v.IdentifyMultipleLanguages)
+		case schemas.AmazonTranscribeProcessorConfiguration_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.AmazonTranscribeProcessorConfiguration_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = CallAnalyticsLanguageCode(ev)
+			return nil
+		case schemas.AmazonTranscribeProcessorConfiguration_LanguageModelName:
+			v.LanguageModelName = new(string)
+			return d.ReadString(schemas.AmazonTranscribeProcessorConfiguration_LanguageModelName, v.LanguageModelName)
+		case schemas.AmazonTranscribeProcessorConfiguration_LanguageOptions:
+			v.LanguageOptions = new(string)
+			return d.ReadString(schemas.AmazonTranscribeProcessorConfiguration_LanguageOptions, v.LanguageOptions)
+		case schemas.AmazonTranscribeProcessorConfiguration_PartialResultsStability:
+			var ev string
+			if err := d.ReadString(schemas.AmazonTranscribeProcessorConfiguration_PartialResultsStability, &ev); err != nil {
+				return err
+			}
+			v.PartialResultsStability = PartialResultsStability(ev)
+			return nil
+		case schemas.AmazonTranscribeProcessorConfiguration_PiiEntityTypes:
+			v.PiiEntityTypes = new(string)
+			return d.ReadString(schemas.AmazonTranscribeProcessorConfiguration_PiiEntityTypes, v.PiiEntityTypes)
+		case schemas.AmazonTranscribeProcessorConfiguration_PreferredLanguage:
+			var ev string
+			if err := d.ReadString(schemas.AmazonTranscribeProcessorConfiguration_PreferredLanguage, &ev); err != nil {
+				return err
+			}
+			v.PreferredLanguage = CallAnalyticsLanguageCode(ev)
+			return nil
+		case schemas.AmazonTranscribeProcessorConfiguration_ShowSpeakerLabel:
+			return d.ReadBool(schemas.AmazonTranscribeProcessorConfiguration_ShowSpeakerLabel, &v.ShowSpeakerLabel)
+		case schemas.AmazonTranscribeProcessorConfiguration_VocabularyFilterMethod:
+			var ev string
+			if err := d.ReadString(schemas.AmazonTranscribeProcessorConfiguration_VocabularyFilterMethod, &ev); err != nil {
+				return err
+			}
+			v.VocabularyFilterMethod = VocabularyFilterMethod(ev)
+			return nil
+		case schemas.AmazonTranscribeProcessorConfiguration_VocabularyFilterName:
+			v.VocabularyFilterName = new(string)
+			return d.ReadString(schemas.AmazonTranscribeProcessorConfiguration_VocabularyFilterName, v.VocabularyFilterName)
+		case schemas.AmazonTranscribeProcessorConfiguration_VocabularyFilterNames:
+			v.VocabularyFilterNames = new(string)
+			return d.ReadString(schemas.AmazonTranscribeProcessorConfiguration_VocabularyFilterNames, v.VocabularyFilterNames)
+		case schemas.AmazonTranscribeProcessorConfiguration_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.AmazonTranscribeProcessorConfiguration_VocabularyName, v.VocabularyName)
+		case schemas.AmazonTranscribeProcessorConfiguration_VocabularyNames:
+			v.VocabularyNames = new(string)
+			return d.ReadString(schemas.AmazonTranscribeProcessorConfiguration_VocabularyNames, v.VocabularyNames)
+		}
+		return nil
+	})
+}
+
 // The configuration for the artifacts concatenation.
 type ArtifactsConcatenationConfiguration struct {
 
@@ -337,6 +619,78 @@ type ArtifactsConcatenationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ArtifactsConcatenationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ArtifactsConcatenationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ArtifactsConcatenationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Audio != nil {
+		s.WriteStruct(schemas.ArtifactsConcatenationConfiguration_Audio)
+		v.Audio.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompositedVideo != nil {
+		s.WriteStruct(schemas.ArtifactsConcatenationConfiguration_CompositedVideo)
+		v.CompositedVideo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Content != nil {
+		s.WriteStruct(schemas.ArtifactsConcatenationConfiguration_Content)
+		v.Content.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataChannel != nil {
+		s.WriteStruct(schemas.ArtifactsConcatenationConfiguration_DataChannel)
+		v.DataChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MeetingEvents != nil {
+		s.WriteStruct(schemas.ArtifactsConcatenationConfiguration_MeetingEvents)
+		v.MeetingEvents.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TranscriptionMessages != nil {
+		s.WriteStruct(schemas.ArtifactsConcatenationConfiguration_TranscriptionMessages)
+		v.TranscriptionMessages.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Video != nil {
+		s.WriteStruct(schemas.ArtifactsConcatenationConfiguration_Video)
+		v.Video.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ArtifactsConcatenationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ArtifactsConcatenationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ArtifactsConcatenationConfiguration_Audio:
+			v.Audio = &AudioConcatenationConfiguration{}
+			return v.Audio.Deserialize(d)
+		case schemas.ArtifactsConcatenationConfiguration_CompositedVideo:
+			v.CompositedVideo = &CompositedVideoConcatenationConfiguration{}
+			return v.CompositedVideo.Deserialize(d)
+		case schemas.ArtifactsConcatenationConfiguration_Content:
+			v.Content = &ContentConcatenationConfiguration{}
+			return v.Content.Deserialize(d)
+		case schemas.ArtifactsConcatenationConfiguration_DataChannel:
+			v.DataChannel = &DataChannelConcatenationConfiguration{}
+			return v.DataChannel.Deserialize(d)
+		case schemas.ArtifactsConcatenationConfiguration_MeetingEvents:
+			v.MeetingEvents = &MeetingEventsConcatenationConfiguration{}
+			return v.MeetingEvents.Deserialize(d)
+		case schemas.ArtifactsConcatenationConfiguration_TranscriptionMessages:
+			v.TranscriptionMessages = &TranscriptionMessagesConcatenationConfiguration{}
+			return v.TranscriptionMessages.Deserialize(d)
+		case schemas.ArtifactsConcatenationConfiguration_Video:
+			v.Video = &VideoConcatenationConfiguration{}
+			return v.Video.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The configuration for the artifacts.
 type ArtifactsConfiguration struct {
 
@@ -361,6 +715,54 @@ type ArtifactsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ArtifactsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ArtifactsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ArtifactsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Audio != nil {
+		s.WriteStruct(schemas.ArtifactsConfiguration_Audio)
+		v.Audio.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompositedVideo != nil {
+		s.WriteStruct(schemas.ArtifactsConfiguration_CompositedVideo)
+		v.CompositedVideo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Content != nil {
+		s.WriteStruct(schemas.ArtifactsConfiguration_Content)
+		v.Content.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Video != nil {
+		s.WriteStruct(schemas.ArtifactsConfiguration_Video)
+		v.Video.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ArtifactsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ArtifactsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ArtifactsConfiguration_Audio:
+			v.Audio = &AudioArtifactsConfiguration{}
+			return v.Audio.Deserialize(d)
+		case schemas.ArtifactsConfiguration_CompositedVideo:
+			v.CompositedVideo = &CompositedVideoArtifactsConfiguration{}
+			return v.CompositedVideo.Deserialize(d)
+		case schemas.ArtifactsConfiguration_Content:
+			v.Content = &ContentArtifactsConfiguration{}
+			return v.Content.Deserialize(d)
+		case schemas.ArtifactsConfiguration_Video:
+			v.Video = &VideoArtifactsConfiguration{}
+			return v.Video.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The audio artifact configuration object.
 type AudioArtifactsConfiguration struct {
 
@@ -372,6 +774,32 @@ type AudioArtifactsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AudioArtifactsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AudioArtifactsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AudioArtifactsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MuxType != "" {
+		s.WriteString(schemas.AudioArtifactsConfiguration_MuxType, string(v.MuxType))
+	}
+}
+func (v *AudioArtifactsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AudioArtifactsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AudioArtifactsConfiguration_MuxType:
+			var ev string
+			if err := d.ReadString(schemas.AudioArtifactsConfiguration_MuxType, &ev); err != nil {
+				return err
+			}
+			v.MuxType = AudioMuxType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The audio artifact concatenation configuration object.
 type AudioConcatenationConfiguration struct {
 
@@ -381,6 +809,32 @@ type AudioConcatenationConfiguration struct {
 	State AudioArtifactsConcatenationState
 
 	noSmithyDocumentSerde
+}
+
+func (v *AudioConcatenationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AudioConcatenationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AudioConcatenationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.AudioConcatenationConfiguration_State, string(v.State))
+	}
+}
+func (v *AudioConcatenationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AudioConcatenationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AudioConcatenationConfiguration_State:
+			var ev string
+			if err := d.ReadString(schemas.AudioConcatenationConfiguration_State, &ev); err != nil {
+				return err
+			}
+			v.State = AudioArtifactsConcatenationState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Defines an audio channel in a Kinesis video stream.
@@ -397,6 +851,37 @@ type ChannelDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChannelDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != 0 {
+		s.WriteInt32(schemas.ChannelDefinition_ChannelId, v.ChannelId)
+	}
+	if v.ParticipantRole != "" {
+		s.WriteString(schemas.ChannelDefinition_ParticipantRole, string(v.ParticipantRole))
+	}
+}
+func (v *ChannelDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelDefinition_ChannelId:
+			return d.ReadInt32(schemas.ChannelDefinition_ChannelId, &v.ChannelId)
+		case schemas.ChannelDefinition_ParticipantRole:
+			var ev string
+			if err := d.ReadString(schemas.ChannelDefinition_ParticipantRole, &ev); err != nil {
+				return err
+			}
+			v.ParticipantRole = ParticipantRole(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The configuration object of the Amazon Chime SDK meeting concatenation for a
 // specified media pipeline.
 type ChimeSdkMeetingConcatenationConfiguration struct {
@@ -410,6 +895,30 @@ type ChimeSdkMeetingConcatenationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChimeSdkMeetingConcatenationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChimeSdkMeetingConcatenationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChimeSdkMeetingConcatenationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactsConfiguration != nil {
+		s.WriteStruct(schemas.ChimeSdkMeetingConcatenationConfiguration_ArtifactsConfiguration)
+		v.ArtifactsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ChimeSdkMeetingConcatenationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChimeSdkMeetingConcatenationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChimeSdkMeetingConcatenationConfiguration_ArtifactsConfiguration:
+			v.ArtifactsConfiguration = &ArtifactsConcatenationConfiguration{}
+			return v.ArtifactsConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The configuration object of the Amazon Chime SDK meeting for a specified media
 // pipeline. SourceType must be ChimeSdkMeeting .
 type ChimeSdkMeetingConfiguration struct {
@@ -421,6 +930,38 @@ type ChimeSdkMeetingConfiguration struct {
 	SourceConfiguration *SourceConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *ChimeSdkMeetingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChimeSdkMeetingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChimeSdkMeetingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactsConfiguration != nil {
+		s.WriteStruct(schemas.ChimeSdkMeetingConfiguration_ArtifactsConfiguration)
+		v.ArtifactsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceConfiguration != nil {
+		s.WriteStruct(schemas.ChimeSdkMeetingConfiguration_SourceConfiguration)
+		v.SourceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ChimeSdkMeetingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChimeSdkMeetingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChimeSdkMeetingConfiguration_ArtifactsConfiguration:
+			v.ArtifactsConfiguration = &ArtifactsConfiguration{}
+			return v.ArtifactsConfiguration.Deserialize(d)
+		case schemas.ChimeSdkMeetingConfiguration_SourceConfiguration:
+			v.SourceConfiguration = &SourceConfiguration{}
+			return v.SourceConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The media pipeline's configuration object.
@@ -445,6 +986,54 @@ type ChimeSdkMeetingLiveConnectorConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChimeSdkMeetingLiveConnectorConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChimeSdkMeetingLiveConnectorConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChimeSdkMeetingLiveConnectorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ChimeSdkMeetingLiveConnectorConfiguration_Arn, *v.Arn)
+	}
+	if v.CompositedVideo != nil {
+		s.WriteStruct(schemas.ChimeSdkMeetingLiveConnectorConfiguration_CompositedVideo)
+		v.CompositedVideo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MuxType != "" {
+		s.WriteString(schemas.ChimeSdkMeetingLiveConnectorConfiguration_MuxType, string(v.MuxType))
+	}
+	if v.SourceConfiguration != nil {
+		s.WriteStruct(schemas.ChimeSdkMeetingLiveConnectorConfiguration_SourceConfiguration)
+		v.SourceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ChimeSdkMeetingLiveConnectorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChimeSdkMeetingLiveConnectorConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChimeSdkMeetingLiveConnectorConfiguration_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ChimeSdkMeetingLiveConnectorConfiguration_Arn, v.Arn)
+		case schemas.ChimeSdkMeetingLiveConnectorConfiguration_CompositedVideo:
+			v.CompositedVideo = &CompositedVideoArtifactsConfiguration{}
+			return v.CompositedVideo.Deserialize(d)
+		case schemas.ChimeSdkMeetingLiveConnectorConfiguration_MuxType:
+			var ev string
+			if err := d.ReadString(schemas.ChimeSdkMeetingLiveConnectorConfiguration_MuxType, &ev); err != nil {
+				return err
+			}
+			v.MuxType = LiveConnectorMuxType(ev)
+			return nil
+		case schemas.ChimeSdkMeetingLiveConnectorConfiguration_SourceConfiguration:
+			v.SourceConfiguration = &SourceConfiguration{}
+			return v.SourceConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies the configuration for compositing video artifacts.
 type CompositedVideoArtifactsConfiguration struct {
 
@@ -463,6 +1052,50 @@ type CompositedVideoArtifactsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompositedVideoArtifactsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompositedVideoArtifactsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompositedVideoArtifactsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GridViewConfiguration != nil {
+		s.WriteStruct(schemas.CompositedVideoArtifactsConfiguration_GridViewConfiguration)
+		v.GridViewConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Layout != "" {
+		s.WriteString(schemas.CompositedVideoArtifactsConfiguration_Layout, string(v.Layout))
+	}
+	if v.Resolution != "" {
+		s.WriteString(schemas.CompositedVideoArtifactsConfiguration_Resolution, string(v.Resolution))
+	}
+}
+func (v *CompositedVideoArtifactsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompositedVideoArtifactsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CompositedVideoArtifactsConfiguration_GridViewConfiguration:
+			v.GridViewConfiguration = &GridViewConfiguration{}
+			return v.GridViewConfiguration.Deserialize(d)
+		case schemas.CompositedVideoArtifactsConfiguration_Layout:
+			var ev string
+			if err := d.ReadString(schemas.CompositedVideoArtifactsConfiguration_Layout, &ev); err != nil {
+				return err
+			}
+			v.Layout = LayoutOption(ev)
+			return nil
+		case schemas.CompositedVideoArtifactsConfiguration_Resolution:
+			var ev string
+			if err := d.ReadString(schemas.CompositedVideoArtifactsConfiguration_Resolution, &ev); err != nil {
+				return err
+			}
+			v.Resolution = ResolutionOption(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The composited video configuration object for a specified media pipeline.
 // SourceType must be ChimeSdkMeeting .
 type CompositedVideoConcatenationConfiguration struct {
@@ -473,6 +1106,32 @@ type CompositedVideoConcatenationConfiguration struct {
 	State ArtifactsConcatenationState
 
 	noSmithyDocumentSerde
+}
+
+func (v *CompositedVideoConcatenationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompositedVideoConcatenationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompositedVideoConcatenationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.CompositedVideoConcatenationConfiguration_State, string(v.State))
+	}
+}
+func (v *CompositedVideoConcatenationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompositedVideoConcatenationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CompositedVideoConcatenationConfiguration_State:
+			var ev string
+			if err := d.ReadString(schemas.CompositedVideoConcatenationConfiguration_State, &ev); err != nil {
+				return err
+			}
+			v.State = ArtifactsConcatenationState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The data sink of the configuration object.
@@ -489,6 +1148,40 @@ type ConcatenationSink struct {
 	Type ConcatenationSinkType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConcatenationSink) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConcatenationSink)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConcatenationSink) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3BucketSinkConfiguration != nil {
+		s.WriteStruct(schemas.ConcatenationSink_S3BucketSinkConfiguration)
+		v.S3BucketSinkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ConcatenationSink_Type, string(v.Type))
+	}
+}
+func (v *ConcatenationSink) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConcatenationSink, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConcatenationSink_S3BucketSinkConfiguration:
+			v.S3BucketSinkConfiguration = &S3BucketSinkConfiguration{}
+			return v.S3BucketSinkConfiguration.Deserialize(d)
+		case schemas.ConcatenationSink_Type:
+			var ev string
+			if err := d.ReadString(schemas.ConcatenationSink_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ConcatenationSinkType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The source type and media pipeline configuration settings in a configuration
@@ -508,6 +1201,40 @@ type ConcatenationSource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConcatenationSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConcatenationSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConcatenationSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MediaCapturePipelineSourceConfiguration != nil {
+		s.WriteStruct(schemas.ConcatenationSource_MediaCapturePipelineSourceConfiguration)
+		v.MediaCapturePipelineSourceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ConcatenationSource_Type, string(v.Type))
+	}
+}
+func (v *ConcatenationSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConcatenationSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConcatenationSource_MediaCapturePipelineSourceConfiguration:
+			v.MediaCapturePipelineSourceConfiguration = &MediaCapturePipelineSourceConfiguration{}
+			return v.MediaCapturePipelineSourceConfiguration.Deserialize(d)
+		case schemas.ConcatenationSource_Type:
+			var ev string
+			if err := d.ReadString(schemas.ConcatenationSource_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ConcatenationSourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The content artifact object.
 type ContentArtifactsConfiguration struct {
 
@@ -522,6 +1249,42 @@ type ContentArtifactsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContentArtifactsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContentArtifactsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContentArtifactsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MuxType != "" {
+		s.WriteString(schemas.ContentArtifactsConfiguration_MuxType, string(v.MuxType))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ContentArtifactsConfiguration_State, string(v.State))
+	}
+}
+func (v *ContentArtifactsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContentArtifactsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContentArtifactsConfiguration_MuxType:
+			var ev string
+			if err := d.ReadString(schemas.ContentArtifactsConfiguration_MuxType, &ev); err != nil {
+				return err
+			}
+			v.MuxType = ContentMuxType(ev)
+			return nil
+		case schemas.ContentArtifactsConfiguration_State:
+			var ev string
+			if err := d.ReadString(schemas.ContentArtifactsConfiguration_State, &ev); err != nil {
+				return err
+			}
+			v.State = ArtifactsState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The composited content configuration object for a specified media pipeline.
 type ContentConcatenationConfiguration struct {
 
@@ -533,6 +1296,32 @@ type ContentConcatenationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContentConcatenationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContentConcatenationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContentConcatenationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.ContentConcatenationConfiguration_State, string(v.State))
+	}
+}
+func (v *ContentConcatenationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContentConcatenationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContentConcatenationConfiguration_State:
+			var ev string
+			if err := d.ReadString(schemas.ContentConcatenationConfiguration_State, &ev); err != nil {
+				return err
+			}
+			v.State = ArtifactsConcatenationState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The content configuration object's data channel.
 type DataChannelConcatenationConfiguration struct {
 
@@ -542,6 +1331,32 @@ type DataChannelConcatenationConfiguration struct {
 	State ArtifactsConcatenationState
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataChannelConcatenationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataChannelConcatenationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataChannelConcatenationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.DataChannelConcatenationConfiguration_State, string(v.State))
+	}
+}
+func (v *DataChannelConcatenationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataChannelConcatenationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataChannelConcatenationConfiguration_State:
+			var ev string
+			if err := d.ReadString(schemas.DataChannelConcatenationConfiguration_State, &ev); err != nil {
+				return err
+			}
+			v.State = ArtifactsConcatenationState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the timestamp range and timestamp origin of a range of fragments.
@@ -578,6 +1393,40 @@ type FragmentSelector struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FragmentSelector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FragmentSelector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FragmentSelector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FragmentSelectorType != "" {
+		s.WriteString(schemas.FragmentSelector_FragmentSelectorType, string(v.FragmentSelectorType))
+	}
+	if v.TimestampRange != nil {
+		s.WriteStruct(schemas.FragmentSelector_TimestampRange)
+		v.TimestampRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FragmentSelector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FragmentSelector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FragmentSelector_FragmentSelectorType:
+			var ev string
+			if err := d.ReadString(schemas.FragmentSelector_FragmentSelectorType, &ev); err != nil {
+				return err
+			}
+			v.FragmentSelectorType = FragmentSelectorType(ev)
+			return nil
+		case schemas.FragmentSelector_TimestampRange:
+			v.TimestampRange = &TimestampRange{}
+			return v.TimestampRange.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies the type of grid layout.
 type GridViewConfiguration struct {
 
@@ -607,6 +1456,82 @@ type GridViewConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GridViewConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GridViewConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GridViewConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveSpeakerOnlyConfiguration != nil {
+		s.WriteStruct(schemas.GridViewConfiguration_ActiveSpeakerOnlyConfiguration)
+		v.ActiveSpeakerOnlyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CanvasOrientation != "" {
+		s.WriteString(schemas.GridViewConfiguration_CanvasOrientation, string(v.CanvasOrientation))
+	}
+	if v.ContentShareLayout != "" {
+		s.WriteString(schemas.GridViewConfiguration_ContentShareLayout, string(v.ContentShareLayout))
+	}
+	if v.HorizontalLayoutConfiguration != nil {
+		s.WriteStruct(schemas.GridViewConfiguration_HorizontalLayoutConfiguration)
+		v.HorizontalLayoutConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PresenterOnlyConfiguration != nil {
+		s.WriteStruct(schemas.GridViewConfiguration_PresenterOnlyConfiguration)
+		v.PresenterOnlyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VerticalLayoutConfiguration != nil {
+		s.WriteStruct(schemas.GridViewConfiguration_VerticalLayoutConfiguration)
+		v.VerticalLayoutConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VideoAttribute != nil {
+		s.WriteStruct(schemas.GridViewConfiguration_VideoAttribute)
+		v.VideoAttribute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GridViewConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GridViewConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GridViewConfiguration_ActiveSpeakerOnlyConfiguration:
+			v.ActiveSpeakerOnlyConfiguration = &ActiveSpeakerOnlyConfiguration{}
+			return v.ActiveSpeakerOnlyConfiguration.Deserialize(d)
+		case schemas.GridViewConfiguration_CanvasOrientation:
+			var ev string
+			if err := d.ReadString(schemas.GridViewConfiguration_CanvasOrientation, &ev); err != nil {
+				return err
+			}
+			v.CanvasOrientation = CanvasOrientation(ev)
+			return nil
+		case schemas.GridViewConfiguration_ContentShareLayout:
+			var ev string
+			if err := d.ReadString(schemas.GridViewConfiguration_ContentShareLayout, &ev); err != nil {
+				return err
+			}
+			v.ContentShareLayout = ContentShareLayoutOption(ev)
+			return nil
+		case schemas.GridViewConfiguration_HorizontalLayoutConfiguration:
+			v.HorizontalLayoutConfiguration = &HorizontalLayoutConfiguration{}
+			return v.HorizontalLayoutConfiguration.Deserialize(d)
+		case schemas.GridViewConfiguration_PresenterOnlyConfiguration:
+			v.PresenterOnlyConfiguration = &PresenterOnlyConfiguration{}
+			return v.PresenterOnlyConfiguration.Deserialize(d)
+		case schemas.GridViewConfiguration_VerticalLayoutConfiguration:
+			v.VerticalLayoutConfiguration = &VerticalLayoutConfiguration{}
+			return v.VerticalLayoutConfiguration.Deserialize(d)
+		case schemas.GridViewConfiguration_VideoAttribute:
+			v.VideoAttribute = &VideoAttribute{}
+			return v.VideoAttribute.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Defines the configuration settings for the horizontal layout.
 type HorizontalLayoutConfiguration struct {
 
@@ -625,6 +1550,54 @@ type HorizontalLayoutConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HorizontalLayoutConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HorizontalLayoutConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HorizontalLayoutConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TileAspectRatio != nil {
+		s.WriteString(schemas.HorizontalLayoutConfiguration_TileAspectRatio, *v.TileAspectRatio)
+	}
+	if v.TileCount != nil {
+		s.WriteInt32(schemas.HorizontalLayoutConfiguration_TileCount, *v.TileCount)
+	}
+	if v.TileOrder != "" {
+		s.WriteString(schemas.HorizontalLayoutConfiguration_TileOrder, string(v.TileOrder))
+	}
+	if v.TilePosition != "" {
+		s.WriteString(schemas.HorizontalLayoutConfiguration_TilePosition, string(v.TilePosition))
+	}
+}
+func (v *HorizontalLayoutConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HorizontalLayoutConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HorizontalLayoutConfiguration_TileAspectRatio:
+			v.TileAspectRatio = new(string)
+			return d.ReadString(schemas.HorizontalLayoutConfiguration_TileAspectRatio, v.TileAspectRatio)
+		case schemas.HorizontalLayoutConfiguration_TileCount:
+			v.TileCount = new(int32)
+			return d.ReadInt32(schemas.HorizontalLayoutConfiguration_TileCount, v.TileCount)
+		case schemas.HorizontalLayoutConfiguration_TileOrder:
+			var ev string
+			if err := d.ReadString(schemas.HorizontalLayoutConfiguration_TileOrder, &ev); err != nil {
+				return err
+			}
+			v.TileOrder = TileOrder(ev)
+			return nil
+		case schemas.HorizontalLayoutConfiguration_TilePosition:
+			var ev string
+			if err := d.ReadString(schemas.HorizontalLayoutConfiguration_TilePosition, &ev); err != nil {
+				return err
+			}
+			v.TilePosition = HorizontalTilePosition(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A structure that contains the configuration settings for an issue detection
 // task.
 type IssueDetectionConfiguration struct {
@@ -635,6 +1608,28 @@ type IssueDetectionConfiguration struct {
 	RuleName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IssueDetectionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IssueDetectionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IssueDetectionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleName != nil {
+		s.WriteString(schemas.IssueDetectionConfiguration_RuleName, *v.RuleName)
+	}
+}
+func (v *IssueDetectionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IssueDetectionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IssueDetectionConfiguration_RuleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.IssueDetectionConfiguration_RuleName, v.RuleName)
+		}
+		return nil
+	})
 }
 
 // A structure that contains the settings for a keyword match task.
@@ -658,6 +1653,36 @@ type KeywordMatchConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KeywordMatchConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeywordMatchConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeywordMatchConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKeywordMatchWordList(s, schemas.KeywordMatchConfiguration_Keywords, v.Keywords)
+	if v.Negate != false {
+		s.WriteBool(schemas.KeywordMatchConfiguration_Negate, v.Negate)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.KeywordMatchConfiguration_RuleName, *v.RuleName)
+	}
+}
+func (v *KeywordMatchConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeywordMatchConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeywordMatchConfiguration_Keywords:
+			return deserializeKeywordMatchWordList(d, schemas.KeywordMatchConfiguration_Keywords, &v.Keywords)
+		case schemas.KeywordMatchConfiguration_Negate:
+			return d.ReadBool(schemas.KeywordMatchConfiguration_Negate, &v.Negate)
+		case schemas.KeywordMatchConfiguration_RuleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.KeywordMatchConfiguration_RuleName, v.RuleName)
+		}
+		return nil
+	})
+}
+
 // A structure that contains the configuration settings for a Kinesis Data Stream
 // sink.
 type KinesisDataStreamSinkConfiguration struct {
@@ -666,6 +1691,28 @@ type KinesisDataStreamSinkConfiguration struct {
 	InsightsTarget *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisDataStreamSinkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisDataStreamSinkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisDataStreamSinkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InsightsTarget != nil {
+		s.WriteString(schemas.KinesisDataStreamSinkConfiguration_InsightsTarget, *v.InsightsTarget)
+	}
+}
+func (v *KinesisDataStreamSinkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisDataStreamSinkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisDataStreamSinkConfiguration_InsightsTarget:
+			v.InsightsTarget = new(string)
+			return d.ReadString(schemas.KinesisDataStreamSinkConfiguration_InsightsTarget, v.InsightsTarget)
+		}
+		return nil
+	})
 }
 
 // The configuration of an Kinesis video stream.
@@ -701,6 +1748,34 @@ type KinesisVideoStreamConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisVideoStreamConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisVideoStreamConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisVideoStreamConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataRetentionInHours != nil {
+		s.WriteInt32(schemas.KinesisVideoStreamConfiguration_DataRetentionInHours, *v.DataRetentionInHours)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.KinesisVideoStreamConfiguration_Region, *v.Region)
+	}
+}
+func (v *KinesisVideoStreamConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisVideoStreamConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisVideoStreamConfiguration_DataRetentionInHours:
+			v.DataRetentionInHours = new(int32)
+			return d.ReadInt32(schemas.KinesisVideoStreamConfiguration_DataRetentionInHours, v.DataRetentionInHours)
+		case schemas.KinesisVideoStreamConfiguration_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.KinesisVideoStreamConfiguration_Region, v.Region)
+		}
+		return nil
+	})
+}
+
 // The updated Kinesis video stream configuration object.
 type KinesisVideoStreamConfigurationUpdate struct {
 
@@ -708,6 +1783,28 @@ type KinesisVideoStreamConfigurationUpdate struct {
 	DataRetentionInHours *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisVideoStreamConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisVideoStreamConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisVideoStreamConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataRetentionInHours != nil {
+		s.WriteInt32(schemas.KinesisVideoStreamConfigurationUpdate_DataRetentionInHours, *v.DataRetentionInHours)
+	}
+}
+func (v *KinesisVideoStreamConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisVideoStreamConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisVideoStreamConfigurationUpdate_DataRetentionInHours:
+			v.DataRetentionInHours = new(int32)
+			return d.ReadInt32(schemas.KinesisVideoStreamConfigurationUpdate_DataRetentionInHours, v.DataRetentionInHours)
+		}
+		return nil
+	})
 }
 
 // The video stream pool configuration object.
@@ -740,6 +1837,76 @@ type KinesisVideoStreamPoolConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisVideoStreamPoolConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisVideoStreamPoolConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisVideoStreamPoolConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.KinesisVideoStreamPoolConfiguration_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.PoolArn != nil {
+		s.WriteString(schemas.KinesisVideoStreamPoolConfiguration_PoolArn, *v.PoolArn)
+	}
+	if v.PoolId != nil {
+		s.WriteString(schemas.KinesisVideoStreamPoolConfiguration_PoolId, *v.PoolId)
+	}
+	if v.PoolName != nil {
+		s.WriteString(schemas.KinesisVideoStreamPoolConfiguration_PoolName, *v.PoolName)
+	}
+	if v.PoolSize != nil {
+		s.WriteInt32(schemas.KinesisVideoStreamPoolConfiguration_PoolSize, *v.PoolSize)
+	}
+	if v.PoolStatus != "" {
+		s.WriteString(schemas.KinesisVideoStreamPoolConfiguration_PoolStatus, string(v.PoolStatus))
+	}
+	if v.StreamConfiguration != nil {
+		s.WriteStruct(schemas.KinesisVideoStreamPoolConfiguration_StreamConfiguration)
+		v.StreamConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.KinesisVideoStreamPoolConfiguration_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+}
+func (v *KinesisVideoStreamPoolConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisVideoStreamPoolConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisVideoStreamPoolConfiguration_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.KinesisVideoStreamPoolConfiguration_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.KinesisVideoStreamPoolConfiguration_PoolArn:
+			v.PoolArn = new(string)
+			return d.ReadString(schemas.KinesisVideoStreamPoolConfiguration_PoolArn, v.PoolArn)
+		case schemas.KinesisVideoStreamPoolConfiguration_PoolId:
+			v.PoolId = new(string)
+			return d.ReadString(schemas.KinesisVideoStreamPoolConfiguration_PoolId, v.PoolId)
+		case schemas.KinesisVideoStreamPoolConfiguration_PoolName:
+			v.PoolName = new(string)
+			return d.ReadString(schemas.KinesisVideoStreamPoolConfiguration_PoolName, v.PoolName)
+		case schemas.KinesisVideoStreamPoolConfiguration_PoolSize:
+			v.PoolSize = new(int32)
+			return d.ReadInt32(schemas.KinesisVideoStreamPoolConfiguration_PoolSize, v.PoolSize)
+		case schemas.KinesisVideoStreamPoolConfiguration_PoolStatus:
+			var ev string
+			if err := d.ReadString(schemas.KinesisVideoStreamPoolConfiguration_PoolStatus, &ev); err != nil {
+				return err
+			}
+			v.PoolStatus = KinesisVideoStreamPoolStatus(ev)
+			return nil
+		case schemas.KinesisVideoStreamPoolConfiguration_StreamConfiguration:
+			v.StreamConfiguration = &KinesisVideoStreamConfiguration{}
+			return v.StreamConfiguration.Deserialize(d)
+		case schemas.KinesisVideoStreamPoolConfiguration_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.KinesisVideoStreamPoolConfiguration_UpdatedTimestamp, v.UpdatedTimestamp)
+		}
+		return nil
+	})
+}
+
 // A summary of the Kinesis video stream pool.
 type KinesisVideoStreamPoolSummary struct {
 
@@ -753,6 +1920,40 @@ type KinesisVideoStreamPoolSummary struct {
 	PoolName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisVideoStreamPoolSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisVideoStreamPoolSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisVideoStreamPoolSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PoolArn != nil {
+		s.WriteString(schemas.KinesisVideoStreamPoolSummary_PoolArn, *v.PoolArn)
+	}
+	if v.PoolId != nil {
+		s.WriteString(schemas.KinesisVideoStreamPoolSummary_PoolId, *v.PoolId)
+	}
+	if v.PoolName != nil {
+		s.WriteString(schemas.KinesisVideoStreamPoolSummary_PoolName, *v.PoolName)
+	}
+}
+func (v *KinesisVideoStreamPoolSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisVideoStreamPoolSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisVideoStreamPoolSummary_PoolArn:
+			v.PoolArn = new(string)
+			return d.ReadString(schemas.KinesisVideoStreamPoolSummary_PoolArn, v.PoolArn)
+		case schemas.KinesisVideoStreamPoolSummary_PoolId:
+			v.PoolId = new(string)
+			return d.ReadString(schemas.KinesisVideoStreamPoolSummary_PoolId, v.PoolId)
+		case schemas.KinesisVideoStreamPoolSummary_PoolName:
+			v.PoolName = new(string)
+			return d.ReadString(schemas.KinesisVideoStreamPoolSummary_PoolName, v.PoolName)
+		}
+		return nil
+	})
 }
 
 // A structure that contains the runtime settings for recording a Kinesis video
@@ -771,6 +1972,33 @@ type KinesisVideoStreamRecordingSourceRuntimeConfiguration struct {
 	Streams []RecordingStreamConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisVideoStreamRecordingSourceRuntimeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisVideoStreamRecordingSourceRuntimeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisVideoStreamRecordingSourceRuntimeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FragmentSelector != nil {
+		s.WriteStruct(schemas.KinesisVideoStreamRecordingSourceRuntimeConfiguration_FragmentSelector)
+		v.FragmentSelector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRecordingStreamList(s, schemas.KinesisVideoStreamRecordingSourceRuntimeConfiguration_Streams, v.Streams)
+}
+func (v *KinesisVideoStreamRecordingSourceRuntimeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisVideoStreamRecordingSourceRuntimeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisVideoStreamRecordingSourceRuntimeConfiguration_FragmentSelector:
+			v.FragmentSelector = &FragmentSelector{}
+			return v.FragmentSelector.Deserialize(d)
+		case schemas.KinesisVideoStreamRecordingSourceRuntimeConfiguration_Streams:
+			return deserializeRecordingStreamList(d, schemas.KinesisVideoStreamRecordingSourceRuntimeConfiguration_Streams, &v.Streams)
+		}
+		return nil
+	})
 }
 
 // The runtime configuration settings for the Kinesis video stream source.
@@ -804,6 +2032,41 @@ type KinesisVideoStreamSourceRuntimeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisVideoStreamSourceRuntimeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisVideoStreamSourceRuntimeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisVideoStreamSourceRuntimeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MediaEncoding != "" {
+		s.WriteString(schemas.KinesisVideoStreamSourceRuntimeConfiguration_MediaEncoding, string(v.MediaEncoding))
+	}
+	if v.MediaSampleRate != nil {
+		s.WriteInt32(schemas.KinesisVideoStreamSourceRuntimeConfiguration_MediaSampleRate, *v.MediaSampleRate)
+	}
+	serializeStreams(s, schemas.KinesisVideoStreamSourceRuntimeConfiguration_Streams, v.Streams)
+}
+func (v *KinesisVideoStreamSourceRuntimeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisVideoStreamSourceRuntimeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisVideoStreamSourceRuntimeConfiguration_MediaEncoding:
+			var ev string
+			if err := d.ReadString(schemas.KinesisVideoStreamSourceRuntimeConfiguration_MediaEncoding, &ev); err != nil {
+				return err
+			}
+			v.MediaEncoding = MediaEncoding(ev)
+			return nil
+		case schemas.KinesisVideoStreamSourceRuntimeConfiguration_MediaSampleRate:
+			v.MediaSampleRate = new(int32)
+			return d.ReadInt32(schemas.KinesisVideoStreamSourceRuntimeConfiguration_MediaSampleRate, v.MediaSampleRate)
+		case schemas.KinesisVideoStreamSourceRuntimeConfiguration_Streams:
+			return deserializeStreams(d, schemas.KinesisVideoStreamSourceRuntimeConfiguration_Streams, &v.Streams)
+		}
+		return nil
+	})
+}
+
 // The task configuration settings for the Kinesis video stream source.
 type KinesisVideoStreamSourceTaskConfiguration struct {
 
@@ -823,6 +2086,39 @@ type KinesisVideoStreamSourceTaskConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisVideoStreamSourceTaskConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisVideoStreamSourceTaskConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisVideoStreamSourceTaskConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != 0 {
+		s.WriteInt32(schemas.KinesisVideoStreamSourceTaskConfiguration_ChannelId, v.ChannelId)
+	}
+	if v.FragmentNumber != nil {
+		s.WriteString(schemas.KinesisVideoStreamSourceTaskConfiguration_FragmentNumber, *v.FragmentNumber)
+	}
+	if v.StreamArn != nil {
+		s.WriteString(schemas.KinesisVideoStreamSourceTaskConfiguration_StreamArn, *v.StreamArn)
+	}
+}
+func (v *KinesisVideoStreamSourceTaskConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisVideoStreamSourceTaskConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisVideoStreamSourceTaskConfiguration_ChannelId:
+			return d.ReadInt32(schemas.KinesisVideoStreamSourceTaskConfiguration_ChannelId, &v.ChannelId)
+		case schemas.KinesisVideoStreamSourceTaskConfiguration_FragmentNumber:
+			v.FragmentNumber = new(string)
+			return d.ReadString(schemas.KinesisVideoStreamSourceTaskConfiguration_FragmentNumber, v.FragmentNumber)
+		case schemas.KinesisVideoStreamSourceTaskConfiguration_StreamArn:
+			v.StreamArn = new(string)
+			return d.ReadString(schemas.KinesisVideoStreamSourceTaskConfiguration_StreamArn, v.StreamArn)
+		}
+		return nil
+	})
+}
+
 // A structure that contains the configuration settings for an AWS Lambda
 // function's data sink.
 type LambdaFunctionSinkConfiguration struct {
@@ -831,6 +2127,28 @@ type LambdaFunctionSinkConfiguration struct {
 	InsightsTarget *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LambdaFunctionSinkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaFunctionSinkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaFunctionSinkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InsightsTarget != nil {
+		s.WriteString(schemas.LambdaFunctionSinkConfiguration_InsightsTarget, *v.InsightsTarget)
+	}
+}
+func (v *LambdaFunctionSinkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaFunctionSinkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaFunctionSinkConfiguration_InsightsTarget:
+			v.InsightsTarget = new(string)
+			return d.ReadString(schemas.LambdaFunctionSinkConfiguration_InsightsTarget, v.InsightsTarget)
+		}
+		return nil
+	})
 }
 
 // The media pipeline's RTMP configuration object.
@@ -850,6 +2168,44 @@ type LiveConnectorRTMPConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LiveConnectorRTMPConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LiveConnectorRTMPConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LiveConnectorRTMPConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioChannels != "" {
+		s.WriteString(schemas.LiveConnectorRTMPConfiguration_AudioChannels, string(v.AudioChannels))
+	}
+	if v.AudioSampleRate != nil {
+		s.WriteString(schemas.LiveConnectorRTMPConfiguration_AudioSampleRate, *v.AudioSampleRate)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.LiveConnectorRTMPConfiguration_Url, *v.Url)
+	}
+}
+func (v *LiveConnectorRTMPConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LiveConnectorRTMPConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LiveConnectorRTMPConfiguration_AudioChannels:
+			var ev string
+			if err := d.ReadString(schemas.LiveConnectorRTMPConfiguration_AudioChannels, &ev); err != nil {
+				return err
+			}
+			v.AudioChannels = AudioChannelsOption(ev)
+			return nil
+		case schemas.LiveConnectorRTMPConfiguration_AudioSampleRate:
+			v.AudioSampleRate = new(string)
+			return d.ReadString(schemas.LiveConnectorRTMPConfiguration_AudioSampleRate, v.AudioSampleRate)
+		case schemas.LiveConnectorRTMPConfiguration_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.LiveConnectorRTMPConfiguration_Url, v.Url)
+		}
+		return nil
+	})
+}
+
 // The media pipeline's sink configuration settings.
 type LiveConnectorSinkConfiguration struct {
 
@@ -866,6 +2222,40 @@ type LiveConnectorSinkConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LiveConnectorSinkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LiveConnectorSinkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LiveConnectorSinkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RTMPConfiguration != nil {
+		s.WriteStruct(schemas.LiveConnectorSinkConfiguration_RTMPConfiguration)
+		v.RTMPConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SinkType != "" {
+		s.WriteString(schemas.LiveConnectorSinkConfiguration_SinkType, string(v.SinkType))
+	}
+}
+func (v *LiveConnectorSinkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LiveConnectorSinkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LiveConnectorSinkConfiguration_RTMPConfiguration:
+			v.RTMPConfiguration = &LiveConnectorRTMPConfiguration{}
+			return v.RTMPConfiguration.Deserialize(d)
+		case schemas.LiveConnectorSinkConfiguration_SinkType:
+			var ev string
+			if err := d.ReadString(schemas.LiveConnectorSinkConfiguration_SinkType, &ev); err != nil {
+				return err
+			}
+			v.SinkType = LiveConnectorSinkType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The data source configuration object of a streaming media pipeline.
 type LiveConnectorSourceConfiguration struct {
 
@@ -880,6 +2270,40 @@ type LiveConnectorSourceConfiguration struct {
 	SourceType LiveConnectorSourceType
 
 	noSmithyDocumentSerde
+}
+
+func (v *LiveConnectorSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LiveConnectorSourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LiveConnectorSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChimeSdkMeetingLiveConnectorConfiguration != nil {
+		s.WriteStruct(schemas.LiveConnectorSourceConfiguration_ChimeSdkMeetingLiveConnectorConfiguration)
+		v.ChimeSdkMeetingLiveConnectorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.LiveConnectorSourceConfiguration_SourceType, string(v.SourceType))
+	}
+}
+func (v *LiveConnectorSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LiveConnectorSourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LiveConnectorSourceConfiguration_ChimeSdkMeetingLiveConnectorConfiguration:
+			v.ChimeSdkMeetingLiveConnectorConfiguration = &ChimeSdkMeetingLiveConnectorConfiguration{}
+			return v.ChimeSdkMeetingLiveConnectorConfiguration.Deserialize(d)
+		case schemas.LiveConnectorSourceConfiguration_SourceType:
+			var ev string
+			if err := d.ReadString(schemas.LiveConnectorSourceConfiguration_SourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = LiveConnectorSourceType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A media pipeline object consisting of an ID, source type, source ARN, a sink
@@ -930,6 +2354,110 @@ type MediaCapturePipeline struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MediaCapturePipeline) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaCapturePipeline)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaCapturePipeline) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChimeSdkMeetingConfiguration != nil {
+		s.WriteStruct(schemas.MediaCapturePipeline_ChimeSdkMeetingConfiguration)
+		v.ChimeSdkMeetingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.MediaCapturePipeline_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.MediaPipelineArn != nil {
+		s.WriteString(schemas.MediaCapturePipeline_MediaPipelineArn, *v.MediaPipelineArn)
+	}
+	if v.MediaPipelineId != nil {
+		s.WriteString(schemas.MediaCapturePipeline_MediaPipelineId, *v.MediaPipelineId)
+	}
+	if v.SinkArn != nil {
+		s.WriteString(schemas.MediaCapturePipeline_SinkArn, *v.SinkArn)
+	}
+	if v.SinkIamRoleArn != nil {
+		s.WriteString(schemas.MediaCapturePipeline_SinkIamRoleArn, *v.SinkIamRoleArn)
+	}
+	if v.SinkType != "" {
+		s.WriteString(schemas.MediaCapturePipeline_SinkType, string(v.SinkType))
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.MediaCapturePipeline_SourceArn, *v.SourceArn)
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.MediaCapturePipeline_SourceType, string(v.SourceType))
+	}
+	if v.SseAwsKeyManagementParams != nil {
+		s.WriteStruct(schemas.MediaCapturePipeline_SseAwsKeyManagementParams)
+		v.SseAwsKeyManagementParams.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.MediaCapturePipeline_Status, string(v.Status))
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.MediaCapturePipeline_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+}
+func (v *MediaCapturePipeline) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaCapturePipeline, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaCapturePipeline_ChimeSdkMeetingConfiguration:
+			v.ChimeSdkMeetingConfiguration = &ChimeSdkMeetingConfiguration{}
+			return v.ChimeSdkMeetingConfiguration.Deserialize(d)
+		case schemas.MediaCapturePipeline_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MediaCapturePipeline_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.MediaCapturePipeline_MediaPipelineArn:
+			v.MediaPipelineArn = new(string)
+			return d.ReadString(schemas.MediaCapturePipeline_MediaPipelineArn, v.MediaPipelineArn)
+		case schemas.MediaCapturePipeline_MediaPipelineId:
+			v.MediaPipelineId = new(string)
+			return d.ReadString(schemas.MediaCapturePipeline_MediaPipelineId, v.MediaPipelineId)
+		case schemas.MediaCapturePipeline_SinkArn:
+			v.SinkArn = new(string)
+			return d.ReadString(schemas.MediaCapturePipeline_SinkArn, v.SinkArn)
+		case schemas.MediaCapturePipeline_SinkIamRoleArn:
+			v.SinkIamRoleArn = new(string)
+			return d.ReadString(schemas.MediaCapturePipeline_SinkIamRoleArn, v.SinkIamRoleArn)
+		case schemas.MediaCapturePipeline_SinkType:
+			var ev string
+			if err := d.ReadString(schemas.MediaCapturePipeline_SinkType, &ev); err != nil {
+				return err
+			}
+			v.SinkType = MediaPipelineSinkType(ev)
+			return nil
+		case schemas.MediaCapturePipeline_SourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.MediaCapturePipeline_SourceArn, v.SourceArn)
+		case schemas.MediaCapturePipeline_SourceType:
+			var ev string
+			if err := d.ReadString(schemas.MediaCapturePipeline_SourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = MediaPipelineSourceType(ev)
+			return nil
+		case schemas.MediaCapturePipeline_SseAwsKeyManagementParams:
+			v.SseAwsKeyManagementParams = &SseAwsKeyManagementParams{}
+			return v.SseAwsKeyManagementParams.Deserialize(d)
+		case schemas.MediaCapturePipeline_Status:
+			var ev string
+			if err := d.ReadString(schemas.MediaCapturePipeline_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = MediaPipelineStatus(ev)
+			return nil
+		case schemas.MediaCapturePipeline_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MediaCapturePipeline_UpdatedTimestamp, v.UpdatedTimestamp)
+		}
+		return nil
+	})
+}
+
 // The source configuration object of a media capture pipeline.
 type MediaCapturePipelineSourceConfiguration struct {
 
@@ -947,6 +2475,36 @@ type MediaCapturePipelineSourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MediaCapturePipelineSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaCapturePipelineSourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaCapturePipelineSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChimeSdkMeetingConfiguration != nil {
+		s.WriteStruct(schemas.MediaCapturePipelineSourceConfiguration_ChimeSdkMeetingConfiguration)
+		v.ChimeSdkMeetingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MediaPipelineArn != nil {
+		s.WriteString(schemas.MediaCapturePipelineSourceConfiguration_MediaPipelineArn, *v.MediaPipelineArn)
+	}
+}
+func (v *MediaCapturePipelineSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaCapturePipelineSourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaCapturePipelineSourceConfiguration_ChimeSdkMeetingConfiguration:
+			v.ChimeSdkMeetingConfiguration = &ChimeSdkMeetingConcatenationConfiguration{}
+			return v.ChimeSdkMeetingConfiguration.Deserialize(d)
+		case schemas.MediaCapturePipelineSourceConfiguration_MediaPipelineArn:
+			v.MediaPipelineArn = new(string)
+			return d.ReadString(schemas.MediaCapturePipelineSourceConfiguration_MediaPipelineArn, v.MediaPipelineArn)
+		}
+		return nil
+	})
+}
+
 // The summary data of a media capture pipeline.
 type MediaCapturePipelineSummary struct {
 
@@ -957,6 +2515,34 @@ type MediaCapturePipelineSummary struct {
 	MediaPipelineId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MediaCapturePipelineSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaCapturePipelineSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaCapturePipelineSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MediaPipelineArn != nil {
+		s.WriteString(schemas.MediaCapturePipelineSummary_MediaPipelineArn, *v.MediaPipelineArn)
+	}
+	if v.MediaPipelineId != nil {
+		s.WriteString(schemas.MediaCapturePipelineSummary_MediaPipelineId, *v.MediaPipelineId)
+	}
+}
+func (v *MediaCapturePipelineSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaCapturePipelineSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaCapturePipelineSummary_MediaPipelineArn:
+			v.MediaPipelineArn = new(string)
+			return d.ReadString(schemas.MediaCapturePipelineSummary_MediaPipelineArn, v.MediaPipelineArn)
+		case schemas.MediaCapturePipelineSummary_MediaPipelineId:
+			v.MediaPipelineId = new(string)
+			return d.ReadString(schemas.MediaCapturePipelineSummary_MediaPipelineId, v.MediaPipelineId)
+		}
+		return nil
+	})
 }
 
 // Concatenates audio and video data from one or more data streams.
@@ -985,6 +2571,62 @@ type MediaConcatenationPipeline struct {
 	UpdatedTimestamp *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *MediaConcatenationPipeline) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaConcatenationPipeline)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaConcatenationPipeline) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.MediaConcatenationPipeline_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.MediaPipelineArn != nil {
+		s.WriteString(schemas.MediaConcatenationPipeline_MediaPipelineArn, *v.MediaPipelineArn)
+	}
+	if v.MediaPipelineId != nil {
+		s.WriteString(schemas.MediaConcatenationPipeline_MediaPipelineId, *v.MediaPipelineId)
+	}
+	serializeConcatenationSinkList(s, schemas.MediaConcatenationPipeline_Sinks, v.Sinks)
+	serializeConcatenationSourceList(s, schemas.MediaConcatenationPipeline_Sources, v.Sources)
+	if v.Status != "" {
+		s.WriteString(schemas.MediaConcatenationPipeline_Status, string(v.Status))
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.MediaConcatenationPipeline_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+}
+func (v *MediaConcatenationPipeline) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaConcatenationPipeline, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaConcatenationPipeline_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MediaConcatenationPipeline_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.MediaConcatenationPipeline_MediaPipelineArn:
+			v.MediaPipelineArn = new(string)
+			return d.ReadString(schemas.MediaConcatenationPipeline_MediaPipelineArn, v.MediaPipelineArn)
+		case schemas.MediaConcatenationPipeline_MediaPipelineId:
+			v.MediaPipelineId = new(string)
+			return d.ReadString(schemas.MediaConcatenationPipeline_MediaPipelineId, v.MediaPipelineId)
+		case schemas.MediaConcatenationPipeline_Sinks:
+			return deserializeConcatenationSinkList(d, schemas.MediaConcatenationPipeline_Sinks, &v.Sinks)
+		case schemas.MediaConcatenationPipeline_Sources:
+			return deserializeConcatenationSourceList(d, schemas.MediaConcatenationPipeline_Sources, &v.Sources)
+		case schemas.MediaConcatenationPipeline_Status:
+			var ev string
+			if err := d.ReadString(schemas.MediaConcatenationPipeline_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = MediaPipelineStatus(ev)
+			return nil
+		case schemas.MediaConcatenationPipeline_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MediaConcatenationPipeline_UpdatedTimestamp, v.UpdatedTimestamp)
+		}
+		return nil
+	})
 }
 
 // A media pipeline that streams call analytics data.
@@ -1027,6 +2669,86 @@ type MediaInsightsPipeline struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MediaInsightsPipeline) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaInsightsPipeline)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaInsightsPipeline) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.MediaInsightsPipeline_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	serializeMediaInsightsPipelineElementStatuses(s, schemas.MediaInsightsPipeline_ElementStatuses, v.ElementStatuses)
+	if v.KinesisVideoStreamRecordingSourceRuntimeConfiguration != nil {
+		s.WriteStruct(schemas.MediaInsightsPipeline_KinesisVideoStreamRecordingSourceRuntimeConfiguration)
+		v.KinesisVideoStreamRecordingSourceRuntimeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisVideoStreamSourceRuntimeConfiguration != nil {
+		s.WriteStruct(schemas.MediaInsightsPipeline_KinesisVideoStreamSourceRuntimeConfiguration)
+		v.KinesisVideoStreamSourceRuntimeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MediaInsightsPipelineConfigurationArn != nil {
+		s.WriteString(schemas.MediaInsightsPipeline_MediaInsightsPipelineConfigurationArn, *v.MediaInsightsPipelineConfigurationArn)
+	}
+	serializeMediaInsightsRuntimeMetadata(s, schemas.MediaInsightsPipeline_MediaInsightsRuntimeMetadata, v.MediaInsightsRuntimeMetadata)
+	if v.MediaPipelineArn != nil {
+		s.WriteString(schemas.MediaInsightsPipeline_MediaPipelineArn, *v.MediaPipelineArn)
+	}
+	if v.MediaPipelineId != nil {
+		s.WriteString(schemas.MediaInsightsPipeline_MediaPipelineId, *v.MediaPipelineId)
+	}
+	if v.S3RecordingSinkRuntimeConfiguration != nil {
+		s.WriteStruct(schemas.MediaInsightsPipeline_S3RecordingSinkRuntimeConfiguration)
+		v.S3RecordingSinkRuntimeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.MediaInsightsPipeline_Status, string(v.Status))
+	}
+}
+func (v *MediaInsightsPipeline) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaInsightsPipeline, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaInsightsPipeline_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MediaInsightsPipeline_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.MediaInsightsPipeline_ElementStatuses:
+			return deserializeMediaInsightsPipelineElementStatuses(d, schemas.MediaInsightsPipeline_ElementStatuses, &v.ElementStatuses)
+		case schemas.MediaInsightsPipeline_KinesisVideoStreamRecordingSourceRuntimeConfiguration:
+			v.KinesisVideoStreamRecordingSourceRuntimeConfiguration = &KinesisVideoStreamRecordingSourceRuntimeConfiguration{}
+			return v.KinesisVideoStreamRecordingSourceRuntimeConfiguration.Deserialize(d)
+		case schemas.MediaInsightsPipeline_KinesisVideoStreamSourceRuntimeConfiguration:
+			v.KinesisVideoStreamSourceRuntimeConfiguration = &KinesisVideoStreamSourceRuntimeConfiguration{}
+			return v.KinesisVideoStreamSourceRuntimeConfiguration.Deserialize(d)
+		case schemas.MediaInsightsPipeline_MediaInsightsPipelineConfigurationArn:
+			v.MediaInsightsPipelineConfigurationArn = new(string)
+			return d.ReadString(schemas.MediaInsightsPipeline_MediaInsightsPipelineConfigurationArn, v.MediaInsightsPipelineConfigurationArn)
+		case schemas.MediaInsightsPipeline_MediaInsightsRuntimeMetadata:
+			return deserializeMediaInsightsRuntimeMetadata(d, schemas.MediaInsightsPipeline_MediaInsightsRuntimeMetadata, &v.MediaInsightsRuntimeMetadata)
+		case schemas.MediaInsightsPipeline_MediaPipelineArn:
+			v.MediaPipelineArn = new(string)
+			return d.ReadString(schemas.MediaInsightsPipeline_MediaPipelineArn, v.MediaPipelineArn)
+		case schemas.MediaInsightsPipeline_MediaPipelineId:
+			v.MediaPipelineId = new(string)
+			return d.ReadString(schemas.MediaInsightsPipeline_MediaPipelineId, v.MediaPipelineId)
+		case schemas.MediaInsightsPipeline_S3RecordingSinkRuntimeConfiguration:
+			v.S3RecordingSinkRuntimeConfiguration = &S3RecordingSinkRuntimeConfiguration{}
+			return v.S3RecordingSinkRuntimeConfiguration.Deserialize(d)
+		case schemas.MediaInsightsPipeline_Status:
+			var ev string
+			if err := d.ReadString(schemas.MediaInsightsPipeline_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = MediaPipelineStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A structure that contains the configuration settings for a media insights
 // pipeline.
 type MediaInsightsPipelineConfiguration struct {
@@ -1056,6 +2778,69 @@ type MediaInsightsPipelineConfiguration struct {
 	UpdatedTimestamp *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *MediaInsightsPipelineConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaInsightsPipelineConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaInsightsPipelineConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.MediaInsightsPipelineConfiguration_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	serializeMediaInsightsPipelineConfigurationElements(s, schemas.MediaInsightsPipelineConfiguration_Elements, v.Elements)
+	if v.MediaInsightsPipelineConfigurationArn != nil {
+		s.WriteString(schemas.MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationArn, *v.MediaInsightsPipelineConfigurationArn)
+	}
+	if v.MediaInsightsPipelineConfigurationId != nil {
+		s.WriteString(schemas.MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationId, *v.MediaInsightsPipelineConfigurationId)
+	}
+	if v.MediaInsightsPipelineConfigurationName != nil {
+		s.WriteString(schemas.MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationName, *v.MediaInsightsPipelineConfigurationName)
+	}
+	if v.RealTimeAlertConfiguration != nil {
+		s.WriteStruct(schemas.MediaInsightsPipelineConfiguration_RealTimeAlertConfiguration)
+		v.RealTimeAlertConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceAccessRoleArn != nil {
+		s.WriteString(schemas.MediaInsightsPipelineConfiguration_ResourceAccessRoleArn, *v.ResourceAccessRoleArn)
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.MediaInsightsPipelineConfiguration_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+}
+func (v *MediaInsightsPipelineConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaInsightsPipelineConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaInsightsPipelineConfiguration_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MediaInsightsPipelineConfiguration_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.MediaInsightsPipelineConfiguration_Elements:
+			return deserializeMediaInsightsPipelineConfigurationElements(d, schemas.MediaInsightsPipelineConfiguration_Elements, &v.Elements)
+		case schemas.MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationArn:
+			v.MediaInsightsPipelineConfigurationArn = new(string)
+			return d.ReadString(schemas.MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationArn, v.MediaInsightsPipelineConfigurationArn)
+		case schemas.MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationId:
+			v.MediaInsightsPipelineConfigurationId = new(string)
+			return d.ReadString(schemas.MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationId, v.MediaInsightsPipelineConfigurationId)
+		case schemas.MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationName:
+			v.MediaInsightsPipelineConfigurationName = new(string)
+			return d.ReadString(schemas.MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationName, v.MediaInsightsPipelineConfigurationName)
+		case schemas.MediaInsightsPipelineConfiguration_RealTimeAlertConfiguration:
+			v.RealTimeAlertConfiguration = &RealTimeAlertConfiguration{}
+			return v.RealTimeAlertConfiguration.Deserialize(d)
+		case schemas.MediaInsightsPipelineConfiguration_ResourceAccessRoleArn:
+			v.ResourceAccessRoleArn = new(string)
+			return d.ReadString(schemas.MediaInsightsPipelineConfiguration_ResourceAccessRoleArn, v.ResourceAccessRoleArn)
+		case schemas.MediaInsightsPipelineConfiguration_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MediaInsightsPipelineConfiguration_UpdatedTimestamp, v.UpdatedTimestamp)
+		}
+		return nil
+	})
 }
 
 // An element in a media insights pipeline configuration.
@@ -1105,6 +2890,104 @@ type MediaInsightsPipelineConfigurationElement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MediaInsightsPipelineConfigurationElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaInsightsPipelineConfigurationElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaInsightsPipelineConfigurationElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmazonTranscribeCallAnalyticsProcessorConfiguration != nil {
+		s.WriteStruct(schemas.MediaInsightsPipelineConfigurationElement_AmazonTranscribeCallAnalyticsProcessorConfiguration)
+		v.AmazonTranscribeCallAnalyticsProcessorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AmazonTranscribeProcessorConfiguration != nil {
+		s.WriteStruct(schemas.MediaInsightsPipelineConfigurationElement_AmazonTranscribeProcessorConfiguration)
+		v.AmazonTranscribeProcessorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisDataStreamSinkConfiguration != nil {
+		s.WriteStruct(schemas.MediaInsightsPipelineConfigurationElement_KinesisDataStreamSinkConfiguration)
+		v.KinesisDataStreamSinkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaFunctionSinkConfiguration != nil {
+		s.WriteStruct(schemas.MediaInsightsPipelineConfigurationElement_LambdaFunctionSinkConfiguration)
+		v.LambdaFunctionSinkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3RecordingSinkConfiguration != nil {
+		s.WriteStruct(schemas.MediaInsightsPipelineConfigurationElement_S3RecordingSinkConfiguration)
+		v.S3RecordingSinkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnsTopicSinkConfiguration != nil {
+		s.WriteStruct(schemas.MediaInsightsPipelineConfigurationElement_SnsTopicSinkConfiguration)
+		v.SnsTopicSinkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SqsQueueSinkConfiguration != nil {
+		s.WriteStruct(schemas.MediaInsightsPipelineConfigurationElement_SqsQueueSinkConfiguration)
+		v.SqsQueueSinkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.MediaInsightsPipelineConfigurationElement_Type, string(v.Type))
+	}
+	if v.VoiceAnalyticsProcessorConfiguration != nil {
+		s.WriteStruct(schemas.MediaInsightsPipelineConfigurationElement_VoiceAnalyticsProcessorConfiguration)
+		v.VoiceAnalyticsProcessorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VoiceEnhancementSinkConfiguration != nil {
+		s.WriteStruct(schemas.MediaInsightsPipelineConfigurationElement_VoiceEnhancementSinkConfiguration)
+		v.VoiceEnhancementSinkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MediaInsightsPipelineConfigurationElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaInsightsPipelineConfigurationElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaInsightsPipelineConfigurationElement_AmazonTranscribeCallAnalyticsProcessorConfiguration:
+			v.AmazonTranscribeCallAnalyticsProcessorConfiguration = &AmazonTranscribeCallAnalyticsProcessorConfiguration{}
+			return v.AmazonTranscribeCallAnalyticsProcessorConfiguration.Deserialize(d)
+		case schemas.MediaInsightsPipelineConfigurationElement_AmazonTranscribeProcessorConfiguration:
+			v.AmazonTranscribeProcessorConfiguration = &AmazonTranscribeProcessorConfiguration{}
+			return v.AmazonTranscribeProcessorConfiguration.Deserialize(d)
+		case schemas.MediaInsightsPipelineConfigurationElement_KinesisDataStreamSinkConfiguration:
+			v.KinesisDataStreamSinkConfiguration = &KinesisDataStreamSinkConfiguration{}
+			return v.KinesisDataStreamSinkConfiguration.Deserialize(d)
+		case schemas.MediaInsightsPipelineConfigurationElement_LambdaFunctionSinkConfiguration:
+			v.LambdaFunctionSinkConfiguration = &LambdaFunctionSinkConfiguration{}
+			return v.LambdaFunctionSinkConfiguration.Deserialize(d)
+		case schemas.MediaInsightsPipelineConfigurationElement_S3RecordingSinkConfiguration:
+			v.S3RecordingSinkConfiguration = &S3RecordingSinkConfiguration{}
+			return v.S3RecordingSinkConfiguration.Deserialize(d)
+		case schemas.MediaInsightsPipelineConfigurationElement_SnsTopicSinkConfiguration:
+			v.SnsTopicSinkConfiguration = &SnsTopicSinkConfiguration{}
+			return v.SnsTopicSinkConfiguration.Deserialize(d)
+		case schemas.MediaInsightsPipelineConfigurationElement_SqsQueueSinkConfiguration:
+			v.SqsQueueSinkConfiguration = &SqsQueueSinkConfiguration{}
+			return v.SqsQueueSinkConfiguration.Deserialize(d)
+		case schemas.MediaInsightsPipelineConfigurationElement_Type:
+			var ev string
+			if err := d.ReadString(schemas.MediaInsightsPipelineConfigurationElement_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = MediaInsightsPipelineConfigurationElementType(ev)
+			return nil
+		case schemas.MediaInsightsPipelineConfigurationElement_VoiceAnalyticsProcessorConfiguration:
+			v.VoiceAnalyticsProcessorConfiguration = &VoiceAnalyticsProcessorConfiguration{}
+			return v.VoiceAnalyticsProcessorConfiguration.Deserialize(d)
+		case schemas.MediaInsightsPipelineConfigurationElement_VoiceEnhancementSinkConfiguration:
+			v.VoiceEnhancementSinkConfiguration = &VoiceEnhancementSinkConfiguration{}
+			return v.VoiceEnhancementSinkConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A summary of the media insights pipeline configuration.
 type MediaInsightsPipelineConfigurationSummary struct {
 
@@ -1120,6 +3003,40 @@ type MediaInsightsPipelineConfigurationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MediaInsightsPipelineConfigurationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaInsightsPipelineConfigurationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaInsightsPipelineConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MediaInsightsPipelineConfigurationArn != nil {
+		s.WriteString(schemas.MediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationArn, *v.MediaInsightsPipelineConfigurationArn)
+	}
+	if v.MediaInsightsPipelineConfigurationId != nil {
+		s.WriteString(schemas.MediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationId, *v.MediaInsightsPipelineConfigurationId)
+	}
+	if v.MediaInsightsPipelineConfigurationName != nil {
+		s.WriteString(schemas.MediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationName, *v.MediaInsightsPipelineConfigurationName)
+	}
+}
+func (v *MediaInsightsPipelineConfigurationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaInsightsPipelineConfigurationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationArn:
+			v.MediaInsightsPipelineConfigurationArn = new(string)
+			return d.ReadString(schemas.MediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationArn, v.MediaInsightsPipelineConfigurationArn)
+		case schemas.MediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationId:
+			v.MediaInsightsPipelineConfigurationId = new(string)
+			return d.ReadString(schemas.MediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationId, v.MediaInsightsPipelineConfigurationId)
+		case schemas.MediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationName:
+			v.MediaInsightsPipelineConfigurationName = new(string)
+			return d.ReadString(schemas.MediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationName, v.MediaInsightsPipelineConfigurationName)
+		}
+		return nil
+	})
+}
+
 // The status of the pipeline element.
 type MediaInsightsPipelineElementStatus struct {
 
@@ -1130,6 +3047,42 @@ type MediaInsightsPipelineElementStatus struct {
 	Type MediaInsightsPipelineConfigurationElementType
 
 	noSmithyDocumentSerde
+}
+
+func (v *MediaInsightsPipelineElementStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaInsightsPipelineElementStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaInsightsPipelineElementStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.MediaInsightsPipelineElementStatus_Status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.MediaInsightsPipelineElementStatus_Type, string(v.Type))
+	}
+}
+func (v *MediaInsightsPipelineElementStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaInsightsPipelineElementStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaInsightsPipelineElementStatus_Status:
+			var ev string
+			if err := d.ReadString(schemas.MediaInsightsPipelineElementStatus_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = MediaPipelineElementStatus(ev)
+			return nil
+		case schemas.MediaInsightsPipelineElementStatus_Type:
+			var ev string
+			if err := d.ReadString(schemas.MediaInsightsPipelineElementStatus_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = MediaInsightsPipelineConfigurationElementType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The connector pipeline.
@@ -1159,6 +3112,62 @@ type MediaLiveConnectorPipeline struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MediaLiveConnectorPipeline) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaLiveConnectorPipeline)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaLiveConnectorPipeline) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.MediaLiveConnectorPipeline_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.MediaPipelineArn != nil {
+		s.WriteString(schemas.MediaLiveConnectorPipeline_MediaPipelineArn, *v.MediaPipelineArn)
+	}
+	if v.MediaPipelineId != nil {
+		s.WriteString(schemas.MediaLiveConnectorPipeline_MediaPipelineId, *v.MediaPipelineId)
+	}
+	serializeLiveConnectorSinkList(s, schemas.MediaLiveConnectorPipeline_Sinks, v.Sinks)
+	serializeLiveConnectorSourceList(s, schemas.MediaLiveConnectorPipeline_Sources, v.Sources)
+	if v.Status != "" {
+		s.WriteString(schemas.MediaLiveConnectorPipeline_Status, string(v.Status))
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.MediaLiveConnectorPipeline_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+}
+func (v *MediaLiveConnectorPipeline) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaLiveConnectorPipeline, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaLiveConnectorPipeline_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MediaLiveConnectorPipeline_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.MediaLiveConnectorPipeline_MediaPipelineArn:
+			v.MediaPipelineArn = new(string)
+			return d.ReadString(schemas.MediaLiveConnectorPipeline_MediaPipelineArn, v.MediaPipelineArn)
+		case schemas.MediaLiveConnectorPipeline_MediaPipelineId:
+			v.MediaPipelineId = new(string)
+			return d.ReadString(schemas.MediaLiveConnectorPipeline_MediaPipelineId, v.MediaPipelineId)
+		case schemas.MediaLiveConnectorPipeline_Sinks:
+			return deserializeLiveConnectorSinkList(d, schemas.MediaLiveConnectorPipeline_Sinks, &v.Sinks)
+		case schemas.MediaLiveConnectorPipeline_Sources:
+			return deserializeLiveConnectorSourceList(d, schemas.MediaLiveConnectorPipeline_Sources, &v.Sources)
+		case schemas.MediaLiveConnectorPipeline_Status:
+			var ev string
+			if err := d.ReadString(schemas.MediaLiveConnectorPipeline_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = MediaPipelineStatus(ev)
+			return nil
+		case schemas.MediaLiveConnectorPipeline_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MediaLiveConnectorPipeline_UpdatedTimestamp, v.UpdatedTimestamp)
+		}
+		return nil
+	})
+}
+
 // A pipeline consisting of a media capture, media concatenation, or
 // live-streaming pipeline.
 type MediaPipeline struct {
@@ -1181,6 +3190,62 @@ type MediaPipeline struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MediaPipeline) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaPipeline)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaPipeline) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MediaCapturePipeline != nil {
+		s.WriteStruct(schemas.MediaPipeline_MediaCapturePipeline)
+		v.MediaCapturePipeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MediaConcatenationPipeline != nil {
+		s.WriteStruct(schemas.MediaPipeline_MediaConcatenationPipeline)
+		v.MediaConcatenationPipeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MediaInsightsPipeline != nil {
+		s.WriteStruct(schemas.MediaPipeline_MediaInsightsPipeline)
+		v.MediaInsightsPipeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MediaLiveConnectorPipeline != nil {
+		s.WriteStruct(schemas.MediaPipeline_MediaLiveConnectorPipeline)
+		v.MediaLiveConnectorPipeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MediaStreamPipeline != nil {
+		s.WriteStruct(schemas.MediaPipeline_MediaStreamPipeline)
+		v.MediaStreamPipeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MediaPipeline) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaPipeline, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaPipeline_MediaCapturePipeline:
+			v.MediaCapturePipeline = &MediaCapturePipeline{}
+			return v.MediaCapturePipeline.Deserialize(d)
+		case schemas.MediaPipeline_MediaConcatenationPipeline:
+			v.MediaConcatenationPipeline = &MediaConcatenationPipeline{}
+			return v.MediaConcatenationPipeline.Deserialize(d)
+		case schemas.MediaPipeline_MediaInsightsPipeline:
+			v.MediaInsightsPipeline = &MediaInsightsPipeline{}
+			return v.MediaInsightsPipeline.Deserialize(d)
+		case schemas.MediaPipeline_MediaLiveConnectorPipeline:
+			v.MediaLiveConnectorPipeline = &MediaLiveConnectorPipeline{}
+			return v.MediaLiveConnectorPipeline.Deserialize(d)
+		case schemas.MediaPipeline_MediaStreamPipeline:
+			v.MediaStreamPipeline = &MediaStreamPipeline{}
+			return v.MediaStreamPipeline.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The summary of the media pipeline.
 type MediaPipelineSummary struct {
 
@@ -1191,6 +3256,34 @@ type MediaPipelineSummary struct {
 	MediaPipelineId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MediaPipelineSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaPipelineSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaPipelineSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MediaPipelineArn != nil {
+		s.WriteString(schemas.MediaPipelineSummary_MediaPipelineArn, *v.MediaPipelineArn)
+	}
+	if v.MediaPipelineId != nil {
+		s.WriteString(schemas.MediaPipelineSummary_MediaPipelineId, *v.MediaPipelineId)
+	}
+}
+func (v *MediaPipelineSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaPipelineSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaPipelineSummary_MediaPipelineArn:
+			v.MediaPipelineArn = new(string)
+			return d.ReadString(schemas.MediaPipelineSummary_MediaPipelineArn, v.MediaPipelineArn)
+		case schemas.MediaPipelineSummary_MediaPipelineId:
+			v.MediaPipelineId = new(string)
+			return d.ReadString(schemas.MediaPipelineSummary_MediaPipelineId, v.MediaPipelineId)
+		}
+		return nil
+	})
 }
 
 // Structure that contains the settings for a media stream pipeline.
@@ -1220,6 +3313,62 @@ type MediaStreamPipeline struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MediaStreamPipeline) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaStreamPipeline)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaStreamPipeline) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.MediaStreamPipeline_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.MediaPipelineArn != nil {
+		s.WriteString(schemas.MediaStreamPipeline_MediaPipelineArn, *v.MediaPipelineArn)
+	}
+	if v.MediaPipelineId != nil {
+		s.WriteString(schemas.MediaStreamPipeline_MediaPipelineId, *v.MediaPipelineId)
+	}
+	serializeMediaStreamSinkList(s, schemas.MediaStreamPipeline_Sinks, v.Sinks)
+	serializeMediaStreamSourceList(s, schemas.MediaStreamPipeline_Sources, v.Sources)
+	if v.Status != "" {
+		s.WriteString(schemas.MediaStreamPipeline_Status, string(v.Status))
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.MediaStreamPipeline_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+}
+func (v *MediaStreamPipeline) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaStreamPipeline, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaStreamPipeline_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MediaStreamPipeline_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.MediaStreamPipeline_MediaPipelineArn:
+			v.MediaPipelineArn = new(string)
+			return d.ReadString(schemas.MediaStreamPipeline_MediaPipelineArn, v.MediaPipelineArn)
+		case schemas.MediaStreamPipeline_MediaPipelineId:
+			v.MediaPipelineId = new(string)
+			return d.ReadString(schemas.MediaStreamPipeline_MediaPipelineId, v.MediaPipelineId)
+		case schemas.MediaStreamPipeline_Sinks:
+			return deserializeMediaStreamSinkList(d, schemas.MediaStreamPipeline_Sinks, &v.Sinks)
+		case schemas.MediaStreamPipeline_Sources:
+			return deserializeMediaStreamSourceList(d, schemas.MediaStreamPipeline_Sources, &v.Sources)
+		case schemas.MediaStreamPipeline_Status:
+			var ev string
+			if err := d.ReadString(schemas.MediaStreamPipeline_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = MediaPipelineStatus(ev)
+			return nil
+		case schemas.MediaStreamPipeline_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MediaStreamPipeline_UpdatedTimestamp, v.UpdatedTimestamp)
+		}
+		return nil
+	})
+}
+
 // Structure that contains the settings for a media stream sink.
 type MediaStreamSink struct {
 
@@ -1246,6 +3395,54 @@ type MediaStreamSink struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MediaStreamSink) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaStreamSink)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaStreamSink) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MediaStreamType != "" {
+		s.WriteString(schemas.MediaStreamSink_MediaStreamType, string(v.MediaStreamType))
+	}
+	if v.ReservedStreamCapacity != nil {
+		s.WriteInt32(schemas.MediaStreamSink_ReservedStreamCapacity, *v.ReservedStreamCapacity)
+	}
+	if v.SinkArn != nil {
+		s.WriteString(schemas.MediaStreamSink_SinkArn, *v.SinkArn)
+	}
+	if v.SinkType != "" {
+		s.WriteString(schemas.MediaStreamSink_SinkType, string(v.SinkType))
+	}
+}
+func (v *MediaStreamSink) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaStreamSink, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaStreamSink_MediaStreamType:
+			var ev string
+			if err := d.ReadString(schemas.MediaStreamSink_MediaStreamType, &ev); err != nil {
+				return err
+			}
+			v.MediaStreamType = MediaStreamType(ev)
+			return nil
+		case schemas.MediaStreamSink_ReservedStreamCapacity:
+			v.ReservedStreamCapacity = new(int32)
+			return d.ReadInt32(schemas.MediaStreamSink_ReservedStreamCapacity, v.ReservedStreamCapacity)
+		case schemas.MediaStreamSink_SinkArn:
+			v.SinkArn = new(string)
+			return d.ReadString(schemas.MediaStreamSink_SinkArn, v.SinkArn)
+		case schemas.MediaStreamSink_SinkType:
+			var ev string
+			if err := d.ReadString(schemas.MediaStreamSink_SinkType, &ev); err != nil {
+				return err
+			}
+			v.SinkType = MediaStreamPipelineSinkType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Structure that contains the settings for media stream sources.
 type MediaStreamSource struct {
 
@@ -1262,6 +3459,38 @@ type MediaStreamSource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MediaStreamSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaStreamSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaStreamSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceArn != nil {
+		s.WriteString(schemas.MediaStreamSource_SourceArn, *v.SourceArn)
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.MediaStreamSource_SourceType, string(v.SourceType))
+	}
+}
+func (v *MediaStreamSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaStreamSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaStreamSource_SourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.MediaStreamSource_SourceArn, v.SourceArn)
+		case schemas.MediaStreamSource_SourceType:
+			var ev string
+			if err := d.ReadString(schemas.MediaStreamSource_SourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = MediaPipelineSourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The configuration object for an event concatenation pipeline.
 type MeetingEventsConcatenationConfiguration struct {
 
@@ -1271,6 +3500,32 @@ type MeetingEventsConcatenationConfiguration struct {
 	State ArtifactsConcatenationState
 
 	noSmithyDocumentSerde
+}
+
+func (v *MeetingEventsConcatenationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MeetingEventsConcatenationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MeetingEventsConcatenationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.MeetingEventsConcatenationConfiguration_State, string(v.State))
+	}
+}
+func (v *MeetingEventsConcatenationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MeetingEventsConcatenationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MeetingEventsConcatenationConfiguration_State:
+			var ev string
+			if err := d.ReadString(schemas.MeetingEventsConcatenationConfiguration_State, &ev); err != nil {
+				return err
+			}
+			v.State = ArtifactsConcatenationState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Allows you to specify additional settings for your Call Analytics post-call
@@ -1309,6 +3564,50 @@ type PostCallAnalyticsSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PostCallAnalyticsSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostCallAnalyticsSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostCallAnalyticsSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentRedactionOutput != "" {
+		s.WriteString(schemas.PostCallAnalyticsSettings_ContentRedactionOutput, string(v.ContentRedactionOutput))
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.PostCallAnalyticsSettings_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.OutputEncryptionKMSKeyId != nil {
+		s.WriteString(schemas.PostCallAnalyticsSettings_OutputEncryptionKMSKeyId, *v.OutputEncryptionKMSKeyId)
+	}
+	if v.OutputLocation != nil {
+		s.WriteString(schemas.PostCallAnalyticsSettings_OutputLocation, *v.OutputLocation)
+	}
+}
+func (v *PostCallAnalyticsSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PostCallAnalyticsSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PostCallAnalyticsSettings_ContentRedactionOutput:
+			var ev string
+			if err := d.ReadString(schemas.PostCallAnalyticsSettings_ContentRedactionOutput, &ev); err != nil {
+				return err
+			}
+			v.ContentRedactionOutput = ContentRedactionOutput(ev)
+			return nil
+		case schemas.PostCallAnalyticsSettings_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.PostCallAnalyticsSettings_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.PostCallAnalyticsSettings_OutputEncryptionKMSKeyId:
+			v.OutputEncryptionKMSKeyId = new(string)
+			return d.ReadString(schemas.PostCallAnalyticsSettings_OutputEncryptionKMSKeyId, v.OutputEncryptionKMSKeyId)
+		case schemas.PostCallAnalyticsSettings_OutputLocation:
+			v.OutputLocation = new(string)
+			return d.ReadString(schemas.PostCallAnalyticsSettings_OutputLocation, v.OutputLocation)
+		}
+		return nil
+	})
+}
+
 // Defines the configuration for a presenter-only video tile.
 type PresenterOnlyConfiguration struct {
 
@@ -1316,6 +3615,32 @@ type PresenterOnlyConfiguration struct {
 	PresenterPosition PresenterPosition
 
 	noSmithyDocumentSerde
+}
+
+func (v *PresenterOnlyConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PresenterOnlyConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PresenterOnlyConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PresenterPosition != "" {
+		s.WriteString(schemas.PresenterOnlyConfiguration_PresenterPosition, string(v.PresenterPosition))
+	}
+}
+func (v *PresenterOnlyConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PresenterOnlyConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PresenterOnlyConfiguration_PresenterPosition:
+			var ev string
+			if err := d.ReadString(schemas.PresenterOnlyConfiguration_PresenterPosition, &ev); err != nil {
+				return err
+			}
+			v.PresenterPosition = PresenterPosition(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A structure that contains the configuration settings for real-time alerts.
@@ -1329,6 +3654,30 @@ type RealTimeAlertConfiguration struct {
 	Rules []RealTimeAlertRule
 
 	noSmithyDocumentSerde
+}
+
+func (v *RealTimeAlertConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RealTimeAlertConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RealTimeAlertConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Disabled != false {
+		s.WriteBool(schemas.RealTimeAlertConfiguration_Disabled, v.Disabled)
+	}
+	serializeRealTimeAlertRuleList(s, schemas.RealTimeAlertConfiguration_Rules, v.Rules)
+}
+func (v *RealTimeAlertConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RealTimeAlertConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RealTimeAlertConfiguration_Disabled:
+			return d.ReadBool(schemas.RealTimeAlertConfiguration_Disabled, &v.Disabled)
+		case schemas.RealTimeAlertConfiguration_Rules:
+			return deserializeRealTimeAlertRuleList(d, schemas.RealTimeAlertConfiguration_Rules, &v.Rules)
+		}
+		return nil
+	})
 }
 
 // Specifies the words or phrases that trigger an alert.
@@ -1351,6 +3700,56 @@ type RealTimeAlertRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RealTimeAlertRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RealTimeAlertRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RealTimeAlertRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IssueDetectionConfiguration != nil {
+		s.WriteStruct(schemas.RealTimeAlertRule_IssueDetectionConfiguration)
+		v.IssueDetectionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeywordMatchConfiguration != nil {
+		s.WriteStruct(schemas.RealTimeAlertRule_KeywordMatchConfiguration)
+		v.KeywordMatchConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SentimentConfiguration != nil {
+		s.WriteStruct(schemas.RealTimeAlertRule_SentimentConfiguration)
+		v.SentimentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.RealTimeAlertRule_Type, string(v.Type))
+	}
+}
+func (v *RealTimeAlertRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RealTimeAlertRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RealTimeAlertRule_IssueDetectionConfiguration:
+			v.IssueDetectionConfiguration = &IssueDetectionConfiguration{}
+			return v.IssueDetectionConfiguration.Deserialize(d)
+		case schemas.RealTimeAlertRule_KeywordMatchConfiguration:
+			v.KeywordMatchConfiguration = &KeywordMatchConfiguration{}
+			return v.KeywordMatchConfiguration.Deserialize(d)
+		case schemas.RealTimeAlertRule_SentimentConfiguration:
+			v.SentimentConfiguration = &SentimentConfiguration{}
+			return v.SentimentConfiguration.Deserialize(d)
+		case schemas.RealTimeAlertRule_Type:
+			var ev string
+			if err := d.ReadString(schemas.RealTimeAlertRule_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = RealTimeAlertRuleType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A structure that holds the settings for recording media.
 type RecordingStreamConfiguration struct {
 
@@ -1358,6 +3757,28 @@ type RecordingStreamConfiguration struct {
 	StreamArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecordingStreamConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecordingStreamConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecordingStreamConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamArn != nil {
+		s.WriteString(schemas.RecordingStreamConfiguration_StreamArn, *v.StreamArn)
+	}
+}
+func (v *RecordingStreamConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecordingStreamConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecordingStreamConfiguration_StreamArn:
+			v.StreamArn = new(string)
+			return d.ReadString(schemas.RecordingStreamConfiguration_StreamArn, v.StreamArn)
+		}
+		return nil
+	})
 }
 
 // The configuration settings for the S3 bucket.
@@ -1369,6 +3790,28 @@ type S3BucketSinkConfiguration struct {
 	Destination *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3BucketSinkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3BucketSinkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3BucketSinkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.S3BucketSinkConfiguration_Destination, *v.Destination)
+	}
+}
+func (v *S3BucketSinkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3BucketSinkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3BucketSinkConfiguration_Destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.S3BucketSinkConfiguration_Destination, v.Destination)
+		}
+		return nil
+	})
 }
 
 // The structure that holds the settings for transmitting media to the Amazon S3
@@ -1383,6 +3826,38 @@ type S3RecordingSinkConfiguration struct {
 	RecordingFileFormat RecordingFileFormat
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3RecordingSinkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3RecordingSinkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3RecordingSinkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.S3RecordingSinkConfiguration_Destination, *v.Destination)
+	}
+	if v.RecordingFileFormat != "" {
+		s.WriteString(schemas.S3RecordingSinkConfiguration_RecordingFileFormat, string(v.RecordingFileFormat))
+	}
+}
+func (v *S3RecordingSinkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3RecordingSinkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3RecordingSinkConfiguration_Destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.S3RecordingSinkConfiguration_Destination, v.Destination)
+		case schemas.S3RecordingSinkConfiguration_RecordingFileFormat:
+			var ev string
+			if err := d.ReadString(schemas.S3RecordingSinkConfiguration_RecordingFileFormat, &ev); err != nil {
+				return err
+			}
+			v.RecordingFileFormat = RecordingFileFormat(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A structure that holds the settings for transmitting media files to the Amazon
@@ -1403,6 +3878,38 @@ type S3RecordingSinkRuntimeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3RecordingSinkRuntimeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3RecordingSinkRuntimeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3RecordingSinkRuntimeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.S3RecordingSinkRuntimeConfiguration_Destination, *v.Destination)
+	}
+	if v.RecordingFileFormat != "" {
+		s.WriteString(schemas.S3RecordingSinkRuntimeConfiguration_RecordingFileFormat, string(v.RecordingFileFormat))
+	}
+}
+func (v *S3RecordingSinkRuntimeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3RecordingSinkRuntimeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3RecordingSinkRuntimeConfiguration_Destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.S3RecordingSinkRuntimeConfiguration_Destination, v.Destination)
+		case schemas.S3RecordingSinkRuntimeConfiguration_RecordingFileFormat:
+			var ev string
+			if err := d.ReadString(schemas.S3RecordingSinkRuntimeConfiguration_RecordingFileFormat, &ev); err != nil {
+				return err
+			}
+			v.RecordingFileFormat = RecordingFileFormat(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The video streams for a specified media pipeline. The total number of video
 // streams can't exceed 25.
 type SelectedVideoStreams struct {
@@ -1414,6 +3921,28 @@ type SelectedVideoStreams struct {
 	ExternalUserIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SelectedVideoStreams) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SelectedVideoStreams)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SelectedVideoStreams) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttendeeIdList(s, schemas.SelectedVideoStreams_AttendeeIds, v.AttendeeIds)
+	serializeExternalUserIdList(s, schemas.SelectedVideoStreams_ExternalUserIds, v.ExternalUserIds)
+}
+func (v *SelectedVideoStreams) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SelectedVideoStreams, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SelectedVideoStreams_AttendeeIds:
+			return deserializeAttendeeIdList(d, schemas.SelectedVideoStreams_AttendeeIds, &v.AttendeeIds)
+		case schemas.SelectedVideoStreams_ExternalUserIds:
+			return deserializeExternalUserIdList(d, schemas.SelectedVideoStreams_ExternalUserIds, &v.ExternalUserIds)
+		}
+		return nil
+	})
 }
 
 // A structure that contains the configuration settings for a sentiment analysis
@@ -1438,6 +3967,44 @@ type SentimentConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SentimentConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SentimentConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SentimentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleName != nil {
+		s.WriteString(schemas.SentimentConfiguration_RuleName, *v.RuleName)
+	}
+	if v.SentimentType != "" {
+		s.WriteString(schemas.SentimentConfiguration_SentimentType, string(v.SentimentType))
+	}
+	if v.TimePeriod != nil {
+		s.WriteInt32(schemas.SentimentConfiguration_TimePeriod, *v.TimePeriod)
+	}
+}
+func (v *SentimentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SentimentConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SentimentConfiguration_RuleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.SentimentConfiguration_RuleName, v.RuleName)
+		case schemas.SentimentConfiguration_SentimentType:
+			var ev string
+			if err := d.ReadString(schemas.SentimentConfiguration_SentimentType, &ev); err != nil {
+				return err
+			}
+			v.SentimentType = SentimentType(ev)
+			return nil
+		case schemas.SentimentConfiguration_TimePeriod:
+			v.TimePeriod = new(int32)
+			return d.ReadInt32(schemas.SentimentConfiguration_TimePeriod, v.TimePeriod)
+		}
+		return nil
+	})
+}
+
 // The configuration settings for the SNS topic sink.
 type SnsTopicSinkConfiguration struct {
 
@@ -1445,6 +4012,28 @@ type SnsTopicSinkConfiguration struct {
 	InsightsTarget *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SnsTopicSinkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnsTopicSinkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnsTopicSinkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InsightsTarget != nil {
+		s.WriteString(schemas.SnsTopicSinkConfiguration_InsightsTarget, *v.InsightsTarget)
+	}
+}
+func (v *SnsTopicSinkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnsTopicSinkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnsTopicSinkConfiguration_InsightsTarget:
+			v.InsightsTarget = new(string)
+			return d.ReadString(schemas.SnsTopicSinkConfiguration_InsightsTarget, v.InsightsTarget)
+		}
+		return nil
+	})
 }
 
 // Source configuration for a specified media pipeline.
@@ -1455,6 +4044,30 @@ type SourceConfiguration struct {
 	SelectedVideoStreams *SelectedVideoStreams
 
 	noSmithyDocumentSerde
+}
+
+func (v *SourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SelectedVideoStreams != nil {
+		s.WriteStruct(schemas.SourceConfiguration_SelectedVideoStreams)
+		v.SelectedVideoStreams.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceConfiguration_SelectedVideoStreams:
+			v.SelectedVideoStreams = &SelectedVideoStreams{}
+			return v.SelectedVideoStreams.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A representation of an asynchronous request to perform speaker search analysis
@@ -1476,6 +4089,50 @@ type SpeakerSearchTask struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SpeakerSearchTask) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SpeakerSearchTask)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SpeakerSearchTask) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.SpeakerSearchTask_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.SpeakerSearchTaskId != nil {
+		s.WriteString(schemas.SpeakerSearchTask_SpeakerSearchTaskId, *v.SpeakerSearchTaskId)
+	}
+	if v.SpeakerSearchTaskStatus != "" {
+		s.WriteString(schemas.SpeakerSearchTask_SpeakerSearchTaskStatus, string(v.SpeakerSearchTaskStatus))
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.SpeakerSearchTask_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+}
+func (v *SpeakerSearchTask) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SpeakerSearchTask, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SpeakerSearchTask_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.SpeakerSearchTask_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.SpeakerSearchTask_SpeakerSearchTaskId:
+			v.SpeakerSearchTaskId = new(string)
+			return d.ReadString(schemas.SpeakerSearchTask_SpeakerSearchTaskId, v.SpeakerSearchTaskId)
+		case schemas.SpeakerSearchTask_SpeakerSearchTaskStatus:
+			var ev string
+			if err := d.ReadString(schemas.SpeakerSearchTask_SpeakerSearchTaskStatus, &ev); err != nil {
+				return err
+			}
+			v.SpeakerSearchTaskStatus = MediaPipelineTaskStatus(ev)
+			return nil
+		case schemas.SpeakerSearchTask_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.SpeakerSearchTask_UpdatedTimestamp, v.UpdatedTimestamp)
+		}
+		return nil
+	})
+}
+
 // The configuration settings for the SQS sink.
 type SqsQueueSinkConfiguration struct {
 
@@ -1483,6 +4140,28 @@ type SqsQueueSinkConfiguration struct {
 	InsightsTarget *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SqsQueueSinkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SqsQueueSinkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SqsQueueSinkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InsightsTarget != nil {
+		s.WriteString(schemas.SqsQueueSinkConfiguration_InsightsTarget, *v.InsightsTarget)
+	}
+}
+func (v *SqsQueueSinkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SqsQueueSinkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SqsQueueSinkConfiguration_InsightsTarget:
+			v.InsightsTarget = new(string)
+			return d.ReadString(schemas.SqsQueueSinkConfiguration_InsightsTarget, v.InsightsTarget)
+		}
+		return nil
+	})
 }
 
 // Contains server side encryption parameters to be used by media capture
@@ -1536,6 +4215,34 @@ type SseAwsKeyManagementParams struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SseAwsKeyManagementParams) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SseAwsKeyManagementParams)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SseAwsKeyManagementParams) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsKmsEncryptionContext != nil {
+		s.WriteString(schemas.SseAwsKeyManagementParams_AwsKmsEncryptionContext, *v.AwsKmsEncryptionContext)
+	}
+	if v.AwsKmsKeyId != nil {
+		s.WriteString(schemas.SseAwsKeyManagementParams_AwsKmsKeyId, *v.AwsKmsKeyId)
+	}
+}
+func (v *SseAwsKeyManagementParams) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SseAwsKeyManagementParams, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SseAwsKeyManagementParams_AwsKmsEncryptionContext:
+			v.AwsKmsEncryptionContext = new(string)
+			return d.ReadString(schemas.SseAwsKeyManagementParams_AwsKmsEncryptionContext, v.AwsKmsEncryptionContext)
+		case schemas.SseAwsKeyManagementParams_AwsKmsKeyId:
+			v.AwsKmsKeyId = new(string)
+			return d.ReadString(schemas.SseAwsKeyManagementParams_AwsKmsKeyId, v.AwsKmsKeyId)
+		}
+		return nil
+	})
+}
+
 // Defines a streaming channel.
 type StreamChannelDefinition struct {
 
@@ -1548,6 +4255,31 @@ type StreamChannelDefinition struct {
 	ChannelDefinitions []ChannelDefinition
 
 	noSmithyDocumentSerde
+}
+
+func (v *StreamChannelDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamChannelDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamChannelDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChannelDefinitions(s, schemas.StreamChannelDefinition_ChannelDefinitions, v.ChannelDefinitions)
+	if v.NumberOfChannels != nil {
+		s.WriteInt32(schemas.StreamChannelDefinition_NumberOfChannels, *v.NumberOfChannels)
+	}
+}
+func (v *StreamChannelDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamChannelDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamChannelDefinition_ChannelDefinitions:
+			return deserializeChannelDefinitions(d, schemas.StreamChannelDefinition_ChannelDefinitions, &v.ChannelDefinitions)
+		case schemas.StreamChannelDefinition_NumberOfChannels:
+			v.NumberOfChannels = new(int32)
+			return d.ReadInt32(schemas.StreamChannelDefinition_NumberOfChannels, v.NumberOfChannels)
+		}
+		return nil
+	})
 }
 
 // The configuration settings for a stream.
@@ -1569,6 +4301,42 @@ type StreamConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StreamConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FragmentNumber != nil {
+		s.WriteString(schemas.StreamConfiguration_FragmentNumber, *v.FragmentNumber)
+	}
+	if v.StreamArn != nil {
+		s.WriteString(schemas.StreamConfiguration_StreamArn, *v.StreamArn)
+	}
+	if v.StreamChannelDefinition != nil {
+		s.WriteStruct(schemas.StreamConfiguration_StreamChannelDefinition)
+		v.StreamChannelDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StreamConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamConfiguration_FragmentNumber:
+			v.FragmentNumber = new(string)
+			return d.ReadString(schemas.StreamConfiguration_FragmentNumber, v.FragmentNumber)
+		case schemas.StreamConfiguration_StreamArn:
+			v.StreamArn = new(string)
+			return d.ReadString(schemas.StreamConfiguration_StreamArn, v.StreamArn)
+		case schemas.StreamConfiguration_StreamChannelDefinition:
+			v.StreamChannelDefinition = &StreamChannelDefinition{}
+			return v.StreamChannelDefinition.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A key/value pair that grants users access to meeting resources.
 type Tag struct {
 
@@ -1583,6 +4351,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The range of timestamps to return.
@@ -1601,6 +4397,34 @@ type TimestampRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TimestampRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimestampRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimestampRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTimestamp != nil {
+		s.WriteTime(schemas.TimestampRange_EndTimestamp, *v.EndTimestamp)
+	}
+	if v.StartTimestamp != nil {
+		s.WriteTime(schemas.TimestampRange_StartTimestamp, *v.StartTimestamp)
+	}
+}
+func (v *TimestampRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimestampRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimestampRange_EndTimestamp:
+			v.EndTimestamp = new(time.Time)
+			return d.ReadTime(schemas.TimestampRange_EndTimestamp, v.EndTimestamp)
+		case schemas.TimestampRange_StartTimestamp:
+			v.StartTimestamp = new(time.Time)
+			return d.ReadTime(schemas.TimestampRange_StartTimestamp, v.StartTimestamp)
+		}
+		return nil
+	})
+}
+
 // The configuration object for concatenating transcription messages.
 type TranscriptionMessagesConcatenationConfiguration struct {
 
@@ -1610,6 +4434,32 @@ type TranscriptionMessagesConcatenationConfiguration struct {
 	State ArtifactsConcatenationState
 
 	noSmithyDocumentSerde
+}
+
+func (v *TranscriptionMessagesConcatenationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranscriptionMessagesConcatenationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranscriptionMessagesConcatenationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.TranscriptionMessagesConcatenationConfiguration_State, string(v.State))
+	}
+}
+func (v *TranscriptionMessagesConcatenationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TranscriptionMessagesConcatenationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TranscriptionMessagesConcatenationConfiguration_State:
+			var ev string
+			if err := d.ReadString(schemas.TranscriptionMessagesConcatenationConfiguration_State, &ev); err != nil {
+				return err
+			}
+			v.State = ArtifactsConcatenationState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Defines the configuration settings for a vertical layout.
@@ -1630,6 +4480,54 @@ type VerticalLayoutConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerticalLayoutConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerticalLayoutConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerticalLayoutConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TileAspectRatio != nil {
+		s.WriteString(schemas.VerticalLayoutConfiguration_TileAspectRatio, *v.TileAspectRatio)
+	}
+	if v.TileCount != nil {
+		s.WriteInt32(schemas.VerticalLayoutConfiguration_TileCount, *v.TileCount)
+	}
+	if v.TileOrder != "" {
+		s.WriteString(schemas.VerticalLayoutConfiguration_TileOrder, string(v.TileOrder))
+	}
+	if v.TilePosition != "" {
+		s.WriteString(schemas.VerticalLayoutConfiguration_TilePosition, string(v.TilePosition))
+	}
+}
+func (v *VerticalLayoutConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerticalLayoutConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerticalLayoutConfiguration_TileAspectRatio:
+			v.TileAspectRatio = new(string)
+			return d.ReadString(schemas.VerticalLayoutConfiguration_TileAspectRatio, v.TileAspectRatio)
+		case schemas.VerticalLayoutConfiguration_TileCount:
+			v.TileCount = new(int32)
+			return d.ReadInt32(schemas.VerticalLayoutConfiguration_TileCount, v.TileCount)
+		case schemas.VerticalLayoutConfiguration_TileOrder:
+			var ev string
+			if err := d.ReadString(schemas.VerticalLayoutConfiguration_TileOrder, &ev); err != nil {
+				return err
+			}
+			v.TileOrder = TileOrder(ev)
+			return nil
+		case schemas.VerticalLayoutConfiguration_TilePosition:
+			var ev string
+			if err := d.ReadString(schemas.VerticalLayoutConfiguration_TilePosition, &ev); err != nil {
+				return err
+			}
+			v.TilePosition = VerticalTilePosition(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The video artifact configuration object.
 type VideoArtifactsConfiguration struct {
 
@@ -1642,6 +4540,42 @@ type VideoArtifactsConfiguration struct {
 	MuxType VideoMuxType
 
 	noSmithyDocumentSerde
+}
+
+func (v *VideoArtifactsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VideoArtifactsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VideoArtifactsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MuxType != "" {
+		s.WriteString(schemas.VideoArtifactsConfiguration_MuxType, string(v.MuxType))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.VideoArtifactsConfiguration_State, string(v.State))
+	}
+}
+func (v *VideoArtifactsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VideoArtifactsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VideoArtifactsConfiguration_MuxType:
+			var ev string
+			if err := d.ReadString(schemas.VideoArtifactsConfiguration_MuxType, &ev); err != nil {
+				return err
+			}
+			v.MuxType = VideoMuxType(ev)
+			return nil
+		case schemas.VideoArtifactsConfiguration_State:
+			var ev string
+			if err := d.ReadString(schemas.VideoArtifactsConfiguration_State, &ev); err != nil {
+				return err
+			}
+			v.State = ArtifactsState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Defines the settings for a video tile.
@@ -1662,6 +4596,54 @@ type VideoAttribute struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VideoAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VideoAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VideoAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BorderColor != "" {
+		s.WriteString(schemas.VideoAttribute_BorderColor, string(v.BorderColor))
+	}
+	if v.BorderThickness != nil {
+		s.WriteInt32(schemas.VideoAttribute_BorderThickness, *v.BorderThickness)
+	}
+	if v.CornerRadius != nil {
+		s.WriteInt32(schemas.VideoAttribute_CornerRadius, *v.CornerRadius)
+	}
+	if v.HighlightColor != "" {
+		s.WriteString(schemas.VideoAttribute_HighlightColor, string(v.HighlightColor))
+	}
+}
+func (v *VideoAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VideoAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VideoAttribute_BorderColor:
+			var ev string
+			if err := d.ReadString(schemas.VideoAttribute_BorderColor, &ev); err != nil {
+				return err
+			}
+			v.BorderColor = BorderColor(ev)
+			return nil
+		case schemas.VideoAttribute_BorderThickness:
+			v.BorderThickness = new(int32)
+			return d.ReadInt32(schemas.VideoAttribute_BorderThickness, v.BorderThickness)
+		case schemas.VideoAttribute_CornerRadius:
+			v.CornerRadius = new(int32)
+			return d.ReadInt32(schemas.VideoAttribute_CornerRadius, v.CornerRadius)
+		case schemas.VideoAttribute_HighlightColor:
+			var ev string
+			if err := d.ReadString(schemas.VideoAttribute_HighlightColor, &ev); err != nil {
+				return err
+			}
+			v.HighlightColor = HighlightColor(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The configuration object of a video concatenation pipeline.
 type VideoConcatenationConfiguration struct {
 
@@ -1671,6 +4653,32 @@ type VideoConcatenationConfiguration struct {
 	State ArtifactsConcatenationState
 
 	noSmithyDocumentSerde
+}
+
+func (v *VideoConcatenationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VideoConcatenationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VideoConcatenationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.VideoConcatenationConfiguration_State, string(v.State))
+	}
+}
+func (v *VideoConcatenationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VideoConcatenationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VideoConcatenationConfiguration_State:
+			var ev string
+			if err := d.ReadString(schemas.VideoConcatenationConfiguration_State, &ev); err != nil {
+				return err
+			}
+			v.State = ArtifactsConcatenationState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The configuration settings for a voice analytics processor.
@@ -1685,6 +4693,42 @@ type VoiceAnalyticsProcessorConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VoiceAnalyticsProcessorConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoiceAnalyticsProcessorConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoiceAnalyticsProcessorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SpeakerSearchStatus != "" {
+		s.WriteString(schemas.VoiceAnalyticsProcessorConfiguration_SpeakerSearchStatus, string(v.SpeakerSearchStatus))
+	}
+	if v.VoiceToneAnalysisStatus != "" {
+		s.WriteString(schemas.VoiceAnalyticsProcessorConfiguration_VoiceToneAnalysisStatus, string(v.VoiceToneAnalysisStatus))
+	}
+}
+func (v *VoiceAnalyticsProcessorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VoiceAnalyticsProcessorConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VoiceAnalyticsProcessorConfiguration_SpeakerSearchStatus:
+			var ev string
+			if err := d.ReadString(schemas.VoiceAnalyticsProcessorConfiguration_SpeakerSearchStatus, &ev); err != nil {
+				return err
+			}
+			v.SpeakerSearchStatus = VoiceAnalyticsConfigurationStatus(ev)
+			return nil
+		case schemas.VoiceAnalyticsProcessorConfiguration_VoiceToneAnalysisStatus:
+			var ev string
+			if err := d.ReadString(schemas.VoiceAnalyticsProcessorConfiguration_VoiceToneAnalysisStatus, &ev); err != nil {
+				return err
+			}
+			v.VoiceToneAnalysisStatus = VoiceAnalyticsConfigurationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A static structure that contains the configuration data for a
 // VoiceEnhancementSinkConfiguration element.
 type VoiceEnhancementSinkConfiguration struct {
@@ -1693,6 +4737,27 @@ type VoiceEnhancementSinkConfiguration struct {
 	Disabled bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *VoiceEnhancementSinkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoiceEnhancementSinkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoiceEnhancementSinkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Disabled != false {
+		s.WriteBool(schemas.VoiceEnhancementSinkConfiguration_Disabled, v.Disabled)
+	}
+}
+func (v *VoiceEnhancementSinkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VoiceEnhancementSinkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VoiceEnhancementSinkConfiguration_Disabled:
+			return d.ReadBool(schemas.VoiceEnhancementSinkConfiguration_Disabled, &v.Disabled)
+		}
+		return nil
+	})
 }
 
 // A representation of an asynchronous request to perform voice tone analysis on a
@@ -1712,6 +4777,50 @@ type VoiceToneAnalysisTask struct {
 	VoiceToneAnalysisTaskStatus MediaPipelineTaskStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *VoiceToneAnalysisTask) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoiceToneAnalysisTask)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoiceToneAnalysisTask) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.VoiceToneAnalysisTask_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.VoiceToneAnalysisTask_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+	if v.VoiceToneAnalysisTaskId != nil {
+		s.WriteString(schemas.VoiceToneAnalysisTask_VoiceToneAnalysisTaskId, *v.VoiceToneAnalysisTaskId)
+	}
+	if v.VoiceToneAnalysisTaskStatus != "" {
+		s.WriteString(schemas.VoiceToneAnalysisTask_VoiceToneAnalysisTaskStatus, string(v.VoiceToneAnalysisTaskStatus))
+	}
+}
+func (v *VoiceToneAnalysisTask) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VoiceToneAnalysisTask, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VoiceToneAnalysisTask_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.VoiceToneAnalysisTask_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.VoiceToneAnalysisTask_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.VoiceToneAnalysisTask_UpdatedTimestamp, v.UpdatedTimestamp)
+		case schemas.VoiceToneAnalysisTask_VoiceToneAnalysisTaskId:
+			v.VoiceToneAnalysisTaskId = new(string)
+			return d.ReadString(schemas.VoiceToneAnalysisTask_VoiceToneAnalysisTaskId, v.VoiceToneAnalysisTaskId)
+		case schemas.VoiceToneAnalysisTask_VoiceToneAnalysisTaskStatus:
+			var ev string
+			if err := d.ReadString(schemas.VoiceToneAnalysisTask_VoiceToneAnalysisTaskStatus, &ev); err != nil {
+				return err
+			}
+			v.VoiceToneAnalysisTaskStatus = MediaPipelineTaskStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,24 @@ type ListAppAuthorizationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppAuthorizationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppAuthorizationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppAuthorizationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBundleIdentifier != nil {
+		s.WriteString(schemas.ListAppAuthorizationsRequest_appBundleIdentifier, *v.AppBundleIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppAuthorizationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppAuthorizationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAppAuthorizationsOutput struct {
 
 	// Contains a list of app authorization summaries.
@@ -72,16 +92,26 @@ type ListAppAuthorizationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppAuthorizationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppAuthorizationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppAuthorizationsResponse_appAuthorizationSummaryList:
+			return deserializeAppAuthorizationSummaryList(d, schemas.ListAppAuthorizationsResponse_appAuthorizationSummaryList, &v.AppAuthorizationSummaryList)
+		case schemas.ListAppAuthorizationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppAuthorizationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppAuthorizationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppAuthorizations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppAuthorizations, schemas.ListAppAuthorizationsRequest, schemas.ListAppAuthorizationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppAuthorizations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppAuthorizations, schemas.ListAppAuthorizationsRequest, schemas.ListAppAuthorizationsResponse), output: &ListAppAuthorizationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAppAuthorizations"); err != nil {

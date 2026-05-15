@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -31,6 +33,15 @@ type GetAccountConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetAccountConfigurationOutput struct {
 
 	// An EncryptionConfig object that contains the KMS key ARN that is used for
@@ -47,16 +58,24 @@ type GetAccountConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountConfigurationResponse_encryptionConfig:
+			v.EncryptionConfig = &types.EncryptionConfig{}
+			return v.EncryptionConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccountConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountConfiguration, schemas.GetAccountConfigurationRequest, schemas.GetAccountConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccountConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountConfiguration, schemas.GetAccountConfigurationRequest, schemas.GetAccountConfigurationResponse), output: &GetAccountConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAccountConfiguration"); err != nil {

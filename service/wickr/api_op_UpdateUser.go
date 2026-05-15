@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,26 @@ type UpdateUserInput struct {
 	UserDetails *types.UpdateUserDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkId != nil {
+		s.WriteString(schemas.UpdateUserRequest_networkId, *v.NetworkId)
+	}
+	if v.UserDetails != nil {
+		s.WriteStruct(schemas.UpdateUserRequest_userDetails)
+		v.UserDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.UpdateUserRequest_userId, *v.UserId)
+	}
 }
 
 type UpdateUserOutput struct {
@@ -101,16 +123,56 @@ type UpdateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateUserResponse_codeValidation:
+			v.CodeValidation = new(bool)
+			return d.ReadBool(schemas.UpdateUserResponse_codeValidation, v.CodeValidation)
+		case schemas.UpdateUserResponse_firstName:
+			v.FirstName = new(string)
+			return d.ReadString(schemas.UpdateUserResponse_firstName, v.FirstName)
+		case schemas.UpdateUserResponse_inviteCode:
+			v.InviteCode = new(string)
+			return d.ReadString(schemas.UpdateUserResponse_inviteCode, v.InviteCode)
+		case schemas.UpdateUserResponse_inviteExpiration:
+			v.InviteExpiration = new(int32)
+			return d.ReadInt32(schemas.UpdateUserResponse_inviteExpiration, v.InviteExpiration)
+		case schemas.UpdateUserResponse_lastName:
+			v.LastName = new(string)
+			return d.ReadString(schemas.UpdateUserResponse_lastName, v.LastName)
+		case schemas.UpdateUserResponse_middleName:
+			v.MiddleName = new(string)
+			return d.ReadString(schemas.UpdateUserResponse_middleName, v.MiddleName)
+		case schemas.UpdateUserResponse_modified:
+			v.Modified = new(int32)
+			return d.ReadInt32(schemas.UpdateUserResponse_modified, v.Modified)
+		case schemas.UpdateUserResponse_networkId:
+			v.NetworkId = new(string)
+			return d.ReadString(schemas.UpdateUserResponse_networkId, v.NetworkId)
+		case schemas.UpdateUserResponse_securityGroupIds:
+			return deserializeSecurityGroupIdList(d, schemas.UpdateUserResponse_securityGroupIds, &v.SecurityGroupIds)
+		case schemas.UpdateUserResponse_status:
+			v.Status = new(int32)
+			return d.ReadInt32(schemas.UpdateUserResponse_status, v.Status)
+		case schemas.UpdateUserResponse_suspended:
+			v.Suspended = new(bool)
+			return d.ReadBool(schemas.UpdateUserResponse_suspended, v.Suspended)
+		case schemas.UpdateUserResponse_userId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.UpdateUserResponse_userId, v.UserId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUser, schemas.UpdateUserRequest, schemas.UpdateUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUser, schemas.UpdateUserRequest, schemas.UpdateUserResponse), output: &UpdateUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateUser"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,21 @@ type ListUserAccessLoggingSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserAccessLoggingSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserAccessLoggingSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserAccessLoggingSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUserAccessLoggingSettingsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUserAccessLoggingSettingsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListUserAccessLoggingSettingsOutput struct {
 
 	// The pagination token used to retrieve the next page of results for this
@@ -54,16 +71,26 @@ type ListUserAccessLoggingSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserAccessLoggingSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUserAccessLoggingSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUserAccessLoggingSettingsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUserAccessLoggingSettingsResponse_nextToken, v.NextToken)
+		case schemas.ListUserAccessLoggingSettingsResponse_userAccessLoggingSettings:
+			return deserializeUserAccessLoggingSettingsList(d, schemas.ListUserAccessLoggingSettingsResponse_userAccessLoggingSettings, &v.UserAccessLoggingSettings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUserAccessLoggingSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListUserAccessLoggingSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserAccessLoggingSettings, schemas.ListUserAccessLoggingSettingsRequest, schemas.ListUserAccessLoggingSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListUserAccessLoggingSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserAccessLoggingSettings, schemas.ListUserAccessLoggingSettingsRequest, schemas.ListUserAccessLoggingSettingsResponse), output: &ListUserAccessLoggingSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListUserAccessLoggingSettings"); err != nil {

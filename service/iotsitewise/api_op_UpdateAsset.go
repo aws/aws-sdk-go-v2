@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,6 +66,30 @@ type UpdateAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetDescription != nil {
+		s.WriteString(schemas.UpdateAssetRequest_assetDescription, *v.AssetDescription)
+	}
+	if v.AssetExternalId != nil {
+		s.WriteString(schemas.UpdateAssetRequest_assetExternalId, *v.AssetExternalId)
+	}
+	if v.AssetId != nil {
+		s.WriteString(schemas.UpdateAssetRequest_assetId, *v.AssetId)
+	}
+	if v.AssetName != nil {
+		s.WriteString(schemas.UpdateAssetRequest_assetName, *v.AssetName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateAssetRequest_clientToken, *v.ClientToken)
+	}
+}
+
 type UpdateAssetOutput struct {
 
 	// The status of the asset, which contains a state ( UPDATING after successfully
@@ -78,16 +104,24 @@ type UpdateAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAssetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAssetResponse_assetStatus:
+			v.AssetStatus = &types.AssetStatus{}
+			return v.AssetStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAsset, schemas.UpdateAssetRequest, schemas.UpdateAssetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAsset, schemas.UpdateAssetRequest, schemas.UpdateAssetResponse), output: &UpdateAssetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAsset"); err != nil {

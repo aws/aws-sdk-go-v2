@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type ListSolNetworkPackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSolNetworkPackagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolNetworkPackagesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolNetworkPackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSolNetworkPackagesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSolNetworkPackagesInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListSolNetworkPackagesOutput struct {
 
 	// Network packages. A network package is a .zip file in CSAR (Cloud Service
@@ -61,16 +78,26 @@ type ListSolNetworkPackagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSolNetworkPackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSolNetworkPackagesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSolNetworkPackagesOutput_networkPackages:
+			return deserializeListSolNetworkPackageResources(d, schemas.ListSolNetworkPackagesOutput_networkPackages, &v.NetworkPackages)
+		case schemas.ListSolNetworkPackagesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSolNetworkPackagesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSolNetworkPackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSolNetworkPackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSolNetworkPackages, schemas.ListSolNetworkPackagesInput, schemas.ListSolNetworkPackagesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSolNetworkPackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSolNetworkPackages, schemas.ListSolNetworkPackagesInput, schemas.ListSolNetworkPackagesOutput), output: &ListSolNetworkPackagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSolNetworkPackages"); err != nil {

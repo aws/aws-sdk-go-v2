@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/health/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -36,6 +37,16 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConcurrentModificationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConcurrentModificationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConcurrentModificationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConcurrentModificationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified pagination token ( nextToken ) is not valid.
 type InvalidPaginationToken struct {
@@ -62,6 +73,16 @@ func (e *InvalidPaginationToken) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidPaginationToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidPaginationToken) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidPaginationToken, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidPaginationToken_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidPaginationToken_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified locale is not supported.
 type UnsupportedLocale struct {
@@ -88,3 +109,13 @@ func (e *UnsupportedLocale) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedLocale) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedLocale) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedLocale, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedLocale_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedLocale_message, v.Message)
+		}
+		return nil
+	})
+}

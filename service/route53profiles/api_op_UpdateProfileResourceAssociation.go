@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53profiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53profiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,24 @@ type UpdateProfileResourceAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProfileResourceAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProfileResourceAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProfileResourceAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateProfileResourceAssociationRequest_Name, *v.Name)
+	}
+	if v.ProfileResourceAssociationId != nil {
+		s.WriteString(schemas.UpdateProfileResourceAssociationRequest_ProfileResourceAssociationId, *v.ProfileResourceAssociationId)
+	}
+	if v.ResourceProperties != nil {
+		s.WriteString(schemas.UpdateProfileResourceAssociationRequest_ResourceProperties, *v.ResourceProperties)
+	}
+}
+
 type UpdateProfileResourceAssociationOutput struct {
 
 	//  Information about the UpdateProfileResourceAssociation request, including a
@@ -59,16 +79,24 @@ type UpdateProfileResourceAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProfileResourceAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProfileResourceAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProfileResourceAssociationResponse_ProfileResourceAssociation:
+			v.ProfileResourceAssociation = &types.ProfileResourceAssociation{}
+			return v.ProfileResourceAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProfileResourceAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProfileResourceAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProfileResourceAssociation, schemas.UpdateProfileResourceAssociationRequest, schemas.UpdateProfileResourceAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProfileResourceAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProfileResourceAssociation, schemas.UpdateProfileResourceAssociationRequest, schemas.UpdateProfileResourceAssociationResponse), output: &UpdateProfileResourceAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProfileResourceAssociation"); err != nil {

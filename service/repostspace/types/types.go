@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/repostspace/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -26,6 +28,40 @@ type BatchError struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessorId != nil {
+		s.WriteString(schemas.BatchError_accessorId, *v.AccessorId)
+	}
+	if v.Error != nil {
+		s.WriteInt32(schemas.BatchError_error, *v.Error)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BatchError_message, *v.Message)
+	}
+}
+func (v *BatchError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchError_accessorId:
+			v.AccessorId = new(string)
+			return d.ReadString(schemas.BatchError_accessorId, v.AccessorId)
+		case schemas.BatchError_error:
+			v.Error = new(int32)
+			return d.ReadInt32(schemas.BatchError_error, v.Error)
+		case schemas.BatchError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchError_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // A structure that contains some information about a channel in a private re:Post.
@@ -74,6 +110,80 @@ type ChannelData struct {
 	DeleteDateTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ChannelData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelDescription != nil {
+		s.WriteString(schemas.ChannelData_channelDescription, *v.ChannelDescription)
+	}
+	if v.ChannelId != nil {
+		s.WriteString(schemas.ChannelData_channelId, *v.ChannelId)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.ChannelData_channelName, *v.ChannelName)
+	}
+	if v.ChannelStatus != "" {
+		s.WriteString(schemas.ChannelData_channelStatus, string(v.ChannelStatus))
+	}
+	if v.CreateDateTime != nil {
+		s.WriteTime(schemas.ChannelData_createDateTime, *v.CreateDateTime)
+	}
+	if v.DeleteDateTime != nil {
+		s.WriteTime(schemas.ChannelData_deleteDateTime, *v.DeleteDateTime)
+	}
+	if v.GroupCount != nil {
+		s.WriteInt32(schemas.ChannelData_groupCount, *v.GroupCount)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.ChannelData_spaceId, *v.SpaceId)
+	}
+	if v.UserCount != nil {
+		s.WriteInt32(schemas.ChannelData_userCount, *v.UserCount)
+	}
+}
+func (v *ChannelData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelData_channelDescription:
+			v.ChannelDescription = new(string)
+			return d.ReadString(schemas.ChannelData_channelDescription, v.ChannelDescription)
+		case schemas.ChannelData_channelId:
+			v.ChannelId = new(string)
+			return d.ReadString(schemas.ChannelData_channelId, v.ChannelId)
+		case schemas.ChannelData_channelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.ChannelData_channelName, v.ChannelName)
+		case schemas.ChannelData_channelStatus:
+			var ev string
+			if err := d.ReadString(schemas.ChannelData_channelStatus, &ev); err != nil {
+				return err
+			}
+			v.ChannelStatus = ChannelStatus(ev)
+			return nil
+		case schemas.ChannelData_createDateTime:
+			v.CreateDateTime = new(time.Time)
+			return d.ReadTime(schemas.ChannelData_createDateTime, v.CreateDateTime)
+		case schemas.ChannelData_deleteDateTime:
+			v.DeleteDateTime = new(time.Time)
+			return d.ReadTime(schemas.ChannelData_deleteDateTime, v.DeleteDateTime)
+		case schemas.ChannelData_groupCount:
+			v.GroupCount = new(int32)
+			return d.ReadInt32(schemas.ChannelData_groupCount, v.GroupCount)
+		case schemas.ChannelData_spaceId:
+			v.SpaceId = new(string)
+			return d.ReadString(schemas.ChannelData_spaceId, v.SpaceId)
+		case schemas.ChannelData_userCount:
+			v.UserCount = new(int32)
+			return d.ReadInt32(schemas.ChannelData_userCount, v.UserCount)
+		}
+		return nil
+	})
 }
 
 // A structure that contains some information about a private re:Post in the
@@ -158,6 +268,138 @@ type SpaceData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SpaceData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SpaceData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SpaceData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.SpaceData_arn, *v.Arn)
+	}
+	if v.ConfigurationStatus != "" {
+		s.WriteString(schemas.SpaceData_configurationStatus, string(v.ConfigurationStatus))
+	}
+	if v.ContentSize != nil {
+		s.WriteInt64(schemas.SpaceData_contentSize, *v.ContentSize)
+	}
+	if v.CreateDateTime != nil {
+		s.WriteTime(schemas.SpaceData_createDateTime, *v.CreateDateTime)
+	}
+	if v.DeleteDateTime != nil {
+		s.WriteTime(schemas.SpaceData_deleteDateTime, *v.DeleteDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.SpaceData_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SpaceData_name, *v.Name)
+	}
+	if v.RandomDomain != nil {
+		s.WriteString(schemas.SpaceData_randomDomain, *v.RandomDomain)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.SpaceData_spaceId, *v.SpaceId)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.SpaceData_status, *v.Status)
+	}
+	if v.StorageLimit != nil {
+		s.WriteInt64(schemas.SpaceData_storageLimit, *v.StorageLimit)
+	}
+	if v.SupportedEmailDomains != nil {
+		s.WriteStruct(schemas.SpaceData_supportedEmailDomains)
+		v.SupportedEmailDomains.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Tier != "" {
+		s.WriteString(schemas.SpaceData_tier, string(v.Tier))
+	}
+	if v.UserCount != nil {
+		s.WriteInt32(schemas.SpaceData_userCount, *v.UserCount)
+	}
+	if v.UserKMSKey != nil {
+		s.WriteString(schemas.SpaceData_userKMSKey, *v.UserKMSKey)
+	}
+	if v.VanityDomain != nil {
+		s.WriteString(schemas.SpaceData_vanityDomain, *v.VanityDomain)
+	}
+	if v.VanityDomainStatus != "" {
+		s.WriteString(schemas.SpaceData_vanityDomainStatus, string(v.VanityDomainStatus))
+	}
+}
+func (v *SpaceData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SpaceData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SpaceData_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.SpaceData_arn, v.Arn)
+		case schemas.SpaceData_configurationStatus:
+			var ev string
+			if err := d.ReadString(schemas.SpaceData_configurationStatus, &ev); err != nil {
+				return err
+			}
+			v.ConfigurationStatus = ConfigurationStatus(ev)
+			return nil
+		case schemas.SpaceData_contentSize:
+			v.ContentSize = new(int64)
+			return d.ReadInt64(schemas.SpaceData_contentSize, v.ContentSize)
+		case schemas.SpaceData_createDateTime:
+			v.CreateDateTime = new(time.Time)
+			return d.ReadTime(schemas.SpaceData_createDateTime, v.CreateDateTime)
+		case schemas.SpaceData_deleteDateTime:
+			v.DeleteDateTime = new(time.Time)
+			return d.ReadTime(schemas.SpaceData_deleteDateTime, v.DeleteDateTime)
+		case schemas.SpaceData_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SpaceData_description, v.Description)
+		case schemas.SpaceData_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SpaceData_name, v.Name)
+		case schemas.SpaceData_randomDomain:
+			v.RandomDomain = new(string)
+			return d.ReadString(schemas.SpaceData_randomDomain, v.RandomDomain)
+		case schemas.SpaceData_spaceId:
+			v.SpaceId = new(string)
+			return d.ReadString(schemas.SpaceData_spaceId, v.SpaceId)
+		case schemas.SpaceData_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.SpaceData_status, v.Status)
+		case schemas.SpaceData_storageLimit:
+			v.StorageLimit = new(int64)
+			return d.ReadInt64(schemas.SpaceData_storageLimit, v.StorageLimit)
+		case schemas.SpaceData_supportedEmailDomains:
+			v.SupportedEmailDomains = &SupportedEmailDomainsStatus{}
+			return v.SupportedEmailDomains.Deserialize(d)
+		case schemas.SpaceData_tier:
+			var ev string
+			if err := d.ReadString(schemas.SpaceData_tier, &ev); err != nil {
+				return err
+			}
+			v.Tier = TierLevel(ev)
+			return nil
+		case schemas.SpaceData_userCount:
+			v.UserCount = new(int32)
+			return d.ReadInt32(schemas.SpaceData_userCount, v.UserCount)
+		case schemas.SpaceData_userKMSKey:
+			v.UserKMSKey = new(string)
+			return d.ReadString(schemas.SpaceData_userKMSKey, v.UserKMSKey)
+		case schemas.SpaceData_vanityDomain:
+			v.VanityDomain = new(string)
+			return d.ReadString(schemas.SpaceData_vanityDomain, v.VanityDomain)
+		case schemas.SpaceData_vanityDomainStatus:
+			var ev string
+			if err := d.ReadString(schemas.SpaceData_vanityDomainStatus, &ev); err != nil {
+				return err
+			}
+			v.VanityDomainStatus = VanityDomainStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type SupportedEmailDomainsParameters struct {
 
 	//
@@ -169,6 +411,35 @@ type SupportedEmailDomainsParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SupportedEmailDomainsParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupportedEmailDomainsParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SupportedEmailDomainsParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedDomainsList(s, schemas.SupportedEmailDomainsParameters_allowedDomains, v.AllowedDomains)
+	if v.Enabled != "" {
+		s.WriteString(schemas.SupportedEmailDomainsParameters_enabled, string(v.Enabled))
+	}
+}
+func (v *SupportedEmailDomainsParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SupportedEmailDomainsParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SupportedEmailDomainsParameters_allowedDomains:
+			return deserializeAllowedDomainsList(d, schemas.SupportedEmailDomainsParameters_allowedDomains, &v.AllowedDomains)
+		case schemas.SupportedEmailDomainsParameters_enabled:
+			var ev string
+			if err := d.ReadString(schemas.SupportedEmailDomainsParameters_enabled, &ev); err != nil {
+				return err
+			}
+			v.Enabled = FeatureEnableParameter(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type SupportedEmailDomainsStatus struct {
 
 	//
@@ -178,6 +449,35 @@ type SupportedEmailDomainsStatus struct {
 	Enabled FeatureEnableStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *SupportedEmailDomainsStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupportedEmailDomainsStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SupportedEmailDomainsStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedDomainsList(s, schemas.SupportedEmailDomainsStatus_allowedDomains, v.AllowedDomains)
+	if v.Enabled != "" {
+		s.WriteString(schemas.SupportedEmailDomainsStatus_enabled, string(v.Enabled))
+	}
+}
+func (v *SupportedEmailDomainsStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SupportedEmailDomainsStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SupportedEmailDomainsStatus_allowedDomains:
+			return deserializeAllowedDomainsList(d, schemas.SupportedEmailDomainsStatus_allowedDomains, &v.AllowedDomains)
+		case schemas.SupportedEmailDomainsStatus_enabled:
+			var ev string
+			if err := d.ReadString(schemas.SupportedEmailDomainsStatus_enabled, &ev); err != nil {
+				return err
+			}
+			v.Enabled = FeatureEnableStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Stores information about a field that’s passed inside a request that resulted
@@ -195,6 +495,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

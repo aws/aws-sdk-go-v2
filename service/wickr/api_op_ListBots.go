@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +70,42 @@ type ListBotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.ListBotsRequest_displayName, *v.DisplayName)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.ListBotsRequest_groupId, *v.GroupId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBotsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.ListBotsRequest_networkId, *v.NetworkId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortDirection != "" {
+		s.WriteString(schemas.ListBotsRequest_sortDirection, string(v.SortDirection))
+	}
+	if v.SortFields != nil {
+		s.WriteString(schemas.ListBotsRequest_sortFields, *v.SortFields)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListBotsRequest_status, int32(v.Status))
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.ListBotsRequest_username, *v.Username)
+	}
+}
+
 type ListBotsOutput struct {
 
 	// A list of bot objects matching the specified filters and within the current
@@ -86,16 +124,26 @@ type ListBotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBotsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBotsResponse_bots:
+			return deserializeBots(d, schemas.ListBotsResponse_bots, &v.Bots)
+		case schemas.ListBotsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBotsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBots, schemas.ListBotsRequest, schemas.ListBotsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBots, schemas.ListBotsRequest, schemas.ListBotsResponse), output: &ListBotsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBots"); err != nil {

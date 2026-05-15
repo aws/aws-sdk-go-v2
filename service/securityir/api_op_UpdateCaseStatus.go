@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityir/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,6 +66,21 @@ type UpdateCaseStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCaseStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCaseStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCaseStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseId != nil {
+		s.WriteString(schemas.UpdateCaseStatusRequest_caseId, *v.CaseId)
+	}
+	if v.CaseStatus != "" {
+		s.WriteString(schemas.UpdateCaseStatusRequest_caseStatus, string(v.CaseStatus))
+	}
+}
+
 type UpdateCaseStatusOutput struct {
 
 	// Response element for UpdateCaseStatus showing the newly configured status.
@@ -75,16 +92,28 @@ type UpdateCaseStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCaseStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCaseStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCaseStatusResponse_caseStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCaseStatusResponse_caseStatus, &ev); err != nil {
+				return err
+			}
+			v.CaseStatus = types.SelfManagedCaseStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCaseStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCaseStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCaseStatus, schemas.UpdateCaseStatusRequest, schemas.UpdateCaseStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCaseStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCaseStatus, schemas.UpdateCaseStatusRequest, schemas.UpdateCaseStatusResponse), output: &UpdateCaseStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCaseStatus"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,6 +67,31 @@ type BatchUpdateDevicePositionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateDevicePositionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateDevicePositionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateDevicePositionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrackerName != nil {
+		s.WriteString(schemas.BatchUpdateDevicePositionRequest_TrackerName, *v.TrackerName)
+	}
+	serializeDevicePositionUpdateList(s, schemas.BatchUpdateDevicePositionRequest_Updates, v.Updates)
+}
+func (v *BatchUpdateDevicePositionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateDevicePositionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateDevicePositionRequest_TrackerName:
+			v.TrackerName = new(string)
+			return d.ReadString(schemas.BatchUpdateDevicePositionRequest_TrackerName, v.TrackerName)
+		case schemas.BatchUpdateDevicePositionRequest_Updates:
+			return deserializeDevicePositionUpdateList(d, schemas.BatchUpdateDevicePositionRequest_Updates, &v.Updates)
+		}
+		return nil
+	})
+}
+
 type BatchUpdateDevicePositionOutput struct {
 
 	// Contains error details for each device that failed to update its position.
@@ -78,16 +105,32 @@ type BatchUpdateDevicePositionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateDevicePositionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateDevicePositionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateDevicePositionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchUpdateDevicePositionErrorList(s, schemas.BatchUpdateDevicePositionResponse_Errors, v.Errors)
+}
+func (v *BatchUpdateDevicePositionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateDevicePositionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateDevicePositionResponse_Errors:
+			return deserializeBatchUpdateDevicePositionErrorList(d, schemas.BatchUpdateDevicePositionResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateDevicePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateDevicePosition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateDevicePosition, schemas.BatchUpdateDevicePositionRequest, schemas.BatchUpdateDevicePositionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateDevicePosition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateDevicePosition, schemas.BatchUpdateDevicePositionRequest, schemas.BatchUpdateDevicePositionResponse), output: &BatchUpdateDevicePositionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUpdateDevicePosition"); err != nil {

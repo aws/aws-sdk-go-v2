@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,24 @@ type ListCustomPluginsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomPluginsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomPluginsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomPluginsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCustomPluginsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NamePrefix != nil {
+		s.WriteString(schemas.ListCustomPluginsRequest_namePrefix, *v.NamePrefix)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomPluginsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListCustomPluginsOutput struct {
 
 	// An array of custom plugin descriptions.
@@ -59,16 +79,38 @@ type ListCustomPluginsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomPluginsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomPluginsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomPluginsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfCustomPluginSummary(s, schemas.ListCustomPluginsResponse_customPlugins, v.CustomPlugins)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomPluginsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomPluginsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomPluginsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomPluginsResponse_customPlugins:
+			return deserialize__listOfCustomPluginSummary(d, schemas.ListCustomPluginsResponse_customPlugins, &v.CustomPlugins)
+		case schemas.ListCustomPluginsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomPluginsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomPluginsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCustomPlugins{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomPlugins, schemas.ListCustomPluginsRequest, schemas.ListCustomPluginsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCustomPlugins{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomPlugins, schemas.ListCustomPluginsRequest, schemas.ListCustomPluginsResponse), output: &ListCustomPluginsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCustomPlugins"); err != nil {

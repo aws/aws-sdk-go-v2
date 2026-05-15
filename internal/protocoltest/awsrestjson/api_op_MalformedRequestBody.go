@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +35,34 @@ type MalformedRequestBodyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedRequestBodyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MalformedRequestBodyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedRequestBodyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Float != nil {
+		s.WriteFloat32(schemas.MalformedRequestBodyInput_float, *v.Float)
+	}
+	if v.Int != nil {
+		s.WriteInt32(schemas.MalformedRequestBodyInput_int, *v.Int)
+	}
+}
+func (v *MalformedRequestBodyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MalformedRequestBodyInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MalformedRequestBodyInput_float:
+			v.Float = new(float32)
+			return d.ReadFloat32(schemas.MalformedRequestBodyInput_float, v.Float)
+		case schemas.MalformedRequestBodyInput_int:
+			v.Int = new(int32)
+			return d.ReadInt32(schemas.MalformedRequestBodyInput_int, v.Int)
+		}
+		return nil
+	})
+}
+
 type MalformedRequestBodyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,16 +70,29 @@ type MalformedRequestBodyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedRequestBodyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedRequestBodyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *MalformedRequestBodyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMalformedRequestBodyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpMalformedRequestBody{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedRequestBody, schemas.MalformedRequestBodyInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMalformedRequestBody{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedRequestBody, schemas.MalformedRequestBodyInput, nil), output: &MalformedRequestBodyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "MalformedRequestBody"); err != nil {

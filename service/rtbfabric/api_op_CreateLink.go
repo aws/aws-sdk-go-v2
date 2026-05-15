@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -61,6 +63,38 @@ type CreateLinkInput struct {
 	TimeoutInMillis *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLinkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		s.WriteStruct(schemas.CreateLinkRequest_attributes)
+		v.Attributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.CreateLinkRequest_gatewayId, *v.GatewayId)
+	}
+	if v.HttpResponderAllowed != nil {
+		s.WriteBool(schemas.CreateLinkRequest_httpResponderAllowed, *v.HttpResponderAllowed)
+	}
+	if v.LogSettings != nil {
+		s.WriteStruct(schemas.CreateLinkRequest_logSettings)
+		v.LogSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PeerGatewayId != nil {
+		s.WriteString(schemas.CreateLinkRequest_peerGatewayId, *v.PeerGatewayId)
+	}
+	serializeTagsMap(s, schemas.CreateLinkRequest_tags, v.Tags)
+	if v.TimeoutInMillis != nil {
+		s.WriteInt64(schemas.CreateLinkRequest_timeoutInMillis, *v.TimeoutInMillis)
+	}
 }
 
 type CreateLinkOutput struct {
@@ -122,16 +156,70 @@ type CreateLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLinkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLinkResponse_attributes:
+			v.Attributes = &types.LinkAttributes{}
+			return v.Attributes.Deserialize(d)
+		case schemas.CreateLinkResponse_connectivityType:
+			var ev string
+			if err := d.ReadString(schemas.CreateLinkResponse_connectivityType, &ev); err != nil {
+				return err
+			}
+			v.ConnectivityType = types.ConnectivityType(ev)
+			return nil
+		case schemas.CreateLinkResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateLinkResponse_createdAt, v.CreatedAt)
+		case schemas.CreateLinkResponse_customerProvidedId:
+			v.CustomerProvidedId = new(string)
+			return d.ReadString(schemas.CreateLinkResponse_customerProvidedId, v.CustomerProvidedId)
+		case schemas.CreateLinkResponse_direction:
+			var ev string
+			if err := d.ReadString(schemas.CreateLinkResponse_direction, &ev); err != nil {
+				return err
+			}
+			v.Direction = types.LinkDirection(ev)
+			return nil
+		case schemas.CreateLinkResponse_flowModules:
+			return deserializeModuleConfigurationList(d, schemas.CreateLinkResponse_flowModules, &v.FlowModules)
+		case schemas.CreateLinkResponse_gatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.CreateLinkResponse_gatewayId, v.GatewayId)
+		case schemas.CreateLinkResponse_linkId:
+			v.LinkId = new(string)
+			return d.ReadString(schemas.CreateLinkResponse_linkId, v.LinkId)
+		case schemas.CreateLinkResponse_logSettings:
+			v.LogSettings = &types.LinkLogSettings{}
+			return v.LogSettings.Deserialize(d)
+		case schemas.CreateLinkResponse_peerGatewayId:
+			v.PeerGatewayId = new(string)
+			return d.ReadString(schemas.CreateLinkResponse_peerGatewayId, v.PeerGatewayId)
+		case schemas.CreateLinkResponse_pendingFlowModules:
+			return deserializeModuleConfigurationList(d, schemas.CreateLinkResponse_pendingFlowModules, &v.PendingFlowModules)
+		case schemas.CreateLinkResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateLinkResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LinkStatus(ev)
+			return nil
+		case schemas.CreateLinkResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateLinkResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLink, schemas.CreateLinkRequest, schemas.CreateLinkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLink, schemas.CreateLinkRequest, schemas.CreateLinkResponse), output: &CreateLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLink"); err != nil {

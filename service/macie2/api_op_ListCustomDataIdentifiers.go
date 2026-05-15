@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,21 @@ type ListCustomDataIdentifiersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomDataIdentifiersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomDataIdentifiersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomDataIdentifiersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCustomDataIdentifiersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomDataIdentifiersRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListCustomDataIdentifiersOutput struct {
 
 	// An array of objects, one for each custom data identifier.
@@ -55,16 +72,26 @@ type ListCustomDataIdentifiersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomDataIdentifiersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomDataIdentifiersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomDataIdentifiersResponse_items:
+			return deserialize__listOfCustomDataIdentifierSummary(d, schemas.ListCustomDataIdentifiersResponse_items, &v.Items)
+		case schemas.ListCustomDataIdentifiersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomDataIdentifiersResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomDataIdentifiersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCustomDataIdentifiers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomDataIdentifiers, schemas.ListCustomDataIdentifiersRequest, schemas.ListCustomDataIdentifiersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCustomDataIdentifiers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomDataIdentifiers, schemas.ListCustomDataIdentifiersRequest, schemas.ListCustomDataIdentifiersResponse), output: &ListCustomDataIdentifiersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCustomDataIdentifiers"); err != nil {

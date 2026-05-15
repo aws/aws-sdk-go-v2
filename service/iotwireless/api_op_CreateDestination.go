@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -70,6 +72,34 @@ type CreateDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateDestinationRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDestinationRequest_Description, *v.Description)
+	}
+	if v.Expression != nil {
+		s.WriteString(schemas.CreateDestinationRequest_Expression, *v.Expression)
+	}
+	if v.ExpressionType != "" {
+		s.WriteString(schemas.CreateDestinationRequest_ExpressionType, string(v.ExpressionType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDestinationRequest_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateDestinationRequest_RoleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateDestinationRequest_Tags, v.Tags)
+}
+
 type CreateDestinationOutput struct {
 
 	// The Amazon Resource Name of the new resource.
@@ -84,16 +114,27 @@ type CreateDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDestinationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateDestinationResponse_Arn, v.Arn)
+		case schemas.CreateDestinationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateDestinationResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDestination, schemas.CreateDestinationRequest, schemas.CreateDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDestination, schemas.CreateDestinationRequest, schemas.CreateDestinationResponse), output: &CreateDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDestination"); err != nil {

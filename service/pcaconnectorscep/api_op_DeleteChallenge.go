@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type DeleteChallengeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteChallengeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteChallengeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChallengeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChallengeArn != nil {
+		s.WriteString(schemas.DeleteChallengeRequest_ChallengeArn, *v.ChallengeArn)
+	}
+}
+
 type DeleteChallengeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,16 +59,29 @@ type DeleteChallengeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteChallengeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChallengeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteChallengeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteChallengeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteChallenge{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChallenge, schemas.DeleteChallengeRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteChallenge{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChallenge, schemas.DeleteChallengeRequest, nil), output: &DeleteChallengeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteChallenge"); err != nil {

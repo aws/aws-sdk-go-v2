@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,27 @@ type ListAssertionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssertionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssertionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssertionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssertionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssertionsRequest_nextToken, *v.NextToken)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.ListAssertionsRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.ListAssertionsRequest_source, string(v.Source))
+	}
+}
+
 type ListAssertionsOutput struct {
 
 	// The list of assertions.
@@ -62,16 +85,26 @@ type ListAssertionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssertionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssertionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssertionsResponse_assertions:
+			return deserializeAssertionList(d, schemas.ListAssertionsResponse_assertions, &v.Assertions)
+		case schemas.ListAssertionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssertionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssertionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssertions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssertions, schemas.ListAssertionsRequest, schemas.ListAssertionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssertions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssertions, schemas.ListAssertionsRequest, schemas.ListAssertionsResponse), output: &ListAssertionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAssertions"); err != nil {

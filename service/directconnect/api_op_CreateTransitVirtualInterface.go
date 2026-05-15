@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +61,23 @@ type CreateTransitVirtualInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTransitVirtualInterfaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTransitVirtualInterfaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTransitVirtualInterfaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.CreateTransitVirtualInterfaceRequest_connectionId, *v.ConnectionId)
+	}
+	if v.NewTransitVirtualInterface != nil {
+		s.WriteStruct(schemas.CreateTransitVirtualInterfaceRequest_newTransitVirtualInterface)
+		v.NewTransitVirtualInterface.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateTransitVirtualInterfaceOutput struct {
 
 	// Information about a virtual interface.
@@ -70,16 +89,24 @@ type CreateTransitVirtualInterfaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTransitVirtualInterfaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTransitVirtualInterfaceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTransitVirtualInterfaceResult_virtualInterface:
+			v.VirtualInterface = &types.VirtualInterface{}
+			return v.VirtualInterface.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTransitVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTransitVirtualInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTransitVirtualInterface, schemas.CreateTransitVirtualInterfaceRequest, schemas.CreateTransitVirtualInterfaceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateTransitVirtualInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTransitVirtualInterface, schemas.CreateTransitVirtualInterfaceRequest, schemas.CreateTransitVirtualInterfaceResult), output: &CreateTransitVirtualInterfaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTransitVirtualInterface"); err != nil {

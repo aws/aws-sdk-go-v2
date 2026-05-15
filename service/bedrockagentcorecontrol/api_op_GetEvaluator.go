@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -48,6 +50,21 @@ type GetEvaluatorInput struct {
 	IncludedData types.IncludedData
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEvaluatorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEvaluatorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEvaluatorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluatorId != nil {
+		s.WriteString(schemas.GetEvaluatorRequest_evaluatorId, *v.EvaluatorId)
+	}
+	if v.IncludedData != "" {
+		s.WriteString(schemas.GetEvaluatorRequest_includedData, string(v.IncludedData))
+	}
 }
 
 type GetEvaluatorOutput struct {
@@ -112,16 +129,61 @@ type GetEvaluatorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEvaluatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEvaluatorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEvaluatorResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetEvaluatorResponse_createdAt, v.CreatedAt)
+		case schemas.GetEvaluatorResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetEvaluatorResponse_description, v.Description)
+		case schemas.GetEvaluatorResponse_evaluatorArn:
+			v.EvaluatorArn = new(string)
+			return d.ReadString(schemas.GetEvaluatorResponse_evaluatorArn, v.EvaluatorArn)
+		case schemas.GetEvaluatorResponse_evaluatorConfig:
+			return deserializeEvaluatorConfig(d, schemas.GetEvaluatorResponse_evaluatorConfig, &v.EvaluatorConfig)
+		case schemas.GetEvaluatorResponse_evaluatorId:
+			v.EvaluatorId = new(string)
+			return d.ReadString(schemas.GetEvaluatorResponse_evaluatorId, v.EvaluatorId)
+		case schemas.GetEvaluatorResponse_evaluatorName:
+			v.EvaluatorName = new(string)
+			return d.ReadString(schemas.GetEvaluatorResponse_evaluatorName, v.EvaluatorName)
+		case schemas.GetEvaluatorResponse_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.GetEvaluatorResponse_kmsKeyArn, v.KmsKeyArn)
+		case schemas.GetEvaluatorResponse_level:
+			var ev string
+			if err := d.ReadString(schemas.GetEvaluatorResponse_level, &ev); err != nil {
+				return err
+			}
+			v.Level = types.EvaluatorLevel(ev)
+			return nil
+		case schemas.GetEvaluatorResponse_lockedForModification:
+			v.LockedForModification = new(bool)
+			return d.ReadBool(schemas.GetEvaluatorResponse_lockedForModification, v.LockedForModification)
+		case schemas.GetEvaluatorResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetEvaluatorResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EvaluatorStatus(ev)
+			return nil
+		case schemas.GetEvaluatorResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetEvaluatorResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEvaluatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEvaluator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvaluator, schemas.GetEvaluatorRequest, schemas.GetEvaluatorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEvaluator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvaluator, schemas.GetEvaluatorRequest, schemas.GetEvaluatorResponse), output: &GetEvaluatorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEvaluator"); err != nil {

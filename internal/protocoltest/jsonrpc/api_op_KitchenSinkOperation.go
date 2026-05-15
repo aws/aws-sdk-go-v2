@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -84,6 +86,155 @@ type KitchenSinkOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KitchenSinkOperationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KitchenSink)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KitchenSinkOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blob != nil {
+		s.WriteBlob(schemas.KitchenSink_Blob, v.Blob)
+	}
+	if v.Boolean != nil {
+		s.WriteBool(schemas.KitchenSink_Boolean, *v.Boolean)
+	}
+	if v.Double != nil {
+		s.WriteFloat64(schemas.KitchenSink_Double, *v.Double)
+	}
+	if v.EmptyStruct != nil {
+		s.WriteStruct(schemas.KitchenSink_EmptyStruct)
+		v.EmptyStruct.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Float != nil {
+		s.WriteFloat32(schemas.KitchenSink_Float, *v.Float)
+	}
+	if v.HttpdateTimestamp != nil {
+		s.WriteTime(schemas.KitchenSink_HttpdateTimestamp, *v.HttpdateTimestamp)
+	}
+	if v.Integer != nil {
+		s.WriteInt32(schemas.KitchenSink_Integer, *v.Integer)
+	}
+	if v.Iso8601Timestamp != nil {
+		s.WriteTime(schemas.KitchenSink_Iso8601Timestamp, *v.Iso8601Timestamp)
+	}
+	if v.JsonValue != nil {
+		s.WriteString(schemas.KitchenSink_JsonValue, *v.JsonValue)
+	}
+	serializeListOfListOfStrings(s, schemas.KitchenSink_ListOfLists, v.ListOfLists)
+	serializeListOfMapsOfStrings(s, schemas.KitchenSink_ListOfMapsOfStrings, v.ListOfMapsOfStrings)
+	serializeListOfStrings(s, schemas.KitchenSink_ListOfStrings, v.ListOfStrings)
+	serializeListOfStructs(s, schemas.KitchenSink_ListOfStructs, v.ListOfStructs)
+	if v.Long != nil {
+		s.WriteInt64(schemas.KitchenSink_Long, *v.Long)
+	}
+	serializeMapOfListsOfStrings(s, schemas.KitchenSink_MapOfListsOfStrings, v.MapOfListsOfStrings)
+	serializeMapOfMapOfStrings(s, schemas.KitchenSink_MapOfMaps, v.MapOfMaps)
+	serializeMapOfStrings(s, schemas.KitchenSink_MapOfStrings, v.MapOfStrings)
+	serializeMapOfStructs(s, schemas.KitchenSink_MapOfStructs, v.MapOfStructs)
+	serializeListOfKitchenSinks(s, schemas.KitchenSink_RecursiveList, v.RecursiveList)
+	serializeMapOfKitchenSinks(s, schemas.KitchenSink_RecursiveMap, v.RecursiveMap)
+	if v.RecursiveStruct != nil {
+		s.WriteStruct(schemas.KitchenSink_RecursiveStruct)
+		v.RecursiveStruct.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SimpleStruct != nil {
+		s.WriteStruct(schemas.KitchenSink_SimpleStruct)
+		v.SimpleStruct.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.String_ != nil {
+		s.WriteString(schemas.KitchenSink_String, *v.String_)
+	}
+	if v.StructWithJsonName != nil {
+		s.WriteStruct(schemas.KitchenSink_StructWithJsonName)
+		v.StructWithJsonName.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.KitchenSink_Timestamp, *v.Timestamp)
+	}
+	if v.UnixTimestamp != nil {
+		s.WriteTime(schemas.KitchenSink_UnixTimestamp, *v.UnixTimestamp)
+	}
+}
+func (v *KitchenSinkOperationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KitchenSink, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KitchenSink_Blob:
+			return d.ReadBlob(schemas.KitchenSink_Blob, &v.Blob)
+		case schemas.KitchenSink_Boolean:
+			v.Boolean = new(bool)
+			return d.ReadBool(schemas.KitchenSink_Boolean, v.Boolean)
+		case schemas.KitchenSink_Double:
+			v.Double = new(float64)
+			return d.ReadFloat64(schemas.KitchenSink_Double, v.Double)
+		case schemas.KitchenSink_EmptyStruct:
+			v.EmptyStruct = &types.EmptyStruct{}
+			return v.EmptyStruct.Deserialize(d)
+		case schemas.KitchenSink_Float:
+			v.Float = new(float32)
+			return d.ReadFloat32(schemas.KitchenSink_Float, v.Float)
+		case schemas.KitchenSink_HttpdateTimestamp:
+			v.HttpdateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.KitchenSink_HttpdateTimestamp, v.HttpdateTimestamp)
+		case schemas.KitchenSink_Integer:
+			v.Integer = new(int32)
+			return d.ReadInt32(schemas.KitchenSink_Integer, v.Integer)
+		case schemas.KitchenSink_Iso8601Timestamp:
+			v.Iso8601Timestamp = new(time.Time)
+			return d.ReadTime(schemas.KitchenSink_Iso8601Timestamp, v.Iso8601Timestamp)
+		case schemas.KitchenSink_JsonValue:
+			v.JsonValue = new(string)
+			return d.ReadString(schemas.KitchenSink_JsonValue, v.JsonValue)
+		case schemas.KitchenSink_ListOfLists:
+			return deserializeListOfListOfStrings(d, schemas.KitchenSink_ListOfLists, &v.ListOfLists)
+		case schemas.KitchenSink_ListOfMapsOfStrings:
+			return deserializeListOfMapsOfStrings(d, schemas.KitchenSink_ListOfMapsOfStrings, &v.ListOfMapsOfStrings)
+		case schemas.KitchenSink_ListOfStrings:
+			return deserializeListOfStrings(d, schemas.KitchenSink_ListOfStrings, &v.ListOfStrings)
+		case schemas.KitchenSink_ListOfStructs:
+			return deserializeListOfStructs(d, schemas.KitchenSink_ListOfStructs, &v.ListOfStructs)
+		case schemas.KitchenSink_Long:
+			v.Long = new(int64)
+			return d.ReadInt64(schemas.KitchenSink_Long, v.Long)
+		case schemas.KitchenSink_MapOfListsOfStrings:
+			return deserializeMapOfListsOfStrings(d, schemas.KitchenSink_MapOfListsOfStrings, &v.MapOfListsOfStrings)
+		case schemas.KitchenSink_MapOfMaps:
+			return deserializeMapOfMapOfStrings(d, schemas.KitchenSink_MapOfMaps, &v.MapOfMaps)
+		case schemas.KitchenSink_MapOfStrings:
+			return deserializeMapOfStrings(d, schemas.KitchenSink_MapOfStrings, &v.MapOfStrings)
+		case schemas.KitchenSink_MapOfStructs:
+			return deserializeMapOfStructs(d, schemas.KitchenSink_MapOfStructs, &v.MapOfStructs)
+		case schemas.KitchenSink_RecursiveList:
+			return deserializeListOfKitchenSinks(d, schemas.KitchenSink_RecursiveList, &v.RecursiveList)
+		case schemas.KitchenSink_RecursiveMap:
+			return deserializeMapOfKitchenSinks(d, schemas.KitchenSink_RecursiveMap, &v.RecursiveMap)
+		case schemas.KitchenSink_RecursiveStruct:
+			v.RecursiveStruct = &types.KitchenSink{}
+			return v.RecursiveStruct.Deserialize(d)
+		case schemas.KitchenSink_SimpleStruct:
+			v.SimpleStruct = &types.SimpleStruct{}
+			return v.SimpleStruct.Deserialize(d)
+		case schemas.KitchenSink_String:
+			v.String_ = new(string)
+			return d.ReadString(schemas.KitchenSink_String, v.String_)
+		case schemas.KitchenSink_StructWithJsonName:
+			v.StructWithJsonName = &types.StructWithJsonName{}
+			return v.StructWithJsonName.Deserialize(d)
+		case schemas.KitchenSink_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.KitchenSink_Timestamp, v.Timestamp)
+		case schemas.KitchenSink_UnixTimestamp:
+			v.UnixTimestamp = new(time.Time)
+			return d.ReadTime(schemas.KitchenSink_UnixTimestamp, v.UnixTimestamp)
+		}
+		return nil
+	})
+}
+
 type KitchenSinkOperationOutput struct {
 	Blob []byte
 
@@ -144,16 +295,162 @@ type KitchenSinkOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KitchenSinkOperationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KitchenSink)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KitchenSinkOperationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blob != nil {
+		s.WriteBlob(schemas.KitchenSink_Blob, v.Blob)
+	}
+	if v.Boolean != nil {
+		s.WriteBool(schemas.KitchenSink_Boolean, *v.Boolean)
+	}
+	if v.Double != nil {
+		s.WriteFloat64(schemas.KitchenSink_Double, *v.Double)
+	}
+	if v.EmptyStruct != nil {
+		s.WriteStruct(schemas.KitchenSink_EmptyStruct)
+		v.EmptyStruct.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Float != nil {
+		s.WriteFloat32(schemas.KitchenSink_Float, *v.Float)
+	}
+	if v.HttpdateTimestamp != nil {
+		s.WriteTime(schemas.KitchenSink_HttpdateTimestamp, *v.HttpdateTimestamp)
+	}
+	if v.Integer != nil {
+		s.WriteInt32(schemas.KitchenSink_Integer, *v.Integer)
+	}
+	if v.Iso8601Timestamp != nil {
+		s.WriteTime(schemas.KitchenSink_Iso8601Timestamp, *v.Iso8601Timestamp)
+	}
+	if v.JsonValue != nil {
+		s.WriteString(schemas.KitchenSink_JsonValue, *v.JsonValue)
+	}
+	serializeListOfListOfStrings(s, schemas.KitchenSink_ListOfLists, v.ListOfLists)
+	serializeListOfMapsOfStrings(s, schemas.KitchenSink_ListOfMapsOfStrings, v.ListOfMapsOfStrings)
+	serializeListOfStrings(s, schemas.KitchenSink_ListOfStrings, v.ListOfStrings)
+	serializeListOfStructs(s, schemas.KitchenSink_ListOfStructs, v.ListOfStructs)
+	if v.Long != nil {
+		s.WriteInt64(schemas.KitchenSink_Long, *v.Long)
+	}
+	serializeMapOfListsOfStrings(s, schemas.KitchenSink_MapOfListsOfStrings, v.MapOfListsOfStrings)
+	serializeMapOfMapOfStrings(s, schemas.KitchenSink_MapOfMaps, v.MapOfMaps)
+	serializeMapOfStrings(s, schemas.KitchenSink_MapOfStrings, v.MapOfStrings)
+	serializeMapOfStructs(s, schemas.KitchenSink_MapOfStructs, v.MapOfStructs)
+	serializeListOfKitchenSinks(s, schemas.KitchenSink_RecursiveList, v.RecursiveList)
+	serializeMapOfKitchenSinks(s, schemas.KitchenSink_RecursiveMap, v.RecursiveMap)
+	if v.RecursiveStruct != nil {
+		s.WriteStruct(schemas.KitchenSink_RecursiveStruct)
+		v.RecursiveStruct.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SimpleStruct != nil {
+		s.WriteStruct(schemas.KitchenSink_SimpleStruct)
+		v.SimpleStruct.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.String_ != nil {
+		s.WriteString(schemas.KitchenSink_String, *v.String_)
+	}
+	if v.StructWithJsonName != nil {
+		s.WriteStruct(schemas.KitchenSink_StructWithJsonName)
+		v.StructWithJsonName.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.KitchenSink_Timestamp, *v.Timestamp)
+	}
+	if v.UnixTimestamp != nil {
+		s.WriteTime(schemas.KitchenSink_UnixTimestamp, *v.UnixTimestamp)
+	}
+}
+func (v *KitchenSinkOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KitchenSink, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KitchenSink_Blob:
+			return d.ReadBlob(schemas.KitchenSink_Blob, &v.Blob)
+		case schemas.KitchenSink_Boolean:
+			v.Boolean = new(bool)
+			return d.ReadBool(schemas.KitchenSink_Boolean, v.Boolean)
+		case schemas.KitchenSink_Double:
+			v.Double = new(float64)
+			return d.ReadFloat64(schemas.KitchenSink_Double, v.Double)
+		case schemas.KitchenSink_EmptyStruct:
+			v.EmptyStruct = &types.EmptyStruct{}
+			return v.EmptyStruct.Deserialize(d)
+		case schemas.KitchenSink_Float:
+			v.Float = new(float32)
+			return d.ReadFloat32(schemas.KitchenSink_Float, v.Float)
+		case schemas.KitchenSink_HttpdateTimestamp:
+			v.HttpdateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.KitchenSink_HttpdateTimestamp, v.HttpdateTimestamp)
+		case schemas.KitchenSink_Integer:
+			v.Integer = new(int32)
+			return d.ReadInt32(schemas.KitchenSink_Integer, v.Integer)
+		case schemas.KitchenSink_Iso8601Timestamp:
+			v.Iso8601Timestamp = new(time.Time)
+			return d.ReadTime(schemas.KitchenSink_Iso8601Timestamp, v.Iso8601Timestamp)
+		case schemas.KitchenSink_JsonValue:
+			v.JsonValue = new(string)
+			return d.ReadString(schemas.KitchenSink_JsonValue, v.JsonValue)
+		case schemas.KitchenSink_ListOfLists:
+			return deserializeListOfListOfStrings(d, schemas.KitchenSink_ListOfLists, &v.ListOfLists)
+		case schemas.KitchenSink_ListOfMapsOfStrings:
+			return deserializeListOfMapsOfStrings(d, schemas.KitchenSink_ListOfMapsOfStrings, &v.ListOfMapsOfStrings)
+		case schemas.KitchenSink_ListOfStrings:
+			return deserializeListOfStrings(d, schemas.KitchenSink_ListOfStrings, &v.ListOfStrings)
+		case schemas.KitchenSink_ListOfStructs:
+			return deserializeListOfStructs(d, schemas.KitchenSink_ListOfStructs, &v.ListOfStructs)
+		case schemas.KitchenSink_Long:
+			v.Long = new(int64)
+			return d.ReadInt64(schemas.KitchenSink_Long, v.Long)
+		case schemas.KitchenSink_MapOfListsOfStrings:
+			return deserializeMapOfListsOfStrings(d, schemas.KitchenSink_MapOfListsOfStrings, &v.MapOfListsOfStrings)
+		case schemas.KitchenSink_MapOfMaps:
+			return deserializeMapOfMapOfStrings(d, schemas.KitchenSink_MapOfMaps, &v.MapOfMaps)
+		case schemas.KitchenSink_MapOfStrings:
+			return deserializeMapOfStrings(d, schemas.KitchenSink_MapOfStrings, &v.MapOfStrings)
+		case schemas.KitchenSink_MapOfStructs:
+			return deserializeMapOfStructs(d, schemas.KitchenSink_MapOfStructs, &v.MapOfStructs)
+		case schemas.KitchenSink_RecursiveList:
+			return deserializeListOfKitchenSinks(d, schemas.KitchenSink_RecursiveList, &v.RecursiveList)
+		case schemas.KitchenSink_RecursiveMap:
+			return deserializeMapOfKitchenSinks(d, schemas.KitchenSink_RecursiveMap, &v.RecursiveMap)
+		case schemas.KitchenSink_RecursiveStruct:
+			v.RecursiveStruct = &types.KitchenSink{}
+			return v.RecursiveStruct.Deserialize(d)
+		case schemas.KitchenSink_SimpleStruct:
+			v.SimpleStruct = &types.SimpleStruct{}
+			return v.SimpleStruct.Deserialize(d)
+		case schemas.KitchenSink_String:
+			v.String_ = new(string)
+			return d.ReadString(schemas.KitchenSink_String, v.String_)
+		case schemas.KitchenSink_StructWithJsonName:
+			v.StructWithJsonName = &types.StructWithJsonName{}
+			return v.StructWithJsonName.Deserialize(d)
+		case schemas.KitchenSink_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.KitchenSink_Timestamp, v.Timestamp)
+		case schemas.KitchenSink_UnixTimestamp:
+			v.UnixTimestamp = new(time.Time)
+			return d.ReadTime(schemas.KitchenSink_UnixTimestamp, v.UnixTimestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationKitchenSinkOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpKitchenSinkOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.KitchenSinkOperation, schemas.KitchenSink, schemas.KitchenSink)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpKitchenSinkOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.KitchenSinkOperation, schemas.KitchenSink, schemas.KitchenSink), output: &KitchenSinkOperationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "KitchenSinkOperation"); err != nil {

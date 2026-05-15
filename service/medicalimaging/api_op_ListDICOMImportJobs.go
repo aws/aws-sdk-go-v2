@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,27 @@ type ListDICOMImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDICOMImportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDICOMImportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDICOMImportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatastoreId != nil {
+		s.WriteString(schemas.ListDICOMImportJobsRequest_datastoreId, *v.DatastoreId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.ListDICOMImportJobsRequest_jobStatus, string(v.JobStatus))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDICOMImportJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDICOMImportJobsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDICOMImportJobsOutput struct {
 
 	// A list of job summaries.
@@ -62,16 +85,26 @@ type ListDICOMImportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDICOMImportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDICOMImportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDICOMImportJobsResponse_jobSummaries:
+			return deserializeDICOMImportJobSummaries(d, schemas.ListDICOMImportJobsResponse_jobSummaries, &v.JobSummaries)
+		case schemas.ListDICOMImportJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDICOMImportJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDICOMImportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDICOMImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDICOMImportJobs, schemas.ListDICOMImportJobsRequest, schemas.ListDICOMImportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDICOMImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDICOMImportJobs, schemas.ListDICOMImportJobsRequest, schemas.ListDICOMImportJobsResponse), output: &ListDICOMImportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDICOMImportJobs"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type DeleteRetrainingSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRetrainingSchedulerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRetrainingSchedulerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRetrainingSchedulerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelName != nil {
+		s.WriteString(schemas.DeleteRetrainingSchedulerRequest_ModelName, *v.ModelName)
+	}
+}
+
 type DeleteRetrainingSchedulerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,16 +58,29 @@ type DeleteRetrainingSchedulerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRetrainingSchedulerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRetrainingSchedulerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRetrainingSchedulerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRetrainingSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteRetrainingScheduler{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRetrainingScheduler, schemas.DeleteRetrainingSchedulerRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteRetrainingScheduler{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRetrainingScheduler, schemas.DeleteRetrainingSchedulerRequest, nil), output: &DeleteRetrainingSchedulerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteRetrainingScheduler"); err != nil {

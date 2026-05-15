@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivschat/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivschat/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,52 @@ type ListRoomsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoomsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoomsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoomsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoggingConfigurationIdentifier != nil {
+		s.WriteString(schemas.ListRoomsRequest_loggingConfigurationIdentifier, *v.LoggingConfigurationIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRoomsRequest_maxResults, *v.MaxResults)
+	}
+	if v.MessageReviewHandlerUri != nil {
+		s.WriteString(schemas.ListRoomsRequest_messageReviewHandlerUri, *v.MessageReviewHandlerUri)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListRoomsRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoomsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListRoomsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRoomsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRoomsRequest_loggingConfigurationIdentifier:
+			v.LoggingConfigurationIdentifier = new(string)
+			return d.ReadString(schemas.ListRoomsRequest_loggingConfigurationIdentifier, v.LoggingConfigurationIdentifier)
+		case schemas.ListRoomsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListRoomsRequest_maxResults, v.MaxResults)
+		case schemas.ListRoomsRequest_messageReviewHandlerUri:
+			v.MessageReviewHandlerUri = new(string)
+			return d.ReadString(schemas.ListRoomsRequest_messageReviewHandlerUri, v.MessageReviewHandlerUri)
+		case schemas.ListRoomsRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ListRoomsRequest_name, v.Name)
+		case schemas.ListRoomsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRoomsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListRoomsOutput struct {
 
 	// List of the matching rooms (summary information only).
@@ -66,16 +114,38 @@ type ListRoomsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoomsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoomsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoomsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoomsResponse_nextToken, *v.NextToken)
+	}
+	serializeRoomList(s, schemas.ListRoomsResponse_rooms, v.Rooms)
+}
+func (v *ListRoomsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRoomsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRoomsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRoomsResponse_nextToken, v.NextToken)
+		case schemas.ListRoomsResponse_rooms:
+			return deserializeRoomList(d, schemas.ListRoomsResponse_rooms, &v.Rooms)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRoomsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRooms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRooms, schemas.ListRoomsRequest, schemas.ListRoomsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRooms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRooms, schemas.ListRoomsRequest, schemas.ListRoomsResponse), output: &ListRoomsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRooms"); err != nil {

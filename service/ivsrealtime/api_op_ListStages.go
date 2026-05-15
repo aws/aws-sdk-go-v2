@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,34 @@ type ListStagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStagesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStagesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListStagesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStagesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStagesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListStagesRequest_maxResults, v.MaxResults)
+		case schemas.ListStagesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStagesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListStagesOutput struct {
 
 	// List of the matching stages (summary information only).
@@ -57,16 +87,38 @@ type ListStagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStagesResponse_nextToken, *v.NextToken)
+	}
+	serializeStageSummaryList(s, schemas.ListStagesResponse_stages, v.Stages)
+}
+func (v *ListStagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStagesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStagesResponse_nextToken, v.NextToken)
+		case schemas.ListStagesResponse_stages:
+			return deserializeStageSummaryList(d, schemas.ListStagesResponse_stages, &v.Stages)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStages, schemas.ListStagesRequest, schemas.ListStagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListStages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStages, schemas.ListStagesRequest, schemas.ListStagesResponse), output: &ListStagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListStages"); err != nil {

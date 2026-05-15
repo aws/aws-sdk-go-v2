@@ -7,7 +7,9 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,21 @@ type PrepareQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrepareQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrepareQueryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrepareQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryString != nil {
+		s.WriteString(schemas.PrepareQueryRequest_QueryString, *v.QueryString)
+	}
+	if v.ValidateOnly != nil {
+		s.WriteBool(schemas.PrepareQueryRequest_ValidateOnly, *v.ValidateOnly)
+	}
+}
+
 type PrepareQueryOutput struct {
 
 	// A list of SELECT clause columns of the submitted query string.
@@ -70,16 +87,28 @@ type PrepareQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrepareQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrepareQueryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrepareQueryResponse_Columns:
+			return deserializeSelectColumnList(d, schemas.PrepareQueryResponse_Columns, &v.Columns)
+		case schemas.PrepareQueryResponse_Parameters:
+			return deserializeParameterMappingList(d, schemas.PrepareQueryResponse_Parameters, &v.Parameters)
+		case schemas.PrepareQueryResponse_QueryString:
+			v.QueryString = new(string)
+			return d.ReadString(schemas.PrepareQueryResponse_QueryString, v.QueryString)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPrepareQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPrepareQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PrepareQuery, schemas.PrepareQueryRequest, schemas.PrepareQueryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPrepareQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PrepareQuery, schemas.PrepareQueryRequest, schemas.PrepareQueryResponse), output: &PrepareQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PrepareQuery"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -39,6 +41,18 @@ type DescribeBulkImportJobInput struct {
 	JobId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeBulkImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBulkImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBulkImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeBulkImportJobRequest_jobId, *v.JobId)
+	}
 }
 
 type DescribeBulkImportJobOutput struct {
@@ -125,16 +139,57 @@ type DescribeBulkImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBulkImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBulkImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBulkImportJobResponse_adaptiveIngestion:
+			v.AdaptiveIngestion = new(bool)
+			return d.ReadBool(schemas.DescribeBulkImportJobResponse_adaptiveIngestion, v.AdaptiveIngestion)
+		case schemas.DescribeBulkImportJobResponse_deleteFilesAfterImport:
+			v.DeleteFilesAfterImport = new(bool)
+			return d.ReadBool(schemas.DescribeBulkImportJobResponse_deleteFilesAfterImport, v.DeleteFilesAfterImport)
+		case schemas.DescribeBulkImportJobResponse_errorReportLocation:
+			v.ErrorReportLocation = &types.ErrorReportLocation{}
+			return v.ErrorReportLocation.Deserialize(d)
+		case schemas.DescribeBulkImportJobResponse_files:
+			return deserializeFiles(d, schemas.DescribeBulkImportJobResponse_files, &v.Files)
+		case schemas.DescribeBulkImportJobResponse_jobConfiguration:
+			v.JobConfiguration = &types.JobConfiguration{}
+			return v.JobConfiguration.Deserialize(d)
+		case schemas.DescribeBulkImportJobResponse_jobCreationDate:
+			v.JobCreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeBulkImportJobResponse_jobCreationDate, v.JobCreationDate)
+		case schemas.DescribeBulkImportJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.DescribeBulkImportJobResponse_jobId, v.JobId)
+		case schemas.DescribeBulkImportJobResponse_jobLastUpdateDate:
+			v.JobLastUpdateDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeBulkImportJobResponse_jobLastUpdateDate, v.JobLastUpdateDate)
+		case schemas.DescribeBulkImportJobResponse_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.DescribeBulkImportJobResponse_jobName, v.JobName)
+		case schemas.DescribeBulkImportJobResponse_jobRoleArn:
+			v.JobRoleArn = new(string)
+			return d.ReadString(schemas.DescribeBulkImportJobResponse_jobRoleArn, v.JobRoleArn)
+		case schemas.DescribeBulkImportJobResponse_jobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBulkImportJobResponse_jobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBulkImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBulkImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBulkImportJob, schemas.DescribeBulkImportJobRequest, schemas.DescribeBulkImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeBulkImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBulkImportJob, schemas.DescribeBulkImportJobRequest, schemas.DescribeBulkImportJobResponse), output: &DescribeBulkImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeBulkImportJob"); err != nil {

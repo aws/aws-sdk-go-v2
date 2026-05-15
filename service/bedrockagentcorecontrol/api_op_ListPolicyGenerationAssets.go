@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,6 +67,27 @@ type ListPolicyGenerationAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyGenerationAssetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyGenerationAssetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyGenerationAssetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPolicyGenerationAssetsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPolicyGenerationAssetsRequest_nextToken, *v.NextToken)
+	}
+	if v.PolicyEngineId != nil {
+		s.WriteString(schemas.ListPolicyGenerationAssetsRequest_policyEngineId, *v.PolicyEngineId)
+	}
+	if v.PolicyGenerationId != nil {
+		s.WriteString(schemas.ListPolicyGenerationAssetsRequest_policyGenerationId, *v.PolicyGenerationId)
+	}
+}
+
 type ListPolicyGenerationAssetsOutput struct {
 
 	// A pagination token that can be used in subsequent [ListPolicyGenerationAssets] calls to retrieve additional
@@ -86,16 +109,26 @@ type ListPolicyGenerationAssetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyGenerationAssetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPolicyGenerationAssetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPolicyGenerationAssetsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPolicyGenerationAssetsResponse_nextToken, v.NextToken)
+		case schemas.ListPolicyGenerationAssetsResponse_policyGenerationAssets:
+			return deserializePolicyGenerationAssets(d, schemas.ListPolicyGenerationAssetsResponse_policyGenerationAssets, &v.PolicyGenerationAssets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPolicyGenerationAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPolicyGenerationAssets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyGenerationAssets, schemas.ListPolicyGenerationAssetsRequest, schemas.ListPolicyGenerationAssetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPolicyGenerationAssets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyGenerationAssets, schemas.ListPolicyGenerationAssetsRequest, schemas.ListPolicyGenerationAssetsResponse), output: &ListPolicyGenerationAssetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPolicyGenerationAssets"); err != nil {

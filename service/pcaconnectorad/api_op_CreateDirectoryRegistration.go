@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,22 @@ type CreateDirectoryRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDirectoryRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDirectoryRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDirectoryRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDirectoryRegistrationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.CreateDirectoryRegistrationRequest_DirectoryId, *v.DirectoryId)
+	}
+	serializeTags(s, schemas.CreateDirectoryRegistrationRequest_Tags, v.Tags)
+}
+
 type CreateDirectoryRegistrationOutput struct {
 
 	// The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration].
@@ -56,16 +74,24 @@ type CreateDirectoryRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDirectoryRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDirectoryRegistrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDirectoryRegistrationResponse_DirectoryRegistrationArn:
+			v.DirectoryRegistrationArn = new(string)
+			return d.ReadString(schemas.CreateDirectoryRegistrationResponse_DirectoryRegistrationArn, v.DirectoryRegistrationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDirectoryRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDirectoryRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDirectoryRegistration, schemas.CreateDirectoryRegistrationRequest, schemas.CreateDirectoryRegistrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDirectoryRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDirectoryRegistration, schemas.CreateDirectoryRegistrationRequest, schemas.CreateDirectoryRegistrationResponse), output: &CreateDirectoryRegistrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDirectoryRegistration"); err != nil {

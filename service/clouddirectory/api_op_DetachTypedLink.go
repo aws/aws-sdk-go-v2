@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,23 @@ type DetachTypedLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachTypedLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachTypedLinkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachTypedLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.DetachTypedLinkRequest_DirectoryArn, *v.DirectoryArn)
+	}
+	if v.TypedLinkSpecifier != nil {
+		s.WriteStruct(schemas.DetachTypedLinkRequest_TypedLinkSpecifier)
+		v.TypedLinkSpecifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DetachTypedLinkOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,16 +72,29 @@ type DetachTypedLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachTypedLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachTypedLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DetachTypedLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetachTypedLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDetachTypedLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachTypedLink, schemas.DetachTypedLinkRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDetachTypedLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachTypedLink, schemas.DetachTypedLinkRequest, nil), output: &DetachTypedLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DetachTypedLink"); err != nil {

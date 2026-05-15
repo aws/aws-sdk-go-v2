@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,21 @@ type DescribeSlackWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSlackWorkspacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSlackWorkspacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSlackWorkspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeSlackWorkspacesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSlackWorkspacesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeSlackWorkspacesOutput struct {
 
 	//  An optional token returned from a prior request. Use this token for pagination
@@ -59,16 +76,26 @@ type DescribeSlackWorkspacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSlackWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSlackWorkspacesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSlackWorkspacesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSlackWorkspacesResult_NextToken, v.NextToken)
+		case schemas.DescribeSlackWorkspacesResult_SlackWorkspaces:
+			return deserializeSlackWorkspacesList(d, schemas.DescribeSlackWorkspacesResult_SlackWorkspaces, &v.SlackWorkspaces)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSlackWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSlackWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSlackWorkspaces, schemas.DescribeSlackWorkspacesRequest, schemas.DescribeSlackWorkspacesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSlackWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSlackWorkspaces, schemas.DescribeSlackWorkspacesRequest, schemas.DescribeSlackWorkspacesResult), output: &DescribeSlackWorkspacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeSlackWorkspaces"); err != nil {

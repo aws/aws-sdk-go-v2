@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -75,6 +77,27 @@ type GetChannelMessageStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChannelMessageStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChannelMessageStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChannelMessageStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.GetChannelMessageStatusRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ChimeBearer != nil {
+		s.WriteString(schemas.GetChannelMessageStatusRequest_ChimeBearer, *v.ChimeBearer)
+	}
+	if v.MessageId != nil {
+		s.WriteString(schemas.GetChannelMessageStatusRequest_MessageId, *v.MessageId)
+	}
+	if v.SubChannelId != nil {
+		s.WriteString(schemas.GetChannelMessageStatusRequest_SubChannelId, *v.SubChannelId)
+	}
+}
+
 type GetChannelMessageStatusOutput struct {
 
 	// The message status and details.
@@ -86,16 +109,24 @@ type GetChannelMessageStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChannelMessageStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetChannelMessageStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetChannelMessageStatusResponse_Status:
+			v.Status = &types.ChannelMessageStatusStructure{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetChannelMessageStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChannelMessageStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannelMessageStatus, schemas.GetChannelMessageStatusRequest, schemas.GetChannelMessageStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetChannelMessageStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannelMessageStatus, schemas.GetChannelMessageStatusRequest, schemas.GetChannelMessageStatusResponse), output: &GetChannelMessageStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetChannelMessageStatus"); err != nil {

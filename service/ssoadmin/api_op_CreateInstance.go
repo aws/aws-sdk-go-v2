@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,6 +64,22 @@ type CreateInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateInstanceRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateInstanceRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreateInstanceRequest_Tags, v.Tags)
+}
+
 type CreateInstanceOutput struct {
 
 	// The ARN of the instance of IAM Identity Center under which the operation will
@@ -77,16 +95,24 @@ type CreateInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInstanceResponse_InstanceArn:
+			v.InstanceArn = new(string)
+			return d.ReadString(schemas.CreateInstanceResponse_InstanceArn, v.InstanceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInstance, schemas.CreateInstanceRequest, schemas.CreateInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInstance, schemas.CreateInstanceRequest, schemas.CreateInstanceResponse), output: &CreateInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateInstance"); err != nil {

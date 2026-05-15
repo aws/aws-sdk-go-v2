@@ -7,7 +7,9 @@ import (
 	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -55,6 +57,24 @@ type DescribeAssetModelInput struct {
 	ExcludeProperties bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAssetModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssetModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssetModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetModelId != nil {
+		s.WriteString(schemas.DescribeAssetModelRequest_assetModelId, *v.AssetModelId)
+	}
+	if v.AssetModelVersion != nil {
+		s.WriteString(schemas.DescribeAssetModelRequest_assetModelVersion, *v.AssetModelVersion)
+	}
+	if v.ExcludeProperties != false {
+		s.WriteBool(schemas.DescribeAssetModelRequest_excludeProperties, v.ExcludeProperties)
+	}
 }
 
 type DescribeAssetModelOutput struct {
@@ -159,16 +179,68 @@ type DescribeAssetModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAssetModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAssetModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAssetModelResponse_assetModelArn:
+			v.AssetModelArn = new(string)
+			return d.ReadString(schemas.DescribeAssetModelResponse_assetModelArn, v.AssetModelArn)
+		case schemas.DescribeAssetModelResponse_assetModelCompositeModelSummaries:
+			return deserializeAssetModelCompositeModelSummaries(d, schemas.DescribeAssetModelResponse_assetModelCompositeModelSummaries, &v.AssetModelCompositeModelSummaries)
+		case schemas.DescribeAssetModelResponse_assetModelCompositeModels:
+			return deserializeAssetModelCompositeModels(d, schemas.DescribeAssetModelResponse_assetModelCompositeModels, &v.AssetModelCompositeModels)
+		case schemas.DescribeAssetModelResponse_assetModelCreationDate:
+			v.AssetModelCreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeAssetModelResponse_assetModelCreationDate, v.AssetModelCreationDate)
+		case schemas.DescribeAssetModelResponse_assetModelDescription:
+			v.AssetModelDescription = new(string)
+			return d.ReadString(schemas.DescribeAssetModelResponse_assetModelDescription, v.AssetModelDescription)
+		case schemas.DescribeAssetModelResponse_assetModelExternalId:
+			v.AssetModelExternalId = new(string)
+			return d.ReadString(schemas.DescribeAssetModelResponse_assetModelExternalId, v.AssetModelExternalId)
+		case schemas.DescribeAssetModelResponse_assetModelHierarchies:
+			return deserializeAssetModelHierarchies(d, schemas.DescribeAssetModelResponse_assetModelHierarchies, &v.AssetModelHierarchies)
+		case schemas.DescribeAssetModelResponse_assetModelId:
+			v.AssetModelId = new(string)
+			return d.ReadString(schemas.DescribeAssetModelResponse_assetModelId, v.AssetModelId)
+		case schemas.DescribeAssetModelResponse_assetModelLastUpdateDate:
+			v.AssetModelLastUpdateDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeAssetModelResponse_assetModelLastUpdateDate, v.AssetModelLastUpdateDate)
+		case schemas.DescribeAssetModelResponse_assetModelName:
+			v.AssetModelName = new(string)
+			return d.ReadString(schemas.DescribeAssetModelResponse_assetModelName, v.AssetModelName)
+		case schemas.DescribeAssetModelResponse_assetModelProperties:
+			return deserializeAssetModelProperties(d, schemas.DescribeAssetModelResponse_assetModelProperties, &v.AssetModelProperties)
+		case schemas.DescribeAssetModelResponse_assetModelStatus:
+			v.AssetModelStatus = &types.AssetModelStatus{}
+			return v.AssetModelStatus.Deserialize(d)
+		case schemas.DescribeAssetModelResponse_assetModelType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAssetModelResponse_assetModelType, &ev); err != nil {
+				return err
+			}
+			v.AssetModelType = types.AssetModelType(ev)
+			return nil
+		case schemas.DescribeAssetModelResponse_assetModelVersion:
+			v.AssetModelVersion = new(string)
+			return d.ReadString(schemas.DescribeAssetModelResponse_assetModelVersion, v.AssetModelVersion)
+		case schemas.DescribeAssetModelResponse_eTag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.DescribeAssetModelResponse_eTag, v.ETag)
+		case schemas.DescribeAssetModelResponse_interfaceDetails:
+			return deserializeInterfaceDetails(d, schemas.DescribeAssetModelResponse_interfaceDetails, &v.InterfaceDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAssetModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAssetModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssetModel, schemas.DescribeAssetModelRequest, schemas.DescribeAssetModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAssetModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssetModel, schemas.DescribeAssetModelRequest, schemas.DescribeAssetModelResponse), output: &DescribeAssetModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAssetModel"); err != nil {

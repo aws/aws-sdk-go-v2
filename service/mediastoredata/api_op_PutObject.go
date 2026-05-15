@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediastoredata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediastoredata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -92,6 +94,37 @@ type PutObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutObjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutObjectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheControl != nil {
+		s.WriteString(schemas.PutObjectRequest_CacheControl, *v.CacheControl)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.PutObjectRequest_ContentType, *v.ContentType)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.PutObjectRequest_Path, *v.Path)
+	}
+	if v.StorageClass != "" {
+		s.WriteString(schemas.PutObjectRequest_StorageClass, string(v.StorageClass))
+	}
+	if v.UploadAvailability != "" {
+		s.WriteString(schemas.PutObjectRequest_UploadAvailability, string(v.UploadAvailability))
+	}
+}
+func (v *PutObjectInput) GetPayloadStream() io.Reader { return v.Body }
+
+var _ smithy.StreamingInput = (*PutObjectInput)(nil)
+
+func (v *PutObjectInput) SetPayloadStream(r io.ReadCloser) { v.Body = r }
+
+var _ smithy.StreamingOutput = (*PutObjectInput)(nil)
+
 type PutObjectOutput struct {
 
 	// The SHA256 digest of the object that is persisted.
@@ -110,16 +143,34 @@ type PutObjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutObjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutObjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutObjectResponse_ContentSHA256:
+			v.ContentSHA256 = new(string)
+			return d.ReadString(schemas.PutObjectResponse_ContentSHA256, v.ContentSHA256)
+		case schemas.PutObjectResponse_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.PutObjectResponse_ETag, v.ETag)
+		case schemas.PutObjectResponse_StorageClass:
+			var ev string
+			if err := d.ReadString(schemas.PutObjectResponse_StorageClass, &ev); err != nil {
+				return err
+			}
+			v.StorageClass = types.StorageClass(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutObject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutObject, schemas.PutObjectRequest, schemas.PutObjectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutObject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutObject, schemas.PutObjectRequest, schemas.PutObjectResponse), output: &PutObjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutObject"); err != nil {

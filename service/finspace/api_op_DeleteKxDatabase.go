@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,24 @@ type DeleteKxDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteKxDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteKxDatabaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteKxDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteKxDatabaseRequest_clientToken, *v.ClientToken)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.DeleteKxDatabaseRequest_databaseName, *v.DatabaseName)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DeleteKxDatabaseRequest_environmentId, *v.EnvironmentId)
+	}
+}
+
 type DeleteKxDatabaseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,16 +75,21 @@ type DeleteKxDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteKxDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteKxDatabaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteKxDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteKxDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKxDatabase, schemas.DeleteKxDatabaseRequest, schemas.DeleteKxDatabaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteKxDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKxDatabase, schemas.DeleteKxDatabaseRequest, schemas.DeleteKxDatabaseResponse), output: &DeleteKxDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteKxDatabase"); err != nil {

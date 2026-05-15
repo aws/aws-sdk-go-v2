@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -135,6 +137,62 @@ type CreateOdbNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOdbNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOdbNetworkInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOdbNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateOdbNetworkInput_availabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.CreateOdbNetworkInput_availabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.BackupSubnetCidr != nil {
+		s.WriteString(schemas.CreateOdbNetworkInput_backupSubnetCidr, *v.BackupSubnetCidr)
+	}
+	if v.ClientSubnetCidr != nil {
+		s.WriteString(schemas.CreateOdbNetworkInput_clientSubnetCidr, *v.ClientSubnetCidr)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateOdbNetworkInput_clientToken, *v.ClientToken)
+	}
+	serializeStringList(s, schemas.CreateOdbNetworkInput_crossRegionS3RestoreSourcesToEnable, v.CrossRegionS3RestoreSourcesToEnable)
+	if v.CustomDomainName != nil {
+		s.WriteString(schemas.CreateOdbNetworkInput_customDomainName, *v.CustomDomainName)
+	}
+	if v.DefaultDnsPrefix != nil {
+		s.WriteString(schemas.CreateOdbNetworkInput_defaultDnsPrefix, *v.DefaultDnsPrefix)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateOdbNetworkInput_displayName, *v.DisplayName)
+	}
+	if v.KmsAccess != "" {
+		s.WriteString(schemas.CreateOdbNetworkInput_kmsAccess, string(v.KmsAccess))
+	}
+	if v.KmsPolicyDocument != nil {
+		s.WriteString(schemas.CreateOdbNetworkInput_kmsPolicyDocument, *v.KmsPolicyDocument)
+	}
+	if v.S3Access != "" {
+		s.WriteString(schemas.CreateOdbNetworkInput_s3Access, string(v.S3Access))
+	}
+	if v.S3PolicyDocument != nil {
+		s.WriteString(schemas.CreateOdbNetworkInput_s3PolicyDocument, *v.S3PolicyDocument)
+	}
+	if v.StsAccess != "" {
+		s.WriteString(schemas.CreateOdbNetworkInput_stsAccess, string(v.StsAccess))
+	}
+	if v.StsPolicyDocument != nil {
+		s.WriteString(schemas.CreateOdbNetworkInput_stsPolicyDocument, *v.StsPolicyDocument)
+	}
+	serializeRequestTagMap(s, schemas.CreateOdbNetworkInput_tags, v.Tags)
+	if v.ZeroEtlAccess != "" {
+		s.WriteString(schemas.CreateOdbNetworkInput_zeroEtlAccess, string(v.ZeroEtlAccess))
+	}
+}
+
 type CreateOdbNetworkOutput struct {
 
 	// The unique identifier of the ODB network.
@@ -157,16 +215,37 @@ type CreateOdbNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOdbNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOdbNetworkOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOdbNetworkOutput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.CreateOdbNetworkOutput_displayName, v.DisplayName)
+		case schemas.CreateOdbNetworkOutput_odbNetworkId:
+			v.OdbNetworkId = new(string)
+			return d.ReadString(schemas.CreateOdbNetworkOutput_odbNetworkId, v.OdbNetworkId)
+		case schemas.CreateOdbNetworkOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateOdbNetworkOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceStatus(ev)
+			return nil
+		case schemas.CreateOdbNetworkOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.CreateOdbNetworkOutput_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOdbNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateOdbNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOdbNetwork, schemas.CreateOdbNetworkInput, schemas.CreateOdbNetworkOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateOdbNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOdbNetwork, schemas.CreateOdbNetworkInput, schemas.CreateOdbNetworkOutput), output: &CreateOdbNetworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateOdbNetwork"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,24 @@ type GetDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDocumentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationToken != nil {
+		s.WriteString(schemas.GetDocumentRequest_AuthenticationToken, *v.AuthenticationToken)
+	}
+	if v.DocumentId != nil {
+		s.WriteString(schemas.GetDocumentRequest_DocumentId, *v.DocumentId)
+	}
+	if v.IncludeCustomMetadata != false {
+		s.WriteBool(schemas.GetDocumentRequest_IncludeCustomMetadata, v.IncludeCustomMetadata)
+	}
+}
+
 type GetDocumentOutput struct {
 
 	// The custom metadata on the document.
@@ -58,16 +78,26 @@ type GetDocumentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDocumentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDocumentResponse_CustomMetadata:
+			return deserializeCustomMetadataMap(d, schemas.GetDocumentResponse_CustomMetadata, &v.CustomMetadata)
+		case schemas.GetDocumentResponse_Metadata:
+			v.Metadata = &types.DocumentMetadata{}
+			return v.Metadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocument, schemas.GetDocumentRequest, schemas.GetDocumentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocument, schemas.GetDocumentRequest, schemas.GetDocumentResponse), output: &GetDocumentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDocument"); err != nil {

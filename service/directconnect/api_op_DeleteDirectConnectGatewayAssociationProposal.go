@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type DeleteDirectConnectGatewayAssociationProposalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDirectConnectGatewayAssociationProposalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDirectConnectGatewayAssociationProposalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDirectConnectGatewayAssociationProposalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProposalId != nil {
+		s.WriteString(schemas.DeleteDirectConnectGatewayAssociationProposalRequest_proposalId, *v.ProposalId)
+	}
+}
+
 type DeleteDirectConnectGatewayAssociationProposalOutput struct {
 
 	// The ID of the associated gateway.
@@ -49,16 +63,24 @@ type DeleteDirectConnectGatewayAssociationProposalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDirectConnectGatewayAssociationProposalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDirectConnectGatewayAssociationProposalResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociationProposal:
+			v.DirectConnectGatewayAssociationProposal = &types.DirectConnectGatewayAssociationProposal{}
+			return v.DirectConnectGatewayAssociationProposal.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDirectConnectGatewayAssociationProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDirectConnectGatewayAssociationProposal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDirectConnectGatewayAssociationProposal, schemas.DeleteDirectConnectGatewayAssociationProposalRequest, schemas.DeleteDirectConnectGatewayAssociationProposalResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDirectConnectGatewayAssociationProposal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDirectConnectGatewayAssociationProposal, schemas.DeleteDirectConnectGatewayAssociationProposalRequest, schemas.DeleteDirectConnectGatewayAssociationProposalResult), output: &DeleteDirectConnectGatewayAssociationProposalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDirectConnectGatewayAssociationProposal"); err != nil {

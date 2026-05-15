@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -89,6 +91,46 @@ type CreateRegistryRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRegistryRecordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRegistryRecordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRegistryRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRegistryRecordRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRegistryRecordRequest_description, *v.Description)
+	}
+	if v.DescriptorType != "" {
+		s.WriteString(schemas.CreateRegistryRecordRequest_descriptorType, string(v.DescriptorType))
+	}
+	if v.Descriptors != nil {
+		s.WriteStruct(schemas.CreateRegistryRecordRequest_descriptors)
+		v.Descriptors.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRegistryRecordRequest_name, *v.Name)
+	}
+	if v.RecordVersion != nil {
+		s.WriteString(schemas.CreateRegistryRecordRequest_recordVersion, *v.RecordVersion)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.CreateRegistryRecordRequest_registryId, *v.RegistryId)
+	}
+	if v.SynchronizationConfiguration != nil {
+		s.WriteStruct(schemas.CreateRegistryRecordRequest_synchronizationConfiguration)
+		v.SynchronizationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SynchronizationType != "" {
+		s.WriteString(schemas.CreateRegistryRecordRequest_synchronizationType, string(v.SynchronizationType))
+	}
+}
+
 type CreateRegistryRecordOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created registry record.
@@ -108,16 +150,31 @@ type CreateRegistryRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRegistryRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRegistryRecordResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRegistryRecordResponse_recordArn:
+			v.RecordArn = new(string)
+			return d.ReadString(schemas.CreateRegistryRecordResponse_recordArn, v.RecordArn)
+		case schemas.CreateRegistryRecordResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateRegistryRecordResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RegistryRecordStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRegistryRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRegistryRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRegistryRecord, schemas.CreateRegistryRecordRequest, schemas.CreateRegistryRecordResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRegistryRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRegistryRecord, schemas.CreateRegistryRecordRequest, schemas.CreateRegistryRecordResponse), output: &CreateRegistryRecordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRegistryRecord"); err != nil {

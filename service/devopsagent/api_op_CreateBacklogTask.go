@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,6 +64,38 @@ type CreateBacklogTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBacklogTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBacklogTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBacklogTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.CreateBacklogTaskRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateBacklogTaskRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateBacklogTaskRequest_description, *v.Description)
+	}
+	if v.Priority != "" {
+		s.WriteString(schemas.CreateBacklogTaskRequest_priority, string(v.Priority))
+	}
+	if v.Reference != nil {
+		s.WriteStruct(schemas.CreateBacklogTaskRequest_reference)
+		v.Reference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskType != "" {
+		s.WriteString(schemas.CreateBacklogTaskRequest_taskType, string(v.TaskType))
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.CreateBacklogTaskRequest_title, *v.Title)
+	}
+}
+
 // Response structure containing the created backlog task
 type CreateBacklogTaskOutput struct {
 
@@ -76,16 +110,24 @@ type CreateBacklogTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBacklogTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBacklogTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBacklogTaskResponse_task:
+			v.Task = &types.Task{}
+			return v.Task.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBacklogTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBacklogTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBacklogTask, schemas.CreateBacklogTaskRequest, schemas.CreateBacklogTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBacklogTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBacklogTask, schemas.CreateBacklogTaskRequest, schemas.CreateBacklogTaskResponse), output: &CreateBacklogTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBacklogTask"); err != nil {

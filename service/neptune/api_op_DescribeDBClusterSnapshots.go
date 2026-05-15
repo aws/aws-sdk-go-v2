@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -112,6 +114,37 @@ type DescribeDBClusterSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBClusterSnapshotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBClusterSnapshotsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBClusterSnapshotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.DescribeDBClusterSnapshotsMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	if v.DBClusterSnapshotIdentifier != nil {
+		s.WriteString(schemas.DescribeDBClusterSnapshotsMessage_DBClusterSnapshotIdentifier, *v.DBClusterSnapshotIdentifier)
+	}
+	serializeFilterList(s, schemas.DescribeDBClusterSnapshotsMessage_Filters, v.Filters)
+	if v.IncludePublic != nil {
+		s.WriteBool(schemas.DescribeDBClusterSnapshotsMessage_IncludePublic, *v.IncludePublic)
+	}
+	if v.IncludeShared != nil {
+		s.WriteBool(schemas.DescribeDBClusterSnapshotsMessage_IncludeShared, *v.IncludeShared)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBClusterSnapshotsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBClusterSnapshotsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.SnapshotType != nil {
+		s.WriteString(schemas.DescribeDBClusterSnapshotsMessage_SnapshotType, *v.SnapshotType)
+	}
+}
+
 type DescribeDBClusterSnapshotsOutput struct {
 
 	// Provides a list of DB cluster snapshots for the user.
@@ -128,16 +161,26 @@ type DescribeDBClusterSnapshotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBClusterSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBClusterSnapshotMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBClusterSnapshotMessage_DBClusterSnapshots:
+			return deserializeDBClusterSnapshotList(d, schemas.DBClusterSnapshotMessage_DBClusterSnapshots, &v.DBClusterSnapshots)
+		case schemas.DBClusterSnapshotMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DBClusterSnapshotMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBClusterSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBClusterSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBClusterSnapshots, schemas.DescribeDBClusterSnapshotsMessage, schemas.DBClusterSnapshotMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBClusterSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBClusterSnapshots, schemas.DescribeDBClusterSnapshotsMessage, schemas.DBClusterSnapshotMessage), output: &DescribeDBClusterSnapshotsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDBClusterSnapshots"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -31,6 +33,28 @@ type MalformedContentTypeWithoutBodyEmptyInputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedContentTypeWithoutBodyEmptyInputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MalformedContentTypeWithoutBodyEmptyInputInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedContentTypeWithoutBodyEmptyInputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Header != nil {
+		s.WriteString(schemas.MalformedContentTypeWithoutBodyEmptyInputInput_header, *v.Header)
+	}
+}
+func (v *MalformedContentTypeWithoutBodyEmptyInputInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MalformedContentTypeWithoutBodyEmptyInputInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MalformedContentTypeWithoutBodyEmptyInputInput_header:
+			v.Header = new(string)
+			return d.ReadString(schemas.MalformedContentTypeWithoutBodyEmptyInputInput_header, v.Header)
+		}
+		return nil
+	})
+}
+
 type MalformedContentTypeWithoutBodyEmptyInputOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -38,16 +62,29 @@ type MalformedContentTypeWithoutBodyEmptyInputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedContentTypeWithoutBodyEmptyInputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedContentTypeWithoutBodyEmptyInputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *MalformedContentTypeWithoutBodyEmptyInputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMalformedContentTypeWithoutBodyEmptyInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpMalformedContentTypeWithoutBodyEmptyInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedContentTypeWithoutBodyEmptyInput, schemas.MalformedContentTypeWithoutBodyEmptyInputInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMalformedContentTypeWithoutBodyEmptyInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedContentTypeWithoutBodyEmptyInput, schemas.MalformedContentTypeWithoutBodyEmptyInputInput, nil), output: &MalformedContentTypeWithoutBodyEmptyInputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "MalformedContentTypeWithoutBodyEmptyInput"); err != nil {

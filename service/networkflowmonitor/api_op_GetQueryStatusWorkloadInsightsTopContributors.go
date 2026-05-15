@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,21 @@ type GetQueryStatusWorkloadInsightsTopContributorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryStatusWorkloadInsightsTopContributorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryStatusWorkloadInsightsTopContributorsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryStatusWorkloadInsightsTopContributorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryId != nil {
+		s.WriteString(schemas.GetQueryStatusWorkloadInsightsTopContributorsInput_queryId, *v.QueryId)
+	}
+	if v.ScopeId != nil {
+		s.WriteString(schemas.GetQueryStatusWorkloadInsightsTopContributorsInput_scopeId, *v.ScopeId)
+	}
+}
+
 type GetQueryStatusWorkloadInsightsTopContributorsOutput struct {
 
 	// When you run a query, use this call to check the status of the query to make
@@ -82,16 +99,28 @@ type GetQueryStatusWorkloadInsightsTopContributorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryStatusWorkloadInsightsTopContributorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQueryStatusWorkloadInsightsTopContributorsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQueryStatusWorkloadInsightsTopContributorsOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetQueryStatusWorkloadInsightsTopContributorsOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.QueryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQueryStatusWorkloadInsightsTopContributorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQueryStatusWorkloadInsightsTopContributors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryStatusWorkloadInsightsTopContributors, schemas.GetQueryStatusWorkloadInsightsTopContributorsInput, schemas.GetQueryStatusWorkloadInsightsTopContributorsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQueryStatusWorkloadInsightsTopContributors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryStatusWorkloadInsightsTopContributors, schemas.GetQueryStatusWorkloadInsightsTopContributorsInput, schemas.GetQueryStatusWorkloadInsightsTopContributorsOutput), output: &GetQueryStatusWorkloadInsightsTopContributorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetQueryStatusWorkloadInsightsTopContributors"); err != nil {

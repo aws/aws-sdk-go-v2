@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,24 @@ type UpdateOtaTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOtaTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOtaTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOtaTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateOtaTaskRequest_Description, *v.Description)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateOtaTaskRequest_Identifier, *v.Identifier)
+	}
+	if v.TaskConfigurationId != nil {
+		s.WriteString(schemas.UpdateOtaTaskRequest_TaskConfigurationId, *v.TaskConfigurationId)
+	}
+}
+
 type UpdateOtaTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,16 +69,29 @@ type UpdateOtaTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOtaTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOtaTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateOtaTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateOtaTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateOtaTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOtaTask, schemas.UpdateOtaTaskRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateOtaTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOtaTask, schemas.UpdateOtaTaskRequest, nil), output: &UpdateOtaTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateOtaTask"); err != nil {

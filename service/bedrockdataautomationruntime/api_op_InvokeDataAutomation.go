@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomationruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomationruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,39 @@ type InvokeDataAutomationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeDataAutomationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeDataAutomationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeDataAutomationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlueprintList(s, schemas.InvokeDataAutomationRequest_blueprints, v.Blueprints)
+	if v.DataAutomationConfiguration != nil {
+		s.WriteStruct(schemas.InvokeDataAutomationRequest_dataAutomationConfiguration)
+		v.DataAutomationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataAutomationProfileArn != nil {
+		s.WriteString(schemas.InvokeDataAutomationRequest_dataAutomationProfileArn, *v.DataAutomationProfileArn)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.InvokeDataAutomationRequest_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputConfiguration != nil {
+		s.WriteStruct(schemas.InvokeDataAutomationRequest_inputConfiguration)
+		v.InputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputConfiguration != nil {
+		s.WriteStruct(schemas.InvokeDataAutomationRequest_outputConfiguration)
+		v.OutputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Invoke Data Automation Response
 type InvokeDataAutomationOutput struct {
 
@@ -75,16 +110,33 @@ type InvokeDataAutomationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeDataAutomationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeDataAutomationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeDataAutomationResponse_outputConfiguration:
+			v.OutputConfiguration = &types.OutputConfiguration{}
+			return v.OutputConfiguration.Deserialize(d)
+		case schemas.InvokeDataAutomationResponse_outputSegments:
+			return deserializeOutputSegmentList(d, schemas.InvokeDataAutomationResponse_outputSegments, &v.OutputSegments)
+		case schemas.InvokeDataAutomationResponse_semanticModality:
+			var ev string
+			if err := d.ReadString(schemas.InvokeDataAutomationResponse_semanticModality, &ev); err != nil {
+				return err
+			}
+			v.SemanticModality = types.SemanticModality(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInvokeDataAutomationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpInvokeDataAutomation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeDataAutomation, schemas.InvokeDataAutomationRequest, schemas.InvokeDataAutomationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpInvokeDataAutomation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeDataAutomation, schemas.InvokeDataAutomationRequest, schemas.InvokeDataAutomationResponse), output: &InvokeDataAutomationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeDataAutomation"); err != nil {

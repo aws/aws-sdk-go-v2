@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,24 @@ type GetSystemTemplateRevisionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSystemTemplateRevisionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSystemTemplateRevisionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSystemTemplateRevisionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetSystemTemplateRevisionsRequest_id, *v.Id)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetSystemTemplateRevisionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSystemTemplateRevisionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetSystemTemplateRevisionsOutput struct {
 
 	// The string to specify as nextToken when you request the next page of results.
@@ -68,16 +88,26 @@ type GetSystemTemplateRevisionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSystemTemplateRevisionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSystemTemplateRevisionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSystemTemplateRevisionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetSystemTemplateRevisionsResponse_nextToken, v.NextToken)
+		case schemas.GetSystemTemplateRevisionsResponse_summaries:
+			return deserializeSystemTemplateSummaries(d, schemas.GetSystemTemplateRevisionsResponse_summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSystemTemplateRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSystemTemplateRevisions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSystemTemplateRevisions, schemas.GetSystemTemplateRevisionsRequest, schemas.GetSystemTemplateRevisionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSystemTemplateRevisions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSystemTemplateRevisions, schemas.GetSystemTemplateRevisionsRequest, schemas.GetSystemTemplateRevisionsResponse), output: &GetSystemTemplateRevisionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSystemTemplateRevisions"); err != nil {

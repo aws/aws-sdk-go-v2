@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,6 +40,18 @@ type DeleteConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteConnectionRequest_Name, *v.Name)
+	}
+}
+
 type DeleteConnectionOutput struct {
 
 	// The ARN of the connection that was deleted.
@@ -63,16 +77,40 @@ type DeleteConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteConnectionResponse_ConnectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.DeleteConnectionResponse_ConnectionArn, v.ConnectionArn)
+		case schemas.DeleteConnectionResponse_ConnectionState:
+			var ev string
+			if err := d.ReadString(schemas.DeleteConnectionResponse_ConnectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = types.ConnectionState(ev)
+			return nil
+		case schemas.DeleteConnectionResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DeleteConnectionResponse_CreationTime, v.CreationTime)
+		case schemas.DeleteConnectionResponse_LastAuthorizedTime:
+			v.LastAuthorizedTime = new(time.Time)
+			return d.ReadTime(schemas.DeleteConnectionResponse_LastAuthorizedTime, v.LastAuthorizedTime)
+		case schemas.DeleteConnectionResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DeleteConnectionResponse_LastModifiedTime, v.LastModifiedTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConnection, schemas.DeleteConnectionRequest, schemas.DeleteConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConnection, schemas.DeleteConnectionRequest, schemas.DeleteConnectionResponse), output: &DeleteConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteConnection"); err != nil {

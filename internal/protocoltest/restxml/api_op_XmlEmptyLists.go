@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -62,6 +64,30 @@ type XmlEmptyListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlEmptyListsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlEmptyListsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlEmptyListsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBooleanList(s, schemas.XmlEmptyListsRequest_booleanList, v.BooleanList)
+	serializeFooEnumList(s, schemas.XmlEmptyListsRequest_enumList, v.EnumList)
+	serializeRenamedListMembers(s, schemas.XmlEmptyListsRequest_flattenedList, v.FlattenedList)
+	serializeRenamedListMembers(s, schemas.XmlEmptyListsRequest_flattenedList2, v.FlattenedList2)
+	serializeListWithMemberNamespace(s, schemas.XmlEmptyListsRequest_flattenedListWithMemberNamespace, v.FlattenedListWithMemberNamespace)
+	serializeListWithNamespace(s, schemas.XmlEmptyListsRequest_flattenedListWithNamespace, v.FlattenedListWithNamespace)
+	serializeStructureList(s, schemas.XmlEmptyListsRequest_flattenedStructureList, v.FlattenedStructureList)
+	serializeIntegerEnumList(s, schemas.XmlEmptyListsRequest_intEnumList, v.IntEnumList)
+	serializeIntegerList(s, schemas.XmlEmptyListsRequest_integerList, v.IntegerList)
+	serializeNestedStringList(s, schemas.XmlEmptyListsRequest_nestedStringList, v.NestedStringList)
+	serializeRenamedListMembers(s, schemas.XmlEmptyListsRequest_renamedListMembers, v.RenamedListMembers)
+	serializeStringList(s, schemas.XmlEmptyListsRequest_stringList, v.StringList)
+	serializeStringSet(s, schemas.XmlEmptyListsRequest_stringSet, v.StringSet)
+	serializeStructureList(s, schemas.XmlEmptyListsRequest_structureList, v.StructureList)
+	serializeTimestampList(s, schemas.XmlEmptyListsRequest_timestampList, v.TimestampList)
+}
+
 type XmlEmptyListsOutput struct {
 	BooleanList []bool
 
@@ -100,16 +126,51 @@ type XmlEmptyListsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlEmptyListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XmlEmptyListsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XmlEmptyListsResponse_booleanList:
+			return deserializeBooleanList(d, schemas.XmlEmptyListsResponse_booleanList, &v.BooleanList)
+		case schemas.XmlEmptyListsResponse_enumList:
+			return deserializeFooEnumList(d, schemas.XmlEmptyListsResponse_enumList, &v.EnumList)
+		case schemas.XmlEmptyListsResponse_flattenedList:
+			return deserializeRenamedListMembers(d, schemas.XmlEmptyListsResponse_flattenedList, &v.FlattenedList)
+		case schemas.XmlEmptyListsResponse_flattenedList2:
+			return deserializeRenamedListMembers(d, schemas.XmlEmptyListsResponse_flattenedList2, &v.FlattenedList2)
+		case schemas.XmlEmptyListsResponse_flattenedListWithMemberNamespace:
+			return deserializeListWithMemberNamespace(d, schemas.XmlEmptyListsResponse_flattenedListWithMemberNamespace, &v.FlattenedListWithMemberNamespace)
+		case schemas.XmlEmptyListsResponse_flattenedListWithNamespace:
+			return deserializeListWithNamespace(d, schemas.XmlEmptyListsResponse_flattenedListWithNamespace, &v.FlattenedListWithNamespace)
+		case schemas.XmlEmptyListsResponse_flattenedStructureList:
+			return deserializeStructureList(d, schemas.XmlEmptyListsResponse_flattenedStructureList, &v.FlattenedStructureList)
+		case schemas.XmlEmptyListsResponse_intEnumList:
+			return deserializeIntegerEnumList(d, schemas.XmlEmptyListsResponse_intEnumList, &v.IntEnumList)
+		case schemas.XmlEmptyListsResponse_integerList:
+			return deserializeIntegerList(d, schemas.XmlEmptyListsResponse_integerList, &v.IntegerList)
+		case schemas.XmlEmptyListsResponse_nestedStringList:
+			return deserializeNestedStringList(d, schemas.XmlEmptyListsResponse_nestedStringList, &v.NestedStringList)
+		case schemas.XmlEmptyListsResponse_renamedListMembers:
+			return deserializeRenamedListMembers(d, schemas.XmlEmptyListsResponse_renamedListMembers, &v.RenamedListMembers)
+		case schemas.XmlEmptyListsResponse_stringList:
+			return deserializeStringList(d, schemas.XmlEmptyListsResponse_stringList, &v.StringList)
+		case schemas.XmlEmptyListsResponse_stringSet:
+			return deserializeStringSet(d, schemas.XmlEmptyListsResponse_stringSet, &v.StringSet)
+		case schemas.XmlEmptyListsResponse_structureList:
+			return deserializeStructureList(d, schemas.XmlEmptyListsResponse_structureList, &v.StructureList)
+		case schemas.XmlEmptyListsResponse_timestampList:
+			return deserializeTimestampList(d, schemas.XmlEmptyListsResponse_timestampList, &v.TimestampList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationXmlEmptyListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlEmptyLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlEmptyLists, schemas.XmlEmptyListsRequest, schemas.XmlEmptyListsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpXmlEmptyLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlEmptyLists, schemas.XmlEmptyListsRequest, schemas.XmlEmptyListsResponse), output: &XmlEmptyListsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlEmptyLists"); err != nil {

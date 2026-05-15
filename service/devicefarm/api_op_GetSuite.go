@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type GetSuiteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSuiteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSuiteRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSuiteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetSuiteRequest_arn, *v.Arn)
+	}
+}
+
 // Represents the result of a get suite request.
 type GetSuiteOutput struct {
 
@@ -50,16 +64,24 @@ type GetSuiteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSuiteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSuiteResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSuiteResult_suite:
+			v.Suite = &types.Suite{}
+			return v.Suite.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSuiteMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSuite{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSuite, schemas.GetSuiteRequest, schemas.GetSuiteResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSuite{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSuite, schemas.GetSuiteRequest, schemas.GetSuiteResult), output: &GetSuiteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSuite"); err != nil {

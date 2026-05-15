@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type SetAccountDefaultProtectConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetAccountDefaultProtectConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetAccountDefaultProtectConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetAccountDefaultProtectConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.SetAccountDefaultProtectConfigurationRequest_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+}
+
 type SetAccountDefaultProtectConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the account default protect configuration.
@@ -56,16 +70,27 @@ type SetAccountDefaultProtectConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetAccountDefaultProtectConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetAccountDefaultProtectConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetAccountDefaultProtectConfigurationResult_DefaultProtectConfigurationArn:
+			v.DefaultProtectConfigurationArn = new(string)
+			return d.ReadString(schemas.SetAccountDefaultProtectConfigurationResult_DefaultProtectConfigurationArn, v.DefaultProtectConfigurationArn)
+		case schemas.SetAccountDefaultProtectConfigurationResult_DefaultProtectConfigurationId:
+			v.DefaultProtectConfigurationId = new(string)
+			return d.ReadString(schemas.SetAccountDefaultProtectConfigurationResult_DefaultProtectConfigurationId, v.DefaultProtectConfigurationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetAccountDefaultProtectConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSetAccountDefaultProtectConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetAccountDefaultProtectConfiguration, schemas.SetAccountDefaultProtectConfigurationRequest, schemas.SetAccountDefaultProtectConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSetAccountDefaultProtectConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetAccountDefaultProtectConfiguration, schemas.SetAccountDefaultProtectConfigurationRequest, schemas.SetAccountDefaultProtectConfigurationResult), output: &SetAccountDefaultProtectConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SetAccountDefaultProtectConfiguration"); err != nil {

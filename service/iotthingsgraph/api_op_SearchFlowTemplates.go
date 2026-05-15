@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,22 @@ type SearchFlowTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchFlowTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchFlowTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchFlowTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFlowTemplateFilters(s, schemas.SearchFlowTemplatesRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchFlowTemplatesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchFlowTemplatesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type SearchFlowTemplatesOutput struct {
 
 	// The string to specify as nextToken when you request the next page of results.
@@ -60,16 +78,26 @@ type SearchFlowTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchFlowTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchFlowTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchFlowTemplatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchFlowTemplatesResponse_nextToken, v.NextToken)
+		case schemas.SearchFlowTemplatesResponse_summaries:
+			return deserializeFlowTemplateSummaries(d, schemas.SearchFlowTemplatesResponse_summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchFlowTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchFlowTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchFlowTemplates, schemas.SearchFlowTemplatesRequest, schemas.SearchFlowTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearchFlowTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchFlowTemplates, schemas.SearchFlowTemplatesRequest, schemas.SearchFlowTemplatesResponse), output: &SearchFlowTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchFlowTemplates"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,6 +63,26 @@ type DescribeSenderIdsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSenderIdsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSenderIdsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSenderIdsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSenderIdFilterList(s, schemas.DescribeSenderIdsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeSenderIdsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSenderIdsRequest_NextToken, *v.NextToken)
+	}
+	if v.Owner != "" {
+		s.WriteString(schemas.DescribeSenderIdsRequest_Owner, string(v.Owner))
+	}
+	serializeSenderIdList(s, schemas.DescribeSenderIdsRequest_SenderIds, v.SenderIds)
+}
+
 type DescribeSenderIdsOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is
@@ -77,16 +99,26 @@ type DescribeSenderIdsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSenderIdsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSenderIdsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSenderIdsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSenderIdsResult_NextToken, v.NextToken)
+		case schemas.DescribeSenderIdsResult_SenderIds:
+			return deserializeSenderIdInformationList(d, schemas.DescribeSenderIdsResult_SenderIds, &v.SenderIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSenderIdsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeSenderIds{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSenderIds, schemas.DescribeSenderIdsRequest, schemas.DescribeSenderIdsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeSenderIds{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSenderIds, schemas.DescribeSenderIdsRequest, schemas.DescribeSenderIdsResult), output: &DescribeSenderIdsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeSenderIds"); err != nil {

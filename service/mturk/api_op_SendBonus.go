@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -71,6 +73,30 @@ type SendBonusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendBonusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendBonusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendBonusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignmentId != nil {
+		s.WriteString(schemas.SendBonusRequest_AssignmentId, *v.AssignmentId)
+	}
+	if v.BonusAmount != nil {
+		s.WriteString(schemas.SendBonusRequest_BonusAmount, *v.BonusAmount)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.SendBonusRequest_Reason, *v.Reason)
+	}
+	if v.UniqueRequestToken != nil {
+		s.WriteString(schemas.SendBonusRequest_UniqueRequestToken, *v.UniqueRequestToken)
+	}
+	if v.WorkerId != nil {
+		s.WriteString(schemas.SendBonusRequest_WorkerId, *v.WorkerId)
+	}
+}
+
 type SendBonusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -78,16 +104,21 @@ type SendBonusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendBonusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendBonusResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendBonusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSendBonus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendBonus, schemas.SendBonusRequest, schemas.SendBonusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSendBonus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendBonus, schemas.SendBonusRequest, schemas.SendBonusResponse), output: &SendBonusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SendBonus"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/geomaps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/geomaps/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -149,6 +151,40 @@ type GetStyleDescriptorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStyleDescriptorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStyleDescriptorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStyleDescriptorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Buildings != "" {
+		s.WriteString(schemas.GetStyleDescriptorRequest_Buildings, string(v.Buildings))
+	}
+	if v.ColorScheme != "" {
+		s.WriteString(schemas.GetStyleDescriptorRequest_ColorScheme, string(v.ColorScheme))
+	}
+	if v.ContourDensity != "" {
+		s.WriteString(schemas.GetStyleDescriptorRequest_ContourDensity, string(v.ContourDensity))
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.GetStyleDescriptorRequest_Key, *v.Key)
+	}
+	if v.PoliticalView != nil {
+		s.WriteString(schemas.GetStyleDescriptorRequest_PoliticalView, *v.PoliticalView)
+	}
+	if v.Style != "" {
+		s.WriteString(schemas.GetStyleDescriptorRequest_Style, string(v.Style))
+	}
+	if v.Terrain != "" {
+		s.WriteString(schemas.GetStyleDescriptorRequest_Terrain, string(v.Terrain))
+	}
+	if v.Traffic != "" {
+		s.WriteString(schemas.GetStyleDescriptorRequest_Traffic, string(v.Traffic))
+	}
+	serializeTravelModeList(s, schemas.GetStyleDescriptorRequest_TravelModes, v.TravelModes)
+}
+
 type GetStyleDescriptorOutput struct {
 
 	// This Blob contains the body of the style descriptor which is in
@@ -171,16 +207,32 @@ type GetStyleDescriptorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStyleDescriptorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStyleDescriptorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStyleDescriptorResponse_Blob:
+			return d.ReadBlob(schemas.GetStyleDescriptorResponse_Blob, &v.Blob)
+		case schemas.GetStyleDescriptorResponse_CacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.GetStyleDescriptorResponse_CacheControl, v.CacheControl)
+		case schemas.GetStyleDescriptorResponse_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.GetStyleDescriptorResponse_ContentType, v.ContentType)
+		case schemas.GetStyleDescriptorResponse_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.GetStyleDescriptorResponse_ETag, v.ETag)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetStyleDescriptorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStyleDescriptor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStyleDescriptor, schemas.GetStyleDescriptorRequest, schemas.GetStyleDescriptorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetStyleDescriptor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStyleDescriptor, schemas.GetStyleDescriptorRequest, schemas.GetStyleDescriptorResponse), output: &GetStyleDescriptorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetStyleDescriptor"); err != nil {

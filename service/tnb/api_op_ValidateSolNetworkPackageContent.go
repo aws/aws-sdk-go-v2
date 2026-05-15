@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,24 @@ type ValidateSolNetworkPackageContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateSolNetworkPackageContentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateSolNetworkPackageContentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateSolNetworkPackageContentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != "" {
+		s.WriteString(schemas.ValidateSolNetworkPackageContentInput_contentType, string(v.ContentType))
+	}
+	if v.File != nil {
+		s.WriteBlob(schemas.ValidateSolNetworkPackageContentInput_file, v.File)
+	}
+	if v.NsdInfoId != nil {
+		s.WriteString(schemas.ValidateSolNetworkPackageContentInput_nsdInfoId, *v.NsdInfoId)
+	}
+}
+
 type ValidateSolNetworkPackageContentOutput struct {
 
 	// Network package ARN.
@@ -95,16 +115,41 @@ type ValidateSolNetworkPackageContentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateSolNetworkPackageContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidateSolNetworkPackageContentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidateSolNetworkPackageContentOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ValidateSolNetworkPackageContentOutput_arn, v.Arn)
+		case schemas.ValidateSolNetworkPackageContentOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ValidateSolNetworkPackageContentOutput_id, v.Id)
+		case schemas.ValidateSolNetworkPackageContentOutput_metadata:
+			v.Metadata = &types.ValidateSolNetworkPackageContentMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.ValidateSolNetworkPackageContentOutput_nsdId:
+			v.NsdId = new(string)
+			return d.ReadString(schemas.ValidateSolNetworkPackageContentOutput_nsdId, v.NsdId)
+		case schemas.ValidateSolNetworkPackageContentOutput_nsdName:
+			v.NsdName = new(string)
+			return d.ReadString(schemas.ValidateSolNetworkPackageContentOutput_nsdName, v.NsdName)
+		case schemas.ValidateSolNetworkPackageContentOutput_nsdVersion:
+			v.NsdVersion = new(string)
+			return d.ReadString(schemas.ValidateSolNetworkPackageContentOutput_nsdVersion, v.NsdVersion)
+		case schemas.ValidateSolNetworkPackageContentOutput_vnfPkgIds:
+			return deserializeVnfPkgIdList(d, schemas.ValidateSolNetworkPackageContentOutput_vnfPkgIds, &v.VnfPkgIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationValidateSolNetworkPackageContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpValidateSolNetworkPackageContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateSolNetworkPackageContent, schemas.ValidateSolNetworkPackageContentInput, schemas.ValidateSolNetworkPackageContentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpValidateSolNetworkPackageContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateSolNetworkPackageContent, schemas.ValidateSolNetworkPackageContentInput, schemas.ValidateSolNetworkPackageContentOutput), output: &ValidateSolNetworkPackageContentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ValidateSolNetworkPackageContent"); err != nil {

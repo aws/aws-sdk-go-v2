@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mwaa/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mwaa/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -218,6 +220,169 @@ type UpdateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAirflowConfigurationOptions(s, schemas.UpdateEnvironmentInput_AirflowConfigurationOptions, v.AirflowConfigurationOptions)
+	if v.AirflowVersion != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_AirflowVersion, *v.AirflowVersion)
+	}
+	if v.DagS3Path != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_DagS3Path, *v.DagS3Path)
+	}
+	if v.EnvironmentClass != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_EnvironmentClass, *v.EnvironmentClass)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.UpdateEnvironmentInput_LoggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxWebservers != nil {
+		s.WriteInt32(schemas.UpdateEnvironmentInput_MaxWebservers, *v.MaxWebservers)
+	}
+	if v.MaxWorkers != nil {
+		s.WriteInt32(schemas.UpdateEnvironmentInput_MaxWorkers, *v.MaxWorkers)
+	}
+	if v.MinWebservers != nil {
+		s.WriteInt32(schemas.UpdateEnvironmentInput_MinWebservers, *v.MinWebservers)
+	}
+	if v.MinWorkers != nil {
+		s.WriteInt32(schemas.UpdateEnvironmentInput_MinWorkers, *v.MinWorkers)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_Name, *v.Name)
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.UpdateEnvironmentInput_NetworkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PluginsS3ObjectVersion != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_PluginsS3ObjectVersion, *v.PluginsS3ObjectVersion)
+	}
+	if v.PluginsS3Path != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_PluginsS3Path, *v.PluginsS3Path)
+	}
+	if v.RequirementsS3ObjectVersion != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_RequirementsS3ObjectVersion, *v.RequirementsS3ObjectVersion)
+	}
+	if v.RequirementsS3Path != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_RequirementsS3Path, *v.RequirementsS3Path)
+	}
+	if v.Schedulers != nil {
+		s.WriteInt32(schemas.UpdateEnvironmentInput_Schedulers, *v.Schedulers)
+	}
+	if v.SourceBucketArn != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_SourceBucketArn, *v.SourceBucketArn)
+	}
+	if v.StartupScriptS3ObjectVersion != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_StartupScriptS3ObjectVersion, *v.StartupScriptS3ObjectVersion)
+	}
+	if v.StartupScriptS3Path != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_StartupScriptS3Path, *v.StartupScriptS3Path)
+	}
+	if v.WebserverAccessMode != "" {
+		s.WriteString(schemas.UpdateEnvironmentInput_WebserverAccessMode, string(v.WebserverAccessMode))
+	}
+	if v.WeeklyMaintenanceWindowStart != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_WeeklyMaintenanceWindowStart, *v.WeeklyMaintenanceWindowStart)
+	}
+	if v.WorkerReplacementStrategy != "" {
+		s.WriteString(schemas.UpdateEnvironmentInput_WorkerReplacementStrategy, string(v.WorkerReplacementStrategy))
+	}
+}
+func (v *UpdateEnvironmentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEnvironmentInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEnvironmentInput_AirflowConfigurationOptions:
+			return deserializeAirflowConfigurationOptions(d, schemas.UpdateEnvironmentInput_AirflowConfigurationOptions, &v.AirflowConfigurationOptions)
+		case schemas.UpdateEnvironmentInput_AirflowVersion:
+			v.AirflowVersion = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_AirflowVersion, v.AirflowVersion)
+		case schemas.UpdateEnvironmentInput_DagS3Path:
+			v.DagS3Path = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_DagS3Path, v.DagS3Path)
+		case schemas.UpdateEnvironmentInput_EnvironmentClass:
+			v.EnvironmentClass = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_EnvironmentClass, v.EnvironmentClass)
+		case schemas.UpdateEnvironmentInput_ExecutionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_ExecutionRoleArn, v.ExecutionRoleArn)
+		case schemas.UpdateEnvironmentInput_LoggingConfiguration:
+			v.LoggingConfiguration = &types.LoggingConfigurationInput{}
+			return v.LoggingConfiguration.Deserialize(d)
+		case schemas.UpdateEnvironmentInput_MaxWebservers:
+			v.MaxWebservers = new(int32)
+			return d.ReadInt32(schemas.UpdateEnvironmentInput_MaxWebservers, v.MaxWebservers)
+		case schemas.UpdateEnvironmentInput_MaxWorkers:
+			v.MaxWorkers = new(int32)
+			return d.ReadInt32(schemas.UpdateEnvironmentInput_MaxWorkers, v.MaxWorkers)
+		case schemas.UpdateEnvironmentInput_MinWebservers:
+			v.MinWebservers = new(int32)
+			return d.ReadInt32(schemas.UpdateEnvironmentInput_MinWebservers, v.MinWebservers)
+		case schemas.UpdateEnvironmentInput_MinWorkers:
+			v.MinWorkers = new(int32)
+			return d.ReadInt32(schemas.UpdateEnvironmentInput_MinWorkers, v.MinWorkers)
+		case schemas.UpdateEnvironmentInput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_Name, v.Name)
+		case schemas.UpdateEnvironmentInput_NetworkConfiguration:
+			v.NetworkConfiguration = &types.UpdateNetworkConfigurationInput{}
+			return v.NetworkConfiguration.Deserialize(d)
+		case schemas.UpdateEnvironmentInput_PluginsS3ObjectVersion:
+			v.PluginsS3ObjectVersion = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_PluginsS3ObjectVersion, v.PluginsS3ObjectVersion)
+		case schemas.UpdateEnvironmentInput_PluginsS3Path:
+			v.PluginsS3Path = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_PluginsS3Path, v.PluginsS3Path)
+		case schemas.UpdateEnvironmentInput_RequirementsS3ObjectVersion:
+			v.RequirementsS3ObjectVersion = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_RequirementsS3ObjectVersion, v.RequirementsS3ObjectVersion)
+		case schemas.UpdateEnvironmentInput_RequirementsS3Path:
+			v.RequirementsS3Path = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_RequirementsS3Path, v.RequirementsS3Path)
+		case schemas.UpdateEnvironmentInput_Schedulers:
+			v.Schedulers = new(int32)
+			return d.ReadInt32(schemas.UpdateEnvironmentInput_Schedulers, v.Schedulers)
+		case schemas.UpdateEnvironmentInput_SourceBucketArn:
+			v.SourceBucketArn = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_SourceBucketArn, v.SourceBucketArn)
+		case schemas.UpdateEnvironmentInput_StartupScriptS3ObjectVersion:
+			v.StartupScriptS3ObjectVersion = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_StartupScriptS3ObjectVersion, v.StartupScriptS3ObjectVersion)
+		case schemas.UpdateEnvironmentInput_StartupScriptS3Path:
+			v.StartupScriptS3Path = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_StartupScriptS3Path, v.StartupScriptS3Path)
+		case schemas.UpdateEnvironmentInput_WebserverAccessMode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateEnvironmentInput_WebserverAccessMode, &ev); err != nil {
+				return err
+			}
+			v.WebserverAccessMode = types.WebserverAccessMode(ev)
+			return nil
+		case schemas.UpdateEnvironmentInput_WeeklyMaintenanceWindowStart:
+			v.WeeklyMaintenanceWindowStart = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_WeeklyMaintenanceWindowStart, v.WeeklyMaintenanceWindowStart)
+		case schemas.UpdateEnvironmentInput_WorkerReplacementStrategy:
+			var ev string
+			if err := d.ReadString(schemas.UpdateEnvironmentInput_WorkerReplacementStrategy, &ev); err != nil {
+				return err
+			}
+			v.WorkerReplacementStrategy = types.WorkerReplacementStrategy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type UpdateEnvironmentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon MWAA environment. For example,
@@ -230,16 +395,35 @@ type UpdateEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateEnvironmentOutput_Arn, *v.Arn)
+	}
+}
+func (v *UpdateEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEnvironmentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEnvironmentOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentOutput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironment, schemas.UpdateEnvironmentInput, schemas.UpdateEnvironmentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironment, schemas.UpdateEnvironmentInput, schemas.UpdateEnvironmentOutput), output: &UpdateEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateEnvironment"); err != nil {

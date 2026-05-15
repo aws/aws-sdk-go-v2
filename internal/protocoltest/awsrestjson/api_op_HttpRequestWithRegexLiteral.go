@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +35,28 @@ type HttpRequestWithRegexLiteralInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpRequestWithRegexLiteralInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpRequestWithRegexLiteralInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpRequestWithRegexLiteralInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Str != nil {
+		s.WriteString(schemas.HttpRequestWithRegexLiteralInput_str, *v.Str)
+	}
+}
+func (v *HttpRequestWithRegexLiteralInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpRequestWithRegexLiteralInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpRequestWithRegexLiteralInput_str:
+			v.Str = new(string)
+			return d.ReadString(schemas.HttpRequestWithRegexLiteralInput_str, v.Str)
+		}
+		return nil
+	})
+}
+
 type HttpRequestWithRegexLiteralOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,16 +64,29 @@ type HttpRequestWithRegexLiteralOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpRequestWithRegexLiteralOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpRequestWithRegexLiteralOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *HttpRequestWithRegexLiteralOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationHttpRequestWithRegexLiteralMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpHttpRequestWithRegexLiteral{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpRequestWithRegexLiteral, schemas.HttpRequestWithRegexLiteralInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpRequestWithRegexLiteral{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpRequestWithRegexLiteral, schemas.HttpRequestWithRegexLiteralInput, nil), output: &HttpRequestWithRegexLiteralOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "HttpRequestWithRegexLiteral"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type ResetRuntimeLogConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetRuntimeLogConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetRuntimeLogConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetRuntimeLogConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedThingId != nil {
+		s.WriteString(schemas.ResetRuntimeLogConfigurationRequest_ManagedThingId, *v.ManagedThingId)
+	}
+}
+
 type ResetRuntimeLogConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,16 +57,29 @@ type ResetRuntimeLogConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetRuntimeLogConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetRuntimeLogConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ResetRuntimeLogConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResetRuntimeLogConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpResetRuntimeLogConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetRuntimeLogConfiguration, schemas.ResetRuntimeLogConfigurationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpResetRuntimeLogConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetRuntimeLogConfiguration, schemas.ResetRuntimeLogConfigurationRequest, nil), output: &ResetRuntimeLogConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ResetRuntimeLogConfiguration"); err != nil {

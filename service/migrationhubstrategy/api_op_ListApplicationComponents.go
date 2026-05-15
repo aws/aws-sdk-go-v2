@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,63 @@ type ListApplicationComponentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationComponentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationComponentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationComponentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationComponentCriteria != "" {
+		s.WriteString(schemas.ListApplicationComponentsRequest_applicationComponentCriteria, string(v.ApplicationComponentCriteria))
+	}
+	if v.FilterValue != nil {
+		s.WriteString(schemas.ListApplicationComponentsRequest_filterValue, *v.FilterValue)
+	}
+	serializeGroupIds(s, schemas.ListApplicationComponentsRequest_groupIdFilter, v.GroupIdFilter)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListApplicationComponentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationComponentsRequest_nextToken, *v.NextToken)
+	}
+	if v.Sort != "" {
+		s.WriteString(schemas.ListApplicationComponentsRequest_sort, string(v.Sort))
+	}
+}
+func (v *ListApplicationComponentsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApplicationComponentsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApplicationComponentsRequest_applicationComponentCriteria:
+			var ev string
+			if err := d.ReadString(schemas.ListApplicationComponentsRequest_applicationComponentCriteria, &ev); err != nil {
+				return err
+			}
+			v.ApplicationComponentCriteria = types.ApplicationComponentCriteria(ev)
+			return nil
+		case schemas.ListApplicationComponentsRequest_filterValue:
+			v.FilterValue = new(string)
+			return d.ReadString(schemas.ListApplicationComponentsRequest_filterValue, v.FilterValue)
+		case schemas.ListApplicationComponentsRequest_groupIdFilter:
+			return deserializeGroupIds(d, schemas.ListApplicationComponentsRequest_groupIdFilter, &v.GroupIdFilter)
+		case schemas.ListApplicationComponentsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListApplicationComponentsRequest_maxResults, v.MaxResults)
+		case schemas.ListApplicationComponentsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApplicationComponentsRequest_nextToken, v.NextToken)
+		case schemas.ListApplicationComponentsRequest_sort:
+			var ev string
+			if err := d.ReadString(schemas.ListApplicationComponentsRequest_sort, &ev); err != nil {
+				return err
+			}
+			v.Sort = types.SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type ListApplicationComponentsOutput struct {
 
 	//  The list of application components with detailed information about each
@@ -73,16 +132,38 @@ type ListApplicationComponentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationComponentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationComponentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationComponentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationComponentDetails(s, schemas.ListApplicationComponentsResponse_applicationComponentInfos, v.ApplicationComponentInfos)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationComponentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListApplicationComponentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApplicationComponentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApplicationComponentsResponse_applicationComponentInfos:
+			return deserializeApplicationComponentDetails(d, schemas.ListApplicationComponentsResponse_applicationComponentInfos, &v.ApplicationComponentInfos)
+		case schemas.ListApplicationComponentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApplicationComponentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApplicationComponentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApplicationComponents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationComponents, schemas.ListApplicationComponentsRequest, schemas.ListApplicationComponentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApplicationComponents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationComponents, schemas.ListApplicationComponentsRequest, schemas.ListApplicationComponentsResponse), output: &ListApplicationComponentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListApplicationComponents"); err != nil {

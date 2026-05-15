@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,24 @@ type ListAppInstanceUserEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppInstanceUserEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppInstanceUserEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppInstanceUserEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceUserArn != nil {
+		s.WriteString(schemas.ListAppInstanceUserEndpointsRequest_AppInstanceUserArn, *v.AppInstanceUserArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppInstanceUserEndpointsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppInstanceUserEndpointsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAppInstanceUserEndpointsOutput struct {
 
 	// The information for each requested AppInstanceUserEndpoint .
@@ -59,16 +79,26 @@ type ListAppInstanceUserEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppInstanceUserEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppInstanceUserEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppInstanceUserEndpointsResponse_AppInstanceUserEndpoints:
+			return deserializeAppInstanceUserEndpointSummaryList(d, schemas.ListAppInstanceUserEndpointsResponse_AppInstanceUserEndpoints, &v.AppInstanceUserEndpoints)
+		case schemas.ListAppInstanceUserEndpointsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppInstanceUserEndpointsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppInstanceUserEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppInstanceUserEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppInstanceUserEndpoints, schemas.ListAppInstanceUserEndpointsRequest, schemas.ListAppInstanceUserEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppInstanceUserEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppInstanceUserEndpoints, schemas.ListAppInstanceUserEndpointsRequest, schemas.ListAppInstanceUserEndpointsResponse), output: &ListAppInstanceUserEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAppInstanceUserEndpoints"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/rum/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rum/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,44 @@ type DeleteRumMetricsDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRumMetricsDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRumMetricsDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRumMetricsDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppMonitorName != nil {
+		s.WriteString(schemas.DeleteRumMetricsDestinationRequest_AppMonitorName, *v.AppMonitorName)
+	}
+	if v.Destination != "" {
+		s.WriteString(schemas.DeleteRumMetricsDestinationRequest_Destination, string(v.Destination))
+	}
+	if v.DestinationArn != nil {
+		s.WriteString(schemas.DeleteRumMetricsDestinationRequest_DestinationArn, *v.DestinationArn)
+	}
+}
+func (v *DeleteRumMetricsDestinationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRumMetricsDestinationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRumMetricsDestinationRequest_AppMonitorName:
+			v.AppMonitorName = new(string)
+			return d.ReadString(schemas.DeleteRumMetricsDestinationRequest_AppMonitorName, v.AppMonitorName)
+		case schemas.DeleteRumMetricsDestinationRequest_Destination:
+			var ev string
+			if err := d.ReadString(schemas.DeleteRumMetricsDestinationRequest_Destination, &ev); err != nil {
+				return err
+			}
+			v.Destination = types.MetricDestination(ev)
+			return nil
+		case schemas.DeleteRumMetricsDestinationRequest_DestinationArn:
+			v.DestinationArn = new(string)
+			return d.ReadString(schemas.DeleteRumMetricsDestinationRequest_DestinationArn, v.DestinationArn)
+		}
+		return nil
+	})
+}
+
 type DeleteRumMetricsDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,16 +96,29 @@ type DeleteRumMetricsDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRumMetricsDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRumMetricsDestinationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRumMetricsDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRumMetricsDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRumMetricsDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRumMetricsDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRumMetricsDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRumMetricsDestination, schemas.DeleteRumMetricsDestinationRequest, schemas.DeleteRumMetricsDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRumMetricsDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRumMetricsDestination, schemas.DeleteRumMetricsDestinationRequest, schemas.DeleteRumMetricsDestinationResponse), output: &DeleteRumMetricsDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteRumMetricsDestination"); err != nil {

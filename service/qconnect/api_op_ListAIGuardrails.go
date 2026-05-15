@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,24 @@ type ListAIGuardrailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAIGuardrailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAIGuardrailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAIGuardrailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssistantId != nil {
+		s.WriteString(schemas.ListAIGuardrailsRequest_assistantId, *v.AssistantId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAIGuardrailsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAIGuardrailsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAIGuardrailsOutput struct {
 
 	// The summaries of the AI Guardrails.
@@ -62,16 +82,26 @@ type ListAIGuardrailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAIGuardrailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAIGuardrailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAIGuardrailsResponse_aiGuardrailSummaries:
+			return deserializeAIGuardrailSummariesList(d, schemas.ListAIGuardrailsResponse_aiGuardrailSummaries, &v.AiGuardrailSummaries)
+		case schemas.ListAIGuardrailsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAIGuardrailsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAIGuardrailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAIGuardrails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAIGuardrails, schemas.ListAIGuardrailsRequest, schemas.ListAIGuardrailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAIGuardrails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAIGuardrails, schemas.ListAIGuardrailsRequest, schemas.ListAIGuardrailsResponse), output: &ListAIGuardrailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAIGuardrails"); err != nil {

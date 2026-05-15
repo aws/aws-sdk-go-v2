@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,24 @@ type UpdateAssertionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssertionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssertionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssertionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssertionId != nil {
+		s.WriteString(schemas.UpdateAssertionRequest_assertionId, *v.AssertionId)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.UpdateAssertionRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.UpdateAssertionRequest_text, *v.Text)
+	}
+}
+
 type UpdateAssertionOutput struct {
 
 	// The updated assertion.
@@ -58,16 +78,24 @@ type UpdateAssertionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssertionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAssertionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAssertionResponse_assertion:
+			v.Assertion = &types.Assertion{}
+			return v.Assertion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAssertionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAssertion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssertion, schemas.UpdateAssertionRequest, schemas.UpdateAssertionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAssertion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssertion, schemas.UpdateAssertionRequest, schemas.UpdateAssertionResponse), output: &UpdateAssertionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAssertion"); err != nil {

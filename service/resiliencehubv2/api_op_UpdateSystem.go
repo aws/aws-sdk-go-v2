@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,24 @@ type UpdateSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSystemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSystemRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSystemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSystemRequest_description, *v.Description)
+	}
+	if v.SharingEnabled != nil {
+		s.WriteBool(schemas.UpdateSystemRequest_sharingEnabled, *v.SharingEnabled)
+	}
+	if v.SystemArn != nil {
+		s.WriteString(schemas.UpdateSystemRequest_systemArn, *v.SystemArn)
+	}
+}
+
 type UpdateSystemOutput struct {
 
 	// The updated system.
@@ -56,16 +76,24 @@ type UpdateSystemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSystemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSystemResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSystemResponse_system:
+			v.System = &types.System{}
+			return v.System.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSystem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSystem, schemas.UpdateSystemRequest, schemas.UpdateSystemResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSystem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSystem, schemas.UpdateSystemRequest, schemas.UpdateSystemResponse), output: &UpdateSystemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSystem"); err != nil {

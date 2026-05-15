@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -67,6 +69,29 @@ type CreateGatewayRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGatewayRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGatewayRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGatewayRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActions(s, schemas.CreateGatewayRuleRequest_actions, v.Actions)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateGatewayRuleRequest_clientToken, *v.ClientToken)
+	}
+	serializeConditions(s, schemas.CreateGatewayRuleRequest_conditions, v.Conditions)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateGatewayRuleRequest_description, *v.Description)
+	}
+	if v.GatewayIdentifier != nil {
+		s.WriteString(schemas.CreateGatewayRuleRequest_gatewayIdentifier, *v.GatewayIdentifier)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.CreateGatewayRuleRequest_priority, *v.Priority)
+	}
+}
+
 type CreateGatewayRuleOutput struct {
 
 	// The actions to take when the rule conditions are met.
@@ -115,16 +140,50 @@ type CreateGatewayRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGatewayRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGatewayRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGatewayRuleResponse_actions:
+			return deserializeActions(d, schemas.CreateGatewayRuleResponse_actions, &v.Actions)
+		case schemas.CreateGatewayRuleResponse_conditions:
+			return deserializeConditions(d, schemas.CreateGatewayRuleResponse_conditions, &v.Conditions)
+		case schemas.CreateGatewayRuleResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateGatewayRuleResponse_createdAt, v.CreatedAt)
+		case schemas.CreateGatewayRuleResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateGatewayRuleResponse_description, v.Description)
+		case schemas.CreateGatewayRuleResponse_gatewayArn:
+			v.GatewayArn = new(string)
+			return d.ReadString(schemas.CreateGatewayRuleResponse_gatewayArn, v.GatewayArn)
+		case schemas.CreateGatewayRuleResponse_priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.CreateGatewayRuleResponse_priority, v.Priority)
+		case schemas.CreateGatewayRuleResponse_ruleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.CreateGatewayRuleResponse_ruleId, v.RuleId)
+		case schemas.CreateGatewayRuleResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateGatewayRuleResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GatewayRuleStatus(ev)
+			return nil
+		case schemas.CreateGatewayRuleResponse_system:
+			v.System = &types.SystemManagedBlock{}
+			return v.System.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGatewayRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGatewayRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGatewayRule, schemas.CreateGatewayRuleRequest, schemas.CreateGatewayRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGatewayRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGatewayRule, schemas.CreateGatewayRuleRequest, schemas.CreateGatewayRuleResponse), output: &CreateGatewayRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateGatewayRule"); err != nil {

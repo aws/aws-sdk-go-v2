@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +61,30 @@ type ListTrainedModelVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrainedModelVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrainedModelVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrainedModelVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTrainedModelVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.ListTrainedModelVersionsRequest_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrainedModelVersionsRequest_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListTrainedModelVersionsRequest_status, string(v.Status))
+	}
+	if v.TrainedModelArn != nil {
+		s.WriteString(schemas.ListTrainedModelVersionsRequest_trainedModelArn, *v.TrainedModelArn)
+	}
+}
+
 type ListTrainedModelVersionsOutput struct {
 
 	// A list of trained model versions that match the specified criteria. Each entry
@@ -79,16 +105,26 @@ type ListTrainedModelVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrainedModelVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTrainedModelVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTrainedModelVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTrainedModelVersionsResponse_nextToken, v.NextToken)
+		case schemas.ListTrainedModelVersionsResponse_trainedModels:
+			return deserializeTrainedModelList(d, schemas.ListTrainedModelVersionsResponse_trainedModels, &v.TrainedModels)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTrainedModelVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTrainedModelVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrainedModelVersions, schemas.ListTrainedModelVersionsRequest, schemas.ListTrainedModelVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTrainedModelVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrainedModelVersions, schemas.ListTrainedModelVersionsRequest, schemas.ListTrainedModelVersionsResponse), output: &ListTrainedModelVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTrainedModelVersions"); err != nil {

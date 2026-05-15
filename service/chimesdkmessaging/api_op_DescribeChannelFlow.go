@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type DescribeChannelFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChannelFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChannelFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChannelFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelFlowArn != nil {
+		s.WriteString(schemas.DescribeChannelFlowRequest_ChannelFlowArn, *v.ChannelFlowArn)
+	}
+}
+
 type DescribeChannelFlowOutput struct {
 
 	// The channel flow details.
@@ -49,16 +63,24 @@ type DescribeChannelFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChannelFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeChannelFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeChannelFlowResponse_ChannelFlow:
+			v.ChannelFlow = &types.ChannelFlow{}
+			return v.ChannelFlow.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeChannelFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeChannelFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChannelFlow, schemas.DescribeChannelFlowRequest, schemas.DescribeChannelFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeChannelFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChannelFlow, schemas.DescribeChannelFlowRequest, schemas.DescribeChannelFlowResponse), output: &DescribeChannelFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeChannelFlow"); err != nil {

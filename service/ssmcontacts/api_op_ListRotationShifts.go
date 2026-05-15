@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -54,6 +56,30 @@ type ListRotationShiftsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRotationShiftsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRotationShiftsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRotationShiftsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListRotationShiftsRequest_EndTime, *v.EndTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRotationShiftsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRotationShiftsRequest_NextToken, *v.NextToken)
+	}
+	if v.RotationId != nil {
+		s.WriteString(schemas.ListRotationShiftsRequest_RotationId, *v.RotationId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListRotationShiftsRequest_StartTime, *v.StartTime)
+	}
+}
+
 type ListRotationShiftsOutput struct {
 
 	// The token for the next set of items to return. Use this token to get the next
@@ -69,16 +95,26 @@ type ListRotationShiftsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRotationShiftsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRotationShiftsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRotationShiftsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRotationShiftsResult_NextToken, v.NextToken)
+		case schemas.ListRotationShiftsResult_RotationShifts:
+			return deserializeRotationShifts(d, schemas.ListRotationShiftsResult_RotationShifts, &v.RotationShifts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRotationShiftsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRotationShifts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRotationShifts, schemas.ListRotationShiftsRequest, schemas.ListRotationShiftsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRotationShifts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRotationShifts, schemas.ListRotationShiftsRequest, schemas.ListRotationShiftsResult), output: &ListRotationShiftsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRotationShifts"); err != nil {

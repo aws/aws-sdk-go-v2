@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type DescribeDatasetInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeDatasetRequest_Name, *v.Name)
+	}
 }
 
 type DescribeDatasetOutput struct {
@@ -89,16 +103,64 @@ type DescribeDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDatasetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDatasetResponse_CreateDate:
+			v.CreateDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetResponse_CreateDate, v.CreateDate)
+		case schemas.DescribeDatasetResponse_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_CreatedBy, v.CreatedBy)
+		case schemas.DescribeDatasetResponse_Format:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDatasetResponse_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = types.InputFormat(ev)
+			return nil
+		case schemas.DescribeDatasetResponse_FormatOptions:
+			v.FormatOptions = &types.FormatOptions{}
+			return v.FormatOptions.Deserialize(d)
+		case schemas.DescribeDatasetResponse_Input:
+			v.Input = &types.Input{}
+			return v.Input.Deserialize(d)
+		case schemas.DescribeDatasetResponse_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_LastModifiedBy, v.LastModifiedBy)
+		case schemas.DescribeDatasetResponse_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.DescribeDatasetResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_Name, v.Name)
+		case schemas.DescribeDatasetResponse_PathOptions:
+			v.PathOptions = &types.PathOptions{}
+			return v.PathOptions.Deserialize(d)
+		case schemas.DescribeDatasetResponse_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_ResourceArn, v.ResourceArn)
+		case schemas.DescribeDatasetResponse_Source:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDatasetResponse_Source, &ev); err != nil {
+				return err
+			}
+			v.Source = types.Source(ev)
+			return nil
+		case schemas.DescribeDatasetResponse_Tags:
+			return deserializeTagMap(d, schemas.DescribeDatasetResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataset, schemas.DescribeDatasetRequest, schemas.DescribeDatasetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataset, schemas.DescribeDatasetRequest, schemas.DescribeDatasetResponse), output: &DescribeDatasetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDataset"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -78,6 +80,68 @@ type RegisterApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterApplicationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.RegisterApplicationInput_ApplicationId, *v.ApplicationId)
+	}
+	if v.ApplicationType != "" {
+		s.WriteString(schemas.RegisterApplicationInput_ApplicationType, string(v.ApplicationType))
+	}
+	serializeComponentInfoList(s, schemas.RegisterApplicationInput_ComponentsInfo, v.ComponentsInfo)
+	serializeApplicationCredentialList(s, schemas.RegisterApplicationInput_Credentials, v.Credentials)
+	if v.DatabaseArn != nil {
+		s.WriteString(schemas.RegisterApplicationInput_DatabaseArn, *v.DatabaseArn)
+	}
+	serializeInstanceList(s, schemas.RegisterApplicationInput_Instances, v.Instances)
+	if v.SapInstanceNumber != nil {
+		s.WriteString(schemas.RegisterApplicationInput_SapInstanceNumber, *v.SapInstanceNumber)
+	}
+	if v.Sid != nil {
+		s.WriteString(schemas.RegisterApplicationInput_Sid, *v.Sid)
+	}
+	serializeTagMap(s, schemas.RegisterApplicationInput_Tags, v.Tags)
+}
+func (v *RegisterApplicationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterApplicationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterApplicationInput_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.RegisterApplicationInput_ApplicationId, v.ApplicationId)
+		case schemas.RegisterApplicationInput_ApplicationType:
+			var ev string
+			if err := d.ReadString(schemas.RegisterApplicationInput_ApplicationType, &ev); err != nil {
+				return err
+			}
+			v.ApplicationType = types.ApplicationType(ev)
+			return nil
+		case schemas.RegisterApplicationInput_ComponentsInfo:
+			return deserializeComponentInfoList(d, schemas.RegisterApplicationInput_ComponentsInfo, &v.ComponentsInfo)
+		case schemas.RegisterApplicationInput_Credentials:
+			return deserializeApplicationCredentialList(d, schemas.RegisterApplicationInput_Credentials, &v.Credentials)
+		case schemas.RegisterApplicationInput_DatabaseArn:
+			v.DatabaseArn = new(string)
+			return d.ReadString(schemas.RegisterApplicationInput_DatabaseArn, v.DatabaseArn)
+		case schemas.RegisterApplicationInput_Instances:
+			return deserializeInstanceList(d, schemas.RegisterApplicationInput_Instances, &v.Instances)
+		case schemas.RegisterApplicationInput_SapInstanceNumber:
+			v.SapInstanceNumber = new(string)
+			return d.ReadString(schemas.RegisterApplicationInput_SapInstanceNumber, v.SapInstanceNumber)
+		case schemas.RegisterApplicationInput_Sid:
+			v.Sid = new(string)
+			return d.ReadString(schemas.RegisterApplicationInput_Sid, v.Sid)
+		case schemas.RegisterApplicationInput_Tags:
+			return deserializeTagMap(d, schemas.RegisterApplicationInput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type RegisterApplicationOutput struct {
 
 	// The application registered with AWS Systems Manager for SAP.
@@ -92,16 +156,43 @@ type RegisterApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterApplicationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Application != nil {
+		s.WriteStruct(schemas.RegisterApplicationOutput_Application)
+		v.Application.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.RegisterApplicationOutput_OperationId, *v.OperationId)
+	}
+}
+func (v *RegisterApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterApplicationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterApplicationOutput_Application:
+			v.Application = &types.Application{}
+			return v.Application.Deserialize(d)
+		case schemas.RegisterApplicationOutput_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.RegisterApplicationOutput_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterApplication, schemas.RegisterApplicationInput, schemas.RegisterApplicationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterApplication, schemas.RegisterApplicationInput, schemas.RegisterApplicationOutput), output: &RegisterApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterApplication"); err != nil {

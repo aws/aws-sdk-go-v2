@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -31,6 +33,25 @@ type MalformedListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MalformedListInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSimpleList(s, schemas.MalformedListInput_bodyList, v.BodyList)
+}
+func (v *MalformedListInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MalformedListInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MalformedListInput_bodyList:
+			return deserializeSimpleList(d, schemas.MalformedListInput_bodyList, &v.BodyList)
+		}
+		return nil
+	})
+}
+
 type MalformedListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -38,16 +59,29 @@ type MalformedListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *MalformedListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMalformedListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpMalformedList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedList, schemas.MalformedListInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMalformedList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedList, schemas.MalformedListInput, nil), output: &MalformedListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "MalformedList"); err != nil {

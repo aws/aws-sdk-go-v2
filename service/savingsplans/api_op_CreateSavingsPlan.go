@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/savingsplans/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -59,6 +61,31 @@ type CreateSavingsPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSavingsPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSavingsPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSavingsPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateSavingsPlanRequest_clientToken, *v.ClientToken)
+	}
+	if v.Commitment != nil {
+		s.WriteString(schemas.CreateSavingsPlanRequest_commitment, *v.Commitment)
+	}
+	if v.PurchaseTime != nil {
+		s.WriteTime(schemas.CreateSavingsPlanRequest_purchaseTime, *v.PurchaseTime)
+	}
+	if v.SavingsPlanOfferingId != nil {
+		s.WriteString(schemas.CreateSavingsPlanRequest_savingsPlanOfferingId, *v.SavingsPlanOfferingId)
+	}
+	serializeTagMap(s, schemas.CreateSavingsPlanRequest_tags, v.Tags)
+	if v.UpfrontPaymentAmount != nil {
+		s.WriteString(schemas.CreateSavingsPlanRequest_upfrontPaymentAmount, *v.UpfrontPaymentAmount)
+	}
+}
+
 type CreateSavingsPlanOutput struct {
 
 	// The ID of the Savings Plan.
@@ -70,16 +97,24 @@ type CreateSavingsPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSavingsPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSavingsPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSavingsPlanResponse_savingsPlanId:
+			v.SavingsPlanId = new(string)
+			return d.ReadString(schemas.CreateSavingsPlanResponse_savingsPlanId, v.SavingsPlanId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSavingsPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSavingsPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSavingsPlan, schemas.CreateSavingsPlanRequest, schemas.CreateSavingsPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSavingsPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSavingsPlan, schemas.CreateSavingsPlanRequest, schemas.CreateSavingsPlanResponse), output: &CreateSavingsPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSavingsPlan"); err != nil {

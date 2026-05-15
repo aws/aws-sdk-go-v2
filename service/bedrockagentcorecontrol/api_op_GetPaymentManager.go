@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type GetPaymentManagerInput struct {
 	PaymentManagerId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPaymentManagerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPaymentManagerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPaymentManagerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PaymentManagerId != nil {
+		s.WriteString(schemas.GetPaymentManagerRequest_paymentManagerId, *v.PaymentManagerId)
+	}
 }
 
 type GetPaymentManagerOutput struct {
@@ -105,16 +119,63 @@ type GetPaymentManagerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPaymentManagerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPaymentManagerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPaymentManagerResponse_authorizerConfiguration:
+			return deserializeAuthorizerConfiguration(d, schemas.GetPaymentManagerResponse_authorizerConfiguration, &v.AuthorizerConfiguration)
+		case schemas.GetPaymentManagerResponse_authorizerType:
+			var ev string
+			if err := d.ReadString(schemas.GetPaymentManagerResponse_authorizerType, &ev); err != nil {
+				return err
+			}
+			v.AuthorizerType = types.PaymentsAuthorizerType(ev)
+			return nil
+		case schemas.GetPaymentManagerResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPaymentManagerResponse_createdAt, v.CreatedAt)
+		case schemas.GetPaymentManagerResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetPaymentManagerResponse_description, v.Description)
+		case schemas.GetPaymentManagerResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPaymentManagerResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetPaymentManagerResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetPaymentManagerResponse_name, v.Name)
+		case schemas.GetPaymentManagerResponse_paymentManagerArn:
+			v.PaymentManagerArn = new(string)
+			return d.ReadString(schemas.GetPaymentManagerResponse_paymentManagerArn, v.PaymentManagerArn)
+		case schemas.GetPaymentManagerResponse_paymentManagerId:
+			v.PaymentManagerId = new(string)
+			return d.ReadString(schemas.GetPaymentManagerResponse_paymentManagerId, v.PaymentManagerId)
+		case schemas.GetPaymentManagerResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetPaymentManagerResponse_roleArn, v.RoleArn)
+		case schemas.GetPaymentManagerResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetPaymentManagerResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PaymentManagerStatus(ev)
+			return nil
+		case schemas.GetPaymentManagerResponse_tags:
+			return deserializeTagsMap(d, schemas.GetPaymentManagerResponse_tags, &v.Tags)
+		case schemas.GetPaymentManagerResponse_workloadIdentityDetails:
+			v.WorkloadIdentityDetails = &types.WorkloadIdentityDetails{}
+			return v.WorkloadIdentityDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPaymentManagerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPaymentManager{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPaymentManager, schemas.GetPaymentManagerRequest, schemas.GetPaymentManagerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPaymentManager{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPaymentManager, schemas.GetPaymentManagerRequest, schemas.GetPaymentManagerResponse), output: &GetPaymentManagerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPaymentManager"); err != nil {

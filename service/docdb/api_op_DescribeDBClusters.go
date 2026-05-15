@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -70,6 +72,25 @@ type DescribeDBClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBClustersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBClustersMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBClustersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.DescribeDBClustersMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	serializeFilterList(s, schemas.DescribeDBClustersMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBClustersMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBClustersMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 // Represents the output of DescribeDBClusters.
 type DescribeDBClustersOutput struct {
 
@@ -87,16 +108,26 @@ type DescribeDBClustersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBClustersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBClusterMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBClusterMessage_DBClusters:
+			return deserializeDBClusterList(d, schemas.DBClusterMessage_DBClusters, &v.DBClusters)
+		case schemas.DBClusterMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DBClusterMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBClusters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBClusters, schemas.DescribeDBClustersMessage, schemas.DBClusterMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBClusters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBClusters, schemas.DescribeDBClustersMessage, schemas.DBClusterMessage), output: &DescribeDBClustersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDBClusters"); err != nil {

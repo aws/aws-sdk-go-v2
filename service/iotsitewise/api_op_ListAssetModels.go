@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,6 +63,25 @@ type ListAssetModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListAssetModelsTypeFilter(s, schemas.ListAssetModelsRequest_assetModelTypes, v.AssetModelTypes)
+	if v.AssetModelVersion != nil {
+		s.WriteString(schemas.ListAssetModelsRequest_assetModelVersion, *v.AssetModelVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssetModelsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetModelsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAssetModelsOutput struct {
 
 	// A list that summarizes each asset model.
@@ -78,16 +99,26 @@ type ListAssetModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssetModelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssetModelsResponse_assetModelSummaries:
+			return deserializeAssetModelSummaries(d, schemas.ListAssetModelsResponse_assetModelSummaries, &v.AssetModelSummaries)
+		case schemas.ListAssetModelsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssetModelsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssetModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssetModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetModels, schemas.ListAssetModelsRequest, schemas.ListAssetModelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssetModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetModels, schemas.ListAssetModelsRequest, schemas.ListAssetModelsResponse), output: &ListAssetModelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAssetModels"); err != nil {

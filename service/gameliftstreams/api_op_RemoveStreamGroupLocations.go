@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,6 +67,19 @@ type RemoveStreamGroupLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveStreamGroupLocationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveStreamGroupLocationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveStreamGroupLocationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.RemoveStreamGroupLocationsInput_Identifier, *v.Identifier)
+	}
+	serializeLocationsList(s, schemas.RemoveStreamGroupLocationsInput_Locations, v.Locations)
+}
+
 type RemoveStreamGroupLocationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -72,16 +87,29 @@ type RemoveStreamGroupLocationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveStreamGroupLocationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveStreamGroupLocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveStreamGroupLocationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveStreamGroupLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveStreamGroupLocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveStreamGroupLocations, schemas.RemoveStreamGroupLocationsInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveStreamGroupLocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveStreamGroupLocations, schemas.RemoveStreamGroupLocationsInput, nil), output: &RemoveStreamGroupLocationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveStreamGroupLocations"); err != nil {

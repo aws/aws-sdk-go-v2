@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,6 +40,18 @@ type GetSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SpaceName != nil {
+		s.WriteString(schemas.GetSubscriptionRequest_spaceName, *v.SpaceName)
+	}
+}
+
 type GetSubscriptionOutput struct {
 
 	// The display name of the Amazon Web Services account used for billing for the
@@ -67,16 +81,33 @@ type GetSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSubscriptionResponse_awsAccountName:
+			v.AwsAccountName = new(string)
+			return d.ReadString(schemas.GetSubscriptionResponse_awsAccountName, v.AwsAccountName)
+		case schemas.GetSubscriptionResponse_pendingSubscriptionStartTime:
+			v.PendingSubscriptionStartTime = new(time.Time)
+			return d.ReadTime(schemas.GetSubscriptionResponse_pendingSubscriptionStartTime, v.PendingSubscriptionStartTime)
+		case schemas.GetSubscriptionResponse_pendingSubscriptionType:
+			v.PendingSubscriptionType = new(string)
+			return d.ReadString(schemas.GetSubscriptionResponse_pendingSubscriptionType, v.PendingSubscriptionType)
+		case schemas.GetSubscriptionResponse_subscriptionType:
+			v.SubscriptionType = new(string)
+			return d.ReadString(schemas.GetSubscriptionResponse_subscriptionType, v.SubscriptionType)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubscription, schemas.GetSubscriptionRequest, schemas.GetSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubscription, schemas.GetSubscriptionRequest, schemas.GetSubscriptionResponse), output: &GetSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSubscription"); err != nil {

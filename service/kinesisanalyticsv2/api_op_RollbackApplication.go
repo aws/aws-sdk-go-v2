@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,21 @@ type RollbackApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RollbackApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RollbackApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RollbackApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.RollbackApplicationRequest_ApplicationName, *v.ApplicationName)
+	}
+	if v.CurrentApplicationVersionId != nil {
+		s.WriteInt64(schemas.RollbackApplicationRequest_CurrentApplicationVersionId, *v.CurrentApplicationVersionId)
+	}
+}
+
 type RollbackApplicationOutput struct {
 
 	// Describes the application, including the application Amazon Resource Name
@@ -69,16 +86,27 @@ type RollbackApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RollbackApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RollbackApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RollbackApplicationResponse_ApplicationDetail:
+			v.ApplicationDetail = &types.ApplicationDetail{}
+			return v.ApplicationDetail.Deserialize(d)
+		case schemas.RollbackApplicationResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.RollbackApplicationResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRollbackApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRollbackApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RollbackApplication, schemas.RollbackApplicationRequest, schemas.RollbackApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRollbackApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RollbackApplication, schemas.RollbackApplicationRequest, schemas.RollbackApplicationResponse), output: &RollbackApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RollbackApplication"); err != nil {

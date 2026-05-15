@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,43 @@ type CreateJobForDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateJobForDevicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateJobForDevicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateJobForDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeviceIdList(s, schemas.CreateJobForDevicesRequest_DeviceIds, v.DeviceIds)
+	if v.DeviceJobConfig != nil {
+		s.WriteStruct(schemas.CreateJobForDevicesRequest_DeviceJobConfig)
+		v.DeviceJobConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.CreateJobForDevicesRequest_JobType, string(v.JobType))
+	}
+}
+func (v *CreateJobForDevicesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateJobForDevicesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateJobForDevicesRequest_DeviceIds:
+			return deserializeDeviceIdList(d, schemas.CreateJobForDevicesRequest_DeviceIds, &v.DeviceIds)
+		case schemas.CreateJobForDevicesRequest_DeviceJobConfig:
+			v.DeviceJobConfig = &types.DeviceJobConfig{}
+			return v.DeviceJobConfig.Deserialize(d)
+		case schemas.CreateJobForDevicesRequest_JobType:
+			var ev string
+			if err := d.ReadString(schemas.CreateJobForDevicesRequest_JobType, &ev); err != nil {
+				return err
+			}
+			v.JobType = types.JobType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type CreateJobForDevicesOutput struct {
 
 	// A list of jobs.
@@ -59,16 +98,32 @@ type CreateJobForDevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateJobForDevicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateJobForDevicesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateJobForDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobList(s, schemas.CreateJobForDevicesResponse_Jobs, v.Jobs)
+}
+func (v *CreateJobForDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateJobForDevicesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateJobForDevicesResponse_Jobs:
+			return deserializeJobList(d, schemas.CreateJobForDevicesResponse_Jobs, &v.Jobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateJobForDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateJobForDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateJobForDevices, schemas.CreateJobForDevicesRequest, schemas.CreateJobForDevicesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateJobForDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateJobForDevices, schemas.CreateJobForDevicesRequest, schemas.CreateJobForDevicesResponse), output: &CreateJobForDevicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateJobForDevices"); err != nil {

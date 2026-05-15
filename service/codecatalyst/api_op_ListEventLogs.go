@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -78,6 +80,33 @@ type ListEventLogsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventLogsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventLogsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventLogsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListEventLogsRequest_endTime, *v.EndTime)
+	}
+	if v.EventName != nil {
+		s.WriteString(schemas.ListEventLogsRequest_eventName, *v.EventName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEventLogsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventLogsRequest_nextToken, *v.NextToken)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.ListEventLogsRequest_spaceName, *v.SpaceName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListEventLogsRequest_startTime, *v.StartTime)
+	}
+}
+
 type ListEventLogsOutput struct {
 
 	// Information about each event retrieved in the list.
@@ -95,16 +124,26 @@ type ListEventLogsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventLogsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEventLogsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEventLogsResponse_items:
+			return deserializeEventLogEntries(d, schemas.ListEventLogsResponse_items, &v.Items)
+		case schemas.ListEventLogsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEventLogsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEventLogsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEventLogs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventLogs, schemas.ListEventLogsRequest, schemas.ListEventLogsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEventLogs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventLogs, schemas.ListEventLogsRequest, schemas.ListEventLogsResponse), output: &ListEventLogsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEventLogs"); err != nil {

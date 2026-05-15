@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -55,6 +57,28 @@ type DescribeRouteCalculatorInput struct {
 	CalculatorName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeRouteCalculatorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRouteCalculatorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRouteCalculatorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CalculatorName != nil {
+		s.WriteString(schemas.DescribeRouteCalculatorRequest_CalculatorName, *v.CalculatorName)
+	}
+}
+func (v *DescribeRouteCalculatorInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRouteCalculatorRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRouteCalculatorRequest_CalculatorName:
+			v.CalculatorName = new(string)
+			return d.ReadString(schemas.DescribeRouteCalculatorRequest_CalculatorName, v.CalculatorName)
+		}
+		return nil
+	})
 }
 
 type DescribeRouteCalculatorOutput struct {
@@ -128,16 +152,78 @@ type DescribeRouteCalculatorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRouteCalculatorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRouteCalculatorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRouteCalculatorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CalculatorArn != nil {
+		s.WriteString(schemas.DescribeRouteCalculatorResponse_CalculatorArn, *v.CalculatorArn)
+	}
+	if v.CalculatorName != nil {
+		s.WriteString(schemas.DescribeRouteCalculatorResponse_CalculatorName, *v.CalculatorName)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.DescribeRouteCalculatorResponse_CreateTime, *v.CreateTime)
+	}
+	if v.DataSource != nil {
+		s.WriteString(schemas.DescribeRouteCalculatorResponse_DataSource, *v.DataSource)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeRouteCalculatorResponse_Description, *v.Description)
+	}
+	if v.PricingPlan != "" {
+		s.WriteString(schemas.DescribeRouteCalculatorResponse_PricingPlan, string(v.PricingPlan))
+	}
+	serializeTagMap(s, schemas.DescribeRouteCalculatorResponse_Tags, v.Tags)
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.DescribeRouteCalculatorResponse_UpdateTime, *v.UpdateTime)
+	}
+}
+func (v *DescribeRouteCalculatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRouteCalculatorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRouteCalculatorResponse_CalculatorArn:
+			v.CalculatorArn = new(string)
+			return d.ReadString(schemas.DescribeRouteCalculatorResponse_CalculatorArn, v.CalculatorArn)
+		case schemas.DescribeRouteCalculatorResponse_CalculatorName:
+			v.CalculatorName = new(string)
+			return d.ReadString(schemas.DescribeRouteCalculatorResponse_CalculatorName, v.CalculatorName)
+		case schemas.DescribeRouteCalculatorResponse_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeRouteCalculatorResponse_CreateTime, v.CreateTime)
+		case schemas.DescribeRouteCalculatorResponse_DataSource:
+			v.DataSource = new(string)
+			return d.ReadString(schemas.DescribeRouteCalculatorResponse_DataSource, v.DataSource)
+		case schemas.DescribeRouteCalculatorResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeRouteCalculatorResponse_Description, v.Description)
+		case schemas.DescribeRouteCalculatorResponse_PricingPlan:
+			var ev string
+			if err := d.ReadString(schemas.DescribeRouteCalculatorResponse_PricingPlan, &ev); err != nil {
+				return err
+			}
+			v.PricingPlan = types.PricingPlan(ev)
+			return nil
+		case schemas.DescribeRouteCalculatorResponse_Tags:
+			return deserializeTagMap(d, schemas.DescribeRouteCalculatorResponse_Tags, &v.Tags)
+		case schemas.DescribeRouteCalculatorResponse_UpdateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeRouteCalculatorResponse_UpdateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRouteCalculatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRouteCalculator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRouteCalculator, schemas.DescribeRouteCalculatorRequest, schemas.DescribeRouteCalculatorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeRouteCalculator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRouteCalculator, schemas.DescribeRouteCalculatorRequest, schemas.DescribeRouteCalculatorResponse), output: &DescribeRouteCalculatorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRouteCalculator"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,21 @@ type GetFacetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFacetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFacetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFacetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetFacetRequest_Name, *v.Name)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.GetFacetRequest_SchemaArn, *v.SchemaArn)
+	}
+}
+
 type GetFacetOutput struct {
 
 	// The Facet structure that is associated with the facet.
@@ -55,16 +72,24 @@ type GetFacetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFacetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFacetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFacetResponse_Facet:
+			v.Facet = &types.Facet{}
+			return v.Facet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFacet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFacet, schemas.GetFacetRequest, schemas.GetFacetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFacet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFacet, schemas.GetFacetRequest, schemas.GetFacetResponse), output: &GetFacetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFacet"); err != nil {

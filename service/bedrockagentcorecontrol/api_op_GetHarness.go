@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type GetHarnessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHarnessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHarnessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHarnessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HarnessId != nil {
+		s.WriteString(schemas.GetHarnessRequest_harnessId, *v.HarnessId)
+	}
+}
+
 type GetHarnessOutput struct {
 
 	// The harness resource.
@@ -50,16 +64,24 @@ type GetHarnessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHarnessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetHarnessResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetHarnessResponse_harness:
+			v.Harness = &types.Harness{}
+			return v.Harness.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetHarnessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetHarness{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHarness, schemas.GetHarnessRequest, schemas.GetHarnessResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetHarness{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHarness, schemas.GetHarnessRequest, schemas.GetHarnessResponse), output: &GetHarnessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetHarness"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -77,6 +79,25 @@ type DescribeObjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeObjectsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeObjectsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeObjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluateExpressions != false {
+		s.WriteBool(schemas.DescribeObjectsInput_evaluateExpressions, v.EvaluateExpressions)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeObjectsInput_marker, *v.Marker)
+	}
+	serializeidList(s, schemas.DescribeObjectsInput_objectIds, v.ObjectIds)
+	if v.PipelineId != nil {
+		s.WriteString(schemas.DescribeObjectsInput_pipelineId, *v.PipelineId)
+	}
+}
+
 // Contains the output of DescribeObjects.
 type DescribeObjectsOutput struct {
 
@@ -99,16 +120,28 @@ type DescribeObjectsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeObjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeObjectsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeObjectsOutput_hasMoreResults:
+			return d.ReadBool(schemas.DescribeObjectsOutput_hasMoreResults, &v.HasMoreResults)
+		case schemas.DescribeObjectsOutput_marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeObjectsOutput_marker, v.Marker)
+		case schemas.DescribeObjectsOutput_pipelineObjects:
+			return deserializePipelineObjectList(d, schemas.DescribeObjectsOutput_pipelineObjects, &v.PipelineObjects)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeObjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeObjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeObjects, schemas.DescribeObjectsInput, schemas.DescribeObjectsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeObjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeObjects, schemas.DescribeObjectsInput, schemas.DescribeObjectsOutput), output: &DescribeObjectsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeObjects"); err != nil {

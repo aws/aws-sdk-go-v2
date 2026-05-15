@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -70,6 +72,36 @@ type ImportDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportDocumentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportDocumentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.ImportDocumentInput_appId, *v.AppId)
+	}
+	if v.CardId != nil {
+		s.WriteString(schemas.ImportDocumentInput_cardId, *v.CardId)
+	}
+	if v.FileContentsBase64 != nil {
+		s.WriteString(schemas.ImportDocumentInput_fileContentsBase64, *v.FileContentsBase64)
+	}
+	if v.FileName != nil {
+		s.WriteString(schemas.ImportDocumentInput_fileName, *v.FileName)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ImportDocumentInput_instanceId, *v.InstanceId)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.ImportDocumentInput_scope, string(v.Scope))
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.ImportDocumentInput_sessionId, *v.SessionId)
+	}
+}
+
 type ImportDocumentOutput struct {
 
 	// The unique identifier assigned to the uploaded file.
@@ -81,16 +113,24 @@ type ImportDocumentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportDocumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportDocumentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportDocumentOutput_fileId:
+			v.FileId = new(string)
+			return d.ReadString(schemas.ImportDocumentOutput_fileId, v.FileId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportDocument, schemas.ImportDocumentInput, schemas.ImportDocumentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportDocument, schemas.ImportDocumentInput, schemas.ImportDocumentOutput), output: &ImportDocumentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportDocument"); err != nil {

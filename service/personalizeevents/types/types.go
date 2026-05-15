@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/personalizeevents/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -31,6 +33,34 @@ type Action struct {
 	Properties *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Action) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Action)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Action) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionId != nil {
+		s.WriteString(schemas.Action_actionId, *v.ActionId)
+	}
+	if v.Properties != nil {
+		s.WriteString(schemas.Action_properties, *v.Properties)
+	}
+}
+func (v *Action) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Action, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Action_actionId:
+			v.ActionId = new(string)
+			return d.ReadString(schemas.Action_actionId, v.ActionId)
+		case schemas.Action_properties:
+			v.Properties = new(string)
+			return d.ReadString(schemas.Action_properties, v.Properties)
+		}
+		return nil
+	})
 }
 
 // Represents an action interaction event sent using the PutActionInteractions API.
@@ -114,6 +144,73 @@ type ActionInteraction struct {
 	UserId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActionInteraction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActionInteraction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActionInteraction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionId != nil {
+		s.WriteString(schemas.ActionInteraction_actionId, *v.ActionId)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.ActionInteraction_eventId, *v.EventId)
+	}
+	if v.EventType != nil {
+		s.WriteString(schemas.ActionInteraction_eventType, *v.EventType)
+	}
+	serializeActionImpression(s, schemas.ActionInteraction_impression, v.Impression)
+	if v.Properties != nil {
+		s.WriteString(schemas.ActionInteraction_properties, *v.Properties)
+	}
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.ActionInteraction_recommendationId, *v.RecommendationId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.ActionInteraction_sessionId, *v.SessionId)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.ActionInteraction_timestamp, *v.Timestamp)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.ActionInteraction_userId, *v.UserId)
+	}
+}
+func (v *ActionInteraction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActionInteraction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActionInteraction_actionId:
+			v.ActionId = new(string)
+			return d.ReadString(schemas.ActionInteraction_actionId, v.ActionId)
+		case schemas.ActionInteraction_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.ActionInteraction_eventId, v.EventId)
+		case schemas.ActionInteraction_eventType:
+			v.EventType = new(string)
+			return d.ReadString(schemas.ActionInteraction_eventType, v.EventType)
+		case schemas.ActionInteraction_impression:
+			return deserializeActionImpression(d, schemas.ActionInteraction_impression, &v.Impression)
+		case schemas.ActionInteraction_properties:
+			v.Properties = new(string)
+			return d.ReadString(schemas.ActionInteraction_properties, v.Properties)
+		case schemas.ActionInteraction_recommendationId:
+			v.RecommendationId = new(string)
+			return d.ReadString(schemas.ActionInteraction_recommendationId, v.RecommendationId)
+		case schemas.ActionInteraction_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.ActionInteraction_sessionId, v.SessionId)
+		case schemas.ActionInteraction_timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.ActionInteraction_timestamp, v.Timestamp)
+		case schemas.ActionInteraction_userId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.ActionInteraction_userId, v.UserId)
+		}
+		return nil
+	})
 }
 
 // Represents item interaction event information sent using the PutEvents API.
@@ -206,6 +303,75 @@ type Event struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Event) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Event)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Event) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventId != nil {
+		s.WriteString(schemas.Event_eventId, *v.EventId)
+	}
+	if v.EventType != nil {
+		s.WriteString(schemas.Event_eventType, *v.EventType)
+	}
+	if v.EventValue != nil {
+		s.WriteFloat32(schemas.Event_eventValue, *v.EventValue)
+	}
+	serializeImpression(s, schemas.Event_impression, v.Impression)
+	if v.ItemId != nil {
+		s.WriteString(schemas.Event_itemId, *v.ItemId)
+	}
+	if v.MetricAttribution != nil {
+		s.WriteStruct(schemas.Event_metricAttribution)
+		v.MetricAttribution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Properties != nil {
+		s.WriteString(schemas.Event_properties, *v.Properties)
+	}
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.Event_recommendationId, *v.RecommendationId)
+	}
+	if v.SentAt != nil {
+		s.WriteTime(schemas.Event_sentAt, *v.SentAt)
+	}
+}
+func (v *Event) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Event, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Event_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.Event_eventId, v.EventId)
+		case schemas.Event_eventType:
+			v.EventType = new(string)
+			return d.ReadString(schemas.Event_eventType, v.EventType)
+		case schemas.Event_eventValue:
+			v.EventValue = new(float32)
+			return d.ReadFloat32(schemas.Event_eventValue, v.EventValue)
+		case schemas.Event_impression:
+			return deserializeImpression(d, schemas.Event_impression, &v.Impression)
+		case schemas.Event_itemId:
+			v.ItemId = new(string)
+			return d.ReadString(schemas.Event_itemId, v.ItemId)
+		case schemas.Event_metricAttribution:
+			v.MetricAttribution = &MetricAttribution{}
+			return v.MetricAttribution.Deserialize(d)
+		case schemas.Event_properties:
+			v.Properties = new(string)
+			return d.ReadString(schemas.Event_properties, v.Properties)
+		case schemas.Event_recommendationId:
+			v.RecommendationId = new(string)
+			return d.ReadString(schemas.Event_recommendationId, v.RecommendationId)
+		case schemas.Event_sentAt:
+			v.SentAt = new(time.Time)
+			return d.ReadTime(schemas.Event_sentAt, v.SentAt)
+		}
+		return nil
+	})
+}
+
 // Represents item metadata added to an Items dataset using the PutItems API. For
 // more information see [Importing items individually].
 //
@@ -232,6 +398,34 @@ type Item struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Item) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Item)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Item) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ItemId != nil {
+		s.WriteString(schemas.Item_itemId, *v.ItemId)
+	}
+	if v.Properties != nil {
+		s.WriteString(schemas.Item_properties, *v.Properties)
+	}
+}
+func (v *Item) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Item, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Item_itemId:
+			v.ItemId = new(string)
+			return d.ReadString(schemas.Item_itemId, v.ItemId)
+		case schemas.Item_properties:
+			v.Properties = new(string)
+			return d.ReadString(schemas.Item_properties, v.Properties)
+		}
+		return nil
+	})
+}
+
 // Contains information about a metric attribution associated with an event. For
 // more information about metric attributions, see [Measuring impact of recommendations].
 //
@@ -244,6 +438,28 @@ type MetricAttribution struct {
 	EventAttributionSource *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetricAttribution) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricAttribution)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricAttribution) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventAttributionSource != nil {
+		s.WriteString(schemas.MetricAttribution_eventAttributionSource, *v.EventAttributionSource)
+	}
+}
+func (v *MetricAttribution) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricAttribution, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricAttribution_eventAttributionSource:
+			v.EventAttributionSource = new(string)
+			return d.ReadString(schemas.MetricAttribution_eventAttributionSource, v.EventAttributionSource)
+		}
+		return nil
+	})
 }
 
 // Represents user metadata added to a Users dataset using the PutUsers API. For
@@ -270,6 +486,34 @@ type User struct {
 	Properties *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *User) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.User)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Properties != nil {
+		s.WriteString(schemas.User_properties, *v.Properties)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.User_userId, *v.UserId)
+	}
+}
+func (v *User) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.User, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.User_properties:
+			v.Properties = new(string)
+			return d.ReadString(schemas.User_properties, v.Properties)
+		case schemas.User_userId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.User_userId, v.UserId)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

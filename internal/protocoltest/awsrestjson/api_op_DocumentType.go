@@ -7,6 +7,10 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/internal/document"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -35,6 +39,38 @@ type DocumentTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DocumentTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentTypeInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteDocument(schemas.DocumentTypeInputOutput_documentValue, &smithydocument.Opaque{Value: v.DocumentValue})
+	if v.StringValue != nil {
+		s.WriteString(schemas.DocumentTypeInputOutput_stringValue, *v.StringValue)
+	}
+}
+func (v *DocumentTypeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentTypeInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentTypeInputOutput_documentValue:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.DocumentTypeInputOutput_documentValue, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.DocumentValue = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.DocumentTypeInputOutput_stringValue:
+			v.StringValue = new(string)
+			return d.ReadString(schemas.DocumentTypeInputOutput_stringValue, v.StringValue)
+		}
+		return nil
+	})
+}
+
 type DocumentTypeOutput struct {
 	DocumentValue document.Interface
 
@@ -46,16 +82,45 @@ type DocumentTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DocumentTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentTypeInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteDocument(schemas.DocumentTypeInputOutput_documentValue, &smithydocument.Opaque{Value: v.DocumentValue})
+	if v.StringValue != nil {
+		s.WriteString(schemas.DocumentTypeInputOutput_stringValue, *v.StringValue)
+	}
+}
+func (v *DocumentTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentTypeInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentTypeInputOutput_documentValue:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.DocumentTypeInputOutput_documentValue, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.DocumentValue = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.DocumentTypeInputOutput_stringValue:
+			v.StringValue = new(string)
+			return d.ReadString(schemas.DocumentTypeInputOutput_stringValue, v.StringValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDocumentTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDocumentType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DocumentType, schemas.DocumentTypeInputOutput, schemas.DocumentTypeInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDocumentType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DocumentType, schemas.DocumentTypeInputOutput, schemas.DocumentTypeInputOutput), output: &DocumentTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DocumentType"); err != nil {

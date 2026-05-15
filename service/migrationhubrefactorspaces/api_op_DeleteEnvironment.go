@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -40,6 +42,28 @@ type DeleteEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentIdentifier != nil {
+		s.WriteString(schemas.DeleteEnvironmentRequest_EnvironmentIdentifier, *v.EnvironmentIdentifier)
+	}
+}
+func (v *DeleteEnvironmentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEnvironmentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEnvironmentRequest_EnvironmentIdentifier:
+			v.EnvironmentIdentifier = new(string)
+			return d.ReadString(schemas.DeleteEnvironmentRequest_EnvironmentIdentifier, v.EnvironmentIdentifier)
+		}
+		return nil
+	})
+}
+
 type DeleteEnvironmentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the environment.
@@ -63,16 +87,63 @@ type DeleteEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteEnvironmentResponse_Arn, *v.Arn)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DeleteEnvironmentResponse_EnvironmentId, *v.EnvironmentId)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.DeleteEnvironmentResponse_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteEnvironmentResponse_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DeleteEnvironmentResponse_State, string(v.State))
+	}
+}
+func (v *DeleteEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEnvironmentResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteEnvironmentResponse_Arn, v.Arn)
+		case schemas.DeleteEnvironmentResponse_EnvironmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.DeleteEnvironmentResponse_EnvironmentId, v.EnvironmentId)
+		case schemas.DeleteEnvironmentResponse_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.DeleteEnvironmentResponse_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.DeleteEnvironmentResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteEnvironmentResponse_Name, v.Name)
+		case schemas.DeleteEnvironmentResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DeleteEnvironmentResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.EnvironmentState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironment, schemas.DeleteEnvironmentRequest, schemas.DeleteEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironment, schemas.DeleteEnvironmentRequest, schemas.DeleteEnvironmentResponse), output: &DeleteEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteEnvironment"); err != nil {

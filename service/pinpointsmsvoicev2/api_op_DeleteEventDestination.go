@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,21 @@ type DeleteEventDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEventDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEventDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEventDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.DeleteEventDestinationRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.EventDestinationName != nil {
+		s.WriteString(schemas.DeleteEventDestinationRequest_EventDestinationName, *v.EventDestinationName)
+	}
+}
+
 type DeleteEventDestinationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the configuration set.
@@ -67,16 +84,30 @@ type DeleteEventDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEventDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEventDestinationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEventDestinationResult_ConfigurationSetArn:
+			v.ConfigurationSetArn = new(string)
+			return d.ReadString(schemas.DeleteEventDestinationResult_ConfigurationSetArn, v.ConfigurationSetArn)
+		case schemas.DeleteEventDestinationResult_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.DeleteEventDestinationResult_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.DeleteEventDestinationResult_EventDestination:
+			v.EventDestination = &types.EventDestination{}
+			return v.EventDestination.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEventDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteEventDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEventDestination, schemas.DeleteEventDestinationRequest, schemas.DeleteEventDestinationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteEventDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEventDestination, schemas.DeleteEventDestinationRequest, schemas.DeleteEventDestinationResult), output: &DeleteEventDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteEventDestination"); err != nil {

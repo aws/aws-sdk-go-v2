@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,33 @@ type ListPhoneNumbersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPhoneNumbersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPhoneNumbersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPhoneNumbersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterName != "" {
+		s.WriteString(schemas.ListPhoneNumbersRequest_FilterName, string(v.FilterName))
+	}
+	if v.FilterValue != nil {
+		s.WriteString(schemas.ListPhoneNumbersRequest_FilterValue, *v.FilterValue)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPhoneNumbersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPhoneNumbersRequest_NextToken, *v.NextToken)
+	}
+	if v.ProductType != "" {
+		s.WriteString(schemas.ListPhoneNumbersRequest_ProductType, string(v.ProductType))
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ListPhoneNumbersRequest_Status, *v.Status)
+	}
+}
+
 type ListPhoneNumbersOutput struct {
 
 	// The token used to return the next page of results.
@@ -66,16 +95,26 @@ type ListPhoneNumbersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPhoneNumbersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPhoneNumbersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPhoneNumbersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPhoneNumbersResponse_NextToken, v.NextToken)
+		case schemas.ListPhoneNumbersResponse_PhoneNumbers:
+			return deserializePhoneNumberList(d, schemas.ListPhoneNumbersResponse_PhoneNumbers, &v.PhoneNumbers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPhoneNumbersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPhoneNumbers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPhoneNumbers, schemas.ListPhoneNumbersRequest, schemas.ListPhoneNumbersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPhoneNumbers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPhoneNumbers, schemas.ListPhoneNumbersRequest, schemas.ListPhoneNumbersResponse), output: &ListPhoneNumbersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPhoneNumbers"); err != nil {

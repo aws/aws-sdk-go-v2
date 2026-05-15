@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -39,6 +41,21 @@ type DescribeComputationModelInput struct {
 	ComputationModelVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeComputationModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeComputationModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeComputationModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputationModelId != nil {
+		s.WriteString(schemas.DescribeComputationModelRequest_computationModelId, *v.ComputationModelId)
+	}
+	if v.ComputationModelVersion != nil {
+		s.WriteString(schemas.DescribeComputationModelRequest_computationModelVersion, *v.ComputationModelVersion)
+	}
 }
 
 type DescribeComputationModelOutput struct {
@@ -109,16 +126,52 @@ type DescribeComputationModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeComputationModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeComputationModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeComputationModelResponse_actionDefinitions:
+			return deserializeActionDefinitions(d, schemas.DescribeComputationModelResponse_actionDefinitions, &v.ActionDefinitions)
+		case schemas.DescribeComputationModelResponse_computationModelArn:
+			v.ComputationModelArn = new(string)
+			return d.ReadString(schemas.DescribeComputationModelResponse_computationModelArn, v.ComputationModelArn)
+		case schemas.DescribeComputationModelResponse_computationModelConfiguration:
+			v.ComputationModelConfiguration = &types.ComputationModelConfiguration{}
+			return v.ComputationModelConfiguration.Deserialize(d)
+		case schemas.DescribeComputationModelResponse_computationModelCreationDate:
+			v.ComputationModelCreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeComputationModelResponse_computationModelCreationDate, v.ComputationModelCreationDate)
+		case schemas.DescribeComputationModelResponse_computationModelDataBinding:
+			return deserializeComputationModelDataBinding(d, schemas.DescribeComputationModelResponse_computationModelDataBinding, &v.ComputationModelDataBinding)
+		case schemas.DescribeComputationModelResponse_computationModelDescription:
+			v.ComputationModelDescription = new(string)
+			return d.ReadString(schemas.DescribeComputationModelResponse_computationModelDescription, v.ComputationModelDescription)
+		case schemas.DescribeComputationModelResponse_computationModelId:
+			v.ComputationModelId = new(string)
+			return d.ReadString(schemas.DescribeComputationModelResponse_computationModelId, v.ComputationModelId)
+		case schemas.DescribeComputationModelResponse_computationModelLastUpdateDate:
+			v.ComputationModelLastUpdateDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeComputationModelResponse_computationModelLastUpdateDate, v.ComputationModelLastUpdateDate)
+		case schemas.DescribeComputationModelResponse_computationModelName:
+			v.ComputationModelName = new(string)
+			return d.ReadString(schemas.DescribeComputationModelResponse_computationModelName, v.ComputationModelName)
+		case schemas.DescribeComputationModelResponse_computationModelStatus:
+			v.ComputationModelStatus = &types.ComputationModelStatus{}
+			return v.ComputationModelStatus.Deserialize(d)
+		case schemas.DescribeComputationModelResponse_computationModelVersion:
+			v.ComputationModelVersion = new(string)
+			return d.ReadString(schemas.DescribeComputationModelResponse_computationModelVersion, v.ComputationModelVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeComputationModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeComputationModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComputationModel, schemas.DescribeComputationModelRequest, schemas.DescribeComputationModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeComputationModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComputationModel, schemas.DescribeComputationModelRequest, schemas.DescribeComputationModelResponse), output: &DescribeComputationModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeComputationModel"); err != nil {

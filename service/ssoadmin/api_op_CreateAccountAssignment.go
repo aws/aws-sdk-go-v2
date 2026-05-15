@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -82,6 +84,33 @@ type CreateAccountAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccountAssignmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccountAssignmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccountAssignmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.CreateAccountAssignmentRequest_InstanceArn, *v.InstanceArn)
+	}
+	if v.PermissionSetArn != nil {
+		s.WriteString(schemas.CreateAccountAssignmentRequest_PermissionSetArn, *v.PermissionSetArn)
+	}
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.CreateAccountAssignmentRequest_PrincipalId, *v.PrincipalId)
+	}
+	if v.PrincipalType != "" {
+		s.WriteString(schemas.CreateAccountAssignmentRequest_PrincipalType, string(v.PrincipalType))
+	}
+	if v.TargetId != nil {
+		s.WriteString(schemas.CreateAccountAssignmentRequest_TargetId, *v.TargetId)
+	}
+	if v.TargetType != "" {
+		s.WriteString(schemas.CreateAccountAssignmentRequest_TargetType, string(v.TargetType))
+	}
+}
+
 type CreateAccountAssignmentOutput struct {
 
 	// The status object for the account assignment creation operation.
@@ -93,16 +122,24 @@ type CreateAccountAssignmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccountAssignmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccountAssignmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccountAssignmentResponse_AccountAssignmentCreationStatus:
+			v.AccountAssignmentCreationStatus = &types.AccountAssignmentOperationStatus{}
+			return v.AccountAssignmentCreationStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAccountAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAccountAssignment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccountAssignment, schemas.CreateAccountAssignmentRequest, schemas.CreateAccountAssignmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAccountAssignment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccountAssignment, schemas.CreateAccountAssignmentRequest, schemas.CreateAccountAssignmentResponse), output: &CreateAccountAssignmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAccountAssignment"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/invoicing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -86,6 +88,49 @@ type PutProcurementPortalPreferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutProcurementPortalPreferenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutProcurementPortalPreferenceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutProcurementPortalPreferenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PutProcurementPortalPreferenceRequest_ClientToken, *v.ClientToken)
+	}
+	serializeContacts(s, schemas.PutProcurementPortalPreferenceRequest_Contacts, v.Contacts)
+	if v.EinvoiceDeliveryEnabled != nil {
+		s.WriteBool(schemas.PutProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled, *v.EinvoiceDeliveryEnabled)
+	}
+	if v.EinvoiceDeliveryPreference != nil {
+		s.WriteStruct(schemas.PutProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference)
+		v.EinvoiceDeliveryPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProcurementPortalInstanceEndpoint != nil {
+		s.WriteString(schemas.PutProcurementPortalPreferenceRequest_ProcurementPortalInstanceEndpoint, *v.ProcurementPortalInstanceEndpoint)
+	}
+	if v.ProcurementPortalPreferenceArn != nil {
+		s.WriteString(schemas.PutProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn, *v.ProcurementPortalPreferenceArn)
+	}
+	if v.ProcurementPortalSharedSecret != nil {
+		s.WriteString(schemas.PutProcurementPortalPreferenceRequest_ProcurementPortalSharedSecret, *v.ProcurementPortalSharedSecret)
+	}
+	if v.PurchaseOrderRetrievalEnabled != nil {
+		s.WriteBool(schemas.PutProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled, *v.PurchaseOrderRetrievalEnabled)
+	}
+	if v.Selector != nil {
+		s.WriteStruct(schemas.PutProcurementPortalPreferenceRequest_Selector)
+		v.Selector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestEnvPreference != nil {
+		s.WriteStruct(schemas.PutProcurementPortalPreferenceRequest_TestEnvPreference)
+		v.TestEnvPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutProcurementPortalPreferenceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated procurement portal preference.
@@ -99,16 +144,24 @@ type PutProcurementPortalPreferenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutProcurementPortalPreferenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutProcurementPortalPreferenceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn:
+			v.ProcurementPortalPreferenceArn = new(string)
+			return d.ReadString(schemas.PutProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn, v.ProcurementPortalPreferenceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutProcurementPortalPreferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPutProcurementPortalPreference{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutProcurementPortalPreference, schemas.PutProcurementPortalPreferenceRequest, schemas.PutProcurementPortalPreferenceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPutProcurementPortalPreference{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutProcurementPortalPreference, schemas.PutProcurementPortalPreferenceRequest, schemas.PutProcurementPortalPreferenceResponse), output: &PutProcurementPortalPreferenceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutProcurementPortalPreference"); err != nil {

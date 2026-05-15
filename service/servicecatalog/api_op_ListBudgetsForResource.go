@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,27 @@ type ListBudgetsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBudgetsForResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBudgetsForResourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBudgetsForResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.ListBudgetsForResourceInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.ListBudgetsForResourceInput_PageSize, v.PageSize)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.ListBudgetsForResourceInput_PageToken, *v.PageToken)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ListBudgetsForResourceInput_ResourceId, *v.ResourceId)
+	}
+}
+
 type ListBudgetsForResourceOutput struct {
 
 	// Information about the associated budgets.
@@ -66,16 +89,26 @@ type ListBudgetsForResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBudgetsForResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBudgetsForResourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBudgetsForResourceOutput_Budgets:
+			return deserializeBudgets(d, schemas.ListBudgetsForResourceOutput_Budgets, &v.Budgets)
+		case schemas.ListBudgetsForResourceOutput_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.ListBudgetsForResourceOutput_NextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBudgetsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListBudgetsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBudgetsForResource, schemas.ListBudgetsForResourceInput, schemas.ListBudgetsForResourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListBudgetsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBudgetsForResource, schemas.ListBudgetsForResourceInput, schemas.ListBudgetsForResourceOutput), output: &ListBudgetsForResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBudgetsForResource"); err != nil {

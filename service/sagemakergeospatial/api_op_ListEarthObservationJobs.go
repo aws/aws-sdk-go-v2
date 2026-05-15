@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,60 @@ type ListEarthObservationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEarthObservationJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEarthObservationJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEarthObservationJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEarthObservationJobInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEarthObservationJobInput_NextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteString(schemas.ListEarthObservationJobInput_SortBy, *v.SortBy)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListEarthObservationJobInput_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListEarthObservationJobInput_StatusEquals, string(v.StatusEquals))
+	}
+}
+func (v *ListEarthObservationJobsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEarthObservationJobInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEarthObservationJobInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListEarthObservationJobInput_MaxResults, v.MaxResults)
+		case schemas.ListEarthObservationJobInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEarthObservationJobInput_NextToken, v.NextToken)
+		case schemas.ListEarthObservationJobInput_SortBy:
+			v.SortBy = new(string)
+			return d.ReadString(schemas.ListEarthObservationJobInput_SortBy, v.SortBy)
+		case schemas.ListEarthObservationJobInput_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.ListEarthObservationJobInput_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = types.SortOrder(ev)
+			return nil
+		case schemas.ListEarthObservationJobInput_StatusEquals:
+			var ev string
+			if err := d.ReadString(schemas.ListEarthObservationJobInput_StatusEquals, &ev); err != nil {
+				return err
+			}
+			v.StatusEquals = types.EarthObservationJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type ListEarthObservationJobsOutput struct {
 
 	// Contains summary information about the Earth Observation jobs.
@@ -67,16 +123,38 @@ type ListEarthObservationJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEarthObservationJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEarthObservationJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEarthObservationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEarthObservationJobList(s, schemas.ListEarthObservationJobOutput_EarthObservationJobSummaries, v.EarthObservationJobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEarthObservationJobOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEarthObservationJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEarthObservationJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEarthObservationJobOutput_EarthObservationJobSummaries:
+			return deserializeEarthObservationJobList(d, schemas.ListEarthObservationJobOutput_EarthObservationJobSummaries, &v.EarthObservationJobSummaries)
+		case schemas.ListEarthObservationJobOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEarthObservationJobOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEarthObservationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEarthObservationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEarthObservationJobs, schemas.ListEarthObservationJobInput, schemas.ListEarthObservationJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEarthObservationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEarthObservationJobs, schemas.ListEarthObservationJobInput, schemas.ListEarthObservationJobOutput), output: &ListEarthObservationJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEarthObservationJobs"); err != nil {

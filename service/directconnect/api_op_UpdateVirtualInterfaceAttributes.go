@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,27 @@ type UpdateVirtualInterfaceAttributesInput struct {
 	VirtualInterfaceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateVirtualInterfaceAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVirtualInterfaceAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVirtualInterfaceAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableSiteLink != nil {
+		s.WriteBool(schemas.UpdateVirtualInterfaceAttributesRequest_enableSiteLink, *v.EnableSiteLink)
+	}
+	if v.Mtu != nil {
+		s.WriteInt32(schemas.UpdateVirtualInterfaceAttributesRequest_mtu, *v.Mtu)
+	}
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.UpdateVirtualInterfaceAttributesRequest_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
+	if v.VirtualInterfaceName != nil {
+		s.WriteString(schemas.UpdateVirtualInterfaceAttributesRequest_virtualInterfaceName, *v.VirtualInterfaceName)
+	}
 }
 
 // Information about a virtual interface.
@@ -202,16 +225,188 @@ type UpdateVirtualInterfaceAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVirtualInterfaceAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualInterface)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVirtualInterfaceAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressFamily != "" {
+		s.WriteString(schemas.VirtualInterface_addressFamily, string(v.AddressFamily))
+	}
+	if v.AmazonAddress != nil {
+		s.WriteString(schemas.VirtualInterface_amazonAddress, *v.AmazonAddress)
+	}
+	if v.AmazonSideAsn != nil {
+		s.WriteInt64(schemas.VirtualInterface_amazonSideAsn, *v.AmazonSideAsn)
+	}
+	if v.Asn != 0 {
+		s.WriteInt32(schemas.VirtualInterface_asn, v.Asn)
+	}
+	if v.AsnLong != nil {
+		s.WriteInt64(schemas.VirtualInterface_asnLong, *v.AsnLong)
+	}
+	if v.AuthKey != nil {
+		s.WriteString(schemas.VirtualInterface_authKey, *v.AuthKey)
+	}
+	if v.AwsDeviceV2 != nil {
+		s.WriteString(schemas.VirtualInterface_awsDeviceV2, *v.AwsDeviceV2)
+	}
+	if v.AwsLogicalDeviceId != nil {
+		s.WriteString(schemas.VirtualInterface_awsLogicalDeviceId, *v.AwsLogicalDeviceId)
+	}
+	serializeBGPPeerList(s, schemas.VirtualInterface_bgpPeers, v.BgpPeers)
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.VirtualInterface_connectionId, *v.ConnectionId)
+	}
+	if v.CustomerAddress != nil {
+		s.WriteString(schemas.VirtualInterface_customerAddress, *v.CustomerAddress)
+	}
+	if v.CustomerRouterConfig != nil {
+		s.WriteString(schemas.VirtualInterface_customerRouterConfig, *v.CustomerRouterConfig)
+	}
+	if v.DirectConnectGatewayId != nil {
+		s.WriteString(schemas.VirtualInterface_directConnectGatewayId, *v.DirectConnectGatewayId)
+	}
+	if v.JumboFrameCapable != nil {
+		s.WriteBool(schemas.VirtualInterface_jumboFrameCapable, *v.JumboFrameCapable)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.VirtualInterface_location, *v.Location)
+	}
+	if v.Mtu != nil {
+		s.WriteInt32(schemas.VirtualInterface_mtu, *v.Mtu)
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.VirtualInterface_ownerAccount, *v.OwnerAccount)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.VirtualInterface_region, *v.Region)
+	}
+	serializeRouteFilterPrefixList(s, schemas.VirtualInterface_routeFilterPrefixes, v.RouteFilterPrefixes)
+	if v.SiteLinkEnabled != nil {
+		s.WriteBool(schemas.VirtualInterface_siteLinkEnabled, *v.SiteLinkEnabled)
+	}
+	serializeTagList(s, schemas.VirtualInterface_tags, v.Tags)
+	if v.VirtualGatewayId != nil {
+		s.WriteString(schemas.VirtualInterface_virtualGatewayId, *v.VirtualGatewayId)
+	}
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.VirtualInterface_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
+	if v.VirtualInterfaceName != nil {
+		s.WriteString(schemas.VirtualInterface_virtualInterfaceName, *v.VirtualInterfaceName)
+	}
+	if v.VirtualInterfaceState != "" {
+		s.WriteString(schemas.VirtualInterface_virtualInterfaceState, string(v.VirtualInterfaceState))
+	}
+	if v.VirtualInterfaceType != nil {
+		s.WriteString(schemas.VirtualInterface_virtualInterfaceType, *v.VirtualInterfaceType)
+	}
+	if v.Vlan != 0 {
+		s.WriteInt32(schemas.VirtualInterface_vlan, v.Vlan)
+	}
+}
+func (v *UpdateVirtualInterfaceAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualInterface, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualInterface_addressFamily:
+			var ev string
+			if err := d.ReadString(schemas.VirtualInterface_addressFamily, &ev); err != nil {
+				return err
+			}
+			v.AddressFamily = types.AddressFamily(ev)
+			return nil
+		case schemas.VirtualInterface_amazonAddress:
+			v.AmazonAddress = new(string)
+			return d.ReadString(schemas.VirtualInterface_amazonAddress, v.AmazonAddress)
+		case schemas.VirtualInterface_amazonSideAsn:
+			v.AmazonSideAsn = new(int64)
+			return d.ReadInt64(schemas.VirtualInterface_amazonSideAsn, v.AmazonSideAsn)
+		case schemas.VirtualInterface_asn:
+			return d.ReadInt32(schemas.VirtualInterface_asn, &v.Asn)
+		case schemas.VirtualInterface_asnLong:
+			v.AsnLong = new(int64)
+			return d.ReadInt64(schemas.VirtualInterface_asnLong, v.AsnLong)
+		case schemas.VirtualInterface_authKey:
+			v.AuthKey = new(string)
+			return d.ReadString(schemas.VirtualInterface_authKey, v.AuthKey)
+		case schemas.VirtualInterface_awsDeviceV2:
+			v.AwsDeviceV2 = new(string)
+			return d.ReadString(schemas.VirtualInterface_awsDeviceV2, v.AwsDeviceV2)
+		case schemas.VirtualInterface_awsLogicalDeviceId:
+			v.AwsLogicalDeviceId = new(string)
+			return d.ReadString(schemas.VirtualInterface_awsLogicalDeviceId, v.AwsLogicalDeviceId)
+		case schemas.VirtualInterface_bgpPeers:
+			return deserializeBGPPeerList(d, schemas.VirtualInterface_bgpPeers, &v.BgpPeers)
+		case schemas.VirtualInterface_connectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.VirtualInterface_connectionId, v.ConnectionId)
+		case schemas.VirtualInterface_customerAddress:
+			v.CustomerAddress = new(string)
+			return d.ReadString(schemas.VirtualInterface_customerAddress, v.CustomerAddress)
+		case schemas.VirtualInterface_customerRouterConfig:
+			v.CustomerRouterConfig = new(string)
+			return d.ReadString(schemas.VirtualInterface_customerRouterConfig, v.CustomerRouterConfig)
+		case schemas.VirtualInterface_directConnectGatewayId:
+			v.DirectConnectGatewayId = new(string)
+			return d.ReadString(schemas.VirtualInterface_directConnectGatewayId, v.DirectConnectGatewayId)
+		case schemas.VirtualInterface_jumboFrameCapable:
+			v.JumboFrameCapable = new(bool)
+			return d.ReadBool(schemas.VirtualInterface_jumboFrameCapable, v.JumboFrameCapable)
+		case schemas.VirtualInterface_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.VirtualInterface_location, v.Location)
+		case schemas.VirtualInterface_mtu:
+			v.Mtu = new(int32)
+			return d.ReadInt32(schemas.VirtualInterface_mtu, v.Mtu)
+		case schemas.VirtualInterface_ownerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.VirtualInterface_ownerAccount, v.OwnerAccount)
+		case schemas.VirtualInterface_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.VirtualInterface_region, v.Region)
+		case schemas.VirtualInterface_routeFilterPrefixes:
+			return deserializeRouteFilterPrefixList(d, schemas.VirtualInterface_routeFilterPrefixes, &v.RouteFilterPrefixes)
+		case schemas.VirtualInterface_siteLinkEnabled:
+			v.SiteLinkEnabled = new(bool)
+			return d.ReadBool(schemas.VirtualInterface_siteLinkEnabled, v.SiteLinkEnabled)
+		case schemas.VirtualInterface_tags:
+			return deserializeTagList(d, schemas.VirtualInterface_tags, &v.Tags)
+		case schemas.VirtualInterface_virtualGatewayId:
+			v.VirtualGatewayId = new(string)
+			return d.ReadString(schemas.VirtualInterface_virtualGatewayId, v.VirtualGatewayId)
+		case schemas.VirtualInterface_virtualInterfaceId:
+			v.VirtualInterfaceId = new(string)
+			return d.ReadString(schemas.VirtualInterface_virtualInterfaceId, v.VirtualInterfaceId)
+		case schemas.VirtualInterface_virtualInterfaceName:
+			v.VirtualInterfaceName = new(string)
+			return d.ReadString(schemas.VirtualInterface_virtualInterfaceName, v.VirtualInterfaceName)
+		case schemas.VirtualInterface_virtualInterfaceState:
+			var ev string
+			if err := d.ReadString(schemas.VirtualInterface_virtualInterfaceState, &ev); err != nil {
+				return err
+			}
+			v.VirtualInterfaceState = types.VirtualInterfaceState(ev)
+			return nil
+		case schemas.VirtualInterface_virtualInterfaceType:
+			v.VirtualInterfaceType = new(string)
+			return d.ReadString(schemas.VirtualInterface_virtualInterfaceType, v.VirtualInterfaceType)
+		case schemas.VirtualInterface_vlan:
+			return d.ReadInt32(schemas.VirtualInterface_vlan, &v.Vlan)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVirtualInterfaceAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateVirtualInterfaceAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVirtualInterfaceAttributes, schemas.UpdateVirtualInterfaceAttributesRequest, schemas.VirtualInterface)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateVirtualInterfaceAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVirtualInterfaceAttributes, schemas.UpdateVirtualInterfaceAttributesRequest, schemas.VirtualInterface), output: &UpdateVirtualInterfaceAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateVirtualInterfaceAttributes"); err != nil {

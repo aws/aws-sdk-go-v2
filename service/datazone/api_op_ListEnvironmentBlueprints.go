@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,30 @@ type ListEnvironmentBlueprintsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentBlueprintsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnvironmentBlueprintsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnvironmentBlueprintsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.ListEnvironmentBlueprintsInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Managed != nil {
+		s.WriteBool(schemas.ListEnvironmentBlueprintsInput_managed, *v.Managed)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEnvironmentBlueprintsInput_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListEnvironmentBlueprintsInput_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnvironmentBlueprintsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListEnvironmentBlueprintsOutput struct {
 
 	// The results of the ListEnvironmentBlueprints action.
@@ -79,16 +105,26 @@ type ListEnvironmentBlueprintsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentBlueprintsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnvironmentBlueprintsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnvironmentBlueprintsOutput_items:
+			return deserializeEnvironmentBlueprintSummaries(d, schemas.ListEnvironmentBlueprintsOutput_items, &v.Items)
+		case schemas.ListEnvironmentBlueprintsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnvironmentBlueprintsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnvironmentBlueprintsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEnvironmentBlueprints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentBlueprints, schemas.ListEnvironmentBlueprintsInput, schemas.ListEnvironmentBlueprintsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEnvironmentBlueprints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentBlueprints, schemas.ListEnvironmentBlueprintsInput, schemas.ListEnvironmentBlueprintsOutput), output: &ListEnvironmentBlueprintsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEnvironmentBlueprints"); err != nil {

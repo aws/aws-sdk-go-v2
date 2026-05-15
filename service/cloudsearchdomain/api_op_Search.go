@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -363,6 +365,57 @@ type SearchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cursor != nil {
+		s.WriteString(schemas.SearchRequest_cursor, *v.Cursor)
+	}
+	if v.Expr != nil {
+		s.WriteString(schemas.SearchRequest_expr, *v.Expr)
+	}
+	if v.Facet != nil {
+		s.WriteString(schemas.SearchRequest_facet, *v.Facet)
+	}
+	if v.FilterQuery != nil {
+		s.WriteString(schemas.SearchRequest_filterQuery, *v.FilterQuery)
+	}
+	if v.Highlight != nil {
+		s.WriteString(schemas.SearchRequest_highlight, *v.Highlight)
+	}
+	if v.Partial != false {
+		s.WriteBool(schemas.SearchRequest_partial, v.Partial)
+	}
+	if v.Query != nil {
+		s.WriteString(schemas.SearchRequest_query, *v.Query)
+	}
+	if v.QueryOptions != nil {
+		s.WriteString(schemas.SearchRequest_queryOptions, *v.QueryOptions)
+	}
+	if v.QueryParser != "" {
+		s.WriteString(schemas.SearchRequest_queryParser, string(v.QueryParser))
+	}
+	if v.Return != nil {
+		s.WriteString(schemas.SearchRequest_return, *v.Return)
+	}
+	if v.Size != 0 {
+		s.WriteInt64(schemas.SearchRequest_size, v.Size)
+	}
+	if v.Sort != nil {
+		s.WriteString(schemas.SearchRequest_sort, *v.Sort)
+	}
+	if v.Start != 0 {
+		s.WriteInt64(schemas.SearchRequest_start, v.Start)
+	}
+	if v.Stats != nil {
+		s.WriteString(schemas.SearchRequest_stats, *v.Stats)
+	}
+}
+
 // The result of a Search request. Contains the documents that match the specified
 // search criteria and any requested fields, highlights, and facet information.
 type SearchOutput struct {
@@ -385,16 +438,31 @@ type SearchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchResponse_facets:
+			return deserializeFacets(d, schemas.SearchResponse_facets, &v.Facets)
+		case schemas.SearchResponse_hits:
+			v.Hits = &types.Hits{}
+			return v.Hits.Deserialize(d)
+		case schemas.SearchResponse_stats:
+			return deserializeStats(d, schemas.SearchResponse_stats, &v.Stats)
+		case schemas.SearchResponse_status:
+			v.Status = &types.SearchStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Search, schemas.SearchRequest, schemas.SearchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Search, schemas.SearchRequest, schemas.SearchResponse), output: &SearchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "Search"); err != nil {

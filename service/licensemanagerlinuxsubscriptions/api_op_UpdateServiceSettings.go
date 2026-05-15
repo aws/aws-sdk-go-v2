@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,46 @@ type UpdateServiceSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowUpdate != nil {
+		s.WriteBool(schemas.UpdateServiceSettingsRequest_AllowUpdate, *v.AllowUpdate)
+	}
+	if v.LinuxSubscriptionsDiscovery != "" {
+		s.WriteString(schemas.UpdateServiceSettingsRequest_LinuxSubscriptionsDiscovery, string(v.LinuxSubscriptionsDiscovery))
+	}
+	if v.LinuxSubscriptionsDiscoverySettings != nil {
+		s.WriteStruct(schemas.UpdateServiceSettingsRequest_LinuxSubscriptionsDiscoverySettings)
+		v.LinuxSubscriptionsDiscoverySettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateServiceSettingsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceSettingsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceSettingsRequest_AllowUpdate:
+			v.AllowUpdate = new(bool)
+			return d.ReadBool(schemas.UpdateServiceSettingsRequest_AllowUpdate, v.AllowUpdate)
+		case schemas.UpdateServiceSettingsRequest_LinuxSubscriptionsDiscovery:
+			var ev string
+			if err := d.ReadString(schemas.UpdateServiceSettingsRequest_LinuxSubscriptionsDiscovery, &ev); err != nil {
+				return err
+			}
+			v.LinuxSubscriptionsDiscovery = types.LinuxSubscriptionsDiscovery(ev)
+			return nil
+		case schemas.UpdateServiceSettingsRequest_LinuxSubscriptionsDiscoverySettings:
+			v.LinuxSubscriptionsDiscoverySettings = &types.LinuxSubscriptionsDiscoverySettings{}
+			return v.LinuxSubscriptionsDiscoverySettings.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type UpdateServiceSettingsOutput struct {
 
 	// The Region in which License Manager displays the aggregated data for Linux
@@ -75,16 +117,63 @@ type UpdateServiceSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.UpdateServiceSettingsResponse_HomeRegions, v.HomeRegions)
+	if v.LinuxSubscriptionsDiscovery != "" {
+		s.WriteString(schemas.UpdateServiceSettingsResponse_LinuxSubscriptionsDiscovery, string(v.LinuxSubscriptionsDiscovery))
+	}
+	if v.LinuxSubscriptionsDiscoverySettings != nil {
+		s.WriteStruct(schemas.UpdateServiceSettingsResponse_LinuxSubscriptionsDiscoverySettings)
+		v.LinuxSubscriptionsDiscoverySettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateServiceSettingsResponse_Status, string(v.Status))
+	}
+	serializeStringMap(s, schemas.UpdateServiceSettingsResponse_StatusMessage, v.StatusMessage)
+}
+func (v *UpdateServiceSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceSettingsResponse_HomeRegions:
+			return deserializeStringList(d, schemas.UpdateServiceSettingsResponse_HomeRegions, &v.HomeRegions)
+		case schemas.UpdateServiceSettingsResponse_LinuxSubscriptionsDiscovery:
+			var ev string
+			if err := d.ReadString(schemas.UpdateServiceSettingsResponse_LinuxSubscriptionsDiscovery, &ev); err != nil {
+				return err
+			}
+			v.LinuxSubscriptionsDiscovery = types.LinuxSubscriptionsDiscovery(ev)
+			return nil
+		case schemas.UpdateServiceSettingsResponse_LinuxSubscriptionsDiscoverySettings:
+			v.LinuxSubscriptionsDiscoverySettings = &types.LinuxSubscriptionsDiscoverySettings{}
+			return v.LinuxSubscriptionsDiscoverySettings.Deserialize(d)
+		case schemas.UpdateServiceSettingsResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateServiceSettingsResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		case schemas.UpdateServiceSettingsResponse_StatusMessage:
+			return deserializeStringMap(d, schemas.UpdateServiceSettingsResponse_StatusMessage, &v.StatusMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateServiceSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceSettings, schemas.UpdateServiceSettingsRequest, schemas.UpdateServiceSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateServiceSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceSettings, schemas.UpdateServiceSettingsRequest, schemas.UpdateServiceSettingsResponse), output: &UpdateServiceSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateServiceSettings"); err != nil {

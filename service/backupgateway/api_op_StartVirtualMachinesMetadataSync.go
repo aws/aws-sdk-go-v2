@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,28 @@ type StartVirtualMachinesMetadataSyncInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartVirtualMachinesMetadataSyncInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartVirtualMachinesMetadataSyncInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartVirtualMachinesMetadataSyncInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HypervisorArn != nil {
+		s.WriteString(schemas.StartVirtualMachinesMetadataSyncInput_HypervisorArn, *v.HypervisorArn)
+	}
+}
+func (v *StartVirtualMachinesMetadataSyncInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartVirtualMachinesMetadataSyncInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartVirtualMachinesMetadataSyncInput_HypervisorArn:
+			v.HypervisorArn = new(string)
+			return d.ReadString(schemas.StartVirtualMachinesMetadataSyncInput_HypervisorArn, v.HypervisorArn)
+		}
+		return nil
+	})
+}
+
 type StartVirtualMachinesMetadataSyncOutput struct {
 
 	// The Amazon Resource Name (ARN) of the hypervisor.
@@ -48,16 +72,35 @@ type StartVirtualMachinesMetadataSyncOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartVirtualMachinesMetadataSyncOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartVirtualMachinesMetadataSyncOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartVirtualMachinesMetadataSyncOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HypervisorArn != nil {
+		s.WriteString(schemas.StartVirtualMachinesMetadataSyncOutput_HypervisorArn, *v.HypervisorArn)
+	}
+}
+func (v *StartVirtualMachinesMetadataSyncOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartVirtualMachinesMetadataSyncOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartVirtualMachinesMetadataSyncOutput_HypervisorArn:
+			v.HypervisorArn = new(string)
+			return d.ReadString(schemas.StartVirtualMachinesMetadataSyncOutput_HypervisorArn, v.HypervisorArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartVirtualMachinesMetadataSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartVirtualMachinesMetadataSync{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartVirtualMachinesMetadataSync, schemas.StartVirtualMachinesMetadataSyncInput, schemas.StartVirtualMachinesMetadataSyncOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartVirtualMachinesMetadataSync{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartVirtualMachinesMetadataSync, schemas.StartVirtualMachinesMetadataSyncInput, schemas.StartVirtualMachinesMetadataSyncOutput), output: &StartVirtualMachinesMetadataSyncOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartVirtualMachinesMetadataSync"); err != nil {

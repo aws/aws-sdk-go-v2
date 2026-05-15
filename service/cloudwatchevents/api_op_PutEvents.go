@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,16 @@ type PutEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePutEventsRequestEntryList(s, schemas.PutEventsRequest_Entries, v.Entries)
+}
+
 type PutEventsOutput struct {
 
 	// The successfully and unsuccessfully ingested events results. If the ingestion
@@ -55,16 +67,25 @@ type PutEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutEventsResponse_Entries:
+			return deserializePutEventsResultEntryList(d, schemas.PutEventsResponse_Entries, &v.Entries)
+		case schemas.PutEventsResponse_FailedEntryCount:
+			return d.ReadInt32(schemas.PutEventsResponse_FailedEntryCount, &v.FailedEntryCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEvents, schemas.PutEventsRequest, schemas.PutEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEvents, schemas.PutEventsRequest, schemas.PutEventsResponse), output: &PutEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutEvents"); err != nil {

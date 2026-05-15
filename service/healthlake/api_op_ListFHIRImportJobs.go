@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -58,6 +60,36 @@ type ListFHIRImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFHIRImportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFHIRImportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFHIRImportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatastoreId != nil {
+		s.WriteString(schemas.ListFHIRImportJobsRequest_DatastoreId, *v.DatastoreId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.ListFHIRImportJobsRequest_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.ListFHIRImportJobsRequest_JobStatus, string(v.JobStatus))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFHIRImportJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFHIRImportJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.SubmittedAfter != nil {
+		s.WriteTime(schemas.ListFHIRImportJobsRequest_SubmittedAfter, *v.SubmittedAfter)
+	}
+	if v.SubmittedBefore != nil {
+		s.WriteTime(schemas.ListFHIRImportJobsRequest_SubmittedBefore, *v.SubmittedBefore)
+	}
+}
+
 type ListFHIRImportJobsOutput struct {
 
 	// The properties for listed import jobs.
@@ -74,16 +106,26 @@ type ListFHIRImportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFHIRImportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFHIRImportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFHIRImportJobsResponse_ImportJobPropertiesList:
+			return deserializeImportJobPropertiesList(d, schemas.ListFHIRImportJobsResponse_ImportJobPropertiesList, &v.ImportJobPropertiesList)
+		case schemas.ListFHIRImportJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFHIRImportJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFHIRImportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListFHIRImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFHIRImportJobs, schemas.ListFHIRImportJobsRequest, schemas.ListFHIRImportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListFHIRImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFHIRImportJobs, schemas.ListFHIRImportJobsRequest, schemas.ListFHIRImportJobsResponse), output: &ListFHIRImportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFHIRImportJobs"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,6 +44,21 @@ type CancelSubscriptionInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CancelSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelSubscriptionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.CancelSubscriptionInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.CancelSubscriptionInput_identifier, *v.Identifier)
+	}
 }
 
 type CancelSubscriptionOutput struct {
@@ -106,16 +123,57 @@ type CancelSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelSubscriptionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelSubscriptionOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CancelSubscriptionOutput_createdAt, v.CreatedAt)
+		case schemas.CancelSubscriptionOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.CancelSubscriptionOutput_createdBy, v.CreatedBy)
+		case schemas.CancelSubscriptionOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CancelSubscriptionOutput_domainId, v.DomainId)
+		case schemas.CancelSubscriptionOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CancelSubscriptionOutput_id, v.Id)
+		case schemas.CancelSubscriptionOutput_retainPermissions:
+			v.RetainPermissions = new(bool)
+			return d.ReadBool(schemas.CancelSubscriptionOutput_retainPermissions, v.RetainPermissions)
+		case schemas.CancelSubscriptionOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CancelSubscriptionOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SubscriptionStatus(ev)
+			return nil
+		case schemas.CancelSubscriptionOutput_subscribedListing:
+			v.SubscribedListing = &types.SubscribedListing{}
+			return v.SubscribedListing.Deserialize(d)
+		case schemas.CancelSubscriptionOutput_subscribedPrincipal:
+			return deserializeSubscribedPrincipal(d, schemas.CancelSubscriptionOutput_subscribedPrincipal, &v.SubscribedPrincipal)
+		case schemas.CancelSubscriptionOutput_subscriptionRequestId:
+			v.SubscriptionRequestId = new(string)
+			return d.ReadString(schemas.CancelSubscriptionOutput_subscriptionRequestId, v.SubscriptionRequestId)
+		case schemas.CancelSubscriptionOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CancelSubscriptionOutput_updatedAt, v.UpdatedAt)
+		case schemas.CancelSubscriptionOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.CancelSubscriptionOutput_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelSubscription, schemas.CancelSubscriptionInput, schemas.CancelSubscriptionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelSubscription, schemas.CancelSubscriptionInput, schemas.CancelSubscriptionOutput), output: &CancelSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelSubscription"); err != nil {

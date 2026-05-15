@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,32 @@ type DescribeBudgetPerformanceHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBudgetPerformanceHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBudgetPerformanceHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBudgetPerformanceHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeBudgetPerformanceHistoryRequest_AccountId, *v.AccountId)
+	}
+	if v.BudgetName != nil {
+		s.WriteString(schemas.DescribeBudgetPerformanceHistoryRequest_BudgetName, *v.BudgetName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeBudgetPerformanceHistoryRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeBudgetPerformanceHistoryRequest_NextToken, *v.NextToken)
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.DescribeBudgetPerformanceHistoryRequest_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DescribeBudgetPerformanceHistoryOutput struct {
 
 	// The history of how often the budget has gone into an ALARM state.
@@ -77,16 +105,27 @@ type DescribeBudgetPerformanceHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBudgetPerformanceHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBudgetPerformanceHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBudgetPerformanceHistoryResponse_BudgetPerformanceHistory:
+			v.BudgetPerformanceHistory = &types.BudgetPerformanceHistory{}
+			return v.BudgetPerformanceHistory.Deserialize(d)
+		case schemas.DescribeBudgetPerformanceHistoryResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeBudgetPerformanceHistoryResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBudgetPerformanceHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeBudgetPerformanceHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBudgetPerformanceHistory, schemas.DescribeBudgetPerformanceHistoryRequest, schemas.DescribeBudgetPerformanceHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeBudgetPerformanceHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBudgetPerformanceHistory, schemas.DescribeBudgetPerformanceHistoryRequest, schemas.DescribeBudgetPerformanceHistoryResponse), output: &DescribeBudgetPerformanceHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeBudgetPerformanceHistory"); err != nil {

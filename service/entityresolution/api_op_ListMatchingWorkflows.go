@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,21 @@ type ListMatchingWorkflowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMatchingWorkflowsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMatchingWorkflowsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMatchingWorkflowsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMatchingWorkflowsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMatchingWorkflowsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListMatchingWorkflowsOutput struct {
 
 	// The pagination token from the previous API call.
@@ -54,16 +71,26 @@ type ListMatchingWorkflowsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMatchingWorkflowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMatchingWorkflowsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMatchingWorkflowsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMatchingWorkflowsOutput_nextToken, v.NextToken)
+		case schemas.ListMatchingWorkflowsOutput_workflowSummaries:
+			return deserializeMatchingWorkflowList(d, schemas.ListMatchingWorkflowsOutput_workflowSummaries, &v.WorkflowSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMatchingWorkflowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMatchingWorkflows{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMatchingWorkflows, schemas.ListMatchingWorkflowsInput, schemas.ListMatchingWorkflowsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMatchingWorkflows{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMatchingWorkflows, schemas.ListMatchingWorkflowsInput, schemas.ListMatchingWorkflowsOutput), output: &ListMatchingWorkflowsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMatchingWorkflows"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,30 @@ type ListSourceRepositoryBranchesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSourceRepositoryBranchesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSourceRepositoryBranchesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSourceRepositoryBranchesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSourceRepositoryBranchesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSourceRepositoryBranchesRequest_nextToken, *v.NextToken)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.ListSourceRepositoryBranchesRequest_projectName, *v.ProjectName)
+	}
+	if v.SourceRepositoryName != nil {
+		s.WriteString(schemas.ListSourceRepositoryBranchesRequest_sourceRepositoryName, *v.SourceRepositoryName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.ListSourceRepositoryBranchesRequest_spaceName, *v.SpaceName)
+	}
+}
+
 type ListSourceRepositoryBranchesOutput struct {
 
 	// Information about the source branches.
@@ -73,16 +99,26 @@ type ListSourceRepositoryBranchesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSourceRepositoryBranchesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSourceRepositoryBranchesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSourceRepositoryBranchesResponse_items:
+			return deserializeListSourceRepositoryBranchesItems(d, schemas.ListSourceRepositoryBranchesResponse_items, &v.Items)
+		case schemas.ListSourceRepositoryBranchesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSourceRepositoryBranchesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSourceRepositoryBranchesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSourceRepositoryBranches{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceRepositoryBranches, schemas.ListSourceRepositoryBranchesRequest, schemas.ListSourceRepositoryBranchesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSourceRepositoryBranches{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceRepositoryBranches, schemas.ListSourceRepositoryBranchesRequest, schemas.ListSourceRepositoryBranchesResponse), output: &ListSourceRepositoryBranchesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSourceRepositoryBranches"); err != nil {

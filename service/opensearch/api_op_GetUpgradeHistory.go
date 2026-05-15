@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,24 @@ type GetUpgradeHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUpgradeHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUpgradeHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUpgradeHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetUpgradeHistoryRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.GetUpgradeHistoryRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetUpgradeHistoryRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Container for the response returned by the GetUpgradeHistory operation.
 type GetUpgradeHistoryOutput struct {
 
@@ -66,16 +86,26 @@ type GetUpgradeHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUpgradeHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUpgradeHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUpgradeHistoryResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetUpgradeHistoryResponse_NextToken, v.NextToken)
+		case schemas.GetUpgradeHistoryResponse_UpgradeHistories:
+			return deserializeUpgradeHistoryList(d, schemas.GetUpgradeHistoryResponse_UpgradeHistories, &v.UpgradeHistories)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUpgradeHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUpgradeHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUpgradeHistory, schemas.GetUpgradeHistoryRequest, schemas.GetUpgradeHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUpgradeHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUpgradeHistory, schemas.GetUpgradeHistoryRequest, schemas.GetUpgradeHistoryResponse), output: &GetUpgradeHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetUpgradeHistory"); err != nil {

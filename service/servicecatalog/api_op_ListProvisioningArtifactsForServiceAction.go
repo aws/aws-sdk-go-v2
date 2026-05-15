@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,27 @@ type ListProvisioningArtifactsForServiceActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProvisioningArtifactsForServiceActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProvisioningArtifactsForServiceActionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProvisioningArtifactsForServiceActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.ListProvisioningArtifactsForServiceActionInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.ListProvisioningArtifactsForServiceActionInput_PageSize, v.PageSize)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.ListProvisioningArtifactsForServiceActionInput_PageToken, *v.PageToken)
+	}
+	if v.ServiceActionId != nil {
+		s.WriteString(schemas.ListProvisioningArtifactsForServiceActionInput_ServiceActionId, *v.ServiceActionId)
+	}
+}
+
 type ListProvisioningArtifactsForServiceActionOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -68,16 +91,26 @@ type ListProvisioningArtifactsForServiceActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProvisioningArtifactsForServiceActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProvisioningArtifactsForServiceActionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProvisioningArtifactsForServiceActionOutput_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.ListProvisioningArtifactsForServiceActionOutput_NextPageToken, v.NextPageToken)
+		case schemas.ListProvisioningArtifactsForServiceActionOutput_ProvisioningArtifactViews:
+			return deserializeProvisioningArtifactViews(d, schemas.ListProvisioningArtifactsForServiceActionOutput_ProvisioningArtifactViews, &v.ProvisioningArtifactViews)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProvisioningArtifactsForServiceActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListProvisioningArtifactsForServiceAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProvisioningArtifactsForServiceAction, schemas.ListProvisioningArtifactsForServiceActionInput, schemas.ListProvisioningArtifactsForServiceActionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListProvisioningArtifactsForServiceAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProvisioningArtifactsForServiceAction, schemas.ListProvisioningArtifactsForServiceActionInput, schemas.ListProvisioningArtifactsForServiceActionOutput), output: &ListProvisioningArtifactsForServiceActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProvisioningArtifactsForServiceAction"); err != nil {

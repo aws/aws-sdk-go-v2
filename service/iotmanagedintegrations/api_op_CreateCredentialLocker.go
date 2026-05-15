@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -45,6 +47,22 @@ type CreateCredentialLockerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCredentialLockerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCredentialLockerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCredentialLockerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateCredentialLockerRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCredentialLockerRequest_Name, *v.Name)
+	}
+	serializeTagsMap(s, schemas.CreateCredentialLockerRequest_Tags, v.Tags)
+}
+
 type CreateCredentialLockerOutput struct {
 
 	// The Amazon Resource Name (ARN) of the credential locker.
@@ -62,16 +80,30 @@ type CreateCredentialLockerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCredentialLockerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCredentialLockerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCredentialLockerResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateCredentialLockerResponse_Arn, v.Arn)
+		case schemas.CreateCredentialLockerResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateCredentialLockerResponse_CreatedAt, v.CreatedAt)
+		case schemas.CreateCredentialLockerResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateCredentialLockerResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCredentialLockerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCredentialLocker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCredentialLocker, schemas.CreateCredentialLockerRequest, schemas.CreateCredentialLockerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCredentialLocker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCredentialLocker, schemas.CreateCredentialLockerRequest, schemas.CreateCredentialLockerResponse), output: &CreateCredentialLockerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCredentialLocker"); err != nil {

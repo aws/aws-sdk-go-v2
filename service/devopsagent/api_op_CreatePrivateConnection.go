@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -45,6 +47,20 @@ type CreatePrivateConnectionInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreatePrivateConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePrivateConnectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePrivateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePrivateConnectionMode(s, schemas.CreatePrivateConnectionInput_mode, v.Mode)
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePrivateConnectionInput_name, *v.Name)
+	}
+	serializeTags(s, schemas.CreatePrivateConnectionInput_tags, v.Tags)
 }
 
 // Output containing the newly created Private Connection summary.
@@ -94,16 +110,55 @@ type CreatePrivateConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePrivateConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePrivateConnectionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePrivateConnectionOutput_certificateExpiryTime:
+			v.CertificateExpiryTime = new(time.Time)
+			return d.ReadTime(schemas.CreatePrivateConnectionOutput_certificateExpiryTime, v.CertificateExpiryTime)
+		case schemas.CreatePrivateConnectionOutput_hostAddress:
+			v.HostAddress = new(string)
+			return d.ReadString(schemas.CreatePrivateConnectionOutput_hostAddress, v.HostAddress)
+		case schemas.CreatePrivateConnectionOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreatePrivateConnectionOutput_name, v.Name)
+		case schemas.CreatePrivateConnectionOutput_resourceConfigurationId:
+			v.ResourceConfigurationId = new(string)
+			return d.ReadString(schemas.CreatePrivateConnectionOutput_resourceConfigurationId, v.ResourceConfigurationId)
+		case schemas.CreatePrivateConnectionOutput_resourceGatewayId:
+			v.ResourceGatewayId = new(string)
+			return d.ReadString(schemas.CreatePrivateConnectionOutput_resourceGatewayId, v.ResourceGatewayId)
+		case schemas.CreatePrivateConnectionOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreatePrivateConnectionOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PrivateConnectionStatus(ev)
+			return nil
+		case schemas.CreatePrivateConnectionOutput_tags:
+			return deserializeTags(d, schemas.CreatePrivateConnectionOutput_tags, &v.Tags)
+		case schemas.CreatePrivateConnectionOutput_type:
+			var ev string
+			if err := d.ReadString(schemas.CreatePrivateConnectionOutput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.PrivateConnectionType(ev)
+			return nil
+		case schemas.CreatePrivateConnectionOutput_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.CreatePrivateConnectionOutput_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePrivateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePrivateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePrivateConnection, schemas.CreatePrivateConnectionInput, schemas.CreatePrivateConnectionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePrivateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePrivateConnection, schemas.CreatePrivateConnectionInput, schemas.CreatePrivateConnectionOutput), output: &CreatePrivateConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePrivateConnection"); err != nil {

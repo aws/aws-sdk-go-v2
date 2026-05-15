@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -31,6 +33,22 @@ type RecursiveXmlShapesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecursiveXmlShapesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecursiveXmlShapesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RecursiveXmlShapesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type RecursiveXmlShapesOutput struct {
 	Nested *types.RecursiveXmlShapesOutputNested1
 
@@ -40,16 +58,37 @@ type RecursiveXmlShapesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecursiveXmlShapesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecursiveXmlShapesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecursiveXmlShapesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Nested != nil {
+		s.WriteStruct(schemas.RecursiveXmlShapesOutput_nested)
+		v.Nested.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RecursiveXmlShapesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecursiveXmlShapesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecursiveXmlShapesOutput_nested:
+			v.Nested = &types.RecursiveXmlShapesOutputNested1{}
+			return v.Nested.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRecursiveXmlShapesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsEc2query_serializeOpRecursiveXmlShapes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RecursiveXmlShapes, nil, schemas.RecursiveXmlShapesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsEc2query_deserializeOpRecursiveXmlShapes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RecursiveXmlShapes, nil, schemas.RecursiveXmlShapesOutput), output: &RecursiveXmlShapesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RecursiveXmlShapes"); err != nil {

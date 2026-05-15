@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,21 @@ type DescribeQAppPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQAppPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQAppPermissionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQAppPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.DescribeQAppPermissionsInput_appId, *v.AppId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeQAppPermissionsInput_instanceId, *v.InstanceId)
+	}
+}
+
 type DescribeQAppPermissionsOutput struct {
 
 	// The unique identifier of the Amazon Q App for which permissions are returned.
@@ -62,16 +79,29 @@ type DescribeQAppPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQAppPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeQAppPermissionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeQAppPermissionsOutput_appId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.DescribeQAppPermissionsOutput_appId, v.AppId)
+		case schemas.DescribeQAppPermissionsOutput_permissions:
+			return deserializePermissionsOutputList(d, schemas.DescribeQAppPermissionsOutput_permissions, &v.Permissions)
+		case schemas.DescribeQAppPermissionsOutput_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DescribeQAppPermissionsOutput_resourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeQAppPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeQAppPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQAppPermissions, schemas.DescribeQAppPermissionsInput, schemas.DescribeQAppPermissionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeQAppPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQAppPermissions, schemas.DescribeQAppPermissionsInput, schemas.DescribeQAppPermissionsOutput), output: &DescribeQAppPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeQAppPermissions"); err != nil {

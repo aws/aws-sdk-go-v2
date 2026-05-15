@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type GetVoiceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVoiceProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVoiceProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVoiceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VoiceProfileId != nil {
+		s.WriteString(schemas.GetVoiceProfileRequest_VoiceProfileId, *v.VoiceProfileId)
+	}
+}
+
 type GetVoiceProfileOutput struct {
 
 	// The voice profile details.
@@ -48,16 +62,24 @@ type GetVoiceProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVoiceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVoiceProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVoiceProfileResponse_VoiceProfile:
+			v.VoiceProfile = &types.VoiceProfile{}
+			return v.VoiceProfile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVoiceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVoiceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVoiceProfile, schemas.GetVoiceProfileRequest, schemas.GetVoiceProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetVoiceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVoiceProfile, schemas.GetVoiceProfileRequest, schemas.GetVoiceProfileResponse), output: &GetVoiceProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetVoiceProfile"); err != nil {

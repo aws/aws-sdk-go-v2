@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -77,6 +79,34 @@ type UpdateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateGroupRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.UpdateGroupRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.GroupScope != "" {
+		s.WriteString(schemas.UpdateGroupRequest_GroupScope, string(v.GroupScope))
+	}
+	if v.GroupType != "" {
+		s.WriteString(schemas.UpdateGroupRequest_GroupType, string(v.GroupType))
+	}
+	serializeAttributes(s, schemas.UpdateGroupRequest_OtherAttributes, v.OtherAttributes)
+	if v.SAMAccountName != nil {
+		s.WriteString(schemas.UpdateGroupRequest_SAMAccountName, *v.SAMAccountName)
+	}
+	if v.UpdateType != "" {
+		s.WriteString(schemas.UpdateGroupRequest_UpdateType, string(v.UpdateType))
+	}
+}
+
 type UpdateGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -84,16 +114,21 @@ type UpdateGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGroup, schemas.UpdateGroupRequest, schemas.UpdateGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGroup, schemas.UpdateGroupRequest, schemas.UpdateGroupResult), output: &UpdateGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateGroup"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,21 @@ type GetChannelPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChannelPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChannelPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChannelPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelGroupName != nil {
+		s.WriteString(schemas.GetChannelPolicyRequest_ChannelGroupName, *v.ChannelGroupName)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.GetChannelPolicyRequest_ChannelName, *v.ChannelName)
+	}
+}
+
 type GetChannelPolicyOutput struct {
 
 	// The name that describes the channel group. The name is the primary identifier
@@ -72,16 +89,30 @@ type GetChannelPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChannelPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetChannelPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetChannelPolicyResponse_ChannelGroupName:
+			v.ChannelGroupName = new(string)
+			return d.ReadString(schemas.GetChannelPolicyResponse_ChannelGroupName, v.ChannelGroupName)
+		case schemas.GetChannelPolicyResponse_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.GetChannelPolicyResponse_ChannelName, v.ChannelName)
+		case schemas.GetChannelPolicyResponse_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.GetChannelPolicyResponse_Policy, v.Policy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetChannelPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChannelPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannelPolicy, schemas.GetChannelPolicyRequest, schemas.GetChannelPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetChannelPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannelPolicy, schemas.GetChannelPolicyRequest, schemas.GetChannelPolicyResponse), output: &GetChannelPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetChannelPolicy"); err != nil {

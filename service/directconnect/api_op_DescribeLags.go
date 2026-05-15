@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,24 @@ type DescribeLagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LagId != nil {
+		s.WriteString(schemas.DescribeLagsRequest_lagId, *v.LagId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeLagsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeLagsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeLagsOutput struct {
 
 	// The LAGs.
@@ -59,16 +79,38 @@ type DescribeLagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Lags)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLagList(s, schemas.Lags_lags, v.Lags)
+	if v.NextToken != nil {
+		s.WriteString(schemas.Lags_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeLagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Lags, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Lags_lags:
+			return deserializeLagList(d, schemas.Lags_lags, &v.Lags)
+		case schemas.Lags_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.Lags_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLags, schemas.DescribeLagsRequest, schemas.Lags)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLags, schemas.DescribeLagsRequest, schemas.Lags), output: &DescribeLagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeLags"); err != nil {

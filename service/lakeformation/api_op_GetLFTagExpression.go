@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,21 @@ type GetLFTagExpressionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLFTagExpressionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLFTagExpressionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLFTagExpressionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GetLFTagExpressionRequest_CatalogId, *v.CatalogId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetLFTagExpressionRequest_Name, *v.Name)
+	}
+}
+
 type GetLFTagExpressionOutput struct {
 
 	// The identifier for the Data Catalog. By default, the account ID in which the
@@ -63,16 +80,32 @@ type GetLFTagExpressionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLFTagExpressionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLFTagExpressionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLFTagExpressionResponse_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.GetLFTagExpressionResponse_CatalogId, v.CatalogId)
+		case schemas.GetLFTagExpressionResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetLFTagExpressionResponse_Description, v.Description)
+		case schemas.GetLFTagExpressionResponse_Expression:
+			return deserializeExpression(d, schemas.GetLFTagExpressionResponse_Expression, &v.Expression)
+		case schemas.GetLFTagExpressionResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetLFTagExpressionResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLFTagExpressionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLFTagExpression{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLFTagExpression, schemas.GetLFTagExpressionRequest, schemas.GetLFTagExpressionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLFTagExpression{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLFTagExpression, schemas.GetLFTagExpressionRequest, schemas.GetLFTagExpressionResponse), output: &GetLFTagExpressionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLFTagExpression"); err != nil {

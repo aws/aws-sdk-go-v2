@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,6 +62,28 @@ type BatchCreateChannelMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateChannelMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateChannelMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateChannelMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.BatchCreateChannelMembershipRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ChimeBearer != nil {
+		s.WriteString(schemas.BatchCreateChannelMembershipRequest_ChimeBearer, *v.ChimeBearer)
+	}
+	serializeMemberArns(s, schemas.BatchCreateChannelMembershipRequest_MemberArns, v.MemberArns)
+	if v.SubChannelId != nil {
+		s.WriteString(schemas.BatchCreateChannelMembershipRequest_SubChannelId, *v.SubChannelId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.BatchCreateChannelMembershipRequest_Type, string(v.Type))
+	}
+}
+
 type BatchCreateChannelMembershipOutput struct {
 
 	// The list of channel memberships in the response.
@@ -75,16 +99,26 @@ type BatchCreateChannelMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateChannelMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateChannelMembershipResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateChannelMembershipResponse_BatchChannelMemberships:
+			v.BatchChannelMemberships = &types.BatchChannelMemberships{}
+			return v.BatchChannelMemberships.Deserialize(d)
+		case schemas.BatchCreateChannelMembershipResponse_Errors:
+			return deserializeBatchCreateChannelMembershipErrors(d, schemas.BatchCreateChannelMembershipResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchCreateChannelMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchCreateChannelMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateChannelMembership, schemas.BatchCreateChannelMembershipRequest, schemas.BatchCreateChannelMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchCreateChannelMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateChannelMembership, schemas.BatchCreateChannelMembershipRequest, schemas.BatchCreateChannelMembershipResponse), output: &BatchCreateChannelMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchCreateChannelMembership"); err != nil {

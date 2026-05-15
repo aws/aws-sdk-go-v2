@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,6 +44,18 @@ type DeleteFirewallRuleInput struct {
 	FirewallRuleId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteFirewallRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFirewallRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFirewallRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallRuleId != nil {
+		s.WriteString(schemas.DeleteFirewallRuleInput_firewallRuleId, *v.FirewallRuleId)
+	}
 }
 
 type DeleteFirewallRuleOutput struct {
@@ -125,16 +139,96 @@ type DeleteFirewallRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFirewallRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFirewallRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFirewallRuleOutput_action:
+			var ev string
+			if err := d.ReadString(schemas.DeleteFirewallRuleOutput_action, &ev); err != nil {
+				return err
+			}
+			v.Action = types.FirewallRuleAction(ev)
+			return nil
+		case schemas.DeleteFirewallRuleOutput_blockOverrideDnsType:
+			var ev string
+			if err := d.ReadString(schemas.DeleteFirewallRuleOutput_blockOverrideDnsType, &ev); err != nil {
+				return err
+			}
+			v.BlockOverrideDnsType = types.BlockOverrideDnsQueryType(ev)
+			return nil
+		case schemas.DeleteFirewallRuleOutput_blockOverrideDomain:
+			v.BlockOverrideDomain = new(string)
+			return d.ReadString(schemas.DeleteFirewallRuleOutput_blockOverrideDomain, v.BlockOverrideDomain)
+		case schemas.DeleteFirewallRuleOutput_blockOverrideTtl:
+			v.BlockOverrideTtl = new(int32)
+			return d.ReadInt32(schemas.DeleteFirewallRuleOutput_blockOverrideTtl, v.BlockOverrideTtl)
+		case schemas.DeleteFirewallRuleOutput_blockResponse:
+			var ev string
+			if err := d.ReadString(schemas.DeleteFirewallRuleOutput_blockResponse, &ev); err != nil {
+				return err
+			}
+			v.BlockResponse = types.FirewallBlockResponse(ev)
+			return nil
+		case schemas.DeleteFirewallRuleOutput_confidenceThreshold:
+			var ev string
+			if err := d.ReadString(schemas.DeleteFirewallRuleOutput_confidenceThreshold, &ev); err != nil {
+				return err
+			}
+			v.ConfidenceThreshold = types.ConfidenceThreshold(ev)
+			return nil
+		case schemas.DeleteFirewallRuleOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeleteFirewallRuleOutput_createdAt, v.CreatedAt)
+		case schemas.DeleteFirewallRuleOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DeleteFirewallRuleOutput_description, v.Description)
+		case schemas.DeleteFirewallRuleOutput_dnsAdvancedProtection:
+			var ev string
+			if err := d.ReadString(schemas.DeleteFirewallRuleOutput_dnsAdvancedProtection, &ev); err != nil {
+				return err
+			}
+			v.DnsAdvancedProtection = types.DnsAdvancedProtection(ev)
+			return nil
+		case schemas.DeleteFirewallRuleOutput_dnsViewId:
+			v.DnsViewId = new(string)
+			return d.ReadString(schemas.DeleteFirewallRuleOutput_dnsViewId, v.DnsViewId)
+		case schemas.DeleteFirewallRuleOutput_firewallDomainListId:
+			v.FirewallDomainListId = new(string)
+			return d.ReadString(schemas.DeleteFirewallRuleOutput_firewallDomainListId, v.FirewallDomainListId)
+		case schemas.DeleteFirewallRuleOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteFirewallRuleOutput_id, v.Id)
+		case schemas.DeleteFirewallRuleOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteFirewallRuleOutput_name, v.Name)
+		case schemas.DeleteFirewallRuleOutput_priority:
+			v.Priority = new(int64)
+			return d.ReadInt64(schemas.DeleteFirewallRuleOutput_priority, v.Priority)
+		case schemas.DeleteFirewallRuleOutput_queryType:
+			v.QueryType = new(string)
+			return d.ReadString(schemas.DeleteFirewallRuleOutput_queryType, v.QueryType)
+		case schemas.DeleteFirewallRuleOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteFirewallRuleOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CRResourceStatus(ev)
+			return nil
+		case schemas.DeleteFirewallRuleOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeleteFirewallRuleOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFirewallRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFirewallRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFirewallRule, schemas.DeleteFirewallRuleInput, schemas.DeleteFirewallRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteFirewallRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFirewallRule, schemas.DeleteFirewallRuleInput, schemas.DeleteFirewallRuleOutput), output: &DeleteFirewallRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteFirewallRule"); err != nil {

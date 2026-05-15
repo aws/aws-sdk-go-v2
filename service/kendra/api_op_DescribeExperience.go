@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -45,6 +47,21 @@ type DescribeExperienceInput struct {
 	IndexId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeExperienceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExperienceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExperienceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeExperienceRequest_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.DescribeExperienceRequest_IndexId, *v.IndexId)
+	}
 }
 
 type DescribeExperienceOutput struct {
@@ -96,16 +113,57 @@ type DescribeExperienceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExperienceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeExperienceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeExperienceResponse_Configuration:
+			v.Configuration = &types.ExperienceConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.DescribeExperienceResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeExperienceResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeExperienceResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeExperienceResponse_Description, v.Description)
+		case schemas.DescribeExperienceResponse_Endpoints:
+			return deserializeExperienceEndpoints(d, schemas.DescribeExperienceResponse_Endpoints, &v.Endpoints)
+		case schemas.DescribeExperienceResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DescribeExperienceResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.DescribeExperienceResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeExperienceResponse_Id, v.Id)
+		case schemas.DescribeExperienceResponse_IndexId:
+			v.IndexId = new(string)
+			return d.ReadString(schemas.DescribeExperienceResponse_IndexId, v.IndexId)
+		case schemas.DescribeExperienceResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeExperienceResponse_Name, v.Name)
+		case schemas.DescribeExperienceResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeExperienceResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeExperienceResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeExperienceResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ExperienceStatus(ev)
+			return nil
+		case schemas.DescribeExperienceResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeExperienceResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeExperienceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeExperience{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExperience, schemas.DescribeExperienceRequest, schemas.DescribeExperienceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeExperience{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExperience, schemas.DescribeExperienceRequest, schemas.DescribeExperienceResponse), output: &DescribeExperienceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeExperience"); err != nil {

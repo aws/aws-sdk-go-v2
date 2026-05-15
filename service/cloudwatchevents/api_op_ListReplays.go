@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,30 @@ type ListReplaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReplaysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReplaysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReplaysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventSourceArn != nil {
+		s.WriteString(schemas.ListReplaysRequest_EventSourceArn, *v.EventSourceArn)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListReplaysRequest_Limit, *v.Limit)
+	}
+	if v.NamePrefix != nil {
+		s.WriteString(schemas.ListReplaysRequest_NamePrefix, *v.NamePrefix)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReplaysRequest_NextToken, *v.NextToken)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ListReplaysRequest_State, string(v.State))
+	}
+}
+
 type ListReplaysOutput struct {
 
 	// The token returned by a previous call to retrieve the next set of results.
@@ -63,16 +89,26 @@ type ListReplaysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReplaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReplaysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReplaysResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReplaysResponse_NextToken, v.NextToken)
+		case schemas.ListReplaysResponse_Replays:
+			return deserializeReplayList(d, schemas.ListReplaysResponse_Replays, &v.Replays)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReplaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListReplays{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReplays, schemas.ListReplaysRequest, schemas.ListReplaysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListReplays{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReplays, schemas.ListReplaysRequest, schemas.ListReplaysResponse), output: &ListReplaysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListReplays"); err != nil {

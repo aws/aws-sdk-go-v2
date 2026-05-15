@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -108,6 +110,56 @@ type StartMLDataProcessingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMLDataProcessingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMLDataProcessingJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMLDataProcessingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigFileName != nil {
+		s.WriteString(schemas.StartMLDataProcessingJobInput_configFileName, *v.ConfigFileName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StartMLDataProcessingJobInput_id, *v.Id)
+	}
+	if v.InputDataS3Location != nil {
+		s.WriteString(schemas.StartMLDataProcessingJobInput_inputDataS3Location, *v.InputDataS3Location)
+	}
+	if v.ModelType != nil {
+		s.WriteString(schemas.StartMLDataProcessingJobInput_modelType, *v.ModelType)
+	}
+	if v.NeptuneIamRoleArn != nil {
+		s.WriteString(schemas.StartMLDataProcessingJobInput_neptuneIamRoleArn, *v.NeptuneIamRoleArn)
+	}
+	if v.PreviousDataProcessingJobId != nil {
+		s.WriteString(schemas.StartMLDataProcessingJobInput_previousDataProcessingJobId, *v.PreviousDataProcessingJobId)
+	}
+	if v.ProcessedDataS3Location != nil {
+		s.WriteString(schemas.StartMLDataProcessingJobInput_processedDataS3Location, *v.ProcessedDataS3Location)
+	}
+	if v.ProcessingInstanceType != nil {
+		s.WriteString(schemas.StartMLDataProcessingJobInput_processingInstanceType, *v.ProcessingInstanceType)
+	}
+	if v.ProcessingInstanceVolumeSizeInGB != nil {
+		s.WriteInt32(schemas.StartMLDataProcessingJobInput_processingInstanceVolumeSizeInGB, *v.ProcessingInstanceVolumeSizeInGB)
+	}
+	if v.ProcessingTimeOutInSeconds != nil {
+		s.WriteInt32(schemas.StartMLDataProcessingJobInput_processingTimeOutInSeconds, *v.ProcessingTimeOutInSeconds)
+	}
+	if v.S3OutputEncryptionKMSKey != nil {
+		s.WriteString(schemas.StartMLDataProcessingJobInput_s3OutputEncryptionKMSKey, *v.S3OutputEncryptionKMSKey)
+	}
+	if v.SagemakerIamRoleArn != nil {
+		s.WriteString(schemas.StartMLDataProcessingJobInput_sagemakerIamRoleArn, *v.SagemakerIamRoleArn)
+	}
+	serializeStringList(s, schemas.StartMLDataProcessingJobInput_securityGroupIds, v.SecurityGroupIds)
+	serializeStringList(s, schemas.StartMLDataProcessingJobInput_subnets, v.Subnets)
+	if v.VolumeEncryptionKMSKey != nil {
+		s.WriteString(schemas.StartMLDataProcessingJobInput_volumeEncryptionKMSKey, *v.VolumeEncryptionKMSKey)
+	}
+}
+
 type StartMLDataProcessingJobOutput struct {
 
 	// The ARN of the data processing job.
@@ -125,16 +177,30 @@ type StartMLDataProcessingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMLDataProcessingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMLDataProcessingJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMLDataProcessingJobOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartMLDataProcessingJobOutput_arn, v.Arn)
+		case schemas.StartMLDataProcessingJobOutput_creationTimeInMillis:
+			v.CreationTimeInMillis = new(int64)
+			return d.ReadInt64(schemas.StartMLDataProcessingJobOutput_creationTimeInMillis, v.CreationTimeInMillis)
+		case schemas.StartMLDataProcessingJobOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartMLDataProcessingJobOutput_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMLDataProcessingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartMLDataProcessingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMLDataProcessingJob, schemas.StartMLDataProcessingJobInput, schemas.StartMLDataProcessingJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartMLDataProcessingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMLDataProcessingJob, schemas.StartMLDataProcessingJobInput, schemas.StartMLDataProcessingJobOutput), output: &StartMLDataProcessingJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMLDataProcessingJob"); err != nil {

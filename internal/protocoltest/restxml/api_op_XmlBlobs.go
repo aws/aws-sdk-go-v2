@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,6 +34,18 @@ type XmlBlobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlBlobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlBlobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlBlobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Data != nil {
+		s.WriteBlob(schemas.XmlBlobsRequest_data, v.Data)
+	}
+}
+
 type XmlBlobsOutput struct {
 	Data []byte
 
@@ -41,16 +55,23 @@ type XmlBlobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlBlobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XmlBlobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XmlBlobsResponse_data:
+			return d.ReadBlob(schemas.XmlBlobsResponse_data, &v.Data)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationXmlBlobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlBlobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlBlobs, schemas.XmlBlobsRequest, schemas.XmlBlobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpXmlBlobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlBlobs, schemas.XmlBlobsRequest, schemas.XmlBlobsResponse), output: &XmlBlobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlBlobs"); err != nil {

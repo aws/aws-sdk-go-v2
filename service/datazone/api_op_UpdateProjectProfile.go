@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -68,6 +70,41 @@ type UpdateProjectProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProjectProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProjectProfileInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProjectProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowCustomProjectResourceTags != nil {
+		s.WriteBool(schemas.UpdateProjectProfileInput_allowCustomProjectResourceTags, *v.AllowCustomProjectResourceTags)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateProjectProfileInput_description, *v.Description)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.UpdateProjectProfileInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.DomainUnitIdentifier != nil {
+		s.WriteString(schemas.UpdateProjectProfileInput_domainUnitIdentifier, *v.DomainUnitIdentifier)
+	}
+	serializeEnvironmentConfigurationsList(s, schemas.UpdateProjectProfileInput_environmentConfigurations, v.EnvironmentConfigurations)
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateProjectProfileInput_identifier, *v.Identifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateProjectProfileInput_name, *v.Name)
+	}
+	serializeProjectResourceTagParameters(s, schemas.UpdateProjectProfileInput_projectResourceTags, v.ProjectResourceTags)
+	if v.ProjectResourceTagsDescription != nil {
+		s.WriteString(schemas.UpdateProjectProfileInput_projectResourceTagsDescription, *v.ProjectResourceTagsDescription)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateProjectProfileInput_status, string(v.Status))
+	}
+}
+
 type UpdateProjectProfileOutput struct {
 
 	// The user who created a project profile.
@@ -124,16 +161,62 @@ type UpdateProjectProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProjectProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProjectProfileOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProjectProfileOutput_allowCustomProjectResourceTags:
+			v.AllowCustomProjectResourceTags = new(bool)
+			return d.ReadBool(schemas.UpdateProjectProfileOutput_allowCustomProjectResourceTags, v.AllowCustomProjectResourceTags)
+		case schemas.UpdateProjectProfileOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateProjectProfileOutput_createdAt, v.CreatedAt)
+		case schemas.UpdateProjectProfileOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.UpdateProjectProfileOutput_createdBy, v.CreatedBy)
+		case schemas.UpdateProjectProfileOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateProjectProfileOutput_description, v.Description)
+		case schemas.UpdateProjectProfileOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.UpdateProjectProfileOutput_domainId, v.DomainId)
+		case schemas.UpdateProjectProfileOutput_domainUnitId:
+			v.DomainUnitId = new(string)
+			return d.ReadString(schemas.UpdateProjectProfileOutput_domainUnitId, v.DomainUnitId)
+		case schemas.UpdateProjectProfileOutput_environmentConfigurations:
+			return deserializeEnvironmentConfigurationsList(d, schemas.UpdateProjectProfileOutput_environmentConfigurations, &v.EnvironmentConfigurations)
+		case schemas.UpdateProjectProfileOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateProjectProfileOutput_id, v.Id)
+		case schemas.UpdateProjectProfileOutput_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateProjectProfileOutput_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.UpdateProjectProfileOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateProjectProfileOutput_name, v.Name)
+		case schemas.UpdateProjectProfileOutput_projectResourceTags:
+			return deserializeProjectResourceTagParameters(d, schemas.UpdateProjectProfileOutput_projectResourceTags, &v.ProjectResourceTags)
+		case schemas.UpdateProjectProfileOutput_projectResourceTagsDescription:
+			v.ProjectResourceTagsDescription = new(string)
+			return d.ReadString(schemas.UpdateProjectProfileOutput_projectResourceTagsDescription, v.ProjectResourceTagsDescription)
+		case schemas.UpdateProjectProfileOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateProjectProfileOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProjectProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProjectProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProjectProfile, schemas.UpdateProjectProfileInput, schemas.UpdateProjectProfileOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProjectProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProjectProfile, schemas.UpdateProjectProfileInput, schemas.UpdateProjectProfileOutput), output: &UpdateProjectProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProjectProfile"); err != nil {

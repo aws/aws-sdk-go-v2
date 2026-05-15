@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type GetOperatorAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOperatorAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOperatorAppInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOperatorAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.GetOperatorAppInput_agentSpaceId, *v.AgentSpaceId)
+	}
+}
+
 // Output containing the Operator App configuration including authentication
 // details.
 type GetOperatorAppOutput struct {
@@ -59,16 +73,30 @@ type GetOperatorAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOperatorAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOperatorAppOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOperatorAppOutput_iam:
+			v.Iam = &types.IamAuthConfiguration{}
+			return v.Iam.Deserialize(d)
+		case schemas.GetOperatorAppOutput_idc:
+			v.Idc = &types.IdcAuthConfiguration{}
+			return v.Idc.Deserialize(d)
+		case schemas.GetOperatorAppOutput_idp:
+			v.Idp = &types.IdpAuthConfiguration{}
+			return v.Idp.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOperatorAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOperatorApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOperatorApp, schemas.GetOperatorAppInput, schemas.GetOperatorAppOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOperatorApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOperatorApp, schemas.GetOperatorAppInput, schemas.GetOperatorAppOutput), output: &GetOperatorAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOperatorApp"); err != nil {

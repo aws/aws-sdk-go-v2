@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/artifact/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -14,6 +16,32 @@ type AccountSettings struct {
 	NotificationSubscriptionStatus NotificationSubscriptionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccountSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotificationSubscriptionStatus != "" {
+		s.WriteString(schemas.AccountSettings_notificationSubscriptionStatus, string(v.NotificationSubscriptionStatus))
+	}
+}
+func (v *AccountSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountSettings_notificationSubscriptionStatus:
+			var ev string
+			if err := d.ReadString(schemas.AccountSettings_notificationSubscriptionStatus, &ev); err != nil {
+				return err
+			}
+			v.NotificationSubscriptionStatus = NotificationSubscriptionStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Summary for customer-agreement resource.
@@ -59,6 +87,102 @@ type CustomerAgreementSummary struct {
 	Type AgreementType
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomerAgreementSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomerAgreementSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomerAgreementSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgreementTerms(s, schemas.CustomerAgreementSummary_acceptanceTerms, v.AcceptanceTerms)
+	if v.AgreementArn != nil {
+		s.WriteString(schemas.CustomerAgreementSummary_agreementArn, *v.AgreementArn)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.CustomerAgreementSummary_arn, *v.Arn)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CustomerAgreementSummary_awsAccountId, *v.AwsAccountId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CustomerAgreementSummary_description, *v.Description)
+	}
+	if v.EffectiveEnd != nil {
+		s.WriteTime(schemas.CustomerAgreementSummary_effectiveEnd, *v.EffectiveEnd)
+	}
+	if v.EffectiveStart != nil {
+		s.WriteTime(schemas.CustomerAgreementSummary_effectiveStart, *v.EffectiveStart)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CustomerAgreementSummary_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CustomerAgreementSummary_name, *v.Name)
+	}
+	if v.OrganizationArn != nil {
+		s.WriteString(schemas.CustomerAgreementSummary_organizationArn, *v.OrganizationArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CustomerAgreementSummary_state, string(v.State))
+	}
+	serializeAgreementTerms(s, schemas.CustomerAgreementSummary_terminateTerms, v.TerminateTerms)
+	if v.Type != "" {
+		s.WriteString(schemas.CustomerAgreementSummary_type, string(v.Type))
+	}
+}
+func (v *CustomerAgreementSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomerAgreementSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomerAgreementSummary_acceptanceTerms:
+			return deserializeAgreementTerms(d, schemas.CustomerAgreementSummary_acceptanceTerms, &v.AcceptanceTerms)
+		case schemas.CustomerAgreementSummary_agreementArn:
+			v.AgreementArn = new(string)
+			return d.ReadString(schemas.CustomerAgreementSummary_agreementArn, v.AgreementArn)
+		case schemas.CustomerAgreementSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CustomerAgreementSummary_arn, v.Arn)
+		case schemas.CustomerAgreementSummary_awsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.CustomerAgreementSummary_awsAccountId, v.AwsAccountId)
+		case schemas.CustomerAgreementSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CustomerAgreementSummary_description, v.Description)
+		case schemas.CustomerAgreementSummary_effectiveEnd:
+			v.EffectiveEnd = new(time.Time)
+			return d.ReadTime(schemas.CustomerAgreementSummary_effectiveEnd, v.EffectiveEnd)
+		case schemas.CustomerAgreementSummary_effectiveStart:
+			v.EffectiveStart = new(time.Time)
+			return d.ReadTime(schemas.CustomerAgreementSummary_effectiveStart, v.EffectiveStart)
+		case schemas.CustomerAgreementSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CustomerAgreementSummary_id, v.Id)
+		case schemas.CustomerAgreementSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CustomerAgreementSummary_name, v.Name)
+		case schemas.CustomerAgreementSummary_organizationArn:
+			v.OrganizationArn = new(string)
+			return d.ReadString(schemas.CustomerAgreementSummary_organizationArn, v.OrganizationArn)
+		case schemas.CustomerAgreementSummary_state:
+			var ev string
+			if err := d.ReadString(schemas.CustomerAgreementSummary_state, &ev); err != nil {
+				return err
+			}
+			v.State = CustomerAgreementState(ev)
+			return nil
+		case schemas.CustomerAgreementSummary_terminateTerms:
+			return deserializeAgreementTerms(d, schemas.CustomerAgreementSummary_terminateTerms, &v.TerminateTerms)
+		case schemas.CustomerAgreementSummary_type:
+			var ev string
+			if err := d.ReadString(schemas.CustomerAgreementSummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = AgreementType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Full detail for report resource metadata.
@@ -127,6 +251,154 @@ type ReportDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReportDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptanceType != "" {
+		s.WriteString(schemas.ReportDetail_acceptanceType, string(v.AcceptanceType))
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.ReportDetail_arn, *v.Arn)
+	}
+	if v.Category != nil {
+		s.WriteString(schemas.ReportDetail_category, *v.Category)
+	}
+	if v.CompanyName != nil {
+		s.WriteString(schemas.ReportDetail_companyName, *v.CompanyName)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ReportDetail_createdAt, *v.CreatedAt)
+	}
+	if v.DeletedAt != nil {
+		s.WriteTime(schemas.ReportDetail_deletedAt, *v.DeletedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ReportDetail_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ReportDetail_id, *v.Id)
+	}
+	if v.LastModifiedAt != nil {
+		s.WriteTime(schemas.ReportDetail_lastModifiedAt, *v.LastModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ReportDetail_name, *v.Name)
+	}
+	if v.PeriodEnd != nil {
+		s.WriteTime(schemas.ReportDetail_periodEnd, *v.PeriodEnd)
+	}
+	if v.PeriodStart != nil {
+		s.WriteTime(schemas.ReportDetail_periodStart, *v.PeriodStart)
+	}
+	if v.ProductName != nil {
+		s.WriteString(schemas.ReportDetail_productName, *v.ProductName)
+	}
+	if v.SequenceNumber != nil {
+		s.WriteInt64(schemas.ReportDetail_sequenceNumber, *v.SequenceNumber)
+	}
+	if v.Series != nil {
+		s.WriteString(schemas.ReportDetail_series, *v.Series)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ReportDetail_state, string(v.State))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ReportDetail_statusMessage, *v.StatusMessage)
+	}
+	if v.TermArn != nil {
+		s.WriteString(schemas.ReportDetail_termArn, *v.TermArn)
+	}
+	if v.UploadState != "" {
+		s.WriteString(schemas.ReportDetail_uploadState, string(v.UploadState))
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.ReportDetail_version, *v.Version)
+	}
+}
+func (v *ReportDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportDetail_acceptanceType:
+			var ev string
+			if err := d.ReadString(schemas.ReportDetail_acceptanceType, &ev); err != nil {
+				return err
+			}
+			v.AcceptanceType = AcceptanceType(ev)
+			return nil
+		case schemas.ReportDetail_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ReportDetail_arn, v.Arn)
+		case schemas.ReportDetail_category:
+			v.Category = new(string)
+			return d.ReadString(schemas.ReportDetail_category, v.Category)
+		case schemas.ReportDetail_companyName:
+			v.CompanyName = new(string)
+			return d.ReadString(schemas.ReportDetail_companyName, v.CompanyName)
+		case schemas.ReportDetail_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ReportDetail_createdAt, v.CreatedAt)
+		case schemas.ReportDetail_deletedAt:
+			v.DeletedAt = new(time.Time)
+			return d.ReadTime(schemas.ReportDetail_deletedAt, v.DeletedAt)
+		case schemas.ReportDetail_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ReportDetail_description, v.Description)
+		case schemas.ReportDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ReportDetail_id, v.Id)
+		case schemas.ReportDetail_lastModifiedAt:
+			v.LastModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.ReportDetail_lastModifiedAt, v.LastModifiedAt)
+		case schemas.ReportDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ReportDetail_name, v.Name)
+		case schemas.ReportDetail_periodEnd:
+			v.PeriodEnd = new(time.Time)
+			return d.ReadTime(schemas.ReportDetail_periodEnd, v.PeriodEnd)
+		case schemas.ReportDetail_periodStart:
+			v.PeriodStart = new(time.Time)
+			return d.ReadTime(schemas.ReportDetail_periodStart, v.PeriodStart)
+		case schemas.ReportDetail_productName:
+			v.ProductName = new(string)
+			return d.ReadString(schemas.ReportDetail_productName, v.ProductName)
+		case schemas.ReportDetail_sequenceNumber:
+			v.SequenceNumber = new(int64)
+			return d.ReadInt64(schemas.ReportDetail_sequenceNumber, v.SequenceNumber)
+		case schemas.ReportDetail_series:
+			v.Series = new(string)
+			return d.ReadString(schemas.ReportDetail_series, v.Series)
+		case schemas.ReportDetail_state:
+			var ev string
+			if err := d.ReadString(schemas.ReportDetail_state, &ev); err != nil {
+				return err
+			}
+			v.State = PublishedState(ev)
+			return nil
+		case schemas.ReportDetail_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ReportDetail_statusMessage, v.StatusMessage)
+		case schemas.ReportDetail_termArn:
+			v.TermArn = new(string)
+			return d.ReadString(schemas.ReportDetail_termArn, v.TermArn)
+		case schemas.ReportDetail_uploadState:
+			var ev string
+			if err := d.ReadString(schemas.ReportDetail_uploadState, &ev); err != nil {
+				return err
+			}
+			v.UploadState = UploadState(ev)
+			return nil
+		case schemas.ReportDetail_version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.ReportDetail_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Summary for report resource.
 type ReportSummary struct {
 
@@ -178,6 +450,124 @@ type ReportSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReportSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptanceType != "" {
+		s.WriteString(schemas.ReportSummary_acceptanceType, string(v.AcceptanceType))
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.ReportSummary_arn, *v.Arn)
+	}
+	if v.Category != nil {
+		s.WriteString(schemas.ReportSummary_category, *v.Category)
+	}
+	if v.CompanyName != nil {
+		s.WriteString(schemas.ReportSummary_companyName, *v.CompanyName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ReportSummary_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ReportSummary_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ReportSummary_name, *v.Name)
+	}
+	if v.PeriodEnd != nil {
+		s.WriteTime(schemas.ReportSummary_periodEnd, *v.PeriodEnd)
+	}
+	if v.PeriodStart != nil {
+		s.WriteTime(schemas.ReportSummary_periodStart, *v.PeriodStart)
+	}
+	if v.ProductName != nil {
+		s.WriteString(schemas.ReportSummary_productName, *v.ProductName)
+	}
+	if v.Series != nil {
+		s.WriteString(schemas.ReportSummary_series, *v.Series)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ReportSummary_state, string(v.State))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ReportSummary_statusMessage, *v.StatusMessage)
+	}
+	if v.UploadState != "" {
+		s.WriteString(schemas.ReportSummary_uploadState, string(v.UploadState))
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.ReportSummary_version, *v.Version)
+	}
+}
+func (v *ReportSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportSummary_acceptanceType:
+			var ev string
+			if err := d.ReadString(schemas.ReportSummary_acceptanceType, &ev); err != nil {
+				return err
+			}
+			v.AcceptanceType = AcceptanceType(ev)
+			return nil
+		case schemas.ReportSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ReportSummary_arn, v.Arn)
+		case schemas.ReportSummary_category:
+			v.Category = new(string)
+			return d.ReadString(schemas.ReportSummary_category, v.Category)
+		case schemas.ReportSummary_companyName:
+			v.CompanyName = new(string)
+			return d.ReadString(schemas.ReportSummary_companyName, v.CompanyName)
+		case schemas.ReportSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ReportSummary_description, v.Description)
+		case schemas.ReportSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ReportSummary_id, v.Id)
+		case schemas.ReportSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ReportSummary_name, v.Name)
+		case schemas.ReportSummary_periodEnd:
+			v.PeriodEnd = new(time.Time)
+			return d.ReadTime(schemas.ReportSummary_periodEnd, v.PeriodEnd)
+		case schemas.ReportSummary_periodStart:
+			v.PeriodStart = new(time.Time)
+			return d.ReadTime(schemas.ReportSummary_periodStart, v.PeriodStart)
+		case schemas.ReportSummary_productName:
+			v.ProductName = new(string)
+			return d.ReadString(schemas.ReportSummary_productName, v.ProductName)
+		case schemas.ReportSummary_series:
+			v.Series = new(string)
+			return d.ReadString(schemas.ReportSummary_series, v.Series)
+		case schemas.ReportSummary_state:
+			var ev string
+			if err := d.ReadString(schemas.ReportSummary_state, &ev); err != nil {
+				return err
+			}
+			v.State = PublishedState(ev)
+			return nil
+		case schemas.ReportSummary_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ReportSummary_statusMessage, v.StatusMessage)
+		case schemas.ReportSummary_uploadState:
+			var ev string
+			if err := d.ReadString(schemas.ReportSummary_uploadState, &ev); err != nil {
+				return err
+			}
+			v.UploadState = UploadState(ev)
+			return nil
+		case schemas.ReportSummary_version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.ReportSummary_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Validation exception message and name.
 type ValidationExceptionField struct {
 
@@ -192,6 +582,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

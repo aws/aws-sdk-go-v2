@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,21 @@ type GetMLEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMLEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMLEndpointInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMLEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetMLEndpointInput_id, *v.Id)
+	}
+	if v.NeptuneIamRoleArn != nil {
+		s.WriteString(schemas.GetMLEndpointInput_neptuneIamRoleArn, *v.NeptuneIamRoleArn)
+	}
+}
+
 type GetMLEndpointOutput struct {
 
 	// The endpoint definition.
@@ -69,16 +86,33 @@ type GetMLEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMLEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMLEndpointOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMLEndpointOutput_endpoint:
+			v.Endpoint = &types.MlResourceDefinition{}
+			return v.Endpoint.Deserialize(d)
+		case schemas.GetMLEndpointOutput_endpointConfig:
+			v.EndpointConfig = &types.MlConfigDefinition{}
+			return v.EndpointConfig.Deserialize(d)
+		case schemas.GetMLEndpointOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetMLEndpointOutput_id, v.Id)
+		case schemas.GetMLEndpointOutput_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.GetMLEndpointOutput_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMLEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMLEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLEndpoint, schemas.GetMLEndpointInput, schemas.GetMLEndpointOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMLEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLEndpoint, schemas.GetMLEndpointInput, schemas.GetMLEndpointOutput), output: &GetMLEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMLEndpoint"); err != nil {

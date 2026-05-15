@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,6 +34,25 @@ type MalformedUnionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedUnionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MalformedUnionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedUnionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSimpleUnion(s, schemas.MalformedUnionInput_union, v.Union)
+}
+func (v *MalformedUnionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MalformedUnionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MalformedUnionInput_union:
+			return deserializeSimpleUnion(d, schemas.MalformedUnionInput_union, &v.Union)
+		}
+		return nil
+	})
+}
+
 type MalformedUnionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -39,16 +60,29 @@ type MalformedUnionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedUnionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedUnionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *MalformedUnionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMalformedUnionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpMalformedUnion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedUnion, schemas.MalformedUnionInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMalformedUnion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedUnion, schemas.MalformedUnionInput, nil), output: &MalformedUnionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "MalformedUnion"); err != nil {

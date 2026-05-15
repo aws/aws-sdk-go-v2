@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,18 @@ type ListHapgsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHapgsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHapgsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHapgsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHapgsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListHapgsOutput struct {
 
 	// The list of high-availability partition groups.
@@ -71,16 +85,26 @@ type ListHapgsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHapgsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHapgsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHapgsResponse_HapgList:
+			return deserializeHapgList(d, schemas.ListHapgsResponse_HapgList, &v.HapgList)
+		case schemas.ListHapgsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHapgsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHapgsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListHapgs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHapgs, schemas.ListHapgsRequest, schemas.ListHapgsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListHapgs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHapgs, schemas.ListHapgsRequest, schemas.ListHapgsResponse), output: &ListHapgsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListHapgs"); err != nil {

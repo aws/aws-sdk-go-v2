@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type DeleteConnectInstanceConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConnectInstanceConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConnectInstanceConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConnectInstanceConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CampaignDeletionPolicy != "" {
+		s.WriteString(schemas.DeleteConnectInstanceConfigRequest_campaignDeletionPolicy, string(v.CampaignDeletionPolicy))
+	}
+	if v.ConnectInstanceId != nil {
+		s.WriteString(schemas.DeleteConnectInstanceConfigRequest_connectInstanceId, *v.ConnectInstanceId)
+	}
+}
+
 type DeleteConnectInstanceConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,16 +66,29 @@ type DeleteConnectInstanceConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConnectInstanceConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConnectInstanceConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteConnectInstanceConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConnectInstanceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConnectInstanceConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConnectInstanceConfig, schemas.DeleteConnectInstanceConfigRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteConnectInstanceConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConnectInstanceConfig, schemas.DeleteConnectInstanceConfigRequest, nil), output: &DeleteConnectInstanceConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteConnectInstanceConfig"); err != nil {

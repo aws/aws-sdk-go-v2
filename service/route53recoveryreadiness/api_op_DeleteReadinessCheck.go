@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type DeleteReadinessCheckInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReadinessCheckInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReadinessCheckRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReadinessCheckInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReadinessCheckName != nil {
+		s.WriteString(schemas.DeleteReadinessCheckRequest_ReadinessCheckName, *v.ReadinessCheckName)
+	}
+}
+
 type DeleteReadinessCheckOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,16 +57,29 @@ type DeleteReadinessCheckOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReadinessCheckOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReadinessCheckOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteReadinessCheckOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteReadinessCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteReadinessCheck{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReadinessCheck, schemas.DeleteReadinessCheckRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteReadinessCheck{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReadinessCheck, schemas.DeleteReadinessCheckRequest, nil), output: &DeleteReadinessCheckOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteReadinessCheck"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +70,27 @@ type GetQueryResultsWorkloadInsightsTopContributorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryResultsWorkloadInsightsTopContributorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryResultsWorkloadInsightsTopContributorsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryResultsWorkloadInsightsTopContributorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetQueryResultsWorkloadInsightsTopContributorsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetQueryResultsWorkloadInsightsTopContributorsInput_nextToken, *v.NextToken)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.GetQueryResultsWorkloadInsightsTopContributorsInput_queryId, *v.QueryId)
+	}
+	if v.ScopeId != nil {
+		s.WriteString(schemas.GetQueryResultsWorkloadInsightsTopContributorsInput_scopeId, *v.ScopeId)
+	}
+}
+
 type GetQueryResultsWorkloadInsightsTopContributorsOutput struct {
 
 	// The token for the next set of results. You receive this token from a previous
@@ -84,16 +107,26 @@ type GetQueryResultsWorkloadInsightsTopContributorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryResultsWorkloadInsightsTopContributorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQueryResultsWorkloadInsightsTopContributorsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQueryResultsWorkloadInsightsTopContributorsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetQueryResultsWorkloadInsightsTopContributorsOutput_nextToken, v.NextToken)
+		case schemas.GetQueryResultsWorkloadInsightsTopContributorsOutput_topContributors:
+			return deserializeWorkloadInsightsTopContributorsRowList(d, schemas.GetQueryResultsWorkloadInsightsTopContributorsOutput_topContributors, &v.TopContributors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQueryResultsWorkloadInsightsTopContributorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQueryResultsWorkloadInsightsTopContributors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryResultsWorkloadInsightsTopContributors, schemas.GetQueryResultsWorkloadInsightsTopContributorsInput, schemas.GetQueryResultsWorkloadInsightsTopContributorsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQueryResultsWorkloadInsightsTopContributors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryResultsWorkloadInsightsTopContributors, schemas.GetQueryResultsWorkloadInsightsTopContributorsInput, schemas.GetQueryResultsWorkloadInsightsTopContributorsOutput), output: &GetQueryResultsWorkloadInsightsTopContributorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetQueryResultsWorkloadInsightsTopContributors"); err != nil {

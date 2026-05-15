@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -37,6 +39,18 @@ type GetArchiveInput struct {
 	ArchiveId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetArchiveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetArchiveRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetArchiveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveId != nil {
+		s.WriteString(schemas.GetArchiveRequest_ArchiveId, *v.ArchiveId)
+	}
 }
 
 // The response containing details of the requested archive.
@@ -88,16 +102,48 @@ type GetArchiveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetArchiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetArchiveResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetArchiveResponse_ArchiveArn:
+			v.ArchiveArn = new(string)
+			return d.ReadString(schemas.GetArchiveResponse_ArchiveArn, v.ArchiveArn)
+		case schemas.GetArchiveResponse_ArchiveId:
+			v.ArchiveId = new(string)
+			return d.ReadString(schemas.GetArchiveResponse_ArchiveId, v.ArchiveId)
+		case schemas.GetArchiveResponse_ArchiveName:
+			v.ArchiveName = new(string)
+			return d.ReadString(schemas.GetArchiveResponse_ArchiveName, v.ArchiveName)
+		case schemas.GetArchiveResponse_ArchiveState:
+			var ev string
+			if err := d.ReadString(schemas.GetArchiveResponse_ArchiveState, &ev); err != nil {
+				return err
+			}
+			v.ArchiveState = types.ArchiveState(ev)
+			return nil
+		case schemas.GetArchiveResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetArchiveResponse_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.GetArchiveResponse_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.GetArchiveResponse_KmsKeyArn, v.KmsKeyArn)
+		case schemas.GetArchiveResponse_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetArchiveResponse_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.GetArchiveResponse_Retention:
+			return deserializeArchiveRetention(d, schemas.GetArchiveResponse_Retention, &v.Retention)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArchive, schemas.GetArchiveRequest, schemas.GetArchiveResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArchive, schemas.GetArchiveRequest, schemas.GetArchiveResponse), output: &GetArchiveOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetArchive"); err != nil {

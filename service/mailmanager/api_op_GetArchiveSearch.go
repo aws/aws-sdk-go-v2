@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -39,6 +41,18 @@ type GetArchiveSearchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetArchiveSearchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetArchiveSearchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetArchiveSearchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SearchId != nil {
+		s.WriteString(schemas.GetArchiveSearchRequest_SearchId, *v.SearchId)
+	}
+}
+
 // The response containing details of the specified archive search job.
 type GetArchiveSearchOutput struct {
 
@@ -66,16 +80,39 @@ type GetArchiveSearchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetArchiveSearchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetArchiveSearchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetArchiveSearchResponse_ArchiveId:
+			v.ArchiveId = new(string)
+			return d.ReadString(schemas.GetArchiveSearchResponse_ArchiveId, v.ArchiveId)
+		case schemas.GetArchiveSearchResponse_Filters:
+			v.Filters = &types.ArchiveFilters{}
+			return v.Filters.Deserialize(d)
+		case schemas.GetArchiveSearchResponse_FromTimestamp:
+			v.FromTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetArchiveSearchResponse_FromTimestamp, v.FromTimestamp)
+		case schemas.GetArchiveSearchResponse_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.GetArchiveSearchResponse_MaxResults, v.MaxResults)
+		case schemas.GetArchiveSearchResponse_Status:
+			v.Status = &types.SearchStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.GetArchiveSearchResponse_ToTimestamp:
+			v.ToTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetArchiveSearchResponse_ToTimestamp, v.ToTimestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetArchiveSearchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetArchiveSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArchiveSearch, schemas.GetArchiveSearchRequest, schemas.GetArchiveSearchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetArchiveSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArchiveSearch, schemas.GetArchiveSearchRequest, schemas.GetArchiveSearchResponse), output: &GetArchiveSearchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetArchiveSearch"); err != nil {

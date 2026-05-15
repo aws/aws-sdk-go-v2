@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -68,6 +70,34 @@ type UpdateKxDataviewInput struct {
 	SegmentConfigurations []types.KxDataviewSegmentConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateKxDataviewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateKxDataviewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateKxDataviewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangesetId != nil {
+		s.WriteString(schemas.UpdateKxDataviewRequest_changesetId, *v.ChangesetId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateKxDataviewRequest_clientToken, *v.ClientToken)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.UpdateKxDataviewRequest_databaseName, *v.DatabaseName)
+	}
+	if v.DataviewName != nil {
+		s.WriteString(schemas.UpdateKxDataviewRequest_dataviewName, *v.DataviewName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateKxDataviewRequest_description, *v.Description)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.UpdateKxDataviewRequest_environmentId, *v.EnvironmentId)
+	}
+	serializeKxDataviewSegmentConfigurationList(s, schemas.UpdateKxDataviewRequest_segmentConfigurations, v.SegmentConfigurations)
 }
 
 type UpdateKxDataviewOutput struct {
@@ -138,16 +168,67 @@ type UpdateKxDataviewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateKxDataviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateKxDataviewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateKxDataviewResponse_activeVersions:
+			return deserializeKxDataviewActiveVersionList(d, schemas.UpdateKxDataviewResponse_activeVersions, &v.ActiveVersions)
+		case schemas.UpdateKxDataviewResponse_autoUpdate:
+			return d.ReadBool(schemas.UpdateKxDataviewResponse_autoUpdate, &v.AutoUpdate)
+		case schemas.UpdateKxDataviewResponse_availabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.UpdateKxDataviewResponse_availabilityZoneId, v.AvailabilityZoneId)
+		case schemas.UpdateKxDataviewResponse_azMode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateKxDataviewResponse_azMode, &ev); err != nil {
+				return err
+			}
+			v.AzMode = types.KxAzMode(ev)
+			return nil
+		case schemas.UpdateKxDataviewResponse_changesetId:
+			v.ChangesetId = new(string)
+			return d.ReadString(schemas.UpdateKxDataviewResponse_changesetId, v.ChangesetId)
+		case schemas.UpdateKxDataviewResponse_createdTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.UpdateKxDataviewResponse_createdTimestamp, v.CreatedTimestamp)
+		case schemas.UpdateKxDataviewResponse_databaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.UpdateKxDataviewResponse_databaseName, v.DatabaseName)
+		case schemas.UpdateKxDataviewResponse_dataviewName:
+			v.DataviewName = new(string)
+			return d.ReadString(schemas.UpdateKxDataviewResponse_dataviewName, v.DataviewName)
+		case schemas.UpdateKxDataviewResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateKxDataviewResponse_description, v.Description)
+		case schemas.UpdateKxDataviewResponse_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.UpdateKxDataviewResponse_environmentId, v.EnvironmentId)
+		case schemas.UpdateKxDataviewResponse_lastModifiedTimestamp:
+			v.LastModifiedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.UpdateKxDataviewResponse_lastModifiedTimestamp, v.LastModifiedTimestamp)
+		case schemas.UpdateKxDataviewResponse_readWrite:
+			return d.ReadBool(schemas.UpdateKxDataviewResponse_readWrite, &v.ReadWrite)
+		case schemas.UpdateKxDataviewResponse_segmentConfigurations:
+			return deserializeKxDataviewSegmentConfigurationList(d, schemas.UpdateKxDataviewResponse_segmentConfigurations, &v.SegmentConfigurations)
+		case schemas.UpdateKxDataviewResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateKxDataviewResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.KxDataviewStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateKxDataviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateKxDataview{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKxDataview, schemas.UpdateKxDataviewRequest, schemas.UpdateKxDataviewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateKxDataview{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKxDataview, schemas.UpdateKxDataviewRequest, schemas.UpdateKxDataviewResponse), output: &UpdateKxDataviewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateKxDataview"); err != nil {

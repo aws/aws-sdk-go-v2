@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,24 @@ type DeleteProvisionedProductPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProvisionedProductPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProvisionedProductPlanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProvisionedProductPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.DeleteProvisionedProductPlanInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.IgnoreErrors != false {
+		s.WriteBool(schemas.DeleteProvisionedProductPlanInput_IgnoreErrors, v.IgnoreErrors)
+	}
+	if v.PlanId != nil {
+		s.WriteString(schemas.DeleteProvisionedProductPlanInput_PlanId, *v.PlanId)
+	}
+}
+
 type DeleteProvisionedProductPlanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,16 +74,21 @@ type DeleteProvisionedProductPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProvisionedProductPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProvisionedProductPlanOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProvisionedProductPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteProvisionedProductPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProvisionedProductPlan, schemas.DeleteProvisionedProductPlanInput, schemas.DeleteProvisionedProductPlanOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteProvisionedProductPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProvisionedProductPlan, schemas.DeleteProvisionedProductPlanInput, schemas.DeleteProvisionedProductPlanOutput), output: &DeleteProvisionedProductPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteProvisionedProductPlan"); err != nil {

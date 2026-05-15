@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,21 @@ type DescribeRuleInput struct {
 	EventBusName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventBusName != nil {
+		s.WriteString(schemas.DescribeRuleRequest_EventBusName, *v.EventBusName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeRuleRequest_Name, *v.Name)
+	}
 }
 
 type DescribeRuleOutput struct {
@@ -93,16 +110,55 @@ type DescribeRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRuleResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeRuleResponse_Arn, v.Arn)
+		case schemas.DescribeRuleResponse_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.DescribeRuleResponse_CreatedBy, v.CreatedBy)
+		case schemas.DescribeRuleResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeRuleResponse_Description, v.Description)
+		case schemas.DescribeRuleResponse_EventBusName:
+			v.EventBusName = new(string)
+			return d.ReadString(schemas.DescribeRuleResponse_EventBusName, v.EventBusName)
+		case schemas.DescribeRuleResponse_EventPattern:
+			v.EventPattern = new(string)
+			return d.ReadString(schemas.DescribeRuleResponse_EventPattern, v.EventPattern)
+		case schemas.DescribeRuleResponse_ManagedBy:
+			v.ManagedBy = new(string)
+			return d.ReadString(schemas.DescribeRuleResponse_ManagedBy, v.ManagedBy)
+		case schemas.DescribeRuleResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeRuleResponse_Name, v.Name)
+		case schemas.DescribeRuleResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeRuleResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeRuleResponse_ScheduleExpression:
+			v.ScheduleExpression = new(string)
+			return d.ReadString(schemas.DescribeRuleResponse_ScheduleExpression, v.ScheduleExpression)
+		case schemas.DescribeRuleResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeRuleResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.RuleState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRule, schemas.DescribeRuleRequest, schemas.DescribeRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRule, schemas.DescribeRuleRequest, schemas.DescribeRuleResponse), output: &DescribeRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRule"); err != nil {

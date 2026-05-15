@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -34,6 +36,40 @@ type DefinitionS3Location struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DefinitionS3Location) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DefinitionS3Location)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DefinitionS3Location) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.DefinitionS3Location_Bucket, *v.Bucket)
+	}
+	if v.ObjectKey != nil {
+		s.WriteString(schemas.DefinitionS3Location_ObjectKey, *v.ObjectKey)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.DefinitionS3Location_VersionId, *v.VersionId)
+	}
+}
+func (v *DefinitionS3Location) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DefinitionS3Location, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DefinitionS3Location_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.DefinitionS3Location_Bucket, v.Bucket)
+		case schemas.DefinitionS3Location_ObjectKey:
+			v.ObjectKey = new(string)
+			return d.ReadString(schemas.DefinitionS3Location_ObjectKey, v.ObjectKey)
+		case schemas.DefinitionS3Location_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.DefinitionS3Location_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
+
 // Configuration for encrypting workflow data at rest and in transit. Amazon
 // Managed Workflows for Apache Airflow Serverless provides comprehensive
 // encryption capabilities to protect sensitive workflow data, parameters, and
@@ -57,6 +93,38 @@ type EncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.EncryptionConfiguration_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.EncryptionConfiguration_Type, string(v.Type))
+	}
+}
+func (v *EncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionConfiguration_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.EncryptionConfiguration_KmsKeyId, v.KmsKeyId)
+		case schemas.EncryptionConfiguration_Type:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionConfiguration_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = EncryptionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Configuration for workflow logging that specifies where you should store your
 // workflow execution logs. Amazon Managed Workflows for Apache Airflow Serverless
 // provides comprehensive logging capabilities that capture workflow execution
@@ -73,6 +141,28 @@ type LoggingConfiguration struct {
 	LogGroupName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoggingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoggingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoggingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogGroupName != nil {
+		s.WriteString(schemas.LoggingConfiguration_LogGroupName, *v.LogGroupName)
+	}
+}
+func (v *LoggingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoggingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoggingConfiguration_LogGroupName:
+			v.LogGroupName = new(string)
+			return d.ReadString(schemas.LoggingConfiguration_LogGroupName, v.LogGroupName)
+		}
+		return nil
+	})
 }
 
 // Network configuration for workflow execution. Specifies VPC security groups and
@@ -93,6 +183,28 @@ type NetworkConfiguration struct {
 	SubnetIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityGroupIds(s, schemas.NetworkConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIds(s, schemas.NetworkConfiguration_SubnetIds, v.SubnetIds)
+}
+func (v *NetworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkConfiguration_SecurityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.NetworkConfiguration_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.NetworkConfiguration_SubnetIds:
+			return deserializeSubnetIds(d, schemas.NetworkConfiguration_SubnetIds, &v.SubnetIds)
+		}
+		return nil
+	})
 }
 
 // Summary information about a workflow run's execution details, including status
@@ -116,6 +228,50 @@ type RunDetailSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RunDetailSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RunDetailSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RunDetailSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedOn != nil {
+		s.WriteTime(schemas.RunDetailSummary_CreatedOn, *v.CreatedOn)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.RunDetailSummary_EndedAt, *v.EndedAt)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.RunDetailSummary_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RunDetailSummary_Status, string(v.Status))
+	}
+}
+func (v *RunDetailSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RunDetailSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RunDetailSummary_CreatedOn:
+			v.CreatedOn = new(time.Time)
+			return d.ReadTime(schemas.RunDetailSummary_CreatedOn, v.CreatedOn)
+		case schemas.RunDetailSummary_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.RunDetailSummary_EndedAt, v.EndedAt)
+		case schemas.RunDetailSummary_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.RunDetailSummary_StartedAt, v.StartedAt)
+		case schemas.RunDetailSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.RunDetailSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = WorkflowRunStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The configuration to use to schedule automated workflow execution using cron
 // expressions. Amazon Managed Workflows for Apache Airflow Serverless integrates
 // with EventBridge Scheduler to provide cost-effective, timezone-aware scheduling
@@ -131,6 +287,28 @@ type ScheduleConfiguration struct {
 	CronExpression *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScheduleConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduleConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CronExpression != nil {
+		s.WriteString(schemas.ScheduleConfiguration_CronExpression, *v.CronExpression)
+	}
+}
+func (v *ScheduleConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduleConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduleConfiguration_CronExpression:
+			v.CronExpression = new(string)
+			return d.ReadString(schemas.ScheduleConfiguration_CronExpression, v.CronExpression)
+		}
+		return nil
+	})
 }
 
 // Summary information about a task instance within a workflow run, including its
@@ -162,6 +340,68 @@ type TaskInstanceSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaskInstanceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskInstanceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskInstanceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationInSeconds != nil {
+		s.WriteInt32(schemas.TaskInstanceSummary_DurationInSeconds, *v.DurationInSeconds)
+	}
+	if v.OperatorName != nil {
+		s.WriteString(schemas.TaskInstanceSummary_OperatorName, *v.OperatorName)
+	}
+	if v.RunId != nil {
+		s.WriteString(schemas.TaskInstanceSummary_RunId, *v.RunId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TaskInstanceSummary_Status, string(v.Status))
+	}
+	if v.TaskInstanceId != nil {
+		s.WriteString(schemas.TaskInstanceSummary_TaskInstanceId, *v.TaskInstanceId)
+	}
+	if v.WorkflowArn != nil {
+		s.WriteString(schemas.TaskInstanceSummary_WorkflowArn, *v.WorkflowArn)
+	}
+	if v.WorkflowVersion != nil {
+		s.WriteString(schemas.TaskInstanceSummary_WorkflowVersion, *v.WorkflowVersion)
+	}
+}
+func (v *TaskInstanceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskInstanceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskInstanceSummary_DurationInSeconds:
+			v.DurationInSeconds = new(int32)
+			return d.ReadInt32(schemas.TaskInstanceSummary_DurationInSeconds, v.DurationInSeconds)
+		case schemas.TaskInstanceSummary_OperatorName:
+			v.OperatorName = new(string)
+			return d.ReadString(schemas.TaskInstanceSummary_OperatorName, v.OperatorName)
+		case schemas.TaskInstanceSummary_RunId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.TaskInstanceSummary_RunId, v.RunId)
+		case schemas.TaskInstanceSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.TaskInstanceSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = TaskInstanceStatus(ev)
+			return nil
+		case schemas.TaskInstanceSummary_TaskInstanceId:
+			v.TaskInstanceId = new(string)
+			return d.ReadString(schemas.TaskInstanceSummary_TaskInstanceId, v.TaskInstanceId)
+		case schemas.TaskInstanceSummary_WorkflowArn:
+			v.WorkflowArn = new(string)
+			return d.ReadString(schemas.TaskInstanceSummary_WorkflowArn, v.WorkflowArn)
+		case schemas.TaskInstanceSummary_WorkflowVersion:
+			v.WorkflowVersion = new(string)
+			return d.ReadString(schemas.TaskInstanceSummary_WorkflowVersion, v.WorkflowVersion)
+		}
+		return nil
+	})
+}
+
 // Contains information about a field that failed validation, including the field
 // name and a descriptive error message.
 type ValidationExceptionField struct {
@@ -177,6 +417,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_Name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Message, v.Message)
+		case schemas.ValidationExceptionField_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Detailed information about a workflow run execution, including timing, status,
@@ -233,6 +501,99 @@ type WorkflowRunDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkflowRunDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowRunDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowRunDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedOn != nil {
+		s.WriteTime(schemas.WorkflowRunDetail_CompletedOn, *v.CompletedOn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.WorkflowRunDetail_CreatedAt, *v.CreatedAt)
+	}
+	if v.Duration != nil {
+		s.WriteInt32(schemas.WorkflowRunDetail_Duration, *v.Duration)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.WorkflowRunDetail_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.WorkflowRunDetail_ModifiedAt, *v.ModifiedAt)
+	}
+	if v.RunId != nil {
+		s.WriteString(schemas.WorkflowRunDetail_RunId, *v.RunId)
+	}
+	if v.RunState != "" {
+		s.WriteString(schemas.WorkflowRunDetail_RunState, string(v.RunState))
+	}
+	if v.RunType != "" {
+		s.WriteString(schemas.WorkflowRunDetail_RunType, string(v.RunType))
+	}
+	if v.StartedOn != nil {
+		s.WriteTime(schemas.WorkflowRunDetail_StartedOn, *v.StartedOn)
+	}
+	serializeTaskInstanceIds(s, schemas.WorkflowRunDetail_TaskInstances, v.TaskInstances)
+	if v.WorkflowArn != nil {
+		s.WriteString(schemas.WorkflowRunDetail_WorkflowArn, *v.WorkflowArn)
+	}
+	if v.WorkflowVersion != nil {
+		s.WriteString(schemas.WorkflowRunDetail_WorkflowVersion, *v.WorkflowVersion)
+	}
+}
+func (v *WorkflowRunDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowRunDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowRunDetail_CompletedOn:
+			v.CompletedOn = new(time.Time)
+			return d.ReadTime(schemas.WorkflowRunDetail_CompletedOn, v.CompletedOn)
+		case schemas.WorkflowRunDetail_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.WorkflowRunDetail_CreatedAt, v.CreatedAt)
+		case schemas.WorkflowRunDetail_Duration:
+			v.Duration = new(int32)
+			return d.ReadInt32(schemas.WorkflowRunDetail_Duration, v.Duration)
+		case schemas.WorkflowRunDetail_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.WorkflowRunDetail_ErrorMessage, v.ErrorMessage)
+		case schemas.WorkflowRunDetail_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.WorkflowRunDetail_ModifiedAt, v.ModifiedAt)
+		case schemas.WorkflowRunDetail_RunId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.WorkflowRunDetail_RunId, v.RunId)
+		case schemas.WorkflowRunDetail_RunState:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowRunDetail_RunState, &ev); err != nil {
+				return err
+			}
+			v.RunState = WorkflowRunStatus(ev)
+			return nil
+		case schemas.WorkflowRunDetail_RunType:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowRunDetail_RunType, &ev); err != nil {
+				return err
+			}
+			v.RunType = RunType(ev)
+			return nil
+		case schemas.WorkflowRunDetail_StartedOn:
+			v.StartedOn = new(time.Time)
+			return d.ReadTime(schemas.WorkflowRunDetail_StartedOn, v.StartedOn)
+		case schemas.WorkflowRunDetail_TaskInstances:
+			return deserializeTaskInstanceIds(d, schemas.WorkflowRunDetail_TaskInstances, &v.TaskInstances)
+		case schemas.WorkflowRunDetail_WorkflowArn:
+			v.WorkflowArn = new(string)
+			return d.ReadString(schemas.WorkflowRunDetail_WorkflowArn, v.WorkflowArn)
+		case schemas.WorkflowRunDetail_WorkflowVersion:
+			v.WorkflowVersion = new(string)
+			return d.ReadString(schemas.WorkflowRunDetail_WorkflowVersion, v.WorkflowVersion)
+		}
+		return nil
+	})
+}
+
 // Summary information about a workflow run, including basic identification and
 // status information.
 type WorkflowRunSummary struct {
@@ -253,6 +614,58 @@ type WorkflowRunSummary struct {
 	WorkflowVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkflowRunSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowRunSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowRunSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RunDetailSummary != nil {
+		s.WriteStruct(schemas.WorkflowRunSummary_RunDetailSummary)
+		v.RunDetailSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RunId != nil {
+		s.WriteString(schemas.WorkflowRunSummary_RunId, *v.RunId)
+	}
+	if v.RunType != "" {
+		s.WriteString(schemas.WorkflowRunSummary_RunType, string(v.RunType))
+	}
+	if v.WorkflowArn != nil {
+		s.WriteString(schemas.WorkflowRunSummary_WorkflowArn, *v.WorkflowArn)
+	}
+	if v.WorkflowVersion != nil {
+		s.WriteString(schemas.WorkflowRunSummary_WorkflowVersion, *v.WorkflowVersion)
+	}
+}
+func (v *WorkflowRunSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowRunSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowRunSummary_RunDetailSummary:
+			v.RunDetailSummary = &RunDetailSummary{}
+			return v.RunDetailSummary.Deserialize(d)
+		case schemas.WorkflowRunSummary_RunId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.WorkflowRunSummary_RunId, v.RunId)
+		case schemas.WorkflowRunSummary_RunType:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowRunSummary_RunType, &ev); err != nil {
+				return err
+			}
+			v.RunType = RunType(ev)
+			return nil
+		case schemas.WorkflowRunSummary_WorkflowArn:
+			v.WorkflowArn = new(string)
+			return d.ReadString(schemas.WorkflowRunSummary_WorkflowArn, v.WorkflowArn)
+		case schemas.WorkflowRunSummary_WorkflowVersion:
+			v.WorkflowVersion = new(string)
+			return d.ReadString(schemas.WorkflowRunSummary_WorkflowVersion, v.WorkflowVersion)
+		}
+		return nil
+	})
 }
 
 // Summary information about a workflow, including basic identification and
@@ -286,6 +699,74 @@ type WorkflowSummary struct {
 	WorkflowVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkflowSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.WorkflowSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.WorkflowSummary_Description, *v.Description)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.WorkflowSummary_ModifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WorkflowSummary_Name, *v.Name)
+	}
+	if v.TriggerMode != nil {
+		s.WriteString(schemas.WorkflowSummary_TriggerMode, *v.TriggerMode)
+	}
+	if v.WorkflowArn != nil {
+		s.WriteString(schemas.WorkflowSummary_WorkflowArn, *v.WorkflowArn)
+	}
+	if v.WorkflowStatus != "" {
+		s.WriteString(schemas.WorkflowSummary_WorkflowStatus, string(v.WorkflowStatus))
+	}
+	if v.WorkflowVersion != nil {
+		s.WriteString(schemas.WorkflowSummary_WorkflowVersion, *v.WorkflowVersion)
+	}
+}
+func (v *WorkflowSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.WorkflowSummary_CreatedAt, v.CreatedAt)
+		case schemas.WorkflowSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.WorkflowSummary_Description, v.Description)
+		case schemas.WorkflowSummary_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.WorkflowSummary_ModifiedAt, v.ModifiedAt)
+		case schemas.WorkflowSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WorkflowSummary_Name, v.Name)
+		case schemas.WorkflowSummary_TriggerMode:
+			v.TriggerMode = new(string)
+			return d.ReadString(schemas.WorkflowSummary_TriggerMode, v.TriggerMode)
+		case schemas.WorkflowSummary_WorkflowArn:
+			v.WorkflowArn = new(string)
+			return d.ReadString(schemas.WorkflowSummary_WorkflowArn, v.WorkflowArn)
+		case schemas.WorkflowSummary_WorkflowStatus:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowSummary_WorkflowStatus, &ev); err != nil {
+				return err
+			}
+			v.WorkflowStatus = WorkflowStatus(ev)
+			return nil
+		case schemas.WorkflowSummary_WorkflowVersion:
+			v.WorkflowVersion = new(string)
+			return d.ReadString(schemas.WorkflowSummary_WorkflowVersion, v.WorkflowVersion)
+		}
+		return nil
+	})
 }
 
 // Summary information about a workflow version, including identification and
@@ -323,6 +804,74 @@ type WorkflowVersionSummary struct {
 	TriggerMode *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkflowVersionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowVersionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.WorkflowVersionSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.DefinitionS3Location != nil {
+		s.WriteStruct(schemas.WorkflowVersionSummary_DefinitionS3Location)
+		v.DefinitionS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IsLatestVersion != nil {
+		s.WriteBool(schemas.WorkflowVersionSummary_IsLatestVersion, *v.IsLatestVersion)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.WorkflowVersionSummary_ModifiedAt, *v.ModifiedAt)
+	}
+	if v.ScheduleConfiguration != nil {
+		s.WriteStruct(schemas.WorkflowVersionSummary_ScheduleConfiguration)
+		v.ScheduleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TriggerMode != nil {
+		s.WriteString(schemas.WorkflowVersionSummary_TriggerMode, *v.TriggerMode)
+	}
+	if v.WorkflowArn != nil {
+		s.WriteString(schemas.WorkflowVersionSummary_WorkflowArn, *v.WorkflowArn)
+	}
+	if v.WorkflowVersion != nil {
+		s.WriteString(schemas.WorkflowVersionSummary_WorkflowVersion, *v.WorkflowVersion)
+	}
+}
+func (v *WorkflowVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowVersionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowVersionSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.WorkflowVersionSummary_CreatedAt, v.CreatedAt)
+		case schemas.WorkflowVersionSummary_DefinitionS3Location:
+			v.DefinitionS3Location = &DefinitionS3Location{}
+			return v.DefinitionS3Location.Deserialize(d)
+		case schemas.WorkflowVersionSummary_IsLatestVersion:
+			v.IsLatestVersion = new(bool)
+			return d.ReadBool(schemas.WorkflowVersionSummary_IsLatestVersion, v.IsLatestVersion)
+		case schemas.WorkflowVersionSummary_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.WorkflowVersionSummary_ModifiedAt, v.ModifiedAt)
+		case schemas.WorkflowVersionSummary_ScheduleConfiguration:
+			v.ScheduleConfiguration = &ScheduleConfiguration{}
+			return v.ScheduleConfiguration.Deserialize(d)
+		case schemas.WorkflowVersionSummary_TriggerMode:
+			v.TriggerMode = new(string)
+			return d.ReadString(schemas.WorkflowVersionSummary_TriggerMode, v.TriggerMode)
+		case schemas.WorkflowVersionSummary_WorkflowArn:
+			v.WorkflowArn = new(string)
+			return d.ReadString(schemas.WorkflowVersionSummary_WorkflowArn, v.WorkflowArn)
+		case schemas.WorkflowVersionSummary_WorkflowVersion:
+			v.WorkflowVersion = new(string)
+			return d.ReadString(schemas.WorkflowVersionSummary_WorkflowVersion, v.WorkflowVersion)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

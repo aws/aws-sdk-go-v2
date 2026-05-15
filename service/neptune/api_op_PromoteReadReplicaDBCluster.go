@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type PromoteReadReplicaDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PromoteReadReplicaDBClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PromoteReadReplicaDBClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PromoteReadReplicaDBClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.PromoteReadReplicaDBClusterMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+}
+
 type PromoteReadReplicaDBClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster.
@@ -50,16 +64,24 @@ type PromoteReadReplicaDBClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PromoteReadReplicaDBClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PromoteReadReplicaDBClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PromoteReadReplicaDBClusterResult_DBCluster:
+			v.DBCluster = &types.DBCluster{}
+			return v.DBCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPromoteReadReplicaDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpPromoteReadReplicaDBCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PromoteReadReplicaDBCluster, schemas.PromoteReadReplicaDBClusterMessage, schemas.PromoteReadReplicaDBClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPromoteReadReplicaDBCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PromoteReadReplicaDBCluster, schemas.PromoteReadReplicaDBClusterMessage, schemas.PromoteReadReplicaDBClusterResult), output: &PromoteReadReplicaDBClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PromoteReadReplicaDBCluster"); err != nil {

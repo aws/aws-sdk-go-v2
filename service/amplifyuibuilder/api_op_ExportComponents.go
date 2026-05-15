@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,40 @@ type ExportComponentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportComponentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportComponentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportComponentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.ExportComponentsRequest_appId, *v.AppId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.ExportComponentsRequest_environmentName, *v.EnvironmentName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ExportComponentsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ExportComponentsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportComponentsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportComponentsRequest_appId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.ExportComponentsRequest_appId, v.AppId)
+		case schemas.ExportComponentsRequest_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.ExportComponentsRequest_environmentName, v.EnvironmentName)
+		case schemas.ExportComponentsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ExportComponentsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ExportComponentsOutput struct {
 
 	// Represents the configuration of the exported components.
@@ -62,16 +98,38 @@ type ExportComponentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportComponentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportComponentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportComponentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComponentList(s, schemas.ExportComponentsResponse_entities, v.Entities)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ExportComponentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ExportComponentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportComponentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportComponentsResponse_entities:
+			return deserializeComponentList(d, schemas.ExportComponentsResponse_entities, &v.Entities)
+		case schemas.ExportComponentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ExportComponentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportComponentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExportComponents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportComponents, schemas.ExportComponentsRequest, schemas.ExportComponentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExportComponents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportComponents, schemas.ExportComponentsRequest, schemas.ExportComponentsResponse), output: &ExportComponentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ExportComponents"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,21 @@ type ListFirewallPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFirewallPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFirewallPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFirewallPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFirewallPoliciesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFirewallPoliciesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListFirewallPoliciesOutput struct {
 
 	// The metadata for the firewall policies. Depending on your setting for max
@@ -67,16 +84,26 @@ type ListFirewallPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFirewallPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFirewallPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFirewallPoliciesResponse_FirewallPolicies:
+			return deserializeFirewallPolicies(d, schemas.ListFirewallPoliciesResponse_FirewallPolicies, &v.FirewallPolicies)
+		case schemas.ListFirewallPoliciesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFirewallPoliciesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFirewallPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListFirewallPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFirewallPolicies, schemas.ListFirewallPoliciesRequest, schemas.ListFirewallPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListFirewallPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFirewallPolicies, schemas.ListFirewallPoliciesRequest, schemas.ListFirewallPoliciesResponse), output: &ListFirewallPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFirewallPolicies"); err != nil {

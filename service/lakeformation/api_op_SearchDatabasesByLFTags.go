@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,25 @@ type SearchDatabasesByLFTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchDatabasesByLFTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchDatabasesByLFTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchDatabasesByLFTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.SearchDatabasesByLFTagsRequest_CatalogId, *v.CatalogId)
+	}
+	serializeExpression(s, schemas.SearchDatabasesByLFTagsRequest_Expression, v.Expression)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchDatabasesByLFTagsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchDatabasesByLFTagsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type SearchDatabasesByLFTagsOutput struct {
 
 	// A list of databases that meet the LF-tag conditions.
@@ -67,16 +88,26 @@ type SearchDatabasesByLFTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchDatabasesByLFTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchDatabasesByLFTagsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchDatabasesByLFTagsResponse_DatabaseList:
+			return deserializeDatabaseLFTagsList(d, schemas.SearchDatabasesByLFTagsResponse_DatabaseList, &v.DatabaseList)
+		case schemas.SearchDatabasesByLFTagsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchDatabasesByLFTagsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchDatabasesByLFTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchDatabasesByLFTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchDatabasesByLFTags, schemas.SearchDatabasesByLFTagsRequest, schemas.SearchDatabasesByLFTagsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchDatabasesByLFTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchDatabasesByLFTags, schemas.SearchDatabasesByLFTagsRequest, schemas.SearchDatabasesByLFTagsResponse), output: &SearchDatabasesByLFTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchDatabasesByLFTags"); err != nil {

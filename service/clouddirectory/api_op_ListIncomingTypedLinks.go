@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,6 +67,38 @@ type ListIncomingTypedLinksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIncomingTypedLinksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIncomingTypedLinksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIncomingTypedLinksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsistencyLevel != "" {
+		s.WriteString(schemas.ListIncomingTypedLinksRequest_ConsistencyLevel, string(v.ConsistencyLevel))
+	}
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.ListIncomingTypedLinksRequest_DirectoryArn, *v.DirectoryArn)
+	}
+	serializeTypedLinkAttributeRangeList(s, schemas.ListIncomingTypedLinksRequest_FilterAttributeRanges, v.FilterAttributeRanges)
+	if v.FilterTypedLink != nil {
+		s.WriteStruct(schemas.ListIncomingTypedLinksRequest_FilterTypedLink)
+		v.FilterTypedLink.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIncomingTypedLinksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIncomingTypedLinksRequest_NextToken, *v.NextToken)
+	}
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.ListIncomingTypedLinksRequest_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListIncomingTypedLinksOutput struct {
 
 	// Returns one or more typed link specifiers as output.
@@ -79,16 +113,26 @@ type ListIncomingTypedLinksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIncomingTypedLinksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIncomingTypedLinksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIncomingTypedLinksResponse_LinkSpecifiers:
+			return deserializeTypedLinkSpecifierList(d, schemas.ListIncomingTypedLinksResponse_LinkSpecifiers, &v.LinkSpecifiers)
+		case schemas.ListIncomingTypedLinksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIncomingTypedLinksResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIncomingTypedLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIncomingTypedLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIncomingTypedLinks, schemas.ListIncomingTypedLinksRequest, schemas.ListIncomingTypedLinksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIncomingTypedLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIncomingTypedLinks, schemas.ListIncomingTypedLinksRequest, schemas.ListIncomingTypedLinksResponse), output: &ListIncomingTypedLinksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIncomingTypedLinks"); err != nil {

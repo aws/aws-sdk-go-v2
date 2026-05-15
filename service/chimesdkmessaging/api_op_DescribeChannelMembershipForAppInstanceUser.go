@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,24 @@ type DescribeChannelMembershipForAppInstanceUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChannelMembershipForAppInstanceUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChannelMembershipForAppInstanceUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChannelMembershipForAppInstanceUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceUserArn != nil {
+		s.WriteString(schemas.DescribeChannelMembershipForAppInstanceUserRequest_AppInstanceUserArn, *v.AppInstanceUserArn)
+	}
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.DescribeChannelMembershipForAppInstanceUserRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ChimeBearer != nil {
+		s.WriteString(schemas.DescribeChannelMembershipForAppInstanceUserRequest_ChimeBearer, *v.ChimeBearer)
+	}
+}
+
 type DescribeChannelMembershipForAppInstanceUserOutput struct {
 
 	// The channel to which a user belongs.
@@ -64,16 +84,24 @@ type DescribeChannelMembershipForAppInstanceUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChannelMembershipForAppInstanceUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeChannelMembershipForAppInstanceUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeChannelMembershipForAppInstanceUserResponse_ChannelMembership:
+			v.ChannelMembership = &types.ChannelMembershipForAppInstanceUserSummary{}
+			return v.ChannelMembership.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeChannelMembershipForAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeChannelMembershipForAppInstanceUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChannelMembershipForAppInstanceUser, schemas.DescribeChannelMembershipForAppInstanceUserRequest, schemas.DescribeChannelMembershipForAppInstanceUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeChannelMembershipForAppInstanceUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChannelMembershipForAppInstanceUser, schemas.DescribeChannelMembershipForAppInstanceUserRequest, schemas.DescribeChannelMembershipForAppInstanceUserResponse), output: &DescribeChannelMembershipForAppInstanceUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeChannelMembershipForAppInstanceUser"); err != nil {

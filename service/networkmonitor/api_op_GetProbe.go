@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -45,6 +47,21 @@ type GetProbeInput struct {
 	ProbeId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetProbeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProbeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProbeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitorName != nil {
+		s.WriteString(schemas.GetProbeInput_monitorName, *v.MonitorName)
+	}
+	if v.ProbeId != nil {
+		s.WriteString(schemas.GetProbeInput_probeId, *v.ProbeId)
+	}
 }
 
 type GetProbeOutput struct {
@@ -104,16 +121,71 @@ type GetProbeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProbeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProbeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProbeOutput_addressFamily:
+			var ev string
+			if err := d.ReadString(schemas.GetProbeOutput_addressFamily, &ev); err != nil {
+				return err
+			}
+			v.AddressFamily = types.AddressFamily(ev)
+			return nil
+		case schemas.GetProbeOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetProbeOutput_createdAt, v.CreatedAt)
+		case schemas.GetProbeOutput_destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.GetProbeOutput_destination, v.Destination)
+		case schemas.GetProbeOutput_destinationPort:
+			v.DestinationPort = new(int32)
+			return d.ReadInt32(schemas.GetProbeOutput_destinationPort, v.DestinationPort)
+		case schemas.GetProbeOutput_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.GetProbeOutput_modifiedAt, v.ModifiedAt)
+		case schemas.GetProbeOutput_packetSize:
+			v.PacketSize = new(int32)
+			return d.ReadInt32(schemas.GetProbeOutput_packetSize, v.PacketSize)
+		case schemas.GetProbeOutput_probeArn:
+			v.ProbeArn = new(string)
+			return d.ReadString(schemas.GetProbeOutput_probeArn, v.ProbeArn)
+		case schemas.GetProbeOutput_probeId:
+			v.ProbeId = new(string)
+			return d.ReadString(schemas.GetProbeOutput_probeId, v.ProbeId)
+		case schemas.GetProbeOutput_protocol:
+			var ev string
+			if err := d.ReadString(schemas.GetProbeOutput_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = types.Protocol(ev)
+			return nil
+		case schemas.GetProbeOutput_sourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.GetProbeOutput_sourceArn, v.SourceArn)
+		case schemas.GetProbeOutput_state:
+			var ev string
+			if err := d.ReadString(schemas.GetProbeOutput_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.ProbeState(ev)
+			return nil
+		case schemas.GetProbeOutput_tags:
+			return deserializeTagMap(d, schemas.GetProbeOutput_tags, &v.Tags)
+		case schemas.GetProbeOutput_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.GetProbeOutput_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProbeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProbe{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProbe, schemas.GetProbeInput, schemas.GetProbeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProbe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProbe, schemas.GetProbeInput, schemas.GetProbeOutput), output: &GetProbeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetProbe"); err != nil {

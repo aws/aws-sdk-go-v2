@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/braket/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/braket/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,37 @@ type SearchDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchDevicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchDevicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSearchDevicesFilterList(s, schemas.SearchDevicesRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchDevicesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchDevicesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *SearchDevicesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchDevicesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchDevicesRequest_filters:
+			return deserializeSearchDevicesFilterList(d, schemas.SearchDevicesRequest_filters, &v.Filters)
+		case schemas.SearchDevicesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.SearchDevicesRequest_maxResults, v.MaxResults)
+		case schemas.SearchDevicesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchDevicesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type SearchDevicesOutput struct {
 
 	// An array of DeviceSummary objects for devices that match the specified filter
@@ -64,16 +97,38 @@ type SearchDevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchDevicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchDevicesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeviceSummaryList(s, schemas.SearchDevicesResponse_devices, v.Devices)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchDevicesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *SearchDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchDevicesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchDevicesResponse_devices:
+			return deserializeDeviceSummaryList(d, schemas.SearchDevicesResponse_devices, &v.Devices)
+		case schemas.SearchDevicesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchDevicesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchDevices, schemas.SearchDevicesRequest, schemas.SearchDevicesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchDevices, schemas.SearchDevicesRequest, schemas.SearchDevicesResponse), output: &SearchDevicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchDevices"); err != nil {

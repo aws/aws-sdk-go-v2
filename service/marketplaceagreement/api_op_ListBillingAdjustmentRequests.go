@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -64,6 +66,39 @@ type ListBillingAdjustmentRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBillingAdjustmentRequestsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBillingAdjustmentRequestsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBillingAdjustmentRequestsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.ListBillingAdjustmentRequestsInput_agreementId, *v.AgreementId)
+	}
+	if v.AgreementType != nil {
+		s.WriteString(schemas.ListBillingAdjustmentRequestsInput_agreementType, *v.AgreementType)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListBillingAdjustmentRequestsInput_catalog, *v.Catalog)
+	}
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListBillingAdjustmentRequestsInput_createdAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListBillingAdjustmentRequestsInput_createdBefore, *v.CreatedBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBillingAdjustmentRequestsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBillingAdjustmentRequestsInput_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListBillingAdjustmentRequestsInput_status, string(v.Status))
+	}
+}
+
 type ListBillingAdjustmentRequestsOutput struct {
 
 	// An array of BillingAdjustmentSummary objects containing summary information
@@ -81,16 +116,26 @@ type ListBillingAdjustmentRequestsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBillingAdjustmentRequestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBillingAdjustmentRequestsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBillingAdjustmentRequestsOutput_items:
+			return deserializeBillingAdjustmentSummaryList(d, schemas.ListBillingAdjustmentRequestsOutput_items, &v.Items)
+		case schemas.ListBillingAdjustmentRequestsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBillingAdjustmentRequestsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBillingAdjustmentRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListBillingAdjustmentRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBillingAdjustmentRequests, schemas.ListBillingAdjustmentRequestsInput, schemas.ListBillingAdjustmentRequestsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListBillingAdjustmentRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBillingAdjustmentRequests, schemas.ListBillingAdjustmentRequestsInput, schemas.ListBillingAdjustmentRequestsOutput), output: &ListBillingAdjustmentRequestsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBillingAdjustmentRequests"); err != nil {

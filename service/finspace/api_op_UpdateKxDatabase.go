@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -50,6 +52,27 @@ type UpdateKxDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateKxDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateKxDatabaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateKxDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateKxDatabaseRequest_clientToken, *v.ClientToken)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.UpdateKxDatabaseRequest_databaseName, *v.DatabaseName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateKxDatabaseRequest_description, *v.Description)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.UpdateKxDatabaseRequest_environmentId, *v.EnvironmentId)
+	}
+}
+
 type UpdateKxDatabaseOutput struct {
 
 	// The name of the kdb database.
@@ -72,16 +95,33 @@ type UpdateKxDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateKxDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateKxDatabaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateKxDatabaseResponse_databaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.UpdateKxDatabaseResponse_databaseName, v.DatabaseName)
+		case schemas.UpdateKxDatabaseResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateKxDatabaseResponse_description, v.Description)
+		case schemas.UpdateKxDatabaseResponse_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.UpdateKxDatabaseResponse_environmentId, v.EnvironmentId)
+		case schemas.UpdateKxDatabaseResponse_lastModifiedTimestamp:
+			v.LastModifiedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.UpdateKxDatabaseResponse_lastModifiedTimestamp, v.LastModifiedTimestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateKxDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateKxDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKxDatabase, schemas.UpdateKxDatabaseRequest, schemas.UpdateKxDatabaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateKxDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKxDatabase, schemas.UpdateKxDatabaseRequest, schemas.UpdateKxDatabaseResponse), output: &UpdateKxDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateKxDatabase"); err != nil {

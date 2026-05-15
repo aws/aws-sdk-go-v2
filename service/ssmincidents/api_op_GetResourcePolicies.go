@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,40 @@ type GetResourcePoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcePoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcePoliciesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcePoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetResourcePoliciesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourcePoliciesInput_nextToken, *v.NextToken)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetResourcePoliciesInput_resourceArn, *v.ResourceArn)
+	}
+}
+func (v *GetResourcePoliciesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourcePoliciesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourcePoliciesInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.GetResourcePoliciesInput_maxResults, v.MaxResults)
+		case schemas.GetResourcePoliciesInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetResourcePoliciesInput_nextToken, v.NextToken)
+		case schemas.GetResourcePoliciesInput_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.GetResourcePoliciesInput_resourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
+
 type GetResourcePoliciesOutput struct {
 
 	// Details about the resource policy attached to the response plan.
@@ -62,16 +98,38 @@ type GetResourcePoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcePoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcePoliciesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcePoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourcePoliciesOutput_nextToken, *v.NextToken)
+	}
+	serializeResourcePolicyList(s, schemas.GetResourcePoliciesOutput_resourcePolicies, v.ResourcePolicies)
+}
+func (v *GetResourcePoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourcePoliciesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourcePoliciesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetResourcePoliciesOutput_nextToken, v.NextToken)
+		case schemas.GetResourcePoliciesOutput_resourcePolicies:
+			return deserializeResourcePolicyList(d, schemas.GetResourcePoliciesOutput_resourcePolicies, &v.ResourcePolicies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourcePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourcePolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcePolicies, schemas.GetResourcePoliciesInput, schemas.GetResourcePoliciesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourcePolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcePolicies, schemas.GetResourcePoliciesInput, schemas.GetResourcePoliciesOutput), output: &GetResourcePoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResourcePolicies"); err != nil {

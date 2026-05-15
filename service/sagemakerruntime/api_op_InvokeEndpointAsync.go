@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -107,6 +109,45 @@ type InvokeEndpointAsyncInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeEndpointAsyncInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeEndpointAsyncInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeEndpointAsyncInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accept != nil {
+		s.WriteString(schemas.InvokeEndpointAsyncInput_Accept, *v.Accept)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.InvokeEndpointAsyncInput_ContentType, *v.ContentType)
+	}
+	if v.CustomAttributes != nil {
+		s.WriteString(schemas.InvokeEndpointAsyncInput_CustomAttributes, *v.CustomAttributes)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.InvokeEndpointAsyncInput_EndpointName, *v.EndpointName)
+	}
+	if v.Filename != nil {
+		s.WriteString(schemas.InvokeEndpointAsyncInput_Filename, *v.Filename)
+	}
+	if v.InferenceId != nil {
+		s.WriteString(schemas.InvokeEndpointAsyncInput_InferenceId, *v.InferenceId)
+	}
+	if v.InputLocation != nil {
+		s.WriteString(schemas.InvokeEndpointAsyncInput_InputLocation, *v.InputLocation)
+	}
+	if v.InvocationTimeoutSeconds != nil {
+		s.WriteInt32(schemas.InvokeEndpointAsyncInput_InvocationTimeoutSeconds, *v.InvocationTimeoutSeconds)
+	}
+	if v.RequestTTLSeconds != nil {
+		s.WriteInt32(schemas.InvokeEndpointAsyncInput_RequestTTLSeconds, *v.RequestTTLSeconds)
+	}
+	if v.S3OutputPathExtension != nil {
+		s.WriteString(schemas.InvokeEndpointAsyncInput_S3OutputPathExtension, *v.S3OutputPathExtension)
+	}
+}
+
 type InvokeEndpointAsyncOutput struct {
 
 	// The Amazon S3 URI where the inference failure response payload is stored.
@@ -126,16 +167,30 @@ type InvokeEndpointAsyncOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeEndpointAsyncOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeEndpointAsyncOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeEndpointAsyncOutput_FailureLocation:
+			v.FailureLocation = new(string)
+			return d.ReadString(schemas.InvokeEndpointAsyncOutput_FailureLocation, v.FailureLocation)
+		case schemas.InvokeEndpointAsyncOutput_InferenceId:
+			v.InferenceId = new(string)
+			return d.ReadString(schemas.InvokeEndpointAsyncOutput_InferenceId, v.InferenceId)
+		case schemas.InvokeEndpointAsyncOutput_OutputLocation:
+			v.OutputLocation = new(string)
+			return d.ReadString(schemas.InvokeEndpointAsyncOutput_OutputLocation, v.OutputLocation)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInvokeEndpointAsyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeEndpointAsync{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeEndpointAsync, schemas.InvokeEndpointAsyncInput, schemas.InvokeEndpointAsyncOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeEndpointAsync{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeEndpointAsync, schemas.InvokeEndpointAsyncInput, schemas.InvokeEndpointAsyncOutput), output: &InvokeEndpointAsyncOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeEndpointAsync"); err != nil {

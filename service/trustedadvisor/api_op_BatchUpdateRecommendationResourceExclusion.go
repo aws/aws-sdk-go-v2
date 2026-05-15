@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/trustedadvisor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/trustedadvisor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,16 @@ type BatchUpdateRecommendationResourceExclusionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateRecommendationResourceExclusionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateRecommendationResourceExclusionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateRecommendationResourceExclusionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecommendationResourceExclusionList(s, schemas.BatchUpdateRecommendationResourceExclusionRequest_recommendationResourceExclusions, v.RecommendationResourceExclusions)
+}
+
 type BatchUpdateRecommendationResourceExclusionOutput struct {
 
 	// A list of recommendation resource ARNs whose exclusion status failed to update,
@@ -56,16 +68,23 @@ type BatchUpdateRecommendationResourceExclusionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateRecommendationResourceExclusionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateRecommendationResourceExclusionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateRecommendationResourceExclusionResponse_batchUpdateRecommendationResourceExclusionErrors:
+			return deserializeUpdateRecommendationResourceExclusionErrorList(d, schemas.BatchUpdateRecommendationResourceExclusionResponse_batchUpdateRecommendationResourceExclusionErrors, &v.BatchUpdateRecommendationResourceExclusionErrors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateRecommendationResourceExclusionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateRecommendationResourceExclusion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateRecommendationResourceExclusion, schemas.BatchUpdateRecommendationResourceExclusionRequest, schemas.BatchUpdateRecommendationResourceExclusionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateRecommendationResourceExclusion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateRecommendationResourceExclusion, schemas.BatchUpdateRecommendationResourceExclusionRequest, schemas.BatchUpdateRecommendationResourceExclusionResponse), output: &BatchUpdateRecommendationResourceExclusionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUpdateRecommendationResourceExclusion"); err != nil {

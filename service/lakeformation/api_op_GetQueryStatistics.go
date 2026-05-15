@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,6 +40,18 @@ type GetQueryStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryStatisticsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryId != nil {
+		s.WriteString(schemas.GetQueryStatisticsRequest_QueryId, *v.QueryId)
+	}
+}
+
 type GetQueryStatisticsOutput struct {
 
 	// An ExecutionStatistics structure containing execution statistics.
@@ -55,16 +69,30 @@ type GetQueryStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQueryStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQueryStatisticsResponse_ExecutionStatistics:
+			v.ExecutionStatistics = &types.ExecutionStatistics{}
+			return v.ExecutionStatistics.Deserialize(d)
+		case schemas.GetQueryStatisticsResponse_PlanningStatistics:
+			v.PlanningStatistics = &types.PlanningStatistics{}
+			return v.PlanningStatistics.Deserialize(d)
+		case schemas.GetQueryStatisticsResponse_QuerySubmissionTime:
+			v.QuerySubmissionTime = new(time.Time)
+			return d.ReadTime(schemas.GetQueryStatisticsResponse_QuerySubmissionTime, v.QuerySubmissionTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQueryStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQueryStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryStatistics, schemas.GetQueryStatisticsRequest, schemas.GetQueryStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQueryStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryStatistics, schemas.GetQueryStatisticsRequest, schemas.GetQueryStatisticsResponse), output: &GetQueryStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetQueryStatistics"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -73,6 +75,30 @@ type GetRepositoryEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRepositoryEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRepositoryEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRepositoryEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.GetRepositoryEndpointRequest_domain, *v.Domain)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.GetRepositoryEndpointRequest_domainOwner, *v.DomainOwner)
+	}
+	if v.EndpointType != "" {
+		s.WriteString(schemas.GetRepositoryEndpointRequest_endpointType, string(v.EndpointType))
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.GetRepositoryEndpointRequest_format, string(v.Format))
+	}
+	if v.Repository != nil {
+		s.WriteString(schemas.GetRepositoryEndpointRequest_repository, *v.Repository)
+	}
+}
+
 type GetRepositoryEndpointOutput struct {
 
 	//  A string that specifies the URL of the returned endpoint.
@@ -84,16 +110,24 @@ type GetRepositoryEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRepositoryEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRepositoryEndpointResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRepositoryEndpointResult_repositoryEndpoint:
+			v.RepositoryEndpoint = new(string)
+			return d.ReadString(schemas.GetRepositoryEndpointResult_repositoryEndpoint, v.RepositoryEndpoint)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRepositoryEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRepositoryEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRepositoryEndpoint, schemas.GetRepositoryEndpointRequest, schemas.GetRepositoryEndpointResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRepositoryEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRepositoryEndpoint, schemas.GetRepositoryEndpointRequest, schemas.GetRepositoryEndpointResult), output: &GetRepositoryEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRepositoryEndpoint"); err != nil {

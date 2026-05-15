@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,6 +43,18 @@ type GetMigrationInput struct {
 	MigrationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetMigrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMigrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMigrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationId != nil {
+		s.WriteString(schemas.GetMigrationRequest_migrationId, *v.MigrationId)
+	}
 }
 
 type GetMigrationOutput struct {
@@ -99,16 +113,62 @@ type GetMigrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMigrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMigrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMigrationResponse_alerts:
+			return deserializeMigrationAlerts(d, schemas.GetMigrationResponse_alerts, &v.Alerts)
+		case schemas.GetMigrationResponse_migrationId:
+			v.MigrationId = new(string)
+			return d.ReadString(schemas.GetMigrationResponse_migrationId, v.MigrationId)
+		case schemas.GetMigrationResponse_migrationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetMigrationResponse_migrationStatus, &ev); err != nil {
+				return err
+			}
+			v.MigrationStatus = types.MigrationStatus(ev)
+			return nil
+		case schemas.GetMigrationResponse_migrationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.GetMigrationResponse_migrationStrategy, &ev); err != nil {
+				return err
+			}
+			v.MigrationStrategy = types.MigrationStrategy(ev)
+			return nil
+		case schemas.GetMigrationResponse_migrationTimestamp:
+			v.MigrationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetMigrationResponse_migrationTimestamp, v.MigrationTimestamp)
+		case schemas.GetMigrationResponse_v1BotLocale:
+			var ev string
+			if err := d.ReadString(schemas.GetMigrationResponse_v1BotLocale, &ev); err != nil {
+				return err
+			}
+			v.V1BotLocale = types.Locale(ev)
+			return nil
+		case schemas.GetMigrationResponse_v1BotName:
+			v.V1BotName = new(string)
+			return d.ReadString(schemas.GetMigrationResponse_v1BotName, v.V1BotName)
+		case schemas.GetMigrationResponse_v1BotVersion:
+			v.V1BotVersion = new(string)
+			return d.ReadString(schemas.GetMigrationResponse_v1BotVersion, v.V1BotVersion)
+		case schemas.GetMigrationResponse_v2BotId:
+			v.V2BotId = new(string)
+			return d.ReadString(schemas.GetMigrationResponse_v2BotId, v.V2BotId)
+		case schemas.GetMigrationResponse_v2BotRole:
+			v.V2BotRole = new(string)
+			return d.ReadString(schemas.GetMigrationResponse_v2BotRole, v.V2BotRole)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMigration, schemas.GetMigrationRequest, schemas.GetMigrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMigration, schemas.GetMigrationRequest, schemas.GetMigrationResponse), output: &GetMigrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMigration"); err != nil {

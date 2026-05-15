@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -57,6 +59,49 @@ type JsonListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonListsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JsonListsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonListsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBooleanList(s, schemas.JsonListsInputOutput_booleanList, v.BooleanList)
+	serializeFooEnumList(s, schemas.JsonListsInputOutput_enumList, v.EnumList)
+	serializeIntegerEnumList(s, schemas.JsonListsInputOutput_intEnumList, v.IntEnumList)
+	serializeIntegerList(s, schemas.JsonListsInputOutput_integerList, v.IntegerList)
+	serializeNestedStringList(s, schemas.JsonListsInputOutput_nestedStringList, v.NestedStringList)
+	serializeStringList(s, schemas.JsonListsInputOutput_stringList, v.StringList)
+	serializeStringSet(s, schemas.JsonListsInputOutput_stringSet, v.StringSet)
+	serializeStructureList(s, schemas.JsonListsInputOutput_structureList, v.StructureList)
+	serializeTimestampList(s, schemas.JsonListsInputOutput_timestampList, v.TimestampList)
+}
+func (v *JsonListsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JsonListsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JsonListsInputOutput_booleanList:
+			return deserializeBooleanList(d, schemas.JsonListsInputOutput_booleanList, &v.BooleanList)
+		case schemas.JsonListsInputOutput_enumList:
+			return deserializeFooEnumList(d, schemas.JsonListsInputOutput_enumList, &v.EnumList)
+		case schemas.JsonListsInputOutput_intEnumList:
+			return deserializeIntegerEnumList(d, schemas.JsonListsInputOutput_intEnumList, &v.IntEnumList)
+		case schemas.JsonListsInputOutput_integerList:
+			return deserializeIntegerList(d, schemas.JsonListsInputOutput_integerList, &v.IntegerList)
+		case schemas.JsonListsInputOutput_nestedStringList:
+			return deserializeNestedStringList(d, schemas.JsonListsInputOutput_nestedStringList, &v.NestedStringList)
+		case schemas.JsonListsInputOutput_stringList:
+			return deserializeStringList(d, schemas.JsonListsInputOutput_stringList, &v.StringList)
+		case schemas.JsonListsInputOutput_stringSet:
+			return deserializeStringSet(d, schemas.JsonListsInputOutput_stringSet, &v.StringSet)
+		case schemas.JsonListsInputOutput_structureList:
+			return deserializeStructureList(d, schemas.JsonListsInputOutput_structureList, &v.StructureList)
+		case schemas.JsonListsInputOutput_timestampList:
+			return deserializeTimestampList(d, schemas.JsonListsInputOutput_timestampList, &v.TimestampList)
+		}
+		return nil
+	})
+}
+
 type JsonListsOutput struct {
 	BooleanList []bool
 
@@ -83,16 +128,56 @@ type JsonListsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonListsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JsonListsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBooleanList(s, schemas.JsonListsInputOutput_booleanList, v.BooleanList)
+	serializeFooEnumList(s, schemas.JsonListsInputOutput_enumList, v.EnumList)
+	serializeIntegerEnumList(s, schemas.JsonListsInputOutput_intEnumList, v.IntEnumList)
+	serializeIntegerList(s, schemas.JsonListsInputOutput_integerList, v.IntegerList)
+	serializeNestedStringList(s, schemas.JsonListsInputOutput_nestedStringList, v.NestedStringList)
+	serializeStringList(s, schemas.JsonListsInputOutput_stringList, v.StringList)
+	serializeStringSet(s, schemas.JsonListsInputOutput_stringSet, v.StringSet)
+	serializeStructureList(s, schemas.JsonListsInputOutput_structureList, v.StructureList)
+	serializeTimestampList(s, schemas.JsonListsInputOutput_timestampList, v.TimestampList)
+}
+func (v *JsonListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JsonListsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JsonListsInputOutput_booleanList:
+			return deserializeBooleanList(d, schemas.JsonListsInputOutput_booleanList, &v.BooleanList)
+		case schemas.JsonListsInputOutput_enumList:
+			return deserializeFooEnumList(d, schemas.JsonListsInputOutput_enumList, &v.EnumList)
+		case schemas.JsonListsInputOutput_intEnumList:
+			return deserializeIntegerEnumList(d, schemas.JsonListsInputOutput_intEnumList, &v.IntEnumList)
+		case schemas.JsonListsInputOutput_integerList:
+			return deserializeIntegerList(d, schemas.JsonListsInputOutput_integerList, &v.IntegerList)
+		case schemas.JsonListsInputOutput_nestedStringList:
+			return deserializeNestedStringList(d, schemas.JsonListsInputOutput_nestedStringList, &v.NestedStringList)
+		case schemas.JsonListsInputOutput_stringList:
+			return deserializeStringList(d, schemas.JsonListsInputOutput_stringList, &v.StringList)
+		case schemas.JsonListsInputOutput_stringSet:
+			return deserializeStringSet(d, schemas.JsonListsInputOutput_stringSet, &v.StringSet)
+		case schemas.JsonListsInputOutput_structureList:
+			return deserializeStructureList(d, schemas.JsonListsInputOutput_structureList, &v.StructureList)
+		case schemas.JsonListsInputOutput_timestampList:
+			return deserializeTimestampList(d, schemas.JsonListsInputOutput_timestampList, &v.TimestampList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationJsonListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpJsonLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JsonLists, schemas.JsonListsInputOutput, schemas.JsonListsInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpJsonLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JsonLists, schemas.JsonListsInputOutput, schemas.JsonListsInputOutput), output: &JsonListsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "JsonLists"); err != nil {

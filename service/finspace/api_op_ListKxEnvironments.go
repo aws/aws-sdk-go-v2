@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,21 @@ type ListKxEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKxEnvironmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKxEnvironmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKxEnvironmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListKxEnvironmentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListKxEnvironmentsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListKxEnvironmentsOutput struct {
 
 	// A list of environments in an account.
@@ -52,16 +69,26 @@ type ListKxEnvironmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKxEnvironmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListKxEnvironmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListKxEnvironmentsResponse_environments:
+			return deserializeKxEnvironmentList(d, schemas.ListKxEnvironmentsResponse_environments, &v.Environments)
+		case schemas.ListKxEnvironmentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListKxEnvironmentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListKxEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListKxEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKxEnvironments, schemas.ListKxEnvironmentsRequest, schemas.ListKxEnvironmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListKxEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKxEnvironments, schemas.ListKxEnvironmentsRequest, schemas.ListKxEnvironmentsResponse), output: &ListKxEnvironmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListKxEnvironments"); err != nil {

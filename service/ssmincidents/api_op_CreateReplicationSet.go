@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,34 @@ type CreateReplicationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReplicationSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReplicationSetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReplicationSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateReplicationSetInput_clientToken, *v.ClientToken)
+	}
+	serializeRegionMapInput(s, schemas.CreateReplicationSetInput_regions, v.Regions)
+	serializeTagMap(s, schemas.CreateReplicationSetInput_tags, v.Tags)
+}
+func (v *CreateReplicationSetInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateReplicationSetInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateReplicationSetInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateReplicationSetInput_clientToken, v.ClientToken)
+		case schemas.CreateReplicationSetInput_regions:
+			return deserializeRegionMapInput(d, schemas.CreateReplicationSetInput_regions, &v.Regions)
+		case schemas.CreateReplicationSetInput_tags:
+			return deserializeTagMap(d, schemas.CreateReplicationSetInput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateReplicationSetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the replication set.
@@ -59,16 +89,35 @@ type CreateReplicationSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReplicationSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReplicationSetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReplicationSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateReplicationSetOutput_arn, *v.Arn)
+	}
+}
+func (v *CreateReplicationSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateReplicationSetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateReplicationSetOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateReplicationSetOutput_arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateReplicationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateReplicationSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReplicationSet, schemas.CreateReplicationSetInput, schemas.CreateReplicationSetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateReplicationSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReplicationSet, schemas.CreateReplicationSetInput, schemas.CreateReplicationSetOutput), output: &CreateReplicationSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateReplicationSet"); err != nil {

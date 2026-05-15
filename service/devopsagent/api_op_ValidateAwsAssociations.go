@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type ValidateAwsAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateAwsAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateAwsAssociationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateAwsAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.ValidateAwsAssociationsInput_agentSpaceId, *v.AgentSpaceId)
+	}
+}
+
 // Empty Output for successful validating an aws association
 type ValidateAwsAssociationsOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -46,16 +60,21 @@ type ValidateAwsAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateAwsAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidateAwsAssociationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationValidateAwsAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpValidateAwsAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateAwsAssociations, schemas.ValidateAwsAssociationsInput, schemas.ValidateAwsAssociationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpValidateAwsAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateAwsAssociations, schemas.ValidateAwsAssociationsInput, schemas.ValidateAwsAssociationsOutput), output: &ValidateAwsAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ValidateAwsAssociations"); err != nil {

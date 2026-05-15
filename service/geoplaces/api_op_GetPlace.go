@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/geoplaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/geoplaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -82,6 +84,31 @@ type GetPlaceInput struct {
 	PoliticalView *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPlaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGetPlaceAdditionalFeatureList(s, schemas.GetPlaceRequest_AdditionalFeatures, v.AdditionalFeatures)
+	if v.IntendedUse != "" {
+		s.WriteString(schemas.GetPlaceRequest_IntendedUse, string(v.IntendedUse))
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.GetPlaceRequest_Key, *v.Key)
+	}
+	if v.Language != nil {
+		s.WriteString(schemas.GetPlaceRequest_Language, *v.Language)
+	}
+	if v.PlaceId != nil {
+		s.WriteString(schemas.GetPlaceRequest_PlaceId, *v.PlaceId)
+	}
+	if v.PoliticalView != nil {
+		s.WriteString(schemas.GetPlaceRequest_PoliticalView, *v.PoliticalView)
+	}
 }
 
 type GetPlaceOutput struct {
@@ -216,16 +243,78 @@ type GetPlaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPlaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPlaceResponse_AccessPoints:
+			return deserializeAccessPointList(d, schemas.GetPlaceResponse_AccessPoints, &v.AccessPoints)
+		case schemas.GetPlaceResponse_AccessRestrictions:
+			return deserializeAccessRestrictionList(d, schemas.GetPlaceResponse_AccessRestrictions, &v.AccessRestrictions)
+		case schemas.GetPlaceResponse_Address:
+			v.Address = &types.Address{}
+			return v.Address.Deserialize(d)
+		case schemas.GetPlaceResponse_AddressNumberCorrected:
+			v.AddressNumberCorrected = new(bool)
+			return d.ReadBool(schemas.GetPlaceResponse_AddressNumberCorrected, v.AddressNumberCorrected)
+		case schemas.GetPlaceResponse_BusinessChains:
+			return deserializeBusinessChainList(d, schemas.GetPlaceResponse_BusinessChains, &v.BusinessChains)
+		case schemas.GetPlaceResponse_Categories:
+			return deserializeCategoryList(d, schemas.GetPlaceResponse_Categories, &v.Categories)
+		case schemas.GetPlaceResponse_Contacts:
+			v.Contacts = &types.Contacts{}
+			return v.Contacts.Deserialize(d)
+		case schemas.GetPlaceResponse_FoodTypes:
+			return deserializeFoodTypeList(d, schemas.GetPlaceResponse_FoodTypes, &v.FoodTypes)
+		case schemas.GetPlaceResponse_MainAddress:
+			v.MainAddress = &types.RelatedPlace{}
+			return v.MainAddress.Deserialize(d)
+		case schemas.GetPlaceResponse_MapView:
+			return deserializeBoundingBox(d, schemas.GetPlaceResponse_MapView, &v.MapView)
+		case schemas.GetPlaceResponse_OpeningHours:
+			return deserializeOpeningHoursList(d, schemas.GetPlaceResponse_OpeningHours, &v.OpeningHours)
+		case schemas.GetPlaceResponse_Phonemes:
+			v.Phonemes = &types.PhonemeDetails{}
+			return v.Phonemes.Deserialize(d)
+		case schemas.GetPlaceResponse_PlaceId:
+			v.PlaceId = new(string)
+			return d.ReadString(schemas.GetPlaceResponse_PlaceId, v.PlaceId)
+		case schemas.GetPlaceResponse_PlaceType:
+			var ev string
+			if err := d.ReadString(schemas.GetPlaceResponse_PlaceType, &ev); err != nil {
+				return err
+			}
+			v.PlaceType = types.PlaceType(ev)
+			return nil
+		case schemas.GetPlaceResponse_PoliticalView:
+			v.PoliticalView = new(string)
+			return d.ReadString(schemas.GetPlaceResponse_PoliticalView, v.PoliticalView)
+		case schemas.GetPlaceResponse_Position:
+			return deserializePosition(d, schemas.GetPlaceResponse_Position, &v.Position)
+		case schemas.GetPlaceResponse_PostalCodeDetails:
+			return deserializePostalCodeDetailsList(d, schemas.GetPlaceResponse_PostalCodeDetails, &v.PostalCodeDetails)
+		case schemas.GetPlaceResponse_PricingBucket:
+			v.PricingBucket = new(string)
+			return d.ReadString(schemas.GetPlaceResponse_PricingBucket, v.PricingBucket)
+		case schemas.GetPlaceResponse_SecondaryAddresses:
+			return deserializeRelatedPlaceList(d, schemas.GetPlaceResponse_SecondaryAddresses, &v.SecondaryAddresses)
+		case schemas.GetPlaceResponse_TimeZone:
+			v.TimeZone = &types.TimeZone{}
+			return v.TimeZone.Deserialize(d)
+		case schemas.GetPlaceResponse_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.GetPlaceResponse_Title, v.Title)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPlaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPlace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlace, schemas.GetPlaceRequest, schemas.GetPlaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPlace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlace, schemas.GetPlaceRequest, schemas.GetPlaceResponse), output: &GetPlaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPlace"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -61,6 +63,39 @@ type ListProblemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProblemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProblemsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProblemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListProblemsRequest_AccountId, *v.AccountId)
+	}
+	if v.ComponentName != nil {
+		s.WriteString(schemas.ListProblemsRequest_ComponentName, *v.ComponentName)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListProblemsRequest_EndTime, *v.EndTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProblemsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProblemsRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.ListProblemsRequest_ResourceGroupName, *v.ResourceGroupName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListProblemsRequest_StartTime, *v.StartTime)
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.ListProblemsRequest_Visibility, string(v.Visibility))
+	}
+}
+
 type ListProblemsOutput struct {
 
 	// The Amazon Web Services account ID for the resource group owner.
@@ -82,16 +117,32 @@ type ListProblemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProblemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProblemsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProblemsResponse_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ListProblemsResponse_AccountId, v.AccountId)
+		case schemas.ListProblemsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProblemsResponse_NextToken, v.NextToken)
+		case schemas.ListProblemsResponse_ProblemList:
+			return deserializeProblemList(d, schemas.ListProblemsResponse_ProblemList, &v.ProblemList)
+		case schemas.ListProblemsResponse_ResourceGroupName:
+			v.ResourceGroupName = new(string)
+			return d.ReadString(schemas.ListProblemsResponse_ResourceGroupName, v.ResourceGroupName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProblemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListProblems{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProblems, schemas.ListProblemsRequest, schemas.ListProblemsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListProblems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProblems, schemas.ListProblemsRequest, schemas.ListProblemsResponse), output: &ListProblemsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProblems"); err != nil {

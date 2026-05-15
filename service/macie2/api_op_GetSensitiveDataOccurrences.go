@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -40,6 +42,18 @@ type GetSensitiveDataOccurrencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSensitiveDataOccurrencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSensitiveDataOccurrencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSensitiveDataOccurrencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingId != nil {
+		s.WriteString(schemas.GetSensitiveDataOccurrencesRequest_findingId, *v.FindingId)
+	}
+}
+
 type GetSensitiveDataOccurrencesOutput struct {
 
 	// If an error occurred when Amazon Macie attempted to retrieve occurrences of
@@ -71,16 +85,33 @@ type GetSensitiveDataOccurrencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSensitiveDataOccurrencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSensitiveDataOccurrencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSensitiveDataOccurrencesResponse_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.GetSensitiveDataOccurrencesResponse_error, v.Error)
+		case schemas.GetSensitiveDataOccurrencesResponse_sensitiveDataOccurrences:
+			return deserializeSensitiveDataOccurrences(d, schemas.GetSensitiveDataOccurrencesResponse_sensitiveDataOccurrences, &v.SensitiveDataOccurrences)
+		case schemas.GetSensitiveDataOccurrencesResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetSensitiveDataOccurrencesResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RevealRequestStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSensitiveDataOccurrencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSensitiveDataOccurrences{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSensitiveDataOccurrences, schemas.GetSensitiveDataOccurrencesRequest, schemas.GetSensitiveDataOccurrencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSensitiveDataOccurrences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSensitiveDataOccurrences, schemas.GetSensitiveDataOccurrencesRequest, schemas.GetSensitiveDataOccurrencesResponse), output: &GetSensitiveDataOccurrencesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSensitiveDataOccurrences"); err != nil {

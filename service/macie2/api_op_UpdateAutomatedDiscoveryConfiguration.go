@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,21 @@ type UpdateAutomatedDiscoveryConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAutomatedDiscoveryConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAutomatedDiscoveryConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAutomatedDiscoveryConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoEnableOrganizationMembers != "" {
+		s.WriteString(schemas.UpdateAutomatedDiscoveryConfigurationRequest_autoEnableOrganizationMembers, string(v.AutoEnableOrganizationMembers))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateAutomatedDiscoveryConfigurationRequest_status, string(v.Status))
+	}
+}
+
 type UpdateAutomatedDiscoveryConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -63,16 +80,21 @@ type UpdateAutomatedDiscoveryConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAutomatedDiscoveryConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAutomatedDiscoveryConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAutomatedDiscoveryConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAutomatedDiscoveryConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAutomatedDiscoveryConfiguration, schemas.UpdateAutomatedDiscoveryConfigurationRequest, schemas.UpdateAutomatedDiscoveryConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAutomatedDiscoveryConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAutomatedDiscoveryConfiguration, schemas.UpdateAutomatedDiscoveryConfigurationRequest, schemas.UpdateAutomatedDiscoveryConfigurationResponse), output: &UpdateAutomatedDiscoveryConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAutomatedDiscoveryConfiguration"); err != nil {

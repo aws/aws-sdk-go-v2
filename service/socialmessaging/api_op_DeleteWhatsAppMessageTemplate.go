@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,27 @@ type DeleteWhatsAppMessageTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWhatsAppMessageTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWhatsAppMessageTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWhatsAppMessageTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteAllLanguages != nil {
+		s.WriteBool(schemas.DeleteWhatsAppMessageTemplateInput_deleteAllLanguages, *v.DeleteAllLanguages)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteWhatsAppMessageTemplateInput_id, *v.Id)
+	}
+	if v.MetaTemplateId != nil {
+		s.WriteString(schemas.DeleteWhatsAppMessageTemplateInput_metaTemplateId, *v.MetaTemplateId)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.DeleteWhatsAppMessageTemplateInput_templateName, *v.TemplateName)
+	}
+}
+
 type DeleteWhatsAppMessageTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,16 +77,21 @@ type DeleteWhatsAppMessageTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWhatsAppMessageTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWhatsAppMessageTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWhatsAppMessageTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWhatsAppMessageTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWhatsAppMessageTemplate, schemas.DeleteWhatsAppMessageTemplateInput, schemas.DeleteWhatsAppMessageTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWhatsAppMessageTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWhatsAppMessageTemplate, schemas.DeleteWhatsAppMessageTemplateInput, schemas.DeleteWhatsAppMessageTemplateOutput), output: &DeleteWhatsAppMessageTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteWhatsAppMessageTemplate"); err != nil {

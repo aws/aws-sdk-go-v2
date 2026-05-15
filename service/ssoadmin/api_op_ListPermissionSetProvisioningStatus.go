@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,29 @@ type ListPermissionSetProvisioningStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPermissionSetProvisioningStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPermissionSetProvisioningStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPermissionSetProvisioningStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListPermissionSetProvisioningStatusRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.ListPermissionSetProvisioningStatusRequest_InstanceArn, *v.InstanceArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPermissionSetProvisioningStatusRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPermissionSetProvisioningStatusRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPermissionSetProvisioningStatusOutput struct {
 
 	// The pagination token for the list API. Initially the value is null. Use the
@@ -65,16 +90,26 @@ type ListPermissionSetProvisioningStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPermissionSetProvisioningStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPermissionSetProvisioningStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPermissionSetProvisioningStatusResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPermissionSetProvisioningStatusResponse_NextToken, v.NextToken)
+		case schemas.ListPermissionSetProvisioningStatusResponse_PermissionSetsProvisioningStatus:
+			return deserializePermissionSetProvisioningStatusList(d, schemas.ListPermissionSetProvisioningStatusResponse_PermissionSetsProvisioningStatus, &v.PermissionSetsProvisioningStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPermissionSetProvisioningStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPermissionSetProvisioningStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPermissionSetProvisioningStatus, schemas.ListPermissionSetProvisioningStatusRequest, schemas.ListPermissionSetProvisioningStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPermissionSetProvisioningStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPermissionSetProvisioningStatus, schemas.ListPermissionSetProvisioningStatusRequest, schemas.ListPermissionSetProvisioningStatusResponse), output: &ListPermissionSetProvisioningStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPermissionSetProvisioningStatus"); err != nil {

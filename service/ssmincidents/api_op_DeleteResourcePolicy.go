@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,34 @@ type DeleteResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourcePolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyId != nil {
+		s.WriteString(schemas.DeleteResourcePolicyInput_policyId, *v.PolicyId)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DeleteResourcePolicyInput_resourceArn, *v.ResourceArn)
+	}
+}
+func (v *DeleteResourcePolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourcePolicyInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResourcePolicyInput_policyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.DeleteResourcePolicyInput_policyId, v.PolicyId)
+		case schemas.DeleteResourcePolicyInput_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DeleteResourcePolicyInput_resourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
+
 type DeleteResourcePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,16 +79,29 @@ type DeleteResourcePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourcePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourcePolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourcePolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourcePolicy, schemas.DeleteResourcePolicyInput, schemas.DeleteResourcePolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourcePolicy, schemas.DeleteResourcePolicyInput, schemas.DeleteResourcePolicyOutput), output: &DeleteResourcePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteResourcePolicy"); err != nil {

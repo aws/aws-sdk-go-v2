@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/osis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/osis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,6 +36,15 @@ type ListPipelineBlueprintsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPipelineBlueprintsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPipelineBlueprintsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPipelineBlueprintsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type ListPipelineBlueprintsOutput struct {
 
 	// A list of available blueprints for Data Prepper.
@@ -45,16 +56,23 @@ type ListPipelineBlueprintsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPipelineBlueprintsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPipelineBlueprintsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPipelineBlueprintsResponse_Blueprints:
+			return deserializePipelineBlueprintsSummaryList(d, schemas.ListPipelineBlueprintsResponse_Blueprints, &v.Blueprints)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPipelineBlueprintsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPipelineBlueprints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipelineBlueprints, schemas.ListPipelineBlueprintsRequest, schemas.ListPipelineBlueprintsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPipelineBlueprints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipelineBlueprints, schemas.ListPipelineBlueprintsRequest, schemas.ListPipelineBlueprintsResponse), output: &ListPipelineBlueprintsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPipelineBlueprints"); err != nil {

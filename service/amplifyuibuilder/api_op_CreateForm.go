@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,48 @@ type CreateFormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFormInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFormRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFormInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.CreateFormRequest_appId, *v.AppId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateFormRequest_clientToken, *v.ClientToken)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.CreateFormRequest_environmentName, *v.EnvironmentName)
+	}
+	if v.FormToCreate != nil {
+		s.WriteStruct(schemas.CreateFormRequest_formToCreate)
+		v.FormToCreate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFormInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFormRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFormRequest_appId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.CreateFormRequest_appId, v.AppId)
+		case schemas.CreateFormRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateFormRequest_clientToken, v.ClientToken)
+		case schemas.CreateFormRequest_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.CreateFormRequest_environmentName, v.EnvironmentName)
+		case schemas.CreateFormRequest_formToCreate:
+			v.FormToCreate = &types.CreateFormData{}
+			return v.FormToCreate.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type CreateFormOutput struct {
 
 	// Describes the configuration of the new form.
@@ -61,16 +105,37 @@ type CreateFormOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFormOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFormResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFormOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Entity != nil {
+		s.WriteStruct(schemas.CreateFormResponse_entity)
+		v.Entity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFormOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFormResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFormResponse_entity:
+			v.Entity = &types.Form{}
+			return v.Entity.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFormMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateForm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateForm, schemas.CreateFormRequest, schemas.CreateFormResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateForm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateForm, schemas.CreateFormRequest, schemas.CreateFormResponse), output: &CreateFormOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateForm"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,27 @@ type ListPortfoliosForProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPortfoliosForProductInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPortfoliosForProductInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPortfoliosForProductInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.ListPortfoliosForProductInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.ListPortfoliosForProductInput_PageSize, v.PageSize)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.ListPortfoliosForProductInput_PageToken, *v.PageToken)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.ListPortfoliosForProductInput_ProductId, *v.ProductId)
+	}
+}
+
 type ListPortfoliosForProductOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -66,16 +89,26 @@ type ListPortfoliosForProductOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPortfoliosForProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPortfoliosForProductOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPortfoliosForProductOutput_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.ListPortfoliosForProductOutput_NextPageToken, v.NextPageToken)
+		case schemas.ListPortfoliosForProductOutput_PortfolioDetails:
+			return deserializePortfolioDetails(d, schemas.ListPortfoliosForProductOutput_PortfolioDetails, &v.PortfolioDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPortfoliosForProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPortfoliosForProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPortfoliosForProduct, schemas.ListPortfoliosForProductInput, schemas.ListPortfoliosForProductOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPortfoliosForProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPortfoliosForProduct, schemas.ListPortfoliosForProductInput, schemas.ListPortfoliosForProductOutput), output: &ListPortfoliosForProductOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPortfoliosForProduct"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -104,6 +106,22 @@ type ListDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListDevicesRequest_arn, *v.Arn)
+	}
+	serializeDeviceFilters(s, schemas.ListDevicesRequest_filters, v.Filters)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevicesRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Represents the result of a list devices operation.
 type ListDevicesOutput struct {
 
@@ -121,16 +139,26 @@ type ListDevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDevicesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDevicesResult_devices:
+			return deserializeDevices(d, schemas.ListDevicesResult_devices, &v.Devices)
+		case schemas.ListDevicesResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDevicesResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevices, schemas.ListDevicesRequest, schemas.ListDevicesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevices, schemas.ListDevicesRequest, schemas.ListDevicesResult), output: &ListDevicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDevices"); err != nil {

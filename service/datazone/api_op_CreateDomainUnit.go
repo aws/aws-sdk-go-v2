@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -55,6 +57,30 @@ type CreateDomainUnitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainUnitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainUnitInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainUnitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDomainUnitInput_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDomainUnitInput_description, *v.Description)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.CreateDomainUnitInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDomainUnitInput_name, *v.Name)
+	}
+	if v.ParentDomainUnitIdentifier != nil {
+		s.WriteString(schemas.CreateDomainUnitInput_parentDomainUnitIdentifier, *v.ParentDomainUnitIdentifier)
+	}
+}
+
 type CreateDomainUnitOutput struct {
 
 	// The IDs of the ancestor domain units.
@@ -100,16 +126,46 @@ type CreateDomainUnitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainUnitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDomainUnitOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDomainUnitOutput_ancestorDomainUnitIds:
+			return deserializeDomainUnitIds(d, schemas.CreateDomainUnitOutput_ancestorDomainUnitIds, &v.AncestorDomainUnitIds)
+		case schemas.CreateDomainUnitOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateDomainUnitOutput_createdAt, v.CreatedAt)
+		case schemas.CreateDomainUnitOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.CreateDomainUnitOutput_createdBy, v.CreatedBy)
+		case schemas.CreateDomainUnitOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateDomainUnitOutput_description, v.Description)
+		case schemas.CreateDomainUnitOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CreateDomainUnitOutput_domainId, v.DomainId)
+		case schemas.CreateDomainUnitOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateDomainUnitOutput_id, v.Id)
+		case schemas.CreateDomainUnitOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateDomainUnitOutput_name, v.Name)
+		case schemas.CreateDomainUnitOutput_owners:
+			return deserializeDomainUnitOwners(d, schemas.CreateDomainUnitOutput_owners, &v.Owners)
+		case schemas.CreateDomainUnitOutput_parentDomainUnitId:
+			v.ParentDomainUnitId = new(string)
+			return d.ReadString(schemas.CreateDomainUnitOutput_parentDomainUnitId, v.ParentDomainUnitId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDomainUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDomainUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomainUnit, schemas.CreateDomainUnitInput, schemas.CreateDomainUnitOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDomainUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomainUnit, schemas.CreateDomainUnitInput, schemas.CreateDomainUnitOutput), output: &CreateDomainUnitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDomainUnit"); err != nil {

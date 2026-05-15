@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,18 @@ type DeleteArchiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteArchiveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteArchiveRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteArchiveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveId != nil {
+		s.WriteString(schemas.DeleteArchiveRequest_ArchiveId, *v.ArchiveId)
+	}
+}
+
 // The response indicating if the archive deletion was successfully initiated.
 //
 // On success, returns an HTTP 200 status code. On failure, returns an error
@@ -52,16 +66,21 @@ type DeleteArchiveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteArchiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteArchiveResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteArchive, schemas.DeleteArchiveRequest, schemas.DeleteArchiveResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteArchive, schemas.DeleteArchiveRequest, schemas.DeleteArchiveResponse), output: &DeleteArchiveOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteArchive"); err != nil {

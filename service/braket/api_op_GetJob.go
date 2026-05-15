@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/braket/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/braket/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -40,6 +42,31 @@ type GetJobInput struct {
 	AdditionalAttributeNames []types.HybridJobAdditionalAttributeName
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHybridJobAdditionalAttributeNamesList(s, schemas.GetJobRequest_additionalAttributeNames, v.AdditionalAttributeNames)
+	if v.JobArn != nil {
+		s.WriteString(schemas.GetJobRequest_jobArn, *v.JobArn)
+	}
+}
+func (v *GetJobInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetJobRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetJobRequest_additionalAttributeNames:
+			return deserializeHybridJobAdditionalAttributeNamesList(d, schemas.GetJobRequest_additionalAttributeNames, &v.AdditionalAttributeNames)
+		case schemas.GetJobRequest_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.GetJobRequest_jobArn, v.JobArn)
+		}
+		return nil
+	})
 }
 
 type GetJobOutput struct {
@@ -141,16 +168,158 @@ type GetJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlgorithmSpecification != nil {
+		s.WriteStruct(schemas.GetJobResponse_algorithmSpecification)
+		v.AlgorithmSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAssociations(s, schemas.GetJobResponse_associations, v.Associations)
+	if v.BillableDuration != nil {
+		s.WriteInt32(schemas.GetJobResponse_billableDuration, *v.BillableDuration)
+	}
+	if v.CheckpointConfig != nil {
+		s.WriteStruct(schemas.GetJobResponse_checkpointConfig)
+		v.CheckpointConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetJobResponse_createdAt, *v.CreatedAt)
+	}
+	if v.DeviceConfig != nil {
+		s.WriteStruct(schemas.GetJobResponse_deviceConfig)
+		v.DeviceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.GetJobResponse_endedAt, *v.EndedAt)
+	}
+	serializeJobEvents(s, schemas.GetJobResponse_events, v.Events)
+	if v.FailureReason != nil {
+		s.WriteString(schemas.GetJobResponse_failureReason, *v.FailureReason)
+	}
+	serializeHyperParameters(s, schemas.GetJobResponse_hyperParameters, v.HyperParameters)
+	serializeInputConfigList(s, schemas.GetJobResponse_inputDataConfig, v.InputDataConfig)
+	if v.InstanceConfig != nil {
+		s.WriteStruct(schemas.GetJobResponse_instanceConfig)
+		v.InstanceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.GetJobResponse_jobArn, *v.JobArn)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.GetJobResponse_jobName, *v.JobName)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.GetJobResponse_outputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueueInfo != nil {
+		s.WriteStruct(schemas.GetJobResponse_queueInfo)
+		v.QueueInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetJobResponse_roleArn, *v.RoleArn)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetJobResponse_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetJobResponse_status, string(v.Status))
+	}
+	if v.StoppingCondition != nil {
+		s.WriteStruct(schemas.GetJobResponse_stoppingCondition)
+		v.StoppingCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.GetJobResponse_tags, v.Tags)
+}
+func (v *GetJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetJobResponse_algorithmSpecification:
+			v.AlgorithmSpecification = &types.AlgorithmSpecification{}
+			return v.AlgorithmSpecification.Deserialize(d)
+		case schemas.GetJobResponse_associations:
+			return deserializeAssociations(d, schemas.GetJobResponse_associations, &v.Associations)
+		case schemas.GetJobResponse_billableDuration:
+			v.BillableDuration = new(int32)
+			return d.ReadInt32(schemas.GetJobResponse_billableDuration, v.BillableDuration)
+		case schemas.GetJobResponse_checkpointConfig:
+			v.CheckpointConfig = &types.JobCheckpointConfig{}
+			return v.CheckpointConfig.Deserialize(d)
+		case schemas.GetJobResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetJobResponse_createdAt, v.CreatedAt)
+		case schemas.GetJobResponse_deviceConfig:
+			v.DeviceConfig = &types.DeviceConfig{}
+			return v.DeviceConfig.Deserialize(d)
+		case schemas.GetJobResponse_endedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.GetJobResponse_endedAt, v.EndedAt)
+		case schemas.GetJobResponse_events:
+			return deserializeJobEvents(d, schemas.GetJobResponse_events, &v.Events)
+		case schemas.GetJobResponse_failureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.GetJobResponse_failureReason, v.FailureReason)
+		case schemas.GetJobResponse_hyperParameters:
+			return deserializeHyperParameters(d, schemas.GetJobResponse_hyperParameters, &v.HyperParameters)
+		case schemas.GetJobResponse_inputDataConfig:
+			return deserializeInputConfigList(d, schemas.GetJobResponse_inputDataConfig, &v.InputDataConfig)
+		case schemas.GetJobResponse_instanceConfig:
+			v.InstanceConfig = &types.InstanceConfig{}
+			return v.InstanceConfig.Deserialize(d)
+		case schemas.GetJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.GetJobResponse_jobArn, v.JobArn)
+		case schemas.GetJobResponse_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.GetJobResponse_jobName, v.JobName)
+		case schemas.GetJobResponse_outputDataConfig:
+			v.OutputDataConfig = &types.JobOutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.GetJobResponse_queueInfo:
+			v.QueueInfo = &types.HybridJobQueueInfo{}
+			return v.QueueInfo.Deserialize(d)
+		case schemas.GetJobResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetJobResponse_roleArn, v.RoleArn)
+		case schemas.GetJobResponse_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetJobResponse_startedAt, v.StartedAt)
+		case schemas.GetJobResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetJobResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.JobPrimaryStatus(ev)
+			return nil
+		case schemas.GetJobResponse_stoppingCondition:
+			v.StoppingCondition = &types.JobStoppingCondition{}
+			return v.StoppingCondition.Deserialize(d)
+		case schemas.GetJobResponse_tags:
+			return deserializeTagsMap(d, schemas.GetJobResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJob, schemas.GetJobRequest, schemas.GetJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJob, schemas.GetJobRequest, schemas.GetJobResponse), output: &GetJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetJob"); err != nil {

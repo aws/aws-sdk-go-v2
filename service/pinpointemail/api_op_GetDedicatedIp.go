@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,18 @@ type GetDedicatedIpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDedicatedIpInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDedicatedIpRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDedicatedIpInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ip != nil {
+		s.WriteString(schemas.GetDedicatedIpRequest_Ip, *v.Ip)
+	}
+}
+
 // Information about a dedicated IP address.
 type GetDedicatedIpOutput struct {
 
@@ -54,16 +68,24 @@ type GetDedicatedIpOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDedicatedIpOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDedicatedIpResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDedicatedIpResponse_DedicatedIp:
+			v.DedicatedIp = &types.DedicatedIp{}
+			return v.DedicatedIp.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDedicatedIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDedicatedIp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDedicatedIp, schemas.GetDedicatedIpRequest, schemas.GetDedicatedIpResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDedicatedIp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDedicatedIp, schemas.GetDedicatedIpRequest, schemas.GetDedicatedIpResponse), output: &GetDedicatedIpOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDedicatedIp"); err != nil {

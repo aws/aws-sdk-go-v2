@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,24 @@ type CreateStorageConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStorageConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStorageConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStorageConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateStorageConfigurationRequest_name, *v.Name)
+	}
+	if v.S3 != nil {
+		s.WriteStruct(schemas.CreateStorageConfigurationRequest_s3)
+		v.S3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateStorageConfigurationRequest_tags, v.Tags)
+}
+
 type CreateStorageConfigurationOutput struct {
 
 	// The StorageConfiguration that was created.
@@ -64,16 +84,24 @@ type CreateStorageConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStorageConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStorageConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStorageConfigurationResponse_storageConfiguration:
+			v.StorageConfiguration = &types.StorageConfiguration{}
+			return v.StorageConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStorageConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateStorageConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStorageConfiguration, schemas.CreateStorageConfigurationRequest, schemas.CreateStorageConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateStorageConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStorageConfiguration, schemas.CreateStorageConfigurationRequest, schemas.CreateStorageConfigurationResponse), output: &CreateStorageConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateStorageConfiguration"); err != nil {

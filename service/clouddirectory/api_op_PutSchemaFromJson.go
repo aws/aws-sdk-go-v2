@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,21 @@ type PutSchemaFromJsonInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSchemaFromJsonInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSchemaFromJsonRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSchemaFromJsonInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Document != nil {
+		s.WriteString(schemas.PutSchemaFromJsonRequest_Document, *v.Document)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.PutSchemaFromJsonRequest_SchemaArn, *v.SchemaArn)
+	}
+}
+
 type PutSchemaFromJsonOutput struct {
 
 	// The ARN of the schema to update.
@@ -55,16 +72,24 @@ type PutSchemaFromJsonOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSchemaFromJsonOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutSchemaFromJsonResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutSchemaFromJsonResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PutSchemaFromJsonResponse_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutSchemaFromJsonMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutSchemaFromJson{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSchemaFromJson, schemas.PutSchemaFromJsonRequest, schemas.PutSchemaFromJsonResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutSchemaFromJson{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSchemaFromJson, schemas.PutSchemaFromJsonRequest, schemas.PutSchemaFromJsonResponse), output: &PutSchemaFromJsonOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutSchemaFromJson"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,23 @@ type SearchFacetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchFacetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchFacetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchFacetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFacetTypeList(s, schemas.SearchFacetsInput_facetTypes, v.FacetTypes)
+	serializeSearchFilterList(s, schemas.SearchFacetsInput_filters, v.Filters)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchFacetsInput_nextToken, *v.NextToken)
+	}
+	if v.SearchText != nil {
+		s.WriteString(schemas.SearchFacetsInput_searchText, *v.SearchText)
+	}
+}
+
 type SearchFacetsOutput struct {
 
 	// A map of facet types to their corresponding facet values. Each facet value
@@ -72,16 +91,29 @@ type SearchFacetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchFacetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchFacetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchFacetsOutput_listingFacets:
+			return deserializeTypeToFacetMap(d, schemas.SearchFacetsOutput_listingFacets, &v.ListingFacets)
+		case schemas.SearchFacetsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchFacetsOutput_nextToken, v.NextToken)
+		case schemas.SearchFacetsOutput_totalResults:
+			v.TotalResults = new(int64)
+			return d.ReadInt64(schemas.SearchFacetsOutput_totalResults, v.TotalResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchFacetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchFacets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchFacets, schemas.SearchFacetsInput, schemas.SearchFacetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchFacets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchFacets, schemas.SearchFacetsInput, schemas.SearchFacetsOutput), output: &SearchFacetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchFacets"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +35,16 @@ type XmlMapsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlMapsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlMapsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlMapsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeXmlMapsInputOutputMap(s, schemas.XmlMapsRequest_myMap, v.MyMap)
+}
+
 type XmlMapsOutput struct {
 	MyMap map[string]types.GreetingStruct
 
@@ -42,16 +54,23 @@ type XmlMapsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XmlMapsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XmlMapsResponse_myMap:
+			return deserializeXmlMapsInputOutputMap(d, schemas.XmlMapsResponse_myMap, &v.MyMap)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationXmlMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlMaps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlMaps, schemas.XmlMapsRequest, schemas.XmlMapsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpXmlMaps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlMaps, schemas.XmlMapsRequest, schemas.XmlMapsResponse), output: &XmlMapsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlMaps"); err != nil {

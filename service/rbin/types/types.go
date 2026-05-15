@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/rbin/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -15,6 +17,30 @@ type LockConfiguration struct {
 	UnlockDelay *UnlockDelay
 
 	noSmithyDocumentSerde
+}
+
+func (v *LockConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LockConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LockConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UnlockDelay != nil {
+		s.WriteStruct(schemas.LockConfiguration_UnlockDelay)
+		v.UnlockDelay.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LockConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LockConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LockConfiguration_UnlockDelay:
+			v.UnlockDelay = &UnlockDelay{}
+			return v.UnlockDelay.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // [Tag-level retention rules only] Information about the resource tags used to
@@ -30,6 +56,34 @@ type ResourceTag struct {
 	ResourceTagValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceTag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceTagKey != nil {
+		s.WriteString(schemas.ResourceTag_ResourceTagKey, *v.ResourceTagKey)
+	}
+	if v.ResourceTagValue != nil {
+		s.WriteString(schemas.ResourceTag_ResourceTagValue, *v.ResourceTagValue)
+	}
+}
+func (v *ResourceTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceTag_ResourceTagKey:
+			v.ResourceTagKey = new(string)
+			return d.ReadString(schemas.ResourceTag_ResourceTagKey, v.ResourceTagKey)
+		case schemas.ResourceTag_ResourceTagValue:
+			v.ResourceTagValue = new(string)
+			return d.ReadString(schemas.ResourceTag_ResourceTagValue, v.ResourceTagValue)
+		}
+		return nil
+	})
 }
 
 // Information about the retention period for which the retention rule is to
@@ -53,6 +107,38 @@ type RetentionPeriod struct {
 	RetentionPeriodValue *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *RetentionPeriod) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetentionPeriod)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetentionPeriod) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetentionPeriodUnit != "" {
+		s.WriteString(schemas.RetentionPeriod_RetentionPeriodUnit, string(v.RetentionPeriodUnit))
+	}
+	if v.RetentionPeriodValue != nil {
+		s.WriteInt32(schemas.RetentionPeriod_RetentionPeriodValue, *v.RetentionPeriodValue)
+	}
+}
+func (v *RetentionPeriod) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetentionPeriod, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetentionPeriod_RetentionPeriodUnit:
+			var ev string
+			if err := d.ReadString(schemas.RetentionPeriod_RetentionPeriodUnit, &ev); err != nil {
+				return err
+			}
+			v.RetentionPeriodUnit = RetentionPeriodUnit(ev)
+			return nil
+		case schemas.RetentionPeriod_RetentionPeriodValue:
+			v.RetentionPeriodValue = new(int32)
+			return d.ReadInt32(schemas.RetentionPeriod_RetentionPeriodValue, v.RetentionPeriodValue)
+		}
+		return nil
+	})
 }
 
 // Information about a Recycle Bin retention rule.
@@ -90,6 +176,58 @@ type RuleSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RuleSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.RuleSummary_Description, *v.Description)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.RuleSummary_Identifier, *v.Identifier)
+	}
+	if v.LockState != "" {
+		s.WriteString(schemas.RuleSummary_LockState, string(v.LockState))
+	}
+	if v.RetentionPeriod != nil {
+		s.WriteStruct(schemas.RuleSummary_RetentionPeriod)
+		v.RetentionPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleArn != nil {
+		s.WriteString(schemas.RuleSummary_RuleArn, *v.RuleArn)
+	}
+}
+func (v *RuleSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RuleSummary_Description, v.Description)
+		case schemas.RuleSummary_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.RuleSummary_Identifier, v.Identifier)
+		case schemas.RuleSummary_LockState:
+			var ev string
+			if err := d.ReadString(schemas.RuleSummary_LockState, &ev); err != nil {
+				return err
+			}
+			v.LockState = LockState(ev)
+			return nil
+		case schemas.RuleSummary_RetentionPeriod:
+			v.RetentionPeriod = &RetentionPeriod{}
+			return v.RetentionPeriod.Deserialize(d)
+		case schemas.RuleSummary_RuleArn:
+			v.RuleArn = new(string)
+			return d.ReadString(schemas.RuleSummary_RuleArn, v.RuleArn)
+		}
+		return nil
+	})
+}
+
 // Information about the tags to assign to the retention rule.
 type Tag struct {
 
@@ -104,6 +242,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Information about the retention rule unlock delay. The unlock delay is the
@@ -124,6 +290,38 @@ type UnlockDelay struct {
 	UnlockDelayValue *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *UnlockDelay) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnlockDelay)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnlockDelay) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UnlockDelayUnit != "" {
+		s.WriteString(schemas.UnlockDelay_UnlockDelayUnit, string(v.UnlockDelayUnit))
+	}
+	if v.UnlockDelayValue != nil {
+		s.WriteInt32(schemas.UnlockDelay_UnlockDelayValue, *v.UnlockDelayValue)
+	}
+}
+func (v *UnlockDelay) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnlockDelay, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnlockDelay_UnlockDelayUnit:
+			var ev string
+			if err := d.ReadString(schemas.UnlockDelay_UnlockDelayUnit, &ev); err != nil {
+				return err
+			}
+			v.UnlockDelayUnit = UnlockDelayUnit(ev)
+			return nil
+		case schemas.UnlockDelay_UnlockDelayValue:
+			v.UnlockDelayValue = new(int32)
+			return d.ReadInt32(schemas.UnlockDelay_UnlockDelayValue, v.UnlockDelayValue)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

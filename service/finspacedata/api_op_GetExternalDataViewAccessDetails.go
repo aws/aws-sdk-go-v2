@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/finspacedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspacedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,21 @@ type GetExternalDataViewAccessDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExternalDataViewAccessDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExternalDataViewAccessDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExternalDataViewAccessDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataViewId != nil {
+		s.WriteString(schemas.GetExternalDataViewAccessDetailsRequest_dataViewId, *v.DataViewId)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.GetExternalDataViewAccessDetailsRequest_datasetId, *v.DatasetId)
+	}
+}
+
 type GetExternalDataViewAccessDetailsOutput struct {
 
 	// The credentials required to access the external Dataview from the S3 location.
@@ -64,16 +81,27 @@ type GetExternalDataViewAccessDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExternalDataViewAccessDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetExternalDataViewAccessDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetExternalDataViewAccessDetailsResponse_credentials:
+			v.Credentials = &types.AwsCredentials{}
+			return v.Credentials.Deserialize(d)
+		case schemas.GetExternalDataViewAccessDetailsResponse_s3Location:
+			v.S3Location = &types.S3Location{}
+			return v.S3Location.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExternalDataViewAccessDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetExternalDataViewAccessDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExternalDataViewAccessDetails, schemas.GetExternalDataViewAccessDetailsRequest, schemas.GetExternalDataViewAccessDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetExternalDataViewAccessDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExternalDataViewAccessDetails, schemas.GetExternalDataViewAccessDetailsRequest, schemas.GetExternalDataViewAccessDetailsResponse), output: &GetExternalDataViewAccessDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetExternalDataViewAccessDetails"); err != nil {

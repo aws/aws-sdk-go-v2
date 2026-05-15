@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supplychain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,32 @@ type UpdateDataIntegrationFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataIntegrationFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataIntegrationFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataIntegrationFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateDataIntegrationFlowRequest_instanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDataIntegrationFlowRequest_name, *v.Name)
+	}
+	serializeDataIntegrationFlowSourceList(s, schemas.UpdateDataIntegrationFlowRequest_sources, v.Sources)
+	if v.Target != nil {
+		s.WriteStruct(schemas.UpdateDataIntegrationFlowRequest_target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Transformation != nil {
+		s.WriteStruct(schemas.UpdateDataIntegrationFlowRequest_transformation)
+		v.Transformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The response parameters for UpdateDataIntegrationFlow.
 type UpdateDataIntegrationFlowOutput struct {
 
@@ -69,16 +97,24 @@ type UpdateDataIntegrationFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataIntegrationFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataIntegrationFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataIntegrationFlowResponse_flow:
+			v.Flow = &types.DataIntegrationFlow{}
+			return v.Flow.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataIntegrationFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataIntegrationFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataIntegrationFlow, schemas.UpdateDataIntegrationFlowRequest, schemas.UpdateDataIntegrationFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataIntegrationFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataIntegrationFlow, schemas.UpdateDataIntegrationFlowRequest, schemas.UpdateDataIntegrationFlowResponse), output: &UpdateDataIntegrationFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDataIntegrationFlow"); err != nil {

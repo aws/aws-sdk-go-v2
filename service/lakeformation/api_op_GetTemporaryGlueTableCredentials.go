@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -69,6 +71,36 @@ type GetTemporaryGlueTableCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTemporaryGlueTableCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTemporaryGlueTableCredentialsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTemporaryGlueTableCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditContext != nil {
+		s.WriteStruct(schemas.GetTemporaryGlueTableCredentialsRequest_AuditContext)
+		v.AuditContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DurationSeconds != nil {
+		s.WriteInt32(schemas.GetTemporaryGlueTableCredentialsRequest_DurationSeconds, *v.DurationSeconds)
+	}
+	serializePermissionList(s, schemas.GetTemporaryGlueTableCredentialsRequest_Permissions, v.Permissions)
+	if v.QuerySessionContext != nil {
+		s.WriteStruct(schemas.GetTemporaryGlueTableCredentialsRequest_QuerySessionContext)
+		v.QuerySessionContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3Path != nil {
+		s.WriteString(schemas.GetTemporaryGlueTableCredentialsRequest_S3Path, *v.S3Path)
+	}
+	serializePermissionTypeList(s, schemas.GetTemporaryGlueTableCredentialsRequest_SupportedPermissionTypes, v.SupportedPermissionTypes)
+	if v.TableArn != nil {
+		s.WriteString(schemas.GetTemporaryGlueTableCredentialsRequest_TableArn, *v.TableArn)
+	}
+}
+
 type GetTemporaryGlueTableCredentialsOutput struct {
 
 	// The access key ID for the temporary credentials.
@@ -92,16 +124,35 @@ type GetTemporaryGlueTableCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTemporaryGlueTableCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTemporaryGlueTableCredentialsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTemporaryGlueTableCredentialsResponse_AccessKeyId:
+			v.AccessKeyId = new(string)
+			return d.ReadString(schemas.GetTemporaryGlueTableCredentialsResponse_AccessKeyId, v.AccessKeyId)
+		case schemas.GetTemporaryGlueTableCredentialsResponse_Expiration:
+			v.Expiration = new(time.Time)
+			return d.ReadTime(schemas.GetTemporaryGlueTableCredentialsResponse_Expiration, v.Expiration)
+		case schemas.GetTemporaryGlueTableCredentialsResponse_SecretAccessKey:
+			v.SecretAccessKey = new(string)
+			return d.ReadString(schemas.GetTemporaryGlueTableCredentialsResponse_SecretAccessKey, v.SecretAccessKey)
+		case schemas.GetTemporaryGlueTableCredentialsResponse_SessionToken:
+			v.SessionToken = new(string)
+			return d.ReadString(schemas.GetTemporaryGlueTableCredentialsResponse_SessionToken, v.SessionToken)
+		case schemas.GetTemporaryGlueTableCredentialsResponse_VendedS3Path:
+			return deserializePathStringList(d, schemas.GetTemporaryGlueTableCredentialsResponse_VendedS3Path, &v.VendedS3Path)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTemporaryGlueTableCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTemporaryGlueTableCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemporaryGlueTableCredentials, schemas.GetTemporaryGlueTableCredentialsRequest, schemas.GetTemporaryGlueTableCredentialsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTemporaryGlueTableCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemporaryGlueTableCredentials, schemas.GetTemporaryGlueTableCredentialsRequest, schemas.GetTemporaryGlueTableCredentialsResponse), output: &GetTemporaryGlueTableCredentialsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTemporaryGlueTableCredentials"); err != nil {

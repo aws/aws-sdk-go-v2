@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type GetCustomDataIdentifierInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCustomDataIdentifierInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCustomDataIdentifierRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCustomDataIdentifierInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetCustomDataIdentifierRequest_id, *v.Id)
+	}
 }
 
 type GetCustomDataIdentifierOutput struct {
@@ -99,16 +113,53 @@ type GetCustomDataIdentifierOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCustomDataIdentifierOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCustomDataIdentifierResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCustomDataIdentifierResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetCustomDataIdentifierResponse_arn, v.Arn)
+		case schemas.GetCustomDataIdentifierResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCustomDataIdentifierResponse_createdAt, v.CreatedAt)
+		case schemas.GetCustomDataIdentifierResponse_deleted:
+			v.Deleted = new(bool)
+			return d.ReadBool(schemas.GetCustomDataIdentifierResponse_deleted, v.Deleted)
+		case schemas.GetCustomDataIdentifierResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetCustomDataIdentifierResponse_description, v.Description)
+		case schemas.GetCustomDataIdentifierResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetCustomDataIdentifierResponse_id, v.Id)
+		case schemas.GetCustomDataIdentifierResponse_ignoreWords:
+			return deserialize__listOf__string(d, schemas.GetCustomDataIdentifierResponse_ignoreWords, &v.IgnoreWords)
+		case schemas.GetCustomDataIdentifierResponse_keywords:
+			return deserialize__listOf__string(d, schemas.GetCustomDataIdentifierResponse_keywords, &v.Keywords)
+		case schemas.GetCustomDataIdentifierResponse_maximumMatchDistance:
+			v.MaximumMatchDistance = new(int32)
+			return d.ReadInt32(schemas.GetCustomDataIdentifierResponse_maximumMatchDistance, v.MaximumMatchDistance)
+		case schemas.GetCustomDataIdentifierResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetCustomDataIdentifierResponse_name, v.Name)
+		case schemas.GetCustomDataIdentifierResponse_regex:
+			v.Regex = new(string)
+			return d.ReadString(schemas.GetCustomDataIdentifierResponse_regex, v.Regex)
+		case schemas.GetCustomDataIdentifierResponse_severityLevels:
+			return deserializeSeverityLevelList(d, schemas.GetCustomDataIdentifierResponse_severityLevels, &v.SeverityLevels)
+		case schemas.GetCustomDataIdentifierResponse_tags:
+			return deserializeTagMap(d, schemas.GetCustomDataIdentifierResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCustomDataIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCustomDataIdentifier{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCustomDataIdentifier, schemas.GetCustomDataIdentifierRequest, schemas.GetCustomDataIdentifierResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCustomDataIdentifier{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCustomDataIdentifier, schemas.GetCustomDataIdentifierRequest, schemas.GetCustomDataIdentifierResponse), output: &GetCustomDataIdentifierOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCustomDataIdentifier"); err != nil {

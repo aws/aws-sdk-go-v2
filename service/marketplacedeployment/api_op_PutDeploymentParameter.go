@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacedeployment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacedeployment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -70,6 +72,36 @@ type PutDeploymentParameterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDeploymentParameterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDeploymentParameterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDeploymentParameterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.PutDeploymentParameterRequest_agreementId, *v.AgreementId)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.PutDeploymentParameterRequest_catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PutDeploymentParameterRequest_clientToken, *v.ClientToken)
+	}
+	if v.DeploymentParameter != nil {
+		s.WriteStruct(schemas.PutDeploymentParameterRequest_deploymentParameter)
+		v.DeploymentParameter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.PutDeploymentParameterRequest_expirationDate, *v.ExpirationDate)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.PutDeploymentParameterRequest_productId, *v.ProductId)
+	}
+	serializeTagsMap(s, schemas.PutDeploymentParameterRequest_tags, v.Tags)
+}
+
 type PutDeploymentParameterOutput struct {
 
 	// The unique identifier of the agreement.
@@ -99,16 +131,32 @@ type PutDeploymentParameterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDeploymentParameterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutDeploymentParameterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutDeploymentParameterResponse_agreementId:
+			v.AgreementId = new(string)
+			return d.ReadString(schemas.PutDeploymentParameterResponse_agreementId, v.AgreementId)
+		case schemas.PutDeploymentParameterResponse_deploymentParameterId:
+			v.DeploymentParameterId = new(string)
+			return d.ReadString(schemas.PutDeploymentParameterResponse_deploymentParameterId, v.DeploymentParameterId)
+		case schemas.PutDeploymentParameterResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.PutDeploymentParameterResponse_resourceArn, v.ResourceArn)
+		case schemas.PutDeploymentParameterResponse_tags:
+			return deserializeTagsMap(d, schemas.PutDeploymentParameterResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutDeploymentParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutDeploymentParameter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDeploymentParameter, schemas.PutDeploymentParameterRequest, schemas.PutDeploymentParameterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutDeploymentParameter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDeploymentParameter, schemas.PutDeploymentParameterRequest, schemas.PutDeploymentParameterResponse), output: &PutDeploymentParameterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutDeploymentParameter"); err != nil {

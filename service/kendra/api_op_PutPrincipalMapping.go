@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -107,6 +109,35 @@ type PutPrincipalMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutPrincipalMappingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutPrincipalMappingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutPrincipalMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.PutPrincipalMappingRequest_DataSourceId, *v.DataSourceId)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.PutPrincipalMappingRequest_GroupId, *v.GroupId)
+	}
+	if v.GroupMembers != nil {
+		s.WriteStruct(schemas.PutPrincipalMappingRequest_GroupMembers)
+		v.GroupMembers.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.PutPrincipalMappingRequest_IndexId, *v.IndexId)
+	}
+	if v.OrderingId != nil {
+		s.WriteInt64(schemas.PutPrincipalMappingRequest_OrderingId, *v.OrderingId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.PutPrincipalMappingRequest_RoleArn, *v.RoleArn)
+	}
+}
+
 type PutPrincipalMappingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -114,16 +145,29 @@ type PutPrincipalMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutPrincipalMappingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutPrincipalMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutPrincipalMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutPrincipalMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutPrincipalMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPrincipalMapping, schemas.PutPrincipalMappingRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutPrincipalMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPrincipalMapping, schemas.PutPrincipalMappingRequest, nil), output: &PutPrincipalMappingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutPrincipalMapping"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/aiops/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/aiops/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,21 @@ type ListInvestigationGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInvestigationGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInvestigationGroupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInvestigationGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInvestigationGroupsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInvestigationGroupsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListInvestigationGroupsOutput struct {
 
 	// An array of structures, where each structure contains the information about one
@@ -56,16 +73,26 @@ type ListInvestigationGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInvestigationGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInvestigationGroupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInvestigationGroupsOutput_investigationGroups:
+			return deserializeInvestigationGroups(d, schemas.ListInvestigationGroupsOutput_investigationGroups, &v.InvestigationGroups)
+		case schemas.ListInvestigationGroupsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInvestigationGroupsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInvestigationGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInvestigationGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInvestigationGroups, schemas.ListInvestigationGroupsInput, schemas.ListInvestigationGroupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInvestigationGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInvestigationGroups, schemas.ListInvestigationGroupsInput, schemas.ListInvestigationGroupsOutput), output: &ListInvestigationGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListInvestigationGroups"); err != nil {

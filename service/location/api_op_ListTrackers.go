@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,34 @@ type ListTrackersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrackersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrackersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrackersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTrackersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrackersRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListTrackersInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTrackersRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTrackersRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListTrackersRequest_MaxResults, v.MaxResults)
+		case schemas.ListTrackersRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTrackersRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListTrackersOutput struct {
 
 	// Contains tracker resources in your Amazon Web Services account. Details include
@@ -62,16 +92,38 @@ type ListTrackersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrackersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrackersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrackersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListTrackersResponseEntryList(s, schemas.ListTrackersResponse_Entries, v.Entries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrackersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListTrackersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTrackersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTrackersResponse_Entries:
+			return deserializeListTrackersResponseEntryList(d, schemas.ListTrackersResponse_Entries, &v.Entries)
+		case schemas.ListTrackersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTrackersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTrackersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTrackers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrackers, schemas.ListTrackersRequest, schemas.ListTrackersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTrackers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrackers, schemas.ListTrackersRequest, schemas.ListTrackersResponse), output: &ListTrackersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTrackers"); err != nil {

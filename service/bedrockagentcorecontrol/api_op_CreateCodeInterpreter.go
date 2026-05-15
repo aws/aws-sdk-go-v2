@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -64,6 +66,34 @@ type CreateCodeInterpreterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCodeInterpreterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCodeInterpreterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCodeInterpreterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificates(s, schemas.CreateCodeInterpreterRequest_certificates, v.Certificates)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateCodeInterpreterRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCodeInterpreterRequest_description, *v.Description)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.CreateCodeInterpreterRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCodeInterpreterRequest_name, *v.Name)
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.CreateCodeInterpreterRequest_networkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.CreateCodeInterpreterRequest_tags, v.Tags)
+}
+
 type CreateCodeInterpreterOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created code interpreter.
@@ -92,16 +122,37 @@ type CreateCodeInterpreterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCodeInterpreterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCodeInterpreterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCodeInterpreterResponse_codeInterpreterArn:
+			v.CodeInterpreterArn = new(string)
+			return d.ReadString(schemas.CreateCodeInterpreterResponse_codeInterpreterArn, v.CodeInterpreterArn)
+		case schemas.CreateCodeInterpreterResponse_codeInterpreterId:
+			v.CodeInterpreterId = new(string)
+			return d.ReadString(schemas.CreateCodeInterpreterResponse_codeInterpreterId, v.CodeInterpreterId)
+		case schemas.CreateCodeInterpreterResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateCodeInterpreterResponse_createdAt, v.CreatedAt)
+		case schemas.CreateCodeInterpreterResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateCodeInterpreterResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CodeInterpreterStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCodeInterpreterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCodeInterpreter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCodeInterpreter, schemas.CreateCodeInterpreterRequest, schemas.CreateCodeInterpreterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCodeInterpreter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCodeInterpreter, schemas.CreateCodeInterpreterRequest, schemas.CreateCodeInterpreterResponse), output: &CreateCodeInterpreterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCodeInterpreter"); err != nil {

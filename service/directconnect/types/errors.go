@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,16 @@ func (e *DirectConnectClientException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DirectConnectClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DirectConnectClientException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectConnectClientException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectConnectClientException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DirectConnectClientException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A server-side error occurred.
 type DirectConnectServerException struct {
@@ -58,6 +69,16 @@ func (e *DirectConnectServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DirectConnectServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *DirectConnectServerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectConnectServerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectConnectServerException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DirectConnectServerException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A tag key was specified more than once.
 type DuplicateTagKeysException struct {
@@ -84,6 +105,16 @@ func (e *DuplicateTagKeysException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicateTagKeysException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DuplicateTagKeysException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DuplicateTagKeysException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DuplicateTagKeysException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DuplicateTagKeysException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You have reached the limit on the number of tags that can be assigned.
 type TooManyTagsException struct {
@@ -110,3 +141,13 @@ func (e *TooManyTagsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyTagsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyTagsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyTagsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyTagsException_message, v.Message)
+		}
+		return nil
+	})
+}

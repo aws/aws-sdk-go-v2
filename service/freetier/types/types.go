@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/freetier/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -23,6 +25,14 @@ type ActivityRewardMemberCredit struct {
 }
 
 func (*ActivityRewardMemberCredit) isActivityReward() {}
+func (v *ActivityRewardMemberCredit) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityReward_credit)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ActivityRewardMemberCredit) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The summary of activities.
 type ActivitySummary struct {
@@ -50,6 +60,47 @@ type ActivitySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivitySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivitySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivitySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityId != nil {
+		s.WriteString(schemas.ActivitySummary_activityId, *v.ActivityId)
+	}
+	serializeActivityReward(s, schemas.ActivitySummary_reward, v.Reward)
+	if v.Status != "" {
+		s.WriteString(schemas.ActivitySummary_status, string(v.Status))
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.ActivitySummary_title, *v.Title)
+	}
+}
+func (v *ActivitySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivitySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivitySummary_activityId:
+			v.ActivityId = new(string)
+			return d.ReadString(schemas.ActivitySummary_activityId, v.ActivityId)
+		case schemas.ActivitySummary_reward:
+			return deserializeActivityReward(d, schemas.ActivitySummary_reward, &v.Reward)
+		case schemas.ActivitySummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ActivitySummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ActivityStatus(ev)
+			return nil
+		case schemas.ActivitySummary_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.ActivitySummary_title, v.Title)
+		}
+		return nil
+	})
+}
+
 // Contains the specifications for the filters to use for your request.
 type DimensionValues struct {
 
@@ -71,6 +122,38 @@ type DimensionValues struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DimensionValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DimensionValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DimensionValues) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != "" {
+		s.WriteString(schemas.DimensionValues_Key, string(v.Key))
+	}
+	serializeMatchOptions(s, schemas.DimensionValues_MatchOptions, v.MatchOptions)
+	serializeValues(s, schemas.DimensionValues_Values, v.Values)
+}
+func (v *DimensionValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DimensionValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DimensionValues_Key:
+			var ev string
+			if err := d.ReadString(schemas.DimensionValues_Key, &ev); err != nil {
+				return err
+			}
+			v.Key = Dimension(ev)
+			return nil
+		case schemas.DimensionValues_MatchOptions:
+			return deserializeMatchOptions(d, schemas.DimensionValues_MatchOptions, &v.MatchOptions)
+		case schemas.DimensionValues_Values:
+			return deserializeValues(d, schemas.DimensionValues_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Use Expression to filter in the GetFreeTierUsage API operation.
@@ -131,6 +214,44 @@ type Expression struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Expression) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Expression)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Expression) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExpressions(s, schemas.Expression_And, v.And)
+	if v.Dimensions != nil {
+		s.WriteStruct(schemas.Expression_Dimensions)
+		v.Dimensions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Not != nil {
+		s.WriteStruct(schemas.Expression_Not)
+		v.Not.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeExpressions(s, schemas.Expression_Or, v.Or)
+}
+func (v *Expression) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Expression, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Expression_And:
+			return deserializeExpressions(d, schemas.Expression_And, &v.And)
+		case schemas.Expression_Dimensions:
+			v.Dimensions = &DimensionValues{}
+			return v.Dimensions.Deserialize(d)
+		case schemas.Expression_Not:
+			v.Not = &Expression{}
+			return v.Not.Deserialize(d)
+		case schemas.Expression_Or:
+			return deserializeExpressions(d, schemas.Expression_Or, &v.Or)
+		}
+		return nil
+	})
+}
+
 // Consists of a Amazon Web Services Free Tier offer’s metadata and your data
 // usage for the offer.
 type FreeTierUsage struct {
@@ -173,6 +294,79 @@ type FreeTierUsage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FreeTierUsage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FreeTierUsage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FreeTierUsage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActualUsageAmount != 0 {
+		s.WriteFloat64(schemas.FreeTierUsage_actualUsageAmount, v.ActualUsageAmount)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.FreeTierUsage_description, *v.Description)
+	}
+	if v.ForecastedUsageAmount != 0 {
+		s.WriteFloat64(schemas.FreeTierUsage_forecastedUsageAmount, v.ForecastedUsageAmount)
+	}
+	if v.FreeTierType != nil {
+		s.WriteString(schemas.FreeTierUsage_freeTierType, *v.FreeTierType)
+	}
+	if v.Limit != 0 {
+		s.WriteFloat64(schemas.FreeTierUsage_limit, v.Limit)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.FreeTierUsage_operation, *v.Operation)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.FreeTierUsage_region, *v.Region)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.FreeTierUsage_service, *v.Service)
+	}
+	if v.Unit != nil {
+		s.WriteString(schemas.FreeTierUsage_unit, *v.Unit)
+	}
+	if v.UsageType != nil {
+		s.WriteString(schemas.FreeTierUsage_usageType, *v.UsageType)
+	}
+}
+func (v *FreeTierUsage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FreeTierUsage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FreeTierUsage_actualUsageAmount:
+			return d.ReadFloat64(schemas.FreeTierUsage_actualUsageAmount, &v.ActualUsageAmount)
+		case schemas.FreeTierUsage_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.FreeTierUsage_description, v.Description)
+		case schemas.FreeTierUsage_forecastedUsageAmount:
+			return d.ReadFloat64(schemas.FreeTierUsage_forecastedUsageAmount, &v.ForecastedUsageAmount)
+		case schemas.FreeTierUsage_freeTierType:
+			v.FreeTierType = new(string)
+			return d.ReadString(schemas.FreeTierUsage_freeTierType, v.FreeTierType)
+		case schemas.FreeTierUsage_limit:
+			return d.ReadFloat64(schemas.FreeTierUsage_limit, &v.Limit)
+		case schemas.FreeTierUsage_operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.FreeTierUsage_operation, v.Operation)
+		case schemas.FreeTierUsage_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.FreeTierUsage_region, v.Region)
+		case schemas.FreeTierUsage_service:
+			v.Service = new(string)
+			return d.ReadString(schemas.FreeTierUsage_service, v.Service)
+		case schemas.FreeTierUsage_unit:
+			v.Unit = new(string)
+			return d.ReadString(schemas.FreeTierUsage_unit, v.Unit)
+		case schemas.FreeTierUsage_usageType:
+			v.UsageType = new(string)
+			return d.ReadString(schemas.FreeTierUsage_usageType, v.UsageType)
+		}
+		return nil
+	})
+}
+
 // The monetary amount of the credit.
 type MonetaryAmount struct {
 
@@ -187,6 +381,37 @@ type MonetaryAmount struct {
 	Unit CurrencyCode
 
 	noSmithyDocumentSerde
+}
+
+func (v *MonetaryAmount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonetaryAmount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonetaryAmount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != 0 {
+		s.WriteFloat64(schemas.MonetaryAmount_amount, v.Amount)
+	}
+	if v.Unit != "" {
+		s.WriteString(schemas.MonetaryAmount_unit, string(v.Unit))
+	}
+}
+func (v *MonetaryAmount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MonetaryAmount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MonetaryAmount_amount:
+			return d.ReadFloat64(schemas.MonetaryAmount_amount, &v.Amount)
+		case schemas.MonetaryAmount_unit:
+			var ev string
+			if err := d.ReadString(schemas.MonetaryAmount_unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = CurrencyCode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

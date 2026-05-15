@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,24 @@ type ListMicrosoftTeamsUserIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMicrosoftTeamsUserIdentitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMicrosoftTeamsUserIdentitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMicrosoftTeamsUserIdentitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChatConfigurationArn != nil {
+		s.WriteString(schemas.ListMicrosoftTeamsUserIdentitiesRequest_ChatConfigurationArn, *v.ChatConfigurationArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMicrosoftTeamsUserIdentitiesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMicrosoftTeamsUserIdentitiesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListMicrosoftTeamsUserIdentitiesOutput struct {
 
 	// An optional token returned from a prior request. Use this token for pagination
@@ -62,16 +82,26 @@ type ListMicrosoftTeamsUserIdentitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMicrosoftTeamsUserIdentitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMicrosoftTeamsUserIdentitiesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMicrosoftTeamsUserIdentitiesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMicrosoftTeamsUserIdentitiesResult_NextToken, v.NextToken)
+		case schemas.ListMicrosoftTeamsUserIdentitiesResult_TeamsUserIdentities:
+			return deserializeTeamsUserIdentitiesList(d, schemas.ListMicrosoftTeamsUserIdentitiesResult_TeamsUserIdentities, &v.TeamsUserIdentities)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMicrosoftTeamsUserIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMicrosoftTeamsUserIdentities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMicrosoftTeamsUserIdentities, schemas.ListMicrosoftTeamsUserIdentitiesRequest, schemas.ListMicrosoftTeamsUserIdentitiesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMicrosoftTeamsUserIdentities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMicrosoftTeamsUserIdentities, schemas.ListMicrosoftTeamsUserIdentitiesRequest, schemas.ListMicrosoftTeamsUserIdentitiesResult), output: &ListMicrosoftTeamsUserIdentitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMicrosoftTeamsUserIdentities"); err != nil {

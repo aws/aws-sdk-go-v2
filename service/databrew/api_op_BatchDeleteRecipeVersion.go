@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -71,6 +73,19 @@ type BatchDeleteRecipeVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteRecipeVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteRecipeVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteRecipeVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.BatchDeleteRecipeVersionRequest_Name, *v.Name)
+	}
+	serializeRecipeVersionList(s, schemas.BatchDeleteRecipeVersionRequest_RecipeVersions, v.RecipeVersions)
+}
+
 type BatchDeleteRecipeVersionOutput struct {
 
 	// The name of the recipe that was modified.
@@ -87,16 +102,26 @@ type BatchDeleteRecipeVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteRecipeVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteRecipeVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteRecipeVersionResponse_Errors:
+			return deserializeRecipeErrorList(d, schemas.BatchDeleteRecipeVersionResponse_Errors, &v.Errors)
+		case schemas.BatchDeleteRecipeVersionResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.BatchDeleteRecipeVersionResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteRecipeVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteRecipeVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteRecipeVersion, schemas.BatchDeleteRecipeVersionRequest, schemas.BatchDeleteRecipeVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteRecipeVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteRecipeVersion, schemas.BatchDeleteRecipeVersionRequest, schemas.BatchDeleteRecipeVersionResponse), output: &BatchDeleteRecipeVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDeleteRecipeVersion"); err != nil {

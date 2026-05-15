@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,16 @@ func (e *DuplicateResourceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicateResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DuplicateResourceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DuplicateResourceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DuplicateResourceException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DuplicateResourceException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // One or more parameters provided to the operation are not valid.
 type InvalidParametersException struct {
@@ -58,6 +69,16 @@ func (e *InvalidParametersException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidParametersException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidParametersException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidParametersException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidParametersException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidParametersException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An attempt was made to modify a resource that is in a state that is not valid.
 // Check your resources to ensure that they are in valid states before retrying the
@@ -86,6 +107,16 @@ func (e *InvalidStateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidStateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidStateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidStateException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidStateException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The current limits of the service would have been exceeded by this operation.
 // Decrease your resource use or increase your service limits and retry the
@@ -114,6 +145,16 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation is not supported.
 type OperationNotSupportedException struct {
@@ -140,6 +181,16 @@ func (e *OperationNotSupportedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *OperationNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *OperationNotSupportedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OperationNotSupportedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OperationNotSupportedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OperationNotSupportedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A resource that is currently in use. Ensure that the resource is not in use and
 // retry the operation.
@@ -167,6 +218,16 @@ func (e *ResourceInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceInUseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceInUseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceInUseException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceInUseException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified resource was not found.
 type ResourceNotFoundException struct {
@@ -193,6 +254,16 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An operation requiring TagOptions failed because the TagOptions migration
 // process has not been performed for this account. Use the Amazon Web Services
@@ -222,3 +293,13 @@ func (e *TagOptionNotMigratedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TagOptionNotMigratedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TagOptionNotMigratedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagOptionNotMigratedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagOptionNotMigratedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TagOptionNotMigratedException_Message, v.Message)
+		}
+		return nil
+	})
+}

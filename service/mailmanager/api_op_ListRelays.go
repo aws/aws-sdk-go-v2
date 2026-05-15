@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,21 @@ type ListRelaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRelaysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRelaysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRelaysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRelaysRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListRelaysRequest_PageSize, *v.PageSize)
+	}
+}
+
 type ListRelaysOutput struct {
 
 	// The list of returned relays.
@@ -57,16 +74,26 @@ type ListRelaysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRelaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRelaysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRelaysResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRelaysResponse_NextToken, v.NextToken)
+		case schemas.ListRelaysResponse_Relays:
+			return deserializeRelays(d, schemas.ListRelaysResponse_Relays, &v.Relays)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRelaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListRelays{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRelays, schemas.ListRelaysRequest, schemas.ListRelaysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListRelays{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRelays, schemas.ListRelaysRequest, schemas.ListRelaysResponse), output: &ListRelaysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRelays"); err != nil {

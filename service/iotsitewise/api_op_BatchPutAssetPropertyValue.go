@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,6 +71,19 @@ type BatchPutAssetPropertyValueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutAssetPropertyValueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutAssetPropertyValueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutAssetPropertyValueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnablePartialEntryProcessing != nil {
+		s.WriteBool(schemas.BatchPutAssetPropertyValueRequest_enablePartialEntryProcessing, *v.EnablePartialEntryProcessing)
+	}
+	serializePutAssetPropertyValueEntries(s, schemas.BatchPutAssetPropertyValueRequest_entries, v.Entries)
+}
+
 type BatchPutAssetPropertyValueOutput struct {
 
 	// A list of the errors (if any) associated with the batch put request. Each error
@@ -83,16 +98,23 @@ type BatchPutAssetPropertyValueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutAssetPropertyValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutAssetPropertyValueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutAssetPropertyValueResponse_errorEntries:
+			return deserializeBatchPutAssetPropertyErrorEntries(d, schemas.BatchPutAssetPropertyValueResponse_errorEntries, &v.ErrorEntries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchPutAssetPropertyValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutAssetPropertyValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutAssetPropertyValue, schemas.BatchPutAssetPropertyValueRequest, schemas.BatchPutAssetPropertyValueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchPutAssetPropertyValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutAssetPropertyValue, schemas.BatchPutAssetPropertyValueRequest, schemas.BatchPutAssetPropertyValueResponse), output: &BatchPutAssetPropertyValueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchPutAssetPropertyValue"); err != nil {

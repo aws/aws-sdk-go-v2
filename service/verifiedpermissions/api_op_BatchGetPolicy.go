@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,16 @@ type BatchGetPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetPolicyInputList(s, schemas.BatchGetPolicyInput_requests, v.Requests)
+}
+
 type BatchGetPolicyOutput struct {
 
 	// Information about the policies from the request that resulted in an error.
@@ -61,16 +73,25 @@ type BatchGetPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetPolicyOutput_errors:
+			return deserializeBatchGetPolicyErrorList(d, schemas.BatchGetPolicyOutput_errors, &v.Errors)
+		case schemas.BatchGetPolicyOutput_results:
+			return deserializeBatchGetPolicyOutputList(d, schemas.BatchGetPolicyOutput_results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchGetPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetPolicy, schemas.BatchGetPolicyInput, schemas.BatchGetPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchGetPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetPolicy, schemas.BatchGetPolicyInput, schemas.BatchGetPolicyOutput), output: &BatchGetPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetPolicy"); err != nil {

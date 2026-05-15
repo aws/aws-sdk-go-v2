@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,24 @@ type DeleteMessageTemplateAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMessageTemplateAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMessageTemplateAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMessageTemplateAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.DeleteMessageTemplateAttachmentRequest_attachmentId, *v.AttachmentId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.DeleteMessageTemplateAttachmentRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.MessageTemplateId != nil {
+		s.WriteString(schemas.DeleteMessageTemplateAttachmentRequest_messageTemplateId, *v.MessageTemplateId)
+	}
+}
+
 type DeleteMessageTemplateAttachmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,16 +77,21 @@ type DeleteMessageTemplateAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMessageTemplateAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMessageTemplateAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMessageTemplateAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMessageTemplateAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMessageTemplateAttachment, schemas.DeleteMessageTemplateAttachmentRequest, schemas.DeleteMessageTemplateAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMessageTemplateAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMessageTemplateAttachment, schemas.DeleteMessageTemplateAttachmentRequest, schemas.DeleteMessageTemplateAttachmentResponse), output: &DeleteMessageTemplateAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteMessageTemplateAttachment"); err != nil {

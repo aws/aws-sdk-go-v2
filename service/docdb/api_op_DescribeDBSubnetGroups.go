@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,25 @@ type DescribeDBSubnetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBSubnetGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBSubnetGroupsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBSubnetGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBSubnetGroupName != nil {
+		s.WriteString(schemas.DescribeDBSubnetGroupsMessage_DBSubnetGroupName, *v.DBSubnetGroupName)
+	}
+	serializeFilterList(s, schemas.DescribeDBSubnetGroupsMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBSubnetGroupsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBSubnetGroupsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 // Represents the output of DescribeDBSubnetGroups.
 type DescribeDBSubnetGroupsOutput struct {
 
@@ -72,16 +93,26 @@ type DescribeDBSubnetGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBSubnetGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBSubnetGroupMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBSubnetGroupMessage_DBSubnetGroups:
+			return deserializeDBSubnetGroups(d, schemas.DBSubnetGroupMessage_DBSubnetGroups, &v.DBSubnetGroups)
+		case schemas.DBSubnetGroupMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DBSubnetGroupMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBSubnetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBSubnetGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBSubnetGroups, schemas.DescribeDBSubnetGroupsMessage, schemas.DBSubnetGroupMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBSubnetGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBSubnetGroups, schemas.DescribeDBSubnetGroupsMessage, schemas.DBSubnetGroupMessage), output: &DescribeDBSubnetGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDBSubnetGroups"); err != nil {

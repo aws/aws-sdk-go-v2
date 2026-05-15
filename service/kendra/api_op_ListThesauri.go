@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,24 @@ type ListThesauriInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThesauriInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThesauriRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThesauriInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexId != nil {
+		s.WriteString(schemas.ListThesauriRequest_IndexId, *v.IndexId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListThesauriRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThesauriRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListThesauriOutput struct {
 
 	// If the response is truncated, Amazon Kendra returns this token that you can use
@@ -61,16 +81,26 @@ type ListThesauriOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThesauriOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListThesauriResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListThesauriResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListThesauriResponse_NextToken, v.NextToken)
+		case schemas.ListThesauriResponse_ThesaurusSummaryItems:
+			return deserializeThesaurusSummaryItems(d, schemas.ListThesauriResponse_ThesaurusSummaryItems, &v.ThesaurusSummaryItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListThesauriMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListThesauri{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThesauri, schemas.ListThesauriRequest, schemas.ListThesauriResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListThesauri{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThesauri, schemas.ListThesauriRequest, schemas.ListThesauriResponse), output: &ListThesauriOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListThesauri"); err != nil {

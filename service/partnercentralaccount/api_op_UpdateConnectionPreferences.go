@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -53,6 +55,25 @@ type UpdateConnectionPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectionPreferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectionPreferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectionPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessType != "" {
+		s.WriteString(schemas.UpdateConnectionPreferencesRequest_AccessType, string(v.AccessType))
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.UpdateConnectionPreferencesRequest_Catalog, *v.Catalog)
+	}
+	serializeParticipantIdentifierList(s, schemas.UpdateConnectionPreferencesRequest_ExcludedParticipantIdentifiers, v.ExcludedParticipantIdentifiers)
+	if v.Revision != nil {
+		s.WriteInt64(schemas.UpdateConnectionPreferencesRequest_Revision, *v.Revision)
+	}
+}
+
 type UpdateConnectionPreferencesOutput struct {
 
 	// The updated access type setting for connections.
@@ -90,16 +111,42 @@ type UpdateConnectionPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectionPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectionPreferencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConnectionPreferencesResponse_AccessType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateConnectionPreferencesResponse_AccessType, &ev); err != nil {
+				return err
+			}
+			v.AccessType = types.AccessType(ev)
+			return nil
+		case schemas.UpdateConnectionPreferencesResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateConnectionPreferencesResponse_Arn, v.Arn)
+		case schemas.UpdateConnectionPreferencesResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.UpdateConnectionPreferencesResponse_Catalog, v.Catalog)
+		case schemas.UpdateConnectionPreferencesResponse_ExcludedParticipantIds:
+			return deserializeParticipantIdentifierList(d, schemas.UpdateConnectionPreferencesResponse_ExcludedParticipantIds, &v.ExcludedParticipantIds)
+		case schemas.UpdateConnectionPreferencesResponse_Revision:
+			v.Revision = new(int64)
+			return d.ReadInt64(schemas.UpdateConnectionPreferencesResponse_Revision, v.Revision)
+		case schemas.UpdateConnectionPreferencesResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateConnectionPreferencesResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConnectionPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateConnectionPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectionPreferences, schemas.UpdateConnectionPreferencesRequest, schemas.UpdateConnectionPreferencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateConnectionPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectionPreferences, schemas.UpdateConnectionPreferencesRequest, schemas.UpdateConnectionPreferencesResponse), output: &UpdateConnectionPreferencesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateConnectionPreferences"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type GetHITInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHITInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHITRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHITInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HITId != nil {
+		s.WriteString(schemas.GetHITRequest_HITId, *v.HITId)
+	}
+}
+
 type GetHITOutput struct {
 
 	//  Contains the requested HIT data.
@@ -48,16 +62,24 @@ type GetHITOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHITOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetHITResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetHITResponse_HIT:
+			v.HIT = &types.HIT{}
+			return v.HIT.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetHIT{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHIT, schemas.GetHITRequest, schemas.GetHITResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetHIT{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHIT, schemas.GetHITRequest, schemas.GetHITResponse), output: &GetHITOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetHIT"); err != nil {

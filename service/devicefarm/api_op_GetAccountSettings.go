@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +35,15 @@ type GetAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 // Represents the account settings return values from the GetAccountSettings
 // request.
 type GetAccountSettingsOutput struct {
@@ -46,16 +57,24 @@ type GetAccountSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountSettingsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountSettingsResult_accountSettings:
+			v.AccountSettings = &types.AccountSettings{}
+			return v.AccountSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountSettings, schemas.GetAccountSettingsRequest, schemas.GetAccountSettingsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountSettings, schemas.GetAccountSettingsRequest, schemas.GetAccountSettingsResult), output: &GetAccountSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAccountSettings"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backupsearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backupsearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,24 @@ type ListSearchJobBackupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSearchJobBackupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSearchJobBackupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSearchJobBackupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSearchJobBackupsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSearchJobBackupsInput_NextToken, *v.NextToken)
+	}
+	if v.SearchJobIdentifier != nil {
+		s.WriteString(schemas.ListSearchJobBackupsInput_SearchJobIdentifier, *v.SearchJobIdentifier)
+	}
+}
+
 type ListSearchJobBackupsOutput struct {
 
 	// The recovery points returned the results of a search job
@@ -79,16 +99,26 @@ type ListSearchJobBackupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSearchJobBackupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSearchJobBackupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSearchJobBackupsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSearchJobBackupsOutput_NextToken, v.NextToken)
+		case schemas.ListSearchJobBackupsOutput_Results:
+			return deserializeSearchJobBackupsResults(d, schemas.ListSearchJobBackupsOutput_Results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSearchJobBackupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSearchJobBackups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSearchJobBackups, schemas.ListSearchJobBackupsInput, schemas.ListSearchJobBackupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSearchJobBackups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSearchJobBackups, schemas.ListSearchJobBackupsInput, schemas.ListSearchJobBackupsOutput), output: &ListSearchJobBackupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSearchJobBackups"); err != nil {

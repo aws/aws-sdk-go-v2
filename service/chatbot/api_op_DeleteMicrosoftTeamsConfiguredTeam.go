@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,18 @@ type DeleteMicrosoftTeamsConfiguredTeamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMicrosoftTeamsConfiguredTeamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTeamsConfiguredTeamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMicrosoftTeamsConfiguredTeamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TeamId != nil {
+		s.WriteString(schemas.DeleteTeamsConfiguredTeamRequest_TeamId, *v.TeamId)
+	}
+}
+
 type DeleteMicrosoftTeamsConfiguredTeamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,16 +66,21 @@ type DeleteMicrosoftTeamsConfiguredTeamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMicrosoftTeamsConfiguredTeamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTeamsConfiguredTeamResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMicrosoftTeamsConfiguredTeamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMicrosoftTeamsConfiguredTeam{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMicrosoftTeamsConfiguredTeam, schemas.DeleteTeamsConfiguredTeamRequest, schemas.DeleteTeamsConfiguredTeamResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMicrosoftTeamsConfiguredTeam{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMicrosoftTeamsConfiguredTeam, schemas.DeleteTeamsConfiguredTeamRequest, schemas.DeleteTeamsConfiguredTeamResult), output: &DeleteMicrosoftTeamsConfiguredTeamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteMicrosoftTeamsConfiguredTeam"); err != nil {

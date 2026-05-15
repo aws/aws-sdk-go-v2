@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -92,6 +94,42 @@ type CreatePlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociatedAlarmMap(s, schemas.CreatePlanRequest_associatedAlarms, v.AssociatedAlarms)
+	if v.Description != nil {
+		s.WriteString(schemas.CreatePlanRequest_description, *v.Description)
+	}
+	if v.ExecutionRole != nil {
+		s.WriteString(schemas.CreatePlanRequest_executionRole, *v.ExecutionRole)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePlanRequest_name, *v.Name)
+	}
+	if v.PrimaryRegion != nil {
+		s.WriteString(schemas.CreatePlanRequest_primaryRegion, *v.PrimaryRegion)
+	}
+	if v.RecoveryApproach != "" {
+		s.WriteString(schemas.CreatePlanRequest_recoveryApproach, string(v.RecoveryApproach))
+	}
+	if v.RecoveryTimeObjectiveMinutes != nil {
+		s.WriteInt32(schemas.CreatePlanRequest_recoveryTimeObjectiveMinutes, *v.RecoveryTimeObjectiveMinutes)
+	}
+	serializeRegionList(s, schemas.CreatePlanRequest_regions, v.Regions)
+	if v.ReportConfiguration != nil {
+		s.WriteStruct(schemas.CreatePlanRequest_reportConfiguration)
+		v.ReportConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreatePlanRequest_tags, v.Tags)
+	serializeTriggerList(s, schemas.CreatePlanRequest_triggers, v.Triggers)
+	serializeWorkflowList(s, schemas.CreatePlanRequest_workflows, v.Workflows)
+}
 func (in *CreatePlanInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.UseControlPlaneEndpoint = ptr.Bool(true)
@@ -108,16 +146,24 @@ type CreatePlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePlanResponse_plan:
+			v.Plan = &types.Plan{}
+			return v.Plan.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreatePlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePlan, schemas.CreatePlanRequest, schemas.CreatePlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreatePlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePlan, schemas.CreatePlanRequest, schemas.CreatePlanResponse), output: &CreatePlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePlan"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -47,6 +49,43 @@ type OmitsSerializingEmptyListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OmitsSerializingEmptyListsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OmitsSerializingEmptyListsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OmitsSerializingEmptyListsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBooleanList(s, schemas.OmitsSerializingEmptyListsInput_queryBooleanList, v.QueryBooleanList)
+	serializeDoubleList(s, schemas.OmitsSerializingEmptyListsInput_queryDoubleList, v.QueryDoubleList)
+	serializeFooEnumList(s, schemas.OmitsSerializingEmptyListsInput_queryEnumList, v.QueryEnumList)
+	serializeIntegerEnumList(s, schemas.OmitsSerializingEmptyListsInput_queryIntegerEnumList, v.QueryIntegerEnumList)
+	serializeIntegerList(s, schemas.OmitsSerializingEmptyListsInput_queryIntegerList, v.QueryIntegerList)
+	serializeStringList(s, schemas.OmitsSerializingEmptyListsInput_queryStringList, v.QueryStringList)
+	serializeTimestampList(s, schemas.OmitsSerializingEmptyListsInput_queryTimestampList, v.QueryTimestampList)
+}
+func (v *OmitsSerializingEmptyListsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OmitsSerializingEmptyListsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OmitsSerializingEmptyListsInput_queryBooleanList:
+			return deserializeBooleanList(d, schemas.OmitsSerializingEmptyListsInput_queryBooleanList, &v.QueryBooleanList)
+		case schemas.OmitsSerializingEmptyListsInput_queryDoubleList:
+			return deserializeDoubleList(d, schemas.OmitsSerializingEmptyListsInput_queryDoubleList, &v.QueryDoubleList)
+		case schemas.OmitsSerializingEmptyListsInput_queryEnumList:
+			return deserializeFooEnumList(d, schemas.OmitsSerializingEmptyListsInput_queryEnumList, &v.QueryEnumList)
+		case schemas.OmitsSerializingEmptyListsInput_queryIntegerEnumList:
+			return deserializeIntegerEnumList(d, schemas.OmitsSerializingEmptyListsInput_queryIntegerEnumList, &v.QueryIntegerEnumList)
+		case schemas.OmitsSerializingEmptyListsInput_queryIntegerList:
+			return deserializeIntegerList(d, schemas.OmitsSerializingEmptyListsInput_queryIntegerList, &v.QueryIntegerList)
+		case schemas.OmitsSerializingEmptyListsInput_queryStringList:
+			return deserializeStringList(d, schemas.OmitsSerializingEmptyListsInput_queryStringList, &v.QueryStringList)
+		case schemas.OmitsSerializingEmptyListsInput_queryTimestampList:
+			return deserializeTimestampList(d, schemas.OmitsSerializingEmptyListsInput_queryTimestampList, &v.QueryTimestampList)
+		}
+		return nil
+	})
+}
+
 type OmitsSerializingEmptyListsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,16 +93,29 @@ type OmitsSerializingEmptyListsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OmitsSerializingEmptyListsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OmitsSerializingEmptyListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *OmitsSerializingEmptyListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationOmitsSerializingEmptyListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpOmitsSerializingEmptyLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OmitsSerializingEmptyLists, schemas.OmitsSerializingEmptyListsInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpOmitsSerializingEmptyLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OmitsSerializingEmptyLists, schemas.OmitsSerializingEmptyListsInput, nil), output: &OmitsSerializingEmptyListsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "OmitsSerializingEmptyLists"); err != nil {

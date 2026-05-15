@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -83,6 +85,37 @@ type GetDevicePoolCompatibilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDevicePoolCompatibilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDevicePoolCompatibilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDevicePoolCompatibilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.GetDevicePoolCompatibilityRequest_appArn, *v.AppArn)
+	}
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.GetDevicePoolCompatibilityRequest_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DevicePoolArn != nil {
+		s.WriteString(schemas.GetDevicePoolCompatibilityRequest_devicePoolArn, *v.DevicePoolArn)
+	}
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.GetDevicePoolCompatibilityRequest_projectArn, *v.ProjectArn)
+	}
+	if v.Test != nil {
+		s.WriteStruct(schemas.GetDevicePoolCompatibilityRequest_test)
+		v.Test.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestType != "" {
+		s.WriteString(schemas.GetDevicePoolCompatibilityRequest_testType, string(v.TestType))
+	}
+}
+
 // Represents the result of describe device pool compatibility request.
 type GetDevicePoolCompatibilityOutput struct {
 
@@ -98,16 +131,25 @@ type GetDevicePoolCompatibilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDevicePoolCompatibilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDevicePoolCompatibilityResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDevicePoolCompatibilityResult_compatibleDevices:
+			return deserializeDevicePoolCompatibilityResults(d, schemas.GetDevicePoolCompatibilityResult_compatibleDevices, &v.CompatibleDevices)
+		case schemas.GetDevicePoolCompatibilityResult_incompatibleDevices:
+			return deserializeDevicePoolCompatibilityResults(d, schemas.GetDevicePoolCompatibilityResult_incompatibleDevices, &v.IncompatibleDevices)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDevicePoolCompatibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDevicePoolCompatibility{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDevicePoolCompatibility, schemas.GetDevicePoolCompatibilityRequest, schemas.GetDevicePoolCompatibilityResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDevicePoolCompatibility{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDevicePoolCompatibility, schemas.GetDevicePoolCompatibilityRequest, schemas.GetDevicePoolCompatibilityResult), output: &GetDevicePoolCompatibilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDevicePoolCompatibility"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type GetSipMediaApplicationLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSipMediaApplicationLoggingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSipMediaApplicationLoggingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSipMediaApplicationLoggingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SipMediaApplicationId != nil {
+		s.WriteString(schemas.GetSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationId, *v.SipMediaApplicationId)
+	}
+}
+
 type GetSipMediaApplicationLoggingConfigurationOutput struct {
 
 	// The actual logging configuration.
@@ -48,16 +62,24 @@ type GetSipMediaApplicationLoggingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSipMediaApplicationLoggingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSipMediaApplicationLoggingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSipMediaApplicationLoggingConfigurationResponse_SipMediaApplicationLoggingConfiguration:
+			v.SipMediaApplicationLoggingConfiguration = &types.SipMediaApplicationLoggingConfiguration{}
+			return v.SipMediaApplicationLoggingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSipMediaApplicationLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSipMediaApplicationLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSipMediaApplicationLoggingConfiguration, schemas.GetSipMediaApplicationLoggingConfigurationRequest, schemas.GetSipMediaApplicationLoggingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSipMediaApplicationLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSipMediaApplicationLoggingConfiguration, schemas.GetSipMediaApplicationLoggingConfigurationRequest, schemas.GetSipMediaApplicationLoggingConfigurationResponse), output: &GetSipMediaApplicationLoggingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSipMediaApplicationLoggingConfiguration"); err != nil {

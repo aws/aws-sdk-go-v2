@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type DeleteNetworkSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNetworkSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNetworkSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNetworkSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkSettingsArn != nil {
+		s.WriteString(schemas.DeleteNetworkSettingsRequest_networkSettingsArn, *v.NetworkSettingsArn)
+	}
+}
+
 type DeleteNetworkSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,16 +57,21 @@ type DeleteNetworkSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNetworkSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteNetworkSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteNetworkSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteNetworkSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNetworkSettings, schemas.DeleteNetworkSettingsRequest, schemas.DeleteNetworkSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteNetworkSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNetworkSettings, schemas.DeleteNetworkSettingsRequest, schemas.DeleteNetworkSettingsResponse), output: &DeleteNetworkSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteNetworkSettings"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,6 +65,27 @@ type AddDirectQueryDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddDirectQueryDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddDirectQueryDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddDirectQueryDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceAccessPolicy != nil {
+		s.WriteString(schemas.AddDirectQueryDataSourceRequest_DataSourceAccessPolicy, *v.DataSourceAccessPolicy)
+	}
+	if v.DataSourceName != nil {
+		s.WriteString(schemas.AddDirectQueryDataSourceRequest_DataSourceName, *v.DataSourceName)
+	}
+	serializeDirectQueryDataSourceType(s, schemas.AddDirectQueryDataSourceRequest_DataSourceType, v.DataSourceType)
+	if v.Description != nil {
+		s.WriteString(schemas.AddDirectQueryDataSourceRequest_Description, *v.Description)
+	}
+	serializeDirectQueryOpenSearchARNList(s, schemas.AddDirectQueryDataSourceRequest_OpenSearchArns, v.OpenSearchArns)
+	serializeTagList(s, schemas.AddDirectQueryDataSourceRequest_TagList, v.TagList)
+}
+
 type AddDirectQueryDataSourceOutput struct {
 
 	//  The unique, system-generated identifier that represents the data source.
@@ -74,16 +97,24 @@ type AddDirectQueryDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddDirectQueryDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddDirectQueryDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddDirectQueryDataSourceResponse_DataSourceArn:
+			v.DataSourceArn = new(string)
+			return d.ReadString(schemas.AddDirectQueryDataSourceResponse_DataSourceArn, v.DataSourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddDirectQueryDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddDirectQueryDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddDirectQueryDataSource, schemas.AddDirectQueryDataSourceRequest, schemas.AddDirectQueryDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddDirectQueryDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddDirectQueryDataSource, schemas.AddDirectQueryDataSourceRequest, schemas.AddDirectQueryDataSourceResponse), output: &AddDirectQueryDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AddDirectQueryDataSource"); err != nil {

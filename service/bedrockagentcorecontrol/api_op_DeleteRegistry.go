@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,18 @@ type DeleteRegistryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRegistryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRegistryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRegistryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryId != nil {
+		s.WriteString(schemas.DeleteRegistryRequest_registryId, *v.RegistryId)
+	}
+}
+
 type DeleteRegistryOutput struct {
 
 	// The current status of the registry, set to DELETING when deletion is initiated.
@@ -53,16 +67,28 @@ type DeleteRegistryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRegistryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRegistryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRegistryResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteRegistryResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RegistryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRegistry{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRegistry, schemas.DeleteRegistryRequest, schemas.DeleteRegistryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRegistry{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRegistry, schemas.DeleteRegistryRequest, schemas.DeleteRegistryResponse), output: &DeleteRegistryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteRegistry"); err != nil {

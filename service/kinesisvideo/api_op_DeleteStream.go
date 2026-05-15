@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,21 @@ type DeleteStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.DeleteStreamInput_CurrentVersion, *v.CurrentVersion)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.DeleteStreamInput_StreamARN, *v.StreamARN)
+	}
+}
+
 type DeleteStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,16 +78,21 @@ type DeleteStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStream, schemas.DeleteStreamInput, schemas.DeleteStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStream, schemas.DeleteStreamInput, schemas.DeleteStreamOutput), output: &DeleteStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteStream"); err != nil {

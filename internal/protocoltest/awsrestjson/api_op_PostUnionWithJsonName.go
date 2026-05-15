@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +35,16 @@ type PostUnionWithJsonNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PostUnionWithJsonNameInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostUnionWithJsonNameInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostUnionWithJsonNameInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUnionWithJsonName(s, schemas.PostUnionWithJsonNameInput_value, v.Value)
+}
+
 type PostUnionWithJsonNameOutput struct {
 
 	// This member is required.
@@ -44,16 +56,23 @@ type PostUnionWithJsonNameOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PostUnionWithJsonNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PostUnionWithJsonNameOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PostUnionWithJsonNameOutput_value:
+			return deserializeUnionWithJsonName(d, schemas.PostUnionWithJsonNameOutput_value, &v.Value)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPostUnionWithJsonNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPostUnionWithJsonName{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PostUnionWithJsonName, schemas.PostUnionWithJsonNameInput, schemas.PostUnionWithJsonNameOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPostUnionWithJsonName{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PostUnionWithJsonName, schemas.PostUnionWithJsonNameInput, schemas.PostUnionWithJsonNameOutput), output: &PostUnionWithJsonNameOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PostUnionWithJsonName"); err != nil {

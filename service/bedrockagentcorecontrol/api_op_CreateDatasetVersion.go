@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -57,6 +59,21 @@ type CreateDatasetVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDatasetVersionRequest_clientToken, *v.ClientToken)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.CreateDatasetVersionRequest_datasetId, *v.DatasetId)
+	}
+}
+
 type CreateDatasetVersionOutput struct {
 
 	//  The timestamp when the version creation was initiated.
@@ -91,16 +108,40 @@ type CreateDatasetVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDatasetVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDatasetVersionResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateDatasetVersionResponse_createdAt, v.CreatedAt)
+		case schemas.CreateDatasetVersionResponse_datasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.CreateDatasetVersionResponse_datasetArn, v.DatasetArn)
+		case schemas.CreateDatasetVersionResponse_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.CreateDatasetVersionResponse_datasetId, v.DatasetId)
+		case schemas.CreateDatasetVersionResponse_datasetVersion:
+			v.DatasetVersion = new(string)
+			return d.ReadString(schemas.CreateDatasetVersionResponse_datasetVersion, v.DatasetVersion)
+		case schemas.CreateDatasetVersionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateDatasetVersionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DatasetStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDatasetVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDatasetVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDatasetVersion, schemas.CreateDatasetVersionRequest, schemas.CreateDatasetVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDatasetVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDatasetVersion, schemas.CreateDatasetVersionRequest, schemas.CreateDatasetVersionResponse), output: &CreateDatasetVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDatasetVersion"); err != nil {

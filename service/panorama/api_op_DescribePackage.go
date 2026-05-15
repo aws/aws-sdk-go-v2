@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,28 @@ type DescribePackageInput struct {
 	PackageId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribePackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePackageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PackageId != nil {
+		s.WriteString(schemas.DescribePackageRequest_PackageId, *v.PackageId)
+	}
+}
+func (v *DescribePackageInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePackageRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePackageRequest_PackageId:
+			v.PackageId = new(string)
+			return d.ReadString(schemas.DescribePackageRequest_PackageId, v.PackageId)
+		}
+		return nil
+	})
 }
 
 type DescribePackageOutput struct {
@@ -82,16 +106,70 @@ type DescribePackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePackageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePackageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribePackageResponse_Arn, *v.Arn)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.DescribePackageResponse_CreatedTime, *v.CreatedTime)
+	}
+	if v.PackageId != nil {
+		s.WriteString(schemas.DescribePackageResponse_PackageId, *v.PackageId)
+	}
+	if v.PackageName != nil {
+		s.WriteString(schemas.DescribePackageResponse_PackageName, *v.PackageName)
+	}
+	serializePrincipalArnsList(s, schemas.DescribePackageResponse_ReadAccessPrincipalArns, v.ReadAccessPrincipalArns)
+	if v.StorageLocation != nil {
+		s.WriteStruct(schemas.DescribePackageResponse_StorageLocation)
+		v.StorageLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.DescribePackageResponse_Tags, v.Tags)
+	serializePrincipalArnsList(s, schemas.DescribePackageResponse_WriteAccessPrincipalArns, v.WriteAccessPrincipalArns)
+}
+func (v *DescribePackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePackageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePackageResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribePackageResponse_Arn, v.Arn)
+		case schemas.DescribePackageResponse_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePackageResponse_CreatedTime, v.CreatedTime)
+		case schemas.DescribePackageResponse_PackageId:
+			v.PackageId = new(string)
+			return d.ReadString(schemas.DescribePackageResponse_PackageId, v.PackageId)
+		case schemas.DescribePackageResponse_PackageName:
+			v.PackageName = new(string)
+			return d.ReadString(schemas.DescribePackageResponse_PackageName, v.PackageName)
+		case schemas.DescribePackageResponse_ReadAccessPrincipalArns:
+			return deserializePrincipalArnsList(d, schemas.DescribePackageResponse_ReadAccessPrincipalArns, &v.ReadAccessPrincipalArns)
+		case schemas.DescribePackageResponse_StorageLocation:
+			v.StorageLocation = &types.StorageLocation{}
+			return v.StorageLocation.Deserialize(d)
+		case schemas.DescribePackageResponse_Tags:
+			return deserializeTagMap(d, schemas.DescribePackageResponse_Tags, &v.Tags)
+		case schemas.DescribePackageResponse_WriteAccessPrincipalArns:
+			return deserializePrincipalArnsList(d, schemas.DescribePackageResponse_WriteAccessPrincipalArns, &v.WriteAccessPrincipalArns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePackage, schemas.DescribePackageRequest, schemas.DescribePackageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePackage, schemas.DescribePackageRequest, schemas.DescribePackageResponse), output: &DescribePackageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePackage"); err != nil {

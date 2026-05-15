@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivschat/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivschat/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -74,6 +76,46 @@ type CreateChatTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChatTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChatTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChatTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChatTokenAttributes(s, schemas.CreateChatTokenRequest_attributes, v.Attributes)
+	serializeChatTokenCapabilities(s, schemas.CreateChatTokenRequest_capabilities, v.Capabilities)
+	if v.RoomIdentifier != nil {
+		s.WriteString(schemas.CreateChatTokenRequest_roomIdentifier, *v.RoomIdentifier)
+	}
+	if v.SessionDurationInMinutes != nil {
+		s.WriteInt32(schemas.CreateChatTokenRequest_sessionDurationInMinutes, *v.SessionDurationInMinutes)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.CreateChatTokenRequest_userId, *v.UserId)
+	}
+}
+func (v *CreateChatTokenInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChatTokenRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChatTokenRequest_attributes:
+			return deserializeChatTokenAttributes(d, schemas.CreateChatTokenRequest_attributes, &v.Attributes)
+		case schemas.CreateChatTokenRequest_capabilities:
+			return deserializeChatTokenCapabilities(d, schemas.CreateChatTokenRequest_capabilities, &v.Capabilities)
+		case schemas.CreateChatTokenRequest_roomIdentifier:
+			v.RoomIdentifier = new(string)
+			return d.ReadString(schemas.CreateChatTokenRequest_roomIdentifier, v.RoomIdentifier)
+		case schemas.CreateChatTokenRequest_sessionDurationInMinutes:
+			v.SessionDurationInMinutes = new(int32)
+			return d.ReadInt32(schemas.CreateChatTokenRequest_sessionDurationInMinutes, v.SessionDurationInMinutes)
+		case schemas.CreateChatTokenRequest_userId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.CreateChatTokenRequest_userId, v.UserId)
+		}
+		return nil
+	})
+}
+
 type CreateChatTokenOutput struct {
 
 	// Time after which an end user's session is no longer valid. This is an ISO 8601
@@ -93,16 +135,47 @@ type CreateChatTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChatTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChatTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChatTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionExpirationTime != nil {
+		s.WriteTime(schemas.CreateChatTokenResponse_sessionExpirationTime, *v.SessionExpirationTime)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.CreateChatTokenResponse_token, *v.Token)
+	}
+	if v.TokenExpirationTime != nil {
+		s.WriteTime(schemas.CreateChatTokenResponse_tokenExpirationTime, *v.TokenExpirationTime)
+	}
+}
+func (v *CreateChatTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChatTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChatTokenResponse_sessionExpirationTime:
+			v.SessionExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateChatTokenResponse_sessionExpirationTime, v.SessionExpirationTime)
+		case schemas.CreateChatTokenResponse_token:
+			v.Token = new(string)
+			return d.ReadString(schemas.CreateChatTokenResponse_token, v.Token)
+		case schemas.CreateChatTokenResponse_tokenExpirationTime:
+			v.TokenExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateChatTokenResponse_tokenExpirationTime, v.TokenExpirationTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateChatTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChatToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChatToken, schemas.CreateChatTokenRequest, schemas.CreateChatTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateChatToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChatToken, schemas.CreateChatTokenRequest, schemas.CreateChatTokenResponse), output: &CreateChatTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateChatToken"); err != nil {

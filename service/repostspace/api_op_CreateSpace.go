@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/repostspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/repostspace/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,6 +71,39 @@ type CreateSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSpaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSpaceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSpaceInput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSpaceInput_name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateSpaceInput_roleArn, *v.RoleArn)
+	}
+	if v.Subdomain != nil {
+		s.WriteString(schemas.CreateSpaceInput_subdomain, *v.Subdomain)
+	}
+	if v.SupportedEmailDomains != nil {
+		s.WriteStruct(schemas.CreateSpaceInput_supportedEmailDomains)
+		v.SupportedEmailDomains.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateSpaceInput_tags, v.Tags)
+	if v.Tier != "" {
+		s.WriteString(schemas.CreateSpaceInput_tier, string(v.Tier))
+	}
+	if v.UserKMSKey != nil {
+		s.WriteString(schemas.CreateSpaceInput_userKMSKey, *v.UserKMSKey)
+	}
+}
+
 type CreateSpaceOutput struct {
 
 	// The unique ID of the private re:Post.
@@ -82,16 +117,24 @@ type CreateSpaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSpaceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSpaceOutput_spaceId:
+			v.SpaceId = new(string)
+			return d.ReadString(schemas.CreateSpaceOutput_spaceId, v.SpaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSpaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSpace, schemas.CreateSpaceInput, schemas.CreateSpaceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSpace, schemas.CreateSpaceInput, schemas.CreateSpaceOutput), output: &CreateSpaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSpace"); err != nil {

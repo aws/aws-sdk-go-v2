@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,19 @@ type BatchDeleteFeaturedResultsSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteFeaturedResultsSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteFeaturedResultsSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteFeaturedResultsSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFeaturedResultsSetIdList(s, schemas.BatchDeleteFeaturedResultsSetRequest_FeaturedResultsSetIds, v.FeaturedResultsSetIds)
+	if v.IndexId != nil {
+		s.WriteString(schemas.BatchDeleteFeaturedResultsSetRequest_IndexId, *v.IndexId)
+	}
+}
+
 type BatchDeleteFeaturedResultsSetOutput struct {
 
 	// The list of errors for the featured results set IDs, explaining why they
@@ -58,16 +73,23 @@ type BatchDeleteFeaturedResultsSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteFeaturedResultsSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteFeaturedResultsSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteFeaturedResultsSetResponse_Errors:
+			return deserializeBatchDeleteFeaturedResultsSetErrors(d, schemas.BatchDeleteFeaturedResultsSetResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteFeaturedResultsSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDeleteFeaturedResultsSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteFeaturedResultsSet, schemas.BatchDeleteFeaturedResultsSetRequest, schemas.BatchDeleteFeaturedResultsSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDeleteFeaturedResultsSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteFeaturedResultsSet, schemas.BatchDeleteFeaturedResultsSetRequest, schemas.BatchDeleteFeaturedResultsSetResponse), output: &BatchDeleteFeaturedResultsSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDeleteFeaturedResultsSet"); err != nil {

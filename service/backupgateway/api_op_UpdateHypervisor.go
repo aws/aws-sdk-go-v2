@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,58 @@ type UpdateHypervisorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHypervisorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHypervisorInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHypervisorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Host != nil {
+		s.WriteString(schemas.UpdateHypervisorInput_Host, *v.Host)
+	}
+	if v.HypervisorArn != nil {
+		s.WriteString(schemas.UpdateHypervisorInput_HypervisorArn, *v.HypervisorArn)
+	}
+	if v.LogGroupArn != nil {
+		s.WriteString(schemas.UpdateHypervisorInput_LogGroupArn, *v.LogGroupArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateHypervisorInput_Name, *v.Name)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.UpdateHypervisorInput_Password, *v.Password)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.UpdateHypervisorInput_Username, *v.Username)
+	}
+}
+func (v *UpdateHypervisorInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateHypervisorInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateHypervisorInput_Host:
+			v.Host = new(string)
+			return d.ReadString(schemas.UpdateHypervisorInput_Host, v.Host)
+		case schemas.UpdateHypervisorInput_HypervisorArn:
+			v.HypervisorArn = new(string)
+			return d.ReadString(schemas.UpdateHypervisorInput_HypervisorArn, v.HypervisorArn)
+		case schemas.UpdateHypervisorInput_LogGroupArn:
+			v.LogGroupArn = new(string)
+			return d.ReadString(schemas.UpdateHypervisorInput_LogGroupArn, v.LogGroupArn)
+		case schemas.UpdateHypervisorInput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateHypervisorInput_Name, v.Name)
+		case schemas.UpdateHypervisorInput_Password:
+			v.Password = new(string)
+			return d.ReadString(schemas.UpdateHypervisorInput_Password, v.Password)
+		case schemas.UpdateHypervisorInput_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.UpdateHypervisorInput_Username, v.Username)
+		}
+		return nil
+	})
+}
+
 type UpdateHypervisorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the hypervisor you updated.
@@ -66,16 +120,35 @@ type UpdateHypervisorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHypervisorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHypervisorOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHypervisorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HypervisorArn != nil {
+		s.WriteString(schemas.UpdateHypervisorOutput_HypervisorArn, *v.HypervisorArn)
+	}
+}
+func (v *UpdateHypervisorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateHypervisorOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateHypervisorOutput_HypervisorArn:
+			v.HypervisorArn = new(string)
+			return d.ReadString(schemas.UpdateHypervisorOutput_HypervisorArn, v.HypervisorArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateHypervisorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateHypervisor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHypervisor, schemas.UpdateHypervisorInput, schemas.UpdateHypervisorOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateHypervisor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHypervisor, schemas.UpdateHypervisorInput, schemas.UpdateHypervisorOutput), output: &UpdateHypervisorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateHypervisor"); err != nil {

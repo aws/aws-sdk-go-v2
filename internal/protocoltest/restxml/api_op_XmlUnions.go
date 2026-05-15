@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,6 +34,16 @@ type XmlUnionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlUnionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlUnionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlUnionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeXmlUnionShape(s, schemas.XmlUnionsRequest_unionValue, v.UnionValue)
+}
+
 type XmlUnionsOutput struct {
 	UnionValue types.XmlUnionShape
 
@@ -41,16 +53,23 @@ type XmlUnionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlUnionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XmlUnionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XmlUnionsResponse_unionValue:
+			return deserializeXmlUnionShape(d, schemas.XmlUnionsResponse_unionValue, &v.UnionValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationXmlUnionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlUnions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlUnions, schemas.XmlUnionsRequest, schemas.XmlUnionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpXmlUnions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlUnions, schemas.XmlUnionsRequest, schemas.XmlUnionsResponse), output: &XmlUnionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlUnions"); err != nil {

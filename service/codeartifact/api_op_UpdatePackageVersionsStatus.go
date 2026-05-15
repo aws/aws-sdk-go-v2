@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -99,6 +101,41 @@ type UpdatePackageVersionsStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePackageVersionsStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePackageVersionsStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePackageVersionsStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.UpdatePackageVersionsStatusRequest_domain, *v.Domain)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.UpdatePackageVersionsStatusRequest_domainOwner, *v.DomainOwner)
+	}
+	if v.ExpectedStatus != "" {
+		s.WriteString(schemas.UpdatePackageVersionsStatusRequest_expectedStatus, string(v.ExpectedStatus))
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.UpdatePackageVersionsStatusRequest_format, string(v.Format))
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.UpdatePackageVersionsStatusRequest_namespace, *v.Namespace)
+	}
+	if v.Package != nil {
+		s.WriteString(schemas.UpdatePackageVersionsStatusRequest_package, *v.Package)
+	}
+	if v.Repository != nil {
+		s.WriteString(schemas.UpdatePackageVersionsStatusRequest_repository, *v.Repository)
+	}
+	if v.TargetStatus != "" {
+		s.WriteString(schemas.UpdatePackageVersionsStatusRequest_targetStatus, string(v.TargetStatus))
+	}
+	serializePackageVersionRevisionMap(s, schemas.UpdatePackageVersionsStatusRequest_versionRevisions, v.VersionRevisions)
+	serializePackageVersionList(s, schemas.UpdatePackageVersionsStatusRequest_versions, v.Versions)
+}
+
 type UpdatePackageVersionsStatusOutput struct {
 
 	//  A list of SuccessfulPackageVersionInfo objects, one for each package version
@@ -115,16 +152,25 @@ type UpdatePackageVersionsStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePackageVersionsStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePackageVersionsStatusResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePackageVersionsStatusResult_failedVersions:
+			return deserializePackageVersionErrorMap(d, schemas.UpdatePackageVersionsStatusResult_failedVersions, &v.FailedVersions)
+		case schemas.UpdatePackageVersionsStatusResult_successfulVersions:
+			return deserializeSuccessfulPackageVersionInfoMap(d, schemas.UpdatePackageVersionsStatusResult_successfulVersions, &v.SuccessfulVersions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePackageVersionsStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePackageVersionsStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePackageVersionsStatus, schemas.UpdatePackageVersionsStatusRequest, schemas.UpdatePackageVersionsStatusResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePackageVersionsStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePackageVersionsStatus, schemas.UpdatePackageVersionsStatusRequest, schemas.UpdatePackageVersionsStatusResult), output: &UpdatePackageVersionsStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePackageVersionsStatus"); err != nil {

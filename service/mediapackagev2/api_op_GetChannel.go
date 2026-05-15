@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -44,6 +46,21 @@ type GetChannelInput struct {
 	ChannelName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelGroupName != nil {
+		s.WriteString(schemas.GetChannelRequest_ChannelGroupName, *v.ChannelGroupName)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.GetChannelRequest_ChannelName, *v.ChannelName)
+	}
 }
 
 type GetChannelOutput struct {
@@ -121,16 +138,62 @@ type GetChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetChannelResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetChannelResponse_Arn, v.Arn)
+		case schemas.GetChannelResponse_ChannelGroupName:
+			v.ChannelGroupName = new(string)
+			return d.ReadString(schemas.GetChannelResponse_ChannelGroupName, v.ChannelGroupName)
+		case schemas.GetChannelResponse_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.GetChannelResponse_ChannelName, v.ChannelName)
+		case schemas.GetChannelResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetChannelResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetChannelResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetChannelResponse_Description, v.Description)
+		case schemas.GetChannelResponse_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.GetChannelResponse_ETag, v.ETag)
+		case schemas.GetChannelResponse_IngestEndpoints:
+			return deserializeIngestEndpointList(d, schemas.GetChannelResponse_IngestEndpoints, &v.IngestEndpoints)
+		case schemas.GetChannelResponse_InputSwitchConfiguration:
+			v.InputSwitchConfiguration = &types.InputSwitchConfiguration{}
+			return v.InputSwitchConfiguration.Deserialize(d)
+		case schemas.GetChannelResponse_InputType:
+			var ev string
+			if err := d.ReadString(schemas.GetChannelResponse_InputType, &ev); err != nil {
+				return err
+			}
+			v.InputType = types.InputType(ev)
+			return nil
+		case schemas.GetChannelResponse_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.GetChannelResponse_ModifiedAt, v.ModifiedAt)
+		case schemas.GetChannelResponse_OutputHeaderConfiguration:
+			v.OutputHeaderConfiguration = &types.OutputHeaderConfiguration{}
+			return v.OutputHeaderConfiguration.Deserialize(d)
+		case schemas.GetChannelResponse_ResetAt:
+			v.ResetAt = new(time.Time)
+			return d.ReadTime(schemas.GetChannelResponse_ResetAt, v.ResetAt)
+		case schemas.GetChannelResponse_Tags:
+			return deserializeTagMap(d, schemas.GetChannelResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannel, schemas.GetChannelRequest, schemas.GetChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannel, schemas.GetChannelRequest, schemas.GetChannelResponse), output: &GetChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetChannel"); err != nil {

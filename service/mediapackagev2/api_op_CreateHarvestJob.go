@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -78,6 +80,49 @@ type CreateHarvestJobInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateHarvestJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHarvestJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHarvestJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelGroupName != nil {
+		s.WriteString(schemas.CreateHarvestJobRequest_ChannelGroupName, *v.ChannelGroupName)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.CreateHarvestJobRequest_ChannelName, *v.ChannelName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateHarvestJobRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateHarvestJobRequest_Description, *v.Description)
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.CreateHarvestJobRequest_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HarvestJobName != nil {
+		s.WriteString(schemas.CreateHarvestJobRequest_HarvestJobName, *v.HarvestJobName)
+	}
+	if v.HarvestedManifests != nil {
+		s.WriteStruct(schemas.CreateHarvestJobRequest_HarvestedManifests)
+		v.HarvestedManifests.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OriginEndpointName != nil {
+		s.WriteString(schemas.CreateHarvestJobRequest_OriginEndpointName, *v.OriginEndpointName)
+	}
+	if v.ScheduleConfiguration != nil {
+		s.WriteStruct(schemas.CreateHarvestJobRequest_ScheduleConfiguration)
+		v.ScheduleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateHarvestJobRequest_Tags, v.Tags)
 }
 
 // The response object returned after creating a harvest job.
@@ -159,16 +204,69 @@ type CreateHarvestJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHarvestJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateHarvestJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateHarvestJobResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateHarvestJobResponse_Arn, v.Arn)
+		case schemas.CreateHarvestJobResponse_ChannelGroupName:
+			v.ChannelGroupName = new(string)
+			return d.ReadString(schemas.CreateHarvestJobResponse_ChannelGroupName, v.ChannelGroupName)
+		case schemas.CreateHarvestJobResponse_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.CreateHarvestJobResponse_ChannelName, v.ChannelName)
+		case schemas.CreateHarvestJobResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateHarvestJobResponse_CreatedAt, v.CreatedAt)
+		case schemas.CreateHarvestJobResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateHarvestJobResponse_Description, v.Description)
+		case schemas.CreateHarvestJobResponse_Destination:
+			v.Destination = &types.Destination{}
+			return v.Destination.Deserialize(d)
+		case schemas.CreateHarvestJobResponse_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.CreateHarvestJobResponse_ETag, v.ETag)
+		case schemas.CreateHarvestJobResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.CreateHarvestJobResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.CreateHarvestJobResponse_HarvestJobName:
+			v.HarvestJobName = new(string)
+			return d.ReadString(schemas.CreateHarvestJobResponse_HarvestJobName, v.HarvestJobName)
+		case schemas.CreateHarvestJobResponse_HarvestedManifests:
+			v.HarvestedManifests = &types.HarvestedManifests{}
+			return v.HarvestedManifests.Deserialize(d)
+		case schemas.CreateHarvestJobResponse_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateHarvestJobResponse_ModifiedAt, v.ModifiedAt)
+		case schemas.CreateHarvestJobResponse_OriginEndpointName:
+			v.OriginEndpointName = new(string)
+			return d.ReadString(schemas.CreateHarvestJobResponse_OriginEndpointName, v.OriginEndpointName)
+		case schemas.CreateHarvestJobResponse_ScheduleConfiguration:
+			v.ScheduleConfiguration = &types.HarvesterScheduleConfiguration{}
+			return v.ScheduleConfiguration.Deserialize(d)
+		case schemas.CreateHarvestJobResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateHarvestJobResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.HarvestJobStatus(ev)
+			return nil
+		case schemas.CreateHarvestJobResponse_Tags:
+			return deserializeTagMap(d, schemas.CreateHarvestJobResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHarvestJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateHarvestJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHarvestJob, schemas.CreateHarvestJobRequest, schemas.CreateHarvestJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateHarvestJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHarvestJob, schemas.CreateHarvestJobRequest, schemas.CreateHarvestJobResponse), output: &CreateHarvestJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateHarvestJob"); err != nil {

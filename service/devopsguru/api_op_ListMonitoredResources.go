@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,26 @@ type ListMonitoredResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMonitoredResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMonitoredResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMonitoredResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListMonitoredResourcesRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMonitoredResourcesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMonitoredResourcesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListMonitoredResourcesOutput struct {
 
 	//  Information about the resource that is being monitored, including the name of
@@ -65,16 +87,26 @@ type ListMonitoredResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMonitoredResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMonitoredResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMonitoredResourcesResponse_MonitoredResourceIdentifiers:
+			return deserializeMonitoredResourceIdentifiers(d, schemas.ListMonitoredResourcesResponse_MonitoredResourceIdentifiers, &v.MonitoredResourceIdentifiers)
+		case schemas.ListMonitoredResourcesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMonitoredResourcesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMonitoredResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMonitoredResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMonitoredResources, schemas.ListMonitoredResourcesRequest, schemas.ListMonitoredResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMonitoredResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMonitoredResources, schemas.ListMonitoredResourcesRequest, schemas.ListMonitoredResourcesResponse), output: &ListMonitoredResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMonitoredResources"); err != nil {

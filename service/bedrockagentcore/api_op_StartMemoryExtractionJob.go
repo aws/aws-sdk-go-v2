@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,26 @@ type StartMemoryExtractionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMemoryExtractionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMemoryExtractionJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMemoryExtractionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartMemoryExtractionJobInput_clientToken, *v.ClientToken)
+	}
+	if v.ExtractionJob != nil {
+		s.WriteStruct(schemas.StartMemoryExtractionJobInput_extractionJob)
+		v.ExtractionJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MemoryId != nil {
+		s.WriteString(schemas.StartMemoryExtractionJobInput_memoryId, *v.MemoryId)
+	}
+}
+
 type StartMemoryExtractionJobOutput struct {
 
 	// Extraction Job ID that was attempted to start.
@@ -66,16 +88,24 @@ type StartMemoryExtractionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMemoryExtractionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMemoryExtractionJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMemoryExtractionJobOutput_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartMemoryExtractionJobOutput_jobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMemoryExtractionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartMemoryExtractionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMemoryExtractionJob, schemas.StartMemoryExtractionJobInput, schemas.StartMemoryExtractionJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartMemoryExtractionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMemoryExtractionJob, schemas.StartMemoryExtractionJobInput, schemas.StartMemoryExtractionJobOutput), output: &StartMemoryExtractionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMemoryExtractionJob"); err != nil {

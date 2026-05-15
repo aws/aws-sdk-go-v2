@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -29,6 +31,22 @@ type HttpResponseCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpResponseCodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpResponseCodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *HttpResponseCodeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type HttpResponseCodeOutput struct {
 	Status *int32
 
@@ -38,16 +56,35 @@ type HttpResponseCodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpResponseCodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpResponseCodeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpResponseCodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteInt32(schemas.HttpResponseCodeOutput_Status, *v.Status)
+	}
+}
+func (v *HttpResponseCodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpResponseCodeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpResponseCodeOutput_Status:
+			v.Status = new(int32)
+			return d.ReadInt32(schemas.HttpResponseCodeOutput_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationHttpResponseCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpResponseCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpResponseCode, nil, schemas.HttpResponseCodeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpHttpResponseCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpResponseCode, nil, schemas.HttpResponseCodeOutput), output: &HttpResponseCodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "HttpResponseCode"); err != nil {

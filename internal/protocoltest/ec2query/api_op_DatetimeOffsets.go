@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -30,6 +32,22 @@ type DatetimeOffsetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatetimeOffsetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatetimeOffsetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DatetimeOffsetsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DatetimeOffsetsOutput struct {
 	Datetime *time.Time
 
@@ -39,16 +57,35 @@ type DatetimeOffsetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatetimeOffsetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatetimeOffsetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatetimeOffsetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Datetime != nil {
+		s.WriteTime(schemas.DatetimeOffsetsOutput_datetime, *v.Datetime)
+	}
+}
+func (v *DatetimeOffsetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatetimeOffsetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatetimeOffsetsOutput_datetime:
+			v.Datetime = new(time.Time)
+			return d.ReadTime(schemas.DatetimeOffsetsOutput_datetime, v.Datetime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDatetimeOffsetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsEc2query_serializeOpDatetimeOffsets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DatetimeOffsets, nil, schemas.DatetimeOffsetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsEc2query_deserializeOpDatetimeOffsets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DatetimeOffsets, nil, schemas.DatetimeOffsetsOutput), output: &DatetimeOffsetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DatetimeOffsets"); err != nil {

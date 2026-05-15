@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubconfig/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,6 +36,15 @@ type GetHomeRegionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHomeRegionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHomeRegionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHomeRegionInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetHomeRegionOutput struct {
 
 	// The name of the home region of the calling account.
@@ -45,16 +56,24 @@ type GetHomeRegionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHomeRegionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetHomeRegionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetHomeRegionResult_HomeRegion:
+			v.HomeRegion = new(string)
+			return d.ReadString(schemas.GetHomeRegionResult_HomeRegion, v.HomeRegion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetHomeRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetHomeRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHomeRegion, schemas.GetHomeRegionRequest, schemas.GetHomeRegionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetHomeRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHomeRegion, schemas.GetHomeRegionRequest, schemas.GetHomeRegionResult), output: &GetHomeRegionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetHomeRegion"); err != nil {

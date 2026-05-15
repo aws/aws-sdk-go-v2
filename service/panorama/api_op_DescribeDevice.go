@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,28 @@ type DescribeDeviceInput struct {
 	DeviceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceId != nil {
+		s.WriteString(schemas.DescribeDeviceRequest_DeviceId, *v.DeviceId)
+	}
+}
+func (v *DescribeDeviceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDeviceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDeviceRequest_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.DescribeDeviceRequest_DeviceId, v.DeviceId)
+		}
+		return nil
+	})
 }
 
 type DescribeDeviceOutput struct {
@@ -107,16 +131,169 @@ type DescribeDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAlternateSoftwares(s, schemas.DescribeDeviceResponse_AlternateSoftwares, v.AlternateSoftwares)
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_Arn, *v.Arn)
+	}
+	if v.Brand != "" {
+		s.WriteString(schemas.DescribeDeviceResponse_Brand, string(v.Brand))
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.DescribeDeviceResponse_CreatedTime, *v.CreatedTime)
+	}
+	if v.CurrentNetworkingStatus != nil {
+		s.WriteStruct(schemas.DescribeDeviceResponse_CurrentNetworkingStatus)
+		v.CurrentNetworkingStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CurrentSoftware != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_CurrentSoftware, *v.CurrentSoftware)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_Description, *v.Description)
+	}
+	if v.DeviceAggregatedStatus != "" {
+		s.WriteString(schemas.DescribeDeviceResponse_DeviceAggregatedStatus, string(v.DeviceAggregatedStatus))
+	}
+	if v.DeviceConnectionStatus != "" {
+		s.WriteString(schemas.DescribeDeviceResponse_DeviceConnectionStatus, string(v.DeviceConnectionStatus))
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_DeviceId, *v.DeviceId)
+	}
+	if v.LatestAlternateSoftware != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_LatestAlternateSoftware, *v.LatestAlternateSoftware)
+	}
+	if v.LatestDeviceJob != nil {
+		s.WriteStruct(schemas.DescribeDeviceResponse_LatestDeviceJob)
+		v.LatestDeviceJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LatestSoftware != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_LatestSoftware, *v.LatestSoftware)
+	}
+	if v.LeaseExpirationTime != nil {
+		s.WriteTime(schemas.DescribeDeviceResponse_LeaseExpirationTime, *v.LeaseExpirationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_Name, *v.Name)
+	}
+	if v.NetworkingConfiguration != nil {
+		s.WriteStruct(schemas.DescribeDeviceResponse_NetworkingConfiguration)
+		v.NetworkingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProvisioningStatus != "" {
+		s.WriteString(schemas.DescribeDeviceResponse_ProvisioningStatus, string(v.ProvisioningStatus))
+	}
+	if v.SerialNumber != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_SerialNumber, *v.SerialNumber)
+	}
+	serializeTagMap(s, schemas.DescribeDeviceResponse_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.DescribeDeviceResponse_Type, string(v.Type))
+	}
+}
+func (v *DescribeDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDeviceResponse_AlternateSoftwares:
+			return deserializeAlternateSoftwares(d, schemas.DescribeDeviceResponse_AlternateSoftwares, &v.AlternateSoftwares)
+		case schemas.DescribeDeviceResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_Arn, v.Arn)
+		case schemas.DescribeDeviceResponse_Brand:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDeviceResponse_Brand, &ev); err != nil {
+				return err
+			}
+			v.Brand = types.DeviceBrand(ev)
+			return nil
+		case schemas.DescribeDeviceResponse_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDeviceResponse_CreatedTime, v.CreatedTime)
+		case schemas.DescribeDeviceResponse_CurrentNetworkingStatus:
+			v.CurrentNetworkingStatus = &types.NetworkStatus{}
+			return v.CurrentNetworkingStatus.Deserialize(d)
+		case schemas.DescribeDeviceResponse_CurrentSoftware:
+			v.CurrentSoftware = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_CurrentSoftware, v.CurrentSoftware)
+		case schemas.DescribeDeviceResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_Description, v.Description)
+		case schemas.DescribeDeviceResponse_DeviceAggregatedStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDeviceResponse_DeviceAggregatedStatus, &ev); err != nil {
+				return err
+			}
+			v.DeviceAggregatedStatus = types.DeviceAggregatedStatus(ev)
+			return nil
+		case schemas.DescribeDeviceResponse_DeviceConnectionStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDeviceResponse_DeviceConnectionStatus, &ev); err != nil {
+				return err
+			}
+			v.DeviceConnectionStatus = types.DeviceConnectionStatus(ev)
+			return nil
+		case schemas.DescribeDeviceResponse_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_DeviceId, v.DeviceId)
+		case schemas.DescribeDeviceResponse_LatestAlternateSoftware:
+			v.LatestAlternateSoftware = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_LatestAlternateSoftware, v.LatestAlternateSoftware)
+		case schemas.DescribeDeviceResponse_LatestDeviceJob:
+			v.LatestDeviceJob = &types.LatestDeviceJob{}
+			return v.LatestDeviceJob.Deserialize(d)
+		case schemas.DescribeDeviceResponse_LatestSoftware:
+			v.LatestSoftware = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_LatestSoftware, v.LatestSoftware)
+		case schemas.DescribeDeviceResponse_LeaseExpirationTime:
+			v.LeaseExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDeviceResponse_LeaseExpirationTime, v.LeaseExpirationTime)
+		case schemas.DescribeDeviceResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_Name, v.Name)
+		case schemas.DescribeDeviceResponse_NetworkingConfiguration:
+			v.NetworkingConfiguration = &types.NetworkPayload{}
+			return v.NetworkingConfiguration.Deserialize(d)
+		case schemas.DescribeDeviceResponse_ProvisioningStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDeviceResponse_ProvisioningStatus, &ev); err != nil {
+				return err
+			}
+			v.ProvisioningStatus = types.DeviceStatus(ev)
+			return nil
+		case schemas.DescribeDeviceResponse_SerialNumber:
+			v.SerialNumber = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_SerialNumber, v.SerialNumber)
+		case schemas.DescribeDeviceResponse_Tags:
+			return deserializeTagMap(d, schemas.DescribeDeviceResponse_Tags, &v.Tags)
+		case schemas.DescribeDeviceResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDeviceResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.DeviceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDevice, schemas.DescribeDeviceRequest, schemas.DescribeDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDevice, schemas.DescribeDeviceRequest, schemas.DescribeDeviceResponse), output: &DescribeDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDevice"); err != nil {

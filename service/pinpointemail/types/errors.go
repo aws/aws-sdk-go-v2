@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,6 +34,16 @@ func (e *AccountSuspendedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccountSuspendedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccountSuspendedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountSuspendedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountSuspendedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccountSuspendedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The resource specified in your request already exists.
 type AlreadyExistsException struct {
@@ -59,6 +70,16 @@ func (e *AlreadyExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AlreadyExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AlreadyExistsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AlreadyExistsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The input you provided is invalid.
 type BadRequestException struct {
@@ -85,6 +106,16 @@ func (e *BadRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BadRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BadRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BadRequestException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BadRequestException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The resource is being modified by another operation or thread.
 type ConcurrentModificationException struct {
@@ -111,6 +142,16 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ConcurrentModificationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConcurrentModificationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConcurrentModificationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConcurrentModificationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // There are too many instances of the specified resource type.
 type LimitExceededException struct {
@@ -137,6 +178,16 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The message can't be sent because the sending domain isn't verified.
 type MailFromDomainNotVerifiedException struct {
@@ -165,6 +216,16 @@ func (e *MailFromDomainNotVerifiedException) ErrorCode() string {
 func (e *MailFromDomainNotVerifiedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *MailFromDomainNotVerifiedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MailFromDomainNotVerifiedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MailFromDomainNotVerifiedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MailFromDomainNotVerifiedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The message can't be sent because it contains invalid content.
 type MessageRejected struct {
@@ -191,6 +252,16 @@ func (e *MessageRejected) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MessageRejected) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MessageRejected) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageRejected, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageRejected_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MessageRejected_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The resource you attempted to access doesn't exist.
 type NotFoundException struct {
@@ -217,6 +288,16 @@ func (e *NotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The message can't be sent because the account's ability to send email is
 // currently paused.
@@ -244,6 +325,16 @@ func (e *SendingPausedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SendingPausedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *SendingPausedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendingPausedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendingPausedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SendingPausedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Too many requests have been made to the operation.
 type TooManyRequestsException struct {
@@ -270,3 +361,13 @@ func (e *TooManyRequestsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyRequestsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyRequestsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyRequestsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyRequestsException_message, v.Message)
+		}
+		return nil
+	})
+}

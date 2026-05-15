@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,27 @@ type ListAIPromptsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAIPromptsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAIPromptsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAIPromptsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssistantId != nil {
+		s.WriteString(schemas.ListAIPromptsRequest_assistantId, *v.AssistantId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAIPromptsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAIPromptsRequest_nextToken, *v.NextToken)
+	}
+	if v.Origin != "" {
+		s.WriteString(schemas.ListAIPromptsRequest_origin, string(v.Origin))
+	}
+}
+
 type ListAIPromptsOutput struct {
 
 	// The summaries of the AI Prompts.
@@ -67,16 +90,26 @@ type ListAIPromptsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAIPromptsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAIPromptsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAIPromptsResponse_aiPromptSummaries:
+			return deserializeAIPromptSummaryList(d, schemas.ListAIPromptsResponse_aiPromptSummaries, &v.AiPromptSummaries)
+		case schemas.ListAIPromptsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAIPromptsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAIPromptsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAIPrompts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAIPrompts, schemas.ListAIPromptsRequest, schemas.ListAIPromptsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAIPrompts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAIPrompts, schemas.ListAIPromptsRequest, schemas.ListAIPromptsResponse), output: &ListAIPromptsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAIPrompts"); err != nil {

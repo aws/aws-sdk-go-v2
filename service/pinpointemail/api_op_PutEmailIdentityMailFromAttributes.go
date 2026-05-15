@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,6 +63,24 @@ type PutEmailIdentityMailFromAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEmailIdentityMailFromAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEmailIdentityMailFromAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEmailIdentityMailFromAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BehaviorOnMxFailure != "" {
+		s.WriteString(schemas.PutEmailIdentityMailFromAttributesRequest_BehaviorOnMxFailure, string(v.BehaviorOnMxFailure))
+	}
+	if v.EmailIdentity != nil {
+		s.WriteString(schemas.PutEmailIdentityMailFromAttributesRequest_EmailIdentity, *v.EmailIdentity)
+	}
+	if v.MailFromDomain != nil {
+		s.WriteString(schemas.PutEmailIdentityMailFromAttributesRequest_MailFromDomain, *v.MailFromDomain)
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutEmailIdentityMailFromAttributesOutput struct {
@@ -70,16 +90,21 @@ type PutEmailIdentityMailFromAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEmailIdentityMailFromAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEmailIdentityMailFromAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutEmailIdentityMailFromAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEmailIdentityMailFromAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEmailIdentityMailFromAttributes, schemas.PutEmailIdentityMailFromAttributesRequest, schemas.PutEmailIdentityMailFromAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutEmailIdentityMailFromAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEmailIdentityMailFromAttributes, schemas.PutEmailIdentityMailFromAttributesRequest, schemas.PutEmailIdentityMailFromAttributesResponse), output: &PutEmailIdentityMailFromAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutEmailIdentityMailFromAttributes"); err != nil {

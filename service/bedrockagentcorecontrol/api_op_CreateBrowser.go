@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -75,6 +77,45 @@ type CreateBrowserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBrowserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBrowserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBrowserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrowserSigning != nil {
+		s.WriteStruct(schemas.CreateBrowserRequest_browserSigning)
+		v.BrowserSigning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCertificates(s, schemas.CreateBrowserRequest_certificates, v.Certificates)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateBrowserRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateBrowserRequest_description, *v.Description)
+	}
+	serializeBrowserEnterprisePolicies(s, schemas.CreateBrowserRequest_enterprisePolicies, v.EnterprisePolicies)
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.CreateBrowserRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateBrowserRequest_name, *v.Name)
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.CreateBrowserRequest_networkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Recording != nil {
+		s.WriteStruct(schemas.CreateBrowserRequest_recording)
+		v.Recording.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.CreateBrowserRequest_tags, v.Tags)
+}
+
 type CreateBrowserOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created browser.
@@ -103,16 +144,37 @@ type CreateBrowserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBrowserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBrowserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBrowserResponse_browserArn:
+			v.BrowserArn = new(string)
+			return d.ReadString(schemas.CreateBrowserResponse_browserArn, v.BrowserArn)
+		case schemas.CreateBrowserResponse_browserId:
+			v.BrowserId = new(string)
+			return d.ReadString(schemas.CreateBrowserResponse_browserId, v.BrowserId)
+		case schemas.CreateBrowserResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateBrowserResponse_createdAt, v.CreatedAt)
+		case schemas.CreateBrowserResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateBrowserResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BrowserStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBrowserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBrowser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBrowser, schemas.CreateBrowserRequest, schemas.CreateBrowserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBrowser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBrowser, schemas.CreateBrowserRequest, schemas.CreateBrowserResponse), output: &CreateBrowserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBrowser"); err != nil {

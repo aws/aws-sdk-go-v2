@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,6 +63,31 @@ type UpdateAIAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAIAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAIAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAIAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AiAgentId != nil {
+		s.WriteString(schemas.UpdateAIAgentRequest_aiAgentId, *v.AiAgentId)
+	}
+	if v.AssistantId != nil {
+		s.WriteString(schemas.UpdateAIAgentRequest_assistantId, *v.AssistantId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateAIAgentRequest_clientToken, *v.ClientToken)
+	}
+	serializeAIAgentConfiguration(s, schemas.UpdateAIAgentRequest_configuration, v.Configuration)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAIAgentRequest_description, *v.Description)
+	}
+	if v.VisibilityStatus != "" {
+		s.WriteString(schemas.UpdateAIAgentRequest_visibilityStatus, string(v.VisibilityStatus))
+	}
+}
+
 type UpdateAIAgentOutput struct {
 
 	// The data of the updated Amazon Q in Connect AI Agent.
@@ -72,16 +99,24 @@ type UpdateAIAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAIAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAIAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAIAgentResponse_aiAgent:
+			v.AiAgent = &types.AIAgentData{}
+			return v.AiAgent.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAIAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAIAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAIAgent, schemas.UpdateAIAgentRequest, schemas.UpdateAIAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAIAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAIAgent, schemas.UpdateAIAgentRequest, schemas.UpdateAIAgentResponse), output: &UpdateAIAgentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAIAgent"); err != nil {

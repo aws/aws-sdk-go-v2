@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaigns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaigns/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,28 @@ type DescribeCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCampaignInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCampaignRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCampaignInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeCampaignRequest_id, *v.Id)
+	}
+}
+func (v *DescribeCampaignInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCampaignRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCampaignRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeCampaignRequest_id, v.Id)
+		}
+		return nil
+	})
+}
+
 // DescribeCampaignResponse
 type DescribeCampaignOutput struct {
 
@@ -50,16 +74,37 @@ type DescribeCampaignOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCampaignOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCampaignResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCampaignOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Campaign != nil {
+		s.WriteStruct(schemas.DescribeCampaignResponse_campaign)
+		v.Campaign.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeCampaignOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCampaignResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCampaignResponse_campaign:
+			v.Campaign = &types.Campaign{}
+			return v.Campaign.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCampaign{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCampaign, schemas.DescribeCampaignRequest, schemas.DescribeCampaignResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeCampaign{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCampaign, schemas.DescribeCampaignRequest, schemas.DescribeCampaignResponse), output: &DescribeCampaignOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeCampaign"); err != nil {

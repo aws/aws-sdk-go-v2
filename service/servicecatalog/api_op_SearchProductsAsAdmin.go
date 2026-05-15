@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,6 +64,37 @@ type SearchProductsAsAdminInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchProductsAsAdminInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchProductsAsAdminInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchProductsAsAdminInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.SearchProductsAsAdminInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	serializeProductViewFilters(s, schemas.SearchProductsAsAdminInput_Filters, v.Filters)
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.SearchProductsAsAdminInput_PageSize, v.PageSize)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.SearchProductsAsAdminInput_PageToken, *v.PageToken)
+	}
+	if v.PortfolioId != nil {
+		s.WriteString(schemas.SearchProductsAsAdminInput_PortfolioId, *v.PortfolioId)
+	}
+	if v.ProductSource != "" {
+		s.WriteString(schemas.SearchProductsAsAdminInput_ProductSource, string(v.ProductSource))
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.SearchProductsAsAdminInput_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.SearchProductsAsAdminInput_SortOrder, string(v.SortOrder))
+	}
+}
+
 type SearchProductsAsAdminOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -77,16 +110,26 @@ type SearchProductsAsAdminOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchProductsAsAdminOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchProductsAsAdminOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchProductsAsAdminOutput_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.SearchProductsAsAdminOutput_NextPageToken, v.NextPageToken)
+		case schemas.SearchProductsAsAdminOutput_ProductViewDetails:
+			return deserializeProductViewDetails(d, schemas.SearchProductsAsAdminOutput_ProductViewDetails, &v.ProductViewDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchProductsAsAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchProductsAsAdmin{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchProductsAsAdmin, schemas.SearchProductsAsAdminInput, schemas.SearchProductsAsAdminOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearchProductsAsAdmin{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchProductsAsAdmin, schemas.SearchProductsAsAdminInput, schemas.SearchProductsAsAdminOutput), output: &SearchProductsAsAdminOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchProductsAsAdmin"); err != nil {

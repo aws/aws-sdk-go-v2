@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +70,45 @@ type ListFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFindingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.ListFindingsInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.CodeReviewJobId != nil {
+		s.WriteString(schemas.ListFindingsInput_codeReviewJobId, *v.CodeReviewJobId)
+	}
+	if v.Confidence != "" {
+		s.WriteString(schemas.ListFindingsInput_confidence, string(v.Confidence))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFindingsInput_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListFindingsInput_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFindingsInput_nextToken, *v.NextToken)
+	}
+	if v.PentestJobId != nil {
+		s.WriteString(schemas.ListFindingsInput_pentestJobId, *v.PentestJobId)
+	}
+	if v.RiskLevel != "" {
+		s.WriteString(schemas.ListFindingsInput_riskLevel, string(v.RiskLevel))
+	}
+	if v.RiskType != nil {
+		s.WriteString(schemas.ListFindingsInput_riskType, *v.RiskType)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListFindingsInput_status, string(v.Status))
+	}
+}
+
 // Output for the ListFindings operation.
 type ListFindingsOutput struct {
 
@@ -85,16 +126,26 @@ type ListFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFindingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFindingsOutput_findingsSummaries:
+			return deserializeFindingSummaryList(d, schemas.ListFindingsOutput_findingsSummaries, &v.FindingsSummaries)
+		case schemas.ListFindingsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFindingsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFindings, schemas.ListFindingsInput, schemas.ListFindingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFindings, schemas.ListFindingsInput, schemas.ListFindingsOutput), output: &ListFindingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFindings"); err != nil {

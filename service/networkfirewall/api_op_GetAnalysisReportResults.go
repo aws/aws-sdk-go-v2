@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -64,6 +66,30 @@ type GetAnalysisReportResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnalysisReportResultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnalysisReportResultsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnalysisReportResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisReportId != nil {
+		s.WriteString(schemas.GetAnalysisReportResultsRequest_AnalysisReportId, *v.AnalysisReportId)
+	}
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.GetAnalysisReportResultsRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.GetAnalysisReportResultsRequest_FirewallName, *v.FirewallName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetAnalysisReportResultsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAnalysisReportResultsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetAnalysisReportResultsOutput struct {
 
 	// Retrieves the results of a traffic analysis report.
@@ -100,16 +126,45 @@ type GetAnalysisReportResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnalysisReportResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAnalysisReportResultsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAnalysisReportResultsResponse_AnalysisReportResults:
+			return deserializeAnalysisReportResults(d, schemas.GetAnalysisReportResultsResponse_AnalysisReportResults, &v.AnalysisReportResults)
+		case schemas.GetAnalysisReportResultsResponse_AnalysisType:
+			var ev string
+			if err := d.ReadString(schemas.GetAnalysisReportResultsResponse_AnalysisType, &ev); err != nil {
+				return err
+			}
+			v.AnalysisType = types.EnabledAnalysisType(ev)
+			return nil
+		case schemas.GetAnalysisReportResultsResponse_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetAnalysisReportResultsResponse_EndTime, v.EndTime)
+		case schemas.GetAnalysisReportResultsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetAnalysisReportResultsResponse_NextToken, v.NextToken)
+		case schemas.GetAnalysisReportResultsResponse_ReportTime:
+			v.ReportTime = new(time.Time)
+			return d.ReadTime(schemas.GetAnalysisReportResultsResponse_ReportTime, v.ReportTime)
+		case schemas.GetAnalysisReportResultsResponse_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetAnalysisReportResultsResponse_StartTime, v.StartTime)
+		case schemas.GetAnalysisReportResultsResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.GetAnalysisReportResultsResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAnalysisReportResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetAnalysisReportResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnalysisReportResults, schemas.GetAnalysisReportResultsRequest, schemas.GetAnalysisReportResultsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetAnalysisReportResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnalysisReportResults, schemas.GetAnalysisReportResultsRequest, schemas.GetAnalysisReportResultsResponse), output: &GetAnalysisReportResultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAnalysisReportResults"); err != nil {

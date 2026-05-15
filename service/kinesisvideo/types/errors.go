@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,16 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessDeniedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You have reached the maximum limit of active signaling channels for this Amazon
 // Web Services account in this region.
@@ -61,6 +72,16 @@ func (e *AccountChannelLimitExceededException) ErrorCode() string {
 func (e *AccountChannelLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *AccountChannelLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountChannelLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountChannelLimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccountChannelLimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The number of streams created for the account is too high.
 type AccountStreamLimitExceededException struct {
@@ -89,6 +110,16 @@ func (e *AccountStreamLimitExceededException) ErrorCode() string {
 func (e *AccountStreamLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *AccountStreamLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountStreamLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountStreamLimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccountStreamLimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Kinesis Video Streams has throttled the request because you have exceeded the
 // limit of allowed client calls. Try making the call later.
@@ -116,6 +147,16 @@ func (e *ClientLimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ClientLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientLimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ClientLimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Not implemented.
 type DeviceStreamLimitExceededException struct {
@@ -144,6 +185,16 @@ func (e *DeviceStreamLimitExceededException) ErrorCode() string {
 func (e *DeviceStreamLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *DeviceStreamLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeviceStreamLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeviceStreamLimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeviceStreamLimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The value for this input parameter is invalid.
 type InvalidArgumentException struct {
@@ -170,6 +221,16 @@ func (e *InvalidArgumentException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidArgumentException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidArgumentException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidArgumentException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidArgumentException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Not implemented.
 type InvalidDeviceException struct {
@@ -196,6 +257,16 @@ func (e *InvalidDeviceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidDeviceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidDeviceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidDeviceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidDeviceException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidDeviceException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The format of the StreamARN is invalid.
 type InvalidResourceFormatException struct {
@@ -222,6 +293,16 @@ func (e *InvalidResourceFormatException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidResourceFormatException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidResourceFormatException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidResourceFormatException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidResourceFormatException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidResourceFormatException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The Stream data retention in hours is equal to zero.
 type NoDataRetentionException struct {
@@ -248,6 +329,16 @@ func (e *NoDataRetentionException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoDataRetentionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NoDataRetentionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NoDataRetentionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NoDataRetentionException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NoDataRetentionException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The caller is not authorized to perform this operation.
 type NotAuthorizedException struct {
@@ -274,6 +365,16 @@ func (e *NotAuthorizedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotAuthorizedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotAuthorizedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotAuthorizedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotAuthorizedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // When the input StreamARN or ChannelARN in CLOUD_STORAGE_MODE is already mapped
 // to a different Kinesis Video Stream resource, or if the provided input StreamARN
@@ -311,6 +412,16 @@ func (e *ResourceInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceInUseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceInUseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceInUseException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceInUseException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Amazon Kinesis Video Streams can't find the stream that you specified.
 type ResourceNotFoundException struct {
@@ -337,6 +448,16 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The Exception rendered when the Amazon Kinesis Video Stream can't find a
 // stream's edge configuration that you specified.
@@ -365,6 +486,16 @@ func (e *StreamEdgeConfigurationNotFoundException) ErrorCode() string {
 }
 func (e *StreamEdgeConfigurationNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *StreamEdgeConfigurationNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamEdgeConfigurationNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamEdgeConfigurationNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.StreamEdgeConfigurationNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // You have exceeded the limit of tags that you can associate with the resource. A
@@ -395,6 +526,16 @@ func (e *TagsPerResourceExceededLimitException) ErrorCode() string {
 func (e *TagsPerResourceExceededLimitException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *TagsPerResourceExceededLimitException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagsPerResourceExceededLimitException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagsPerResourceExceededLimitException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TagsPerResourceExceededLimitException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The stream version that you specified is not the latest version. To get the
 // latest version, use the [DescribeStream]API.
@@ -424,3 +565,13 @@ func (e *VersionMismatchException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *VersionMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *VersionMismatchException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VersionMismatchException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VersionMismatchException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.VersionMismatchException_Message, v.Message)
+		}
+		return nil
+	})
+}

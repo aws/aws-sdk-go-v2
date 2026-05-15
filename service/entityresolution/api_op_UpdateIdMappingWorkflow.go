@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,6 +69,36 @@ type UpdateIdMappingWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIdMappingWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIdMappingWorkflowInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIdMappingWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateIdMappingWorkflowInput_description, *v.Description)
+	}
+	if v.IdMappingTechniques != nil {
+		s.WriteStruct(schemas.UpdateIdMappingWorkflowInput_idMappingTechniques)
+		v.IdMappingTechniques.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IncrementalRunConfig != nil {
+		s.WriteStruct(schemas.UpdateIdMappingWorkflowInput_incrementalRunConfig)
+		v.IncrementalRunConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIdMappingWorkflowInputSourceConfig(s, schemas.UpdateIdMappingWorkflowInput_inputSourceConfig, v.InputSourceConfig)
+	serializeIdMappingWorkflowOutputSourceConfig(s, schemas.UpdateIdMappingWorkflowInput_outputSourceConfig, v.OutputSourceConfig)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateIdMappingWorkflowInput_roleArn, *v.RoleArn)
+	}
+	if v.WorkflowName != nil {
+		s.WriteString(schemas.UpdateIdMappingWorkflowInput_workflowName, *v.WorkflowName)
+	}
+}
+
 type UpdateIdMappingWorkflowOutput struct {
 
 	// An object which defines the ID mapping technique and any additional
@@ -112,16 +144,43 @@ type UpdateIdMappingWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIdMappingWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIdMappingWorkflowOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIdMappingWorkflowOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateIdMappingWorkflowOutput_description, v.Description)
+		case schemas.UpdateIdMappingWorkflowOutput_idMappingTechniques:
+			v.IdMappingTechniques = &types.IdMappingTechniques{}
+			return v.IdMappingTechniques.Deserialize(d)
+		case schemas.UpdateIdMappingWorkflowOutput_incrementalRunConfig:
+			v.IncrementalRunConfig = &types.IdMappingIncrementalRunConfig{}
+			return v.IncrementalRunConfig.Deserialize(d)
+		case schemas.UpdateIdMappingWorkflowOutput_inputSourceConfig:
+			return deserializeIdMappingWorkflowInputSourceConfig(d, schemas.UpdateIdMappingWorkflowOutput_inputSourceConfig, &v.InputSourceConfig)
+		case schemas.UpdateIdMappingWorkflowOutput_outputSourceConfig:
+			return deserializeIdMappingWorkflowOutputSourceConfig(d, schemas.UpdateIdMappingWorkflowOutput_outputSourceConfig, &v.OutputSourceConfig)
+		case schemas.UpdateIdMappingWorkflowOutput_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.UpdateIdMappingWorkflowOutput_roleArn, v.RoleArn)
+		case schemas.UpdateIdMappingWorkflowOutput_workflowArn:
+			v.WorkflowArn = new(string)
+			return d.ReadString(schemas.UpdateIdMappingWorkflowOutput_workflowArn, v.WorkflowArn)
+		case schemas.UpdateIdMappingWorkflowOutput_workflowName:
+			v.WorkflowName = new(string)
+			return d.ReadString(schemas.UpdateIdMappingWorkflowOutput_workflowName, v.WorkflowName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIdMappingWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIdMappingWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdMappingWorkflow, schemas.UpdateIdMappingWorkflowInput, schemas.UpdateIdMappingWorkflowOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIdMappingWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdMappingWorkflow, schemas.UpdateIdMappingWorkflowInput, schemas.UpdateIdMappingWorkflowOutput), output: &UpdateIdMappingWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateIdMappingWorkflow"); err != nil {

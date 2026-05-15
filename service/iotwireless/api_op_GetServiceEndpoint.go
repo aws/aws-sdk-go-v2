@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type GetServiceEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceType != "" {
+		s.WriteString(schemas.GetServiceEndpointRequest_ServiceType, string(v.ServiceType))
+	}
+}
+
 type GetServiceEndpointOutput struct {
 
 	// The Root CA of the server trust certificate.
@@ -55,16 +69,34 @@ type GetServiceEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceEndpointResponse_ServerTrust:
+			v.ServerTrust = new(string)
+			return d.ReadString(schemas.GetServiceEndpointResponse_ServerTrust, v.ServerTrust)
+		case schemas.GetServiceEndpointResponse_ServiceEndpoint:
+			v.ServiceEndpoint = new(string)
+			return d.ReadString(schemas.GetServiceEndpointResponse_ServiceEndpoint, v.ServiceEndpoint)
+		case schemas.GetServiceEndpointResponse_ServiceType:
+			var ev string
+			if err := d.ReadString(schemas.GetServiceEndpointResponse_ServiceType, &ev); err != nil {
+				return err
+			}
+			v.ServiceType = types.WirelessGatewayServiceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServiceEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceEndpoint, schemas.GetServiceEndpointRequest, schemas.GetServiceEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetServiceEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceEndpoint, schemas.GetServiceEndpointRequest, schemas.GetServiceEndpointResponse), output: &GetServiceEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetServiceEndpoint"); err != nil {

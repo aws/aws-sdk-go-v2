@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/launchwizard/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/launchwizard/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type GetWorkloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkloadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkloadInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkloadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.GetWorkloadInput_workloadName, *v.WorkloadName)
+	}
+}
+
 type GetWorkloadOutput struct {
 
 	// Information about the workload.
@@ -48,16 +62,24 @@ type GetWorkloadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkloadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkloadOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkloadOutput_workload:
+			v.Workload = &types.WorkloadData{}
+			return v.Workload.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkload, schemas.GetWorkloadInput, schemas.GetWorkloadOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkload, schemas.GetWorkloadInput, schemas.GetWorkloadOutput), output: &GetWorkloadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWorkload"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesthinclient/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesthinclient/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,6 +67,42 @@ type UpdateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DesiredSoftwareSetId != nil {
+		s.WriteString(schemas.UpdateEnvironmentRequest_desiredSoftwareSetId, *v.DesiredSoftwareSetId)
+	}
+	if v.DesktopArn != nil {
+		s.WriteString(schemas.UpdateEnvironmentRequest_desktopArn, *v.DesktopArn)
+	}
+	if v.DesktopEndpoint != nil {
+		s.WriteString(schemas.UpdateEnvironmentRequest_desktopEndpoint, *v.DesktopEndpoint)
+	}
+	serializeDeviceCreationTagsMap(s, schemas.UpdateEnvironmentRequest_deviceCreationTags, v.DeviceCreationTags)
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateEnvironmentRequest_id, *v.Id)
+	}
+	if v.MaintenanceWindow != nil {
+		s.WriteStruct(schemas.UpdateEnvironmentRequest_maintenanceWindow)
+		v.MaintenanceWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateEnvironmentRequest_name, *v.Name)
+	}
+	if v.SoftwareSetUpdateMode != "" {
+		s.WriteString(schemas.UpdateEnvironmentRequest_softwareSetUpdateMode, string(v.SoftwareSetUpdateMode))
+	}
+	if v.SoftwareSetUpdateSchedule != "" {
+		s.WriteString(schemas.UpdateEnvironmentRequest_softwareSetUpdateSchedule, string(v.SoftwareSetUpdateSchedule))
+	}
+}
+
 type UpdateEnvironmentOutput struct {
 
 	// Describes an environment.
@@ -76,16 +114,24 @@ type UpdateEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEnvironmentResponse_environment:
+			v.Environment = &types.EnvironmentSummary{}
+			return v.Environment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironment, schemas.UpdateEnvironmentRequest, schemas.UpdateEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironment, schemas.UpdateEnvironmentRequest, schemas.UpdateEnvironmentResponse), output: &UpdateEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateEnvironment"); err != nil {

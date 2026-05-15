@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/launchwizard/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -76,6 +78,29 @@ type CreateDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeploymentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentPatternName != nil {
+		s.WriteString(schemas.CreateDeploymentInput_deploymentPatternName, *v.DeploymentPatternName)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateDeploymentInput_dryRun, v.DryRun)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDeploymentInput_name, *v.Name)
+	}
+	serializeDeploymentSpecifications(s, schemas.CreateDeploymentInput_specifications, v.Specifications)
+	serializeTags(s, schemas.CreateDeploymentInput_tags, v.Tags)
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.CreateDeploymentInput_workloadName, *v.WorkloadName)
+	}
+}
+
 type CreateDeploymentOutput struct {
 
 	// The ID of the deployment.
@@ -87,16 +112,24 @@ type CreateDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDeploymentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDeploymentOutput_deploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.CreateDeploymentOutput_deploymentId, v.DeploymentId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeployment, schemas.CreateDeploymentInput, schemas.CreateDeploymentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeployment, schemas.CreateDeploymentInput, schemas.CreateDeploymentOutput), output: &CreateDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDeployment"); err != nil {

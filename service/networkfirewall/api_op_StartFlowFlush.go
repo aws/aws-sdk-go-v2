@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +70,31 @@ type StartFlowFlushInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFlowFlushInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFlowFlushRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFlowFlushInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.StartFlowFlushRequest_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.StartFlowFlushRequest_FirewallArn, *v.FirewallArn)
+	}
+	serializeFlowFilters(s, schemas.StartFlowFlushRequest_FlowFilters, v.FlowFilters)
+	if v.MinimumFlowAgeInSeconds != nil {
+		s.WriteInt32(schemas.StartFlowFlushRequest_MinimumFlowAgeInSeconds, *v.MinimumFlowAgeInSeconds)
+	}
+	if v.VpcEndpointAssociationArn != nil {
+		s.WriteString(schemas.StartFlowFlushRequest_VpcEndpointAssociationArn, *v.VpcEndpointAssociationArn)
+	}
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.StartFlowFlushRequest_VpcEndpointId, *v.VpcEndpointId)
+	}
+}
+
 type StartFlowFlushOutput struct {
 
 	// The Amazon Resource Name (ARN) of the firewall.
@@ -91,16 +118,34 @@ type StartFlowFlushOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFlowFlushOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartFlowFlushResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartFlowFlushResponse_FirewallArn:
+			v.FirewallArn = new(string)
+			return d.ReadString(schemas.StartFlowFlushResponse_FirewallArn, v.FirewallArn)
+		case schemas.StartFlowFlushResponse_FlowOperationId:
+			v.FlowOperationId = new(string)
+			return d.ReadString(schemas.StartFlowFlushResponse_FlowOperationId, v.FlowOperationId)
+		case schemas.StartFlowFlushResponse_FlowOperationStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartFlowFlushResponse_FlowOperationStatus, &ev); err != nil {
+				return err
+			}
+			v.FlowOperationStatus = types.FlowOperationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartFlowFlushMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartFlowFlush{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFlowFlush, schemas.StartFlowFlushRequest, schemas.StartFlowFlushResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartFlowFlush{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFlowFlush, schemas.StartFlowFlushRequest, schemas.StartFlowFlushResponse), output: &StartFlowFlushOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartFlowFlush"); err != nil {

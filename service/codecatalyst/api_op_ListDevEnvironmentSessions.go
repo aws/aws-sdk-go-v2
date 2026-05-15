@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,30 @@ type ListDevEnvironmentSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevEnvironmentSessionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevEnvironmentSessionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevEnvironmentSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DevEnvironmentId != nil {
+		s.WriteString(schemas.ListDevEnvironmentSessionsRequest_devEnvironmentId, *v.DevEnvironmentId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDevEnvironmentSessionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevEnvironmentSessionsRequest_nextToken, *v.NextToken)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.ListDevEnvironmentSessionsRequest_projectName, *v.ProjectName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.ListDevEnvironmentSessionsRequest_spaceName, *v.SpaceName)
+	}
+}
+
 type ListDevEnvironmentSessionsOutput struct {
 
 	// Information about each session retrieved in the list.
@@ -73,16 +99,26 @@ type ListDevEnvironmentSessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevEnvironmentSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDevEnvironmentSessionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDevEnvironmentSessionsResponse_items:
+			return deserializeDevEnvironmentSessionsSummaryList(d, schemas.ListDevEnvironmentSessionsResponse_items, &v.Items)
+		case schemas.ListDevEnvironmentSessionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDevEnvironmentSessionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDevEnvironmentSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDevEnvironmentSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevEnvironmentSessions, schemas.ListDevEnvironmentSessionsRequest, schemas.ListDevEnvironmentSessionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDevEnvironmentSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevEnvironmentSessions, schemas.ListDevEnvironmentSessionsRequest, schemas.ListDevEnvironmentSessionsResponse), output: &ListDevEnvironmentSessionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDevEnvironmentSessions"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -57,6 +59,27 @@ type UpdateRegistryRecordStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRegistryRecordStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRegistryRecordStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRegistryRecordStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecordId != nil {
+		s.WriteString(schemas.UpdateRegistryRecordStatusRequest_recordId, *v.RecordId)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.UpdateRegistryRecordStatusRequest_registryId, *v.RegistryId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateRegistryRecordStatusRequest_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.UpdateRegistryRecordStatusRequest_statusReason, *v.StatusReason)
+	}
+}
+
 type UpdateRegistryRecordStatusOutput struct {
 
 	// The Amazon Resource Name (ARN) of the registry record.
@@ -95,16 +118,43 @@ type UpdateRegistryRecordStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRegistryRecordStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRegistryRecordStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRegistryRecordStatusResponse_recordArn:
+			v.RecordArn = new(string)
+			return d.ReadString(schemas.UpdateRegistryRecordStatusResponse_recordArn, v.RecordArn)
+		case schemas.UpdateRegistryRecordStatusResponse_recordId:
+			v.RecordId = new(string)
+			return d.ReadString(schemas.UpdateRegistryRecordStatusResponse_recordId, v.RecordId)
+		case schemas.UpdateRegistryRecordStatusResponse_registryArn:
+			v.RegistryArn = new(string)
+			return d.ReadString(schemas.UpdateRegistryRecordStatusResponse_registryArn, v.RegistryArn)
+		case schemas.UpdateRegistryRecordStatusResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateRegistryRecordStatusResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RegistryRecordStatus(ev)
+			return nil
+		case schemas.UpdateRegistryRecordStatusResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.UpdateRegistryRecordStatusResponse_statusReason, v.StatusReason)
+		case schemas.UpdateRegistryRecordStatusResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateRegistryRecordStatusResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRegistryRecordStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRegistryRecordStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRegistryRecordStatus, schemas.UpdateRegistryRecordStatusRequest, schemas.UpdateRegistryRecordStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRegistryRecordStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRegistryRecordStatus, schemas.UpdateRegistryRecordStatusRequest, schemas.UpdateRegistryRecordStatusResponse), output: &UpdateRegistryRecordStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRegistryRecordStatus"); err != nil {

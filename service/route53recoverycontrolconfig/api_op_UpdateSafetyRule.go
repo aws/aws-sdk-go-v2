@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,25 @@ type UpdateSafetyRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSafetyRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSafetyRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSafetyRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssertionRuleUpdate != nil {
+		s.WriteStruct(schemas.UpdateSafetyRuleRequest_AssertionRuleUpdate)
+		v.AssertionRuleUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GatingRuleUpdate != nil {
+		s.WriteStruct(schemas.UpdateSafetyRuleRequest_GatingRuleUpdate)
+		v.GatingRuleUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateSafetyRuleOutput struct {
 
 	// The assertion rule updated.
@@ -56,16 +77,27 @@ type UpdateSafetyRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSafetyRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSafetyRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSafetyRuleResponse_AssertionRule:
+			v.AssertionRule = &types.AssertionRule{}
+			return v.AssertionRule.Deserialize(d)
+		case schemas.UpdateSafetyRuleResponse_GatingRule:
+			v.GatingRule = &types.GatingRule{}
+			return v.GatingRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSafetyRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSafetyRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSafetyRule, schemas.UpdateSafetyRuleRequest, schemas.UpdateSafetyRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSafetyRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSafetyRule, schemas.UpdateSafetyRuleRequest, schemas.UpdateSafetyRuleResponse), output: &UpdateSafetyRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSafetyRule"); err != nil {

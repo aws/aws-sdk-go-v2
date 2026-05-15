@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,24 @@ type ListServicePrincipalNamesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServicePrincipalNamesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServicePrincipalNamesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServicePrincipalNamesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryRegistrationArn != nil {
+		s.WriteString(schemas.ListServicePrincipalNamesRequest_DirectoryRegistrationArn, *v.DirectoryRegistrationArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServicePrincipalNamesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServicePrincipalNamesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListServicePrincipalNamesOutput struct {
 
 	// Use this parameter when paginating results in a subsequent request after you
@@ -68,16 +88,26 @@ type ListServicePrincipalNamesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServicePrincipalNamesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServicePrincipalNamesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServicePrincipalNamesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServicePrincipalNamesResponse_NextToken, v.NextToken)
+		case schemas.ListServicePrincipalNamesResponse_ServicePrincipalNames:
+			return deserializeServicePrincipalNameList(d, schemas.ListServicePrincipalNamesResponse_ServicePrincipalNames, &v.ServicePrincipalNames)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServicePrincipalNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListServicePrincipalNames{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServicePrincipalNames, schemas.ListServicePrincipalNamesRequest, schemas.ListServicePrincipalNamesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListServicePrincipalNames{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServicePrincipalNames, schemas.ListServicePrincipalNamesRequest, schemas.ListServicePrincipalNamesResponse), output: &ListServicePrincipalNamesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListServicePrincipalNames"); err != nil {

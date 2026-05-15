@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -35,6 +37,22 @@ type TestGetNoInputNoPayloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestGetNoInputNoPayloadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestGetNoInputNoPayloadInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *TestGetNoInputNoPayloadInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type TestGetNoInputNoPayloadOutput struct {
 	TestId *string
 
@@ -44,16 +62,35 @@ type TestGetNoInputNoPayloadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestGetNoInputNoPayloadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestNoPayloadInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestGetNoInputNoPayloadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestId != nil {
+		s.WriteString(schemas.TestNoPayloadInputOutput_testId, *v.TestId)
+	}
+}
+func (v *TestGetNoInputNoPayloadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestNoPayloadInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestNoPayloadInputOutput_testId:
+			v.TestId = new(string)
+			return d.ReadString(schemas.TestNoPayloadInputOutput_testId, v.TestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestGetNoInputNoPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestGetNoInputNoPayload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestGetNoInputNoPayload, nil, schemas.TestNoPayloadInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTestGetNoInputNoPayload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestGetNoInputNoPayload, nil, schemas.TestNoPayloadInputOutput), output: &TestGetNoInputNoPayloadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "TestGetNoInputNoPayload"); err != nil {

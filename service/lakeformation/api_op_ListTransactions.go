@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,27 @@ type ListTransactionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTransactionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTransactionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTransactionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.ListTransactionsRequest_CatalogId, *v.CatalogId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTransactionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTransactionsRequest_NextToken, *v.NextToken)
+	}
+	if v.StatusFilter != "" {
+		s.WriteString(schemas.ListTransactionsRequest_StatusFilter, string(v.StatusFilter))
+	}
+}
+
 type ListTransactionsOutput struct {
 
 	// A continuation token indicating whether additional data is available.
@@ -66,16 +89,26 @@ type ListTransactionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTransactionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTransactionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTransactionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTransactionsResponse_NextToken, v.NextToken)
+		case schemas.ListTransactionsResponse_Transactions:
+			return deserializeTransactionDescriptionList(d, schemas.ListTransactionsResponse_Transactions, &v.Transactions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTransactionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTransactions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTransactions, schemas.ListTransactionsRequest, schemas.ListTransactionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTransactions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTransactions, schemas.ListTransactionsRequest, schemas.ListTransactionsResponse), output: &ListTransactionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTransactions"); err != nil {

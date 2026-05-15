@@ -7,7 +7,9 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -70,6 +72,26 @@ type UpdateAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxQueryTCU != nil {
+		s.WriteInt32(schemas.UpdateAccountSettingsRequest_MaxQueryTCU, *v.MaxQueryTCU)
+	}
+	if v.QueryCompute != nil {
+		s.WriteStruct(schemas.UpdateAccountSettingsRequest_QueryCompute)
+		v.QueryCompute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueryPricingModel != "" {
+		s.WriteString(schemas.UpdateAccountSettingsRequest_QueryPricingModel, string(v.QueryPricingModel))
+	}
+}
+
 type UpdateAccountSettingsOutput struct {
 
 	// The configured maximum number of compute units the service will use at any
@@ -88,16 +110,34 @@ type UpdateAccountSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccountSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccountSettingsResponse_MaxQueryTCU:
+			v.MaxQueryTCU = new(int32)
+			return d.ReadInt32(schemas.UpdateAccountSettingsResponse_MaxQueryTCU, v.MaxQueryTCU)
+		case schemas.UpdateAccountSettingsResponse_QueryCompute:
+			v.QueryCompute = &types.QueryComputeResponse{}
+			return v.QueryCompute.Deserialize(d)
+		case schemas.UpdateAccountSettingsResponse_QueryPricingModel:
+			var ev string
+			if err := d.ReadString(schemas.UpdateAccountSettingsResponse_QueryPricingModel, &ev); err != nil {
+				return err
+			}
+			v.QueryPricingModel = types.QueryPricingModel(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountSettings, schemas.UpdateAccountSettingsRequest, schemas.UpdateAccountSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountSettings, schemas.UpdateAccountSettingsRequest, schemas.UpdateAccountSettingsResponse), output: &UpdateAccountSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAccountSettings"); err != nil {

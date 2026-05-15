@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -37,6 +39,18 @@ type GetRegistryInput struct {
 	RegistryId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetRegistryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRegistryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRegistryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryId != nil {
+		s.WriteString(schemas.GetRegistryRequest_registryId, *v.RegistryId)
+	}
 }
 
 type GetRegistryOutput struct {
@@ -101,16 +115,61 @@ type GetRegistryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRegistryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRegistryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRegistryResponse_approvalConfiguration:
+			v.ApprovalConfiguration = &types.ApprovalConfiguration{}
+			return v.ApprovalConfiguration.Deserialize(d)
+		case schemas.GetRegistryResponse_authorizerConfiguration:
+			return deserializeAuthorizerConfiguration(d, schemas.GetRegistryResponse_authorizerConfiguration, &v.AuthorizerConfiguration)
+		case schemas.GetRegistryResponse_authorizerType:
+			var ev string
+			if err := d.ReadString(schemas.GetRegistryResponse_authorizerType, &ev); err != nil {
+				return err
+			}
+			v.AuthorizerType = types.RegistryAuthorizerType(ev)
+			return nil
+		case schemas.GetRegistryResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetRegistryResponse_createdAt, v.CreatedAt)
+		case schemas.GetRegistryResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetRegistryResponse_description, v.Description)
+		case schemas.GetRegistryResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetRegistryResponse_name, v.Name)
+		case schemas.GetRegistryResponse_registryArn:
+			v.RegistryArn = new(string)
+			return d.ReadString(schemas.GetRegistryResponse_registryArn, v.RegistryArn)
+		case schemas.GetRegistryResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.GetRegistryResponse_registryId, v.RegistryId)
+		case schemas.GetRegistryResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetRegistryResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RegistryStatus(ev)
+			return nil
+		case schemas.GetRegistryResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetRegistryResponse_statusReason, v.StatusReason)
+		case schemas.GetRegistryResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetRegistryResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRegistry{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegistry, schemas.GetRegistryRequest, schemas.GetRegistryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRegistry{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegistry, schemas.GetRegistryRequest, schemas.GetRegistryResponse), output: &GetRegistryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRegistry"); err != nil {

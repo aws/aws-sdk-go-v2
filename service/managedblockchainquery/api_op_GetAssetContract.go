@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,20 @@ type GetAssetContractInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssetContractInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssetContractInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssetContractInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContractIdentifier != nil {
+		s.WriteStruct(schemas.GetAssetContractInput_contractIdentifier)
+		v.ContractIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetAssetContractOutput struct {
 
 	// Contains the blockchain address and network information about the contract.
@@ -68,16 +84,37 @@ type GetAssetContractOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssetContractOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssetContractOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssetContractOutput_contractIdentifier:
+			v.ContractIdentifier = &types.ContractIdentifier{}
+			return v.ContractIdentifier.Deserialize(d)
+		case schemas.GetAssetContractOutput_deployerAddress:
+			v.DeployerAddress = new(string)
+			return d.ReadString(schemas.GetAssetContractOutput_deployerAddress, v.DeployerAddress)
+		case schemas.GetAssetContractOutput_metadata:
+			v.Metadata = &types.ContractMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.GetAssetContractOutput_tokenStandard:
+			var ev string
+			if err := d.ReadString(schemas.GetAssetContractOutput_tokenStandard, &ev); err != nil {
+				return err
+			}
+			v.TokenStandard = types.QueryTokenStandard(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssetContractMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssetContract{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssetContract, schemas.GetAssetContractInput, schemas.GetAssetContractOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssetContract{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssetContract, schemas.GetAssetContractInput, schemas.GetAssetContractOutput), output: &GetAssetContractOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAssetContract"); err != nil {

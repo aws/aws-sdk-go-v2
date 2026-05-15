@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mwaa/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,28 @@ type CreateWebLoginTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWebLoginTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWebLoginTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWebLoginTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWebLoginTokenRequest_Name, *v.Name)
+	}
+}
+func (v *CreateWebLoginTokenInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWebLoginTokenRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWebLoginTokenRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateWebLoginTokenRequest_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 type CreateWebLoginTokenOutput struct {
 
 	// The user name of the Apache Airflow identity creating the web login token.
@@ -60,16 +84,53 @@ type CreateWebLoginTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWebLoginTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWebLoginTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWebLoginTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AirflowIdentity != nil {
+		s.WriteString(schemas.CreateWebLoginTokenResponse_AirflowIdentity, *v.AirflowIdentity)
+	}
+	if v.IamIdentity != nil {
+		s.WriteString(schemas.CreateWebLoginTokenResponse_IamIdentity, *v.IamIdentity)
+	}
+	if v.WebServerHostname != nil {
+		s.WriteString(schemas.CreateWebLoginTokenResponse_WebServerHostname, *v.WebServerHostname)
+	}
+	if v.WebToken != nil {
+		s.WriteString(schemas.CreateWebLoginTokenResponse_WebToken, *v.WebToken)
+	}
+}
+func (v *CreateWebLoginTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWebLoginTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWebLoginTokenResponse_AirflowIdentity:
+			v.AirflowIdentity = new(string)
+			return d.ReadString(schemas.CreateWebLoginTokenResponse_AirflowIdentity, v.AirflowIdentity)
+		case schemas.CreateWebLoginTokenResponse_IamIdentity:
+			v.IamIdentity = new(string)
+			return d.ReadString(schemas.CreateWebLoginTokenResponse_IamIdentity, v.IamIdentity)
+		case schemas.CreateWebLoginTokenResponse_WebServerHostname:
+			v.WebServerHostname = new(string)
+			return d.ReadString(schemas.CreateWebLoginTokenResponse_WebServerHostname, v.WebServerHostname)
+		case schemas.CreateWebLoginTokenResponse_WebToken:
+			v.WebToken = new(string)
+			return d.ReadString(schemas.CreateWebLoginTokenResponse_WebToken, v.WebToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWebLoginTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWebLoginToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebLoginToken, schemas.CreateWebLoginTokenRequest, schemas.CreateWebLoginTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWebLoginToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebLoginToken, schemas.CreateWebLoginTokenRequest, schemas.CreateWebLoginTokenResponse), output: &CreateWebLoginTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWebLoginToken"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,39 @@ type UpdateServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociatedSystemList(s, schemas.UpdateServiceRequest_associatedSystems, v.AssociatedSystems)
+	if v.DependencyDiscovery != "" {
+		s.WriteString(schemas.UpdateServiceRequest_dependencyDiscovery, string(v.DependencyDiscovery))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateServiceRequest_description, *v.Description)
+	}
+	if v.PermissionModel != nil {
+		s.WriteStruct(schemas.UpdateServiceRequest_permissionModel)
+		v.PermissionModel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.UpdateServiceRequest_policyArn, *v.PolicyArn)
+	}
+	serializeRegionList(s, schemas.UpdateServiceRequest_regions, v.Regions)
+	if v.ReportConfiguration != nil {
+		s.WriteStruct(schemas.UpdateServiceRequest_reportConfiguration)
+		v.ReportConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.UpdateServiceRequest_serviceArn, *v.ServiceArn)
+	}
+}
+
 type UpdateServiceOutput struct {
 
 	// The updated service.
@@ -71,16 +106,24 @@ type UpdateServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceResponse_service:
+			v.Service = &types.Service{}
+			return v.Service.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateService, schemas.UpdateServiceRequest, schemas.UpdateServiceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateService, schemas.UpdateServiceRequest, schemas.UpdateServiceResponse), output: &UpdateServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateService"); err != nil {

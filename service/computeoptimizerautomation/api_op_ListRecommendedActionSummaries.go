@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,22 @@ type ListRecommendedActionSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendedActionSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendedActionSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendedActionSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecommendedActionFilterList(s, schemas.ListRecommendedActionSummariesRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecommendedActionSummariesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendedActionSummariesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListRecommendedActionSummariesOutput struct {
 
 	// A token used for pagination. If present, indicates there are more results
@@ -64,16 +82,26 @@ type ListRecommendedActionSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendedActionSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecommendedActionSummariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecommendedActionSummariesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecommendedActionSummariesResponse_nextToken, v.NextToken)
+		case schemas.ListRecommendedActionSummariesResponse_recommendedActionSummaries:
+			return deserializeRecommendedActionSummaries(d, schemas.ListRecommendedActionSummariesResponse_recommendedActionSummaries, &v.RecommendedActionSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecommendedActionSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListRecommendedActionSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendedActionSummaries, schemas.ListRecommendedActionSummariesRequest, schemas.ListRecommendedActionSummariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListRecommendedActionSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendedActionSummaries, schemas.ListRecommendedActionSummariesRequest, schemas.ListRecommendedActionSummariesResponse), output: &ListRecommendedActionSummariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRecommendedActionSummaries"); err != nil {

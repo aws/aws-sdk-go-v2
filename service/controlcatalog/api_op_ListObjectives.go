@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/controlcatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controlcatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,26 @@ type ListObjectivesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListObjectivesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListObjectivesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListObjectivesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListObjectivesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListObjectivesRequest_NextToken, *v.NextToken)
+	}
+	if v.ObjectiveFilter != nil {
+		s.WriteStruct(schemas.ListObjectivesRequest_ObjectiveFilter)
+		v.ObjectiveFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListObjectivesOutput struct {
 
 	// The list of objectives that the ListObjectives API returns.
@@ -64,16 +86,26 @@ type ListObjectivesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListObjectivesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListObjectivesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListObjectivesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListObjectivesResponse_NextToken, v.NextToken)
+		case schemas.ListObjectivesResponse_Objectives:
+			return deserializeObjectiveSummaryList(d, schemas.ListObjectivesResponse_Objectives, &v.Objectives)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListObjectivesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListObjectives{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListObjectives, schemas.ListObjectivesRequest, schemas.ListObjectivesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListObjectives{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListObjectives, schemas.ListObjectivesRequest, schemas.ListObjectivesResponse), output: &ListObjectivesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListObjectives"); err != nil {

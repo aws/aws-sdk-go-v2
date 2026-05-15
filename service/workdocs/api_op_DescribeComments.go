@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,30 @@ type DescribeCommentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCommentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCommentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCommentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationToken != nil {
+		s.WriteString(schemas.DescribeCommentsRequest_AuthenticationToken, *v.AuthenticationToken)
+	}
+	if v.DocumentId != nil {
+		s.WriteString(schemas.DescribeCommentsRequest_DocumentId, *v.DocumentId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeCommentsRequest_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeCommentsRequest_Marker, *v.Marker)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.DescribeCommentsRequest_VersionId, *v.VersionId)
+	}
+}
+
 type DescribeCommentsOutput struct {
 
 	// The list of comments for the specified document version.
@@ -68,16 +94,26 @@ type DescribeCommentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCommentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCommentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCommentsResponse_Comments:
+			return deserializeCommentList(d, schemas.DescribeCommentsResponse_Comments, &v.Comments)
+		case schemas.DescribeCommentsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeCommentsResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCommentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeComments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComments, schemas.DescribeCommentsRequest, schemas.DescribeCommentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeComments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComments, schemas.DescribeCommentsRequest, schemas.DescribeCommentsResponse), output: &DescribeCommentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeComments"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,28 @@ type DisassociateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.DisassociateUserRequest_Domain, *v.Domain)
+	}
+	serializeIdentityProvider(s, schemas.DisassociateUserRequest_IdentityProvider, v.IdentityProvider)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DisassociateUserRequest_InstanceId, *v.InstanceId)
+	}
+	if v.InstanceUserArn != nil {
+		s.WriteString(schemas.DisassociateUserRequest_InstanceUserArn, *v.InstanceUserArn)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.DisassociateUserRequest_Username, *v.Username)
+	}
+}
+
 type DisassociateUserOutput struct {
 
 	// Metadata that describes the associate user operation.
@@ -62,16 +86,24 @@ type DisassociateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateUserResponse_InstanceUserSummary:
+			v.InstanceUserSummary = &types.InstanceUserSummary{}
+			return v.InstanceUserSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateUser, schemas.DisassociateUserRequest, schemas.DisassociateUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateUser, schemas.DisassociateUserRequest, schemas.DisassociateUserResponse), output: &DisassociateUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateUser"); err != nil {

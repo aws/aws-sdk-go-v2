@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,6 +64,34 @@ type ListPlaceIndexesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlaceIndexesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlaceIndexesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlaceIndexesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPlaceIndexesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlaceIndexesRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListPlaceIndexesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlaceIndexesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlaceIndexesRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListPlaceIndexesRequest_MaxResults, v.MaxResults)
+		case schemas.ListPlaceIndexesRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPlaceIndexesRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListPlaceIndexesOutput struct {
 
 	// Lists the place index resources that exist in your Amazon Web Services account
@@ -79,16 +109,38 @@ type ListPlaceIndexesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlaceIndexesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlaceIndexesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlaceIndexesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListPlaceIndexesResponseEntryList(s, schemas.ListPlaceIndexesResponse_Entries, v.Entries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlaceIndexesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListPlaceIndexesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlaceIndexesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlaceIndexesResponse_Entries:
+			return deserializeListPlaceIndexesResponseEntryList(d, schemas.ListPlaceIndexesResponse_Entries, &v.Entries)
+		case schemas.ListPlaceIndexesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPlaceIndexesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPlaceIndexesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPlaceIndexes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlaceIndexes, schemas.ListPlaceIndexesRequest, schemas.ListPlaceIndexesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPlaceIndexes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlaceIndexes, schemas.ListPlaceIndexesRequest, schemas.ListPlaceIndexesResponse), output: &ListPlaceIndexesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPlaceIndexes"); err != nil {

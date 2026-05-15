@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,24 @@ type ListArchiveExportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListArchiveExportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListArchiveExportsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListArchiveExportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveId != nil {
+		s.WriteString(schemas.ListArchiveExportsRequest_ArchiveId, *v.ArchiveId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListArchiveExportsRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListArchiveExportsRequest_PageSize, *v.PageSize)
+	}
+}
+
 // The response containing a list of archive export jobs and their statuses.
 type ListArchiveExportsOutput struct {
 
@@ -62,16 +82,26 @@ type ListArchiveExportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListArchiveExportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListArchiveExportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListArchiveExportsResponse_Exports:
+			return deserializeExportSummaryList(d, schemas.ListArchiveExportsResponse_Exports, &v.Exports)
+		case schemas.ListArchiveExportsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListArchiveExportsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListArchiveExportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListArchiveExports{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListArchiveExports, schemas.ListArchiveExportsRequest, schemas.ListArchiveExportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListArchiveExports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListArchiveExports, schemas.ListArchiveExportsRequest, schemas.ListArchiveExportsResponse), output: &ListArchiveExportsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListArchiveExports"); err != nil {

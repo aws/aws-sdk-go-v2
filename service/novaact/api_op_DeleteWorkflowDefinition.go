@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/novaact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/novaact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type DeleteWorkflowDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkflowDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkflowDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkflowDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkflowDefinitionName != nil {
+		s.WriteString(schemas.DeleteWorkflowDefinitionRequest_workflowDefinitionName, *v.WorkflowDefinitionName)
+	}
+}
+
 type DeleteWorkflowDefinitionOutput struct {
 
 	// The status of the workflow definition after deletion request.
@@ -51,16 +65,28 @@ type DeleteWorkflowDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkflowDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkflowDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteWorkflowDefinitionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteWorkflowDefinitionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.WorkflowDefinitionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWorkflowDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkflowDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkflowDefinition, schemas.DeleteWorkflowDefinitionRequest, schemas.DeleteWorkflowDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWorkflowDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkflowDefinition, schemas.DeleteWorkflowDefinitionRequest, schemas.DeleteWorkflowDefinitionResponse), output: &DeleteWorkflowDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteWorkflowDefinition"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,20 @@ type PutLoggingOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLoggingOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLoggingOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLoggingOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoggingOptions != nil {
+		s.WriteStruct(schemas.PutLoggingOptionsRequest_loggingOptions)
+		v.LoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutLoggingOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,16 +60,21 @@ type PutLoggingOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLoggingOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutLoggingOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutLoggingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutLoggingOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLoggingOptions, schemas.PutLoggingOptionsRequest, schemas.PutLoggingOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutLoggingOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLoggingOptions, schemas.PutLoggingOptionsRequest, schemas.PutLoggingOptionsResponse), output: &PutLoggingOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutLoggingOptions"); err != nil {

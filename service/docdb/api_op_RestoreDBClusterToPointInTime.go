@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -181,6 +183,56 @@ type RestoreDBClusterToPointInTimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreDBClusterToPointInTimeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreDBClusterToPointInTimeMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreDBClusterToPointInTimeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.RestoreDBClusterToPointInTimeMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	if v.DBSubnetGroupName != nil {
+		s.WriteString(schemas.RestoreDBClusterToPointInTimeMessage_DBSubnetGroupName, *v.DBSubnetGroupName)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.RestoreDBClusterToPointInTimeMessage_DeletionProtection, *v.DeletionProtection)
+	}
+	serializeLogTypeList(s, schemas.RestoreDBClusterToPointInTimeMessage_EnableCloudwatchLogsExports, v.EnableCloudwatchLogsExports)
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.RestoreDBClusterToPointInTimeMessage_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.NetworkType != nil {
+		s.WriteString(schemas.RestoreDBClusterToPointInTimeMessage_NetworkType, *v.NetworkType)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.RestoreDBClusterToPointInTimeMessage_Port, *v.Port)
+	}
+	if v.RestoreToTime != nil {
+		s.WriteTime(schemas.RestoreDBClusterToPointInTimeMessage_RestoreToTime, *v.RestoreToTime)
+	}
+	if v.RestoreType != nil {
+		s.WriteString(schemas.RestoreDBClusterToPointInTimeMessage_RestoreType, *v.RestoreType)
+	}
+	if v.ServerlessV2ScalingConfiguration != nil {
+		s.WriteStruct(schemas.RestoreDBClusterToPointInTimeMessage_ServerlessV2ScalingConfiguration)
+		v.ServerlessV2ScalingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceDBClusterIdentifier != nil {
+		s.WriteString(schemas.RestoreDBClusterToPointInTimeMessage_SourceDBClusterIdentifier, *v.SourceDBClusterIdentifier)
+	}
+	if v.StorageType != nil {
+		s.WriteString(schemas.RestoreDBClusterToPointInTimeMessage_StorageType, *v.StorageType)
+	}
+	serializeTagList(s, schemas.RestoreDBClusterToPointInTimeMessage_Tags, v.Tags)
+	if v.UseLatestRestorableTime != nil {
+		s.WriteBool(schemas.RestoreDBClusterToPointInTimeMessage_UseLatestRestorableTime, *v.UseLatestRestorableTime)
+	}
+	serializeVpcSecurityGroupIdList(s, schemas.RestoreDBClusterToPointInTimeMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
+}
+
 type RestoreDBClusterToPointInTimeOutput struct {
 
 	// Detailed information about a cluster.
@@ -192,16 +244,24 @@ type RestoreDBClusterToPointInTimeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreDBClusterToPointInTimeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreDBClusterToPointInTimeResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreDBClusterToPointInTimeResult_DBCluster:
+			v.DBCluster = &types.DBCluster{}
+			return v.DBCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreDBClusterToPointInTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestoreDBClusterToPointInTime{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreDBClusterToPointInTime, schemas.RestoreDBClusterToPointInTimeMessage, schemas.RestoreDBClusterToPointInTimeResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRestoreDBClusterToPointInTime{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreDBClusterToPointInTime, schemas.RestoreDBClusterToPointInTimeMessage, schemas.RestoreDBClusterToPointInTimeResult), output: &RestoreDBClusterToPointInTimeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RestoreDBClusterToPointInTime"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -70,6 +72,48 @@ type UpdateDataSourceInput struct {
 	Schedule *types.ScheduleConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataSourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFormInputList(s, schemas.UpdateDataSourceInput_assetFormsInput, v.AssetFormsInput)
+	serializeDataSourceConfigurationInput(s, schemas.UpdateDataSourceInput_configuration, v.Configuration)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDataSourceInput_description, *v.Description)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.UpdateDataSourceInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.EnableSetting != "" {
+		s.WriteString(schemas.UpdateDataSourceInput_enableSetting, string(v.EnableSetting))
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateDataSourceInput_identifier, *v.Identifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDataSourceInput_name, *v.Name)
+	}
+	if v.PublishOnImport != nil {
+		s.WriteBool(schemas.UpdateDataSourceInput_publishOnImport, *v.PublishOnImport)
+	}
+	if v.Recommendation != nil {
+		s.WriteStruct(schemas.UpdateDataSourceInput_recommendation)
+		v.Recommendation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetainPermissionsOnRevokeFailure != nil {
+		s.WriteBool(schemas.UpdateDataSourceInput_retainPermissionsOnRevokeFailure, *v.RetainPermissionsOnRevokeFailure)
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.UpdateDataSourceInput_schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type UpdateDataSourceOutput struct {
@@ -161,16 +205,99 @@ type UpdateDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataSourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataSourceOutput_assetFormsOutput:
+			return deserializeFormOutputList(d, schemas.UpdateDataSourceOutput_assetFormsOutput, &v.AssetFormsOutput)
+		case schemas.UpdateDataSourceOutput_configuration:
+			return deserializeDataSourceConfigurationOutput(d, schemas.UpdateDataSourceOutput_configuration, &v.Configuration)
+		case schemas.UpdateDataSourceOutput_connectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.UpdateDataSourceOutput_connectionId, v.ConnectionId)
+		case schemas.UpdateDataSourceOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateDataSourceOutput_createdAt, v.CreatedAt)
+		case schemas.UpdateDataSourceOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateDataSourceOutput_description, v.Description)
+		case schemas.UpdateDataSourceOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.UpdateDataSourceOutput_domainId, v.DomainId)
+		case schemas.UpdateDataSourceOutput_enableSetting:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDataSourceOutput_enableSetting, &ev); err != nil {
+				return err
+			}
+			v.EnableSetting = types.EnableSetting(ev)
+			return nil
+		case schemas.UpdateDataSourceOutput_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.UpdateDataSourceOutput_environmentId, v.EnvironmentId)
+		case schemas.UpdateDataSourceOutput_errorMessage:
+			v.ErrorMessage = &types.DataSourceErrorMessage{}
+			return v.ErrorMessage.Deserialize(d)
+		case schemas.UpdateDataSourceOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateDataSourceOutput_id, v.Id)
+		case schemas.UpdateDataSourceOutput_lastRunAt:
+			v.LastRunAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateDataSourceOutput_lastRunAt, v.LastRunAt)
+		case schemas.UpdateDataSourceOutput_lastRunErrorMessage:
+			v.LastRunErrorMessage = &types.DataSourceErrorMessage{}
+			return v.LastRunErrorMessage.Deserialize(d)
+		case schemas.UpdateDataSourceOutput_lastRunStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDataSourceOutput_lastRunStatus, &ev); err != nil {
+				return err
+			}
+			v.LastRunStatus = types.DataSourceRunStatus(ev)
+			return nil
+		case schemas.UpdateDataSourceOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateDataSourceOutput_name, v.Name)
+		case schemas.UpdateDataSourceOutput_projectId:
+			v.ProjectId = new(string)
+			return d.ReadString(schemas.UpdateDataSourceOutput_projectId, v.ProjectId)
+		case schemas.UpdateDataSourceOutput_publishOnImport:
+			v.PublishOnImport = new(bool)
+			return d.ReadBool(schemas.UpdateDataSourceOutput_publishOnImport, v.PublishOnImport)
+		case schemas.UpdateDataSourceOutput_recommendation:
+			v.Recommendation = &types.RecommendationConfiguration{}
+			return v.Recommendation.Deserialize(d)
+		case schemas.UpdateDataSourceOutput_retainPermissionsOnRevokeFailure:
+			v.RetainPermissionsOnRevokeFailure = new(bool)
+			return d.ReadBool(schemas.UpdateDataSourceOutput_retainPermissionsOnRevokeFailure, v.RetainPermissionsOnRevokeFailure)
+		case schemas.UpdateDataSourceOutput_schedule:
+			v.Schedule = &types.ScheduleConfiguration{}
+			return v.Schedule.Deserialize(d)
+		case schemas.UpdateDataSourceOutput_selfGrantStatus:
+			return deserializeSelfGrantStatusOutput(d, schemas.UpdateDataSourceOutput_selfGrantStatus, &v.SelfGrantStatus)
+		case schemas.UpdateDataSourceOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDataSourceOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DataSourceStatus(ev)
+			return nil
+		case schemas.UpdateDataSourceOutput_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.UpdateDataSourceOutput_type, v.Type)
+		case schemas.UpdateDataSourceOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateDataSourceOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataSource, schemas.UpdateDataSourceInput, schemas.UpdateDataSourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataSource, schemas.UpdateDataSourceInput, schemas.UpdateDataSourceOutput), output: &UpdateDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDataSource"); err != nil {

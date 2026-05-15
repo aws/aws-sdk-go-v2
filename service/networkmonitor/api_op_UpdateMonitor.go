@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,21 @@ type UpdateMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMonitorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMonitorInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationPeriod != nil {
+		s.WriteInt64(schemas.UpdateMonitorInput_aggregationPeriod, *v.AggregationPeriod)
+	}
+	if v.MonitorName != nil {
+		s.WriteString(schemas.UpdateMonitorInput_monitorName, *v.MonitorName)
+	}
+}
+
 type UpdateMonitorOutput struct {
 
 	// The ARN of the monitor that was updated.
@@ -74,16 +91,39 @@ type UpdateMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMonitorOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMonitorOutput_aggregationPeriod:
+			v.AggregationPeriod = new(int64)
+			return d.ReadInt64(schemas.UpdateMonitorOutput_aggregationPeriod, v.AggregationPeriod)
+		case schemas.UpdateMonitorOutput_monitorArn:
+			v.MonitorArn = new(string)
+			return d.ReadString(schemas.UpdateMonitorOutput_monitorArn, v.MonitorArn)
+		case schemas.UpdateMonitorOutput_monitorName:
+			v.MonitorName = new(string)
+			return d.ReadString(schemas.UpdateMonitorOutput_monitorName, v.MonitorName)
+		case schemas.UpdateMonitorOutput_state:
+			var ev string
+			if err := d.ReadString(schemas.UpdateMonitorOutput_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.MonitorState(ev)
+			return nil
+		case schemas.UpdateMonitorOutput_tags:
+			return deserializeTagMap(d, schemas.UpdateMonitorOutput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMonitor, schemas.UpdateMonitorInput, schemas.UpdateMonitorOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMonitor, schemas.UpdateMonitorInput, schemas.UpdateMonitorOutput), output: &UpdateMonitorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMonitor"); err != nil {

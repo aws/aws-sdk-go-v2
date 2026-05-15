@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emrserverless/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,40 @@ type CancelJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelJobRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelJobRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CancelJobRunRequest_applicationId, *v.ApplicationId)
+	}
+	if v.JobRunId != nil {
+		s.WriteString(schemas.CancelJobRunRequest_jobRunId, *v.JobRunId)
+	}
+	if v.ShutdownGracePeriodInSeconds != nil {
+		s.WriteInt32(schemas.CancelJobRunRequest_shutdownGracePeriodInSeconds, *v.ShutdownGracePeriodInSeconds)
+	}
+}
+func (v *CancelJobRunInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelJobRunRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelJobRunRequest_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.CancelJobRunRequest_applicationId, v.ApplicationId)
+		case schemas.CancelJobRunRequest_jobRunId:
+			v.JobRunId = new(string)
+			return d.ReadString(schemas.CancelJobRunRequest_jobRunId, v.JobRunId)
+		case schemas.CancelJobRunRequest_shutdownGracePeriodInSeconds:
+			v.ShutdownGracePeriodInSeconds = new(int32)
+			return d.ReadInt32(schemas.CancelJobRunRequest_shutdownGracePeriodInSeconds, v.ShutdownGracePeriodInSeconds)
+		}
+		return nil
+	})
+}
+
 type CancelJobRunOutput struct {
 
 	// The output contains the application ID on which the job run is cancelled.
@@ -63,16 +99,41 @@ type CancelJobRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelJobRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelJobRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelJobRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CancelJobRunResponse_applicationId, *v.ApplicationId)
+	}
+	if v.JobRunId != nil {
+		s.WriteString(schemas.CancelJobRunResponse_jobRunId, *v.JobRunId)
+	}
+}
+func (v *CancelJobRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelJobRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelJobRunResponse_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.CancelJobRunResponse_applicationId, v.ApplicationId)
+		case schemas.CancelJobRunResponse_jobRunId:
+			v.JobRunId = new(string)
+			return d.ReadString(schemas.CancelJobRunResponse_jobRunId, v.JobRunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelJobRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelJobRun, schemas.CancelJobRunRequest, schemas.CancelJobRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelJobRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelJobRun, schemas.CancelJobRunRequest, schemas.CancelJobRunResponse), output: &CancelJobRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelJobRun"); err != nil {

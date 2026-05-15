@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,24 @@ type ListPolicyGenerationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyGenerationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyGenerationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyGenerationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPolicyGenerationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPolicyGenerationsRequest_nextToken, *v.NextToken)
+	}
+	if v.PolicyEngineId != nil {
+		s.WriteString(schemas.ListPolicyGenerationsRequest_policyEngineId, *v.PolicyEngineId)
+	}
+}
+
 type ListPolicyGenerationsOutput struct {
 
 	// An array of policy generation objects that match the specified criteria.
@@ -63,16 +83,26 @@ type ListPolicyGenerationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyGenerationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPolicyGenerationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPolicyGenerationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPolicyGenerationsResponse_nextToken, v.NextToken)
+		case schemas.ListPolicyGenerationsResponse_policyGenerations:
+			return deserializePolicyGenerations(d, schemas.ListPolicyGenerationsResponse_policyGenerations, &v.PolicyGenerations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPolicyGenerationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPolicyGenerations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyGenerations, schemas.ListPolicyGenerationsRequest, schemas.ListPolicyGenerationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPolicyGenerations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyGenerations, schemas.ListPolicyGenerationsRequest, schemas.ListPolicyGenerationsResponse), output: &ListPolicyGenerationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPolicyGenerations"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,6 +44,24 @@ type UpdateBillEstimateInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateBillEstimateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBillEstimateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBillEstimateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.UpdateBillEstimateRequest_expiresAt, *v.ExpiresAt)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateBillEstimateRequest_identifier, *v.Identifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateBillEstimateRequest_name, *v.Name)
+	}
 }
 
 type UpdateBillEstimateOutput struct {
@@ -89,16 +109,62 @@ type UpdateBillEstimateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBillEstimateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBillEstimateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBillEstimateResponse_billInterval:
+			v.BillInterval = &types.BillInterval{}
+			return v.BillInterval.Deserialize(d)
+		case schemas.UpdateBillEstimateResponse_costCategoryGroupSharingPreferenceArn:
+			v.CostCategoryGroupSharingPreferenceArn = new(string)
+			return d.ReadString(schemas.UpdateBillEstimateResponse_costCategoryGroupSharingPreferenceArn, v.CostCategoryGroupSharingPreferenceArn)
+		case schemas.UpdateBillEstimateResponse_costCategoryGroupSharingPreferenceEffectiveDate:
+			v.CostCategoryGroupSharingPreferenceEffectiveDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateBillEstimateResponse_costCategoryGroupSharingPreferenceEffectiveDate, v.CostCategoryGroupSharingPreferenceEffectiveDate)
+		case schemas.UpdateBillEstimateResponse_costSummary:
+			v.CostSummary = &types.BillEstimateCostSummary{}
+			return v.CostSummary.Deserialize(d)
+		case schemas.UpdateBillEstimateResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateBillEstimateResponse_createdAt, v.CreatedAt)
+		case schemas.UpdateBillEstimateResponse_expiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateBillEstimateResponse_expiresAt, v.ExpiresAt)
+		case schemas.UpdateBillEstimateResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.UpdateBillEstimateResponse_failureMessage, v.FailureMessage)
+		case schemas.UpdateBillEstimateResponse_groupSharingPreference:
+			var ev string
+			if err := d.ReadString(schemas.UpdateBillEstimateResponse_groupSharingPreference, &ev); err != nil {
+				return err
+			}
+			v.GroupSharingPreference = types.GroupSharingPreferenceEnum(ev)
+			return nil
+		case schemas.UpdateBillEstimateResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateBillEstimateResponse_id, v.Id)
+		case schemas.UpdateBillEstimateResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateBillEstimateResponse_name, v.Name)
+		case schemas.UpdateBillEstimateResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateBillEstimateResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BillEstimateStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBillEstimateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateBillEstimate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBillEstimate, schemas.UpdateBillEstimateRequest, schemas.UpdateBillEstimateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateBillEstimate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBillEstimate, schemas.UpdateBillEstimateRequest, schemas.UpdateBillEstimateResponse), output: &UpdateBillEstimateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateBillEstimate"); err != nil {

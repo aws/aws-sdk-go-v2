@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,46 @@ type MalformedByteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedByteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MalformedByteInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedByteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByteInBody != nil {
+		s.WriteInt8(schemas.MalformedByteInput_byteInBody, *v.ByteInBody)
+	}
+	if v.ByteInHeader != nil {
+		s.WriteInt8(schemas.MalformedByteInput_byteInHeader, *v.ByteInHeader)
+	}
+	if v.ByteInPath != nil {
+		s.WriteInt8(schemas.MalformedByteInput_byteInPath, *v.ByteInPath)
+	}
+	if v.ByteInQuery != nil {
+		s.WriteInt8(schemas.MalformedByteInput_byteInQuery, *v.ByteInQuery)
+	}
+}
+func (v *MalformedByteInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MalformedByteInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MalformedByteInput_byteInBody:
+			v.ByteInBody = new(int8)
+			return d.ReadInt8(schemas.MalformedByteInput_byteInBody, v.ByteInBody)
+		case schemas.MalformedByteInput_byteInHeader:
+			v.ByteInHeader = new(int8)
+			return d.ReadInt8(schemas.MalformedByteInput_byteInHeader, v.ByteInHeader)
+		case schemas.MalformedByteInput_byteInPath:
+			v.ByteInPath = new(int8)
+			return d.ReadInt8(schemas.MalformedByteInput_byteInPath, v.ByteInPath)
+		case schemas.MalformedByteInput_byteInQuery:
+			v.ByteInQuery = new(int8)
+			return d.ReadInt8(schemas.MalformedByteInput_byteInQuery, v.ByteInQuery)
+		}
+		return nil
+	})
+}
+
 type MalformedByteOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,16 +88,29 @@ type MalformedByteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedByteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedByteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *MalformedByteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMalformedByteMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpMalformedByte{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedByte, schemas.MalformedByteInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMalformedByte{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedByte, schemas.MalformedByteInput, nil), output: &MalformedByteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "MalformedByte"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,27 @@ type ListSpansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSpansInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSpansRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSpansInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssistantId != nil {
+		s.WriteString(schemas.ListSpansRequest_assistantId, *v.AssistantId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSpansRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSpansRequest_nextToken, *v.NextToken)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.ListSpansRequest_sessionId, *v.SessionId)
+	}
+}
+
 type ListSpansOutput struct {
 
 	// Array of span objects for the session
@@ -66,16 +89,26 @@ type ListSpansOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSpansOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSpansResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSpansResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSpansResponse_nextToken, v.NextToken)
+		case schemas.ListSpansResponse_spans:
+			return deserializeSpanList(d, schemas.ListSpansResponse_spans, &v.Spans)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSpansMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSpans{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSpans, schemas.ListSpansRequest, schemas.ListSpansResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSpans{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSpans, schemas.ListSpansRequest, schemas.ListSpansResponse), output: &ListSpansOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSpans"); err != nil {

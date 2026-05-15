@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaigns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaigns/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,28 @@ type GetConnectInstanceConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConnectInstanceConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectInstanceConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectInstanceConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectInstanceId != nil {
+		s.WriteString(schemas.GetConnectInstanceConfigRequest_connectInstanceId, *v.ConnectInstanceId)
+	}
+}
+func (v *GetConnectInstanceConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConnectInstanceConfigRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConnectInstanceConfigRequest_connectInstanceId:
+			v.ConnectInstanceId = new(string)
+			return d.ReadString(schemas.GetConnectInstanceConfigRequest_connectInstanceId, v.ConnectInstanceId)
+		}
+		return nil
+	})
+}
+
 // GetConnectInstanceConfigResponse
 type GetConnectInstanceConfigOutput struct {
 
@@ -50,16 +74,37 @@ type GetConnectInstanceConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConnectInstanceConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectInstanceConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectInstanceConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectInstanceConfig != nil {
+		s.WriteStruct(schemas.GetConnectInstanceConfigResponse_connectInstanceConfig)
+		v.ConnectInstanceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetConnectInstanceConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConnectInstanceConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConnectInstanceConfigResponse_connectInstanceConfig:
+			v.ConnectInstanceConfig = &types.InstanceConfig{}
+			return v.ConnectInstanceConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConnectInstanceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConnectInstanceConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnectInstanceConfig, schemas.GetConnectInstanceConfigRequest, schemas.GetConnectInstanceConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConnectInstanceConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnectInstanceConfig, schemas.GetConnectInstanceConfigRequest, schemas.GetConnectInstanceConfigResponse), output: &GetConnectInstanceConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetConnectInstanceConfig"); err != nil {

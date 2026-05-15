@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,6 +44,18 @@ type DeleteAccessSourceInput struct {
 	AccessSourceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteAccessSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccessSourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccessSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessSourceId != nil {
+		s.WriteString(schemas.DeleteAccessSourceInput_accessSourceId, *v.AccessSourceId)
+	}
 }
 
 type DeleteAccessSourceOutput struct {
@@ -100,16 +114,63 @@ type DeleteAccessSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccessSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAccessSourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAccessSourceOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteAccessSourceOutput_arn, v.Arn)
+		case schemas.DeleteAccessSourceOutput_cidr:
+			v.Cidr = new(string)
+			return d.ReadString(schemas.DeleteAccessSourceOutput_cidr, v.Cidr)
+		case schemas.DeleteAccessSourceOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeleteAccessSourceOutput_createdAt, v.CreatedAt)
+		case schemas.DeleteAccessSourceOutput_dnsViewId:
+			v.DnsViewId = new(string)
+			return d.ReadString(schemas.DeleteAccessSourceOutput_dnsViewId, v.DnsViewId)
+		case schemas.DeleteAccessSourceOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteAccessSourceOutput_id, v.Id)
+		case schemas.DeleteAccessSourceOutput_ipAddressType:
+			var ev string
+			if err := d.ReadString(schemas.DeleteAccessSourceOutput_ipAddressType, &ev); err != nil {
+				return err
+			}
+			v.IpAddressType = types.IpAddressType(ev)
+			return nil
+		case schemas.DeleteAccessSourceOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteAccessSourceOutput_name, v.Name)
+		case schemas.DeleteAccessSourceOutput_protocol:
+			var ev string
+			if err := d.ReadString(schemas.DeleteAccessSourceOutput_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = types.DnsProtocol(ev)
+			return nil
+		case schemas.DeleteAccessSourceOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteAccessSourceOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CRResourceStatus(ev)
+			return nil
+		case schemas.DeleteAccessSourceOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeleteAccessSourceOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAccessSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAccessSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccessSource, schemas.DeleteAccessSourceInput, schemas.DeleteAccessSourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAccessSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccessSource, schemas.DeleteAccessSourceInput, schemas.DeleteAccessSourceOutput), output: &DeleteAccessSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAccessSource"); err != nil {

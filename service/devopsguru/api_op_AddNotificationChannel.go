@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,20 @@ type AddNotificationChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddNotificationChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddNotificationChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddNotificationChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Config != nil {
+		s.WriteStruct(schemas.AddNotificationChannelRequest_Config)
+		v.Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AddNotificationChannelOutput struct {
 
 	//  The ID of the added notification channel.
@@ -68,16 +84,24 @@ type AddNotificationChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddNotificationChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddNotificationChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddNotificationChannelResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AddNotificationChannelResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddNotificationChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddNotificationChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddNotificationChannel, schemas.AddNotificationChannelRequest, schemas.AddNotificationChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddNotificationChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddNotificationChannel, schemas.AddNotificationChannelRequest, schemas.AddNotificationChannelResponse), output: &AddNotificationChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AddNotificationChannel"); err != nil {

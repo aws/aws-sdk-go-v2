@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,6 +43,19 @@ type UpdateWorkloadIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkloadIdentityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkloadIdentityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkloadIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceOauth2ReturnUrlListType(s, schemas.UpdateWorkloadIdentityRequest_allowedResourceOauth2ReturnUrls, v.AllowedResourceOauth2ReturnUrls)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateWorkloadIdentityRequest_name, *v.Name)
+	}
+}
+
 type UpdateWorkloadIdentityOutput struct {
 
 	// The timestamp when the workload identity was created.
@@ -73,16 +88,35 @@ type UpdateWorkloadIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkloadIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkloadIdentityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkloadIdentityResponse_allowedResourceOauth2ReturnUrls:
+			return deserializeResourceOauth2ReturnUrlListType(d, schemas.UpdateWorkloadIdentityResponse_allowedResourceOauth2ReturnUrls, &v.AllowedResourceOauth2ReturnUrls)
+		case schemas.UpdateWorkloadIdentityResponse_createdTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateWorkloadIdentityResponse_createdTime, v.CreatedTime)
+		case schemas.UpdateWorkloadIdentityResponse_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateWorkloadIdentityResponse_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.UpdateWorkloadIdentityResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateWorkloadIdentityResponse_name, v.Name)
+		case schemas.UpdateWorkloadIdentityResponse_workloadIdentityArn:
+			v.WorkloadIdentityArn = new(string)
+			return d.ReadString(schemas.UpdateWorkloadIdentityResponse_workloadIdentityArn, v.WorkloadIdentityArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkloadIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkloadIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkloadIdentity, schemas.UpdateWorkloadIdentityRequest, schemas.UpdateWorkloadIdentityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorkloadIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkloadIdentity, schemas.UpdateWorkloadIdentityRequest, schemas.UpdateWorkloadIdentityResponse), output: &UpdateWorkloadIdentityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateWorkloadIdentity"); err != nil {

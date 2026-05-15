@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,46 @@ type MalformedIntegerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedIntegerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MalformedIntegerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedIntegerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntegerInBody != nil {
+		s.WriteInt32(schemas.MalformedIntegerInput_integerInBody, *v.IntegerInBody)
+	}
+	if v.IntegerInHeader != nil {
+		s.WriteInt32(schemas.MalformedIntegerInput_integerInHeader, *v.IntegerInHeader)
+	}
+	if v.IntegerInPath != nil {
+		s.WriteInt32(schemas.MalformedIntegerInput_integerInPath, *v.IntegerInPath)
+	}
+	if v.IntegerInQuery != nil {
+		s.WriteInt32(schemas.MalformedIntegerInput_integerInQuery, *v.IntegerInQuery)
+	}
+}
+func (v *MalformedIntegerInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MalformedIntegerInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MalformedIntegerInput_integerInBody:
+			v.IntegerInBody = new(int32)
+			return d.ReadInt32(schemas.MalformedIntegerInput_integerInBody, v.IntegerInBody)
+		case schemas.MalformedIntegerInput_integerInHeader:
+			v.IntegerInHeader = new(int32)
+			return d.ReadInt32(schemas.MalformedIntegerInput_integerInHeader, v.IntegerInHeader)
+		case schemas.MalformedIntegerInput_integerInPath:
+			v.IntegerInPath = new(int32)
+			return d.ReadInt32(schemas.MalformedIntegerInput_integerInPath, v.IntegerInPath)
+		case schemas.MalformedIntegerInput_integerInQuery:
+			v.IntegerInQuery = new(int32)
+			return d.ReadInt32(schemas.MalformedIntegerInput_integerInQuery, v.IntegerInQuery)
+		}
+		return nil
+	})
+}
+
 type MalformedIntegerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,16 +88,29 @@ type MalformedIntegerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedIntegerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedIntegerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *MalformedIntegerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMalformedIntegerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpMalformedInteger{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedInteger, schemas.MalformedIntegerInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMalformedInteger{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedInteger, schemas.MalformedIntegerInput, nil), output: &MalformedIntegerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "MalformedInteger"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,19 @@ type DeleteConnectInstanceIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConnectInstanceIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConnectInstanceIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConnectInstanceIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectInstanceId != nil {
+		s.WriteString(schemas.DeleteConnectInstanceIntegrationRequest_connectInstanceId, *v.ConnectInstanceId)
+	}
+	serializeIntegrationIdentifier(s, schemas.DeleteConnectInstanceIntegrationRequest_integrationIdentifier, v.IntegrationIdentifier)
+}
+
 type DeleteConnectInstanceIntegrationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,16 +65,29 @@ type DeleteConnectInstanceIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConnectInstanceIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConnectInstanceIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteConnectInstanceIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConnectInstanceIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConnectInstanceIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConnectInstanceIntegration, schemas.DeleteConnectInstanceIntegrationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteConnectInstanceIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConnectInstanceIntegration, schemas.DeleteConnectInstanceIntegrationRequest, nil), output: &DeleteConnectInstanceIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteConnectInstanceIntegration"); err != nil {

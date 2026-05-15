@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -126,6 +128,37 @@ type PutRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.PutRuleRequest_Description, *v.Description)
+	}
+	if v.EventBusName != nil {
+		s.WriteString(schemas.PutRuleRequest_EventBusName, *v.EventBusName)
+	}
+	if v.EventPattern != nil {
+		s.WriteString(schemas.PutRuleRequest_EventPattern, *v.EventPattern)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutRuleRequest_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.PutRuleRequest_RoleArn, *v.RoleArn)
+	}
+	if v.ScheduleExpression != nil {
+		s.WriteString(schemas.PutRuleRequest_ScheduleExpression, *v.ScheduleExpression)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.PutRuleRequest_State, string(v.State))
+	}
+	serializeTagList(s, schemas.PutRuleRequest_Tags, v.Tags)
+}
+
 type PutRuleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the rule.
@@ -137,16 +170,24 @@ type PutRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutRuleResponse_RuleArn:
+			v.RuleArn = new(string)
+			return d.ReadString(schemas.PutRuleResponse_RuleArn, v.RuleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRule, schemas.PutRuleRequest, schemas.PutRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRule, schemas.PutRuleRequest, schemas.PutRuleResponse), output: &PutRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutRule"); err != nil {
