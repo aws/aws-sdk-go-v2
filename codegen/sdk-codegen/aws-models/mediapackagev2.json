@@ -1051,6 +1051,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of path to use in manifest URIs. <code>LEAF</code> uses leaf-relative paths (for example, <code>index_1.mpd</code>). <code>ROOT</code> uses root-relative paths that include the full path from root (for example, <code>/out/v1/channel-group/channel/endpoint/index_1.mpd</code>). If you don't specify a value, the default is <code>LEAF</code>.</p>"
                     }
+                },
+                "AvailabilityStartTimeConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#DashAvailabilityStartTimeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the DASH <code>availabilityStartTime</code> attribute of the Media Presentation Description (MPD). If you don't specify a value, MediaPackage uses the default availability start time of <code>2024-01-01T00:00:00Z</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1991,7 +1997,10 @@
                                             }
                                         ]
                                     },
-                                    "Compactness": "STANDARD"
+                                    "Compactness": "STANDARD",
+                                    "AvailabilityStartTimeConfiguration": {
+                                        "FixedAvailabilityStartTime": "2026-04-17T23:00:00.00Z"
+                                    }
                                 }
                             ],
                             "Tags": {
@@ -2205,7 +2214,10 @@
                                         ]
                                     },
                                     "Compactness": "STANDARD",
-                                    "UriPathType": "LEAF"
+                                    "UriPathType": "LEAF",
+                                    "AvailabilityStartTimeConfiguration": {
+                                        "FixedAvailabilityStartTime": "2026-04-17T23:00:00.00Z"
+                                    }
                                 }
                             ],
                             "ETag": "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=",
@@ -2615,6 +2627,21 @@
                     "min": 0,
                     "max": 25
                 }
+            }
+        },
+        "com.amazonaws.mediapackagev2#DashAvailabilityStartTimeConfiguration": {
+            "type": "union",
+            "members": {
+                "FixedAvailabilityStartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fixed availability start time for the DASH manifest, in ISO 8601 date-time format. The value must have hourly granularity, meaning that the minutes, seconds, and fractional seconds must be zero. The value must be on or after <code>2024-01-01T00:00:00Z</code> and must be at least 14 days before the current time.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the DASH <code>availabilityStartTime</code> attribute of the Media Presentation Description (MPD). Use this configuration to set a custom availability start time for your DASH manifest.</p>"
             }
         },
         "com.amazonaws.mediapackagev2#DashBaseUrl": {
@@ -4244,6 +4271,12 @@
                     "target": "com.amazonaws.mediapackagev2#UriPathType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of path used in manifest URIs. <code>LEAF</code> indicates leaf-relative paths. <code>ROOT</code> indicates root-relative paths that include the full path from root.</p>"
+                    }
+                },
+                "AvailabilityStartTimeConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#DashAvailabilityStartTimeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the DASH <code>availabilityStartTime</code> attribute of the Media Presentation Description (MPD).</p>"
                     }
                 }
             },
