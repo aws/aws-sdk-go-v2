@@ -1,3 +1,13 @@
+# Release (2026-05-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.74.0](service/cloudwatchlogs/CHANGELOG.md#v1740-2026-05-15)
+  * **Feature**: Updating the max limit for start query api parameter.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.38.0](service/mediapackagev2/CHANGELOG.md#v1380-2026-05-15)
+  * **Feature**: This release adds support for AvailabilityStartTimeConfiguration in MediaPackageV2 DASH manifests
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.17.0](service/partnercentralselling/CHANGELOG.md#v1170-2026-05-15)
+  * **Feature**: Enable TCV intake on Opportunity to improve Opportunities Hygiene and downstream revenue attribution.
+
 # Release (2026-05-14)
 
 ## Module Highlights

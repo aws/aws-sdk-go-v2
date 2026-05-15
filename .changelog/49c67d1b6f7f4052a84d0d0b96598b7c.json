@@ -1,8 +1,0 @@
-{
-    "id": "49c67d1b-6f7f-4052-a84d-0d0b96598b7c",
-    "type": "feature",
-    "description": "Enable TCV intake on Opportunity to improve Opportunities Hygiene and downstream revenue attribution.",
-    "modules": [
-        "service/partnercentralselling"
-    ]
-}

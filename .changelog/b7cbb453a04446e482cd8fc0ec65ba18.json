@@ -1,8 +1,0 @@
-{
-    "id": "b7cbb453-a044-46e4-82cd-8fc0ec65ba18",
-    "type": "feature",
-    "description": "This release adds support for AvailabilityStartTimeConfiguration in MediaPackageV2 DASH manifests",
-    "modules": [
-        "service/mediapackagev2"
-    ]
-}

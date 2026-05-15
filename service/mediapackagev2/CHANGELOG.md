@@ -1,3 +1,7 @@
+# v1.38.0 (2026-05-15)
+
+* **Feature**: This release adds support for AvailabilityStartTimeConfiguration in MediaPackageV2 DASH manifests
+
 # v1.37.0 (2026-04-29)
 
 * **Feature**: This feature adds configuration for specifying SCTE marker handling and allow greater control over generated manifest and segment URIs

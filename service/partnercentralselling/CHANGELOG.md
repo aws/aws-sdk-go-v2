@@ -1,3 +1,7 @@
+# v1.17.0 (2026-05-15)
+
+* **Feature**: Enable TCV intake on Opportunity to improve Opportunities Hygiene and downstream revenue attribution.
+
 # v1.16.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.
