@@ -116,6 +116,11 @@ type CreateDashManifestConfiguration struct {
 	// This member is required.
 	ManifestName *string
 
+	// The configuration for the DASH availabilityStartTime attribute of the Media
+	// Presentation Description (MPD). If you don't specify a value, MediaPackage uses
+	// the default availability start time of 2024-01-01T00:00:00Z .
+	AvailabilityStartTimeConfiguration DashAvailabilityStartTimeConfiguration
+
 	// The base URLs to use for retrieving segments.
 	BaseUrls []DashBaseUrl
 
@@ -356,6 +361,30 @@ type CreateMssManifestConfiguration struct {
 	ManifestWindowSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+// The configuration for the DASH availabilityStartTime attribute of the Media
+// Presentation Description (MPD). Use this configuration to set a custom
+// availability start time for your DASH manifest.
+//
+// The following types satisfy this interface:
+//
+//	DashAvailabilityStartTimeConfigurationMemberFixedAvailabilityStartTime
+type DashAvailabilityStartTimeConfiguration interface {
+	isDashAvailabilityStartTimeConfiguration()
+}
+
+// The fixed availability start time for the DASH manifest, in ISO 8601 date-time
+// format. The value must have hourly granularity, meaning that the minutes,
+// seconds, and fractional seconds must be zero. The value must be on or after
+// 2024-01-01T00:00:00Z and must be at least 14 days before the current time.
+type DashAvailabilityStartTimeConfigurationMemberFixedAvailabilityStartTime struct {
+	Value time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (*DashAvailabilityStartTimeConfigurationMemberFixedAvailabilityStartTime) isDashAvailabilityStartTimeConfiguration() {
 }
 
 // The base URLs to use for retrieving segments. You can specify multiple
@@ -727,6 +756,10 @@ type GetDashManifestConfiguration struct {
 	//
 	// This member is required.
 	Url *string
+
+	// The configuration for the DASH availabilityStartTime attribute of the Media
+	// Presentation Description (MPD).
+	AvailabilityStartTimeConfiguration DashAvailabilityStartTimeConfiguration
 
 	// The base URL to use for retrieving segments.
 	BaseUrls []DashBaseUrl
@@ -1530,3 +1563,14 @@ type StartTag struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isDashAvailabilityStartTimeConfiguration() {}

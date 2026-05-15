@@ -1,0 +1,8 @@
+{
+    "id": "6cee16ec-4d00-4113-893a-df69e17adcab",
+    "type": "feature",
+    "description": "Updating the max limit for start query api parameter.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

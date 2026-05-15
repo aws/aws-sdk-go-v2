@@ -20,6 +20,7 @@ import (
 	"io/ioutil"
 	"math"
 	"strings"
+	"time"
 )
 
 type awsRestjson1_deserializeOpCancelHarvestJob struct {
@@ -6489,6 +6490,52 @@ func awsRestjson1_deserializeDocumentCustomAdTypeList(v *[]types.CustomAdType, v
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDashAvailabilityStartTimeConfiguration(v *types.DashAvailabilityStartTimeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.DashAvailabilityStartTimeConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "FixedAvailabilityStartTime":
+			var mv time.Time
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				mv = t
+			}
+			uv = &types.DashAvailabilityStartTimeConfigurationMemberFixedAvailabilityStartTime{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDashBaseUrl(v **types.DashBaseUrl, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7512,6 +7559,11 @@ func awsRestjson1_deserializeDocumentGetDashManifestConfiguration(v **types.GetD
 
 	for key, value := range shape {
 		switch key {
+		case "AvailabilityStartTimeConfiguration":
+			if err := awsRestjson1_deserializeDocumentDashAvailabilityStartTimeConfiguration(&sv.AvailabilityStartTimeConfiguration, value); err != nil {
+				return err
+			}
+
 		case "BaseUrls":
 			if err := awsRestjson1_deserializeDocumentDashBaseUrls(&sv.BaseUrls, value); err != nil {
 				return err

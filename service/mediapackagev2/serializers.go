@@ -2987,6 +2987,13 @@ func awsRestjson1_serializeDocumentCreateDashManifestConfiguration(v *types.Crea
 	object := value.Object()
 	defer object.Close()
 
+	if v.AvailabilityStartTimeConfiguration != nil {
+		ok := object.Key("AvailabilityStartTimeConfiguration")
+		if err := awsRestjson1_serializeDocumentDashAvailabilityStartTimeConfiguration(v.AvailabilityStartTimeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BaseUrls != nil {
 		ok := object.Key("BaseUrls")
 		if err := awsRestjson1_serializeDocumentDashBaseUrls(v.BaseUrls, ok); err != nil {
@@ -3302,6 +3309,22 @@ func awsRestjson1_serializeDocumentCustomAdTypeList(v []types.CustomAdType, valu
 	for i := range v {
 		av := array.Value()
 		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDashAvailabilityStartTimeConfiguration(v types.DashAvailabilityStartTimeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.DashAvailabilityStartTimeConfigurationMemberFixedAvailabilityStartTime:
+		av := object.Key("FixedAvailabilityStartTime")
+		av.String(smithytime.FormatDateTime(uv.Value))
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }
