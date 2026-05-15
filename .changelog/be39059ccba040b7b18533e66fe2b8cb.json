@@ -1,0 +1,8 @@
+{
+    "id": "be39059c-cba0-40b7-b185-33e66fe2b8cb",
+    "type": "feature",
+    "description": "Support SHA-256 for CloudFront signer",
+    "modules": [
+        "feature/cloudfront/sign"
+    ]
+}

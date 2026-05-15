@@ -15,6 +15,8 @@ const (
 	CookieSignatureName = "CloudFront-Signature"
 	// CookieKeyIDName name of the signing Key ID cookie
 	CookieKeyIDName = "CloudFront-Key-Pair-Id"
+	// CookieHashAlgorithmName name of the hash algorithm cookie
+	CookieHashAlgorithmName = "CloudFront-Hash-Algorithm"
 )
 
 // A CookieOptions optional additional options that can be applied to the signed
@@ -58,7 +60,11 @@ type CookieSigner struct {
 	keyID  string
 	signer crypto.Signer
 
-	Opts CookieOptions
+	// HashAlg specifies the hash algorithm for signing. Defaults to
+	// HashSHA1. Set to HashSHA256 to produce SHA-256 signed cookies
+	// with a CloudFront-Hash-Algorithm cookie.
+	HashAlg HashAlgorithm
+	Opts    CookieOptions
 }
 
 // NewCookieSigner constructs and returns a new CookieSigner to be used to for
@@ -125,7 +131,7 @@ func (s CookieSigner) Sign(u string, expires time.Time, opts ...func(*CookieOpti
 	}
 
 	p := NewCannedPolicy(resource, expires)
-	return createCookies(p, s.keyID, s.signer, s.Opts.apply(opts...))
+	return createCookies(p, s.keyID, s.signer, s.HashAlg, s.Opts.apply(opts...))
 }
 
 // Returns and validates the URL's scheme.
@@ -202,13 +208,13 @@ func cookieURLScheme(u string) (string, error) {
 //	    }
 //	}
 func (s CookieSigner) SignWithPolicy(p *Policy, opts ...func(*CookieOptions)) ([]*http.Cookie, error) {
-	return createCookies(p, s.keyID, s.signer, s.Opts.apply(opts...))
+	return createCookies(p, s.keyID, s.signer, s.HashAlg, s.Opts.apply(opts...))
 }
 
 // Prepares the cookies to be attached to the header. An (optional) options
 // struct is provided in case people don't want to manually edit their cookies.
-func createCookies(p *Policy, keyID string, signer crypto.Signer, opt CookieOptions) ([]*http.Cookie, error) {
-	b64Sig, b64Policy, err := p.Sign(signer)
+func createCookies(p *Policy, keyID string, signer crypto.Signer, hashAlg HashAlgorithm, opt CookieOptions) ([]*http.Cookie, error) {
+	b64Sig, b64Policy, err := p.SignWithAlgorithm(signer, hashAlg)
 	if err != nil {
 		return nil, err
 	}
@@ -234,6 +240,18 @@ func createCookies(p *Policy, keyID string, signer crypto.Signer, opt CookieOpti
 	}
 
 	cookies := []*http.Cookie{cPolicy, cSignature, cKey}
+
+	// Hash algorithm cookie is always appended when explicitly set. When
+	// HashAlg is empty (zero value), it defaults to SHA-1 without the
+	// cookie for backward compatibility.
+	if hashAlg != "" {
+		cookies = append(cookies, &http.Cookie{
+			Name:     CookieHashAlgorithmName,
+			Value:    string(hashAlg),
+			HttpOnly: true,
+			Expires:  opt.Expires,
+		})
+	}
 
 	// Applie the cookie options
 	for _, c := range cookies {
