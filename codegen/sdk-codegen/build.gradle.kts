@@ -65,6 +65,17 @@ tasks.register("generate-smithy-build") {
         val modelsDirProp: String by project
         val models = project.file(modelsDirProp);
 
+        val experimentalSerdeEnv = System.getenv("SMITHY_GO_EXPERIMENTAL_SERDE") ?: ""
+        val experimentalSerdeServices = if (experimentalSerdeEnv.isNotEmpty()) {
+            experimentalSerdeEnv.split(",")
+        } else {
+            emptyList()
+        }
+
+        val rolloutExperimentalSerdeServices = listOf(
+           "aws.protocoltests.json10"
+        )
+
         fileTree(models).filter { it.isFile }.files.forEach eachFile@{ file ->
             val model = Model.assembler()
                     .addImport(file.absolutePath)
@@ -88,6 +99,12 @@ tasks.register("generate-smithy-build") {
                 }
             }
 
+            val useExperimentalSerde = experimentalSerdeServices.any {
+                service.id.toString().startsWith(it)
+            } || rolloutExperimentalSerdeServices.any {
+                service.id.toString().startsWith(it)
+            }
+
             val serviceTrait = service.getTrait(ServiceTrait::class.javaObjectType).get();
 
             val sdkId = serviceTrait.sdkId
@@ -100,6 +117,7 @@ tasks.register("generate-smithy-build") {
                             .withMember("go-codegen", Node.objectNodeBuilder()
                                     .withMember("service", service.id.toString())
                                     .withMember("module", "github.com/aws/aws-sdk-go-v2/service/$sdkId")
+                                    .withMember("useExperimentalSerde", useExperimentalSerde)
                                     .build()))
                     .build()
             projectionsBuilder.withMember(sdkId + "." + service.version.toLowerCase(), projectionContents)

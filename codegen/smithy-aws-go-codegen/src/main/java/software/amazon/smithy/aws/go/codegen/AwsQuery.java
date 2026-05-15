@@ -27,7 +27,6 @@ import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.ErrorTrait;
-import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionGenerator;
 import software.amazon.smithy.go.codegen.endpoints.FnGenerator;
 
 /**
@@ -204,12 +203,6 @@ class AwsQuery extends HttpRpcProtocolGenerator {
     @Override
     public void generateEventStreamComponents(GenerationContext context) {
         throw new CodegenException("event streams not supported with AWS QUERY protocol.");
-    }
-
-    @Override
-    public void generateEndpointResolution(GenerationContext context) {
-        var generator = new EndpointResolutionGenerator(new AwsFnProvider());
-        generator.generate(context);
     }
 
     @Override
