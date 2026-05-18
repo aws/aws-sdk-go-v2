@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a user account for the specified Amazon Connect instance.
+// Creates a user account for the specified Connect Customer instance.
 //
 // Certain [UserIdentityInfo] parameters are required in some situations. For example, Email ,
-// FirstName and LastName are required if you are using Amazon Connect or SAML for
-// identity management.
+// FirstName and LastName are required if you are using Connect Customer or SAML
+// for identity management.
 //
 // Fields in PhoneConfig cannot be set simultaneously with their corresponding
 // channel-specific configuration parameters. Specifically:
@@ -33,8 +33,8 @@ import (
 // AfterContactWorkConfigs , PhoneNumberConfigs , PersistentConnectionConfigs , and
 // VoiceEnhancementConfigs for per-channel configuration.
 //
-// For information about how to create users using the Amazon Connect admin
-// website, see [Add Users]in the Amazon Connect Administrator Guide.
+// For information about how to create users using the Connect Customer admin
+// website, see [Add Users]in the Connect Customer Administrator Guide.
 //
 // [Add Users]: https://docs.aws.amazon.com/connect/latest/adminguide/user-management.html
 // [UserIdentityInfo]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UserIdentityInfo.html
@@ -55,8 +55,8 @@ func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns
 
 type CreateUserInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -97,15 +97,15 @@ type CreateUserInput struct {
 	AutoAcceptConfigs []types.AutoAcceptConfig
 
 	// The identifier of the user account in the directory used for identity
-	// management. If Amazon Connect cannot access the directory, you can specify this
-	// identifier to authenticate users. If you include the identifier, we assume that
-	// Amazon Connect cannot access the directory. Otherwise, the identity information
-	// is used to authenticate users from your directory.
+	// management. If Connect Customer cannot access the directory, you can specify
+	// this identifier to authenticate users. If you include the identifier, we assume
+	// that Connect Customer cannot access the directory. Otherwise, the identity
+	// information is used to authenticate users from your directory.
 	//
 	// This parameter is required if you are using an existing directory for identity
-	// management in Amazon Connect when Amazon Connect cannot access your directory to
-	// authenticate users. If you are using SAML for identity management and include
-	// this parameter, an error is returned.
+	// management in Connect Customer when Connect Customer cannot access your
+	// directory to authenticate users. If you are using SAML for identity management
+	// and include this parameter, an error is returned.
 	DirectoryUserId *string
 
 	// The identifier of the hierarchy group for the user.
@@ -115,7 +115,7 @@ type CreateUserInput struct {
 	IdentityInfo *types.UserIdentityInfo
 
 	// The password for the user account. A password is required if you are using
-	// Amazon Connect for identity management. Otherwise, it is an error to include a
+	// Connect Customer for identity management. Otherwise, it is an error to include a
 	// password.
 	Password *string
 

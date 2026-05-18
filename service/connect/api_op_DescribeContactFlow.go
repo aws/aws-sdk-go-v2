@@ -13,7 +13,7 @@ import (
 
 // Describes the specified flow.
 //
-// You can also create and update flows using the [Amazon Connect Flow language].
+// You can also create and update flows using the [Connect Customer Flow language].
 //
 // Use the $SAVED alias in the request to describe the SAVED content of a Flow.
 // For example, arn:aws:.../contact-flow/{id}:$SAVED . After a flow is published,
@@ -26,7 +26,7 @@ import (
 // The PUBLISHED status will initiate validation on the content. SAVED does not
 // initiate validation of the content. SAVED | PUBLISHED
 //
-// [Amazon Connect Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
+// [Connect Customer Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
 func (c *Client) DescribeContactFlow(ctx context.Context, params *DescribeContactFlowInput, optFns ...func(*Options)) (*DescribeContactFlowOutput, error) {
 	if params == nil {
 		params = &DescribeContactFlowInput{}
@@ -49,7 +49,7 @@ type DescribeContactFlowInput struct {
 	// This member is required.
 	ContactFlowId *string
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Connect Customer instance.
 	//
 	// This member is required.
 	InstanceId *string

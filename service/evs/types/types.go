@@ -34,7 +34,7 @@ type Check struct {
 	//   - HOST_COUNT : Checks that your environment has a minimum of 4 hosts.
 	//
 	// If this check fails, you will need to add hosts so that your environment meets
-	//   this minimum requirement. Amazon EVS only supports environments with 4-16 hosts.
+	//   this minimum requirement. Amazon EVS only supports environments with 4-32 hosts.
 	Type CheckType
 
 	noSmithyDocumentSerde
@@ -287,7 +287,7 @@ type ErrorDetail struct {
 // An ESX host that runs on an Amazon EC2 bare metal instance. Four hosts are
 // created in an Amazon EVS environment during environment creation. You can add
 // hosts to an environment using the CreateEnvironmentHost operation. Amazon EVS
-// supports 4-16 hosts per environment.
+// supports 4-32 hosts per environment.
 type Host struct {
 
 	//  The date and time that the host was created.

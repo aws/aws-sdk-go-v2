@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches evaluation forms in an Amazon Connect instance, with optional
+// Searches evaluation forms in an Connect Customer instance, with optional
 // filtering.
 //
 // # Use cases
@@ -32,9 +32,9 @@ import (
 //     recently changed contact evaluations, try calling the API again in a few
 //     seconds.
 //
-// Endpoints: See [Amazon Connect endpoints and quotas].
+// Endpoints: See [Connect Customer endpoints and quotas].
 //
-// [Amazon Connect endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+// [Connect Customer endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 func (c *Client) SearchEvaluationForms(ctx context.Context, params *SearchEvaluationFormsInput, optFns ...func(*Options)) (*SearchEvaluationFormsOutput, error) {
 	if params == nil {
 		params = &SearchEvaluationFormsInput{}
@@ -52,8 +52,8 @@ func (c *Client) SearchEvaluationForms(ctx context.Context, params *SearchEvalua
 
 type SearchEvaluationFormsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

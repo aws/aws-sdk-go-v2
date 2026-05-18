@@ -759,6 +759,26 @@ func (DeploymentControllerType) Values() []DeploymentControllerType {
 	}
 }
 
+type DeploymentLifecycleHookAction string
+
+// Enum values for DeploymentLifecycleHookAction
+const (
+	DeploymentLifecycleHookActionRollback DeploymentLifecycleHookAction = "ROLLBACK"
+	DeploymentLifecycleHookActionContinue DeploymentLifecycleHookAction = "CONTINUE"
+)
+
+// Values returns all known values for DeploymentLifecycleHookAction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentLifecycleHookAction) Values() []DeploymentLifecycleHookAction {
+	return []DeploymentLifecycleHookAction{
+		"ROLLBACK",
+		"CONTINUE",
+	}
+}
+
 type DeploymentLifecycleHookStage string
 
 // Enum values for DeploymentLifecycleHookStage
@@ -768,6 +788,7 @@ const (
 	DeploymentLifecycleHookStagePostScaleUp                DeploymentLifecycleHookStage = "POST_SCALE_UP"
 	DeploymentLifecycleHookStageTestTrafficShift           DeploymentLifecycleHookStage = "TEST_TRAFFIC_SHIFT"
 	DeploymentLifecycleHookStagePostTestTrafficShift       DeploymentLifecycleHookStage = "POST_TEST_TRAFFIC_SHIFT"
+	DeploymentLifecycleHookStagePreProductionTrafficShift  DeploymentLifecycleHookStage = "PRE_PRODUCTION_TRAFFIC_SHIFT"
 	DeploymentLifecycleHookStageProductionTrafficShift     DeploymentLifecycleHookStage = "PRODUCTION_TRAFFIC_SHIFT"
 	DeploymentLifecycleHookStagePostProductionTrafficShift DeploymentLifecycleHookStage = "POST_PRODUCTION_TRAFFIC_SHIFT"
 )
@@ -784,8 +805,55 @@ func (DeploymentLifecycleHookStage) Values() []DeploymentLifecycleHookStage {
 		"POST_SCALE_UP",
 		"TEST_TRAFFIC_SHIFT",
 		"POST_TEST_TRAFFIC_SHIFT",
+		"PRE_PRODUCTION_TRAFFIC_SHIFT",
 		"PRODUCTION_TRAFFIC_SHIFT",
 		"POST_PRODUCTION_TRAFFIC_SHIFT",
+	}
+}
+
+type DeploymentLifecycleHookStatus string
+
+// Enum values for DeploymentLifecycleHookStatus
+const (
+	DeploymentLifecycleHookStatusAwaitingAction DeploymentLifecycleHookStatus = "AWAITING_ACTION"
+	DeploymentLifecycleHookStatusInProgress     DeploymentLifecycleHookStatus = "IN_PROGRESS"
+	DeploymentLifecycleHookStatusSucceeded      DeploymentLifecycleHookStatus = "SUCCEEDED"
+	DeploymentLifecycleHookStatusFailed         DeploymentLifecycleHookStatus = "FAILED"
+	DeploymentLifecycleHookStatusTimedOut       DeploymentLifecycleHookStatus = "TIMED_OUT"
+)
+
+// Values returns all known values for DeploymentLifecycleHookStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentLifecycleHookStatus) Values() []DeploymentLifecycleHookStatus {
+	return []DeploymentLifecycleHookStatus{
+		"AWAITING_ACTION",
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+		"TIMED_OUT",
+	}
+}
+
+type DeploymentLifecycleHookTargetType string
+
+// Enum values for DeploymentLifecycleHookTargetType
+const (
+	DeploymentLifecycleHookTargetTypeAwsLambda DeploymentLifecycleHookTargetType = "AWS_LAMBDA"
+	DeploymentLifecycleHookTargetTypePause     DeploymentLifecycleHookTargetType = "PAUSE"
+)
+
+// Values returns all known values for DeploymentLifecycleHookTargetType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentLifecycleHookTargetType) Values() []DeploymentLifecycleHookTargetType {
+	return []DeploymentLifecycleHookTargetType{
+		"AWS_LAMBDA",
+		"PAUSE",
 	}
 }
 

@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new queue for the specified Amazon Connect instance.
+// Creates a new queue for the specified Connect Customer instance.
 //
 //   - If the phone number is claimed to a traffic distribution group that was
-//     created in the same Region as the Amazon Connect instance where you are calling
-//     this API, then you can use a full phone number ARN or a UUID for
+//     created in the same Region as the Connect Customer instance where you are
+//     calling this API, then you can use a full phone number ARN or a UUID for
 //     OutboundCallerIdNumberId . However, if the phone number is claimed to a
 //     traffic distribution group that is in one Region, and you are calling this API
 //     from an instance in another Amazon Web Services Region that is associated with
@@ -54,8 +54,8 @@ type CreateQueueInput struct {
 	// This member is required.
 	HoursOfOperationId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

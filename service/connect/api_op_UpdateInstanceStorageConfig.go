@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
+// This API is in preview release for Connect Customer and is subject to change.
 //
 // Updates an existing configuration for a resource type. This API is idempotent.
 func (c *Client) UpdateInstanceStorageConfig(ctx context.Context, params *UpdateInstanceStorageConfigInput, optFns ...func(*Options)) (*UpdateInstanceStorageConfigOutput, error) {
@@ -37,8 +37,8 @@ type UpdateInstanceStorageConfigInput struct {
 	// This member is required.
 	AssociationId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

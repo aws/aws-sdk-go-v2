@@ -13,7 +13,7 @@ import (
 
 // Places an inbound in-app, web, or video call to a contact, and then initiates
 // the flow. It performs the actions in the flow that are specified (in
-// ContactFlowId) and present in the Amazon Connect instance (specified as
+// ContactFlowId) and present in the Connect Customer instance (specified as
 // InstanceId).
 func (c *Client) StartWebRTCContact(ctx context.Context, params *StartWebRTCContactInput, optFns ...func(*Options)) (*StartWebRTCContactOutput, error) {
 	if params == nil {
@@ -32,18 +32,19 @@ func (c *Client) StartWebRTCContact(ctx context.Context, params *StartWebRTCCont
 
 type StartWebRTCContactInput struct {
 
-	// The identifier of the flow for the call. To see the ContactFlowId in the Amazon
-	// Connect admin website, on the navigation menu go to Routing, Flows. Choose the
-	// flow. On the flow page, under the name of the flow, choose Show additional flow
-	// information. The ContactFlowId is the last part of the ARN, shown here in bold:
+	// The identifier of the flow for the call. To see the ContactFlowId in the
+	// Connect Customer admin website, on the navigation menu go to Routing, Flows.
+	// Choose the flow. On the flow page, under the name of the flow, choose Show
+	// additional flow information. The ContactFlowId is the last part of the ARN,
+	// shown here in bold:
 	//
 	// arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx
 	//
 	// This member is required.
 	ContactFlowId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -60,7 +61,7 @@ type StartWebRTCContactInput struct {
 	AllowedCapabilities *types.AllowedCapabilities
 
 	// A custom key-value pair using an attribute map. The attributes are standard
-	// Amazon Connect attributes, and can be accessed in flows just like any other
+	// Connect Customer attributes, and can be accessed in flows just like any other
 	// contact attributes.
 	//
 	// There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact.
@@ -87,8 +88,8 @@ type StartWebRTCContactInput struct {
 	// during task creation.
 	References map[string]types.Reference
 
-	// The unique identifier for an Amazon Connect contact. This identifier is related
-	// to the contact starting.
+	// The unique identifier for an Connect Customer contact. This identifier is
+	// related to the contact starting.
 	RelatedContactId *string
 
 	noSmithyDocumentSerde
@@ -100,7 +101,7 @@ type StartWebRTCContactOutput struct {
 	// to connect to the call.
 	ConnectionData *types.ConnectionData
 
-	// The identifier of the contact in this instance of Amazon Connect.
+	// The identifier of the contact in this instance of Connect Customer.
 	ContactId *string
 
 	// The identifier for a contact participant. The ParticipantId for a contact

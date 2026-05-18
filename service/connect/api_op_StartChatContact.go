@@ -12,8 +12,8 @@ import (
 )
 
 // Initiates a flow to start a new chat for the customer. Response of this API
-// provides a token required to obtain credentials from the [CreateParticipantConnection]API in the Amazon
-// Connect Participant Service.
+// provides a token required to obtain credentials from the [CreateParticipantConnection]API in the Connect
+// Customer Participant Service.
 //
 // When a new chat contact is successfully created, clients must subscribe to the
 // participant’s connection for the created chat within 5 minutes. This is achieved
@@ -30,17 +30,17 @@ import (
 // account may not support the ability to configure custom chat durations. For more
 // information, contact Amazon Web Services Support.
 //
-// For more information about chat, see the following topics in the Amazon Connect
-// Administrator Guide:
+// For more information about chat, see the following topics in the Connect
+// Customer Administrator Guide:
 //
-// [Concepts: Web and mobile messaging capabilities in Amazon Connect]
+// [Concepts: Web and mobile messaging capabilities in Connect Customer]
 //
-// [Amazon Connect Chat security best practices]
+// [Connect Customer Chat security best practices]
 //
 // [CreateParticipantConnection]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
-// [Concepts: Web and mobile messaging capabilities in Amazon Connect]: https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html
+// [Concepts: Web and mobile messaging capabilities in Connect Customer]: https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html
+// [Connect Customer Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 // [quota for concurrent active chats]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
-// [Amazon Connect Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 func (c *Client) StartChatContact(ctx context.Context, params *StartChatContactInput, optFns ...func(*Options)) (*StartChatContactOutput, error) {
 	if params == nil {
 		params = &StartChatContactInput{}
@@ -59,7 +59,7 @@ func (c *Client) StartChatContact(ctx context.Context, params *StartChatContactI
 type StartChatContactInput struct {
 
 	// The identifier of the flow for initiating the chat. To see the ContactFlowId in
-	// the Amazon Connect admin website, on the navigation menu go to Routing, Flows.
+	// the Connect Customer admin website, on the navigation menu go to Routing, Flows.
 	// Choose the flow. On the flow page, under the name of the flow, choose Show
 	// additional flow information. The ContactFlowId is the last part of the ARN,
 	// shown here in bold:
@@ -69,8 +69,8 @@ type StartChatContactInput struct {
 	// This member is required.
 	ContactFlowId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -83,7 +83,7 @@ type StartChatContactInput struct {
 	ParticipantDetails *types.ParticipantDetails
 
 	// A custom key-value pair using an attribute map. The attributes are standard
-	// Amazon Connect attributes. They can be accessed in flows just like any other
+	// Connect Customer attributes. They can be accessed in flows just like any other
 	// contact attributes.
 	//
 	// There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact.
@@ -123,14 +123,14 @@ type StartChatContactInput struct {
 	// [Enable persistent chat]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
 	PersistentChat *types.PersistentChat
 
-	// The unique identifier for an Amazon Connect contact. This identifier is related
-	// to the chat starting.
+	// The unique identifier for an Connect Customer contact. This identifier is
+	// related to the chat starting.
 	//
 	// You cannot provide data for both RelatedContactId and PersistentChat.
 	RelatedContactId *string
 
 	// A set of system defined key-value pairs stored on individual contact segments
-	// using an attribute map. The attributes are standard Amazon Connect attributes.
+	// using an attribute map. The attributes are standard Connect Customer attributes.
 	// They can be accessed in flows.
 	//
 	// Attribute keys can include only alphanumeric, -, and _.
@@ -165,7 +165,7 @@ type StartChatContactInput struct {
 
 type StartChatContactOutput struct {
 
-	// The identifier of this contact within the Amazon Connect instance.
+	// The identifier of this contact within the Connect Customer instance.
 	ContactId *string
 
 	// The contactId from which a persistent chat session is started. This field is

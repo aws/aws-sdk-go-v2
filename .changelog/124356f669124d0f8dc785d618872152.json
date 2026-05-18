@@ -1,0 +1,8 @@
+{
+    "id": "124356f6-6912-4d0f-8dc7-85d618872152",
+    "type": "feature",
+    "description": "Adds support for up to 3 mediaTailorPlaybackConfiguration objects in an ad configuration resource",
+    "modules": [
+        "service/ivs"
+    ]
+}

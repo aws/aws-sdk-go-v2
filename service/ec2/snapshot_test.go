@@ -4142,6 +4142,18 @@ func TestCheckSnapshot_DescribeIpamPolicies(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeIpamPoolAllocations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIpamPoolAllocations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeIpamPoolAllocations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeIpamPools(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeIpamPools(context.Background(), nil, func(o *Options) {
@@ -7651,6 +7663,18 @@ func TestCheckSnapshot_ModifyIpamPool(t *testing.T) {
 	_, err := svc.ModifyIpamPool(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyIpamPool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyIpamPoolAllocation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyIpamPoolAllocation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyIpamPoolAllocation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -13297,6 +13321,18 @@ func TestUpdateSnapshot_DescribeIpamPolicies(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeIpamPoolAllocations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIpamPoolAllocations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeIpamPoolAllocations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeIpamPools(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeIpamPools(context.Background(), nil, func(o *Options) {
@@ -16806,6 +16842,18 @@ func TestUpdateSnapshot_ModifyIpamPool(t *testing.T) {
 	_, err := svc.ModifyIpamPool(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyIpamPool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyIpamPoolAllocation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyIpamPoolAllocation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyIpamPoolAllocation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

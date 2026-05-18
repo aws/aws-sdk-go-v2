@@ -233,6 +233,15 @@ type ActiveIAMPolicyAssignment struct {
 	noSmithyDocumentSerde
 }
 
+// Additional notes that provide supplementary context for a column.
+type AdditionalNotes struct {
+
+	// The additional notes text.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
 // An ad hoc (one-time) filtering option.
 type AdHocFilteringOption struct {
 
@@ -4285,6 +4294,31 @@ type ColumnSchema struct {
 	noSmithyDocumentSerde
 }
 
+// A semantic property for a column.
+type ColumnSemanticProperty struct {
+
+	// Additional notes for the column.
+	AdditionalNotes *AdditionalNotes
+
+	// A description of the column.
+	Description *ColumnDescription
+
+	// The semantic type of the column.
+	SemanticType *ColumnSemanticType
+
+	noSmithyDocumentSerde
+}
+
+// The semantic type information for a column in the new data preparation
+// experience.
+type ColumnSemanticType struct {
+
+	// The geographical role of the column in the new data preparation experience.
+	GeographicalRole GeoSpatialDataRole
+
+	noSmithyDocumentSerde
+}
+
 // The sort configuration for a column that is not used in a field well.
 type ColumnSort struct {
 
@@ -5235,6 +5269,17 @@ type CustomFilterListConfiguration struct {
 	//
 	//   - FILTER_ALL_VALUES
 	SelectAllOptions CategoryFilterSelectAllOptions
+
+	noSmithyDocumentSerde
+}
+
+// A custom instruction that provides guidance on how the dataset should be
+// consumed.
+type CustomInstruction struct {
+
+	// An inline custom instruction containing text and optional uploaded document
+	// metadata.
+	InlineCustomInstruction *InlineCustomInstruction
 
 	noSmithyDocumentSerde
 }
@@ -6566,6 +6611,30 @@ type DataSetSearchFilter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A description structure for dataset-level semantic metadata.
+type DataSetSemanticDescription struct {
+
+	// The descriptive text for the dataset.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// Semantic metadata for a dataset, including a description and custom
+// instructions.
+type DataSetSemanticMetadata struct {
+
+	// A list of custom instructions that guide how the dataset should be consumed.
+	CustomInstructions []CustomInstruction
+
+	// A description of the dataset.
+	Description *DataSetSemanticDescription
 
 	noSmithyDocumentSerde
 }
@@ -11450,6 +11519,21 @@ type Ingestion struct {
 
 	// Information about rows for a data set SPICE ingestion.
 	RowInfo *RowInfo
+
+	noSmithyDocumentSerde
+}
+
+// An inline custom instruction with text content and optional file upload
+// metadata.
+type InlineCustomInstruction struct {
+
+	// The instruction text content.
+	//
+	// This member is required.
+	InstructionText *string
+
+	// Metadata about an uploaded document associated with this instruction.
+	UploadedDocumentMetadata *UploadedDocumentMetadata
 
 	noSmithyDocumentSerde
 }
@@ -17086,6 +17170,10 @@ type SemanticEntityType struct {
 // structured for analysis and reporting.
 type SemanticModelConfiguration struct {
 
+	// The dataset-level semantic metadata, including a description and custom
+	// instructions.
+	SemanticMetadata []DataSetSemanticMetadata
+
 	// A map of semantic tables that define the analytical structure.
 	TableMap map[string]SemanticTable
 
@@ -17109,6 +17197,9 @@ type SemanticTable struct {
 	// Configuration for row level security that control data access for this semantic
 	// table.
 	RowLevelPermissionConfiguration *RowLevelPermissionConfiguration
+
+	// The column-level semantic metadata for this semantic table.
+	SemanticMetadata *TableSemanticMetadata
 
 	noSmithyDocumentSerde
 }
@@ -17209,6 +17300,20 @@ type ShapeConditionalFormat struct {
 	//
 	// This member is required.
 	BackgroundColor *ConditionalFormattingColor
+
+	noSmithyDocumentSerde
+}
+
+// Semantic metadata shared across one or more columns.
+type SharedColumnSemanticMetadata struct {
+
+	// The semantic properties for the specified columns.
+	//
+	// This member is required.
+	ColumnProperties []ColumnSemanticProperty
+
+	// The names of the columns this metadata applies to.
+	ColumnNames []string
 
 	noSmithyDocumentSerde
 }
@@ -18756,6 +18861,15 @@ type TableRowConditionalFormatting struct {
 
 	// The conditional formatting color (solid, gradient) of the text for a table row.
 	TextColor *ConditionalFormattingColor
+
+	noSmithyDocumentSerde
+}
+
+// Column-level semantic metadata for a semantic table.
+type TableSemanticMetadata struct {
+
+	// A list of column semantic metadata entries.
+	ColumnMetadata []SharedColumnSemanticMetadata
 
 	noSmithyDocumentSerde
 }
@@ -21165,6 +21279,15 @@ type UntagColumnOperation struct {
 	//
 	// This member is required.
 	TagNames []ColumnTagName
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for an uploaded document associated with a custom instruction.
+type UploadedDocumentMetadata struct {
+
+	// The name of the uploaded document.
+	Name *string
 
 	noSmithyDocumentSerde
 }

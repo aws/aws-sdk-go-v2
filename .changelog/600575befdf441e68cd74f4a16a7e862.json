@@ -1,0 +1,8 @@
+{
+    "id": "600575be-fdf4-41e6-8cd7-4f4a16a7e862",
+    "type": "feature",
+    "description": "Amazon ECS now supports Pause lifecycle hooks for service deployments, allowing customers to automatically pause deployments at specified stages and use the new ContinueServiceDeployment API to continue or roll back with confidence.",
+    "modules": [
+        "service/ecs"
+    ]
+}

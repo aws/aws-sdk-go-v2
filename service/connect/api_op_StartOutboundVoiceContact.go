@@ -26,18 +26,18 @@ import (
 //
 // UK numbers with a 447 prefix are not allowed by default. Before you can dial
 // these UK mobile numbers, you must submit a service quota increase request. For
-// more information, see [Amazon Connect Service Quotas]in the Amazon Connect Administrator Guide.
+// more information, see [Connect Customer Service Quotas]in the Connect Customer Administrator Guide.
 //
 // Campaign calls are not allowed by default. Before you can make a call with
 // TrafficType = CAMPAIGN , you must submit a service quota increase request to the
-// quota [Amazon Connect campaigns].
+// quota [Connect Customer campaigns].
 //
 // For Preview dialing mode, only the Amazon Connect outbound campaigns service
 // principal is allowed to assume a role in your account and call this API with
 // OutboundStrategy.
 //
-// [Amazon Connect Service Quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
-// [Amazon Connect campaigns]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#outbound-communications-quotas
+// [Connect Customer Service Quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
+// [Connect Customer campaigns]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#outbound-communications-quotas
 func (c *Client) StartOutboundVoiceContact(ctx context.Context, params *StartOutboundVoiceContactInput, optFns ...func(*Options)) (*StartOutboundVoiceContactOutput, error) {
 	if params == nil {
 		params = &StartOutboundVoiceContactInput{}
@@ -56,10 +56,10 @@ func (c *Client) StartOutboundVoiceContact(ctx context.Context, params *StartOut
 type StartOutboundVoiceContactInput struct {
 
 	// The identifier of the flow for the outbound call. To see the ContactFlowId in
-	// the Amazon Connect admin website, on the navigation menu go to Routing, Contact
-	// Flows. Choose the flow. On the flow page, under the name of the flow, choose
-	// Show additional flow information. The ContactFlowId is the last part of the ARN,
-	// shown here in bold:
+	// the Connect Customer admin website, on the navigation menu go to Routing,
+	// Contact Flows. Choose the flow. On the flow page, under the name of the flow,
+	// choose Show additional flow information. The ContactFlowId is the last part of
+	// the ARN, shown here in bold:
 	//
 	// arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx
 	//
@@ -71,8 +71,8 @@ type StartOutboundVoiceContactInput struct {
 	// This member is required.
 	DestinationPhoneNumber *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -83,7 +83,7 @@ type StartOutboundVoiceContactInput struct {
 	AnswerMachineDetectionConfig *types.AnswerMachineDetectionConfig
 
 	// A custom key-value pair using an attribute map. The attributes are standard
-	// Amazon Connect attributes, and can be accessed in flows just like any other
+	// Connect Customer attributes, and can be accessed in flows just like any other
 	// contact attributes.
 	//
 	// There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact.
@@ -103,7 +103,7 @@ type StartOutboundVoiceContactInput struct {
 	ClientToken *string
 
 	// A description of the voice contact that appears in the agent's snapshot in the
-	// CCP logs. For more information about CCP logs, see [Download and review CCP logs]in the Amazon Connect
+	// CCP logs. For more information about CCP logs, see [Download and review CCP logs]in the Connect Customer
 	// Administrator Guide.
 	//
 	// [Download and review CCP logs]: https://docs.aws.amazon.com/connect/latest/adminguide/download-ccp-logs.html
@@ -139,12 +139,12 @@ type StartOutboundVoiceContactInput struct {
 	// call, in seconds
 	RingTimeoutInSeconds *int32
 
-	// The phone number associated with the Amazon Connect instance, in E.164 format.
-	// If you do not specify a source phone number, you must specify a queue.
+	// The phone number associated with the Connect Customer instance, in E.164
+	// format. If you do not specify a source phone number, you must specify a queue.
 	SourcePhoneNumber *string
 
 	// Denotes the class of traffic. Calls with different traffic types are handled
-	// differently by Amazon Connect. The default value is GENERAL . Use CAMPAIGN if
+	// differently by Connect Customer. The default value is GENERAL . Use CAMPAIGN if
 	// EnableAnswerMachineDetection is set to true . For all other cases, use GENERAL .
 	TrafficType types.TrafficType
 
@@ -153,7 +153,7 @@ type StartOutboundVoiceContactInput struct {
 
 type StartOutboundVoiceContactOutput struct {
 
-	// The identifier of this contact within the Amazon Connect instance.
+	// The identifier of this contact within the Connect Customer instance.
 	ContactId *string
 
 	// Metadata pertaining to the operation's result.

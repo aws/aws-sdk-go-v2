@@ -12,7 +12,7 @@ import (
 )
 
 // Provides summary information about the Amazon Web Services resource
-// associations for the specified Amazon Connect instance.
+// associations for the specified Connect Customer instance.
 func (c *Client) ListIntegrationAssociations(ctx context.Context, params *ListIntegrationAssociationsInput, optFns ...func(*Options)) (*ListIntegrationAssociationsOutput, error) {
 	if params == nil {
 		params = &ListIntegrationAssociationsInput{}
@@ -30,8 +30,8 @@ func (c *Client) ListIntegrationAssociations(ctx context.Context, params *ListIn
 
 type ListIntegrationAssociationsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

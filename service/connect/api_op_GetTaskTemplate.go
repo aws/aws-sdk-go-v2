@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets details about a specific task template in the specified Amazon Connect
+// Gets details about a specific task template in the specified Connect Customer
 // instance.
 func (c *Client) GetTaskTemplate(ctx context.Context, params *GetTaskTemplateInput, optFns ...func(*Options)) (*GetTaskTemplateOutput, error) {
 	if params == nil {
@@ -31,8 +31,8 @@ func (c *Client) GetTaskTemplate(ctx context.Context, params *GetTaskTemplateInp
 
 type GetTaskTemplateInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -88,8 +88,8 @@ type GetTaskTemplateOutput struct {
 	// Fields that are part of the template.
 	Fields []types.TaskTemplateField
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	InstanceId *string

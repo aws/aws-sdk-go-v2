@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the dataset ID associated with a given Amazon Connect instance.
+// Removes the dataset ID associated with a given Connect Customer instance.
 func (c *Client) DisassociateAnalyticsDataSet(ctx context.Context, params *DisassociateAnalyticsDataSetInput, optFns ...func(*Options)) (*DisassociateAnalyticsDataSetOutput, error) {
 	if params == nil {
 		params = &DisassociateAnalyticsDataSetInput{}
@@ -33,8 +33,8 @@ type DisassociateAnalyticsDataSetInput struct {
 	// This member is required.
 	DataSetId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -42,9 +42,9 @@ type DisassociateAnalyticsDataSetInput struct {
 	InstanceId *string
 
 	// The identifier of the target account. Use to associate a dataset to a different
-	// account than the one containing the Amazon Connect instance. If not specified,
-	// by default this value is the Amazon Web Services account that has the Amazon
-	// Connect instance.
+	// account than the one containing the Connect Customer instance. If not specified,
+	// by default this value is the Amazon Web Services account that has the Connect
+	// Customer instance.
 	TargetAccountId *string
 
 	noSmithyDocumentSerde

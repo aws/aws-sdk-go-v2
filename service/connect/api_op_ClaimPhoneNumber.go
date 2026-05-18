@@ -10,13 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Claims an available phone number to your Amazon Connect instance or traffic
+// Claims an available phone number to your Connect Customer instance or traffic
 // distribution group. You can call this API only in the same Amazon Web Services
-// Region where the Amazon Connect instance or traffic distribution group was
+// Region where the Connect Customer instance or traffic distribution group was
 // created.
 //
-// For more information about how to use this operation, see [Claim a phone number in your country] and [Claim phone numbers to traffic distribution groups] in the Amazon
-// Connect Administrator Guide.
+// For more information about how to use this operation, see [Claim a phone number in your country] and [Claim phone numbers to traffic distribution groups] in the Connect
+// Customer Administrator Guide.
 //
 // You can call the [SearchAvailablePhoneNumbers] API for available phone numbers that you can claim. Call the [DescribePhoneNumber]
 // API to verify the status of a previous [ClaimPhoneNumber]operation.
@@ -75,7 +75,7 @@ type ClaimPhoneNumberInput struct {
 	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
-	// The identifier of the Amazon Connect instance that phone numbers are claimed
+	// The identifier of the Connect Customer instance that phone numbers are claimed
 	// to. You can [find the instance ID]in the Amazon Resource Name (ARN) of the instance. You must enter
 	// InstanceId or TargetArn .
 	//
@@ -89,7 +89,7 @@ type ClaimPhoneNumberInput struct {
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
-	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+	// The Amazon Resource Name (ARN) for Connect Customer instances or traffic
 	// distribution groups that phone number inbound traffic is routed through. You
 	// must enter InstanceId or TargetArn .
 	TargetArn *string

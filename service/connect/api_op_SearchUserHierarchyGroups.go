@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches UserHierarchyGroups in an Amazon Connect instance, with optional
+// Searches UserHierarchyGroups in an Connect Customer instance, with optional
 // filtering.
 //
 // The UserHierarchyGroup with "LevelId": "0" is the foundation for building
@@ -34,7 +34,7 @@ func (c *Client) SearchUserHierarchyGroups(ctx context.Context, params *SearchUs
 
 type SearchUserHierarchyGroupsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// The identifier of the Connect Customer instance. You can find the instanceId in
 	// the ARN of the instance.
 	//
 	// This member is required.

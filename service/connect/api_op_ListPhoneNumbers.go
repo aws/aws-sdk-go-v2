@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides information about the phone numbers for the specified Amazon Connect
+// Provides information about the phone numbers for the specified Connect Customer
 // instance.
 //
-// For more information about phone numbers, see [Set Up Phone Numbers for Your Contact Center] in the Amazon Connect
+// For more information about phone numbers, see [Set Up Phone Numbers for Your Contact Center] in the Connect Customer
 // Administrator Guide.
 //
 //   - We recommend using [ListPhoneNumbersV2]to return phone number types. ListPhoneNumbers doesn't
@@ -47,8 +47,8 @@ func (c *Client) ListPhoneNumbers(ctx context.Context, params *ListPhoneNumbersI
 
 type ListPhoneNumbersInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

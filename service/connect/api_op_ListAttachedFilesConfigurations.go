@@ -12,7 +12,7 @@ import (
 )
 
 // Provides summary information about the attached files configurations for the
-// specified Amazon Connect instance.
+// specified Connect Customer instance.
 //
 // This API returns effective configurations (custom overrides or defaults) for
 // each attachment scope. If no custom configuration exists for a scope, the
@@ -34,8 +34,8 @@ func (c *Client) ListAttachedFilesConfigurations(ctx context.Context, params *Li
 
 type ListAttachedFilesConfigurationsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

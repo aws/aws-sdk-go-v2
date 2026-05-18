@@ -11,9 +11,9 @@ import (
 )
 
 // Removes the specified tags from the contact resource. For more information
-// about this API is used, see [Set up granular billing for a detailed view of your Amazon Connect usage].
+// about this API is used, see [Set up granular billing for a detailed view of your Connect Customer usage].
 //
-// [Set up granular billing for a detailed view of your Amazon Connect usage]: https://docs.aws.amazon.com/connect/latest/adminguide/granular-billing.html
+// [Set up granular billing for a detailed view of your Connect Customer usage]: https://docs.aws.amazon.com/connect/latest/adminguide/granular-billing.html
 func (c *Client) UntagContact(ctx context.Context, params *UntagContactInput, optFns ...func(*Options)) (*UntagContactOutput, error) {
 	if params == nil {
 		params = &UntagContactInput{}
@@ -31,13 +31,13 @@ func (c *Client) UntagContact(ctx context.Context, params *UntagContactInput, op
 
 type UntagContactInput struct {
 
-	// The identifier of the contact in this instance of Amazon Connect.
+	// The identifier of the contact in this instance of Connect Customer.
 	//
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

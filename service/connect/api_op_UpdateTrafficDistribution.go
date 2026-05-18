@@ -24,7 +24,7 @@ import (
 // non-default TrafficDistributionGroup , an InvalidRequestException is returned.
 //
 // For more information about updating a traffic distribution group, see [Update telephony traffic distribution across Amazon Web Services Regions] in the
-// Amazon Connect Administrator Guide.
+// Connect Customer Administrator Guide.
 //
 // Important things to know
 //

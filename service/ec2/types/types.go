@@ -11628,6 +11628,9 @@ type IpamPoolAllocation struct {
 	// The type of the resource.
 	ResourceType IpamPoolAllocationResourceType
 
+	// The tags for the IPAM pool allocation.
+	Tags []Tag
+
 	noSmithyDocumentSerde
 }
 
@@ -25022,6 +25025,10 @@ type VolumeModification struct {
 
 	// The current modification state.
 	ModificationState VolumeModificationState
+
+	// Describes whether the resource is managed by a service provider and, if so,
+	// describes the service provider that manages it.
+	Operator *OperatorResponse
 
 	// The original IOPS rate of the volume.
 	OriginalIops *int32

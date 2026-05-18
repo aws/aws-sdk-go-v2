@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the hierarchy structure of the specified Amazon Connect instance.
+// Describes the hierarchy structure of the specified Connect Customer instance.
 func (c *Client) DescribeUserHierarchyStructure(ctx context.Context, params *DescribeUserHierarchyStructureInput, optFns ...func(*Options)) (*DescribeUserHierarchyStructureOutput, error) {
 	if params == nil {
 		params = &DescribeUserHierarchyStructureInput{}
@@ -29,8 +29,8 @@ func (c *Client) DescribeUserHierarchyStructure(ctx context.Context, params *Des
 
 type DescribeUserHierarchyStructureInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

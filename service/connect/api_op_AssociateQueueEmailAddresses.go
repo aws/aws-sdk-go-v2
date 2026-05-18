@@ -21,7 +21,7 @@ import (
 //   - You can associate up to 49 additional email addresses with a single queue,
 //     plus 1 default outbound email address, for a total of 50.
 //
-//   - The email addresses must already exist in the Amazon Connect instance
+//   - The email addresses must already exist in the Connect Customer instance
 //     before they can be associated with a queue.
 //
 //   - Agents will be able to select from these associated email addresses when
@@ -57,8 +57,8 @@ type AssociateQueueEmailAddressesInput struct {
 	// This member is required.
 	EmailAddressesConfig []types.EmailAddressConfig
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

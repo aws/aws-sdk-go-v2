@@ -48,7 +48,7 @@ type GetAttachedFileInput struct {
 	// This member is required.
 	FileId *string
 
-	// The unique identifier of the Amazon Connect instance.
+	// The unique identifier of the Connect Customer instance.
 	//
 	// This member is required.
 	InstanceId *string

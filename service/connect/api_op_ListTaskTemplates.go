@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists task templates for the specified Amazon Connect instance.
+// Lists task templates for the specified Connect Customer instance.
 func (c *Client) ListTaskTemplates(ctx context.Context, params *ListTaskTemplatesInput, optFns ...func(*Options)) (*ListTaskTemplatesOutput, error) {
 	if params == nil {
 		params = &ListTaskTemplatesInput{}
@@ -29,8 +29,8 @@ func (c *Client) ListTaskTemplates(ctx context.Context, params *ListTaskTemplate
 
 type ListTaskTemplatesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

@@ -11,19 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Supports SAML sign-in for Amazon Connect. Retrieves a token for federation. The
-// token is for the Amazon Connect user which corresponds to the IAM credentials
-// that were used to invoke this action.
+// Supports SAML sign-in for Connect Customer. Retrieves a token for federation.
+// The token is for the Connect Customer user which corresponds to the IAM
+// credentials that were used to invoke this action.
 //
-// For more information about how SAML sign-in works in Amazon Connect, see [Configure SAML with IAM for Amazon Connect in the Amazon Connect Administrator Guide.]
+// For more information about how SAML sign-in works in Connect Customer, see [Configure SAML with IAM for Connect Customer in the Connect Customer Administrator Guide.]
 //
 // This API doesn't support root users. If you try to invoke GetFederationToken
 // with root credentials, an error message similar to the following one appears:
 //
 //	Provided identity: Principal: .... User: .... cannot be used for federation
-//	with Amazon Connect
+//	with Connect Customer
 //
-// [Configure SAML with IAM for Amazon Connect in the Amazon Connect Administrator Guide.]: https://docs.aws.amazon.com/connect/latest/adminguide/configure-saml.html
+// [Configure SAML with IAM for Connect Customer in the Connect Customer Administrator Guide.]: https://docs.aws.amazon.com/connect/latest/adminguide/configure-saml.html
 func (c *Client) GetFederationToken(ctx context.Context, params *GetFederationTokenInput, optFns ...func(*Options)) (*GetFederationTokenOutput, error) {
 	if params == nil {
 		params = &GetFederationTokenInput{}
@@ -41,8 +41,8 @@ func (c *Client) GetFederationToken(ctx context.Context, params *GetFederationTo
 
 type GetFederationTokenInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

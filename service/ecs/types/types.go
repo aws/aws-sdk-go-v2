@@ -3009,6 +3009,77 @@ type DeploymentLifecycleHook struct {
 	// [Permissions required for Lambda functions in Amazon ECS blue/green deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html
 	RoleArn *string
 
+	// The type of action the lifecycle hook performs. Valid values are:
+	//
+	//   - AWS_LAMBDA - Invokes a Lambda function at the specified lifecycle stage.
+	//   This is the default value.
+	//
+	//   - PAUSE - Pauses the deployment at the specified lifecycle stage until you
+	//   call ContinueServiceDeployment to continue or roll back.
+	//
+	// This field is optional. If not specified, the default value is AWS_LAMBDA .
+	TargetType DeploymentLifecycleHookTargetType
+
+	// The timeout configuration for the lifecycle hook. This specifies how long
+	// Amazon ECS waits before taking the timeout action if the hook is not resolved.
+	TimeoutConfiguration *DeploymentLifecycleHookTimeoutConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The details of a deployment lifecycle hook that is active during a service
+// deployment.
+//
+// You can view lifecycle hook details by calling [DescribeServiceDeployments].
+//
+// [DescribeServiceDeployments]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html
+type DeploymentLifecycleHookDetail struct {
+
+	// The time when the lifecycle hook times out. If the hook has not been completed
+	// by this time, Amazon ECS takes the timeout action.
+	ExpiresAt *time.Time
+
+	// The ID of the lifecycle hook. Use this value when calling
+	// ContinueServiceDeployment to continue or roll back a paused deployment.
+	HookId *string
+
+	// The status of the lifecycle hook. Valid values depend on the hook type:
+	//
+	//   - For AWS_LAMBDA hooks: IN_PROGRESS , SUCCEEDED , FAILED , and TIMED_OUT .
+	//
+	//   - For PAUSE hooks: AWAITING_ACTION , SUCCEEDED , FAILED , and TIMED_OUT .
+	Status DeploymentLifecycleHookStatus
+
+	// The Amazon Resource Name (ARN) of the hook target. For AWS_LAMBDA hooks, this
+	// is the Lambda function ARN. For PAUSE hooks, this field is not set.
+	TargetArn *string
+
+	// The type of action the lifecycle hook performs, such as AWS_LAMBDA or PAUSE .
+	TargetType DeploymentLifecycleHookTargetType
+
+	// The action Amazon ECS takes when the lifecycle hook times out. Valid values are
+	// CONTINUE and ROLLBACK .
+	TimeoutAction DeploymentLifecycleHookAction
+
+	noSmithyDocumentSerde
+}
+
+// The timeout configuration for a deployment lifecycle hook. This determines how
+// long Amazon ECS waits for the hook to complete before taking the specified
+// timeout action.
+type DeploymentLifecycleHookTimeoutConfiguration struct {
+
+	// The action Amazon ECS takes when the lifecycle hook times out. Valid values are:
+	//
+	//   - CONTINUE - Proceeds the deployment to the next lifecycle stage.
+	//
+	//   - ROLLBACK - Rolls back the deployment to the previous service revision.
+	Action DeploymentLifecycleHookAction
+
+	// The number of minutes Amazon ECS waits for the lifecycle hook to complete
+	// before taking the timeout action.
+	TimeoutInMinutes *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -5943,11 +6014,11 @@ type RuntimePlatform struct {
 // for task storage. For more information, see [Amazon S3 Files volumes]in the Amazon Elastic Container
 // Service Developer Guide.
 //
-// Your task definition must include a Task IAM Role. See [IAM role for attaching your file system to AWS compute resources] for required
+// Your task definition must include a Task IAM Role. See [IAM role for attaching your file system to Amazon Web Services compute resources] for required
 // permissions.
 //
 // [Amazon S3 Files volumes]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/s3files-volumes.html
-// [IAM role for attaching your file system to AWS compute resources]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-files-prereq-policies.html#s3-files-prereq-iam-compute-role
+// [IAM role for attaching your file system to Amazon Web Services compute resources]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-files-prereq-policies.html#s3-files-prereq-iam-compute-role
 type S3FilesVolumeConfiguration struct {
 
 	// The full ARN of the S3 Files file system to mount.
@@ -6658,6 +6729,9 @@ type ServiceDeployment struct {
 	// The time the service deployment finished. The format is yyyy-MM-dd
 	// HH:mm:ss.SSSSSS.
 	FinishedAt *time.Time
+
+	// The details of the lifecycle hooks for the current service deployment.
+	LifecycleHookDetails []DeploymentLifecycleHookDetail
 
 	// The current lifecycle stage of the deployment. Possible values include:
 	//

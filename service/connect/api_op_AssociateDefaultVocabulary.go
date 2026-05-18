@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates an existing vocabulary as the default. Contact Lens for Amazon
-// Connect uses the vocabulary in post-call and real-time analysis sessions for the
-// given language.
+// Associates an existing vocabulary as the default. Contact Lens for Connect
+// Customer uses the vocabulary in post-call and real-time analysis sessions for
+// the given language.
 func (c *Client) AssociateDefaultVocabulary(ctx context.Context, params *AssociateDefaultVocabularyInput, optFns ...func(*Options)) (*AssociateDefaultVocabularyOutput, error) {
 	if params == nil {
 		params = &AssociateDefaultVocabularyInput{}
@@ -31,8 +31,8 @@ func (c *Client) AssociateDefaultVocabulary(ctx context.Context, params *Associa
 
 type AssociateDefaultVocabularyInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

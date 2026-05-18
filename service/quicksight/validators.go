@@ -9935,6 +9935,40 @@ func validateCustomFilterListConfiguration(v *types.CustomFilterListConfiguratio
 	}
 }
 
+func validateCustomInstruction(v *types.CustomInstruction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomInstruction"}
+	if v.InlineCustomInstruction != nil {
+		if err := validateInlineCustomInstruction(v.InlineCustomInstruction); err != nil {
+			invalidParams.AddNested("InlineCustomInstruction", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomInstructionList(v []types.CustomInstruction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomInstructionList"}
+	for i := range v {
+		if err := validateCustomInstruction(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCustomInstructions(v *types.CustomInstructions) error {
 	if v == nil {
 		return nil
@@ -10740,6 +10774,60 @@ func validateDataSetSearchFilterList(v []types.DataSetSearchFilter) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DataSetSearchFilterList"}
 	for i := range v {
 		if err := validateDataSetSearchFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSetSemanticDescription(v *types.DataSetSemanticDescription) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSetSemanticDescription"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSetSemanticMetadata(v *types.DataSetSemanticMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSetSemanticMetadata"}
+	if v.Description != nil {
+		if err := validateDataSetSemanticDescription(v.Description); err != nil {
+			invalidParams.AddNested("Description", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomInstructions != nil {
+		if err := validateCustomInstructionList(v.CustomInstructions); err != nil {
+			invalidParams.AddNested("CustomInstructions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSetSemanticMetadataList(v []types.DataSetSemanticMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSetSemanticMetadataList"}
+	for i := range v {
+		if err := validateDataSetSemanticMetadata(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -15029,6 +15117,21 @@ func validateIncrementalRefresh(v *types.IncrementalRefresh) error {
 		if err := validateLookbackWindow(v.LookbackWindow); err != nil {
 			invalidParams.AddNested("LookbackWindow", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInlineCustomInstruction(v *types.InlineCustomInstruction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InlineCustomInstruction"}
+	if v.InstructionText == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstructionText"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -19706,6 +19809,11 @@ func validateSemanticModelConfiguration(v *types.SemanticModelConfiguration) err
 			invalidParams.AddNested("TableMap", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SemanticMetadata != nil {
+		if err := validateDataSetSemanticMetadataList(v.SemanticMetadata); err != nil {
+			invalidParams.AddNested("SemanticMetadata", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -19727,6 +19835,11 @@ func validateSemanticTable(v *types.SemanticTable) error {
 	if v.RowLevelPermissionConfiguration != nil {
 		if err := validateRowLevelPermissionConfiguration(v.RowLevelPermissionConfiguration); err != nil {
 			invalidParams.AddNested("RowLevelPermissionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SemanticMetadata != nil {
+		if err := validateTableSemanticMetadata(v.SemanticMetadata); err != nil {
+			invalidParams.AddNested("SemanticMetadata", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -19892,6 +20005,38 @@ func validateShapeConditionalFormat(v *types.ShapeConditionalFormat) error {
 	} else if v.BackgroundColor != nil {
 		if err := validateConditionalFormattingColor(v.BackgroundColor); err != nil {
 			invalidParams.AddNested("BackgroundColor", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSharedColumnSemanticMetadata(v *types.SharedColumnSemanticMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SharedColumnSemanticMetadata"}
+	if v.ColumnProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnProperties"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSharedColumnSemanticMetadataList(v []types.SharedColumnSemanticMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SharedColumnSemanticMetadataList"}
+	for i := range v {
+		if err := validateSharedColumnSemanticMetadata(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -21331,6 +21476,23 @@ func validateTableRowConditionalFormatting(v *types.TableRowConditionalFormattin
 	if v.TextColor != nil {
 		if err := validateConditionalFormattingColor(v.TextColor); err != nil {
 			invalidParams.AddNested("TextColor", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTableSemanticMetadata(v *types.TableSemanticMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TableSemanticMetadata"}
+	if v.ColumnMetadata != nil {
+		if err := validateSharedColumnSemanticMetadataList(v.ColumnMetadata); err != nil {
+			invalidParams.AddNested("ColumnMetadata", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

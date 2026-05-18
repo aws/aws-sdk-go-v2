@@ -22654,6 +22654,18 @@ func awsRestjson1_serializeDocumentActionsList(v []string, value smithyjson.Valu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAdditionalNotes(v *types.AdditionalNotes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Text != nil {
+		ok := object.Key("Text")
+		ok.String(*v.Text)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAdHocFilteringOption(v *types.AdHocFilteringOption, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -28817,6 +28829,17 @@ func awsRestjson1_serializeDocumentColumnList(v []string, value smithyjson.Value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentColumnNameList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentColumnSchema(v *types.ColumnSchema, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -28849,6 +28872,59 @@ func awsRestjson1_serializeDocumentColumnSchemaList(v []types.ColumnSchema, valu
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentColumnSemanticProperty(v *types.ColumnSemanticProperty, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalNotes != nil {
+		ok := object.Key("AdditionalNotes")
+		if err := awsRestjson1_serializeDocumentAdditionalNotes(v.AdditionalNotes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		if err := awsRestjson1_serializeDocumentColumnDescription(v.Description, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SemanticType != nil {
+		ok := object.Key("SemanticType")
+		if err := awsRestjson1_serializeDocumentColumnSemanticType(v.SemanticType, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentColumnSemanticPropertyList(v []types.ColumnSemanticProperty, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentColumnSemanticProperty(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentColumnSemanticType(v *types.ColumnSemanticType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.GeographicalRole) > 0 {
+		ok := object.Key("GeographicalRole")
+		ok.String(string(v.GeographicalRole))
+	}
+
 	return nil
 }
 
@@ -30368,6 +30444,33 @@ func awsRestjson1_serializeDocumentCustomFilterListConfiguration(v *types.Custom
 		ok.String(string(v.SelectAllOptions))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomInstruction(v *types.CustomInstruction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InlineCustomInstruction != nil {
+		ok := object.Key("InlineCustomInstruction")
+		if err := awsRestjson1_serializeDocumentInlineCustomInstruction(v.InlineCustomInstruction, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomInstructionList(v []types.CustomInstruction, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCustomInstruction(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -31904,6 +32007,52 @@ func awsRestjson1_serializeDocumentDataSetSearchFilterList(v []types.DataSetSear
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentDataSetSearchFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataSetSemanticDescription(v *types.DataSetSemanticDescription, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Text != nil {
+		ok := object.Key("Text")
+		ok.String(*v.Text)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataSetSemanticMetadata(v *types.DataSetSemanticMetadata, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomInstructions != nil {
+		ok := object.Key("CustomInstructions")
+		if err := awsRestjson1_serializeDocumentCustomInstructionList(v.CustomInstructions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		if err := awsRestjson1_serializeDocumentDataSetSemanticDescription(v.Description, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataSetSemanticMetadataList(v []types.DataSetSemanticMetadata, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentDataSetSemanticMetadata(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -38678,6 +38827,25 @@ func awsRestjson1_serializeDocumentIncrementalRefresh(v *types.IncrementalRefres
 	if v.LookbackWindow != nil {
 		ok := object.Key("LookbackWindow")
 		if err := awsRestjson1_serializeDocumentLookbackWindow(v.LookbackWindow, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInlineCustomInstruction(v *types.InlineCustomInstruction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstructionText != nil {
+		ok := object.Key("InstructionText")
+		ok.String(*v.InstructionText)
+	}
+
+	if v.UploadedDocumentMetadata != nil {
+		ok := object.Key("UploadedDocumentMetadata")
+		if err := awsRestjson1_serializeDocumentUploadedDocumentMetadata(v.UploadedDocumentMetadata, ok); err != nil {
 			return err
 		}
 	}
@@ -46269,6 +46437,13 @@ func awsRestjson1_serializeDocumentSemanticModelConfiguration(v *types.SemanticM
 	object := value.Object()
 	defer object.Close()
 
+	if v.SemanticMetadata != nil {
+		ok := object.Key("SemanticMetadata")
+		if err := awsRestjson1_serializeDocumentDataSetSemanticMetadataList(v.SemanticMetadata, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TableMap != nil {
 		ok := object.Key("TableMap")
 		if err := awsRestjson1_serializeDocumentSemanticTableMap(v.TableMap, ok); err != nil {
@@ -46296,6 +46471,13 @@ func awsRestjson1_serializeDocumentSemanticTable(v *types.SemanticTable, value s
 	if v.RowLevelPermissionConfiguration != nil {
 		ok := object.Key("RowLevelPermissionConfiguration")
 		if err := awsRestjson1_serializeDocumentRowLevelPermissionConfiguration(v.RowLevelPermissionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SemanticMetadata != nil {
+		ok := object.Key("SemanticMetadata")
+		if err := awsRestjson1_serializeDocumentTableSemanticMetadata(v.SemanticMetadata, ok); err != nil {
 			return err
 		}
 	}
@@ -46541,6 +46723,40 @@ func awsRestjson1_serializeDocumentShapeConditionalFormat(v *types.ShapeConditio
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSharedColumnSemanticMetadata(v *types.SharedColumnSemanticMetadata, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ColumnNames != nil {
+		ok := object.Key("ColumnNames")
+		if err := awsRestjson1_serializeDocumentColumnNameList(v.ColumnNames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ColumnProperties != nil {
+		ok := object.Key("ColumnProperties")
+		if err := awsRestjson1_serializeDocumentColumnSemanticPropertyList(v.ColumnProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSharedColumnSemanticMetadataList(v []types.SharedColumnSemanticMetadata, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSharedColumnSemanticMetadata(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -48759,6 +48975,20 @@ func awsRestjson1_serializeDocumentTableRowConditionalFormatting(v *types.TableR
 	if v.TextColor != nil {
 		ok := object.Key("TextColor")
 		if err := awsRestjson1_serializeDocumentConditionalFormattingColor(v.TextColor, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTableSemanticMetadata(v *types.TableSemanticMetadata, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ColumnMetadata != nil {
+		ok := object.Key("ColumnMetadata")
+		if err := awsRestjson1_serializeDocumentSharedColumnSemanticMetadataList(v.ColumnMetadata, ok); err != nil {
 			return err
 		}
 	}
@@ -52124,6 +52354,18 @@ func awsRestjson1_serializeDocumentUpdateResourcePermissionList(v []types.Resour
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUploadedDocumentMetadata(v *types.UploadedDocumentMetadata, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
 	return nil
 }
 

@@ -11,7 +11,7 @@ import (
 )
 
 // Starts screen sharing for a contact. For more information about screen sharing,
-// see [Set up in-app, web, video calling, and screen sharing capabilities]in the Amazon Connect Administrator Guide.
+// see [Set up in-app, web, video calling, and screen sharing capabilities]in the Connect Customer Administrator Guide.
 //
 // [Set up in-app, web, video calling, and screen sharing capabilities]: https://docs.aws.amazon.com/connect/latest/adminguide/inapp-calling.html
 func (c *Client) StartScreenSharing(ctx context.Context, params *StartScreenSharingInput, optFns ...func(*Options)) (*StartScreenSharingOutput, error) {
@@ -31,13 +31,13 @@ func (c *Client) StartScreenSharing(ctx context.Context, params *StartScreenShar
 
 type StartScreenSharingInput struct {
 
-	// The identifier of the contact in this instance of Amazon Connect.
+	// The identifier of the contact in this instance of Connect Customer.
 	//
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

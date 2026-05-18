@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides information about the flow modules for the specified Amazon Connect
+// Provides information about the flow modules for the specified Connect Customer
 // instance.
 func (c *Client) ListContactFlowModules(ctx context.Context, params *ListContactFlowModulesInput, optFns ...func(*Options)) (*ListContactFlowModulesOutput, error) {
 	if params == nil {
@@ -30,8 +30,8 @@ func (c *Client) ListContactFlowModules(ctx context.Context, params *ListContact
 
 type ListContactFlowModulesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

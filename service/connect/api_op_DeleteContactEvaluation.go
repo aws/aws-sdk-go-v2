@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a contact evaluation in the specified Amazon Connect instance.
+// Deletes a contact evaluation in the specified Connect Customer instance.
 func (c *Client) DeleteContactEvaluation(ctx context.Context, params *DeleteContactEvaluationInput, optFns ...func(*Options)) (*DeleteContactEvaluationOutput, error) {
 	if params == nil {
 		params = &DeleteContactEvaluationInput{}
@@ -33,8 +33,8 @@ type DeleteContactEvaluationInput struct {
 	// This member is required.
 	EvaluationId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

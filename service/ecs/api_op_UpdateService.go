@@ -422,6 +422,13 @@ type UpdateServiceInput struct {
 type UpdateServiceOutput struct {
 
 	// The full description of your service following the update call.
+	//
+	// The response includes a lifecycleHookDetails field, which is an empty array
+	// when the service is created or updated. The values are populated when a
+	// lifecycle hook executes and are available as part of the service deployment
+	// details ([DescribeServiceDeployments] ).
+	//
+	// [DescribeServiceDeployments]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html
 	Service *types.Service
 
 	// Metadata pertaining to the operation's result.

@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets metric data from the specified Amazon Connect instance.
+// Gets metric data from the specified Connect Customer instance.
 //
 // GetMetricDataV2 offers more features than [GetMetricData], the previous version of this API.
 // It has new metrics, offers filtering at a metric level, and offers the ability
@@ -21,7 +21,7 @@ import (
 // at varying intervals. It does not support agent queues.
 //
 // For a description of the historical metrics that are supported by
-// GetMetricDataV2 and GetMetricData , see [Metrics definitions] in the Amazon Connect Administrator
+// GetMetricDataV2 and GetMetricData , see [Metrics definitions] in the Connect Customer Administrator
 // Guide.
 //
 // When you make a successful API request, you can expect the following metric
@@ -98,7 +98,7 @@ type GetMetricDataV2Input struct {
 	// TEST_CASE | TEST_CASE_EXECUTION_FAILURE_REASON | TEST_CASE_EXECUTION_RESULT |
 	// TEST_CASE_EXECUTION_STATE
 	//
-	// The following filter keys correspond to Amazon Connect resources and are used
+	// The following filter keys correspond to Connect Customer resources and are used
 	// for authorizing requests. A GetMetricDataV2 request requires at least one of
 	// these filters:
 	//
@@ -145,7 +145,7 @@ type GetMetricDataV2Input struct {
 	// [Campaign]
 	//   - ARNs are valid filter values for the CAMPAIGN filter key.
 	//
-	//   - To filter by phone number, see [Create a historical metrics report]in the Amazon Connect Administrator Guide.
+	//   - To filter by phone number, see [Create a historical metrics report]in the Connect Customer Administrator Guide.
 	//
 	// [Create a historical metrics report]: https://docs.aws.amazon.com/connect/latest/adminguide/create-historical-metrics-report.html
 	// [Campaign]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-outbound-campaigns_Campaign.html
@@ -155,7 +155,7 @@ type GetMetricDataV2Input struct {
 
 	// The metrics to retrieve. Specify the name or metricId, groupings, and filters
 	// for each metric. The following historical metrics are available. For a
-	// description of each metric, see [Metrics definition]in the Amazon Connect Administrator Guide.
+	// description of each metric, see [Metrics definition]in the Connect Customer Administrator Guide.
 	//
 	// MetricId should be used to reference custom metrics or out of the box metrics
 	// as Arn. If using MetricId, the limit is 20 MetricId per request.
@@ -1614,7 +1614,7 @@ type GetMetricDataV2Input struct {
 	Metrics []types.MetricV2
 
 	// The Amazon Resource Name (ARN) of the resource. This includes the instanceId an
-	// Amazon Connect instance.
+	// Connect Customer instance.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -1670,8 +1670,8 @@ type GetMetricDataV2Input struct {
 	//   TOTAL .
 	//
 	// For example, if IntervalPeriod is selected THIRTY_MIN , StartTime and EndTime
-	//   differs by 1 day, then Amazon Connect returns 48 results in the response. Each
-	//   result is aggregated by the THIRTY_MIN period. By default Amazon Connect
+	//   differs by 1 day, then Connect Customer returns 48 results in the response. Each
+	//   result is aggregated by the THIRTY_MIN period. By default Connect Customer
 	//   aggregates results based on the TOTAL interval period.
 	//
 	// The following list describes restrictions on StartTime and EndTime based on

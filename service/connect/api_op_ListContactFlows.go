@@ -11,15 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides information about the flows for the specified Amazon Connect instance.
+// Provides information about the flows for the specified Connect Customer
+// instance.
 //
-// You can also create and update flows using the [Amazon Connect Flow language].
+// You can also create and update flows using the [Connect Customer Flow language].
 //
-// For more information about flows, see [Flows] in the Amazon Connect Administrator
+// For more information about flows, see [Flows] in the Connect Customer Administrator
 // Guide.
 //
 // [Flows]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html
-// [Amazon Connect Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
+// [Connect Customer Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
 func (c *Client) ListContactFlows(ctx context.Context, params *ListContactFlowsInput, optFns ...func(*Options)) (*ListContactFlowsOutput, error) {
 	if params == nil {
 		params = &ListContactFlowsInput{}
@@ -37,8 +38,8 @@ func (c *Client) ListContactFlows(ctx context.Context, params *ListContactFlowsI
 
 type ListContactFlowsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

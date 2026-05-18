@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change. To
-// request access to this API, contact Amazon Web Services Support.
+// This API is in preview release for Connect Customer and is subject to change.
+// To request access to this API, contact Amazon Web Services Support.
 //
 // Provides summary information about the authentication profiles in a specified
-// Amazon Connect instance.
+// Connect Customer instance.
 func (c *Client) ListAuthenticationProfiles(ctx context.Context, params *ListAuthenticationProfilesInput, optFns ...func(*Options)) (*ListAuthenticationProfilesOutput, error) {
 	if params == nil {
 		params = &ListAuthenticationProfilesInput{}
@@ -33,8 +33,8 @@ func (c *Client) ListAuthenticationProfiles(ctx context.Context, params *ListAut
 
 type ListAuthenticationProfilesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

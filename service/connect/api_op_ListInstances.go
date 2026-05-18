@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
+// This API is in preview release for Connect Customer and is subject to change.
 //
 // Return a list of instances which are in active state, creation-in-progress
 // state, and failed state. Instances that aren't successfully created (they are in

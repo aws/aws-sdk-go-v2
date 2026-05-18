@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Gets the real-time metric data from the specified Amazon Connect instance.
+// Gets the real-time metric data from the specified Connect Customer instance.
 //
-// For a description of each metric, see [Metrics definitions] in the Amazon Connect Administrator
+// For a description of each metric, see [Metrics definitions] in the Connect Customer Administrator
 // Guide.
 //
 // When you make a successful API request, you can expect the following metric
@@ -58,7 +58,7 @@ type GetCurrentMetricDataInput struct {
 
 	// The metrics to retrieve. Specify the name or metricId, and unit for each
 	// metric. The following metrics are available. For a description of all the
-	// metrics, see [Metrics definitions]in the Amazon Connect Administrator Guide.
+	// metrics, see [Metrics definitions]in the Connect Customer Administrator Guide.
 	//
 	// MetricId should be used to reference custom metrics or out of the box metrics
 	// as Arn. If using MetricId, the limit is 10 MetricId per request.
@@ -197,8 +197,8 @@ type GetCurrentMetricDataInput struct {
 	// This member is required.
 	Filters *types.Filters
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

@@ -11,7 +11,7 @@ import (
 )
 
 // Updates an email address metadata. For more information about email addresses,
-// see [Create email addresses]in the Amazon Connect Administrator Guide.
+// see [Create email addresses]in the Connect Customer Administrator Guide.
 //
 // [Create email addresses]: https://docs.aws.amazon.com/connect/latest/adminguide/create-email-address1.html
 func (c *Client) UpdateEmailAddressMetadata(ctx context.Context, params *UpdateEmailAddressMetadataInput, optFns ...func(*Options)) (*UpdateEmailAddressMetadataOutput, error) {
@@ -36,8 +36,8 @@ type UpdateEmailAddressMetadataInput struct {
 	// This member is required.
 	EmailAddressId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

@@ -145,7 +145,6 @@ func TestSignCookie_ECDSA(t *testing.T) {
 	}
 }
 
-
 func TestSignCookieSHA256(t *testing.T) {
 	privKey, err := rsa.GenerateKey(randReader, 1024)
 	if err != nil {

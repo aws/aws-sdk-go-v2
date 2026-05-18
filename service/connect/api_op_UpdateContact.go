@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
+// This API is in preview release for Connect Customer and is subject to change.
 //
 // Adds or updates user-defined contact information associated with the specified
 // contact. At least one field to be updated must be present in the request.
@@ -41,8 +41,8 @@ type UpdateContactInput struct {
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -51,10 +51,10 @@ type UpdateContactInput struct {
 
 	// The endpoint of the customer for which the contact was initiated. For external
 	// audio contacts, this is usually the end customer's phone number. This value can
-	// only be updated for external audio contacts. For more information, see [Amazon Connect Contact Lens integration]in the
-	// Amazon Connect Administrator Guide.
+	// only be updated for external audio contacts. For more information, see [Connect Customer Contact Lens integration]in the
+	// Connect Customer Administrator Guide.
 	//
-	// [Amazon Connect Contact Lens integration]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html
+	// [Connect Customer Contact Lens integration]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html
 	CustomerEndpoint *types.Endpoint
 
 	// The description of the contact.
@@ -65,18 +65,18 @@ type UpdateContactInput struct {
 
 	//  Information about the queue associated with a contact. This parameter can only
 	// be updated for external audio contacts. It is used when you integrate
-	// third-party systems with Contact Lens for analytics. For more information, see [Amazon Connect Contact Lens integration]
-	// in the Amazon Connect Administrator Guide.
+	// third-party systems with Contact Lens for analytics. For more information, see [Connect Customer Contact Lens integration]
+	// in the Connect Customer Administrator Guide.
 	//
-	// [Amazon Connect Contact Lens integration]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html
+	// [Connect Customer Contact Lens integration]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html
 	QueueInfo *types.QueueInfoInput
 
 	// Well-formed data on contact, shown to agents on Contact Control Panel (CCP).
 	References map[string]types.Reference
 
 	// A set of system defined key-value pairs stored on individual contact segments
-	// (unique contact ID) using an attribute map. The attributes are standard Amazon
-	// Connect attributes. They can be accessed in flows.
+	// (unique contact ID) using an attribute map. The attributes are standard Connect
+	// Customer attributes. They can be accessed in flows.
 	//
 	// Attribute keys can include only alphanumeric, -, and _.
 	//
@@ -89,17 +89,17 @@ type UpdateContactInput struct {
 	// External system endpoint for the contact was initiated. For external audio
 	// contacts, this is the phone number of the external system such as the contact
 	// center. This value can only be updated for external audio contacts. For more
-	// information, see [Amazon Connect Contact Lens integration]in the Amazon Connect Administrator Guide.
+	// information, see [Connect Customer Contact Lens integration]in the Connect Customer Administrator Guide.
 	//
-	// [Amazon Connect Contact Lens integration]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html
+	// [Connect Customer Contact Lens integration]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html
 	SystemEndpoint *types.Endpoint
 
 	// Information about the agent associated with a contact. This parameter can only
 	// be updated for external audio contacts. It is used when you integrate
-	// third-party systems with Contact Lens for analytics. For more information, see [Amazon Connect Contact Lens integration]
-	// in the Amazon Connect Administrator Guide.
+	// third-party systems with Contact Lens for analytics. For more information, see [Connect Customer Contact Lens integration]
+	// in the Connect Customer Administrator Guide.
 	//
-	// [Amazon Connect Contact Lens integration]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html
+	// [Connect Customer Contact Lens integration]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html
 	UserInfo *types.UserInfo
 
 	noSmithyDocumentSerde

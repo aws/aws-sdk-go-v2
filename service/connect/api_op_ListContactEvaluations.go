@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists contact evaluations in the specified Amazon Connect instance.
+// Lists contact evaluations in the specified Connect Customer instance.
 func (c *Client) ListContactEvaluations(ctx context.Context, params *ListContactEvaluationsInput, optFns ...func(*Options)) (*ListContactEvaluationsOutput, error) {
 	if params == nil {
 		params = &ListContactEvaluationsInput{}
@@ -29,13 +29,13 @@ func (c *Client) ListContactEvaluations(ctx context.Context, params *ListContact
 
 type ListContactEvaluationsInput struct {
 
-	// The identifier of the contact in this instance of Amazon Connect.
+	// The identifier of the contact in this instance of Connect Customer.
 	//
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
