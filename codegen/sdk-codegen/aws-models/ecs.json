@@ -339,6 +339,9 @@
             "version": "2014-11-13",
             "operations": [
                 {
+                    "target": "com.amazonaws.ecs#ContinueServiceDeployment"
+                },
+                {
                     "target": "com.amazonaws.ecs#DeleteAccountSetting"
                 },
                 {
@@ -3691,6 +3694,127 @@
                 "target": "com.amazonaws.ecs#Container"
             }
         },
+        "com.amazonaws.ecs#ContinueServiceDeployment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#ContinueServiceDeploymentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#ContinueServiceDeploymentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServiceDeploymentNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to continue a paused service deployment",
+                    "relativeDocumentation": "API_ContinueServiceDeployment.html",
+                    "resources": {
+                        "required": {
+                            "service-deployment": {
+                                "conditionKeys": [
+                                    "ecs:service",
+                                    "ecs:cluster",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            },
+                            "service": {
+                                "conditionKeys": [
+                                    "ecs:cluster",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Continues or rolls back an Amazon ECS service deployment that is paused at a lifecycle hook.</p> <p>When a service deployment reaches a lifecycle stage that has a <code>PAUSE</code> hook configured, the deployment pauses and waits for an explicit action. Use this API to either continue the deployment to the next stage or roll back to the previous service revision.</p> <p>To find the <code>hookId</code> of the paused hook, call <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html\">DescribeServiceDeployments</a> and inspect the <code>lifecycleHookDetails</code> field.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To continue a paused service deployment",
+                        "documentation": "This example continues a service deployment that is paused at a lifecycle hook, using the CONTINUE action to proceed to the next deployment stage.",
+                        "input": {
+                            "serviceDeploymentArn": "arn:aws:ecs:us-east-1:123456789012:service-deployment/MyCluster/MyService/r9i43YFjvgF_xlg7m2eJ1r",
+                            "hookId": "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567",
+                            "action": "CONTINUE"
+                        },
+                        "output": {
+                            "serviceDeploymentArn": "arn:aws:ecs:us-east-1:123456789012:service-deployment/MyCluster/MyService/r9i43YFjvgF_xlg7m2eJ1r"
+                        }
+                    },
+                    {
+                        "title": "To roll back a paused service deployment",
+                        "documentation": "This example rolls back a service deployment that is paused at a lifecycle hook, using the ROLLBACK action to revert to the previous service revision.",
+                        "input": {
+                            "serviceDeploymentArn": "arn:aws:ecs:us-east-1:123456789012:service-deployment/MyCluster/MyService/r9i43YFjvgF_xlg7m2eJ1r",
+                            "hookId": "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567",
+                            "action": "ROLLBACK"
+                        },
+                        "output": {
+                            "serviceDeploymentArn": "arn:aws:ecs:us-east-1:123456789012:service-deployment/MyCluster/MyService/r9i43YFjvgF_xlg7m2eJ1r"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ecs#ContinueServiceDeploymentRequest": {
+            "type": "structure",
+            "members": {
+                "serviceDeploymentArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service deployment to continue or roll back.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "hookId": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the paused lifecycle hook to act on. You can find the <code>hookId</code> by calling <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html\">DescribeServiceDeployments</a> and inspecting the <code>lifecycleHookDetails</code> field of the service deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.ecs#DeploymentLifecycleHookAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take on the paused lifecycle hook. Valid values are:</p> <ul> <li> <p> <code>CONTINUE</code> - Proceeds the deployment to the next lifecycle stage.</p> </li> <li> <p> <code>ROLLBACK</code> - Rolls back the deployment to the previous service revision.</p> </li> </ul> <p>If no value is specified, the default action is <code>CONTINUE</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#ContinueServiceDeploymentResponse": {
+            "type": "structure",
+            "members": {
+                "serviceDeploymentArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service deployment that was continued or rolled back.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecs#CpuManufacturer": {
             "type": "enum",
             "members": {
@@ -4593,6 +4717,74 @@
                                 "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/default/console-sample-app-static:6"
                             }
                         }
+                    },
+                    {
+                        "title": "To create a service with a pause lifecycle hook",
+                        "documentation": "This example creates a service with a blue/green deployment strategy that includes a pause lifecycle hook at the POST_PRODUCTION_TRAFFIC_SHIFT stage. The deployment will pause at that stage until you explicitly continue or roll back using the ContinueServiceDeployment API, or until the 60-minute timeout expires and triggers a rollback.",
+                        "input": {
+                            "serviceName": "ecs-service-with-pause-hook",
+                            "taskDefinition": "ecs-demo",
+                            "desiredCount": 2,
+                            "deploymentConfiguration": {
+                                "strategy": "BLUE_GREEN",
+                                "lifecycleHooks": [
+                                    {
+                                        "targetType": "PAUSE",
+                                        "lifecycleStages": [
+                                            "POST_PRODUCTION_TRAFFIC_SHIFT"
+                                        ],
+                                        "timeoutConfiguration": {
+                                            "timeoutInMinutes": 60,
+                                            "action": "ROLLBACK"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "output": {
+                            "service": {
+                                "clusterArn": "arn:aws:ecs:us-east-1:012345678910:cluster/default",
+                                "createdAt": "2026-05-06T16:00:00.000Z",
+                                "deploymentConfiguration": {
+                                    "maximumPercent": 200,
+                                    "minimumHealthyPercent": 100,
+                                    "strategy": "BLUE_GREEN",
+                                    "lifecycleHooks": [
+                                        {
+                                            "targetType": "PAUSE",
+                                            "lifecycleStages": [
+                                                "POST_PRODUCTION_TRAFFIC_SHIFT"
+                                            ],
+                                            "timeoutConfiguration": {
+                                                "timeoutInMinutes": 60,
+                                                "action": "ROLLBACK"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "deployments": [
+                                    {
+                                        "createdAt": "2026-05-06T16:00:00.000Z",
+                                        "desiredCount": 2,
+                                        "id": "ecs-svc/9223370564342348388",
+                                        "pendingCount": 0,
+                                        "runningCount": 0,
+                                        "status": "PRIMARY",
+                                        "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/ecs-demo:1",
+                                        "updatedAt": "2026-05-06T16:00:00.000Z"
+                                    }
+                                ],
+                                "desiredCount": 2,
+                                "events": [],
+                                "loadBalancers": [],
+                                "pendingCount": 0,
+                                "runningCount": 0,
+                                "serviceArn": "arn:aws:ecs:us-east-1:012345678910:service/default/ecs-service-with-pause-hook",
+                                "serviceName": "ecs-service-with-pause-hook",
+                                "status": "ACTIVE",
+                                "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/ecs-demo:1"
+                            }
+                        }
                     }
                 ]
             }
@@ -4771,7 +4963,7 @@
                 "service": {
                     "target": "com.amazonaws.ecs#Service",
                     "traits": {
-                        "smithy.api#documentation": "<p>The full description of your service following the create call.</p> <p>A service will return either a <code>capacityProviderStrategy</code> or <code>launchType</code> parameter, but not both, depending where one was specified when it was created.</p> <p>If a service is using the <code>ECS</code> deployment controller, the <code>deploymentController</code> and <code>taskSets</code> parameters will not be returned.</p> <p>if the service uses the <code>CODE_DEPLOY</code> deployment controller, the <code>deploymentController</code>, <code>taskSets</code> and <code>deployments</code> parameters will be returned, however the <code>deployments</code> parameter will be an empty list.</p>",
+                        "smithy.api#documentation": "<p>The full description of your service following the create call.</p> <p>A service will return either a <code>capacityProviderStrategy</code> or <code>launchType</code> parameter, but not both, depending where one was specified when it was created.</p> <p>If a service is using the <code>ECS</code> deployment controller, the <code>deploymentController</code> and <code>taskSets</code> parameters will not be returned.</p> <p>if the service uses the <code>CODE_DEPLOY</code> deployment controller, the <code>deploymentController</code>, <code>taskSets</code> and <code>deployments</code> parameters will be returned, however the <code>deployments</code> parameter will be an empty list.</p> <p>The response includes a <code>lifecycleHookDetails</code> field, which is an empty array when the service is created or updated. The values are populated when a lifecycle hook executes and are available as part of the service deployment details (<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html\">DescribeServiceDeployments</a>).</p>",
                         "smithy.api#notProperty": {}
                     }
                 }
@@ -7811,6 +8003,12 @@
         "com.amazonaws.ecs#DeploymentLifecycleHook": {
             "type": "structure",
             "members": {
+                "targetType": {
+                    "target": "com.amazonaws.ecs#DeploymentLifecycleHookTargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of action the lifecycle hook performs. Valid values are:</p> <ul> <li> <p> <code>AWS_LAMBDA</code> - Invokes a Lambda function at the specified lifecycle stage. This is the default value.</p> </li> <li> <p> <code>PAUSE</code> - Pauses the deployment at the specified lifecycle stage until you call <code>ContinueServiceDeployment</code> to continue or roll back.</p> </li> </ul> <p>This field is optional. If not specified, the default value is <code>AWS_LAMBDA</code>.</p>"
+                    }
+                },
                 "hookTargetArn": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
@@ -7834,10 +8032,92 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Use this field to specify custom parameters that Amazon ECS will pass to your hook target invocations (such as a Lambda function).</p>"
                     }
+                },
+                "timeoutConfiguration": {
+                    "target": "com.amazonaws.ecs#DeploymentLifecycleHookTimeoutConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timeout configuration for the lifecycle hook. This specifies how long Amazon ECS waits before taking the timeout action if the hook is not resolved.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A deployment lifecycle hook runs custom logic at specific stages of the deployment process. Currently, you can use Lambda functions as hook targets.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-lifecycle-hooks.html\">Lifecycle hooks for Amazon ECS service deployments</a> in the <i> Amazon Elastic Container Service Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DeploymentLifecycleHookAction": {
+            "type": "enum",
+            "members": {
+                "ROLLBACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLBACK"
+                    }
+                },
+                "CONTINUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTINUE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#DeploymentLifecycleHookDetail": {
+            "type": "structure",
+            "members": {
+                "hookId": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the lifecycle hook. Use this value when calling <code>ContinueServiceDeployment</code> to continue or roll back a paused deployment.</p>"
+                    }
+                },
+                "targetType": {
+                    "target": "com.amazonaws.ecs#DeploymentLifecycleHookTargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of action the lifecycle hook performs, such as <code>AWS_LAMBDA</code> or <code>PAUSE</code>.</p>"
+                    }
+                },
+                "targetArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the hook target. For <code>AWS_LAMBDA</code> hooks, this is the Lambda function ARN. For <code>PAUSE</code> hooks, this field is not set.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#DeploymentLifecycleHookStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the lifecycle hook. Valid values depend on the hook type:</p> <ul> <li> <p>For <code>AWS_LAMBDA</code> hooks: <code>IN_PROGRESS</code>, <code>SUCCEEDED</code>, <code>FAILED</code>, and <code>TIMED_OUT</code>.</p> </li> <li> <p>For <code>PAUSE</code> hooks: <code>AWAITING_ACTION</code>, <code>SUCCEEDED</code>, <code>FAILED</code>, and <code>TIMED_OUT</code>.</p> </li> </ul>"
+                    }
+                },
+                "expiresAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the lifecycle hook times out. If the hook has not been completed by this time, Amazon ECS takes the timeout action.</p>"
+                    }
+                },
+                "timeoutAction": {
+                    "target": "com.amazonaws.ecs#DeploymentLifecycleHookAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action Amazon ECS takes when the lifecycle hook times out. Valid values are <code>CONTINUE</code> and <code>ROLLBACK</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a deployment lifecycle hook that is active during a service deployment.</p> <p>You can view lifecycle hook details by calling <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html\">DescribeServiceDeployments</a>.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DeploymentLifecycleHookDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#DeploymentLifecycleHookDetail"
+            }
+        },
+        "com.amazonaws.ecs#DeploymentLifecycleHookDuration": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 20160
+                }
             }
         },
         "com.amazonaws.ecs#DeploymentLifecycleHookList": {
@@ -7879,6 +8159,12 @@
                         "smithy.api#enumValue": "POST_TEST_TRAFFIC_SHIFT"
                     }
                 },
+                "PRE_PRODUCTION_TRAFFIC_SHIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRE_PRODUCTION_TRAFFIC_SHIFT"
+                    }
+                },
                 "PRODUCTION_TRAFFIC_SHIFT": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -7897,6 +8183,78 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ecs#DeploymentLifecycleHookStage"
+            }
+        },
+        "com.amazonaws.ecs#DeploymentLifecycleHookStatus": {
+            "type": "enum",
+            "members": {
+                "AWAITING_ACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWAITING_ACTION"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "TIMED_OUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMED_OUT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#DeploymentLifecycleHookTargetType": {
+            "type": "enum",
+            "members": {
+                "AWS_LAMBDA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_LAMBDA"
+                    }
+                },
+                "PAUSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAUSE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#DeploymentLifecycleHookTimeoutConfiguration": {
+            "type": "structure",
+            "members": {
+                "timeoutInMinutes": {
+                    "target": "com.amazonaws.ecs#DeploymentLifecycleHookDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of minutes Amazon ECS waits for the lifecycle hook to complete before taking the timeout action.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.ecs#DeploymentLifecycleHookAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action Amazon ECS takes when the lifecycle hook times out. Valid values are:</p> <ul> <li> <p> <code>CONTINUE</code> - Proceeds the deployment to the next lifecycle stage.</p> </li> <li> <p> <code>ROLLBACK</code> - Rolls back the deployment to the previous service revision.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The timeout configuration for a deployment lifecycle hook. This determines how long Amazon ECS waits for the hook to complete before taking the specified timeout action.</p>"
             }
         },
         "com.amazonaws.ecs#DeploymentRolloutState": {
@@ -9452,6 +9810,64 @@
                             ],
                             "failures": []
                         }
+                    },
+                    {
+                        "title": "To describe a service deployment with a paused lifecycle hook",
+                        "documentation": "This example describes a service deployment that is currently paused at a lifecycle hook. The lifecycleHookDetails field shows the status of the pause hook, including when it will expire and what action will be taken if the timeout is reached.",
+                        "input": {
+                            "serviceDeploymentArns": [
+                                "arn:aws:ecs:us-east-1:123456789012:service-deployment/MyCluster/MyService/r9i43YFjvgF_xlg7m2eJ1r"
+                            ]
+                        },
+                        "output": {
+                            "serviceDeployments": [
+                                {
+                                    "serviceDeploymentArn": "arn:aws:ecs:us-east-1:123456789012:service-deployment/MyCluster/MyService/r9i43YFjvgF_xlg7m2eJ1r",
+                                    "serviceArn": "arn:aws:ecs:us-east-1:123456789012:service/MyCluster/MyService",
+                                    "clusterArn": "arn:aws:ecs:us-east-1:123456789012:cluster/MyCluster",
+                                    "updatedAt": "2026-05-06T16:00:00.000Z",
+                                    "targetServiceRevision": {
+                                        "arn": "arn:aws:ecs:us-east-1:123456789012:service-revision/MyCluster/MyService/1234567890123456789",
+                                        "requestedTaskCount": 2,
+                                        "runningTaskCount": 1,
+                                        "pendingTaskCount": 1
+                                    },
+                                    "status": "IN_PROGRESS",
+                                    "lifecycleStage": "POST_PRODUCTION_TRAFFIC_SHIFT",
+                                    "lifecycleHookDetails": [
+                                        {
+                                            "hookId": "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567",
+                                            "targetType": "PAUSE",
+                                            "status": "AWAITING_ACTION",
+                                            "expiresAt": "2026-05-06T17:00:00.000Z",
+                                            "timeoutAction": "ROLLBACK"
+                                        }
+                                    ],
+                                    "deploymentConfiguration": {
+                                        "deploymentCircuitBreaker": {
+                                            "enable": false,
+                                            "rollback": false
+                                        },
+                                        "maximumPercent": 200,
+                                        "minimumHealthyPercent": 100,
+                                        "strategy": "BLUE_GREEN",
+                                        "lifecycleHooks": [
+                                            {
+                                                "targetType": "PAUSE",
+                                                "lifecycleStages": [
+                                                    "POST_PRODUCTION_TRAFFIC_SHIFT"
+                                                ],
+                                                "timeoutConfiguration": {
+                                                    "timeoutInMinutes": 60,
+                                                    "action": "ROLLBACK"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "failures": []
+                        }
                     }
                 ],
                 "smithy.api#readonly": {}
@@ -9711,6 +10127,62 @@
                                     "serviceName": "ecs-simple-service",
                                     "status": "ACTIVE",
                                     "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/default/hello_world:6"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "To describe a service with a pause lifecycle hook",
+                        "documentation": "This example provides descriptive information about the service ``ecs-service-with-pause-hook``, which is configured with a pause lifecycle hook in its deployment configuration.",
+                        "input": {
+                            "services": [
+                                "ecs-service-with-pause-hook"
+                            ]
+                        },
+                        "output": {
+                            "failures": [],
+                            "services": [
+                                {
+                                    "clusterArn": "arn:aws:ecs:us-east-1:012345678910:cluster/default",
+                                    "createdAt": "2026-05-06T16:00:00.000Z",
+                                    "deploymentConfiguration": {
+                                        "maximumPercent": 200,
+                                        "minimumHealthyPercent": 100,
+                                        "strategy": "BLUE_GREEN",
+                                        "lifecycleHooks": [
+                                            {
+                                                "targetType": "PAUSE",
+                                                "lifecycleStages": [
+                                                    "POST_PRODUCTION_TRAFFIC_SHIFT"
+                                                ],
+                                                "timeoutConfiguration": {
+                                                    "timeoutInMinutes": 60,
+                                                    "action": "ROLLBACK"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "deployments": [
+                                        {
+                                            "createdAt": "2026-05-06T16:00:00.000Z",
+                                            "desiredCount": 2,
+                                            "id": "ecs-svc/9223370564341623665",
+                                            "pendingCount": 0,
+                                            "runningCount": 2,
+                                            "status": "PRIMARY",
+                                            "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/ecs-demo:1",
+                                            "updatedAt": "2026-05-06T16:00:00.000Z"
+                                        }
+                                    ],
+                                    "desiredCount": 2,
+                                    "events": [],
+                                    "loadBalancers": [],
+                                    "pendingCount": 0,
+                                    "runningCount": 2,
+                                    "serviceArn": "arn:aws:ecs:us-east-1:012345678910:service/default/ecs-service-with-pause-hook",
+                                    "serviceName": "ecs-service-with-pause-hook",
+                                    "status": "ACTIVE",
+                                    "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/ecs-demo:1"
                                 }
                             ]
                         }
@@ -17810,7 +18282,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This parameter is specified when you're using an Amazon S3 Files file system for task storage. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/s3files-volumes.html\">Amazon S3 Files volumes</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <important> <p>Your task definition must include a Task IAM Role. See <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-files-prereq-policies.html#s3-files-prereq-iam-compute-role\"> IAM role for attaching your file system to AWS compute resources</a> for required permissions.</p> </important>"
+                "smithy.api#documentation": "<p>This parameter is specified when you're using an Amazon S3 Files file system for task storage. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/s3files-volumes.html\">Amazon S3 Files volumes</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <important> <p>Your task definition must include a Task IAM Role. See <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-files-prereq-policies.html#s3-files-prereq-iam-compute-role\"> IAM role for attaching your file system to Amazon Web Services compute resources</a> for required permissions.</p> </important>"
             }
         },
         "com.amazonaws.ecs#Scale": {
@@ -18571,6 +19043,12 @@
                     "target": "com.amazonaws.ecs#ServiceDeploymentLifecycleStage",
                     "traits": {
                         "smithy.api#documentation": "<p>The current lifecycle stage of the deployment. Possible values include:</p> <ul> <li> <p>RECONCILE_SERVICE</p> <p>The reconciliation stage that only happens when you start a new service deployment with more than 1 service revision in an ACTIVE state.</p> </li> <li> <p>PRE_SCALE_UP</p> <p>The green service revision has not started. The blue service revision is handling 100% of the production traffic. There is no test traffic.</p> </li> <li> <p>SCALE_UP</p> <p>The stage when the green service revision scales up to 100% and launches new tasks. The green service revision is not serving any traffic at this point.</p> </li> <li> <p>POST_SCALE_UP</p> <p>The green service revision has started. The blue service revision is handling 100% of the production traffic. There is no test traffic.</p> </li> <li> <p>TEST_TRAFFIC_SHIFT</p> <p>The blue and green service revisions are running. The blue service revision handles 100% of the production traffic. The green service revision is migrating from 0% to 100% of test traffic.</p> </li> <li> <p>POST_TEST_TRAFFIC_SHIFT</p> <p>The test traffic shift is complete. The green service revision handles 100% of the test traffic.</p> </li> <li> <p>PRODUCTION_TRAFFIC_SHIFT</p> <p>Production traffic is shifting to the green service revision. The green service revision is migrating from 0% to 100% of production traffic.</p> </li> <li> <p>POST_PRODUCTION_TRAFFIC_SHIFT</p> <p>The production traffic shift is complete.</p> </li> <li> <p>BAKE_TIME</p> <p>The stage when both blue and green service revisions are running simultaneously after the production traffic has shifted.</p> </li> <li> <p>CLEAN_UP</p> <p>The stage when the blue service revision has completely scaled down to 0 running tasks. The green service revision is now the production service revision after this stage.</p> </li> </ul>"
+                    }
+                },
+                "lifecycleHookDetails": {
+                    "target": "com.amazonaws.ecs#DeploymentLifecycleHookDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the lifecycle hooks for the current service deployment.</p>"
                     }
                 },
                 "deploymentConfiguration": {
@@ -23550,6 +24028,29 @@
                             "desiredCount": 10
                         },
                         "output": {}
+                    },
+                    {
+                        "title": "To update a service to add a pause lifecycle hook",
+                        "documentation": "This example updates the my-blue-green-service service to add a pause lifecycle hook at the POST_PRODUCTION_TRAFFIC_SHIFT stage. The deployment will pause at that stage until you explicitly continue or roll back using the ContinueServiceDeployment API, or until the 30-minute timeout expires and triggers a continue.",
+                        "input": {
+                            "service": "my-blue-green-service",
+                            "deploymentConfiguration": {
+                                "strategy": "BLUE_GREEN",
+                                "lifecycleHooks": [
+                                    {
+                                        "targetType": "PAUSE",
+                                        "lifecycleStages": [
+                                            "POST_PRODUCTION_TRAFFIC_SHIFT"
+                                        ],
+                                        "timeoutConfiguration": {
+                                            "timeoutInMinutes": 30,
+                                            "action": "CONTINUE"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "output": {}
                     }
                 ]
             }
@@ -23844,7 +24345,7 @@
                 "service": {
                     "target": "com.amazonaws.ecs#Service",
                     "traits": {
-                        "smithy.api#documentation": "<p>The full description of your service following the update call.</p>",
+                        "smithy.api#documentation": "<p>The full description of your service following the update call.</p> <p>The response includes a <code>lifecycleHookDetails</code> field, which is an empty array when the service is created or updated. The values are populated when a lifecycle hook executes and are available as part of the service deployment details (<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html\">DescribeServiceDeployments</a>).</p>",
                         "smithy.api#notProperty": {}
                     }
                 }

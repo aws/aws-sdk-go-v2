@@ -786,6 +786,30 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#AdditionalNotes": {
+            "type": "structure",
+            "members": {
+                "Text": {
+                    "target": "com.amazonaws.quicksight#AdditionalNotesText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional notes text.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Additional notes that provide supplementary context for a column.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AdditionalNotesText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.quicksight#AggFunction": {
             "type": "structure",
             "members": {
@@ -9523,6 +9547,18 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#ColumnNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#ColumnName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                }
+            }
+        },
         "com.amazonaws.quicksight#ColumnOrderingType": {
             "type": "enum",
             "members": {
@@ -9599,6 +9635,58 @@
                     "min": 0,
                     "max": 500
                 }
+            }
+        },
+        "com.amazonaws.quicksight#ColumnSemanticProperty": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.quicksight#ColumnDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the column.</p>"
+                    }
+                },
+                "AdditionalNotes": {
+                    "target": "com.amazonaws.quicksight#AdditionalNotes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional notes for the column.</p>"
+                    }
+                },
+                "SemanticType": {
+                    "target": "com.amazonaws.quicksight#ColumnSemanticType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The semantic type of the column.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A semantic property for a column.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ColumnSemanticPropertyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#ColumnSemanticProperty"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ColumnSemanticType": {
+            "type": "structure",
+            "members": {
+                "GeographicalRole": {
+                    "target": "com.amazonaws.quicksight#GeoSpatialDataRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The geographical role of the column in the new data preparation experience.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The semantic type information for a column in the new data preparation experience.</p>"
             }
         },
         "com.amazonaws.quicksight#ColumnSort": {
@@ -15060,6 +15148,32 @@
                 "smithy.api#documentation": "<p>A list of custom filter values.</p>"
             }
         },
+        "com.amazonaws.quicksight#CustomInstruction": {
+            "type": "structure",
+            "members": {
+                "InlineCustomInstruction": {
+                    "target": "com.amazonaws.quicksight#InlineCustomInstruction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An inline custom instruction containing text and optional uploaded document metadata.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A custom instruction that provides guidance on how the dataset should be consumed.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#CustomInstructionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#CustomInstruction"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.quicksight#CustomInstructions": {
             "type": "structure",
             "members": {
@@ -17191,6 +17305,16 @@
                 "smithy.api#documentation": "<p>A filter condition that filters date values within a specified range.</p>"
             }
         },
+        "com.amazonaws.quicksight#DataSetDescriptiveText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.quicksight#DataSetEntityResourceId": {
             "type": "string",
             "traits": {
@@ -17557,6 +17681,53 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.quicksight#DataSetSearchFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DataSetSemanticDescription": {
+            "type": "structure",
+            "members": {
+                "Text": {
+                    "target": "com.amazonaws.quicksight#DataSetDescriptiveText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive text for the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A description structure for dataset-level semantic metadata.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSetSemanticMetadata": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.quicksight#DataSetSemanticDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the dataset.</p>"
+                    }
+                },
+                "CustomInstructions": {
+                    "target": "com.amazonaws.quicksight#CustomInstructionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of custom instructions that guide how the dataset should be consumed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Semantic metadata for a dataset, including a description and custom instructions.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSetSemanticMetadataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#DataSetSemanticMetadata"
             },
             "traits": {
                 "smithy.api#length": {
@@ -37925,6 +38096,37 @@
                 "target": "com.amazonaws.quicksight#Ingestion"
             }
         },
+        "com.amazonaws.quicksight#InlineCustomInstruction": {
+            "type": "structure",
+            "members": {
+                "InstructionText": {
+                    "target": "com.amazonaws.quicksight#InlineCustomInstructionText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instruction text content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UploadedDocumentMetadata": {
+                    "target": "com.amazonaws.quicksight#UploadedDocumentMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata about an uploaded document associated with this instruction.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An inline custom instruction with text content and optional file upload metadata.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#InlineCustomInstructionText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.quicksight#InnerFilter": {
             "type": "structure",
             "members": {
@@ -56481,6 +56683,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A map of semantic tables that define the analytical structure.</p>"
                     }
+                },
+                "SemanticMetadata": {
+                    "target": "com.amazonaws.quicksight#DataSetSemanticMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset-level semantic metadata, including a description and custom instructions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -56508,6 +56716,12 @@
                     "target": "com.amazonaws.quicksight#RowLevelPermissionConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for row level security that control data access for this semantic table.</p>"
+                    }
+                },
+                "SemanticMetadata": {
+                    "target": "com.amazonaws.quicksight#TableSemanticMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column-level semantic metadata for this semantic table.</p>"
                     }
                 }
             },
@@ -56887,6 +57101,39 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The shape conditional formatting of a filled map visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SharedColumnSemanticMetadata": {
+            "type": "structure",
+            "members": {
+                "ColumnNames": {
+                    "target": "com.amazonaws.quicksight#ColumnNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the columns this metadata applies to.</p>"
+                    }
+                },
+                "ColumnProperties": {
+                    "target": "com.amazonaws.quicksight#ColumnSemanticPropertyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The semantic properties for the specified columns.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Semantic metadata shared across one or more columns.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SharedColumnSemanticMetadataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SharedColumnSemanticMetadata"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                }
             }
         },
         "com.amazonaws.quicksight#SharedViewConfigurations": {
@@ -60856,6 +61103,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The conditional formatting of a table row.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TableSemanticMetadata": {
+            "type": "structure",
+            "members": {
+                "ColumnMetadata": {
+                    "target": "com.amazonaws.quicksight#SharedColumnSemanticMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of column semantic metadata entries.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Column-level semantic metadata for a semantic table.</p>"
             }
         },
         "com.amazonaws.quicksight#TableSideBorderOptions": {
@@ -71689,6 +71950,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the format for a source file or files.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#UploadedDocumentMetadata": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.quicksight#UploadedDocumentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the uploaded document.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata for an uploaded document associated with a custom instruction.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#UploadedDocumentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 127
+                }
             }
         },
         "com.amazonaws.quicksight#User": {
