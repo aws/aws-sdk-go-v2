@@ -1,3 +1,7 @@
+# v1.110.0 (2026-05-18)
+
+* **Feature**: Support for dataset enrichment and geo spatial in new data preparation experience
+
 # v1.109.0 (2026-05-13)
 
 * **Feature**: Adds five new custom permission option for Quick Apps so that these capabilities can be controlled by public SDK and CLI.

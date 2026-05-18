@@ -1,3 +1,7 @@
+# v1.48.0 (2026-05-18)
+
+* **Feature**: Services manage service-linked analyzers through dedicated APIs - CreateServiceLinkedAnalyzer and DeleteServiceLinkedAnalyzer that separate service-linked specific operations from customer-managed operations. It also shows up in ListAnalyzers and GetAnalyzer responses.
+
 # v1.47.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

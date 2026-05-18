@@ -1,3 +1,21 @@
+# Release (2026-05-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/cloudfront/sign`: [v1.11.0](feature/cloudfront/sign/CHANGELOG.md#v1110-2026-05-18)
+  * **Feature**: Support SHA-256 for CloudFront signer
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.48.0](service/accessanalyzer/CHANGELOG.md#v1480-2026-05-18)
+  * **Feature**: Services manage service-linked analyzers through dedicated APIs - CreateServiceLinkedAnalyzer and DeleteServiceLinkedAnalyzer that separate service-linked specific operations from customer-managed operations. It also shows up in ListAnalyzers and GetAnalyzer responses.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.174.0](service/connect/CHANGELOG.md#v11740-2026-05-18)
+  * **Feature**: Amazon Connect Cases now supports SLA durations of up to 2 years (1,051,200 minutes), increased from the previous maximum of 90 days (129,600 minutes). This enables you to track long-running service level agreements for cases that require extended resolution timelines.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.303.0](service/ec2/CHANGELOG.md#v13030-2026-05-18)
+  * **Feature**: Amazon VPC IP Address Manager (IPAM) now supports tags on IPAM pool allocations, enabling all standard tagging features for allocations including tag-on-create.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.80.0](service/ecs/CHANGELOG.md#v1800-2026-05-18)
+  * **Feature**: Amazon ECS now supports Pause lifecycle hooks for service deployments, allowing customers to automatically pause deployments at specified stages and use the new ContinueServiceDeployment API to continue or roll back with confidence.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.8.2](service/evs/CHANGELOG.md#v182-2026-05-18)
+  * **Documentation**: Amazon EVS now supports up to 32 hosts per EVS environment, increasing the previous host limit to allow a larger scale of VMware workload deployments and reduce operational overhead.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.110.0](service/quicksight/CHANGELOG.md#v11100-2026-05-18)
+  * **Feature**: Support for dataset enrichment and geo spatial in new data preparation experience
+
 # Release (2026-05-15)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.11.0 (2026-05-18)
+
+* **Feature**: Support SHA-256 for CloudFront signer
+
 # v1.10.0 (2026-04-30)
 
 * **Feature**: Support ECDSA for CloudFront sign cookies

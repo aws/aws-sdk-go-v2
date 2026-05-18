@@ -1,3 +1,7 @@
+# v1.80.0 (2026-05-18)
+
+* **Feature**: Amazon ECS now supports Pause lifecycle hooks for service deployments, allowing customers to automatically pause deployments at specified stages and use the new ContinueServiceDeployment API to continue or roll back with confidence.
+
 # v1.79.1 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

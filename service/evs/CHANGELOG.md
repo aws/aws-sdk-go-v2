@@ -1,3 +1,7 @@
+# v1.8.2 (2026-05-18)
+
+* **Documentation**: Amazon EVS now supports up to 32 hosts per EVS environment, increasing the previous host limit to allow a larger scale of VMware workload deployments and reduce operational overhead.
+
 # v1.8.1 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

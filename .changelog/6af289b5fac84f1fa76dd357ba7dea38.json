@@ -1,8 +1,0 @@
-{
-    "id": "6af289b5-fac8-4f1f-a76d-d357ba7dea38",
-    "type": "feature",
-    "description": "Services manage service-linked analyzers through dedicated APIs - CreateServiceLinkedAnalyzer and DeleteServiceLinkedAnalyzer that separate service-linked specific operations from customer-managed operations. It also shows up in ListAnalyzers and GetAnalyzer responses.",
-    "modules": [
-        "service/accessanalyzer"
-    ]
-}

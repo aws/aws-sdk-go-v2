@@ -1,8 +1,0 @@
-{
-    "id": "b5b9c299-61f7-4046-9d6b-7a559713a2a0",
-    "type": "feature",
-    "description": "Support for dataset enrichment and geo spatial in new data preparation experience",
-    "modules": [
-        "service/quicksight"
-    ]
-}
